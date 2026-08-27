@@ -2,9 +2,10 @@
 
 
 #include "KhazanPlayerController.h"
+#include "GameFramework/Pawn.h"
+#include "InputActionValue.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "Kismet/KismetMathLibrary.h"
 
 AKhazanPlayerController::AKhazanPlayerController(const FObjectInitializer& ObjectInitializer)
 	:Super(ObjectInitializer)
@@ -27,27 +28,26 @@ void AKhazanPlayerController::SetupInputComponent()
 
 	if (auto* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent))
 	{
-		EnhancedInputComponent->BindAction(TestAction, ETriggerEvent::Triggered, this, &ThisClass::Input_Test);
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
 		EnhancedInputComponent->BindAction(TurnAction, ETriggerEvent::Triggered, this, &ThisClass::Input_Turn);
 	}
 }
 
-void AKhazanPlayerController::Input_Test(const FInputActionValue& InputValue)
-{
-	GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::Cyan, TEXT("Test"));
-}
-
 void AKhazanPlayerController::Input_Move(const FInputActionValue& InputValue)
 {
-	FVector2D MovementVector = InputValue.Get<FVector2D>();
+	const FVector2D MovementVector = InputValue.Get<FVector2D>();
 
-	GetPawn()->AddActorWorldOffset(FVector(MovementVector, 0.f));
+	const FRotator Rotator = GetControlRotation();
+	const FVector ForwardDir = FRotationMatrix(FRotator(0.f,Rotator.Yaw,0.f)).GetUnitAxis(EAxis::X);
+	const FVector RightDir   = FRotationMatrix(FRotator(0.f,Rotator.Yaw,0.f)).GetUnitAxis(EAxis::Y);
+	
+	GetPawn()->AddMovementInput(ForwardDir, MovementVector.X);
+	GetPawn()->AddMovementInput(RightDir,  MovementVector.Y);
 }
 
 void AKhazanPlayerController::Input_Turn(const FInputActionValue& InputValue)
 {
-	FVector2D Val = InputValue.Get<FVector2D>();
+	const FVector2D Val = InputValue.Get<FVector2D>();
 	AddYawInput(Val.X);
-	AddPitchInput(Val.Y);
+	AddPitchInput(-Val.Y);
 }
