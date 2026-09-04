@@ -37,10 +37,21 @@ UCLASS()
 class KHAZAN_API UKhazanAssetData : public UPrimaryDataAsset
 {
 	GENERATED_BODY()
+
+public:
+	virtual void PreSave(FObjectPreSaveContext ObjectSaveContext) override;
 	
 public:
+	FSoftObjectPath GetAssetPathByName(const FGameplayTag& AssetName);
+	const FAssetSet& GetAssetSetByLabel(const FGameplayTag& Label);
 	
 private:
 	UPROPERTY(EditDefaultsOnly)
 	TMap<FName, FAssetSet> AssetGroupNameToSet;
+	
+	UPROPERTY()
+	TMap<FGameplayTag, FSoftObjectPath> AssetNameToPath;
+	
+	UPROPERTY()
+	TMap<FGameplayTag, FAssetSet> AssetLabelToSet;
 };

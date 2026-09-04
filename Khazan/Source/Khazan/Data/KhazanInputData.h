@@ -26,6 +26,9 @@ UCLASS()
 class KHAZAN_API UKhazanInputData : public UDataAsset
 {
 	GENERATED_BODY()
+
+public:
+	const UInputAction* FindInputActionByTag(const FGameplayTag& InputTag) const;
 	
 public:
 	UPROPERTY(EditDefaultsOnly)

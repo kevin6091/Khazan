@@ -25,16 +25,12 @@ protected:
 
 private:
 	void Input_Move(const FInputActionValue& InputValue);
+	void Input_MoveReleased(const FInputActionValue& InputValue);
+	
 	void Input_Turn(const FInputActionValue& InputValue);
-
+	void Input_Jump(const FInputActionValue& InputValue);
+	void Input_Attack(const FInputActionValue& InputValue);
+	
 protected:
-	UPROPERTY(EditAnywhere, Category = Input)
-	TObjectPtr<class UInputMappingContext> InputMappingContext;
-	
-	UPROPERTY(EditAnywhere, Category = Input)
-	TObjectPtr<class UInputAction> MoveAction;
-	
-	UPROPERTY(EditAnywhere, Category = Input)
-	TObjectPtr<class UInputAction> TurnAction;
 
 };
