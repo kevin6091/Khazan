@@ -167,6 +167,67 @@ def child_components(package: str, actor_index: int, objects: list[dict[str, Any
     return result
 
 
+def referenced_package(value: Any) -> str | None:
+    if not isinstance(value, dict):
+        return None
+    return package_from_object_path(value.get("ObjectPath"))
+
+
+def referenced_packages(value: Any) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    result: list[str] = []
+    for item in value:
+        package = referenced_package(item)
+        if package and package not in result:
+            result.append(package)
+    return result
+
+
+def referenced_package_slots(value: Any) -> list[str | None]:
+    if not isinstance(value, list):
+        return []
+    return [referenced_package(item) for item in value]
+
+
+def static_mesh_placement(
+    level_name: str,
+    package: str,
+    index: int,
+    actor: dict[str, Any],
+    objects: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    transform, component = actor_transform(actor, objects, package)
+    if not isinstance(component, dict):
+        return None
+
+    component_properties = component.get("Properties")
+    if not isinstance(component_properties, dict):
+        return None
+    static_mesh_package = referenced_package(component_properties.get("StaticMesh"))
+    if not static_mesh_package:
+        return None
+
+    actor_properties = actor.get("Properties") if isinstance(actor.get("Properties"), dict) else {}
+    material_packages = referenced_package_slots(component_properties.get("OverrideMaterials"))
+    return {
+        "source_level": level_name,
+        "source_package": package,
+        "source_object_index": index,
+        "actor_type": actor.get("Type"),
+        "actor_name": actor.get("Name"),
+        "static_mesh_package": static_mesh_package,
+        "override_material_packages": material_packages,
+        "transform": transform,
+        "cast_shadow": component_properties.get("CastShadow", True),
+        "visible": not bool(actor_properties.get("bHidden", False))
+        and component_properties.get("bVisible", True) is not False
+        and not bool(component_properties.get("bHiddenInGame", False)),
+        "cached_max_draw_distance": component_properties.get("CachedLDMaxDrawDistance"),
+        "tags": actor_properties.get("Tags", []),
+    }
+
+
 def actor_record(level_name: str, package: str, index: int, actor: dict[str, Any], objects: list[dict[str, Any]], include_properties: bool) -> dict[str, Any]:
     transform, component = actor_transform(actor, objects, package)
     record: dict[str, Any] = {
@@ -219,6 +280,7 @@ def scan_world_json(path: Path) -> dict[str, Any]:
     refs_by_kind: dict[str, Counter[str]] = defaultdict(Counter)
     template_placements: Counter[str] = Counter()
     placements: list[dict[str, Any]] = []
+    static_mesh_placements: list[dict[str, Any]] = []
     metadata: dict[str, list[dict[str, Any]]] = defaultdict(list)
     streaming_levels: list[dict[str, Any]] = []
 
@@ -250,6 +312,9 @@ def scan_world_json(path: Path) -> dict[str, Any]:
 
         placement = actor_record(path.stem, package, index, obj, objects, include_properties=False)
         placements.append(placement)
+        mesh_placement = static_mesh_placement(path.stem, package, index, obj, objects)
+        if mesh_placement:
+            static_mesh_placements.append(mesh_placement)
         if placement["template_package"]:
             template_placements[str(placement["template_package"])] += 1
 
@@ -265,6 +330,7 @@ def scan_world_json(path: Path) -> dict[str, Any]:
         "refs_by_kind": refs_by_kind,
         "template_placements": template_placements,
         "placements": placements,
+        "static_mesh_placements": static_mesh_placements,
         "metadata": metadata,
         "streaming_levels": streaming_levels,
     }
@@ -335,6 +401,7 @@ def main() -> int:
     global_refs: dict[str, Counter[str]] = defaultdict(Counter)
     global_templates: Counter[str] = Counter()
     placements: list[dict[str, Any]] = []
+    static_mesh_placements: list[dict[str, Any]] = []
     metadata: dict[str, list[dict[str, Any]]] = defaultdict(list)
     streaming_levels: list[dict[str, Any]] = []
     level_summaries: list[dict[str, Any]] = []
@@ -343,6 +410,7 @@ def main() -> int:
         global_types.update(scan["type_counts"])
         global_templates.update(scan["template_placements"])
         placements.extend(scan["placements"])
+        static_mesh_placements.extend(scan["static_mesh_placements"])
         for kind, counter in scan["refs_by_kind"].items():
             global_refs[kind].update(counter)
         for kind, entries in scan["metadata"].items():
@@ -449,6 +517,13 @@ def main() -> int:
         "generated_at": generated_at,
         "placements": placements,
     })
+    json_dump(output_dir / "HeinMach_RenderableStaticMeshPlacements.json", {
+        "schema_version": 1,
+        "level": "HeinMach",
+        "generated_at": generated_at,
+        "coordinate_system": "Unreal Engine centimeters, Z-up",
+        "placements": static_mesh_placements,
+    })
     json_dump(output_dir / "HeinMach_MissingAssets.json", missing)
 
     summary = {
@@ -456,6 +531,7 @@ def main() -> int:
         "parsed": len(scans),
         "errors": len(errors),
         "actors": len(placements),
+        "renderable_static_mesh_placements": len(static_mesh_placements),
         "template_packages": len(template_status),
         "templates_missing_json": sum(not item["has_properties_json"] for item in template_status),
         "monster_spawns": len(metadata.get("monster_spawn", [])),
