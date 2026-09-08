@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LandscapeWeightmapExtractor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3d78b97a5b67e1a3feaff7fcd6e77af7391700e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bafaf8bede5dffc1badafa743831571341b7bc70")]
 [assembly: System.Reflection.AssemblyProductAttribute("LandscapeWeightmapExtractor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LandscapeWeightmapExtractor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

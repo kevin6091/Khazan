@@ -1,6 +1,5 @@
 
 
-
 #include "KhazanGameInstance.h"
 #include "KhazanAssetManager.h"
 
@@ -12,7 +11,6 @@ UKhazanGameInstance::UKhazanGameInstance(const FObjectInitializer& ObjectInitial
 void UKhazanGameInstance::Init()
 {
 	Super::Init();
-	
 	UKhazanAssetManager::Initialize();
 }
 

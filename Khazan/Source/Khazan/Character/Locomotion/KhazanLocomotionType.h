@@ -27,6 +27,14 @@ enum class EKhazanLocomotionMode : uint8
 	InAir
 };
 
+UENUM(BlueprintType)
+enum class EKhazanFoot : uint8
+{
+	None,
+	Left,
+	Right
+};
+
 USTRUCT(BlueprintType)
 struct FKhazanLocomotionIntent
 {
@@ -39,10 +47,10 @@ struct FKhazanLocomotionIntent
 	float InputAmount = 0.f;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Locomotion")
-	EKhazanGait TargetGait = EKhazanGait::Run;
+	EKhazanGait TargetGait = EKhazanGait::Walk;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Locomotion")
-	EKhazanGait MaxAllowedGait = EKhazanGait::Run;
+	EKhazanGait MaxAllowedGait = EKhazanGait::Sprint;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Locomotion")
 	EKhazanRotationMode RotationMode = EKhazanRotationMode::VelocityDirection;

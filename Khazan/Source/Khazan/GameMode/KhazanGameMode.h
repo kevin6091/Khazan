@@ -13,5 +13,7 @@ UCLASS()
 class KHAZAN_API AKhazanGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+
+private:
+	void BeginPlay() override;
 };

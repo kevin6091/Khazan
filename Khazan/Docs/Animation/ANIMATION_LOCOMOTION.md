@@ -259,3 +259,73 @@ FModel/변환 원본은 모두 249 frame, 10.375초로 들어왔지만 다수 �
 - 최신 감사: runtime 107/107, source 107/107, 오류 0, 경고 2다.
 - 경고 2개는 위의 Base Idle 두 클립에 부족한 원본 14 frame이며, 다른 naming, skeleton, trim, root, marker, metadata 검사는 모두 통과했다.
 - 작업 전 런타임 바이너리 백업은 `Saved/ArtBackups/DAS_Locomotion_Runtime_Before_2026-09-03`에 있다.
+
+## 2026-09-07 InGame 전용 로코모션 현재 기준
+
+- 사용자 확정: 런타임 Animation Sequence는 `/Game/_Art/Kazan/Animation/InGame` 아래만 사용한다. Walk/Run Start는 사용하지 않고 Sprint에만 Start 모션을 사용한다. Stop, Moving Turn, Turn In Place는 구현한다.
+- 이후 단계 설명과 구현 기준은 [INGAME_LOCOMOTION_MIGRATION.md](INGAME_LOCOMOTION_MIGRATION.md)를 따른다. 이 새 문서에는 현행 계획과 1단계의 에셋/마커 준비 절차, 검사 함수의 줄별 설명을 기록했다.
+- 사용자가 직접 C++/ABP/에셋을 구현하고 어시스턴트가 자세히 설명하는 진행 방식을 유지한다. 이번 요청에서 어시스턴트가 변경한 것은 문서와 읽기 전용 감사 결과뿐이다.
+- 현재 에디터에서 InGame 에셋 64개를 확인했다: Animation Sequence 62개, Level Sequence 2개. 62개 시퀀스 모두 Sync Marker가 0개다. 새 복사본은 이전 라이브러리의 marker 준비 완료 상태를 이어받았다고 보지 않는다.
+- 기본 loop 선택은 `Walk/DAS_Khazan_Walk_Loop`, `Run/CA_P_Kazan_DualAxeSword_Run_F`, `Sprint/DAS_Khazan_Sprint_Loop`이다. 각각 33/119/119프레임 구간, 1.375/4.958333/4.958333초, 24 fps다. 긴 Run/Sprint는 여러 유효 주기를 보존하며 개별 접촉을 다시 확인한다.
+- 현재 ABP는 Walk/Run 두 Sequence Player를 Bool로 블렌드하며 둘 다 Do Not Sync다. Idle/Airborne_TEMP와 Stop에는 아직 InGame 밖 시퀀스 참조가 있어 그래프 전환 과정에서 교체해야 한다.
+- Run의 시작/끝 대표 RAW 본 위치가 다르므로 loop 경계를 시각적으로 확인한다. 이 위치 차이만으로 결함을 확정하지 않는다. 미리보기 접지, 전체 pose/속도 연속성, BP Compile/빌드/PIE는 이번에 완료로 기록하지 않는다.
+- 재사용 감사: `Saved/ImportReports/Khazan_InGame_Locomotion_Audit_20260907.json`. InGame에 없는 무기/자세별 시퀀스를 이전 폴더에서 자동으로 가져오지 않는다.
+
+### 2026-09-07 L3 Sprint / Walk 170 / Run 470 입력 정책
+
+- 사용자 확정: 왼쪽 스틱에 유효 입력이 있으면 Walk 170 cm/s, 기울기가 Run 임계값을 넘으면 Run 470 cm/s로 목표 속도를 고정한다. 같은 gait 안에서 스틱 기울기에 따라 연속적으로 속도를 바꾸지 않는다.
+- Sprint는 L3 버튼으로 생성한 요청이 있을 때만 허용한다. 스틱 최대 기울기만으로 Sprint로 전환하지 않는다. Walk/Run에는 Start가 없고 Sprint에만 Start를 사용하는 정책은 그대로다.
+- 입력 크기는 gait 선택과 Intent 데이터로 보존하고, 실제 이동에는 정규화한 방향과 ScaleValue 1을 사용한다. 170/470은 입력에 곱하지 않고 CharacterMovementComponent의 MaxWalkSpeed에 적용한다. 기존 가감속은 유지한다.
+- Run 임계값, Sprint 속도, L3 토글/홀드 방식은 아직 사용자 확정 전이다. 상세 설명과 이후 2단계의 추가 변수/액션 경로는 `INGAME_LOCOMOTION_MIGRATION.md`의 같은 날짜 입력 정책 섹션에 기록했다.
+
+### 2026-09-07 사용자 loop marker 검토와 2단계 설명
+
+- 현재 기본 Run은 새 `InGame/DAS/Locomotion/Run/DAS_Khazan_Run_Loop`이다. Walk/Run/Sprint marker 2/12/16개와 공통 이름/시간 범위/좌우 교대를 확인했다. 이전 marker 0개 기준선은 이 세 복사본의 현재 상태가 아니다.
+- 현재 ABP는 Run의 marker 없는 CA_P 원본을 계속 참조하고 Walk/Run 동기화가 꺼져 있다. InGame 밖 Idle/Stop 참조도 남아 있어 그래프 3단계 완료는 아니다.
+- 최신 Player는 0.6 경계의 170/470 MaxWalkSpeed 분기를 구현했으나 CMC에 전달할 벡터 정규화와 요청/허용 gait 연결이 남아 있다. 순수 입력 크기는 Intent에 보존한다.
+- 다음 사용자 구현 가이드는 [INGAME_LOCOMOTION_STEP_2.md](INGAME_LOCOMOTION_STEP_2.md)다. 현행 계획만 다루며 이전 C++ 상태 재생 제어를 복원하지 않는다.
+- 감사 리포트: `Saved/ImportReports/Khazan_InGame_LoopMarkers_Audit_20260907.json`. 접지 시각 검증, 새 프로세스 저장 검증, 제시 코드의 빌드/BP Compile/PIE는 완료로 기록하지 않는다. 어시스턴트는 이번에 C++나 에셋을 수정하지 않았다.
+
+### 2026-09-07 3단계 사용자 구현 가이드
+
+- 사용자가 2단계 테스트 완료를 보고했다. 최신 소스의 입력/속도/gait 연결과 ABP Walk/Run의 새 loop 및 Sync Group Locomotion 설정을 읽기 전용으로 확인했다.
+- [INGAME_LOCOMOTION_STEP_3.md](INGAME_LOCOMOTION_STEP_3.md)에 Idle/WalkRun/SprintLoop, 현재 Stop 보존/재입력, InGame 참조 정리, 공중 임시 분기와 클래스별 데이터 소유 이유를 설명했다.
+- 새 C++ 제안은 AnimInstance의 시각 선택 조건과 220/190 cm/s 히스테리시스다. Player의 L3 정책/물리 170/470을 변경하지 않는다. 원시 snapshot 구조는 재작성하지 않는다.
+- Stop 원샷의 긴 10.375초 후보, LF/RF/Sprint 선택, Run Stop root와 제동 품질은 구분해서 기록한다. 일반 loop와 재입력 경로 완료를 Stop 품질 완료로 혼동하지 않는다.
+- 이번 작업은 설명/문서/표적 감사 자료 작성이며 C++/에셋을 변경하지 않았다. 3단계 구현/빌드/PIE는 아직 대기다. 감사: `Saved/ImportReports/Khazan_InGame_Step3_Baseline_20260907.json`.
+
+
+## 2026-09-07 Stop 진입 데이터 / enum 선택 / 발 동기화 4단계 안내
+
+- 사용자 3단계 적용을 현재 소스와 ABP에서 읽기 전용으로 확인했다. 상태 이름은 WalkRun/Sprint/Stop이며 bShouldSprint를 사용한다. Stop→WalkRun/Sprint 재입력은 이미 연결되어 있다.
+- bUseRunStop은 release edge에서만 갱신하는 마지막 선택값이다. 조건 밖 로그는 현재 GroundSpeed와 과거 선택을 함께 출력한다. 실제 ABP 임계값은 315였고 기존 로그에 600/false→504/true, 이후 0/true가 관찰되었다. release/인스턴스 식별자가 없는 로그로 개별 재현의 실행 분기를 단정하지 않는다.
+- [INGAME_LOCOMOTION_STEP_4.md](INGAME_LOCOMOTION_STEP_4.md)에 StopGait/StopEntrySpeed/StopEntryFoot 진입 고정, 직전 속도/지상 입력 이력, enum loop 선택, 독립 bool 전이 조건, LF/RF 후보 매핑과 양방향 sync 절차를 작성했다.
+- 입력 없는 감속 중 loop 선택도 유지해 outgoing Run이 속도 0에서 Walk로 바뀌는 것을 피한다. Stop 진입은 bIsStopping과 분리하며 물리 정지 후 원샷 종료/재입력은 ABP가 소유한다.
+- 현재 DAS Walk/Run Stop LF는 각각 40/95프레임 구간이고 나머지 RF/Sprint 네 후보는 249프레임 구간이다. 여섯 후보 모두 marker 0개이며 Sprint _02의 반대 발 매핑은 시각 검증 전이다. 현재 길이/사용자 편집을 덮어쓰지 않았다.
+- 원시 소스/에셋 수정 없이 문서와 표적 감사 결과만 작성했다. 제안식 14개 시나리오 계산은 빌드/BP Compile/PIE/접지 검증이 아니다.
+
+## 2026-09-08 Sprint 단일 Stop과 root 정책 안내
+
+- 사용자 확인: Sprint Stop은 좌우 발 variant가 아닌 단일 클립으로 사용한다. Walk/Run만 LF/RF 선택을 유지하며 Stop graph는 기본 5 Player 구성이다. Sprint 분기에 Foot enum blend를 요구하지 않는다.
+- 현재 Sprint 작업본은 DAS_Khazan_Sprint_Stop_LF, 114프레임 구간/4.75초, marker 0개다. 이름의 LF를 실제 발별 세트 존재의 근거로 보지 않는다. 중립 이름 DAS_Khazan_Sprint_Stop을 권장하되 Rename/복사/삭제는 수행하지 않았다.
+- ABP Root Motion Mode는 Montages Only이며 작업본 Enable Root Motion/Force Root Lock은 모두 false다. root local Y 이동 표본을 확인했지만 실제 캡슐 거리와 동일시하지 않는다.
+- 현재 단계 권장안은 CMC 제동 유지 + Stop 작업본 Root Motion=false/Force Root Lock=true/Ref Pose 우선 비교다. 원본 root track은 보존한다. authored Stop 이동을 실제 게임플레이 거리로 사용할 경우에만 별도 Root Motion 제동/재입력/스케일 정책을 검증한다.
+- 상세 설명과 단일 Sprint 연결, root 설정 비교 및 현재 소스 선행 교정은 INGAME_LOCOMOTION_STEP_4.md의 2026-09-08 섹션을 따른다. 코드 조건 반전 진단 기록은 Engineering 프로젝트 상태에도 분리했다.
+- 이번 변경은 설명 문서뿐이다. C++/ABP/시퀀스 수정 및 새 빌드/PIE는 수행하지 않았다.
+
+## 2026-09-08 본 삭제로 손상된 InGame 작업본 8개 복구 완료
+
+- InGame AnimSequence 63개 중 DAS 작업본 8개에서 root 외 225개 본 트랙이 삭제된 상태를 확인했다. 나머지 55개와 대응 Weapons 원본은 226개 트랙을 유지했다.
+- 정상 원본에서 누락 트랙만 복구하여 작업본 8개를 저장했다. 기존 root 키 전체, 현재 잘라둔 길이, Walk/Run/Sprint Sync Marker 2/12/16개와 기타 설정을 보존했다. SK_Khazan/SKM_Khazan과 ABP/C++는 수정하지 않았다.
+- 별도 프로세스의 전체 RAW 본/프레임 비교, root hash/marker/설정 보존 및 compressed pose 발 동작 검사가 8/8 통과했다. 보호 대상 Content 61개도 백업과 SHA-256이 같다. 최종 commandlet exit 0, 오류 0이다.
+- Sprint Stop은 이번 시작 시점에 249프레임 구간/10.375초로 저장되어 있었다. 직전 기록의 114프레임 구간/4.75초와 달라 길이를 질문했으며, 답변 전에는 현재 길이를 유지했다. 이전 4.75초 tail 편집까지 복구했다고 간주하지 않는다.
+- 현재 복구 계층은 C_P_Kazan(scale 100) → Root → Bip001이다. Root 최상위 변경은 별도 메시/스켈레톤과 애니메이션을 함께 변환하고 검증하는 후속 작업이다.
+- 상세 결과/백업/원본 매핑/재검증 명령: [SKELETON_RECOVERY_2026-09-08.md](SKELETON_RECOVERY_2026-09-08.md). 새 PIE 전이/접지 품질 검증은 이번 범위에서 수행하지 않았다.
+
+## 2026-09-08 사용자 Control Rig loop 끝 프레임 편집 복원
+
+- 사용자가 Walk/Run/Sprint loop의 첫 프레임 키를 마지막 프레임에 복사해 Bake했음을 확인했다. 앞선 본 트랙 원본 복구는 이 사용자 포즈 편집을 재현하지 못했다.
+- DAS_Khazan_Walk_Loop은 0→33, Run_Loop/Sprint_Loop은 0→119로 첫 포즈를 마지막 sample에 복사한 결과를 실제 시퀀스에 적용하고 저장했다. 길이 1.375/4.958333/4.958333초, 마커 2/12/16개와 설정은 유지했다.
+- 별도 프로세스에서 226개 본의 RAW/압축 포즈 처음·끝 차이 0, 끝 직전까지 중간 프레임 보존 검사를 3/3 통과했다. 보호 대상 파일 66개는 SHA-256이 같다. 최종 commandlet exit 0/오류 0.
+- 현재 검증 정본은 Saved/ImportReports/Khazan_DAS_LoopClosure_verify_20260908.json이다. 앞선 SkeletonRecovery source-equality 검사는 끝 프레임 수동 편집 이전의 이력으로 남긴다.
+- 백업/오차/재검증 절차와 정확한 범위는 SKELETON_RECOVERY_2026-09-08.md의 추가 복구 섹션을 따른다. 외부 Control Rig 편집 이력 자체를 복원한 것은 아니며 Stop/C++/ABP/스켈레톤/메시는 수정하지 않았다.

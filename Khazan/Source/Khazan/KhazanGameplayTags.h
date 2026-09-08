@@ -8,6 +8,7 @@ namespace KhazanGameplayTags
 {
 	// InputAction Tags
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_Move);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_Sprint);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_Turn);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_Jump);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_Attack);

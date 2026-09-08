@@ -27,6 +27,10 @@ private:
 	void Input_Move(const FInputActionValue& InputValue);
 	void Input_MoveReleased(const FInputActionValue& InputValue);
 	
+	void Input_Sprint(const FInputActionValue& InputValue);
+	void Input_SprintReleased(const FInputActionValue& InputValue);
+	void Input_SprintCanceled(const FInputActionValue& InputValue);
+	
 	void Input_Turn(const FInputActionValue& InputValue);
 	void Input_Jump(const FInputActionValue& InputValue);
 	void Input_Attack(const FInputActionValue& InputValue);

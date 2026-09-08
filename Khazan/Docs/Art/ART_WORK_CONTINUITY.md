@@ -116,3 +116,69 @@
 - 재개 시 `HeinMach_Final_Reconstruction_Audit.json` → `HeinMach_FogIntegrity_Review.json` → 실패한 항목만 표적 확인한다. source snapshot/schema가 바뀌지 않았다면 전수 추출 또는 비-Fog actor 복원을 반복하지 않는다.
 - 알려진 데이터 제약은 cooked proprietary Fog graph와 WEP 구역별 `FOG_Deep`/`FOG_Dark` controller 부재다. 현재 전역 Fog는 안정적인 UE5 preview이며 원본 런타임 지역 전환의 완전 복제는 아니다.
 - 현재 요청 범위에 남은 blocker는 없다.
+
+## 2026-09-07 진행 중 — StormPass 실제 플레이 경로·표면 렌더링
+
+- 기존 `passed` 감사가 실제 화면 품질을 보장하지 못함을 원본 시작 카메라에서 확인했다. 상세 근거/재개 문서: `STORMPASS_PRESENTATION_REVIEW_2026-09-07.md`.
+- 에디터를 직접 실행해 StormPass 14,408 actor를 열었다. 원본 시작 PlayerStart는 아직 없으며, 기존 Source/HeinMach/사용자 삭제는 건드리지 않는다.
+- 초기 USD 표면 검사 542 MI 중 534개의 packed-channel 오류를 발견했다. 54개의 effective Translucent도 원본 full-package JSON과 다시 대조한다.
+- 새 수리 도구: `Scripts/StormPass/repair_stormpass_surface_rendering.py`. `audit()`는 현재 상태를 보고하고 초기 plan을 보존한다. `repair_batch(offset, limit)`는 plan의 stable index 범위를 백업 후 수정한다. 실행한 batch는 `Saved/ImportReports/StormPass_SurfaceRendering_Batch_*.json`에 남는다.
+- 재개 시 먼저 `StormPass_SurfaceRendering_Plan_20260907.json` / 최신 audit / batch report를 읽는다. 완료 batch를 무조건 재실행하지 말고 audit mismatch 경로만 재확인한다.
+- 맵 원본 백업은 `Saved/ArtBackups/StormPass_PreRoutePresentation_20260907`. 조명/PP 실험값은 원래 상태로 되돌렸으며, Boss Phase 2/Clear의 임시 editor 숨김만 비교를 위해 남아 있다. 이 상태는 최종 표시 정책이 아니다.
+- 경로 metadata `StormPass_PlayableCameraAnchors.json`에는 정확히 18개 spawn anchor, 26개 streaming volume이 있다. 원본 Landscape 위 덮임은 이 18곳에서 발견되지 않았다.
+- 남은 작업: USD 표면 수정 종료, 원본 단계별 표시 복구, 실제 PlayerStart 및 편집용 경로 카메라, 조명·Fog 최종 검증, 에디터 재시작 감사, 오늘 작업 commit/main push. 아직 완료/푸시하지 않았다.
+
+## 2026-09-08 09:47 KST 재개 — Bad Request 신고 후 저장 상태 확인
+
+- 사용자에게 `{"detail":"Bad Request"}`가 표시돼 작업이 중단됐다. 확인된 별도 오류는 49개 MI 일괄 호출의 MCP 180초 응답 timeout이며, 두 오류가 동일 원인이라는 근거는 없다. 실패 요청의 HTTP 상세가 없으므로 원인 확정/재발 방지 보장을 하지 않는다.
+- UnrealEditor PID 34500은 정상 응답하며 중단 전 작업도 실제로 저장됐다. 현재 source control adapter 538개 중 108개 완료 / 430개 잔여다. `StormPass_NativeSurfaceBatch_0030.json`까지 완료. 최초 49개 표적 샘플 + index 0–59이며 중복 1개는 생략됐다.
+- 기존 USD channel/blend 검사는 542개 중 mismatch 0까지 완료했다. 이후 추가 원본 부모 추출에서 `GlobalMetallic=.4`, `GlobalRoughness=.6`, `GlobalSpecular=.2`, inherited `MetallicAdjust=-.5` 등을 확인했다. 해당 보정은 `restore_stormpass_surface_controls.py`의 별도 native adapter 작업이다. 원본 BBQ custom shading bytecode의 완전 복제는 아니다.
+- canonical source chain/수치: `StormPass_InheritedSurfaceControls_20260907.json`. 모든 요청은 full package 경로 기반이며 288개 실사용 재질 + 해당 부모만 추가 추출했다. 에셋 전수 재추출은 하지 않았다.
+- 맵은 14,426 actors: 원본 14,408 + source PlayerStart 1 + editor-only review Camera 17. 원본 actor 삭제/이동 0. Phase 1/2/Clear 1,335/1,098/698개는 persistent editor layer + game visibility/collision 상태로 분리했다. 현재 `traversal` 표시 상태다.
+- 수레 `WP_BANTU_Cart_Wood_002`의 source LOD0 section index `[0,1,2,3,5,4]`로 3/4/5 슬롯을 교정했다. 원본 중복 material index가 USD에서 deduplicate됐던 문제이며 `StormPass_CartSectionCorrection_20260907.json`에 근거가 있다.
+- 재개 체크포인트로 StormPass 맵만 명시적으로 저장했다. 이 조명은 아직 최종 검증 전: SkyLight specified source cube/intensity1.2/lower-hemisphere color 활성, PP shadow gain1/film slope.88/ambient cubemap2.5, Lumen 원래 설정. 기존 전역 Fog/Fogsheet V2는 변경하지 않았다.
+- `snapshot_user_work.ps1 -Mode Verify`: 기존 사용자 파일/삭제 258개 전부 동일. Source/Animation/HeinMach 변경 없음. commit/push 미실행.
+- 재개 순서: native adapter index60부터 10개 이하 짧은 호출로 진행(이미 완료된 MI는 readback으로 생략) → missing SSS 25개 표적 검토 → 실제 활성 viewport camera + 전체 editor window 캡처로 시각 확인 → 조명/Fog 최종 확인 → fresh-editor 및 Git 검증/commit/main push.
+- `take_screenshot(kind=viewport)`는 4-pane 구성에서 비활성 widget의 이전 화면을 반환할 수 있다. 레이아웃 변경 없이 `kind=editor_window`를 사용하고, camera는 `LevelEditorSubsystem.get_active_viewport_config_key()`로 실제 활성 key를 확인한다. HighResScreenshot/viewport layout 변경/forceLive 추정 사용 금지.
+
+## 2026-09-08 10:12 KST 추가 체크포인트 — native surface 완료 / PNG import 경로 교정
+
+- 짧은 batch 0060–0530 완료. `StormPass_NativeSurfaceControls_Audit.json`은 material_count538 / failures0이며 모든 MI가 개별 저장됐다.
+- 이후 첫 PNG(`BASE_Black.png`) 자동 임포트에서 에디터가 종료됐다. 이는 앞서 신고된 HTTP Bad Request와 별도 사건이다. 로그의 직접 원인은 `Interchange`가 `TaskGraph.cpp:705 ++Queue(QueueIndex).RecursionGuard == 1` assert를 발생시킨 것이다. Rider의 `RunScript` game-thread callback 안에서 동기 Interchange import가 실행됐다.
+- 신규 texture import manifest는 아직 만들어지지 않았고, 25개 Subsurface 단계는 미실행이다. 저장된 맵(14,426 actors), 538 MI 및 기존 사용자 변경은 유지된다.
+- 같은 live 자동 임포트는 재시도하지 않는다. `AssetTools.cpp:3566–3569`에서 `SpecifiedFactory == nullptr`일 때만 Interchange를 선택함을 확인했다. `restore_stormpass_subsurface_inputs.py`에 명시적 `TextureFactory()`를 지정했다.
+- 안전한 재개: GUI 종료 상태에서 `import_stormpass_surface_textures_commandlet.py`를 unattended `UnrealEditor-Cmd -NullRHI -run=pythonscript`로 실행 → import manifest/로그 확인 → GUI로 StormPass 재시작 → SSS를 5개 이하씩 연결 → 최종 scene 검증. Source/Engine C++ 또는 프로젝트 전역 import 설정은 변경하지 않는다.
+
+## 2026-09-08 Khazan 본 삭제 후 InGame 애니메이션 트랙 복구 진행
+
+- 현재 상태: SK_Khazan/SKM_Khazan은 이미 HEAD와 SHA-256이 일치하며 계층은 C_P_Kazan → Root → Bip001이다. InGame AnimSequence 63개 중 DAS 작업본 8개만 root 트랙 1개로 축소되어 있고 나머지 55개와 해당 Weapons 원본은 226개 트랙을 유지한다.
+- 보존: Walk/Run/Sprint loop Sync Marker 2/12/16개가 남아 있다. 현재 길이, 기존 root 키, marker, notify, curve/설정을 보존하며 누락된 225개 트랙만 복구한다. 전체 Git 롤백이나 재임포트는 수행하지 않는다.
+- 백업: Saved/ArtBackups/Khazan_SkeletonRecovery_20260908_132146/manifest.json. 현재 InGame, SK/SKM/ABP, 해당 자동 저장본 82개(492,441,030 bytes)를 복사하고 각 SHA-256을 검증했다.
+- 마지막 검증: /Game/_Recovery/KhazanSkeleton_20260908 아래 복사본 8개의 225개 트랙 복구 및 모든 프레임 RAW pose 비교가 통과했다. 원본 시퀀스의 길이/마커/설정과 root 키는 그대로다. 리포트는 Saved/ImportReports/Khazan_SkeletonRecovery_prepare_20260908.json이다.
+- 실패 원인: 편집된 스켈레톤을 반영하는 과정에서 시퀀스의 본 트랙 자체가 사라졌다. 로컬 UE 5.8 AnimSequencerController의 skeleton update 경로는 새 계층에 없는 트랙을 제거한다. 스켈레톤 복원만으로 삭제된 트랙이 재생성되지는 않는다.
+- 남은 작업: 복사본의 compressed pose/메시 동작 확인 → 같은 8개 작업본에 누락 트랙 적용 → 별도 프로세스에서 저장 결과 검증 → 결과 문서 추가. C++/ABP 수정은 필요하지 않다.
+- 재개: Scripts/Animation/recover_khazan_missing_bone_tracks.py와 prepare 리포트를 먼저 확인한다. Editor Python에서 runpy.run_path(unreal.Paths.project_dir()+'Scripts/Animation/recover_khazan_missing_bone_tracks.py', init_globals={'RECOVERY_MODE':'apply'}, run_name='__main__')를 사용한다. 스크립트는 backup hash 일치/미저장 수정 없음/복사본 8개 통과를 선행 검사한다. 적용이 일부 진행됐다면 무조건 재실행하지 말고 apply 리포트의 완료 에셋과 현재 트랙 수를 먼저 확인한다.
+- 별도 확인: Sprint Stop 작업본은 이번 시작 시점에 249프레임 구간/10.375초다. 직전 문서의 114프레임 구간/4.75초와 달라 사용자에게 길이 선택을 질문했으며 답변 전에는 현재 길이를 보존한다.
+
+### 2026-09-08 같은 작업 완료 및 남은 선택 사항
+
+- 위 진행 기록 이후 복사본 compressed pose 검증, 실제 8개 작업본 적용/저장, fresh-process 재검증을 모두 완료했다. Saved/ImportReports/Khazan_SkeletonRecovery_apply_20260908.json 및 Khazan_SkeletonRecovery_FreshAudit_20260908.json은 passed다. 최종 commandlet 로그는 Khazan_SkeletonRecovery_FreshAudit_Final_20260908.log이고 exit code 0/오류 0이다.
+- 원본 시퀀스 8개의 트랙은 모두 226개다. 기존 root 키 전체와 marker/길이/설정을 보존했고 대상 외 Content 파일 61개의 hash가 같다. 실제 작업본에 복구를 다시 적용할 필요가 없다.
+- 애니메이션 트랙 손상에 대한 남은 필수 복구는 없다. 선택 사항은 Sprint Stop의 직전 4.75초 길이 복원 여부다. 답변이 오면 Docs/Animation/SKELETON_RECOVERY_2026-09-08.md를 읽고 해당 한 클립의 현재 길이/dirty 상태를 먼저 확인한 뒤 새 백업을 만든다. 이전 문서의 114프레임 구간은 24 fps에서 4.75초/115 sample keys다. 새 사용자 편집을 확인 없이 덮어쓰지 않는다.
+- Root 최상위로의 후속 계층 변환은 별도 복사본을 사용한다. 현재 공유 Skeleton에서 최상위 C_P_Kazan(scale 100)을 다시 삭제하지 않는다. 변환 범위와 검증 기준은 위 전용 문서에 기록했다.
+
+## 2026-09-08 DAS loop Control Rig 끝 프레임 편집 복원 진행
+
+- 사용자 보완: DAS_Khazan_Walk_Loop/Run_Loop/Sprint_Loop은 Control Rig에서 첫 프레임을 마지막 프레임에 복사해 Bake한 작업본이다. 앞선 본 트랙 복구는 정상 원본의 포즈를 채운 결과여서 이 사용자 끝 프레임 편집을 재현하지 못했다.
+- 현재 적용: 첫 포즈를 Walk 33번, Run/Sprint 119번 마지막 sample에 복사한 결과를 실제 세 시퀀스에 적용/저장했다. 첫 프레임부터 끝 직전까지의 RAW 포즈 보존과 RAW/COMPRESSED 처음·끝 일치 검사를 통과했다. 길이/프레임 수, 모든 Sync Marker 30개와 설정을 보존했다.
+- 백업: Saved/ArtBackups/DAS_LoopClosure_20260908_134814. 변경 전 실제 loop 3개와 기존 Driving Level Sequence 3개를 복사하고 SHA-256을 검증했다. loop_pose_before.json에는 세 시퀀스의 모든 본/프레임 및 설정을 저장했다.
+- 마지막 검증: Saved/ImportReports/Khazan_DAS_LoopClosure_apply_20260908.json은 passed다. 스크립트는 Scripts/Animation/restore_das_loop_end_pose.py이며 verify가 기본이다. 외부 Control Rig 시퀀스의 작업 이력을 복원한 것이 아니라 사용자가 설명한 Bake 결과를 AnimSequence에 재적용했다.
+- 남은 작업/정확한 재개: 별도 UnrealEditor-Cmd의 -run=pythonscript -script=Scripts/Animation/restore_das_loop_end_pose.py로 저장본 재검증. 실행 중 Editor의 MCP 포트 충돌을 피하려면 -ini:EditorPerProjectUserSettings:[/Script/ModelContextProtocolEngine.ModelContextProtocolSettings]:bAutoStartServer=False를 해당 프로세스에만 전달한다. apply 재실행은 하지 않는다. 최종 결과를 Animation/Art 문서에 추가한다.
+- 기존 Khazan_SkeletonRecovery_FreshAudit_20260908.json은 끝 프레임 편집 이전의 원본 포즈 복구 이력이다. 현행 세 loop의 마지막 프레임은 의도적으로 원본과 다르며, 이전 source-equality 검사를 현재 끝 프레임의 정답으로 사용하지 않는다.
+
+### 2026-09-08 loop 끝 프레임 복원 최종 완료
+
+- 위 진행 기록 이후 fresh-process 저장본 검증 3/3을 완료했다. Khazan_DAS_LoopClosure_verify_20260908.json은 passed/commandlet=true이며 RAW/COMPRESSED endpoint error가 세 시퀀스 모두 [0,0,0]이다. 마지막 직전까지 포즈 보존, marker/길이/설정 보존, 다른 Content 66개 SHA-256 보존도 통과했다.
+- 최종 로그 Khazan_DAS_LoopClosure_FreshAudit_20260908.log는 exit 0/오류 0이다. 현재 사용자 요청인 세 loop 첫/끝 포즈 복구의 남은 필수 작업은 없다.
+- 재검증은 Scripts/Animation/restore_das_loop_end_pose.py의 기본 verify 모드로 한다. 이후 사용자가 추가 편집하면 baseline과 달라질 수 있으므로 차이를 곧바로 손상으로 단정하지 않는다. apply를 다시 실행하거나 이전 skeleton 복구 스크립트로 끝 프레임을 원본 포즈로 되돌리지 않는다.
+- 상세 결과와 이전 복구의 한계 보완은 Docs/Animation/SKELETON_RECOVERY_2026-09-08.md 및 ANIMATION_LOCOMOTION.md에 날짜별로 추가했다.

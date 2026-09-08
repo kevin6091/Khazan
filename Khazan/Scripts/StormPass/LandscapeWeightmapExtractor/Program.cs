@@ -105,6 +105,72 @@ internal static class Program
         provider.SubmitKey(new FGuid(), new FAesKey(configuration.AesKey));
         provider.PostMount();
 
+        // Targeted follow-up extraction uses the already validated FModel
+        // configuration/provider, without rerunning the Landscape survey.
+        if (args.Length >= 5 && args[3] is "--metadata-only" or "--metadata-with-parents")
+        {
+            var requested = JsonSerializer.Deserialize<string[]>(await File.ReadAllTextAsync(args[4]))
+                ?? throw new InvalidOperationException("Metadata request must be a package-path array");
+            var metadataManifest = new List<object>();
+            var pending = new Queue<string>(requested);
+            var visited = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            while (pending.TryDequeue(out var sourcePackage))
+            {
+                if (!visited.Add(sourcePackage)) continue;
+                if (!sourcePackage.StartsWith("BBQ/Content/", StringComparison.Ordinal) ||
+                    sourcePackage.Contains("..", StringComparison.Ordinal) || sourcePackage.Contains('\\'))
+                    throw new InvalidOperationException("Invalid source package path");
+                var destination = Path.GetFullPath(Path.Combine(outputRoot, sourcePackage + ".json"));
+                if (!destination.StartsWith(Path.GetFullPath(outputRoot) + Path.DirectorySeparatorChar,
+                        StringComparison.OrdinalIgnoreCase))
+                    throw new InvalidOperationException("Output escaped the requested extraction directory");
+                if (!File.Exists(destination))
+                {
+                    var exports = provider.LoadPackage(sourcePackage).GetExports().ToArray();
+                    Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
+                    await File.WriteAllTextAsync(destination,
+                        Newtonsoft.Json.JsonConvert.SerializeObject(exports, Newtonsoft.Json.Formatting.Indented));
+                    Log.Information("Extracted metadata: {Package} ({Count} exports)", sourcePackage, exports.Length);
+                }
+                metadataManifest.Add(new { source_package = sourcePackage, output = destination,
+                    bytes = new FileInfo(destination).Length });
+                if (args[3] == "--metadata-with-parents")
+                {
+                    using var parsed = JsonDocument.Parse(await File.ReadAllTextAsync(destination));
+                    foreach (var export in parsed.RootElement.EnumerateArray())
+                        if (export.TryGetProperty("Properties", out var properties) &&
+                            properties.TryGetProperty("Parent", out var parent) &&
+                            parent.TryGetProperty("ObjectPath", out var objectPath))
+                        {
+                            var parentPath = objectPath.GetString();
+                            if (parentPath?.StartsWith("BBQ/Content/", StringComparison.Ordinal) == true)
+                                pending.Enqueue(parentPath.Split('.')[0]);
+                        }
+                }
+            }
+            await File.WriteAllTextAsync(Path.Combine(outputRoot, "TargetedMetadataManifest.json"),
+                JsonSerializer.Serialize(metadataManifest, new JsonSerializerOptions { WriteIndented = true }));
+            return 0;
+        }
+
+        if (args.Length >= 5 && args[3] == "--textures-only")
+        {
+            var requested = JsonSerializer.Deserialize<string[]>(await File.ReadAllTextAsync(args[4]))
+                ?? throw new InvalidOperationException("Texture request must be a package-path array");
+            var parameters = requested.Distinct(StringComparer.Ordinal).Select(package =>
+            {
+                if (!package.StartsWith("BBQ/Content/", StringComparison.Ordinal) ||
+                    package.Contains("..", StringComparison.Ordinal) || package.Contains('\\'))
+                    throw new InvalidOperationException("Invalid texture package path");
+                var name = package.Split('/')[^1];
+                return new TextureParameterRecord("StormPassTargetedRepair", name, package + "." + name, name);
+            }).ToArray();
+            var textures = await ExtractSurfaceTextures(provider, versions, parameters, outputRoot);
+            await File.WriteAllTextAsync(Path.Combine(outputRoot, "TargetedTextureManifest.json"),
+                JsonSerializer.Serialize(textures, new JsonSerializerOptions { WriteIndented = true }));
+            return 0;
+        }
+
         var summaries = new List<object>();
         foreach (var target in Targets)
         {

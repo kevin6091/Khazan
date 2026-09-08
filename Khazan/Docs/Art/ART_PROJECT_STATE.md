@@ -139,3 +139,20 @@
 - [컴파일·검증] V5를 표적 재컴파일했고 `Failed to compile`/`LogMaterial`/shader compiler error는 0이다. `HeinMach_Final_Reconstruction_Audit.json`은 `all_checks_passed=true`, 43/43 통과다.
 - [정본] 최종 맵 SHA-256은 `B209ACB34FCEFC3D6F11EE47D098107976CA30B6A84CFA16335EA6638C2812E0`이다. 작업 전 안전 백업은 `Saved/ArtBackups/HeinMach_PreFogReview_20260904_143116`, 비교 캡처는 `Saved/ArtValidation/HeinMach_Fog_Review_20260904`에 있다.
 - [제약] source WEP가 구역별로 전환하는 cooked `FOG_Deep`/`FOG_Dark` controller와 proprietary master graph topology는 추출물에 없다. 따라서 단일 전역 Fog는 source 색/특성을 참고한 안정적인 UE5 preview이며 원본 런타임 지역 전환 로직의 완전 복제로 기록하지 않는다.
+
+## 2026-09-08 Khazan 스켈레톤 편집 후 애니메이션 트랙 복구
+
+- [완료] InGame DAS 작업본 8개의 삭제된 본 트랙을 1개(root) → 226개로 복구했다. 현재 길이와 Sync Marker 30개를 보존하고 기존 root 키를 변경하지 않았다.
+- [검증] 별도 Unreal 프로세스에서 8/8 RAW 전체 본/프레임, 압축 포즈의 발 동작, root/marker/설정 보존을 확인했다. 대상 외 Content 파일 61개는 백업과 SHA-256이 동일하다. 최종 commandlet exit 0/오류 0.
+- [보존] SK_Khazan/SKM_Khazan은 시작 시점부터 Git HEAD와 같았으며 수정하지 않았다. 현재 계층은 C_P_Kazan → Root → Bip001이다.
+- [백업] Saved/ArtBackups/Khazan_SkeletonRecovery_20260908_132146에 현재/자동 저장 82개 파일과 검증 hash를 보존했다.
+- [경계] Sprint Stop은 이번 시작 시점의 10.375초 길이를 보존했다. 직전 기록의 4.75초로 다시 자를지는 사용자 답변 대기다. Root 최상위 계층 변경과 PIE 발 접지 검증은 수행하지 않았다.
+- [정본] Docs/Animation/SKELETON_RECOVERY_2026-09-08.md 및 Saved/ImportReports/Khazan_SkeletonRecovery_FreshAudit_20260908.json.
+
+## 2026-09-08 DAS loop 사용자 끝 프레임 포즈 재적용 완료
+
+- [보완] 이전 본 트랙 복구가 사용자 Control Rig의 첫 프레임→마지막 프레임 복사 편집까지 재현하지 못했음을 확인했다.
+- [완료] InGame Walk/Run/Sprint loop의 기존 마지막 33/119/119번 sample을 0번 포즈와 같게 복원해 저장했다. 길이/설정, Sync Marker 총 30개와 중간 프레임 포즈를 보존했다.
+- [검증] 별도 프로세스에서 3/3 RAW 및 compressed 처음·끝 포즈 차이 0. 보호 대상 Content 66개 SHA-256 동일, commandlet exit 0/오류 0.
+- [백업] Saved/ArtBackups/DAS_LoopClosure_20260908_134814에 현재 파일 6개와 전체 loop RAW 포즈/설정 스냅샷을 보존했다.
+- [정본] Docs/Animation/SKELETON_RECOVERY_2026-09-08.md의 추가 복구 섹션 및 Saved/ImportReports/Khazan_DAS_LoopClosure_verify_20260908.json. 이전 source-equality 감사는 이 끝 프레임 수정 이전의 이력이다.

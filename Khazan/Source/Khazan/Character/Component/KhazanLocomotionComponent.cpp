@@ -18,8 +18,9 @@ void UKhazanLocomotionComponent::SetMoveInputWorld(const FVector& Input)
 	
 	const FVector Input2D(Input.X, Input.Y, 0.f);
 	
+	// 0~1범위
 	Intent.MoveInputWorld = Input2D.GetClampedToMaxSize(1.f);
-	
+	// 0~1범위
 	Intent.InputAmount = Intent.MoveInputWorld.Size2D();
 }
 
