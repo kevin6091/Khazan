@@ -121,3 +121,11 @@
 - 최신 UE inventory는 `Metadata/AnimationPruning_20260909/RetainedAssets.json`이다. 확인된 backing source 549개를 제거하고 Playback 722/Source 162/기존 Idle 3개를 남겼다. 전체 importer로 삭제 대상을 되살리지 않는다.
 - UE 5.8 AnimSequence는 `data_model`이 비어 있고 `AnimationSequencerDataModel`을 사용할 수 있다. 읽기 검증 시 `seq.controller.get_model_interface().get_frame_rate()` 및 `get_number_of_keys()`를 사용한다.
 - GUI와 별도 감사 commandlet을 함께 실행할 때 실험적 ModelContextProtocol의 동일 포트 충돌이 발생하면 감사 프로세스에만 `-DisablePlugins=ModelContextProtocol`을 적용한다. 프로젝트/GUI 설정을 바꾸지 않는다. Python passed와 최종 process exit/로그 오류 수를 함께 확인한다.
+
+### 2026-09-09 Enemy 재생 라이브러리 현행 규칙
+
+- 현행 Enemy AnimSequence는 병종별 `<family>/Animations/Playback` 한 폴더와 `A_EN_PLAY_*` 접두사를 사용한다. `SourceSequences`, `PlaybackClips`, `*SourceReferences` 애니메이션 경로를 신규 소비자에 사용하지 않는다.
+- `A_EN_PLAY_AC_*`는 주로 Composite bake, `A_EN_PLAY_CA_*`는 직접 원본 시간축이다. AC/CA는 원작 basename이므로 의미를 이름만으로 추정하지 않고 `PlaybackDerivation`, `OriginalPackage`, `TimingContract`를 읽는다.
+- rename은 UE AssetTools로 수행해 Blueprint hard/soft 참조를 함께 갱신한다. old package에 참조 또는 ObjectRedirector가 남지 않았는지 fresh registry에서 확인하고, JSON/CSV history를 redirector 대신 런타임 경로로 사용하지 않는다.
+- 동일 원본의 중복 자산 삭제는 Skeleton/FPS/sample/길이/root 계약과 모든 프레임·bone의 RAW/COMPRESSED pose를 확인한 뒤 수행한다. 수치 허용치는 gameplay 튜닝값과 구분해 보고한다.
+- 최신 inventory는 `Metadata/AnimationStructure_20260909/CurrentAssets.json`, current animation lookup은 `AnimationLibrary.csv`와 `RenameMap.json`이다. 이전 전체 importer를 실행해 옛 두 폴더를 복구하지 않는다.

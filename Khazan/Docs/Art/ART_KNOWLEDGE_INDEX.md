@@ -142,3 +142,11 @@
 - `Metadata/AnimationPruning_20260909/RetainedAssets.json`이 현재 Enemy 1,222개 기준이다. 애니메이션은 887개이며 재생용 722개는 그대로다. 이전 `Cleanup_20260909`의 1,771개 목록은 정리 전 이력이다.
 - 같은 폴더의 `AnimationRetention.csv`, `RetainedSourceDecisions.json`, `HeinMachEnemy_AnimationPruning_Metadata_20260909.json`은 전체 package/field 기준 재사용 가능한 원본 소비 분석이다. Composite 안의 Weapon Notify 참조도 직접 소비로 별도 보존한다.
 - `RemovedSources.json`과 외부 `AnimationPruning_20260909/BackupManifest.json`으로 삭제 파일을 복구할 수 있다. 별도 프로세스 감사 `HeinMachEnemy_AnimationPruning_Audit_20260909.json` 및 최종 commandlet exit 0/오류 0을 확인했다.
+
+### 2026-09-09 Enemy 애니메이션 현재 경로
+
+- [ENEMY_ANIMATION_LIBRARY_STRUCTURE_2026-09-09.md](ENEMY_ANIMATION_LIBRARY_STRUCTURE_2026-09-09.md)가 최신 네이밍·폴더 정본이다. AnimSequence 884개는 모두 `A_EN_PLAY_*`이며 각 병종의 `Animations/Playback`에 있다.
+- `Metadata/AnimationStructure_20260909/CurrentAssets.json`: 현재 Enemy UE 자산 1,219개의 경로/hash. `AnimationLibrary.csv`: 884개 병종·유래·원작 package·FPS·sample·길이·RateScale.
+- `RenameMap.json`: old→current 884개 경로. `LegacyIdleDuplicates.json`: 중복 Idle 3개 전 프레임 비교와 삭제 근거. `BlueprintComponents.json`: 새 경로를 쓰는 BP 16개의 컴포넌트 계약.
+- `PlaybackDerivation=CompositeBake` 722개, `DirectOriginalTimeline` 162개다. 둘 다 프로젝트 재생용이며 원작 유래는 metadata로만 구분한다. 이전 manifest의 destination은 역사 경로로 취급한다.
+- 최종 `HeinMachEnemy_AnimationStructureAudit_20260909.json`: redirector/missing dependency 0, 길이 변화 0, RAW/COMPRESSED pose 평가 5,298회, 카탈로그 16개, commandlet 오류 0.

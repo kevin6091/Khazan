@@ -58,3 +58,9 @@ BlendSpace의 `Properties.SampleData[*].Animation`, AnimationProfile의 `AnimMap
 ## 2026-09-09 main 전달 확인
 
 에셋 정리 커밋 `ec802c8f37cb45ecdab3ee9460495f7f65595ade`를 `origin/main`에 push하고 원격 ref 일치를 확인했다. 삭제 549개와 새 metadata/스크립트/관련 Art 기록만 포함하며 기존 다른 작업은 그대로 남았다. 이 전달 확인은 후속 문서 커밋에 포함한다.
+
+## 2026-09-09 후속 재생 구조 통합
+
+이 문서에서 보존한 Source 162개는 원작 유래상 직접 AnimSequence였지만 프로젝트에서는 실제 재생 자산이다. 후속 요청에 따라 `A_EN_SRC_*`와 `SourceSequences` 구분을 제거하고 `A_EN_PLAY_*`, `Animations/Playback`으로 옮겼다. 기존 Idle 3개는 대응 직접 재생 자산과 전 프레임 동등성 검사 후 삭제해 현재 AnimSequence는 884개다.
+
+원작 Composite bake 722개와 직접 원본 시간축 162개의 차이는 `PlaybackDerivation` metadata에 남는다. 최신 경로와 검증은 [ENEMY_ANIMATION_LIBRARY_STRUCTURE_2026-09-09.md](ENEMY_ANIMATION_LIBRARY_STRUCTURE_2026-09-09.md) 및 `Metadata/AnimationStructure_20260909`를 사용한다. 이 문서의 옛 경로는 조건부 삭제 시점의 기록이다.

@@ -299,3 +299,11 @@
 - 에셋 삭제·판단 metadata·스크립트·Art 문서를 `ec802c8f37cb45ecdab3ee9460495f7f65595ade` (`art: prune verified unused enemy source animations`)로 main에 커밋하고 origin에 push했다. `git ls-remote origin refs/heads/main`의 동일 hash를 확인했다.
 - 커밋은 검증된 원본 삭제 549개와 새 metadata 9개·스크립트 3개·Art 문서 6개의 567개 파일이다. 공용 Art 문서는 Enemy 추가 기록만 stage했으며 기존 사용자 Player/C++/설정/다른 문서 변경은 포함하지 않았다.
 - 현재 요청의 안전한 삭제·검증·Git 전달은 완료다. 원본 전체 미사용 조건은 성립하지 않으므로 Source 162개와 기존 Idle 3개는 보존한 상태가 최종 결과다. 이 확인 기록은 후속 문서 커밋으로 전달한다.
+
+### 2026-09-09 Enemy 애니메이션 구조 통합 완료
+
+- 사용자 후속 요청으로 남은 재생 자산의 네이밍/구조를 통일했다. 884개를 `A_EN_PLAY_*` 및 8개 병종별 `Animations/Playback` 폴더로 이동하고, 같은 원본의 초기 Idle 3개는 전 프레임 비교 후 제거했다. 현재 Enemy UE 자산 1,219개, AnimSequence 884개다.
+- `CompositeBake` 722개와 `DirectOriginalTimeline` 162개 모두 `EnemyArtRole=PlaybackSequence`다. 유래와 원작 package는 metadata에 보존했고 FPS/길이/sample/RateScale/root 설정은 이동 전 계약과 같다.
+- UE AssetTools가 BP 16개 참조를 갱신해 저장했다. old package/redirector/missing dependency 0. 별도 commandlet에서 884개 처음/중간/마지막 RAW+COMPRESSED pose 총 5,298회와 BP/카탈로그를 검사했다. 최종 로그 `EnemyAnimationStructureAudit_20260909.log`는 Success/오류 0/exit 0이다.
+- 변경 전 애니메이션 887개와 BP 16개는 `Desktop/카잔/EnemyExtracts/AnimationStructure_20260909`에 hash 백업했다. 보호한 외부 작업의 검사 시점 변경은 0개이며 `KhazanAnimInstance.cpp`/Player/Config를 수정하지 않았다.
+- 최신 정본 `ENEMY_ANIMATION_LIBRARY_STRUCTURE_2026-09-09.md`, metadata `AnimationStructure_20260909`. 남은 절차는 Enemy/관련 Art 파일만 stage 검토 → main commit/push → 원격 hash 확인이다.

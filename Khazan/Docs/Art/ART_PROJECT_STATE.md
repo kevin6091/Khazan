@@ -194,3 +194,10 @@
 - 남은 Enemy UE 자산 1,222개 전체 hash가 작업 전과 같다. BP 16개와 재생용 FPS/길이/RateScale/포즈를 편집하지 않았다. 원작 AP/BlendSpace/Weapon Notify의 직접 참조와 현재 BP 원본 참조 5개를 보존했다.
 - 별도 commandlet에서 저장 rate/sample/길이·compressed pose 2,166개·BP 참조 검증 passed, 누락 dependency 0, 최종 exit 0/오류 0. 외부 문서 작업 8개 변경은 별도 관측·보존했다.
 - 최신 정본: [ENEMY_SOURCE_ANIMATION_PRUNING_2026-09-09.md](ENEMY_SOURCE_ANIMATION_PRUNING_2026-09-09.md). 현재 목록은 `Metadata/AnimationPruning_20260909/RetainedAssets.json`, 복구 백업은 `Desktop/카잔/EnemyExtracts/AnimationPruning_20260909`다.
+
+### 2026-09-09 Enemy 재생 애니메이션 네이밍·폴더 통합 완료
+
+- 남은 AnimSequence를 실제 재생 역할로 통합했다. 중복 초기 Idle 3개를 전 프레임 RAW/COMPRESSED 비교 후 제거하고 최종 884개를 모두 `A_EN_PLAY_*`, 병종별 `Animations/Playback` 폴더로 이동했다.
+- 원작 Composite bake 722개와 원본 시간축 직접 재생 162개는 파일명/폴더를 공유한다. 유래는 `PlaybackDerivation`과 `PreviousEnemyArtRole`, `OriginalPackage` metadata로 구분한다. FPS·길이·sample·RateScale·root 설정은 변경하지 않았다.
+- BP 16개의 애니메이션 참조를 UE rename으로 새 경로에 저장했다. old package/redirector/missing dependency 0. 별도 commandlet에서 884개 RAW/COMPRESSED 5,298 pose 평가, 카탈로그 16개, 최종 exit 0/오류 0을 확인했다.
+- 최신 정본: [ENEMY_ANIMATION_LIBRARY_STRUCTURE_2026-09-09.md](ENEMY_ANIMATION_LIBRARY_STRUCTURE_2026-09-09.md). 현재 목록은 `Metadata/AnimationStructure_20260909/CurrentAssets.json`, 애니메이션 표는 `AnimationLibrary.csv`, 백업은 `Desktop/카잔/EnemyExtracts/AnimationStructure_20260909`다.
