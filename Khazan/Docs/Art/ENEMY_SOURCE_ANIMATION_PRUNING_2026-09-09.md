@@ -54,3 +54,7 @@ BlendSpace의 `Properties.SampleData[*].Animation`, AnimationProfile의 `AnimMap
 `Saved/Logs/EnemyAnimationPruningFinalAudit_20260909.log`는 **Success, 오류 0개, 기존 Lumen scalability 경고 1개, process exit code 0**으로 정상 종료했다. `HeinMachEnemy_AnimationPruning_Audit_20260909.json`은 passed다. 이전 GUI ensure/첫 commandlet의 포트 충돌과 최종 결과를 구분한다. 최종 commandlet의 임시 플러그인 비활성화는 현재 GUI나 프로젝트 설정에 적용하지 않았다.
 
 커밋 범위는 Enemy 원본 삭제·새 판단 자료·관련 파이프라인/Art 문서다. Player/DAS/C++/프로젝트 설정 및 다른 문서 작업은 포함하지 않는다. main과 origin/main이 같은 상태에서 이번 변경을 stage하며, 전달 commit과 원격 일치 확인은 최종 응답 및 `Saved/ImportReports/HeinMachEnemy_AnimationPruning_GitDelivery_20260909.json`에 기록한다.
+
+## 2026-09-09 main 전달 확인
+
+에셋 정리 커밋 `ec802c8f37cb45ecdab3ee9460495f7f65595ade`를 `origin/main`에 push하고 원격 ref 일치를 확인했다. 삭제 549개와 새 metadata/스크립트/관련 Art 기록만 포함하며 기존 다른 작업은 그대로 남았다. 이 전달 확인은 후속 문서 커밋에 포함한다.

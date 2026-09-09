@@ -293,3 +293,9 @@
 - 첫 독립 감사는 에셋 검사 passed 후 MCP HTTP 포트 충돌로 process error가 남았다. 프로젝트 설정을 바꾸지 않고 최종 감사 프로세스에만 `-DisablePlugins=ModelContextProtocol`을 적용해 재검사했다. 최종 로그 `EnemyAnimationPruningFinalAudit_20260909.log`: Success, 0 errors, 1 기존 scalability warning, exit 0.
 - 현재 rate/sample/길이/RateScale 검사, Playback compressed pose 2,166개, 카탈로그 BP 16개 참조 검증 passed. missing Enemy dependency 0. 기존 Router/Animation/Engineering 문서 8개는 외부 작업 변경으로 관측했으며 되돌리지 않았다.
 - 정본 `ENEMY_SOURCE_ANIMATION_PRUNING_2026-09-09.md`; 남은 전달 절차는 새 metadata 발행 → 해당 Enemy/Art 변경만 stage → main commit/push → 원격 hash 확인이다. 현재 애니메이션을 추가로 편집하거나 검증을 처음부터 반복할 필요는 없다.
+
+### 2026-09-09 조건부 원본 삭제 main 전달 완료
+
+- 에셋 삭제·판단 metadata·스크립트·Art 문서를 `ec802c8f37cb45ecdab3ee9460495f7f65595ade` (`art: prune verified unused enemy source animations`)로 main에 커밋하고 origin에 push했다. `git ls-remote origin refs/heads/main`의 동일 hash를 확인했다.
+- 커밋은 검증된 원본 삭제 549개와 새 metadata 9개·스크립트 3개·Art 문서 6개의 567개 파일이다. 공용 Art 문서는 Enemy 추가 기록만 stage했으며 기존 사용자 Player/C++/설정/다른 문서 변경은 포함하지 않았다.
+- 현재 요청의 안전한 삭제·검증·Git 전달은 완료다. 원본 전체 미사용 조건은 성립하지 않으므로 Source 162개와 기존 Idle 3개는 보존한 상태가 최종 결과다. 이 확인 기록은 후속 문서 커밋으로 전달한다.
