@@ -76,3 +76,7 @@ UE의 asset rename을 사용해 884개를 이동했고, BP 16개의 몸체·활�
 최신 현재 목록과 경로 대응은 `Content/_Art/Enemies/HeinMach/Metadata/AnimationStructure_20260909`에 발행한다. `CurrentAssets.json`이 전체 1,219개 Enemy UE 자산의 현재 경로와 SHA-256을, `AnimationLibrary.csv`가 884개 재생 시퀀스의 병종·유래·원작 package·FPS·길이를 기록한다. `RenameMap.json`, `LegacyIdleDuplicates.json`, `BlueprintComponents.json`으로 이동과 BP 참조를 추적한다.
 
 이전 `Expansion_20260909`, `Cleanup_20260909`, `AnimationPruning_20260909`의 destination 경로는 각 작업 당시의 이력이다. 현재 경로가 필요한 코드·BP·후속 도구는 최신 구조 metadata를 사용한다. 전체 importer를 다시 실행해 `SourceSequences`와 `PlaybackClips` 폴더를 되살리지 않는다.
+
+## 2026-09-09 main 전달 확인
+
+통합 에셋·경로 metadata·파이프라인·관련 Art 문서를 `6fd77bcc281e549f82bdb4204593b181faa02d83` (`art: unify enemy playback animation library`)로 main에 커밋하고 `origin/main`의 동일 hash를 확인했다. 기존 Player/DAS/C++/프로젝트 설정과 다른 작업 문서는 포함하지 않았다. 이 전달 기록은 후속 문서 커밋에 포함한다.

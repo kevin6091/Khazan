@@ -307,3 +307,9 @@
 - UE AssetTools가 BP 16개 참조를 갱신해 저장했다. old package/redirector/missing dependency 0. 별도 commandlet에서 884개 처음/중간/마지막 RAW+COMPRESSED pose 총 5,298회와 BP/카탈로그를 검사했다. 최종 로그 `EnemyAnimationStructureAudit_20260909.log`는 Success/오류 0/exit 0이다.
 - 변경 전 애니메이션 887개와 BP 16개는 `Desktop/카잔/EnemyExtracts/AnimationStructure_20260909`에 hash 백업했다. 보호한 외부 작업의 검사 시점 변경은 0개이며 `KhazanAnimInstance.cpp`/Player/Config를 수정하지 않았다.
 - 최신 정본 `ENEMY_ANIMATION_LIBRARY_STRUCTURE_2026-09-09.md`, metadata `AnimationStructure_20260909`. 남은 절차는 Enemy/관련 Art 파일만 stage 검토 → main commit/push → 원격 hash 확인이다.
+
+### 2026-09-09 Enemy 재생 라이브러리 main 전달 완료
+
+- 통합 변경을 `6fd77bcc281e549f82bdb4204593b181faa02d83` (`art: unify enemy playback animation library`)로 main에 커밋하고 origin에 push했다. `git ls-remote origin refs/heads/main` 일치까지 확인했다.
+- stage 전 정확한 범위 1,808개 경로를 검사했다: old animation 삭제 887, 새 animation 추가 884, BP 수정 16, metadata/스크립트/문서만 포함했다. 최대 신규 파일은 약 2.86 MiB이며 build/cache 파일은 없다.
+- 사용자 Player/DAS/C++/Config/다른 문서 변경은 작업 트리에 그대로 보존했다. 현재 요청의 네이밍·폴더 통합, 중복 Idle 정리, 검증 및 Git 전달은 완료다. 이 전달 확인은 후속 문서 커밋으로 반영한다.
