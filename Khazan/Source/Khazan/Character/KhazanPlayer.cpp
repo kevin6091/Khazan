@@ -48,6 +48,14 @@ void AKhazanPlayer::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void AKhazanPlayer::UnPossessed()
+{
+	HandleInputMoveReleased();
+	bSprintRequested = false;
+	
+	Super::UnPossessed();
+}
+
 void AKhazanPlayer::HandleInputMove(const FVector2D& MovementInput, const FRotator& ControlRotation)
 {
 	UKhazanLocomotionComponent* Locomotion = GetLocomotionComponent();
@@ -57,15 +65,9 @@ void AKhazanPlayer::HandleInputMove(const FVector2D& MovementInput, const FRotat
 		return;
 	}
 
-	if (!Locomotion->GetIntent().bMovementAllowed || IsMoveInputIgnored())
-	{
-		HandleInputMoveReleased();
-		return;
-	}
-
-	const float RawInputAmount =
-		static_cast<float>(MovementInput.Length());
-
+	const float RawInputAmount = static_cast<float>(MovementInput.Length());
+	
+	// 원시 입력의 크기가 DeadZone보다 작으면 입력 취소.
 	if (RawInputAmount <= MoveInputDeadZone)
 	{
 		HandleInputMoveReleased();
@@ -77,10 +79,16 @@ void AKhazanPlayer::HandleInputMove(const FVector2D& MovementInput, const FRotat
 	const FVector Right = UKismetMathLibrary::GetRightVector(YawRotation);
 	
 	const FVector WorldInput = Forward * MovementInput.X + Right * MovementInput.Y;
+	
 	Locomotion->SetMoveInputWorld(WorldInput);
 	
 	//gait와 속도 결정하기
 	RefreshLocomotionGait();
+	
+	if (!Locomotion->IsMovementInputAllowed())
+	{
+		return;
+	}
 	
 	const FVector MoveDirection = Locomotion->GetIntent().MoveInputWorld.GetSafeNormal2D();
 	AddMovementInput(MoveDirection, 1.f);
@@ -133,7 +141,7 @@ void AKhazanPlayer::RefreshLocomotionGait()
 	
 	const FKhazanLocomotionIntent& Intent = Locomotion->GetIntent();
 	
-	if (!Intent.bMovementAllowed || IsMoveInputIgnored() || Intent.InputAmount <= 0.f)
+	if (Intent.InputAmount <= 0.f)
 	{
 		return;
 	}
@@ -144,6 +152,11 @@ void AKhazanPlayer::RefreshLocomotionGait()
 
 	Locomotion->SetTargetGait(RequestedGait);
 
+	if (!Locomotion->IsMovementInputAllowed())
+	{
+		return;
+	}
+	
 	switch (Locomotion->GetResolvedGait())
 	{
 	case EKhazanGait::Walk:

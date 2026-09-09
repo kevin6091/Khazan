@@ -329,3 +329,39 @@ FModel/변환 원본은 모두 249 frame, 10.375초로 들어왔지만 다수 �
 - 별도 프로세스에서 226개 본의 RAW/압축 포즈 처음·끝 차이 0, 끝 직전까지 중간 프레임 보존 검사를 3/3 통과했다. 보호 대상 파일 66개는 SHA-256이 같다. 최종 commandlet exit 0/오류 0.
 - 현재 검증 정본은 Saved/ImportReports/Khazan_DAS_LoopClosure_verify_20260908.json이다. 앞선 SkeletonRecovery source-equality 검사는 끝 프레임 수동 편집 이전의 이력으로 남긴다.
 - 백업/오차/재검증 절차와 정확한 범위는 SKELETON_RECOVERY_2026-09-08.md의 추가 복구 섹션을 따른다. 외부 Control Rig 편집 이력 자체를 복원한 것은 아니며 Stop/C++/ABP/스켈레톤/메시는 수정하지 않았다.
+
+## 2026-09-08 Stop _New의 C_P_Kazan Root 트랙 Bake
+
+- 사용자 요청대로 InGame Run/DAS_Khazan_Run_Stop_LF_New, Run/DAS_Khazan_Run_Stop_RF_New, Sprint/DAS_Khazan_Sprint_Stop_New를 원본 복사로 생성했다.
+- 원본은 각각 95/91/114프레임 구간(3.958333/3.791667/4.75초), 24 fps다. Sync Marker 0개와 길이/설정을 그대로 보존했다. 이전 기록의 RF/Sprint 길이로 되돌리지 않았다.
+- C_P_Kazan의 scale 100을 포함해 Root의 움직임을 최상위 본으로 합성하고 Root 애니메이션 트랙만 제거했다. 본 계층은 유지하며 Root는 reference pose로 고정된다.
+- 기타 225개 본의 Control Rig 채널 2,025개는 키 시간/값/탄젠트까지 동일하다. 원본/다른 InGame/Skeleton/Mesh/ABP/AnimInstance를 포함한 보호 파일 71개는 SHA-256이 같다.
+- 별도 프로세스에서 세 저장본의 RAW/압축 포즈 및 속성/채널 보존 검증을 3/3 통과했다. Root Motion 활성화, 정규화 scale, Root Lock 등 옵션은 원본값을 유지했다. Enable Root Motion은 false이며 게임 내 이동 활성화/거리 검증은 수행하지 않았다.
+- 상세 변환식/결과/백업/검증 정본: [STOP_ROOT_TRANSFER_2026-09-08.md](STOP_ROOT_TRANSFER_2026-09-08.md), Saved/ImportReports/Khazan_DAS_StopRootTransfer_verify_20260908.json.
+
+## 2026-09-08 Stop 마커와 양발 동시 착지 기준
+
+- Stop Sync Marker는 현재 loop와 공통 의미의 접촉 위상으로 동기화할 때 적용한다. 모든 Stop에 좌우 두 마커를 강제로 요구하지 않는다.
+- 양발이 지면에 있는 상태와 두 발이 같은 순간 새로 착지하는 사건을 구분한다. 한 발이 이미 지지하고 다른 발이 새로 닿으면 새로 닿은 발의 접촉만 기록한다.
+- 실제 동시 착지에 LeftFoot/RightFoot을 같은 시각으로 겹치거나 가짜 한 프레임 차이를 만들지 않는다. BothFeet Sync Marker만 추가해도 기존 loop와 자동 동기화되지 않으며 현재 C++ 좌우 쌍 해석도 이를 처리하지 않는다.
+- 양발 착지 이벤트/접지 구간이 필요하면 선택적인 Anim Notify 또는 좌우 독립 Animation Curve로 표현한다. 이름만 추가해 전이/IK가 구현되는 것은 아니다. 양발 착지와 Stop 완료 시점도 구분한다.
+- 순환 보행 위상이 없는 Stop은 Do Not Sync + 일반 전이/재입력을 기준으로 먼저 확인한다. 대응 마커가 있는 Stop도 마지막 접촉 이후 정착 구간의 재입력 품질을 따로 검사한다.
+- 상세: INGAME_LOCOMOTION_STEP_4.md의 같은 날짜 양발 착지 보충. 이번에는 문서만 추가했으며 특정 프레임의 접지 포즈 재검증이나 C++/ABP/에셋 변경은 수행하지 않았다.
+
+## 2026-09-08 현재 Stop 검증 범위와 5단계 준비
+
+- 실제 현재 Stop은 InGame의 Walk LF/RF, Run LF/RF, Sprint 단일 시퀀스 5개를 참조한다. Stop state Always Reset on Entry=true, 모두 Loop=false. Sprint에는 단일 Default Pose만 가진 Foot enum 노드가 있지만 좌우 시퀀스 두 개를 사용하는 구조는 아니다.
+- Run LF/Run RF/Sprint Stop의 Force Root Lock=true, Enable Root Motion=false, Ref Pose를 확인했다. Walk LF/RF Stop은 Force Root Lock=false다. 이 설정 차이만으로 Walk root가 실제 이동한다고 단정하지 않는다. 전체 top/child root 변위 확인은 남았다. ABP Root Motion Mode는 Montages Only다.
+- 현재 Stop 길이/marker 수: Walk LF 1.666667초/3, Walk RF 1.666667초/1, Run LF 3.708333초/1, Run RF 3.791667초/2, Sprint 4.75초/1. 한쪽 marker 하나만 있는 시퀀스를 좌우 순환 위상이 완전히 동기화된 것으로 기록하지 않는다. 모두 Locomotion/AlwaysLeader/Leader Joining Override=true로 설정되어 있어 비순환 Stop의 그룹 정책은 후속 시각 검증 항목이다.
+- loop 마커 2/12/16과 InGame 참조를 확인했다. GroundedLocomotion 출력 뒤 Inertialization 노드가 연결돼 있다. 이전 Message Log의 누락 오류만으로 현재 노드가 없다고 판단하지 않는다.
+- 새 빌드와 실제 C++ Walk/Run/Sprint Stop 진입 데이터 확인은 Engineering 프로젝트 상태를 따른다. 추가 PIE 입력 검사와 viewport 관찰은 도구/디버거 응답 중단으로 완료하지 못했고 발 튐 원인도 확정하지 않았다. 사용자가 보고한 체감 품질과 어시스턴트의 완료 검증 범위를 구분한다.
+- [INGAME_LOCOMOTION_STEP_5.md](INGAME_LOCOMOTION_STEP_5.md)에 다음 저속·전방 SprintStart 기본형, 원본 보존/자산 준비, 실제 최상위 C_P_Kazan과 자식 Root 구분, 변수/함수의 줄별 의미, 상태 전이와 중단 규칙을 작성했다. 코드/에셋은 사용자가 적용할 예제이며 이번에 구현하거나 런타임 통과시킨 것이 아니다.
+- 현재 실행 정리/재개는 Docs/Engineering/ENGINEERING_WORK_CONTINUITY.md의 2026-09-08 섹션을 먼저 따른다. 테스트 리포트: Saved/ImportReports/Khazan_InGame_Stop_Verification_20260908.json.
+
+## 2026-09-08 현재 구현 정본 통합과 Start 전면 제외
+
+- 사용자 요청으로 [LOCOMOTION_CURRENT_IMPLEMENTATION.md](LOCOMOTION_CURRENT_IMPLEMENTATION.md)를 새 정본으로 추가했다. 이후 로코모션 작업은 Router 다음에 이 정본을 먼저 읽는다. 이 문서의 앞선 구현 기록은 삭제하지 않고 이력/상세 근거로 보존한다.
+- 새 정본은 현재 소스를 재확인해 클래스 책임, Intent/snapshot/파생/Stop 진입/이력 변수, 함수와 갱신 순서, 마지막 ABP/시퀀스 관측값, 실제 검증과 미확정 항목을 구분했다.
+- 사용자 최신 결정: Sprint를 포함한 모든 Start 모션을 사용하지 않는다. 앞선 SprintStart 제안은 취소됐고 현재 bShouldPlayStart=false를 유지한다. 다음 구현 주제는 Turn이다.
+- 현재 실제 심볼은 LocomotionGait, StopGait, StopEntryFoot, bShouldSprint, MovementDirectionAngle이다. 과거 bool 선택 변수와 가이드의 임시 이름을 현재 구현으로 재사용하지 않는다.
+- 이번에는 문서와 선행 읽기 규칙만 변경했다. C++/ABP/시퀀스 수정, 새 빌드/PIE, 중단된 검사 세션 복구는 수행하지 않았다. 마지막 에셋 관측과 새 소스 확인을 같은 검증 수준으로 기록하지 않는다.

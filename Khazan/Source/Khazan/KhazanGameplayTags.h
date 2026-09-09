@@ -18,4 +18,8 @@ namespace KhazanGameplayTags
 	
 	// AssetLabel Tags
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(AssetLabel_Preload);
+	
+	
+	// Block Tags
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Block_Movement_Input);
 }

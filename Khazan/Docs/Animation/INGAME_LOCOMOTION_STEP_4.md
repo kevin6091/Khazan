@@ -533,3 +533,55 @@ KhazanAnimInstance.cpp의 UpdateTransitionData_AnyThread에서 현재 조건은 
 검증 범위: 소스, 에디터 metadata, 세 root 표본, 공식 문서/로컬 UE 5.8 구현을 읽기 전용 확인했다. 새 빌드/Compile/PIE 재현이나 C++/ABP/에셋 수정은 수행하지 않았다.
 
 근거: [Epic Root Motion](https://dev.epicgames.com/documentation/en-us/unreal-engine/root-motion-in-unreal-engine), [Epic Distance Matching](https://dev.epicgames.com/documentation/en-us/unreal-engine/distance-matching-in-unreal-engine), 로컬 UE 5.8 AnimSequence.cpp / AnimCompressionTypes.h / CharacterMovementComponent.cpp / AnimInstance.cpp.
+
+## 2026-09-08 보충: Stop Sync Marker와 양발 동시 착지
+
+### 적용 범위
+
+앞선 'Stop에 마커를 준비한다'는 안내를 모든 Stop에 LeftFoot/RightFoot 두 개를 강제한다는 뜻으로 사용하지 않는다. 현재 loop와 의미가 맞는 접촉 위상으로 동기화할 Stop에만 같은 marker 체계를 적용한다. 순환 보행 위상이 없는 단일 양발 제동/정착 클립은 기본 Do Not Sync와 일반 state crossfade로 먼저 연결해도 된다.
+
+### 접촉 사건과 접지 상태 구분
+
+- 이미 왼발이 지지 중이고 오른발이 새로 착지하면 그 시점에는 RightFoot 접촉 기준을 기록한다. 양발이 바닥에 있다는 이유로 LeftFoot을 다시 추가하지 않는다.
+- 실제 좌우 착지가 다른 시점이면 실제 접촉 순서대로 마커를 기록한다. Stop을 억지로 loop처럼 좌우 반복하도록 만들지 않는다.
+- 두 발이 공중에서 같은 순간 새로 착지한 것이거나, 양발 미끄러짐/정착으로 기존 loop의 좌우 위상을 정의하기 어려운 구간은 임의의 한 발로 단정하지 않는다.
+- 루프에서 정의한 접촉 기준(예: 발이 실제로 체중을 받기 시작하는 접촉)을 Stop에도 일관되게 사용한다. 발끝/뒤꿈치의 자세 변화나 단순히 가장 낮은 높이를 모든 새로운 접촉으로 기록하지 않는다.
+- 느린 재생과 프레임 단위 검토로 순서를 확인할 수 없으면 애매함을 그대로 인정한다. 좌우를 강제로 번갈아 만들기 위해 한쪽 마커를 1프레임 옮기지 않는다.
+
+### 같은 시각의 LeftFoot + RightFoot을 사용하지 않는 이유
+
+현재 데이터 계약은 이전/다음 접촉 마커 사이의 시간상 진행률로 발 후보를 고른다. 두 이름을 정확히 같은 시각에 놓는 것은 그 사이의 보행 구간을 정의하지 못하며 '양발 접지'를 표현하는 전용 문법도 아니다.
+
+로컬 UE 5.8 AnimSequence.cpp에는 이전/다음 마커 시간이 같으면 이전 시간을 클립 길이만큼 보정하는 처리 등이 있다. 따라서 동시 마커가 반드시 0 나눗셈이나 Crash를 낸다고 설명하지 않는다. 프로젝트의 교대 보행 위상 의미에 적합하지 않아서 피하는 것이다.
+
+### BothFeet Sync Marker만 추가하면 해결되지 않는다
+
+- 이름은 엔진이 특별하게 해석하는 양발 착지 명령이 아니다.
+- marker 동기화에는 같은 그룹의 활성 소스 사이에 공통인 이름이 필요하다. Stop에만 BothFeet를 넣어도 현재 Walk/Run/Sprint loop와 해당 지점이 자동 대응되지 않는다.
+- 현재 SelectStopEntryFoot_AnyThread는 LeftFoot→RightFoot 또는 RightFoot→LeftFoot 쌍만 인정한다. 조회 결과에 BothFeet가 포함된 쌍은 현재 함수에서 None으로 반환된다.
+- 모든 클립에 의미 있는 공통 BothFeet 위상이 있는 별도 시스템을 설계할 수는 있지만, 현재 교대 보행 loop에 없는 접촉을 만들어 넣는 것으로 해결하지 않는다.
+
+### 양발 착지 데이터가 실제로 필요할 때
+
+동기화와 별개의 데이터로 만든다. 아래 이름은 프로젝트에 제안하는 이름이며 엔진 내장 인식 규칙이 아니다.
+
+- 일회성 착지 이벤트: 선택적으로 BothFeetPlant 같은 Anim Notify. Add Notify에서 만들며 Add Sync Marker가 아니다. 소비 로직이 있어야 효과가 있고, 추가만으로 전이/발 고정이 수행되지는 않는다.
+- 접지 구간/가중치: FootContact_L과 FootContact_R 같은 일반 float Animation Curve. 왼발만 지지하는 구간은 1/0, 오른발은 0/1, 양발은 1/1, 둘 다 비접촉이면 0/0으로 authoring할 수 있다.
+- 이 curve는 애니메이션의 접지 의도/가중치이지 실제 지면 trace 결과가 아니다. 실제 IK/foot lock과 결합하려면 별도 소비 로직이 필요하다.
+- 일반 curve는 pose blending 등에 의해 중간값이 될 수 있다. 아무 고려 없이 최종 값 == 1만 검사하는 bool로 취급하지 않는다.
+- 지금 착지 효과나 foot IK에 사용할 계획이 없다면 Notify/Curve까지 새로 추가할 필요는 없다.
+- 양발 착지 시점과 Stop 동작 완료 시점은 같지 않을 수 있다. 양발이 닿았다는 이유만으로 상체의 제동/정착 동작을 자르거나 자동으로 Idle로 전이시키지 않는다.
+
+### 현재 단계의 편집 기준
+
+1. 실제 사용할 최종 InGame 작업본을 연다. 최신 기록의 Run/Sprint _New와 원본을 혼동해 사용하지 않는 원본에만 마커를 추가하지 않는다.
+2. 실제 한 발씩의 대응 접촉 구간이 있는 Stop에는 기존 LeftFoot/RightFoot을 추가하고 기존 marker sync 정책을 검증한다.
+3. 같은 Stop 후반이 양발 정착으로 끝나면 마지막 발 마커 뒤에 가상의 교대 접촉을 만들지 않는다. 이 구간에서 재입력하는 테스트는 별도로 한다.
+4. 클립 전체가 양발 동시 제동 위주이고 loop와 대응되는 위상이 없다면, 해당 Sequence Player는 Do Not Sync를 기준으로 일반 0.1초 안팎의 state crossfade/재입력을 먼저 확인한다. 수치는 초기 시험값이며 최종 품질 보장이 아니다.
+5. 이 선택은 '동기화가 없어도 모든 위상에서 정확히 맞는다'는 뜻이 아니다. 초입/후반 재입력이 만족스럽지 않으면 대응 pose 선택/블렌드/실제 필요한 접지 로직을 후속 설계한다. 단일 Sprint Stop의 반대 발 variant를 마커로 생성할 수는 없다.
+6. 마커가 없거나 공통 이름이 부족한 Stop을 이름만 Locomotion 그룹에 넣으면 length sync로 동작할 수 있다. 마커를 생략할 때는 그룹 정책도 확인한다.
+7. 발 착지와 Stop 완료, Stop 클립 선택, 물리 Root Motion 적용은 서로 다른 책임이다. 이번 보충은 Root Motion 설정을 바꾸는 절차가 아니다.
+
+이번에는 소스/기존 기록/공식 문서와 로컬 엔진 마커 계산만 읽고 문서에 기준을 추가했다. 특정 Stop의 정확한 접촉 프레임/양발 여부를 포즈 재생으로 새로 판정하거나 시퀀스/ABP/C++를 수정하지 않았다.
+
+근거: [Epic Sync Groups](https://dev.epicgames.com/documentation/en-us/unreal-engine/animation-sync-groups-in-unreal-engine), [Epic Animation Notifies](https://dev.epicgames.com/documentation/en-us/unreal-engine/animation-notifies-in-unreal-engine), [Epic Animation Curves](https://dev.epicgames.com/documentation/en-us/unreal-engine/animation-curves-in-unreal-engine), 로컬 UE 5.8 AnimSequence.cpp의 marker 위치 계산과 현재 KhazanAnimInstance.cpp의 좌우 쌍 검사.

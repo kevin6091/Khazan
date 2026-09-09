@@ -103,7 +103,7 @@ void UKhazanAnimInstance::UpdateKinematics_AnyThread(const FKhazanAnimGameThread
 	// 공중에 있는지.
 	bIsFalling = Snapshot.MovementMode == MOVE_Falling;
 	
-	// 이동 Input을 가졌는지. 이동이 허락되지않으면 false.
+	// "유효한" 이동 Input을 가졌는지. 이동이 허락되지않으면 false.
 	bHasMovementInput = Snapshot.bMovementAllowed && InputAmount > MovementInputThreshold;
 	
 	// 움직이는 중인지. Input말고도 다른 요인으로도 움직인다면 true.
@@ -136,7 +136,7 @@ void UKhazanAnimInstance::UpdateTransitionData_AnyThread()
 	bShouldPlayStart = false;
 	bShouldEnterStop = false;
 	
-	if (!bHasPreviousKinematicFrame)
+	if (bHasPreviousKinematicFrame)
 	{
 		const bool bJustLostGroundedMovementInput = bHadGroundedMovementInput && !bHasMovementInput;
 
@@ -277,8 +277,8 @@ void UKhazanAnimInstance::GatherGameThreadData()
 
 	NewData.RotationMode = Intent.RotationMode;
 
-	NewData.bMovementAllowed = Intent.bMovementAllowed;
-
+	NewData.bMovementAllowed = LocomotionComponent->IsMovementInputAllowed();
+	
 	NewData.bValid = true;
 
 	GameThreadData = NewData;

@@ -157,6 +157,21 @@
 - [백업] Saved/ArtBackups/DAS_LoopClosure_20260908_134814에 현재 파일 6개와 전체 loop RAW 포즈/설정 스냅샷을 보존했다.
 - [정본] Docs/Animation/SKELETON_RECOVERY_2026-09-08.md의 추가 복구 섹션 및 Saved/ImportReports/Khazan_DAS_LoopClosure_verify_20260908.json. 이전 source-equality 감사는 이 끝 프레임 수정 이전의 이력이다.
 
+## 2026-09-08 Stop C_P_Kazan Root 트랙 _New 생성
+
+- [완료] InGame의 Run_Stop_LF/Run_Stop_RF/Sprint_Stop을 같은 이름_New로 복사하고 Root/C_P_Kazan의 애니메이션 트랙만 수정했다. 상위 scale 100을 반영해 움직임을 C_P_Kazan으로 옮기고 Root 트랙을 비웠다. Skeleton/본 계층은 유지했다.
+- [보존] 현재 원본 길이 3.958333/3.791667/4.75초, 24 fps, Sync Marker와 일반 속성/옵션을 보존했다. 나머지 본의 FK Control Rig 채널 2,025개는 키/탄젠트까지 같다. 보호 파일 71개 hash가 동일하다.
+- [검증] 별도 Unreal 프로세스에서 _New 3/3 RAW/압축 포즈, Root 고정, 기타 채널 및 속성 보존을 확인했다. 최종 commandlet exit 0/오류 0.
+- [범위] Root Motion 활성화/정규화 scale/Root Lock 등 설정은 원본대로 유지했다. 실제 CharacterMovement 이동 거리나 PIE 전이 검증은 하지 않았다.
+- [백업/정본] Saved/ArtBackups/DAS_StopRootTransfer_20260908_141845, Docs/Animation/STOP_ROOT_TRANSFER_2026-09-08.md, Saved/ImportReports/Khazan_DAS_StopRootTransfer_verify_20260908.json.
+
+## 2026-09-08 DAS 로코모션 24 fps 시간축 재검사
+
+- [완료/읽기 전용] PSA 11개, Blender FBX 6개, 현재 InGame 시퀀스 11개 및 ABP Sequence Player 10개를 표적 검사했다. PSA/FBX/게임 코드/에셋은 변경하지 않았다.
+- [판정] 현재 InGame은 모두 24 fps/RateScale 1.0이다. PSA N/R 및 공개 CUE4Parse exporter 계산 규칙에서 복원한 유효 sample 간격은 11개 모두 약 30 fps다. 과거의 “24 fps로 임포트됨”은 “원작 속도가 정확히 24 fps”라는 뜻이 아니다.
+- [근거] FBX 키 시간이 1/24초 격자에 있고, source/현재 InGame 각각 5개 시퀀스의 표적 본 회전 변화는 PSA 연속 frame +1과 대응했다. 같은 동작 구간을 24 fps 시간축에 배치해 늘어난 것으로 판단한다.
+- [미적용 제안] 동일 키 구간의 30/24=1.25배 비교 테스트. 원작의 최종 ABP/Montage/RateScale 및 정확한 exporter binary 버전은 미확인이다. 속도/접지의 시각 합격이나 모든 애니메이션의 전수 보정을 완료한 것이 아니다.
+- [정본/재사용] [DAS_ANIMATION_TIMING_AUDIT_2026-09-08.md](DAS_ANIMATION_TIMING_AUDIT_2026-09-08.md), Saved/ImportReports/Khazan_Locomotion_Timing_Audit_20260908.json. 기존 marker/loop 끝 pose/Stop root 편집은 보존했다.
 ## 2026-09-08 HeinMach Enemy 외형 라이브러리 추가
 
 - [완료] `/Game/_Art/Enemies/HeinMach`에 튜토리얼 검병 40종, 검·방패병 4종, 별도 할버드 정예 1종의 외형 Blueprint를 저장했다. 개별 source 메시 17개와 조합 전신 메시 44개, texture 149개, source 대응 material 36개 및 보조 material 1개, idle animation 3개를 포함한다.

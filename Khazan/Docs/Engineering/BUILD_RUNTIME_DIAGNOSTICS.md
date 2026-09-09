@@ -75,3 +75,41 @@
 - 명령 대상: `KhazanEditor Win64 Development`, UE 5.8 UBT, `-WaitMutex -FromMsBuild`.
 - 결과: `Succeeded`; `UnrealEditor-Khazan.lib/.dll` 링크와 `KhazanEditor.target` metadata 생성 완료.
 - 신규 Locomotion C++과 기존 프로젝트 모듈을 포함한 non-unity adaptive build에서 compile/link error 0건.
+
+
+## 2026-09-09 M2.1 PIE 종료 `bHasBegunPlay` assert
+
+- 증상: DevMap PIE는 시작되지만 Stop PIE의 `BeginTearingDown` 직후 Editor가 종료된다.
+- 반복 증거: `Saved/Crashes/UECC-Windows-5507E58445FD1FB5866451848C33073A_0000`(14:45:01), `Saved/Crashes/UECC-Windows-582F3E9048CD1E1EA461AA80BE12322E_0000`(14:45:41) 모두 `ActorComponent.cpp:1668`, `Assertion failed: bHasBegunPlay`다.
+- 엔진 계약: UE 5.8.2 `UActorComponent::EndPlay()`는 진입 시 `bHasBegunPlay`를 검사하고 종료 시 false로 바꾼다.
+- 프로젝트 원인: 사용자 적용본 `UKhazanLocomotionComponent::EndPlay()`가 시작과 끝에서 `Super::EndPlay()`를 두 번 호출한다. 첫 호출 뒤 두 번째 호출이 assert한다.
+- 수정 계약: 자신의 delegate 구독/weak reference/Intent를 정리한 뒤 `Super::EndPlay(EndPlayReason)`를 마지막에 한 번만 호출한다.
+- 함께 발견한 별도 오류: `RegisterGameplayTagEvent()`가 반환한 ASC 소유 delegate 참조를 지역 변수에 값 복사하고 그 복사본에 AddUObject했다. crash 원인은 아니지만 실제 태그 변화 callback이 등록되지 않아 M2.1 기능 검증을 무효화한다. ASC 반환값에 직접 `AddUObject`하거나 명시적 참조에 연결한다.
+- 현재 검증 판정: PIE 시작과 ASC 탐색 오류 부재까지만 통과. GE asset은 현재 Infinite/Target Tag/None 데이터를 가진다. A/B handle, count 0→1→2→1→0, 허용 결과, 재 PIE 종료는 수정 후 다시 검사해야 한다.
+
+
+## 2026-09-09 M2.1 종료 assert 수정 후 재검증
+
+- 사용자 수정본은 delegate를 `FOnGameplayEffectTagCountChanged&`로 받아 ASC 소유 delegate에 구독하고, `EndPlay()` 마지막의 `Super::EndPlay()` 한 번만 남긴다.
+- 15:00:23 Live Coding patch 성공 뒤 실제 `GE_Test_BlockMovement`를 A/B 두 handle로 적용·해제했다. tag count / 활성 효과 수 / 캐시된 이동 허용값은 `0/0/true → 1/1/false → 2/2/false → 1/1/false → 0/0/true`였다. 두 handle은 서로 달랐고 개별 제거도 성공했다.
+- 별도 차단 효과를 활성 상태로 남긴 채 PIE를 종료했으며 `BeginTearingDown`과 `CleanupWorld for DevMap` 뒤 Editor가 유지됐다. 두 번째 PIE도 count 0, 효과 0, 허용 true로 새로 시작하고 정상 종료됐다.
+- 새 crash report는 생기지 않았다. `Saved/Crashes` 최신 항목은 수정 전 `UECC-Windows-582F3E9048CD1E1EA461AA80BE12322E_0000`(14:45:41)이며 현재 Editor PID 23328은 응답 중이고 PIE Idle이다. 따라서 이 항목의 `bHasBegunPlay` assert는 수정본 런타임에서 재발하지 않았다.
+- Player BP는 compile error/warning 없이 실행됐고 서로 다른 A/B handle을 만들었다. 현재 그래프가 BeginPlay 한 호출에서 적용과 제거를 모두 끝내므로 실제 이동 차단을 눈으로 볼 수 없다는 테스트 구성 한계가 있다.
+- 자동 Enhanced Input 주입은 허용 상태에서도 프로젝트 `IA_Move` binding에 도달하지 않아 실제 입력 gate 판정에 쓰지 않았다. 분리된 BP 이벤트를 통한 키보드/패드 시험과 Editor 종료 후 전체 Development Editor 빌드는 남는다.
+
+### 같은 세션 후속 — Enhanced Input 경로 합격
+
+- `InjectInputVectorForAction(IA_Move, (0,1,0))`을 12프레임 사용한 두 번째 probe는 프로젝트의 실제 action binding에 도달했다.
+- Block count 1에서는 캐시 허용 false와 원시 InputAmount 1.0을 동시에 관측했고 변위/속도/가속도는 모두 0이었다. 같은 효과를 handle로 제거한 count 0에서는 허용 true, InputAmount 1.0, 변위 387.214 uu, 속도 `(0,470,0)` uu/s, 가속도 `(0,1800,0)` uu/s²였다.
+- 주입 종료 뒤 InputAmount와 MoveInputWorld가 0으로 돌아와 Released 정리도 확인했다. 수치는 이 실행의 관측값이며 원작값 또는 튜닝 제안이 아니다.
+- 초기 probe 과정의 Python `AttributeError`/`NameError`는 노출되지 않은 helper와 callback 전역 수명 사용에서 발생한 진단 코드 오류다. callback을 명시적으로 해제하고 해당 PIE를 종료해 활성 Test GE를 정리한 뒤, 보존된 `builtins` 참조 방식으로 재검증했다. 게임 C++ assert나 BP compile 오류가 아니다.
+- 최종 PIE 종료도 정상이며 임시 callback/참조가 없다. M2.1 기능 런타임은 통과했고, 남은 빌드 검증은 Editor 종료 상태의 전체 `KhazanEditor Win64 Development` 한 번이다.
+
+
+## 2026-09-09 M2.1 Editor 종료 상태 전체 빌드 완료
+
+- Editor가 종료된 상태에서 `Build.bat KhazanEditor Win64 Development Khazan.uproject -WaitMutex -FromMsBuild`를 실행했다.
+- 결과는 `Succeeded`, `Target is up to date`, exit code 0이다. 앞서 확인한 실제 IA_Move gate, 효과 A/B count/handle, 반복 PIE 종료 결과와 합쳐 M2.1을 완료 처리한다.
+- M2.2/2.3 설명 준비를 위한 별도 `UnrealEditor-Cmd -run=pythonscript -nullrhi` CDO probe도 exit code 0, commandlet error 0으로 끝났다. 결과는 `Saved/ImportReports/M2_2_3_CurrentCDO_20260909.json`이다.
+- Probe는 Player CDO의 Walk/Run/Sprint 170/470/600, CMC MaxWalkSpeed 300, MinAnalog 15, MaxAcceleration/Braking 1800/1800, Yaw 540과 현재 base CharacterMovementComponent를 읽었다. 수치는 현재 프로젝트 관측/이관값이며 원작 검증값이 아니다.
+- 게임 Source/BP/asset은 이 확인에서 저장·수정하지 않았다. 다음 C++/BP 작업은 [M2.2·M2.3 공동 구현 가이드](CHARACTER_TAG_ABILITY_STEP_2.md#m2-2-m2-3-detailed-guide-20260909)의 사용자 적용 대기다.

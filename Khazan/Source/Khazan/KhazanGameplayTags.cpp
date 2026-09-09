@@ -17,4 +17,8 @@ namespace KhazanGameplayTags
 	
 	// AssetLabel Tags
 	UE_DEFINE_GAMEPLAY_TAG(AssetLabel_Preload, "AssetLabel.Preload");
+	
+	
+	// Block Tags
+	UE_DEFINE_GAMEPLAY_TAG(Block_Movement_Input, "Block.Movement.Input");
 }

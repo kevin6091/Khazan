@@ -447,3 +447,35 @@ else if (MovementInput.Length() > 170.f)
 - StopEntryFoot는 Walk/Run 선택용이며 Sprint의 단일 선택에 필수 입력이 아니다. 단일 시퀀스에도 실제 발 접촉 마커를 넣어 재입력 동기화에 활용할 수 있지만 반대 발 초입 pose를 생성해 주는 것은 아니다.
 - Root Motion 적용 여부는 root 이동 키의 존재가 아니라 캡슐 제동의 이동량을 무엇으로 결정할지에 따라 선택한다. 현재 단계에는 CMC 제동과 인플레이스 Stop(root lock)을 권장한다. 현재 에셋 설정을 변경한 기록이나 사용자가 Root Motion 정책을 최종 확정한 기록은 아니다.
 - 세부 절차는 INGAME_LOCOMOTION_STEP_4.md의 2026-09-08 섹션이 앞선 Sprint 두 발 전제보다 우선한다. 이번에는 설명/문서만 변경했다.
+
+## 2026-09-08 Stop 마커 적용 범위 보충
+
+- 모든 Stop에 LeftFoot/RightFoot을 강제로 배치하는 것이 아니라, loop와 대응하는 실제 접촉 위상이 있는 클립에 marker sync를 적용한다.
+- 실제 양발 동시 착지/정착은 같은 시각의 좌우 Sync Marker 또는 가짜 시간차로 표현하지 않는다. 필요할 때만 별도 Notify/접지 curve로 기록한다.
+- 교대 위상이 없는 단일 Stop은 Do Not Sync와 일반 전이를 기준으로 연결하고, 초반/후반 재입력을 검증한다. 상세 기준은 INGAME_LOCOMOTION_STEP_4.md의 양발 동시 착지 보충을 따른다.
+
+## 2026-09-08 Stop 부분 검증 이후 5단계 준비
+
+- 사용자 정책 확정: Stop은 Root Lock을 이용한 인플레이스로 운용하며 실제 이동/제동은 CMC가 담당한다. 실제 확인한 Run/Sprint Stop은 Force Root Lock=true이고 Walk Stop 두 개는 false이므로 설정과 root 변위를 구분해 재확인한다.
+- 최신 소스의 Stop 이력 조건은 올바르다. 새 UBT 빌드 성공 및 PIE C++ 중단점에서 Walk/Run/Sprint의 진입 Gait와 속도 170/470/600 보존을 확인했다. 추가 입력/ABP 완주/발 시각 검증은 도구 중단으로 미완료다. 이 기록을 4단계 전체 통과로 해석하지 않는다.
+- 다음 사용자 구현 가이드는 [INGAME_LOCOMOTION_STEP_5.md](INGAME_LOCOMOTION_STEP_5.md)다. 최초 적용 범위를 저속·전방 SprintStart 하나로 좁혀 원샷의 진입/종료/중단을 먼저 검증한다. 고속 Run→Sprint는 적합한 주행 중 가속 클립을 준비하기 전까지 기존 Sprint 직접 진입을 유지한다. 방향별 Start는 후속 확장이다.
+- 기존 bShouldPlayStart를 Sprint 진입 pulse로 재사용하고, AnimInstance에 이전 지상 Sprint 요청/이전 지상 여부 및 진입 속도/입력 방향각을 추가하는 예제를 제공한다. Player/Controller/CMC의 입력과 실제 이동 정책은 유지한다. 예제 속도/각도 220 cm/s/45도는 튜닝 출발점이며 자산 적합성을 검증한 최종 수치가 아니다.
+- Start 후보의 포즈/현재 길이/최상위와 자식 root 처리가 아직 검증되지 않았으므로 에셋 준비를 선행한다. Force Root Lock만으로 자식 Root의 이동까지 사라진다고 가정하지 않는다.
+- 어시스턴트는 진단 스크립트/리포트/설명 문서만 추가했다. 실제 C++/ABP/시퀀스는 변경하지 않았다. 멈춘 검사 세션의 정리와 정확한 재개는 Docs/Engineering/ENGINEERING_WORK_CONTINUITY.md의 2026-09-08 기록을 따른다.
+
+## 2026-09-08 현행 정본과 모든 Start 제외 — 이후 적용 순서
+
+- 현재 구현/변수/함수의 정본은 [LOCOMOTION_CURRENT_IMPLEMENTATION.md](LOCOMOTION_CURRENT_IMPLEMENTATION.md)다. 이 문서의 앞선 단계 설명을 현재 구현 완료 상태로 읽지 않는다.
+- 사용자 확정: Walk/Run/Sprint 모두 Start 시퀀스를 사용하지 않는다. SprintStart를 다시 구현하지 않고 Idle/Stop의 유효 Sprint 입력은 Sprint loop로 직접 연결한다.
+- 기존 번호는 이전 설명 링크와의 대응을 위해 보존한다. 5단계는 취소이며 재개 대상이 아니다.
+
+| 기존 단계 | 현재 처리 |
+| --- | --- |
+| 1~3 에셋/입력/loop | 사용자 구현과 검증 기록을 새 정본 기준으로 유지. 과거의 없는 변수/marker 상태로 되돌리지 않음. |
+| 4 Stop | 현재 enum/진입 스냅샷/Walk·Run LF/RF/Sprint 단일 구조 유지. 실제 부분 검증과 남은 시각 검증을 구분. |
+| 5 SprintStart | 취소. 모든 Start 제외. |
+| 6 Turn | 다음 설명/구현 주제. 현재 정본 정리 후 재개하며 새 Turn 데이터/그래프는 아직 미구현. |
+| 7 LockOn | 후속 범위. 이 단계에서도 Start를 자동 재도입하지 않음. |
+| 8 품질/통합 | 발 접촉, 제동/회전, 재입력/공중/낮은 FPS 등의 후속 검증. |
+
+이번 변경은 문서뿐이다. Turn 설계 중 언급한 미확정 후보 변수/콜백을 사용자가 적용한 코드로 기록하지 않는다. 실행 검사 재개가 필요할 때만 Engineering continuity의 미회수 세션 정리 절차를 따른다.

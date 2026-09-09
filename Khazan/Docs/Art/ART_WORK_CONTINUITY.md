@@ -183,6 +183,23 @@
 - 재검증은 Scripts/Animation/restore_das_loop_end_pose.py의 기본 verify 모드로 한다. 이후 사용자가 추가 편집하면 baseline과 달라질 수 있으므로 차이를 곧바로 손상으로 단정하지 않는다. apply를 다시 실행하거나 이전 skeleton 복구 스크립트로 끝 프레임을 원본 포즈로 되돌리지 않는다.
 - 상세 결과와 이전 복구의 한계 보완은 Docs/Animation/SKELETON_RECOVERY_2026-09-08.md 및 ANIMATION_LOCOMOTION.md에 날짜별로 추가했다.
 
+## 2026-09-08 Stop Root 움직임을 C_P_Kazan으로 전달한 _New 생성 진행
+
+- 사용자 범위: Run_Stop_LF/Run_Stop_RF/Sprint_Stop 세 원본에서 같은 위치의 이름_New 시퀀스를 생성한다. Root와 C_P_Kazan 애니메이션 키 외 Sync Marker/길이/옵션/나머지 본/원본은 수정하지 않는다.
+- 현재 적용: DAS_Khazan_Run_Stop_LF_New, DAS_Khazan_Run_Stop_RF_New, DAS_Khazan_Sprint_Stop_New를 원본 복사로 생성하고 저장했다. 원본의 현재 길이는 95/91/114프레임 구간(3.958333/3.791667/4.75초)이다.
+- 방법: AnimationSequencerDataModel의 FK Control Rig 트랙에서 C_P_Kazan의 scale 100을 반영해 Parent_new(t)=Root_ref^-1*Root_old(t)*Parent_old(t)를 Bake하고, Root의 애니메이션 트랙만 제거했다. 실제 스켈레톤의 본/계층은 변경하지 않았다. C_P_Kazan 아래에 Root 외의 sibling이 없음을 확인했다.
+- 마지막 검증: Saved/ImportReports/Khazan_DAS_StopRootTransfer_build_20260908.json은 passed, 3개 저장 완료다. 원본과 복사본의 기타 설정 35개 및 Notify/Marker/길이 정보가 같고, 나머지 225개 본의 Control Rig 채널 2,025개는 키 시간/값/tangent/default까지 정확히 같다. 매 프레임 RAW/압축 컴포넌트 포즈와 Root 고정 상태도 검사했다.
+- 백업: Saved/ArtBackups/DAS_StopRootTransfer_20260908_141845. 원본 3개 6,077,827 bytes를 복사해 SHA-256 확인했고 baseline.json/manifest.json에 설정, 기타 채널 해시와 보호 파일 71개의 해시를 저장했다. 원본/다른 InGame/스켈레톤/메시/ABP/AnimInstance 파일은 변경하지 않았다.
+- 남은 작업/재개: 별도 UnrealEditor-Cmd -run=pythonscript -script=Scripts/Animation/bake_das_stop_root_to_dummy.py의 기본 verify 모드로 저장본 검증 후 문서에 최종 결과를 추가한다. 실행 중 Editor와 MCP 포트가 충돌하지 않도록 -ini:EditorPerProjectUserSettings:[/Script/ModelContextProtocolEngine.ModelContextProtocolSettings]:bAutoStartServer=False를 commandlet 프로세스에만 전달한다. build 재실행은 하지 않는다.
+- 보존한 옵션: Enable Root Motion=false, Force Root Lock=false, Use Normalized Root Motion Scale=true. 사용자 요청에 따라 본 키 이외의 설정을 변경하지 않았다. 이 기록은 게임 내 Root Motion 활성화나 CharacterMovement 이동 거리 검증을 뜻하지 않는다.
+
+### 2026-09-08 Stop _New Root 이관 최종 완료
+
+- 위 진행 기록 이후 fresh-process 저장본 검증 3/3을 완료했다. Khazan_DAS_StopRootTransfer_verify_20260908.json은 passed/commandlet=true다. 최종 로그 Khazan_DAS_StopRootTransfer_FreshAudit_20260908.log는 exit 0/오류 0.
+- Root/C_P_Kazan 외 채널 2,025개와 일반 속성/시퀀스 정보 35개 항목 보존, RAW/압축 전신 컴포넌트 포즈, Root reference pose 고정 및 보호 파일 71개 해시 일치가 통과했다. 사용자 요청인 세 _New 생성의 남은 필수 작업은 없다.
+- 현재 결과의 정본은 Docs/Animation/STOP_ROOT_TRANSFER_2026-09-08.md다. 기본 verify 모드로 재검증하고 build를 다시 실행하지 않는다. 후속 사용자 수정으로 baseline이 달라지면 차이를 먼저 확인한다.
+- Enable Root Motion=false 등 기존 옵션은 사용자 요청대로 유지했다. Root Motion 활성화나 정규화 scale 정책 변경은 이 작업에 포함하지 않았다. 본 키 이외의 설정을 자동으로 변경하지 않는다.
+
 ## 2026-09-08 HeinMach 인간형 Enemy 추출·조립 시작
 
 - 요청: DAS 튜토리얼과 초반 HeinMach 인간형 적의 외형 조합, 장비, 머티리얼, 텍스처, 원작 메타데이터 추출 및 Enemy 전용 폴더 임포트. 게임 로직/C++ 변경 작업이 아니다.

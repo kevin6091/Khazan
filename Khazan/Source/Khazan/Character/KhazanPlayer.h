@@ -19,6 +19,7 @@ protected:
 
 public:	
 	virtual void Tick(float DeltaTime) override;
+	virtual void UnPossessed() override;
 	
 public:
 	void HandleInputMove(const FVector2D& MovementInput, const FRotator& ControlRotation);

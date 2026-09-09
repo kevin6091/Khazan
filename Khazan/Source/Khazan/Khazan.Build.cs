@@ -15,7 +15,10 @@ public class Khazan : ModuleRules
 
         PublicDependencyModuleNames.AddRange(new string[]
         {
-	        "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "GameplayTags", "Cog", "CogEngine", "CogDebug", "CogImgui"
+	        "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "GameplayTags", 
+	        "Cog", "CogEngine", "CogDebug", "CogImgui",
+	        "GameplayAbilities",
+	        "GameplayTasks"
         });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

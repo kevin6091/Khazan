@@ -108,6 +108,18 @@
 - 최신 StormPass map SHA-256은 `F63A6C8D66C3F5D6A677EF00B2AECDB4406A6B229AB7C4DB1E4D42F25CC2C91E`다.
 - 이전 `3719...` hash는 `BASE_Black_NoneSRGB` default closure 직전 체크포인트다.
 
+## 2026-09-08 DAS 애니메이션 속도 / PSA·FBX 시간축
+
+| 필요한 정보 | 첫 조회 위치 | 판정 기준 |
+| --- | --- | --- |
+| 24 fps가 원작 속도인지 | [DAS_ANIMATION_TIMING_AUDIT_2026-09-08.md](DAS_ANIMATION_TIMING_AUDIT_2026-09-08.md) | 11개 PSA의 유효 간격 약 30 fps, 현 InGame 24 fps; 원작 최종 runtime 배속은 별도 |
+| 실제 FPS/키 개수/marker/ABP PlayRate | `Saved/ImportReports/Khazan_Locomotion_Timing_Audit_20260908.json` | Editor 직접 읽기 11개/Sequence Player 10개 |
+| 임포트 속도 저하의 근거 | 같은 JSON의 FBX 및 angular-step 검사 | 6개 FBX의 1/24초 시간 격자; source/InGame 각각 5개 표적 본에서 PSA offset +1 대응 |
+| Run 30.25, Walk 30.882353, Turn 32의 의미 | 시간축 문서 2절 | N/R 유효 길이와 (N-1) 구간을 구분; AnimRate를 그대로 nominal fps에 적용하지 않음 |
+
+- 기존 PSA metadata의 `duration_seconds=(N-1)/AnimRate`는 원작 SequenceLength의 독립 실측값이 아니다. 시간 해석은 이번 보완을 우선하며 이전 report는 보존한다.
+- 새로운 source snapshot/에셋 수정이 없으면 위 결과를 재사용한다. 이번 검사는 표적 조사이며 모든 DAS 애니메이션의 전수 합격이 아니다.
+
 ## 2026-09-08 HeinMach 인간형 Enemy 재사용 자료
 
 - 정본: [HEINMACH_ENEMY_EXTRACTION_2026-09-08.md](HEINMACH_ENEMY_EXTRACTION_2026-09-08.md). 후속 Enemy 외형 작업은 이 문서와 저장 manifest부터 확인한다.
