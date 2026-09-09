@@ -102,3 +102,9 @@ FPS는 저장한 sample의 시간 간격이다. 재생용 FPS가 약 60이라고
 - 에셋 및 파이프라인 커밋: `65119aa65dcf6f7d20b756715695111b946f2ee9`, `art: add curated humanoid enemies and metadata-timed animations`.
 - `origin/main` push 성공, LFS 객체 39개(110 MB) 업로드 완료. 원격 `refs/heads/main`의 commit 일치까지 확인했다.
 - 기존 Player/C++/설정 변경 및 다른 DAS 문서 작업은 커밋에 포함하지 않았다. 공용 Art 문서는 Enemy 섹션만 stage했다. 이 전달 확인은 별도 문서 커밋으로 기록한다.
+
+## 2026-09-09 후속 원본 애니메이션 정리
+
+사용자의 후속 조건부 삭제 요청으로 원본 549개를 정리했다. 현재 재생용 722개·원본 162개·기존 Idle 3개를 남겼으며, 이 문서 앞부분의 “1,436개 모두 유지”는 그 이전 작업 결과다. 원작 직접 참조와 재생용 미대응 동작이 있으므로 원본 전체가 인게임 미사용이라는 가정은 성립하지 않는다.
+
+최신 결과·보존 근거·최종 검증은 [ENEMY_SOURCE_ANIMATION_PRUNING_2026-09-09.md](ENEMY_SOURCE_ANIMATION_PRUNING_2026-09-09.md)와 `Metadata/AnimationPruning_20260909`에 있다. 남은 1,222개 UE 에셋의 내용과 재생 속도는 그대로이며 Blueprint의 작업 범위도 위 설명과 같다.

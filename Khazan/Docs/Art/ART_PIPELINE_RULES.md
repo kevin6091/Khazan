@@ -113,3 +113,11 @@
 - 캐릭터 삭제는 사용할 BP·보존 애니메이션·카탈로그 및 외부 참조를 root로 두고 hard/soft dependency closure를 구한 뒤 수행한다. 개별 source 파츠라도 중갑/무기/preview/pose carrier에 필요하면 남긴다.
 - `DeleteLoadedAssets`의 성공값만으로 디스크 삭제를 확정하지 않는다. 이번에는 미참조 texture 1개가 남아 UE 종료 후 백업/hash/정확한 경로를 확인하고 단일 파일을 정리했다. 별도 UE 프로세스에서 남긴 자산 hash·BP 재로드·누락 참조를 확인한다.
 - 재생용 시퀀스 중 `EquivalentSourceTimeline`은 후속 통합 후보이며, sample 수·포즈·소비 참조까지 확인한 뒤 canonical 자산을 선택한다. 이번에 시퀀스를 삭제하지 않았고 시간축이 변경된 271개와 동일한 451개를 구분했다.
+
+### 2026-09-09 원본 애니메이션 삭제의 확인된 경계
+
+- `SourceSequences`라는 폴더명만으로 인게임 미사용이라고 가정하지 않는다. 현재 BP와 원작 AP/BlendSpace/WeaponSlot/Notify에 직접 원본 참조가 존재한다. `AnimationPruning_20260909`의 소비 분석과 현재 UE 참조를 함께 확인한다.
+- Composite의 body bake는 내부 Weapon Notify가 참조하는 별도 무기 시퀀스를 대체하지 않는다. 현재 미참조라도 대응 재생용이 없는 동작은 불필요하다고 확정하지 않는다.
+- 최신 UE inventory는 `Metadata/AnimationPruning_20260909/RetainedAssets.json`이다. 확인된 backing source 549개를 제거하고 Playback 722/Source 162/기존 Idle 3개를 남겼다. 전체 importer로 삭제 대상을 되살리지 않는다.
+- UE 5.8 AnimSequence는 `data_model`이 비어 있고 `AnimationSequencerDataModel`을 사용할 수 있다. 읽기 검증 시 `seq.controller.get_model_interface().get_frame_rate()` 및 `get_number_of_keys()`를 사용한다.
+- GUI와 별도 감사 commandlet을 함께 실행할 때 실험적 ModelContextProtocol의 동일 포트 충돌이 발생하면 감사 프로세스에만 `-DisablePlugins=ModelContextProtocol`을 적용한다. 프로젝트/GUI 설정을 바꾸지 않는다. Python passed와 최종 process exit/로그 오류 수를 함께 확인한다.

@@ -277,3 +277,19 @@
 - 에셋·스크립트·Enemy 문서 변경을 `65119aa65dcf6f7d20b756715695111b946f2ee9` (`art: add curated humanoid enemies and metadata-timed animations`)로 main에 커밋·push했다. Git LFS 39개/110 MB 업로드 완료이며 `git ls-remote origin refs/heads/main`이 해당 commit과 일치했다.
 - staged 4,415개 파일은 Enemy Content 4,372개, 스크립트 36개, Art 문서 7개다. 캐시/빌드 산출물과 Player/C++/설정은 제외했다. 공용 Art 문서도 Enemy 섹션만 stage해 기존 DAS 문서 변경을 보존했다.
 - 현재 요청의 외형 정리·설명·검증·주요 변경 전달은 완료다. 이 완료 기록은 후속 문서 커밋에 포함한다. 애니메이션 실사용 목록 선정과 삭제는 사용자가 검증 후 요청하는 후속 범위로 남긴다.
+
+### 2026-09-09 원본 애니메이션 조건부 삭제 착수
+
+- 사용자 요청은 인게임에서 필요 없는 것이 확실한 원본만 삭제하고 Git push하는 것이다. 새로 확인한 현재 BP는 원본 5개를 참조하며 원작 AP/BlendSpace/WeaponSlot/Weapon Notify에도 직접 원본 참조가 있다. 따라서 재생용 722개만 남기는 전면 삭제 조건은 충족하지 않는다.
+- `HeinMachEnemy_AnimationPruning_Metadata_20260909.json`: 기존 저장 metadata를 분석해 Source 711개 중 현재 참조 없음 + 알려진 원작 소비가 이미 bake된 Composite segment뿐인 549개를 삭제 대상으로 정했다. 원작 직접 참조 또는 재생용 대응이 없는 162개와 기존 Idle 3개는 보존한다. Composite 안의 Weapon Notify 참조는 body bake로 대체되지 않으므로 직접 소비로 분류한다.
+- 삭제 전 백업 완료: `C:/Users/user/Desktop/카잔/EnemyExtracts/AnimationPruning_20260909/BackupManifest.json`. 549개 원본 복사와 SHA-256 확인, 남길 1,222개 hash 및 기존 사용자 작업/Config/환경 50개 hash를 기록했다. 현재 변경 대상 Enemy의 unsaved edit는 없다.
+- 재개: `Scripts/Enemies/prune_enemy_source_animations.py`의 `delete_sources()`를 UE Python에서 실행 → 별도 commandlet에서 `verify_saved_assets()` → 새 AnimationPruning metadata/Art 문서 발행 → Enemy 변경만 main commit/push. `backup()`은 기존 기준을 덮어쓰지 않으며 반복 실행하지 않는다. 삭제는 plan hash 및 개별 백업/현재 파일 hash/최신 미참조 검증 이후에만 진행한다.
+- 현재 단계는 삭제 직전이며, Blueprint/재생용/플레이어/게임 코드 변경은 없다. 기존 metadata와 전체 import builder는 역사 자료로 보존하고 삭제 파일을 재생성하지 않는다.
+
+### 2026-09-09 원본 애니메이션 정리·검증 완료
+
+- 549개 원본 삭제 완료, 290,576,489 bytes 감소. 현재 Source 162 + 기존 Idle 3 + Playback 722 = AnimSequence 887개, Enemy 전체 UE 자산 1,222개다. 남은 에셋 전체 hash가 같고 BP/재생 속도/키를 수정하지 않았다.
+- GUI 삭제 중 `FAppTime` handled ensure와 legacy 참조 수집 fallback 경고가 있었으나 API 성공·실제 파일 삭제·보존 hash를 확인했다. GUI에 unsaved Enemy package는 없다.
+- 첫 독립 감사는 에셋 검사 passed 후 MCP HTTP 포트 충돌로 process error가 남았다. 프로젝트 설정을 바꾸지 않고 최종 감사 프로세스에만 `-DisablePlugins=ModelContextProtocol`을 적용해 재검사했다. 최종 로그 `EnemyAnimationPruningFinalAudit_20260909.log`: Success, 0 errors, 1 기존 scalability warning, exit 0.
+- 현재 rate/sample/길이/RateScale 검사, Playback compressed pose 2,166개, 카탈로그 BP 16개 참조 검증 passed. missing Enemy dependency 0. 기존 Router/Animation/Engineering 문서 8개는 외부 작업 변경으로 관측했으며 되돌리지 않았다.
+- 정본 `ENEMY_SOURCE_ANIMATION_PRUNING_2026-09-09.md`; 남은 전달 절차는 새 metadata 발행 → 해당 Enemy/Art 변경만 stage → main commit/push → 원격 hash 확인이다. 현재 애니메이션을 추가로 편집하거나 검증을 처음부터 반복할 필요는 없다.

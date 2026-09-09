@@ -187,3 +187,10 @@
 - 재생용 722개를 비교해 시간축이 달라지는 271개와 원본과 시간축이 같은 451개로 분류했다. 451개 중 440개는 sample 수와 포즈도 저장 정밀도 안에서 같고, 11개는 표본 수가 다르다. 실제 삭제는 아직 하지 않았다.
 - 최신 정본: [ENEMY_LIBRARY_CLEANUP_AND_PLAYBACK_2026-09-09.md](ENEMY_LIBRARY_CLEANUP_AND_PLAYBACK_2026-09-09.md). 현재 inventory와 비교표는 `Content/_Art/Enemies/HeinMach/Metadata/Cleanup_20260909`에 있다. 이전 import manifest는 추출 당시 자료다.
 - `HeinMachEnemy_CleanupAudit_20260909.json` passed. 별도 프로세스에서 BP 16개와 카탈로그를 로드했으며 missing Enemy dependency 0, 오류 0이다. 기존 코드/플레이어/환경 및 작업 시작 시 보호 파일 44개는 동일하다.
+
+### 2026-09-09 Enemy 원본 애니메이션 조건부 정리 완료
+
+- 원본 549개(290,576,489 bytes, 약 277.12 MiB)를 삭제했다. 현재 AnimSequence는 Playback 722 + Source 162 + 기존 Idle 3 = 887개다. 직접 사용 또는 대체 미확인 원본이 있어 재생용만 남기는 전면 삭제는 하지 않았다.
+- 남은 Enemy UE 자산 1,222개 전체 hash가 작업 전과 같다. BP 16개와 재생용 FPS/길이/RateScale/포즈를 편집하지 않았다. 원작 AP/BlendSpace/Weapon Notify의 직접 참조와 현재 BP 원본 참조 5개를 보존했다.
+- 별도 commandlet에서 저장 rate/sample/길이·compressed pose 2,166개·BP 참조 검증 passed, 누락 dependency 0, 최종 exit 0/오류 0. 외부 문서 작업 8개 변경은 별도 관측·보존했다.
+- 최신 정본: [ENEMY_SOURCE_ANIMATION_PRUNING_2026-09-09.md](ENEMY_SOURCE_ANIMATION_PRUNING_2026-09-09.md). 현재 목록은 `Metadata/AnimationPruning_20260909/RetainedAssets.json`, 복구 백업은 `Desktop/카잔/EnemyExtracts/AnimationPruning_20260909`다.
