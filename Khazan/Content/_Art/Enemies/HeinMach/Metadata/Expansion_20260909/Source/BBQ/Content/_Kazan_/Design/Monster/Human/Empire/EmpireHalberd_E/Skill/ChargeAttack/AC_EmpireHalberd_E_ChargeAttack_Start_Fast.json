@@ -1,0 +1,1209 @@
+[
+  {
+    "Type": "AnimComposite",
+    "Name": "AC_EmpireHalberd_E_ChargeAttack_Start_Fast",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimComposite'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast",
+    "Properties": {
+      "AnimationTrack": {
+        "AnimSegments": [
+          {
+            "AnimReference": {
+              "ObjectName": "AnimSequence'CA_M_Halberd_ChargeAttack_Start'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Named/Halberd/Animation/CA_M_Halberd_ChargeAttack_Start.0"
+            },
+            "StartPos": 0.0,
+            "AnimStartTime": 1.0,
+            "AnimEndTime": 1.4666667,
+            "AnimPlayRate": 1.0,
+            "LoopingCount": 1
+          }
+        ]
+      },
+      "Notifies": [
+        {
+          "TriggerTimeOffset": -0.0001,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxDamagerReaction",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_DamagerReaction'AC_EmpireHalberd_E_ChargeAttack_Start_Fast:xxAnimNotifyState_DamagerReaction_3'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.4"
+          },
+          "Duration": 0.18095773,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.4666667,
+            "LinkValue": 0.18095773,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 5,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.4666667,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxAkEvent",
+          "Notify": {
+            "ObjectName": "xxAnimNotify_AkEvent'AC_EmpireHalberd_E_ChargeAttack_Start_Fast:xxAnimNotify_AkEvent_5'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.1"
+          },
+          "NotifyStateClass": null,
+          "Duration": 0.0,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": -1,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.0,
+            "LinkValue": 0.021985548,
+            "LinkedSequence": null
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 9,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.4666667,
+          "LinkValue": 0.021985548,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxSkillEventTag",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_SkillEventTag'AC_EmpireHalberd_E_ChargeAttack_Start_Fast:xxAnimNotifyState_SkillEventTag_4'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.9"
+          },
+          "Duration": 0.292405,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.4666667,
+            "LinkValue": 0.4666667,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 7,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.4666667,
+          "LinkValue": 0.17426169,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxSkillEventTag",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_SkillEventTag'AC_EmpireHalberd_E_ChargeAttack_Start_Fast:xxAnimNotifyState_SkillEventTag_5'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.10"
+          },
+          "Duration": 0.291476,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.4666667,
+            "LinkValue": 0.4666667,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 8,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.4666667,
+          "LinkValue": 0.17519069,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxDamagerReaction",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_DamagerReaction'AC_EmpireHalberd_E_ChargeAttack_Start_Fast:xxAnimNotifyState_DamagerReaction_4'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.5"
+          },
+          "Duration": 0.290856,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.4666667,
+            "LinkValue": 0.4666667,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 4,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.4666667,
+          "LinkValue": 0.1758107,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxMoveTo",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_MoveTo'AC_EmpireHalberd_E_ChargeAttack_Start_Fast:xxAnimNotifyState_MoveTo_5'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.8"
+          },
+          "Duration": 0.282471,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.4666667,
+            "LinkValue": 0.4666667,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 3,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.4666667,
+          "LinkValue": 0.1841957,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxAttack",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Attack'AC_EmpireHalberd_E_ChargeAttack_Start_Fast:xxAnimNotifyState_Attack_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.2"
+          },
+          "Duration": 0.18538302,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.4666667,
+            "LinkValue": 0.4666667,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::BranchingPoint",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 1,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.4666667,
+          "LinkValue": 0.28128368,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxChangeStatus",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_ChangeStatus'AC_EmpireHalberd_E_ChargeAttack_Start_Fast:xxAnimNotifyState_ChangeStatus_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.3"
+          },
+          "Duration": 0.033333335,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.4666667,
+            "LinkValue": 0.31461734,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 6,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.4666667,
+          "LinkValue": 0.281284,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxMoveTo",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_MoveTo'AC_EmpireHalberd_E_ChargeAttack_Start_Fast:xxAnimNotifyState_MoveTo_3'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.7"
+          },
+          "Duration": 0.13183519,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.4666667,
+            "LinkValue": 0.4666667,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 2,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.4666667,
+          "LinkValue": 0.3348315,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxLookAt",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_LookAt'AC_EmpireHalberd_E_ChargeAttack_Start_Fast:xxAnimNotifyState_LookAt_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.6"
+          },
+          "Duration": 0.13005558,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.4666667,
+            "LinkValue": 0.4666667,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.4666667,
+          "LinkValue": 0.33661112,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+          }
+        }
+      ],
+      "SequenceLength": 0.4666667,
+      "RawCurveData": {
+        "FloatCurves": [
+          {
+            "FloatCurve": {
+              "Keys": [
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": -0.7778797,
+                  "Value": 0.25000033,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": -0.25615174,
+                  "Value": 0.25000033,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.2325263,
+                  "Value": -0.7500002,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.38869023,
+                  "Value": -0.7500002,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.46553326,
+                  "Value": 0.7499998,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                }
+              ],
+              "DefaultValue": 3.4028235E+38,
+              "PreInfinityExtrap": "RCCE_Constant",
+              "PostInfinityExtrap": "RCCE_Constant"
+            },
+            "Name": {
+              "DisplayName": "Dilation"
+            },
+            "CurveTypeFlags": 4
+          }
+        ]
+      },
+      "DilationCurve": {
+        "TimePerFrame": 0.016666668,
+        "DilationSequenceLength": 0.7055926,
+        "DilationAnimPositions": [
+          {
+            "T_Original": 0.0,
+            "T_Dilation": 0.0
+          },
+          {
+            "T_Original": 0.016666668,
+            "T_Dilation": 0.021516671
+          },
+          {
+            "T_Original": 0.033333335,
+            "T_Dilation": 0.04360187
+          },
+          {
+            "T_Original": 0.050000004,
+            "T_Dilation": 0.066255584
+          },
+          {
+            "T_Original": 0.06666667,
+            "T_Dilation": 0.089477815
+          },
+          {
+            "T_Original": 0.083333336,
+            "T_Dilation": 0.113268554
+          },
+          {
+            "T_Original": 0.10000001,
+            "T_Dilation": 0.13762781
+          },
+          {
+            "T_Original": 0.116666675,
+            "T_Dilation": 0.16255556
+          },
+          {
+            "T_Original": 0.13333334,
+            "T_Dilation": 0.1880518
+          },
+          {
+            "T_Original": 0.15,
+            "T_Dilation": 0.21411654
+          },
+          {
+            "T_Original": 0.16666667,
+            "T_Dilation": 0.24074979
+          },
+          {
+            "T_Original": 0.18333334,
+            "T_Dilation": 0.26795152
+          },
+          {
+            "T_Original": 0.20000002,
+            "T_Dilation": 0.29572174
+          },
+          {
+            "T_Original": 0.21666668,
+            "T_Dilation": 0.32406044
+          },
+          {
+            "T_Original": 0.23333335,
+            "T_Dilation": 0.35295412
+          },
+          {
+            "T_Original": 0.25,
+            "T_Dilation": 0.3821208
+          },
+          {
+            "T_Original": 0.26666668,
+            "T_Dilation": 0.41128746
+          },
+          {
+            "T_Original": 0.28333336,
+            "T_Dilation": 0.44045413
+          },
+          {
+            "T_Original": 0.3,
+            "T_Dilation": 0.4696208
+          },
+          {
+            "T_Original": 0.3166667,
+            "T_Dilation": 0.49878746
+          },
+          {
+            "T_Original": 0.33333334,
+            "T_Dilation": 0.52795416
+          },
+          {
+            "T_Original": 0.35000002,
+            "T_Dilation": 0.55712086
+          },
+          {
+            "T_Original": 0.36666667,
+            "T_Dilation": 0.58628756
+          },
+          {
+            "T_Original": 0.38333336,
+            "T_Dilation": 0.61545426
+          },
+          {
+            "T_Original": 0.40000004,
+            "T_Dilation": 0.64265734
+          },
+          {
+            "T_Original": 0.4166667,
+            "T_Dilation": 0.66511065
+          },
+          {
+            "T_Original": 0.43333337,
+            "T_Dilation": 0.68218637
+          },
+          {
+            "T_Original": 0.45000002,
+            "T_Dilation": 0.69516546
+          },
+          {
+            "T_Original": 0.4666667,
+            "T_Dilation": 0.7055926
+          }
+        ],
+        "BakedDilationCurveName": "Dilation"
+      },
+      "Skeleton": {
+        "ObjectName": "Skeleton'C_M_Halberd_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Named/Halberd/Model/C_M_Halberd_Skeleton.5"
+      }
+    },
+    "SkeletonGuid": "DCBAFC19-407F5E25-3D81D298-7C7AB833"
+  },
+  {
+    "Type": "xxAnimNotify_AkEvent",
+    "Name": "xxAnimNotify_AkEvent_5",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotify_AkEvent'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+    },
+    "Properties": {
+      "Event": {
+        "ObjectName": "AkAudioEvent'efx_empirehalberd_chargeattack_rush'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/EmpireHalberd_E/efx_empirehalberd_chargeattack_rush.0"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Attack",
+    "Name": "xxAnimNotifyState_Attack_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Attack'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+    },
+    "Properties": {
+      "Shape": "EAttackShape::AttackBoxComponent",
+      "bUseAttackBoxComponent": true,
+      "Size": {
+        "X": 50.0,
+        "Y": 40.0,
+        "Z": 200.0
+      },
+      "BoneName": "Weapon_R",
+      "AttackStance": "EAttackStance::RightHand",
+      "RelativeOffset": {
+        "X": -10.0,
+        "Y": 20.0,
+        "Z": 60.0
+      },
+      "AttackIntervalDesc": "일반+컴포넌트, 1회 공격",
+      "bBakingAttackComponent": true,
+      "PostCleaningAttackInfo": {
+        "AttackBoxList": [
+          {
+            "Key": "0.28128368",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 6.737625,
+                "Y": 56.81251,
+                "Z": 110.23243
+              },
+              "LocalRotator": {
+                "Pitch": 64.72904,
+                "Yaw": -61.866333,
+                "Roll": 107.403534
+              }
+            }
+          },
+          {
+            "Key": "0.39328223",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 52.22973,
+                "Y": 57.022877,
+                "Z": 115.66327
+              },
+              "LocalRotator": {
+                "Pitch": 74.70471,
+                "Yaw": -73.733,
+                "Roll": 107.250275
+              }
+            }
+          },
+          {
+            "Key": "0.4665667",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 78.75192,
+                "Y": 49.86387,
+                "Z": 123.35333
+              },
+              "LocalRotator": {
+                "Pitch": 83.576195,
+                "Yaw": -90.493774,
+                "Roll": 93.773094
+              }
+            }
+          }
+        ],
+        "Bounds": {
+          "Min": {
+            "X": -143.86511,
+            "Y": -41.964584,
+            "Z": -1.6651688
+          },
+          "Max": {
+            "X": 339.577,
+            "Y": 152.41054,
+            "Z": 172.42752
+          },
+          "IsValid": 1
+        }
+      },
+      "BakingAttackDirections": {
+        "AttackDirections": [
+          {
+            "Key": "0.28128368",
+            "Value": {
+              "CenterPosition": {
+                "X": 65.72819,
+                "Y": 55.222935,
+                "Z": 85.381195
+              },
+              "Position": {
+                "X": 259.53174,
+                "Y": 97.507935,
+                "Z": 59.844147
+              },
+              "Direction": {
+                "X": 0.5654947,
+                "Y": -0.7715545,
+                "Z": 0.037846368
+              }
+            }
+          },
+          {
+            "Key": "0.29628348",
+            "Value": {
+              "CenterPosition": {
+                "X": 71.82088,
+                "Y": 53.022003,
+                "Z": 84.23849
+              },
+              "Position": {
+                "X": 267.29642,
+                "Y": 84.472496,
+                "Z": 55.951378
+              },
+              "Direction": {
+                "X": 0.5654947,
+                "Y": -0.7715545,
+                "Z": 0.037846368
+              }
+            }
+          },
+          {
+            "Key": "0.31628323",
+            "Value": {
+              "CenterPosition": {
+                "X": 79.83002,
+                "Y": 50.474117,
+                "Z": 84.826675
+              },
+              "Position": {
+                "X": 276.6504,
+                "Y": 71.87215,
+                "Z": 56.474533
+              },
+              "Direction": {
+                "X": 0.5654947,
+                "Y": -0.7715545,
+                "Z": 0.037846368
+              }
+            }
+          },
+          {
+            "Key": "0.33728296",
+            "Value": {
+              "CenterPosition": {
+                "X": 88.21495,
+                "Y": 47.50438,
+                "Z": 86.32533
+              },
+              "Position": {
+                "X": 285.99878,
+                "Y": 59.970695,
+                "Z": 59.378677
+              },
+              "Direction": {
+                "X": 0.5654947,
+                "Y": -0.7715545,
+                "Z": 0.037846368
+              }
+            }
+          },
+          {
+            "Key": "0.35928267",
+            "Value": {
+              "CenterPosition": {
+                "X": 97.17031,
+                "Y": 44.537624,
+                "Z": 89.64812
+              },
+              "Position": {
+                "X": 295.74,
+                "Y": 50.461605,
+                "Z": 66.51865
+              },
+              "Direction": {
+                "X": 0.5654947,
+                "Y": -0.7715545,
+                "Z": 0.037846368
+              }
+            }
+          },
+          {
+            "Key": "0.3812824",
+            "Value": {
+              "CenterPosition": {
+                "X": 106.00932,
+                "Y": 41.45959,
+                "Z": 93.77734
+              },
+              "Position": {
+                "X": 305.15588,
+                "Y": 42.26841,
+                "Z": 75.33804
+              },
+              "Direction": {
+                "X": 0.5724516,
+                "Y": -0.5519362,
+                "Z": 0.5989871
+              }
+            }
+          },
+          {
+            "Key": "0.4032821",
+            "Value": {
+              "CenterPosition": {
+                "X": 114.6652,
+                "Y": 38.322895,
+                "Z": 98.402306
+              },
+              "Position": {
+                "X": 314.19406,
+                "Y": 35.151543,
+                "Z": 85.05456
+              },
+              "Direction": {
+                "X": 0.5724516,
+                "Y": -0.5519362,
+                "Z": 0.5989871
+              }
+            }
+          },
+          {
+            "Key": "0.4262818",
+            "Value": {
+              "CenterPosition": {
+                "X": 123.30815,
+                "Y": 34.749275,
+                "Z": 103.381134
+              },
+              "Position": {
+                "X": 323.02133,
+                "Y": 27.81828,
+                "Z": 95.21994
+              },
+              "Direction": {
+                "X": 0.5724516,
+                "Y": -0.5519362,
+                "Z": 0.5989871
+              }
+            }
+          },
+          {
+            "Key": "0.4502815",
+            "Value": {
+              "CenterPosition": {
+                "X": 131.68112,
+                "Y": 30.157488,
+                "Z": 107.85118
+              },
+              "Position": {
+                "X": 331.30508,
+                "Y": 18.567125,
+                "Z": 103.8613
+              },
+              "Direction": {
+                "X": 0.5724516,
+                "Y": -0.5519362,
+                "Z": 0.5989871
+              }
+            }
+          },
+          {
+            "Key": "0.4665667",
+            "Value": {
+              "CenterPosition": {
+                "X": 137.10847,
+                "Y": 26.723938,
+                "Z": 110.74161
+              },
+              "Position": {
+                "X": 336.5548,
+                "Y": 11.925844,
+                "Z": 109.269135
+              },
+              "Direction": {
+                "X": 0.5724516,
+                "Y": -0.5519362,
+                "Z": 0.5989871
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_ChangeStatus",
+    "Name": "xxAnimNotifyState_ChangeStatus_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_ChangeStatus'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+    },
+    "Properties": {
+      "ChangeStatusMode": "EChangeStatusMode::ConsumeStatus",
+      "ConsumeDynamicStatusMap": [
+        {
+          "Key": "EGrDynamicStatus::Stamina",
+          "Value": {
+            "StatusOper": "EStatusOper::Rate",
+            "StatusValue": 500
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_DamagerReaction",
+    "Name": "xxAnimNotifyState_DamagerReaction_3",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_DamagerReaction'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+    },
+    "Properties": {
+      "DamagerReactionTableSelect": {
+        "DamagerReactionTag": {
+          "DataTable": {
+            "ObjectName": "DataTable'DamagerReaction_Common'",
+            "ObjectPath": "BBQ/Content/_Common/Constants/DamagerReaction/DamagerReaction_Common.0"
+          },
+          "RowName": "강인도1등급+"
+        }
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_DamagerReaction",
+    "Name": "xxAnimNotifyState_DamagerReaction_4",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_DamagerReaction'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+    },
+    "Properties": {
+      "DamagerReactionTableSelect": {
+        "DamagerReactionTag": {
+          "DataTable": {
+            "ObjectName": "DataTable'DamagerReaction_Common'",
+            "ObjectPath": "BBQ/Content/_Common/Constants/DamagerReaction/DamagerReaction_Common.0"
+          },
+          "RowName": "강인도2등급+"
+        }
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_LookAt",
+    "Name": "xxAnimNotifyState_LookAt_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_LookAt'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+    },
+    "Properties": {
+      "bNotifyEnd": false
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_MoveTo",
+    "Name": "xxAnimNotifyState_MoveTo_3",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_MoveTo'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+    },
+    "Properties": {
+      "MoveToType": "EAMoveToType::OnlyRotation",
+      "TotalSelectTargetTraceInfo": {
+        "bUseSelect": true,
+        "TargetSelectionTypes": [
+          "ETargetSelectionType::UseSkillTarget",
+          "ETargetSelectionType::LockOnTarget"
+        ],
+        "FindLocationInfo": {
+          "FindRandomLocationInfo": {
+            "bUseEqualSpaceDegreeAndRand": true
+          }
+        }
+      },
+      "PositionInfo": {
+        "UsePositionData": {
+          "bUseBlendOption": true
+        },
+        "UseCurveData": {
+          "CurveVector": {
+            "ObjectName": "CurveVector'CV_common_NoAir_deaccel'",
+            "ObjectPath": "BBQ/Content/_Common/MoveCurve/CV_common_NoAir_deaccel.0"
+          },
+          "CustomCurveScale": {
+            "X": 160.0,
+            "Y": 1.0,
+            "Z": 1.0
+          }
+        },
+        "bApplyCurrentRotatorOnMoveDir": true
+      },
+      "RotatorInfo": {
+        "CustomRotatorMethod": "ECustomMoveRotatorMethod::LookAtTraceTarget",
+        "LootAtTraceTarget": {
+          "bUseNewSpeed": true,
+          "AnglePerSecondNew": 140,
+          "AnglePerSecond": 3.0,
+          "CustomTraceMaxAngle": 180,
+          "CustomTraceMinAngle": -180,
+          "CustomMaxAngle": 60,
+          "CustomMinAngle": -60
+        }
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_MoveTo",
+    "Name": "xxAnimNotifyState_MoveTo_5",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_MoveTo'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+    },
+    "Properties": {
+      "MoveToType": "EAMoveToType::RootMotion",
+      "TotalSelectTargetTraceInfo": {
+        "bUseSelect": true,
+        "TargetSelectionTypes": [
+          "ETargetSelectionType::UseSkillTarget",
+          "ETargetSelectionType::LockOnTarget"
+        ],
+        "FindLocationInfo": {
+          "FindRandomLocationInfo": {
+            "bUseEqualSpaceDegreeAndRand": true
+          }
+        }
+      },
+      "PositionInfo": {
+        "UsePositionData": {
+          "bUseBlendOption": true
+        },
+        "UseCurveData": {
+          "CurveVector": {
+            "ObjectName": "CurveVector'CV_common_NoAir_deaccel'",
+            "ObjectPath": "BBQ/Content/_Common/MoveCurve/CV_common_NoAir_deaccel.0"
+          },
+          "CustomCurveScale": {
+            "X": 160.0,
+            "Y": 1.0,
+            "Z": 1.0
+          }
+        },
+        "bApplyCurrentRotatorOnMoveDir": true
+      },
+      "RotatorInfo": {
+        "CustomRotatorMethod": "ECustomMoveRotatorMethod::LookAtTraceTarget",
+        "LootAtTraceTarget": {
+          "AnglePerSecond": 15.0
+        }
+      },
+      "RootMotionCorrectionData": {
+        "RootMotionCorrectionScale": 0.8,
+        "RootMotionTraceTarget": {
+          "TraceTargetDistanceMax": 100.0,
+          "bNearByMoveToTraceTarget": true,
+          "NearDistanceByMoveToTraceTarget": 50.0
+        }
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_SkillEventTag",
+    "Name": "xxAnimNotifyState_SkillEventTag_4",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_SkillEventTag'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+    },
+    "Properties": {
+      "Index": "ESimpleSkillEventIndex::Index1"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_SkillEventTag",
+    "Name": "xxAnimNotifyState_SkillEventTag_5",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_SkillEventTag'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_ChargeAttack_Start_Fast'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/ChargeAttack/AC_EmpireHalberd_E_ChargeAttack_Start_Fast.0"
+    },
+    "Properties": {
+      "Index": "ESimpleSkillEventIndex::Index2"
+    }
+  }
+]

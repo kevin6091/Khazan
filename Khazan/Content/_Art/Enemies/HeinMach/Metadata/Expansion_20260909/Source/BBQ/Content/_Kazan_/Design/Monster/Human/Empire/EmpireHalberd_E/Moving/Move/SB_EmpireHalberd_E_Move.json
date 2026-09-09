@@ -1,0 +1,186 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_EmpireHalberd_E_Move_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Moving/Move/SB_EmpireHalberd_E_Move",
+    "SuperStruct": {
+      "ObjectName": "Class'xxSkillMove'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_EmpireHalberd_E_Move_C'Default__SB_EmpireHalberd_E_Move_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Moving/Move/SB_EmpireHalberd_E_Move.1"
+    }
+  },
+  {
+    "Type": "SB_EmpireHalberd_E_Move_C",
+    "Name": "Default__SB_EmpireHalberd_E_Move_C",
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Moving/Move/SB_EmpireHalberd_E_Move.SB_EmpireHalberd_E_Move_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Moving/Move/SB_EmpireHalberd_E_Move",
+    "Properties": {
+      "NormalMoveInfoMap": [
+        {
+          "Key": "EAnimationState::Battle",
+          "Value": {
+            "BlendSpace": {
+              "ObjectName": "BlendSpace'BS_EmpireHalberd_E_NormalMove'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Moving/Move/BS_EmpireHalberd_E_NormalMove.0"
+            },
+            "BlendSpaceInBlendTime": 0.2,
+            "BlendSpaceWalkY": 0.5,
+            "BlendSpaceRunY": 1.0,
+            "BlendSpaceSprintY": 1.5,
+            "bUsBlendSpcaeX": false,
+            "RootMotionQuickTurnLeftQuarter": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Turn_L'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Moving/Reaction/AC_EmpireHalberd_E_Turn_L.0"
+            },
+            "RootMotionQuickTurnLeft": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Turn_L_180'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Moving/Reaction/AC_EmpireHalberd_E_Turn_L_180.0"
+            },
+            "RootMotionQuickTurnRightQuarter": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Turn_R'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Moving/Reaction/AC_EmpireHalberd_E_Turn_R.0"
+            },
+            "RootMotionQuickTurnRight": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Turn_R_180'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Moving/Reaction/AC_EmpireHalberd_E_Turn_R_180.0"
+            },
+            "RootMotionQuickTurnBlendSeconds": 0.1,
+            "NormalBrakeLeft": null,
+            "NormalBrakeRight": null,
+            "NormalBrakeCurve": null,
+            "NormalBrakeBlendSeconds": 0.25,
+            "SprintBrake": null,
+            "SprintBrakeCurve": null,
+            "SprintBrakeBlendSeconds": 0.25,
+            "SprintTurn": null,
+            "SprintTurnCurve": null,
+            "SprintTurnBlendSeconds": 0.25,
+            "WalkAnimSpeed": {
+              "AnimMoveDistance": 334.0,
+              "AnimPlayTime": 1.67
+            },
+            "RunAnimSpeed": {
+              "AnimMoveDistance": 558.0,
+              "AnimPlayTime": 1.07
+            },
+            "SprintAnimSpeed": {
+              "AnimMoveDistance": 0.0,
+              "AnimPlayTime": 0.1
+            },
+            "bUseSprintReady": false,
+            "SprintReadyAnimationInfo": {
+              "Animation": null,
+              "BlendTime": 0.2
+            },
+            "DodgeReadyAnim": null,
+            "ChangePeaceAnim": null,
+            "ChangePeaceBlendSeconds": 0.1,
+            "MoveDamageType": "ECharacterDamageType::Normal",
+            "SystemGuardFrontAngle": 180.0,
+            "SystemGuardAnimInfo": {
+              "CommonAnimationTagDamageAnimsRandom": []
+            },
+            "bUseAttackerReactionAnim": false,
+            "SystemGuardAnimInfoByAttackerReaction": []
+          }
+        }
+      ],
+      "NormalRotationCurve": {
+        "ObjectName": "CurveFloat'CV_MoveRotation_Monster_Small'",
+        "ObjectPath": "BBQ/Content/_Common/MoveCurve/CV_MoveRotation_Monster_Small.0"
+      },
+      "NormalQuickTurnThreshold": 45.0,
+      "NormalQuickTurnCancelThreshold": 20.0,
+      "bUseLockOnTurnThreshold": true,
+      "LockOnTurnThreshold": 45.0,
+      "LockOnTurnCancelThreshold": 20.0,
+      "LockOnMoveInfoMap": [
+        {
+          "Key": "EAnimationState::Battle",
+          "Value": {
+            "BlendSpace": {
+              "ObjectName": "BlendSpace'BS_EmpireHalberd_E_LockOnMove'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Moving/Move/BS_EmpireHalberd_E_LockOnMove.0"
+            },
+            "BlendSpaceInBlendTime": 0.2,
+            "LockOnBaseSpeeds": {
+              "AnimMoveDistance": 0.0,
+              "AnimPlayTime": 0.1
+            },
+            "LockOnBaseSpeeds[1]": {
+              "AnimMoveDistance": 334.0,
+              "AnimPlayTime": 1.67
+            },
+            "LockOnBaseSpeeds[2]": {
+              "AnimMoveDistance": 334.0,
+              "AnimPlayTime": 1.67
+            },
+            "LockOnBaseSpeeds[3]": {
+              "AnimMoveDistance": 334.0,
+              "AnimPlayTime": 1.67
+            },
+            "LockOnBaseSpeeds[4]": {
+              "AnimMoveDistance": 250.5,
+              "AnimPlayTime": 1.67
+            },
+            "LockOnBaseSpeeds[5]": {
+              "AnimMoveDistance": 250.5,
+              "AnimPlayTime": 1.67
+            },
+            "LockOnBaseSpeeds[6]": {
+              "AnimMoveDistance": 334.0,
+              "AnimPlayTime": 1.67
+            },
+            "LockOnBaseSpeeds[7]": {
+              "AnimMoveDistance": 250.5,
+              "AnimPlayTime": 1.67
+            },
+            "LockOnBaseSpeeds[8]": {
+              "AnimMoveDistance": 250.5,
+              "AnimPlayTime": 1.67
+            },
+            "QuarterLeftLockOnTurn": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Turn_L'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Moving/Reaction/AC_EmpireHalberd_E_Turn_L.0"
+            },
+            "QuarterRightLockOnTurn": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Turn_R'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Moving/Reaction/AC_EmpireHalberd_E_Turn_R.0"
+            },
+            "HalfLeftLockOnTurn": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Turn_L_180'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Moving/Reaction/AC_EmpireHalberd_E_Turn_L_180.0"
+            },
+            "HalfRightLockOnTurn": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Turn_R_180'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Moving/Reaction/AC_EmpireHalberd_E_Turn_R_180.0"
+            },
+            "LockOnTurnBlendSeconds": 0.15,
+            "MoveDamageType": "ECharacterDamageType::Normal",
+            "SystemGuardFrontAngle": 180.0,
+            "SystemGuardAnimInfo": {
+              "CommonAnimationTagDamageAnimsRandom": []
+            },
+            "bUseAttackerReactionAnim": false,
+            "SystemGuardAnimInfoByAttackerReaction": []
+          }
+        }
+      ],
+      "bLockOnLookAt": true,
+      "bCanRotateMainTarget": false
+    }
+  }
+]

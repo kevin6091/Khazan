@@ -1,0 +1,1472 @@
+[
+  {
+    "Type": "AnimComposite",
+    "Name": "AC_EmpireSword_Ballista_Reload",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimComposite'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload",
+    "Properties": {
+      "AnimationTrack": {
+        "AnimSegments": [
+          {
+            "AnimReference": {
+              "ObjectName": "AnimSequence'CA_M_EmpSwd_Ballista_Ballista_Hand_End'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Animation/EmpireSword3/CA_M_EmpSwd_Ballista_Ballista_Hand_End.0"
+            },
+            "StartPos": 0.0,
+            "AnimStartTime": 0.0,
+            "AnimEndTime": 4.1,
+            "AnimPlayRate": 1.0,
+            "LoopingCount": 1
+          }
+        ]
+      },
+      "Notifies": [
+        {
+          "TriggerTimeOffset": -0.0001,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxSkillEventTag",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_SkillEventTag'AC_EmpireSword_Ballista_Reload:xxAnimNotifyState_SkillEventTag_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.6"
+          },
+          "Duration": 4.1,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 4.1,
+            "LinkValue": 4.1,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 1,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 4.1,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0001,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxChangeArmedState",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_ChangeArmedState'AC_EmpireSword_Ballista_Reload:xxAnimNotifyState_ChangeArmedState_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.1"
+          },
+          "Duration": 4.1,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 4.1,
+            "LinkValue": 4.1,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 4.1,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_EmpireSword_Ballista_Reload:xxAnimNotifyState_Particle_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.2"
+          },
+          "Duration": 0.497288,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 4.1,
+            "LinkValue": 0.6232115,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 2,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 4.1,
+          "LinkValue": 0.12592351,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_EmpireSword_Ballista_Reload:xxAnimNotifyState_Particle_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.4"
+          },
+          "Duration": 0.49728802,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 4.1,
+            "LinkValue": 0.87988555,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 3,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 4.1,
+          "LinkValue": 0.38259754,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_EmpireSword_Ballista_Reload:xxAnimNotifyState_Particle_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.3"
+          },
+          "Duration": 0.497288,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 4.1,
+            "LinkValue": 1.9434036,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 2,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 4.1,
+          "LinkValue": 1.4461156,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_EmpireSword_Ballista_Reload:xxAnimNotifyState_Particle_3'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.5"
+          },
+          "Duration": 0.497288,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 4.1,
+            "LinkValue": 2.1551251,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 3,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 4.1,
+          "LinkValue": 1.6578372,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+          }
+        }
+      ],
+      "SequenceLength": 4.1,
+      "RawCurveData": {
+        "FloatCurves": [
+          {
+            "FloatCurve": {
+              "Keys": [
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 2.8,
+                  "Value": 0.3,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 3.6,
+                  "Value": -0.2,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                }
+              ],
+              "DefaultValue": 3.4028235E+38,
+              "PreInfinityExtrap": "RCCE_Constant",
+              "PostInfinityExtrap": "RCCE_Constant"
+            },
+            "Name": {
+              "DisplayName": "Dilation"
+            },
+            "CurveTypeFlags": 4
+          }
+        ]
+      },
+      "DilationCurve": {
+        "TimePerFrame": 0.016666668,
+        "DilationSequenceLength": 3.5256155,
+        "DilationAnimPositions": [
+          {
+            "T_Original": 0.0,
+            "T_Dilation": 0.0
+          },
+          {
+            "T_Original": 0.016666668,
+            "T_Dilation": 0.012820514
+          },
+          {
+            "T_Original": 0.033333335,
+            "T_Dilation": 0.025641028
+          },
+          {
+            "T_Original": 0.050000004,
+            "T_Dilation": 0.038461544
+          },
+          {
+            "T_Original": 0.06666667,
+            "T_Dilation": 0.051282056
+          },
+          {
+            "T_Original": 0.083333336,
+            "T_Dilation": 0.06410257
+          },
+          {
+            "T_Original": 0.10000001,
+            "T_Dilation": 0.07692308
+          },
+          {
+            "T_Original": 0.116666675,
+            "T_Dilation": 0.08974359
+          },
+          {
+            "T_Original": 0.13333334,
+            "T_Dilation": 0.102564104
+          },
+          {
+            "T_Original": 0.15,
+            "T_Dilation": 0.115384616
+          },
+          {
+            "T_Original": 0.16666667,
+            "T_Dilation": 0.12820514
+          },
+          {
+            "T_Original": 0.18333334,
+            "T_Dilation": 0.14102565
+          },
+          {
+            "T_Original": 0.20000002,
+            "T_Dilation": 0.15384616
+          },
+          {
+            "T_Original": 0.21666668,
+            "T_Dilation": 0.16666667
+          },
+          {
+            "T_Original": 0.23333335,
+            "T_Dilation": 0.17948718
+          },
+          {
+            "T_Original": 0.25,
+            "T_Dilation": 0.1923077
+          },
+          {
+            "T_Original": 0.26666668,
+            "T_Dilation": 0.20512821
+          },
+          {
+            "T_Original": 0.28333336,
+            "T_Dilation": 0.21794872
+          },
+          {
+            "T_Original": 0.3,
+            "T_Dilation": 0.23076923
+          },
+          {
+            "T_Original": 0.3166667,
+            "T_Dilation": 0.24358974
+          },
+          {
+            "T_Original": 0.33333334,
+            "T_Dilation": 0.25641027
+          },
+          {
+            "T_Original": 0.35000002,
+            "T_Dilation": 0.26923078
+          },
+          {
+            "T_Original": 0.36666667,
+            "T_Dilation": 0.2820513
+          },
+          {
+            "T_Original": 0.38333336,
+            "T_Dilation": 0.2948718
+          },
+          {
+            "T_Original": 0.40000004,
+            "T_Dilation": 0.30769232
+          },
+          {
+            "T_Original": 0.4166667,
+            "T_Dilation": 0.32051283
+          },
+          {
+            "T_Original": 0.43333337,
+            "T_Dilation": 0.33333334
+          },
+          {
+            "T_Original": 0.45000002,
+            "T_Dilation": 0.34615386
+          },
+          {
+            "T_Original": 0.4666667,
+            "T_Dilation": 0.35897437
+          },
+          {
+            "T_Original": 0.48333335,
+            "T_Dilation": 0.37179488
+          },
+          {
+            "T_Original": 0.5,
+            "T_Dilation": 0.3846154
+          },
+          {
+            "T_Original": 0.5166667,
+            "T_Dilation": 0.3974359
+          },
+          {
+            "T_Original": 0.53333336,
+            "T_Dilation": 0.41025642
+          },
+          {
+            "T_Original": 0.55,
+            "T_Dilation": 0.42307693
+          },
+          {
+            "T_Original": 0.5666667,
+            "T_Dilation": 0.43589744
+          },
+          {
+            "T_Original": 0.5833334,
+            "T_Dilation": 0.44871795
+          },
+          {
+            "T_Original": 0.6,
+            "T_Dilation": 0.46153846
+          },
+          {
+            "T_Original": 0.6166667,
+            "T_Dilation": 0.47435898
+          },
+          {
+            "T_Original": 0.6333334,
+            "T_Dilation": 0.4871795
+          },
+          {
+            "T_Original": 0.65000004,
+            "T_Dilation": 0.5
+          },
+          {
+            "T_Original": 0.6666667,
+            "T_Dilation": 0.51282054
+          },
+          {
+            "T_Original": 0.6833334,
+            "T_Dilation": 0.5256411
+          },
+          {
+            "T_Original": 0.70000005,
+            "T_Dilation": 0.5384616
+          },
+          {
+            "T_Original": 0.7166667,
+            "T_Dilation": 0.55128217
+          },
+          {
+            "T_Original": 0.73333335,
+            "T_Dilation": 0.5641027
+          },
+          {
+            "T_Original": 0.75000006,
+            "T_Dilation": 0.57692325
+          },
+          {
+            "T_Original": 0.7666667,
+            "T_Dilation": 0.5897438
+          },
+          {
+            "T_Original": 0.78333336,
+            "T_Dilation": 0.60256433
+          },
+          {
+            "T_Original": 0.8000001,
+            "T_Dilation": 0.6153849
+          },
+          {
+            "T_Original": 0.8166667,
+            "T_Dilation": 0.6282054
+          },
+          {
+            "T_Original": 0.8333334,
+            "T_Dilation": 0.64102596
+          },
+          {
+            "T_Original": 0.85,
+            "T_Dilation": 0.6538465
+          },
+          {
+            "T_Original": 0.86666673,
+            "T_Dilation": 0.66666704
+          },
+          {
+            "T_Original": 0.8833334,
+            "T_Dilation": 0.6794876
+          },
+          {
+            "T_Original": 0.90000004,
+            "T_Dilation": 0.6923081
+          },
+          {
+            "T_Original": 0.9166667,
+            "T_Dilation": 0.70512867
+          },
+          {
+            "T_Original": 0.9333334,
+            "T_Dilation": 0.7179492
+          },
+          {
+            "T_Original": 0.95000005,
+            "T_Dilation": 0.73076975
+          },
+          {
+            "T_Original": 0.9666667,
+            "T_Dilation": 0.7435903
+          },
+          {
+            "T_Original": 0.9833334,
+            "T_Dilation": 0.75641084
+          },
+          {
+            "T_Original": 1.0,
+            "T_Dilation": 0.7692314
+          },
+          {
+            "T_Original": 1.0166668,
+            "T_Dilation": 0.7820519
+          },
+          {
+            "T_Original": 1.0333334,
+            "T_Dilation": 0.79487246
+          },
+          {
+            "T_Original": 1.0500001,
+            "T_Dilation": 0.807693
+          },
+          {
+            "T_Original": 1.0666667,
+            "T_Dilation": 0.82051355
+          },
+          {
+            "T_Original": 1.0833334,
+            "T_Dilation": 0.8333341
+          },
+          {
+            "T_Original": 1.1,
+            "T_Dilation": 0.84615463
+          },
+          {
+            "T_Original": 1.1166667,
+            "T_Dilation": 0.8589752
+          },
+          {
+            "T_Original": 1.1333334,
+            "T_Dilation": 0.8717957
+          },
+          {
+            "T_Original": 1.1500001,
+            "T_Dilation": 0.88461626
+          },
+          {
+            "T_Original": 1.1666667,
+            "T_Dilation": 0.8974368
+          },
+          {
+            "T_Original": 1.1833334,
+            "T_Dilation": 0.91025734
+          },
+          {
+            "T_Original": 1.2,
+            "T_Dilation": 0.9230779
+          },
+          {
+            "T_Original": 1.2166667,
+            "T_Dilation": 0.9358984
+          },
+          {
+            "T_Original": 1.2333333,
+            "T_Dilation": 0.94871897
+          },
+          {
+            "T_Original": 1.2500001,
+            "T_Dilation": 0.9615395
+          },
+          {
+            "T_Original": 1.2666668,
+            "T_Dilation": 0.97436005
+          },
+          {
+            "T_Original": 1.2833334,
+            "T_Dilation": 0.9871806
+          },
+          {
+            "T_Original": 1.3000001,
+            "T_Dilation": 1.0000011
+          },
+          {
+            "T_Original": 1.3166667,
+            "T_Dilation": 1.0128216
+          },
+          {
+            "T_Original": 1.3333334,
+            "T_Dilation": 1.025642
+          },
+          {
+            "T_Original": 1.35,
+            "T_Dilation": 1.0384625
+          },
+          {
+            "T_Original": 1.3666668,
+            "T_Dilation": 1.051283
+          },
+          {
+            "T_Original": 1.3833334,
+            "T_Dilation": 1.0641035
+          },
+          {
+            "T_Original": 1.4000001,
+            "T_Dilation": 1.076924
+          },
+          {
+            "T_Original": 1.4166667,
+            "T_Dilation": 1.0897444
+          },
+          {
+            "T_Original": 1.4333334,
+            "T_Dilation": 1.1025649
+          },
+          {
+            "T_Original": 1.45,
+            "T_Dilation": 1.1153854
+          },
+          {
+            "T_Original": 1.4666667,
+            "T_Dilation": 1.1282059
+          },
+          {
+            "T_Original": 1.4833335,
+            "T_Dilation": 1.1410264
+          },
+          {
+            "T_Original": 1.5000001,
+            "T_Dilation": 1.1538469
+          },
+          {
+            "T_Original": 1.5166668,
+            "T_Dilation": 1.1666673
+          },
+          {
+            "T_Original": 1.5333334,
+            "T_Dilation": 1.1794878
+          },
+          {
+            "T_Original": 1.5500001,
+            "T_Dilation": 1.1923083
+          },
+          {
+            "T_Original": 1.5666667,
+            "T_Dilation": 1.2051288
+          },
+          {
+            "T_Original": 1.5833334,
+            "T_Dilation": 1.2179493
+          },
+          {
+            "T_Original": 1.6000001,
+            "T_Dilation": 1.2307698
+          },
+          {
+            "T_Original": 1.6166668,
+            "T_Dilation": 1.2435902
+          },
+          {
+            "T_Original": 1.6333334,
+            "T_Dilation": 1.2564107
+          },
+          {
+            "T_Original": 1.6500001,
+            "T_Dilation": 1.2692312
+          },
+          {
+            "T_Original": 1.6666667,
+            "T_Dilation": 1.2820517
+          },
+          {
+            "T_Original": 1.6833334,
+            "T_Dilation": 1.2948722
+          },
+          {
+            "T_Original": 1.7,
+            "T_Dilation": 1.3076926
+          },
+          {
+            "T_Original": 1.7166667,
+            "T_Dilation": 1.3205131
+          },
+          {
+            "T_Original": 1.7333335,
+            "T_Dilation": 1.3333336
+          },
+          {
+            "T_Original": 1.7500001,
+            "T_Dilation": 1.3461541
+          },
+          {
+            "T_Original": 1.7666668,
+            "T_Dilation": 1.3589746
+          },
+          {
+            "T_Original": 1.7833334,
+            "T_Dilation": 1.371795
+          },
+          {
+            "T_Original": 1.8000001,
+            "T_Dilation": 1.3846155
+          },
+          {
+            "T_Original": 1.8166667,
+            "T_Dilation": 1.397436
+          },
+          {
+            "T_Original": 1.8333334,
+            "T_Dilation": 1.4102565
+          },
+          {
+            "T_Original": 1.8500001,
+            "T_Dilation": 1.423077
+          },
+          {
+            "T_Original": 1.8666668,
+            "T_Dilation": 1.4358975
+          },
+          {
+            "T_Original": 1.8833334,
+            "T_Dilation": 1.448718
+          },
+          {
+            "T_Original": 1.9000001,
+            "T_Dilation": 1.4615384
+          },
+          {
+            "T_Original": 1.9166667,
+            "T_Dilation": 1.4743589
+          },
+          {
+            "T_Original": 1.9333334,
+            "T_Dilation": 1.4871794
+          },
+          {
+            "T_Original": 1.95,
+            "T_Dilation": 1.4999999
+          },
+          {
+            "T_Original": 1.9666668,
+            "T_Dilation": 1.5128204
+          },
+          {
+            "T_Original": 1.9833335,
+            "T_Dilation": 1.5256408
+          },
+          {
+            "T_Original": 2.0,
+            "T_Dilation": 1.5384613
+          },
+          {
+            "T_Original": 2.016667,
+            "T_Dilation": 1.5512818
+          },
+          {
+            "T_Original": 2.0333335,
+            "T_Dilation": 1.5641023
+          },
+          {
+            "T_Original": 2.0500002,
+            "T_Dilation": 1.5769228
+          },
+          {
+            "T_Original": 2.0666668,
+            "T_Dilation": 1.5897433
+          },
+          {
+            "T_Original": 2.0833335,
+            "T_Dilation": 1.6025637
+          },
+          {
+            "T_Original": 2.1000001,
+            "T_Dilation": 1.6153842
+          },
+          {
+            "T_Original": 2.1166668,
+            "T_Dilation": 1.6282047
+          },
+          {
+            "T_Original": 2.1333334,
+            "T_Dilation": 1.6410252
+          },
+          {
+            "T_Original": 2.15,
+            "T_Dilation": 1.6538457
+          },
+          {
+            "T_Original": 2.1666667,
+            "T_Dilation": 1.6666662
+          },
+          {
+            "T_Original": 2.1833334,
+            "T_Dilation": 1.6794866
+          },
+          {
+            "T_Original": 2.2,
+            "T_Dilation": 1.6923071
+          },
+          {
+            "T_Original": 2.2166667,
+            "T_Dilation": 1.7051276
+          },
+          {
+            "T_Original": 2.2333333,
+            "T_Dilation": 1.7179481
+          },
+          {
+            "T_Original": 2.25,
+            "T_Dilation": 1.7307686
+          },
+          {
+            "T_Original": 2.266667,
+            "T_Dilation": 1.743589
+          },
+          {
+            "T_Original": 2.2833335,
+            "T_Dilation": 1.7564095
+          },
+          {
+            "T_Original": 2.3000002,
+            "T_Dilation": 1.76923
+          },
+          {
+            "T_Original": 2.3166668,
+            "T_Dilation": 1.7820505
+          },
+          {
+            "T_Original": 2.3333335,
+            "T_Dilation": 1.794871
+          },
+          {
+            "T_Original": 2.3500001,
+            "T_Dilation": 1.8076915
+          },
+          {
+            "T_Original": 2.3666668,
+            "T_Dilation": 1.8205119
+          },
+          {
+            "T_Original": 2.3833334,
+            "T_Dilation": 1.8333324
+          },
+          {
+            "T_Original": 2.4,
+            "T_Dilation": 1.8461529
+          },
+          {
+            "T_Original": 2.4166667,
+            "T_Dilation": 1.8589734
+          },
+          {
+            "T_Original": 2.4333334,
+            "T_Dilation": 1.8717939
+          },
+          {
+            "T_Original": 2.45,
+            "T_Dilation": 1.8846143
+          },
+          {
+            "T_Original": 2.4666667,
+            "T_Dilation": 1.8974348
+          },
+          {
+            "T_Original": 2.4833333,
+            "T_Dilation": 1.9102553
+          },
+          {
+            "T_Original": 2.5000002,
+            "T_Dilation": 1.9230758
+          },
+          {
+            "T_Original": 2.516667,
+            "T_Dilation": 1.9358963
+          },
+          {
+            "T_Original": 2.5333335,
+            "T_Dilation": 1.9487168
+          },
+          {
+            "T_Original": 2.5500002,
+            "T_Dilation": 1.9615372
+          },
+          {
+            "T_Original": 2.5666668,
+            "T_Dilation": 1.9743577
+          },
+          {
+            "T_Original": 2.5833335,
+            "T_Dilation": 1.9871782
+          },
+          {
+            "T_Original": 2.6000001,
+            "T_Dilation": 1.9999987
+          },
+          {
+            "T_Original": 2.6166668,
+            "T_Dilation": 2.0128193
+          },
+          {
+            "T_Original": 2.6333334,
+            "T_Dilation": 2.0256398
+          },
+          {
+            "T_Original": 2.65,
+            "T_Dilation": 2.0384603
+          },
+          {
+            "T_Original": 2.6666667,
+            "T_Dilation": 2.0512807
+          },
+          {
+            "T_Original": 2.6833334,
+            "T_Dilation": 2.0641012
+          },
+          {
+            "T_Original": 2.7,
+            "T_Dilation": 2.0769217
+          },
+          {
+            "T_Original": 2.7166667,
+            "T_Dilation": 2.0897422
+          },
+          {
+            "T_Original": 2.7333336,
+            "T_Dilation": 2.1025627
+          },
+          {
+            "T_Original": 2.7500002,
+            "T_Dilation": 2.1153831
+          },
+          {
+            "T_Original": 2.766667,
+            "T_Dilation": 2.1282036
+          },
+          {
+            "T_Original": 2.7833335,
+            "T_Dilation": 2.141024
+          },
+          {
+            "T_Original": 2.8000002,
+            "T_Dilation": 2.1538446
+          },
+          {
+            "T_Original": 2.8166668,
+            "T_Dilation": 2.1667166
+          },
+          {
+            "T_Original": 2.8333335,
+            "T_Dilation": 2.179693
+          },
+          {
+            "T_Original": 2.8500001,
+            "T_Dilation": 2.1927755
+          },
+          {
+            "T_Original": 2.8666668,
+            "T_Dilation": 2.205966
+          },
+          {
+            "T_Original": 2.8833334,
+            "T_Dilation": 2.2192662
+          },
+          {
+            "T_Original": 2.9,
+            "T_Dilation": 2.2326777
+          },
+          {
+            "T_Original": 2.9166667,
+            "T_Dilation": 2.2462027
+          },
+          {
+            "T_Original": 2.9333334,
+            "T_Dilation": 2.2598429
+          },
+          {
+            "T_Original": 2.95,
+            "T_Dilation": 2.2736003
+          },
+          {
+            "T_Original": 2.966667,
+            "T_Dilation": 2.2874773
+          },
+          {
+            "T_Original": 2.9833336,
+            "T_Dilation": 2.3014755
+          },
+          {
+            "T_Original": 3.0000002,
+            "T_Dilation": 2.3155973
+          },
+          {
+            "T_Original": 3.016667,
+            "T_Dilation": 2.329845
+          },
+          {
+            "T_Original": 3.0333335,
+            "T_Dilation": 2.3442204
+          },
+          {
+            "T_Original": 3.0500002,
+            "T_Dilation": 2.3587263
+          },
+          {
+            "T_Original": 3.0666668,
+            "T_Dilation": 2.373365
+          },
+          {
+            "T_Original": 3.0833335,
+            "T_Dilation": 2.3881388
+          },
+          {
+            "T_Original": 3.1000001,
+            "T_Dilation": 2.4030502
+          },
+          {
+            "T_Original": 3.1166668,
+            "T_Dilation": 2.418102
+          },
+          {
+            "T_Original": 3.1333334,
+            "T_Dilation": 2.4332967
+          },
+          {
+            "T_Original": 3.15,
+            "T_Dilation": 2.448637
+          },
+          {
+            "T_Original": 3.1666667,
+            "T_Dilation": 2.4641259
+          },
+          {
+            "T_Original": 3.1833334,
+            "T_Dilation": 2.4797661
+          },
+          {
+            "T_Original": 3.2000003,
+            "T_Dilation": 2.495561
+          },
+          {
+            "T_Original": 3.216667,
+            "T_Dilation": 2.511513
+          },
+          {
+            "T_Original": 3.2333336,
+            "T_Dilation": 2.5276258
+          },
+          {
+            "T_Original": 3.2500002,
+            "T_Dilation": 2.5439024
+          },
+          {
+            "T_Original": 3.266667,
+            "T_Dilation": 2.5603464
+          },
+          {
+            "T_Original": 3.2833335,
+            "T_Dilation": 2.576961
+          },
+          {
+            "T_Original": 3.3000002,
+            "T_Dilation": 2.5937488
+          },
+          {
+            "T_Original": 3.3166668,
+            "T_Dilation": 2.6107101
+          },
+          {
+            "T_Original": 3.3333335,
+            "T_Dilation": 2.627845
+          },
+          {
+            "T_Original": 3.3500001,
+            "T_Dilation": 2.6451538
+          },
+          {
+            "T_Original": 3.3666668,
+            "T_Dilation": 2.662636
+          },
+          {
+            "T_Original": 3.3833334,
+            "T_Dilation": 2.680292
+          },
+          {
+            "T_Original": 3.4,
+            "T_Dilation": 2.6981213
+          },
+          {
+            "T_Original": 3.4166667,
+            "T_Dilation": 2.7161243
+          },
+          {
+            "T_Original": 3.4333334,
+            "T_Dilation": 2.7343009
+          },
+          {
+            "T_Original": 3.4500003,
+            "T_Dilation": 2.7526512
+          },
+          {
+            "T_Original": 3.466667,
+            "T_Dilation": 2.7711751
+          },
+          {
+            "T_Original": 3.4833336,
+            "T_Dilation": 2.7898726
+          },
+          {
+            "T_Original": 3.5000002,
+            "T_Dilation": 2.8087437
+          },
+          {
+            "T_Original": 3.516667,
+            "T_Dilation": 2.8277884
+          },
+          {
+            "T_Original": 3.5333335,
+            "T_Dilation": 2.8470068
+          },
+          {
+            "T_Original": 3.5500002,
+            "T_Dilation": 2.8663988
+          },
+          {
+            "T_Original": 3.5666668,
+            "T_Dilation": 2.8859644
+          },
+          {
+            "T_Original": 3.5833335,
+            "T_Dilation": 2.9057035
+          },
+          {
+            "T_Original": 3.6000001,
+            "T_Dilation": 2.9256163
+          },
+          {
+            "T_Original": 3.6166668,
+            "T_Dilation": 2.9456162
+          },
+          {
+            "T_Original": 3.6333334,
+            "T_Dilation": 2.9656162
+          },
+          {
+            "T_Original": 3.65,
+            "T_Dilation": 2.9856162
+          },
+          {
+            "T_Original": 3.6666667,
+            "T_Dilation": 3.0056162
+          },
+          {
+            "T_Original": 3.6833336,
+            "T_Dilation": 3.0256162
+          },
+          {
+            "T_Original": 3.7000003,
+            "T_Dilation": 3.0456161
+          },
+          {
+            "T_Original": 3.716667,
+            "T_Dilation": 3.0656161
+          },
+          {
+            "T_Original": 3.7333336,
+            "T_Dilation": 3.085616
+          },
+          {
+            "T_Original": 3.7500002,
+            "T_Dilation": 3.105616
+          },
+          {
+            "T_Original": 3.766667,
+            "T_Dilation": 3.125616
+          },
+          {
+            "T_Original": 3.7833335,
+            "T_Dilation": 3.145616
+          },
+          {
+            "T_Original": 3.8000002,
+            "T_Dilation": 3.165616
+          },
+          {
+            "T_Original": 3.8166668,
+            "T_Dilation": 3.185616
+          },
+          {
+            "T_Original": 3.8333335,
+            "T_Dilation": 3.205616
+          },
+          {
+            "T_Original": 3.8500001,
+            "T_Dilation": 3.225616
+          },
+          {
+            "T_Original": 3.8666668,
+            "T_Dilation": 3.245616
+          },
+          {
+            "T_Original": 3.8833334,
+            "T_Dilation": 3.265616
+          },
+          {
+            "T_Original": 3.9,
+            "T_Dilation": 3.285616
+          },
+          {
+            "T_Original": 3.916667,
+            "T_Dilation": 3.305616
+          },
+          {
+            "T_Original": 3.9333336,
+            "T_Dilation": 3.325616
+          },
+          {
+            "T_Original": 3.9500003,
+            "T_Dilation": 3.3456159
+          },
+          {
+            "T_Original": 3.966667,
+            "T_Dilation": 3.3656158
+          },
+          {
+            "T_Original": 3.9833336,
+            "T_Dilation": 3.3856158
+          },
+          {
+            "T_Original": 4.0,
+            "T_Dilation": 3.4056158
+          },
+          {
+            "T_Original": 4.016667,
+            "T_Dilation": 3.4256158
+          },
+          {
+            "T_Original": 4.033334,
+            "T_Dilation": 3.4456158
+          },
+          {
+            "T_Original": 4.05,
+            "T_Dilation": 3.4656157
+          },
+          {
+            "T_Original": 4.066667,
+            "T_Dilation": 3.4856157
+          },
+          {
+            "T_Original": 4.0833335,
+            "T_Dilation": 3.5056157
+          },
+          {
+            "T_Original": 4.1,
+            "T_Dilation": 3.5256155
+          }
+        ],
+        "BakedDilationCurveName": "Dilation"
+      },
+      "Skeleton": {
+        "ObjectName": "Skeleton'C_M_Human_Adult_M_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Model/C_M_Human_Adult_M_Skeleton.15"
+      }
+    },
+    "SkeletonGuid": "DAF13C4E-44F21635-494009B0-96C586C1"
+  },
+  {
+    "Type": "xxAnimNotifyState_ChangeArmedState",
+    "Name": "xxAnimNotifyState_ChangeArmedState_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_ChangeArmedState'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+    },
+    "Properties": {
+      "IsBegin": true,
+      "BeginInfo": {
+        "ArmedState": "EWeaponArmedState::Unarmed"
+      },
+      "EndInfo": {
+        "ArmedState": "EWeaponArmedState::None"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "ParticleMode": "MaterialEffect",
+        "EffectData": {
+          "ObjectName": "xxMaterialEffectParticleData'PA_World_Mon_M_Footstep_normal'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_World/Monster/PA_World_Mon_M_Footstep_normal.0"
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-r-Foot"
+      },
+      "bOnlyStartAttach": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "ParticleMode": "MaterialEffect",
+        "EffectData": {
+          "ObjectName": "xxMaterialEffectParticleData'PA_World_Mon_M_Footstep_normal'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_World/Monster/PA_World_Mon_M_Footstep_normal.0"
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-r-Foot"
+      },
+      "bOnlyStartAttach": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "ParticleMode": "MaterialEffect",
+        "EffectData": {
+          "ObjectName": "xxMaterialEffectParticleData'PA_World_Mon_M_Footstep_normal'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_World/Monster/PA_World_Mon_M_Footstep_normal.0"
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-L-Foot"
+      },
+      "bOnlyStartAttach": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_3",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "ParticleMode": "MaterialEffect",
+        "EffectData": {
+          "ObjectName": "xxMaterialEffectParticleData'PA_World_Mon_M_Footstep_normal'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_World/Monster/PA_World_Mon_M_Footstep_normal.0"
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-L-Foot"
+      },
+      "bOnlyStartAttach": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_SkillEventTag",
+    "Name": "xxAnimNotifyState_SkillEventTag_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_SkillEventTag'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireSword_Ballista_Reload'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Ballista/AC_EmpireSword_Ballista_Reload.0"
+    },
+    "Properties": {
+      "Index": "ESimpleSkillEventIndex::Index3"
+    }
+  }
+]

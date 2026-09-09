@@ -1,0 +1,397 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_EmpireSword_Early_Smash_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash",
+    "SuperStruct": {
+      "ObjectName": "Class'xxCommonSimpleSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_EmpireSword_Early_Smash_C'Default__SB_EmpireSword_Early_Smash_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.1"
+    }
+  },
+  {
+    "Type": "SB_EmpireSword_Early_Smash_C",
+    "Name": "Default__SB_EmpireSword_Early_Smash_C",
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.SB_EmpireSword_Early_Smash_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash",
+    "Properties": {
+      "SubStateInfos": [
+        {
+          "Key": "ESubStateStepByActiveInput::Step1",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step2",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": null,
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.3,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTagNavigationMove'Default__SB_EmpireSword_Early_Smash_C:xxSimpleSkillEventTagNavigationMove_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.7"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSkillEventFunc_NavMove'Default__SB_EmpireSword_Early_Smash_C:xxSimpleSkillEventFunc_NavMove_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.4"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Early_Smash_C:xxSimpleSkillEventTag_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.6"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireSword_Early_Smash_C:xxChangeNextStepFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.2"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step2",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Smash'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/AC_EmpireSword_Smash.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.2,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Early_Smash_C:xxSimpleSkillEventTag_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.5"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxConsumeStaminaRegainFunc'Default__SB_EmpireSword_Early_Smash_C:xxConsumeStaminaRegainFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.3"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step3",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Stand_F'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/AC_EmpireSword_Stand_F.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.2,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [],
+            "bContinueStepWithNoAnim": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Early_Smash_C'Default__SB_EmpireSword_Early_Smash_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step2"
+    }
+  },
+  {
+    "Type": "xxConsumeStaminaRegainFunc",
+    "Name": "xxConsumeStaminaRegainFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxConsumeStaminaRegainFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Early_Smash_C'Default__SB_EmpireSword_Early_Smash_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.1"
+    },
+    "Properties": {
+      "StaminaConsumeRegainInfo": {
+        "StaminaOperator": "EStatusOper::Rate",
+        "StaminaConsumeValue": 1000,
+        "bUseSkillConsumeDynamicStatusShort": true
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventFunc_NavMove",
+    "Name": "xxSimpleSkillEventFunc_NavMove_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventFunc_NavMove'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Early_Smash_C'Default__SB_EmpireSword_Early_Smash_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.1"
+    },
+    "Properties": {
+      "AcceptanceRadius": 300.0,
+      "bIncludeAgentAndGoalRadius": false,
+      "MoveOption": "EIdleMoveOption::Walk",
+      "MoveLimitTime": 6.0
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Early_Smash_C'Default__SB_EmpireSword_Early_Smash_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireSword_Early_Smash_C:xxSimpleSkillEventTag_0.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.8"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Early_Smash_C'Default__SB_EmpireSword_Early_Smash_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::EndSubState",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireSword_Early_Smash_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_TargetCondition_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.9"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTagNavigationMove",
+    "Name": "xxSimpleSkillEventTagNavigationMove_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTagNavigationMove'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Early_Smash_C'Default__SB_EmpireSword_Early_Smash_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.1"
+    },
+    "Properties": {
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireSword_Early_Smash_C:xxSimpleSkillEventTagNavigationMove_1.xxSimpleSkillTagCondition_TargetCondition_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.10"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Early_Smash_C:xxSimpleSkillEventTag_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.5"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::Stamina",
+        "CompareOperator": "ECompareOperator::GreaterThanOrEqualTo"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_TargetCondition",
+    "Name": "xxSimpleSkillTagCondition_TargetCondition_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_TargetCondition'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Early_Smash_C:xxSimpleSkillEventTag_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.6"
+    },
+    "Properties": {
+      "TargetSelectionTypes": [
+        "ETargetSelectionTypeByCondition::LockOnTarget",
+        "ETargetSelectionTypeByCondition::UseSkillTarget"
+      ],
+      "bCheckDistance": true,
+      "MaxDistance": 400.0,
+      "bCheckBaseDirection": true,
+      "CheckHitDirections": [
+        "EBaseDirection::Front"
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_TargetCondition",
+    "Name": "xxSimpleSkillTagCondition_TargetCondition_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_TargetCondition'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTagNavigationMove'Default__SB_EmpireSword_Early_Smash_C:xxSimpleSkillEventTagNavigationMove_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.7"
+    },
+    "Properties": {
+      "TargetSelectionTypes": [
+        "ETargetSelectionTypeByCondition::LockOnTarget",
+        "ETargetSelectionTypeByCondition::UseSkillTarget"
+      ],
+      "bCheckDistance": true,
+      "MinDistance": 300.0,
+      "MaxDistance": 700.0
+    }
+  }
+]

@@ -1,0 +1,322 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_EmpireSword_Move_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Move/SB_EmpireSword_Move",
+    "SuperStruct": {
+      "ObjectName": "Class'xxSkillMove'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_EmpireSword_Move_C'Default__SB_EmpireSword_Move_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Move/SB_EmpireSword_Move.1"
+    }
+  },
+  {
+    "Type": "SB_EmpireSword_Move_C",
+    "Name": "Default__SB_EmpireSword_Move_C",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Move/SB_EmpireSword_Move.SB_EmpireSword_Move_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Move/SB_EmpireSword_Move",
+    "Properties": {
+      "NormalMoveInfoMap": [
+        {
+          "Key": "EAnimationState::Battle",
+          "Value": {
+            "BlendSpace": {
+              "ObjectName": "BlendSpace'BS_EmpireSword_NormalMove'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Move/BS_EmpireSword_NormalMove.0"
+            },
+            "BlendSpaceInBlendTime": 0.1,
+            "BlendSpaceWalkY": 0.5,
+            "BlendSpaceRunY": 1.0,
+            "BlendSpaceSprintY": 1.5,
+            "bUsBlendSpcaeX": false,
+            "RootMotionQuickTurnLeftQuarter": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Turn_L'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Reaction/AC_EmpireSword_Turn_L.0"
+            },
+            "RootMotionQuickTurnLeft": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Turn_L_180'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Reaction/AC_EmpireSword_Turn_L_180.0"
+            },
+            "RootMotionQuickTurnRightQuarter": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Turn_R'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Reaction/AC_EmpireSword_Turn_R.0"
+            },
+            "RootMotionQuickTurnRight": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Turn_R_180'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Reaction/AC_EmpireSword_Turn_R_180.0"
+            },
+            "RootMotionQuickTurnBlendSeconds": 0.1,
+            "NormalBrakeLeft": null,
+            "NormalBrakeRight": null,
+            "NormalBrakeCurve": null,
+            "NormalBrakeBlendSeconds": 0.25,
+            "SprintBrake": null,
+            "SprintBrakeCurve": null,
+            "SprintBrakeBlendSeconds": 0.25,
+            "SprintTurn": null,
+            "SprintTurnCurve": null,
+            "SprintTurnBlendSeconds": 0.25,
+            "WalkAnimSpeed": {
+              "AnimMoveDistance": 180.0,
+              "AnimPlayTime": 1.0
+            },
+            "RunAnimSpeed": {
+              "AnimMoveDistance": 369.6,
+              "AnimPlayTime": 0.77
+            },
+            "SprintAnimSpeed": {
+              "AnimMoveDistance": 0.0,
+              "AnimPlayTime": 0.1
+            },
+            "bUseSprintReady": false,
+            "SprintReadyAnimationInfo": {
+              "Animation": null,
+              "BlendTime": 0.2
+            },
+            "DodgeReadyAnim": null,
+            "ChangePeaceAnim": null,
+            "ChangePeaceBlendSeconds": 0.1,
+            "MoveDamageType": "ECharacterDamageType::Normal",
+            "SystemGuardFrontAngle": 180.0,
+            "SystemGuardAnimInfo": {
+              "CommonAnimationTagDamageAnimsRandom": []
+            },
+            "bUseAttackerReactionAnim": false,
+            "SystemGuardAnimInfoByAttackerReaction": []
+          }
+        },
+        {
+          "Key": "EAnimationState::Peace",
+          "Value": {
+            "BlendSpace": {
+              "ObjectName": "BlendSpace'BS_EmpireSword_PeaceMove'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Move/BS_EmpireSword_PeaceMove.0"
+            },
+            "BlendSpaceInBlendTime": 0.2,
+            "BlendSpaceWalkY": 0.5,
+            "BlendSpaceRunY": 1.0,
+            "BlendSpaceSprintY": 1.5,
+            "bUsBlendSpcaeX": false,
+            "RootMotionQuickTurnLeftQuarter": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Turn_L_Peace'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_Turn_L_Peace.0"
+            },
+            "RootMotionQuickTurnLeft": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Turn_L_Peace_180'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_Turn_L_Peace_180.0"
+            },
+            "RootMotionQuickTurnRightQuarter": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Turn_R_Peace'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_Turn_R_Peace.0"
+            },
+            "RootMotionQuickTurnRight": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Turn_R_Peace_180'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_Turn_R_Peace_180.0"
+            },
+            "RootMotionQuickTurnBlendSeconds": 0.1,
+            "NormalBrakeLeft": null,
+            "NormalBrakeRight": null,
+            "NormalBrakeCurve": null,
+            "NormalBrakeBlendSeconds": 0.25,
+            "SprintBrake": null,
+            "SprintBrakeCurve": null,
+            "SprintBrakeBlendSeconds": 0.25,
+            "SprintTurn": null,
+            "SprintTurnCurve": null,
+            "SprintTurnBlendSeconds": 0.25,
+            "WalkAnimSpeed": {
+              "AnimMoveDistance": 180.0,
+              "AnimPlayTime": 1.2
+            },
+            "RunAnimSpeed": {
+              "AnimMoveDistance": 246.4,
+              "AnimPlayTime": 0.77
+            },
+            "SprintAnimSpeed": {
+              "AnimMoveDistance": 280.0,
+              "AnimPlayTime": 0.1
+            },
+            "bUseSprintReady": false,
+            "SprintReadyAnimationInfo": {
+              "Animation": null,
+              "BlendTime": 0.2
+            },
+            "DodgeReadyAnim": null,
+            "ChangePeaceAnim": null,
+            "ChangePeaceBlendSeconds": 0.1,
+            "MoveDamageType": "ECharacterDamageType::Normal",
+            "SystemGuardFrontAngle": 180.0,
+            "SystemGuardAnimInfo": {
+              "CommonAnimationTagDamageAnimsRandom": []
+            },
+            "bUseAttackerReactionAnim": false,
+            "SystemGuardAnimInfoByAttackerReaction": []
+          }
+        },
+        {
+          "Key": "EAnimationState::Custom_1",
+          "Value": {
+            "BlendSpace": {
+              "ObjectName": "BlendSpace'BS_EmpireSword_NormalMove_2'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Move/BS_EmpireSword_NormalMove_2.0"
+            },
+            "BlendSpaceInBlendTime": 0.1,
+            "BlendSpaceWalkY": 0.5,
+            "BlendSpaceRunY": 1.0,
+            "BlendSpaceSprintY": 1.5,
+            "bUsBlendSpcaeX": false,
+            "RootMotionQuickTurnLeftQuarter": null,
+            "RootMotionQuickTurnLeft": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Turn_L_180'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Reaction/AC_EmpireSword_Turn_L_180.0"
+            },
+            "RootMotionQuickTurnRightQuarter": null,
+            "RootMotionQuickTurnRight": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Turn_R_180'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Reaction/AC_EmpireSword_Turn_R_180.0"
+            },
+            "RootMotionQuickTurnBlendSeconds": 0.1,
+            "NormalBrakeLeft": null,
+            "NormalBrakeRight": null,
+            "NormalBrakeCurve": null,
+            "NormalBrakeBlendSeconds": 0.25,
+            "SprintBrake": null,
+            "SprintBrakeCurve": null,
+            "SprintBrakeBlendSeconds": 0.25,
+            "SprintTurn": null,
+            "SprintTurnCurve": null,
+            "SprintTurnBlendSeconds": 0.25,
+            "WalkAnimSpeed": {
+              "AnimMoveDistance": 180.0,
+              "AnimPlayTime": 1.0
+            },
+            "RunAnimSpeed": {
+              "AnimMoveDistance": 369.6,
+              "AnimPlayTime": 0.77
+            },
+            "SprintAnimSpeed": {
+              "AnimMoveDistance": 0.0,
+              "AnimPlayTime": 0.1
+            },
+            "bUseSprintReady": false,
+            "SprintReadyAnimationInfo": {
+              "Animation": null,
+              "BlendTime": 0.2
+            },
+            "DodgeReadyAnim": null,
+            "ChangePeaceAnim": null,
+            "ChangePeaceBlendSeconds": 0.1,
+            "MoveDamageType": "ECharacterDamageType::Normal",
+            "SystemGuardFrontAngle": 180.0,
+            "SystemGuardAnimInfo": {
+              "CommonAnimationTagDamageAnimsRandom": []
+            },
+            "bUseAttackerReactionAnim": false,
+            "SystemGuardAnimInfoByAttackerReaction": []
+          }
+        }
+      ],
+      "bIsChoiceRandom": true,
+      "RandomCategory": [
+        "EAnimationState::Battle",
+        "EAnimationState::Custom_1"
+      ],
+      "NormalRotationCurve": {
+        "ObjectName": "CurveFloat'CV_MoveRotation_Monster_Small'",
+        "ObjectPath": "BBQ/Content/_Common/MoveCurve/CV_MoveRotation_Monster_Small.0"
+      },
+      "NormalQuickTurnThreshold": 90.0,
+      "NormalQuickTurnCancelThreshold": 20.0,
+      "bUseLockOnTurnThreshold": true,
+      "LockOnTurnThreshold": 90.0,
+      "LockOnTurnCancelThreshold": 20.0,
+      "LockOnMoveInfoMap": [
+        {
+          "Key": "EAnimationState::Battle",
+          "Value": {
+            "BlendSpace": {
+              "ObjectName": "BlendSpace'BS_EmpireSword_LockOnMove'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Move/BS_EmpireSword_LockOnMove.0"
+            },
+            "BlendSpaceInBlendTime": 0.3,
+            "LockOnBaseSpeeds": {
+              "AnimMoveDistance": 0.0,
+              "AnimPlayTime": 0.1
+            },
+            "LockOnBaseSpeeds[1]": {
+              "AnimMoveDistance": 180.0,
+              "AnimPlayTime": 1.0
+            },
+            "LockOnBaseSpeeds[2]": {
+              "AnimMoveDistance": 180.0,
+              "AnimPlayTime": 1.0
+            },
+            "LockOnBaseSpeeds[3]": {
+              "AnimMoveDistance": 180.0,
+              "AnimPlayTime": 1.0
+            },
+            "LockOnBaseSpeeds[4]": {
+              "AnimMoveDistance": 180.0,
+              "AnimPlayTime": 1.0
+            },
+            "LockOnBaseSpeeds[5]": {
+              "AnimMoveDistance": 180.0,
+              "AnimPlayTime": 1.0
+            },
+            "LockOnBaseSpeeds[6]": {
+              "AnimMoveDistance": 180.0,
+              "AnimPlayTime": 1.0
+            },
+            "LockOnBaseSpeeds[7]": {
+              "AnimMoveDistance": 180.0,
+              "AnimPlayTime": 1.0
+            },
+            "LockOnBaseSpeeds[8]": {
+              "AnimMoveDistance": 180.0,
+              "AnimPlayTime": 1.0
+            },
+            "QuarterLeftLockOnTurn": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Turn_L'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Reaction/AC_EmpireSword_Turn_L.0"
+            },
+            "QuarterRightLockOnTurn": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Turn_R'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Reaction/AC_EmpireSword_Turn_R.0"
+            },
+            "HalfLeftLockOnTurn": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Turn_L_180'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Reaction/AC_EmpireSword_Turn_L_180.0"
+            },
+            "HalfRightLockOnTurn": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Turn_R_180'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Reaction/AC_EmpireSword_Turn_R_180.0"
+            },
+            "LockOnTurnBlendSeconds": 0.15,
+            "MoveDamageType": "ECharacterDamageType::Normal",
+            "SystemGuardFrontAngle": 180.0,
+            "SystemGuardAnimInfo": {
+              "CommonAnimationTagDamageAnimsRandom": []
+            },
+            "bUseAttackerReactionAnim": false,
+            "SystemGuardAnimInfoByAttackerReaction": []
+          }
+        }
+      ],
+      "bLockOnLookAt": true,
+      "bCanRotateMainTarget": false,
+      "bLockOnCircling": false
+    }
+  }
+]

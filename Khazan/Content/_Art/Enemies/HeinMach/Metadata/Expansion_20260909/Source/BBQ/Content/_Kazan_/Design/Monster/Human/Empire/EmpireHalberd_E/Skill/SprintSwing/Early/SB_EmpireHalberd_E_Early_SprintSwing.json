@@ -1,0 +1,573 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_EmpireHalberd_E_Early_SprintSwing_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing",
+    "SuperStruct": {
+      "ObjectName": "Class'xxCommonSimpleSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_SprintSwing_C'Default__SB_EmpireHalberd_E_Early_SprintSwing_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.1"
+    }
+  },
+  {
+    "Type": "SB_EmpireHalberd_E_Early_SprintSwing_C",
+    "Name": "Default__SB_EmpireHalberd_E_Early_SprintSwing_C",
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.SB_EmpireHalberd_E_Early_SprintSwing_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing",
+    "Properties": {
+      "SubStateInfos": [
+        {
+          "Key": "ESubStateStepByActiveInput::Step1",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step2",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_SprintSwing_Start'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/AC_EmpireHalberd_E_SprintSwing_Start.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.3,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index3",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEventTagOnDamageBefore'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxSimpeEventTagOnDamageBefore_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.6"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxChangeNextStepFunc_2'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.3"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step2",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_SprintSwing_Loop'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/AC_EmpireHalberd_E_SprintSwing_Loop.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxSimpleSkillEventTag_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.8"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxChangeNextStepFunc_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.2"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxSimpleSkillEventTag_2'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.9"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxConsumeStaminaTimeFunc'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxConsumeStaminaTimeFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.5"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index4",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxSimpleSkillEventTag_3'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.10"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxChangeNextStepFunc_3'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.4"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step3",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Early_SprintSwing_End'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/AC_EmpireHalberd_E_Early_SprintSwing_End.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.45,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index16",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxSimpleSkillEventTag_4'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.11"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSSEventFunc_JustGuardIncreaseStamina'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxSSEventFunc_JustGuardIncreaseStamina_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.15"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step4",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Early_SprintSwing_End'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/AC_EmpireHalberd_E_Early_SprintSwing_End.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.0,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index16",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxSimpleSkillEventTag_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.7"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSSEventFunc_JustGuardIncreaseStamina'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxSSEventFunc_JustGuardIncreaseStamina_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.16"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_SprintSwing_C'Default__SB_EmpireHalberd_E_Early_SprintSwing_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step3"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_SprintSwing_C'Default__SB_EmpireHalberd_E_Early_SprintSwing_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step2"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_3",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_SprintSwing_C'Default__SB_EmpireHalberd_E_Early_SprintSwing_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step4"
+    }
+  },
+  {
+    "Type": "xxConsumeStaminaTimeFunc",
+    "Name": "xxConsumeStaminaTimeFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxConsumeStaminaTimeFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_SprintSwing_C'Default__SB_EmpireHalberd_E_Early_SprintSwing_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.1"
+    },
+    "Properties": {
+      "StaminaOperator": "EStatusOper::Rate",
+      "ConsumePerSecond": 200
+    }
+  },
+  {
+    "Type": "xxSimpeEventTagOnDamageBefore",
+    "Name": "xxSimpeEventTagOnDamageBefore_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEventTagOnDamageBefore'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_SprintSwing_C'Default__SB_EmpireHalberd_E_Early_SprintSwing_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.1"
+    },
+    "Properties": {
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_FindTarget'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxSimpeEventTagOnDamageBefore_0.xxSimpleSkillTagCondition_FindTarget_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.12"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_SprintSwing_C'Default__SB_EmpireHalberd_E_Early_SprintSwing_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStartEnd"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_SprintSwing_C'Default__SB_EmpireHalberd_E_Early_SprintSwing_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyTick",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_FindTarget'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_FindTarget_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.13"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_NotifyEnable'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_NotifyEnable_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.14"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_SprintSwing_C'Default__SB_EmpireHalberd_E_Early_SprintSwing_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyTick"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_3",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_SprintSwing_C'Default__SB_EmpireHalberd_E_Early_SprintSwing_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyEnd"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_SprintSwing_C'Default__SB_EmpireHalberd_E_Early_SprintSwing_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStartEnd"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_FindTarget",
+    "Name": "xxSimpleSkillTagCondition_FindTarget_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_FindTarget'",
+    "Outer": {
+      "ObjectName": "xxSimpeEventTagOnDamageBefore'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxSimpeEventTagOnDamageBefore_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.6"
+    },
+    "Properties": {
+      "CheckStateInfo": {
+        "bInstantTarget": true,
+        "InstantTargetTraceInfo": {
+          "bUseCircleTraceInfo": true,
+          "CircleTraceInfo": {
+            "RangeMax": 3000.0,
+            "RangeMin": 300.0
+          },
+          "bCheckScreenInSide": false
+        },
+        "bIDLE": false
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_FindTarget",
+    "Name": "xxSimpleSkillTagCondition_FindTarget_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_FindTarget'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxSimpleSkillEventTag_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.8"
+    },
+    "Properties": {
+      "CheckStateInfo": {
+        "bInstantTarget": true,
+        "InstantTargetTraceInfo": {
+          "bUseCircleTraceInfo": true,
+          "CircleTraceInfo": {
+            "Yaw": 120.0
+          },
+          "bCheckScreenInSide": false
+        },
+        "bIDLE": false,
+        "DelayTime": 0.0
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_NotifyEnable",
+    "Name": "xxSimpleSkillTagCondition_NotifyEnable_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_NotifyEnable'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_SprintSwing_C:xxSimpleSkillEventTag_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.8"
+    }
+  },
+  {
+    "Type": "xxSSEventFunc_JustGuardIncreaseStamina",
+    "Name": "xxSSEventFunc_JustGuardIncreaseStamina_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSSEventFunc_JustGuardIncreaseStamina'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_SprintSwing_C'Default__SB_EmpireHalberd_E_Early_SprintSwing_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.1"
+    },
+    "Properties": {
+      "StaminaOperator": "EStatusOper::Rate",
+      "IncreaseValue": 1000
+    }
+  },
+  {
+    "Type": "xxSSEventFunc_JustGuardIncreaseStamina",
+    "Name": "xxSSEventFunc_JustGuardIncreaseStamina_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSSEventFunc_JustGuardIncreaseStamina'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_SprintSwing_C'Default__SB_EmpireHalberd_E_Early_SprintSwing_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/SprintSwing/Early/SB_EmpireHalberd_E_Early_SprintSwing.1"
+    },
+    "Properties": {
+      "StaminaOperator": "EStatusOper::Rate",
+      "IncreaseValue": 1000
+    }
+  }
+]

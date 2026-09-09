@@ -95,3 +95,21 @@
 - Sync Marker 이름은 `LeftFoot`, `RightFoot`, marker track은 `LocomotionSync`로 통일한다. Anim Graph의 Sync Group `Locomotion`은 에셋 track과 별도로 설정한다.
 - builder는 정확한 runtime target만 교체하는 idempotent 작업이어야 한다. 원본 수량·길이·marker 무변경, runtime inventory, skeleton, trim, naming, root 설정, metadata와 marker를 fresh-process audit로 확인한다.
 - DAS 정본 builder는 `Scripts/Animation/build_das_locomotion_runtime_library.py`, 정본 audit는 `Scripts/Animation/audit_das_locomotion_runtime_library.py`다. 최신 결과는 각각 `Khazan_DAS_Locomotion_RuntimeBuild.json`과 `Khazan_DAS_Locomotion_RuntimeAudit.json`이다.
+
+## 2026-09-09 Enemy 임포트의 검증된 주의점
+
+- Enemy source lookup은 full package path를 키로 사용한다. basename이 같은 `BASE_Normal`과 몸체/무기 `CA_M_EmpBow_Stand_F`도 다른 원본이다. 기존 destination 이름도 신규 이름 충돌 검사에 예약한다.
+- 원본 `NumFrames`, `SequenceLength`, `RateScale`, composite segment 배속, 활성 DilationCurve를 분리 보존한다. CUE ActorX의 `N/L` AnimRate를 `(N-1)/L` sample rate 대신 적용하지 않는다. `PlaybackClips`는 시간 보정을 bake했으므로 동일 보정을 다시 곱하지 않는다.
+- UE 5.8의 AnimSequence factory는 압축 target frame rate도 초기화한다. 임의 rational rate를 controller에만 뒤늦게 설정하는 방식과 공약수 bridge는 압축 ensure/fatal을 일으킬 수 있다. 신규 자산 생성 동안만 AnimationSettings CDO의 default rate를 목표값으로 설정하고 NEVER notify로 즉시 복원한다. Config 저장은 하지 않으며 hash로 확인한다.
+- 긴 임포트는 작은 commandlet 배치로 수행한다. Python 보고서가 passed여도 비동기 압축 작업이 나중에 실패할 수 있으므로 프로세스 정상 종료까지 확인한다. 현재 정본은 `Scripts/Enemies/import_enemy_expansion_animations.py`, `run_enemy_animation_batches.py`다.
+- Python `unreal.Rotator`는 모든 축을 keyword 인자로 명시한다. UE 5.8에서 `(0,-90,0)`은 yaw가 아니라 pitch를 바꾼다. 뼈 pose 검사와 별도로 실제 BP component rotation, head/pelvis 높이, 장비 부착을 확인한다.
+- 파츠 통합 전 실제 사용 bone의 bind transform 일치를 검사한다. 빈 carrier의 미사용 cloth bone을 무조건 기준으로 삼지 않는다. 서로 다른 source bind를 가진 중갑 파츠는 각 skin을 보존하고 동일 애니메이션 시간으로 재생한다.
+- 예전 조합을 Archive로 이동한 뒤 destination 저장만으로 redirector가 디스크에 남았다고 가정하지 않는다. 이동 대응표와 저장된 destination을 확인하고 과거 metadata lookup에 적용한다.
+- 재조사 전 `HeinMachEnemyV2_FinalAudit.json`과 각 manifest를 읽고 실패한 항목만 표적 검증한다. 원본 전용 shader/RNG/physics 구현이 없는 상태를 완전한 원작 재현으로 표시하지 않는다.
+
+### 2026-09-09 Enemy 정리 이후 적용 규칙
+
+- 현재 에셋 기준은 `Metadata/Cleanup_20260909/RetainedAssets.json`과 `HeinMachEnemy_CleanupAudit_20260909.json`이다. 이전 import manifest·archive 이동표는 추출/이동 당시의 기록이며 현재 존재 목록이 아니다. 사용자가 제거한 미사용 자산을 전체 builder 재실행으로 되살리지 않는다.
+- 캐릭터 삭제는 사용할 BP·보존 애니메이션·카탈로그 및 외부 참조를 root로 두고 hard/soft dependency closure를 구한 뒤 수행한다. 개별 source 파츠라도 중갑/무기/preview/pose carrier에 필요하면 남긴다.
+- `DeleteLoadedAssets`의 성공값만으로 디스크 삭제를 확정하지 않는다. 이번에는 미참조 texture 1개가 남아 UE 종료 후 백업/hash/정확한 경로를 확인하고 단일 파일을 정리했다. 별도 UE 프로세스에서 남긴 자산 hash·BP 재로드·누락 참조를 확인한다.
+- 재생용 시퀀스 중 `EquivalentSourceTimeline`은 후속 통합 후보이며, sample 수·포즈·소비 참조까지 확인한 뒤 canonical 자산을 선택한다. 이번에 시퀀스를 삭제하지 않았고 시간축이 변경된 271개와 동일한 451개를 구분했다.

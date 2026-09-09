@@ -107,3 +107,31 @@
 - Water source texture 정본 수량은 11개, unresolved source texture default는 0이다.
 - 최신 StormPass map SHA-256은 `F63A6C8D66C3F5D6A677EF00B2AECDB4406A6B229AB7C4DB1E4D42F25CC2C91E`다.
 - 이전 `3719...` hash는 `BASE_Black_NoneSRGB` default closure 직전 체크포인트다.
+
+## 2026-09-08 HeinMach 인간형 Enemy 재사용 자료
+
+- 정본: [HEINMACH_ENEMY_EXTRACTION_2026-09-08.md](HEINMACH_ENEMY_EXTRACTION_2026-09-08.md). 후속 Enemy 외형 작업은 이 문서와 저장 manifest부터 확인한다.
+- UE: `/Game/_Art/Enemies/HeinMach`; 검병 40, 검·방패병 4, 별도 HalberdElite 1. 확인용 맵 `Preview/L_HeinMach_EnemyCatalogue`.
+- `Content/_Art/Enemies/HeinMach/Metadata/EnemyImportManifest.json`: 원작 package → 개별 mesh/texture/material 대응, source slot 및 Skeleton/LOD/Morph 출처.
+- 같은 폴더 `CombinedMeshManifest.json`: 전신 조합 44개의 파츠 목록, point/wedge/material offset, bone mapping 검사. `EnemyAssemblyCatalog.json`: 완성 BP 45개.
+- `VisualRecipes.json`의 `PartsList`가 geometry 조합의 근거다. `ColorOverrideRandomPreset`은 Empire001/002/003 color, `BoneModRandomPreset`은 검병 Base/Fat/Sick, 방패병 Base/Fat/Muscle이며 적용 완료 자료가 아니다. runtime 선택 조건 확인 없이 랜덤 preset 번호를 고정 외형으로 단정하지 않는다.
+- `SourceSpawnActors.json`: HeinMach 원본 spawn handler 47개. 튜토리얼은 actor 1066 검병/1055 방패병으로 표적 확인됐다. 다른 이름의 CB를 튜토리얼 적으로 대체하지 않는다.
+- 외부 원본 보존: `C:/Users/user/Desktop/카잔/EnemyExtracts/HeinMach_20260908`. package full path, raw cooked archive, 모든 source LOD PSK, morph record 및 SHA-256을 보존한다.
+- 감사: `Saved/ImportReports/HeinMachEnemy_{SourceExtraction,LibraryBuild,CombinedBodies,AssemblyBuild,FreshAudit,RenderAssetAudit,ProtectedMaps}.json`. 반복 전수 추출 없이 미통과 항목만 표적 확인한다.
+
+## 2026-09-09 Enemy V2 우선 조회
+
+- 최신 의상/장비/애니메이션 정본은 [HEINMACH_ENEMY_EXPANSION_2026-09-09.md](HEINMACH_ENEMY_EXPANSION_2026-09-09.md)이다. 앞선 얼굴 중심 45종은 보관용이며 현재 대표 카탈로그는 16종이다.
+- 원본 선택과 경로: `Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/{ImportManifest,AssemblyCatalog,SourceClosure}.json`, 간편 조회 `EnemyCatalogue.csv`.
+- 속도: 같은 폴더 `AnimationImportManifest.json`, `AnimationTimingAudit.json`, `AnimationIndex.csv`. 원본 711개는 `(NumFrames-1)/SequenceLength=30 fps`, 재생용 722개는 source segment/활성 DilationCurve를 반영한 1배 재생 자산이다. ActorX AnimRate와 nominal sample rate를 혼동하지 않는다.
+- 이벤트 원본/변환 시간: `PlaybackEventTimes.json`, 4,863개 notify 시간 대응. 실행 로직은 source JSON에만 보존되며 gameplay Notify 구현과 구분한다.
+- 최종 감사: `Saved/ImportReports/HeinMachEnemyV2_FinalAudit.json`에서 animation/render/orientation/preservation 보고서를 연결한다. 소스 raw archive는 `C:/Users/user/Desktop/카잔/EnemyExtracts/HumanoidExpansion_20260909`, 원본 package 2,144개다.
+- UI 카탈로그: `/Game/_Art/Enemies/HeinMach/Preview/L_HeinMach_EnemyCatalogue`; 마법사 BP는 `/Game/_Art/Enemies/OtherRegions/Humanoids`이다. 옛 경로는 `LegacyAssetMoves.json`으로 조회한다.
+
+### 2026-09-09 Cleanup 이후의 최신 조회 기준
+
+- [ENEMY_LIBRARY_CLEANUP_AND_PLAYBACK_2026-09-09.md](ENEMY_LIBRARY_CLEANUP_AND_PLAYBACK_2026-09-09.md)에 삭제 결과, 실제 BP Components, 30 fps 원본과 Composite bake의 차이를 정리했다.
+- 현재 남은 파일은 `Metadata/Cleanup_20260909/RetainedAssets.json`, 삭제한 195개는 `RemovedAssets.json`이다. 이전 Archive 89개도 삭제됐으므로 옛 import manifest만 보고 다시 생성하지 않는다.
+- `PlaybackComparison.csv`: 시간축 변경 271개 / 동일 451개. 원본과 같은 451개가 모두 byte 중복은 아니며 11개는 표본 수가 다르다. 애니메이션은 모두 보존했다.
+- `BlueprintComponents.json`: BP 16개의 실제 부모 Actor, 메시·Idle·배속·collision·transform. gameplay AI/Ability/AnimGraph를 구현한 자료가 아니다.
+- 최신 감사 `HeinMachEnemy_CleanupAudit_20260909.json`은 남은 1,771개 UE 자산 hash, 카탈로그 16개, 의존성 누락 0을 확인한다. 백업은 `Desktop/카잔/EnemyExtracts/ProjectCleanup_20260909`다.

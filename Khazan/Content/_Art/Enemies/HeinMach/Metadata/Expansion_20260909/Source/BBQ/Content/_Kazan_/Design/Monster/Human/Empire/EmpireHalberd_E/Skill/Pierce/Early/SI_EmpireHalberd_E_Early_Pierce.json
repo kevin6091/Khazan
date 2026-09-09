@@ -1,0 +1,186 @@
+[
+  {
+    "Type": "xxSkillInfo",
+    "Name": "SI_EmpireHalberd_E_Early_Pierce",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Pierce/Early/SI_EmpireHalberd_E_Early_Pierce",
+    "Properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "5C063A5D4F7C7B80EA6F2C83690A75AD",
+        "SourceString": "찌르기",
+        "LocalizedString": "찌르기"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Pierce/Early/SB_EmpireHalberd_E_Early_Pierce.SB_EmpireHalberd_E_Early_Pierce_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 5.0,
+      "StatusChangeInfoList": [
+        {
+          "bUseParticle": false,
+          "StatusToChangeInfos": [
+            {
+              "StatusToChange": "EDynamicStatusToChange::Stamina",
+              "Operator": "EStatusOper::Rate",
+              "Value": -4000,
+              "bDieHard": false
+            }
+          ],
+          "bChangeImmediate": false,
+          "bNotChangeWhenShort": true,
+          "bCheckCanChange": false,
+          "ParticleInfo": {
+            "ParticleMode": "ParticleSystem",
+            "Particle": null,
+            "BPOverrideParticle": null,
+            "NiagaraParticle": null,
+            "EffectData": null,
+            "ShowUpType": "EEffectShowUp::ShowAll",
+            "bSyncData": false,
+            "Scale": 1.0,
+            "ScaleRandRange": 0.0,
+            "RotationRandRange": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            },
+            "Scale3D": {
+              "X": 1.0,
+              "Y": 1.0,
+              "Z": 1.0
+            },
+            "RelativeLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "RelativeRotation": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            },
+            "bAttached": false,
+            "AttachSocketName": "None",
+            "bApplyBaseScale": true,
+            "bSpawnOnFloor": false,
+            "HeightFromFloor": 0.0,
+            "FloorAroundBlendRange": 0.0,
+            "bRotateInDirOfFloor": false,
+            "RotateInDirOfFloorAroundBlendRange": 50.0,
+            "CustomTimeDilation": 1.0,
+            "bReceivesDecals": false,
+            "bAbsoluteRotation": true,
+            "bAbsoluteRotationWorld": false,
+            "bIgnoreAttachedVisibility": false,
+            "TranslucencySortPriority": 0,
+            "bCastParticleShadow": false,
+            "bUseParticleParametersAsset": false,
+            "ParticleFloatParams": [],
+            "ParticleVectorParams": [],
+            "ParticlePhysicalVectorParams": [],
+            "ParticlePhysicalFloatParams": [],
+            "ParticleParametersAsset": null,
+            "ParticleVectorParam": "None",
+            "ParticleVectorParam2": "None",
+            "bParticleVectorParamApplyEveryTick": false,
+            "bUseEndPoint": false,
+            "EndPointVectorParam": "None",
+            "bUseEnvVolumeDependent": false,
+            "EnvVolumeBundleAsset": null
+          },
+          "bUseDecal": false,
+          "DecalData": {
+            "DecalMode": "DecalMode_MaterialInstance",
+            "DecalMaterial": null,
+            "MaterialEffect": null,
+            "RandomDecalScale": {
+              "BasedVector": {
+                "X": 50.0,
+                "Y": 256.0,
+                "Z": 256.0
+              },
+              "MinVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MaxVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "bFixedRatio": true
+            },
+            "SpawnLocationBoneName": "None",
+            "RandomPosition": {
+              "BasedVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MinVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MaxVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "bFixedRatio": true
+            },
+            "RandomRotator": {
+              "BasedRotator": {
+                "Pitch": -90.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              },
+              "MinRotator": {
+                "Pitch": 0.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              },
+              "MaxRotator": {
+                "Pitch": 0.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              }
+            },
+            "LifeSpan": 0.0,
+            "bOwnerYawRotOnly": false,
+            "IsSpawnFloor": true,
+            "bRotateInDirOfTerrain": false,
+            "RotateInDirOfTerrainAroundBlendRange": 50.0,
+            "bCheckStretchOnWall": false,
+            "bScaleUpStretchedDecal": false,
+            "StretchedDecalScale": {
+              "X": 2.25,
+              "Y": 0.75,
+              "Z": 0.75
+            },
+            "OpacityCurve": null,
+            "OpacityParamName": "FadeOut",
+            "RandomScalarParams": [],
+            "bApplyBaseScale": true,
+            "LimitAngleOnAttackSuccessed": 0.0
+          },
+          "bUseSound": false,
+          "SoundEvent": null
+        }
+      ],
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_EmpireHalberd_E_Early_Pierce_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Pierce/Early/SD_EmpireHalberd_E_Early_Pierce_01.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_EmpireHalberd_E_Early_Pierce_02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Pierce/Early/SD_EmpireHalberd_E_Early_Pierce_02.0"
+        }
+      ]
+    }
+  }
+]

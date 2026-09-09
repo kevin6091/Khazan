@@ -1,0 +1,520 @@
+[
+  {
+    "Type": "AnimComposite",
+    "Name": "AC_EmpireSword_UnEquip",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimComposite'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_UnEquip",
+    "Properties": {
+      "AnimationTrack": {
+        "AnimSegments": [
+          {
+            "AnimReference": {
+              "ObjectName": "AnimSequence'CA_M_EmpSwd_FootSword02'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Animation/EmpireSword3/CA_M_EmpSwd_FootSword02.0"
+            },
+            "StartPos": 0.0,
+            "AnimStartTime": 0.0,
+            "AnimEndTime": 0.73333335,
+            "AnimPlayRate": 1.0,
+            "LoopingCount": 1
+          }
+        ]
+      },
+      "Notifies": [
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxAkEvent",
+          "Notify": {
+            "ObjectName": "xxAnimNotify_AkEvent'AC_EmpireSword_UnEquip:xxAnimNotify_AkEvent_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_UnEquip.1"
+          },
+          "NotifyStateClass": null,
+          "Duration": 0.0,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": -1,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.0,
+            "LinkValue": 0.07177904,
+            "LinkedSequence": null
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 2,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.73333335,
+          "LinkValue": 0.07177904,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireSword_UnEquip'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_UnEquip.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxChangeArmedState",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_ChangeArmedState'AC_EmpireSword_UnEquip:xxAnimNotifyState_ChangeArmedState_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_UnEquip.2"
+          },
+          "Duration": 0.18913752,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.73333335,
+            "LinkValue": 0.54125434,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_UnEquip'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_UnEquip.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 1,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.73333335,
+          "LinkValue": 0.35211682,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireSword_UnEquip'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_UnEquip.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_EmpireSword_UnEquip:xxAnimNotifyState_Particle_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_UnEquip.3"
+          },
+          "Duration": 0.15236658,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.73333335,
+            "LinkValue": 0.6660991,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_UnEquip'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_UnEquip.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.73333335,
+          "LinkValue": 0.5137325,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireSword_UnEquip'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_UnEquip.0"
+          }
+        }
+      ],
+      "SequenceLength": 0.73333335,
+      "RawCurveData": {
+        "FloatCurves": [
+          {
+            "FloatCurve": {
+              "Keys": [
+                {
+                  "InterpMode": "RCIM_Cubic",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.0,
+                  "Value": 0.0,
+                  "ArriveTangent": -12.237322,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": -12.237322,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Cubic",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.024515174,
+                  "Value": -0.30000007,
+                  "ArriveTangent": -2.0504713,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": -2.0504713,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Cubic",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.19507709,
+                  "Value": -0.39999998,
+                  "ArriveTangent": 1.2535682,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 1.2535682,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Cubic",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.26383215,
+                  "Value": 6.2846794E-08,
+                  "ArriveTangent": 3.8123221,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 3.8123221,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Cubic",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.3,
+                  "Value": 0.0,
+                  "ArriveTangent": -2.962334,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": -2.962334,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Cubic",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.38198227,
+                  "Value": -0.35000002,
+                  "ArriveTangent": -2.5104654,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": -2.5104654,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Cubic",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.4394164,
+                  "Value": -0.35000002,
+                  "ArriveTangent": 2.9217525,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 2.9217525,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Cubic",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.5017734,
+                  "Value": 6.2846794E-08,
+                  "ArriveTangent": 5.6128426,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 5.6128426,
+                  "LeaveTangentWeight": 0.0
+                }
+              ],
+              "DefaultValue": 3.4028235E+38,
+              "PreInfinityExtrap": "RCCE_Constant",
+              "PostInfinityExtrap": "RCCE_Constant"
+            },
+            "Name": {
+              "DisplayName": "Dilation"
+            },
+            "CurveTypeFlags": 4
+          }
+        ]
+      },
+      "DilationCurve": {
+        "TimePerFrame": 0.016666668,
+        "DilationSequenceLength": 0.854682,
+        "DilationAnimPositions": [
+          {
+            "T_Original": 0.0,
+            "T_Dilation": 0.0
+          },
+          {
+            "T_Original": 0.016666668,
+            "T_Dilation": 0.018209012
+          },
+          {
+            "T_Original": 0.033333335,
+            "T_Dilation": 0.039084367
+          },
+          {
+            "T_Original": 0.050000004,
+            "T_Dilation": 0.06091833
+          },
+          {
+            "T_Original": 0.06666667,
+            "T_Dilation": 0.08291516
+          },
+          {
+            "T_Original": 0.083333336,
+            "T_Dilation": 0.105074845
+          },
+          {
+            "T_Original": 0.10000001,
+            "T_Dilation": 0.12739739
+          },
+          {
+            "T_Original": 0.116666675,
+            "T_Dilation": 0.14988281
+          },
+          {
+            "T_Original": 0.13333334,
+            "T_Dilation": 0.17253108
+          },
+          {
+            "T_Original": 0.15,
+            "T_Dilation": 0.19534221
+          },
+          {
+            "T_Original": 0.16666667,
+            "T_Dilation": 0.21831621
+          },
+          {
+            "T_Original": 0.18333334,
+            "T_Dilation": 0.24145308
+          },
+          {
+            "T_Original": 0.20000002,
+            "T_Dilation": 0.26448894
+          },
+          {
+            "T_Original": 0.21666668,
+            "T_Dilation": 0.2865073
+          },
+          {
+            "T_Original": 0.23333335,
+            "T_Dilation": 0.3069073
+          },
+          {
+            "T_Original": 0.25,
+            "T_Dilation": 0.32568848
+          },
+          {
+            "T_Original": 0.26666668,
+            "T_Dilation": 0.34299982
+          },
+          {
+            "T_Original": 0.28333336,
+            "T_Dilation": 0.3596665
+          },
+          {
+            "T_Original": 0.3,
+            "T_Dilation": 0.37633318
+          },
+          {
+            "T_Original": 0.3166667,
+            "T_Dilation": 0.39357242
+          },
+          {
+            "T_Original": 0.33333334,
+            "T_Dilation": 0.41199887
+          },
+          {
+            "T_Original": 0.35000002,
+            "T_Dilation": 0.43161237
+          },
+          {
+            "T_Original": 0.36666667,
+            "T_Dilation": 0.45241278
+          },
+          {
+            "T_Original": 0.38333336,
+            "T_Dilation": 0.4743544
+          },
+          {
+            "T_Original": 0.40000004,
+            "T_Dilation": 0.4968544
+          },
+          {
+            "T_Original": 0.4166667,
+            "T_Dilation": 0.5193544
+          },
+          {
+            "T_Original": 0.43333337,
+            "T_Dilation": 0.5418544
+          },
+          {
+            "T_Original": 0.45000002,
+            "T_Dilation": 0.5638482
+          },
+          {
+            "T_Original": 0.4666667,
+            "T_Dilation": 0.58454925
+          },
+          {
+            "T_Original": 0.48333335,
+            "T_Dilation": 0.6036888
+          },
+          {
+            "T_Original": 0.5,
+            "T_Dilation": 0.62126637
+          },
+          {
+            "T_Original": 0.5166667,
+            "T_Dilation": 0.63801557
+          },
+          {
+            "T_Original": 0.53333336,
+            "T_Dilation": 0.6546822
+          },
+          {
+            "T_Original": 0.55,
+            "T_Dilation": 0.67134887
+          },
+          {
+            "T_Original": 0.5666667,
+            "T_Dilation": 0.6880155
+          },
+          {
+            "T_Original": 0.5833334,
+            "T_Dilation": 0.7046822
+          },
+          {
+            "T_Original": 0.6,
+            "T_Dilation": 0.7213488
+          },
+          {
+            "T_Original": 0.6166667,
+            "T_Dilation": 0.7380155
+          },
+          {
+            "T_Original": 0.6333334,
+            "T_Dilation": 0.7546821
+          },
+          {
+            "T_Original": 0.65000004,
+            "T_Dilation": 0.7713488
+          },
+          {
+            "T_Original": 0.6666667,
+            "T_Dilation": 0.7880154
+          },
+          {
+            "T_Original": 0.6833334,
+            "T_Dilation": 0.8046821
+          },
+          {
+            "T_Original": 0.70000005,
+            "T_Dilation": 0.8213487
+          },
+          {
+            "T_Original": 0.7166667,
+            "T_Dilation": 0.8380154
+          },
+          {
+            "T_Original": 0.73333335,
+            "T_Dilation": 0.854682
+          }
+        ],
+        "BakedDilationCurveName": "Dilation"
+      },
+      "Skeleton": {
+        "ObjectName": "Skeleton'C_M_Human_Adult_M_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Model/C_M_Human_Adult_M_Skeleton.15"
+      }
+    },
+    "SkeletonGuid": "DAF13C4E-44F21635-494009B0-96C586C1"
+  },
+  {
+    "Type": "xxAnimNotify_AkEvent",
+    "Name": "xxAnimNotify_AkEvent_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotify_AkEvent'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireSword_UnEquip'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_UnEquip.0"
+    },
+    "Properties": {
+      "Event": {
+        "ObjectName": "AkAudioEvent'efx_empiresword_unequip'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/EmpireSword/efx_empiresword_unequip.0"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_ChangeArmedState",
+    "Name": "xxAnimNotifyState_ChangeArmedState_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_ChangeArmedState'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireSword_UnEquip'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_UnEquip.0"
+    },
+    "Properties": {
+      "IsBegin": true,
+      "BeginInfo": {
+        "ArmedState": "EWeaponArmedState::Unarmed"
+      },
+      "EndInfo": {
+        "ArmedState": "EWeaponArmedState::None"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireSword_UnEquip'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_UnEquip.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "ParticleMode": "MaterialEffect",
+        "EffectData": {
+          "ObjectName": "xxMaterialEffectParticleData'PA_World_Mon_M_Footstep_normal'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_World/Monster/PA_World_Mon_M_Footstep_normal.0"
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-L-Foot"
+      },
+      "bOnlyStartAttach": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  }
+]

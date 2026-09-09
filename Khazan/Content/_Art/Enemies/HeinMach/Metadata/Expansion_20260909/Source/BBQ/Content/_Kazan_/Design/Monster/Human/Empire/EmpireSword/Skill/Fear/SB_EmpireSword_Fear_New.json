@@ -1,0 +1,803 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_EmpireSword_Fear_New_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New",
+    "SuperStruct": {
+      "ObjectName": "Class'xxCommonSimpleSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    }
+  },
+  {
+    "Type": "SB_EmpireSword_Fear_New_C",
+    "Name": "Default__SB_EmpireSword_Fear_New_C",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.SB_EmpireSword_Fear_New_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New",
+    "Properties": {
+      "SubStateInfos": [
+        {
+          "Key": "ESubStateStepByActiveInput::Step2",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step3",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimSequence'CA_M_PicaCoward_Run_F_Fear_Ty3'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Animation/PicaCoward/CA_M_PicaCoward_Run_F_Fear_Ty3.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 4,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTagNavigationMove'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTagNavigationMove_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.16"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSSkillEventFunc_NavMoveUseAnim'Default__SB_EmpireSword_Fear_New_C:xxSSkillEventFunc_NavMoveUseAnim_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.22"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index4",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.9"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeWeaponArmedStateFunc'Default__SB_EmpireSword_Fear_New_C:xxChangeWeaponArmedStateFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.8"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index5",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_13'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.12"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireSword_Fear_New_C:xxChangeNextStepFunc_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.3"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step1",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": null,
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_5'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.15"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSSEventFunc_SetLocTargetPoint'Default__SB_EmpireSword_Fear_New_C:xxSSEventFunc_SetLocTargetPoint_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.21"
+                    },
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireSword_Fear_New_C:xxChangeNextStepFunc_4'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.7"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step3",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Fear_Start'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/AC_EmpireSword_Fear_Start.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.3,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 0,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_11'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.11"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireSword_Fear_New_C:xxChangeNextStepFunc_10'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.4"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.10"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireSword_Fear_New_C:xxChangeNextStepFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.2"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step4",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Fear_Loop_01'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/AC_EmpireSword_Fear_Loop_01.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.3,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_4'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.14"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireSword_Fear_New_C:xxChangeNextStepFunc_2'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.5"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_2'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.13"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireSword_Fear_New_C:xxChangeNextStepFunc_3'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.6"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step5",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step6",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Fear_Suprise'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/AC_EmpireSword_Fear_Suprise.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.3,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step6",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Fear_Battle'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/AC_EmpireSword_Fear_Battle.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.3,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [],
+            "bContinueStepWithNoAnim": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step4"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step5"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_10",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step5"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step4",
+      "bEnableSameStep": true
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_3",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step5"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step2"
+    }
+  },
+  {
+    "Type": "xxChangeWeaponArmedStateFunc",
+    "Name": "xxChangeWeaponArmedStateFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeWeaponArmedStateFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "ArmedState": "EWeaponArmedState::Unarmed"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::StartSubState"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_11",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyTick",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_FindTarget'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_11.xxSimpleSkillTagCondition_FindTarget_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.17"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_NotifyEnable'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_11.xxSimpleSkillTagCondition_NotifyEnable_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.20"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_13",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyTick",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_FindTarget'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_13.xxSimpleSkillTagCondition_FindTarget_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.18"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyTick",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_FindTarget'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_2.xxSimpleSkillTagCondition_FindTarget_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.19"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_5",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::StartSubState"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTagNavigationMove",
+    "Name": "xxSimpleSkillEventTagNavigationMove_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTagNavigationMove'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_FindTarget",
+    "Name": "xxSimpleSkillTagCondition_FindTarget_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_FindTarget'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_11'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.11"
+    },
+    "Properties": {
+      "CheckStateInfo": {
+        "bInstantTarget": true,
+        "InstantTargetTraceInfo": {
+          "bUseCircleTraceInfo": true,
+          "CircleTraceInfo": {
+            "Yaw": 360.0,
+            "RangeMax": 1800.0
+          },
+          "bCheckScreenInSide": false
+        },
+        "bIDLE": false
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_FindTarget",
+    "Name": "xxSimpleSkillTagCondition_FindTarget_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_FindTarget'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_13'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.12"
+    },
+    "Properties": {
+      "CheckStateInfo": {
+        "bInstantTarget": true,
+        "InstantTargetTraceInfo": {
+          "bUseCircleTraceInfo": true,
+          "CircleTraceInfo": {
+            "Yaw": 360.0,
+            "RangeMax": 1200.0
+          },
+          "bCheckScreenInSide": false
+        },
+        "bIDLE": false
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_FindTarget",
+    "Name": "xxSimpleSkillTagCondition_FindTarget_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_FindTarget'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.13"
+    },
+    "Properties": {
+      "CheckStateInfo": {
+        "bInstantTarget": true,
+        "InstantTargetTraceInfo": {
+          "bUseCircleTraceInfo": true,
+          "CircleTraceInfo": {
+            "Yaw": 360.0,
+            "RangeMax": 1800.0
+          },
+          "bCheckScreenInSide": false
+        },
+        "bIDLE": false
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_NotifyEnable",
+    "Name": "xxSimpleSkillTagCondition_NotifyEnable_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_NotifyEnable'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Fear_New_C:xxSimpleSkillEventTag_11'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.11"
+    }
+  },
+  {
+    "Type": "xxSSEventFunc_SetLocTargetPoint",
+    "Name": "xxSSEventFunc_SetLocTargetPoint_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSSEventFunc_SetLocTargetPoint'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "TargetPointTag": "Fear_Run",
+      "bUseSetTargetPoint": true
+    }
+  },
+  {
+    "Type": "xxSSkillEventFunc_NavMoveUseAnim",
+    "Name": "xxSSkillEventFunc_NavMoveUseAnim_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSSkillEventFunc_NavMoveUseAnim'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Fear_New_C'Default__SB_EmpireSword_Fear_New_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SB_EmpireSword_Fear_New.1"
+    },
+    "Properties": {
+      "TargetPointTag": "123",
+      "bUseSkillTargetLocation": true
+    }
+  }
+]

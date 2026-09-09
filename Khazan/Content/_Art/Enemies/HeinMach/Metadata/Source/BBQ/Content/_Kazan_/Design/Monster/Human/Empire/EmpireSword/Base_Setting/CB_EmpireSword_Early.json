@@ -1,0 +1,1888 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "CB_EmpireSword_Early_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early",
+    "Properties": {
+      "SimpleConstructionScript": {
+        "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+      }
+    },
+    "SuperStruct": {
+      "ObjectName": "Class'xxActor'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ChildProperties": [
+      {
+        "Type": "ObjectProperty",
+        "Name": "xxInjuryComponent",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxInjuryComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "xxLockOnSphere",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxLockOnSphereComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "CD_RD_Human_Adult_M_EmpireWounded_001",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "BlueprintGeneratedClass'CD_RD_Human_Adult_M_EmpireWounded_001_C'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Data/RandomLookInfo/Monster_HumanType/CD_RD_Human_Adult_M_EmpireWounded_001.0"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "DBox_Foot_R",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxDamageBoxComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "DBox_Foot_L",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxDamageBoxComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "DBox_Calf_R_2",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxDamageBoxComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "DBox_Calf_R_1",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxDamageBoxComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "DBox_Calf_L_2",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxDamageBoxComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "DBox_Calf_L_1",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxDamageBoxComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "Dbox_Arm_R_2",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxDamageBoxComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "Dbox_Arm_R_1",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxDamageBoxComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "Dbox_Arm_L_2",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxDamageBoxComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "Dbox_Arm_L_1",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxDamageBoxComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "DBox_Spine2",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxDamageBoxComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "DBox_Head",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxDamageBoxComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "Combine_3",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxSkeletalMeshBaseComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "Combine_2",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxSkeletalMeshBaseComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "Combine_1",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxSkeletalMeshBaseComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "Combine_0",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | InstancedReference | NonTransactional",
+        "PropertyClass": {
+          "ObjectName": "Class'xxSkeletalMeshBaseComponent'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      }
+    ],
+    "ClassFlags": "CLASS_Config | CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Game",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    }
+  },
+  {
+    "Type": "CB_EmpireSword_Early_C",
+    "Name": "Default__CB_EmpireSword_Early_C",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.CB_EmpireSword_Early_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early",
+    "Properties": {
+      "StatusComponent": {
+        "ObjectName": "xxStatusComponent'Default__CB_EmpireSword_Early_C:Status'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.58"
+      },
+      "StateComponent": {
+        "ObjectName": "xxStateComponent'Default__CB_EmpireSword_Early_C:State'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.57"
+      },
+      "SpellComponent": {
+        "ObjectName": "xxSpellComponent'Default__CB_EmpireSword_Early_C:Spell'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.56"
+      },
+      "HitComponent": {
+        "ObjectName": "xxHitComponent'Default__CB_EmpireSword_Early_C:Hit'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.42"
+      },
+      "StatusEffectComponent": {
+        "ObjectName": "xxStatusEffectComponent'Default__CB_EmpireSword_Early_C:StatusEffect'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.59"
+      },
+      "TimeDelayComponent": {
+        "ObjectName": "xxTimeDelayComponent'Default__CB_EmpireSword_Early_C:TimeDelay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.61"
+      },
+      "xxInputComponent": {
+        "ObjectName": "xxInputComponent'Default__CB_EmpireSword_Early_C:Input'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.45"
+      },
+      "xxSkeletalMeshComponent": {
+        "ObjectName": "xxSkeletalMeshComponent'Default__CB_EmpireSword_Early_C:CharacterMesh0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.53"
+      },
+      "xxMovementComponent": {
+        "ObjectName": "xxCharacterMovementComponent'Default__CB_EmpireSword_Early_C:CharMoveComp'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.28"
+      },
+      "TargetTraceComponent": {
+        "ObjectName": "xxTargetTraceComponent'Default__CB_EmpireSword_Early_C:TargetTrace'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.60"
+      },
+      "WeaponManagerComponent": {
+        "ObjectName": "xxWeaponManagerComponent'Default__CB_EmpireSword_Early_C:WeaponManager'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.62"
+      },
+      "xxAttachComponent": {
+        "ObjectName": "xxAttachComponent'Default__CB_EmpireSword_Early_C:xxAttachComponent'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.27"
+      },
+      "xxSpawnEffectComponent": {
+        "ObjectName": "xxSpawnEffectComponent'Default__CB_EmpireSword_Early_C:SpawnEffectComponent'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.55"
+      },
+      "xxInteractionComponent": {
+        "ObjectName": "xxInteractionComponent'Default__CB_EmpireSword_Early_C:InteractionComponent'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.46"
+      },
+      "xxHoldAttachComponent": {
+        "ObjectName": "xxHoldAttachComponent'Default__CB_EmpireSword_Early_C:xxHoldAttachComponent'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.43"
+      },
+      "AkComponent": {
+        "ObjectName": "xxAkComponent'Default__CB_EmpireSword_Early_C:CppCreatedxxAkComponent'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.26"
+      },
+      "xxRPCComponent": {
+        "ObjectName": "xxRPCComponent'Default__CB_EmpireSword_Early_C:xxRPC'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.48"
+      },
+      "Scale": 1.2,
+      "CharacterHeightType": "ECharacterHeightType::Normal",
+      "CharacterWeightType": "EBodyWeightType::Normal",
+      "bParticipateBattleBGM": false,
+      "AnimationBlueprint": {
+        "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireSword_C'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/AB_EmpireSword.2"
+      },
+      "AnimationProfiles": [
+        {
+          "Key": "EAnimationState::Battle",
+          "Value": {
+            "ObjectName": "xxAnimationProfile'AP_EmpireSword'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/AP_EmpireSword.0"
+          }
+        }
+      ],
+      "IdleStateClass": {
+        "ObjectName": "BlueprintGeneratedClass'SB_EmpireSword_Move_C'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Move/SB_EmpireSword_Move.0"
+      },
+      "DamageStateClass": {
+        "ObjectName": "BlueprintGeneratedClass'Common_Damage_Guts_C'",
+        "ObjectPath": "BBQ/Content/_Common/State/Common_Damage_Guts.115"
+      },
+      "DeadStateClass": {
+        "ObjectName": "BlueprintGeneratedClass'SB_Common_Dead_C'",
+        "ObjectPath": "BBQ/Content/_Common/State/SB_Common_Dead.26"
+      },
+      "FallingStateClass": {
+        "ObjectName": "BlueprintGeneratedClass'Common_Falling_C'",
+        "ObjectPath": "BBQ/Content/_Common/State/Common_Falling.0"
+      },
+      "StatusProfile": {
+        "ObjectName": "xxStatusProfile'CS_EmpireSword'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CS_EmpireSword.0"
+      },
+      "AIDataAsset": {
+        "ObjectName": "xxAIData'AI_EmpireSword_Early'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/AI_EmpireSword_Early.0"
+      },
+      "DamageLayerSound": {
+        "ObjectName": "AkAudioEvent'efx_pc_enemy_hit_leather'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/Player_Hit/efx_pc_enemy_hit_leather.0"
+      },
+      "DieVoice": {
+        "ObjectName": "AkAudioEvent'vo_empiresword_die'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/EmpireSword/vo_empiresword_die.0"
+      },
+      "SpecialDieVoice": [
+        {
+          "Key": "ESpecialDieVoice::InTheWeakByJavelin",
+          "Value": null
+        }
+      ],
+      "FootStepEvent": {
+        "ObjectName": "AkAudioEvent'efx_empiresword_footstep'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/EmpireSword/efx_empiresword_footstep.0"
+      },
+      "bStartSpellData": true,
+      "FacialGroupAsset": {
+        "ObjectName": "xxFacialGroupInfo'CF_Human_Adult_M_Tensity_GroupData'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Facial/GroupData/CF_Human_Adult_M_Tensity_GroupData.0"
+      },
+      "DefaultDefaultWeaponSlots": [
+        {
+          "ObjectName": "xxWeaponSlot'WS_EmpireSword_Early_Equip'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/WS_EmpireSword_Early_Equip.0"
+        }
+      ],
+      "DefaultSkillList": [
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_Early_Slash'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Slash/Early/SI_EmpireSword_Early_Slash.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_Early_Smash'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SI_EmpireSword_Early_Smash.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_RushAttack'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/RushAttack/SI_EmpireSword_RushAttack.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_Peace'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Peace/SI_EmpireSword_Peace.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_WeaponEquip'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/SI_EmpireSword_WeaponEquip.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_WeaponUnEquip'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/SI_EmpireSword_WeaponUnEquip.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_ClimbingLadder'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/Climbing/SI_EmpireSword_ClimbingLadder.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_Passive_InputCounter'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Passive_InputCounter/SI_EmpireSword_Passive_InputCounter.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_RushAttack_DistroyObject'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/RushAttack/SI_EmpireSword_RushAttack_DistroyObject.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_Sequence'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/LevelSequence/SI_Sequence.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_RushAttack_Tutorial'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/RushAttack/SI_EmpireSword_RushAttack_Tutorial.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_RushAttack_Start_Combat'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/RushAttack/SI_EmpireSword_RushAttack_Start_Combat.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_Fear'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Fear/SI_EmpireSword_Fear.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_Vigilant_FreakOut_Armed'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_Armed/SI_EmpireSword_Vigilant_FreakOut_Armed.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_Vigilant_FreakOut_UnArmed'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/SI_EmpireSword_Vigilant_FreakOut_UnArmed.0"
+        },
+        {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_Vigilant_LookAround'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/LookAround/SI_EmpireSword_Vigilant_LookAround.0"
+        }
+      ],
+      "MaterialForSound": "EArmorMaterialType::Gore",
+      "bUseRotToTargetLockOnSphereLocation": true,
+      "SurfaceTrailInfo": {
+        "ObjectName": "xxSurfaceTrailInfo'SurfaceTrailInfo_Human'",
+        "ObjectPath": "BBQ/Content/Art/Character/CHA_Data/SurfaceTrailInfo/SurfaceTrailInfo_Human.0"
+      },
+      "bIsUseFootStepSoundInfo": true,
+      "FootStepSoundInfo": {
+        "ObjectName": "xxFootStepSoundInfo'Monster_Human_Footstep_info'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Footstep_info/Monster_Human_Footstep_info.0"
+      },
+      "Mesh": {
+        "ObjectName": "xxSkeletalMeshComponent'Default__CB_EmpireSword_Early_C:CharacterMesh0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.53"
+      },
+      "CharacterMovement": {
+        "ObjectName": "xxCharacterMovementComponent'Default__CB_EmpireSword_Early_C:CharMoveComp'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.28"
+      },
+      "CapsuleComponent": {
+        "ObjectName": "CapsuleComponent'Default__CB_EmpireSword_Early_C:CollisionCylinder'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.2"
+      },
+      "RootComponent": {
+        "ObjectName": "CapsuleComponent'Default__CB_EmpireSword_Early_C:CollisionCylinder'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.2"
+      }
+    }
+  },
+  {
+    "Type": "CapsuleComponent",
+    "Name": "CollisionCylinder",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'CapsuleComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    },
+    "Properties": {
+      "CapsuleHalfHeight": 85.0,
+      "CapsuleRadius": 32.0
+    }
+  },
+  {
+    "Type": "CD_RD_Human_Adult_M_EmpireWounded_001_C",
+    "Name": "CD_RD_Human_Adult_M_EmpireWounded_001_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Art/Character/CHA_Data/RandomLookInfo/Monster_HumanType/CD_RD_Human_Adult_M_EmpireWounded_001.CD_RD_Human_Adult_M_EmpireWounded_001_C'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Template": {
+      "ObjectName": "CD_RD_Human_Adult_M_EmpireWounded_001_C'Default__CD_RD_Human_Adult_M_EmpireWounded_001_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Data/RandomLookInfo/Monster_HumanType/CD_RD_Human_Adult_M_EmpireWounded_001.1"
+    }
+  },
+  {
+    "Type": "SceneComponent",
+    "Name": "DefaultSceneRoot_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SceneComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'SceneComponent'",
+        "ObjectPath": "/Script/Engine"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "SceneComponent'CB_EmpireSword_Early_C:DefaultSceneRoot_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.4"
+      },
+      "VariableGuid": "1A63B590-4643CBD5-CC7816AD-DCA8E551",
+      "InternalVariableName": "DefaultSceneRoot"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxDamageBoxComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxDamageBoxComponent'CB_EmpireSword_Early_C:Dbox_Arm_L_1_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.30"
+      },
+      "AttachToName": "Bip001-L-UpperArm",
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "136F1C06-4A0A7037-D80ADFA3-AF91B0FC",
+      "InternalVariableName": "Dbox_Arm_L_1"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_10",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxInjuryComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxInjuryComponent'CB_EmpireSword_Early_C:xxInjuryComponent_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.44"
+      },
+      "VariableGuid": "DCA65D3A-48DF3A15-BC80529F-D3FC806C",
+      "InternalVariableName": "xxInjuryComponent"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_11",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxDamageBoxComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxDamageBoxComponent'CB_EmpireSword_Early_C:Dbox_Arm_L_2_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.31"
+      },
+      "AttachToName": "Bip001-L-Hand",
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "001D4783-474AC4C7-01BF898C-B5404132",
+      "InternalVariableName": "Dbox_Arm_L_2"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_12",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxDamageBoxComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxDamageBoxComponent'CB_EmpireSword_Early_C:Dbox_Arm_R_1_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.32"
+      },
+      "AttachToName": "Bip001-R-UpperArm",
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "1BBF002F-44CAA85C-3ADC94A1-A701186F",
+      "InternalVariableName": "Dbox_Arm_R_1"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_13",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxDamageBoxComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxDamageBoxComponent'CB_EmpireSword_Early_C:Dbox_Arm_R_2_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.33"
+      },
+      "AttachToName": "Bip001-R-Hand",
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "3D828C8D-4AD02FDF-8FD23B9C-6D61508C",
+      "InternalVariableName": "Dbox_Arm_R_2"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_14",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxDamageBoxComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxDamageBoxComponent'CB_EmpireSword_Early_C:DBox_Calf_L_1_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.34"
+      },
+      "AttachToName": "Bip001-L-Calf",
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "9BF36AE7-4BD70CB1-2CE12390-919B5D94",
+      "InternalVariableName": "DBox_Calf_L_1"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_15",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxDamageBoxComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxDamageBoxComponent'CB_EmpireSword_Early_C:DBox_Calf_L_2_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.35"
+      },
+      "AttachToName": "Bip001-L-Calf",
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "3B18598B-493C76AC-BD84C799-45263626",
+      "InternalVariableName": "DBox_Calf_L_2"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_16",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxDamageBoxComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxDamageBoxComponent'CB_EmpireSword_Early_C:DBox_Calf_R_1_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.36"
+      },
+      "AttachToName": "Bip001-R-Calf",
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "C9B5F563-41EB80E3-4D1E53BC-002FF633",
+      "InternalVariableName": "DBox_Calf_R_1"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_17",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxDamageBoxComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxDamageBoxComponent'CB_EmpireSword_Early_C:DBox_Calf_R_2_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.37"
+      },
+      "AttachToName": "Bip001-R-Calf",
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "C3ADDEB8-4E984924-F81F8692-8E9E0D9C",
+      "InternalVariableName": "DBox_Calf_R_2"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_18",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxDamageBoxComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxDamageBoxComponent'CB_EmpireSword_Early_C:DBox_Foot_L_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.38"
+      },
+      "AttachToName": "Bip001-L-Foot",
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "AD654DD2-47512EDD-C54A25BA-4E1BA5A0",
+      "InternalVariableName": "DBox_Foot_L"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_19",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxDamageBoxComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxDamageBoxComponent'CB_EmpireSword_Early_C:DBox_Foot_R_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.39"
+      },
+      "AttachToName": "Bip001-R-Foot",
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "64207BCB-4EFB949B-1D5CAFBA-E56C2510",
+      "InternalVariableName": "DBox_Foot_R"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "BlueprintGeneratedClass'CD_RD_Human_Adult_M_EmpireWounded_001_C'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Data/RandomLookInfo/Monster_HumanType/CD_RD_Human_Adult_M_EmpireWounded_001.0"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "CD_RD_Human_Adult_M_EmpireWounded_001_C'CB_EmpireSword_Early_C:CD_RD_Human_Adult_M_EmpireWounded_001_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.3"
+      },
+      "VariableGuid": "CF4C03DC-42C9C5A7-1522419A-1220B8E9",
+      "InternalVariableName": "CD_RD_Human_Adult_M_EmpireWounded_001"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_3",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxSkeletalMeshBaseComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxSkeletalMeshBaseComponent'CB_EmpireSword_Early_C:Combine_0_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.49"
+      },
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "0D3C9DD1-4C3409F3-BFF3EB94-D62AE4FF",
+      "InternalVariableName": "Combine_0"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_4",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxSkeletalMeshBaseComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxSkeletalMeshBaseComponent'CB_EmpireSword_Early_C:Combine_1_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.50"
+      },
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "25CA2991-40C5CECA-D8FDC296-6BC9B0F5",
+      "InternalVariableName": "Combine_1"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_5",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxSkeletalMeshBaseComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxSkeletalMeshBaseComponent'CB_EmpireSword_Early_C:Combine_2_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.51"
+      },
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "52D92549-46805D35-DDB5F3B4-022ACC45",
+      "InternalVariableName": "Combine_2"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_6",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxSkeletalMeshBaseComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxSkeletalMeshBaseComponent'CB_EmpireSword_Early_C:Combine_3_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.52"
+      },
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "903BAF89-466EDBCD-4D88A8AD-3339C08D",
+      "InternalVariableName": "Combine_3"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_7",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxDamageBoxComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxDamageBoxComponent'CB_EmpireSword_Early_C:DBox_Head_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.40"
+      },
+      "AttachToName": "Bip001-Head",
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "VariableGuid": "457176A8-4E77D34A-5D864B83-86F07B2A",
+      "InternalVariableName": "DBox_Head"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_8",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxDamageBoxComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxDamageBoxComponent'CB_EmpireSword_Early_C:DBox_Spine2_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.41"
+      },
+      "AttachToName": "Bip001-Spine2",
+      "ParentComponentOrVariableName": "CharacterMesh0",
+      "bIsParentComponentNative": true,
+      "ChildNodes": [
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_9'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.24"
+        }
+      ],
+      "VariableGuid": "2AB542A6-4411E4D3-220FECB3-96B86413",
+      "InternalVariableName": "DBox_Spine2"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_9",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CB_EmpireSword_Early_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.25"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'xxLockOnSphereComponent'",
+        "ObjectPath": "/Script/BBQ"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "xxLockOnSphereComponent'CB_EmpireSword_Early_C:xxLockOnSphere_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.47"
+      },
+      "VariableGuid": "BC32D8A0-40F5465E-3460EEBE-F87DFC89",
+      "InternalVariableName": "xxLockOnSphere"
+    }
+  },
+  {
+    "Type": "SimpleConstructionScript",
+    "Name": "SimpleConstructionScript_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SimpleConstructionScript'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "RootNodes": [
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_3'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.18"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_4'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.19"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_5'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.20"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_6'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.21"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_7'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.22"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_8'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.23"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.6"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_11'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.8"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_12'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.9"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_13'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.10"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_14'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.11"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_15'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.12"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_16'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.13"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_17'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.14"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_18'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.15"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_19'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.16"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_2'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.17"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_10'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.7"
+        }
+      ],
+      "AllNodes": [
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_3'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.18"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_4'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.19"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_5'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.20"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_6'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.21"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_7'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.22"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_8'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.23"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.6"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_11'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.8"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_12'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.9"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_13'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.10"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_14'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.11"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_15'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.12"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_16'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.13"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_17'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.14"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_18'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.15"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_19'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.16"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_2'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.17"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_9'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.24"
+        },
+        {
+          "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_10'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.7"
+        }
+      ],
+      "DefaultSceneRootNode": {
+        "ObjectName": "SCS_Node'CB_EmpireSword_Early_C:SimpleConstructionScript_0.SCS_Node_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.5"
+      }
+    }
+  },
+  {
+    "Type": "xxAkComponent",
+    "Name": "CppCreatedxxAkComponent",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAkComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    },
+    "Properties": {
+      "AttachParent": {
+        "ObjectName": "CapsuleComponent'Default__CB_EmpireSword_Early_C:CollisionCylinder'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.2"
+      }
+    }
+  },
+  {
+    "Type": "xxAttachComponent",
+    "Name": "xxAttachComponent",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAttachComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    }
+  },
+  {
+    "Type": "xxCharacterMovementComponent",
+    "Name": "CharMoveComp",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxCharacterMovementComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    },
+    "Properties": {
+      "FallingLimitOffset": 150.0
+    }
+  },
+  {
+    "Type": "xxComboManager",
+    "Name": "ComboManager",
+    "Flags": "RF_Public | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxComboManager'",
+    "Outer": {
+      "ObjectName": "xxStateComponent'Default__CB_EmpireSword_Early_C:State'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.57"
+    }
+  },
+  {
+    "Type": "xxDamageBoxComponent",
+    "Name": "Dbox_Arm_L_1_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageBoxComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "BodyInstance": {
+        "PhysMaterialOverride": {
+          "ObjectName": "PhysicalMaterial'PM_Flesh'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicalMaterial/PM_Flesh.0"
+        }
+      },
+      "RelativeLocation": {
+        "X": 11.05059,
+        "Y": -0.0001302382,
+        "Z": -1.0679165E-06
+      },
+      "RelativeScale3D": {
+        "X": 0.5,
+        "Y": 0.2,
+        "Z": 0.25
+      }
+    }
+  },
+  {
+    "Type": "xxDamageBoxComponent",
+    "Name": "Dbox_Arm_L_2_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageBoxComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "BodyInstance": {
+        "PhysMaterialOverride": {
+          "ObjectName": "PhysicalMaterial'PM_Flesh'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicalMaterial/PM_Flesh.0"
+        }
+      },
+      "RelativeLocation": {
+        "X": -9.856247,
+        "Y": 0.005821591,
+        "Z": -1.3946456
+      },
+      "RelativeRotation": {
+        "Pitch": 0.0,
+        "Yaw": 2.1771217E-05,
+        "Roll": 0.0
+      },
+      "RelativeScale3D": {
+        "X": 0.65,
+        "Y": 0.2,
+        "Z": 0.2
+      }
+    }
+  },
+  {
+    "Type": "xxDamageBoxComponent",
+    "Name": "Dbox_Arm_R_1_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageBoxComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "BodyInstance": {
+        "PhysMaterialOverride": {
+          "ObjectName": "PhysicalMaterial'PM_Flesh'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicalMaterial/PM_Flesh.0"
+        }
+      },
+      "RelativeLocation": {
+        "X": 9.739677,
+        "Y": 8.1E-05,
+        "Z": -8.1E-05
+      },
+      "RelativeScale3D": {
+        "X": 0.6,
+        "Y": 0.2,
+        "Z": 0.25
+      }
+    }
+  },
+  {
+    "Type": "xxDamageBoxComponent",
+    "Name": "Dbox_Arm_R_2_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageBoxComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "BodyInstance": {
+        "PhysMaterialOverride": {
+          "ObjectName": "PhysicalMaterial'PM_Flesh'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicalMaterial/PM_Flesh.0"
+        }
+      },
+      "RelativeLocation": {
+        "X": -7.764817,
+        "Y": 0.00051709474,
+        "Z": -2.4761662
+      },
+      "RelativeRotation": {
+        "Pitch": 14.999996,
+        "Yaw": 2.7892977E-06,
+        "Roll": 1.3888158E-05
+      },
+      "RelativeScale3D": {
+        "X": 0.5,
+        "Y": 0.2,
+        "Z": 0.2
+      }
+    }
+  },
+  {
+    "Type": "xxDamageBoxComponent",
+    "Name": "DBox_Calf_L_1_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageBoxComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "BodyInstance": {
+        "PhysMaterialOverride": {
+          "ObjectName": "PhysicalMaterial'PM_Flesh'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicalMaterial/PM_Flesh.0"
+        }
+      },
+      "RelativeLocation": {
+        "X": -7.2528286,
+        "Y": 14.581166,
+        "Z": 1.748585E-05
+      },
+      "RelativeRotation": {
+        "Pitch": 2.0490566E-05,
+        "Yaw": -49.999847,
+        "Roll": 4.8853317E-12
+      },
+      "RelativeScale3D": {
+        "X": 0.6,
+        "Y": 0.3,
+        "Z": 0.3
+      }
+    }
+  },
+  {
+    "Type": "xxDamageBoxComponent",
+    "Name": "DBox_Calf_L_2_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageBoxComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "BodyInstance": {
+        "PhysMaterialOverride": {
+          "ObjectName": "PhysicalMaterial'PM_Flesh'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicalMaterial/PM_Flesh.0"
+        }
+      },
+      "RelativeLocation": {
+        "X": 23.455914,
+        "Y": 1.9619251,
+        "Z": -9.168714E-06
+      },
+      "RelativeRotation": {
+        "Pitch": 6.830189E-06,
+        "Yaw": -5.0000744,
+        "Roll": 4.967271E-06
+      },
+      "RelativeScale3D": {
+        "X": 0.75,
+        "Y": 0.3,
+        "Z": 0.3
+      }
+    }
+  },
+  {
+    "Type": "xxDamageBoxComponent",
+    "Name": "DBox_Calf_R_1_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageBoxComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "BodyInstance": {
+        "PhysMaterialOverride": {
+          "ObjectName": "PhysicalMaterial'PM_Flesh'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicalMaterial/PM_Flesh.0"
+        }
+      },
+      "RelativeLocation": {
+        "X": -7.1862273,
+        "Y": 15.472868,
+        "Z": 0.00019533485
+      },
+      "RelativeRotation": {
+        "Pitch": 0.0,
+        "Yaw": -60.0,
+        "Roll": 0.0
+      },
+      "RelativeScale3D": {
+        "X": 0.6,
+        "Y": 0.3,
+        "Z": 0.3
+      }
+    }
+  },
+  {
+    "Type": "xxDamageBoxComponent",
+    "Name": "DBox_Calf_R_2_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageBoxComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "BodyInstance": {
+        "PhysMaterialOverride": {
+          "ObjectName": "PhysicalMaterial'PM_Flesh'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicalMaterial/PM_Flesh.0"
+        }
+      },
+      "RelativeLocation": {
+        "X": 24.031517,
+        "Y": 3.371036,
+        "Z": 0.0002917707
+      },
+      "RelativeScale3D": {
+        "X": 0.75,
+        "Y": 0.3,
+        "Z": 0.3
+      }
+    }
+  },
+  {
+    "Type": "xxDamageBoxComponent",
+    "Name": "DBox_Foot_L_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageBoxComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "BodyInstance": {
+        "PhysMaterialOverride": {
+          "ObjectName": "PhysicalMaterial'PM_Flesh'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicalMaterial/PM_Flesh.0"
+        }
+      },
+      "RelativeLocation": {
+        "X": 3.9301896,
+        "Y": -6.3186164,
+        "Z": 0.00016282625
+      },
+      "RelativeRotation": {
+        "Pitch": 0.0,
+        "Yaw": 5.293395E-05,
+        "Roll": 0.0
+      },
+      "RelativeScale3D": {
+        "X": 0.2,
+        "Y": 0.5,
+        "Z": 0.3
+      }
+    }
+  },
+  {
+    "Type": "xxDamageBoxComponent",
+    "Name": "DBox_Foot_R_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageBoxComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "BodyInstance": {
+        "PhysMaterialOverride": {
+          "ObjectName": "PhysicalMaterial'PM_Flesh'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicalMaterial/PM_Flesh.0"
+        }
+      },
+      "RelativeLocation": {
+        "X": 4.3589196,
+        "Y": -7.878528,
+        "Z": -2.194898E-05
+      },
+      "RelativeScale3D": {
+        "X": 0.2,
+        "Y": 0.5,
+        "Z": 0.3
+      }
+    }
+  },
+  {
+    "Type": "xxDamageBoxComponent",
+    "Name": "DBox_Head_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageBoxComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "DefenseGroup": "EGrDefenseGroup::Group1",
+      "bWeakPointDamgeBox": true,
+      "Color": {
+        "R": 0.8962693,
+        "G": 0.33245152,
+        "B": 0.006048833,
+        "A": 1.0,
+        "Hex": "F39C12"
+      },
+      "BodyInstance": {
+        "PhysMaterialOverride": {
+          "ObjectName": "PhysicalMaterial'PM_Flesh'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicalMaterial/PM_Flesh.0"
+        }
+      },
+      "RelativeLocation": {
+        "X": 8.336181,
+        "Y": -0.9166356,
+        "Z": 3.4018842E-06
+      },
+      "RelativeScale3D": {
+        "X": 0.35,
+        "Y": 0.35,
+        "Z": 0.3
+      }
+    }
+  },
+  {
+    "Type": "xxDamageBoxComponent",
+    "Name": "DBox_Spine2_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageBoxComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "BodyInstance": {
+        "PhysMaterialOverride": {
+          "ObjectName": "PhysicalMaterial'PM_Flesh'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicalMaterial/PM_Flesh.0"
+        }
+      },
+      "RelativeLocation": {
+        "X": -2.4880908,
+        "Y": -3.1309006,
+        "Z": 1.1894403
+      },
+      "RelativeRotation": {
+        "Pitch": 3.4150944E-05,
+        "Yaw": 15.0001,
+        "Roll": 7.5432454E-06
+      },
+      "RelativeScale3D": {
+        "X": 1.1,
+        "Y": 0.38,
+        "Z": 0.5
+      }
+    }
+  },
+  {
+    "Type": "xxHitComponent",
+    "Name": "Hit",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxHitComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    }
+  },
+  {
+    "Type": "xxHoldAttachComponent",
+    "Name": "xxHoldAttachComponent",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxHoldAttachComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    }
+  },
+  {
+    "Type": "xxInjuryComponent",
+    "Name": "xxInjuryComponent_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxInjuryComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    }
+  },
+  {
+    "Type": "xxInputComponent",
+    "Name": "Input",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxInputComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    }
+  },
+  {
+    "Type": "xxInteractionComponent",
+    "Name": "InteractionComponent",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxInteractionComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    }
+  },
+  {
+    "Type": "xxLockOnSphereComponent",
+    "Name": "xxLockOnSphere_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxLockOnSphereComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "RelativeLocation": {
+        "X": -9.964111,
+        "Y": -1.1901322E-05,
+        "Z": -4.798174E-06
+      }
+    }
+  },
+  {
+    "Type": "xxRPCComponent",
+    "Name": "xxRPC",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxRPCComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    }
+  },
+  {
+    "Type": "xxSkeletalMeshBaseComponent",
+    "Name": "Combine_0_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkeletalMeshBaseComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "bCastCapsuleIndirectShadow": true,
+      "CapsuleIndirectShadowMinVisibility": 0.75,
+      "bReceivesDecals": false,
+      "bUseAttachParentBound": true
+    }
+  },
+  {
+    "Type": "xxSkeletalMeshBaseComponent",
+    "Name": "Combine_1_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkeletalMeshBaseComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "bCastCapsuleIndirectShadow": true,
+      "CapsuleIndirectShadowMinVisibility": 0.75,
+      "bReceivesDecals": false,
+      "bUseAttachParentBound": true
+    }
+  },
+  {
+    "Type": "xxSkeletalMeshBaseComponent",
+    "Name": "Combine_2_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkeletalMeshBaseComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "bCastCapsuleIndirectShadow": true,
+      "CapsuleIndirectShadowMinVisibility": 0.75,
+      "bReceivesDecals": false,
+      "bUseAttachParentBound": true
+    }
+  },
+  {
+    "Type": "xxSkeletalMeshBaseComponent",
+    "Name": "Combine_3_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkeletalMeshBaseComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.0"
+    },
+    "Properties": {
+      "bCastCapsuleIndirectShadow": true,
+      "CapsuleIndirectShadowMinVisibility": 0.75,
+      "bReceivesDecals": false,
+      "bUseAttachParentBound": true
+    }
+  },
+  {
+    "Type": "xxSkeletalMeshComponent",
+    "Name": "CharacterMesh0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkeletalMeshComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    },
+    "Properties": {
+      "OnAnimInitialized": {
+        "InvocationList": [
+          {
+            "Object": {
+              "ObjectName": "xxSkeletalMeshComponent'Default__CB_EmpireSword_Early_C:CharacterMesh0'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.53"
+            },
+            "FunctionName": "AnimInitialized"
+          }
+        ]
+      },
+      "SkeletalMesh": {
+        "ObjectName": "SkeletalMesh'C_M_Human_Adult_M_EmptyMesh'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Model/C_M_Human_Adult_M_EmptyMesh.0"
+      },
+      "AttachParent": {
+        "ObjectName": "CapsuleComponent'Default__CB_EmpireSword_Early_C:CollisionCylinder'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.2"
+      },
+      "RelativeLocation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": -85.0
+      },
+      "RelativeRotation": {
+        "Pitch": 0.0,
+        "Yaw": -90.0,
+        "Roll": 0.0
+      }
+    }
+  },
+  {
+    "Type": "xxSkillStateManager",
+    "Name": "SkillManager",
+    "Flags": "RF_Public | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillStateManager'",
+    "Outer": {
+      "ObjectName": "xxStateComponent'Default__CB_EmpireSword_Early_C:State'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.57"
+    }
+  },
+  {
+    "Type": "xxSpawnEffectComponent",
+    "Name": "SpawnEffectComponent",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSpawnEffectComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    }
+  },
+  {
+    "Type": "xxSpellComponent",
+    "Name": "Spell",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSpellComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    }
+  },
+  {
+    "Type": "xxStateComponent",
+    "Name": "State",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxStateComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    },
+    "Properties": {
+      "SkillStateManager": {
+        "ObjectName": "xxSkillStateManager'Default__CB_EmpireSword_Early_C:State.SkillManager'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.54"
+      },
+      "ComboManager": {
+        "ObjectName": "xxComboManager'Default__CB_EmpireSword_Early_C:State.ComboManager'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.29"
+      }
+    }
+  },
+  {
+    "Type": "xxStatusComponent",
+    "Name": "Status",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxStatusComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    }
+  },
+  {
+    "Type": "xxStatusEffectComponent",
+    "Name": "StatusEffect",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxStatusEffectComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    }
+  },
+  {
+    "Type": "xxTargetTraceComponent",
+    "Name": "TargetTrace",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxTargetTraceComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    }
+  },
+  {
+    "Type": "xxTimeDelayComponent",
+    "Name": "TimeDelay",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxTimeDelayComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    }
+  },
+  {
+    "Type": "xxWeaponManagerComponent",
+    "Name": "WeaponManager",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxWeaponManagerComponent'",
+    "Outer": {
+      "ObjectName": "CB_EmpireSword_Early_C'Default__CB_EmpireSword_Early_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.1"
+    }
+  }
+]

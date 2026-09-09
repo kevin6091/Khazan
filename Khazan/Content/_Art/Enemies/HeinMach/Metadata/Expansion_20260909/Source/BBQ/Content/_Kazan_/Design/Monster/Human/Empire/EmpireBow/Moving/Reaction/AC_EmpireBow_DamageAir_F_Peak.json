@@ -1,0 +1,97 @@
+[
+  {
+    "Type": "AnimComposite",
+    "Name": "AC_EmpireBow_DamageAir_F_Peak",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimComposite'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/Reaction/AC_EmpireBow_DamageAir_F_Peak",
+    "Properties": {
+      "AnimationTrack": {
+        "AnimSegments": [
+          {
+            "AnimReference": {
+              "ObjectName": "AnimSequence'CA_M_EmpBow_DamageAir_F'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Animation/EmpireBow/CA_M_EmpBow_DamageAir_F.0"
+            },
+            "StartPos": 0.0,
+            "AnimStartTime": 0.1671,
+            "AnimEndTime": 0.2671,
+            "AnimPlayRate": 1.0,
+            "LoopingCount": 1
+          }
+        ]
+      },
+      "Notifies": [
+        {
+          "TriggerTimeOffset": 0.0001,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxChangingFacial",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_ChangingFacial'AC_EmpireBow_DamageAir_F_Peak:xxAnimNotifyState_ChangingFacial_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/Reaction/AC_EmpireBow_DamageAir_F_Peak.1"
+          },
+          "Duration": 0.10000001,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.10000001,
+            "LinkValue": 0.10000001,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireBow_DamageAir_F_Peak'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/Reaction/AC_EmpireBow_DamageAir_F_Peak.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.10000001,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireBow_DamageAir_F_Peak'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/Reaction/AC_EmpireBow_DamageAir_F_Peak.0"
+          }
+        }
+      ],
+      "SequenceLength": 0.10000001,
+      "Skeleton": {
+        "ObjectName": "Skeleton'C_M_Human_Adult_M_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Model/C_M_Human_Adult_M_Skeleton.15"
+      }
+    },
+    "SkeletonGuid": "DAF13C4E-44F21635-494009B0-96C586C1"
+  },
+  {
+    "Type": "xxAnimNotifyState_ChangingFacial",
+    "Name": "xxAnimNotifyState_ChangingFacial_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_ChangingFacial'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireBow_DamageAir_F_Peak'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/Reaction/AC_EmpireBow_DamageAir_F_Peak.0"
+    },
+    "Properties": {
+      "FacialInfo": {
+        "ObjectName": "xxFacialGroupInfo'CF_Human_Adult_M_Damage_GroupData'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Facial/GroupData/CF_Human_Adult_M_Damage_GroupData.0"
+      },
+      "bInstantFacial": true
+    }
+  }
+]

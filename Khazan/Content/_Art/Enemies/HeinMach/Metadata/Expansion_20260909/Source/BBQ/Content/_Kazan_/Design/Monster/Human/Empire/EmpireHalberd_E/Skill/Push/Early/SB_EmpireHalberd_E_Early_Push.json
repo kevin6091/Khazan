@@ -1,0 +1,483 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_EmpireHalberd_E_Early_Push_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push",
+    "SuperStruct": {
+      "ObjectName": "Class'xxCommonSimpleSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_Push_C'Default__SB_EmpireHalberd_E_Early_Push_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.1"
+    }
+  },
+  {
+    "Type": "SB_EmpireHalberd_E_Early_Push_C",
+    "Name": "Default__SB_EmpireHalberd_E_Early_Push_C",
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.SB_EmpireHalberd_E_Early_Push_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push",
+    "Properties": {
+      "SubStateInfos": [
+        {
+          "Key": "ESubStateStepByActiveInput::Step1",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Early_Push_01'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/AC_EmpireHalberd_E_Early_Push_01.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.5"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireHalberd_E_Early_Push_C:xxChangeNextStepFunc_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.3"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index16",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_3'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.7"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSSEventFunc_JustGuardIncreaseStamina'Default__SB_EmpireHalberd_E_Early_Push_C:xxSSEventFunc_JustGuardIncreaseStamina_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.14"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step2",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Early_Push_02'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/AC_EmpireHalberd_E_Early_Push_02.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.4,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index16",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_4'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.8"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSSEventFunc_JustGuardIncreaseStamina'Default__SB_EmpireHalberd_E_Early_Push_C:xxSSEventFunc_JustGuardIncreaseStamina_2'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.15"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step3",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Push_01'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/AC_EmpireHalberd_E_Push_01.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.4,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.4"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireHalberd_E_Early_Push_C:xxChangeNextStepFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.2"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index16",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_2'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.6"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSSEventFunc_JustGuardIncreaseStamina'Default__SB_EmpireHalberd_E_Early_Push_C:xxSSEventFunc_JustGuardIncreaseStamina_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.13"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_Push_C'Default__SB_EmpireHalberd_E_Early_Push_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step2"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_Push_C'Default__SB_EmpireHalberd_E_Early_Push_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step2"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_Push_C'Default__SB_EmpireHalberd_E_Early_Push_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_AttackSuccess'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_0.xxSimpleSkillTagCondition_AttackSuccess_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.9"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_0.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.11"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_Push_C'Default__SB_EmpireHalberd_E_Early_Push_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_AttackSuccess'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_AttackSuccess_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.10"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.12"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_Push_C'Default__SB_EmpireHalberd_E_Early_Push_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStartEnd"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_3",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_Push_C'Default__SB_EmpireHalberd_E_Early_Push_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStartEnd"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_Push_C'Default__SB_EmpireHalberd_E_Early_Push_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStartEnd"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_AttackSuccess",
+    "Name": "xxSimpleSkillTagCondition_AttackSuccess_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_AttackSuccess'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.4"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_AttackSuccess",
+    "Name": "xxSimpleSkillTagCondition_AttackSuccess_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_AttackSuccess'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.5"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.4"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::Stamina",
+        "CompareOperator": "ECompareOperator::GreaterThanOrEqualTo",
+        "bUseRatio": true,
+        "RatioValue": 0.5,
+        "Value": 1
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.5"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::Stamina",
+        "CompareOperator": "ECompareOperator::GreaterThanOrEqualTo",
+        "bUseRatio": true,
+        "RatioValue": 0.2,
+        "Value": 1
+      }
+    }
+  },
+  {
+    "Type": "xxSSEventFunc_JustGuardIncreaseStamina",
+    "Name": "xxSSEventFunc_JustGuardIncreaseStamina_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSSEventFunc_JustGuardIncreaseStamina'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_Push_C'Default__SB_EmpireHalberd_E_Early_Push_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.1"
+    },
+    "Properties": {
+      "StaminaOperator": "EStatusOper::Rate",
+      "IncreaseValue": 500
+    }
+  },
+  {
+    "Type": "xxSSEventFunc_JustGuardIncreaseStamina",
+    "Name": "xxSSEventFunc_JustGuardIncreaseStamina_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSSEventFunc_JustGuardIncreaseStamina'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_Push_C'Default__SB_EmpireHalberd_E_Early_Push_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.1"
+    },
+    "Properties": {
+      "StaminaOperator": "EStatusOper::Rate",
+      "IncreaseValue": 500
+    }
+  },
+  {
+    "Type": "xxSSEventFunc_JustGuardIncreaseStamina",
+    "Name": "xxSSEventFunc_JustGuardIncreaseStamina_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSSEventFunc_JustGuardIncreaseStamina'",
+    "Outer": {
+      "ObjectName": "SB_EmpireHalberd_E_Early_Push_C'Default__SB_EmpireHalberd_E_Early_Push_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.1"
+    },
+    "Properties": {
+      "StaminaOperator": "EStatusOper::Rate",
+      "IncreaseValue": 500
+    }
+  }
+]

@@ -1,0 +1,4060 @@
+[
+  {
+    "Type": "Function",
+    "Name": "ExecuteUbergraph_AB_EmpireBow",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+    },
+    "ChildProperties": [
+      {
+        "Type": "IntProperty",
+        "Name": "EntryPoint",
+        "Flags": "RF_Public",
+        "ElementSize": 4,
+        "PropertyFlags": "BlueprintVisible | BlueprintReadOnly | Parm"
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "CallFunc_GetSkillBoneTransRot_ReturnValue",
+        "Flags": "RF_Public",
+        "ElementSize": 12,
+        "Struct": {
+          "ObjectName": "ScriptStruct'Rotator'",
+          "ObjectPath": "/Script/CoreUObject"
+        }
+      },
+      {
+        "Type": "FloatProperty",
+        "Name": "CallFunc_GetSkillBoneTransAlpha_ReturnValue",
+        "Flags": "RF_Public",
+        "ElementSize": 4
+      }
+    ],
+    "FunctionFlags": "FUNC_Final | FUNC_UbergraphFunction"
+  },
+  {
+    "Type": "Function",
+    "Name": "EvaluateGraphExposedInputs_ExecuteUbergraph_AB_EmpireBow_AnimGraphNode_ModifyBone_7EB88D134E97EFA3FB74508DA2F9277B",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+    },
+    "FunctionFlags": "FUNC_BlueprintEvent"
+  },
+  {
+    "Type": "Function",
+    "Name": "AnimGraph",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+    },
+    "ChildProperties": [
+      {
+        "Type": "StructProperty",
+        "Name": "AnimGraph",
+        "Flags": "RF_Public",
+        "ElementSize": 24,
+        "PropertyFlags": "Parm | OutParm",
+        "Struct": {
+          "ObjectName": "ScriptStruct'PoseLink'",
+          "ObjectPath": "/Script/Engine"
+        }
+      }
+    ],
+    "FunctionFlags": "FUNC_HasOutParms | FUNC_BlueprintCallable | FUNC_BlueprintEvent"
+  },
+  {
+    "Type": "AnimBlueprintGeneratedClass",
+    "Name": "AB_EmpireBow_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimBlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow",
+    "Properties": {
+      "TargetSkeleton": {
+        "ObjectName": "Skeleton'C_M_Human_Adult_M_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Model/C_M_Human_Adult_M_Skeleton.15"
+      },
+      "OrderedSavedPoseIndicesMap": [
+        {
+          "Key": "AnimGraph",
+          "Value": {
+            "OrderedSavedPoseNodeIndices": []
+          }
+        }
+      ],
+      "EvaluateGraphExposedInputs": [
+        {
+          "BoundFunction": "None",
+          "CopyRecords": [
+            {
+              "CopyIndex": 0,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 1,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            }
+          ],
+          "Function": null,
+          "ValueHandlerNodeProperty": {
+            "Path": [
+              "AnimGraphNode_ControlRig"
+            ],
+            "ResolvedOwner": {
+              "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+            }
+          }
+        },
+        {
+          "BoundFunction": "None",
+          "CopyRecords": [
+            {
+              "CopyIndex": 2,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 3,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            }
+          ],
+          "Function": null,
+          "ValueHandlerNodeProperty": {
+            "Path": [
+              "AnimGraphNode_ControlRig_1"
+            ],
+            "ResolvedOwner": {
+              "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+            }
+          }
+        },
+        {
+          "BoundFunction": "EvaluateGraphExposedInputs_ExecuteUbergraph_AB_EmpireBow_AnimGraphNode_ModifyBone_7EB88D134E97EFA3FB74508DA2F9277B",
+          "CopyRecords": [],
+          "Function": {
+            "ObjectName": "Function'AB_EmpireBow_C:EvaluateGraphExposedInputs_ExecuteUbergraph_AB_EmpireBow_AnimGraphNode_ModifyBone_7EB88D134E97EFA3FB74508DA2F9277B'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.1"
+          },
+          "ValueHandlerNodeProperty": {
+            "Path": [
+              "AnimGraphNode_ModifyBone"
+            ],
+            "ResolvedOwner": {
+              "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+            }
+          }
+        },
+        {
+          "BoundFunction": "None",
+          "CopyRecords": [
+            {
+              "CopyIndex": 4,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            }
+          ],
+          "Function": null,
+          "ValueHandlerNodeProperty": {
+            "Path": [
+              "AnimGraphNode_TwoWayBlend"
+            ],
+            "ResolvedOwner": {
+              "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+            }
+          }
+        },
+        {
+          "BoundFunction": "None",
+          "CopyRecords": [
+            {
+              "CopyIndex": 5,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            }
+          ],
+          "Function": null,
+          "ValueHandlerNodeProperty": {
+            "Path": [
+              "AnimGraphNode_PoseSnapshot"
+            ],
+            "ResolvedOwner": {
+              "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+            }
+          }
+        },
+        {
+          "BoundFunction": "None",
+          "CopyRecords": [
+            {
+              "CopyIndex": 6,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 7,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 8,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 9,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 10,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 11,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 12,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 13,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 14,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 15,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 16,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            }
+          ],
+          "Function": null,
+          "ValueHandlerNodeProperty": {
+            "Path": [
+              "xxAnimGraphNode_SlotBlend"
+            ],
+            "ResolvedOwner": {
+              "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+            }
+          }
+        },
+        {
+          "BoundFunction": "None",
+          "CopyRecords": [
+            {
+              "CopyIndex": 17,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 18,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 19,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 20,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 21,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 22,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 23,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 24,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 25,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 26,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 27,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            }
+          ],
+          "Function": null,
+          "ValueHandlerNodeProperty": {
+            "Path": [
+              "xxAnimGraphNode_SlotBlend_1"
+            ],
+            "ResolvedOwner": {
+              "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+            }
+          }
+        },
+        {
+          "BoundFunction": "None",
+          "CopyRecords": [
+            {
+              "CopyIndex": 28,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 29,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 30,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 31,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 32,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            }
+          ],
+          "Function": null,
+          "ValueHandlerNodeProperty": {
+            "Path": [
+              "xxAnimGraphNode_AdditiveBlend"
+            ],
+            "ResolvedOwner": {
+              "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+            }
+          }
+        },
+        {
+          "BoundFunction": "None",
+          "CopyRecords": [
+            {
+              "CopyIndex": 33,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 34,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            },
+            {
+              "CopyIndex": 35,
+              "PostCopyOperation": "EPostCopyOperation::None"
+            }
+          ],
+          "Function": null,
+          "ValueHandlerNodeProperty": {
+            "Path": [
+              "xxAnimGraphNode_ModifyBones"
+            ],
+            "ResolvedOwner": {
+              "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+            }
+          }
+        }
+      ],
+      "PropertyAccessLibrary": {
+        "PathSegments": [
+          {
+            "Name": "OptimizationVictimIKAlpha",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "OptimizationVictimIKAlpha"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "AnimGraphNode_ControlRig",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimNode_ControlRig'",
+              "ObjectPath": "/Script/ControlRig"
+            },
+            "Property": {
+              "Path": [
+                "AnimGraphNode_ControlRig"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "Alpha",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "Alpha"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimNode_ControlRig'",
+                "ObjectPath": "/Script/ControlRig"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "VictimPoseInfo",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "VictimPoseInfo"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "__CustomProperty_VictimPoseInfo_8667DFD94AEE35D7576E2A9D8E0B821D",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "__CustomProperty_VictimPoseInfo_8667DFD94AEE35D7576E2A9D8E0B821D"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "OptimizationSuperAnmourIKAlpha",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "OptimizationSuperAnmourIKAlpha"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "AnimGraphNode_ControlRig_1",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimNode_ControlRig'",
+              "ObjectPath": "/Script/ControlRig"
+            },
+            "Property": {
+              "Path": [
+                "AnimGraphNode_ControlRig_1"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "Alpha",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "Alpha"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimNode_ControlRig'",
+                "ObjectPath": "/Script/ControlRig"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "SuperArmourVictimPoseInfo",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "SuperArmourVictimPoseInfo"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "__CustomProperty_VictimPoseInfo_E2ACBB0C4FF7364DA8F81387F6C72EBF",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "__CustomProperty_VictimPoseInfo_E2ACBB0C4FF7364DA8F81387F6C72EBF"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "MoveAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "MoveAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendAlphaForBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendAlphaForBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "AnimGraphNode_TwoWayBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimNode_TwoWayBlend'",
+              "ObjectPath": "/Script/AnimGraphRuntime"
+            },
+            "Property": {
+              "Path": [
+                "AnimGraphNode_TwoWayBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "Alpha",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "Alpha"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimNode_TwoWayBlend'",
+                "ObjectPath": "/Script/AnimGraphRuntime"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "MoveAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "MoveAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "SlotName",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "SlotName"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "AnimGraphNode_PoseSnapshot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimNode_PoseSnapshot'",
+              "ObjectPath": "/Script/AnimGraphRuntime"
+            },
+            "Property": {
+              "Path": [
+                "AnimGraphNode_PoseSnapshot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "SnapshotName",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "SnapshotName"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimNode_PoseSnapshot'",
+                "ObjectPath": "/Script/AnimGraphRuntime"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "SkillAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "SkillAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "SlotName",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "SlotName"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "SnapshotName",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "SnapshotName"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "SkillAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "SkillAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bUseBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bUseBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bUseBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bUseBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "SkillAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "SkillAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bLoopBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bLoopBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bLoopBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bLoopBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "SkillAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "SkillAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "SkillAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "SkillAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendVector",
+            "Struct": {
+              "ObjectName": "ScriptStruct'Vector'",
+              "ObjectPath": "/Script/CoreUObject"
+            },
+            "Property": {
+              "Path": [
+                "BlendVector"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "X",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "X"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'Vector'",
+                "ObjectPath": "/Script/CoreUObject"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "X",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "X"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "SkillAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "SkillAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendVector",
+            "Struct": {
+              "ObjectName": "ScriptStruct'Vector'",
+              "ObjectPath": "/Script/CoreUObject"
+            },
+            "Property": {
+              "Path": [
+                "BlendVector"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "Y",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "Y"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'Vector'",
+                "ObjectPath": "/Script/CoreUObject"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "Y",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "Y"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "SkillAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "SkillAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendTime",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendTime"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendTimeBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendTimeBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "SkillAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "SkillAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendTime",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendTime"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendTimeAnimationSlot",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendTimeAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "SkillAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "SkillAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "PlayRate",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "PlayRate"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "PlayRate",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "PlayRate"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "SkillAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "SkillAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bPlayOverBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bPlayOverBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bPlayOverBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bPlayOverBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "SkillAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "SkillAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bChangedOldBlendSpcaePosition",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bChangedOldBlendSpcaePosition"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bChangedOldBlendSpcaePosition",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bChangedOldBlendSpcaePosition"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "MoveAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "MoveAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "SlotName",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "SlotName"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend_1",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend_1"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "SnapshotName",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "SnapshotName"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "MoveAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "MoveAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bUseBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bUseBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend_1",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend_1"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bUseBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bUseBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "MoveAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "MoveAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bLoopBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bLoopBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend_1",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend_1"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bLoopBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bLoopBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "MoveAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "MoveAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend_1",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend_1"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "MoveAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "MoveAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendVector",
+            "Struct": {
+              "ObjectName": "ScriptStruct'Vector'",
+              "ObjectPath": "/Script/CoreUObject"
+            },
+            "Property": {
+              "Path": [
+                "BlendVector"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "X",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "X"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'Vector'",
+                "ObjectPath": "/Script/CoreUObject"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend_1",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend_1"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "X",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "X"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "MoveAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "MoveAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendVector",
+            "Struct": {
+              "ObjectName": "ScriptStruct'Vector'",
+              "ObjectPath": "/Script/CoreUObject"
+            },
+            "Property": {
+              "Path": [
+                "BlendVector"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "Y",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "Y"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'Vector'",
+                "ObjectPath": "/Script/CoreUObject"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend_1",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend_1"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "Y",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "Y"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "MoveAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "MoveAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendTime",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendTime"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend_1",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend_1"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendTimeBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendTimeBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "MoveAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "MoveAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendTime",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendTime"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend_1",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend_1"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendTimeAnimationSlot",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendTimeAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "MoveAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "MoveAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "PlayRate",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "PlayRate"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend_1",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend_1"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "PlayRate",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "PlayRate"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "MoveAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "MoveAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bPlayOverBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bPlayOverBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend_1",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend_1"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bPlayOverBlendSpace",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bPlayOverBlendSpace"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "MoveAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "MoveAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bChangedOldBlendSpcaePosition",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bChangedOldBlendSpcaePosition"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_SlotBlend_1",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_SlotBlend_1"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "bChangedOldBlendSpcaePosition",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bChangedOldBlendSpcaePosition"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "CurrentBlendIndex",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "CurrentBlendIndex"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_AdditiveBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_AdditiveBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_AdditiveBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "ActiveChildIndex",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "ActiveChildIndex"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_AdditiveBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "MoveAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "MoveAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendTime",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendTime"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_AdditiveBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_AdditiveBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_AdditiveBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendTime",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendTime"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_AdditiveBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": 0,
+            "Flags": 6
+          },
+          {
+            "Name": "SkillAnimationSlot",
+            "Struct": {
+              "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "SkillAnimationSlot"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendTime",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendTime"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'AnimationSlotInfo'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_AdditiveBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_AdditiveBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_AdditiveBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "BlendTime",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "BlendTime"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_AdditiveBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": 1,
+            "Flags": 6
+          },
+          {
+            "Name": "CurrentAdditiveDamageAnimation",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "CurrentAdditiveDamageAnimation"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_AdditiveBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_AdditiveBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_AdditiveBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "AdditiveAnimSequence",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "AdditiveAnimSequence"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_AdditiveBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "bResetCurrentAdditiveDamageAnimation",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "bResetCurrentAdditiveDamageAnimation"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_AdditiveBlend",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_AdditiveBlend'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_AdditiveBlend"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "ResetAnimSequence",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "ResetAnimSequence"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_AdditiveBlend'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "RootBoneRotation",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "RootBoneRotation"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_ModifyBones",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_ModifyBones'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_ModifyBones"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "RootBoneRotation",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "RootBoneRotation"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_ModifyBones'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "RootShakeOffset",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "RootShakeOffset"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_ModifyBones",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_ModifyBones'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_ModifyBones"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "ShakeTranslation",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "ShakeTranslation"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_ModifyBones'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "RootShakeScale",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "RootShakeScale"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "Class'xxAnimInstance'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          },
+          {
+            "Name": "xxAnimGraphNode_ModifyBones",
+            "Struct": {
+              "ObjectName": "ScriptStruct'xxAnimNode_ModifyBones'",
+              "ObjectPath": "/Script/BBQ"
+            },
+            "Property": {
+              "Path": [
+                "xxAnimGraphNode_ModifyBones"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "AnimBlueprintGeneratedClass'AB_EmpireBow_C'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.3"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 1
+          },
+          {
+            "Name": "ShakeAlpha",
+            "Struct": null,
+            "Property": {
+              "Path": [
+                "ShakeAlpha"
+              ],
+              "ResolvedOwner": {
+                "ObjectName": "ScriptStruct'xxAnimNode_ModifyBones'",
+                "ObjectPath": "/Script/BBQ"
+              }
+            },
+            "Function": null,
+            "ArrayIndex": -1,
+            "Flags": 2
+          }
+        ],
+        "SrcPaths": [
+          {
+            "PathSegmentStartIndex": 0,
+            "PathSegmentCount": 1,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 3,
+            "PathSegmentCount": 1,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 5,
+            "PathSegmentCount": 1,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 8,
+            "PathSegmentCount": 1,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 10,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 14,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 18,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 22,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 26,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 30,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 34,
+            "PathSegmentCount": 3,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 39,
+            "PathSegmentCount": 3,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 44,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 48,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 52,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 56,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 60,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 64,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 68,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 72,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 76,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 80,
+            "PathSegmentCount": 3,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 85,
+            "PathSegmentCount": 3,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 90,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 94,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 98,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 102,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 106,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 110,
+            "PathSegmentCount": 1,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 113,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 117,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 121,
+            "PathSegmentCount": 1,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 124,
+            "PathSegmentCount": 1,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 127,
+            "PathSegmentCount": 1,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 130,
+            "PathSegmentCount": 1,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 133,
+            "PathSegmentCount": 1,
+            "bHasEvents": false
+          }
+        ],
+        "DestPaths": [
+          {
+            "PathSegmentStartIndex": 1,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 4,
+            "PathSegmentCount": 1,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 6,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 9,
+            "PathSegmentCount": 1,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 12,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 16,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 20,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 24,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 28,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 32,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 37,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 42,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 46,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 50,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 54,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 58,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 62,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 66,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 70,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 74,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 78,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 83,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 88,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 92,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 96,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 100,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 104,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 108,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 111,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 115,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 119,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 122,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 125,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 128,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 131,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          },
+          {
+            "PathSegmentStartIndex": 134,
+            "PathSegmentCount": 2,
+            "bHasEvents": false
+          }
+        ],
+        "CopyBatches": {
+          "Copies": [
+            {
+              "AccessIndex": 0,
+              "DestAccessStartIndex": 0,
+              "DestAccessEndIndex": 1,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 1,
+              "DestAccessStartIndex": 1,
+              "DestAccessEndIndex": 2,
+              "Type": "EPropertyAccessCopyType::Struct"
+            },
+            {
+              "AccessIndex": 2,
+              "DestAccessStartIndex": 2,
+              "DestAccessEndIndex": 3,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 3,
+              "DestAccessStartIndex": 3,
+              "DestAccessEndIndex": 4,
+              "Type": "EPropertyAccessCopyType::Struct"
+            },
+            {
+              "AccessIndex": 4,
+              "DestAccessStartIndex": 4,
+              "DestAccessEndIndex": 5,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 5,
+              "DestAccessStartIndex": 5,
+              "DestAccessEndIndex": 6,
+              "Type": "EPropertyAccessCopyType::Name"
+            },
+            {
+              "AccessIndex": 6,
+              "DestAccessStartIndex": 6,
+              "DestAccessEndIndex": 7,
+              "Type": "EPropertyAccessCopyType::Name"
+            },
+            {
+              "AccessIndex": 7,
+              "DestAccessStartIndex": 7,
+              "DestAccessEndIndex": 8,
+              "Type": "EPropertyAccessCopyType::Bool"
+            },
+            {
+              "AccessIndex": 8,
+              "DestAccessStartIndex": 8,
+              "DestAccessEndIndex": 9,
+              "Type": "EPropertyAccessCopyType::Bool"
+            },
+            {
+              "AccessIndex": 9,
+              "DestAccessStartIndex": 9,
+              "DestAccessEndIndex": 10,
+              "Type": "EPropertyAccessCopyType::Object"
+            },
+            {
+              "AccessIndex": 10,
+              "DestAccessStartIndex": 10,
+              "DestAccessEndIndex": 11,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 11,
+              "DestAccessStartIndex": 11,
+              "DestAccessEndIndex": 12,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 12,
+              "DestAccessStartIndex": 12,
+              "DestAccessEndIndex": 13,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 13,
+              "DestAccessStartIndex": 13,
+              "DestAccessEndIndex": 14,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 14,
+              "DestAccessStartIndex": 14,
+              "DestAccessEndIndex": 15,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 15,
+              "DestAccessStartIndex": 15,
+              "DestAccessEndIndex": 16,
+              "Type": "EPropertyAccessCopyType::Bool"
+            },
+            {
+              "AccessIndex": 16,
+              "DestAccessStartIndex": 16,
+              "DestAccessEndIndex": 17,
+              "Type": "EPropertyAccessCopyType::Bool"
+            },
+            {
+              "AccessIndex": 17,
+              "DestAccessStartIndex": 17,
+              "DestAccessEndIndex": 18,
+              "Type": "EPropertyAccessCopyType::Name"
+            },
+            {
+              "AccessIndex": 18,
+              "DestAccessStartIndex": 18,
+              "DestAccessEndIndex": 19,
+              "Type": "EPropertyAccessCopyType::Bool"
+            },
+            {
+              "AccessIndex": 19,
+              "DestAccessStartIndex": 19,
+              "DestAccessEndIndex": 20,
+              "Type": "EPropertyAccessCopyType::Bool"
+            },
+            {
+              "AccessIndex": 20,
+              "DestAccessStartIndex": 20,
+              "DestAccessEndIndex": 21,
+              "Type": "EPropertyAccessCopyType::Object"
+            },
+            {
+              "AccessIndex": 21,
+              "DestAccessStartIndex": 21,
+              "DestAccessEndIndex": 22,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 22,
+              "DestAccessStartIndex": 22,
+              "DestAccessEndIndex": 23,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 23,
+              "DestAccessStartIndex": 23,
+              "DestAccessEndIndex": 24,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 24,
+              "DestAccessStartIndex": 24,
+              "DestAccessEndIndex": 25,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 25,
+              "DestAccessStartIndex": 25,
+              "DestAccessEndIndex": 26,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 26,
+              "DestAccessStartIndex": 26,
+              "DestAccessEndIndex": 27,
+              "Type": "EPropertyAccessCopyType::Bool"
+            },
+            {
+              "AccessIndex": 27,
+              "DestAccessStartIndex": 27,
+              "DestAccessEndIndex": 28,
+              "Type": "EPropertyAccessCopyType::Bool"
+            },
+            {
+              "AccessIndex": 28,
+              "DestAccessStartIndex": 28,
+              "DestAccessEndIndex": 29,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 29,
+              "DestAccessStartIndex": 29,
+              "DestAccessEndIndex": 30,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 30,
+              "DestAccessStartIndex": 30,
+              "DestAccessEndIndex": 31,
+              "Type": "EPropertyAccessCopyType::Plain"
+            },
+            {
+              "AccessIndex": 31,
+              "DestAccessStartIndex": 31,
+              "DestAccessEndIndex": 32,
+              "Type": "EPropertyAccessCopyType::Object"
+            },
+            {
+              "AccessIndex": 32,
+              "DestAccessStartIndex": 32,
+              "DestAccessEndIndex": 33,
+              "Type": "EPropertyAccessCopyType::Bool"
+            },
+            {
+              "AccessIndex": 33,
+              "DestAccessStartIndex": 33,
+              "DestAccessEndIndex": 34,
+              "Type": "EPropertyAccessCopyType::Struct"
+            },
+            {
+              "AccessIndex": 34,
+              "DestAccessStartIndex": 34,
+              "DestAccessEndIndex": 35,
+              "Type": "EPropertyAccessCopyType::Struct"
+            },
+            {
+              "AccessIndex": 35,
+              "DestAccessStartIndex": 35,
+              "DestAccessEndIndex": 36,
+              "Type": "EPropertyAccessCopyType::Plain"
+            }
+          ]
+        }
+      },
+      "UberGraphFunction": {
+        "ObjectName": "Function'AB_EmpireBow_C:ExecuteUbergraph_AB_EmpireBow'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.0"
+      }
+    },
+    "SuperStruct": {
+      "ObjectName": "Class'xxAnimInstance'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "Children": [
+      {
+        "ObjectName": "Function'AB_EmpireBow_C:AnimGraph'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.2"
+      },
+      {
+        "ObjectName": "Function'AB_EmpireBow_C:EvaluateGraphExposedInputs_ExecuteUbergraph_AB_EmpireBow_AnimGraphNode_ModifyBone_7EB88D134E97EFA3FB74508DA2F9277B'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.1"
+      },
+      {
+        "ObjectName": "Function'AB_EmpireBow_C:ExecuteUbergraph_AB_EmpireBow'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.0"
+      }
+    ],
+    "ChildProperties": [
+      {
+        "Type": "StructProperty",
+        "Name": "UberGraphFrame",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 16,
+        "PropertyFlags": "Transient | DuplicateTransient",
+        "Struct": {
+          "ObjectName": "ScriptStruct'PointerToUberGraphFrame'",
+          "ObjectPath": "/Script/Engine"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "AnimGraphNode_Root",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 64,
+        "Struct": {
+          "ObjectName": "ScriptStruct'AnimNode_Root'",
+          "ObjectPath": "/Script/Engine"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "AnimGraphNode_LocalToComponentSpace",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 40,
+        "Struct": {
+          "ObjectName": "ScriptStruct'AnimNode_ConvertLocalToComponentSpace'",
+          "ObjectPath": "/Script/Engine"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "AnimGraphNode_ComponentToLocalSpace",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 40,
+        "Struct": {
+          "ObjectName": "ScriptStruct'AnimNode_ConvertComponentToLocalSpace'",
+          "ObjectPath": "/Script/Engine"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "xxAnimGraphNode_ModifyBones",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 1424,
+        "Struct": {
+          "ObjectName": "ScriptStruct'xxAnimNode_ModifyBones'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "xxAnimGraphNode_AdditiveBlend",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 1488,
+        "Struct": {
+          "ObjectName": "ScriptStruct'xxAnimNode_AdditiveBlend'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "xxAnimGraphNode_SlotBlend_1",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 744,
+        "Struct": {
+          "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "xxAnimGraphNode_SlotBlend",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 744,
+        "Struct": {
+          "ObjectName": "ScriptStruct'xxAnimNode_SlotBlend'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "AnimGraphNode_PoseSnapshot",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 176,
+        "Struct": {
+          "ObjectName": "ScriptStruct'AnimNode_PoseSnapshot'",
+          "ObjectPath": "/Script/AnimGraphRuntime"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "AnimGraphNode_TwoWayBlend",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 216,
+        "Struct": {
+          "ObjectName": "ScriptStruct'AnimNode_TwoWayBlend'",
+          "ObjectPath": "/Script/AnimGraphRuntime"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "AnimGraphNode_ModifyBone",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 352,
+        "Struct": {
+          "ObjectName": "ScriptStruct'AnimNode_ModifyBone'",
+          "ObjectPath": "/Script/AnimGraphRuntime"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "AnimGraphNode_ControlRig_2",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 912,
+        "Struct": {
+          "ObjectName": "ScriptStruct'AnimNode_ControlRig'",
+          "ObjectPath": "/Script/ControlRig"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "AnimGraphNode_ControlRig_1",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 912,
+        "Struct": {
+          "ObjectName": "ScriptStruct'AnimNode_ControlRig'",
+          "ObjectPath": "/Script/ControlRig"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "AnimGraphNode_ControlRig",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 912,
+        "Struct": {
+          "ObjectName": "ScriptStruct'AnimNode_ControlRig'",
+          "ObjectPath": "/Script/ControlRig"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "__CustomProperty_VictimPoseInfo_8667DFD94AEE35D7576E2A9D8E0B821D",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 56,
+        "Struct": {
+          "ObjectName": "ScriptStruct'RigVictimPoseInfo'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "__CustomProperty_VictimPoseInfo_E2ACBB0C4FF7364DA8F81387F6C72EBF",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 56,
+        "Struct": {
+          "ObjectName": "ScriptStruct'RigVictimPoseInfo'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      }
+    ],
+    "FuncMap": {
+      "ExecuteUbergraph_AB_EmpireBow": {
+        "ObjectName": "Function'AB_EmpireBow_C:ExecuteUbergraph_AB_EmpireBow'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.0"
+      },
+      "EvaluateGraphExposedInputs_ExecuteUbergraph_AB_EmpireBow_AnimGraphNode_ModifyBone_7EB88D134E97EFA3FB74508DA2F9277B": {
+        "ObjectName": "Function'AB_EmpireBow_C:EvaluateGraphExposedInputs_ExecuteUbergraph_AB_EmpireBow_AnimGraphNode_ModifyBone_7EB88D134E97EFA3FB74508DA2F9277B'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.1"
+      },
+      "AnimGraph": {
+        "ObjectName": "Function'AB_EmpireBow_C:AnimGraph'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.2"
+      }
+    },
+    "ClassFlags": "CLASS_Transient | CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'SkeletalMeshComponent'",
+      "ObjectPath": "/Script/Engine"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "AB_EmpireBow_C'Default__AB_EmpireBow_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.4"
+    }
+  },
+  {
+    "Type": "AB_EmpireBow_C",
+    "Name": "Default__AB_EmpireBow_C",
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "AnimBlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.AB_EmpireBow_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow",
+    "Properties": {
+      "UberGraphFrame": {},
+      "AnimGraphNode_Root": {
+        "Result": {
+          "LinkID": 12
+        },
+        "Name": "AnimGraph",
+        "Group": "None"
+      },
+      "AnimGraphNode_LocalToComponentSpace": {
+        "LocalPose": {
+          "LinkID": 4
+        }
+      },
+      "AnimGraphNode_ComponentToLocalSpace": {
+        "ComponentPose": {
+          "LinkID": 3
+        }
+      },
+      "xxAnimGraphNode_ModifyBones": {
+        "ComponentPose": {
+          "LinkID": 9
+        },
+        "RootBoneRotation": {
+          "Pitch": 0.0,
+          "Yaw": 0.0,
+          "Roll": 0.0
+        },
+        "ShakeTranslation": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "ShakeAlpha": 0.0,
+        "BoneToModifyRoot": {
+          "BoneToModify": {
+            "BoneName": "Root"
+          },
+          "Alpha": 1.0
+        },
+        "RotationMode": "BMM_Additive",
+        "RotationSpace": "BCS_ComponentSpace"
+      },
+      "xxAnimGraphNode_AdditiveBlend": {
+        "ActiveChildIndex": 0,
+        "BlendPose": [
+          {
+            "LinkID": 8
+          },
+          {
+            "LinkID": 6
+          }
+        ],
+        "BlendTime": [
+          0.1,
+          0.1
+        ],
+        "BlendType": "EAlphaBlendOption::Linear",
+        "CustomBlendCurve": null,
+        "BlendProfile": null,
+        "AdditiveAnimSequence": null,
+        "ResetAnimSequence": false
+      },
+      "xxAnimGraphNode_SlotBlend_1": {
+        "SnapshotName": "None",
+        "SlotType": "EAnimationSlot::Move",
+        "bUseBlendSpace": false,
+        "bLoopBlendSpace": true,
+        "BlendSpace": null,
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "BlendTimeBlendSpace": 0.0,
+        "BlendTimeAnimationSlot": 0.0,
+        "PlayRate": 1.0,
+        "ActiveChildIndex": 0,
+        "bPlayOverBlendSpace": true,
+        "bChangedOldBlendSpcaePosition": false,
+        "LastActiveChildIndex": 0
+      },
+      "xxAnimGraphNode_SlotBlend": {
+        "SnapshotName": "None",
+        "SlotType": "EAnimationSlot::Skill",
+        "bUseBlendSpace": false,
+        "bLoopBlendSpace": true,
+        "BlendSpace": null,
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "BlendTimeBlendSpace": 0.0,
+        "BlendTimeAnimationSlot": 0.0,
+        "PlayRate": 1.0,
+        "ActiveChildIndex": 1,
+        "bPlayOverBlendSpace": true,
+        "bChangedOldBlendSpcaePosition": false,
+        "LastActiveChildIndex": 0
+      },
+      "AnimGraphNode_PoseSnapshot": {
+        "SnapshotName": "None",
+        "Snapshot": {
+          "LocalTransforms": [],
+          "BoneNames": [],
+          "SkeletalMeshName": "None",
+          "SnapshotName": "None",
+          "bIsValid": false
+        },
+        "Mode": "ESnapshotSourceMode::NamedSnapshot"
+      },
+      "AnimGraphNode_TwoWayBlend": {
+        "A": {
+          "LinkID": 5
+        },
+        "B": {
+          "LinkID": 7
+        },
+        "AlphaInputType": "EAnimAlphaInputType::Float",
+        "bAlphaBoolEnabled": true,
+        "bResetChildOnActivation": false,
+        "Alpha": 0.0,
+        "AlphaScaleBias": {
+          "Scale": 1.0,
+          "Bias": 0.0
+        },
+        "AlphaBoolBlend": {
+          "BlendInTime": 0.0,
+          "BlendOutTime": 0.0,
+          "BlendOption": "EAlphaBlendOption::Linear",
+          "bInitialized": false,
+          "CustomCurve": null,
+          "AlphaBlend": {
+            "CustomCurve": null,
+            "BlendTime": 0.2,
+            "BlendOption": "EAlphaBlendOption::Linear"
+          }
+        },
+        "AlphaCurveName": "None",
+        "AlphaScaleBiasClamp": {
+          "bMapRange": false,
+          "bClampResult": false,
+          "bInterpResult": false,
+          "InRange": {
+            "Min": 0.0,
+            "Max": 1.0
+          },
+          "OutRange": {
+            "Min": 0.0,
+            "Max": 1.0
+          },
+          "Scale": 1.0,
+          "Bias": 0.0,
+          "ClampMin": 0.0,
+          "ClampMax": 1.0,
+          "InterpSpeedIncreasing": 10.0,
+          "InterpSpeedDecreasing": 10.0
+        }
+      },
+      "AnimGraphNode_ModifyBone": {
+        "BoneToModify": {
+          "BoneName": "Bip001-Spine"
+        },
+        "Translation": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "Rotation": {
+          "Pitch": 0.0,
+          "Yaw": 0.0,
+          "Roll": 0.0
+        },
+        "Scale": {
+          "X": 1.0,
+          "Y": 1.0,
+          "Z": 1.0
+        },
+        "TranslationMode": "BMM_Ignore",
+        "RotationMode": "BMM_Additive",
+        "ScaleMode": "BMM_Ignore",
+        "TranslationSpace": "BCS_ComponentSpace",
+        "RotationSpace": "BCS_ComponentSpace",
+        "ScaleSpace": "BCS_ComponentSpace",
+        "ComponentPose": {
+          "LinkID": 1
+        },
+        "LODThreshold": -1,
+        "ActualAlpha": 0.0,
+        "AlphaInputType": "EAnimAlphaInputType::Float",
+        "bAlphaBoolEnabled": true,
+        "Alpha": 1.0,
+        "AlphaScaleBias": {
+          "Scale": 1.0,
+          "Bias": 0.0
+        },
+        "AlphaBoolBlend": {
+          "BlendInTime": 0.0,
+          "BlendOutTime": 0.0,
+          "BlendOption": "EAlphaBlendOption::Linear",
+          "bInitialized": false,
+          "CustomCurve": null,
+          "AlphaBlend": {
+            "CustomCurve": null,
+            "BlendTime": 0.2,
+            "BlendOption": "EAlphaBlendOption::Linear"
+          }
+        },
+        "AlphaCurveName": "None",
+        "AlphaScaleBiasClamp": {
+          "bMapRange": false,
+          "bClampResult": false,
+          "bInterpResult": false,
+          "InRange": {
+            "Min": 0.0,
+            "Max": 1.0
+          },
+          "OutRange": {
+            "Min": 0.0,
+            "Max": 1.0
+          },
+          "Scale": 1.0,
+          "Bias": 0.0,
+          "ClampMin": 0.0,
+          "ClampMax": 1.0,
+          "InterpSpeedIncreasing": 10.0,
+          "InterpSpeedDecreasing": 10.0
+        }
+      },
+      "AnimGraphNode_ControlRig_2": {
+        "ControlRigClass": {
+          "ObjectName": "ControlRigBlueprintGeneratedClass'CR_M_Human_Adult_M_CtrlRig_C'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Model/CR_M_Human_Adult_M_CtrlRig.0"
+        },
+        "ControlRig": null,
+        "Alpha": 1.0,
+        "AlphaInputType": "EAnimAlphaInputType::Float",
+        "bAlphaBoolEnabled": true,
+        "bSetRefPoseFromSkeleton": false,
+        "AlphaScaleBias": {
+          "Scale": 1.0,
+          "Bias": 0.0
+        },
+        "AlphaBoolBlend": {
+          "BlendInTime": 0.0,
+          "BlendOutTime": 0.0,
+          "BlendOption": "EAlphaBlendOption::Linear",
+          "bInitialized": false,
+          "CustomCurve": null,
+          "AlphaBlend": {
+            "CustomCurve": null,
+            "BlendTime": 0.2,
+            "BlendOption": "EAlphaBlendOption::Linear"
+          }
+        },
+        "AlphaCurveName": "None",
+        "AlphaScaleBiasClamp": {
+          "bMapRange": false,
+          "bClampResult": false,
+          "bInterpResult": false,
+          "InRange": {
+            "Min": 0.0,
+            "Max": 1.0
+          },
+          "OutRange": {
+            "Min": 0.0,
+            "Max": 1.0
+          },
+          "Scale": 1.0,
+          "Bias": 0.0,
+          "ClampMin": 0.0,
+          "ClampMax": 1.0,
+          "InterpSpeedIncreasing": 10.0,
+          "InterpSpeedDecreasing": 10.0
+        },
+        "DistanceOptimizeExceptionsFlag": 0,
+        "InputMapping": [],
+        "OutputMapping": [],
+        "LODThreshold": -1,
+        "Source": {
+          "LinkID": 2
+        },
+        "ControlRigBoneMapping": [],
+        "ControlRigCurveMapping": [],
+        "InputToCurveMappingUIDs": [],
+        "NodeMappingContainer": null,
+        "InputSettings": {
+          "bUpdatePose": true,
+          "bUpdateCurves": true
+        },
+        "OutputSettings": {
+          "bUpdatePose": true,
+          "bUpdateCurves": true
+        },
+        "bExecute": true,
+        "SourcePropertyNames": [],
+        "DestPropertyNames": [],
+        "TargetInstance": null
+      },
+      "AnimGraphNode_ControlRig_1": {
+        "ControlRigClass": {
+          "ObjectName": "ControlRigBlueprintGeneratedClass'CR_M_Human_Adult_M_IKHit_C'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Model/CR_M_Human_Adult_M_IKHit.0"
+        },
+        "ControlRig": null,
+        "Alpha": 1.0,
+        "AlphaInputType": "EAnimAlphaInputType::Float",
+        "bAlphaBoolEnabled": true,
+        "bSetRefPoseFromSkeleton": false,
+        "AlphaScaleBias": {
+          "Scale": 1.0,
+          "Bias": 0.0
+        },
+        "AlphaBoolBlend": {
+          "BlendInTime": 0.0,
+          "BlendOutTime": 0.0,
+          "BlendOption": "EAlphaBlendOption::Linear",
+          "bInitialized": false,
+          "CustomCurve": null,
+          "AlphaBlend": {
+            "CustomCurve": null,
+            "BlendTime": 0.2,
+            "BlendOption": "EAlphaBlendOption::Linear"
+          }
+        },
+        "AlphaCurveName": "None",
+        "AlphaScaleBiasClamp": {
+          "bMapRange": false,
+          "bClampResult": false,
+          "bInterpResult": false,
+          "InRange": {
+            "Min": 0.0,
+            "Max": 1.0
+          },
+          "OutRange": {
+            "Min": 0.0,
+            "Max": 1.0
+          },
+          "Scale": 1.0,
+          "Bias": 0.0,
+          "ClampMin": 0.0,
+          "ClampMax": 1.0,
+          "InterpSpeedIncreasing": 10.0,
+          "InterpSpeedDecreasing": 10.0
+        },
+        "DistanceOptimizeExceptionsFlag": 0,
+        "InputMapping": [],
+        "OutputMapping": [],
+        "LODThreshold": -1,
+        "Source": {
+          "LinkID": 10
+        },
+        "ControlRigBoneMapping": [],
+        "ControlRigCurveMapping": [],
+        "InputToCurveMappingUIDs": [],
+        "NodeMappingContainer": null,
+        "InputSettings": {
+          "bUpdatePose": true,
+          "bUpdateCurves": true
+        },
+        "OutputSettings": {
+          "bUpdatePose": true,
+          "bUpdateCurves": true
+        },
+        "bExecute": true,
+        "SourcePropertyNames": [
+          "__CustomProperty_VictimPoseInfo_E2ACBB0C4FF7364DA8F81387F6C72EBF"
+        ],
+        "DestPropertyNames": [
+          "VictimPoseInfo"
+        ],
+        "TargetInstance": null
+      },
+      "AnimGraphNode_ControlRig": {
+        "ControlRigClass": {
+          "ObjectName": "ControlRigBlueprintGeneratedClass'CR_M_Human_Adult_M_BodyHit_C'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Model/CR_M_Human_Adult_M_BodyHit.0"
+        },
+        "ControlRig": null,
+        "Alpha": 1.0,
+        "AlphaInputType": "EAnimAlphaInputType::Float",
+        "bAlphaBoolEnabled": true,
+        "bSetRefPoseFromSkeleton": false,
+        "AlphaScaleBias": {
+          "Scale": 1.0,
+          "Bias": 0.0
+        },
+        "AlphaBoolBlend": {
+          "BlendInTime": 0.0,
+          "BlendOutTime": 0.0,
+          "BlendOption": "EAlphaBlendOption::Linear",
+          "bInitialized": false,
+          "CustomCurve": null,
+          "AlphaBlend": {
+            "CustomCurve": null,
+            "BlendTime": 0.2,
+            "BlendOption": "EAlphaBlendOption::Linear"
+          }
+        },
+        "AlphaCurveName": "None",
+        "AlphaScaleBiasClamp": {
+          "bMapRange": false,
+          "bClampResult": false,
+          "bInterpResult": false,
+          "InRange": {
+            "Min": 0.0,
+            "Max": 1.0
+          },
+          "OutRange": {
+            "Min": 0.0,
+            "Max": 1.0
+          },
+          "Scale": 1.0,
+          "Bias": 0.0,
+          "ClampMin": 0.0,
+          "ClampMax": 1.0,
+          "InterpSpeedIncreasing": 10.0,
+          "InterpSpeedDecreasing": 10.0
+        },
+        "DistanceOptimizeExceptionsFlag": 0,
+        "InputMapping": [],
+        "OutputMapping": [],
+        "LODThreshold": -1,
+        "Source": {
+          "LinkID": 11
+        },
+        "ControlRigBoneMapping": [],
+        "ControlRigCurveMapping": [],
+        "InputToCurveMappingUIDs": [],
+        "NodeMappingContainer": null,
+        "InputSettings": {
+          "bUpdatePose": true,
+          "bUpdateCurves": true
+        },
+        "OutputSettings": {
+          "bUpdatePose": true,
+          "bUpdateCurves": true
+        },
+        "bExecute": true,
+        "SourcePropertyNames": [
+          "__CustomProperty_VictimPoseInfo_8667DFD94AEE35D7576E2A9D8E0B821D"
+        ],
+        "DestPropertyNames": [
+          "VictimPoseInfo"
+        ],
+        "TargetInstance": null
+      },
+      "__CustomProperty_VictimPoseInfo_8667DFD94AEE35D7576E2A9D8E0B821D": {
+        "HitLocation": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "AttackDirection": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "AttackStrength": "EBattleDirecting_AttackStrength::ALL",
+        "ProgressTime": 60.0,
+        "OverrideInfo": {
+          "CurveIndex": -1,
+          "Power": -1.0,
+          "Time": -1.0
+        },
+        "AttackDirectionWorld": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 0.0
+        }
+      },
+      "__CustomProperty_VictimPoseInfo_E2ACBB0C4FF7364DA8F81387F6C72EBF": {
+        "HitLocation": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "AttackDirection": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "AttackStrength": "EBattleDirecting_AttackStrength::ALL",
+        "ProgressTime": 60.0,
+        "OverrideInfo": {
+          "CurveIndex": -1,
+          "Power": -1.0,
+          "Time": -1.0
+        },
+        "AttackDirectionWorld": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 0.0
+        }
+      },
+      "MoveAnimationSlot": {
+        "BlendSpace": {
+          "ObjectName": "BlendSpace'BS_PicaroonBow_NormalMove'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Picaroon/PicaroonBow/Moving/Move/BS_PicaroonBow_NormalMove.0"
+        }
+      },
+      "OnMontageStarted": {
+        "InvocationList": [
+          {
+            "Object": {
+              "ObjectName": "AB_EmpireBow_C'Default__AB_EmpireBow_C'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Base_Setting/AB_EmpireBow.4"
+            },
+            "FunctionName": "OnMontageStartedHandle"
+          }
+        ]
+      }
+    }
+  }
+]

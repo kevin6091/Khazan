@@ -1,0 +1,510 @@
+[
+  {
+    "Type": "AnimComposite",
+    "Name": "AC_EmpireBow_Equip",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimComposite'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/PeaceIdle/AC_EmpireBow_Equip",
+    "Properties": {
+      "AnimationTrack": {
+        "AnimSegments": [
+          {
+            "AnimReference": {
+              "ObjectName": "AnimSequence'CA_M_EmpBow_CarryASword'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Animation/EmpireBow/CA_M_EmpBow_CarryASword.0"
+            },
+            "StartPos": 0.0,
+            "AnimStartTime": 0.0,
+            "AnimEndTime": 1.0,
+            "AnimPlayRate": 1.0,
+            "LoopingCount": 1
+          }
+        ]
+      },
+      "Notifies": [
+        {
+          "TriggerTimeOffset": -0.0001,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxWeapon",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Weapon'AC_EmpireBow_Equip:xxAnimNotifyState_Weapon_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/PeaceIdle/AC_EmpireBow_Equip.3"
+          },
+          "Duration": 1.0,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 1.0,
+            "LinkValue": 1.0,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireBow_Equip'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/PeaceIdle/AC_EmpireBow_Equip.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 1,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.0,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireBow_Equip'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/PeaceIdle/AC_EmpireBow_Equip.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxAkEvent",
+          "Notify": {
+            "ObjectName": "xxAnimNotify_AkEvent'AC_EmpireBow_Equip:xxAnimNotify_AkEvent_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/PeaceIdle/AC_EmpireBow_Equip.1"
+          },
+          "NotifyStateClass": null,
+          "Duration": 0.0,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": -1,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.0,
+            "LinkValue": 0.15639955,
+            "LinkedSequence": null
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 2,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.0,
+          "LinkValue": 0.15639955,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireBow_Equip'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/PeaceIdle/AC_EmpireBow_Equip.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxChangeArmedState",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_ChangeArmedState'AC_EmpireBow_Equip:xxAnimNotifyState_ChangeArmedState_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/PeaceIdle/AC_EmpireBow_Equip.2"
+          },
+          "Duration": 0.43643123,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 1.0,
+            "LinkValue": 0.88303447,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireBow_Equip'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/PeaceIdle/AC_EmpireBow_Equip.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.0,
+          "LinkValue": 0.44660324,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireBow_Equip'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/PeaceIdle/AC_EmpireBow_Equip.0"
+          }
+        }
+      ],
+      "SequenceLength": 1.0,
+      "RawCurveData": {
+        "FloatCurves": [
+          {
+            "FloatCurve": {
+              "Keys": [
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.0,
+                  "Value": 2.9802322E-08,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                }
+              ],
+              "DefaultValue": 3.4028235E+38,
+              "PreInfinityExtrap": "RCCE_Constant",
+              "PostInfinityExtrap": "RCCE_Constant"
+            },
+            "Name": {
+              "DisplayName": "Dilation"
+            },
+            "CurveTypeFlags": 4
+          }
+        ]
+      },
+      "DilationCurve": {
+        "TimePerFrame": 0.016666668,
+        "DilationSequenceLength": 0.99999964,
+        "DilationAnimPositions": [
+          {
+            "T_Original": 0.0,
+            "T_Dilation": 0.0
+          },
+          {
+            "T_Original": 0.016666668,
+            "T_Dilation": 0.016666668
+          },
+          {
+            "T_Original": 0.033333335,
+            "T_Dilation": 0.033333335
+          },
+          {
+            "T_Original": 0.050000004,
+            "T_Dilation": 0.050000004
+          },
+          {
+            "T_Original": 0.06666667,
+            "T_Dilation": 0.06666667
+          },
+          {
+            "T_Original": 0.083333336,
+            "T_Dilation": 0.083333336
+          },
+          {
+            "T_Original": 0.10000001,
+            "T_Dilation": 0.1
+          },
+          {
+            "T_Original": 0.116666675,
+            "T_Dilation": 0.11666667
+          },
+          {
+            "T_Original": 0.13333334,
+            "T_Dilation": 0.13333334
+          },
+          {
+            "T_Original": 0.15,
+            "T_Dilation": 0.15
+          },
+          {
+            "T_Original": 0.16666667,
+            "T_Dilation": 0.16666667
+          },
+          {
+            "T_Original": 0.18333334,
+            "T_Dilation": 0.18333334
+          },
+          {
+            "T_Original": 0.20000002,
+            "T_Dilation": 0.2
+          },
+          {
+            "T_Original": 0.21666668,
+            "T_Dilation": 0.21666667
+          },
+          {
+            "T_Original": 0.23333335,
+            "T_Dilation": 0.23333333
+          },
+          {
+            "T_Original": 0.25,
+            "T_Dilation": 0.25
+          },
+          {
+            "T_Original": 0.26666668,
+            "T_Dilation": 0.26666668
+          },
+          {
+            "T_Original": 0.28333336,
+            "T_Dilation": 0.28333336
+          },
+          {
+            "T_Original": 0.3,
+            "T_Dilation": 0.30000004
+          },
+          {
+            "T_Original": 0.3166667,
+            "T_Dilation": 0.31666672
+          },
+          {
+            "T_Original": 0.33333334,
+            "T_Dilation": 0.3333334
+          },
+          {
+            "T_Original": 0.35000002,
+            "T_Dilation": 0.35000008
+          },
+          {
+            "T_Original": 0.36666667,
+            "T_Dilation": 0.36666676
+          },
+          {
+            "T_Original": 0.38333336,
+            "T_Dilation": 0.38333344
+          },
+          {
+            "T_Original": 0.40000004,
+            "T_Dilation": 0.40000013
+          },
+          {
+            "T_Original": 0.4166667,
+            "T_Dilation": 0.4166668
+          },
+          {
+            "T_Original": 0.43333337,
+            "T_Dilation": 0.4333335
+          },
+          {
+            "T_Original": 0.45000002,
+            "T_Dilation": 0.45000017
+          },
+          {
+            "T_Original": 0.4666667,
+            "T_Dilation": 0.46666685
+          },
+          {
+            "T_Original": 0.48333335,
+            "T_Dilation": 0.48333353
+          },
+          {
+            "T_Original": 0.5,
+            "T_Dilation": 0.5000002
+          },
+          {
+            "T_Original": 0.5166667,
+            "T_Dilation": 0.5166668
+          },
+          {
+            "T_Original": 0.53333336,
+            "T_Dilation": 0.5333335
+          },
+          {
+            "T_Original": 0.55,
+            "T_Dilation": 0.55000013
+          },
+          {
+            "T_Original": 0.5666667,
+            "T_Dilation": 0.5666668
+          },
+          {
+            "T_Original": 0.5833334,
+            "T_Dilation": 0.58333343
+          },
+          {
+            "T_Original": 0.6,
+            "T_Dilation": 0.6000001
+          },
+          {
+            "T_Original": 0.6166667,
+            "T_Dilation": 0.61666673
+          },
+          {
+            "T_Original": 0.6333334,
+            "T_Dilation": 0.6333334
+          },
+          {
+            "T_Original": 0.65000004,
+            "T_Dilation": 0.65000004
+          },
+          {
+            "T_Original": 0.6666667,
+            "T_Dilation": 0.6666667
+          },
+          {
+            "T_Original": 0.6833334,
+            "T_Dilation": 0.68333334
+          },
+          {
+            "T_Original": 0.70000005,
+            "T_Dilation": 0.7
+          },
+          {
+            "T_Original": 0.7166667,
+            "T_Dilation": 0.71666664
+          },
+          {
+            "T_Original": 0.73333335,
+            "T_Dilation": 0.7333333
+          },
+          {
+            "T_Original": 0.75000006,
+            "T_Dilation": 0.74999994
+          },
+          {
+            "T_Original": 0.7666667,
+            "T_Dilation": 0.7666666
+          },
+          {
+            "T_Original": 0.78333336,
+            "T_Dilation": 0.78333324
+          },
+          {
+            "T_Original": 0.8000001,
+            "T_Dilation": 0.7999999
+          },
+          {
+            "T_Original": 0.8166667,
+            "T_Dilation": 0.81666654
+          },
+          {
+            "T_Original": 0.8333334,
+            "T_Dilation": 0.8333332
+          },
+          {
+            "T_Original": 0.85,
+            "T_Dilation": 0.84999985
+          },
+          {
+            "T_Original": 0.86666673,
+            "T_Dilation": 0.8666665
+          },
+          {
+            "T_Original": 0.8833334,
+            "T_Dilation": 0.88333315
+          },
+          {
+            "T_Original": 0.90000004,
+            "T_Dilation": 0.8999998
+          },
+          {
+            "T_Original": 0.9166667,
+            "T_Dilation": 0.91666645
+          },
+          {
+            "T_Original": 0.9333334,
+            "T_Dilation": 0.9333331
+          },
+          {
+            "T_Original": 0.95000005,
+            "T_Dilation": 0.94999975
+          },
+          {
+            "T_Original": 0.9666667,
+            "T_Dilation": 0.9666664
+          },
+          {
+            "T_Original": 0.9833334,
+            "T_Dilation": 0.98333305
+          },
+          {
+            "T_Original": 1.0,
+            "T_Dilation": 0.99999964
+          }
+        ],
+        "BakedDilationCurveName": "Dilation"
+      },
+      "Skeleton": {
+        "ObjectName": "Skeleton'C_M_Human_Adult_M_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Model/C_M_Human_Adult_M_Skeleton.15"
+      }
+    },
+    "SkeletonGuid": "DAF13C4E-44F21635-494009B0-96C586C1"
+  },
+  {
+    "Type": "xxAnimNotify_AkEvent",
+    "Name": "xxAnimNotify_AkEvent_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotify_AkEvent'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireBow_Equip'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/PeaceIdle/AC_EmpireBow_Equip.0"
+    },
+    "Properties": {
+      "Event": {
+        "ObjectName": "AkAudioEvent'efx_empirebow_equip'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/EmpireBow/efx_empirebow_equip.0"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_ChangeArmedState",
+    "Name": "xxAnimNotifyState_ChangeArmedState_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_ChangeArmedState'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireBow_Equip'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/PeaceIdle/AC_EmpireBow_Equip.0"
+    },
+    "Properties": {
+      "IsBegin": true,
+      "BeginInfo": {
+        "ArmedState": "EWeaponArmedState::Armed"
+      },
+      "EndInfo": {
+        "ArmedState": "EWeaponArmedState::None"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Weapon",
+    "Name": "xxAnimNotifyState_Weapon_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Weapon'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireBow_Equip'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Moving/PeaceIdle/AC_EmpireBow_Equip.0"
+    },
+    "Properties": {
+      "VisibilityBegin": "EWeaponVisibility::Animation",
+      "VisibilityEnd": "EWeaponVisibility::None",
+      "bUseAnimation": true,
+      "Animations": [
+        {
+          "WeaponSlot": "EWeaponSlot::Primary",
+          "WeaponSocketType": "EWeaponSocketType::None",
+          "DefaultWeaponAnimation": {
+            "AssetPathName": "/Game/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Animation/EmpireBow/Weapon/CA_M_EmpBow_CarryASword.CA_M_EmpBow_CarryASword",
+            "SubPathString": ""
+          },
+          "NewAnimTypeToPlay": "EWeaponSocketAnimationType::Animation_1",
+          "bLoopAnimation": false
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,293 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_Empire_SwordShield_PassiveDodge_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge",
+    "SuperStruct": {
+      "ObjectName": "Class'xxMonsterPassiveDodge'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_Empire_SwordShield_PassiveDodge_C'Default__SB_Empire_SwordShield_PassiveDodge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.1"
+    }
+  },
+  {
+    "Type": "SB_Empire_SwordShield_PassiveDodge_C",
+    "Name": "Default__SB_Empire_SwordShield_PassiveDodge_C",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.SB_Empire_SwordShield_PassiveDodge_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge",
+    "Properties": {
+      "PassiveDatas": [
+        {
+          "PassiveEvent": {
+            "ObjectName": "xxMonsterPassiveTargetCheck'Default__SB_Empire_SwordShield_PassiveDodge_C:xxMonsterPassiveTargetCheck_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.7"
+          },
+          "PassiveFunc": {
+            "ObjectName": "xxMonsterPassiveFunc_UseSkill'Default__SB_Empire_SwordShield_PassiveDodge_C:xxMonsterPassiveFunc_UseSkill_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.2"
+          }
+        },
+        {
+          "PassiveEvent": {
+            "ObjectName": "xxMonsterPassiveSystemGuardCount'Default__SB_Empire_SwordShield_PassiveDodge_C:xxMonsterPassiveSystemGuardCount_3'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.6"
+          },
+          "PassiveFunc": {
+            "ObjectName": "xxMonsterPassiveFunc_UseSkill'Default__SB_Empire_SwordShield_PassiveDodge_C:xxMonsterPassiveFunc_UseSkill_4'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.4"
+          }
+        },
+        {
+          "PassiveEvent": {
+            "ObjectName": "xxMonsterPassiveSystemGuardCount'Default__SB_Empire_SwordShield_PassiveDodge_C:xxMonsterPassiveSystemGuardCount_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.5"
+          },
+          "PassiveFunc": {
+            "ObjectName": "xxMonsterPassiveFunc_UseSkill'Default__SB_Empire_SwordShield_PassiveDodge_C:xxMonsterPassiveFunc_UseSkill_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxMonsterPassiveFunc_UseSkill",
+    "Name": "xxMonsterPassiveFunc_UseSkill_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxMonsterPassiveFunc_UseSkill'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_PassiveDodge_C'Default__SB_Empire_SwordShield_PassiveDodge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.1"
+    },
+    "Properties": {
+      "PassiveFuncSkillInfo": {
+        "SkillInfo": {
+          "ObjectName": "xxSkillInfo'SI_Empire_SwordShield_Guard'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/SI_Empire_SwordShield_Guard.0"
+        },
+        "bUseCoolTime": true,
+        "bOnlyGroundDamageStateCancel": true,
+        "bExceptGetupStateCancel": true,
+        "CancelBlackList": [
+          {
+            "ObjectName": "xxSkillInfo'SI_Empire_SwordShield_GuardReaction'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/GuardReaction/SI_Empire_SwordShield_GuardReaction.0"
+          },
+          {
+            "ObjectName": "xxSkillInfo'SI_Empire_SwordShield_GuardReaction_Broken'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/GuardReaction/SI_Empire_SwordShield_GuardReaction_Broken.0"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Type": "xxMonsterPassiveFunc_UseSkill",
+    "Name": "xxMonsterPassiveFunc_UseSkill_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxMonsterPassiveFunc_UseSkill'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_PassiveDodge_C'Default__SB_Empire_SwordShield_PassiveDodge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.1"
+    },
+    "Properties": {
+      "PassiveFuncSkillInfo": {
+        "SkillInfo": {
+          "ObjectName": "xxSkillInfo'SI_Empire_SwordShield_GuardReaction'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/GuardReaction/SI_Empire_SwordShield_GuardReaction.0"
+        },
+        "bUseForce": true,
+        "bOnlyDamageStateCancel": true,
+        "CancelBlackList": [
+          {
+            "ObjectName": "xxSkillInfo'SI_Empire_SwordShield_GuardReaction_Broken'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/GuardReaction/SI_Empire_SwordShield_GuardReaction_Broken.0"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Type": "xxMonsterPassiveFunc_UseSkill",
+    "Name": "xxMonsterPassiveFunc_UseSkill_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxMonsterPassiveFunc_UseSkill'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_PassiveDodge_C'Default__SB_Empire_SwordShield_PassiveDodge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.1"
+    },
+    "Properties": {
+      "PassiveFuncSkillInfo": {
+        "SkillInfo": {
+          "ObjectName": "xxSkillInfo'SI_Empire_SwordShield_GuardReaction_Broken'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/GuardReaction/SI_Empire_SwordShield_GuardReaction_Broken.0"
+        },
+        "bUseForce": true
+      }
+    }
+  },
+  {
+    "Type": "xxMonsterPassiveSystemGuardCount",
+    "Name": "xxMonsterPassiveSystemGuardCount_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxMonsterPassiveSystemGuardCount'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_PassiveDodge_C'Default__SB_Empire_SwordShield_PassiveDodge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.1"
+    },
+    "Properties": {
+      "WeaponsGuardCount": [
+        {
+          "WeaponType": "EKazanWeaponType::DualAxeSword",
+          "NeedWeaponSuccessCount": 1,
+          "bCheckAttackerReactionValue": false,
+          "ConditionAttackerReactionValue": 0
+        },
+        {
+          "WeaponType": "EKazanWeaponType::GSword",
+          "NeedWeaponSuccessCount": 1,
+          "bCheckAttackerReactionValue": false,
+          "ConditionAttackerReactionValue": 0
+        },
+        {
+          "WeaponType": "EKazanWeaponType::Spear",
+          "NeedWeaponSuccessCount": 1,
+          "bCheckAttackerReactionValue": false,
+          "ConditionAttackerReactionValue": 0
+        }
+      ],
+      "ResetTimeSeconds": 0.0,
+      "TimeInfo": {
+        "PendingLimitTime": 0.2
+      }
+    }
+  },
+  {
+    "Type": "xxMonsterPassiveSystemGuardCount",
+    "Name": "xxMonsterPassiveSystemGuardCount_3",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxMonsterPassiveSystemGuardCount'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_PassiveDodge_C'Default__SB_Empire_SwordShield_PassiveDodge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.1"
+    },
+    "Properties": {
+      "WeaponsGuardCount": [
+        {
+          "WeaponType": "EKazanWeaponType::None",
+          "NeedWeaponSuccessCount": 1,
+          "bCheckAttackerReactionValue": true,
+          "ConditionAttackerReactionValue": 30
+        },
+        {
+          "WeaponType": "EKazanWeaponType::DualAxeSword",
+          "NeedWeaponSuccessCount": 1,
+          "bCheckAttackerReactionValue": true,
+          "ConditionAttackerReactionValue": 30
+        },
+        {
+          "WeaponType": "EKazanWeaponType::GSword",
+          "NeedWeaponSuccessCount": 1,
+          "bCheckAttackerReactionValue": true,
+          "ConditionAttackerReactionValue": 30
+        },
+        {
+          "WeaponType": "EKazanWeaponType::Spear",
+          "NeedWeaponSuccessCount": 1,
+          "bCheckAttackerReactionValue": true,
+          "ConditionAttackerReactionValue": 30
+        }
+      ],
+      "ResetTimeSeconds": 2.0,
+      "TimeInfo": {
+        "PendingLimitTime": 2.0
+      }
+    }
+  },
+  {
+    "Type": "xxMonsterPassiveTargetCheck",
+    "Name": "xxMonsterPassiveTargetCheck_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxMonsterPassiveTargetCheck'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_PassiveDodge_C'Default__SB_Empire_SwordShield_PassiveDodge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.1"
+    },
+    "Properties": {
+      "TargetCheckData": {
+        "bInstantTarget": true,
+        "InstantTargetTraceInfo": {
+          "bUseCircleTraceInfo": true,
+          "CircleTraceInfo": {
+            "Yaw": 90.0,
+            "RangeMax": 500.0
+          }
+        },
+        "AttackBoxCondition": {
+          "bCheckAttackBoxRemainTime": true,
+          "CheckAnimationAttackBoxRemainTime": -0.2,
+          "bCheckAttackBoxActive": true
+        }
+      },
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxTagCondition_CharacterBattleStateType'Default__SB_Empire_SwordShield_PassiveDodge_C:xxMonsterPassiveTargetCheck_0.xxTagCondition_CharacterBattleStateType_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.9"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_Empire_SwordShield_PassiveDodge_C:xxMonsterPassiveTargetCheck_0.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.8"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxMonsterPassiveTargetCheck'Default__SB_Empire_SwordShield_PassiveDodge_C:xxMonsterPassiveTargetCheck_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.7"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::Stamina",
+        "CompareOperator": "ECompareOperator::GreaterThanOrEqualTo",
+        "bUseRatio": true,
+        "RatioValue": 0.2
+      }
+    }
+  },
+  {
+    "Type": "xxTagCondition_CharacterBattleStateType",
+    "Name": "xxTagCondition_CharacterBattleStateType_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxTagCondition_CharacterBattleStateType'",
+    "Outer": {
+      "ObjectName": "xxMonsterPassiveTargetCheck'Default__SB_Empire_SwordShield_PassiveDodge_C:xxMonsterPassiveTargetCheck_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/SB_Empire_SwordShield_PassiveDodge.7"
+    },
+    "Properties": {
+      "bUseDont": true,
+      "CharacterBattleStateTypes": [
+        "ECharacterBattleStateType::StaminaExhaustion"
+      ],
+      "ExceptCharacterBattleStateTypes": [
+        "ECharacterBattleStateType::StaminaExhaustionOrRemainTime"
+      ]
+    }
+  }
+]

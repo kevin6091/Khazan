@@ -1,0 +1,102 @@
+[
+  {
+    "Type": "AnimComposite",
+    "Name": "AC_EmpireSword_Sick_Down_B",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimComposite'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/HeinMach/Sick/AC_EmpireSword_Sick_Down_B",
+    "Properties": {
+      "AnimationTrack": {
+        "AnimSegments": [
+          {
+            "AnimReference": {
+              "ObjectName": "AnimSequence'CA_M_Human_Adult_M_Down_Sick_B_Loop'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Animation/CA_M_Human_Adult_M_Down_Sick_B_Loop.0"
+            },
+            "StartPos": 0.0,
+            "AnimStartTime": 0.0,
+            "AnimEndTime": 6.3333335,
+            "AnimPlayRate": 1.0,
+            "LoopingCount": 1
+          }
+        ]
+      },
+      "Notifies": [
+        {
+          "TriggerTimeOffset": -0.0001,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxDamagerReaction",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_DamagerReaction'AC_EmpireSword_Sick_Down_B:xxAnimNotifyState_DamagerReaction_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/HeinMach/Sick/AC_EmpireSword_Sick_Down_B.1"
+          },
+          "Duration": 6.3333335,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 9.233334,
+            "LinkValue": 6.3333335,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Sick_Down_B'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/HeinMach/Sick/AC_EmpireSword_Sick_Down_B.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 9.233334,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireSword_Sick_Down_B'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/HeinMach/Sick/AC_EmpireSword_Sick_Down_B.0"
+          }
+        }
+      ],
+      "SequenceLength": 6.3333335,
+      "Skeleton": {
+        "ObjectName": "Skeleton'C_M_Human_Adult_M_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Model/C_M_Human_Adult_M_Skeleton.15"
+      }
+    },
+    "SkeletonGuid": "DAF13C4E-44F21635-494009B0-96C586C1"
+  },
+  {
+    "Type": "xxAnimNotifyState_DamagerReaction",
+    "Name": "xxAnimNotifyState_DamagerReaction_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_DamagerReaction'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireSword_Sick_Down_B'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/HeinMach/Sick/AC_EmpireSword_Sick_Down_B.0"
+    },
+    "Properties": {
+      "DamagerReactionTableSelect": {
+        "DamagerReactionTag": {
+          "DataTable": {
+            "ObjectName": "DataTable'DamagerReaction_Common'",
+            "ObjectPath": "BBQ/Content/_Common/Constants/DamagerReaction/DamagerReaction_Common.0"
+          },
+          "RowName": "강인도10등급+"
+        }
+      },
+      "bResetDamageReactionAtNotifyEnd": true
+    }
+  }
+]

@@ -1,0 +1,506 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_EmpireSword_Pierce_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce",
+    "SuperStruct": {
+      "ObjectName": "Class'xxCommonSimpleSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_EmpireSword_Pierce_C'Default__SB_EmpireSword_Pierce_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.1"
+    }
+  },
+  {
+    "Type": "SB_EmpireSword_Pierce_C",
+    "Name": "Default__SB_EmpireSword_Pierce_C",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.SB_EmpireSword_Pierce_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce",
+    "Properties": {
+      "SubStateInfos": [
+        {
+          "Key": "ESubStateStepByActiveInput::Step1",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step2",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": null,
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.3,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTagNavigationMove'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventTagNavigationMove_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.11"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSkillEventFunc_NavMove'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventFunc_NavMove_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.6"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step2",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Pierce_Step1'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/AC_EmpireSword_Pierce_Step1.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.2,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventTag_2'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.9"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxConsumeStaminaRegainFunc'Default__SB_EmpireSword_Pierce_C:xxConsumeStaminaRegainFunc_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.4"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventTag_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.8"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireSword_Pierce_C:xxChangeNextStepFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.2"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step3",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Pierce_Step2'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/AC_EmpireSword_Pierce_Step2.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.2,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventTag_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.7"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxConsumeStaminaRegainFunc'Default__SB_EmpireSword_Pierce_C:xxConsumeStaminaRegainFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.3"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventTag_4'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.10"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxConsumeStaminaRegainFunc'Default__SB_EmpireSword_Pierce_C:xxConsumeStaminaRegainFunc_2'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.5"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Pierce_C'Default__SB_EmpireSword_Pierce_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step3"
+    }
+  },
+  {
+    "Type": "xxConsumeStaminaRegainFunc",
+    "Name": "xxConsumeStaminaRegainFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxConsumeStaminaRegainFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Pierce_C'Default__SB_EmpireSword_Pierce_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.1"
+    },
+    "Properties": {
+      "StaminaConsumeRegainInfo": {
+        "StaminaOperator": "EStatusOper::Rate",
+        "StaminaConsumeValue": 600,
+        "bUseSkillConsumeDynamicStatusShort": true
+      }
+    }
+  },
+  {
+    "Type": "xxConsumeStaminaRegainFunc",
+    "Name": "xxConsumeStaminaRegainFunc_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxConsumeStaminaRegainFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Pierce_C'Default__SB_EmpireSword_Pierce_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.1"
+    },
+    "Properties": {
+      "StaminaConsumeRegainInfo": {
+        "StaminaOperator": "EStatusOper::Rate",
+        "StaminaConsumeValue": 900,
+        "bUseSkillConsumeDynamicStatusShort": true
+      }
+    }
+  },
+  {
+    "Type": "xxConsumeStaminaRegainFunc",
+    "Name": "xxConsumeStaminaRegainFunc_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxConsumeStaminaRegainFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Pierce_C'Default__SB_EmpireSword_Pierce_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.1"
+    },
+    "Properties": {
+      "StaminaConsumeRegainInfo": {
+        "StaminaOperator": "EStatusOper::Rate",
+        "StaminaConsumeValue": 800,
+        "bUseSkillConsumeDynamicStatusShort": true
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventFunc_NavMove",
+    "Name": "xxSimpleSkillEventFunc_NavMove_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventFunc_NavMove'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Pierce_C'Default__SB_EmpireSword_Pierce_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.1"
+    },
+    "Properties": {
+      "AcceptanceRadius": 450.0,
+      "bIncludeAgentAndGoalRadius": false,
+      "MoveOption": "EIdleMoveOption::Walk",
+      "MoveLimitTime": 6.0
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Pierce_C'Default__SB_EmpireSword_Pierce_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventTag_0.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.12"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Pierce_C'Default__SB_EmpireSword_Pierce_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_TargetCondition_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.15"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Pierce_C'Default__SB_EmpireSword_Pierce_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventTag_2.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.13"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Pierce_C'Default__SB_EmpireSword_Pierce_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventTag_4.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.14"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTagNavigationMove",
+    "Name": "xxSimpleSkillEventTagNavigationMove_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTagNavigationMove'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Pierce_C'Default__SB_EmpireSword_Pierce_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.1"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventTag_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.7"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::Stamina",
+        "CompareOperator": "ECompareOperator::GreaterThanOrEqualTo"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventTag_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.9"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::Stamina",
+        "CompareOperator": "ECompareOperator::GreaterThanOrEqualTo"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventTag_4'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.10"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::Stamina",
+        "CompareOperator": "ECompareOperator::GreaterThanOrEqualTo"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_TargetCondition",
+    "Name": "xxSimpleSkillTagCondition_TargetCondition_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_TargetCondition'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventTag_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.8"
+    },
+    "Properties": {
+      "TargetSelectionTypes": [
+        "ETargetSelectionTypeByCondition::LockOnTarget",
+        "ETargetSelectionTypeByCondition::UseSkillTarget"
+      ],
+      "bCheckDistance": true,
+      "MaxDistance": 475.0,
+      "bCheckBaseDirection": true,
+      "FrontBaseAngle": 90.0,
+      "CheckHitDirections": [
+        "EBaseDirection::Front"
+      ]
+    }
+  }
+]

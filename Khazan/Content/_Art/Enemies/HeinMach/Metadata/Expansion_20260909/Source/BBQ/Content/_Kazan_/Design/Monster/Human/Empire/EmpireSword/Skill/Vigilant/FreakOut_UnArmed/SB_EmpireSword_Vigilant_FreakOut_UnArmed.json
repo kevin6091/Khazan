@@ -1,0 +1,168 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_EmpireSword_Vigilant_FreakOut_UnArmed_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/SB_EmpireSword_Vigilant_FreakOut_UnArmed",
+    "SuperStruct": {
+      "ObjectName": "Class'xxCommonSimpleSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_EmpireSword_Vigilant_FreakOut_UnArmed_C'Default__SB_EmpireSword_Vigilant_FreakOut_UnArmed_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/SB_EmpireSword_Vigilant_FreakOut_UnArmed.1"
+    }
+  },
+  {
+    "Type": "SB_EmpireSword_Vigilant_FreakOut_UnArmed_C",
+    "Name": "Default__SB_EmpireSword_Vigilant_FreakOut_UnArmed_C",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/SB_EmpireSword_Vigilant_FreakOut_UnArmed.SB_EmpireSword_Vigilant_FreakOut_UnArmed_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/SB_EmpireSword_Vigilant_FreakOut_UnArmed",
+    "Properties": {
+      "SubStateInfos": [
+        {
+          "Key": "ESubStateStepByActiveInput::Step1",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireSword_Vigilant_FreakOut_UnArmed'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/AC_EmpireSword_Vigilant_FreakOut_UnArmed.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.3,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSword_Vigilant_FreakOut_UnArmed_C:xxSimpleSkillEventTag_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/SB_EmpireSword_Vigilant_FreakOut_UnArmed.4"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSSEventFunc_VigilantShare'Default__SB_EmpireSword_Vigilant_FreakOut_UnArmed_C:xxSSEventFunc_VigilantShare_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/SB_EmpireSword_Vigilant_FreakOut_UnArmed.5"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnEndCheck'Default__SB_EmpireSword_Vigilant_FreakOut_UnArmed_C:xxSimpeEvnetTagOnEndCheck_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/SB_EmpireSword_Vigilant_FreakOut_UnArmed.3"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireSword_Vigilant_FreakOut_UnArmed_C:xxChangeNextStepFunc_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/SB_EmpireSword_Vigilant_FreakOut_UnArmed.2"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Vigilant_FreakOut_UnArmed_C'Default__SB_EmpireSword_Vigilant_FreakOut_UnArmed_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/SB_EmpireSword_Vigilant_FreakOut_UnArmed.1"
+    },
+    "Properties": {
+      "StepAction": "EStatusConsumeResultAction::FinishState"
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnEndCheck",
+    "Name": "xxSimpeEvnetTagOnEndCheck_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnEndCheck'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Vigilant_FreakOut_UnArmed_C'Default__SB_EmpireSword_Vigilant_FreakOut_UnArmed_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/SB_EmpireSword_Vigilant_FreakOut_UnArmed.1"
+    },
+    "Properties": {
+      "SkillStateEndCheckType": "ESkillStateEndCheckType::TrueBattleState"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Vigilant_FreakOut_UnArmed_C'Default__SB_EmpireSword_Vigilant_FreakOut_UnArmed_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/SB_EmpireSword_Vigilant_FreakOut_UnArmed.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSSEventFunc_VigilantShare",
+    "Name": "xxSSEventFunc_VigilantShare_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSSEventFunc_VigilantShare'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Vigilant_FreakOut_UnArmed_C'Default__SB_EmpireSword_Vigilant_FreakOut_UnArmed_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/SB_EmpireSword_Vigilant_FreakOut_UnArmed.1"
+    }
+  }
+]

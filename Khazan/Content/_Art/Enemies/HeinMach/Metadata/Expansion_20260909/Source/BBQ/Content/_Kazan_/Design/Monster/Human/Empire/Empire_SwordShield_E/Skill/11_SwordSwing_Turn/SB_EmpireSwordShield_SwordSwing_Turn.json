@@ -1,0 +1,426 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_EmpireSwordShield_SwordSwing_Turn_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn",
+    "SuperStruct": {
+      "ObjectName": "Class'xxCommonSimpleSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_EmpireSwordShield_SwordSwing_Turn_C'Default__SB_EmpireSwordShield_SwordSwing_Turn_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.1"
+    }
+  },
+  {
+    "Type": "SB_EmpireSwordShield_SwordSwing_Turn_C",
+    "Name": "Default__SB_EmpireSwordShield_SwordSwing_Turn_C",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.SB_EmpireSwordShield_SwordSwing_Turn_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn",
+    "Properties": {
+      "SubStateInfos": [
+        {
+          "Key": "ESubStateStepByActiveInput::Step1",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": null,
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.0,
+            "AnimPlayRate": 0.0,
+            "AnimLoopCount": 0,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSwordShield_SwordSwing_Turn_C:xxSimpleSkillEventTag_7'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.9"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireSwordShield_SwordSwing_Turn_C:xxChangeNextStepFunc_2'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.3"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSwordShield_SwordSwing_Turn_C:xxSimpleSkillEventTag_6'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.8"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireSwordShield_SwordSwing_Turn_C:xxChangeNextStepFunc_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.2"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step2",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireSwordShield_SwordSwing_Turn_L'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/AC_EmpireSwordShield_SwordSwing_Turn_L.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index5",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSwordShield_SwordSwing_Turn_C:xxSimpleSkillEventTag_4'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.7"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxConsumeStaminaRegainFunc'Default__SB_EmpireSwordShield_SwordSwing_Turn_C:xxConsumeStaminaRegainFunc_2'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.5"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step3",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireSwordShield_SwordSwing_Turn_R'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/AC_EmpireSwordShield_SwordSwing_Turn_R.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index5",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSwordShield_SwordSwing_Turn_C:xxSimpleSkillEventTag_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.6"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxConsumeStaminaRegainFunc'Default__SB_EmpireSwordShield_SwordSwing_Turn_C:xxConsumeStaminaRegainFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.4"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSwordShield_SwordSwing_Turn_C'Default__SB_EmpireSwordShield_SwordSwing_Turn_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step3"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSwordShield_SwordSwing_Turn_C'Default__SB_EmpireSwordShield_SwordSwing_Turn_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step2"
+    }
+  },
+  {
+    "Type": "xxConsumeStaminaRegainFunc",
+    "Name": "xxConsumeStaminaRegainFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxConsumeStaminaRegainFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSwordShield_SwordSwing_Turn_C'Default__SB_EmpireSwordShield_SwordSwing_Turn_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.1"
+    },
+    "Properties": {
+      "StaminaConsumeRegainInfo": {
+        "StaminaOperator": "EStatusOper::Rate",
+        "StaminaConsumeValue": 500
+      }
+    }
+  },
+  {
+    "Type": "xxConsumeStaminaRegainFunc",
+    "Name": "xxConsumeStaminaRegainFunc_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxConsumeStaminaRegainFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSwordShield_SwordSwing_Turn_C'Default__SB_EmpireSwordShield_SwordSwing_Turn_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.1"
+    },
+    "Properties": {
+      "StaminaConsumeRegainInfo": {
+        "StaminaOperator": "EStatusOper::Rate",
+        "StaminaConsumeValue": 500
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSwordShield_SwordSwing_Turn_C'Default__SB_EmpireSwordShield_SwordSwing_Turn_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSwordShield_SwordSwing_Turn_C'Default__SB_EmpireSwordShield_SwordSwing_Turn_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_6",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSwordShield_SwordSwing_Turn_C'Default__SB_EmpireSwordShield_SwordSwing_Turn_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::StartSubState",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_FindTarget'Default__SB_EmpireSwordShield_SwordSwing_Turn_C:xxSimpleSkillEventTag_6.xxSimpleSkillTagCondition_FindTarget_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.10"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_7",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSwordShield_SwordSwing_Turn_C'Default__SB_EmpireSwordShield_SwordSwing_Turn_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::StartSubState",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_FindTarget'Default__SB_EmpireSwordShield_SwordSwing_Turn_C:xxSimpleSkillEventTag_7.xxSimpleSkillTagCondition_FindTarget_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.11"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_FindTarget",
+    "Name": "xxSimpleSkillTagCondition_FindTarget_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_FindTarget'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSwordShield_SwordSwing_Turn_C:xxSimpleSkillEventTag_6'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.8"
+    },
+    "Properties": {
+      "CheckStateInfo": {
+        "bInstantTarget": true,
+        "InstantTargetTraceInfo": {
+          "OffsetRotatorYaw": 240.0,
+          "bUseCircleTraceInfo": true,
+          "CircleTraceInfo": {
+            "Yaw": 120.0,
+            "RangeMax": 600.0
+          },
+          "bCheckScreenInSide": false
+        },
+        "bIDLE": false
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_FindTarget",
+    "Name": "xxSimpleSkillTagCondition_FindTarget_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_FindTarget'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireSwordShield_SwordSwing_Turn_C:xxSimpleSkillEventTag_7'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Skill/11_SwordSwing_Turn/SB_EmpireSwordShield_SwordSwing_Turn.9"
+    },
+    "Properties": {
+      "CheckStateInfo": {
+        "bInstantTarget": true,
+        "InstantTargetTraceInfo": {
+          "OffsetRotatorYaw": 120.0,
+          "bUseCircleTraceInfo": true,
+          "CircleTraceInfo": {
+            "Yaw": 120.0,
+            "RangeMax": 600.0
+          },
+          "bCheckScreenInSide": false
+        },
+        "bIDLE": false
+      }
+    }
+  }
+]

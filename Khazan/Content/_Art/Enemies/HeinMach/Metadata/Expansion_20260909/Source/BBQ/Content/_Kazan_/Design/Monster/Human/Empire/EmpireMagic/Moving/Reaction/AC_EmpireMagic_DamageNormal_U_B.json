@@ -1,0 +1,337 @@
+[
+  {
+    "Type": "AnimComposite",
+    "Name": "AC_EmpireMagic_DamageNormal_U_B",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimComposite'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/Reaction/AC_EmpireMagic_DamageNormal_U_B",
+    "Properties": {
+      "AnimationTrack": {
+        "AnimSegments": [
+          {
+            "AnimReference": {
+              "ObjectName": "AnimSequence'CA_M_EMagic_DamageNormal_U_B'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Animation/EmpireMagic/CA_M_EMagic_DamageNormal_U_B.0"
+            },
+            "StartPos": 0.0,
+            "AnimStartTime": 0.0,
+            "AnimEndTime": 0.7,
+            "AnimPlayRate": 1.0,
+            "LoopingCount": 1
+          }
+        ]
+      },
+      "Notifies": [
+        {
+          "TriggerTimeOffset": 0.0001,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxChangingFacial",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_ChangingFacial'AC_EmpireMagic_DamageNormal_U_B:xxAnimNotifyState_ChangingFacial_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/Reaction/AC_EmpireMagic_DamageNormal_U_B.1"
+          },
+          "Duration": 0.7,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.7,
+            "LinkValue": 0.7,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireMagic_DamageNormal_U_B'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/Reaction/AC_EmpireMagic_DamageNormal_U_B.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.7,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireMagic_DamageNormal_U_B'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/Reaction/AC_EmpireMagic_DamageNormal_U_B.0"
+          }
+        }
+      ],
+      "SequenceLength": 0.7,
+      "RawCurveData": {
+        "FloatCurves": [
+          {
+            "FloatCurve": {
+              "Keys": [
+                {
+                  "InterpMode": "RCIM_Cubic",
+                  "TangentMode": "RCTM_User",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.0,
+                  "Value": -0.6,
+                  "ArriveTangent": 5.5,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 5.5,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Cubic",
+                  "TangentMode": "RCTM_User",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.107754,
+                  "Value": -0.25,
+                  "ArriveTangent": -0.166667,
+                  "ArriveTangentWeight": 0.035918,
+                  "LeaveTangent": -0.166667,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Cubic",
+                  "TangentMode": "RCTM_User",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.323262,
+                  "Value": -0.75,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.07183601,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Cubic",
+                  "TangentMode": "RCTM_User",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.7,
+                  "Value": -0.49,
+                  "ArriveTangent": 1.5,
+                  "ArriveTangentWeight": 0.12557933,
+                  "LeaveTangent": 1.5,
+                  "LeaveTangentWeight": 0.0
+                }
+              ],
+              "DefaultValue": 3.4028235E+38,
+              "PreInfinityExtrap": "RCCE_Constant",
+              "PostInfinityExtrap": "RCCE_Constant"
+            },
+            "Name": {
+              "DisplayName": "Dilation"
+            },
+            "CurveTypeFlags": 4
+          }
+        ]
+      },
+      "DilationCurve": {
+        "TimePerFrame": 0.016666668,
+        "DilationSequenceLength": 1.0999811,
+        "DilationAnimPositions": [
+          {
+            "T_Original": 0.0,
+            "T_Dilation": 0.0
+          },
+          {
+            "T_Original": 0.016666668,
+            "T_Dilation": 0.025909109
+          },
+          {
+            "T_Original": 0.033333335,
+            "T_Dilation": 0.05041773
+          },
+          {
+            "T_Original": 0.050000004,
+            "T_Dilation": 0.073690176
+          },
+          {
+            "T_Original": 0.06666667,
+            "T_Dilation": 0.095936686
+          },
+          {
+            "T_Original": 0.083333336,
+            "T_Dilation": 0.11741308
+          },
+          {
+            "T_Original": 0.10000001,
+            "T_Dilation": 0.13842046
+          },
+          {
+            "T_Original": 0.116666675,
+            "T_Dilation": 0.15929607
+          },
+          {
+            "T_Original": 0.13333334,
+            "T_Dilation": 0.18035015
+          },
+          {
+            "T_Original": 0.15,
+            "T_Dilation": 0.20182545
+          },
+          {
+            "T_Original": 0.16666667,
+            "T_Dilation": 0.22391577
+          },
+          {
+            "T_Original": 0.18333334,
+            "T_Dilation": 0.24677086
+          },
+          {
+            "T_Original": 0.20000002,
+            "T_Dilation": 0.27049622
+          },
+          {
+            "T_Original": 0.21666668,
+            "T_Dilation": 0.29515293
+          },
+          {
+            "T_Original": 0.23333335,
+            "T_Dilation": 0.32075745
+          },
+          {
+            "T_Original": 0.25,
+            "T_Dilation": 0.34728155
+          },
+          {
+            "T_Original": 0.26666668,
+            "T_Dilation": 0.37465215
+          },
+          {
+            "T_Original": 0.28333336,
+            "T_Dilation": 0.40275133
+          },
+          {
+            "T_Original": 0.3,
+            "T_Dilation": 0.43141627
+          },
+          {
+            "T_Original": 0.3166667,
+            "T_Dilation": 0.4604392
+          },
+          {
+            "T_Original": 0.33333334,
+            "T_Dilation": 0.4895934
+          },
+          {
+            "T_Original": 0.35000002,
+            "T_Dilation": 0.5187496
+          },
+          {
+            "T_Original": 0.36666667,
+            "T_Dilation": 0.54788274
+          },
+          {
+            "T_Original": 0.38333336,
+            "T_Dilation": 0.57697797
+          },
+          {
+            "T_Original": 0.40000004,
+            "T_Dilation": 0.6060201
+          },
+          {
+            "T_Original": 0.4166667,
+            "T_Dilation": 0.63499343
+          },
+          {
+            "T_Original": 0.43333337,
+            "T_Dilation": 0.66388196
+          },
+          {
+            "T_Original": 0.45000002,
+            "T_Dilation": 0.69266933
+          },
+          {
+            "T_Original": 0.4666667,
+            "T_Dilation": 0.7213387
+          },
+          {
+            "T_Original": 0.48333335,
+            "T_Dilation": 0.74987286
+          },
+          {
+            "T_Original": 0.5,
+            "T_Dilation": 0.7782543
+          },
+          {
+            "T_Original": 0.5166667,
+            "T_Dilation": 0.8064649
+          },
+          {
+            "T_Original": 0.53333336,
+            "T_Dilation": 0.8344865
+          },
+          {
+            "T_Original": 0.55,
+            "T_Dilation": 0.86230016
+          },
+          {
+            "T_Original": 0.5666667,
+            "T_Dilation": 0.88988686
+          },
+          {
+            "T_Original": 0.5833334,
+            "T_Dilation": 0.91722697
+          },
+          {
+            "T_Original": 0.6,
+            "T_Dilation": 0.94430065
+          },
+          {
+            "T_Original": 0.6166667,
+            "T_Dilation": 0.9710875
+          },
+          {
+            "T_Original": 0.6333334,
+            "T_Dilation": 0.9975669
+          },
+          {
+            "T_Original": 0.65000004,
+            "T_Dilation": 1.0237176
+          },
+          {
+            "T_Original": 0.6666667,
+            "T_Dilation": 1.0495182
+          },
+          {
+            "T_Original": 0.6833334,
+            "T_Dilation": 1.0749469
+          },
+          {
+            "T_Original": 0.7,
+            "T_Dilation": 1.0999811
+          }
+        ],
+        "BakedDilationCurveName": "Dilation"
+      },
+      "Skeleton": {
+        "ObjectName": "Skeleton'C_M_Human_Adult_M_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Model/C_M_Human_Adult_M_Skeleton.15"
+      }
+    },
+    "SkeletonGuid": "DAF13C4E-44F21635-494009B0-96C586C1"
+  },
+  {
+    "Type": "xxAnimNotifyState_ChangingFacial",
+    "Name": "xxAnimNotifyState_ChangingFacial_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_ChangingFacial'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireMagic_DamageNormal_U_B'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/Reaction/AC_EmpireMagic_DamageNormal_U_B.0"
+    },
+    "Properties": {
+      "FacialInfo": {
+        "ObjectName": "xxFacialGroupInfo'CF_Human_Adult_M_Damage_GroupData'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Facial/GroupData/CF_Human_Adult_M_Damage_GroupData.0"
+      },
+      "bInstantFacial": true
+    }
+  }
+]

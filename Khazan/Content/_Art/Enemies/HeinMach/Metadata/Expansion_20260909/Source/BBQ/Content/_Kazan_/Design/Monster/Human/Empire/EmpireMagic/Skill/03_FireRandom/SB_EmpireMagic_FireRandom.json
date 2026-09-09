@@ -1,0 +1,4080 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_EmpireMagic_FireRandom_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom",
+    "SuperStruct": {
+      "ObjectName": "Class'xxCommonSimpleSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    }
+  },
+  {
+    "Type": "SB_EmpireMagic_FireRandom_C",
+    "Name": "Default__SB_EmpireMagic_FireRandom_C",
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.SB_EmpireMagic_FireRandom_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom",
+    "Properties": {
+      "SubStateInfos": [
+        {
+          "Key": "ESubStateStepByActiveInput::Step1",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step2",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireMagic_FireRandom_Start'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/AC_EmpireMagic_FireRandom_Start.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.52"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireMagic_FireRandom_C:xxChangeNextStepFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.22"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_32'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.68"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxConsumeStaminaRegainFunc'Default__SB_EmpireMagic_FireRandom_C:xxConsumeStaminaRegainFunc_2'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.29"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step2",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step4",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireMagic_FireRandom_Loop_Front'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/AC_EmpireMagic_FireRandom_Loop_Front.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_7'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.80"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.32"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_9'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.81"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_3'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.45"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index3",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_12'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.54"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_8'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.50"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index4",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_13'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.55"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_10'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.33"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index5",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_14'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.56"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_11'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.34"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index6",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_15'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.57"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_12'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.35"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index7",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_16'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.58"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_13'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.36"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index8",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_17'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.59"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_14'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.37"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index9",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_18'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.60"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_15'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.38"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index10",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_37'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.73"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_16'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.39"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index15",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_38'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.74"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireMagic_FireRandom_C:xxChangeNextStepFunc_5'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.24"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index16",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_39'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.75"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireMagic_FireRandom_C:xxChangeNextStepFunc_6'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.25"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index11",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_40'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.76"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxDynamicStatusChangeInstFunc'Default__SB_EmpireMagic_FireRandom_C:xxDynamicStatusChangeInstFunc_2'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.31"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index12",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_24'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.61"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireMagic_FireRandom_C:xxChangeNextStepFunc_2'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.23"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step3",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step4",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireMagic_FireRandom_Loop_Back'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/AC_EmpireMagic_FireRandom_Loop_Back.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 3,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_11'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.53"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_4'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.46"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_26'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.62"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_5'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.47"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index3",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_27'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.63"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_6'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.48"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index4",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_28'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.64"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_7'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.49"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index5",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_29'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.65"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_9'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.51"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index6",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_30'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.66"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_24'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.40"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index7",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_31'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.67"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_25'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.41"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index8",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_33'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.69"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_26'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.42"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index9",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_34'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.70"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_27'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.43"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index10",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_35'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.71"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_28'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.44"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index15",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_36'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.72"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireMagic_FireRandom_C:xxChangeNextStepFunc_7'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.26"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index16",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_41'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.77"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireMagic_FireRandom_C:xxChangeNextStepFunc_8'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.27"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index11",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_42'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.78"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxDynamicStatusChangeInstFunc'Default__SB_EmpireMagic_FireRandom_C:xxDynamicStatusChangeInstFunc_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.30"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index12",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_43'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.79"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_EmpireMagic_FireRandom_C:xxChangeNextStepFunc_9'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.28"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step4",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_EmpireMagic_FireRandom_End'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/AC_EmpireMagic_FireRandom_End.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [],
+            "bContinueStepWithNoAnim": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_1.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.94"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_10.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.95"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_11.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.96"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_12.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.97"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_13.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.98"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_14.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.99"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_15.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.100"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_16.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.101"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_24.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.102"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_25.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.103"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_26.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.104"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_27.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.105"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_28.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.106"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_3.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.107"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_4.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.108"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_5.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.109"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_6.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.110"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_7.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.111"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_8.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.112"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangedSkillMoveRandom_Common",
+    "Name": "xxChangedSkillMoveRandom_Common_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangedSkillMoveRandom_Common'",
+    "Outer": {
+      "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_9.xxSkillObjectSpawnTypeHoldShoot_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.113"
+    },
+    "Properties": {
+      "TotalCount": 9,
+      "VectorTypeRandoms": [
+        {
+          "Key": "EChangedSkillMoveVectorType::TYPE1",
+          "Value": {
+            "RandomMakeType": "ERandomMakeType::Equal",
+            "MinRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "bUseMiddle": false,
+            "MiddleRange": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "MaxRange": {
+              "X": 2000.0,
+              "Y": 0.0,
+              "Z": 100.0
+            },
+            "MinLocalRange": {
+              "X": 0.0,
+              "Y": -250.0,
+              "Z": 0.0
+            },
+            "MaxLocalRange": {
+              "X": 0.0,
+              "Y": 250.0,
+              "Z": 0.0
+            },
+            "Scale": 1.0
+          }
+        }
+      ],
+      "SkillMoveKeyIndex": 1
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step3"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step4",
+      "bEnableSameStep": true
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_5",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step3",
+      "bEnableSameStep": true
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_6",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step2",
+      "bEnableSameStep": true
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_7",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step3",
+      "bEnableSameStep": true
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_8",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step2",
+      "bEnableSameStep": true
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_9",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step4",
+      "bEnableSameStep": true
+    }
+  },
+  {
+    "Type": "xxConsumeStaminaRegainFunc",
+    "Name": "xxConsumeStaminaRegainFunc_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxConsumeStaminaRegainFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "StaminaConsumeRegainInfo": {
+        "StaminaOperator": "EStatusOper::Rate",
+        "StaminaConsumeValue": 2300,
+        "bUseSkillConsumeDynamicStatusShort": true
+      }
+    }
+  },
+  {
+    "Type": "xxDynamicStatusChangeInstFunc",
+    "Name": "xxDynamicStatusChangeInstFunc_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDynamicStatusChangeInstFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "StatusChangeInfoList": [
+        {
+          "FuncChangeDynamicStatus": "EFuncChangeDynamicStatus::BattleResourceGroup1",
+          "Operator": "EStatusOper::Add",
+          "Value": 1
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDynamicStatusChangeInstFunc",
+    "Name": "xxDynamicStatusChangeInstFunc_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDynamicStatusChangeInstFunc'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "StatusChangeInfoList": [
+        {
+          "FuncChangeDynamicStatus": "EFuncChangeDynamicStatus::BattleResourceGroup1",
+          "Operator": "EStatusOper::Add",
+          "Value": 1
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_1.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.94"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_10",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_10.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.95"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_11",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_11.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.96"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_12",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_12.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.97"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_13",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_13.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.98"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_14",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_14.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.99"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_15",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_15.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.100"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_16",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_16.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.101"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_24",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_24.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.102"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_25",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_25.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.103"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_26",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_26.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.104"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_27",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_27.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.105"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_28",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_28.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.106"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_3",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_3.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.107"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_4.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.108"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_5",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_5.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.109"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_6",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_6.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.110"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_7",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_7.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.111"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_8",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_8.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.112"
+      }
+    }
+  },
+  {
+    "Type": "xxFuncSkillObjectSpawn",
+    "Name": "xxFuncSkillObjectSpawn_9",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxFuncSkillObjectSpawn'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "SkillObejctInfo": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_EmpireMagic_FireRandom_OBJ'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/Object/COI_EmpireMagic_FireRandom_OBJ.0"
+      },
+      "SkillActionType": "ESkillAction::Spawn",
+      "bUseSelectStep": true,
+      "SelectStep": "ESubStateStepByActiveInput::Step2",
+      "SpawnType": {
+        "ObjectName": "xxSkillObjectSpawnTypeHoldShoot'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_9.xxSkillObjectSpawnTypeHoldShoot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.113"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::EndSubState",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_0.xxSimpleSkillTagCondition_TargetCondition_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.89"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_11",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_12",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_13",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_14",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_15",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_16",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_17",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_18",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_24",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyEnd",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_24.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.82"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_26",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_27",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_28",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_29",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_30",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_31",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_32",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_32.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.83"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_33",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_34",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_35",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_36",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyEnd",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_36.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.84"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_36.xxSimpleSkillTagCondition_TargetCondition_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.90"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_37",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_38",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyEnd",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_38.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.85"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_38.xxSimpleSkillTagCondition_TargetCondition_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.91"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_39",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyEnd",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_39.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.86"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_39.xxSimpleSkillTagCondition_TargetCondition_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.92"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_40",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_41",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyEnd",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_41.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.87"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_41.xxSimpleSkillTagCondition_TargetCondition_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.93"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_42",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_43",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyEnd",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_43.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.88"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_7",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_9",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_EmpireMagic_FireRandom_C'Default__SB_EmpireMagic_FireRandom_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_24'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.61"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::BattleResourceGroup1",
+        "CompareOperator": "ECompareOperator::GreaterThan",
+        "Value": 2
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_32'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.68"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::Stamina",
+        "CompareOperator": "ECompareOperator::GreaterThanOrEqualTo"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_36'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.72"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::BattleResourceGroup1",
+        "CompareOperator": "ECompareOperator::LessThanOrEqualTo",
+        "Value": 2
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_38'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.74"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::BattleResourceGroup1",
+        "CompareOperator": "ECompareOperator::LessThanOrEqualTo",
+        "Value": 2
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_39'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.75"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::BattleResourceGroup1",
+        "CompareOperator": "ECompareOperator::LessThanOrEqualTo",
+        "Value": 2
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_41'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.77"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::BattleResourceGroup1",
+        "CompareOperator": "ECompareOperator::LessThanOrEqualTo",
+        "Value": 2
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_43'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.79"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::BattleResourceGroup1",
+        "CompareOperator": "ECompareOperator::GreaterThan",
+        "Value": 2
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_TargetCondition",
+    "Name": "xxSimpleSkillTagCondition_TargetCondition_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_TargetCondition'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.52"
+    },
+    "Properties": {
+      "TargetSelectionTypes": [
+        "ETargetSelectionTypeByCondition::LockOnTarget",
+        "ETargetSelectionTypeByCondition::UseSkillTarget"
+      ],
+      "bCheckDistance": true,
+      "MaxDistance": 500.0,
+      "bCheckBaseDirection": true,
+      "CheckHitDirections": [
+        "EBaseDirection::Front"
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_TargetCondition",
+    "Name": "xxSimpleSkillTagCondition_TargetCondition_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_TargetCondition'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_36'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.72"
+    },
+    "Properties": {
+      "TargetSelectionTypes": [
+        "ETargetSelectionTypeByCondition::LockOnTarget",
+        "ETargetSelectionTypeByCondition::UseSkillTarget"
+      ],
+      "bCheckDistance": true,
+      "MaxDistance": 1000.0
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_TargetCondition",
+    "Name": "xxSimpleSkillTagCondition_TargetCondition_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_TargetCondition'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_38'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.74"
+    },
+    "Properties": {
+      "TargetSelectionTypes": [
+        "ETargetSelectionTypeByCondition::LockOnTarget",
+        "ETargetSelectionTypeByCondition::UseSkillTarget"
+      ],
+      "bCheckDistance": true,
+      "MaxDistance": 1000.0
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_TargetCondition",
+    "Name": "xxSimpleSkillTagCondition_TargetCondition_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_TargetCondition'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_39'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.75"
+    },
+    "Properties": {
+      "TargetSelectionTypes": [
+        "ETargetSelectionTypeByCondition::LockOnTarget",
+        "ETargetSelectionTypeByCondition::UseSkillTarget"
+      ],
+      "bCheckDistance": true,
+      "MinDistance": 1000.0,
+      "MaxDistance": 7000.0
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_TargetCondition",
+    "Name": "xxSimpleSkillTagCondition_TargetCondition_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_TargetCondition'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_EmpireMagic_FireRandom_C:xxSimpleSkillEventTag_41'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.77"
+    },
+    "Properties": {
+      "TargetSelectionTypes": [
+        "ETargetSelectionTypeByCondition::LockOnTarget",
+        "ETargetSelectionTypeByCondition::UseSkillTarget"
+      ],
+      "bCheckDistance": true,
+      "MinDistance": 1000.0,
+      "MaxDistance": 7000.0
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.32"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_1.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.2"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_10'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.33"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_10.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.3"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_11'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.34"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_11.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.4"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_12'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.35"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_12.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.5"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_13'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.36"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_13.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.6"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_14'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.37"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_14.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.7"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_15'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.38"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_15.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.8"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_16'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.39"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_16.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.9"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_24'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.40"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_24.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.10"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_25'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.41"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_25.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.11"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_26'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.42"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_26.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.12"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_27'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.43"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_27.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.13"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_28'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.44"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_28.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.14"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_3'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.45"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_3.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.15"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_4'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.46"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_4.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.16"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_5'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.47"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_5.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.17"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_6'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.48"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_6.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.18"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_7'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.49"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_7.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.19"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_8'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.50"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_8.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.20"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnTypeHoldShoot",
+    "Name": "xxSkillObjectSpawnTypeHoldShoot_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnTypeHoldShoot'",
+    "Outer": {
+      "ObjectName": "xxFuncSkillObjectSpawn'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_9'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.51"
+    },
+    "Properties": {
+      "bUseMultiShoot": true,
+      "MultiInfoByHoldShoot": {
+        "MultiTypeByHoldShoot": "EMultiTypeByHoldShoot::SameTime",
+        "OrderCount": 2,
+        "SpawnInfoList": [
+          {
+            "bUseSocket": true,
+            "SocketName": "Weapon_L_Summoner_FX",
+            "LocationRule": "EAttachmentRule::KeepWorld",
+            "RotationRule": "EAttachmentRule::KeepRelative",
+            "bWeaponSocket": false,
+            "WeaponSocketType": "EWeaponSocketType::None",
+            "BoneOffsetLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "bUseLocalOffset": false,
+            "Location": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotator": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            }
+          }
+        ]
+      },
+      "SpawnAndHoldInfo": {
+        "bUseSocket": true,
+        "SocketName": "Weapon_L_Summoner_FX"
+      },
+      "bUseAimShootInfo": true,
+      "DetachShootInfo": {
+        "bUsePitchRotator": false,
+        "bUseYawRotator": true
+      },
+      "ChangedSkillMoveRandomBase": {
+        "ObjectName": "xxChangedSkillMoveRandom_Common'Default__SB_EmpireMagic_FireRandom_C:xxFuncSkillObjectSpawn_9.xxSkillObjectSpawnTypeHoldShoot_0.xxChangedSkillMoveRandom_Common_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Skill/03_FireRandom/SB_EmpireMagic_FireRandom.21"
+      }
+    }
+  }
+]

@@ -1,0 +1,432 @@
+[
+  {
+    "Type": "xxAIData",
+    "Name": "AI_EmpireSword_Tutorial_Signal_1",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAIData'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/AI_EmpireSword_Tutorial_Signal_1",
+    "Properties": {
+      "SetupType": "EAISetupType::Custom",
+      "ActorClass": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Tutorial.CB_EmpireSword_Tutorial_C",
+        "SubPathString": ""
+      },
+      "bHaveVigilant": true,
+      "VigilantData": {
+        "BehaviorTree": {
+          "ObjectName": "xxNBehaviorTree'BT_VigilantPreset'",
+          "ObjectPath": "BBQ/Content/_Common/AI/BT_VigilantPreset.0"
+        },
+        "ReactionSkillInfo": [
+          {
+            "Key": "EWeaponArmedState::Armed",
+            "Value": {
+              "SkillInfo": {
+                "ObjectName": "xxSkillInfo'SI_EmpireSword_Vigilant_FreakOut_Armed'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_Armed/SI_EmpireSword_Vigilant_FreakOut_Armed.0"
+              }
+            }
+          },
+          {
+            "Key": "EWeaponArmedState::Unarmed",
+            "Value": {
+              "SkillInfo": {
+                "ObjectName": "xxSkillInfo'SI_EmpireSword_Vigilant_FreakOut_UnArmed'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_UnArmed/SI_EmpireSword_Vigilant_FreakOut_UnArmed.0"
+              }
+            }
+          }
+        ],
+        "LookAroundSkillInfo": {
+          "SkillInfo": {
+            "ObjectName": "xxSkillInfo'SI_EmpireSword_Vigilant_LookAround'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/LookAround/SI_EmpireSword_Vigilant_LookAround.0"
+          }
+        }
+      },
+      "PeacePreset": {
+        "PeaceTasks": [
+          {
+            "Key": "EAIPeacePresetStep::Step1",
+            "Value": {
+              "ObjectName": "xxAIPeacePresetTask_Patrol'AI_EmpireSword_Tutorial_Signal_1:xxAIPeacePresetTask_Patrol_3'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/AI_EmpireSword_Tutorial_Signal_1.1"
+            }
+          }
+        ]
+      },
+      "CombatPreset": {
+        "bCanEditStaminaVariable": true,
+        "bCanEditPotionReact": true,
+        "bStaminaRecoveryAI": true,
+        "SkillGroup": [
+          {
+            "Rate": 1,
+            "Skill": {
+              "SkillSetting": {
+                "SkillInfo": {
+                  "ObjectName": "xxSkillInfo'SI_EmpireSword_Slash'",
+                  "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Slash/SI_EmpireSword_Slash.0"
+                }
+              },
+              "bUseSkillInfoIndex": false,
+              "SkillInfoIndex": 0,
+              "StatusConditions": [],
+              "bForceChange": false,
+              "bRangeCheck": true,
+              "Range": {
+                "Min": 0.0,
+                "Max": 300.0
+              },
+              "bHeightCheck": true,
+              "HeightRange": {
+                "Min": -300.0,
+                "Max": 300.0
+              },
+              "AngleCondition": {
+                "BaseDegree": 0.0,
+                "LeftDegree": 60.0,
+                "RightDegree": 60.0
+              },
+              "bUseSearchTarget": false,
+              "FirstUseDelay": 0.0,
+              "AfterUseDelay": 0.0,
+              "TargetStateCondition": {
+                "TargetState": 0,
+                "DamageState": 0,
+                "GuardSpellCheck": false
+              },
+              "SkillTraceCondition": {
+                "LineTraceType": "EAITraceType::Hollow",
+                "bLineTraceToTarget": true,
+                "bLineTraceToTargetLocation": true,
+                "LineTraceAngle": 0.0,
+                "LineTraceDist": 1000.0
+              },
+              "bUse": true,
+              "SelectedSkillSubStateSteps": [],
+              "PartDestructionConditions": [],
+              "bUseOnlyAtGuard": false,
+              "bIgnoreStamina": false,
+              "bPreventUseTwice": false
+            }
+          },
+          {
+            "Rate": 1,
+            "Skill": {
+              "SkillSetting": {
+                "SkillInfo": {
+                  "ObjectName": "xxSkillInfo'SI_EmpireSword_Smash'",
+                  "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/SI_EmpireSword_Smash.0"
+                }
+              },
+              "bUseSkillInfoIndex": false,
+              "SkillInfoIndex": 0,
+              "StatusConditions": [],
+              "bForceChange": false,
+              "bRangeCheck": true,
+              "Range": {
+                "Min": 0.0,
+                "Max": 300.0
+              },
+              "bHeightCheck": true,
+              "HeightRange": {
+                "Min": -300.0,
+                "Max": 300.0
+              },
+              "AngleCondition": {
+                "BaseDegree": 0.0,
+                "LeftDegree": 60.0,
+                "RightDegree": 60.0
+              },
+              "bUseSearchTarget": false,
+              "FirstUseDelay": 0.0,
+              "AfterUseDelay": 0.0,
+              "TargetStateCondition": {
+                "TargetState": 0,
+                "DamageState": 0,
+                "GuardSpellCheck": false
+              },
+              "SkillTraceCondition": {
+                "LineTraceType": "EAITraceType::Hollow",
+                "bLineTraceToTarget": true,
+                "bLineTraceToTargetLocation": true,
+                "LineTraceAngle": 0.0,
+                "LineTraceDist": 1000.0
+              },
+              "bUse": true,
+              "SelectedSkillSubStateSteps": [],
+              "PartDestructionConditions": [],
+              "bUseOnlyAtGuard": false,
+              "bIgnoreStamina": false,
+              "bPreventUseTwice": false
+            }
+          },
+          {
+            "Rate": 1,
+            "Skill": {
+              "SkillSetting": {
+                "SkillInfo": {
+                  "ObjectName": "xxSkillInfo'SI_EmpireSword_Pierce'",
+                  "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SI_EmpireSword_Pierce.0"
+                }
+              },
+              "bUseSkillInfoIndex": false,
+              "SkillInfoIndex": 0,
+              "StatusConditions": [],
+              "bForceChange": false,
+              "bRangeCheck": true,
+              "Range": {
+                "Min": 250.0,
+                "Max": 450.0
+              },
+              "bHeightCheck": true,
+              "HeightRange": {
+                "Min": -300.0,
+                "Max": 300.0
+              },
+              "AngleCondition": {
+                "BaseDegree": 0.0,
+                "LeftDegree": 30.0,
+                "RightDegree": 30.0
+              },
+              "bUseSearchTarget": false,
+              "FirstUseDelay": 0.0,
+              "AfterUseDelay": 0.0,
+              "TargetStateCondition": {
+                "TargetState": 0,
+                "DamageState": 0,
+                "GuardSpellCheck": false
+              },
+              "SkillTraceCondition": {
+                "LineTraceType": "EAITraceType::Hollow",
+                "bLineTraceToTarget": true,
+                "bLineTraceToTargetLocation": true,
+                "LineTraceAngle": 0.0,
+                "LineTraceDist": 1000.0
+              },
+              "bUse": true,
+              "SelectedSkillSubStateSteps": [],
+              "PartDestructionConditions": [],
+              "bUseOnlyAtGuard": false,
+              "bIgnoreStamina": false,
+              "bPreventUseTwice": false
+            }
+          },
+          {
+            "Rate": 2,
+            "Skill": {
+              "SkillSetting": {
+                "SkillInfo": {
+                  "ObjectName": "xxSkillInfo'SI_EmpireSword_RushAttack'",
+                  "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/RushAttack/SI_EmpireSword_RushAttack.0"
+                }
+              },
+              "bUseSkillInfoIndex": false,
+              "SkillInfoIndex": 0,
+              "StatusConditions": [],
+              "bForceChange": false,
+              "bRangeCheck": true,
+              "Range": {
+                "Min": 700.0,
+                "Max": 1900.0
+              },
+              "bHeightCheck": true,
+              "HeightRange": {
+                "Min": -300.0,
+                "Max": 300.0
+              },
+              "AngleCondition": {
+                "BaseDegree": 0.0,
+                "LeftDegree": 60.0,
+                "RightDegree": 60.0
+              },
+              "bUseSearchTarget": false,
+              "FirstUseDelay": 0.0,
+              "AfterUseDelay": 0.0,
+              "TargetStateCondition": {
+                "TargetState": 0,
+                "DamageState": 0,
+                "GuardSpellCheck": false
+              },
+              "SkillTraceCondition": {
+                "LineTraceType": "EAITraceType::Hollow",
+                "bLineTraceToTarget": true,
+                "bLineTraceToTargetLocation": true,
+                "LineTraceAngle": 0.0,
+                "LineTraceDist": 1000.0
+              },
+              "bUse": true,
+              "SelectedSkillSubStateSteps": [],
+              "PartDestructionConditions": [],
+              "bUseOnlyAtGuard": false,
+              "bIgnoreStamina": false,
+              "bPreventUseTwice": false
+            }
+          }
+        ],
+        "WaitTime": 1.0,
+        "NormalMoveSetting": [
+          {
+            "Key": "EAIPresetMoveType::LockOnMove_Front",
+            "Value": {
+              "Rate": 6,
+              "Time": 2.0
+            }
+          },
+          {
+            "Key": "EAIPresetMoveType::LockOnMove_LeftRight",
+            "Value": {
+              "Rate": 3,
+              "Time": 2.0
+            }
+          }
+        ],
+        "NearMoveSetting": [
+          {
+            "Key": "EAIPresetMoveType::LockOnMove_Back",
+            "Value": {
+              "Rate": 5,
+              "Time": 2.0
+            }
+          },
+          {
+            "Key": "EAIPresetMoveType::LockOnMove_LeftRight",
+            "Value": {
+              "Rate": 8,
+              "Time": 2.0
+            }
+          }
+        ],
+        "StaminaNormalMoveSetting": [
+          {
+            "Key": "EAIPresetMoveType::LockOnMove_Back",
+            "Value": {
+              "Rate": 2,
+              "Time": 2.0
+            }
+          },
+          {
+            "Key": "EAIPresetMoveType::LockOnMove_LeftRight",
+            "Value": {
+              "Rate": 8,
+              "Time": 2.0
+            }
+          }
+        ],
+        "StaminaNearMoveSetting": [
+          {
+            "Key": "EAIPresetMoveType::LockOnMove_Back",
+            "Value": {
+              "Rate": 8,
+              "Time": 2.0
+            }
+          },
+          {
+            "Key": "EAIPresetMoveType::LockOnMove_LeftRight",
+            "Value": {
+              "Rate": 2,
+              "Time": 2.0
+            }
+          }
+        ]
+      },
+      "RecognitionValue": {
+        "AttackedReactRange": 2000.0
+      },
+      "TargetUpdateConditions": [
+        {
+          "ObjectName": "xxTargetUpdateCond_Time'AI_EmpireSword_Tutorial_Signal_1:xxTargetUpdateCond_Time_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/AI_EmpireSword_Tutorial_Signal_1.4"
+        }
+      ],
+      "CombatTrigger": {
+        "ObjectName": "xxAITrigger_Combat'AI_EmpireSword_Tutorial_Signal_1:CombatTrigger'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/AI_EmpireSword_Tutorial_Signal_1.2"
+      },
+      "PeaceTrigger": {
+        "ObjectName": "xxAITrigger_Peace'AI_EmpireSword_Tutorial_Signal_1:PeaceTrigger'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/AI_EmpireSword_Tutorial_Signal_1.3"
+      },
+      "RecoverySettings": {
+        "RecoveryAmount": 1
+      },
+      "BattleRetreatSetting": {
+        "BattleRetreatType": "EBattleRetreatType::BattleRangePresetMelee"
+      },
+      "WaitForRetreatSetting": {
+        "bUseWaitForRetreat": true,
+        "ChangeRespiteTime": 4.0,
+        "BehaviorTree": {
+          "ObjectName": "xxNBehaviorTree'BT_WaitForRetreat_Preset'",
+          "ObjectPath": "BBQ/Content/_Common/AI/BT_WaitForRetreat_Preset.0"
+        },
+        "WaitForRetreatTime": 5.0
+      },
+      "bDestroyObjectAtBlockedMoving": true,
+      "DestroySkillInfo": {
+        "SkillInfo": {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_RushAttack_DistroyObject'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/RushAttack/SI_EmpireSword_RushAttack_DistroyObject.0"
+        }
+      }
+    }
+  },
+  {
+    "Type": "xxAIPeacePresetTask_Patrol",
+    "Name": "xxAIPeacePresetTask_Patrol_3",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAIPeacePresetTask_Patrol'",
+    "Outer": {
+      "ObjectName": "xxAIData'AI_EmpireSword_Tutorial_Signal_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/AI_EmpireSword_Tutorial_Signal_1.0"
+    }
+  },
+  {
+    "Type": "xxAITrigger_Combat",
+    "Name": "CombatTrigger",
+    "Flags": "RF_Public | RF_Transactional | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAITrigger_Combat'",
+    "Outer": {
+      "ObjectName": "xxAIData'AI_EmpireSword_Tutorial_Signal_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/AI_EmpireSword_Tutorial_Signal_1.0"
+    },
+    "Properties": {
+      "TriggerName": "CombatTrigger",
+      "BehaviorTree": {
+        "ObjectName": "xxNBehaviorTree'BT_EmpireSword_Tutorial_Signal_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/BT_EmpireSword_Tutorial_Signal_1.0"
+      }
+    }
+  },
+  {
+    "Type": "xxAITrigger_Peace",
+    "Name": "PeaceTrigger",
+    "Flags": "RF_Public | RF_Transactional | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAITrigger_Peace'",
+    "Outer": {
+      "ObjectName": "xxAIData'AI_EmpireSword_Tutorial_Signal_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/AI_EmpireSword_Tutorial_Signal_1.0"
+    },
+    "Properties": {
+      "TriggerName": "PeaceTrigger",
+      "BehaviorTree": {
+        "ObjectName": "xxNBehaviorTree'BT_PeacePreset'",
+        "ObjectPath": "BBQ/Content/_Common/AI/BT_PeacePreset.0"
+      }
+    }
+  },
+  {
+    "Type": "xxTargetUpdateCond_Time",
+    "Name": "xxTargetUpdateCond_Time_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxTargetUpdateCond_Time'",
+    "Outer": {
+      "ObjectName": "xxAIData'AI_EmpireSword_Tutorial_Signal_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/AI_EmpireSword_Tutorial_Signal_1.0"
+    },
+    "Properties": {
+      "TImeSeconds": 5
+    }
+  }
+]

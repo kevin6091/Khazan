@@ -156,3 +156,34 @@
 - [검증] 별도 프로세스에서 3/3 RAW 및 compressed 처음·끝 포즈 차이 0. 보호 대상 Content 66개 SHA-256 동일, commandlet exit 0/오류 0.
 - [백업] Saved/ArtBackups/DAS_LoopClosure_20260908_134814에 현재 파일 6개와 전체 loop RAW 포즈/설정 스냅샷을 보존했다.
 - [정본] Docs/Animation/SKELETON_RECOVERY_2026-09-08.md의 추가 복구 섹션 및 Saved/ImportReports/Khazan_DAS_LoopClosure_verify_20260908.json. 이전 source-equality 감사는 이 끝 프레임 수정 이전의 이력이다.
+
+## 2026-09-08 HeinMach Enemy 외형 라이브러리 추가
+
+- [완료] `/Game/_Art/Enemies/HeinMach`에 튜토리얼 검병 40종, 검·방패병 4종, 별도 할버드 정예 1종의 외형 Blueprint를 저장했다. 개별 source 메시 17개와 조합 전신 메시 44개, texture 149개, source 대응 material 36개 및 보조 material 1개, idle animation 3개를 포함한다.
+- [검증] `HeinMachEnemy_FreshAudit.json` 통과. 별도 UE 프로세스에서 source 참조와 모든 idle sample/bone RAW·COMPRESSED pose, Blueprint 45개의 spawn/무기 socket을 확인했다. `Preview/L_HeinMach_EnemyCatalogue`를 신규 저장했다.
+- [출처] 튜토리얼 actor는 `SA_EmpireSword_Early3_Item`, `SA_Empire_SwordShield_2`. Halberd를 튜토리얼 검병의 도끼 variant로 단정하지 않는다. source closure 327/missing 0, raw archive 347 package를 보존했다.
+- [경계] 원작 전용 shader는 표시용 대체 그래프다. 랜덤 색상·체형 적용, UE MorphTarget/LOD 체인·cloth/physics 전체 복원과 전투 AI는 미완료다. 원본 metadata와 ActorX/raw는 보존했다. geometry 조합 40/4를 색상·체형까지 완전 복원한 수로 해석하지 않는다.
+- [보호] 기존 HeinMach/StormPass 환경 맵 2개 SHA-256이 시작 시점과 같다. 기존 Player/C++는 직접 편집하지 않았다.
+- [정본] `Docs/Art/HEINMACH_ENEMY_EXTRACTION_2026-09-08.md`. 실제 그래픽 RHI compile 결과는 해당 문서 하단 및 `HeinMachEnemy_RenderAssetAudit.json`의 최종 상태를 확인한다.
+
+### 2026-09-08 Enemy 그래픽 감사 완료
+
+- `HeinMachEnemy_RenderAssetAudit.json` passed. 실제 D3D SM6 material 37개 compile 및 저장된 확인용 맵의 조립 45개 재로드를 통과했다. 미참조 staging Skeleton 12개를 정리했다. 최종 Enemy 폴더는 uasset 300개 + 새 catalogue map 1개다.
+- 원작 완전 재현의 미완료 항목은 위 경계와 Enemy 정본에 유지한다. 전투 PIE나 원작 화면 일치 검증 완료를 의미하지 않는다.
+
+## 2026-09-09 Enemy 의상·병종·애니메이션 확장 완료
+
+- 대표 외형을 검병 4, 방패병 4, 궁병 4, 중갑 대검병 1, 할버드 정예 1, 별도 지역 마법사 2의 총 16개로 구성했다. 얼굴은 001/002/003을 순환 사용한다. 검/방패의 군복 공유는 원본 recipe와 일치하며 궁병·중갑·로브와 활·대검·지팡이를 추가했다.
+- `/Game/_Art/Enemies/HeinMach/Humanoids` 및 `/Game/_Art/Enemies/OtherRegions/Humanoids`에 BP를 저장했다. 기존 얼굴 중심 45개 BP와 44개 메시를 `HeinMach/Archive/FaceVariants_20260908`로 옮겼다. 이전 경로 대응은 `LegacyAssetMoves.json`이며 디스크 redirector는 없다.
+- 원본 711개 시퀀스를 metadata의 30 fps 시간축으로 임포트하고, 원본 구간 배속·DilationCurve를 반영한 재생용 722개를 추가했다. 1,433개 모두 저장 길이·RateScale·첫/중간/마지막 모든 bone의 RAW/COMPRESSED pose 검증을 통과했다. 최대 길이 오차는 약 4.124e-7초다.
+- 텍스처 256, 머티리얼 69, 원본/재사용 메시 36 및 통합 몸체 14를 관리한다. 실제 RHI와 BP 16개 검증을 통과했고, 최종 뷰포트에서 발견한 회전 축 오류도 수정해 수직 배치를 확인했다.
+- 정본: [HEINMACH_ENEMY_EXPANSION_2026-09-09.md](HEINMACH_ENEMY_EXPANSION_2026-09-09.md). 통합 보고서: `Saved/ImportReports/HeinMachEnemyV2_FinalAudit.json`. 카탈로그: `/Game/_Art/Enemies/HeinMach/Preview/L_HeinMach_EnemyCatalogue`.
+- 기존 Player C++/ABP/DAS와 두 환경 맵은 무변경이다. 원작 cartoon shader topology, 색상·체형 RNG, UE morph/LOD/cloth/physics 전체 복원과 전투 runtime 배속은 완료 범위에 포함하지 않는다. 관련 원본·메타데이터는 보존했다.
+
+### 2026-09-09 사용자 요청에 따른 Enemy 실사용 외형 정리
+
+- 미사용 BP 45, 메시 67, 머티리얼 41, 텍스처 42의 총 195개(약 327.53 MiB)를 Content에서 삭제했다. 현재 BP 16, 메시 29, Skeleton 10, 머티리얼 65, 텍스처 214다. 기존 Archive의 얼굴 중심 조합도 삭제 대상에 포함된다.
+- 애니메이션은 후속 검증·선정 전까지 모두 유지한다. 기존 Idle 3+Source 711+Playback 722=1,436개이며, 남긴 UE 자산 1,771개 전체 hash는 정리 전과 같다.
+- 재생용 722개를 비교해 시간축이 달라지는 271개와 원본과 시간축이 같은 451개로 분류했다. 451개 중 440개는 sample 수와 포즈도 저장 정밀도 안에서 같고, 11개는 표본 수가 다르다. 실제 삭제는 아직 하지 않았다.
+- 최신 정본: [ENEMY_LIBRARY_CLEANUP_AND_PLAYBACK_2026-09-09.md](ENEMY_LIBRARY_CLEANUP_AND_PLAYBACK_2026-09-09.md). 현재 inventory와 비교표는 `Content/_Art/Enemies/HeinMach/Metadata/Cleanup_20260909`에 있다. 이전 import manifest는 추출 당시 자료다.
+- `HeinMachEnemy_CleanupAudit_20260909.json` passed. 별도 프로세스에서 BP 16개와 카탈로그를 로드했으며 missing Enemy dependency 0, 오류 0이다. 기존 코드/플레이어/환경 및 작업 시작 시 보호 파일 44개는 동일하다.

@@ -1,0 +1,100 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_EmpireSword_Passive_InputCounter_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Passive_InputCounter/SB_EmpireSword_Passive_InputCounter",
+    "SuperStruct": {
+      "ObjectName": "Class'xxPassiveSimpleSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_EmpireSword_Passive_InputCounter_C'Default__SB_EmpireSword_Passive_InputCounter_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Passive_InputCounter/SB_EmpireSword_Passive_InputCounter.1"
+    }
+  },
+  {
+    "Type": "SB_EmpireSword_Passive_InputCounter_C",
+    "Name": "Default__SB_EmpireSword_Passive_InputCounter_C",
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Passive_InputCounter/SB_EmpireSword_Passive_InputCounter.SB_EmpireSword_Passive_InputCounter_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Passive_InputCounter/SB_EmpireSword_Passive_InputCounter",
+    "Properties": {
+      "PassiveSimpleSkillEvents": [
+        {
+          "SkillTag": {
+            "ObjectName": "xxPassiveEventTag_PotionReact'Default__SB_EmpireSword_Passive_InputCounter_C:xxPassiveEventTag_PotionReact_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Passive_InputCounter/SB_EmpireSword_Passive_InputCounter.3"
+          },
+          "Funcs": [
+            {
+              "ObjectName": "xxPassiveChangeSkillStateFuncComplex'Default__SB_EmpireSword_Passive_InputCounter_C:xxPassiveChangeSkillStateFuncComplex_0'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Passive_InputCounter/SB_EmpireSword_Passive_InputCounter.2"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxPassiveChangeSkillStateFuncComplex",
+    "Name": "xxPassiveChangeSkillStateFuncComplex_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxPassiveChangeSkillStateFuncComplex'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Passive_InputCounter_C'Default__SB_EmpireSword_Passive_InputCounter_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Passive_InputCounter/SB_EmpireSword_Passive_InputCounter.1"
+    },
+    "Properties": {
+      "PassiveFuncSkillInfo": {
+        "SkillInfo": {
+          "ObjectName": "xxSkillInfo'SI_EmpireSword_Pierce'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SI_EmpireSword_Pierce.0"
+        },
+        "StartSkillStep": "ESubStateStepByActiveInput::Step2"
+      }
+    }
+  },
+  {
+    "Type": "xxPassiveEventTag_PotionReact",
+    "Name": "xxPassiveEventTag_PotionReact_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxPassiveEventTag_PotionReact'",
+    "Outer": {
+      "ObjectName": "SB_EmpireSword_Passive_InputCounter_C'Default__SB_EmpireSword_Passive_InputCounter_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Passive_InputCounter/SB_EmpireSword_Passive_InputCounter.1"
+    },
+    "Properties": {
+      "bCheckAngle": true,
+      "LimitAngle": 120.0,
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_DistanceTargetToTarget'Default__SB_EmpireSword_Passive_InputCounter_C:xxPassiveEventTag_PotionReact_0.xxSimpleSkillTagCondition_DistanceTargetToTarget_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Passive_InputCounter/SB_EmpireSword_Passive_InputCounter.4"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_DistanceTargetToTarget",
+    "Name": "xxSimpleSkillTagCondition_DistanceTargetToTarget_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_DistanceTargetToTarget'",
+    "Outer": {
+      "ObjectName": "xxPassiveEventTag_PotionReact'Default__SB_EmpireSword_Passive_InputCounter_C:xxPassiveEventTag_PotionReact_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Passive_InputCounter/SB_EmpireSword_Passive_InputCounter.3"
+    },
+    "Properties": {
+      "ToTarget": "ETargetSelectionTypeByCondition::LockOnTarget",
+      "MaxDist": 1500.0
+    }
+  }
+]

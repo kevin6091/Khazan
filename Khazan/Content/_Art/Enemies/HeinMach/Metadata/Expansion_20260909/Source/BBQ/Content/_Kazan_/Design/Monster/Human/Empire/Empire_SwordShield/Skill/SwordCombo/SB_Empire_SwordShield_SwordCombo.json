@@ -1,0 +1,408 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_Empire_SwordShield_SwordCombo_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo",
+    "SuperStruct": {
+      "ObjectName": "Class'xxCommonSimpleSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_Empire_SwordShield_SwordCombo_C'Default__SB_Empire_SwordShield_SwordCombo_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.1"
+    }
+  },
+  {
+    "Type": "SB_Empire_SwordShield_SwordCombo_C",
+    "Name": "Default__SB_Empire_SwordShield_SwordCombo_C",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.SB_Empire_SwordShield_SwordCombo_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo",
+    "Properties": {
+      "SubStateInfos": [
+        {
+          "Key": "ESubStateStepByActiveInput::Step1",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Empire_SwordShield_SwordCombo_01'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/AC_Empire_SwordShield_SwordCombo_01.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Empire_SwordShield_SwordCombo_C:xxSimpleSkillEventTag_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.10"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_Empire_SwordShield_SwordCombo_C:xxChangeNextStepFunc_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.2"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index5",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Empire_SwordShield_SwordCombo_C:xxSimpleSkillEventTag_2'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.11"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxConsumeStaminaRegainFunc'Default__SB_Empire_SwordShield_SwordCombo_C:xxConsumeStaminaRegainFunc_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.4"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnHitFailedResultDamager'Default__SB_Empire_SwordShield_SwordCombo_C:xxSimpeEvnetTagOnHitFailedResultDamager_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.5"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSkillEventFunc_NextSkillEnable'Default__SB_Empire_SwordShield_SwordCombo_C:xxSimpleSkillEventFunc_NextSkillEnable_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.7"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step2",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Empire_SwordShield_SwordCombo_02'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/AC_Empire_SwordShield_SwordCombo_02.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index5",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Empire_SwordShield_SwordCombo_C:xxSimpleSkillEventTag_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.9"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxConsumeStaminaRegainFunc'Default__SB_Empire_SwordShield_SwordCombo_C:xxConsumeStaminaRegainFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.3"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnHitFailedResultDamager'Default__SB_Empire_SwordShield_SwordCombo_C:xxSimpeEvnetTagOnHitFailedResultDamager_2'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.6"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSkillEventFunc_NextSkillEnable'Default__SB_Empire_SwordShield_SwordCombo_C:xxSimpleSkillEventFunc_NextSkillEnable_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.8"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_SwordCombo_C'Default__SB_Empire_SwordShield_SwordCombo_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step2"
+    }
+  },
+  {
+    "Type": "xxConsumeStaminaRegainFunc",
+    "Name": "xxConsumeStaminaRegainFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxConsumeStaminaRegainFunc'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_SwordCombo_C'Default__SB_Empire_SwordShield_SwordCombo_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.1"
+    },
+    "Properties": {
+      "StaminaConsumeRegainInfo": {
+        "StaminaOperator": "EStatusOper::Rate",
+        "StaminaConsumeValue": 500
+      }
+    }
+  },
+  {
+    "Type": "xxConsumeStaminaRegainFunc",
+    "Name": "xxConsumeStaminaRegainFunc_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxConsumeStaminaRegainFunc'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_SwordCombo_C'Default__SB_Empire_SwordShield_SwordCombo_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.1"
+    },
+    "Properties": {
+      "StaminaConsumeRegainInfo": {
+        "StaminaOperator": "EStatusOper::Rate",
+        "StaminaConsumeValue": 400
+      }
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnHitFailedResultDamager",
+    "Name": "xxSimpeEvnetTagOnHitFailedResultDamager_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnHitFailedResultDamager'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_SwordCombo_C'Default__SB_Empire_SwordShield_SwordCombo_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.1"
+    },
+    "Properties": {
+      "Results": [
+        "EEnableDamagedStateResult::SuperArmourAndGuard"
+      ],
+      "CheckCharacterAttackTypes": [
+        "ECharacterAttackType::Normal"
+      ],
+      "DamagerActionResult": "EHitFailedDamagerAction::None"
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnHitFailedResultDamager",
+    "Name": "xxSimpeEvnetTagOnHitFailedResultDamager_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnHitFailedResultDamager'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_SwordCombo_C'Default__SB_Empire_SwordShield_SwordCombo_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.1"
+    },
+    "Properties": {
+      "Results": [
+        "EEnableDamagedStateResult::SuperArmourAndGuard"
+      ],
+      "CheckCharacterAttackTypes": [
+        "ECharacterAttackType::Normal"
+      ],
+      "DamagerActionResult": "EHitFailedDamagerAction::None"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventFunc_NextSkillEnable",
+    "Name": "xxSimpleSkillEventFunc_NextSkillEnable_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventFunc_NextSkillEnable'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_SwordCombo_C'Default__SB_Empire_SwordShield_SwordCombo_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.1"
+    },
+    "Properties": {
+      "ChangeNextSkillCustomInfo": {
+        "ChangeNextSkillCustomType": "EChangeNextSkillCustomType::NowNextSkill",
+        "NextSkillInfo": {
+          "AssetPathName": "/Game/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/GuardReaction/SI_Empire_SwordShield_GuardReaction.SI_Empire_SwordShield_GuardReaction",
+          "SubPathString": ""
+        },
+        "bUseForceCancel": true
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventFunc_NextSkillEnable",
+    "Name": "xxSimpleSkillEventFunc_NextSkillEnable_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventFunc_NextSkillEnable'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_SwordCombo_C'Default__SB_Empire_SwordShield_SwordCombo_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.1"
+    },
+    "Properties": {
+      "ChangeNextSkillCustomInfo": {
+        "ChangeNextSkillCustomType": "EChangeNextSkillCustomType::NowNextSkill",
+        "NextSkillInfo": {
+          "AssetPathName": "/Game/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/GuardReaction/SI_Empire_SwordShield_GuardReaction.SI_Empire_SwordShield_GuardReaction",
+          "SubPathString": ""
+        },
+        "bUseForceCancel": true
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_SwordCombo_C'Default__SB_Empire_SwordShield_SwordCombo_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_SwordCombo_C'Default__SB_Empire_SwordShield_SwordCombo_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_Empire_SwordShield_SwordCombo_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_TargetCondition_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.12"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_SwordCombo_C'Default__SB_Empire_SwordShield_SwordCombo_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_TargetCondition",
+    "Name": "xxSimpleSkillTagCondition_TargetCondition_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_TargetCondition'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_Empire_SwordShield_SwordCombo_C:xxSimpleSkillEventTag_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.10"
+    },
+    "Properties": {
+      "TargetSelectionTypes": [
+        "ETargetSelectionTypeByCondition::LockOnTarget",
+        "ETargetSelectionTypeByCondition::UseSkillTarget"
+      ],
+      "bCheckDistance": true,
+      "MaxDistance": 330.0,
+      "bCheckBaseDirection": true,
+      "CheckHitDirections": [
+        "EBaseDirection::Front"
+      ]
+    }
+  }
+]

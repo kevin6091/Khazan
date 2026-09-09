@@ -1,0 +1,129 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_Empire_SwordShield_Guard_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/SB_Empire_SwordShield_Guard",
+    "SuperStruct": {
+      "ObjectName": "Class'xxSimpleSkillGuard'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_Empire_SwordShield_Guard_C'Default__SB_Empire_SwordShield_Guard_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/SB_Empire_SwordShield_Guard.1"
+    }
+  },
+  {
+    "Type": "SB_Empire_SwordShield_Guard_C",
+    "Name": "Default__SB_Empire_SwordShield_Guard_C",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/SB_Empire_SwordShield_Guard.SB_Empire_SwordShield_Guard_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/SB_Empire_SwordShield_Guard",
+    "Properties": {
+      "GuardSkillInfo": {
+        "ObjectName": "xxGuardSkillInfo'Default__SB_Empire_SwordShield_Guard_C:GuardSkillInfo'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/SB_Empire_SwordShield_Guard.3"
+      }
+    }
+  },
+  {
+    "Type": "xxGuardComponentSuccedEvent",
+    "Name": "xxGuardComponentSuccedEvent_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxGuardComponentSuccedEvent'",
+    "Outer": {
+      "ObjectName": "xxGuardSkillInfo'Default__SB_Empire_SwordShield_Guard_C:GuardSkillInfo'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/SB_Empire_SwordShield_Guard.3"
+    },
+    "Properties": {
+      "IsWeaponSuccessGuard": true,
+      "WeaponsGuardCount": [
+        {
+          "WeaponType": "EKazanWeaponType::DualAxeSword",
+          "NeedWeaponSuccessCount": 2,
+          "bCheckAttackerReactionValue": false,
+          "ConditionAttackerReactionValue": 0
+        },
+        {
+          "WeaponType": "EKazanWeaponType::Spear",
+          "NeedWeaponSuccessCount": 2,
+          "bCheckAttackerReactionValue": false,
+          "ConditionAttackerReactionValue": 0
+        },
+        {
+          "WeaponType": "EKazanWeaponType::GSword",
+          "NeedWeaponSuccessCount": 1,
+          "bCheckAttackerReactionValue": false,
+          "ConditionAttackerReactionValue": 0
+        }
+      ],
+      "NeedSuccessCount": 3,
+      "ChangeNextSkillCustomInfo": {
+        "ChangeNextSkillCustomType": "EChangeNextSkillCustomType::NowNextSkill",
+        "NextSkillInfo": {
+          "AssetPathName": "/Game/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/SI_Empire_SwordShield_GuardBroken.SI_Empire_SwordShield_GuardBroken",
+          "SubPathString": ""
+        },
+        "bUseForceCancel": true
+      }
+    }
+  },
+  {
+    "Type": "xxGuardSkillInfo",
+    "Name": "GuardSkillInfo",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxGuardSkillInfo'",
+    "Outer": {
+      "ObjectName": "SB_Empire_SwordShield_Guard_C'Default__SB_Empire_SwordShield_Guard_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/SB_Empire_SwordShield_Guard.1"
+    },
+    "Properties": {
+      "EndCheckRemainStemina": 0,
+      "bGuardStartWithNotify": false,
+      "bEnableJustGuardAtStart": false,
+      "StartAnim": {
+        "ObjectName": "AnimComposite'AC_Empire_SwordShield_Guard_Start'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/AC_Empire_SwordShield_Guard_Start.0"
+      },
+      "LoopAnim": {
+        "ObjectName": "AnimComposite'AC_Empire_SwordShield_Guard_Loop'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/AC_Empire_SwordShield_Guard_Loop.0"
+      },
+      "EndAnim": {
+        "ObjectName": "AnimComposite'AC_Empire_SwordShield_Guard_End'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/AC_Empire_SwordShield_Guard_End.0"
+      },
+      "BreakAnim": {
+        "ObjectName": "AnimComposite'AC_Empire_SwordShield_Guard_Broken'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/AC_Empire_SwordShield_Guard_Broken.0"
+      },
+      "JustGuardReduseStaminaPowerRate": 0.5,
+      "DamageAnims": [
+        {
+          "ObjectName": "AnimComposite'AC_Empire_SwordShield_Guard_Hit'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/AC_Empire_SwordShield_Guard_Hit.0"
+        }
+      ],
+      "FrontAngle": 60.0,
+      "DefenseDir": [
+        "EGuardDirection::Front"
+      ],
+      "GuardSuccessKnockRate": 0.5,
+      "Components": [
+        {
+          "ObjectName": "xxGuardComponentSuccedEvent'Default__SB_Empire_SwordShield_Guard_C:GuardSkillInfo.xxGuardComponentSuccedEvent_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Guard/SB_Empire_SwordShield_Guard.2"
+        }
+      ],
+      "Version": "GuardSkillInfoVersion::SplitNotifyEventGuardEnd"
+    }
+  }
+]

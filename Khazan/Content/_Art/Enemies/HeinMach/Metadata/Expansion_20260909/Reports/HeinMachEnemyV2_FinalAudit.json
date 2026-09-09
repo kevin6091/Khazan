@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "scope": "Imported humanoid art library and metadata-timed animation assets; proprietary shader/cloth/gameplay behavior is not fully reconstructed.",
+  "date": "2026-09-09T11:43:11.100248+09:00",
+  "catalogue_map": "/Game/_Art/Enemies/HeinMach/Preview/L_HeinMach_EnemyCatalogue",
+  "assemblies": 16,
+  "families": {
+    "Swordsman": 4,
+    "SwordShield": 4,
+    "Archer": 4,
+    "HeavySwordsman": 1,
+    "Mage": 1,
+    "MageHard": 1,
+    "HalberdElite": 1
+  },
+  "animation_counts": {
+    "SourceSequence": 711,
+    "PlaybackClip": 722
+  },
+  "source_meshes_in_manifest": 36,
+  "textures_in_manifest": 256,
+  "materials_in_manifest": 69,
+  "reports": {
+    "Library": "HeinMachEnemyV2_Library.json",
+    "AnimationImportAudit": "HeinMachEnemyV2_AnimationImportAudit.json",
+    "Assemblies": "HeinMachEnemyV2_Assemblies.json",
+    "CatalogueAudit": "HeinMachEnemyV2_CatalogueAudit.json",
+    "RenderAudit": "HeinMachEnemyV2_RenderAudit.json",
+    "OrientationAudit": "HeinMachEnemyV2_OrientationAudit.json",
+    "TextureIdentity": "HeinMachEnemyV2_TextureIdentity.json",
+    "SourceArchive": "HeinMachEnemyV2_SourceArchive.json",
+    "PreservationAudit": "HeinMachEnemyV2_PreservationAudit.json"
+  },
+  "visual_validation": "All 16 catalogue actors upright; source equipment sockets and material rendering checked in the live editor after reload.",
+  "limitations": [
+    "Cooked proprietary cartoon shader topology unavailable; preview adapter used.",
+    "AvatarColor and body preset data preserved; original runtime randomization not reproduced.",
+    "Source morph/LOD/cloth/physics data archived; complete UE simulation and chains not restored.",
+    "Custom gameplay notifies and AI/Ability/Actor time dilation need separate gameplay implementation.",
+    "28 non-character/unused/zero-duration composites preserved as metadata only."
+  ]
+}

@@ -1,0 +1,620 @@
+[
+  {
+    "Type": "xxAnimationProfile",
+    "Name": "AP_Empire_SwordHArmor",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimationProfile'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Base_Setting/AP_Empire_SwordHArmor",
+    "Properties": {
+      "Idle": {
+        "ObjectName": "AnimSequence'CA_M_ESwordHArmor_Stand'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Elite/Elite_M/Animation/ESwordHArmor/CA_M_ESwordHArmor_Stand.0"
+      },
+      "StaminaExhaustionAnimSetMap": [
+        {
+          "Key": "EStaminaExhaustionAnimationIndex::Index1",
+          "Value": {
+            "StartAnim": {
+              "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_Groggy_F_Start'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Groggy_F_Start.0"
+            },
+            "StartAnimBlendTime": 0.2,
+            "LoopAnim": {
+              "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_Groggy_F_Loop'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Groggy_F_Loop.0"
+            },
+            "LoopAnimBlendTime": 0.2,
+            "EndAnim": {
+              "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_Groggy_F_End'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Groggy_F_End.0"
+            },
+            "EndAnimBlendTime": 0.2
+          }
+        }
+      ],
+      "DamageDirectionSet": [
+        {
+          "Key": "EDamageTypeByStrength::DamageNormal",
+          "Value": {
+            "DirectionDamageAnims": [
+              {
+                "Key": "ECommonAnimationTag::DamageL",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageNormal_L_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_L_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageR",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageNormal_R_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_R_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageD",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageNormal_D_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_D_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageU",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageNormal_U_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_U_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Key": "EDamageTypeByStrength::DamageStrong",
+          "Value": {
+            "DirectionDamageAnims": [
+              {
+                "Key": "ECommonAnimationTag::DamageL",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageStrong_L_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_L_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageR",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageStrong_R_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_R_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageD",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageStrong_D_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_D_F.0"
+                  },
+                  "RandomDamageAnimations": [
+                    {
+                      "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageStrong_D_F'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_D_F.0"
+                    },
+                    {
+                      "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageStrong_D_F_2'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_D_F_2.0"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageU",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageStrong_U_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_U_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Key": "EDamageTypeByStrength::DamageWeak",
+          "Value": {
+            "DirectionDamageAnims": [
+              {
+                "Key": "ECommonAnimationTag::DamageL",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageWeak_L_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageWeak_L_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageR",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageWeak_R_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageWeak_R_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageD",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageWeak_D_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageWeak_D_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageU",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageWeak_U_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageWeak_U_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "BackDamageDirectionSet": {
+        "DirectionDamageAnims": [
+          {
+            "Key": "ECommonAnimationTag::DamageD",
+            "Value": {
+              "DamageDefault": {
+                "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageNormal_D_B'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_D_B.0"
+              },
+              "RandomDamageAnimations": []
+            }
+          },
+          {
+            "Key": "ECommonAnimationTag::DamageU",
+            "Value": {
+              "DamageDefault": {
+                "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageNormal_U_B'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_U_B.0"
+              },
+              "RandomDamageAnimations": []
+            }
+          }
+        ]
+      },
+      "DieList": [
+        {
+          "Key": "ECharacterDieState::GroundDie",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_Die_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Die_F.0"
+          }
+        },
+        {
+          "Key": "ECharacterDieState::DownDie",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_Down_F_Loop'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Down_F_Loop.0"
+          }
+        },
+        {
+          "Key": "ECharacterDieState::BackDownDie",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_Down_B_Loop'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Down_B_Loop.0"
+          }
+        }
+      ],
+      "FallingAnimList": {
+        "StartAnim": {
+          "ObjectName": "AnimComposite'AC_EmpireSwordHArmor_Falling'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_EmpireSwordHArmor_Falling.0"
+        },
+        "LoopAnim": {
+          "ObjectName": "AnimComposite'AC_EmpireSwordHArmor_Falling'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_EmpireSwordHArmor_Falling.0"
+        },
+        "EndAnim": {
+          "ObjectName": "AnimComposite'AC_EmpireSwordHArmor_Falling'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_EmpireSwordHArmor_Falling.0"
+        }
+      },
+      "SpecialDamageAnimList": [
+        {
+          "Key": "ESpecialDamageAniType::Grapple1",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageGrapple_Atk_01'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageGrapple_Atk_01.0"
+          }
+        },
+        {
+          "Key": "ESpecialDamageAniType::Grapple2",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageGrapple_Atk_02'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageGrapple_Atk_02.0"
+          }
+        },
+        {
+          "Key": "ESpecialDamageAniType::Grapple_Back1",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageGrapple_Atk_B_01'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageGrapple_Atk_B_01.0"
+          }
+        },
+        {
+          "Key": "ESpecialDamageAniType::Grapple_Back2",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageGrapple_Atk_B_02'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageGrapple_Atk_B_02.0"
+          }
+        },
+        {
+          "Key": "ESpecialDamageAniType::Execution1",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_ESwordShield_DamageFinalBlow'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Moving/Reaction/AC_ESwordShield_DamageFinalBlow.0"
+          }
+        }
+      ],
+      "ParringBlockDamageAnimations": [
+        {
+          "Key": "EParringBlockDamageAnimType::TypeA",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageParry_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageParry_F.0"
+          }
+        }
+      ],
+      "FinalBlowType": "EFinalBlowType::FinalBlow_034",
+      "AnimMapIDToAsset": [
+        {
+          "Key": "0",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageGrapple_Atk_01'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageGrapple_Atk_01.0"
+          }
+        },
+        {
+          "Key": "1",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageGrapple_Atk_02'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageGrapple_Atk_02.0"
+          }
+        },
+        {
+          "Key": "2",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageGrapple_Atk_B_01'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageGrapple_Atk_B_01.0"
+          }
+        },
+        {
+          "Key": "3",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageGrapple_Atk_B_02'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageGrapple_Atk_B_02.0"
+          }
+        },
+        {
+          "Key": "4",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageNormal_D_B'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_D_B.0"
+          }
+        },
+        {
+          "Key": "5",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageNormal_D_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_D_F.0"
+          }
+        },
+        {
+          "Key": "6",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageNormal_L_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_L_F.0"
+          }
+        },
+        {
+          "Key": "7",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageNormal_R_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_R_F.0"
+          }
+        },
+        {
+          "Key": "8",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageNormal_U_B'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_U_B.0"
+          }
+        },
+        {
+          "Key": "9",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageNormal_U_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_U_F.0"
+          }
+        },
+        {
+          "Key": "10",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageParry_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageParry_F.0"
+          }
+        },
+        {
+          "Key": "11",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageStrong_D_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_D_F.0"
+          }
+        },
+        {
+          "Key": "12",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageStrong_D_F_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_D_F_2.0"
+          }
+        },
+        {
+          "Key": "13",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageStrong_L_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_L_F.0"
+          }
+        },
+        {
+          "Key": "14",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageStrong_R_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_R_F.0"
+          }
+        },
+        {
+          "Key": "15",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageStrong_U_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_U_F.0"
+          }
+        },
+        {
+          "Key": "16",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageWeak_D_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageWeak_D_F.0"
+          }
+        },
+        {
+          "Key": "17",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageWeak_L_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageWeak_L_F.0"
+          }
+        },
+        {
+          "Key": "18",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageWeak_R_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageWeak_R_F.0"
+          }
+        },
+        {
+          "Key": "19",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_DamageWeak_U_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageWeak_U_F.0"
+          }
+        },
+        {
+          "Key": "20",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_Die_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Die_F.0"
+          }
+        },
+        {
+          "Key": "21",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_Down_B_Loop'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Down_B_Loop.0"
+          }
+        },
+        {
+          "Key": "22",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_Down_F_Loop'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Down_F_Loop.0"
+          }
+        },
+        {
+          "Key": "23",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_Groggy_F_End'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Groggy_F_End.0"
+          }
+        },
+        {
+          "Key": "24",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_Groggy_F_Loop'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Groggy_F_Loop.0"
+          }
+        },
+        {
+          "Key": "25",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Empire_SwordHArmor_Groggy_F_Start'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Groggy_F_Start.0"
+          }
+        },
+        {
+          "Key": "26",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_EmpireSwordHArmor_Falling'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_EmpireSwordHArmor_Falling.0"
+          }
+        },
+        {
+          "Key": "27",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_ESwordShield_DamageFinalBlow'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Moving/Reaction/AC_ESwordShield_DamageFinalBlow.0"
+          }
+        },
+        {
+          "Key": "28",
+          "Value": {
+            "ObjectName": "AnimSequence'CA_M_ESwordHArmor_Stand'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Elite/Elite_M/Animation/ESwordHArmor/CA_M_ESwordHArmor_Stand.0"
+          }
+        }
+      ],
+      "AnimMapAssetToID": [
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageGrapple_Atk_01.AC_Empire_SwordHArmor_DamageGrapple_Atk_01'",
+          "Value": 0
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageGrapple_Atk_02.AC_Empire_SwordHArmor_DamageGrapple_Atk_02'",
+          "Value": 1
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageGrapple_Atk_B_01.AC_Empire_SwordHArmor_DamageGrapple_Atk_B_01'",
+          "Value": 2
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageGrapple_Atk_B_02.AC_Empire_SwordHArmor_DamageGrapple_Atk_B_02'",
+          "Value": 3
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_D_B.AC_Empire_SwordHArmor_DamageNormal_D_B'",
+          "Value": 4
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_D_F.AC_Empire_SwordHArmor_DamageNormal_D_F'",
+          "Value": 5
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_L_F.AC_Empire_SwordHArmor_DamageNormal_L_F'",
+          "Value": 6
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_R_F.AC_Empire_SwordHArmor_DamageNormal_R_F'",
+          "Value": 7
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_U_B.AC_Empire_SwordHArmor_DamageNormal_U_B'",
+          "Value": 8
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageNormal_U_F.AC_Empire_SwordHArmor_DamageNormal_U_F'",
+          "Value": 9
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageParry_F.AC_Empire_SwordHArmor_DamageParry_F'",
+          "Value": 10
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_D_F.AC_Empire_SwordHArmor_DamageStrong_D_F'",
+          "Value": 11
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_D_F_2.AC_Empire_SwordHArmor_DamageStrong_D_F_2'",
+          "Value": 12
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_L_F.AC_Empire_SwordHArmor_DamageStrong_L_F'",
+          "Value": 13
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_R_F.AC_Empire_SwordHArmor_DamageStrong_R_F'",
+          "Value": 14
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageStrong_U_F.AC_Empire_SwordHArmor_DamageStrong_U_F'",
+          "Value": 15
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageWeak_D_F.AC_Empire_SwordHArmor_DamageWeak_D_F'",
+          "Value": 16
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageWeak_L_F.AC_Empire_SwordHArmor_DamageWeak_L_F'",
+          "Value": 17
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageWeak_R_F.AC_Empire_SwordHArmor_DamageWeak_R_F'",
+          "Value": 18
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_DamageWeak_U_F.AC_Empire_SwordHArmor_DamageWeak_U_F'",
+          "Value": 19
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Die_F.AC_Empire_SwordHArmor_Die_F'",
+          "Value": 20
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Down_B_Loop.AC_Empire_SwordHArmor_Down_B_Loop'",
+          "Value": 21
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Down_F_Loop.AC_Empire_SwordHArmor_Down_F_Loop'",
+          "Value": 22
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Groggy_F_End.AC_Empire_SwordHArmor_Groggy_F_End'",
+          "Value": 23
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Groggy_F_Loop.AC_Empire_SwordHArmor_Groggy_F_Loop'",
+          "Value": 24
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_Empire_SwordHArmor_Groggy_F_Start.AC_Empire_SwordHArmor_Groggy_F_Start'",
+          "Value": 25
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Moving/Reaction/AC_EmpireSwordHArmor_Falling.AC_EmpireSwordHArmor_Falling'",
+          "Value": 26
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield_E/Moving/Reaction/AC_ESwordShield_DamageFinalBlow.AC_ESwordShield_DamageFinalBlow'",
+          "Value": 27
+        },
+        {
+          "Key": "AnimSequence'BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Elite/Elite_M/Animation/ESwordHArmor/CA_M_ESwordHArmor_Stand.CA_M_ESwordHArmor_Stand'",
+          "Value": 28
+        }
+      ]
+    }
+  }
+]

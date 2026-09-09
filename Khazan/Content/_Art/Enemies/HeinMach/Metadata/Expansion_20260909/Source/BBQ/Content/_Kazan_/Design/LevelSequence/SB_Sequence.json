@@ -1,0 +1,131 @@
+[
+  {
+    "Type": "Function",
+    "Name": "ExecuteUbergraph_SB_Sequence",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'SB_Sequence_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/LevelSequence/SB_Sequence.2"
+    },
+    "ChildProperties": [
+      {
+        "Type": "IntProperty",
+        "Name": "EntryPoint",
+        "Flags": "RF_Public",
+        "ElementSize": 4,
+        "PropertyFlags": "BlueprintVisible | BlueprintReadOnly | Parm"
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "K2Node_Event_NewState",
+        "Flags": "RF_Public",
+        "ElementSize": 8,
+        "PropertyClass": {
+          "ObjectName": "Class'xxStateBase'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      }
+    ],
+    "FunctionFlags": "FUNC_Final | FUNC_UbergraphFunction"
+  },
+  {
+    "Type": "Function",
+    "Name": "OnStateEnd",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'SB_Sequence_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/LevelSequence/SB_Sequence.2"
+    },
+    "SuperStruct": {
+      "ObjectName": "Function'xxStateBase:OnStateEnd'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ChildProperties": [
+      {
+        "Type": "ObjectProperty",
+        "Name": "NewState",
+        "Flags": "RF_Public",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | BlueprintReadOnly | Parm",
+        "PropertyClass": {
+          "ObjectName": "Class'xxStateBase'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      }
+    ],
+    "FunctionFlags": "FUNC_Event | FUNC_Public | FUNC_BlueprintEvent"
+  },
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_Sequence_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/LevelSequence/SB_Sequence",
+    "Properties": {
+      "UberGraphFunction": {
+        "ObjectName": "Function'SB_Sequence_C:ExecuteUbergraph_SB_Sequence'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/LevelSequence/SB_Sequence.0"
+      }
+    },
+    "SuperStruct": {
+      "ObjectName": "Class'xxSequenceSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "Children": [
+      {
+        "ObjectName": "Function'SB_Sequence_C:OnStateEnd'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/LevelSequence/SB_Sequence.1"
+      },
+      {
+        "ObjectName": "Function'SB_Sequence_C:ExecuteUbergraph_SB_Sequence'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/LevelSequence/SB_Sequence.0"
+      }
+    ],
+    "ChildProperties": [
+      {
+        "Type": "StructProperty",
+        "Name": "UberGraphFrame",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 16,
+        "PropertyFlags": "Transient | DuplicateTransient",
+        "Struct": {
+          "ObjectName": "ScriptStruct'PointerToUberGraphFrame'",
+          "ObjectPath": "/Script/Engine"
+        }
+      }
+    ],
+    "FuncMap": {
+      "ExecuteUbergraph_SB_Sequence": {
+        "ObjectName": "Function'SB_Sequence_C:ExecuteUbergraph_SB_Sequence'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/LevelSequence/SB_Sequence.0"
+      },
+      "OnStateEnd": {
+        "ObjectName": "Function'SB_Sequence_C:OnStateEnd'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/LevelSequence/SB_Sequence.1"
+      }
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_Sequence_C'Default__SB_Sequence_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/LevelSequence/SB_Sequence.3"
+    }
+  },
+  {
+    "Type": "SB_Sequence_C",
+    "Name": "Default__SB_Sequence_C",
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/LevelSequence/SB_Sequence.SB_Sequence_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/LevelSequence/SB_Sequence",
+    "Properties": {
+      "UberGraphFrame": {}
+    }
+  }
+]

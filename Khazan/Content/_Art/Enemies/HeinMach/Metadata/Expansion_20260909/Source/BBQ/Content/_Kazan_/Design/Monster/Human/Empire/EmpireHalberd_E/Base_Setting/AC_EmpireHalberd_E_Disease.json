@@ -1,0 +1,184 @@
+[
+  {
+    "Type": "AnimComposite",
+    "Name": "AC_EmpireHalberd_E_Disease",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimComposite'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Base_Setting/AC_EmpireHalberd_E_Disease",
+    "Properties": {
+      "AnimationTrack": {
+        "AnimSegments": [
+          {
+            "AnimReference": {
+              "ObjectName": "AnimSequence'CA_EmpireHalberd_E_Halberd'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Base_Setting/CA_EmpireHalberd_E_Halberd.0"
+            },
+            "StartPos": 0.0,
+            "AnimStartTime": 0.0,
+            "AnimEndTime": 2.4,
+            "AnimPlayRate": 1.0,
+            "LoopingCount": 1
+          }
+        ]
+      },
+      "Notifies": [
+        {
+          "TriggerTimeOffset": -0.0001,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_EmpireHalberd_E_Disease:xxAnimNotifyState_Particle_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Base_Setting/AC_EmpireHalberd_E_Disease.2"
+          },
+          "Duration": 2.4,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 4.9666667,
+            "LinkValue": 2.4,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Disease'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Base_Setting/AC_EmpireHalberd_E_Disease.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 4.9666667,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Disease'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Base_Setting/AC_EmpireHalberd_E_Disease.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": -0.0001,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxRimLight",
+          "Notify": {
+            "ObjectName": "xxAnimNotify_RimLight'AC_EmpireHalberd_E_Disease:xxAnimNotify_RimLight_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Base_Setting/AC_EmpireHalberd_E_Disease.1"
+          },
+          "NotifyStateClass": null,
+          "Duration": 0.0,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": -1,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.0,
+            "LinkValue": 0.0,
+            "LinkedSequence": null
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 1,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.2,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Disease'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Base_Setting/AC_EmpireHalberd_E_Disease.0"
+          }
+        }
+      ],
+      "SequenceLength": 2.4,
+      "Skeleton": {
+        "ObjectName": "Skeleton'C_I_Halberd_Weapon_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Named/Halberd/Model/C_I_Halberd_Weapon_Skeleton.0"
+      }
+    },
+    "SkeletonGuid": "A5F82192-413158BE-F55DCEBF-2545CDCF"
+  },
+  {
+    "Type": "xxAnimNotify_RimLight",
+    "Name": "xxAnimNotify_RimLight_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotify_RimLight'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Disease'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Base_Setting/AC_EmpireHalberd_E_Disease.0"
+    },
+    "Properties": {
+      "BlendIn": {
+        "BlendTime": 0.0
+      },
+      "BlendOut": {
+        "BlendTime": 1.2
+      },
+      "Duration": 1.2,
+      "bApplyOnlyToSelfSkeletalMesh": true,
+      "CustomColor": {
+        "R": 2.0,
+        "G": 0.0,
+        "B": 0.0,
+        "A": 0.0,
+        "Hex": "FF0000"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_Disease'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Base_Setting/AC_EmpireHalberd_E_Disease.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "ParticleMode": "Niagara",
+        "NiagaraParticle": {
+          "ObjectName": "NiagaraSystem'FP_Sword1_Init3'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Skalpel/FP_Sword1_Init3.47"
+        },
+        "Scale": 0.8,
+        "RelativeLocation": {
+          "X": 7.858034E-10,
+          "Y": 0.0,
+          "Z": 80.0
+        },
+        "bAttached": true,
+        "AttachSocketName": "Weapon_R",
+        "CustomTimeDilation": 0.5,
+        "bAbsoluteRotation": false
+      },
+      "bDestroyOnNotifyEnd": true,
+      "bDestroyOnNotifyEndDeactived": true,
+      "bDestroyOnAnimEnd": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  }
+]

@@ -182,3 +182,92 @@
 - 최종 로그 Khazan_DAS_LoopClosure_FreshAudit_20260908.log는 exit 0/오류 0이다. 현재 사용자 요청인 세 loop 첫/끝 포즈 복구의 남은 필수 작업은 없다.
 - 재검증은 Scripts/Animation/restore_das_loop_end_pose.py의 기본 verify 모드로 한다. 이후 사용자가 추가 편집하면 baseline과 달라질 수 있으므로 차이를 곧바로 손상으로 단정하지 않는다. apply를 다시 실행하거나 이전 skeleton 복구 스크립트로 끝 프레임을 원본 포즈로 되돌리지 않는다.
 - 상세 결과와 이전 복구의 한계 보완은 Docs/Animation/SKELETON_RECOVERY_2026-09-08.md 및 ANIMATION_LOCOMOTION.md에 날짜별로 추가했다.
+
+## 2026-09-08 HeinMach 인간형 Enemy 추출·조립 시작
+
+- 요청: DAS 튜토리얼과 초반 HeinMach 인간형 적의 외형 조합, 장비, 머티리얼, 텍스처, 원작 메타데이터 추출 및 Enemy 전용 폴더 임포트. 게임 로직/C++ 변경 작업이 아니다.
+- 확인: `HeinMach_Spawn_Main01.json`의 tutorial actor 1066 `SA_EmpireSword_Early3_Item`, 1055 `SA_Empire_SwordShield_2`. 전체 spawn handler 47개를 `Saved/Extracted/HeinMachEnemies/SourceSpawnActors.json`에 저장했다. 도끼 여부는 장비 참조를 추가 확인해야 한다.
+- 원본: FModel 기존 AppSettings의 설치 게임/Pak 및 기존 키를 사용한다. 키는 출력/기록하지 않는다. CUE4Parse 1.2.2.202609 기반 표적 도구 `Scripts/Enemies/EnemyExtractor`를 준비했다. .NET 10은 `C:/Users/user/.dotnet/dotnet.exe`를 사용한다.
+- 보호: `Saved/Extracted/HeinMachEnemies/ProtectedBaseline.json`에 시작 시 기존 변경 파일과 두 완성 환경 맵의 SHA-256을 보존했다. 기존 Art 문서는 하단 추가만 허용한다.
+- 현재 UE Editor 미실행/미연결. 임포트는 UE 5.8 commandlet으로 진행할 수 있다. Python은 `C:/Program Files/Epic Games/UE_5.8/Engine/Binaries/ThirdParty/Python3/Win64/python.exe`를 사용한다.
+- 재개: InitialMetadataRequests.json의 8개 package부터 metadata를 추출하고 CB/SpawnInfo/외형 데이터 참조를 따라간다. TargetedPackageIndex가 생성되면 재사용하며 전 게임 재추출하지 않는다. 이후 Enemy 전용 신규 경로에 임포트→조립→별도 프로세스 재로드 감사→완료 문서 추가. 아직 UE 에셋 임포트는 미실행이다.
+
+## 2026-09-08 HeinMach Enemy 전신 조합·재로드 완료, 그래픽 검증 진행
+
+- 완료: 개별 source mesh 17, 전신 조합 mesh 44, BP 45, texture 149, source 대응 material 36 + 보조 1, idle 3개를 `/Game/_Art/Enemies/HeinMach`에 저장했다. `HeinMachEnemy_FreshAudit.json`이 passed이며 확인용 새 맵 저장까지 완료했다.
+- 마지막 검증: idle 모든 프레임/bone의 RAW·COMPRESSED pose를 정규화된 원본 PSA와 대조했다. 본체 하나가 포즈를 재생하는 최종 조합 BP의 검/방패 socket과 spawn을 45/45 검사했다. 원본 파츠/geometry는 별도 보존한다.
+- 해결한 원인: 추출 quaternion의 미세한 비정규화가 Sequencer Euler 변환에서 큰 골반 오차를 만들었고, 입력 정규화로 해결했다. 초기 파츠 BP의 template weak leader 참조는 actor instance로 자동 재연결되지 않아, source 파츠를 전신 mesh로 조합하고 완성 BP에 적용했다. 초기 prototype은 별도 프로세스에서 미참조 확인 후 정리했다.
+- 현재 진행: 실제 D3D RHI의 `verify_enemy_render_assets.py`가 shader compile 후 저장 맵을 재로드하고, 미참조 import staging을 정리한다. 로그 `Saved/Logs/HeinMachEnemy_RenderAssetAudit.log`, 결과 `Saved/ImportReports/HeinMachEnemy_RenderAssetAudit.json`. 이 실행 중 다른 UE writer를 띄우지 않는다.
+- 중단 시 정확한 재개: 위 RHI 프로세스/로그와 report의 최종 상태를 먼저 확인한다. 실패면 해당 material/참조만 수정하고 같은 RHI 감사만 재실행한다. 통과 후 bundle Python으로 `finalize_enemy_sources.py`를 실행하여 최종 source/derived archive와 보고서를 FModel 루트에 복사하고 hash 대조한다. 마지막 결과를 정본 하단에 추가한다.
+- 남은 원작 재현 범위: custom BBQCartoon shader, AvatarColor/체형/얼굴 적용, UE MorphTarget·LOD 체인, cloth/physics 전체 복원. metadata/raw를 확보했지만 현재 원작 완전 재현으로 기록하지 않는다. 전투 AI 구현 결과도 아니다.
+- 정정: 앞선 시작 기록의 `ProtectedBaseline.json` 설명과 달리 실제 baseline에 저장된 hash는 기존 HeinMach/StormPass 환경 맵 2개다. 두 맵의 현재 hash 일치는 `HeinMachEnemy_ProtectedMaps.json`으로 확인했다. 기존 변경 파일 전체 hash를 검증한 것으로 확대하지 않는다.
+- 정본: `Docs/Art/HEINMACH_ENEMY_EXTRACTION_2026-09-08.md`.
+
+### 2026-09-08 Enemy 그래픽 재로드 검증 완료
+
+- 위 진행 이후 RHI 감사가 passed/exit 0으로 완료됐다. material 37개 compile, 저장 맵의 Blueprint 45개 재로드/소켓/idle 참조 확인, 미참조 staging Skeleton 12개 정리를 마쳤다. 실행 중인 Enemy UE writer는 종료됐다.
+- `HeinMachEnemy_ProtectedMaps.json`의 기존 환경 맵 2/2 hash 일치도 통과했다. 문서 정본 하단의 최종 검증 절을 기준으로 한다.
+- 후속 사용은 `/Game/_Art/Enemies/HeinMach/Preview/L_HeinMach_EnemyCatalogue`에서 시작한다. 에셋을 다시 만들 필요는 없다. 최종 외부 archive 및 hash는 `HeinMachEnemy_SourceExtraction.json`으로 확인한다.
+- 원작 완전 재현에 남은 shader/색상·체형/morph·LOD/cloth·physics와 전투 기능 범위는 위 기록대로 미완료다. 작업 중 시도했던 template leader BP나 초기 prototype 삭제 절차로 돌아가지 않는다.
+
+## 2026-09-09 Enemy 병종·의상·장비·애니메이션 확장 시작
+
+- 사용자 요청: 다른 인간형 병종 및 무기 추가, 얼굴은 3개로 제한하고 의상 중심의 조합, metadata와 같은 애니메이션 재생 속도로 임포트. 기존 40종 얼굴 전수 조합 방식은 이번 대표 목록의 기준으로 사용하지 않는다.
+- 원본 확인: 보존된 HeinMach spawn 47개에는 Sword/SwordShield/Halberd 외에 `CB_EmpireBow_Early`, `CB_Empire_SwordHArmor_Early`, `CB_EmpireSword_Sick_F`가 있다. 6개 인간형 CB를 V2 metadata로 표적 추출했다. 다른 지역 인간형까지 추가할지는 사용자에게 선택 질문을 보냈으며, 우선 HeinMach 확장은 독립적으로 진행한다.
+- 옷 유사성: 이전 tutorial recipe가 상의 2/하의 2개였고 얼굴 5개 조합 비중이 컸다. 기존 master는 AvatarColor preset 적용이 없는 표시용 그래프다. 원작 군복 공통 요소와 미복원 색상/신규 병종 누락을 구분해서 수정한다.
+- 현재 Editor PID 11080, 기존 `L_HeinMach_EnemyCatalogue` 열림, dirty content/map 없음. 초기 단일 viewport 캡처 `Saved/Screenshots/WindowsEditor/RiderMCP/20260909-014822_viewport.png`를 확인했다. 별도 commandlet writer와 동시에 에셋을 저장하지 않는다.
+- 백업: `Saved/ArtBackups/HeinMachEnemyExpansion_20260909/manifest.json`. 기존 Enemy 파일 669개를 복사/hash 대조했고, 대상 외 사용자 변경 파일 및 기존 환경 맵을 포함한 보호 파일 39개 hash를 남겼다.
+- 도구/진행 자료: `Scripts/Enemies/discover_enemy_expansion.py`, `Saved/Extracted/HeinMachEnemiesV2/EditorBaseline.json`, `HumanCBRequests.json`, `HumanSourceInventory.json`. FModel 설정/기존 extractor를 재사용하며 키는 기록하지 않는다.
+- 다음 절차: CB→실제 look recipe/장비/AP·AB 참조 확인 → 신규 source 의상·무기/애니메이션만 dependency 추출 → 얼굴 3개를 의상에 순환 배정하는 대표 목록 작성 → 메타데이터 기반 SequenceLength/NumFrames/RateScale 및 clip/montage 배율 구분 → 임포트/현재 catalogue 정리 → 저장/시각/시간축 재검증. 기존 Player/C++는 수정 대상이 아니다.
+
+
+### 2026-09-09 V2 ?? ?? ? ?? ???? ?? ?? ??
+
+- ?? ??? 2,141 packages, renderable exports 1,005 (708 sequence packages, 256 textures, 41 meshes). ??? ?? dangling SI ?? 1?? SourceClosure.missing? ??.
+- ?? identity 001/002/003? ???? ?? ?? 16? ??: ?? 4, ??? 4, ?? 4, ???? 1, ??? 1, ?? ?? ??? 2. ?? ?? ??? ??? 001?003 ? ???? ??? 003.
+- Saved/Extracted/HeinMachEnemiesV2/ImportManifest.json, CombinedMeshManifest.json. ?? ?? 14?. ?? 3??? pelvis/shoulder ?? source bind mismatch? ??? skin? ??? ??. ???? carrier cloth bind? ?? ??? ???? bind? ???? ??.
+- 708 ?? sequence? NumFrames/SequenceLength? 30fps ??. AnimComposite? AnimPlayRate? DilationCurve.T_Original/T_Dilation?? ??. ??? ??? ?? bake ?? ???? prepare_enemy_animation_timing.py. ApplyDilationCurveType=None? ?? ??.
+- live UE PID11080?? ? ???? ?? ? private memory 78,803,853,312 bytes, ??? commit ?? ? 657MB? ??. ?? ??? ?? ??/?? ?? 669? ?? ?? ???? ??? ?? ??? ?? PID11080 ??. ? texture ??? ????? Library report ???. ?? ??/??? ??? ???? ???? ???.
+- ??: NullRHI commandlet?? import_enemy_expansion_library.py ??. ??? ?? ???. ????? source/baked? import ? ??/?? audit, ?? BP/catalogue ??, ?? GUI ??? ? ?? ??. ?? staging ?? ?? ??? ???? ???.
+
+
+### 2026-09-09 V2 ?? ? ????? ?? ??
+
+- NullRHI ?? ??: HeinMachEnemyV2_Library.json status passed. ? ??? 107?, ???? 69?, ??/??? ?? 36?, ?? ?? 14?.
+- ?? ?? ??? 3?? ?? ? ?? 711?(?? 30fps), ?? ?? 722?? ??. 143? ??? DilationCurve? ?? ???? ?? ??? ???. 26? ???/VFX timeline, ?? ???? ???? ?? elite shield ?? timeline 1?, ?? ?? 0? ???? 1?? ?????? ??.
+- ??/metadata/derived 9,219?? SHA256, cooked 2,144package, ? 1.785GB? Desktop/??/EnemyExtracts/HumanoidExpansion_20260909? ??. SourceArchive report passed.
+- AnimationImportManifest.json 1,433??? 75?? ?? commandlet? ??/?? ? ? ??? ???RateScale???/??/??? ?? RAW/COMPRESSED pose? ??. 0?674 ??. 675 batch?? ??? rational frame rate? ?? ??? ?? ??: 30fps ?? ??? ? ??? ?? ? ??? ?? frame rate? ????? importer ??, ?? ?. saved existing version? ???.
+- Scripts/Enemies/run_enemy_animation_batches.py? ?? ? ???? batch report? ??. ? ??? ??? ?? ? build_enemy_expansion_assemblies.py, audit_enemy_expansion_catalogue.py? ?? ????. BP ?? ?? ???.
+- Preview catalogue ??/legacy ??, ?? RHI shader ??/???, ?? ?? ?? hash ? ?? ???? ?? ??. ??? ?? ???? Saved/Extracted/HeinMachEnemiesV2? Saved/ImportReports/EnemyAnimationBatches.
+
+
+### 2026-09-09 V2 ?? ??????BP????? ??
+
+- AnimationImportAudit passed: 1,433?(711 source, 722 playback), ?? duration ?? 4.123535148892188e-7?, pose max [0.0001068115cm, quaternion component 0.00070858, scale 1.3113e-6]. ? 75? commandlet? ??/?? ??? ?? exit ??.
+- UE 5.8 factory? ?? ??? ?? target rate? ?? ?? ? ?? ????. initialize ? commandlet? AnimationSettings CDO? ?? source-derived rate? ?? ???? NEVER notify? ??/???? ??. Config hash ?? ??. ??? ?? ?? 39?? Saved/ArtBackups/.../FailedCompressionBatch? ??? ? ?????.
+- BP 16? ? CatalogueAudit passed. ?? BP45/????44? Archive/FaceVariants_20260908? ??(redirector ??). LegacyAssetMoves.json? ?? ??.
+- ?? ?? full package? BASE_Normal ? ?? ?? basename? ?? ?? audit?? ??. PNG hash/?? ??? ??? ?? ?? ???? ????, ?? texture? ?? ?? byte? ????. TextureIdentity report passed.
+- ?? ??? ?? ?? Animation/Engineering ?? 6?? baseline ?? ?? ??? ?? ????. ????? ???? ???. Player/C++ ? ?? ?? ?? hash? ????.
+- ??? ??: verify_enemy_expansion_render.py? AllowCommandletRendering/RenderOffscreen?? ?? ?. RenderAudit ?? ? ?? ???? ????? ?? ??, ?? ? ?? active viewport ??? ????? ??. Metadata/?? archive ?? manifest ? report ???, Art ?? ?? ??? ?? ?? ?? ??? ???.
+
+### 2026-09-09 V2 최종 저장·검증·전달 완료
+
+- 앞선 진행 섹션 일부의 한글이 인코딩 문제로 `?`로 남아 있다. 기존 기록은 보존하며 이 절과 `HEINMACH_ENEMY_EXPANSION_2026-09-09.md`의 최종 결과를 현재 상태로 사용한다.
+- 대표 BP 16개, 원본 시퀀스 711개와 시간 보정 재생 시퀀스 722개의 저장을 완료했다. 실제 RHI에서 머티리얼 69개/텍스처 256개/조립 BP 16개 검증 통과. 명명된 Rotator 축으로 최종 BP 회전 오류를 수정했고, 라이브 화면에서 수직 자세와 장비를 확인했다.
+- `HeinMachEnemyV2_FinalAudit.json`, `AnimationImportAudit`, `RenderAudit`, `OrientationAudit`, `PreservationAudit`가 passed다. 애니메이션 길이 최대 오차 4.123535148892188e-7초. 첫/중간/마지막 모든 bone의 RAW/COMPRESSED pose를 검사했으며 전 프레임 원작 화면/전투 PIE 검증은 아니다.
+- 기존 Enemy 669개 백업 hash 일치, 기존 579개 무변경, 89개 Archive 이동 및 이전 카탈로그 맵 갱신. 이전 경로 redirector는 디스크에 없으므로 `LegacyAssetMoves.json`으로 과거 경로를 변환한다. 이동된 89개 자산을 현재 에디터에서 로드했다.
+- 보호 파일 33개와 Config 4개는 시작 hash와 같고, 외부에서 바뀐 Animation/Engineering 문서 6개는 되돌리지 않았다. Player C++/ABP/DAS/환경 맵은 이 Art 작업에서 바꾸지 않았다.
+- 최종 CSV/manifest/report와 파이프라인 스크립트를 프로젝트 Metadata/Expansion_20260909 및 `Desktop/카잔/EnemyExtracts/HumanoidExpansion_20260909`에 동기화했다. `SHA256.json` 및 `DeliverySHA256.json`을 보존한다.
+- 현재 GUI Editor PID 2620이 `L_HeinMach_EnemyCatalogue`를 열고 있으며 마지막 확인은 dirty content/map 0개다. 실행 중인 임포트 배치는 없다. 최종 유효 화면은 `Saved/Screenshots/WindowsEditor/RiderMCP/20260909-023700_viewport.png`; 근접 추가 캡처는 Slate 실패로 중단하고 게임 뷰 임시 설정을 복원했다.
+- 후속 사용: 카탈로그에서 BP를 선택하고 `AnimationIndex.csv`로 원본 동작과 `A_EN_PLAY_*`를 찾는다. 재생용 클립은 1배로 사용한다. 중갑 파츠들은 같은 클립·위상으로 갱신한다. 생성 완료 자산을 일괄 재임포트할 필요는 없다.
+- 남은 원작 재현 경계: cooked cartoon shader topology와 색상/체형 RNG, UE morph/LOD/cloth/physics 전체 복원, 전투 Notify/AI/Actor time dilation. 원본은 보존했지만 실행을 완전히 복원했다고 기록하지 않는다. 후속 요청 시 정본→해당 source JSON/asset→대상 보고서 순으로 필요한 범위만 확인한다.
+
+### 2026-09-09 실사용 Enemy 정리 완료, main 커밋·푸시 진행
+
+- 사용자 요청: 16개 실사용 외형 밖의 원본/과거 조합 정리, BP 설명, 원본 30 fps와 재생용 복사본 차이 설명, main 커밋·push. 애니메이션은 검증 후 선택할 예정이므로 그대로 둔다.
+- 완료: 참조 closure 밖 195개(BP45/mesh67/material41/texture42), 343,444,687 bytes 삭제. 195개 UE 파일을 `Desktop/카잔/EnemyExtracts/ProjectCleanup_20260909`에 복사/hash 확인했다. 기존 Saved/raw 외부 source archive는 유지한다.
+- 남은 UE 자산 1,771개 전체 hash 동일, 애니메이션 1,436개 무변경, Blueprint 16개 재로드와 socket/material/Idle 검증 passed, 누락 Enemy 참조 0. 최종 `EnemyCleanupFinalAudit_20260909.log`는 정상 종료/오류 0이다.
+- API 성공 후 남은 texture `T_EN_T_EV_BlankWhite_01.uasset` 1개는 재실행에서도 남았다. 미참조·프로세스 종료·경로 및 백업 hash를 확인한 뒤 그 단일 파일만 정리했고 최종 fresh audit를 통과했다.
+- 비교: 722개 중 271개는 Composite 구간/배속/반복/연결/시간 보정이 필요하고 451개는 원본과 같은 시간축이다. 같은 시간축 440개는 모든 sample/bone도 저장 정밀도 안에서 같고, 11개는 표본 수가 다르다. 정본 `ENEMY_LIBRARY_CLEANUP_AND_PLAYBACK_2026-09-09.md`와 비교 CSV/JSON에 기록했다.
+- Git: 현재 main이며 fetch 직후 origin/main과 동일했다. Enemy 폴더/스크립트/관련 문서만 커밋한다. 다른 코드·Player 자산·설정 변경 및 기존 DAS 문서 변경은 작업 트리에서 보존한다. 보호한 44개 파일 hash는 모두 같다.
+- 남은 절차: Cleanup metadata/외부 archive 동기화 → 대상 파일만 stage → staged 범위·diff·생성파일 제외 검토 → main commit → origin main push → remote commit hash 확인. 기존 애니메이션 임포트나 시각 폴리싱을 다시 수행할 필요는 없다.

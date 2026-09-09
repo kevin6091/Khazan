@@ -1,0 +1,225 @@
+[
+  {
+    "Type": "AnimComposite",
+    "Name": "AC_EmpireMagic_UnEquip",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimComposite'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/WeaponEquip/AC_EmpireMagic_UnEquip",
+    "Properties": {
+      "AnimationTrack": {
+        "AnimSegments": [
+          {
+            "AnimReference": {
+              "ObjectName": "AnimSequence'CA_M_EMagic_FootSword'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Animation/EmpireMagic/CA_M_EMagic_FootSword.0"
+            },
+            "StartPos": 0.0,
+            "AnimStartTime": 0.0,
+            "AnimEndTime": 1.0,
+            "AnimPlayRate": 1.0,
+            "LoopingCount": 1
+          }
+        ]
+      },
+      "Notifies": [
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxAkEvent",
+          "Notify": {
+            "ObjectName": "xxAnimNotify_AkEvent'AC_EmpireMagic_UnEquip:xxAnimNotify_AkEvent_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/WeaponEquip/AC_EmpireMagic_UnEquip.1"
+          },
+          "NotifyStateClass": null,
+          "Duration": 0.0,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": -1,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.0,
+            "LinkValue": 0.25769445,
+            "LinkedSequence": null
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.0,
+          "LinkValue": 0.25769445,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireMagic_UnEquip'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/WeaponEquip/AC_EmpireMagic_UnEquip.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxWeapon",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Weapon'AC_EmpireMagic_UnEquip:xxAnimNotifyState_Weapon_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/WeaponEquip/AC_EmpireMagic_UnEquip.3"
+          },
+          "Duration": 0.19018203,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 1.0,
+            "LinkValue": 0.6463853,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireMagic_UnEquip'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/WeaponEquip/AC_EmpireMagic_UnEquip.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.0,
+          "LinkValue": 0.45620328,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireMagic_UnEquip'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/WeaponEquip/AC_EmpireMagic_UnEquip.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxChangeArmedState",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_ChangeArmedState'AC_EmpireMagic_UnEquip:xxAnimNotifyState_ChangeArmedState_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/WeaponEquip/AC_EmpireMagic_UnEquip.2"
+          },
+          "Duration": 0.18221238,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 1.0,
+            "LinkValue": 0.64394104,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireMagic_UnEquip'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/WeaponEquip/AC_EmpireMagic_UnEquip.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 1,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.0,
+          "LinkValue": 0.46172866,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireMagic_UnEquip'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/WeaponEquip/AC_EmpireMagic_UnEquip.0"
+          }
+        }
+      ],
+      "SequenceLength": 1.0,
+      "Skeleton": {
+        "ObjectName": "Skeleton'C_M_Human_Adult_M_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Adult/Adult_M/Model/C_M_Human_Adult_M_Skeleton.15"
+      }
+    },
+    "SkeletonGuid": "DAF13C4E-44F21635-494009B0-96C586C1"
+  },
+  {
+    "Type": "xxAnimNotify_AkEvent",
+    "Name": "xxAnimNotify_AkEvent_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotify_AkEvent'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireMagic_UnEquip'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/WeaponEquip/AC_EmpireMagic_UnEquip.0"
+    },
+    "Properties": {
+      "Event": {
+        "ObjectName": "AkAudioEvent'efx_empiremagic_foley_unequip'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/monster/empiremagic/efx_empiremagic_foley_unequip.0"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_ChangeArmedState",
+    "Name": "xxAnimNotifyState_ChangeArmedState_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_ChangeArmedState'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireMagic_UnEquip'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/WeaponEquip/AC_EmpireMagic_UnEquip.0"
+    },
+    "Properties": {
+      "IsBegin": true,
+      "BeginInfo": {
+        "ArmedState": "EWeaponArmedState::Unarmed"
+      },
+      "EndInfo": {
+        "ArmedState": "EWeaponArmedState::None"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Weapon",
+    "Name": "xxAnimNotifyState_Weapon_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Weapon'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireMagic_UnEquip'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Moving/WeaponEquip/AC_EmpireMagic_UnEquip.0"
+    },
+    "Properties": {
+      "VisibilityBegin": "EWeaponVisibility::ShowDefaultSlots",
+      "VisibilityEnd": "EWeaponVisibility::None",
+      "bChangeDefaultWeaponSlot": true,
+      "ChangeDefaultWeaponSlots": [
+        {
+          "ObjectName": "xxWeaponSlot'WS_EmpireMagic_Unequip'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireMagic/Base_Setting/WS_EmpireMagic_Unequip.0"
+        }
+      ]
+    }
+  }
+]

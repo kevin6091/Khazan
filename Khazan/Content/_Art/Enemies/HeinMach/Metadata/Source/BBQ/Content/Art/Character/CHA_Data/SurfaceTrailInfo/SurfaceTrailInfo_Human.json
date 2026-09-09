@@ -1,0 +1,114 @@
+[
+  {
+    "Type": "xxSurfaceTrailInfo",
+    "Name": "SurfaceTrailInfo_Human",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSurfaceTrailInfo'",
+    "Package": "BBQ/Content/Art/Character/CHA_Data/SurfaceTrailInfo/SurfaceTrailInfo_Human",
+    "Properties": {
+      "FootPrint": [
+        {
+          "TemporaryFootPrintDecal": {
+            "ObjectName": "MaterialInstanceConstant'FM_Human_FootPrint_SnowExit_Decal'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/Decal/FM_Human_FootPrint_SnowExit_Decal.0"
+          },
+          "PrintingTime": 2.0,
+          "SurfaceType": "SurfaceType10",
+          "DecalMaterial": {
+            "ObjectName": "MaterialInstanceConstant'PD_Step_N_Snow'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/PhysicsDecal/PD_Step_N_Snow.0"
+          },
+          "Scale": {
+            "X": 1.0,
+            "Y": 1.0,
+            "Z": 1.0
+          },
+          "LifeTime": 5.0,
+          "FadeCurve": {
+            "ObjectName": "CurveFloat'FC_Fade_Out'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/Curve/BBQ_Curve/FC_Fade_Out.0"
+          }
+        },
+        {
+          "TemporaryFootPrintDecal": {
+            "ObjectName": "MaterialInstanceConstant'FM_Human_FootPrint_SnowExit_Decal'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/Decal/FM_Human_FootPrint_SnowExit_Decal.0"
+          },
+          "PrintingTime": 2.0,
+          "SurfaceType": "SurfaceType13",
+          "DecalMaterial": null,
+          "Scale": {
+            "X": 1.0,
+            "Y": 1.0,
+            "Z": 1.0
+          },
+          "LifeTime": 5.0,
+          "FadeCurve": {
+            "ObjectName": "CurveFloat'FC_Fade_Out'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/Curve/BBQ_Curve/FC_Fade_Out.0"
+          }
+        }
+      ],
+      "FootPrintBoneNames": [
+        "Bip001-R-Foot",
+        "Bip001-L-Foot"
+      ],
+      "SurfaceTrail": [
+        {
+          "SurfaceType": "SurfaceType13",
+          "SurfaceParticle": {
+            "AssetPathName": "/Game/_Kazan_/Art/VFX/VFX_Particle/Deepsnow_physic_spawnperunit.Deepsnow_physic_spawnperunit",
+            "SubPathString": ""
+          },
+          "OverrideSurfaceTrailMesh": {
+            "AssetPathName": "/Game/_Common/BaseMeshes/Geometry/SurfaceTrailMesh_Grid_itemDrop.SurfaceTrailMesh_Grid_itemDrop",
+            "SubPathString": ""
+          },
+          "Intensity": 0.8,
+          "LifeTime": 15.0,
+          "PrintInterval": 30.0,
+          "Scale": {
+            "X": 0.3,
+            "Y": 0.1,
+            "Z": 1.0
+          },
+          "SurfaceTrailRandomOffset": {
+            "LocationMin": -1.0,
+            "LocationMax": 1.0,
+            "RotationMin": -3.0,
+            "RotationMax": 3.0,
+            "ScaleMin": 0.0,
+            "ScaleMax": 0.1
+          }
+        },
+        {
+          "SurfaceType": "SurfaceType14",
+          "SurfaceParticle": {
+            "AssetPathName": "/Game/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_World/FP_P_Deepwater_spawnper_PC.FP_P_Deepwater_spawnper_PC",
+            "SubPathString": ""
+          },
+          "OverrideSurfaceTrailMesh": {
+            "AssetPathName": "None",
+            "SubPathString": ""
+          },
+          "Intensity": 1.0,
+          "LifeTime": 20.0,
+          "PrintInterval": 40.0,
+          "Scale": {
+            "X": 0.5,
+            "Y": 0.3,
+            "Z": 0.3
+          },
+          "SurfaceTrailRandomOffset": {
+            "LocationMin": -20.0,
+            "LocationMax": 20.0,
+            "RotationMin": -15.0,
+            "RotationMax": 15.0,
+            "ScaleMin": -0.2,
+            "ScaleMax": 0.2
+          }
+        }
+      ]
+    }
+  }
+]

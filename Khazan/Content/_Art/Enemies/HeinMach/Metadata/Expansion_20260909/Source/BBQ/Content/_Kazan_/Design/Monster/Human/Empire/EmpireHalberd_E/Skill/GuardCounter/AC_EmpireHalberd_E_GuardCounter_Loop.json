@@ -1,0 +1,281 @@
+[
+  {
+    "Type": "AnimComposite",
+    "Name": "AC_EmpireHalberd_E_GuardCounter_Loop",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimComposite'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop",
+    "Properties": {
+      "AnimationTrack": {
+        "AnimSegments": [
+          {
+            "AnimReference": {
+              "ObjectName": "AnimSequence'CA_M_Halberd_Guard_F_Loop'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Named/Halberd/Animation/CA_M_Halberd_Guard_F_Loop.0"
+            },
+            "StartPos": 0.0,
+            "AnimStartTime": 0.0,
+            "AnimEndTime": 0.5,
+            "AnimPlayRate": 1.0,
+            "LoopingCount": 1
+          }
+        ]
+      },
+      "Notifies": [
+        {
+          "TriggerTimeOffset": -0.0001,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxDamageType",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_DamageType'AC_EmpireHalberd_E_GuardCounter_Loop:xxAnimNotifyState_DamageType_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.2"
+          },
+          "Duration": 0.5,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 1.1,
+            "LinkValue": 0.5,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_GuardCounter_Loop'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.1,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_GuardCounter_Loop'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": -0.0001,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxDamagerReaction",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_DamagerReaction'AC_EmpireHalberd_E_GuardCounter_Loop:xxAnimNotifyState_DamagerReaction_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.1"
+          },
+          "Duration": 0.5,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.3,
+            "LinkValue": 0.5,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_GuardCounter_Loop'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 2,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.3,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_GuardCounter_Loop'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0001,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxLookAt",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_LookAt'AC_EmpireHalberd_E_GuardCounter_Loop:xxAnimNotifyState_LookAt_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.3"
+          },
+          "Duration": 0.18984473,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 1.1,
+            "LinkValue": 0.18984473,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_GuardCounter_Loop'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 1,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.1,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_GuardCounter_Loop'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0001,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxSkillEventTag",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_SkillEventTag'AC_EmpireHalberd_E_GuardCounter_Loop:xxAnimNotifyState_SkillEventTag_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.4"
+          },
+          "Duration": 0.3101552,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.5,
+            "LinkValue": 0.49999994,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireHalberd_E_GuardCounter_Loop'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 3,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.5,
+          "LinkValue": 0.18984473,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireHalberd_E_GuardCounter_Loop'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.0"
+          }
+        }
+      ],
+      "SequenceLength": 0.5,
+      "Skeleton": {
+        "ObjectName": "Skeleton'C_M_Halberd_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster_Human/Named/Halberd/Model/C_M_Halberd_Skeleton.5"
+      }
+    },
+    "SkeletonGuid": "DCBAFC19-407F5E25-3D81D298-7C7AB833"
+  },
+  {
+    "Type": "xxAnimNotifyState_DamagerReaction",
+    "Name": "xxAnimNotifyState_DamagerReaction_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_DamagerReaction'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_GuardCounter_Loop'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.0"
+    },
+    "Properties": {
+      "DamagerReactionTableSelect": {
+        "DamagerReactionTag": {
+          "DataTable": {
+            "ObjectName": "DataTable'DamagerReaction_Common'",
+            "ObjectPath": "BBQ/Content/_Common/Constants/DamagerReaction/DamagerReaction_Common.0"
+          },
+          "RowName": "강인도3등급+"
+        }
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_DamageType",
+    "Name": "xxAnimNotifyState_DamageType_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_DamageType'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_GuardCounter_Loop'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.0"
+    },
+    "Properties": {
+      "CustomDamageType": "ECharacterDamageType::SystemGuard",
+      "bUseSystemGuardFrontAngle": true,
+      "SystemGuardFrontAngle": 140.0,
+      "bResetCustomDamageTypeAtNotifyEnd": false
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_LookAt",
+    "Name": "xxAnimNotifyState_LookAt_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_LookAt'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_GuardCounter_Loop'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.0"
+    },
+    "Properties": {
+      "bNotifyEnd": false
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_SkillEventTag",
+    "Name": "xxAnimNotifyState_SkillEventTag_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_SkillEventTag'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireHalberd_E_GuardCounter_Loop'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/GuardCounter/AC_EmpireHalberd_E_GuardCounter_Loop.0"
+    },
+    "Properties": {
+      "Index": "ESimpleSkillEventIndex::Index1"
+    }
+  }
+]

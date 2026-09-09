@@ -1,0 +1,400 @@
+[
+  {
+    "Type": "AnimComposite",
+    "Name": "AC_EmpireBow_BasicShoot_OBJ_Move",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimComposite'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move",
+    "Properties": {
+      "AnimationTrack": {
+        "AnimSegments": [
+          {
+            "AnimReference": {
+              "ObjectName": "AnimSequence'Missile_Idle'",
+              "ObjectPath": "BBQ/Content/_Common/Missile_Idle.0"
+            },
+            "StartPos": 0.0,
+            "AnimStartTime": 0.0,
+            "AnimEndTime": 1.5,
+            "AnimPlayRate": 1.0,
+            "LoopingCount": 1
+          }
+        ]
+      },
+      "bConfirmedByArtist": true,
+      "Notifies": [
+        {
+          "TriggerTimeOffset": -0.0001,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxMoveTo",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_MoveTo'AC_EmpireBow_BasicShoot_OBJ_Move:xxAnimNotifyState_MoveTo_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.1"
+          },
+          "Duration": 1.5,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 5.0,
+            "LinkValue": 1.5,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireBow_BasicShoot_OBJ_Move'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 5.0,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireBow_BasicShoot_OBJ_Move'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0001,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxMoveTo",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_MoveTo'AC_EmpireBow_BasicShoot_OBJ_Move:xxAnimNotifyState_MoveTo_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.2"
+          },
+          "Duration": 0.122727,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 1.5,
+            "LinkValue": 0.122727,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireBow_BasicShoot_OBJ_Move'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 1,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.5,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireBow_BasicShoot_OBJ_Move'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0001,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_EmpireBow_BasicShoot_OBJ_Move:xxAnimNotifyState_Particle_5'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.4"
+          },
+          "Duration": 1.5,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 1.5,
+            "LinkValue": 1.5,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireBow_BasicShoot_OBJ_Move'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 4,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.5,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireBow_BasicShoot_OBJ_Move'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_EmpireBow_BasicShoot_OBJ_Move:xxAnimNotifyState_Particle_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.3"
+          },
+          "Duration": 1.4863607,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 5.0,
+            "LinkValue": 1.5,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_EmpireBow_BasicShoot_OBJ_Move'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 3,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 5.0,
+          "LinkValue": 0.013639331,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_EmpireBow_BasicShoot_OBJ_Move'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.0"
+          }
+        }
+      ],
+      "SequenceLength": 1.5,
+      "Skeleton": {
+        "ObjectName": "Skeleton'Missile_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Common/Missile_Skeleton.0"
+      }
+    },
+    "SkeletonGuid": "C3303285-44CA4EE0-5D0771A4-5786A09A"
+  },
+  {
+    "Type": "xxAnimNotifyState_MoveTo",
+    "Name": "xxAnimNotifyState_MoveTo_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_MoveTo'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireBow_BasicShoot_OBJ_Move'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.0"
+    },
+    "Properties": {
+      "TotalSelectTargetTraceInfo": {
+        "bUseSelect": true,
+        "TargetSelectionTypes": [
+          "ETargetSelectionType::UseSkillTarget",
+          "ETargetSelectionType::LockOnTarget"
+        ],
+        "TargetTraceInfo": {
+          "bCheckOpposite": true
+        },
+        "FindLocationInfo": {
+          "bUseTargetActor": false,
+          "bBasedTargetForwardRotator": true,
+          "TargetLengthRateOffset": {
+            "X": 1000.0,
+            "Y": 0.0,
+            "Z": 0.0
+          },
+          "FindRandomLocationInfo": {
+            "bUseEqualSpaceDegreeAndRand": true
+          }
+        }
+      },
+      "PositionInfo": {
+        "UsePositionData": {
+          "DestPosition": {
+            "X": 6000.0,
+            "Y": 0.0,
+            "Z": 0.0
+          }
+        },
+        "UseCurveData": {
+          "CurveVector": {
+            "ObjectName": "CurveVector'CV_EmpireBow_BasicShoot'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/CV_EmpireBow_BasicShoot.0"
+          },
+          "CustomCurveScale": {
+            "X": 8500.0,
+            "Y": 1.0,
+            "Z": 1.0
+          }
+        },
+        "UseForceData": {
+          "ForceVec": {
+            "X": 5000.0,
+            "Y": 0.0,
+            "Z": 100.0
+          },
+          "CustomAcceleration": {
+            "X": 1.0,
+            "Y": 1.0,
+            "Z": 0.0
+          }
+        },
+        "ZAxisMoveData": {
+          "ZAxisMoveMethod": "EZAxisMoveMethod::None"
+        },
+        "ToralTargetTraceMoveData": {
+          "TargetTraceDistanceRatio": {
+            "X": 0.0,
+            "Y": 500.0,
+            "Z": 1.0
+          }
+        },
+        "bApplyCharacterScale": true,
+        "bApplyCurrentRotatorOnMoveDir": true,
+        "bOnEndReturnDefaultMoveMode": false
+      },
+      "RotatorInfo": {
+        "CustomRotatorMethod": "ECustomMoveRotatorMethod::LookAtTraceTarget",
+        "DestRotator": {
+          "Pitch": -45.0,
+          "Yaw": 0.0,
+          "Roll": 0.0
+        },
+        "LootAtTraceTarget": {
+          "AnglePerSecond": 10.0,
+          "bUsePitchRotator": true
+        }
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_MoveTo",
+    "Name": "xxAnimNotifyState_MoveTo_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_MoveTo'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireBow_BasicShoot_OBJ_Move'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.0"
+    },
+    "Properties": {
+      "MoveToType": "EAMoveToType::OnlyRotation",
+      "TotalSelectTargetTraceInfo": {
+        "bUseSelect": true,
+        "TargetSelectionTypes": [
+          "ETargetSelectionType::LockOnTarget"
+        ],
+        "FindLocationInfo": {
+          "FindRandomLocationInfo": {
+            "bUseEqualSpaceDegreeAndRand": true
+          }
+        }
+      },
+      "RotatorInfo": {
+        "CustomRotatorMethod": "ECustomMoveRotatorMethod::LookAtTraceTarget",
+        "LootAtTraceTarget": {
+          "bUseNewSpeed": true,
+          "AnglePerSecondNew": 180,
+          "AnglePerSecond": 15.0,
+          "CustomTraceMaxAngle": 150,
+          "CustomTraceMinAngle": -150,
+          "CustomMaxAngle": 5,
+          "CustomMinAngle": -5,
+          "bUsePitchRotator": true,
+          "AnglePerSecondPitch": 45,
+          "MaxAngleLimitPitch": 10
+        }
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireBow_BasicShoot_OBJ_Move'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Empire_Arrow'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Human/Empire/EmpireBow/FP_Empire_Arrow.42"
+        },
+        "bAttached": true,
+        "AttachSocketName": "Root",
+        "CustomTimeDilation": 0.1,
+        "bAbsoluteRotation": false
+      },
+      "bDestroyOnNotifyEnd": true,
+      "bDestroyOnAnimEnd": true,
+      "bPreventDuplication": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_5",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_EmpireBow_BasicShoot_OBJ_Move'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireBow/Skill/01_BasicShoot/Object/AC_EmpireBow_BasicShoot_OBJ_Move.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Empire_loop_3'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Human/Empire/EmpireBow/FP_Empire_loop_3.121"
+        },
+        "bAttached": true,
+        "AttachSocketName": "Root",
+        "bAbsoluteRotation": false
+      },
+      "bDestroyOnAnimEnd": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  }
+]
