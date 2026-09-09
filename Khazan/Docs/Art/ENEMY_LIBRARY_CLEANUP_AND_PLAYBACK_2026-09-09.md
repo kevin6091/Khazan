@@ -96,3 +96,9 @@ FPS는 저장한 sample의 시간 간격이다. 재생용 FPS가 약 60이라고
 - 외형 확인: `/Game/_Art/Enemies/HeinMach/Preview/L_HeinMach_EnemyCatalogue`.
 
 복원 요청이 없는 한 이전의 전체 import/assembly builder를 재실행해 삭제한 원본을 다시 생성하지 않는다. 이번 작업은 Enemy 에셋·스크립트·관련 Art 문서를 main에 커밋하는 범위이며, 기존 Player/C++/프로젝트 설정 변경은 별도 작업으로 유지한다.
+
+## 2026-09-09 Git 전달 확인
+
+- 에셋 및 파이프라인 커밋: `65119aa65dcf6f7d20b756715695111b946f2ee9`, `art: add curated humanoid enemies and metadata-timed animations`.
+- `origin/main` push 성공, LFS 객체 39개(110 MB) 업로드 완료. 원격 `refs/heads/main`의 commit 일치까지 확인했다.
+- 기존 Player/C++/설정 변경 및 다른 DAS 문서 작업은 커밋에 포함하지 않았다. 공용 Art 문서는 Enemy 섹션만 stage했다. 이 전달 확인은 별도 문서 커밋으로 기록한다.

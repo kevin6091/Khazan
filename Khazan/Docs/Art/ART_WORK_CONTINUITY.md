@@ -271,3 +271,9 @@
 - 비교: 722개 중 271개는 Composite 구간/배속/반복/연결/시간 보정이 필요하고 451개는 원본과 같은 시간축이다. 같은 시간축 440개는 모든 sample/bone도 저장 정밀도 안에서 같고, 11개는 표본 수가 다르다. 정본 `ENEMY_LIBRARY_CLEANUP_AND_PLAYBACK_2026-09-09.md`와 비교 CSV/JSON에 기록했다.
 - Git: 현재 main이며 fetch 직후 origin/main과 동일했다. Enemy 폴더/스크립트/관련 문서만 커밋한다. 다른 코드·Player 자산·설정 변경 및 기존 DAS 문서 변경은 작업 트리에서 보존한다. 보호한 44개 파일 hash는 모두 같다.
 - 남은 절차: Cleanup metadata/외부 archive 동기화 → 대상 파일만 stage → staged 범위·diff·생성파일 제외 검토 → main commit → origin main push → remote commit hash 확인. 기존 애니메이션 임포트나 시각 폴리싱을 다시 수행할 필요는 없다.
+
+### 2026-09-09 Enemy 정리 main 전달 확인
+
+- 에셋·스크립트·Enemy 문서 변경을 `65119aa65dcf6f7d20b756715695111b946f2ee9` (`art: add curated humanoid enemies and metadata-timed animations`)로 main에 커밋·push했다. Git LFS 39개/110 MB 업로드 완료이며 `git ls-remote origin refs/heads/main`이 해당 commit과 일치했다.
+- staged 4,415개 파일은 Enemy Content 4,372개, 스크립트 36개, Art 문서 7개다. 캐시/빌드 산출물과 Player/C++/설정은 제외했다. 공용 Art 문서도 Enemy 섹션만 stage해 기존 DAS 문서 변경을 보존했다.
+- 현재 요청의 외형 정리·설명·검증·주요 변경 전달은 완료다. 이 완료 기록은 후속 문서 커밋에 포함한다. 애니메이션 실사용 목록 선정과 삭제는 사용자가 검증 후 요청하는 후속 범위로 남긴다.
