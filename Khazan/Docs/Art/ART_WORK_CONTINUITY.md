@@ -338,3 +338,9 @@
 - direct source timeline 12개와 Composite bake 90개 모두 `A_EN_PLAY_*`다. source segment/play rate/repeat/DilationCurve, root motion 95, force root lock 3, additive 1을 asset별로 반영했다. Notify/event 1,164행은 metadata이며 실행 코드는 범위 밖이다.
 - `ValidationSummary.json`과 `RenderValidationSummary.json` passed. 애니메이션 102개 첫/중간/마지막의 모든 bone을 RAW/COMPRESSED로 평가했고 최대 길이 오차는 약 `1.1981e-7`초다. D3D12/SM6에서 material 12개와 BP 3개의 mesh/material/animation 재로드도 통과했다.
 - 기존 사용자 변경 6개 파일과 Player/Locomotion C++는 수정하지 않았다. README와 외부 archive 1,226개 파일의 hash 동기화, 보호 파일 hash 재확인, BigBear/Art 190개 경로의 선택 stage까지 완료했다. 정본은 `BIG_BEAR_EXTRACTION_2026-09-10.md`; 남은 절차는 main commit·push와 원격 hash 확인이다.
+
+### 2026-09-10 BigBear main 전달 완료
+
+- BigBear 에셋·metadata·재현 스크립트·Art 문서 190개 경로를 `e4878e2eb6a4ded141ef7600765d95fb0f2575d8` (`art: add HeinMach and StormPass BigBear enemy`)로 main에 커밋하고 origin에 push했다. Git LFS 2개/6.8 MB 업로드를 완료했고 원격 main hash가 일치했다.
+- 커밋 범위는 BigBear Content 173개, 스크립트 12개, Art 문서 5개다. 기존 사용자 변경 6개 파일은 stage/commit에서 제외했으며 최종 보호 hash mismatch는 0개다.
+- 추출·임포트·애니메이션 시간축 복원·에셋/렌더 검증·원본 archive·첫 Git 전달은 완료됐다. 이 전달 확인 절은 후속 문서 전용 커밋으로 반영한다.
