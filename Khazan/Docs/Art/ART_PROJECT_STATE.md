@@ -216,3 +216,12 @@
 - 원작 Composite bake 722개와 원본 시간축 직접 재생 162개는 파일명/폴더를 공유한다. 유래는 `PlaybackDerivation`과 `PreviousEnemyArtRole`, `OriginalPackage` metadata로 구분한다. FPS·길이·sample·RateScale·root 설정은 변경하지 않았다.
 - BP 16개의 애니메이션 참조를 UE rename으로 새 경로에 저장했다. old package/redirector/missing dependency 0. 별도 commandlet에서 884개 RAW/COMPRESSED 5,298 pose 평가, 카탈로그 16개, 최종 exit 0/오류 0을 확인했다.
 - 최신 정본: [ENEMY_ANIMATION_LIBRARY_STRUCTURE_2026-09-09.md](ENEMY_ANIMATION_LIBRARY_STRUCTURE_2026-09-09.md). 현재 목록은 `Metadata/AnimationStructure_20260909/CurrentAssets.json`, 애니메이션 표는 `AnimationLibrary.csv`, 백업은 `Desktop/카잔/EnemyExtracts/AnimationStructure_20260909`다.
+
+## 2026-09-10 HeinMach·StormPass BigBear Enemy 라이브러리 추가
+
+- 두 레벨의 실제 스폰이 같은 `CB_BigBear_E`를 참조하고 HeinMach는 `AI_BigBear_E_NoneBurst`, StormPass는 `AI_BigBear_E_BurstTutorial`을 쓰는 것을 확인했다. 중복 캐릭터 대신 `/Game/_Art/Enemies/Shared/Beasts/BigBear` 공용 라이브러리로 구성하고 레벨별 맥락은 metadata에 보존했다.
+- 원작 외형 V1/V2/V3 Blueprint 3개, SkeletalMesh/Skeleton 각 1개, 머티리얼 12개, 텍스처 25개, preview map 1개와 재생용 AnimSequence 102개를 저장했다. 전체 Asset Registry 자산은 145개이고 staging/redirector는 0개다.
+- 메시 71-bone PSK에만 맞추지 않고 76개 PSA 공통 79-bone 레이아웃의 helper 8개를 reference pose와 함께 복구했다. 프로젝트는 검증된 LOD0 30,023 vertices를 사용하며 원작 LOD0/1/2는 외부 archive에 보존한다.
+- 애니메이션은 30fps 직접 시간축 12개와 Composite bake 90개다. 구간·반복·AnimPlayRate·DilationCurve를 포즈에 적용하고 최종 길이에 맞는 유리수 FPS로 저장해 모두 RateScale 1.0으로 재생한다. root motion 95, force root lock 3, additive 1의 source 설정을 보존했다.
+- 별도 UE 프로세스에서 102개 RAW/COMPRESSED 포즈와 길이, 145개 에셋 구조, D3D12/SM6 머티리얼 12개 및 BP 3개 재로드를 통과했다. 정본은 [BIG_BEAR_EXTRACTION_2026-09-10.md](BIG_BEAR_EXTRACTION_2026-09-10.md), 최종 보고서는 `BigBear/Metadata/Extraction_20260910/FinalExtractionReport.json`이다.
+- Blueprint는 시각 조립 Actor이며 AI/GAS/공격 collision/ragdoll/원작 Notify 실행은 포함하지 않는다. proprietary cartoon shader graph와 source LOD chain도 완전 복원 범위가 아니다.

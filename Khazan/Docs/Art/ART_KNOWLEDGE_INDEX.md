@@ -162,3 +162,11 @@
 - `RenameMap.json`: old→current 884개 경로. `LegacyIdleDuplicates.json`: 중복 Idle 3개 전 프레임 비교와 삭제 근거. `BlueprintComponents.json`: 새 경로를 쓰는 BP 16개의 컴포넌트 계약.
 - `PlaybackDerivation=CompositeBake` 722개, `DirectOriginalTimeline` 162개다. 둘 다 프로젝트 재생용이며 원작 유래는 metadata로만 구분한다. 이전 manifest의 destination은 역사 경로로 취급한다.
 - 최종 `HeinMachEnemy_AnimationStructureAudit_20260909.json`: redirector/missing dependency 0, 길이 변화 0, RAW/COMPRESSED pose 평가 5,298회, 카탈로그 16개, commandlet 오류 0.
+
+### 2026-09-10 HeinMach·StormPass BigBear Enemy
+
+- [BIG_BEAR_EXTRACTION_2026-09-10.md](BIG_BEAR_EXTRACTION_2026-09-10.md): 두 레벨의 공통 `CB_BigBear_E` 판정, 외형 V1~V3, 79-bone 스켈레톤 복구, 원작 시간축을 반영한 재생 애니메이션 102개와 Blueprint 사용 경계의 정본.
+- 프로젝트 정본 루트: `/Game/_Art/Enemies/Shared/Beasts/BigBear`. 현재 AnimSequence는 모두 `Animations/Playback/A_EN_PLAY_*`, 시각 조립은 `Blueprints/BP_EN_BigBear_V01~V03`, 비교 맵은 `Preview/L_EN_BigBear_Catalogue`다.
+- `Metadata/Extraction_20260910/FinalExtractionReport.json`: 최종 범위와 제한. `ValidationSummary.json`: 145개 asset/skeleton/texture/material/animation 감사. `RenderValidationSummary.json`: 실제 D3D12/SM6 compile·BP 재로드 결과.
+- `AnimationLibrary.csv`, `AnimationImportManifest.json`, `AnimationTimingAudit.json`, `PlaybackEventTimes.json`: source package, direct/composite 유래, FPS·길이·root/additive 계약 및 1,164개 원작 event 시간을 조회한다.
+- `LevelPresence.json`: HeinMach `SA_BigBear_E_2`/`AI_BigBear_E_NoneBurst`와 StormPass `SA_BigBear_E`/`AI_BigBear_E_BurstTutorial`의 source property 근거. 외부 원본 archive는 `Desktop/카잔/EnemyExtracts/BigBear_20260910`, hash 목록은 `ArchiveSHA256.json`이다.

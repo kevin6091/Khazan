@@ -129,3 +129,12 @@
 - rename은 UE AssetTools로 수행해 Blueprint hard/soft 참조를 함께 갱신한다. old package에 참조 또는 ObjectRedirector가 남지 않았는지 fresh registry에서 확인하고, JSON/CSV history를 redirector 대신 런타임 경로로 사용하지 않는다.
 - 동일 원본의 중복 자산 삭제는 Skeleton/FPS/sample/길이/root 계약과 모든 프레임·bone의 RAW/COMPRESSED pose를 확인한 뒤 수행한다. 수치 허용치는 gameplay 튜닝값과 구분해 보고한다.
 - 최신 inventory는 `Metadata/AnimationStructure_20260909/CurrentAssets.json`, current animation lookup은 `AnimationLibrary.csv`와 `RenameMap.json`이다. 이전 전체 importer를 실행해 옛 두 폴더를 복구하지 않는다.
+
+## 2026-09-10 비인간형 Enemy 추출에서 확인한 규칙
+
+- 여러 레벨의 스폰이 같은 `ActorBP_Soft`/character recipe를 참조하면 메시·머티리얼·애니메이션을 레벨별로 복제하지 않는다. 공용 라이브러리를 만들고 각 source actor, AIData, dependent level, 시작 동작 같은 차이를 metadata에 분리 기록한다.
+- SkeletalMesh PSK bone 수만으로 animation skeleton을 정하지 않는다. 선택한 모든 PSA의 bone 이름·순서·parent와 reference pose를 먼저 비교한다. PSA 전용 helper bone이 있으면 메시의 geometry/weight와 기존 prefix를 보존한 채 변환된 PSA reference pose로 추가하고, 모든 animation이 같은 레이아웃인지 검증한다.
+- texture metadata의 authoring `ImportedSize`와 cooked `SizeX/SizeY` 및 실제 PNG payload를 구분한다. UE에는 추출된 cooked payload를 정확히 임포트하며 원본 데이터가 없는 큰 해상도를 생성하지 않는다. 차이는 resolution contract 보고서에 남긴다.
+- Composite bake마다 root motion, force root lock, additive 등 property dictionary를 새로 초기화한다. 이전 clip 값이 다음 clip에 남지 않도록 source-derived flag를 asset별로 다시 읽고 최종 inventory에서 개수를 검증한다.
+- UE 5.8 Python에서 `AnimSequence.get_data_model()`이 없으면 `sequence.controller.get_model_interface()`로 frame rate와 key 수를 읽는다. 저장 후 fresh process에서 RAW와 COMPRESSED 포즈를 모두 평가한다.
+- Composite의 segment trim, play rate, repeat와 DilationCurve를 포즈 시간축에 bake한 자산은 정확한 최종 길이를 표현하는 frame-rate contract를 저장하고 RateScale 1.0으로 소비한다. 30fps source라는 이유로 모든 baked 결과를 30fps로 강제하지 않는다.

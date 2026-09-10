@@ -1,0 +1,158 @@
+[
+  {
+    "level": "HeinMach",
+    "source_level_package": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01",
+    "actor_name": "SA_BigBear_E_2",
+    "actor_type": "xxSpawnHandler_Character",
+    "properties": {
+      "AIData": {
+        "ObjectName": "xxAIData'AI_BigBear_E_NoneBurst'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Beast/BigBear_E/Base_Setting/AI_BigBear_E_NoneBurst.0"
+      },
+      "RecognitionValue": {
+        "SightRange": 500.0,
+        "SightYaw": 360.0
+      },
+      "bOverrideBattleRetreat": true,
+      "BattleRetreatSetting": {
+        "BattleRange": 6000.0
+      },
+      "StartAnimation": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Beast/BigBear_E/Moving/Reaction/AC_BigBear_Basic_Loop_05.AC_BigBear_Basic_Loop_05",
+        "SubPathString": ""
+      },
+      "VigilantReactionAnimation": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Beast/BigBear_E/Moving/Reaction/AC_BigBear_Basic_End_05.AC_BigBear_Basic_End_05",
+        "SubPathString": ""
+      },
+      "bHalfHeightAdjusted": true,
+      "ActorBP_Soft": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Beast/BigBear_E/Base_Setting/CB_BigBear_E.CB_BigBear_E_C",
+        "SubPathString": ""
+      },
+      "SpawnInfo": {
+        "ObjectName": "xxSpawnInfo'SA_BigBear_E'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Beast/BigBear_E/Base_Setting/SA_BigBear_E.2"
+      },
+      "SpawnIDX": 195,
+      "BalanceGroupIndex": 4,
+      "MissionType": "EMissionType::Sub",
+      "SubDetailRoute": 1,
+      "TIDX": 282007,
+      "ActorType": "EGrActorType::Dynamic",
+      "SubActorType": 1,
+      "FactionLink": {
+        "TIDX": 6
+      },
+      "FactionName": "Monster_Blue",
+      "DependentLevelPath": "/Game/_Kazan_/Level/HeinMach/HeinMach_SubLV05_Escape_1",
+      "RootComponent": {
+        "ObjectName": "SceneComponent'HeinMach_Spawn_Main01:PersistentLevel.SA_BigBear_E_2.SceneComponent'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01.377"
+      }
+    },
+    "references": [
+      "BBQ/Content/_Kazan_/Design/Monster/Beast/BigBear_E/Base_Setting/AI_BigBear_E_NoneBurst",
+      "BBQ/Content/_Kazan_/Design/Monster/Beast/BigBear_E/Base_Setting/CB_BigBear_E",
+      "BBQ/Content/_Kazan_/Design/Monster/Beast/BigBear_E/Base_Setting/SA_BigBear_E",
+      "BBQ/Content/_Kazan_/Design/Monster/Beast/BigBear_E/Moving/Reaction/AC_BigBear_Basic_End_05",
+      "BBQ/Content/_Kazan_/Design/Monster/Beast/BigBear_E/Moving/Reaction/AC_BigBear_Basic_Loop_05",
+      "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01"
+    ]
+  },
+  {
+    "level": "StormPass",
+    "source_level_package": "BBQ/Content/_Kazan_/Level/StormPass/StormPass_Spawn_Main01",
+    "actor_name": "SA_BigBear_E",
+    "actor_type": "xxSpawnHandler_Character",
+    "properties": {
+      "AIData": {
+        "ObjectName": "xxAIData'AI_BigBear_E_BurstTutorial'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Beast/BigBear_E/Base_Setting/AI_BigBear_E_BurstTutorial.0"
+      },
+      "bOverrideRecognition": true,
+      "RecognitionValue": {
+        "AbsoluteRange": 2600.0,
+        "SightRange": 2600.0,
+        "SightYaw": 180.0,
+        "UpSightHeight": 500.0
+      },
+      "bOverridePeacePresetTask": true,
+      "PeaceTasks": [
+        {
+          "Key": "EAIPeacePresetStep::Step1",
+          "Value": {
+            "ObjectName": "xxAIPeacePresetTask_Skill'StormPass_Spawn_Main01:PersistentLevel.SA_BigBear_E.xxAIPeacePresetTask_Skill_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Level/StormPass/StormPass_Spawn_Main01.899"
+          }
+        },
+        {
+          "Key": "EAIPeacePresetStep::Step2",
+          "Value": {
+            "ObjectName": "xxAIPeacePresetTask_Patrol'StormPass_Spawn_Main01:PersistentLevel.SA_BigBear_E.xxAIPeacePresetTask_Patrol_3'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Level/StormPass/StormPass_Spawn_Main01.897"
+          }
+        }
+      ],
+      "LBP_OnActorDied": {
+        "InvocationList": [
+          {
+            "Object": {
+              "ObjectName": "StormPass_Spawn_Main01_C'StormPass_Spawn_Main01:PersistentLevel.StormPass_Spawn_Main01_C_3'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Level/StormPass/StormPass_Spawn_Main01.830"
+            },
+            "FunctionName": "BndEvt__StormPass_Spawn_Main01_SA_BigBear_E_K2Node_ActorBoundEvent_1_SpawnedActorDead__DelegateSignature"
+          }
+        ]
+      },
+      "LBP_OnActorSendSignal": {
+        "InvocationList": [
+          {
+            "Object": {
+              "ObjectName": "StormPass_Spawn_Main01_C'StormPass_Spawn_Main01:PersistentLevel.StormPass_Spawn_Main01_C_3'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Level/StormPass/StormPass_Spawn_Main01.830"
+            },
+            "FunctionName": "BndEvt__StormPass_Spawn_Main01_SA_BigBear4_K2Node_ActorBoundEvent_0_SpawnedActorSendSignal__DelegateSignature"
+          }
+        ]
+      },
+      "bHalfHeightAdjusted": true,
+      "SaveLastStateType": "ESaveLastStateType::Mission",
+      "ActorBP_Soft": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Beast/BigBear_E/Base_Setting/CB_BigBear_E.CB_BigBear_E_C",
+        "SubPathString": ""
+      },
+      "SpawnInfo": {
+        "ObjectName": "xxSpawnInfo'SA_BigBear_E'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Beast/BigBear_E/Base_Setting/SA_BigBear_E.2"
+      },
+      "SpawnIDX": 546,
+      "BalanceGroupIndex": 2,
+      "MissionType": "EMissionType::Main",
+      "TIDX": 282007,
+      "ActorType": "EGrActorType::Dynamic",
+      "SubActorType": 1,
+      "FactionLink": {
+        "TIDX": 6
+      },
+      "FactionName": "Monster_Blue",
+      "DependentLevelPath": "/Game/_Kazan_/Level/StormPass/StormPass_SubLV05",
+      "SpawnAreaVolumeArray": [
+        {
+          "ObjectName": "xxSpawnAreaVolume'StormPass_Spawn_Main01:PersistentLevel.xxSpawnAreaVolume_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Level/StormPass/StormPass_Spawn_Main01.1483"
+        }
+      ],
+      "RootComponent": {
+        "ObjectName": "SceneComponent'StormPass_Spawn_Main01:PersistentLevel.SA_BigBear_E.SceneComponent'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Level/StormPass/StormPass_Spawn_Main01.605"
+      }
+    },
+    "references": [
+      "BBQ/Content/_Kazan_/Design/Monster/Beast/BigBear_E/Base_Setting/AI_BigBear_E_BurstTutorial",
+      "BBQ/Content/_Kazan_/Design/Monster/Beast/BigBear_E/Base_Setting/CB_BigBear_E",
+      "BBQ/Content/_Kazan_/Design/Monster/Beast/BigBear_E/Base_Setting/SA_BigBear_E",
+      "BBQ/Content/_Kazan_/Level/StormPass/StormPass_Spawn_Main01"
+    ]
+  }
+]

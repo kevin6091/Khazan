@@ -330,3 +330,11 @@
 - 통합 변경을 `6fd77bcc281e549f82bdb4204593b181faa02d83` (`art: unify enemy playback animation library`)로 main에 커밋하고 origin에 push했다. `git ls-remote origin refs/heads/main` 일치까지 확인했다.
 - stage 전 정확한 범위 1,808개 경로를 검사했다: old animation 삭제 887, 새 animation 추가 884, BP 수정 16, metadata/스크립트/문서만 포함했다. 최대 신규 파일은 약 2.86 MiB이며 build/cache 파일은 없다.
 - 사용자 Player/DAS/C++/Config/다른 문서 변경은 작업 트리에 그대로 보존했다. 현재 요청의 네이밍·폴더 통합, 중복 Idle 정리, 검증 및 Git 전달은 완료다. 이 전달 확인은 후속 문서 커밋으로 반영한다.
+
+## 2026-09-10 HeinMach·StormPass BigBear 추출·검증 완료
+
+- 두 레벨의 실제 spawn metadata가 공통 `CB_BigBear_E`를 가리키는 것을 확인하고 `/Game/_Art/Enemies/Shared/Beasts/BigBear`에 원작 material variation BP 3개와 애니메이션 102개를 포함한 공용 에셋 145개를 저장했다.
+- source closure 309 package, metadata failure 0, raw cooked package 309개를 외부 archive에 보존했다. 원본 PSK의 71개 bone에 PSA 공통 helper 8개를 추가한 79-bone skeleton을 사용하며 76개 PSA 레이아웃과 reference prefix를 검증했다.
+- direct source timeline 12개와 Composite bake 90개 모두 `A_EN_PLAY_*`다. source segment/play rate/repeat/DilationCurve, root motion 95, force root lock 3, additive 1을 asset별로 반영했다. Notify/event 1,164행은 metadata이며 실행 코드는 범위 밖이다.
+- `ValidationSummary.json`과 `RenderValidationSummary.json` passed. 애니메이션 102개 첫/중간/마지막의 모든 bone을 RAW/COMPRESSED로 평가했고 최대 길이 오차는 약 `1.1981e-7`초다. D3D12/SM6에서 material 12개와 BP 3개의 mesh/material/animation 재로드도 통과했다.
+- 기존 사용자 변경 6개 파일과 Player/Locomotion C++는 수정하지 않았다. README와 외부 archive 1,226개 파일의 hash 동기화, 보호 파일 hash 재확인, BigBear/Art 190개 경로의 선택 stage까지 완료했다. 정본은 `BIG_BEAR_EXTRACTION_2026-09-10.md`; 남은 절차는 main commit·push와 원격 hash 확인이다.
