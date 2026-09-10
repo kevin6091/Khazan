@@ -3,22 +3,32 @@
 
 #include "Character/Locomotion/KhazanLocomotionType.h"
 
-namespace
+namespace KhazanLocomotion
 {
-    bool IsKnownGait(const EKhazanGait Gait)
+    int32 GetGaitRestrictionRank(const EKhazanGait Gait)
     {
         switch (Gait)
         {
         case EKhazanGait::Walk:
+            return 0;
+
         case EKhazanGait::Run:
+            return 1;
+
         case EKhazanGait::Sprint:
-            return true;
+            return 2;
+
         default:
-            return false;
+            return INDEX_NONE;
         }
     }
+    
+    bool IsSupportedGait(const EKhazanGait Gait)
+    {
+        return GetGaitRestrictionRank(Gait) != INDEX_NONE;
+    }
 
-    bool IsKnownRotationMode(const EKhazanRotationMode Mode)
+    bool IsSupportedRotationMode(const EKhazanRotationMode Mode)
     {
         switch (Mode)
         {
@@ -71,11 +81,11 @@ bool FKhazanLocomotionConfig::IsValid(FString& OutError) const
         return false;
     }
 
-    if (!IsKnownGait(DefaultTargetGait) ||
-        !IsKnownGait(DefaultMaxAllowedGait) ||
-        !IsKnownRotationMode(DefaultRotationMode))
+    if (!KhazanLocomotion::IsSupportedGait(DefaultRequestedGait) || 
+        !KhazanLocomotion::IsSupportedGait(DefaultMaxAllowedGait) ||
+        !KhazanLocomotion::IsSupportedRotationMode(DefaultRequestedRotationMode))
     {
-        OutError = TEXT("Locomotion config contains an unknown enum value.");
+        OutError = TEXT("Locomotion config contains an unsupported enum value.");
         return false;
     }
 

@@ -214,3 +214,12 @@
 - 현재 이해 경계: Handle의 `Owner`는 gameplay 원인 Source나 ASC OwnerActor가 아니라 해당 handle을 발급한 LocomotionComponent다. `Handle::IsValid()`는 포인터/GUID의 구조적 유효성이고 현재 active ID/map membership은 이후 Component API가 별도로 판정한다.
 - 다음 구현 지점은 20.7 Component public 계약이지만, 사용자의 요청에 따라 이번 응답은 Source/Target/Owner/Effect/Handle/GUID와 config→intent/constraint→policy→CMC 흐름의 개념 설명만 수행한다.
 - 검증 범위: 소스 정적 대조만 수행했다. 진행 중 전체 빌드·PIE와 게임 파일 수정은 수행하지 않았다.
+
+## 2026-09-10 — M2.2 Component 정책 체크포인트, Player·Anim 이관 대기
+
+- 현재 상태: `FKhazanLocomotionConfig`, raw Intent, 원인별 Constraint, ResolvedPolicy와 Component의 intent token/constraint 장부/policy→CMC 적용/tag projection/EndPlay가 사용자 작업 트리에 반영됐다. M2.2 §20.16까지의 중간 상태이며 Player §20.17과 AnimInstance §20.18은 아직 옛 API를 사용한다.
+- 마지막 검증: Editor 종료 상태에서 전체 `KhazanEditor Win64 Development` 빌드를 실행했다. UHT는 통과했지만 `KhazanPlayer.cpp`의 handle 없는 setter 및 삭제된 `GetIntent`/`SetTargetGait`, `KhazanAnimInstance.cpp`의 삭제된 `GetIntent`/`MaxAllowedGait`/`RotationMode` 참조로 exit 1이었다. Component/Type/Character/Definition은 이 실행에서 compile 단계가 완료됐다.
+- 실패 원인: 순서형 마이그레이션에서 producer/공통 policy API가 먼저 바뀌었고 두 소비자가 아직 새 계약으로 이관되지 않았다. 삭제된 호환 API를 되살리는 방식으로 해결하지 않는다.
+- 남은 작업: Player가 Possess 수명에 맞춰 `FKhazanLocomotionIntentHandle`을 발급·종료하고 모든 raw intent write에 전달하도록 §20.17을 적용한다. AnimInstance GT snapshot은 raw Intent와 ResolvedPolicy를 각각 읽도록 §20.18을 적용한다. 기존 trailing whitespace도 최종 변경 전에 정리한다.
+- 정확한 재개: Router → 아키텍처 v2 → Migration 현재 M2.2 → `CHARACTER_TAG_ABILITY_STEP_2.md` §20.17/§20.18 → 실제 Player/Anim/Component 헤더와 소스를 대조한다. 두 소비자 이관 후 전체 빌드 → `PDA_Character_Khazan` 연결 → token/constraint/ASC 중첩/UnPossess·EndPlay/기존 로코모션 PIE 순으로 검증하고, 그 전에는 M2.2 완료나 M2.3 시작으로 기록하지 않는다.
+- Git 의도: 사용자의 요청에 따라 현재 컴파일 실패를 숨기지 않는 WIP 체크포인트로 전체 변경을 main에 전달한다. 빌드 산출물은 Git 대상에 포함하지 않는다.

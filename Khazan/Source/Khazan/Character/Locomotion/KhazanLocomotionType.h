@@ -21,6 +21,27 @@ enum class EKhazanRotationMode : uint8
 	LockOn
 };
 
+/**
+ * 로코모션 enum의 지원 범위와 gait 제한 순서를 정의하는 공통 규칙이다.
+ *
+ * Config 검증과 LocomotionComponent가 같은 규칙을 사용한다.
+ * 상태를 보관하지 않으며 Game Thread 전용 함수도 아니다.
+ */
+namespace KhazanLocomotion
+{
+	// enum 저장 숫자와 별개인 현재 gameplay gait 제한 순서를 반환한다.
+	// 지원하지 않는 값에는 INDEX_NONE을 반환한다.
+	KHAZAN_API int32 GetGaitRestrictionRank(const EKhazanGait Gait);
+
+	// 현재 로코모션 계약에서 처리할 수 있는 gait인지 확인한다.
+	KHAZAN_API bool IsSupportedGait(const EKhazanGait Gait);
+
+	// 현재 로코모션 계약에서 처리할 수 있는 회전 모드인지 확인한다.
+	KHAZAN_API bool IsSupportedRotationMode(const EKhazanRotationMode Mode);
+}
+
+
+// 누가 Intent를 작성했는지
 UENUM(BlueprintType)
 enum class EKhazanLocomotionIntentSource : uint8
 {
@@ -71,13 +92,13 @@ struct KHAZAN_API FKhazanLocomotionConfig
 	FRotator RotationRate = FRotator(0.f, 540.f, 0.f);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Defaults")
-	EKhazanGait DefaultTargetGait = EKhazanGait::Walk;
+	EKhazanGait DefaultRequestedGait = EKhazanGait::Walk;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Defaults")
 	EKhazanGait DefaultMaxAllowedGait = EKhazanGait::Sprint;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Defaults")
-	EKhazanRotationMode DefaultRotationMode = EKhazanRotationMode::VelocityDirection;
+	EKhazanRotationMode DefaultRequestedRotationMode = EKhazanRotationMode::VelocityDirection;
 
 	bool IsValid(FString& OutError) const;
 	float GetSpeedForGait(EKhazanGait Gait) const;
@@ -96,7 +117,7 @@ struct FKhazanLocomotionIntent
 	float InputAmount = 0.f;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Locomotion")
-	EKhazanGait TargetGait = EKhazanGait::Walk;
+	EKhazanGait RequestedGait = EKhazanGait::Walk;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Locomotion")
 	EKhazanRotationMode RequestedRotationMode = EKhazanRotationMode::VelocityDirection;
@@ -115,10 +136,10 @@ struct FKhazanMovementConstraint
 	bool bOverrideRotationMode = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Locomotion", meta = (EditCondition = "bOverrideRotationMode"))
-	EKhazanRotationMode RotationMode = EKhazanRotationMode::VelocityDirection;
+	EKhazanRotationMode RotationModeOverride = EKhazanRotationMode::VelocityDirection;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Locomotion", meta = (EditCondition = "bOverrideRotationMode"))
-	int32 RotationPriority = 0;
+	int32 RotationModeOverridePriority = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Locomotion")
 	FName DebugName = NAME_None;
@@ -140,7 +161,7 @@ struct FKhazanResolvedMovementPolicy
 	EKhazanGait ResolvedGait = EKhazanGait::Walk;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Locomotion")
-	EKhazanRotationMode RotationMode = EKhazanRotationMode::VelocityDirection;
+	EKhazanRotationMode ResolvedRotationMode = EKhazanRotationMode::VelocityDirection;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Locomotion")
 	float MaxWalkSpeed = 0.f;

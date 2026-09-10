@@ -269,7 +269,7 @@ void UKhazanAnimInstance::GatherGameThreadData()
 
 	NewData.MovementMode = MovementComponent->MovementMode;
 
-	NewData.TargetGait = Intent.TargetGait;
+	NewData.TargetGait = Intent.RequestedGait;
 
 	NewData.MaxAllowedGait = Intent.MaxAllowedGait;
 

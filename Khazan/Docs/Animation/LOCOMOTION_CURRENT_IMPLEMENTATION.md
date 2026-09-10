@@ -827,3 +827,135 @@ InGame의 마지막 Turn 목록은 2026-09-07 표적 감사가 근거다. 아래
 - [정적 통과] Component forward declaration, private 필드와 friend 발급 권한, constraint handle의 `USTRUCT(BlueprintType)`/`GENERATED_BODY`, native permission multicast delegate 선언을 확인했다. Character의 BlueprintPure getter와 GameWorld 초기화 경계 정정도 반영됐다.
 - [아직 미구현] 현재 active intent ID/source, constraint map, 발급·검사·해제 API와 policy rebuild는 20.7 이후 범위다. 선언된 handle만으로 이동 소유권이나 제한이 자동 작동하지 않는다.
 - [검증 범위] 읽기 전용 정적 확인만 수행했다. 전체 빌드·PIE와 C++·BP·asset 수정은 수행하지 않았다.
+
+
+## 2026-09-10 M2.2 20.7 LocomotionComponent 헤더 계약 반영 확인
+
+- [현재 부분 구현] 사용자가 `KhazanLocomotionComponent.h`에 config 초기화, 단일 intent source token, 원인별 movement constraint, resolved policy 조회, permission event와 관련 runtime 장부 선언을 반영했다. 기존 handle 없는 intent setter와 `SetMaxAllowedGait` 선언은 제거됐다.
+- [정적 통과] 공개 함수, 내부 `FActiveMovementConstraint`, config/intent/policy/source/constraint/event 멤버가 M2.2 실습판 7절의 계약과 일치한다. Intent handle은 C++ 전용 단일 작성 권한이고 constraint handle은 Blueprint에서도 보관 가능한 원인별 해제 영수증이라는 구분도 유지됐다.
+- [주석 수정] `Source`, issuing `Handle.Owner`, handle 보관자의 책임을 구분하고, `Handle::Reset()`은 발급자 장부를 종료하지 않는다는 점, `IsValid()`는 현재 active 여부 전체를 보장하지 않는다는 점, permission event는 ASC Block 태그 경계 알림이라는 점을 헤더 주석에 명시했다. 선언과 동작 코드는 이 주석 작업에서 변경하지 않았다.
+- [예상 미완성] `KhazanLocomotionComponent.cpp`는 아직 M2.1 구현이며 삭제된 Intent 필드와 handle 없는 setter를 참조한다. 다음은 실습판 8절의 cpp helper/ASC 관측/config 초기화부터 순서대로 이관한다. 이 의도적인 중간 상태에서는 전체 빌드를 완료 판정으로 사용하지 않는다.
+- [검증 범위] 현재 헤더와 관련 타입/Character 전달 코드를 정적으로 대조했고 `git diff --check`를 통과했다. UHT/컴파일/PIE, CMC 단일 작성자, Player·AnimInstance 소비 이관은 아직 검증하지 않았다.
+
+
+## 2026-09-10 M2.2 Component cpp 초기화 묶음 사용자 반영 검토
+
+- [현재 부분 구현] `KhazanLocomotionComponent.cpp`에 필요한 include, gait/회전 검증 helper, M2.2 `BeginPlay()`의 ASC tag delegate 구독, `InitializeMovementConfig()`가 반영됐다. Config 검증 실패 시 config/intent/policy를 비우고, 성공 시 config를 복사한 뒤 Reset과 rebuild를 요청하는 순서는 채택 계약과 일치한다.
+- [주석 수정] gait rank가 속도·튜닝값이 아니라 제한 비교 규칙이라는 점, delegate 참조/구독은 Block 태그 부여가 아니라 callback 등록이라는 점, invalid config reset은 fail-closed 처리라는 점을 소스 주석에 명시했다. 공백 오류도 정리했으며 동작 코드는 변경하지 않았다.
+- [수정 필요] 익명 namespace가 `GetGaitRestrictionRank()` 뒤에서 먼저 닫혀 `IsKnownRotationMode()`와 `GetMoreRestrictiveGait()`가 cpp 내부 linkage 밖에 있다. 닫는 중괄호를 세 helper 뒤로 옮겨야 한다. 이번 초기화 묶음의 일부인 `ResetIntentToConfigDefaults()` 정의도 아직 없다.
+- [아직 미구현] intent/constraint 함수에는 반환 없는 빈 stub이 있고 그 아래에는 M2.1의 handle 없는 setter와 삭제된 Intent 필드 소비가 남아 있다. 현재 소스는 전체 컴파일 가능 상태가 아니며 이 결과를 M2.2 완료로 기록하지 않는다.
+- [정확한 재개] namespace 범위 수정 → `ResetIntentToConfigDefaults()` 추가 → 미래 함수의 빈 stub 정리 여부 확인 → 정적 재검토 후 8.4 intent source token과 8.5 raw intent setter 구현으로 진행한다.
+
+### 같은 작업 후속 — helper 범위 수정과 두 Reset 함수 구분
+
+- [정적 통과] 사용자가 익명 namespace의 닫는 중괄호를 세 helper 뒤로 옮겨 `GetGaitRestrictionRank`, `IsKnownRotationMode`, `GetMoreRestrictiveGait`가 모두 cpp 내부 linkage를 갖도록 수정했다. `InitializeMovementConfig()` 본문도 계속 계약과 일치한다.
+- [현재 정정 필요] `ResetIntentToConfigDefaults()` 정의는 아직 없고, 그 전체 Intent 초기화 본문이 handle 기반 `ResetTargetGaitToDefault()` stub 안에 들어가 있다. 전자는 source 시작/종료용 private 전체 Reset이며, 후자는 유효 token으로 `TargetGait` 하나만 Config 기본값으로 되돌리는 public setter다.
+- [안내 정정] 앞선 대화에서 `ResetTargetGaitToDefault()`는 선언과 개요만 제시하고 전체 구현을 설명하지 않았으므로 사용자 누락으로 취급하지 않는다. 다음 안내는 8.4 token 네 함수와 8.5 setter 다섯 함수의 완전한 교체 코드 및 줄별 의미를 함께 제공한다.
+- [검증 범위] 주석 수정본과 현재 소스를 정적으로 확인했다. 비어 있는 non-void stub, 옛 handle 없는 setter, M2.1 policy/tag 소비가 남아 있으므로 빌드·PIE는 아직 실행하지 않는다.
+
+
+## 2026-09-10 M2.2 Locomotion 명명·계약 정적 감사
+
+- [읽기 전용 검토] `KhazanLocomotionType.h/.cpp`와 `KhazanLocomotionComponent.h/.cpp`, 예정된 Player·CMC·AI 소비 코드를 대조했다. 이번 감사에서는 C++ 심볼과 동작을 변경하지 않았다.
+- [핵심 제안/미적용] 하나의 handle 판정을 public `IsMoveIntentHandleActive`와 private `IsCurrentIntentHandle`이라는 두 동의어로 나누지 않는다. `Current`를 단일 intent 세대의 표준 용어로 정하고 한 public 판정으로 합치거나, 내부 helper를 유지할 경우 이름에 thread check가 없는 내부 구현임을 명시한다.
+- [핵심 제안/미적용] raw intent의 gait·rotation은 최종 결과가 아니라 source 요청이다. `TargetGait` 계열은 `RequestedGait`, handle 기반 `SetRotationMode`는 `SetRequestedRotationMode` 계열로 맞춰 `ResolvedGait`·최종 rotation과 구분한다. Config의 영구 기준 상한인 `DefaultMaxAllowedGait`도 초기 요청 기본값과 구분되는 `BaseMaxAllowedGait`가 더 정확하다.
+- [핵심 제안/미적용] `MovementInputPermissionChanged`는 모든 최종 gate 변화가 아니라 ASC `Block.Movement.Input` tag projection 경계에서만 방송한다. delegate·refresh·callback·delegate handle 이름에 `TagPermission` 또는 `BlockTag` 범위를 포함해 `IsMovementInputAllowed()`의 전체 gate와 구분하는 것이 정확하다.
+- [명료화 제안/미적용] 두 handle의 private `Owner`는 Actor/ASC Owner가 아니라 발급자이므로 `Issuer`, intent `Id`는 세대 ID, constraint `Id`는 제약 ID로 구체화한다. `ApplyOrder`는 apply 시각이 아니라 acquire 순번이므로 `AcquisitionOrder` 계열이 정확하다. C++ const-ref getter와 Blueprint copy getter는 `Snapshot` 접미사로 대칭을 맞춘다.
+- [유지 가능] `Acquire/ReleaseMovementConstraint`, `IsMovementInputAllowed`, `ResolvedGait`, `MaxAllowedGait`, `bHasValidMovementConfig`, `ObservedAbilitySystemComponent`, `ActiveConstraints`, `ResetIntentToConfigDefaults`, `GetMoreRestrictiveGait`는 현재 책임과 이름이 일치한다. `Handle::IsValid()`는 현재성까지 보장하지 않지만 Unreal handle의 구조적 유효성 검사 관례와 주석이 있어 유지할 수 있다.
+- [현재 구현 상태] 새 구현은 `SetRotationMode(handle, ...)`까지 들어갔다. constraint acquire/release는 반환 없는 빈 stub이고, 그 아래에는 삭제된 Intent 필드를 사용하는 M2.1 setter/permission/`GetResolvedGait`/`EndPlay`가 남아 있다. 절대 경로의 Boost Python `handle.hpp` include도 현재 component에 필요하지 않은 자동 추가 흔적으로 보인다. 따라서 현재는 명명과 별개로 전체 컴파일 가능한 상태가 아니다.
+- [검증 범위] 소스·문서·호출 예정 지점의 정적 대조만 수행했다. rename, redirect, 빌드, UHT, PIE 검증은 하지 않았다. 이름 변경을 채택하면 외부 소비자 추가 전에 C++/문서 예제를 한 번에 맞춘 뒤 M2.2 구현을 재개한다.
+
+
+## 2026-09-10 M2.2 사용자 선택 명칭 확정과 후속 명명 규칙
+
+- [사용자 선택/현행 기준] 사용자가 실제 반영한 명칭만 후속 구현의 기준으로 삼는다. `Begin/EndLocomotionIntentSource`, 단일 public 판정 `IsActiveLocomotionIntentHandle`, `RequestedGait`·`RequestedRotationMode`, `Set/ResetRequestedGait`, `SetRequestedRotationMode`, `RotationModeOverride`·`RotationModeOverridePriority`, `ResolvedRotationMode`, C++ getter와 `Snapshot` getter의 대칭, `AcquireOrder`·`NextConstraintAcquireOrder`, config 검증의 `IsSupportedGait/RotationMode`가 채택됐다.
+- [유지 결정] 사용자가 바꾸지 않은 `Handle.Owner/Id`, `ActiveIntentSource/Id/SourceType`, `DefaultMaxAllowedGait`, permission delegate 계열, `InputAmount` 등의 현행 명칭은 그대로 유지한다. 앞 절의 `Current`, `Issuer`, `BaseMaxAllowedGait`, tag 전용 permission 명칭 등 미채택 제안을 실제 계약처럼 다시 사용하지 않는다.
+- [표준 의미] `Active`는 현재 등록돼 사용 가능한 runtime source/handle/constraint, `Requested`는 intent source가 기록한 해결 전 요청, `Resolved`는 config와 constraint를 합친 policy 결과, `Allowed`는 입력 출력 gate, `Default`는 config가 공급하는 기본값, `Owner`는 각 handle을 발급한 LocomotionComponent, `Source`는 intent 또는 constraint의 원인 UObject, `Handle`은 발급자가 반환한 권한 또는 개별 해제 영수증으로 사용한다.
+- [후속 규칙] 영어 사전상의 대체어를 이유로 새 동의어를 추가하지 않는다. 먼저 현행 프로젝트 심볼과 실제 작성자·소비자·수명·판정 범위를 확인하고, 같은 개념에는 이미 채택된 단어를 반복 사용한다. 이름 변경이 필요하면 실제 계약 불일치를 근거로 선언·정의·호출·주석·현행 문서의 변경 범위를 함께 제시하고 사용자의 선택을 보존한다.
+- [정적 확인] 새 Component 선언과 구현은 `SetRequestedRotationMode`까지 서로 일치한다. 다만 Component cpp의 동일한 enum 판정 helper에는 아직 `IsKnownRotationMode`가 남아 있어 `KhazanLocomotionType.cpp`의 채택 용어 `IsSupportedRotationMode`와 불일치한다. 헤더 주석의 옛 `IsMoveIntentHandleActive`, `Begin/EndMoveIntentSource`, `DefaultTargetGait`와 cpp 주석의 `TargetGait`도 현재 심볼로 갱신해야 한다.
+- [예정된 이관 잔여] Player와 AnimInstance, Component cpp 후반은 아직 M2.1 이름과 삭제된 필드를 사용한다. 이는 현재 순서형 구현의 미완성 구간이며 다음 단계에서 새 기준 명칭으로 한 번에 이관한다. source의 절대 Boost Python `handle.hpp` include, 빈 constraint stub, 옛 permission/`GetResolvedGait`/`EndPlay` 구현도 아직 남아 있으므로 빌드 완료 상태가 아니다.
+- [검증 범위] C++ 소스와 관련 호출을 정적으로 확인하고 정본만 추가했다. 사용자 C++·주석·BP·asset은 수정하지 않았으며 빌드·UHT·PIE도 실행하지 않았다.
+
+
+## 2026-09-10 M2.2 enum 지원 규칙 공통화와 Constraint 다음 절차
+
+- [현재 확인] `KhazanLocomotionType.cpp`와 `KhazanLocomotionComponent.cpp`의 `IsSupportedRotationMode`는 각각 익명 namespace에 있어 linker 충돌은 없지만 서로 다른 함수다. 같은 enum 지원 집합을 두 곳에서 따로 유지하면 새 회전 모드 추가 시 검증 경로가 어긋날 수 있다.
+- [설계 결정/사용자 적용 전] Config와 Component/Constraint라는 실제 복수 소비자가 생겼으므로 `KhazanLocomotionType.h/.cpp`의 `KhazanLocomotion` namespace가 gait 제한 순위와 지원 enum 규칙을 한 번만 소유하는 것이 적합하다. 새 helper 파일이나 상태 소유자를 만들지 않는다. Component 익명 namespace에는 단일 소비 함수 `GetMoreRestrictiveGait`만 남긴다.
+- [현재 구현 경계] 새 Component 구현은 `SetRequestedRotationMode`까지 선언·정의가 일치한다. 다음 기능 묶음은 `AcquireMovementConstraint`와 `ReleaseMovementConstraint`이며, 그 다음에야 모든 활성 원인을 합치는 `RebuildAndApplyMovementPolicy`로 진행한다.
+- [다음 계약] acquire는 Game Thread, valid config/source, 지원 gait/활성 rotation override를 검증하고 고유 GUID와 단조 증가 `AcquireOrder`를 기록한 뒤 handle을 반환한다. release는 issuing Component와 GUID가 맞는 자기 항목 한 건만 제거하고 handle을 Reset한 뒤 남은 원인으로 policy rebuild를 요청한다. Source는 진단/orphan 방어용이고 해제 키는 GUID다.
+- [검증 범위] 현재 소스와 단계 문서를 정적으로 대조했으며 설명할 코드만 확정했다. 사용자 C++·BP·asset은 수정하지 않았고, 빈 stub과 M2.1 후반 코드가 남아 있어 빌드·PIE는 아직 수행하지 않는다.
+
+
+## 2026-09-10 M2.2 Constraint 획득·해제 사용자 반영 검토와 Policy 재계산 안내
+
+- [현재 부분 구현] 사용자가 공통 enum 지원 규칙과 `AcquireMovementConstraint`/`ReleaseMovementConstraint`를 반영했다. valid config/source/constraint 검사, 활성 map과 충돌하지 않는 GUID 발급, weak source와 constraint 복사, handle의 issuing `Owner`/`Id`, 자기 항목 한 건 해제와 stale handle 정리는 채택 계약과 일치한다.
+- [수정 필요] 설명했던 `NextConstraintAcquireOrder == MAX_uint64` 사전 검사가 실제 acquire 본문에는 없고 곧바로 `++NextConstraintAcquireOrder`를 수행한다. 증가 전에 실패 handle을 반환하는 guard를 넣어 unsigned wrap으로 최신 제약이 과거 제약보다 작은 순번을 받지 않게 해야 한다. 지역 변수 `bisGaitSupported`는 채택한 bool 표기대로 `bIsGaitSupported`, 로그의 `Constriant` 오탈자는 `constraint`로 정리한다.
+- [성능 판단] GUID 생성 loop는 acquire 사건에서만 실행되고, `FGuid::NewGuid()`가 유효하며 활성 map과 충돌하지 않으면 한 번에 끝난다. `IsValid()`는 상수 시간이고 `TMap::Contains()`는 통상 상수 시간 lookup이므로 정상 규모에서 병목이 아니다. Constraint를 Tick마다 acquire하는 사용 방식은 이 수명 계약에 어긋난다.
+- [현재 생산자/다음 소비자] 현재 소스는 `AcquireOrder`를 기록만 하고 아직 읽지 않는다. 다음 사용자 적용 함수 `RebuildAndApplyMovementPolicy()`가 rotation override priority 동률일 때 더 큰 `AcquireOrder`를 승자로 선택한다. 따라서 overflow 설명은 이미 완성된 소비 코드에 대한 설명이 아니라 다음 재계산 계약의 선행 불변식이다.
+- [제안만 함] `RebuildAndApplyMovementPolicy()`는 소멸한 weak source의 orphan을 방어적으로 제거하고, config 기본 gait 상한에서 모든 제한을 접으며, 요청 회전 모드에서 시작해 priority와 acquire 순서로 override 하나를 고른다. 이어 `RequestedGait`와 최종 상한으로 `ResolvedGait`, config로 `MaxWalkSpeed`를 파생한 뒤 policy를 한 번에 교체하고 CMC 적용 함수를 호출한다. 게임 C++은 이번 설명에서 직접 수정하지 않았다.
+- [검증 범위] 현재 네 로코모션 C++ 파일과 M2.2 단계 문서를 정적으로 대조했다. `RebuildAndApplyMovementPolicy`/CMC 적용이 아직 없고 cpp 후반에 삭제된 Intent 필드 및 중복 `GetResolvedGait` 구현이 남아 있어 빌드·UHT·PIE는 수행하지 않았으며 M2.2 완료로 기록하지 않는다.
+
+
+## 2026-09-10 M2.2 Policy 재계산 사용자 반영과 AcquireOrder overflow 계약 확인
+
+- [현재 부분 구현] 사용자가 `NextConstraintAcquireOrder == MAX_uint64` 사전 guard와 `RebuildAndApplyMovementPolicy()`를 반영했다. 새 제약의 wrap을 막고, orphan source 제거, 가장 제한적인 gait 상한, rotation override priority와 동률 시 더 큰 `AcquireOrder`, 최종 gait·rotation·speed 파생을 수행하는 핵심 계산은 안내 계약과 일치한다.
+- [overflow의 실제 동작] 현재 counter에는 자동 reset이나 활성 순번 재배치가 없다. 최댓값에 도달하면 기존 Constraint와 Policy는 유지되고 새 acquire만 invalid handle로 실패한다. Release는 계속 가능하며 새 Component 인스턴스는 멤버 초기값 0에서 시작한다.
+- [유지 판단] 이 counter는 저장 데이터나 전역 시간이 아니라 Component 인스턴스 수명 안의 acquire 사건 수다. 매초 60회라도 최댓값까지 약 97억 년, 매초 백만 회라도 약 58만 년이 필요하므로 정상 gameplay에서 도달할 수 없다. 현재 guard는 현실적 복구 경로라기보다 silent wrap으로 동률 승자가 뒤집히는 것을 막는 fail-safe로 유지한다.
+- [금지되는 단순 처리] 활성 Constraint가 남아 있는데 counter만 0으로 되돌리면 새 Constraint가 같은 priority의 기존 Constraint보다 오래된 것으로 판정되므로 올바르지 않다. map이 비었을 때만 reset하거나 활성 순서를 보존해 재번호화하는 방식은 가능하지만, 도달 불가능한 경로를 위한 추가 상태 변경과 검증 부담이 있어 현재 구현에는 넣지 않는다.
+- [남은 정리] `bisGaitSupported`는 `bIsGaitSupported`, 오류 로그의 `Constriant`는 `constraint`로 정리해야 한다. 동률 설명 주석은 Order가 “더 높은지”보다 “더 나중에 획득됐는지”, 승자 분기 주석은 priority 단독 채택이 아니라 “현재 Constraint가 rotation override 승자로 선택됐는지”로 표현해야 실제 조건과 일치한다.
+- [검증 범위] 현재 Component 헤더와 cpp의 acquire/release/rebuild를 정적으로 확인했다. 게임 C++은 직접 수정하지 않았고, 후반 M2.1 잔여 코드와 미구현 CMC 적용 경로가 있어 빌드·UHT·PIE는 아직 수행하지 않았다.
+
+
+## 2026-09-10 M2.2 Policy 재계산 반영 확인과 CMC 적용 다음 절차
+
+- [현재 부분 구현] 사용자가 `bIsGaitSupported`와 Constraint 로그 오탈자를 정리했고, overflow guard 및 `RebuildAndApplyMovementPolicy()`를 현행 `Requested`/`Resolved`/`RotationModeOverride`/`AcquireOrder` 명칭으로 반영했다. orphan 제거, gait 제한 fold, rotation priority와 동률 acquire 순번, policy 일괄 교체는 정적 계약과 일치한다.
+- [주석 잔여] 동률 분기 주석의 AcquireOrder는 값이 “더 높은지”가 아니라 “더 나중에 획득됐는지”를 뜻한다. 승자 분기는 priority가 높은 경우와 같은 priority에서 나중에 획득한 경우를 모두 포함하므로 “현재 Constraint가 rotation override 승자로 선택됐다면”으로 적어야 조건과 정확히 일치한다. cpp와 헤더의 일부 `TargetGait` 옛 주석도 현행 `RequestedGait`로 남아 있는지 계속 정리한다.
+- [다음 사용자 적용] 바로 다음 소단계는 선언돼 있지만 정의되지 않은 `ApplyMovementPolicyToCharacter()`다. 검증된 config의 `MinAnalogWalkSpeed`, `MaxAcceleration`, `BrakingDecelerationWalking`, `RotationRate`와 policy의 `MaxWalkSpeed`를 공통 CMC에 쓰고, `ResolvedRotationMode`에 따라 Character의 controller 직접 회전을 끈 뒤 CMC의 이동 방향 회전 또는 controller desired rotation을 배타적으로 선택한다.
+- [엔진 의미 확인] 프로젝트가 연결된 로컬 UE 5.8 소스에서 `bOrientRotationToMovement`는 기본 구현상 Acceleration 방향, 입력 Acceleration이 없고 AI requested velocity가 있으면 그 방향을 사용하며 `bUseControllerDesiredRotation`보다 우선한다. `bUseControllerDesiredRotation`은 Controller의 desired rotation을 `RotationRate`로 따라간다. 따라서 현행 enum `VelocityDirection`은 이 단계에서 CMC의 movement-directed facing adapter이며 매 순간 실제 Velocity 벡터를 직접 추적하는 별도 계산은 아니다.
+- [수치 출처] 이번 적용 함수는 새 수치를 만들지 않는다. 현행 config 기본값과 예정 Definition 값은 Player CDO/소스에서 이관한 프로젝트 값이며 원작 metadata 직접 확인값이 아니다. 함수는 이미 검증·복사된 config와 resolved policy만 소비한다.
+- [단일 작성자 미완료] 현재 `KhazanPlayer.cpp` 생성자, `BeginPlay()`, `RefreshLocomotionGait()`가 회전/속도/가감속을 직접 쓰고 있어 이번 함수 추가 직후에도 중복 작성자가 남는다. Player intent-handle 이관 단계에서 해당 대입과 speed property를 제거하기 전까지 runtime 단일 작성자 완료나 CMC 최종값 검증으로 기록하지 않는다.
+- [검증 범위] 현행 Component, Character, Player, Definition 소스와 로컬 UE 5.8 CMC 헤더/회전 구현을 정적으로 대조했다. 게임 C++·BP·asset은 직접 수정하지 않았고, 후반 옛 필드/함수 소비와 미구현 tag projection·EndPlay·Player/Anim 이관 때문에 빌드·UHT·PIE는 아직 수행하지 않는다.
+
+
+## 2026-09-10 M2.2 CMC 적용 사용자 반영과 tag projection·EndPlay 다음 절차
+
+- [현재 부분 구현] 사용자가 `ApplyMovementPolicyToCharacter()`를 `ResolvedPolicy.ResolvedRotationMode`와 현행 `CMC` 지역 명칭으로 반영했다. 유효 Owner/CMC/config gate, config의 아날로그 최소 속도·가속·보행 제동·회전률, policy의 최종 속도, Character controller 직접 회전 해제, 세 rotation mode의 CMC flag 선택은 안내 계약과 일치한다.
+- [이번 사용자 적용 범위] 다음 묶음은 `HandleMovementBlockChanged()`/`RefreshMovementPermission()`/`IsMovementInputAllowed()`의 완전 교체, cpp의 옛 `GetResolvedGait()` 정의 삭제, `EndPlay()`의 역순 정리다. 이 묶음으로 Component cpp 안의 삭제된 `Intent.bMovementAllowed`, `Intent.MaxAllowedGait`, 인자 없는 `ClearMoveInput()` 소비를 모두 제거한다.
+- [tag projection 계약] callback 인자는 저장하지 않고 현재 weak ASC의 `Block.Movement.Input` count를 다시 읽는다. ASC가 없거나 count가 0보다 크면 fail closed, count가 0이면 tag 관점 허용이다. raw Intent는 보존하고 Pawn의 pending movement input만 소비하며, policy rebuild 후 tag projection 경계에서만 최종 `IsMovementInputAllowed()` 결과를 방송한다.
+- [최종 gate 계약] Config 유효성, ASC 생존, tag projection, 현재 intent Source와 Id, Pawn Owner, 엔진 `IsMoveInputIgnored()`를 모두 만족해야 true다. `ActiveIntentSourceType`은 진단 분류이므로 권한 gate에 사용하지 않는다. Constraint는 현재 gait/rotation을 제한하며 입력 차단은 ASC tag 계약이 담당한다.
+- [EndPlay 계약] ASC 외부 구독 해제 → delegate handle과 자체 listener 정리 → weak ASC 제거 → intent source/Id/type 제거 → constraint map과 acquire counter 제거 → config/intent/policy reset → 마지막에 `Super::EndPlay()` 순서다. teardown 중 rebuild, CMC 적용, permission broadcast, 개별 release를 호출하지 않는다.
+- [아직 미완료] Component 후반을 정리해도 Player와 AnimInstance가 옛 handle 없는 setter/getter 및 삭제된 Intent 필드를 사용한다. 다음 단계에서 Player intent source 수명과 입력 어댑터를 이관한 뒤 AnimInstance snapshot을 맞추기 전에는 전체 빌드·PIE 완료 상태가 아니다.
+- [검증 범위] 현행 Component 헤더/cpp, BeginPlay 구독, 로컬 UE 5.8 GameplayTag event 등록·해제 API를 정적으로 대조했다. 게임 C++·BP·asset은 직접 수정하지 않았고 현재 trailing whitespace도 남아 있어 빌드·UHT·PIE는 수행하지 않았다.
+
+
+## 2026-09-10 M2.2 진행 순서 감사와 tag projection 용어 정리
+
+- [확정 절차 대조] 전체 단계는 M0 → M1 → M2.1 → M2.2 → M2.3 → M2.4 → M3 순서를 유지한다. 현재 작업은 Step 2의 M2.2 §20.2–20.21 가운데 Component 정책 구현 구간이며, M2.3 AI 구동이나 M3 전투 범위를 앞당겨 섞지 않았다.
+- [세부 조정의 성격] 사용자 선택으로 확정된 `BeginLocomotionIntentSource`, `IsActiveLocomotionIntentHandle`, `RequestedGait`, `ResolvedRotationMode`, `AcquireOrder` 계열 명칭을 과거 가이드의 옛 이름 대신 사용했고, 중복 `IsSupportedRotationMode`를 공통 enum helper로 합치고 acquire overflow guard를 명시했다. 이는 M2.2 책임과 의존 순서를 바꾼 것이 아니라 현행 계약에 맞춘 명칭·불변식 보정이다.
+- [현재 소스 위치] `ApplyMovementPolicyToCharacter()`까지는 반영됐다. `RefreshMovementPermission()`의 tag 파생값 기록·pending input 소비·policy rebuild·경계 broadcast와 `IsMovementInputAllowed()`의 새 최종 gate도 현재 소스에 반영됐다. 다만 cpp의 옛 out-of-line `GetResolvedGait()`와 옛 `EndPlay()`가 남아 있어 §20.15 말미–§20.16은 아직 완료되지 않았다. Player §20.17, AnimInstance §20.18, Definition asset/Player 검증 §20.19–20.21은 이후이며 M2.3은 시작 전이다.
+- [projection 정의] 이 문맥의 projection은 ASC가 소유한 `Block.Movement.Input` tag count를 소비자가 필요한 bool 형태로 계산해 둔 읽기용 파생값이다. `bMovementAllowedByTags = ASC가 유효하고 tag count가 0`이며, effect handle·원인·정확한 count를 복원할 수 없으므로 gameplay 원본이나 외부 setter가 아니다. 이후 설명에서는 필요할 때 `ASC 태그 상태에서 계산한 읽기용 파생값`이라고 병기한다.
+- [주석 수정 필요] `GetTagCount()`는 해당 tag event를 구독해야만 호출할 수 있는 API가 아니다. 현재 cpp의 “BeginPlay에서 GameplayTagEvent에 등록한 Tag만 Count 조회 가능” 주석은 “이벤트 구독 여부와 관계없이 ASC가 보유한 해당 tag의 현재 count를 조회한다”로 고쳐야 한다. 또한 `ResolvedPolicy`는 `RefreshMovementPermission()`이 tag 파생값을 쓰고 rebuild가 이를 보존하며 나머지 필드를 계산하므로 “Rebuild 함수만 최종 작성”한다는 헤더 주석도 실제 작성자 둘을 표시해야 한다.
+- [검증 범위] 확정 Migration/Step 2 문서와 현재 Character Definition, Character, LocomotionComponent, Player, AnimInstance 소스를 정적으로 대조했다. 게임 C++·BP·asset은 수정하지 않았고, 현재 삭제된 필드와 옛 호출이 남아 있으므로 빌드·UHT·PIE는 수행하지 않았다.
+- [같은 세션 후속 저장] 감사 도중 사용자가 cpp의 옛 out-of-line `GetResolvedGait()`를 삭제하고 새 `EndPlay()` 정리를 저장했다. 따라서 최신 Component 구현은 §20.16까지 도달했으며, 위의 “옛 getter/EndPlay 잔여” 판정은 그 저장 직전 시점 기록이다. 현재 C++ 전체의 옛 호출은 Player와 AnimInstance에 남아 있고, 다음 구현 순서는 §20.17 Player → §20.18 AnimInstance다.
+
+
+## 2026-09-10 ASC tag 알림과 사용자 delegate·handle 용어 감사
+
+- [용어 구분] Event는 “무슨 일이 발생했다”는 의미이고, delegate는 callback 목록과 호출 기능을 가진 전달 객체이며, callback/handler는 구독자가 등록한 함수다. binding/subscription은 delegate와 callback 사이의 연결이고 `FDelegateHandle`은 그 연결 한 건을 나중에 제거하기 위한 식별자다. `Broadcast()`는 delegate 소유자가 현재 구독자들을 호출하는 동작이다.
+- [현재 엔진 경로] ASC가 `Block.Movement.Input` count를 소유한다. `RegisterGameplayTagEvent(Tag, EventType)`는 ASC가 소유한 `FOnGameplayEffectTagCountChanged` delegate의 참조를 돌려주고, `AddUObject()`가 Locomotion callback을 실제 구독해 `FDelegateHandle`을 반환한다. count가 바뀌면 ASC 내부가 자기 delegate를 방송하며 Locomotion은 ASC delegate를 직접 방송하지 않는다.
+- [현재 사용자 경로] Locomotion은 tag count를 `bMovementAllowedByTags`로 갱신하고 policy를 완성한 뒤 자기가 소유한 native multicast delegate를 직접 방송한다. 이 두 번째 방송은 ASC가 Locomotion의 최종 정책이나 AI PathFollowing 소비자를 알지 못하므로 필요한 도메인 알림이다. delegate는 지난 상태를 저장하거나 새 구독자에게 재생하지 않으므로 BeginPlay의 최초 refresh와 M2.3 AI 구독 직후의 명시적 synchronize가 계속 필요하다.
+- [Handle 구분] `MovementBlockChangedHandle`은 tag나 GameplayEffect의 handle이 아니라 ASC delegate에 등록한 callback 한 건의 구독 handle이다. `Reset()`만으로 구독이 제거되지 않아 같은 ASC/tag/event type에 `UnregisterGameplayTagEvent()`를 먼저 호출한다. `FActiveGameplayEffectHandle`은 적용 효과 한 건, `FKhazanMovementConstraintHandle`은 활성 제약 한 건, `FKhazanLocomotionIntentHandle`은 현재 raw intent 작성 권한이며 서로 대체할 수 없다.
+- [확장 규칙] 같은 `Block.Movement.Input`을 여러 GameplayEffect가 기여해도 ASC count가 합산하므로 Locomotion의 tag delegate 구독은 한 건 그대로다. 각 효과 원인이 자기 `FActiveGameplayEffectHandle`을 보관한다. 여러 listener가 같은 Locomotion 알림을 구독하면 listener마다 자기 `FDelegateHandle` 하나를 보관한다. 실제로 서로 다른 여러 tag를 Locomotion이 관측하게 될 때만 tag/event type/delegate handle의 tuple을 명시적 필드 또는 subscription record 배열·map으로 관리한다.
+- [현재 명칭 문제] `MovementBlockChangedHandle`은 효과/상태 handle처럼 읽히므로 실제 의미인 `MovementBlockTagCountChangedDelegateHandle`이 더 정확하다. callback도 `HandleMovementBlockTagCountChanged`, 지역 `Event` 참조도 `MovementBlockTagCountChangedDelegate`가 실제 역할을 드러낸다.
+- [사용자 delegate 계약 문제] 현재 `MovementInputPermissionChanged`는 tag 파생값 경계에서만 방송되지만 payload는 전체 `IsMovementInputAllowed()` 결과다. Config, intent source, 엔진 input-ignore 변화 전체를 빠짐없이 알리는 event는 아니므로 이름의 범위가 실제 trigger보다 넓다. 현 동작을 유지한다면 `MovementInputAllowedByTagsChanged`로 범위를 좁히고 `bMovementAllowedByTags`를 payload로 보내며, AI callback은 알림 뒤 최종 `IsMovementInputAllowed()`를 다시 조회하는 계약이 정확하다. 이 rename은 제안 상태이며 사용자 선택 전 소스에 적용하지 않았다.
+- [매크로 확인] `DECLARE_MULTICAST_DELEGATE_OneParam`의 `OneParam`은 callback 인자 하나를 뜻하며 delegate 타입만 선언한다. 객체 생성, 구독, 호출을 수행하지 않는다. 로컬 UE 5.8의 `DECLARE_EVENT` 매크로는 소유자만 방송하도록 강제하지 않으며 새 delegate에는 일반 multicast 사용을 권하는 deprecated 설명이 있으므로, 접근 제한을 기대해 해당 매크로로 교체하지 않는다.
+- [검증 범위] 현행 Component와 Step 2 M2.3 예정 AI 구독 코드, 로컬 UE 5.8 delegate macro 및 ASC tag event 구현을 정적으로 대조했다. 게임 C++은 수정하지 않았고 빌드·PIE는 수행하지 않았다.
+
+## 2026-09-10 M2.2 중간 구현 전체 빌드 확인 및 Git 체크포인트
+
+- [사용자 요청] 현재 작업 트리의 변경을 완성 단계로 오인하지 않고 그대로 Git에 보존·push하는 체크포인트다. 기존 M2.2 순서형 구현을 임의로 완성하거나 옛 API를 복구하지 않았다.
+- [실제 빌드] Editor가 종료된 상태에서 UE 5.8 `Build.bat KhazanEditor Win64 Development -Project=.../Khazan.uproject -WaitMutex -NoHotReloadFromIDE`를 실행했다. UHT는 6개 generated file을 작성했고 Component/Type/Character/Definition과 module compile은 진행됐으나 전체 결과는 exit 1이다.
+- [실패 근거] `KhazanPlayer.cpp`가 새 intent handle 없이 `SetMoveInputWorld`/`ClearMoveInput`을 호출하고 삭제된 `GetIntent`/`SetTargetGait`를 사용해 C2660/C2039가 발생했다. `KhazanAnimInstance.cpp`도 삭제된 `GetIntent`, raw Intent의 `MaxAllowedGait`/`RotationMode`를 사용해 C2039가 발생했다. 이는 직전 정본에 기록된 §20.17 Player와 §20.18 AnimInstance 미이관 상태와 일치한다.
+- [추가 정적 상태] `git diff --check`는 `KhazanLocomotionComponent.cpp`와 `KhazanLocomotionType.cpp`의 기존 trailing whitespace를 보고한다. 이번 체크포인트에서는 동작·서식을 추가 변경하지 않고 현재 상태를 보존한다.
+- [정확한 재개] Step 2 §20.17에서 Player의 intent source handle 발급·보관·종료와 handle 기반 setter 호출을 먼저 이관한다. 이어 §20.18에서 AnimInstance GT snapshot이 `GetLocomotionIntent()`와 `GetResolvedMovementPolicy()`를 읽도록 바꾼다. 그 뒤 동일한 전체 Development Editor 빌드를 다시 통과시키고 Definition asset/Player constraint/빙의 종료 PIE를 검사한다.
+- [완료 경계] 현재 Component 정책 계산이 들어온 것은 확인됐지만 M2.2 빌드·PIE 완료, M2.3 시작 또는 기존 로코모션 회귀 통과를 의미하지 않는다.
