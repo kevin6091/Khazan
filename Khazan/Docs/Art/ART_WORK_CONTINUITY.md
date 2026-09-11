@@ -354,3 +354,18 @@
 - 다른 몬스터 이름의 폴더에 있는 Grapple_B 두 시퀀스도 실제 Skeleton 필드가 C_M_Yetuga_Skeleton이므로 추가 추출한다. 경로명만으로 배제하지 않는다. 공통 Missile_Skeleton의 투명 gameplay carrier Composite 6개는 캐릭터 시퀀스와 구분해 원본 metadata를 보존한다.
 - 정확한 재개: prepare_yetuga_sources.py export → build_yetuga_import_manifest.py → prepare_yetuga_animation_timing.py → Unreal Python commandlet import_yetuga_library.py → run_yetuga_animation_batches.py → assembly/fresh process/실제 RHI 검증 → archive/Art 문서 → Yetuga 경로만 main commit/push 및 원격 hash 확인.
 - 작업 전 사용자 변경과 stage 상태는 `WorkspaceBaseline.json`, C++/Config는 `Saved/ImportReports/Yetuga_ProtectedBaseline_20260911.json`에 보존했다. 기존 사용자 C++/Engineering 문서 및 staged rename을 이 Art 작업에서 변경하거나 함께 커밋하지 않는다.
+
+### 2026-09-11 Yetuga 저장 검증과 렌더 검사 진행
+
+- 본체/얼음 mesh·skeleton, 56 texture, MI 14개/master 3개, BP 1개/map 1개와 animation 120개를 저장했다. 전체 199개 에셋의 fresh-process 검사, 원작 소켓 7개, 모든 animation RAW/COMPRESSED 포즈/시간축 검사를 통과했다. 최종 master 버전과 추가 base-property 감사의 재검증은 아직 진행 중이다.
+- 실제 D3D12/SM6에서 17 material의 shader instruction 존재를 확인했다. TC_Grayscale의 Linear Grayscale sampler를 수정했다. 원본 VisibleCylinderPos=-999999 sentinel 같은 보존 값의 합산은 bounded graph로 변경했으나 이를 렌더 문제의 확정 원인으로 기록하지 않는다.
+- commandlet SceneCapture에서는 본체가 표시되지 않고 눈/얼음만 보이는 문제가 남아 있다. 임시 opaque/unlit diagnostic material에서는 본체 실루엣이 올바르게 표시되어 mesh geometry가 없는 문제는 배제했다. 원본 PNG diffuse alpha는 본체/얼굴/털 모두 거의 255로 확인했다. NoTextureStreaming만으로는 개선되지 않았다.
+- 마지막 절차는 숨김/offscreen 일반 UnrealEditor에서 실제 frame을 진행한 뒤 캡처하는 `capture_yetuga_editor_preview.py`다. 현재 실행 PID는 실행 로그에서 확인하며 `Saved/Logs/YetugaEditorPreview_20260911.log`와 `Yetuga_RenderAudit_20260911.json`, preview PNG를 확인한다. 아직 화면 검증 및 원본 archive 최종화/commit/push를 완료로 기록하지 않는다.
+- 진행 중 외부 작업이 기존 사용자 변경과 당시 Yetuga 중간 파일을 `d5cfbc77` (`0911`)으로 main에 commit/push했다. 이 작업에서 reset/amend하지 않는다. 처음 22개 사용자 변경과 Source/Config hash는 이후 대조에서도 모두 동일했다. 후속 Yetuga 수정/추가를 새 main commit으로 전달해야 한다.
+
+### 2026-09-11 Yetuga 에셋·최종 검증 완료
+
+- 원본 581 package, 본체/얼음 mesh와 453/20-bone skeleton, texture 56개, MI 14개/master 3개, BP/map 각 1개, 재생용 animation 120개의 복원·임포트를 완료했다. 전체 199개 에셋이며 staging/임시 package 0개다.
+- V4 master의 sampler/보존 graph와 source base-property를 포함한 최종 fresh audit가 exit 0/pass다. scalar 2,381/vector 482/texture binding 329, source socket 7개, 전 시퀀스 RAW/COMPRESSED pose/시간축을 대조했다. source skeleton별 PSA reference record hash도 모두 동일하다.
+- 일반 UnrealEditor에서 `-ExecCmds="py .../capture_yetuga_editor_preview.py"`로 실제 frame/resource warmup 후 캡처해 본체/털/얼굴/눈/돌기/얼음 투척물의 표시를 확인했다. shader 17개 D3D12/SM6 compile/reload 검증도 pass다. frame 0 commandlet 즉시 capture의 미표시와 실제 저장 에셋 표시를 구분한다.
+- 정본은 `YETUGA_EXTRACTION_2026-09-11.md`, 최신 artifact는 `Metadata/Extraction_20260911/ValidationSummary.json`, `RenderValidationSummary.json`, `Preview/*.png`다. 원본 JSON 전체는 SourceMetadata.zip/Index로 Git에 포함하고 원본 cooked/변환 파일은 외부 archive에 보존한다. proprietary shader/gameplay/physics/cloth/notify 및 LOD chain의 구현 제한은 정본을 따른다.

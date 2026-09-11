@@ -1,4 +1,4 @@
-"""Create the canonical UE import manifest for the shared Yetuga_E library."""
+"""Create the canonical UE import manifest for the HeinMach Yetuga boss."""
 
 from __future__ import annotations
 
@@ -81,11 +81,13 @@ def derive_full_animation_skeleton_psk(body_file: pathlib.Path, animation_files:
         raise RuntimeError(f"Unexpected PSK reference-bone record size {ref_size}")
 
     layouts = {}
+    reference_record_hashes = set()
     animation_reference = None
     for path in animation_files:
         chunks = actorx_chunks(path)
         bones = next(value for value in chunks if value[0].split(b"\0", 1)[0] == b"BONENAMES")
         size, count, payload = bones[2], bones[3], bones[4]
+        reference_record_hashes.add(hashlib.sha256(payload).hexdigest())
         if size != 120:
             raise RuntimeError(f"Unexpected PSA reference-bone record size {size} in {path}")
         names = tuple(bone_name(payload[index * size : (index + 1) * size]) for index in range(count))
@@ -93,6 +95,8 @@ def derive_full_animation_skeleton_psk(body_file: pathlib.Path, animation_files:
         animation_reference = animation_reference or bones
     if len(layouts) != 1:
         raise RuntimeError(f"Yetuga animation skeleton layouts differ: {[len(value) for value in layouts]}")
+    if len(reference_record_hashes) != 1:
+        raise RuntimeError("PSA parent/reference-pose records differ across the selected skeleton")
     animation_names = next(iter(layouts))
     _, _, animation_size, animation_count, animation_payload = animation_reference
     mesh_names = tuple(
@@ -147,6 +151,7 @@ def derive_full_animation_skeleton_psk(body_file: pathlib.Path, animation_files:
         "added_unweighted_animation_bones": list(animation_names[ref_count:]),
         "derivation": "Original body PSK geometry/weights/materials with source PSA-only reference bones appended after handedness conversion.",
         "animation_layout_files_verified": len(animation_files),
+        "animation_reference_layout_sha256": next(iter(reference_record_hashes)),
     }
 
 

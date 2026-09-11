@@ -225,3 +225,11 @@
 - 애니메이션은 30fps 직접 시간축 12개와 Composite bake 90개다. 구간·반복·AnimPlayRate·DilationCurve를 포즈에 적용하고 최종 길이에 맞는 유리수 FPS로 저장해 모두 RateScale 1.0으로 재생한다. root motion 95, force root lock 3, additive 1의 source 설정을 보존했다.
 - 별도 UE 프로세스에서 102개 RAW/COMPRESSED 포즈와 길이, 145개 에셋 구조, D3D12/SM6 머티리얼 12개 및 BP 3개 재로드를 통과했다. 정본은 [BIG_BEAR_EXTRACTION_2026-09-10.md](BIG_BEAR_EXTRACTION_2026-09-10.md), 최종 보고서는 `BigBear/Metadata/Extraction_20260910/FinalExtractionReport.json`이다.
 - Blueprint는 시각 조립 Actor이며 AI/GAS/공격 collision/ragdoll/원작 Notify 실행은 포함하지 않는다. proprietary cartoon shader graph와 source LOD chain도 완전 복원 범위가 아니다.
+
+## 2026-09-11 HeinMach Yetuga 보스 라이브러리
+
+- `HeinMach_Spawn_Main01.SA_Yetuga`의 `ActorBP_Soft` → `Boss/01_Yetuga/Base_Setting/CB_Yetuga`와 실제 `CharacterMesh0`을 기준으로 `/Game/_Art/Enemies/HeinMach/Bosses/Yetuga`에 보스 라이브러리를 구성했다.
+- 본체 453 bone/소형 얼음 20 bone의 mesh·skeleton 각 2개, 2D texture 56개, source parent/leaf MI 14개와 preview shader 3개, 시각 BP 1개, 비교 map 1개, 재생용 AnimSequence 120개로 Asset Registry 총 199개다. 모든 시퀀스는 `Animations/Playback/A_EN_PLAY_*`에 있고 임포트 원본 시퀀스 중복은 없다.
+- 원본 PSA 91개 중 다른 몬스터 폴더의 Grapple_B 두 개도 `Skeleton=C_M_Yetuga_Skeleton`을 확인해 포함했다. 직접 시간축 9개와 Composite 111개를 저장했으며 활성 dilation 66개, root motion 99개, force root lock 68개, additive 1개다.
+- 본체 원본 198-bone PSKX에 PSA 전용 비가중 reference bone 255개를 추가했다. 소켓 7개를 원본 이름·parent·transform으로 복원했고 원본 LOD0/1/2는 archive에 보관한다. 현재 임포트된 LOD0은 본체 207,390/얼음 8,051 vertices다.
+- 정본은 [YETUGA_EXTRACTION_2026-09-11.md](YETUGA_EXTRACTION_2026-09-11.md). 원본 JSON·상속값·시간축·검증 결과는 Yetuga의 `Metadata/Extraction_20260911`을 따른다. 전용 shader graph, AI/전투/physics/cloth/custom notify 실행은 별도의 복원 범위이며 시각 BP에 구현한 것으로 간주하지 않는다.

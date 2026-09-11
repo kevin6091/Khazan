@@ -19,7 +19,7 @@ ROOT = PROJECT / "Saved/Extracted/Yetuga_20260911"
 MANIFEST = json.loads((ROOT / "ImportManifest.json").read_text(encoding="utf-8"))
 DEST = MANIFEST["destination_root"]
 VERSION = MANIFEST["library_version"]
-MATERIAL_ADAPTER_VERSION = "20260911_YetugaPreviewV2_AllLeafParameters"
+MATERIAL_ADAPTER_VERSION = "20260911_YetugaPreviewV4_BoundedParameterRetention"
 SKELETON_VERSION = "20260911_Yetuga_SourceSkeletonV1"
 REPORT = PROJECT / "Saved/ImportReports/Yetuga_LibraryBuild_20260911.json"
 BASELINE = PROJECT / "Saved/ImportReports/Yetuga_ProtectedBaseline_20260911.json"
@@ -165,6 +165,9 @@ def import_textures(report: dict) -> dict[str, object]:
     }
     groups = {
         "TEXTUREGROUP_Character": unreal.TextureGroup.TEXTUREGROUP_CHARACTER,
+        "TEXTUREGROUP_WorldNormalMap": unreal.TextureGroup.TEXTUREGROUP_WORLD_NORMAL_MAP,
+        "TEXTUREGROUP_WorldSpecular": unreal.TextureGroup.TEXTUREGROUP_WORLD_SPECULAR,
+        "TEXTUREGROUP_Effects": unreal.TextureGroup.TEXTUREGROUP_EFFECTS,
         "TEXTUREGROUP_CharacterSpecular": unreal.TextureGroup.TEXTUREGROUP_CHARACTER_SPECULAR,
         "TEXTUREGROUP_CharacterNormalMap": unreal.TextureGroup.TEXTUREGROUP_CHARACTER_NORMAL_MAP,
     }
@@ -234,12 +237,16 @@ def collect_parameters(category: str, texture_map: dict[str, object]):
 def build_master(category: str, texture_map: dict[str, object], report: dict):
     name = "M_EN_Yetuga_" + category + "Preview"
     path = f"{DEST}/Materials/Masters/{name}"
+    rebuilt = False
     if EAL.does_asset_exist(path):
         existing = load(path)
         if EAL.get_metadata_tag(existing, "YetugaMaterialAdapterVersion") != MATERIAL_ADAPTER_VERSION:
-            if not EAL.delete_asset(path):
-                raise RuntimeError("Unable to replace incomplete preview master " + path)
+            if EAL.get_metadata_tag(existing, "YetugaLibraryVersion") != VERSION:
+                raise RuntimeError("Unknown material master " + path)
+            MEL.delete_all_material_expressions(existing)
+            rebuilt = True
     master, created = new_asset(path, unreal.Material, unreal.MaterialFactoryNew())
+    created = created or rebuilt
     if not created:
         report["masters"].append({"asset": path, "created": False, "category": category})
         return master
@@ -276,6 +283,12 @@ def build_master(category: str, texture_map: dict[str, object], report: dict):
         )
         if texture.get_editor_property("compression_settings") == unreal.TextureCompressionSettings.TC_NORMALMAP:
             sampler = unreal.MaterialSamplerType.SAMPLERTYPE_NORMAL
+        elif texture.get_editor_property("compression_settings") == unreal.TextureCompressionSettings.TC_GRAYSCALE:
+            sampler = unreal.MaterialSamplerType.SAMPLERTYPE_GRAYSCALE if texture.get_editor_property("srgb") else unreal.MaterialSamplerType.SAMPLERTYPE_LINEAR_GRAYSCALE
+        elif texture.get_editor_property("compression_settings") == unreal.TextureCompressionSettings.TC_ALPHA:
+            sampler = unreal.MaterialSamplerType.SAMPLERTYPE_ALPHA
+        elif texture.get_editor_property("compression_settings") == unreal.TextureCompressionSettings.TC_MASKS:
+            sampler = unreal.MaterialSamplerType.SAMPLERTYPE_MASKS
         elif texture.get_editor_property("srgb"):
             sampler = unreal.MaterialSamplerType.SAMPLERTYPE_COLOR
         else:
@@ -312,7 +325,14 @@ def build_master(category: str, texture_map: dict[str, object], report: dict):
     # Keep every source leaf parameter addressable on the generated instances.
     # The aggregate is multiplied by exact zero before it joins Base Color, so
     # it changes no rendered value while remaining part of the material graph.
-    preserved = list(scalar_nodes.values()) + list(vector_nodes.values()) + list(texture_nodes.values())
+    # Source VisibleCylinderPos uses -999999 as a sentinel. Sum bounded values
+    # so preservation cannot overflow reduced-precision shader intermediates
+    # before the zero multiply. The parameter defaults/MI overrides stay exact.
+    preserved = []
+    for node in list(scalar_nodes.values()) + list(vector_nodes.values()) + list(texture_nodes.values()):
+        bounded = expression(master, unreal.MaterialExpressionSaturate)
+        connect(node, "", bounded, "None")
+        preserved.append(bounded)
     aggregate = preserved[0]
     for node in preserved[1:]:
         add = expression(master, unreal.MaterialExpressionAdd)
@@ -465,6 +485,31 @@ def import_mesh(row, material_map, report):
         slot.set_editor_property("material_slot_name", row["source_slot_names"][i])
     mesh.set_editor_property("materials", slots)
     skeleton.set_skeleton_preview_mesh(mesh)
+    socket_objects = json.loads((ROOT / "Metadata" / (row["source_skeleton"] + ".json")).read_text(encoding="utf-8"))
+    source_sockets = [o["Properties"] for o in socket_objects if o["Type"] == "SkeletalMeshSocket"]
+    existing_sockets = {str(mesh.get_socket_by_index(i).socket_name): mesh.get_socket_by_index(i) for i in range(mesh.num_sockets())}
+    for props in source_sockets:
+        sock = existing_sockets.get(props["SocketName"])
+        if sock is None:
+            sock = unreal.new_object(unreal.SkeletalMeshSocket, outer=mesh)
+            # UE's promotion API duplicates a mesh socket into the skeleton.
+            # This self-contained mesh uses one exact attachment per source name.
+            mesh.add_socket(sock, False)
+            editor = unreal.get_editor_subsystem(unreal.SkeletalMeshEditorSubsystem)
+            if not editor.rename_socket(mesh, sock.socket_name, props["SocketName"]):
+                raise RuntimeError("Source socket naming failed")
+        sock.set_socket_parent(mesh, props["BoneName"])
+        for field, attr, default in [("RelativeLocation", "relative_location", 0), ("RelativeScale", "relative_scale", 1)]:
+            value = props.get(field, {"X":default,"Y":default,"Z":default})
+            sock.set_editor_property(attr, unreal.Vector(value["X"], value["Y"], value["Z"]))
+        rot = props.get("RelativeRotation", {"Pitch":0,"Yaw":0,"Roll":0})
+        sock.set_editor_property("relative_rotation", unreal.Rotator(pitch=rot["Pitch"], yaw=rot["Yaw"], roll=rot["Roll"]))
+        if "bForceAlwaysAnimated" in props:
+            sock.set_editor_property("force_always_animated", props["bForceAlwaysAnimated"])
+    if mesh.num_sockets() != len(source_sockets):
+        raise RuntimeError("Restored source socket count mismatch")
+    EAL.set_metadata_tag(mesh, "SourceSocketsJSON", json.dumps(source_sockets))
+    EAL.set_metadata_tag(mesh, "SocketOwnershipContract", "Source skeleton sockets restored as mesh-owned sockets with identical names, bones and local transforms; original skeleton JSON archived.")
     set_common_metadata(mesh, row["source_package"], "SkeletalMesh")
     set_common_metadata(skeleton, row["source_skeleton"], "Skeleton")
     for asset in [mesh, skeleton]:

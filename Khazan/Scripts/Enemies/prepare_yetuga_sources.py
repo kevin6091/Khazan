@@ -1,4 +1,4 @@
-"""Build the source-backed Yetuga_E art and animation closure.
+"""Build the source-backed HeinMach Yetuga boss art and animation closure.
 
 The HeinMach boss spawn references CB_Yetuga.  This script
 starts from their exact spawn handlers and follows only Yetuga character,

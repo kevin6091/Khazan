@@ -170,3 +170,12 @@
 - `Metadata/Extraction_20260910/FinalExtractionReport.json`: 최종 범위와 제한. `ValidationSummary.json`: 145개 asset/skeleton/texture/material/animation 감사. `RenderValidationSummary.json`: 실제 D3D12/SM6 compile·BP 재로드 결과.
 - `AnimationLibrary.csv`, `AnimationImportManifest.json`, `AnimationTimingAudit.json`, `PlaybackEventTimes.json`: source package, direct/composite 유래, FPS·길이·root/additive 계약 및 1,164개 원작 event 시간을 조회한다.
 - `LevelPresence.json`: HeinMach `SA_BigBear_E_2`/`AI_BigBear_E_NoneBurst`와 StormPass `SA_BigBear_E`/`AI_BigBear_E_BurstTutorial`의 source property 근거. 외부 원본 archive는 `Desktop/카잔/EnemyExtracts/BigBear_20260910`, hash 목록은 `ArchiveSHA256.json`이다.
+
+### 2026-09-11 HeinMach Yetuga Boss
+
+- [YETUGA_EXTRACTION_2026-09-11.md](YETUGA_EXTRACTION_2026-09-11.md): 실제 보스 식별, 본체 453/얼음 20 bone, 재질 상속/default 복원, 시퀀스 120개, 소켓·BP와 셰이더의 구현 경계.
+- 루트 `/Game/_Art/Enemies/HeinMach/Bosses/Yetuga`; 배치 BP `Blueprints/BP_EN_Boss_Yetuga`; 비교 맵 `Preview/L_EN_Yetuga_Catalogue`; 애니메이션 `Animations/Playback/A_EN_PLAY_*`.
+- `Metadata/Extraction_20260911/ImportManifest.json`: source package, slot 순서, 원본 master 기본값, 부모/자식 override 및 값별 `parameter_origins`. `metadata_only_texture_parameters`는 native 2D binding이 아닌 원본 참조 목록이다.
+- 같은 metadata 폴더의 `AnimationLibrary.csv`, `AnimationImportManifest.json`, `AnimationTimingAudit.json`, `PlaybackEventTimes.json`: FPS 분수·sample·길이·배속·root/additive·2,324 event의 출처와 변환을 조회한다.
+- `SourceMetadata.zip`/`SourceMetadataIndex.json`: 원본 581 package JSON과 hash. `SourceClosure.json`/`LevelPresence.json`: 표적 탐색과 실제 스폰 근거. 전체 맵 재탐색보다 이 자료를 우선한다.
+- `ValidationSummary.json`, `RenderValidationSummary.json`, `FinalExtractionReport.json`, `ArchiveSummary.json`: 저장 후 Unreal 감사, 실제 RHI 검사 및 원본 archive 확인. 외부 archive는 `Desktop/카잔/EnemyExtracts/Yetuga_20260911`이다.

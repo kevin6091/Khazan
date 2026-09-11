@@ -138,3 +138,13 @@
 - Composite bake마다 root motion, force root lock, additive 등 property dictionary를 새로 초기화한다. 이전 clip 값이 다음 clip에 남지 않도록 source-derived flag를 asset별로 다시 읽고 최종 inventory에서 개수를 검증한다.
 - UE 5.8 Python에서 `AnimSequence.get_data_model()`이 없으면 `sequence.controller.get_model_interface()`로 frame rate와 key 수를 읽는다. 저장 후 fresh process에서 RAW와 COMPRESSED 포즈를 모두 평가한다.
 - Composite의 segment trim, play rate, repeat와 DilationCurve를 포즈 시간축에 bake한 자산은 정확한 최종 길이를 표현하는 frame-rate contract를 저장하고 RateScale 1.0으로 소비한다. 30fps source라는 이유로 모든 baked 결과를 30fps로 강제하지 않는다.
+
+## 2026-09-11 Yetuga 복원에서 확인한 규칙
+
+- 캐릭터 이름과 다른 폴더에 있는 시퀀스를 경로명만으로 배제하지 않는다. Yetuga의 Grapple_B 두 원본은 ApesStoneHandElite 폴더에 있지만 실제 Skeleton 필드는 Yetuga다. 참조 대상의 JSON을 표적 추출해 판단한다.
+- CUE4Parse의 skeletal `.pskx`는 큰 mesh의 32-bit index 때문일 수 있다. 프로젝트 PSKXFactory는 static mesh용이다. PSKFactory의 FACE3200 지원을 확인하고 파생 파일 확장자를 `.psk`로 선택하면 chunk 내용과 skeletal bone/weight를 유지할 수 있다. factory/확장자 불일치는 무인 AssetImportTasks에서 UI assertion을 일으킬 수 있다.
+- cooked master의 default parameter는 `CachedExpressionData.Parameters.RuntimeEntries[*].ParameterInfos`와 대응하는 Scalar/Vector/TextureValues 배열을 같은 인덱스로 결합한다. 부모→자식 override와 값별 원본 package를 기록하고 leaf에 직접 기록되지 않은 값을 leaf 원본값이라고 표현하지 않는다.
+- 원본 TC_Grayscale + SRGB=false는 preview TextureSample에도 Linear Grayscale sampler가 필요하다. Normal/Mask/Alpha/Color sampler를 구분하며 null-RHI 저장 성공만으로 shader compile을 통과했다고 간주하지 않는다.
+- UE 5.8 socket의 SocketName/BoneName과 Skeleton.Sockets는 직접 Python property 대입이 제한된다. 공개 `mesh.add_socket`, SkeletalMeshEditorSubsystem.rename_socket, socket.set_socket_parent와 local transform API를 사용한다. `add_socket(..., true)`는 mesh와 skeleton 양쪽에 복제하므로 단일 mesh attachment 복원에서는 false를 사용하고 원래 소유 위치를 metadata에 명시한다.
+- shader instruction 수가 존재하는 것과 화면에 외형이 정상 표시되는 것은 별도 검사다. 실제 RHI에서 저장 BP/재질을 로드하고 렌더 결과도 확인한다. 원본 특수 parameter의 큰 sentinel 값을 색 계산용 보존 합산에 직접 섞지 않는다.
+- frame 0 commandlet SceneCapture 결과를 최종 외형 판정으로 사용하지 않는다. Yetuga에서는 shader가 모두 컴파일됐어도 즉시 capture에서 본체/텍스처가 보이지 않았고, 일반 에디터에서 프레임을 진행한 후 정상 표시됐다. `capture_yetuga_editor_preview.py`를 일반 UnrealEditor의 `-ExecCmds="py ..."`로 실행해 resource warmup 후 캡처한다. `-ExecutePythonScript`는 script 반환 직후 종료하므로 후속 tick callback을 기다리지 못한다.
