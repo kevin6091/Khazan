@@ -369,3 +369,10 @@
 - V4 master의 sampler/보존 graph와 source base-property를 포함한 최종 fresh audit가 exit 0/pass다. scalar 2,381/vector 482/texture binding 329, source socket 7개, 전 시퀀스 RAW/COMPRESSED pose/시간축을 대조했다. source skeleton별 PSA reference record hash도 모두 동일하다.
 - 일반 UnrealEditor에서 `-ExecCmds="py .../capture_yetuga_editor_preview.py"`로 실제 frame/resource warmup 후 캡처해 본체/털/얼굴/눈/돌기/얼음 투척물의 표시를 확인했다. shader 17개 D3D12/SM6 compile/reload 검증도 pass다. frame 0 commandlet 즉시 capture의 미표시와 실제 저장 에셋 표시를 구분한다.
 - 정본은 `YETUGA_EXTRACTION_2026-09-11.md`, 최신 artifact는 `Metadata/Extraction_20260911/ValidationSummary.json`, `RenderValidationSummary.json`, `Preview/*.png`다. 원본 JSON 전체는 SourceMetadata.zip/Index로 Git에 포함하고 원본 cooked/변환 파일은 외부 archive에 보존한다. proprietary shader/gameplay/physics/cloth/notify 및 LOD chain의 구현 제한은 정본을 따른다.
+
+### 2026-09-11 Yetuga main 전달 완료
+
+- 최종 Yetuga 에셋·metadata·재현 스크립트·Art 문서 197개 경로를 `4dfc08a32d6ed30670f3bd098153a6a04b4d3921` (`art: restore HeinMach Yetuga boss and playback animations`)로 main에 커밋하고 origin에 push했다. Git LFS 4개/47 MB 업로드가 완료됐으며 `git ls-remote origin refs/heads/main`과 로컬 HEAD의 동일 hash를 확인했다. 확인 시 작업 트리는 깨끗했다.
+- stage 범위는 Yetuga Content, Yetuga 전용 Python 스크립트와 Art 문서 5개로 검사했다. 외부 작업의 `d5cfbc77` 커밋을 보존했으며 작업 시작 시 사용자 변경 22개와 Source/Config의 보호 hash는 최종 검사에서도 동일했다.
+- 외부 archive는 `C:/Users/user/Desktop/카잔/EnemyExtracts/Yetuga_20260911`의 2,159개 파일을 SHA-256으로 검증했다. 원본 cooked package 581개와 JSON 581개의 보관을 확인했으며, JSON 전체·검증 보고서·최종 렌더 이미지는 프로젝트 metadata와 Git에도 포함했다.
+- 현재 요청의 추출·임포트·시간축 복원·에셋/화면 검증·원본 보관·main 전달을 완료했다. 원작 전용 셰이더와 gameplay/physics/cloth 등의 구현 제한은 정본에 명시한 그대로이며 완전한 원작 실행 로직 복원으로 확대하지 않는다. 이 전달 확인은 후속 문서 전용 커밋으로 반영한다.
