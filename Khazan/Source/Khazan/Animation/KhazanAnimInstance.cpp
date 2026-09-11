@@ -251,7 +251,9 @@ void UKhazanAnimInstance::GatherGameThreadData()
 		return;
 	}
 	
-	const FKhazanLocomotionIntent& Intent = LocomotionComponent->GetIntent();
+	const FKhazanLocomotionIntent& Intent = LocomotionComponent->GetLocomotionIntent();
+
+	const FKhazanResolvedMovementPolicy& Policy = LocomotionComponent->GetResolvedMovementPolicy();
 	
 	NewData.ActorRotation = Character->GetActorRotation();
 
@@ -269,13 +271,13 @@ void UKhazanAnimInstance::GatherGameThreadData()
 
 	NewData.MovementMode = MovementComponent->MovementMode;
 
-	NewData.TargetGait = Intent.RequestedGait;
+	NewData.RequestedGait = Intent.RequestedGait;
 
-	NewData.MaxAllowedGait = Intent.MaxAllowedGait;
+	NewData.MaxAllowedGait = Policy.MaxAllowedGait;
 
-	NewData.ResolvedGait = LocomotionComponent->GetResolvedGait();
+	NewData.ResolvedGait = Policy.ResolvedGait;
 
-	NewData.RotationMode = Intent.RotationMode;
+	NewData.RotationMode = Policy.ResolvedRotationMode;
 
 	NewData.bMovementAllowed = LocomotionComponent->IsMovementInputAllowed();
 	

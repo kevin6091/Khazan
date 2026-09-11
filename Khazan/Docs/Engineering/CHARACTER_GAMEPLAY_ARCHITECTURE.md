@@ -1089,3 +1089,44 @@ CombatResponse는 새로운 전체 액션 관리자가 아니다. 이동·타격
 - ARCH-16/17: M2.2 Definition은 이동 config만 가진다. PostInitializeComponents에서 ASC ActorInfo 다음 config를 검증하고, 그 뒤 Possess/BeginPlay에서 입력·AI를 연결한다. Ability/Attribute/AI/animation soft data와 GameplayReady tag는 실제 M3 소비 전 선행 추가하지 않는다.
 - 현재 수치 170/470/600, 15, 1800/1800, Yaw 540은 Player CDO/소스의 프로젝트 이관값이다. 수입 적에 같은 값을 쓰는 경우 M2 경로 비교용 임시값이며 원작 metadata로 표현하지 않는다.
 - 이번 계약은 기존 ARCH ID를 변경하지 않고 구체화한다. 설명만 작성했고 게임 Source/BP/asset에는 적용하지 않았다. M2.4 이전에는 M2 완료가 아니다.
+
+
+## 2026-09-11 — ARCH-16/17: Character Definition의 기존 AssetManager 편입 결정
+
+- [발견한 불일치] M2.2의 앞선 §20.19 안내는 `UKhazanCharacterDefinition : UPrimaryDataAsset` 인스턴스를 Player BP가 hard reference하도록 제안했다. 그러나 v2 V2-07은 기존 AssetManager를 통한 soft reference 준비를 채택했고, 프로젝트에는 이미 `UKhazanAssetData`/`PDA_AssetData` catalog와 `AssetData.*` key·`AssetLabel.Preload` 로딩 경로가 있다. 아직 Character Definition 에셋은 생성되지 않아 적용 데이터의 이관은 없다.
+- [ARCH-16 결정] 현행 custom catalog를 유지하는 동안 Engine Primary Asset으로 직접 scan하는 타입은 `UKhazanAssetData` 하나다. `UKhazanCharacterDefinition`은 `UDataAsset` payload로 두고 `PDA_AssetData`의 `FAssetEntry`가 GameplayTag name에서 soft object path로 연결한다. 각 Definition을 별도 Primary Asset type으로 추가 scan하거나 같은 대상을 hard pointer와 catalog 양쪽에서 중복 소유하지 않는다.
+- [선택과 수명] 공통 `AKhazanCharacter` class default는 기존 용어를 따른 `CharacterDefinitionAssetName` GameplayTag만 보관한다. GameInstance가 `AssetLabel.Preload` 집합을 준비한 뒤 Character가 tag로 Definition을 조회해 transient runtime pointer를 보관하고, LocomotionComponent는 검증된 config 값 사본만 Pawn 수명 동안 소유한다. Definition은 mutable gameplay 상태를 소유하지 않는다.
+- [확장 방식] Player는 `AssetData.CharacterDefinition.Khazan`, 이후 실제 Monster/보스는 자기 Definition entry/tag를 가진다. 구체 캐릭터 이름을 공통 Character C++에 switch 또는 hardcoded path로 누적하지 않는다. `AssetData.*` tag는 asset catalog key이며 ASC Owned State가 아니다.
+- [ARCH-17 준비 경계] Character Definition은 locomotion 초기화 전에 필수다. 따라서 현재 단계에서는 Preload label을 사용하고, 누락 tag/path/type은 명확한 로그와 이동 fail-closed로 끝내야 한다. 임의 timer 또는 Actor 생성 도중 숨은 동기 load 성공을 GameplayReady로 간주하지 않는다.
+- [선행 보강] 현재 `GetAssetPathByName()`/`GetAssetSetByLabel()`은 lookup 실패 후 null을 역참조하고 runtime index는 `PreSave()` 재저장에 의존한다. `LoadSyncByLabel()`은 path name과 asset tag 두 key로 같은 객체를 cache해 release가 비대칭이다. Definition 소비를 추가하기 전에 lookup 실패 안전성, `PostLoad()` index rebuild, 단일 cache key/load·release 대칭을 바로잡는다.
+- [절차 영향] 이 결정은 M2.2의 data 준비 소단계 내부 수정이다. M2.3 AI나 M3 Ability를 앞당기지 않는다. 앞선 hard-reference §20.19 안내는 적용 전 철회하며, AssetManager 보강 → Definition payload/tag 연결 → Data Asset catalog 등록 → Player/이후 Monster 선택 순서로 대체한다.
+- [적용 상태] 이번 결정에서는 게임 C++·Config·BP·uasset을 수정하지 않았다. 정확한 소스 이관, 빌드와 Editor catalog/Player 설정은 사용자 공동 구현 후 검증한다.
+
+
+## 2026-09-11 — ARCH-16 확장성 기준과 현행 Definition 심볼 확인
+
+- [현행 소스] 사용자가 파일과 타입을 `KhazanCharacterDefinitionData.h/.cpp`, `UKhazanCharacterDefinitionData`로 통일했고 기반 타입은 `UDataAsset`이다. `/Game/Data/Character/DA_Character_Khazan`은 아직 생성되지 않았으며, `AKhazanCharacter`의 `CharacterDefinition`은 아직 `EditDefaultsOnly` 객체 포인터인 과도기 상태다.
+- [확장성의 두 의미] Definition에 config·AbilitySet·Attribute·표현/AI 참조 필드를 늘리는 스키마 확장성은 `UDataAsset`과 `UPrimaryDataAsset`이 같다. `UPrimaryDataAsset`의 추가 이점은 `FPrimaryAssetId`, primary type scan, Asset Bundle, load/unload 및 cook/chunk 규칙을 실제 소비할 때 생기는 로딩·배포 확장성이다.
+- [현행 결정 유지] 현재 `PDA_AssetData`가 이미 GameplayTag key, soft path, label과 preload 수명을 제공하므로 이 catalog를 정본으로 유지하는 동안 Definition payload는 `UDataAsset`으로 둔다. 같은 Definition을 custom `AssetData.CharacterDefinition.*` key와 별도 `KhazanCharacterDefinitionData:<AssetName>` PrimaryAssetId 양쪽에 중복 등록하지 않는다.
+- [향후 전환 조건] 캐릭터별 Definition이 독립적인 bundle/menu/encounter/DLC chunk의 load root가 되어 Engine Primary Asset API로 직접 발견·감사·해제할 실제 소비가 생기면, 해당 도메인의 정본 ID를 `FPrimaryAssetId`로 이관하고 custom catalog entry를 제거한 뒤 `UPrimaryDataAsset`으로 전환한다. 기반 타입만 바꾸고 기존 catalog를 병행하는 것은 전환 완료가 아니다.
+- [에셋 생성 경계] `DA_Character_Khazan` 파일 자체는 runtime 연결 전에 먼저 생성해도 안전하지만, manager 보강 전에는 `PDA_AssetData` preload 등록과 Player BP 연결을 완료한 것으로 보지 않는다. 현재 객체 포인터 칸에 DA를 지정하면 AssetManager를 우회하므로 지정하지 않는다.
+- [적용 상태] 이번 확인에서는 게임 C++·Config·BP·uasset을 수정하거나 빌드/PIE하지 않았다. 설명과 정본 기록만 보강했다.
+
+
+## 2026-09-11 — ARCH-16 Character Definition 에셋 네이밍 정렬
+
+- [현재 확인] `/Game/Data/Character/DA_Character_Khazan`이 `UKhazanCharacterDefinitionData` 인스턴스로 생성됐다. 현재 `PDA_AssetData`와 `BP_KhazanPlayer` 바이너리에는 이 경로 참조가 없으므로 runtime 연결 전 이름을 정리할 수 있다.
+- [명명 계약] Data Asset 인스턴스는 `<AssetTypePrefix>_<Responsibility>[_Variant]` 순서를 사용한다. Character Definition 인스턴스의 최종 권장명은 `DA_CharacterDefinition_Khazan`이다. `CharacterDefinition`은 전체 읽기 전용 캐릭터 정의, `LocomotionConfig`는 그 안의 이동 설정 한 영역, `Khazan`은 구체 variant다.
+- [제외한 이름] `DA_Character_Khazan`은 책임이 빠져 이름만으로 데이터를 식별할 수 없다. `DA_KhazanConfigData`는 `ConfigData`라는 새 포괄 용어를 만들고 향후 AbilitySet·Attribute·표현·AI 참조까지 포함할 전체 Definition을 현재 Locomotion config와 혼동시킨다.
+- [계층별 어휘] C++ 타입은 `UKhazanCharacterDefinitionData`, 에셋은 `DA_CharacterDefinition_Khazan`, catalog key는 `AssetData.CharacterDefinition.Khazan`, Character class-default selector는 `CharacterDefinitionAssetName`, runtime pointer는 `CharacterDefinition`, 이동 하위 값은 `LocomotionConfig`를 사용한다.
+- [적용 경계] 이번 기록은 명명 검토다. 게임 에셋을 직접 rename하거나 catalog/BP에 연결하지 않았고, 빌드/PIE도 수행하지 않았다.
+
+
+## 2026-09-11 — ARCH-16/17 AssetManager 과잉 보강 복원 범위
+
+- [사용자 승인] 이번 직접 구현은 과잉 보강의 복원과 필요한 오류 수정에만 한정한다. 다음 Character Definition tag/selector/catalog/BP 연결은 설명만 제공하며 사용자가 적용한다.
+- [복원 기준] Git HEAD의 AssetManager 설계로 돌아간다. `GetAssetByName()`의 기존 동기 로드 fallback, public `LoadSyncByPath()`/`ReleaseByPath()`, `ReleaseByName(FName)`, `NameToLoadedAsset`의 FName key를 복원한다. cache-only 조회 강제와 tag-key map 이관은 철회한다. ARCH-16의 기존 catalog 활용 결정은 유지한다.
+- [필요한 보강] `PostLoad()`/`PreSave()`에서 기존 index 생성 본문을 공유하고 누락 lookup을 역참조하지 않는다. `GetAssetPathByName()`은 기존 값 반환을 유지하며 누락 시 빈 경로, `GetAssetSetByLabel()`만 nullable pointer를 반환한다. Manager는 이 결과와 catalog 누락을 안전하게 처리한다.
+- [cache 대칭] 기존 path load의 `AssetPath.GetAssetFName()`을 공통 보관 key로 유지한다. label load의 개별 선행 load를 제거하고 batch load 뒤 같은 path key로만 보관한다. label release도 `ReleaseByPath()`로 동일 key를 지운다. tag명과 파일명으로 한 번의 label load가 두 cache 항목을 만들던 오류만 바로잡는다. 서로 다른 경로의 같은 leaf name 구분과 원인별 참조계수는 기존 설계의 범위 밖이며 이번에 새 체계를 만들지 않는다.
+- [ARCH-17 경계] 기존 입력 소비의 lazy load 복원은 새 Character Definition의 준비 실패를 숨겨도 된다는 뜻이 아니다. 다음 Definition 연결에서 preload 완료/필수 데이터 준비 실패를 실제 소비 경계에서 검증한다. `GetAssetByName()` 호출 성공만으로 preload 성공이나 GameplayReady를 판정하지 않는다.
+- [적용/검증] 이 절은 복원 전에 확정한 범위다. 실제 변경 및 빌드/실행 결과는 Engineering 현행/진단 문서에 별도 기록한다. 새로운 gameplay 수치, Character/Locomotion/Anim/GAS/에셋 변경은 이번 직접 구현 범위에 없다.

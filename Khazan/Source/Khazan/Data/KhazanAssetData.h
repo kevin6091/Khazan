@@ -39,12 +39,16 @@ class KHAZAN_API UKhazanAssetData : public UPrimaryDataAsset
 	GENERATED_BODY()
 
 public:
+	virtual void PostLoad() override;
 	virtual void PreSave(FObjectPreSaveContext ObjectSaveContext) override;
 	
 public:
 	FSoftObjectPath GetAssetPathByName(const FGameplayTag& AssetName);
-	const FAssetSet& GetAssetSetByLabel(const FGameplayTag& Label);
+	const FAssetSet* GetAssetSetByLabel(const FGameplayTag& Label);
 	
+private:
+	void RebuildRuntimeLookupMaps();
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	TMap<FName, FAssetSet> AssetGroupNameToSet;

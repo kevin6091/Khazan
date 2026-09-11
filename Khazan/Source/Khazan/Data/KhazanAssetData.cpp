@@ -2,12 +2,23 @@
 
 
 #include "Data/KhazanAssetData.h"
+#include "LogChannels.h"
 #include "UObject/ObjectSaveContext.h"
+
+void UKhazanAssetData::PostLoad()
+{
+	Super::PostLoad();
+	RebuildRuntimeLookupMaps();
+}
 
 void UKhazanAssetData::PreSave(FObjectPreSaveContext ObjectSaveContext)
 {
 	Super::PreSave(ObjectSaveContext);
-	
+	RebuildRuntimeLookupMaps();
+}
+
+void UKhazanAssetData::RebuildRuntimeLookupMaps()
+{
 	AssetNameToPath.Empty();
 	AssetLabelToSet.Empty();
 	
@@ -43,13 +54,20 @@ void UKhazanAssetData::PreSave(FObjectPreSaveContext ObjectSaveContext)
 FSoftObjectPath UKhazanAssetData::GetAssetPathByName(const FGameplayTag& AssetName)
 {
 	FSoftObjectPath* AssetPath = AssetNameToPath.Find(AssetName);
-	ensureAlwaysMsgf(AssetPath, TEXT("Cant find Asset Path form Asset Name [%s]."), *AssetName.ToString());
+	if (!AssetPath)
+	{
+		UE_LOG(LogDefault, Error, TEXT("Cant find Asset Path from Asset Name [%s]."), *AssetName.ToString());
+		return FSoftObjectPath();
+	}
 	return *AssetPath;
 }
 
-const FAssetSet& UKhazanAssetData::GetAssetSetByLabel(const FGameplayTag& Label)
+const FAssetSet* UKhazanAssetData::GetAssetSetByLabel(const FGameplayTag& Label)
 {
 	const FAssetSet* AssetSet = AssetLabelToSet.Find(Label);
-	ensureAlwaysMsgf(AssetSet, TEXT("Cant find Asset Set from Label [%s]."), *Label.ToString());
-	return *AssetSet;
+	if (!AssetSet)
+	{
+		UE_LOG(LogDefault, Error, TEXT("Cant find Asset Set from Label [%s]."), *Label.ToString());
+	}
+	return AssetSet;
 }

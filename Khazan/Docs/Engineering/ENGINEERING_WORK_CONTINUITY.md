@@ -223,3 +223,14 @@
 - 남은 작업: Player가 Possess 수명에 맞춰 `FKhazanLocomotionIntentHandle`을 발급·종료하고 모든 raw intent write에 전달하도록 §20.17을 적용한다. AnimInstance GT snapshot은 raw Intent와 ResolvedPolicy를 각각 읽도록 §20.18을 적용한다. 기존 trailing whitespace도 최종 변경 전에 정리한다.
 - 정확한 재개: Router → 아키텍처 v2 → Migration 현재 M2.2 → `CHARACTER_TAG_ABILITY_STEP_2.md` §20.17/§20.18 → 실제 Player/Anim/Component 헤더와 소스를 대조한다. 두 소비자 이관 후 전체 빌드 → `PDA_Character_Khazan` 연결 → token/constraint/ASC 중첩/UnPossess·EndPlay/기존 로코모션 PIE 순으로 검증하고, 그 전에는 M2.2 완료나 M2.3 시작으로 기록하지 않는다.
 - Git 의도: 사용자의 요청에 따라 현재 컴파일 실패를 숨기지 않는 WIP 체크포인트로 전체 변경을 main에 전달한다. 빌드 산출물은 Git 대상에 포함하지 않는다.
+
+
+## 2026-09-11 — AssetManager 복원 완료, Definition 사용자 연결 대기
+
+- 현재 상태: 과잉 보강은 Git HEAD의 기존 AssetManager API/FName cache로 복원했고 PostLoad index rebuild/null 안전성/batch cache·release 대칭만 남겼다. 직접 수정은 AssetManager/AssetData/Controller의 과잉 보강 묶음으로 끝났다.
+- 수정 직전 다섯 소스의 원본 백업: `Saved/CodeBackups/AssetManager_20260911_170505/`. Git HEAD를 전체 checkout하지 않았고 Character/Player/Anim/Component/Definition의 사용자 변경은 유지했다.
+- 마지막 검증: 최종 전체 Development Editor 빌드 exit 0, 새 프로세스 DevMap 로드/종료 exit 0. 근거는 `Saved/Logs/AssetManagerRollback_Build_20260911.log`와 `AssetManagerRollback_Startup_Final_20260911.log`. IDE 문서의 지연 저장을 발견해 동기화/재검증했으므로 이전 Startup 로그를 최종 근거로 사용하지 않는다.
+- 남은 검증 한계: Python에서 `AssetNameToPath`는 protected라 내부 map 비교를 수행하지 못했다. map 개방/새 debug API를 게임 코드에 추가하지 않았다. 미등록 tag/path의 negative runtime 검사, 실제 이동/Stop/반복 PIE는 미검증이다.
+- 다음 미완료 원인: Player/시험 Monster의 CharacterDefinition이 아직 없고 Player의 locomotion intent 획득도 실패한다. 새 에셋 파일은 있으나 tag/selector/catalog/BP 연결이 아직 없다. 이번 승인으로 이 후속 코드를 직접 구현하지 않는다.
+- 정확한 재개: Router → v2 ARCH-16/17의 마지막 복원 결정 → Migration M2.2 → [Step 2 §27](CHARACTER_TAG_ABILITY_STEP_2.md#asset-manager-rollback-next-20260911). 실제 native tag → 필요 최소 로드 선택 인자 → Character selector/runtime pointer/초기화 조회 → cold build → catalog entry/Player BP tag → Player 이동 회귀 순으로 사용자가 적용한다. 아직 소스에 없는 optional 인자나 tag를 이미 구현된 것으로 가정하지 않는다.
+- 실행 정리: 실행한 Build/Startup/Python commandlet 프로세스는 종료됐다. 디버거/PIE callback은 만들지 않았다. 이번에 uasset/Config를 저장하지 않았으며 새 gameplay 수치는 없다.

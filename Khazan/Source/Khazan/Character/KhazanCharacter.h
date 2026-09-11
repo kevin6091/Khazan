@@ -9,7 +9,7 @@
 
 class UKhazanLocomotionComponent;
 class UAbilitySystemComponent;
-class UKhazanCharacterDefinition;
+class UKhazanCharacterDefinitionData;
 
 UCLASS()
 class KHAZAN_API AKhazanCharacter : public ACharacter, public IAbilitySystemInterface
@@ -25,7 +25,7 @@ public:
 		return LocomotionComponent;
 	}
 
-	const UKhazanCharacterDefinition* GetCharacterDefinition() const
+	const UKhazanCharacterDefinitionData* GetCharacterDefinition() const
 	{
 		return CharacterDefinition;
 	}
@@ -61,5 +61,5 @@ private:
 	TObjectPtr<UKhazanLocomotionComponent> LocomotionComponent;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character|Definition", meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UKhazanCharacterDefinition> CharacterDefinition = nullptr;
+	TObjectPtr<UKhazanCharacterDefinitionData> CharacterDefinition = nullptr;
 };

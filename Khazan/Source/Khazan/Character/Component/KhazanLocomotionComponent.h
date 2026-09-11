@@ -119,7 +119,7 @@ public:
 	// 현재 source가 원하는 Walk/Run/Sprint를 기록하고 최종 Policy를 다시 계산한다.
 	bool SetRequestedGait(const FKhazanLocomotionIntentHandle& Handle, EKhazanGait Gait);
 
-	// source의 요청 gait를 CharacterDefinition의 DefaultTargetGait로 되돌리고 Policy를 다시 계산한다.
+	// source의 요청 gait를 CharacterDefinition의 DefaultRequestedGait로 되돌리고 Policy를 다시 계산한다.
 	bool ResetRequestedGaitToDefault(const FKhazanLocomotionIntentHandle& Handle);
 
 	// Controller가 원하는 회전 모드를 기록한다. Ability 등이 회전을 강제할 때는 Constraint의 override를 사용한다.

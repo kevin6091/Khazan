@@ -27,7 +27,7 @@ struct FKhazanAnimGameThreadData
 
 	TEnumAsByte<EMovementMode> MovementMode = MOVE_None;
 
-	EKhazanGait TargetGait = EKhazanGait::Run;
+	EKhazanGait RequestedGait = EKhazanGait::Run;
 	EKhazanGait MaxAllowedGait = EKhazanGait::Run;
 	EKhazanGait ResolvedGait = EKhazanGait::Run;
 

@@ -344,3 +344,13 @@
 - BigBear 에셋·metadata·재현 스크립트·Art 문서 190개 경로를 `e4878e2eb6a4ded141ef7600765d95fb0f2575d8` (`art: add HeinMach and StormPass BigBear enemy`)로 main에 커밋하고 origin에 push했다. Git LFS 2개/6.8 MB 업로드를 완료했고 원격 main hash가 일치했다.
 - 커밋 범위는 BigBear Content 173개, 스크립트 12개, Art 문서 5개다. 기존 사용자 변경 6개 파일은 stage/commit에서 제외했으며 최종 보호 hash mismatch는 0개다.
 - 추출·임포트·애니메이션 시간축 복원·에셋/렌더 검증·원본 archive·첫 Git 전달은 완료됐다. 이 전달 확인 절은 후속 문서 전용 커밋으로 반영한다.
+
+## 2026-09-11 HeinMach Yetuga 보스 추출 진행
+
+- 요청: Yetuga 본체·재질·텍스처·애니메이션을 원작 JSON 기준으로 추출/복원하여 Unreal에 임포트한 뒤 main commit/push까지 완료한다.
+- HeinMach_Spawn_Main01의 SA_Yetuga → Boss/01_Yetuga/Base_Setting/CB_Yetuga → C_M_Yetuga를 확인했다. 본체 PSA 453 bone과 PSKX 198 bone의 공통 reference pose/parent를 대조했고, 누락된 비가중 뼈를 추가하는 파생 PSKX를 생성했다. 얼음 투척물은 별도 20-bone skeleton이다.
+- 작업 루트 `Saved/Extracted/Yetuga_20260911`, 목적지 `/Game/_Art/Enemies/HeinMach/Bosses/Yetuga`, 외부 원본 archive `C:/Users/user/Desktop/카잔/EnemyExtracts/Yetuga_20260911`. 재현 스크립트는 `Scripts/Enemies/*yetuga*.py`다.
+- 원작 재질의 부모와 cooked master 기본값까지 확인했다. 초기 텍스처 56개 임포트 후 UE 5.8 sampler enum 이름 차이로 master 생성이 중단됐다. 아직 최종 검증/완료가 아니며 해당 API 수정 후 재개한다.
+- 다른 몬스터 이름의 폴더에 있는 Grapple_B 두 시퀀스도 실제 Skeleton 필드가 C_M_Yetuga_Skeleton이므로 추가 추출한다. 경로명만으로 배제하지 않는다. 공통 Missile_Skeleton의 투명 gameplay carrier Composite 6개는 캐릭터 시퀀스와 구분해 원본 metadata를 보존한다.
+- 정확한 재개: prepare_yetuga_sources.py export → build_yetuga_import_manifest.py → prepare_yetuga_animation_timing.py → Unreal Python commandlet import_yetuga_library.py → run_yetuga_animation_batches.py → assembly/fresh process/실제 RHI 검증 → archive/Art 문서 → Yetuga 경로만 main commit/push 및 원격 hash 확인.
+- 작업 전 사용자 변경과 stage 상태는 `WorkspaceBaseline.json`, C++/Config는 `Saved/ImportReports/Yetuga_ProtectedBaseline_20260911.json`에 보존했다. 기존 사용자 C++/Engineering 문서 및 staged rename을 이 Art 작업에서 변경하거나 함께 커밋하지 않는다.

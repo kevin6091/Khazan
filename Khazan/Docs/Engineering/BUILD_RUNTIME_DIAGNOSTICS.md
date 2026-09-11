@@ -113,3 +113,23 @@
 - M2.2/2.3 설명 준비를 위한 별도 `UnrealEditor-Cmd -run=pythonscript -nullrhi` CDO probe도 exit code 0, commandlet error 0으로 끝났다. 결과는 `Saved/ImportReports/M2_2_3_CurrentCDO_20260909.json`이다.
 - Probe는 Player CDO의 Walk/Run/Sprint 170/470/600, CMC MaxWalkSpeed 300, MinAnalog 15, MaxAcceleration/Braking 1800/1800, Yaw 540과 현재 base CharacterMovementComponent를 읽었다. 수치는 현재 프로젝트 관측/이관값이며 원작 검증값이 아니다.
 - 게임 Source/BP/asset은 이 확인에서 저장·수정하지 않았다. 다음 C++/BP 작업은 [M2.2·M2.3 공동 구현 가이드](CHARACTER_TAG_ABILITY_STEP_2.md#m2-2-m2-3-detailed-guide-20260909)의 사용자 적용 대기다.
+
+
+## 2026-09-11 Asset catalog Crash 경계 보강 재개
+
+- 2026-08-31의 `AssetLabel.PreLoad` lookup null 역참조 문제가 새 Character Definition catalog 연결의 선행 차단 항목으로 다시 확인됐다. 현재 Source에는 여전히 `PreSave()` 전용 파생 map 생성과 ensure 뒤 null 역참조가 남아 있다.
+- 다음 사용자 적용은 `PostLoad`/`PreSave` 공통 rebuild, nullable `Find` 반환, tag 기준 단일 loaded cache, cache-only typed Find와 명시적 sync load 분리다. 기존 public path cache API는 현재 외부 소비자가 없고 label load에서 중복 cache 원인이므로 제거 대상이다.
+- 수정 후 먼저 기존 `PDA_AssetData`의 Preload label과 `DA_InputData`를 cold build/PIE에서 회귀 확인한다. Character Definition entry를 추가한 결과와 섞어서 원인을 가리지 않는다.
+- 이번 기록은 안내이며 C++ 수정, build, Editor 실행, PIE는 수행하지 않았다.
+
+
+## 2026-09-11 AssetManager 최소 복원본 검증
+
+- 최종 소스: 기존 path/name/label API와 FName cache로 복원하고 PostLoad index rebuild, lookup null 안전성, batch IO/cache·release 대칭만 보강했다. 어시스턴트 직접 수정 범위는 이 보강 묶음에 한정했다.
+- IDE semantic rename 뒤 아직 저장되지 않은 문서가 디스크 패치를 나중에 덮어쓰는 현상을 발견했다. Rider `apply_patch`로 네 파일의 IDE 문서/디스크를 함께 일치시켰고 최종 저장본을 재빌드했다. 처음의 빌드/Startup 로그는 최종 검증 근거로 사용하지 않는다.
+- 최종 빌드: `Build.bat KhazanEditor Win64 Development Khazan.uproject -WaitMutex -FromMsBuild`, exit 0 / `Result: Succeeded`, DLL 링크 완료. 로그: `Saved/Logs/AssetManagerRollback_Build_20260911.log`. XGE 라이선스 경고는 standalone build로 처리됐다.
+- 최종 시작 검사: `UnrealEditor-Cmd Khazan.uproject /Game/Maps/DevMap -game -nullrhi -unattended -nosound -NoSplash -ExecCmds=Quit`, exit 0. DevMap LoadMap, World cleanup, Game engine shut down을 확인했다. 로그: `Saved/Logs/AssetManagerRollback_Startup_Final_20260911.log`.
+- 이 실행에서 AssetManager catalog/label/path 실패, InputData의 동기 fallback 경고, ensure/assert/crash는 없었다. 입력 setup 이후 한 프레임 종료 검사이며 실제 이동 입력/Stop/반복 PIE를 검증한 것은 아니다.
+- 기존 미완료 상태 확인: `KhazanMonster_1 has no CharacterDefinition`, `BP_KhazanPlayer_C_0 has no CharacterDefinition`, `could not acquire a locomotion intent source`가 남았다. 다음 Definition 연결 단계의 미구현이며 이번 복원에서 Character/BP를 임의로 수정하지 않았다. 따라서 이동 회귀 검사는 Definition 연결 후 수행한다.
+- 별도 보조 검사: `Saved/CodeBackups/verify_asset_catalog_20260911.py`로 index map을 읽으려 했으나 Python에서 `AssetNameToPath`가 protected로 차단됐다(exit 1). snake_case 첫 시도는 property-name lookup 실패였다. 접근 제한을 풀기 위해 게임 코드를 추가하지 않았으며 map 전수 비교/누락 키 fault injection의 런타임 통과를 주장하지 않는다. 로그: `Saved/Logs/AssetManagerRollback_Catalog_Final_20260911.log`.
+- 정적 검증: 최종 네 파일이 작성한 복원본과 일치하고 해당 C++ diff의 whitespace 오류는 없다. 신규 lookup 분기는 source로 확인했다. 실제 API 호출을 건너뛰고 `ensure` 뒤 null 역참조를 허용하지 않는 근거는 [Epic Asserts 문서](https://dev.epicgames.com/documentation/en-us/unreal-engine/asserts-in-unreal-engine)의 ensure 후 실행 지속 계약과 일치한다.

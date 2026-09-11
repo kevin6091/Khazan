@@ -1,7 +1,7 @@
 
 #include "KhazanCharacter.h"
 #include "Component/KhazanLocomotionComponent.h"
-#include "Data/KhazanCharacterDefinition.h"
+#include "Data/KhazanCharacterDefinitionData.h"
 #include "AbilitySystemComponent.h"
 #include "LogChannels.h"
 #include "Engine/World.h"

@@ -135,3 +135,28 @@
 - [제안/미적용 BP] `/Game/Data/Character/PDA_Character_Khazan`, `/Game/Data/Character/PDA_Character_M2TestMonster`, `/Game/Test/M2/BP_KhazanMonster_M2Test`, 시험 AIController/Blackboard/BT/Probe/진단 ABP를 단계별로 만든다. Test 자산을 생산 Player/적 로직의 영구 의존으로 연결하지 않는다.
 - M2.2 빌드/Player 검증 뒤 M2.3 default subobject class를 변경하고 다시 전체 빌드한다. 기존 inherited CharacterMovement를 삭제하거나 두 번째 movement component를 만들지 않는다.
 - 세부 코드는 [Step 2의 연속 가이드](CHARACTER_TAG_ABILITY_STEP_2.md#m2-2-m2-3-detailed-guide-20260909)에 있다. 현재 게임 파일/에셋에는 적용하지 않았다.
+
+
+## 2026-09-11 Character Definition Data Asset 생성과 이름 정리
+
+- `/Game/Data/Character/DA_Character_Khazan`이 `UKhazanCharacterDefinitionData : UDataAsset` 인스턴스로 생성됐다. 아직 `PDA_AssetData` 또는 Player BP에 연결되지 않았다.
+- 책임 중심 에셋 이름 규칙 `<Prefix>_<Responsibility>[_Variant]`에 따라 최종 권장 경로는 `/Game/Data/Character/DA_CharacterDefinition_Khazan`이다.
+- C++ 타입 `UKhazanCharacterDefinitionData`, catalog key `AssetData.CharacterDefinition.Khazan`, selector `CharacterDefinitionAssetName`, 내부 필드 `LocomotionConfig`는 각각 타입·lookup key·선택자·하위 설정의 다른 책임을 나타낸다.
+- 이번 기록은 실제 파일 존재와 미참조 상태를 확인한 명명 안내다. 에셋 rename, catalog/BP 연결, 빌드/PIE는 수행하지 않았다.
+
+
+## 2026-09-11 Character Definition 에셋 rename 완료 확인
+
+- 실제 콘텐츠는 `/Game/Data/Character/DA_CharacterDefinition_Khazan` 하나이며 이전 `DA_Character_Khazan`은 없다. 현재 catalog와 Player BP에는 아직 연결되지 않았다.
+- 다음 소스 checkpoint는 `UKhazanAssetData`의 PostLoad runtime lookup 재구축·nullable Find API와 `UKhazanAssetManager`의 GameplayTag 기준 단일 cache다. 기존 InputData 소비자는 preload된 cache만 읽는 `FindLoadedAssetByName()`으로 이관한다.
+- 이번 기록에서는 Source/BP/Config/uasset을 직접 수정하거나 빌드/PIE하지 않았다.
+
+
+## 2026-09-11 AssetManager 과잉 보강 복원 완료
+
+- 사용자 승인 범위에서 `KhazanAssetManager.h/.cpp`, `KhazanAssetData.h/.cpp`, Controller의 두 getter 사용처를 복원했다. 기준은 Git HEAD의 기존 설계이며, Manager cpp는 341줄에서 204줄로 줄였다(원래 192줄).
+- `GetAssetByName()`의 ResolveObject→필요 시 TryLoad, public path/name/label load·release, `TMap<FName, TObjectPtr<const UObject>> NameToLoadedAsset`를 복원했다. `FindLoadedAssetByName`/private `LoadAssetByPath`/tag cache/반복 stale 검사/타입 오류 로그 확장은 제거했다. Controller는 이번 정리 후 HEAD와 동일하다.
+- 남긴 차이: PostLoad/PreSave 공통 index rebuild, 누락 path의 빈 값 반환, 누락 label의 nullable pointer 반환, catalog 누락 시 안전한 return, 데이터 로드 실패 Error 로그, label load의 중복 개별 IO 제거 및 batch handle의 지역 보존, path FName 기준 cache·release 대칭이다. BP `_C` 보정은 기존의 수정된 로컬 `AssetEntry`를 name/label 양쪽에 넣는 본문으로 복원했다.
+- `ReleaseByName(FName)`은 기존 경로의 asset leaf name을 받는다. `AssetData.InputData`와 같은 catalog tag를 넣는 API가 아니다. Release는 manager의 보관 참조를 제거하며 다른 UObject 참조까지 강제로 해제하지 않는다.
+- 최종 저장본의 전체 Development Editor 빌드 및 DevMap 새 프로세스 시작/종료는 통과했다. 상세 로그와 Python 보조 검사의 접근 제한은 [진단 기록](BUILD_RUNTIME_DIAGNOSTICS.md)의 같은 날짜 절에 기록했다.
+- Character Definition tag/selector/catalog/BP 연결과 gameplay 값은 수정하지 않았다. 다음 사용자 적용 절차는 [Step 2 복원 후 연결 절차](CHARACTER_TAG_ABILITY_STEP_2.md#asset-manager-rollback-next-20260911)를 따른다. 앞 절의 tag cache/FindLoaded 이관 안내는 이 절이 대체한다.

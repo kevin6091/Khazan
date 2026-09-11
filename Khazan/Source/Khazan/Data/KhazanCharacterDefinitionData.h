@@ -3,10 +3,10 @@
 #include "CoreMinimal.h"
 #include "Character/Locomotion/KhazanLocomotionType.h"
 #include "Engine/DataAsset.h"
-#include "KhazanCharacterDefinition.generated.h"
+#include "KhazanCharacterDefinitionData.generated.h"
 
 UCLASS(BlueprintType)
-class KHAZAN_API UKhazanCharacterDefinition : public UPrimaryDataAsset
+class KHAZAN_API UKhazanCharacterDefinitionData : public UDataAsset
 {
 	GENERATED_BODY()
 

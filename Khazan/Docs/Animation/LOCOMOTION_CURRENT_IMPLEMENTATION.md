@@ -959,3 +959,76 @@ InGame의 마지막 Turn 목록은 2026-09-07 표적 감사가 근거다. 아래
 - [추가 정적 상태] `git diff --check`는 `KhazanLocomotionComponent.cpp`와 `KhazanLocomotionType.cpp`의 기존 trailing whitespace를 보고한다. 이번 체크포인트에서는 동작·서식을 추가 변경하지 않고 현재 상태를 보존한다.
 - [정확한 재개] Step 2 §20.17에서 Player의 intent source handle 발급·보관·종료와 handle 기반 setter 호출을 먼저 이관한다. 이어 §20.18에서 AnimInstance GT snapshot이 `GetLocomotionIntent()`와 `GetResolvedMovementPolicy()`를 읽도록 바꾼다. 그 뒤 동일한 전체 Development Editor 빌드를 다시 통과시키고 Definition asset/Player constraint/빙의 종료 PIE를 검사한다.
 - [완료 경계] 현재 Component 정책 계산이 들어온 것은 확인됐지만 M2.2 빌드·PIE 완료, M2.3 시작 또는 기존 로코모션 회귀 통과를 의미하지 않는다.
+
+
+## 2026-09-11 M2.2 §20.17 Player 입력 어댑터 이관 안내
+
+- [현재 확인] 작업 트리는 체크포인트 이후 깨끗하고 LocomotionComponent는 §20.16까지 구현돼 있다. 최근 전체 빌드 실패는 예상된 잔여 구간인 Player의 handle 없는 옛 API와 AnimInstance의 삭제된 Intent 필드 소비에서 발생했다. 사용자는 delegate 네이밍 변경 제안을 이번 단계에 적용하지 않기로 했으므로 관련 현행 심볼을 유지한다.
+- [이번 사용자 적용 범위] `KhazanPlayer.h/.cpp`만 §20.17 계약으로 이관한다. 헤더는 intent handle의 완전한 타입을 포함하고 `PossessedBy()` 및 `PlayerIntentHandle`을 추가하며, 속도 property·Player `BeginPlay()`·`RefreshLocomotionGait()`를 제거한다. cpp는 CMC 정책 직접 대입을 삭제하고 모든 raw intent 쓰기에 현재 handle을 전달한다.
+- [소유 계약] LocomotionComponent가 handle의 발급자이자 활성 Intent 장부 Owner이고, `NewController`는 weak `Source`, `AKhazanPlayer`는 입력 변환과 handle 보관자다. PlayerController의 Enhanced Input binding은 그대로 두며 PlayerState ASC 이관, 네트워크 복제, AI intent는 이번 범위가 아니다.
+- [입력 순서] 유효한 현재 handle 확인 → 장치 입력 dead zone 판정 → ControlRotation Yaw 기준 월드 입력 계산 → handle과 함께 raw intent 기록 → `RefreshRequestedGait()`로 요청 gait 기록 → 최종 `IsMovementInputAllowed()` gate → 통과할 때만 `AddMovementInput()` 순서다. 차단 중에도 raw 방향·세기·gait 요청은 보존한다.
+- [정리 순서] 실제 Move Released는 토글 Sprint 요청을 정리하고 `ClearMoveInput(handle)`과 `ResetRequestedGaitToDefault(handle)`을 호출한다. UnPossess는 이 입력 정리를 먼저 수행하고 hold Sprint도 false로 만든 뒤 `EndLocomotionIntentSource(handle)`로 권한을 종료하고 마지막에 부모 UnPossessed를 호출한다.
+- [수치/작성자] `RunInputThreshold=0.6`, `MoveInputDeadZone=0.1`, 카메라와 메시 transform은 기존 프로젝트 값을 유지한다. Walk/Run/Sprint 및 CMC 가감속·회전 수치는 Player에서 삭제되고 Character Definition → LocomotionComponent → CMC 경로만 작성한다. 새 gameplay 수치를 추가하지 않는다.
+- [적용·검증 경계] 이번 안내에서 게임 C++을 수정하거나 빌드·PIE하지 않았다. Player 적용 후에도 AnimInstance §20.18의 옛 API 때문에 전체 모듈 빌드는 아직 실패할 수 있으며, 다음 검토에서 Player를 확인한 뒤 AnimInstance 이관과 전체 빌드로 이어간다.
+
+
+## 2026-09-11 M2.2 §20.17 Player 반영 빌드 확인과 §20.18 Anim snapshot 안내
+
+- [현재 반영 확인] Player의 `PossessedBy()` intent source 발급, `UnPossessed()` 입력 정리·source 종료, handle 기반 raw input/gait 작성, Player의 CMC 속도·가감속·회전 직접 대입 제거는 §20.17 책임과 일치한다. Camera/SpringArm/Mesh 조립과 입력 해석 설정은 Player에 유지됐다.
+- [실제 빌드] Unreal Editor가 종료된 상태에서 UE 5.8 Development Editor 전체 빌드를 실행했다. UHT는 3개 generated file을 작성했고 `KhazanPlayer.cpp`와 module compile까지 진행했으나 결과는 exit 1이다. 빌드·UHT 통과 또는 M2.2 완료로 기록하지 않는다.
+- [Player 컴파일 수정 필요] `HandleInputMove()`, `HandleInputMoveReleased()`, `RefreshLocomotionGait()`의 지역 이름 `LocomotionComponent`가 부모 `AKhazanCharacter::LocomotionComponent` 멤버를 가려 C4458 세 건이 발생했다. 지역 이름은 단계 문서와 기존 함수의 용례대로 `Locomotion`으로 통일한다. 이동 함수의 선행 null 검사와 다음 조건의 중복 null 검사 중 하나를 제거하고, gait helper의 미사용 `CMC` 지역 변수도 제거한다.
+- [의미 명칭 수정 필요] Player helper는 이제 CMC나 전체 locomotion을 갱신하지 않고 raw `RequestedGait`만 쓴다. §20.17 계약과 채택된 `Requested` 의미에 맞춰 선언·정의·네 호출을 `RefreshRequestedGait()`로 함께 바꾼다. 이는 새 동의어 추가가 아니라 이전 직접 CMC 적용 책임이 제거된 함수의 실제 범위를 이름에 반영하는 §20.17 이관 항목이다.
+- [예상된 Anim 컴파일 잔여] module compile은 `KhazanAnimInstance.cpp`의 삭제된 `GetIntent()`, raw Intent에 더 이상 없는 `MaxAllowedGait`와 `RotationMode`에서 실패했다. 이는 고정 순서의 바로 다음 §20.18 미이관 상태와 정확히 일치한다.
+- [§20.18 적용 계약] `GatherGameThreadData()`는 Game Thread에서 `GetLocomotionIntent()`와 `GetResolvedMovementPolicy()`를 각각 const 참조로 읽는다. 방향·입력량·요청 gait는 raw Intent에서, 허용 상한·최종 gait·최종 회전 모드는 resolved policy에서 값으로 복사하고 최종 이동 gate는 `IsMovementInputAllowed()`로 관측한다. worker 경로는 UObject/ASC/Component를 직접 읽지 않고 완성된 `GameThreadData` 값 사본만 소비한다.
+- [다음 검증 순서] Player 정리와 Anim 함수 교체 후 같은 Development Editor 전체 빌드를 다시 실행한다. 빌드가 통과한 뒤에만 §20.19 Character Definition asset 생성과 §20.20–20.21 Probe/PIE 검증으로 이동하며 M2.3 AI는 아직 시작하지 않는다.
+- [수정·검증 경계] 이번 확인에서는 게임 C++·BP·asset을 직접 수정하지 않았다. 정본에 실제 빌드 결과와 다음 적용 계약만 추가했다. `git diff --check`는 Player 파일의 trailing whitespace를 함께 보고했으며 제시할 정리 코드에서는 제거한다.
+
+
+## 2026-09-11 M2.2 §20.17–20.18 반영 확인과 §20.19 Character Definition 안내
+
+- [Player 반영 확인] `RefreshRequestedGait()` 선언·정의·네 호출, 지역 `Locomotion` 명칭, 현재 intent handle 검사, handle 기반 raw input/gait 작성, Possess/UnPossess source 수명과 Player의 CMC 직접 정책 대입 제거가 소스에 반영됐다. Player/Anim 대상 검색에서 삭제된 `GetIntent()`, raw Intent의 `MaxAllowedGait`/`RotationMode`, `RefreshLocomotionGait()` 및 미사용 CMC 지역 변수는 더 이상 나오지 않는다.
+- [Anim 반영 확인] Game Thread 수집은 `GetLocomotionIntent()`와 `GetResolvedMovementPolicy()`를 분리해 읽고 raw `RequestedGait`, policy의 `MaxAllowedGait`·`ResolvedRotationMode`, 최종 movement gate를 값 snapshot에 복사한다. 사용자가 내부 snapshot 필드도 `TargetGait`에서 `RequestedGait`로 맞췄으며 이 구조체는 reflection/직렬화 대상이 아니고 다른 C++ 사용처도 없어 redirect 없이 안전한 명칭 정리다.
+- [한 줄 의미 정리] 현재 `NewData.ResolvedGait = LocomotionComponent->GetResolvedGait()`는 getter가 같은 `ResolvedPolicy.ResolvedGait`를 반환하므로 런타임 결과와 빌드는 정확하다. 이미 지역 `Policy`를 관측하고 있으므로 raw/해결 데이터 출처를 한 방식으로 표현하려면 `NewData.ResolvedGait = Policy.ResolvedGait`로 맞추는 것이 현행 계약에 더 명료하다.
+- [실제 전체 빌드] Unreal Editor 종료 상태에서 UE 5.8 `KhazanEditor Win64 Development` 전체 빌드를 다시 실행했고 `Target is up to date`, `Result: Succeeded`, exit 0으로 끝났다. §20.17–20.18의 컴파일 경계는 통과했다. PIE 및 M2.2 전체 기능 검증은 아직 수행하지 않았다.
+- [단일 CMC 작성자 정적 확인] `MaxWalkSpeed`, `MaxAcceleration`, `BrakingDecelerationWalking`, `bOrientRotationToMovement`, `bUseControllerDesiredRotation`의 runtime 대입은 `KhazanLocomotionComponent.cpp::ApplyMovementPolicyToCharacter()`에만 남아 있다. config 구조체의 기본값 선언과 Anim의 getter 관측은 runtime 중복 작성이 아니다.
+- [남은 주석/서식] Component 주석 네 곳에는 옛 `TargetGait`/`DefaultTargetGait` 표현이 남아 있어 현행 `RequestedGait`/`DefaultRequestedGait`로 고치는 것이 정확하다. `git diff --check`는 Player의 빈 줄과 대입문 뒤 trailing whitespace를 보고하지만 기능·빌드 오류는 아니다.
+- [§20.19 시작 상태] `/Game/Data`에는 기존 `DA_InputData`와 `PDA_AssetData`가 있으나 `/Game/Data/Character` 폴더와 `PDA_Character_Khazan`은 아직 없다. 할당 대상은 실제 존재하는 `/Game/_Art/Kazan/Character/Bluprints/BP_KhazanPlayer`이며 디스크의 `Kazan`/`Bluprints` 철자를 그대로 사용한다.
+- [다음 사용자 적용] Editor에서 `KhazanCharacterDefinition` Data Asset을 `/Game/Data/Character/PDA_Character_Khazan`으로 만들고 현행 이관값 Walk 170, Run 470, Sprint 600 cm/s, MinAnalog 15 cm/s, MaxAcceleration/WalkingBraking 1800 cm/s², RotationRate Yaw 540 deg/s, 기본 RequestedGait Walk, 기본 MaxAllowedGait Sprint, 기본 RequestedRotationMode VelocityDirection을 기록한 뒤 Player BP의 Class Defaults `Character Definition`에 할당한다. 모든 수치는 현재 프로젝트 소스/CDO 이관값이며 원작 metadata 직접 확인값이 아니다.
+- [적용 경계] 이번 확인에서는 게임 C++·BP·uasset을 직접 수정하지 않았고 현행 정본만 추가했다. Definition 생성·BP Compile/Save와 런타임 초기화 확인은 사용자 적용 후 검증하며, 그 다음 순서는 §20.20 Probe와 §20.21 PIE 합격표다. M2.3 AI는 시작 전이다.
+
+
+## 2026-09-11 M2.2 §20.19 기존 AssetManager 누락 발견과 절차 정정
+
+- [사용자 지적 확인] 프로젝트에는 Config가 지정한 `UKhazanAssetManager`, Engine이 scan하는 단일 `UKhazanAssetData` primary type, `/Game/Data/PDA_AssetData`, `AssetData.*` name과 `AssetLabel.Preload` 기반 soft-path 로딩 구조가 이미 있다. `UKhazanGameInstance::Init()`이 world actor 준비 전에 manager preload를 시작하고 PlayerController가 같은 catalog에서 `DA_InputData`를 조회한다.
+- [이전 안내 철회] 아직 생성되지 않은 Character Definition을 별도 `UPrimaryDataAsset`로 만들고 Player BP가 hard reference하라는 직전 안내는 v2 ARCH-16/17과 기존 프로젝트 구조를 충분히 반영하지 못했다. 에셋 적용 전에 발견됐으므로 `PDA_Character_Khazan` 생성/직접 pointer 할당은 진행하지 않는다.
+- [채택 방향/미적용] `UKhazanCharacterDefinition`은 `UDataAsset` payload, `/Game/Data/Character/DA_Character_Khazan`은 그 인스턴스, `PDA_AssetData`는 `AssetData.CharacterDefinition.Khazan` → soft path catalog entry와 `AssetLabel.Preload`를 소유하도록 정정한다. Character BP는 hard object pointer 대신 `CharacterDefinitionAssetName` key를 선택하고 runtime Character는 manager에서 얻은 transient pointer만 보관한다.
+- [Primary 의미] 여러 `UPrimaryDataAsset`을 만드는 것이 엔진상 잘못은 아니지만, 현재 manager는 `KhazanCharacterDefinition`의 PrimaryAssetId/asset bundle/type scan을 사용하지 않는다. 같은 대상을 custom catalog와 별도 primary scan 양쪽에 등록할 실소비가 없으므로 `UDataAsset`이 기존 `UKhazanInputData`와 같은 payload 책임에 맞다.
+- [선행 보강 필요] 현재 `GetAssetPathByName()`과 `GetAssetSetByLabel()`은 없는 key에서 ensure 뒤 null을 역참조한다. runtime index는 `PreSave()`에만 의존하고 `LoadSyncByLabel()`은 path FName과 GameplayTag FName 두 cache key를 만들어 release가 한쪽만 제거한다. 필수 Definition 소비를 늘리기 전에 fail-closed lookup, `PostLoad()` rebuild, tag 기준 단일 cache/load-release 대칭을 보강한다.
+- [현 단계] M2.2 §20.17–20.18 C++ 빌드 통과 상태는 유지된다. §20.19는 AssetManager 보강과 Definition catalog 연결로 확장됐으며 아직 소스·Config·BP·uasset에 적용되지 않았다. M2.3 AI와 §20.20 Probe는 시작 전이다.
+
+
+## 2026-09-11 M2.2 §20.19 Definition 에셋 생성 재설명 전 상태 확인
+
+- [실제 심볼] 사용자가 Definition 파일을 `KhazanCharacterDefinitionData.h/.cpp`, 클래스를 `UKhazanCharacterDefinitionData : UDataAsset`으로 변경했다. Character include/전방 선언/getter/pointer도 새 타입명을 사용한다. `.cpp` 끝 개행만 없는 서식 사항이 있으며 동작 계약 문제는 아니다.
+- [아직 남은 과도기] `AKhazanCharacter`는 여전히 `EditDefaultsOnly TObjectPtr<UKhazanCharacterDefinitionData> CharacterDefinition`을 직접 받고 `PostInitializeComponents()`에서 사용한다. `CharacterDefinitionAssetName` tag selector와 manager 조회는 아직 구현되지 않았다. AssetData/AssetManager의 lookup·PostLoad·cache 대칭 보강도 아직 적용되지 않았다.
+- [콘텐츠 상태] `/Game/Data`에는 `DA_InputData`와 `PDA_AssetData`만 있으며 `/Game/Data/Character/DA_Character_Khazan`은 아직 없다. 따라서 기존 에셋을 이관하거나 redirect할 일은 없다.
+- [이번 생성 범위] cold build 후 `DA_Character_Khazan`을 만들고 locomotion config 값을 확인·저장하는 일은 runtime 연결과 분리해 먼저 수행할 수 있다. 현재 Player BP의 객체 포인터에는 지정하지 않고, catalog preload entry와 Player selector 지정은 manager/Character C++ 연결 뒤 수행한다.
+- [확장성 판단] config 필드 확장성은 DA/PDA가 같다. 현행 custom catalog를 정본으로 계속 쓰는 범위에서는 DA가 단일 ID·단일 로딩 경로를 유지한다. Engine PrimaryAssetId/bundle/chunk를 직접 쓰는 별도 이관을 결정할 때만 PDA가 로딩·배포 확장성 이점을 제공한다.
+- [검증 범위] 이번 확인은 소스와 Content 파일 목록 대조 및 문서 보강이다. 게임 코드·Config·BP·uasset 수정, 새 빌드, PIE는 수행하지 않았다.
+
+
+## 2026-09-11 M2.2 §20.19 생성 에셋과 네이밍 정정 상태
+
+- [실제 생성] `/Game/Data/Character/DA_Character_Khazan.uasset`이 생성됐고 native class 문자열은 `KhazanCharacterDefinitionData`다. 이번 확인은 파일 존재와 타입 대조이며 내부 수치의 Editor 저장값은 별도로 열어 검증하지 않았다.
+- [참조 확인] 현재 `PDA_AssetData`에는 해당 asset path와 `AssetData.CharacterDefinition.Khazan` entry가 없고, `BP_KhazanPlayer`에도 해당 asset path 참조가 없다. 따라서 runtime 연결 전에 Content Browser rename을 수행할 수 있다.
+- [권장 이름] 최종 이름은 `DA_CharacterDefinition_Khazan`이다. `CharacterDefinition`은 전체 정적 정의, `LocomotionConfig`는 그 내부 이동 설정이므로 `DA_KhazanConfigData`라는 포괄 이름으로 합치지 않는다.
+- [다음 사용자 작업] Editor의 Content Browser에서 rename하고 `/Game/Data/Character` 폴더의 redirector를 정리한 뒤 저장한다. 성공 기준은 새 에셋 하나만 보이고 old-name redirector가 남지 않는 것이며, catalog/BP 연결은 AssetManager 보강 뒤 진행한다.
+- [적용 범위] 이번 확인에서는 게임 Source/BP/Config/uasset을 직접 수정하거나 빌드/PIE하지 않았다.
+
+
+## 2026-09-11 M2.2 §20.19 Definition 에셋 완료와 다음 코드 checkpoint
+
+- [완료 확인] `/Game/Data/Character/DA_CharacterDefinition_Khazan.uasset`이 생성·rename됐고 old-name 파일은 없다. 파일 존재와 native class 연결을 확인했으며 Editor Details의 개별 수치는 이번 읽기 전용 검사에서 재확인하지 않았다.
+- [다음 순서] 확정 마이그레이션의 AssetManager 보강부터 진행한다. `PDA_AssetData`의 authoring source에서 runtime lookup map을 `PostLoad`마다 재구축하고, nullable `Find` 계약과 GameplayTag 기준 단일 loaded cache로 누락·중복 수명을 제거한다.
+- [회귀 경계] 이 코드 checkpoint는 기존 `AssetLabel.Preload`와 `AssetData.InputData` 경로가 cold build 및 PIE에서 계속 작동하는지 먼저 확인한다. Character Definition tag/entry/selector를 아직 연결하지 않으므로 M2.2 완료나 M2.3 시작이 아니다.
+- [적용 상태] 게임 C++·BP·Config·uasset 수정과 build/PIE는 수행하지 않았고 다음 사용자 적용 계약만 기록했다.

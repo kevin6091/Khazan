@@ -3688,3 +3688,160 @@ Custom Nav Link를 통과하는 중 pause, CrowdFollowing, root-motion 기반 AI
 - 기존 20.11의 `ResetTargetGaitToDefault()` 예시 사이 표현 차이는 실습판에서 “이미 기본값이면 true를 반환하고 rebuild 생략”으로 통일했다. `KhazanCharacter.cpp`의 새 `LogDefault` 로그에 필요한 `LogChannels.h` include도 명시했다.
 - 이 추가는 문서 정리와 읽기 전용 소스 대조다. 사용자가 수정 중인 C++·BP·asset은 건드리지 않았고, 중간 빌드 오류는 M2.2 실패로 판정하지 않았다. 실습판 K절의 실제 빌드·PIE 검증 전에는 M2.2 완료가 아니다.
 
+
+## 23. 2026-09-11 — §20.19 정정: 기존 AssetManager 기반 Character Definition 준비
+
+- 앞선 20.19의 `PDA_Character_Khazan` hard-reference 절차는 적용 전 철회한다. 프로젝트의 `UKhazanAssetData`/`PDA_AssetData`가 이미 GameplayTag name → soft object path와 preload label을 소유하며, v2 ARCH-16/17도 기존 AssetManager 준비 경로를 요구한다.
+- `UKhazanAssetData`만 Engine Primary Asset type으로 scan한다. `UKhazanCharacterDefinition`은 현재 직접 PrimaryAssetId/bundle 조회 소비가 없으므로 `UDataAsset` payload로 바꾸고 에셋 이름도 `DA_Character_Khazan`으로 사용한다. 이를 `PDA_AssetData`의 entry로 등록한다.
+- Player/Monster 공통 선택자는 `CharacterDefinitionAssetName` GameplayTag다. Player entry/key는 `AssetData.CharacterDefinition.Khazan`, path는 `/Game/Data/Character/DA_Character_Khazan`, label은 `AssetLabel.Preload`로 한다. `AssetData.*` key는 asset lookup용이며 ASC state tag가 아니다.
+- Character에는 class-default key와 transient loaded Definition pointer를 구분한다. GameInstance preload 후 `PostInitializeComponents()`가 manager에서 타입 검증된 Definition을 얻고 Locomotion config를 초기화한다. LocomotionComponent에는 값 사본만 전달한다.
+- 현재 manager에는 lookup 실패 null 역참조, `PreSave()`에만 의존하는 runtime index, label load의 중복 cache key와 release 비대칭이 남아 있다. 새 필수 Definition을 연결하기 전에 이 경계를 보강한다. 새 순서는 AssetManager 안전성/대칭 → Definition의 UDataAsset·tag selector 연결 → 전체 C++ 빌드 → DA 생성/PDA catalog entry → Player BP tag 지정 → Probe/PIE다.
+- 이 정정은 M2.2 data 준비 내부 순서를 보완하며 M2.3/M3 기능을 섞지 않는다. 이번 기록에서 게임 Source/Config/BP/uasset은 수정하지 않았다.
+
+
+## 24. 2026-09-11 — §20.19 에셋 생성 실습 경계와 현재 심볼
+
+- 실제 타입명은 `UKhazanCharacterDefinitionData : UDataAsset`, 파일명은 `KhazanCharacterDefinitionData.h/.cpp`, 에셋명은 `DA_Character_Khazan`으로 통일한다. 이전 절의 `UKhazanCharacterDefinition` 표기는 과거 심볼이다.
+- Editor를 닫은 cold build 뒤 `/Game/Data/Character`에서 `Miscellaneous > Data Asset > Khazan Character Definition Data`를 선택해 `DA_Character_Khazan`을 만든다. locomotion 값은 170/470/600 cm/s, 15 cm/s, 1800/1800 cm/s², RotationRate (0, 540, 0) deg/s, Walk/Sprint/VelocityDirection이며 모두 현재 프로젝트 이관값이지 원작 metadata 직접 확인값이 아니다.
+- 에셋 파일 생성은 inert data 작성이므로 manager 연결 전에 수행해도 된다. 다만 현재 `AKhazanCharacter::CharacterDefinition` 객체 포인터에는 할당하지 않는다. 최종 연결은 manager lookup 보강, `AssetData.CharacterDefinition.Khazan` native tag, `CharacterDefinitionAssetName` selector와 transient runtime pointer 이관, C++ 빌드 뒤에 한다.
+- 이후 `PDA_AssetData`의 기존 `Data` group에 name=`AssetData.CharacterDefinition.Khazan`, path=`/Game/Data/Character/DA_Character_Khazan`, label=`AssetLabel.Preload` entry를 추가하고 Player BP에는 객체가 아니라 selector tag를 지정한다. 이 등록·지정은 앞선 C++ 연결이 준비된 뒤 수행한다.
+- 이번 기록에서는 게임 Source/Config/BP/uasset을 수정하거나 빌드/PIE하지 않았다.
+
+
+## 25. 2026-09-11 — §20.19 생성 에셋 이름 정정
+
+- 사용자가 `/Game/Data/Character/DA_Character_Khazan`을 생성했다. 실제 파일과 native class `UKhazanCharacterDefinitionData`를 확인했으며, 아직 `PDA_AssetData` entry와 `BP_KhazanPlayer` 참조는 없다.
+- `DA_InputData`와 같은 책임 중심 패턴을 유지하되 여러 캐릭터 variant를 구분하기 위해 이름을 `DA_CharacterDefinition_Khazan`으로 정리한다. 형식은 `DA_<Responsibility>_<Variant>`다.
+- Editor Content Browser에서 해당 에셋을 rename한 뒤 Character 폴더의 redirector를 정리한다. 파일 시스템에서 `.uasset` 이름을 직접 바꾸지 않는다.
+- 후속 catalog path는 `/Game/Data/Character/DA_CharacterDefinition_Khazan`, key는 `AssetData.CharacterDefinition.Khazan`이다. 기존 `DA_Character_Khazan` 경로로 entry를 먼저 만들지 않는다.
+- `DA_KhazanConfigData`는 사용하지 않는다. Definition 전체와 내부 `LocomotionConfig`의 용어 경계를 유지하고, class/file/tag/property 이름은 이번 rename 때문에 변경하지 않는다.
+- 이번 기록에서는 게임 Source/BP/Config/uasset을 직접 수정하거나 빌드/PIE하지 않았다.
+
+
+## 26. 2026-09-11 — §20.19 Definition 에셋 완료 후 AssetManager 보강 소단계
+
+- [실제 에셋] `/Game/Data/Character/DA_CharacterDefinition_Khazan`이 존재하고 이전 `DA_Character_Khazan` 파일은 없다. 아직 catalog/BP 참조는 연결하지 않은 상태다.
+- [이번 사용자 적용 범위] `UKhazanAssetData`가 `PostLoad()`와 `PreSave()`에서 하나의 `RebuildRuntimeLookupMaps()`를 호출하게 하고, 파생 lookup map은 `Transient`로 둔다. lookup은 `FindAssetPathByName()`/`FindAssetSetByLabel()` nullable pointer 계약으로 바꿔 누락 key를 역참조하지 않는다.
+- [Manager 대칭] `UKhazanAssetManager`의 cache 정본 key는 `FAssetEntry::AssetName` GameplayTag 하나다. 경로 이름과 tag 이름으로 같은 객체를 중복 cache하던 public path load/release 경로를 제거하고, `AssetNameToLoadedAsset`에서 load/release한다.
+- [조회와 IO 명명] catalog의 `Find...`와 manager의 `FindLoadedAssetByName()`은 메모리 조회만 수행한다. 실제 IO는 `LoadSyncByName()`/`LoadSyncByLabel()`만 수행한다. 기존 `GetAssetByName()`이 preload 실패를 숨겨 동기 로드하던 동작은 제거하고 PlayerController의 두 사용처를 cache-only 조회로 이관한다.
+- [검증 경계] 이 보강을 Editor 종료 cold build와 기존 `DA_InputData` 이동/회전 입력 PIE 회귀로 먼저 확인한다. Definition native tag, catalog entry, Character selector는 이 checkpoint 뒤 다음 소단계다.
+- [적용 상태] 이번 기록은 사용자 구현용 설명이며 게임 Source/BP/Config/uasset을 직접 수정하거나 빌드/PIE하지 않았다.
+
+
+<a id="asset-manager-rollback-next-20260911"></a>
+
+## 27. 2026-09-11 — 과잉 보강 복원 완료와 다음 Definition 연결 절차
+
+### 이번에 실제 끝낸 범위
+
+- 사용자 승인으로 AssetManager/AssetData 및 Controller getter의 과잉 보강을 직접 복원했다. 앞선 26절의 `FindLoadedAssetByName`과 tag cache 전환은 철회한다. 현재는 기존 `GetAssetByName`, path/name/label load·release, FName cache다.
+- 남긴 필수 보강은 PostLoad index rebuild, 누락 lookup의 안전한 반환, label의 중복 load 제거와 path key의 load·release 대칭이다. `_C` 변환은 원래의 로컬 `AssetEntry` 처리로 돌아가 name/label에 같은 변환 결과를 넣는다.
+- 최종 빌드 및 DevMap 새 프로세스 시작/종료는 통과했다. Player/Monster Definition 누락으로 실제 이동 회귀는 아직 불가능하며 다음 연결 뒤 검증한다. Python의 protected 내부 map 비교는 수행하지 못했다. 상세는 [진단 기록](BUILD_RUNTIME_DIAGNOSTICS.md)의 마지막 절을 따른다.
+- 다음 내용은 사용자가 직접 적용할 절차/제안이다. 아래 tag, 매개변수, Character selector, catalog/BP 변경은 이번에 적용하지 않았다. M2.2 완료나 M2.3 시작을 뜻하지 않는다.
+
+### 다음 목표와 책임
+
+`PDA_AssetData`가 이미 생성된 `/Game/Data/Character/DA_CharacterDefinition_Khazan`을 preload하고, 공통 Character가 자신의 선택 tag로 이 Definition을 얻어 기존 Locomotion 초기화에 전달하게 한다. Player/Monster는 각 BP에서 tag만 선택한다. Character가 Definition을 선택·검증하고 LocomotionComponent가 config 사본/CMC 정책을 소유하는 경계를 유지한다.
+
+### 1. 실제 소비할 Definition tag 선언
+
+`Source/Khazan/KhazanGameplayTags.h`의 기존 AssetData Tags 아래에 선언한다.
+
+```cpp
+UE_DECLARE_GAMEPLAY_TAG_EXTERN(AssetData_CharacterDefinition_Khazan);
+```
+
+같은 namespace의 `KhazanGameplayTags.cpp` AssetData Tags 아래에 정의한다.
+
+```cpp
+UE_DEFINE_GAMEPLAY_TAG(AssetData_CharacterDefinition_Khazan, "AssetData.CharacterDefinition.Khazan");
+```
+
+헤더는 다른 C++ 파일의 참조를 선언하고 cpp가 실제 tag를 등록한다. 이 값은 asset catalog 조회용이며 ASC 상태 태그가 아니다. 이번 Player entry의 실제 소비가 있으므로 선언하며 미사용 몬스터 태그를 먼저 늘리지 않는다.
+
+### 2. 기존 getter에 필요한 최소 조회 선택만 추가
+
+복원된 `GetAssetByName()`은 로드되지 않은 객체를 `TryLoad()`하는 기존 동작을 가진다. 따라서 이 함수를 그대로 호출한 성공만으로 Definition의 선행 준비 성공을 판정하지 않는다. Definition 소비를 추가하는 이번 다음 단계에서만, 아래 최소 확장을 함께 적용한다.
+
+`KhazanAssetManager.h`의 기존 template 선언에 `bool bLoadIfMissing = true`, 아래 template 정의에 기본값 없는 `bool bLoadIfMissing`를 추가한다. 본문의 현재 `if (LoadedAsset == nullptr)`는 `if (LoadedAsset == nullptr && bLoadIfMissing)`로 바꾼다. 다른 본문, 기존 InputData 호출은 그대로다.
+
+- 타입/의미: bool, 호출별 IO 허용 선택이며 보존되는 상태가 아니다. 기본 true는 기존 InputData의 동작을 보존한다.
+- 작성자/소비자: Character 초기화 호출이 false를 전달하고 getter의 fallback 분기만 소비한다. 다른 API·cache·상태/스레드는 추가하지 않는다.
+- false에서는 경로에 대한 `ResolveObject()` 결과만 사용한다. 없거나 타입이 다르면 nullptr이며 Character가 준비 실패를 처리한다. 이때도 실제 Preload label 등록 여부는 catalog 설정과 시작 로그로 별도 확인한다.
+- 이 매개변수는 아직 제안이며 현재 파일에는 없다. 새 `FindLoaded...` 함수나 캐시를 다시 만들지 않는다.
+
+### 3. Character의 선택자와 런타임 참조 분리
+
+`Source/Khazan/Character/KhazanCharacter.h`에 `GameplayTagContainer.h` include를 추가하고 기존 Definition 멤버 위치에서 다음 두 책임을 구분한다.
+
+- `FGameplayTag CharacterDefinitionAssetName`: `EditDefaultsOnly` 선택자다. 기본값은 빈 tag이며 BP Class Defaults에서 Player/Monster별 값을 지정한다. 단위 없는 key이고 Actor 수명 중 반복 갱신하거나 빙의마다 Reset하지 않는다. 공통 C++ 생성자에 Player 전용 tag를 박아 넣지 않는다.
+- 기존 `TObjectPtr<UKhazanCharacterDefinitionData> CharacterDefinition`: `EditDefaultsOnly`를 제거하고 `Transient` 런타임 참조로 둔다. nullptr로 시작하며 초기화 때만 작성하고 현재 `GetCharacterDefinition()`과 config 전달이 소비한다. 기존 getter는 const 읽기 용도를 유지한다.
+- 두 멤버를 BP에 읽기용으로 보일 경우 현재 `BlueprintReadOnly`, Category, `AllowPrivateAccess` 패턴을 유지한다. 에디터에서 직접 입력할 것은 tag 하나이며 런타임 pointer 칸에 DA를 지정하지 않는다.
+
+### 4. 기존 초기화 본문에 조회 한 곳 연결
+
+`KhazanCharacter.cpp`에 `System/KhazanAssetManager.h`를 include한다. `PostInitializeComponents()`의 현재 GameWorld 검사와 `InitAbilityActorInfo(this, this)`를 유지한다. 그 다음, 기존 `if (!IsValid(CharacterDefinition))` 바로 전에 다음 대입을 둔다.
+
+```cpp
+CharacterDefinition = UKhazanAssetManager::GetAssetByName<UKhazanCharacterDefinitionData>(
+    CharacterDefinitionAssetName, false);
+```
+
+- 이 호출은 2단계의 인자를 적용한 뒤에만 컴파일된다. 태그를 const 참조로 전달하고 typed pointer를 반환받으며, false는 동기 로드를 허용하지 않는 선택이다.
+- 현재의 Definition 유효성 검사/오류 return과 `InitializeMovementConfig(CharacterDefinition->GetLocomotionConfig())` 호출은 이어서 사용한다. 실패 로그에는 캐릭터 이름과 선택 tag를 함께 넣어 BP 설정 누락을 식별한다.
+- 호출은 초기화 Game Thread에서 한 번 한다. worker AnimInstance에서 AssetManager를 조회하지 않는다. ASC ActorInfo 연결 성공과 config 준비 성공을 동일하게 취급하지 않는다.
+- config를 받지 못하면 Component의 기존 초기화 실패 정책이 이동 요청을 거절한다. 타이머로 재시도하거나 AnimInstance에서 설정을 대신 주입하지 않는다.
+- 빙의 변화에서는 기존 ASC 참조 갱신/intent handle 처리를 유지한다. 한 Pawn이 끝났다는 이유로 공유 preload 자산을 `ReleaseAll()`하지 않는다.
+
+### 5. 빌드 후 기존 catalog와 Player BP 설정
+
+Editor를 닫고 전체 `KhazanEditor Win64 Development` 빌드를 통과시킨 뒤 새 Editor를 연다.
+
+1. `/Game/Data/PDA_AssetData`를 열고 기존 `Asset Group Name To Set`의 `Data` 그룹 → `Asset Entries`에 항목을 추가한다. 이미 있다면 중복 추가하지 않는다.
+2. `Asset Name` = `AssetData.CharacterDefinition.Khazan`, `Asset Path` = `/Game/Data/Character/DA_CharacterDefinition_Khazan.DA_CharacterDefinition_Khazan`, `Asset Labels` = `AssetLabel.Preload`로 지정하고 저장한다. DA 인스턴스이므로 `_C`를 붙이지 않는다.
+3. `/Game/_Art/Kazan/Character/Bluprints/BP_KhazanPlayer`의 Class Defaults → `Character | Definition` → `Character Definition Asset Name`에서 같은 tag를 선택하고 Compile/Save한다. 기존 직접 object pointer에 할당하는 과거 절차는 사용하지 않는다.
+4. 이번에는 기존 Definition의 `LocomotionConfig` 값을 그대로 연결한다. 숫자를 새로 선정하지 않는다. 실제 Monster Definition은 해당 소비가 이어질 때 따로 등록하며 Player tag를 공통 Character 기본값으로 강제하지 않는다.
+
+### 6. 적용 후 검증과 다음 경계
+
+- 새 PIE에서 Player의 `has no CharacterDefinition`와 `could not acquire a locomotion intent source`가 사라지고 Definition의 config가 공통 Locomotion 초기화에 전달되는지 확인한다. 연결하지 않은 시험 Monster의 경고와 Player 결과를 구분한다.
+- Definition을 위한 늦은 sync load 경고가 없어야 한다. 이름/타입/선택자 누락은 로그와 이동 거절로 끝나고 크래시나 임의 fallback config가 없어야 한다.
+- 현재 Walk/Run/Sprint/Stop, 태그 중첩 제한, UnPossess/EndPlay/재 PIE와 config/CMC 일치를 확인한다. 위 세부 체크포인트를 통과한 뒤 M2.2를 닫고 M2.3의 일반 적/AI 공통 이동으로 진행한다.
+- `ResolveObject()`의 메모리 조회와 `TryLoad()`의 실제 로드 구분은 [Epic FSoftObjectPath API](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/CoreUObject/FSoftObjectPath?lang=en-US)를 따른다. 엔진 API의 동작 근거이며 원작 gameplay 수치의 출처가 아니다.
+
+## 28. 2026-09-11 — 현재 AssetManager/AssetData 호출 계약과 Definition 실습 설명 보완
+
+- 사용자 요청은 수정 이력 요약이 아니라 현재 인터페이스의 실제 사용법과 다음 소단계의 상세 설명이다. 이번에는 소스/BP/Config/uasset을 수정하지 않았으며, 27절 이후의 Definition 연결 코드는 계속 사용자 적용 전 제안이다.
+- 현재 `GetAssetByName<T>(const FGameplayTag&)`에는 인자가 하나다. `bLoadIfMissing`는 아직 없으며, 27절의 선언/정의/조건 변경을 적용한 뒤에만 두 인자로 호출할 수 있다.
+
+### 현재 호출자가 지켜야 하는 계약
+
+| 인터페이스 | 입력/반환 및 사용 의미 |
+| --- | --- |
+| `Initialize()` | 기존 GameInstance `Init()`에서 호출한다. Primary catalog를 얻고 Preload label을 동기 준비한다. 반환형은 void다. |
+| `GetAssetByName<T>(FGameplayTag)` | catalog 경로를 `ResolveObject`/`Cast`하고 실패하면 `TryLoad`한다. 성공은 T 포인터, 실패는 nullptr다. 이 함수 자체는 manager 보관 map에 객체를 추가하지 않는다. |
+| `LoadSyncByName(FGameplayTag)` | catalog의 정확히 같은 name tag로 경로를 얻어 load/manager 보관한다. |
+| `LoadSyncByPath(FSoftObjectPath)` | 지정 경로를 load/manager 보관한다. 경로 유효성만으로 실제 파일 존재/타입이 보장되지는 않는다. |
+| `LoadSyncByLabel(FGameplayTag)` | 정확히 같은 label의 entry들을 동기 load하고 각 경로의 asset FName으로 보관한다. 그룹 FName을 받는 함수가 아니다. |
+| `ReleaseByName(FName)` | `DA_InputData` 같은 경로 끝의 object 이름으로 manager 참조를 제거한다. `AssetData.InputData` tag 문자열을 넘기는 계약이 아니다. |
+| `ReleaseByPath` / `ReleaseByLabel` / `ReleaseAll` | 해당 manager 참조를 제거한다. 다른 UObject 참조의 해제, 즉시 GC, catalog 해제 또는 label별 참조 횟수 관리를 보장하지 않는다. |
+| `GetAssetPathByName(FGameplayTag)` | `FSoftObjectPath` 값 사본을 반환한다. 누락 시 빈 경로이므로 `IsValid()`로 검사한다. |
+| `GetAssetSetByLabel(FGameplayTag)` | 내부 map 값에 대한 `const FAssetSet*`를 반환한다. 누락 시 nullptr이므로 검사 후 `->AssetEntries`를 사용한다. 반환 포인터를 delete하거나 index rebuild 이후까지 보관하지 않는다. |
+
+- name tag/label tag는 TMap의 정확한 key 조회다. 부모 tag를 전달한다고 하위 entry를 함께 찾지 않는다. `Data` group은 편집용 분류다. custom `AssetLabel.Preload`는 이 프로젝트의 grouping tag이며 Engine `UPrimaryAssetLabel` 에셋과 같은 개념으로 취급하지 않는다.
+- AssetData의 편집 원본은 `AssetGroupNameToSet`이다. name/label lookup map은 `PostLoad`/`PreSave`에서 재구성하므로 직접 편집하지 않는다. 경로 정규화는 entry의 로컬 사본에 적용되며 BP_/B_/GE_/GA_ 이름에는 `_C`가 추가된다. DA 인스턴스 경로에는 `_C`를 붙이지 않는다.
+- manager 보관 key는 경로의 leaf FName이므로 서로 다른 폴더의 같은 object 이름을 독립적으로 보관하지 못한다. label이 겹쳐도 label별 참조 횟수는 없다. 공유 Preload의 release를 개별 Character EndPlay에 넣지 않는다.
+- `ReleaseAll()`은 `LoadedAssetData`를 비우지 않는다. 이후 `Initialize()`만 다시 호출하면 catalog 존재 검사에서 반환하므로 보관 map의 재구성이 필요할 때는 해당 load API를 사용해야 한다.
+- API는 현재 native C++ 함수이며 UFUNCTION이 아니다. BP에서 Manager 함수 노드를 새로 찾거나 Anim worker에서 호출하는 절차를 안내하지 않는다.
+
+### 다음 실습의 구체적 상태/검증 계약
+
+- tag 등록은 기존 `KhazanGameplayTags` namespace의 AssetData 구역에 선언/정의를 각각 추가한다. Character 공통 생성자에 Player tag를 지정하지 않는다.
+- Character header에는 `GameplayTagContainer.h`를 generated header 앞에 추가한다. 선택자는 `EditDefaultsOnly` GameplayTag, runtime Definition은 `Transient` TObjectPtr이며 기존 const getter를 유지한다. runtime 참조 확인을 위해 `VisibleInstanceOnly`를 함께 붙이는 것은 이번 설명의 제안이며 현재 소스에는 적용하지 않았다.
+- Character cpp는 기존 GameWorld 검사/ASC ActorInfo 연결 뒤에 `GetAssetByName<UKhazanCharacterDefinitionData>(CharacterDefinitionAssetName, false)` 대입을 두고 기존 유효성 검사와 config 초기화를 이어간다. 실패 로그는 actor/선택 tag를 포함한다. Locomotion의 config는 getter가 반환한 const 참조를 초기화 함수가 값으로 복사하며, 실행 중 DA 편집을 자동 추적하는 구조가 아니다.
+- header/reflection/tag 수정 후 Editor를 종료한 전체 빌드를 한다. 그 뒤 기존 `/Game/Data/PDA_AssetData`의 Data group에 정확한 Definition name/path/Preload label을 등록하고 `/Game/_Art/Kazan/Character/Bluprints/BP_KhazanPlayer` Class Defaults의 선택 tag를 지정한다. 기존 Definition asset/수치는 그대로 사용한다.
+- Preload 검증은 catalog/BP 저장 후 새 프로세스에서 한다. 에디터에서 DA를 먼저 열면 이미 메모리에 있는 객체를 false 조회가 찾을 수 있어 label 누락을 가릴 수 있다. false 조회의 성공 자체가 Preload membership을 증명하지는 않는다.
+- Player runtime Definition 참조, 초기화 실패 로그, CMC의 gait별 MaxWalkSpeed 및 config 적용, Walk/Run/Sprint/Stop, 입력 해제/반복 PIE를 확인한다. 미연결 Monster 오류는 Player의 합격 여부와 구분한다. 이 연결만으로 M2.2 전체 검증이 완료된 것은 아니다.
+- 초기화 순서를 모든 Pawn에 일반화하지 않는다. 설치된 UE 5.8 `Engine/Source/Runtime/Engine/Private/Pawn.cpp`에서 Player auto possession은 `PreInitializeComponents`, AI auto possession은 `PostInitializeComponents` 내부에서 발생할 수 있음을 소스로 확인했다. Definition/config 성공 후에도 intent 획득 실패가 남으면 실제 spawn/auto-possession 경로와 호출 순서를 확인한다. 이번에는 관련 게임 코드를 수정하거나 runtime 호출 순서를 검증하지 않았다.
+- 이번 검증은 현재 소스/설정/기존 기록 및 해당 엔진 소스의 읽기 전용 대조다. 직전 복원본의 빌드/시작 성공을 위 미적용 제안의 빌드/PIE 성공으로 기록하지 않는다.
+

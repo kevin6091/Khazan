@@ -54,7 +54,11 @@ template <typename AssetType>
 AssetType* UKhazanAssetManager::GetAssetByName(const FGameplayTag& AssetName)
 {
 	UKhazanAssetData* AssetData = Get().LoadedAssetData;
-	check(AssetData);
+	if (!AssetData)
+	{
+		UE_LOG(LogDefault, Error, TEXT("AssetData is not loaded."));
+		return nullptr;
+	}
 	
 	AssetType* LoadedAsset = nullptr;
 	const FSoftObjectPath& AssetPath = AssetData->GetAssetPathByName(AssetName);

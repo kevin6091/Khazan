@@ -240,3 +240,11 @@
 - [설명 완료/게임 미적용] [M2.2·M2.3 상세 가이드](CHARACTER_TAG_ABILITY_STEP_2.md#m2-2-m2-3-detailed-guide-20260909)에 CharacterDefinition, raw intent/resolved policy, intent·constraint handle, CMC 단일 작성자, Player 이관, Anim GT snapshot, Khazan CMC, AIController request ID, PathFollowing pause/resume, Monster/BT/NavMesh/시험 절차를 기록했다.
 - M2.2는 먼저 별도 전체 빌드/Player 검증을 거친다. 그 뒤 M2.3을 적용해 RequestPathMove/RequestDirectMove, 차단 중 새 MoveTo, A/B 중첩, abort/도착/실패, 다른 pause, 빙의/종료를 검증한다.
 - 이번 요청은 공동 구현 설명이므로 게임 Source/Build.cs/BP/asset에는 제안 코드를 직접 적용하지 않았다. M2.2/2.3은 사용자 적용·빌드·PIE 전이며 M2 전체와 M3도 미완료다.
+
+
+## 2026-09-11 AssetManager 과잉 보강 복원 후 상태
+
+- 이번만 직접 수정하라는 사용자 승인에 따라 AssetManager/AssetData와 연결된 Controller getter를 Git HEAD의 기존 설계로 복원하고 실제 오류 수정만 남겼다. `GetAssetByName`, 경로 API, FName cache를 다시 사용한다. 구현 계약은 [Source/BP/Config 문서](SOURCE_BP_CONFIG_ARCHITECTURE.md)의 같은 날짜 마지막 절을 따른다.
+- 최종 Development Editor 전체 빌드와 DevMap 새 프로세스 시작·종료는 통과했다. Python의 protected index 비교는 수행 불가였으며 실제 이동/Stop PIE는 아직 검증하지 않았다.
+- 다음은 M2.2의 Character Definition catalog 연결이다. 실제 `DA_CharacterDefinition_Khazan`은 존재하지만 Character는 여전히 직접 pointer 방식이며 selector/native tag/catalog/BP 연결은 이번에 구현하지 않았다. 시작 검사에서도 Player/Monster Definition 누락이 확인됐다.
+- 다음 사용자 적용 안내: [복원 후 Definition 연결 순서](CHARACTER_TAG_ABILITY_STEP_2.md#asset-manager-rollback-next-20260911). 다음 gameplay 코드/에셋을 어시스턴트가 직접 구현할 권한으로 확장하지 않는다.

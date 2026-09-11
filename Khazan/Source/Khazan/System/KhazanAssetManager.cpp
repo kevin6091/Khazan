@@ -52,7 +52,7 @@ void UKhazanAssetManager::LoadSyncByPath(const FSoftObjectPath& AssetPath)
 		}
 		else
 		{
-			UE_LOG(LogDefault, Fatal, TEXT("Failed to load asset [%s]"), *AssetPath.ToString());
+			UE_LOG(LogDefault, Error, TEXT("Failed to load asset [%s]"), *AssetPath.ToString());
 		}
 	}
 }
@@ -60,7 +60,11 @@ void UKhazanAssetManager::LoadSyncByPath(const FSoftObjectPath& AssetPath)
 void UKhazanAssetManager::LoadSyncByName(const FGameplayTag& AssetName)
 {
 	UKhazanAssetData* AssetData = Get().LoadedAssetData;
-	check(AssetData);
+	if (!AssetData)
+	{
+		UE_LOG(LogDefault, Error, TEXT("AssetData is not loaded."));
+		return;
+	}
 	
 	const FSoftObjectPath& AssetPath = AssetData->GetAssetPathByName(AssetName);
 	LoadSyncByPath(AssetPath);
@@ -75,35 +79,42 @@ void UKhazanAssetManager::LoadSyncByLabel(const FGameplayTag& Label)
 	}
 	
 	UKhazanAssetData* AssetData = Get().LoadedAssetData;
-	check(AssetData);
+	if (!AssetData)
+	{
+		UE_LOG(LogDefault, Error, TEXT("AssetData is not loaded."));
+		return;
+	}
 	
 	TArray<FSoftObjectPath> AssetPaths;
 	
-	const FAssetSet& AssetSet = AssetData->GetAssetSetByLabel(Label);
-	for (const FAssetEntry& AssetEntry : AssetSet.AssetEntries)
+	const FAssetSet* AssetSet = AssetData->GetAssetSetByLabel(Label);
+	if (!AssetSet)
+	{
+		return;
+	}
+	for (const FAssetEntry& AssetEntry : AssetSet->AssetEntries)
 	{
 		const FSoftObjectPath& AssetPath = AssetEntry.AssetPath;
-		LoadSyncByPath(AssetPath);
 		if (AssetPath.IsValid())
 		{
 			AssetPaths.Emplace(AssetPath);
 		}
 	}
 	
-	GetStreamableManager().RequestSyncLoad(AssetPaths);
+	TSharedPtr<FStreamableHandle> Handle = GetStreamableManager().RequestSyncLoad(AssetPaths);
 	
-	for (const FAssetEntry& AssetEntry : AssetSet.AssetEntries)
+	for (const FAssetEntry& AssetEntry : AssetSet->AssetEntries)
 	{
 		const FSoftObjectPath& AssetPath = AssetEntry.AssetPath;
 		if (AssetPath.IsValid())
 		{
 			if (UObject* LoadedAsset = AssetPath.ResolveObject())
 			{
-				Get().AddLoadedAsset(AssetEntry.AssetName.GetTagName(), LoadedAsset);
+				Get().AddLoadedAsset(AssetPath.GetAssetFName(), LoadedAsset);
 			}
 			else
 			{
-				UE_LOG(LogDefault, Fatal, TEXT("Failed to load asset [%s]"), *AssetPath.ToString());
+				UE_LOG(LogDefault, Error, TEXT("Failed to load asset [%s]"), *AssetPath.ToString());
 			}
 		}
 	}
@@ -130,21 +141,22 @@ void UKhazanAssetManager::ReleaseByName(const FName& AssetName)
 
 void UKhazanAssetManager::ReleaseByLabel(const FGameplayTag& Label)
 {
-	UKhazanAssetManager& AssetManager = Get();
-	UKhazanAssetData* LoadedAssetData = AssetManager.LoadedAssetData;
-	const FAssetSet& AssetSet = LoadedAssetData->GetAssetSetByLabel(Label);
-	
-	for (const FAssetEntry& AssetEntry : AssetSet.AssetEntries)
+	UKhazanAssetData* AssetData = Get().LoadedAssetData;
+	if (!AssetData)
 	{
-		const FGameplayTag& AssetName = AssetEntry.AssetName;
-		if (AssetManager.NameToLoadedAsset.Contains(AssetName.GetTagName()))
-		{
-			AssetManager.NameToLoadedAsset.Remove(AssetName.GetTagName());
-		}
-		else
-		{
-			UE_LOG(LogDefault, Warning, TEXT("Cant find loaded asset by assetName [%s]"), *AssetName.ToString());
-		}
+		UE_LOG(LogDefault, Error, TEXT("AssetData is not loaded."));
+		return;
+	}
+
+	const FAssetSet* AssetSet = AssetData->GetAssetSetByLabel(Label);
+	if (!AssetSet)
+	{
+		return;
+	}
+
+	for (const FAssetEntry& AssetEntry : AssetSet->AssetEntries)
+	{
+		ReleaseByPath(AssetEntry.AssetPath);
 	}
 }
 
@@ -174,7 +186,7 @@ void UKhazanAssetManager::LoadPreloadAssets()
 	}
 	else
 	{
-		UE_LOG(LogDefault, Fatal, TEXT("Failed to load AssetData asset type [%s]"), *PrimaryAssetType.ToString());
+		UE_LOG(LogDefault, Error, TEXT("Failed to load AssetData asset type [%s]"), *PrimaryAssetType.ToString());
 	}
 }
 

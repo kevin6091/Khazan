@@ -233,7 +233,6 @@ bool UKhazanLocomotionComponent::ClearMoveInput(const FKhazanLocomotionIntentHan
 	}
 
 	// 방향과 입력 세기만 지운다.
-	// TargetGait와 RequestedRotationMode는 이 함수의 책임이 아니다.
 	Intent.MoveInputWorld = FVector::ZeroVector;
 	Intent.InputAmount = 0.f;
 
@@ -261,7 +260,7 @@ bool UKhazanLocomotionComponent::SetRequestedGait(const FKhazanLocomotionIntentH
 	// Constraint가 허용하는 최종 gait와는 다르다.
 	Intent.RequestedGait = Gait;
 
-	// TargetGait가 달라지면 ResolvedGait와 MaxWalkSpeed가 달라질 수 있다.
+	// RequestedGait가 달라지면 ResolvedGait와 MaxWalkSpeed가 달라질 수 있다.
 	RebuildAndApplyMovementPolicy();
 
 	return true;

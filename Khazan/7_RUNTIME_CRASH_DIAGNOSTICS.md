@@ -40,7 +40,8 @@
 
 ### 후속 위험과 하드닝 대상
 
-- `UKhazanAssetData::GetAssetPathByName()`과 `GetAssetSetByLabel()`은 `ensureAlwaysMsgf` 실패 뒤 null 포인터를 역참조한다. 실패 시 빈 값 또는 nullable 결과를 반환하도록 바꿔야 한다.
+- `UKhazanAssetData::
+- GetAssetPathByName()`과 `GetAssetSetByLabel()`은 `ensureAlwaysMsgf` 실패 뒤 null 포인터를 역참조한다. 실패 시 빈 값 또는 nullable 결과를 반환하도록 바꿔야 한다.
 - `LoadPreloadAssets()`의 `LoadPrimaryAssetsWithType(...)->GetLoadedAsset()`은 타입에 여러 Primary Asset이 생기면 모호하다. 명시적인 PrimaryAssetId 또는 `GetPrimaryAssetObject()` 기반으로 고정하는 편이 안전하다.
 - `SetupInputComponent()`는 EnhancedInputComponent와 두 InputAction의 유효성을, `BeginPlay()`는 LocalPlayer와 MappingContext를, `Input_Move()`는 Pawn을 검사해야 한다.
 
