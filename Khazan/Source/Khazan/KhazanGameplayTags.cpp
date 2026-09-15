@@ -14,6 +14,7 @@ namespace KhazanGameplayTags
 	
 	// AssetData Tags
 	UE_DEFINE_GAMEPLAY_TAG(AssetData_InputData, "AssetData.InputData");
+	UE_DEFINE_GAMEPLAY_TAG(AssetData_CharacterDefinition_Khazan, "AssetData.CharacterDefinition.Khazan");
 	
 	// AssetLabel Tags
 	UE_DEFINE_GAMEPLAY_TAG(AssetLabel_Preload, "AssetLabel.Preload");

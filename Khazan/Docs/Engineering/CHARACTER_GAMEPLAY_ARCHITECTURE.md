@@ -1130,3 +1130,448 @@ CombatResponse는 새로운 전체 액션 관리자가 아니다. 이동·타격
 - [cache 대칭] 기존 path load의 `AssetPath.GetAssetFName()`을 공통 보관 key로 유지한다. label load의 개별 선행 load를 제거하고 batch load 뒤 같은 path key로만 보관한다. label release도 `ReleaseByPath()`로 동일 key를 지운다. tag명과 파일명으로 한 번의 label load가 두 cache 항목을 만들던 오류만 바로잡는다. 서로 다른 경로의 같은 leaf name 구분과 원인별 참조계수는 기존 설계의 범위 밖이며 이번에 새 체계를 만들지 않는다.
 - [ARCH-17 경계] 기존 입력 소비의 lazy load 복원은 새 Character Definition의 준비 실패를 숨겨도 된다는 뜻이 아니다. 다음 Definition 연결에서 preload 완료/필수 데이터 준비 실패를 실제 소비 경계에서 검증한다. `GetAssetByName()` 호출 성공만으로 preload 성공이나 GameplayReady를 판정하지 않는다.
 - [적용/검증] 이 절은 복원 전에 확정한 범위다. 실제 변경 및 빌드/실행 결과는 Engineering 현행/진단 문서에 별도 기록한다. 새로운 gameplay 수치, Character/Locomotion/Anim/GAS/에셋 변경은 이번 직접 구현 범위에 없다.
+
+
+<a id="player-first-combat-architecture-20260915"></a>
+## 2026-09-15 — v2.1 Player 우선 전투 제어 재정립 (ARCH-20–29)
+
+### 결정의 범위와 기존 v2와의 관계
+
+현재 Player는 공통 ASC 연결과 Player 이동 정책까지만 실제 검증됐고, 공격 요청·비용·피해 결과·피격 반응·콤보 수명은 아직 없다. 이 상태에서 AIController와 Behavior Tree부터 만들면 검증되는 것은 목적지 이동뿐이며, AI가 나중에 사용할 공통 액션 승인 계약은 검증할 수 없다. 공격을 임시 함수나 Montage 직접 재생으로 우회하면 Player 액션 기반을 만든 뒤 AI를 다시 이관해야 한다. 따라서 **M2.3 AIController 선행 구현을 보류하고 Player 전투 수직 절편을 먼저 만든다.**
+
+- v2의 ASC 태그/GameplayEffect 상태 원본, Ability/Task 실행 수명, LocomotionComponent 이동 정책, CombatResponse 결과 처리, Main/Linked Layer 표현 분리는 유지한다.
+- 이 절은 v2의 구현 순서만 Player 우선으로 고치고, 빠른 액션 전투에 필요한 실행 중재·콤보·방어 결과·SprintPivot 계약을 구체화한다.
+- V2-02의 AI 생성 시점, V2-08의 `M2 AI → M3 전투` 순서, 기존 Migration의 M2.3 이후 순서는 충돌 범위에서 이 절과 최신 Player 우선 Migration이 대체한다. 과거 M2.3 설계는 미래 A1 검토 자료로만 보존한다.
+- ARCH-12의 Player/일반 적 공통 검증은 최종 공통 계약의 합격 조건이다. 각 공통 타입의 첫 소비를 반드시 AI에서 동시에 구현하라는 뜻으로 사용하지 않는다. Player와 무판단 시험 대상에서 계약을 먼저 고정한 뒤 AI를 두 번째 요청 어댑터로 연결할 수 있다.
+- 이번 결정은 설계 문서와 마이그레이션 변경이다. Source, BP, DataAsset, 애니메이션 에셋을 수정하거나 빌드·PIE를 새로 수행한 결과가 아니다.
+
+### ARCH-20–29 결정표
+
+| ID | 채택 결정 | 이유와 적용 범위 |
+| --- | --- | --- |
+| ARCH-20 | Player 액션·자원·전투 결과를 먼저 수직 검증하고 AIController 구현은 뒤로 이동한다. | 현재 AI가 호출할 공통 액션 계약이 없으므로 이동 전용 AI를 먼저 만들면 전투 AI 이관 비용이 생긴다. 완료된 M1/M2.1/M2.2는 유지한다. |
+| ARCH-21 | Player 상태는 하나의 거대 enum/HFSM이 아니라 서로 독립적인 사실의 소유자로 나눈다. | 공격·무적·공중·콤보 창·스태미나 상태는 동시에 존재할 수 있다. ASC, Ability, AttributeSet, CMC, Locomotion, Anim이 자기 사실만 쓴다. |
+| ARCH-22 | 공통 ASC가 일반 액션 요청과 하나의 전신 액션 실행 lane을 중재하고, Ability는 자기 실행 ID와 국소 phase를 소유한다. | 공격·회피·패링·피격·사망의 동시 실행과 교체를 한 경로에서 판정하되 passive/독립 Ability까지 직렬화하지 않는다. |
+| ARCH-23 | PlayerController와 미래 AIController는 서로 다른 의도 생성자이며 같은 공통 요청/승인 결과를 소비한다. | Player는 장치 입력을 의미 입력으로 바꾸고, AI는 전술적 Action을 선택한다. AI가 Player 입력 태그를 흉내 내거나 양쪽이 Montage를 직접 재생하지 않는다. |
+| ARCH-24 | 콤보 실행 문맥과 해금 원본을 분리한다. | 활성 Combo Ability가 현재 node·창·buffer를 소유하고, 영속 Progression/Save가 해금 사실을 소유한다. 읽기 전용 Combo Definition은 가능한 edge와 요구 조건만 정의한다. |
+| ARCH-25 | HP/Stamina/Poise는 AttributeSet/GameplayEffect 경로만 쓰고, 행동 불가 여부는 각 Ability 비용/요구 조건과 이동 정책이 판정한다. | `bCanAct`나 Character의 복제 float 하나로 공격·회피·Sprint를 함께 막지 않는다. 비용 실패는 기존 실행을 취소하지 않는다. |
+| ARCH-26 | 타격 후보와 방어 판정과 최종 결과를 분리하고, 패링/튕김은 실행 ID가 있는 CombatResult로 양쪽에 전달한다. | 대상이 방어 성공을 확정하기 전에 피해를 적용하거나 Player가 Monster 구체 타입을 직접 경직시키지 않는다. |
+| ARCH-27 | SprintPivot은 LocomotionComponent가 소유하는 짧은 이동 maneuver이고 별도 GameplayAbility로 중복 구현하지 않는다. | 입력을 유지한 큰 방향 반전은 일반 입력 해제 Stop과 다르다. 액션 승인 경로는 활성 Pivot을 명시적으로 중단할 수 있고 Linked Locomotion Layer는 포즈만 재생한다. |
+| ARCH-28 | 공중 여부는 CMC의 물리 사실, 추락 결과는 gameplay 결과, 사망은 Pawn 수명의 Effect, 부활/리스폰은 외부 수명으로 분리한다. | `bIsFalling`, `bDead`, Death Montage 종료, 새 Pawn 생성이 하나의 상태 전이로 섞이지 않게 한다. |
+| ARCH-29 | 미래 AI는 인지·전술 선택·이동 요청만 AI 계층에 두고, 비용·취소·콤보·피격·사망 실행은 Player와 같은 공통 계층을 사용한다. | Behavior Tree/StateTree 선택은 콘텐츠 요구가 생길 때 결정한다. BT Task는 요청/실행 ID를 기다리고 자신이 만든 요청만 Abort한다. |
+
+### Player 상태의 실제 소유자
+
+| 사실 | 작성자 | 소비자와 종료 규칙 |
+| --- | --- | --- |
+| 장치 입력, 입력 phase, 카메라 기준 방향 | `AKhazanPlayerController`와 Player 입력 어댑터 | Locomotion 또는 공통 ActionRequest로 즉시 전달. Completed/Canceled/UnPossessed에서 자기 입력만 정리 |
+| Gameplay 준비, Dead, Stun, Invincible, SuperArmor, 입력 차단 | ASC에 적용된 Ability/GameplayEffect의 태그 기여 | 요청 승인, CombatResponse, Locomotion, UI가 읽는다. 원인별 Effect/실행 수명으로 제거 |
+| HP, Stamina, Poise | AttributeSet과 GameplayEffect/Calculation | Ability 비용, 전투 결과, UI가 읽는다. Character float로 복제하지 않음 |
+| 현재 전신 액션 | 활성 GameplayAbility + 공통 ASC의 exclusive lane | Spec/실행 ID로 식별. 정상·취소·실패·사망·EndPlay에서 해당 실행 자원만 정리 |
+| 공격 한 실행의 현재 combo node, 입력 buffer, hit/window 문맥 | 활성 Combo/Attack Ability | 같은 실행의 Notify/Task/관계 해석이 소비. Ability 종료 때 전부 폐기 |
+| 해금된 스킬과 영속 진행 | Progression/Save 계층 | Pawn 준비 시 Ability grant 또는 해금 태그로 투영. 새 Pawn에도 다시 적용하며 Combo Ability가 Save를 직접 읽지 않음 |
+| raw 이동 의도, gait/회전 해결, 이동 제약, SprintPivot maneuver | LocomotionComponent | CMC와 Anim snapshot이 소비. source/constraint/maneuver별 handle 또는 세대 ID로 중단·정리 |
+| 위치, 속도, 바닥, Falling | CMC/엔진 물리 | gameplay와 animation이 관측. gameplay 소비가 실제 생길 때만 ASC tag로 edge를 투영하며 CMC 원본을 대체하지 않음 |
+| loop/Stop/Pivot pose와 Stop 발 이력 | Main snapshot을 받는 Locomotion Linked Layer | pose 선택에만 사용. 공격 허가·피해·사망의 원본이 아님 |
+| AI 감지 대상, 거리 판단, 다음 행동 후보 | 미래 AIController/Brain | 공통 이동·ActionRequest를 만들고 결과/실행 ID를 기다린 뒤 폐기 |
+
+`EPlayerState` 하나로 위 행을 합치지 않는다. Ability 내부의 `Startup/Active/Recovery` 같은 국소 phase enum, Locomotion의 `None/SprintPivot` 같은 배타 maneuver enum, CMC MovementMode는 각각 자기 수명 안에서 사용할 수 있다. 이것들은 전체 gameplay 상태를 서로 덮는 두 번째 원본이 아니다.
+
+### 공통 ActionRequest와 전신 액션 lane
+
+1. PlayerController는 `Input.Action.Attack` 같은 의미와 Started/Completed/Canceled phase를 보낸다. 연속 호출이 필요하지 않은 공격을 매 frame `Triggered`로 제출하지 않는다. 미래 AI는 물리 입력을 만들지 않고 `Action.Attack.*`처럼 선택한 gameplay action을 요청한다.
+2. 공통 ASC는 요청 ID를 발급하고 Ready, Dead/Stun/Block, Ability grant, 관계, 현재 취소 창, 필수 target/resource, 비용 가능성을 사전 검사한다. 결과는 최소한 실행됨, 실행 중 buffer로 인수됨, 거절됨과 구체 이유, 관련 실행 ID를 구분한다.
+3. 전신 액션 lane은 공격·회피·패링·피격·사망처럼 pose와 이동을 함께 점유하는 실행을 한 번에 하나만 승인한다. 재생과 무관한 passive, resource regen, 관측 Ability는 독립 실행할 수 있다. 어떤 Ability가 lane을 점유하는지는 Ability metadata/관계가 정하며 Character enum이 정하지 않는다.
+4. 후보가 실패했을 때 기존 액션을 먼저 취소하지 않는다. 전환 중재는 후보의 사전 승인과 lane 예약, 실제 활성화/비용 Commit, 기존 replaceable 실행 취소의 경계를 추적해야 한다. 새 실행이 montage·hit window·이동 제약을 노출하기 전에 실패 cleanup이 가능한 상태여야 한다.
+5. HitReact/Death 같은 내부 반응 요청은 일반 입력 차단을 우회할 수 있지만 임의 `force` bool로 모든 검사를 생략하지 않는다. 유효한 CombatResult, 대상 Pawn, 원인 실행 ID를 확인하고 관계표에 정의된 취소만 수행한다.
+6. 공통 입력 buffer와 Combo buffer를 섞지 않는다. Combo Ability의 다음 타 입력은 해당 실행이 소유한다. 공격 recovery 중 Dodge처럼 서로 다른 Ability 사이의 queue가 실제 필요해지는 단계에서만 ASC가 만료 시각·우선순위·원 요청 ID가 있는 소수의 pending request를 소유한다.
+
+첫 구현에서 `UKhazanAbilitySystemComponent`, Ability base, Ability grant/input mapping은 실제 Basic Attack 소비와 함께 만든다. 별도 Action Manager, Combo Manager, Player State Machine, 미사용 Relationship/Definition 타입을 한꺼번에 생성하지 않는다. 두 액션 사이의 관계 또는 같은 실행 클래스의 데이터 변형이라는 소비가 생기는 순간에 해당 데이터 타입을 추가한다.
+
+### 콤보와 스킬 해금 계약
+
+- 기본 연속 공격은 한 Combo Ability 실행이 여러 node를 진행하는 구조를 우선한다. 현재 node, 입력 buffer, 유효 window, 이미 소비한 입력, 실행 ID는 그 Ability 인스턴스의 mutable 상태다.
+- Combo Definition은 node가 사용할 Action/Montage section과 edge의 입력 의미, 필요 해금, 상태 조건, 다음 node만 보관하는 읽기 전용 그래프다. 런타임 index나 `bComboQueued`를 DataAsset에 저장하지 않는다.
+- Progression/Save가 해금 사실의 원본이다. Pawn 초기화는 해금 결과를 Ability grant 또는 `Unlock.*` 태그로 ASC에 투영하고 source grant handle을 기록한다. Combo edge는 이 투영만 읽는다.
+- 비용·쿨다운·타깃 방식·실행 구조가 독립적인 Skill/Finisher는 별도 Ability다. Combo edge가 그 Ability를 공통 ASC에 요청하고 승인된 경우에만 현재 Combo 실행에서 전환한다. 그래프가 직접 비용을 차감하거나 Montage를 재생하지 않는다.
+- 전신 액션 간 block/cancel은 Action Relationship 계약, 한 Combo 실행 안의 node 연결은 Combo Definition이 맡는다. 하나의 거대 관계 DataAsset에 두 의미를 섞지 않는다.
+- 해금되지 않은 edge, 비용 부족, window 종료, target 소멸은 서로 다른 거절 결과다. 실패한 branch 때문에 이미 진행 중인 합법적인 공격을 임의로 취소하지 않는다.
+
+### Stamina와 행동 제한 계약
+
+- Attack/Dodge/Parry/Skill의 비용은 Ability cost/GameplayEffect로 Commit한다. UI 사전 표시는 예상값이며 실제 승인 원본이 아니다.
+- Stamina가 부족하면 해당 새 요청만 거절한다. 같은 순간 진행 중인 다른 액션, 다른 원인의 이동 제약, regen Effect를 일괄 제거하지 않는다.
+- Sprint 요청 자체는 현재처럼 Locomotion intent다. Sprint 중 drain과 부족 시 Run 이하 제한을 연결할 때 Locomotion은 Stamina 값을 직접 쓰지 않는다. 실제 소비 단계에서 resolved Sprint의 진입/이탈을 관측하는 하나의 source-owned gameplay 실행이 drain Effect와 gait constraint를 취득·해제하고, 해제·빙의 종료·사망에서 자기 handle만 정리한다.
+- regen 지연, drain 주기, 각 행동 비용, 최소 잔량은 원작 metadata 직접값·원작 기반 계산값·임시 튜닝값으로 구분해 Character/Action 데이터에 모은다. 현재 문서에서는 gameplay 숫자를 확정하지 않는다.
+
+### 타격, 패링, 튕김, 피격과 사망
+
+1. Attack Ability가 실행 ID와 hit window ID를 가진 창을 열고, Combat 계층이 socket의 이전/현재 pose를 이용해 타격 후보를 만든다.
+2. 대상의 방어 해석 경계가 Invincible, Dodge window, Guard/Parry window, 공격 속성, 방향/각도 조건과 중복 HitId를 검사한다.
+3. 그 뒤 하나의 `CombatResult`를 확정한다. 결과는 피해, 방어, 패링 성공, 공격 튕김, Poise 반응, 사망 여부와 source/target/request/execution/window/hit 식별자를 구분한다.
+4. 피해가 확정된 경우만 EffectSpec을 적용한다. 패링 성공이면 방어자에게 성공 결과를, 공격자에게 Deflected 반응 결과를 보내며, 방어자가 Monster 클래스를 cast해 몽타주나 상태를 직접 바꾸지 않는다.
+5. CombatResponse는 결과를 받아 HitReact/Deflected/Death Ability를 요청한다. Death는 다른 반응보다 우선하고 Pawn 수명의 Dead Effect를 먼저 남긴다. Cue와 진동은 확정 결과를 받은 뒤 재생한다.
+
+Parry window와 Invincible window는 활성 Ability 실행에 묶인 별도 기여다. Anim Notify State는 창의 시작/끝 신호를 전달할 수 있지만 최종 소유자는 Ability/Task이며 Notify End가 누락돼도 Cancel/EndPlay cleanup이 가능해야 한다.
+
+### SprintPivot의 gameplay·이동·표현 경계
+
+SprintPivot은 Sprint 입력을 놓아 생기는 일반 Stop이 아니다. **Sprint가 계속 요청되는 동안 현재 평면 이동 방향과 새 raw 입력 방향 사이에 큰 반전이 생겼을 때**, 현재 Sprint를 짧게 제동하고 반대 방향으로 다시 Sprint하는 Locomotion maneuver다.
+
+- 판정 입력은 이전의 유효한 평면 이동/진행 방향과 새 `MoveInputWorld`다. 기존 `MovementDirectionAngle`은 Actor 정면 대비 속도 방향의 애니메이션 관측값이므로 Pivot trigger로 재사용하지 않는다.
+- 진입 조건은 grounded, resolved Sprint, 유효한 raw 입력과 평면 속도, 활성 Pivot 없음, 더 높은 우선순위의 전신 액션/이동 차단 없음이다. 정확한 방향각 임계값·최소 속도·제동 시간·회전 속도·재생 구간은 원작 metadata를 우선 확인하고, 없으면 `SprintPivotConfig` 같은 한 설정 영역의 명시적 임시값으로 둔다.
+- 진입 시 LocomotionComponent가 maneuver 종류, 세대 ID, 진입 방향, 목표 방향과 자기 이동 제약/구동 handle을 소유한다. 목표 방향은 한 실행 동안 고정하고 raw 입력은 계속 최신값으로 기록한다. 중첩 Pivot을 시작하지 않는다.
+- Locomotion Linked Layer는 snapshot의 maneuver를 보고 Sprint Stop 계열 포즈의 필요한 짧은 구간을 재생한다. 현재 root-locked Stop/CMC 이동 경계는 유지하며 ABP가 gameplay maneuver의 완료 원본이나 공격 승인자가 되지 않는다.
+- 완료 시 자기 제약만 해제하고 최신 raw 입력과 현재 Stamina/태그 정책을 다시 해결한다. 입력이 여전히 유효하고 Sprint가 허용되면 새 방향 Sprint로 복귀하고, 입력이 해제됐으면 일반 Stop/Idle 규칙으로 간다.
+- Attack/Dodge/Parry 승인, HitReact/Death, Falling, UnPossess/EndPlay는 활성 maneuver 세대가 맞을 때 Pivot을 중단하고 자기 handle을 정리한다. 늦은 animation callback은 새 Pivot이나 새 Pawn을 끝내지 못한다.
+
+따라서 Pivot은 공통 액션 승인과 피격 취소 계약이 생긴 뒤 구현한다. 먼저 Pivot bool과 Anim 전이를 추가하면 공격/피격이 들어온 뒤 Locomotion과 Ability 중 누가 회전·제동·종료를 소유하는지 다시 고쳐야 한다.
+
+### 추락, 사망, 부활/리스폰
+
+- CMC MovementMode와 물리 속도가 공중 여부의 원본이다. grounded 전용 Ability가 필요해질 때 movement mode edge를 ASC tag/이벤트로 투영할 수 있지만 매 frame 다른 bool을 독립 작성하지 않는다.
+- 추락 높이/낙하 속도/착지 표면으로 결과를 계산하는 소비가 생기면 fall 시작과 impact context를 한 실행이 보관하고, 착지에서 환경 `CombatResult` 또는 전용 consequence를 확정한다. 단순 Falling pose를 위해 피해 Ability를 항상 실행하지 않는다.
+- 사망은 CombatResponse가 확정하고 Dead Effect가 Pawn 수명 동안 유지된다. Death Ability는 입력/이동 정리와 연출 수명만 소유한다.
+- 체크포인트 리스폰은 Encounter/Checkpoint/Progression이 새 Pawn을 만들고 Definition, Attribute, AbilitySet, 해금을 다시 적용하는 외부 수명이다. 전투 중 제자리 부활이 실제 게임 기능으로 필요하면 Dead를 제거할 권한과 비용을 가진 별도 Resurrection Ability/Effect로 설계하며 Death Montage 종료와 혼동하지 않는다.
+
+### 미래 AI Monster 구조
+
+- AIController/Brain은 감지 결과와 전술 기억을 소유하고 접근, 거리 유지, 공격 후보, 방어 후보를 선택한다. 캐릭터의 HP/Stamina/현재 액션 원본을 복제하지 않는다.
+- PathFollowing은 원거리 접근과 일반 이동 intent를 Locomotion에 전달한다. 근접 공격의 최종 정렬, 회전 고정, Motion Warping, hit window는 승인된 Ability 실행이 소유한다.
+- AI의 BT/StateTree Task는 ActionRequest 결과와 실행 ID를 기다린다. Abort 시 자기 request/execution만 취소하며 `StopAllMontages`, 전체 태그 제거, 전체 Ability 취소로 정리하지 않는다.
+- Player와 AI가 공유하는 것은 ASC 승인, Ability/Effect, CombatResult, Locomotion constraint, Action/Character data다. 입력 mapping, 카메라, perception, 전술 점수, path 목적지는 공유 대상이 아니다.
+- AI 프레임워크를 Behavior Tree, StateTree, Utility 조합 중 무엇으로 정할지는 실제 Monster 한 종의 패턴·거리·협동/예약 요구를 정리한 뒤 A1/A2에서 결정한다. 현재는 AIController, custom CMC, Blackboard, BT 시험 에셋을 만들지 않는다.
+
+### 현재 소스의 판정과 수정 시점
+
+| 현재 영역 | 판정 | 다음 변경 시점 |
+| --- | --- | --- |
+| `AKhazanCharacter`의 엔진 ASC, `IAbilitySystemInterface`, LocomotionComponent, Definition selector | 공통 조립 위치로 유지한다. 거대 Player 상태를 추가하지 않는다. | P1에서 실제 요청 중재 소비와 함께 concrete ASC를 `UKhazanAbilitySystemComponent`로 바꾸고 기존 subobject 이름/기반형 reflected 계약을 보존 |
+| `AKhazanPlayerController`의 Enhanced Input binding | 장치 입력 어댑터 책임은 맞다. 현재 Attack은 비어 있고 Jump는 `Character::Jump()` 및 시험 진동을 직접 호출한다. | P1에서 Attack/Jump를 공통 요청으로 이관하고 진동은 확정 Cue/결과 경로로 이동 또는 테스트 잔재 제거 |
+| `AKhazanPlayer`의 이동 입력 변환과 Sprint toggle | 현재 책임에 맞으며 M2.2 검증 결과를 보존한다. 공격·콤보·피격 bool을 추가하지 않는다. | Stamina/Pivot 소비가 생길 때 공개된 Locomotion 계약만 확장 |
+| `UKhazanLocomotionComponent`의 intent, constraint, resolved policy | 유지한다. 현재 Player 경로의 단일 CMC 정책 작성자는 적절하다. | Sprint resource 소비 시 gait edge, P5에서 maneuver 수명 추가. AI path gate용 custom CMC는 A1까지 보류 |
+| `UKhazanCharacterDefinitionData`의 LocomotionConfig | 읽기 전용 정의와 catalog 선택 계약을 유지한다. | P1부터 실제 소비가 생긴 AbilitySet/초기 속성/표현 참조만 단계별 추가. 미래 AI 설정을 지금 빈 필드로 넣지 않음 |
+| `AKhazanMonster` 빈 공통 Character shell | 미래 공통 대상 기반으로 보존한다. | P3의 무판단 전투 시험 대상에는 사용할 수 있으나 AIController/BT는 연결하지 않음 |
+| Main AnimInstance의 현재 loop/Stop | 현재 동작을 보존하고 gameplay 상태 저장소로 확장하지 않는다. | P4에서 기존 pose/Stop 이력을 Locomotion Linked Layer로 옮긴 뒤 P5 SprintPivot 포즈를 그 영역에 추가 |
+
+빈 `BeginPlay`/`Tick`의 정리는 기능 경계가 안정된 뒤 할 수 있는 소규모 정리이며 Player 전투 기반의 선행 조건이 아니다. 현재 변경 대상 목록을 늘리기 위해 별도 리팩터링 단계로 만들지 않는다.
+
+
+## 2026-09-15 — ARCH-04/20/27/29: Khazan CMC 생성 조건 확정
+
+- [판정] 이전 M2.3의 `UKhazanCharacterMovementComponent : UCharacterMovementComponent` 방향과 inherited default subobject 교체 방식은 유효하다. 정확한 구조는 CMC를 감싸는 별도 wrapper component가 아니라 엔진 CMC의 project subclass다.
+- [엔진 근거] 로컬 UE 5.8.2에서 `UCharacterMovementComponent::RequestPathMove`와 `RequestDirectMove`는 virtual이고 PathFollowing이 acceleration 설정에 따라 둘 중 하나를 호출한다. `ACharacter`는 `CharacterMovementComponentName`으로 기본 CMC를 생성하며 `FObjectInitializer::SetDefaultSubobjectClass`는 base class가 정의한 subobject class를 파생형으로 바꾸는 API다.
+- [현재 생성 여부] P1 ActionRequest, P2 Attribute/Stamina, P3 CombatResult에는 custom CMC가 필요하지 않다. P4 표현 분리도 CMC subclass의 소비자가 아니다. 미래 사용 가능성만으로 빈 subclass를 지금 생성하지 않는다.
+- [P5 조건] SprintPivot은 우선 LocomotionComponent의 maneuver와 기존 CMC 공개 API로 구현한다. 같은 frame의 자동 회전/가속 요청 경쟁, 별도 movement mode, low-level velocity 적분처럼 base CMC 외부에서 정확히 중재할 수 없는 실제 문제가 확인될 때만 P5에서 생성 시점을 앞당긴다.
+- [A1 조건] AI PathFollowing은 Player의 입력 어댑터를 거치지 않고 CMC의 두 navigation request 함수로 들어온다. `Block.Movement.Input` 중에도 raw AI intent를 보존하면서 engine 요청은 마지막 경계에서 차단해야 하고 Controller pause만으로 직접 navigation request 우회를 막을 수 없다면 A1에서 custom CMC가 정당한 실제 소비자를 갖는다. 현재 목표 구조에서는 이 가능성이 높지만 A1 진입 검증 전의 무조건 필수 파일로 취급하지 않는다.
+- [책임 제한] custom CMC를 만들면 navigation/물리 엔진 경계의 얇은 adapter로 둔다. LocomotionComponent가 계속 intent·gait·회전·constraint·maneuver 정책의 작성자이고, CMC는 승인된 값을 실행하거나 engine request를 전달/거절한다. CMC에 Ability 상태, Stamina, combo, AI 전술, path request ID를 소유시키지 않는다.
+- [교체 방식] `AKhazanCharacter`의 `FObjectInitializer` initializer list에서 `ACharacter::CharacterMovementComponentName`의 class를 교체한다. 같은 이름 또는 다른 이름의 두 번째 movement component를 `CreateDefaultSubobject`로 추가하지 않는다. 기존 `GetCharacterMovement()` base pointer와 Locomotion 호출은 다형성을 통해 계속 동작한다.
+- [별도 수명 문제] AI 자동 빙의 전에 Definition/ASC/Locomotion이 준비되는지에 따른 `PostInitializeComponents()` 순서 변경은 CMC subclass 교체와 별도 결정이다. A1의 실제 spawn/possess 호출 순서를 확인한 뒤 필요한 경우에만 적용한다.
+- [재검토 대상] 과거 M2.3 코드의 두 override, pending request 정리, navigation intent handle 전달 설계는 A1의 시작점으로 유효하지만 확정 구현은 아니다. P1–P8에서 추가된 Ready/Dead/action/maneuver 계약과 당시 UE 소스를 다시 대조하고 표적 테스트한 뒤 채택한다.
+- [적용 상태] 이번 확인에서는 Source/BP/CDO를 변경하거나 빌드·PIE를 수행하지 않았다. 현재 `AKhazanCharacter`는 엔진 기본 `UCharacterMovementComponent`를 계속 사용한다.
+
+
+<a id="statetree-gas-p1-review-20260915"></a>
+## 2026-09-15 — StateTree·GAS·입력 버퍼 대조 검토와 P1 단순화 제안
+
+### 검토 상태
+
+- 이 절은 사용자가 제시한 `StateTree + GAS 태그 관계 + Input Buffer/AnimNotify` 구성을 UE 5.8 공식 문서, 공식 Lyra 사례, 로컬 UE 5.8.2 API, 현재 P1 실습판과 대조한 **아키텍처 검토 결과**다.
+- 게임 Source/BP/DataAsset/Animation asset은 변경하지 않았다. 아래 단순화안은 기존 ARCH-22와 P1 계약을 바꾸는 **채택 전 제안**이며, 사용자가 방향을 결정하기 전에는 새 정본으로 간주하지 않는다.
+- 기존 P1-A 소스 적용은 이 재검토가 끝날 때까지 보류한다. 현재 P1 소스는 아직 적용되지 않았으므로 이관 비용은 문서 수정뿐이다.
+
+### 공식성에 대한 판정
+
+1. StateTree는 에픽이 제공하는 범용 계층형 상태 머신이며 일반 Actor에 붙일 수 있다. 그러나 확인한 공식 문서는 StateTree를 Player 액션 RPG나 콤보의 최상위 제어기로 권장하거나 `공신력 1위`로 순위를 매기지 않는다. 일반 Actor 지원과 Player 전투의 공식 표준이라는 주장은 구분한다.
+2. GAS는 Ability의 활성화 조건·비용·취소·종료, 태그 기반 block/cancel/required 관계, 비동기 AbilityTask, 입력과 몽타주 실행 수명을 직접 지원한다. 공식 Lyra도 Jump·Dash·Melee 같은 Player 액션을 GAS로 실행하고 Input Tag, AbilitySet grant handle, Tag Relationship Mapping, Activation Policy/Group을 추가한다.
+3. 애니메이션 타이밍에 맞춘 입력 버퍼는 액션 게임에 유용한 프로젝트 기능이지만, 고정 `0.2~0.3초` 큐 컴포넌트가 에픽의 필수 공식 하위 시스템이라는 근거는 확인하지 못했다. 그 숫자는 원작 metadata 직접값도 아니므로 채택하지 않는다.
+
+### 현재 v2에서 유지할 책임
+
+- ARCH-02/03의 ASC 태그·Effect가 공유 gameplay 상태를, 활성 GameplayAbility/Task가 액션 실행 수명을 소유한다는 경계는 유지 가치가 높다.
+- ARCH-04의 LocomotionComponent → CMC 이동 정책, Presentation/AI/CombatResult/GameplayCue의 책임 분리, Main AnimInstance를 gameplay 상태 저장소로 쓰지 않는 계약도 유지한다.
+- Player와 AI가 같은 Ability 실행 경로를 공유한다는 ARCH-23/29의 목표는 유지한다. 공유해야 하는 것은 입력 장치 모양이 아니라 Ability 활성화와 결과 계약이다.
+- StateTree를 Player 액션의 두 번째 권위자로 추가하지 않는다. `Grounded`, `Attack`, `ComboBranch`, `HitReact`를 트리 상태로 다시 소유하면 CMC·ASC 태그·활성 Ability에 이미 존재하는 사실과 수명이 중복된다.
+
+### 과도한 P1 영역
+
+현재 P1 실습판은 최소 수직 절편 안에 다음을 동시에 도입한다.
+
+- `Input.*`, `Action.*`, `Ability.*`의 세 겹 식별
+- `FKhazanActionRequest/Result`와 다수의 별도 C++ 실패 enum
+- Request ID와 Execution ID의 이중 번호
+- 활성 입력 요청, 활성 실행, pending activation handshake의 여러 원장
+- 단일 ActionRequest source 등록과 Player 입력 어댑터에 결합된 `State.Ready.Gameplay`
+- 자체 `ExclusiveFullBody` lane
+
+GAS에는 이미 `FGameplayAbilitySpecHandle`, Ability instance/activation info, `TryActivateAbility`, `AbilitySpecInputPressed/Released`, 활성화 실패 태그 callback, Ability 종료 callback과 취소 여부, Ability/Task 종료 수명이 있다. 위 P1 요소 대부분은 아직 존재하지 않는 AI wait/abort, stale hit callback, cross-ability buffer 문제를 미리 해결하면서 엔진 수명을 다시 추적한다. 따라서 **v2 전체가 과설계인 것은 아니지만 현재 P1 구현 계약은 과설계**라는 판정이다.
+
+### 채택 제안: 얇은 GAS 입력 어댑터
+
+1. `UKhazanAbilitySystemComponent`는 만든다. 현재 실소비는 Input Tag pressed/released 처리, AbilitySet grant handle 관리, GAS failure/end 관측이다.
+2. AbilitySet entry는 Ability class와 선택적 Input Tag만 가진다. PlayerController는 Enhanced Input을 Input Tag pressed/released로 번역하고 ASC는 해당 spec에 엔진 `AbilitySpecInputPressed/Released`와 `TryActivateAbility`를 적용한다.
+3. AI는 A2에서 Action/Ability tag 또는 보관한 spec handle로 같은 ASC의 Ability를 활성화한다. AI가 Player Input Tag를 흉내 내거나 PlayerController source 등록에 의존하지 않는다.
+4. `UKhazanGameplayAbility`에는 실제 공통 소비가 생긴 항목만 둔다. P1에서는 활성화 정책이 필요하면 `OnInputTriggered` 정도를 둔다. 전신 동시 실행은 먼저 Ability tag block/cancel 관계로 표현하고, 두 번째 실제 동시성 사례가 생기면 Lyra식 `Independent / ExclusiveReplaceable / ExclusiveBlocking` 그룹을 검토한다.
+5. Basic Attack Ability는 Montage AbilityTask와 자기 Locomotion constraint를 소유하고 모든 Ability 종료 경로에서 정리한다. Jump Ability가 Jump/StopJumping을 소유한다.
+6. P1에서는 별도 ActionRequest/Result, Request ID, Execution ID, active request/execution map, pending activation handshake, custom full-body lane을 만들지 않는다. 활성화 실패는 GAS의 failure tag container/callback으로, 종료는 Ability end callback과 `bWasCancelled`로 관측한다.
+7. `State.Ready.Gameplay`가 필요하다면 ActorInfo·필수 Definition·grant·Locomotion 같은 gameplay 기반 준비만 뜻하게 한다. 로컬 Player 입력 매핑 존재 여부를 Ready count의 필수 항으로 넣지 않는다.
+8. P3 hit window에서 늦게 도착한 callback을 구분할 실제 필요가 확인되면 그 공격 Ability의 지역 generation/window token을 추가한다. A2에서 AI Task가 특정 요청의 승인·종료·Abort를 기다려야 할 때만 외부 request ticket을 추가한다.
+9. P6 콤보 입력 버퍼는 활성 Combo Ability가 현재 node, 유효 window, buffered input 하나를 소유하는 형태로 시작한다. Attack→Dodge처럼 서로 다른 Ability 사이의 일반 큐가 실제 조작 시험에서 필요할 때만 ASC 또는 입력 router에 작은 cross-action buffer를 추가한다. Notify는 window 이벤트를 보내고 Ability/Task가 권위와 cleanup을 소유한다.
+
+### StateTree를 추가할 수 있는 명확한 조건
+
+- A2의 적 AI가 Patrol/Investigate/Engage/Retreat처럼 디자이너가 편집할 상호 배타적 상위 의사결정 흐름을 필요로 할 때
+- 보스 phase 또는 Scripted sequence처럼 Ability보다 긴 orchestration 수명을 시각적 트리로 편집할 실제 소비자가 생길 때
+
+이 경우에도 StateTree Task는 GAS Ability를 요청하고 그 완료를 기다리는 adapter여야 한다. Montage·비용·hit window·cancel window·피해 결과의 권위는 Ability/Task와 Combat 계층에 남긴다. Player의 `Grounded → Combat → LightAttack → ComboBranch`를 지금 StateTree의 단일 상태 축으로 만들지 않는다.
+
+
+<a id="architecture-v2-2-simplicity-20260915"></a>
+## 2026-09-15 — 아키텍처 v2.2 확정: GAS 중심 구조와 단순성 불변식
+
+### 결정의 지위
+
+- 사용자는 GAS 중심의 현재 책임 분리를 유지하고 Player 전투용 StateTree를 추가하지 않으며, 기능에 필요하지 않은 거대 구조·복잡한 관계·불명확한 코드와 이름을 이후 설계에서 배제하기로 확정했다.
+- 바로 위 `StateTree·GAS·입력 버퍼 대조 검토와 P1 단순화 제안`을 채택한다. 이 절은 ARCH-22/23/24/26/29와 P1의 충돌 범위를 대체하는 최신 정본이다.
+- 유지하는 핵심은 ASC의 공유 gameplay 상태, Ability/Task의 액션 수명, LocomotionComponent→CMC의 이동 정책, Combat 결과와 표현의 분리, Player/AI의 실행 코드 공유다. 과거 `ActionRequest` 구현 형태는 유지 대상이 아니다.
+- 싱글플레이 현재 요구를 기준으로 구현한다. GAS의 엔진 제공 수명과 handle을 사용하되, 현재 요구에 없는 멀티플레이 예측 wrapper·범용 메시지 계층·재시도 protocol은 만들지 않는다.
+
+### 변경된 ARCH 계약
+
+| 관련 ID | v2.2 확정 계약 | 대체·보류 범위 |
+| --- | --- | --- |
+| ARCH-05/09 | 먼저 엔진이 반환하는 Spec/Effect/delegate/task handle과 Ability instance 수명을 사용한다. custom ID는 그것으로 구분할 수 없는 실제 stale/out-of-order callback이 있을 때 해당 소유자 안에만 추가한다. | 모든 자원에 Pawn/요청/실행/창/hit ID를 일률적으로 붙이지 않는다. 기존 Locomotion constraint/intent handle은 실제 중첩·stale source 검증 소비가 있으므로 유지한다. |
+| ARCH-16 | 설정은 우선 Ability/CharacterDefinition의 명확한 필드에 둔다. 두 개 이상의 실제 variant가 같은 실행 코드를 공유하거나 디자이너가 독립 편집해야 할 때만 별도 DataAsset으로 추출한다. | `KhazanActionDefinition`과 `KhazanActionRelationshipData`는 필수 기반 타입이 아니다. optional 필드가 많은 만능 Action DataAsset을 만들지 않는다. |
+| ARCH-17 | P1은 `State.Ready.Gameplay`를 만들지 않는다. ActorInfo와 필수 Definition이 준비된 뒤 Ability를 grant하며, 미부여 spec은 활성화될 수 없다는 엔진 경계를 사용한다. | 실제 비동기 부분 준비 상태를 여러 외부 소비자가 구분해야 할 때만 하나의 명확한 readiness 계약을 추가한다. 입력 mapping 존재 여부를 gameplay Ready count에 넣지 않는다. |
+| ARCH-19 | 활성화 실패는 GAS failure tag/callback과 구체 로그로 관측한다. 소비자가 요구하지 않는 별도 C++ 실패 enum을 복제하지 않는다. | P1의 다수 ActionRequest 실패 enum과 결과 protocol을 폐기한다. UI/AI가 구체 결과를 실제 소비할 때 필요한 failure tag만 추가한다. |
+| ARCH-22 | Khazan ASC는 Input Tag를 해당 Ability spec의 pressed/released 및 `TryActivateAbility`로 연결하는 얇은 adapter다. 실행의 권위와 cleanup은 Ability/Task다. | 공통 `ActionRequest/Result`, Request/Execution ID 원장, pending activation handshake, request source 등록, custom full-body lane을 폐기한다. |
+| ARCH-23 | Player는 기존 `Input.Action.*` tag로 입력을 전달하고, AI는 A2에서 Ability tag 또는 Spec handle로 같은 Ability를 활성화한다. 공유 대상은 GAS 실행과 결과이지 동일 요청 DTO가 아니다. | AI가 Player 입력 tag를 흉내 내거나 미래 AI 때문에 Player용 broker를 선행 구현하지 않는다. |
+| ARCH-24 | 첫 콤보는 활성 Attack/Combo Ability가 현재 단계와 buffered input을 지역 상태로 소유한다. 실제 원작 분기가 확인된 만큼만 데이터화한다. | P6 시작부터 범용 graph runtime, custom graph editor, 전역 FIFO buffer를 만들지 않는다. 선형 combo면 배열/명시적 다음 단계로 시작하고 실제 branching 때 edge를 추가한다. |
+| ARCH-26 | 첫 `CombatResult`는 실제 두 소비자가 함께 필요로 하는 결과와 기존 엔진 문맥만 담는다. | source/target/request/execution/window/hit 식별자를 전부 복제한 만능 결과 구조를 선행 생성하지 않는다. hit 중복이나 늦은 callback에 필요한 지역 token은 해당 hit task/window가 소유한다. |
+| ARCH-29 | AI Brain은 선택한 Ability를 활성화하고 엔진 Ability 종료를 기다린다. 특정 Task Abort가 자기 실행만 취소해야 하는 실제 문제가 생기면 그 Task에 최소 추적 handle/ticket을 둔다. | 공통 ActionRequest protocol과 전역 execution ledger를 AI 선행 조건으로 삼지 않는다. StateTree는 AI 상위 판단 또는 장기 orchestration의 실제 소비가 있을 때만 검토한다. |
+
+### 구조 생성 기준
+
+새 구조는 아래 질문을 모두 통과할 때만 만든다.
+
+1. 현재 단계에서 실행되는 기능과 구체 소비자가 있는가?
+2. 엔진 타입, 기존 owner의 private 함수나 지역 변수로 해결할 수 없는가?
+3. 독립적으로 시작·종료·취소되는 수명이 있는가, 또는 실제 두 곳 이상이 공유하는가?
+4. 새 구조가 제거하는 중복이 새 API·동기화·cleanup보다 큰가?
+5. 실패·취소·EndPlay에서 누가 정리하는지 한 문장으로 말할 수 있는가?
+6. 이름만 보고 요청, 현재 사실, 해결 결과, 최종 결과 중 무엇인지 알 수 있는가?
+
+다음 기준도 고정한다.
+
+- 새 tag는 작성자와 현재 소비자가 모두 있을 때만 선언한다.
+- 새 enum은 실제로 선택해야 하는 둘 이상의 배타 값이 있을 때만 만든다.
+- 새 delegate는 비동기 관측자가 실제로 있을 때만 만든다.
+- 새 handle은 중첩 acquire/release 또는 stale callback 방지가 실제 필요할 때만 만든다.
+- 새 interface는 서로 다른 구현 둘 이상이나 엔진/모듈 경계의 실제 결합 해소가 있을 때 만든다.
+- 새 Component는 Actor와 함께 존재한다는 이유가 아니라 독립 상태와 수명을 소유할 때 만든다.
+- 새 DataAsset은 디자이너 편집, 여러 variant 공유, 로드 경계 중 하나가 실제 필요할 때 만든다.
+- 한 번 전달하는 값은 구조체 `Context`로 감싸지 않는다. 관련 인자가 반복되고 함께 진화할 때만 작은 문맥 타입으로 묶는다.
+- wrapper가 호출을 그대로 전달하기만 하면 만들지 않는다. 검증·변환·수명 소유 중 하나가 있어야 한다.
+- 튜토리얼식 한 줄 해설은 공동 구현 MD에 둔다. Production source 주석은 코드에서 드러나지 않는 이유·단위·수명·제약만 설명한다.
+
+### 클래스별 단순화 판정
+
+| 영역 | 판정 | 구현 기준 |
+| --- | --- | --- |
+| `UKhazanAbilitySystemComponent` | 유지 | P1의 실제 Input Tag→spec 입력/활성화가 첫 소비다. 요청 원장·combo·damage·AI 판단을 넣지 않는다. |
+| `UKhazanGameplayAbility` base | 조건부 | P1 두 Ability가 실제로 공유하는 동작이나 ASC가 읽는 설정이 있을 때만 만든다. 이름만 있는 빈 base는 만들지 않고 필요 전에는 엔진 `UGameplayAbility`를 직접 상속할 수 있다. |
+| `UKhazanAbilitySet` | 유지 | Character variant의 시작 Ability 묶음이라는 실제 데이터 소비가 있다. P1에는 Ability class와 기존 Input Tag만 두고 Effect/Attribute는 해당 단계에서 확장한다. 반환 Spec handle은 실제 제거·재부여 소비 범위에서만 보관한다. |
+| Action Relationship asset | 보류 | Attack/Jump는 GAS 기본 tag 관계로 시작한다. P7에서 여러 Ability에 같은 관계가 반복돼 불일치가 생길 때 Lyra식 중앙 mapping을 도입한다. 범용 규칙 엔진을 만들지 않는다. |
+| Activation Group/full-body lane | 보류 | 기본 block/cancel tag로 표현할 수 없는 두 번째 실제 동시성 사례가 생길 때만 세 가지 이하의 명확한 분류를 검토한다. |
+| Combo Definition | 조건부 | P6에서 실제 공격 수와 분기만 표현한다. 단순 연속 공격이면 작은 배열로 시작하고, 해금 branching이 실제 확인될 때 edge를 추가한다. |
+| Combat hit owner | 미확정 유지 | P3 첫 공격은 AbilityTask 또는 Ability 지역 객체로 수명을 닫는 방식을 먼저 검토한다. 여러 Ability가 같은 지속 추적 서비스를 공유해야 할 때만 `CombatComponent`가 정당화된다. |
+| Combat response owner | 미확정 유지 | 결과→HitReact/Death 변환 책임은 유지하지만 별도 `CombatResponseComponent`를 미리 만들지 않는다. ASC/Character의 작은 함수로 부족한 실제 다중 소비가 생길 때 생성한다. |
+| Targeting/Equipment/BossPhase/Interaction 타입 | 책임만 유지 | 해당 기능의 첫 수직 절편 전에는 클래스·인터페이스·데이터를 만들지 않는다. 문서의 계층명은 생성 의무가 아니다. |
+| custom CMC | 조건부 | 기존 공개 CMC API로 해결하지 못하는 PathFollowing 우회나 low-level 구동 충돌을 A1/P5에서 실제 확인할 때만 subclass를 만든다. |
+
+### 현행 Source 가독성 감사
+
+- `FKhazanMovementConstraintHandle`과 현재 intent token은 중첩 제약 A/B, 개별 해제, 재빙의 stale source 시험을 실제 통과했으므로 현재 복잡도에 근거가 있다. 단지 더 일반화하기 위해 새 ID 계층을 얹지 않는다.
+- `EKhazanLocomotionMode`는 현재 Source 소비가 없다. `AKhazanCharacter`, `AKhazanPlayer`, `AKhazanMonster`에는 기능 없는 Tick/BeginPlay override가 있고 Character tick도 켜져 있다. `KhazanLocomotionComponent.cpp`의 `InterchangeResult.h`도 현재 사용되지 않는다. 이들은 다음 관련 Source 정리 시 참조를 다시 확인하고 제거할 후보이며 새 기능의 선행 조건은 아니다.
+- PlayerController의 지역 변수 `Action2/Action3/Action4`는 `TurnAction/JumpAction/AttackAction`처럼 의미 이름으로 바꿀 후보이다. 입력 callback도 이후 수정 시 Unreal식 한 가지 명명 규칙으로 통일한다.
+- AssetManager의 `GetAssetByName`/`LoadSyncByName`과 Character의 `CharacterDefinitionAssetName`은 실제 타입이 GameplayTag라 이름이 정확하지 않다. BP/직렬화 영향을 조사하지 않은 즉시 rename은 하지 않으며, 관련 API를 다음에 손댈 때 `...ByTag`/`...AssetTag` 이관 가치를 검토한다.
+- `AKhazanPawn`은 C++ 검색에서 자기 파일 외 소비가 보이지 않는 starter shell이다. Blueprint/asset 참조를 확인하기 전에는 삭제하지 않지만 공통 Character와 병행하는 새 기능 기반으로 사용하지 않는다.
+
+### 명명 불변식
+
+- `Request`는 아직 승인되지 않은 의도, `Active`는 현재 실행 중인 사실, `Result`는 확정 결과에만 사용한다.
+- `Handle`은 소유 자원을 개별 해제·취소하는 opaque 영수증일 때만 사용한다. 단순 번호나 표시용 값을 handle이라 부르지 않는다.
+- `State`, `Context`, `Data`, `Info`, `Manager`, `Processor`, `Helper` 같은 넓은 단어는 구체 책임을 대신하지 못한다. 타입 이름에는 `AbilityInput`, `MeleeHit`, `CombatResult`, `MovementConstraint`처럼 실제 대상을 넣는다.
+- bool은 `bIs/bHas/bCan/bShould`로 질문을 표현하고 한 owner 내부 관측에 사용한다. 외부 gameplay 권한을 여러 bool로 복제하지 않는다.
+- 함수는 `동사 + 대상`으로 작성한다. `Process`, `Handle`, `Update`만으로 의미가 끝나는 이름을 피하고 무엇을 입력받아 무엇을 바꾸는지 드러낸다.
+- 같은 개념에 Input/Action/Ability/State tag를 모두 만들지 않는다. 장치 입력에는 기존 `Input.Action.*`, Ability 분류에는 `Ability.*`, 외부가 실제 관측하는 지속 사실에만 `State.*`를 사용한다.
+
+이 단순성 규칙은 확장성을 포기하는 규칙이 아니다. 작은 owner와 엔진 수명을 유지하면 새 Ability는 기존 Ability를 건드리지 않고 추가할 수 있고, 실제 반복이 확인된 뒤 추출한 공통 타입은 요구가 분명하므로 사용과 유지보수가 더 쉽다.
+
+
+<a id="architecture-v2-3-capability-components-20260915"></a>
+## 2026-09-15 — 아키텍처 v2.3 확정: capability component와 단일 CombatComponent 경계
+
+### 결정의 지위
+
+- 사용자는 Component를 붙인 호환 Actor가 그 Component 이름에 맞는 재사용 가능한 능력을 얻어야 한다고 확정했다. 동시에 전투 책임을 여러 작은 Component로 기계적으로 나누지 않는다.
+- 이 절은 v2.2의 단순성 불변식을 유지하며, `Combat hit owner 미확정`, `Combat response owner 미확정`과 P1의 pressed/released 선행 구현 범위를 아래 계약으로 구체화한다.
+- 여기서 `모든 Actor가 사용 가능`은 아무 종류의 Actor에서도 무조건 동작한다는 뜻이 아니다. `UCharacterMovementComponent`가 `ACharacter` 계약을 요구하듯, 각 Component가 선언한 최소 owner 계약을 만족하는 모든 Actor가 같은 기능을 얻는다는 뜻이다. 필요 없는 범용화를 위해 owner 차이를 숨기는 adapter와 분기 묶음을 만들지 않는다.
+
+### Component 채택 규칙
+
+새 `UActorComponent`는 다음 조건을 만족할 때만 만든다.
+
+1. Component가 제공하는 한 문장의 능력이 있다. 예: `LocomotionComponent는 Character의 이동 의도와 여러 이동 제약을 하나의 CMC 정책으로 해결한다.`
+2. 지원하는 owner 계약을 명시할 수 있다. 예: `CombatComponent는 IAbilitySystemInterface를 통해 유효한 ASC를 제공하는 Actor를 지원한다.`
+3. 붙인 뒤 외부 호출자는 owner subclass마다 다른 내부 구현을 알 필요 없이 같은 public API를 사용할 수 있다.
+4. Component가 검증, 상태, 수명, cleanup 중 하나를 실제로 소유한다. 단순히 다른 객체의 함수를 같은 인자로 전달하는 wrapper는 만들지 않는다.
+5. 실행 한 번에만 필요한 값은 Ability/AbilityTask의 지역 수명에 둔다. Actor 수명 동안 여러 실행이 공유해야 하는 값만 Component 멤버가 된다.
+6. 하나의 응집된 능력을 다시 `AttackComponent`, `GuardComponent`, `ParryComponent`, `PoiseComponent`, `HitReactComponent`처럼 잘게 분해하지 않는다. 서로 독립적으로 부착·교체·종료해야 하는 실제 요구가 생기기 전에는 한 Component와 GAS 객체의 조합으로 해결한다.
+
+### 채택한 런타임 구성
+
+```text
+전투 가능한 Character/Actor
+├─ AbilitySystemComponent
+│  ├─ 공유 gameplay 상태: tag / attribute / active effect
+│  └─ 실행 인스턴스: granted ability / ability task
+├─ LocomotionComponent       (ACharacter + CMC가 필요한 이동 능력)
+└─ CombatComponent           (P3에서 도입할 공통 전투 교환 능력)
+
+실행 한 번의 세부 수명
+└─ GameplayAbility / AbilityTask
+   ├─ montage
+   ├─ 공격·취소 window
+   ├─ 그 실행의 movement constraint handle
+   └─ 그 실행의 hit 중복 방지 집합 또는 token
+```
+
+`AbilitySystemComponent` 자체가 이미 Actor에 Ability·Tag·Effect 실행 능력을 붙이는 공식 Component다. `UKhazanAbilitySystemComponent`는 이를 대체하는 전투 Manager가 아니라 프로젝트의 기존 `Input.Action.*` tag를 granted spec activation에 연결하는 얇은 확장이다.
+
+### `UKhazanCombatComponent`의 정확한 역할
+
+`UKhazanCombatComponent`는 P3의 첫 실제 공격 판정에서 만든다. Component를 붙이고 필요한 전투 설정을 초기화한 호환 Actor는 Character subclass 전용 공격/피격 코드를 추가하지 않고 같은 전투 교환 경계에 참여할 수 있어야 한다.
+
+최소 owner 계약은 다음과 같다.
+
+- owner는 `IAbilitySystemInterface`를 통해 유효한 `UAbilitySystemComponent`를 제공한다.
+- 공격 Ability, Montage, 무기 수치 같은 콘텐츠는 CharacterDefinition/AbilitySet/Ability asset에서 제공한다. Component가 없는 데이터를 임의로 만들어 내지 않는다.
+- skeletal mesh나 CMC가 필요한 동작은 그 기능을 요구하는 Ability/Task가 별도로 검사한다. 따라서 ASC를 가진 비Character Actor도 피해 수신처럼 자신이 지원하는 Combat API는 사용할 수 있다.
+
+CombatComponent가 맡을 책임은 다음 범위다.
+
+- owner ASC 연결을 한 번 검증하고 Component 수명 동안 안전하게 참조한다.
+- 공격 실행이 만든 **확정된 접촉 후보**를 공통 전투 입력으로 받아 source/target 유효성 및 전투 참여 가능 여부를 검사한다.
+- GameplayEffect spec과 GameplayEvent를 통해 피해 계산 및 HitReact/Death 실행으로 넘기는 공통 진입점을 제공한다.
+- 여러 Ability 실행이 실제로 공유해야 하는 Actor 단위 전투 기록이나 delegate가 생기면 그 최소 상태와 cleanup을 소유한다.
+- owner가 종료되면 자신이 등록한 delegate와 자신이 소유한 runtime 기록만 해제한다.
+
+CombatComponent가 맡지 않을 책임은 다음과 같다.
+
+- Enhanced Input binding과 Player 입력 해석
+- Ability 활성화 수명, 비용, cooldown, block/cancel 규칙
+- combo 단계, combo buffer, montage 재생 및 notify window
+- damage 수치의 권위와 Attribute 변경 계산
+- 이동 속도·회전·가감속 및 movement constraint 해결
+- AnimGraph/Linked Layer 포즈 선택과 GameplayCue 표현
+- AI 의사결정, lock-on/target 선택, 장비·성장 데이터
+
+위 항목은 각각 기존 GAS Ability/Task/Effect/Attribute, LocomotionComponent, Animation/Cue, AI/Targeting/Equipment 경계에 남긴다. 특히 `CombatResponseComponent`를 함께 만들지 않는다. 첫 HitReact와 Death는 GameplayEvent로 반응 Ability를 활성화하는 경로부터 검증한다. 하나의 CombatComponent로도 표현할 수 없는 독립 수명과 실제 교체 요구가 확인될 때만 새 Component를 다시 심사한다.
+
+### 붙이면 무엇을 얻는가
+
+정확한 의미는 `CombatComponent 부착 + 유효한 ASC + 필요한 Definition/AbilitySet 설정`을 만족하면 다음을 얻는다는 것이다.
+
+- Player, 일반 적, 보스가 같은 전투 입력·결과 경계를 사용한다.
+- 각 Character subclass에 `TakeMeleeDamage`, `ReceiveParry`, `StartHitReact` 같은 서로 다른 함수를 반복해서 만들지 않는다.
+- 공격 실행은 자기 Ability/Task 안에서 닫히고, 다른 Actor와 결과를 교환하는 순간만 CombatComponent를 통과한다.
+- 해당 Actor가 지원하지 않는 mesh/weapon 동작 때문에 피해 수신 같은 공통 기능까지 막히지 않는다.
+
+`Component를 Add하는 것만으로 설정 없는 공격 애니메이션까지 생긴다`는 계약은 채택하지 않는다. 그것은 Component가 콘텐츠 선택, 입력, 실행, 표현을 모두 떠안게 해 거대한 전투 Manager가 되기 때문이다.
+
+### 지금 만들지 않는 이유와 생성 시점
+
+현재 P1의 첫 소비는 `입력 tag → granted ability spec → activation`이며 다른 Actor와 교환하는 hit나 damage가 없다. 지금 CombatComponent를 만들면 ASC를 찾아 저장하는 빈 wrapper만 남으므로 Component 채택 규칙 4를 통과하지 못한다.
+
+따라서 다음 순서를 고정한다.
+
+1. P1에서 ASC 입력 활성화, Ability grant, BasicAttack/Jump 실행과 자기 cleanup을 완성한다.
+2. P2에서 BasicAttack의 Stamina 비용 한 경로를 GAS Attribute/Effect로 검증한다.
+3. P3.1에서 BasicAttack의 실제 접촉 후보와 대상에게 넘길 최소 데이터가 생기는 같은 변경 안에 `UKhazanCombatComponent`를 만든다.
+4. 그 시점에 Player와 최소 한 종류의 적이 같은 Component 계약으로 한 번의 hit를 교환하는지를 검증한다.
+
+### P1 입력 어댑터의 더 작은 시작점
+
+P1 첫 절편의 실제 소비자는 한 번 누르는 Attack이다. 따라서 첫 `UKhazanAbilitySystemComponent`에는 `TryActivateAbilitiesByInputTag(const FGameplayTag&)` 하나만 구현한다. 이 함수는 Dynamic Spec Source Tag가 정확히 같은 granted spec을 찾고 엔진 `TryActivateAbility`를 호출한다.
+
+- held 입력 배열, 매-frame input processor, pressed/released replicated event는 첫 절편에 넣지 않는다.
+- Jump의 `WaitInputRelease`를 실제 구현하는 P1 후속 절편에서 엔진 `InputReleased` generic replicated event가 필요함을 확인하고 그때 press/release 전달을 추가한다.
+- combo 재입력은 P6의 활성 Combo Ability가 실제 소비할 때 추가한다.
+
+이 순서는 기능을 버리는 결정이 아니라 소비자가 생기는 빌드 checkpoint에 기능을 배치하는 결정이다.
+
+
+<a id="architecture-v2-4-global-component-rule-20260915"></a>
+## 2026-09-15 — 아키텍처 v2.4 정정: 모든 Component에 적용하는 capability 원칙
+
+### 사용자 정정과 대체 범위
+
+- 사용자가 든 `CombatComponent`는 capability component를 설명하기 위한 예시였다. 바로 위 v2.3이 그 예시에 지나치게 집중해 미래 P3의 중심 타입처럼 확정한 해석은 철회한다.
+- 최신 원칙은 **현재와 미래의 모든 Component**에 동일하게 적용한다. Component는 호환 owner에 부착됐을 때 이름으로 예측 가능한 하나의 완결된 능력을 제공해야 하며, 코드 분류나 작은 책임 분할만을 목적으로 생성하지 않는다.
+- v2.2의 GAS 중심 실행, 단순성 불변식, 실제 소비 전 타입 보류 원칙은 그대로 유지한다. v2.3의 일반 owner 계약과 Component 채택 질문도 유지하되 `UKhazanCombatComponent를 P3.1에서 반드시 생성한다`는 일정만 취소한다.
+
+### 전역 Component 판정법
+
+모든 새 Component 후보는 다음 순서로 판정한다.
+
+1. 먼저 Ability/AbilityTask의 실행 지역 상태, 기존 Component의 응집된 함수, Actor의 composition 초기화 함수로 해결할 수 있는지 본다.
+2. 그래도 Actor 수명 동안 독립적으로 유지되는 상태와 cleanup이 있고, 호환 owner 여러 종류가 같은 public API를 사용해야 할 때 Component를 선택한다.
+3. 지원 owner를 지나치게 넓히지 않는다. `AKhazanCharacter` 계열만 지원하면 그것도 명확한 재사용 계약이다. 현재 소비자가 없는 임의 `AActor` 지원을 위해 adapter와 nullable 분기를 누적하지 않는다.
+4. 붙인 Component를 쓰기 위해 owner subclass마다 별도 전달 함수와 상태 복사를 만들어야 한다면 API 경계를 다시 검토한다.
+5. 한 기능을 여러 Component가 부분 소유하거나 같은 상태를 ASC tag, Character bool, Component enum으로 중복 작성하지 않는다.
+6. Component 수를 줄이기 위해 서로 관계없는 기능을 하나의 Manager Component에 합치지도 않는다. 응집된 기존 owner에 함수로 둘 수 있으면 그 owner에 둔다.
+
+### 현재 및 후보 Component 전수 판정
+
+| 대상 | 현재 판정 | capability 계약과 경계 |
+| --- | --- | --- |
+| `UAbilitySystemComponent` / `UKhazanAbilitySystemComponent` | 채택 | 붙인 GAS owner가 Ability/Tag/Effect 실행 능력을 얻는다. Khazan subclass는 현재 Input Tag→granted spec activation 한 차이만 더한다. combo, damage, AI 결정을 넣지 않는다. |
+| `UKhazanLocomotionComponent` | 채택 | 지원하는 Khazan Character가 입력/AI 이동 의도와 여러 이동 제약을 하나의 CMC 정책으로 해결한다. Config, intent, constraint, resolved policy는 한 이동 능력의 연속된 데이터이므로 현재 분해하지 않는다. |
+| `UKhazanCombatComponent` | 조건부 후보 | 여러 전투 owner가 Ability/Effect만으로 닫히지 않는 공통 hit 교환 상태/API를 실제로 필요로 할 때만 만든다. P3 시작 자체가 생성 의무가 아니다. |
+| `InputBufferComponent` | 현재 제외 | 첫 combo의 입력은 활성 Ability 지역 수명으로 충분하다. 여러 서로 다른 시스템이 같은 Actor 단위 buffer를 공유하는 실제 요구가 생길 때 다시 판정한다. |
+| `CombatResponseComponent`, `GuardComponent`, `ParryComponent`, `PoiseComponent` | 현재 제외 | 우선 GAS Ability/Effect/Tag와 필요 시 하나의 기존 전투 경계로 구현한다. 이름별 파일 분할을 목적으로 만들지 않는다. |
+| `TargetingComponent` | 조건부 후보 | lock-on 대상 탐색·선택·유지·해제가 Actor 수명의 독립 능력이고 Player/AI 등 복수 producer가 같은 API를 쓸 때만 만든다. 공격 한 번의 target은 Ability/Task 지역이다. |
+| `EquipmentComponent` | 조건부 후보 | 장착 슬롯, 교체, 부여/회수 handle을 Actor 수명 동안 실제 소유할 때 만든다. 단순 무기 포인터 하나 때문에 선행 생성하지 않는다. |
+| `InteractionComponent` | 조건부 후보 | 여러 상호작용 source/target이 동일 탐색·선택 수명을 공유할 때만 만든다. 대상 자체의 결과와 보상은 대상 owner에 둔다. |
+
+이 표의 `조건부 후보`는 예약된 클래스명이 아니다. 해당 단계에서 기존 GAS/Actor/Component로 기능을 먼저 수직 검증하고, Component가 제거할 실제 중복과 소유할 수명이 확인될 때 최종 이름과 API를 결정한다.
+
+### Component가 아닌 구조에도 같은 단순성 기준 적용
+
+단편화를 막는 기준은 Component에만 한정하지 않는다.
+
+- 별도 DataAsset은 같은 묶음을 두 곳 이상에서 재사용하거나 독립 로드·편집·교체할 때 추출한다.
+- 별도 base class는 자식 둘 이상이 실제 공통 동작이나 계약을 공유할 때 만든다.
+- 별도 interface는 서로 다른 구현 둘 이상을 한 소비자가 다뤄야 할 때 만든다.
+- 별도 subsystem/manager는 world 또는 game instance 범위의 고유 수명과 복수 owner 조정이 있을 때 만든다.
+- 한 owner에서 한 번 호출되는 짧은 초기화는 그 owner의 명확한 함수 또는 lifecycle 지점에 둔다. 전달만 하는 Component를 추가하지 않는다.
+
+### P1 AbilitySet 재판정
+
+현재 초기 Ability의 정적 작성자는 이미 `UKhazanCharacterDefinitionData` 하나이며, runtime grant owner는 자기 ASC를 소유한 `AKhazanCharacter` 하나다. 아직 장비, GameFeature, 직업 교체, 공통 적 패키지처럼 같은 Ability 묶음을 독립적으로 부여·회수하는 두 번째 source가 없다.
+
+따라서 P1에는 별도 `UKhazanAbilitySet` DataAsset을 만들지 않는다.
+
+- CharacterDefinition에 `InitialAbilityGrants` 배열을 직접 둔다.
+- 배열 원소는 `AbilityClass`와 선택적 `InputTag`만 가진다.
+- Character의 `PostInitializeComponents()`는 ActorInfo와 Definition/Locomotion 초기화 뒤 authority에서 이 배열을 한 번 Spec으로 grant한다.
+- ASC가 Character와 함께 파괴되므로 현재는 반환 Spec handle 원장을 저장하지 않는다.
+
+다음 중 하나가 실제로 생길 때 `UKhazanAbilitySet` 추출을 다시 검토한다.
+
+1. 같은 Ability 묶음을 서로 다른 CharacterDefinition 둘 이상이 공유한다.
+2. 장비·상태·게임 기능이 그 묶음을 독립적으로 부여하고 나중에 회수해야 한다.
+3. 묶음 자체를 별도 asset으로 교체하거나 독립 로드해야 한다.
+
+이때도 부여 source가 반환 Spec handle을 소유하고 자기 묶음만 회수한다. 미래 가능성만으로 지금 DataAsset, granted-handle struct, remove protocol을 만들지 않는다.

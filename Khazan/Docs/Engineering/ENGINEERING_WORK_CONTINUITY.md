@@ -234,3 +234,94 @@
 - 다음 미완료 원인: Player/시험 Monster의 CharacterDefinition이 아직 없고 Player의 locomotion intent 획득도 실패한다. 새 에셋 파일은 있으나 tag/selector/catalog/BP 연결이 아직 없다. 이번 승인으로 이 후속 코드를 직접 구현하지 않는다.
 - 정확한 재개: Router → v2 ARCH-16/17의 마지막 복원 결정 → Migration M2.2 → [Step 2 §27](CHARACTER_TAG_ABILITY_STEP_2.md#asset-manager-rollback-next-20260911). 실제 native tag → 필요 최소 로드 선택 인자 → Character selector/runtime pointer/초기화 조회 → cold build → catalog entry/Player BP tag → Player 이동 회귀 순으로 사용자가 적용한다. 아직 소스에 없는 optional 인자나 tag를 이미 구현된 것으로 가정하지 않는다.
 - 실행 정리: 실행한 Build/Startup/Python commandlet 프로세스는 종료됐다. 디버거/PIE callback은 만들지 않았다. 이번에 uasset/Config를 저장하지 않았으며 새 gameplay 수치는 없다.
+
+## 2026-09-15 M2.2 Definition 연결 완료 후 패드 없는 검증 재개 지점
+
+- 현재 상태: Character Definition native tag, AssetManager의 비강제 조회, Character selector/runtime 참조, catalog entry, Player BP selector, Definition LocomotionConfig 저장까지 반영됐다. 실제 저장값도 읽기 전용으로 확인했다.
+- 마지막 정적 검증: KhazanCharacter.h/.cpp, KhazanAssetManager.h, gameplay tag 선언·정의가 서로 일치하며 CMC 주요 이동 속성의 직접 작성자는 LocomotionComponent 하나다. Rider 분석 오류는 0이지만 현재 변경분의 cold build 성공을 새로 확정하지는 않았다.
+- 런타임 미검증 사유: 현재 사용할 물리 패드가 없고 IMC_Default의 Move/Sprint에는 키보드 매핑이 없다. 이는 진행 차단 사유가 아니며 Enhanced Input 콘솔 주입으로 실제 Gamepad 매핑과 Input Action callback 경로를 검증할 수 있다.
+- 정확한 재개 절차: Editor 완전 종료 → KhazanEditor Win64 Development cold build → Editor 재실행/DevMap PIE → Input.+key Gamepad_Left2D와 Input.-key로 Walk/Run/Stop 확인 → Thumbstick 입력으로 토글 Sprint 확인 → /Game/Test/M2/BP_M2MovementProbe에서 gait/rotation constraint A/B 중첩·역순 제거·중복 제거와 Block GE A/B를 검증 → constraint/GE를 남긴 PIE 종료와 재PIE cleanup을 확인한다.
+- 완료 조건: Definition 오류 없이 Player가 시작하고, snapshot·CMC 결과가 config 및 제한 정책과 일치하며, A/B 중첩과 개별 handle 제거, 태그 차단 중 raw intent 보존, 재PIE 초기화가 모두 통과해야 한다. 그 뒤에만 M2.3의 custom CMC/AIController 구현으로 이동한다.
+- 이번 기록에서는 게임 Source, BP, DataAsset을 추가 수정하지 않았다.
+
+## 2026-09-15 M2.2 테스트 이벤트 인수 완료, M2.3 재개 지점
+
+- 현재 상태: M2.2 Player runtime 행렬은 통과했다. `/Game/Test/BP_M2MovementProbe`는 compile/save됐고, 실제 입력 mapping/action, gait·rotation constraint A/B, Block GE A/B, UnPossess/Repossess, Stop PIE/새 PIE cleanup을 확인했다. PIE는 종료돼 Idle이며 테스트 effect/constraint/forced input은 남아 있지 않다.
+- 마지막 검증: 새 PIE 기준 `InputAmount=0`, Block tag count `0`, 허용 true, MaxAllowedGait Sprint, ResolvedGait Walk, ResolvedRotationMode VelocityDirection, 정책/CMC MaxWalkSpeed `170`, Velocity `0`이다. gameplay assertion/fatal과 Probe 수리 뒤 BP compile error는 없다. API 탐색 중 Python 오류와 별도 WildBoar import 경고는 분리 기록했다. 전체 raw 결과는 `Saved/Reports/M2_2_RuntimeProbe_20260915.json`이다.
+- 테스트 한계: 물리 패드가 없어 하드웨어 이벤트는 직접 누르지 않았다. `Gamepad_Left2D`/`Gamepad_LeftThumbstick` 실제 mapping과 `IA_Move` action은 콘솔로 주입했다. UE 5.8의 `Input.-key` 아날로그 상쇄 샘플은 엔진 소스로 확인해 별도 진단으로 분리했고, action 제거로 Completed 정리를 검증했다.
+- 빌드 상태: 정식 Editor 모듈의 생성 시각이 모든 현재 Source보다 뒤이고 실제 검증 Editor가 그 뒤 시작됐다. 현재 소스가 반영된 정식 모듈에서 PIE한 사실은 확인했지만 이번 인수 중 새 cold-build 명령 transcript는 만들지 않았다.
+- 정확한 재개 1: Router → `CHARACTER_GAMEPLAY_ARCHITECTURE.md` v2 → `CHARACTER_TAG_ABILITY_MIGRATION.md` M2 → `CHARACTER_TAG_ABILITY_STEP_2.md` 21절을 순서대로 읽고 M2.3만 범위로 잡는다.
+- 정확한 재개 2: 실제 일반 적 기반을 다시 대조한다. 수입 Swordsman/Archer가 여전히 `AActor` 부모라면 억지 reparent하지 않고 `AKhazanMonster` 기반 최소 시험 Pawn, Definition, AIController, Blackboard/BT, NavMesh의 필요한 최소 자산만 만든다.
+- 정확한 재개 3: 공통 `UKhazanCharacterMovementComponent`의 `RequestPathMove`/`RequestDirectMove` gate와 `AKhazanAIController`의 concrete `FAIRequestID`, Block tag delegate, 자기 pause 소유권/cleanup을 구현한다. Player의 통과한 입력·정책 코드를 다시 고치지 않는다.
+- 정확한 재개 4: 정상 MoveTo, A/B `0→1→2→1→0`, 차단 중 새 요청, 같은 request만 resume, Abort/실패/AlreadyAtGoal, 다른 pause 원인, Path/Direct 두 모드, AI UnPossess/Repossess, 반복 PIE를 21.15–21.24 순서로 검증한다. 그 뒤 M2.4 통합 전에는 M3로 넘어가지 않는다.
+## 2026-09-15 M2.3-A 사용자 구현 대기
+
+- 현재 상태: M2.2 runtime 행렬은 앞선 기록대로 완료됐고, M2.3-A의 현행 심볼 및 AI 자동 빙의 초기화 순서 보강안을 설명할 준비가 끝났다. 게임 Source에는 아직 적용되지 않았다.
+- 마지막 정적 검증: 현재 Character/Locomotion/Player/Monster/Build.cs와 UE 5.8.2의 `APawn::PostInitializeComponents`, `AAIController::RequestMove`, `UPathFollowingComponent::PauseMove/ResumeMove`, `UCharacterMovementComponent::RequestPathMove/RequestDirectMove`를 대조했다.
+- 남은 작업: 사용자가 M2.3-A의 Build.cs, 공통 CMC, Character 생성/초기화 순서, AIController, Monster 기본값을 적용한다. 이어 Editor 종료 cold build와 Player CDO/PIE 회귀를 확인한다.
+- 정확한 재개 절차: 실제 적용된 다섯 영역의 diff와 첫 build 결과를 확인한다. 성공하면 `/Game/Test/M2` test controller/monster 및 BB/BT/NavMesh를 만들고 기존 `/Game/Test/BP_M2MovementProbe`의 TargetCharacter를 Monster로 지정해 이동, tag block 중 raw intent 보존·감속·동일 request pause/resume, 중첩 effect, 목표 교체, 완료/Abort/UnPossess/PIE cleanup을 검증한다.
+
+
+## 2026-09-15 Player 우선 전투 아키텍처 재검토 완료, P1 재개 지점
+
+- [현재 상태] 사용자 요청으로 M2.3-A AIController 선행 구현을 보류했다. `UKhazanCharacterMovementComponent`, `AKhazanAIController`, Monster 자동 빙의, Blackboard/Behavior Tree는 아직 적용되지 않았으므로 게임 소스 롤백 대상이 없다. 직전 M2.3-A 구현 대기 절은 과거 계획이다.
+- [보존 기준] M1/M2.1과 M2.2 Player runtime 행렬은 완료 상태를 유지한다. 현재 `AKhazanCharacter`는 엔진 ASC와 LocomotionComponent/Definition을 공통 소유하고, PlayerController의 Attack은 비어 있으며 Jump는 직접 호출/시험 진동, Monster는 빈 Character shell, SprintPivot/Combo/Stamina/CombatResponse/Ability는 미구현이다.
+- [새 결정] ASC/Ability/Attribute/CombatResult/Locomotion/Anim/Progression의 상태 축을 분리하고, Player 입력에서 공통 ActionRequest와 한 Basic Attack 실행을 먼저 검증한다. AI는 같은 요청 계약의 두 번째 의도 생성자로 A1/A2에서 연결한다. 세부 계약은 Architecture `2026-09-15 v2.1 ARCH-20–29`, 실행 순서는 Migration `2026-09-15 Player 우선 순서 개정`이 정본이다.
+- [정확한 재개 1] Router → Architecture 최신 v2.1 → Migration 최신 P1 → 현재 `KhazanGameplayTags`, `KhazanCharacter`, `KhazanPlayerController`, `KhazanPlayer`, `KhazanCharacterDefinitionData`, ASC 초기화 소스를 표적 대조한다. Step 2 21절의 AI 코드를 적용하지 않는다.
+- [정확한 재개 2] P1 상세 공동 구현 가이드를 현재 소스 기준으로 작성한다. 실제 Basic Attack 소비와 함께 `UKhazanAbilitySystemComponent`, Ability base, 최소 grant/input mapping, Ready, 요청/실행 ID와 전신 action lane을 단계별로 만들고 Attack/Jump 직접 우회를 이관한다. 미사용 Combo/Parry/AI 타입은 선행 생성하지 않는다.
+- [정확한 재개 3] 사용자가 P1을 적용한 뒤 Editor 종료 전체 build → ASC subobject/CDO → ActorInfo/Definition/grant/Ready → Attack 단일 요청·실행 → 반복 입력/차단/실패 결과 → 정상/중단/UnPossess/EndPlay cleanup → M2.2 이동 표적 회귀 순으로 확인한다.
+- [이번 검증 범위] 이번에는 아키텍처/마이그레이션/라우터/Step 2/Locomotion 정본만 갱신했다. Source, Config, BP, DataAsset, 애니메이션 에셋을 수정하거나 신규 build/PIE를 실행하지 않았다. 기존 에셋 작업 트리 변경은 건드리지 않았다.
+
+## 2026-09-15 P1-A 사용자 적용 대기
+
+- [현재 상태] P1 시작 전 실제 소스 대조와 Editor 종료 전체 Development Editor 빌드가 통과했다. P1 코드는 아직 없고 기존 M1/M2.1/M2.2 구현과 사용자 작업 트리 변경은 보존돼 있다.
+- [별도 진단] 직전 Editor는 Content Browser rename assert로 종료됐지만 P1 gameplay/Source와 무관하다. 현재 UnrealEditor/LiveCodingConsole 프로세스는 없으며 P1-A를 시작할 수 있다.
+- [정확한 재개] [P1 실습판](CHARACTER_TAG_ABILITY_P1_WALKTHROUGH.md) §4–5에 따라 기존 native tag의 선언/정의 위치를 보존해 P1에서 즉시 소비할 tag만 추가하고, `Source/Khazan/Ability/KhazanActionTypes.h`를 작성한다. 사용자가 저장한 두 tag 파일과 새 type header를 정적 대조한 뒤 P1-B의 custom ASC/base Ability로 이동한다.
+- [검증 경계] P1-A 단독 build를 완료 조건으로 요구하지 않는다. P1-E까지 C++ 계약을 닫은 뒤 Editor 종료 전체 build를 수행한다. 이번 턴에는 게임 Source, BP, DataAsset, Animation asset을 수정하지 않았다.
+
+## 2026-09-15 P1 아키텍처 재검토 — 기존 P1-A 보류
+
+- [현재 상태] 사용자 요청으로 StateTree + GAS tag 관계 + Input Buffer/AnimNotify 구성과 현행 v2/P1을 다시 대조했다. 게임 Source/BP/DataAsset/Animation asset은 변경하지 않았고 P1 코드는 아직 적용되지 않았다.
+- [판정] StateTree는 공식 범용 HFSM이지만 Player 전투/콤보 최상위 제어기의 공식 1순위 표준이라는 근거는 확인되지 않았다. v2의 GAS 중심 책임 분리는 타당하나 P1 실습판의 custom request/execution 추적 계층은 첫 수직 절편에 과하다.
+- [중단 지점] 기존 P1 실습판의 P1-A tag와 `KhazanActionTypes.h`를 적용하지 않는다. 실습판 하단의 `중요: 이 실습판 적용 보류` 절을 따른다.
+- [재개 절차] 사용자가 방향을 결정하면 Architecture의 `StateTree·GAS·입력 버퍼 대조 검토와 P1 단순화 제안`을 기준으로 ARCH-22/P1 계약을 교체하고, 최소 custom ASC + InputTag + AbilitySet + BasicAttack/Jump Ability의 새 단계별 실습판을 작성한다. 그 뒤 사용자가 첫 소단계를 구현하고 정적 검토부터 재개한다.
+- [남은 결정] Player combat StateTree는 도입하지 않는 권고, P1 custom request ledger 제거, 콤보 buffer의 활성 Combo Ability 지역 소유를 채택할지 확정해야 한다. StateTree는 A2 AI 상위 판단 또는 보스/Scripted orchestration의 실제 필요가 생길 때 별도 검토한다.
+
+## 2026-09-15 GAS v2.2 채택 — 최소 P1 실습판 재작성 대기
+
+- [결정 완료] 사용자가 GAS 중심 구조 유지, Player 전투 StateTree 미도입, 기능에 필요 없는 거대 구조·복잡한 관계·불명확한 명명 배제를 확정했다. 이전 절의 `남은 결정`은 해소됐다.
+- [최신 정본] Architecture의 `v2.2 GAS 중심 구조와 단순성 불변식`과 Migration의 `v2.2 최소 P1 계약`을 사용한다. 과거 P1 ActionRequest 실습판은 폐기 상태다.
+- [현재 Source] P1 Ability 코드는 아직 없다. 엔진 ASC, 빈 Attack, Controller 직접 Jump/시험 진동, 검증된 M2.2 Locomotion이 그대로이며 롤백할 P1 Source는 없다.
+- [다음 작업] 새 최소 P1을 의존 순서대로 작은 소단계로 다시 작성한다. 각 단계에서 현재 소비가 없는 class/tag/DataAsset/delegate/handle은 제외하고 사용자가 구현한 뒤 정적 대조한다.
+- [검증 경계] 이번 감사에서는 게임 Source/BP/DataAsset/Animation asset을 수정하거나 build/PIE하지 않았다. 문서 diff와 현행 Source 사용처만 검사했다.
+
+
+## 2026-09-15 — v2.3 P1.1 사용자 적용 대기
+
+- 현재 상태: Architecture v2.3 capability component 계약과 Migration v2.3 P1 실행 순서, 새 `CHARACTER_TAG_ABILITY_P1_MINIMAL_WALKTHROUGH.md`를 작성했다.
+- 마지막 확인: `Khazan.uproject`의 UE 5.8/GameplayAbilities enabled, `Khazan.Build.cs`의 GameplayTags/GameplayAbilities/GameplayTasks dependency, 기존 base ASC subobject와 ActorInfo lifecycle을 표적 대조했다. 설치된 UE 5.8 header/source에서 `FScopedAbilityListLock`, `GetActivatableAbilities`, `GetDynamicSpecSourceTags`, `TryActivateAbility` signature를 확인했다.
+- 게임 적용 상태: 새 `UKhazanAbilitySystemComponent` Source와 Character concrete subobject 교체는 설명만 했으며 아직 적용·compile·PIE 확인되지 않았다. 게임 Source/BP/asset은 이 작업에서 직접 수정하지 않았다.
+- 정확한 재개 절차: Router 최신 절 → Architecture v2.3 → Migration v2.3 → P1 최소 실습판의 P1.1 순으로 읽는다. 사용자가 두 새 Source 파일과 Character cpp 한 줄 교체를 적용하고 Editor/Live Coding을 닫은 cold build 결과를 제공하면 파일을 실제 대조한다.
+- P1.1 합격 조건: UHT/C++ build 성공, 기존 ASC subobject 한 개가 `UKhazanAbilitySystemComponent` concrete class로 생성, duplicate/invalid ASC 오류 없음, M2.2 locomotion 회귀 없음.
+- 다음 단계: P1.1 합격 뒤 Ability class + 기존 Input Tag만 가진 최소 `UKhazanAbilitySet`과 CharacterDefinition grant를 P1.2로 설명한다. CombatComponent는 P3.1 첫 실제 hit까지 생성하지 않는다.
+
+
+## 2026-09-15 — P1.2 직접 Definition grant 사용자 적용 대기
+
+- 최신 결정: CombatComponent 중심 해석을 철회하고 모든 Component에 capability 기준을 적용한다. CombatComponent와 다른 후보 Component는 해당 단계의 실제 독립 능력/상태/cleanup이 확인될 때만 만든다.
+- P1.1 실제 상태: 새 Khazan ASC 두 파일과 Character concrete class 교체가 적용됐고 UE 5.8.2 전체 build가 `Result: Succeeded`다. 새 Editor/PIE와 M2.2 runtime 회귀 증거는 아직 없다.
+- P1.2 변경: 별도 `UKhazanAbilitySet`을 만들지 않는다. `UKhazanCharacterDefinitionData`에 `FKhazanInitialAbilityGrant { AbilityClass, InputTag }` 배열을 직접 추가하고 Character가 ActorInfo/Definition/Locomotion 성공 뒤 authority에서 한 번 `GiveAbility`한다.
+- 정확한 재개: Router 최신 절 → Architecture v2.4 → Migration v2.4 → P1 최소 실습판 `p1-1-applied-p1-2-direct-grants-20260915` 순으로 읽고 Definition h/cpp와 Character cpp 세 파일만 적용한다.
+- P1.2 합격: UHT/build 성공, 기존 Definition locomotion 값 보존, 새 `Initial Ability Grants` 배열이 보이며 크기 0, PIE 무효과와 기존 이동 유지, Definition/ASC 오류 없음.
+- 다음 단계: P1.3에서 직접 `UGameplayAbility`를 상속하는 BasicAttack class 하나를 만들고 첫 Definition entry를 추가한다. Montage/hit/cost/constraint/input 연결은 아직 넣지 않는다.
+- 이번 턴에는 문서만 append했다. 사용자가 적용한 P1.1 Source와 Content를 어시스턴트가 수정하지 않았고 P1.2 build/PIE도 실행하지 않았다.
+
+
+## 2026-09-15 — P1.3 사용자 적용 대기
+
+- 현재 상태: P1.2 Source는 적용됐고 UE 5.8.2 cold build가 19:36 `Result: Succeeded`다. 새 PIE/runtime 증거는 없다.
+- 마지막 대조: Definition은 `AbilityClass + InputTag` 배열을 const reference로 제공하고 Character는 필수 초기화 성공 뒤 authority에서만 Spec을 만들어 `GiveAbility()`한다. `KhazanCharacter.cpp`의 `ParticleHelper.h`는 미사용 include다.
+- 정확한 재개: Router 최신 절 → Architecture v2.4 → Migration `p1-3-basic-attack-spec-20260915` → P1 최소 실습판 `p1-2-applied-p1-3-basic-attack-spec-20260915` 순으로 읽는다. 사용자가 미사용 include를 제거하고 BasicAttack h/cpp를 작성해 cold build한 뒤 기존 CharacterDefinition에 native class와 `Input.Action.Attack` entry 한 개를 넣는다.
+- P1.3 합격: build 성공, 기존 Definition locomotion 값 보존, ASC debug Ability 목록에 inactive BasicAttack Spec 정확히 한 개, activation log 0회, 기존 이동/PIE 종료 회귀 없음.
+- 다음 단계: P1.4에서만 PlayerController Attack의 `Started`를 ASC InputTag activation에 연결한다.
+- 이번 작업은 Engineering 문서만 append했다. 게임 Source/BP/DataAsset은 수정하지 않았다.

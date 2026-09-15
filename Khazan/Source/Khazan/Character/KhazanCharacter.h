@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
+#include "GameplayTagContainer.h"
 #include "KhazanCharacter.generated.h"
 
 class UKhazanLocomotionComponent;
@@ -61,5 +62,8 @@ private:
 	TObjectPtr<UKhazanLocomotionComponent> LocomotionComponent;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character|Definition", meta = (AllowPrivateAccess = "true"))
+	FGameplayTag CharacterDefinitionAssetName;
+	
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadOnly, Category = "Character|Definition", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UKhazanCharacterDefinitionData> CharacterDefinition = nullptr;
 };

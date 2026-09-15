@@ -100,3 +100,44 @@ Engineering 작업에서는 `Docs/Art`를 읽거나 갱신하지 않는다. 런�
 - 조회 순서는 계속 v2 → [Migration의 현재 소단계](Docs/Engineering/CHARACTER_TAG_ABILITY_MIGRATION.md) → Step 2 → 현행 소스/로코모션 정본이다. Step 1을 매번 처음부터 적용하지 않는다.
 - M2.1 태그 입력 제한, M2.2 데이터/CMC 정책, M2.3 AI 구동, M2.4 통합 검증으로 나눠 진행한다. 가이드와 실제 적용/검증 상태를 구분한다.
 
+
+## 2026-09-15 Player 우선 전투 아키텍처 개정 이후 조회 순서
+
+- M1, M2.1, M2.2 Player 이동 기반은 완료 기록을 유지한다. 위 2026-09-09 절의 `M2.3 AI 구동이 다음`이라는 미래 순서는 사용자 재검토 결정으로 대체됐다.
+- 캐릭터/전투/AI 후속 작업은 이 라우터 다음에 [CHARACTER_GAMEPLAY_ARCHITECTURE.md의 최신 v2.1 ARCH-20–29](Docs/Engineering/CHARACTER_GAMEPLAY_ARCHITECTURE.md#player-first-combat-architecture-20260915), 이어 [CHARACTER_TAG_ABILITY_MIGRATION.md의 Player 우선 개정](Docs/Engineering/CHARACTER_TAG_ABILITY_MIGRATION.md#player-first-migration-20260915)을 읽는다.
+- 현재 공동 구현 단계는 P1 Player 공통 ActionRequest와 Basic Attack 실행 수직 절편이다. `CHARACTER_TAG_ABILITY_STEP_2.md` 21절/M2.3-A의 AIController 코드는 현재 적용 절차가 아니며 미래 A1의 검토 자료다.
+- SprintPivot의 실제 변수·포즈·Stop 계약까지 다루면 위 두 Engineering 문서 다음에 [LOCOMOTION_CURRENT_IMPLEMENTATION.md의 최신 절](Docs/Animation/LOCOMOTION_CURRENT_IMPLEMENTATION.md)을 읽고 관련 소스/에셋만 표적 확인한다.
+- Player 우선은 Player 전용 gameplay API를 만든다는 뜻이 아니다. 공통 ASC/Ability/CombatResult/Locomotion 계약을 Player에서 먼저 검증하고 AIController/BT는 A1/A2에서 두 번째 의도 생성자로 연결한다.
+
+
+## 2026-09-15 GAS v2.2 단순성 정본과 P1 교체
+
+- 캐릭터/전투 후속 작업은 이 라우터 다음에 [Architecture v2.2 단순성 불변식](Docs/Engineering/CHARACTER_GAMEPLAY_ARCHITECTURE.md#architecture-v2-2-simplicity-20260915), 이어 [Migration v2.2 최소 P1](Docs/Engineering/CHARACTER_TAG_ABILITY_MIGRATION.md#p1-v2-2-minimal-contract-20260915)을 읽는다. 위 v2.1 ActionRequest/전신 lane 절은 충돌 범위에서 과거 이력이다.
+- Player 전투에는 StateTree를 추가하지 않는다. ASC/Ability/Task/Tag/Effect가 전투 실행과 공유 gameplay 상태를 맡고 CMC, Locomotion, Animation, Combat 결과의 고유 책임을 유지한다. StateTree는 미래 AI 상위 판단이나 장기 orchestration의 실제 소비가 생길 때만 검토한다.
+- 현재 P1은 기존 `Input.Action.*` tag → 최소 Khazan ASC → granted Ability spec → BasicAttack/Jump Ability의 직접 경로다. ActionRequest/Result, Request/Execution ID 원장, pending handshake, request source Ready, custom full-body lane을 구현하지 않는다.
+- 새 class/tag/DataAsset/delegate/handle은 현재 작성자와 소비자, 독립 수명, 엔진 기존 기능으로 부족한 이유가 확인될 때만 추가한다. 상세 줄별 설명은 MD에 두고 production code에는 불명확한 이유·단위·수명·제약만 주석으로 남긴다.
+
+
+## 2026-09-15 Component capability 원칙과 P1.1 최신 진입점
+
+- 캐릭터/전투 후속 작업은 이 라우터 다음에 [Architecture v2.3 capability component 계약](Docs/Engineering/CHARACTER_GAMEPLAY_ARCHITECTURE.md#architecture-v2-3-capability-components-20260915), 이어 [Migration v2.3 실행 순서](Docs/Engineering/CHARACTER_TAG_ABILITY_MIGRATION.md#p1-v2-3-capability-component-migration-20260915)을 읽는다. v2.2의 GAS 중심·단순성 원칙은 유지되고 Component/CombatComponent/P1 입력 세부만 v2.3이 구체화한다.
+- Component는 선언한 owner 계약을 만족하는 모든 Actor에 붙여 같은 능력을 제공해야 한다. 하나의 전투 능력을 작은 Component 다수로 기계적으로 분할하지 않는다.
+- `UKhazanCombatComponent`는 유효한 ASC를 가진 Actor의 공통 전투 교환 경계로 P3 첫 실제 hit와 함께 만든다. P1에는 hit/damage 소비가 없으므로 빈 wrapper를 선행 생성하지 않는다.
+- 현재 공동 구현 진입점은 [P1 최소 실습판 v2.3의 P1.1](Docs/Engineering/CHARACTER_TAG_ABILITY_P1_MINIMAL_WALKTHROUGH.md#p1-minimal-walkthrough-v2-3-20260915)이다. 새 Khazan ASC의 Input Tag→Spec activation 한 기능과 기존 Character default subobject 교체만 적용한 뒤 cold build한다.
+- 위 실습은 사용자가 Source를 직접 적용하는 설명 절차다. 문서 작성 자체를 게임 Source/BP/asset 적용·빌드·PIE 완료로 기록하지 않는다.
+
+
+## 2026-09-15 전역 capability component 기준과 P1.2
+
+- 최신 Component 해석은 [Architecture v2.4 전역 Component 원칙](Docs/Engineering/CHARACTER_GAMEPLAY_ARCHITECTURE.md#architecture-v2-4-global-component-rule-20260915)이다. `CombatComponent`는 예시이며 P3 필수 타입이 아니다. 모든 Component는 호환 owner에 부착했을 때 완결된 능력과 실제 상태/cleanup을 제공해야 하고, 작은 책임 분류만을 위해 새 Component를 만들지 않는다.
+- 후속 구현 순서는 [Migration v2.4 P1.2 수정](Docs/Engineering/CHARACTER_TAG_ABILITY_MIGRATION.md#p1-v2-4-direct-definition-grants-20260915)을 사용한다. 현재 grant source가 CharacterDefinition 하나이므로 별도 AbilitySet asset을 선행 생성하지 않는다.
+- P1.1 Source와 UE 5.8.2 cold build는 실제 확인됐다. 새 PIE 회귀는 누적 검증 대기다.
+- 현재 공동 구현은 [P1 최소 실습판의 P1.2 직접 초기 Ability grant](Docs/Engineering/CHARACTER_TAG_ABILITY_P1_MINIMAL_WALKTHROUGH.md#p1-1-applied-p1-2-direct-grants-20260915)다. 사용자가 Definition의 최소 배열과 Character authority one-shot grant를 적용한다.
+
+
+## 2026-09-15 P1.2 확인 뒤 P1.3 조회 순서
+
+- P1.2 Source와 UE 5.8.2 build는 확인됐다. 새 PIE/runtime 검증은 누적 대기다.
+- 현재 공동 구현은 [P1 최소 실습판의 P1.3 BasicAttack class와 첫 granted Spec](Docs/Engineering/CHARACTER_TAG_ABILITY_P1_MINIMAL_WALKTHROUGH.md#p1-2-applied-p1-3-basic-attack-spec-20260915)이다.
+- 용어는 `FKhazanInitialAbilityGrant` 정적 지시 → 임시 `FGameplayAbilitySpec` → authority `GiveAbility()` → ASC 소유 granted Spec/Handle → 이후 `TryActivateAbility()`와 Ability instance 실행 순으로 구분한다. `EndAbility()`는 실행만 끝내며 `ClearAbility()`가 grant 자체를 회수한다.
+

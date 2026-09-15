@@ -2,9 +2,11 @@
 #include "KhazanCharacter.h"
 #include "Component/KhazanLocomotionComponent.h"
 #include "Data/KhazanCharacterDefinitionData.h"
-#include "AbilitySystemComponent.h"
+#include "Ability/KhazanAbilitySystemComponent.h"
+#include "GameplayAbilitySpec.h"
 #include "LogChannels.h"
 #include "Engine/World.h"
+#include "System/KhazanAssetManager.h"
 
 // Sets default values
 AKhazanCharacter::AKhazanCharacter()
@@ -13,7 +15,7 @@ AKhazanCharacter::AKhazanCharacter()
 	
 	LocomotionComponent = CreateDefaultSubobject<UKhazanLocomotionComponent>(TEXT("LocomotionComponent"));
 	
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+	AbilitySystemComponent = CreateDefaultSubobject<UKhazanAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 }
 
 void AKhazanCharacter::BeginPlay()
@@ -48,10 +50,16 @@ void AKhazanCharacter::PostInitializeComponents()
 	// 따라서 생성자에서 ASC를 만들고 여기서 ActorInfo를 연결.
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	
+	CharacterDefinition = 
+		UKhazanAssetManager::GetAssetByName<UKhazanCharacterDefinitionData>
+	(CharacterDefinitionAssetName, false);
+	
 	//  Character가 사용할 정적 Definition이 지정됐는지 검사한다.
 	if (!IsValid(CharacterDefinition))
 	{
-		UE_LOG(LogDefault, Error, TEXT("%s has no CharacterDefinition."), *GetNameSafe(this));
+		UE_LOG(LogDefault, Error, TEXT("%s has no loaded CharacterDefinition for tag [%s]."),
+			*GetNameSafe(this),
+			*CharacterDefinitionAssetName.ToString());
 		return;
 	}
 
@@ -60,6 +68,35 @@ void AKhazanCharacter::PostInitializeComponents()
 	{
 		UE_LOG(LogDefault, Error, TEXT("%s failed to initialize locomotion from %s."),
 			*GetNameSafe(this), *GetNameSafe(CharacterDefinition));
+		
+		return;
+	}
+	
+	if (HasAuthority())
+	{
+		for (const FKhazanInitialAbilityGrant& InitialAbilityGrant : CharacterDefinition->GetInitialAbilityGrants())
+		{
+			if (!InitialAbilityGrant.AbilityClass)
+			{
+				UE_LOG(LogDefault, Error,
+					TEXT("%s has an InitialAbilityGrant with no AbilityClass "
+						 "in %s (InputTag: %s)."),
+					*GetNameSafe(this),
+					*GetNameSafe(CharacterDefinition),
+					*InitialAbilityGrant.InputTag.ToString());
+				
+				continue;
+			}
+			
+			FGameplayAbilitySpec AbilitySpec(InitialAbilityGrant.AbilityClass);
+			
+			if (InitialAbilityGrant.InputTag.IsValid())
+			{
+				AbilitySpec.GetDynamicSpecSourceTags().AddTag(InitialAbilityGrant.InputTag);
+			}
+			
+			AbilitySystemComponent->GiveAbility(AbilitySpec);
+		}
 	}
 }
 

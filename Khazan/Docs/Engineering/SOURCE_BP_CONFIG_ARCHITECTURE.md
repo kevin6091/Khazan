@@ -160,3 +160,17 @@
 - `ReleaseByName(FName)`은 기존 경로의 asset leaf name을 받는다. `AssetData.InputData`와 같은 catalog tag를 넣는 API가 아니다. Release는 manager의 보관 참조를 제거하며 다른 UObject 참조까지 강제로 해제하지 않는다.
 - 최종 저장본의 전체 Development Editor 빌드 및 DevMap 새 프로세스 시작/종료는 통과했다. 상세 로그와 Python 보조 검사의 접근 제한은 [진단 기록](BUILD_RUNTIME_DIAGNOSTICS.md)의 같은 날짜 절에 기록했다.
 - Character Definition tag/selector/catalog/BP 연결과 gameplay 값은 수정하지 않았다. 다음 사용자 적용 절차는 [Step 2 복원 후 연결 절차](CHARACTER_TAG_ABILITY_STEP_2.md#asset-manager-rollback-next-20260911)를 따른다. 앞 절의 tag cache/FindLoaded 이관 안내는 이 절이 대체한다.
+
+## 2026-09-15 Definition 이름 조회의 현재 사용자 소스
+
+- `AssetData_CharacterDefinition_Khazan` native tag와 문자열 `AssetData.CharacterDefinition.Khazan`이 h/cpp에 등록됐다. `GetAssetByName`은 현재 `const FGameplayTag&`, `const bool bLoadIfMissing = true`를 받으며 false는 TryLoad 분기를 실행하지 않는다. 기존 InputData 인자 하나 호출은 유지된다.
+- Character는 `CharacterDefinitionAssetName` EditDefaultsOnly 선택자를 가지고 `PostInitializeComponents`의 GameWorld 검사/ASC ActorInfo 뒤에 false 조회를 수행한다. actor/tag 실패 로그와 config 전달도 반영됐다.
+- 객체 참조 `CharacterDefinition`의 UPROPERTY는 아직 EditDefaultsOnly다. Transient/VisibleInstanceOnly로 바꿀 사용자 적용 항목이 남으며 런타임 전용 참조 이관이 완료됐다고 기록하지 않는다.
+- catalog/Definition/Player BP의 정확한 대상 경로는 유지된다. 파일은 존재하지만 이번 도구로 저장된 entry/selector 값을 읽지 못했다. 에디터 등록과 관측 절차는 [Step 2 §29](CHARACTER_TAG_ABILITY_STEP_2.md#definition-editor-followthrough-20260915)에 기록했다.
+
+## 2026-09-15 Character Definition selector와 저장 에셋 연결 확인
+
+- native gameplay tag AssetData.CharacterDefinition.Khazan은 AssetData catalog의 Definition soft path를 선택하는 안정된 key다. BP_KhazanPlayer Class Default는 이 tag만 저장하고 runtime CharacterDefinition 포인터는 저장하지 않는다.
+- Character는 GameWorld 초기화에서 GetAssetByName(CharacterDefinitionAssetName, false)로 이미 Preload된 객체만 받아 LocomotionComponent에 config를 값 복사한다. false는 누락을 즉석 동기 로드로 숨기지 않고 preload 계약 실패를 드러내기 위한 소비자 정책이다.
+- CharacterDefinition UPROPERTY는 Transient, VisibleInstanceOnly, BlueprintReadOnly다. 이는 런타임 결과 관측을 허용하면서 BP 기본값이 catalog 선택과 별개의 hard reference가 되는 것을 막는다.
+- 현재 Player의 저장 selector, catalog entry/path/label, Definition config는 일치한다. cold build와 새 프로세스 PIE 검증 전이므로 runtime 완료 판정은 보류한다.

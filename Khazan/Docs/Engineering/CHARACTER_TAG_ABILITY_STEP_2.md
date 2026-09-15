@@ -3845,3 +3845,149 @@ Editor를 닫고 전체 `KhazanEditor Win64 Development` 빌드를 통과시킨 
 - 초기화 순서를 모든 Pawn에 일반화하지 않는다. 설치된 UE 5.8 `Engine/Source/Runtime/Engine/Private/Pawn.cpp`에서 Player auto possession은 `PreInitializeComponents`, AI auto possession은 `PostInitializeComponents` 내부에서 발생할 수 있음을 소스로 확인했다. Definition/config 성공 후에도 intent 획득 실패가 남으면 실제 spawn/auto-possession 경로와 호출 순서를 확인한다. 이번에는 관련 게임 코드를 수정하거나 runtime 호출 순서를 검증하지 않았다.
 - 이번 검증은 현재 소스/설정/기존 기록 및 해당 엔진 소스의 읽기 전용 대조다. 직전 복원본의 빌드/시작 성공을 위 미적용 제안의 빌드/PIE 성공으로 기록하지 않는다.
 
+<a id="definition-editor-followthrough-20260915"></a>
+
+## 29. 2026-09-15 — Definition 연결 소스 사용자 반영 확인과 에디터 후속 절차
+
+### 현재 소스와 한 가지 남은 적용 항목
+
+- 사용자가 Definition native tag 선언/정의, `GetAssetByName`의 `const bool bLoadIfMissing = true` 및 조건 분기, Character의 GameplayTag include/선택자, `PostInitializeComponents()`의 `GetAssetByName<UKhazanCharacterDefinitionData>(CharacterDefinitionAssetName, false)`와 actor/tag 실패 로그를 반영했다.
+- `const bool` 값 인자는 유효하다. 이전 예제와 const 표기가 다르다는 이유로 바꾸지 않는다. 이름 조회와 config 초기화의 호출 위치도 현재 제안과 일치한다.
+- 아직 `KhazanCharacter.h`의 `CharacterDefinition` 객체 포인터는 `EditDefaultsOnly`다. 선택자 `CharacterDefinitionAssetName`의 `EditDefaultsOnly`는 유지하고, 객체 포인터의 UPROPERTY만 다음으로 마무리해야 한다. 아래 코드는 사용자 적용 전이다.
+
+```cpp
+UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadOnly,
+    Category = "Character|Definition", meta = (AllowPrivateAccess = "true"))
+TObjectPtr<UKhazanCharacterDefinitionData> CharacterDefinition = nullptr;
+```
+
+- `Transient`는 실행 중 얻은 참조를 영속 기본값으로 저장/로드하지 않게 한다. `VisibleInstanceOnly`는 실행 인스턴스에서 연결 결과를 읽기용으로 보여 준다. `BlueprintReadOnly`는 BP 대입을 막고 `AllowPrivateAccess`는 private 멤버의 BP 읽기를 허용한다. TObjectPtr/UPROPERTY의 참조 보관은 유지된다.
+- 현 cpp는 옛 기본 포인터도 manager 조회 결과로 덮어쓴다. 따라서 옛 포인터가 조회 실패의 fallback이 된다고 설명하지 않는다. 다만 BP가 직접 DA를 hard-reference하면 BP 로드 시 DA가 먼저 로드되어 Preload 등록 누락을 가릴 수 있으므로 설정 입력을 tag 하나로 마무리한다.
+
+### 따라 할 에디터 연결 순서
+
+1. 위 property 수정을 저장한다. 실행 중인 Editor의 작업을 저장하고 종료한 다음 `KhazanEditor Win64 Development` 전체 빌드를 수행한다. 새 native property/tag를 가진 Editor로 재실행한다. 이 기록에서는 새 빌드를 실행하지 않았다.
+2. 이미 존재하는 `/Game/Data/Character/DA_CharacterDefinition_Khazan`을 확인한다. 타입은 `UKhazanCharacterDefinitionData : UDataAsset`, 데이터 영역은 `LocomotionConfig`다. 새 에셋을 만들거나 이 단계에서 값을 다시 선정하지 않는다.
+3. `/Game/Data/PDA_AssetData`를 열고 Details에서 `Asset Group Name To Set` → 기존 `Data` map 값 → `Asset Entries`를 펼친다. Definition 이름 태그의 기존 entry가 있으면 값을 확인하고, 없을 때만 entry를 하나 추가한다.
+4. `Asset Name`은 `AssetData.CharacterDefinition.Khazan`, `Asset Path`는 `/Game/Data/Character/DA_CharacterDefinition_Khazan.DA_CharacterDefinition_Khazan`, `Asset Labels` 배열의 항목은 `AssetLabel.Preload`다. DataAsset 객체이므로 `_C`나 `.uasset`을 붙이지 않는다. 기존 InputData entry는 보존한다.
+5. catalog를 저장한다. 편집 원본은 `AssetGroupNameToSet`이며 name/label index는 `PreSave`/`PostLoad`에서 재구성된다. `Data`는 편집 그룹이고 이름 태그·Preload 라벨과 다른 역할이다. 태그 선언만으로 entry가 생기거나 Preload 대상이 되지 않는다.
+6. `/Game/_Art/Kazan/Character/Bluprints/BP_KhazanPlayer`를 열고 Class Defaults → `Character|Definition` → `Character Definition Asset Name`에 동일한 이름 태그를 선택한다. 기존 inherited property를 사용하며 같은 이름의 BP 변수를 새로 만들지 않는다. Compile/Save한다.
+7. 선택 태그는 CDO에 저장되는 클래스 기본 설정, `CharacterDefinition`은 Pawn 초기화에서 얻은 객체 참조, Component의 `MovementConfig`는 검증 후 복사한 Pawn별 설정이다. 실행 중 DA 편집이 이미 복사된 config를 자동 교체하지 않는다.
+8. catalog/BP 설정을 저장한 뒤 새 Editor 프로세스를 시작하고 Definition 에셋을 먼저 열지 않은 상태에서 `/Game/Maps/DevMap` PIE를 수행한다. Manager의 이미 로드된 catalog 검사와 다른 경로의 DA 로딩이 결과를 가릴 수 있기 때문이다. false 조회 성공은 객체의 메모리 존재/타입 확인이며 Preload 경로의 단독 증명은 아니다.
+
+### 관측 순서와 예상 결과
+
+- Output Log에서 Player의 `has no loaded CharacterDefinition for tag`, `Invalid locomotion config`, `failed to initialize locomotion`, `could not acquire a locomotion intent source`를 구분한다. 첫 오류가 원인이고 뒤의 intent 오류가 후속 결과일 수 있다.
+- PIE 중 Shift+F1로 마우스를 사용하고 World Outliner에서 실제 Player 인스턴스를 선택한다. runtime `CharacterDefinition`은 해당 DA를 가리켜야 한다. Class Defaults와 실행 인스턴스를 혼동하지 않는다.
+- Character Movement Component의 `MaxWalkSpeed`는 config의 `GetSpeedForGait(ResolvedGait)` 결과와 일치해야 한다. MinAnalogWalkSpeed/MaxAcceleration/BrakingDecelerationWalking도 대응 config 값과 비교한다. 최대 속도 설정과 순간 Velocity를 같은 값으로 요구하지 않는다.
+- 현재 native `GetCharacterDefinition`/`IsMovementInputAllowed`에는 UFUNCTION이 없다. BP 관측은 existing `GetLocomotionComponent`와 `GetLocomotionIntentSnapshot`/`GetResolvedMovementPolicySnapshot`을 사용한다. 이 연결을 위해 새 관측 멤버/manager/helper를 추가하지 않는다.
+- 기존 입력으로 Walk/Run/Sprint 요청, 이동 해제 뒤 raw direction/amount 정리와 Stop, Sprint 해제, Stop PIE/재 PIE를 확인한다. 사용자 DA 값은 이관/설정값이며 원작 metadata 검증값으로 승격하지 않는다.
+- 선택 태그를 잠시 비운 별도 PIE에서 actor/tag 로그와 이동 준비 거절, crash 없음이 기대 결과다. 이후 태그를 복구하고 Compile/Save/새 PIE로 정상 상태를 다시 확인한다.
+- Definition/config 성공 뒤 intent 실패만 남으면 config 준비와 실제 Possess 시점을 대조한다. Player Auto Possess/AI Auto Possess는 일반 GameMode 생성과 순서가 다를 수 있다. 이번에는 runtime 호출 순서를 검사하거나 관련 수명을 수정하지 않았다.
+- 아직 Definition이 없는 시험 Monster의 로그는 Player 연결 성공과 별개다. Player tag를 공통 Character 기본값에 강제하거나 Monster를 임의 삭제하지 않는다.
+
+### 실제 검증 범위
+
+- 현재 C++/Config와 세 에셋의 파일 존재를 읽기 전용으로 확인했다. Rider의 `KhazanCharacter.cpp` 분석은 errors 0이지만 UHT/전체 빌드/PIE 검증을 대신하지 않는다.
+- RiderLink는 연결되지 않았고 `get_asset_properties`는 세 에셋 모두 빈 properties 목록을 반환했다. 이는 catalog entry/Player selector/config가 비어 있다는 증거가 아니다. 현재 저장값과 runtime CDO는 이번에 확정하지 못했으므로 이미 등록돼 있으면 중복 추가 없이 대조하도록 안내한다.
+- 게임 Source/BP/Config/uasset 및 gameplay 수치를 직접 수정하지 않았다. 이번에는 설명/상태 문서만 추가한다.
+- 남은 순서: runtime pointer property 마무리 → 전체 빌드 → catalog/BP 연결 → 새 프로세스 Player 초기화/이동 확인 → M2.2 나머지 constraint/token/빙의·종료 검증. M2.3 AI/M3는 아직 시작하지 않는다.
+
+
+<a id="m2-2-padless-runtime-verification-20260915"></a>
+
+## 30. 2026-09-15 Definition 데이터 연결 완료 확인과 패드 없는 M2.2 런타임 검증 절차
+
+- 실제 저장 에셋을 읽기 전용으로 확인했다. `/Game/Data/PDA_AssetData`의 `Data` 그룹에는 `AssetData.CharacterDefinition.Khazan` → `/Game/Data/Character/DA_CharacterDefinition_Khazan.DA_CharacterDefinition_Khazan` 항목과 `AssetLabel.Preload`가 있으며, `BP_KhazanPlayer`의 `CharacterDefinitionAssetName`도 같은 태그다.
+- Definition의 LocomotionConfig 저장값은 Walk/Run/Sprint `170/470/600`, MinAnalogWalkSpeed `15`, MaxAcceleration/BrakingDecelerationWalking `1800/1800`, RotationRate Yaw `540`, 기본 요청 Walk, 최대 허용 Sprint, 기본 회전 VelocityDirection이다. 이 값들은 현재 프로젝트 이관값이며 이번 확인만으로 원작 메타데이터 직접 검증값으로 승격하지 않는다.
+- C++의 runtime 참조는 `Transient + VisibleInstanceOnly + BlueprintReadOnly`로 정리됐고, `GetAssetByName(CharacterDefinitionAssetName, false)` 결과를 LocomotionComponent 초기화에 전달한다. CMC 속성의 직접 쓰기 지점은 현재 LocomotionComponent 하나로 확인됐다.
+- 현재 `IMC_Default`의 Move/Sprint는 각각 `Gamepad_Left2D`와 `Gamepad_LeftThumbstick`만 연결돼 있어 키보드로 동일 경로를 물리 입력할 수 없다. 프로덕션 IMC를 바꾸지 않고 UE Enhanced Input 콘솔의 `Input.+key`/`Input.-key`로 이 실제 매핑 경로를 주입해 M2.2를 검증한다.
+- 다음 즉시 작업은 `/Game/Test/M2/BP_M2MovementProbe` 테스트 전용 Actor를 만들고, 의도/정책 snapshot, gait·rotation constraint A/B handle, Block GE A/B handle을 독립 관측하는 것이다. 중첩 제거 순서, 잘못된 두 번째 제거, 태그 차단 중 raw intent 보존, Stop PIE/재PIE 정리를 모두 통과해야 M2.2를 닫는다.
+- 최신 소스와 저장 에셋은 확인했지만 이번 변경분을 대상으로 한 Editor 완전 종료 상태의 cold build 및 위 PIE 행렬은 아직 실행하지 않았다. 따라서 M2.2 완료로 기록하지 않으며 M2.3 AI 구현으로 넘어가지 않는다.
+- 실제 API 이름은 `IsActiveLocomotionIntentHandle`이다. 과거 M2.3 예시의 `IsMoveIntentHandleActive` 표기는 현행 선언으로 사용하지 않는다.
+
+
+<a id="m2-2-runtime-result-20260915"></a>
+
+## 31. 2026-09-15 — M2.2 테스트 이벤트 인수와 실제 PIE 결과
+
+### 테스트 BP 정리
+
+- 사용자가 만들다 중단한 실제 에셋은 `/Game/Test/BP_M2MovementProbe`다. 원본은 `Saved/CodexBackups/BP_M2MovementProbe_before_takeover_20260915_141814.uasset`에 보관했다.
+- 기존 Key `1` 경로의 `AcquireMovementConstraint`에는 필수 `Constraint` 구조체가 연결되지 않아 BP가 컴파일되지 않았다. `FKhazanMovementConstraint` Make Struct를 추가하고 `MaxAllowedGait=Run`, `bOverrideRotationMode=false`, `DebugName=Test.Gait.A`를 지정했다.
+- Key `1`은 보관 중인 `GaitHandleA`를 먼저 해제한 뒤 `Source=Self`로 새 제약을 획득하고 반환 handle을 `GaitHandleA`에 저장한다. 같은 키를 반복해도 이전 제약을 잃지 않는다. Key `2`는 해당 handle만 해제한다.
+- 실패 출력의 임시 문구를 `M2 Probe: TargetCharacter not found`로 바꾸고 Key `0`의 Released 중복 출력을 끊었다. `BlockEffectClass` 기본값은 `/Game/Test/GE_Test_BlockMovement.GE_Test_BlockMovement_C`다.
+- 최종 BP compile 상태는 `BS_UP_TO_DATE`이며 저장 뒤 dirty content/map package는 없었다. 제품 C++과 생산 입력 자산은 이번 테스트 인수에서 수정하지 않았다.
+
+### 실제 입력과 정책 결과
+
+- 새 PIE 기준은 Player Definition 연결 성공, raw input `0`, 요청/해결 gait `Walk`, tag 허용 `true`, 최대 허용 gait `Sprint`, 회전 `VelocityDirection`, 정책/CMC `MaxWalkSpeed=170`, 실제 Velocity `0`이었다.
+- 실제 `IMC_Default`의 `Gamepad_Left2D` 매핑을 콘솔로 주입했다. 크기 `0.5`에서는 raw `0.5`, Walk, 정책/CMC `170`, 실제 평면 속도 `170`이었고 크기 `1.0`에서는 Run, 정책/CMC `470`, 실제 평면 속도 `470`이었다.
+- 실제 `Gamepad_LeftThumbstick` 매핑을 프레임을 나눠 눌렀다 놓자 Run→Sprint `600`, 다시 눌렀다 놓자 Sprint→Run `470`으로 토글됐다.
+- 아날로그 키용 `Input.-key`는 UE 5.8의 `RemoveForcedInput(FKey)`가 직전 값을 상쇄하려고 반대 벡터를 release event로 주입한다. 로컬 엔진 `EnhancedInputSubsystemInterface.cpp:1315-1357`에서 이 동작을 확인했다. 이 한 프레임의 음수 샘플을 프로젝트 Released 실패로 판정하지 않았다.
+- release 경로는 `Input.+action IA_Move X=0.5 Y=0` 뒤 `Input.-action IA_Move`로 분리 검사했다. `InputAmount 0.5→0`, `MoveInputWorld (0.5,0,0)→(0,0,0)`, 접지 상태 평면 속도 `170→0`이 되어 실제 `IA_Move Completed → HandleInputMoveReleased`가 통과했다.
+
+### 제약 handle 행렬
+
+- 요청 gait가 Sprint인 상태에서 Gait A=`Run`을 얻으면 해결 gait/CMC가 Run/`470`, Gait B=`Walk`을 추가하면 Walk/`170`이었다.
+- A만 해제해도 B가 남아 Walk/`170`을 유지했다. 같은 A handle의 두 번째 해제는 false였고 다른 제약을 건드리지 않았다. B를 해제하면 Sprint/`600`으로 복구됐다.
+- Rotation A=`LookingDirection`, priority 1 뒤 B=`LockOn`, priority 2를 얻으면 B가 이겼다. B 해제 뒤 A, A 해제 뒤 기본 `VelocityDirection`과 CMC 회전 flag 조합으로 각각 복구됐다.
+- 같은 priority 1에서는 나중에 얻은 B=`LockOn`이 이겼고, B 해제 뒤 먼저 얻은 A=`LookingDirection`으로 돌아갔다. 마지막에는 모든 시험 handle을 해제해 Sprint/VelocityDirection 기본 정책으로 정리했다.
+
+### Block GE 중첩과 입력 보존
+
+- Run raw input `1.0`을 유지한 상태에서 실제 Player ASC에 `GE_Test_BlockMovement` A를 적용했다. A handle은 valid/active, tag count는 `1`, 허용은 false였고 raw input과 요청 Run/정책 `470`은 보존됐다. 450 ms 뒤 평면 속도는 CMC 제동으로 `0`이었다.
+- B를 별도 handle로 적용하면 A/B가 모두 active이고 count `2`였다. A만 제거하면 A inactive/B active, count `1`, 허용 false, 속도 `0`을 유지했다.
+- B를 제거하면 count `0`, 허용 true가 됐다. 새 Move event를 넣지 않은 채 400 ms 뒤 보존된 raw input으로 Run/평면 속도 `470`이 자동 재개됐다. 서로 다른 원인의 효과 handle을 개별 회수하고 raw intent와 출력 gate를 분리하는 계약이 통과했다.
+
+### 빙의와 종료 수명
+
+- raw input `1.0`과 Sprint 요청이 있는 상태에서 PlayerController를 UnPossess했다. 이전 Pawn은 input `0`, 방향 `0`, 요청/해결 Walk, intent source `None`이 됐다.
+- 같은 Pawn을 Repossess한 직후 source는 새 `PlayerController`였지만 raw input은 `0`이라 옛 입력이 재생되지 않았다. 새 `IA_Move 0.5`는 정상 수신됐고 action 제거 뒤 다시 `0`으로 정리됐다.
+- PIE 종료 후 새 PIE에서 tag count `0`, 허용 true, 활성 raw input `0`, 최대 gait Sprint, 해결 Walk, 회전 VelocityDirection, 정책/CMC `170`, Velocity `0`을 확인했다. 마지막 Stop PIE는 Idle로 끝났다.
+- 전체 `Khazan.log`에는 자동화 하니스가 올바른 UE Python API와 GE class 경로를 찾는 동안 발생한 `AttributeError`, read-only tag 대입, 잘못된 class path 경고가 남아 있다. 수정한 API로 다시 실행한 합격 행렬과 구분한다. 실제 gameplay assertion/fatal은 없고, Probe 수리 뒤 Blueprint compiler error도 없다. 같은 시간대 WildBoar import 경고는 별도 작업이므로 이 판정에서 제외했다.
+
+### 빌드 근거, 판정, 다음 경계
+
+- 전체 `Source`의 최신 파일은 `KhazanCharacter.h` `2026-09-15 12:53:50.343`, 정식 모듈 `UnrealEditor-Khazan.dll`은 `12:54:17.263`, 이번 검증에 사용한 Editor 시작은 `13:31:08.556`이다. 정식 모듈이 모든 현재 source보다 새롭고 Editor가 그 뒤 시작됐으므로 이번 PIE가 현재 C++을 반영한 재시작 모듈에서 실행된 것은 확인된다. 이번 인수 중 별도의 cold-build 명령 transcript를 새로 만들지는 않았다.
+- 물리 패드는 없어서 실제 하드웨어 press/release 신호만 미검증이다. 실제 mapping과 action binding은 Enhanced Input 콘솔 주입으로 검사했으며 이 장비 제약은 위 runtime 행렬의 통과 결과와 구분한다.
+- 상세 원시 결과는 `Saved/Reports/M2_2_RuntimeProbe_20260915.json`에 저장했다. 콘솔 key-release artifact는 정상 입력 결과와 별도 진단 절로 분리했다.
+- 이 결과로 M2.2의 Player Definition/입력/단일 CMC 정책/제약·효과·intent handle/빙의·반복 PIE 조건을 통과로 닫는다. M2.3 AI 구동은 아직 구현하거나 검증하지 않았으며 다음 작업은 21절의 일반 적 공통 CMC·AIController·PathFollowing 연결부터 시작한다.
+## 2026-09-15 — M2.3-A 현행 심볼·초기화 순서 정정
+
+이 절은 앞선 21절의 M2.3 초안 중 현행 소스와 충돌하는 부분을 대체한다. 이번 사용자 적용 범위는 공통 AI 이동의 native 접속과 첫 cold build까지다. Blackboard/Behavior Tree/NavMesh/Probe 통합은 이 build와 Player CDO 회귀를 확인한 뒤 M2.3-B에서 수행한다.
+
+- 현행 intent API는 `BeginLocomotionIntentSource`, `EndLocomotionIntentSource`, `IsActiveLocomotionIntentHandle`이다. 앞선 21절의 `BeginMoveIntentSource`, `EndMoveIntentSource`, `IsMoveIntentHandleActive`는 현재 호출명으로 사용하지 않는다.
+- 현행 Definition 필드는 `DefaultRequestedGait`이며 Character는 `CharacterDefinitionAssetName` tag를 `UKhazanAssetManager::GetAssetByName(..., false)`로 조회한다. 앞선 직접 `PDA_Character_*` object pointer와 `DefaultTargetGait` 절차는 폐기된 연결 방식이다.
+- `KhazanAIController.h`가 `AAIController`를 직접 상속하므로 `Khazan.Build.cs`에는 `AIModule`을 Public dependency로 추가한다. 이번 native 코드가 `UNavigationSystemV1`나 `NavigationSystem` 헤더를 직접 사용하지 않으므로 `NavigationSystem`을 별도 직접 dependency로 선행 추가하지 않는다. UE 5.8.2의 `AIModule`이 이를 public dependency로 이미 제공한다.
+- `UKhazanCharacterMovementComponent`는 `RequestPathMove`와 `RequestDirectMove`에서 허용 여부를 검사하기 전에 AI raw 방향을 현행 intent handle로 기록한다. 차단이면 pending path/direct 요청만 지우며 raw intent와 현재 Velocity를 직접 지우지 않는다.
+- `AKhazanAIController`는 active `FAIRequestID`, 자신이 movement block 때문에 실제 pause한 request ID, locomotion permission delegate handle, AI intent handle을 각각 보관한다. pause request ID의 유효성 자체가 소유 표식이므로 같은 사실을 나타내는 별도 bool은 추가하지 않는다. 완료/실패/Abort/UnPossess/EndPlay에서 현재 Pawn·request·handle에 해당하는 상태만 정리한다.
+- 테스트 BP가 실제 소비하도록 Controller에 `SetRequestedGait(EKhazanGait)` BlueprintCallable 어댑터 한 개를 둔다. test Monster는 기존 `AssetData.CharacterDefinition.Khazan` Definition을 재사용하고 BP possess event에서 Run을 요청할 수 있으므로, 테스트 전용 native asset tag와 Definition을 생산 코드에 추가하지 않는다.
+
+### 자동 AI 빙의 전에 Definition을 준비해야 하는 이유
+
+UE 5.8.2의 `APawn::PostInitializeComponents()`는 자기 `Super` 호출 뒤 `AutoPossessAI` 조건을 검사하고 `SpawnDefaultController()`를 호출한다. 현재 `AKhazanCharacter::PostInitializeComponents()`가 먼저 `Super::PostInitializeComponents()`를 호출한 뒤 ASC/Definition/Locomotion config를 준비하므로, `AKhazanMonster`에 자동 AI 빙의를 켜면 `AKhazanAIController::OnPossess()`가 config 준비 전에 실행된다. 이때 `BeginLocomotionIntentSource()`는 의도대로 fail closed한다.
+
+M2.3-A에서는 `AKhazanCharacter::PostInitializeComponents()`의 gameplay-world 초기화 블록을 `Super::PostInitializeComponents()`보다 앞에 놓고, 어떤 실패 분기에서도 부모 호출을 건너뛰지 않도록 early return을 제거한다. Component 등록과 `UAbilitySystemComponent::InitializeComponent()`는 Actor의 PostInitializeComponents 진입 전에 끝나 있으므로 ASC ActorInfo 저장소는 준비돼 있다. 이 순서로 Definition/config와 ASC ActorInfo가 먼저 준비되고, 부모의 AI 자동 빙의 중에는 `PossessedBy()` 갱신과 AI intent 발급이 유효해진다.
+
+### M2.3-A 사용자 적용 파일과 정지점
+
+
+1. `Source/Khazan/Khazan.Build.cs`: Public dependency에 `AIModule` 추가.
+2. `Source/Khazan/Character/Movement/KhazanCharacterMovementComponent.h/.cpp`: acceleration-based path 설정, raw navigation intent 기록, 최종 permission gate, pending 요청 정리.
+3. `Source/Khazan/Character/KhazanCharacter.h/.cpp`: `FObjectInitializer` 생성자와 inherited `CharacterMovement` default subobject class 교체, 위 PostInitializeComponents 순서 보강.
+4. `Source/Khazan/AI/KhazanAIController.h/.cpp`: intent/delegate/request ID 소유, pause/resume/completion/UnPossess/EndPlay cleanup, test에서 소비할 gait 요청 어댑터.
+5. `Source/Khazan/Character/KhazanMonster.cpp`: 공통 AIController class와 `PlacedInWorldOrSpawned` 자동 빙의 기본값.
+6. Editor 완전 종료 상태에서 `KhazanEditor Win64 Development` 전체 build. 새 Editor에서 `BP_KhazanPlayer`를 Compile/Save하고 inherited movement component class와 기존 Definition selector, PIE 시작 오류가 없는지 확인한 시점에서 정지한다.
+
+이 기록은 구현 지침이며 위 Source 변경, build, BP Compile, PIE를 어시스턴트가 수행했다는 뜻이 아니다. M2.3-B는 실제 M2.3-A 적용본을 다시 읽은 뒤 `/Game/Test/M2`의 test Monster/controller, Blackboard, Behavior Tree, NavMesh와 기존 `/Game/Test/BP_M2MovementProbe`를 연결한다.
+
+
+## 2026-09-15 — M2.3-A 적용 보류와 Player P1로 전환
+
+- 사용자 요청에 따라 AIController를 Player 전투 기반보다 먼저 구현하는 순서를 재검토했다. M2.2 Player runtime 행렬의 합격은 유지하지만, 이 문서 21절과 직전 M2.3-A 안내는 **현재 따라 할 절차가 아니다.**
+- 아직 `UKhazanCharacterMovementComponent`, `AKhazanAIController`, Monster 자동 AI 빙의, Blackboard/Behavior Tree 시험 자산이 적용되지 않았으므로 되돌릴 게임 파일은 없다.
+- 기존 21절의 PathFollowing raw intent, concrete request ID, 자기 pause 소유권, same-request resume, Abort/UnPossess cleanup 원칙은 미래 A1의 검토 자료로 보존한다. P1–P8에서 확정될 Ready/ActionRequest/Stamina/Dead/SprintPivot 중단 계약을 반영하지 않은 채 코드를 그대로 복사하지 않는다.
+- 현재 다음 절차는 [Migration의 2026-09-15 Player 우선 개정](CHARACTER_TAG_ABILITY_MIGRATION.md#player-first-migration-20260915)의 **P1 — Player 공통 ActionRequest와 Basic Attack 실행 수직 절편**이다.
+- P1 전에는 AI Build.cs 의존성, custom CMC, AIController, Monster Definition/BT/BB/NavMesh를 만들지 않는다. Player 공격의 피격 대조에는 Controller 없는 `AKhazanMonster` 기반 시험 target을 사용할 수 있지만 AI 구현 완료로 세지 않는다.
+- 이번 항목은 절차 정정이다. Source/BP/DataAsset/Animation을 수정하거나 M2.3/P1 빌드·PIE를 수행하지 않았다.

@@ -25,7 +25,7 @@ public:
 	static void Initialize();
 
 	template<typename AssetType>
-	static AssetType* GetAssetByName(const FGameplayTag& AssetName);
+	static AssetType* GetAssetByName(const FGameplayTag& AssetName, const bool bLoadIfMissing = true);
 	
 	static void LoadSyncByPath(const FSoftObjectPath& AssetPath);
 	static void LoadSyncByName(const FGameplayTag& AssetName);
@@ -51,7 +51,7 @@ private:
 };
 
 template <typename AssetType>
-AssetType* UKhazanAssetManager::GetAssetByName(const FGameplayTag& AssetName)
+AssetType* UKhazanAssetManager::GetAssetByName(const FGameplayTag& AssetName, const bool bLoadIfMissing)
 {
 	UKhazanAssetData* AssetData = Get().LoadedAssetData;
 	if (!AssetData)
@@ -65,7 +65,7 @@ AssetType* UKhazanAssetManager::GetAssetByName(const FGameplayTag& AssetName)
 	if (AssetPath.IsValid())
 	{
 		LoadedAsset = Cast<AssetType>(AssetPath.ResolveObject());
-		if (LoadedAsset == nullptr)
+		if (LoadedAsset == nullptr && bLoadIfMissing)
 		{
 			UE_LOG(LogDefault, Warning, TEXT("Attempted sync loading because asset hadn't loaded yet [%s]/"), *AssetPath.ToString());
 			LoadedAsset = Cast<AssetType>(AssetPath.TryLoad());

@@ -21,13 +21,13 @@ struct KHAZAN_API FKhazanLocomotionIntentHandle
 {
 public:
 	// 발급자가 아직 살아 있고 식별자가 채워졌는지만 검사한다.
-	// 현재 활성 token인지 여부는 IsMoveIntentHandleActive()로 검사한다.
+	// 현재 활성 token인지 여부는 IsActiveLocomotionIntentHandle()로 검사한다.
 	bool IsValid() const
 	{
 		return Owner.IsValid() && Id.IsValid();
 	}
 
-	// 이 handle 값만 비운다. 활성 intent source를 종료하려면 EndMoveIntentSource()를 호출해야 한다.
+	// 이 handle 값만 비운다. 활성 intent source를 종료하려면 EndLocomotionIntentSource()를 호출해야 한다.
 	void Reset()
 	{
 		Owner.Reset();
@@ -40,7 +40,7 @@ private:
 
 	// handle을 발급하고 활성 여부를 판정하는 Component의 약한 참조다. Character의 ASC Owner와는 무관하다.
 	TWeakObjectPtr<UKhazanLocomotionComponent> Owner;
-	// BeginMoveIntentSource()가 발급한 세대 식별자다. 새 source가 시작되면 이전 Id는 stale이 된다.
+	// BeginLocomotionIntentSource()가 발급한 세대 식별자다. 새 source가 시작되면 이전 Id는 stale이 된다.
 	FGuid Id;
 };
 

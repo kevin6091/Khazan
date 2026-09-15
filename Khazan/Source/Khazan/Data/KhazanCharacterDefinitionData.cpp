@@ -4,3 +4,9 @@ const FKhazanLocomotionConfig& UKhazanCharacterDefinitionData::GetLocomotionConf
 {
 	return LocomotionConfig;
 }
+
+const TArray<FKhazanInitialAbilityGrant>&
+UKhazanCharacterDefinitionData::GetInitialAbilityGrants() const
+{
+	return InitialAbilityGrants;
+}

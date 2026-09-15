@@ -1032,3 +1032,32 @@ InGame의 마지막 Turn 목록은 2026-09-07 표적 감사가 근거다. 아래
 - [다음 순서] 확정 마이그레이션의 AssetManager 보강부터 진행한다. `PDA_AssetData`의 authoring source에서 runtime lookup map을 `PostLoad`마다 재구축하고, nullable `Find` 계약과 GameplayTag 기준 단일 loaded cache로 누락·중복 수명을 제거한다.
 - [회귀 경계] 이 코드 checkpoint는 기존 `AssetLabel.Preload`와 `AssetData.InputData` 경로가 cold build 및 PIE에서 계속 작동하는지 먼저 확인한다. Character Definition tag/entry/selector를 아직 연결하지 않으므로 M2.2 완료나 M2.3 시작이 아니다.
 - [적용 상태] 게임 C++·BP·Config·uasset 수정과 build/PIE는 수행하지 않았고 다음 사용자 적용 계약만 기록했다.
+
+## 2026-09-15 M2.2 Definition 이름 조회 반영과 남은 에디터 연결
+
+- [현재 사용자 소스] Definition native tag, CharacterDefinitionAssetName, getter의 선택적 동기 로드 인자와 Character의 false 조회가 반영됐다. Character가 얻은 Definition의 config를 기존 LocomotionComponent 초기화에 전달한다. 과거 직접 DA 포인터 지정/FindLoaded/tag-key cache 제안으로 되돌아가지 않는다.
+- [남은 소스] CharacterDefinition 객체 포인터의 UPROPERTY가 아직 EditDefaultsOnly다. 이 멤버만 Transient runtime 참조/VisibleInstanceOnly 관측으로 마무리하는 사용자 적용 항목을 안내했다. 선택 태그는 계속 EditDefaultsOnly다.
+- [데이터 계약] BP는 Definition 이름 태그를 저장하고 Character는 해당 객체 참조를 보관한다. Component는 config를 검증·복사해 Pawn별 정책/CMC 적용에 사용한다. DA의 실행 중 편집이 이미 복사된 config를 자동 갱신하지 않는다.
+- [후속 실습] [Engineering Step 2 §29](../Engineering/CHARACTER_TAG_ABILITY_STEP_2.md#definition-editor-followthrough-20260915)의 cold build → 기존 catalog 등록 → Player BP 태그 → 새 프로세스 Definition/config/이동·Stop 확인 순서를 따른다. 연결되지 않은 Monster와 Player 결과를 구분한다.
+- [검증 상태] C++/Config/대상 에셋 파일을 정적으로 확인했고 Character cpp의 IDE errors는 0이다. 새 전체 빌드/PIE/CMC 실제 적용은 미검증이다. Rider asset-property 조회가 빈 목록을 반환해 현재 저장된 catalog/selector/config 값도 확정하지 않았다.
+- [직접 수정 범위] 설명과 문서만 추가했다. Source/BP/Config/uasset, 기존 로코모션 수치/애니메이션은 직접 수정하지 않았다. M2.2 전체 완료나 M2.3 시작으로 기록하지 않는다.
+
+## 2026-09-15 M2.2 Player 이동 정책 실제 검증 완료
+
+- [현재 구현 검증] Player Definition이 Locomotion config를 공급하고 LocomotionComponent가 CMC의 최종 속도/회전 정책을 쓰는 경로에서 Walk `170`, Run `470`, Sprint `600`, 기본 회전 VelocityDirection을 실제 PIE로 확인했다. 수치는 현재 프로젝트 이관값이며 원작 metadata 직접 확인값으로 승격하지 않는다.
+- [raw와 resolved 분리] `IA_Move` raw 입력, gait 요청, 최대 허용 gait와 최종 gait가 분리돼 동작했다. Gait A/B와 Rotation A/B constraint의 우선순위·동률 후입 우선·개별 해제·잘못된 두 번째 해제를 검사했고 마지막 기본 정책으로 복구됐다.
+- [태그 gate] Block GE 두 개의 count가 `0→1→2→1→0`일 때 raw input은 `1.0`으로 유지되고 CMC 출력만 제동됐다. 마지막 원인 해제 뒤 새 입력 이벤트 없이 Run 속도로 재개됐다.
+- [입력/수명] 실제 mapping의 Walk/Run/Sprint 토글과 `IA_Move Completed` 정리, Player UnPossess/Repossess의 intent source 교체, Stop PIE/새 PIE 무잔존을 확인했다. 물리 패드는 없어 Enhanced Input 콘솔 주입을 사용했고 UE 5.8 아날로그 key 해제의 반대 벡터 상쇄 샘플은 action release 결과와 구분했다.
+- [변경 경계] 생산 C++·AnimBP·로코모션 애니메이션은 이번 검사에서 수정하지 않았다. 테스트 전용 `/Game/Test/BP_M2MovementProbe`만 컴파일 가능하게 정리했다. 상세 결과는 Engineering [Step 2 §31](../Engineering/CHARACTER_TAG_ABILITY_STEP_2.md#m2-2-runtime-result-20260915)과 `Saved/Reports/M2_2_RuntimeProbe_20260915.json`에 있다.
+- [다음 단계] M2.2 Player 범위는 통과했다. 다음 구현은 M2.3 일반 적의 AI intent/공통 CMC/PathFollowing 연결이며, 기존 Walk/Run/Sprint/Stop 표현 계약이나 Main/Linked Layer 책임을 이 단계에서 바꾸지 않는다.
+
+
+## 2026-09-15 Player 우선 전투 개정과 SprintPivot의 현행 경계
+
+- [순서 변경] 직전 절의 `M2.3 AI가 다음`이라는 미래 순서는 최신 [Engineering 아키텍처 ARCH-20–29](../Engineering/CHARACTER_GAMEPLAY_ARCHITECTURE.md#player-first-combat-architecture-20260915)와 [Player 우선 Migration](../Engineering/CHARACTER_TAG_ABILITY_MIGRATION.md#player-first-migration-20260915)이 대체한다. 현재 다음 구현은 P1 Player ActionRequest/Basic Attack이며 AIController는 A1까지 보류한다.
+- [현재 구현 보존] M2.2에서 검증한 raw intent, Requested/Resolved gait, LocomotionComponent의 CMC 정책, Walk/Run/Sprint/입력 해제 Stop과 발 이력은 변경하지 않았다. Source, AnimBP, DataAsset, Animation Sequence를 이번 설계 검토에서 수정하거나 다시 검증하지 않았다.
+- [SprintPivot의 새 gameplay 계약] Sprint 입력이 유지된 상태의 큰 평면 방향 반전은 일반 Stop과 구분되는 LocomotionComponent 소유 maneuver다. 활성 전신 Ability, 피격/사망, CMC Falling, 입력 해제, 빙의/Actor 종료가 maneuver 세대와 자기 제약만 중단할 수 있어야 한다. Pivot을 Attack Ability나 Main AnimInstance의 mutable gameplay bool로 중복 소유하지 않는다.
+- [표현 계약] Main은 공통 snapshot과 Slot 합성을 유지하고, Locomotion Linked Layer가 이관된 loop/발별 Stop 이력 및 SprintPivot pose를 소유한다. 현재 root-locked Stop과 CMC 구동 경계를 유지한다. 같은 Sprint Stop Sequence를 일부 재사용할 수 있어도 일반 Stop 진입과 Pivot gameplay 수명은 별개다.
+- [판정 입력] Pivot 후보는 이전의 유효한 평면 진행 방향과 새 raw `MoveInputWorld` 사이의 반전으로 계산한다. 기존 `MovementDirectionAngle`은 Actor 정면 대비 속도 방향 관측이므로 Pivot trigger 값으로 바꾸지 않는다. 진입 뒤 목표 방향은 해당 maneuver 동안 고정하고 raw 입력은 계속 최신값으로 기록한 뒤 종료 시 다시 정책을 해결한다.
+- [수치 상태] 방향각 임계값, 최소 속도/입력량, 짧게 사용할 Sprint Stop 구간, 제동/회전/재가속 시간은 이번에 확정하지 않았다. 원작 metadata 직접값을 우선 표적 확인하고, 없으면 `SprintPivotConfig` 한곳의 명시적 임시 튜닝값으로 구분한다. 기존 이동 수치나 Sequence 전체 길이를 근거 없이 Pivot 수치로 전용하지 않는다.
+- [구현 시점] P1 공통 액션 승인/취소, P2 Stamina, P3 HitReact/Death 결과, P4 Locomotion Linked Layer를 먼저 검증한 뒤 P5에서 SprintPivot을 구현한다. P6 Combo와 P7 Dodge/Parry를 추가할 때 Pivot 중단 회귀를 다시 수행한다.
