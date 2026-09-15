@@ -392,3 +392,9 @@
 - 일반 에디터에서 프레임을 진행한 뒤 D3D12/SM6 shader 15개와 두 외형을 검증했다. 최종 PNG는 `RTF_RGBA8_SRGB` target을 사용하며 lit/base-color 이미지를 직접 열어 geometry·피부/털·바위·눈 및 색 차이를 확인했다. 원본 material/texture 수치를 밝게 수정하지 않았다. `ApesStoneHandElite_VisualReview_20260915.json`에 이미지 SHA-256과 검수 범위를 기록했다.
 - 외부 archive는 `Desktop/카잔/EnemyExtracts/ApesStoneHandElite_20260915`다. 선택한 cooked package 387개, 선택/제외 분류의 원본 JSON 총 423개, PSK/PSA/PNG/파생 pose/재현 스크립트/보고서를 보관했다. 최종 1,526개 파일의 hash 검증을 통과했다. 원본 JSON 전체는 프로젝트 `SourceMetadata.zip`/Index로 함께 전달한다.
 - 독립 source 감사에서 원래 bind 97개와 skin weight 45,190행의 vertex/수치/bone 이름 대응이 유지됐고, 사용자 초기 변경 9개 및 Source/Config 41개 hash가 같았다. 남은 절차는 이번 Apes Content/13개 전용 스크립트/Art 문서 5개의 선택 stage → main commit/push → 원격 hash 확인이다. 이미 통과한 임포트/애니메이션/렌더 검증을 다시 시작할 필요는 없다.
+
+### 2026-09-15 ApesStoneHandElite main 전달 완료
+
+- 이번 Apes Content·전용 스크립트·Art 문서 204개 경로를 `da37752472259d84cd20d49302c6e73fdd0f2ad3` (`art: restore source-selected ApesStoneHandElite variants and animations`)로 main에 커밋하고 origin에 push했다. Git LFS 2개/6.3 MB 업로드 완료 및 원격 main의 동일 hash를 확인했다.
+- staged scope/whitespace 검사를 통과했으며 기존 사용자 변경 9개는 stage/commit에서 제외해 작업 트리에 그대로 보존했다. 최종 script EOF 정리 후 외부 archive를 다시 동기화해 최종 hash 검증 수는 1,527개다. 원본 JSON ZIP의 423개 entry도 각각 bytes/SHA-256을 대조했다.
+- 요청한 사용처 분류·선별 추출·UE 임포트·에셋/시간축/화면 검증·원본 보관·Git 전달은 완료다. 정본에 명시한 전용 shader/BoneMod/AI 등의 구현 제한은 유지한다. 이 전달 확인은 별도 문서 커밋으로 반영한다.
