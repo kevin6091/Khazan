@@ -158,3 +158,12 @@
 - 명칭별 조사 metadata와 실제 CB/스폰에서 선택한 closure를 분리한다. 제외한 V2/Ghost/Wraith/정적 시체의 JSON 근거도 보관하지만 살아 있는 적 UE 자산으로 모두 생성하지 않는다. 제한된 참조 조사 결과를 게임 전체 미사용 확정으로 표현하지 않는다.
 - 성공 JSON만으로 batch checkpoint를 재사용하지 않는다. 실제 process exit 0도 기록/확인한다. 이번 기존 GameFeatureData scan의 plugin 로드 ensure는 process 옵션 `-EnablePlugins=GameFeatures`로 해결했으며 project Config/uproject는 변경하지 않았다. 재현 시 `run_apes_stone_hand_editor_stage.py`와 animation runner의 명시된 옵션을 사용한다.
 - 검수용 PNG의 render target 색 공간을 확인한다. `RTF_RGBA8`의 linear gamma를 sRGB 화면용 이미지로 바로 읽으면 어둡게 보일 수 있다. Apes 최종 검수는 `RTF_RGBA8_SRGB`로 캡처했으며 원본 texture sRGB나 material parameter를 밝게 수정하지 않았다. 캡처 표현과 원본 재질 값 복원을 구분한다.
+
+## 2026-09-15 Enemy 에셋 구조 정리 규칙
+
+- Enemy 폴더를 정리할 때 디렉터리명만으로 Legacy 자산을 삭제하지 않는다. Asset Registry의 hard/soft/management referencer와 외부 referencer를 먼저 확인하고, 살아 있는 공용 자산은 UE rename API로 현재 `Humanoids` 또는 `Shared` 구조에 옮긴다.
+- rename 전에는 이동 대상과 직접 참조 package 전체를 외부에 SHA-256 백업한다. 이동 후에는 fresh process에서 old package, redirector, 내부 누락 dependency가 모두 0인지 확인한다.
+- Blueprint package는 본체 외 GeneratedClass/CDO redirector를 만들 수 있다. package의 모든 export가 ObjectRedirector이고 참조가 0인지 확인한다. 맵 referencer는 옛 class를 resolve한 상태로 열어 새 경로로 저장한 뒤 redirector package를 제거한다.
+- `_ImportStaging`, `SourceSequences`, `PlaybackClips`, `*SourceReferences`, `Archive`는 실제로 비어 있을 때만 하위부터 제거한다. `LegacyAssetMoves.json`, `LegacyIdleDuplicates.json`, `ArchiveSummary.json` 같은 이력 파일은 런타임 에셋과 구분해 보존한다.
+- 현재 Enemy package 조회 정본은 `Content/_Art/Enemies/Metadata/Structure_20260915/CurrentAssets.json`과 `RenameMap.json`이다. 과거 importer/manifest의 destination은 당시 이력이며 현재 경로로 사용하지 않는다.
+- 경로 정리 전후에 AnimSequence 시간축/root 설정, SkeletalMesh skeleton/LOD/material slot, Blueprint component 계약을 수치까지 비교한다. 단순 로드 성공만으로 경로 이동의 무변경을 확정하지 않는다.

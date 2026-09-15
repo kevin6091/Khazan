@@ -251,3 +251,11 @@
 - WildDog 애니메이션은 direct 17/composite 65의 82개, WildBoar는 direct 11/composite 63의 74개다. 직접 시퀀스는 모두 원본 30/1 FPS이고 Composite 구간·반복·play rate·dilation을 bake했다. 모든 시퀀스는 `Animations/Playback/A_EN_PLAY_*`, `RateScale=1.0`이며 원본 중복 UE 시퀀스는 없다.
 - fresh asset/RAW·COMPRESSED pose 감사와 일반 UnrealEditor D3D12/SM6 렌더 검증을 통과했다. WildDog shader 12개와 BP 3개, WildBoar shader 9개와 BP 3개의 compile/reload 및 세 coat 표시를 확인했다. BP는 시각 조립 Actor이며 AI/전투/physics/custom notify 실행은 범위에 포함하지 않는다.
 - 정본은 [WILD_DOG_EXTRACTION_2026-09-15.md](WILD_DOG_EXTRACTION_2026-09-15.md)와 [WILD_BOAR_EXTRACTION_2026-09-15.md](WILD_BOAR_EXTRACTION_2026-09-15.md)다. 전용 cooked shader graph와 WildDog BoneMod의 실행 의미는 metadata/raw archive에 보존한 미구현 범위다.
+
+## 2026-09-15 Enemy 에셋 라이브러리 구조 정리 완료
+
+- `/Game/_Art/Enemies`의 UE 에셋 1,940개를 현재 사용 구조로 정리했다. 살아 있는 21개 package는 UE rename API로 이동했고 실제 에셋 삭제는 0개다. 영향 참조 678개는 이동 전 외부 SHA-256 백업을 만들었다.
+- `HeinMach/Empire`의 공용 장비·skeleton·pose carrier는 `HeinMach/Shared`, 옛 최상위 `HeinMach/HalberdElite`는 `HeinMach/Humanoids/HalberdElite`, 인간형 공용 애니메이션은 `HeinMach/Shared/Animations/Playback`으로 합쳤다. `MageHard` BP/mesh는 basename을 유지한 채 `OtherRegions/Humanoids/Mage`에 합쳤다.
+- 최초 빈 leaf 37개와 이동 후 빈 상위 계층을 하위부터 제거해 총 65개 디렉터리를 정리했다. 최종 empty/Legacy 명칭 디렉터리와 ObjectRedirector는 0개다. 과거 Legacy/Archive JSON은 근거 자료로 보존했다.
+- fresh Unreal 감사에서 전체 목록·class, 영향 없는 package 1,262개 hash, 영향 자산 678개 로드, 애니메이션 1,354개·메시 35개·BP 28개 계약, 내부 dependency와 카탈로그 6개를 검사했다. 계약 오차/누락/redirector는 0이며 process exit 0이다.
+- 정본은 [ENEMY_ASSET_LIBRARY_STRUCTURE_2026-09-15.md](ENEMY_ASSET_LIBRARY_STRUCTURE_2026-09-15.md), 현재 조회 자료는 `Content/_Art/Enemies/Metadata/Structure_20260915`이다. 캐릭터 C++/Player/Config는 이 작업에서 수정하지 않았다.

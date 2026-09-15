@@ -197,3 +197,11 @@
 - V1/V2/V3 geometry는 `MATT0000` 이외 ActorX chunk가 같다. 각 `MeshDerivationAudit.json`에서 Dog 48 bone/35,029 weight, Boar 71 bone/12,528 weight와 alias를 확인한다. 원본 LOD0/1/2는 외부 archive에 있고 프로젝트는 LOD0 하나다.
 - `AnimationLibrary.csv`, `AnimationImportManifest.json`, `AnimationTimingAudit.json`, `PlaybackEventTimes.json`은 Dog direct 17/composite 65/event 429, Boar direct 11/composite 63/event 460의 FPS·길이·root 설정·시간 변환 근거다. UE에는 재생 결과만 `Animations/Playback/A_EN_PLAY_*`로 남긴다.
 - `ValidationSummary.json`, `RenderValidationSummary.json`, `FinalExtractionReport.json`, `ArchiveSummary.json`은 fresh UE 감사, 실제 RHI compile/render와 archive 완료 판정이다. 외부 원본은 `Desktop/카잔/EnemyExtracts/WildDog_20260915`, `WildBoar_20260915`; 단계 도구는 `Scripts/Enemies/*wild_dog*.py`, `*wild_boar*.py`다.
+
+### 2026-09-15 Enemy 에셋 현재 구조
+
+- [ENEMY_ASSET_LIBRARY_STRUCTURE_2026-09-15.md](ENEMY_ASSET_LIBRARY_STRUCTURE_2026-09-15.md): 전체 Enemy 폴더 원칙, 21개 이동 대응, 빈/Legacy 폴더 정리와 fresh 감사 결과의 정본.
+- 현재 package 목록은 `Content/_Art/Enemies/Metadata/Structure_20260915/CurrentAssets.json`, 표 형식은 `AssetLibrary.csv`, 옛 경로 대응은 `RenameMap.json`을 사용한다.
+- `HeinMach/Humanoids`는 실제 병종, `HeinMach/Shared`는 공용 장비·rig·pose carrier·애니메이션, `Shared/Beasts`와 `Shared/Elites`는 레벨 공용 비인간형/엘리트 라이브러리다. `OtherRegions/Humanoids/Mage`에는 normal/hard 변형을 함께 둔다.
+- `EmptyDirectoryCleanup.json`은 제거된 65개 디렉터리, `ValidationSummary.json`은 1,940개 에셋과 애니메이션/메시/BP 계약 검증, `WorkspacePreservation.json`은 범위 밖 사용자 작업 보존 기록이다.
+- 이동 전 영향 자산 외부 백업은 `Desktop/카잔/EnemyExtracts/EnemyAssetStructureCleanup_20260915`; 재현 도구는 `Scripts/Enemies/*enemy_asset_structure*.py`다.

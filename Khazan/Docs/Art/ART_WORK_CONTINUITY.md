@@ -413,3 +413,11 @@
 - WildDog/WildBoar Content 314개 경로, 전용 스크립트 26개와 Art 문서 5개의 총 345개 경로를 `d791f0fc` (`art: restore live WildDog and WildBoar variants`)로 main에 커밋하고 origin에 push했다. Git LFS 객체 4개/6.5 MB 업로드를 완료했다.
 - stage 범위 검사와 `git diff --cached --check`를 통과했다. 기존 사용자 변경 14개는 커밋에서 제외해 작업 트리에 유지했으며 Player/맵/C++/Engineering/Animation 파일을 이번 Art 커밋에 포함하지 않았다.
 - 사용처 판정, 실사용 외형 선별, 모델·재질·텍스처·애니메이션 임포트, source/fresh/RHI 검증, 원본 archive와 첫 Git 전달은 완료됐다. 원격 main hash 최종 확인과 이 전달 기록 자체의 문서 커밋만 수행하면 된다.
+
+## 2026-09-15 Enemy 에셋 구조 정리 완료
+
+- 현재 Enemy 1,940개 중 살아 있는 package 21개를 공용/병종/변형 구조로 이동했다. 직접 참조가 갱신된 전체 영향 범위는 678개이며 이동 전 468,397,155바이트를 `Desktop/카잔/EnemyExtracts/EnemyAssetStructureCleanup_20260915`에 SHA-256 백업했다.
+- UE 적용은 완료됐다. `HeinMach/Empire`, 옛 `HeinMach/HalberdElite`, `HeinMach/Humanoids/Shared`, `OtherRegions/Humanoids/MageHard`를 현재 폴더에 합쳤고, 최초 빈 leaf 및 연쇄 빈 상위 폴더 총 65개를 제거했다. 최종 empty/Legacy directory와 redirector는 0개다.
+- fresh audit는 exit 0/pass다. 총 1,940개/class 수, 미영향 1,262개 SHA-256, 영향 678개 로드, AnimSequence 1,354·SkeletalMesh 35·Blueprint 28 계약, 누락 dependency 0, 카탈로그 6개 로드를 확인했다. 수치 계약 최대 오차는 0이다.
+- 작업 중 사용자가 `Source/Khazan/Character/Component/KhazanLocomotionComponent.h`를 추가 수정한 사실을 hash로 감지했다. 해당 변경과 기존 Player/맵/C++/Engineering/Animation 작업은 건드리지 않았고 이 Art commit에서 제외한다.
+- 정본 `ENEMY_ASSET_LIBRARY_STRUCTURE_2026-09-15.md`, 현재 metadata `Content/_Art/Enemies/Metadata/Structure_20260915`, 재현 도구 `Scripts/Enemies/*enemy_asset_structure*.py`. 남은 절차는 metadata 발행 → 범위 선택 stage → main commit/push → 원격 hash 확인이다.
