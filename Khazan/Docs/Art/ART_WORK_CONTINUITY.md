@@ -421,3 +421,10 @@
 - fresh audit는 exit 0/pass다. 총 1,940개/class 수, 미영향 1,262개 SHA-256, 영향 678개 로드, AnimSequence 1,354·SkeletalMesh 35·Blueprint 28 계약, 누락 dependency 0, 카탈로그 6개 로드를 확인했다. 수치 계약 최대 오차는 0이다.
 - 작업 중 사용자가 `Source/Khazan/Character/Component/KhazanLocomotionComponent.h`를 추가 수정한 사실을 hash로 감지했다. 해당 변경과 기존 Player/맵/C++/Engineering/Animation 작업은 건드리지 않았고 이 Art commit에서 제외한다.
 - 정본 `ENEMY_ASSET_LIBRARY_STRUCTURE_2026-09-15.md`, 현재 metadata `Content/_Art/Enemies/Metadata/Structure_20260915`, 재현 도구 `Scripts/Enemies/*enemy_asset_structure*.py`. 남은 절차는 metadata 발행 → 범위 선택 stage → main commit/push → 원격 hash 확인이다.
+
+### 2026-09-15 Enemy 에셋 구조 main 전달 완료
+
+- Enemy Content·현재 구조 metadata·재현 스크립트·Art 문서의 719개 path를 `cc36d53152c167cead1056589be49a38598c1824` (`art: organize enemy asset library`)로 main에 커밋하고 origin에 push했다. Git LFS 객체 24개/100MB 업로드가 완료됐고 당시 원격 main hash와 일치했다.
+- stage 전 A 37/M 661/D 21의 정확한 범위를 확인했으며 범위 밖 stage 0, 남은 Enemy/Art task 변경 0, `git diff --cached --check` 및 `git lfs fsck --pointers`를 통과했다.
+- 기존 사용자 변경 15개는 작업 트리에 그대로 남겼다. 이 중 `KhazanLocomotionComponent.h`는 Enemy 정리 도중 추가 편집된 hash까지 보존했으며 Player/맵/C++/Engineering/Animation 변경을 Enemy 커밋에 포함하지 않았다.
+- 구조 정리·백업·fresh Unreal 계약 감사·metadata 발행·첫 Git 전달은 완료됐다. 이 전달 확인 절만 후속 문서 커밋으로 main에 반영한다.
