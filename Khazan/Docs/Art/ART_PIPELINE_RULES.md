@@ -148,3 +148,13 @@
 - UE 5.8 socket의 SocketName/BoneName과 Skeleton.Sockets는 직접 Python property 대입이 제한된다. 공개 `mesh.add_socket`, SkeletalMeshEditorSubsystem.rename_socket, socket.set_socket_parent와 local transform API를 사용한다. `add_socket(..., true)`는 mesh와 skeleton 양쪽에 복제하므로 단일 mesh attachment 복원에서는 false를 사용하고 원래 소유 위치를 metadata에 명시한다.
 - shader instruction 수가 존재하는 것과 화면에 외형이 정상 표시되는 것은 별도 검사다. 실제 RHI에서 저장 BP/재질을 로드하고 렌더 결과도 확인한다. 원본 특수 parameter의 큰 sentinel 값을 색 계산용 보존 합산에 직접 섞지 않는다.
 - frame 0 commandlet SceneCapture 결과를 최종 외형 판정으로 사용하지 않는다. Yetuga에서는 shader가 모두 컴파일됐어도 즉시 capture에서 본체/텍스처가 보이지 않았고, 일반 에디터에서 프레임을 진행한 후 정상 표시됐다. `capture_yetuga_editor_preview.py`를 일반 UnrealEditor의 `-ExecCmds="py ..."`로 실행해 resource warmup 후 캡처한다. `-ExecutePythonScript`는 script 반환 직후 종료하므로 후속 tick callback을 기다리지 못한다.
+
+## 2026-09-15 ApesStoneHandElite 복원에서 확인한 규칙
+
+- RandomLook recipe CDO만으로 외형 버전을 선택하지 않는다. CB의 SCS component template/상속 override를 확인하며 직렬화된 배열 override는 배열 전체 교체로 적용한다. 이번 실제 CB는 CDO의 V2/추가 variation을 Early 기본형과 Standard V3로 교체했다. 기본값의 존재를 실제 인게임 소비의 근거로 삼지 않는다.
+- 여러 메시를 임포트하기 전에 material 외 ActorX chunk 전체를 비교한다. 기본/V3의 geometry·UV·vertex color·normal·bone·weight가 같으면 하나의 메시와 재질 BP를 공유하고 source alias 및 원본 파일은 보관한다.
+- mesh bone이 PSA bone의 부분집합이지만 prefix가 아니면 이름과 parent를 먼저 대조한다. 공통 bone의 원래 mesh bind를 보존하고 PSA 순서로 parent/weight bone index만 remap한다. helper는 비가중으로 추가한다. 저장 전 전체 weight 행의 vertex·수치·bone 이름 대응과 변경하지 않을 chunk를 별도로 검증한다.
+- 같은 source Skeleton을 쓰더라도 mesh bind와 skeleton reference 값이 다를 수 있다. Apes의 weapon bind 차이를 추출 오류라고 단정하거나 기존 mesh bind를 PSA 값으로 일괄 교체하지 않는다. 원작 BoneMod의 zero/축 의미처럼 metadata만으로 실행 의미가 불명확한 부분은 원시 값/소비 근거/미구현 범위를 기록한다.
+- 명칭별 조사 metadata와 실제 CB/스폰에서 선택한 closure를 분리한다. 제외한 V2/Ghost/Wraith/정적 시체의 JSON 근거도 보관하지만 살아 있는 적 UE 자산으로 모두 생성하지 않는다. 제한된 참조 조사 결과를 게임 전체 미사용 확정으로 표현하지 않는다.
+- 성공 JSON만으로 batch checkpoint를 재사용하지 않는다. 실제 process exit 0도 기록/확인한다. 이번 기존 GameFeatureData scan의 plugin 로드 ensure는 process 옵션 `-EnablePlugins=GameFeatures`로 해결했으며 project Config/uproject는 변경하지 않았다. 재현 시 `run_apes_stone_hand_editor_stage.py`와 animation runner의 명시된 옵션을 사용한다.
+- 검수용 PNG의 render target 색 공간을 확인한다. `RTF_RGBA8`의 linear gamma를 sRGB 화면용 이미지로 바로 읽으면 어둡게 보일 수 있다. Apes 최종 검수는 `RTF_RGBA8_SRGB`로 캡처했으며 원본 texture sRGB나 material parameter를 밝게 수정하지 않았다. 캡처 표현과 원본 재질 값 복원을 구분한다.

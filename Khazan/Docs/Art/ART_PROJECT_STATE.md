@@ -233,3 +233,11 @@
 - 원본 PSA 91개 중 다른 몬스터 폴더의 Grapple_B 두 개도 `Skeleton=C_M_Yetuga_Skeleton`을 확인해 포함했다. 직접 시간축 9개와 Composite 111개를 저장했으며 활성 dilation 66개, root motion 99개, force root lock 68개, additive 1개다.
 - 본체 원본 198-bone PSKX에 PSA 전용 비가중 reference bone 255개를 추가했다. 소켓 7개를 원본 이름·parent·transform으로 복원했고 원본 LOD0/1/2는 archive에 보관한다. 현재 임포트된 LOD0은 본체 207,390/얼음 8,051 vertices다.
 - 정본은 [YETUGA_EXTRACTION_2026-09-11.md](YETUGA_EXTRACTION_2026-09-11.md). 원본 JSON·상속값·시간축·검증 결과는 Yetuga의 `Metadata/Extraction_20260911`을 따른다. 전용 shader graph, AI/전투/physics/cloth/custom notify 실행은 별도의 복원 범위이며 시각 BP에 구현한 것으로 간주하지 않는다.
+
+## 2026-09-15 ApesStoneHandElite Early/Standard 실사용 라이브러리
+
+- `/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite`에 공용 mesh/skeleton 1쌍, texture 31개, MI 13개/master 2개, 재생 시퀀스 92개, Early/Standard 시각 BP 2개 및 비교 맵으로 총 143개 에셋을 저장했다. 새 프로세스의 에셋/참조/포즈 감사는 exit 0/pass이며 임시 package 0개다.
+- 원작 CB component override까지 확인한 최종 외형은 Early=기본 재질, Standard=V3다. V2와 Early의 추가 V3 재질 조합은 레시피 CDO 기본값에서 실제 CB에 의해 교체된다. HeinMach 스폰 3개와 StormPass 1개는 Early이며 Standard의 두 레벨 스폰을 확인한 것으로 확대하지 않는다.
+- 기본/V3 메시의 material chunk 외 payload가 동일해 중복 메시를 만들지 않았다. 97-bone 원본의 bind/weight 수치를 보존한 채 PSA 453-bone 순서로 재매핑하고 비가중 helper 356개를 추가했다. 소켓 7개, 원본 3 LOD 보관과 UE LOD0 24,862 vertices를 확인했다.
+- 직접 source 시간축 10개와 원작 Composite bake 82개 모두 `Animations/Playback/A_EN_PLAY_*`다. 활성 dilation 44개, root motion 70개, force root lock 51개, additive 1개를 원본 property 기준으로 대조했다. 최대 길이 오차 약 `1.94214e-7 s`이며 원본 게임 전체 실행의 hit-stop/AI 속도 실측 검증은 아니다.
+- 정본 [APES_STONE_HAND_EXTRACTION_2026-09-15.md](APES_STONE_HAND_EXTRACTION_2026-09-15.md), 선택 근거 `VariantUsage.json`, 보존 확인 `MeshDerivationAudit.json`, 최종 완료 상태는 `ValidationSummary.json`/`RenderValidationSummary.json`/`FinalExtractionReport.json`이다. Ghost/Wraith·시체·V2 분류 JSON과 원작 BoneMod는 보존하며 전용 shader/BoneMod/AI 실행까지 완전히 구현한 것으로 간주하지 않는다.

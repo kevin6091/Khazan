@@ -1,0 +1,281 @@
+[
+  {
+    "level": "HeinMach",
+    "source_level_package": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01",
+    "actor_name": "SA_ApesStoneHand_E_Early",
+    "properties": {
+      "AIData": {
+        "ObjectName": "xxAIData'AI_ApesStoneHand_E_Early'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/AI_ApesStoneHand_E_Early.0"
+      },
+      "bOverrideRecognition": true,
+      "RecognitionValue": {
+        "AbsoluteRange": 3100.0,
+        "SightRange": 3100.0,
+        "DownSightHeight": 1000.0,
+        "ActionRecognitionRange": {
+          "Back": 100.0
+        }
+      },
+      "BattleRetreatSetting": {
+        "BattleRetreatType": "EBattleRetreatType::SpawnPoint",
+        "BattleRange": 4000.0
+      },
+      "SpawnStartSkillInfo": {
+        "ObjectName": "xxSkillInfo'SI_ApesStoneHand_E_DashAtk_LevelSkill'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/08_DashAtk/SI_ApesStoneHand_E_DashAtk_LevelSkill.0"
+      },
+      "bHalfHeightAdjusted": true,
+      "OnSpawnBySpawnHandler": {
+        "InvocationList": [
+          {
+            "Object": {
+              "ObjectName": "HeinMach_Spawn_Main01_C'HeinMach_Spawn_Main01:PersistentLevel.HeinMach_Spawn_Main01_C_2'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01.234"
+            },
+            "FunctionName": "BndEvt__HeinMach_Spawn_Main01_SA_ApesStoneHand_E_Early_K2Node_ActorBoundEvent_2_OnSpawnBySpawnHandler__DelegateSignature"
+          }
+        ]
+      },
+      "ActorBP_Soft": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CB_ApesStoneHand_E_Early.CB_ApesStoneHand_E_Early_C",
+        "SubPathString": ""
+      },
+      "SpawnInfo": {
+        "ObjectName": "xxSpawnInfo'SA_ApesStoneHand_E_Early'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/SA_ApesStoneHand_E_Early.2"
+      },
+      "SpawnIDX": 197,
+      "BalanceGroupIndex": 1,
+      "MissionType": "EMissionType::Sub",
+      "SubDetailRoute": 1,
+      "TIDX": 282009,
+      "ActorType": "EGrActorType::Dynamic",
+      "SubActorType": 1,
+      "bSpawnAtBeginPlay": false,
+      "FactionLink": {
+        "TIDX": 6
+      },
+      "FactionName": "Monster_Blue",
+      "DependentLevelPath": "/Game/_Kazan_/Level/HeinMach/HeinMach_SubLV02_Blizzard_1",
+      "RootComponent": {
+        "ObjectName": "SceneComponent'HeinMach_Spawn_Main01:PersistentLevel.SA_ApesStoneHand_E_Early.SceneComponent'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01.374"
+      }
+    },
+    "references": [
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/AI_ApesStoneHand_E_Early",
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CB_ApesStoneHand_E_Early",
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/SA_ApesStoneHand_E_Early",
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/08_DashAtk/SI_ApesStoneHand_E_DashAtk_LevelSkill",
+      "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01"
+    ]
+  },
+  {
+    "level": "HeinMach",
+    "source_level_package": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01",
+    "actor_name": "SA_ApesStoneHand_E_Early2",
+    "properties": {
+      "Patrolway": {
+        "ObjectName": "xxPatrolwayActor'HeinMach_Spawn_Main01:PersistentLevel.xxPatrolwayActor7_6'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01.986"
+      },
+      "RecognitionValue": {
+        "AbsoluteRange": 3000.0,
+        "SightRange": 3000.0,
+        "DownSightHeight": 1000.0,
+        "ActionRecognitionRange": {
+          "Back": 100.0
+        }
+      },
+      "bOverridePeacePresetTask": true,
+      "PeaceTasks": [
+        {
+          "Key": "EAIPeacePresetStep::Step1",
+          "Value": {
+            "ObjectName": "xxAIPeacePresetTask_Patrol'HeinMach_Spawn_Main01:PersistentLevel.SA_ApesStoneHand_E_Early2.xxAIPeacePresetTask_Patrol_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01.498"
+          }
+        },
+        {
+          "Key": "EAIPeacePresetStep::Step2",
+          "Value": {
+            "ObjectName": "xxAIPeacePresetTask_Skill'HeinMach_Spawn_Main01:PersistentLevel.SA_ApesStoneHand_E_Early2.xxAIPeacePresetTask_Skill_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01.500"
+          }
+        },
+        {
+          "Key": "EAIPeacePresetStep::Step3",
+          "Value": {
+            "ObjectName": "xxAIPeacePresetTask_Patrol'HeinMach_Spawn_Main01:PersistentLevel.SA_ApesStoneHand_E_Early2.xxAIPeacePresetTask_Patrol_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01.499"
+          }
+        },
+        {
+          "Key": "EAIPeacePresetStep::Step4",
+          "Value": {
+            "ObjectName": "xxAIPeacePresetTask_Skill'HeinMach_Spawn_Main01:PersistentLevel.SA_ApesStoneHand_E_Early2.xxAIPeacePresetTask_Skill_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01.501"
+          }
+        }
+      ],
+      "BattleRetreatSetting": {
+        "BattleRetreatType": "EBattleRetreatType::SpawnPoint",
+        "BattleRange": 4000.0
+      },
+      "bHalfHeightAdjusted": true,
+      "ActorBP_Soft": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CB_ApesStoneHand_E_Early.CB_ApesStoneHand_E_Early_C",
+        "SubPathString": ""
+      },
+      "SpawnInfo": {
+        "ObjectName": "xxSpawnInfo'SA_ApesStoneHand_E_Early'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/SA_ApesStoneHand_E_Early.2"
+      },
+      "SpawnIDX": 311,
+      "BalanceGroupIndex": 3,
+      "MissionType": "EMissionType::Main",
+      "TIDX": 282009,
+      "ActorType": "EGrActorType::Dynamic",
+      "SubActorType": 1,
+      "FactionLink": {
+        "TIDX": 6
+      },
+      "FactionName": "Monster_Blue",
+      "DependentLevelPath": "/Game/_Kazan_/Level/HeinMach/HeinMach_SubLV05_Escape",
+      "RootComponent": {
+        "ObjectName": "SceneComponent'HeinMach_Spawn_Main01:PersistentLevel.SA_ApesStoneHand_E_Early2.SceneComponent'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01.375"
+      }
+    },
+    "references": [
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CB_ApesStoneHand_E_Early",
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/SA_ApesStoneHand_E_Early",
+      "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01"
+    ]
+  },
+  {
+    "level": "HeinMach",
+    "source_level_package": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01",
+    "actor_name": "SA_ApesStoneHand_E_Early3",
+    "properties": {
+      "Patrolway": {
+        "ObjectName": "xxPatrolwayActor'HeinMach_Spawn_Main01:PersistentLevel.xxPatrolwayActor11_42'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01.980"
+      },
+      "AIData": {
+        "ObjectName": "xxAIData'AI_ApesStoneHand_E_Early'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/AI_ApesStoneHand_E_Early.0"
+      },
+      "bOverrideRecognition": true,
+      "RecognitionValue": {
+        "SightRange": 1500.0,
+        "SightYaw": 60.0
+      },
+      "BattleStartSkillInfo": {
+        "ObjectName": "xxSkillInfo'SI_ApesStoneHand_E_DashAtk_StartSkill'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/08_DashAtk/SI_ApesStoneHand_E_DashAtk_StartSkill.0"
+      },
+      "StartAnimation": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Moving/Reaction/AC_ApesStoneHandElite_Basic_Loop_01.AC_ApesStoneHandElite_Basic_Loop_01",
+        "SubPathString": ""
+      },
+      "VigilantReactionAnimation": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Moving/Reaction/AC_ApesStoneHandElite_Basic_End_01.AC_ApesStoneHandElite_Basic_End_01",
+        "SubPathString": ""
+      },
+      "bHalfHeightAdjusted": true,
+      "ActorBP_Soft": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CB_ApesStoneHand_E_Early.CB_ApesStoneHand_E_Early_C",
+        "SubPathString": ""
+      },
+      "SpawnInfo": {
+        "ObjectName": "xxSpawnInfo'SA_ApesStoneHand_E_Early'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/SA_ApesStoneHand_E_Early.2"
+      },
+      "SpawnIDX": 179,
+      "BalanceGroupIndex": 4,
+      "MissionType": "EMissionType::Main",
+      "TIDX": 282009,
+      "ActorType": "EGrActorType::Dynamic",
+      "SubActorType": 1,
+      "FactionLink": {
+        "TIDX": 6
+      },
+      "FactionName": "Monster_Blue",
+      "DependentLevelPath": "/Game/_Kazan_/Level/HeinMach/HeinMach_SubLV05_Escape",
+      "RootComponent": {
+        "ObjectName": "SceneComponent'HeinMach_Spawn_Main01:PersistentLevel.SA_ApesStoneHand_E_Early3.SceneComponent'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01.376"
+      }
+    },
+    "references": [
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/AI_ApesStoneHand_E_Early",
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CB_ApesStoneHand_E_Early",
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/SA_ApesStoneHand_E_Early",
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Moving/Reaction/AC_ApesStoneHandElite_Basic_End_01",
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Moving/Reaction/AC_ApesStoneHandElite_Basic_Loop_01",
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/08_DashAtk/SI_ApesStoneHand_E_DashAtk_StartSkill",
+      "BBQ/Content/_Kazan_/Level/HeinMach/HeinMach_Spawn_Main01"
+    ]
+  },
+  {
+    "level": "StormPass",
+    "source_level_package": "BBQ/Content/_Kazan_/Level/StormPass/StormPass_Spawn_Main01",
+    "actor_name": "SA_ApesStoneHand_E_Early",
+    "properties": {
+      "bStrongEnemyCondition": true,
+      "bOverrideRecognition": true,
+      "RecognitionValue": {
+        "AbsoluteRange": 3000.0,
+        "SightRange": 3000.0,
+        "DownSightHeight": 800.0
+      },
+      "BattleStartSkillInfo": {
+        "ObjectName": "xxSkillInfo'SI_ApesStoneHand_E_DashAtk_StartSkill'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/08_DashAtk/SI_ApesStoneHand_E_DashAtk_StartSkill.0"
+      },
+      "StartAnimation": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Moving/Reaction/AC_ApesStoneHandElite_Basic_Loop_02.AC_ApesStoneHandElite_Basic_Loop_02",
+        "SubPathString": ""
+      },
+      "VigilantReactionAnimation": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Moving/Reaction/AC_ApesStoneHandElite_Basic_End_02.AC_ApesStoneHandElite_Basic_End_02",
+        "SubPathString": ""
+      },
+      "bHalfHeightAdjusted": true,
+      "ActorBP_Soft": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CB_ApesStoneHand_E_Early.CB_ApesStoneHand_E_Early_C",
+        "SubPathString": ""
+      },
+      "SpawnInfo": {
+        "ObjectName": "xxSpawnInfo'SA_ApesStoneHand_E_Early'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/SA_ApesStoneHand_E_Early.2"
+      },
+      "SpawnIDX": 1196,
+      "BalanceGroupIndex": 2,
+      "MissionType": "EMissionType::Sub",
+      "SubDetailRoute": 2,
+      "TIDX": 282009,
+      "ActorType": "EGrActorType::Dynamic",
+      "SubActorType": 1,
+      "FactionLink": {
+        "TIDX": 6
+      },
+      "FactionName": "Monster_Blue",
+      "DependentLevelPath": "/Game/_Kazan_/Level/StormPass/StormPass_SubLV10",
+      "RootComponent": {
+        "ObjectName": "SceneComponent'StormPass_Spawn_Main01:PersistentLevel.SA_ApesStoneHand_E_Early.SceneComponent'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Level/StormPass/StormPass_Spawn_Main01.601"
+      }
+    },
+    "references": [
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CB_ApesStoneHand_E_Early",
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/SA_ApesStoneHand_E_Early",
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Moving/Reaction/AC_ApesStoneHandElite_Basic_End_02",
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Moving/Reaction/AC_ApesStoneHandElite_Basic_Loop_02",
+      "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/08_DashAtk/SI_ApesStoneHand_E_DashAtk_StartSkill",
+      "BBQ/Content/_Kazan_/Level/StormPass/StormPass_Spawn_Main01"
+    ]
+  }
+]

@@ -376,3 +376,19 @@
 - stage 범위는 Yetuga Content, Yetuga 전용 Python 스크립트와 Art 문서 5개로 검사했다. 외부 작업의 `d5cfbc77` 커밋을 보존했으며 작업 시작 시 사용자 변경 22개와 Source/Config의 보호 hash는 최종 검사에서도 동일했다.
 - 외부 archive는 `C:/Users/user/Desktop/카잔/EnemyExtracts/Yetuga_20260911`의 2,159개 파일을 SHA-256으로 검증했다. 원본 cooked package 581개와 JSON 581개의 보관을 확인했으며, JSON 전체·검증 보고서·최종 렌더 이미지는 프로젝트 metadata와 Git에도 포함했다.
 - 현재 요청의 추출·임포트·시간축 복원·에셋/화면 검증·원본 보관·main 전달을 완료했다. 원작 전용 셰이더와 gameplay/physics/cloth 등의 구현 제한은 정본에 명시한 그대로이며 완전한 원작 실행 로직 복원으로 확대하지 않는다. 이 전달 확인은 후속 문서 전용 커밋으로 반영한다.
+
+## 2026-09-15 ApesStoneHandElite 실사용 버전 추출 진행
+
+- 요청은 버전별 사용 용도 확인 후 실사용 모델·재질·텍스처·애니메이션의 복원/UE 임포트다. Router → Art pipeline/state/knowledge → Yetuga 정본을 읽었다. 기존 사용자 Source/Engineering/Animation 변경 9개와 Source/Config hash는 `Saved/Extracted/ApesStoneHandElite_20260915/WorkspaceBaseline.json`으로 보호한다. task helper 자체의 최초 untracked 기록은 보호한 사용자 변경 수에 포함하지 않는다.
+- CB의 SCS component template override까지 읽어 Early=기본 외형, Standard=V3로 확정했다. 레시피 CDO의 V2 및 Early 추가 재질은 실제 CB override에서 교체된다. HeinMach 스폰 3개와 StormPass 1개는 Early다. Ghost/Wraith는 선택한 live closure의 소비 근거가 없고 Dead_002/003은 정적 환경 시체다. 전역 미사용 판정과 혼동하지 않는다.
+- 기본/V3 ActorX는 MATT0000 이외의 chunk가 동일해 메시 1개와 재질 BP 2개를 사용한다. 원본 mesh bone 97개가 PSA 453개의 prefix가 아니므로 이름/parent 기준으로 index를 재매핑하고 원래 mesh bind/skin weight 수치를 보존했다. 추가 helper 356개이며 weapon bind의 원본 reference 차이를 덮어쓰지 않았다.
+- 선택 closure 387 package/metadata failure 0, PSA 입력 79개 → 직접 재생 10 + Composite bake 82 = 92개다. library script는 mesh/skeleton 1쌍, texture 31, MI 13/master 2개 저장을 완료했다. 최초 commandlet은 GameFeatures 기본 클래스가 로드되지 않아 시작 시 ensure/exit 1이 있었다. engine PluginManager의 command-line 옵션을 확인해 해당 임포트 프로세스에만 `-EnablePlugins=GameFeatures`를 추가했고 Config/uproject를 수정하지 않는다.
+- 애니메이션 배치는 `run_apes_stone_hand_animation_batches.py`이며 checkpoint 재사용 조건에 실제 process exit 0을 추가했다. 재개 시 `Saved/ImportReports/ApesStoneHandEliteAnimationBatches/*.json`과 각 batch log를 확인한다. 이후 library 정상 exit 재확인 → assemblies → fresh audit → 일반 UnrealEditor warmup/render → archive → 최종 Art 문서/보호 hash 확인 순서다. 아직 화면 검증/최종 archive 완료로 기록하지 않는다.
+- 새 정본 `APES_STONE_HAND_EXTRACTION_2026-09-15.md`; 도구 `Scripts/Enemies/*apes_stone_hand*.py`; 작업 루트 `Saved/Extracted/ApesStoneHandElite_20260915`; 목적지 `/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite`. 원작 BoneMod의 축/zero 의미 및 전용 shader 실행 코드는 미확인 범위로 분리했다.
+
+### 2026-09-15 ApesStoneHandElite 임포트·최종 검증·원본 보관 완료
+
+- library/assemblies/fresh audit/render 및 애니메이션 모든 batch가 process exit 0으로 끝났다. 최종 UE 자산 143개, BP 2종, 재생용 시퀀스 92개이며 material scalar 1,791/vector 504/texture binding 209개와 source socket 7개 검증을 통과했다. staging/임시 package는 0개다.
+- 일반 에디터에서 프레임을 진행한 뒤 D3D12/SM6 shader 15개와 두 외형을 검증했다. 최종 PNG는 `RTF_RGBA8_SRGB` target을 사용하며 lit/base-color 이미지를 직접 열어 geometry·피부/털·바위·눈 및 색 차이를 확인했다. 원본 material/texture 수치를 밝게 수정하지 않았다. `ApesStoneHandElite_VisualReview_20260915.json`에 이미지 SHA-256과 검수 범위를 기록했다.
+- 외부 archive는 `Desktop/카잔/EnemyExtracts/ApesStoneHandElite_20260915`다. 선택한 cooked package 387개, 선택/제외 분류의 원본 JSON 총 423개, PSK/PSA/PNG/파생 pose/재현 스크립트/보고서를 보관했다. 최종 1,526개 파일의 hash 검증을 통과했다. 원본 JSON 전체는 프로젝트 `SourceMetadata.zip`/Index로 함께 전달한다.
+- 독립 source 감사에서 원래 bind 97개와 skin weight 45,190행의 vertex/수치/bone 이름 대응이 유지됐고, 사용자 초기 변경 9개 및 Source/Config 41개 hash가 같았다. 남은 절차는 이번 Apes Content/13개 전용 스크립트/Art 문서 5개의 선택 stage → main commit/push → 원격 hash 확인이다. 이미 통과한 임포트/애니메이션/렌더 검증을 다시 시작할 필요는 없다.

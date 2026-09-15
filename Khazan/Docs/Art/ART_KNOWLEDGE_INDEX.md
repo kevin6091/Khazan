@@ -179,3 +179,12 @@
 - 같은 metadata 폴더의 `AnimationLibrary.csv`, `AnimationImportManifest.json`, `AnimationTimingAudit.json`, `PlaybackEventTimes.json`: FPS 분수·sample·길이·배속·root/additive·2,324 event의 출처와 변환을 조회한다.
 - `SourceMetadata.zip`/`SourceMetadataIndex.json`: 원본 581 package JSON과 hash. `SourceClosure.json`/`LevelPresence.json`: 표적 탐색과 실제 스폰 근거. 전체 맵 재탐색보다 이 자료를 우선한다.
 - `ValidationSummary.json`, `RenderValidationSummary.json`, `FinalExtractionReport.json`, `ArchiveSummary.json`: 저장 후 Unreal 감사, 실제 RHI 검사 및 원본 archive 확인. 외부 archive는 `Desktop/카잔/EnemyExtracts/Yetuga_20260911`이다.
+
+### 2026-09-15 ApesStoneHandElite 실사용 버전
+
+- [APES_STONE_HAND_EXTRACTION_2026-09-15.md](APES_STONE_HAND_EXTRACTION_2026-09-15.md): Early/Standard CB의 최종 SCS override, V2/V3/Ghost/Wraith/EmptyMesh/시체의 사용 범위와 제외 근거.
+- 루트 `/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite`; BP `Blueprints/BP_EN_ApesStoneHandElite_Early`, `BP_EN_ApesStoneHandElite_Standard`; 비교 맵 `Preview/L_EN_ApesStoneHandElite_Catalogue`.
+- `Metadata/Extraction_20260915/VariantUsage.json`에는 레시피 CDO 원본·CB override·effective recipe, `LevelPresence.json`에는 HeinMach Early 스폰 3개와 StormPass Early 스폰 1개의 자료가 있다. recipe CDO의 V2를 Standard 실사용으로 오인하지 않는다.
+- 기본/V3의 geometry/bind/weights/UV/colors는 같고 material chunk만 다르다. `MeshDerivationAudit.json`은 source bind 97개, 모든 skin weight 45,190행의 vertex/bone 대응 보존과 PSA 453-bone 재매핑을 확인한다. skeleton package는 실제로 Yetuga와 공유한다.
+- `AnimationLibrary.csv`, `AnimationImportManifest.json`, `PlaybackEventTimes.json`: 직접 시퀀스 10개와 Composite bake 82개, FPS/길이/root 계약과 notify/event 1,000행. 원본 중복 UE 시퀀스는 없다.
+- 외부 원본은 `Desktop/카잔/EnemyExtracts/ApesStoneHandElite_20260915`; 단계 도구 `Scripts/Enemies/*apes_stone_hand*.py`. `run_apes_stone_hand_editor_stage.py`는 phase별 process exit와 임시 plugin 옵션을 기록한다. 게임 Config/uproject를 수정하지 않는다.
