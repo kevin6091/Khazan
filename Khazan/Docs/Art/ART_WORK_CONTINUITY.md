@@ -417,7 +417,7 @@
 ## 2026-09-15 Enemy 에셋 구조 정리 완료
 
 - 현재 Enemy 1,940개 중 살아 있는 package 21개를 공용/병종/변형 구조로 이동했다. 직접 참조가 갱신된 전체 영향 범위는 678개이며 이동 전 468,397,155바이트를 `Desktop/카잔/EnemyExtracts/EnemyAssetStructureCleanup_20260915`에 SHA-256 백업했다.
-- UE 적용은 완료됐다. `HeinMach/Empire`, 옛 `HeinMach/HalberdElite`, `HeinMach/Humanoids/Shared`, `OtherRegions/Humanoids/MageHard`를 현재 폴더에 합쳤고, 최초 빈 leaf 및 연쇄 빈 상위 폴더 총 65개를 제거했다. 최종 empty/Legacy directory와 redirector는 0개다.
+- UE 적용은 완료됐다. `HeinMach/Empire`, 옛 `HeinMach/HalberdElite`, `HeinMach/Humanoids/Shared`, `OtherRegions/Humanoids/MageHard`를 현재 폴더에 합쳤고, 최초 빈 leaf 및 연쇄 빈 상위 폴더 총 63개를 제거했다. 최종 empty/Legacy directory와 redirector는 0개다.
 - fresh audit는 exit 0/pass다. 총 1,940개/class 수, 미영향 1,262개 SHA-256, 영향 678개 로드, AnimSequence 1,354·SkeletalMesh 35·Blueprint 28 계약, 누락 dependency 0, 카탈로그 6개 로드를 확인했다. 수치 계약 최대 오차는 0이다.
 - 작업 중 사용자가 `Source/Khazan/Character/Component/KhazanLocomotionComponent.h`를 추가 수정한 사실을 hash로 감지했다. 해당 변경과 기존 Player/맵/C++/Engineering/Animation 작업은 건드리지 않았고 이 Art commit에서 제외한다.
 - 정본 `ENEMY_ASSET_LIBRARY_STRUCTURE_2026-09-15.md`, 현재 metadata `Content/_Art/Enemies/Metadata/Structure_20260915`, 재현 도구 `Scripts/Enemies/*enemy_asset_structure*.py`. 남은 절차는 metadata 발행 → 범위 선택 stage → main commit/push → 원격 hash 확인이다.

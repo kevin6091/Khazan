@@ -2,7 +2,7 @@
 
 ## 결과
 
-`/Game/_Art/Enemies`의 현재 UE 에셋 1,940개를 실제 참조와 Asset Registry 기준으로 정리했다. 비어 있던 import/source/archive 폴더와 이동 후 비게 된 상위 폴더까지 65개 디렉터리를 제거했다. 살아 있는 에셋은 삭제하지 않았으며, 옛 루트에 있던 공용 에셋 10개와 공용 애니메이션 9개, MageHard 변형 2개를 UE `AssetTools.rename_assets`로 현재 구조에 옮겼다.
+`/Game/_Art/Enemies`의 현재 UE 에셋 1,940개를 실제 참조와 Asset Registry 기준으로 정리했다. 비어 있던 import/source/archive 폴더와 이동 후 비게 된 상위 폴더까지 63개 디렉터리를 제거했다. 살아 있는 에셋은 삭제하지 않았으며, 옛 루트에 있던 공용 에셋 10개와 공용 애니메이션 9개, MageHard 변형 2개를 UE `AssetTools.rename_assets`로 현재 구조에 옮겼다.
 
 최종 구조는 다음과 같다.
 

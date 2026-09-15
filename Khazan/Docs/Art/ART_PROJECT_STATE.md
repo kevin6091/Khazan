@@ -256,6 +256,6 @@
 
 - `/Game/_Art/Enemies`의 UE 에셋 1,940개를 현재 사용 구조로 정리했다. 살아 있는 21개 package는 UE rename API로 이동했고 실제 에셋 삭제는 0개다. 영향 참조 678개는 이동 전 외부 SHA-256 백업을 만들었다.
 - `HeinMach/Empire`의 공용 장비·skeleton·pose carrier는 `HeinMach/Shared`, 옛 최상위 `HeinMach/HalberdElite`는 `HeinMach/Humanoids/HalberdElite`, 인간형 공용 애니메이션은 `HeinMach/Shared/Animations/Playback`으로 합쳤다. `MageHard` BP/mesh는 basename을 유지한 채 `OtherRegions/Humanoids/Mage`에 합쳤다.
-- 최초 빈 leaf 37개와 이동 후 빈 상위 계층을 하위부터 제거해 총 65개 디렉터리를 정리했다. 최종 empty/Legacy 명칭 디렉터리와 ObjectRedirector는 0개다. 과거 Legacy/Archive JSON은 근거 자료로 보존했다.
+- 최초 빈 leaf 37개와 이동 후 빈 상위 계층을 하위부터 제거해 총 63개 디렉터리를 정리했다. 최종 empty/Legacy 명칭 디렉터리와 ObjectRedirector는 0개다. 과거 Legacy/Archive JSON은 근거 자료로 보존했다.
 - fresh Unreal 감사에서 전체 목록·class, 영향 없는 package 1,262개 hash, 영향 자산 678개 로드, 애니메이션 1,354개·메시 35개·BP 28개 계약, 내부 dependency와 카탈로그 6개를 검사했다. 계약 오차/누락/redirector는 0이며 process exit 0이다.
 - 정본은 [ENEMY_ASSET_LIBRARY_STRUCTURE_2026-09-15.md](ENEMY_ASSET_LIBRARY_STRUCTURE_2026-09-15.md), 현재 조회 자료는 `Content/_Art/Enemies/Metadata/Structure_20260915`이다. 캐릭터 C++/Player/Config는 이 작업에서 수정하지 않았다.

@@ -203,5 +203,5 @@
 - [ENEMY_ASSET_LIBRARY_STRUCTURE_2026-09-15.md](ENEMY_ASSET_LIBRARY_STRUCTURE_2026-09-15.md): 전체 Enemy 폴더 원칙, 21개 이동 대응, 빈/Legacy 폴더 정리와 fresh 감사 결과의 정본.
 - 현재 package 목록은 `Content/_Art/Enemies/Metadata/Structure_20260915/CurrentAssets.json`, 표 형식은 `AssetLibrary.csv`, 옛 경로 대응은 `RenameMap.json`을 사용한다.
 - `HeinMach/Humanoids`는 실제 병종, `HeinMach/Shared`는 공용 장비·rig·pose carrier·애니메이션, `Shared/Beasts`와 `Shared/Elites`는 레벨 공용 비인간형/엘리트 라이브러리다. `OtherRegions/Humanoids/Mage`에는 normal/hard 변형을 함께 둔다.
-- `EmptyDirectoryCleanup.json`은 제거된 65개 디렉터리, `ValidationSummary.json`은 1,940개 에셋과 애니메이션/메시/BP 계약 검증, `WorkspacePreservation.json`은 범위 밖 사용자 작업 보존 기록이다.
+- `EmptyDirectoryCleanup.json`은 제거된 63개 디렉터리, `ValidationSummary.json`은 1,940개 에셋과 애니메이션/메시/BP 계약 검증, `WorkspacePreservation.json`은 범위 밖 사용자 작업 보존 기록이다.
 - 이동 전 영향 자산 외부 백업은 `Desktop/카잔/EnemyExtracts/EnemyAssetStructureCleanup_20260915`; 재현 도구는 `Scripts/Enemies/*enemy_asset_structure*.py`다.
