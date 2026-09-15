@@ -241,3 +241,13 @@
 - 기본/V3 메시의 material chunk 외 payload가 동일해 중복 메시를 만들지 않았다. 97-bone 원본의 bind/weight 수치를 보존한 채 PSA 453-bone 순서로 재매핑하고 비가중 helper 356개를 추가했다. 소켓 7개, 원본 3 LOD 보관과 UE LOD0 24,862 vertices를 확인했다.
 - 직접 source 시간축 10개와 원작 Composite bake 82개 모두 `Animations/Playback/A_EN_PLAY_*`다. 활성 dilation 44개, root motion 70개, force root lock 51개, additive 1개를 원본 property 기준으로 대조했다. 최대 길이 오차 약 `1.94214e-7 s`이며 원본 게임 전체 실행의 hit-stop/AI 속도 실측 검증은 아니다.
 - 정본 [APES_STONE_HAND_EXTRACTION_2026-09-15.md](APES_STONE_HAND_EXTRACTION_2026-09-15.md), 선택 근거 `VariantUsage.json`, 보존 확인 `MeshDerivationAudit.json`, 최종 완료 상태는 `ValidationSummary.json`/`RenderValidationSummary.json`/`FinalExtractionReport.json`이다. Ghost/Wraith·시체·V2 분류 JSON과 원작 BoneMod는 보존하며 전용 shader/BoneMod/AI 실행까지 완전히 구현한 것으로 간주하지 않는다.
+
+## 2026-09-15 StormPass WildDog·WildBoar 실사용 라이브러리
+
+- 두 `HeinMach_Spawn_Main01`/`StormPass_Spawn_Main01`을 표적 조사했다. WildDog는 StormPass의 `CB_WhiteDog` spawn 17개, WildBoar는 StormPass의 `CB_WildBoar_New` spawn 2개가 확인됐고 HeinMach에는 두 종의 spawn이 없다.
+- `/Game/_Art/Enemies/Shared/Beasts/WildDog`에는 공용 mesh/skeleton, texture 25개, source MI 10개/master 2개, CoatV1~V3 BP와 재생 시퀀스 82개를 포함한 125개 에셋을 저장했다. 일반 PicaroonDog와 Ghost 후보는 선택한 live spawn closure 밖이므로 UE 캐릭터에서 제외했다.
+- `/Game/_Art/Enemies/Shared/Beasts/WildBoar`에는 공용 mesh/skeleton, texture 20개, source MI 7개/master 2개, CoatV1~V3 BP와 재생 시퀀스 74개를 포함한 109개 에셋을 저장했다. 캐릭터 geometry는 하나지만 원본 `PartsIndexCache`가 재질 외형 세 결과를 노출하므로 세 BP를 유지했다.
+- 각 종의 V1/V2/V3 ActorX는 material chunk 이외 payload가 같아 mesh 한 개로 deduplicate했다. Dog 48 bone/weight 35,029행, Boar 71 bone/weight 12,528행의 원본 대응을 검사했고 source LOD0/1/2는 archive에 보관하며 UE에는 LOD0만 임포트했다.
+- WildDog 애니메이션은 direct 17/composite 65의 82개, WildBoar는 direct 11/composite 63의 74개다. 직접 시퀀스는 모두 원본 30/1 FPS이고 Composite 구간·반복·play rate·dilation을 bake했다. 모든 시퀀스는 `Animations/Playback/A_EN_PLAY_*`, `RateScale=1.0`이며 원본 중복 UE 시퀀스는 없다.
+- fresh asset/RAW·COMPRESSED pose 감사와 일반 UnrealEditor D3D12/SM6 렌더 검증을 통과했다. WildDog shader 12개와 BP 3개, WildBoar shader 9개와 BP 3개의 compile/reload 및 세 coat 표시를 확인했다. BP는 시각 조립 Actor이며 AI/전투/physics/custom notify 실행은 범위에 포함하지 않는다.
+- 정본은 [WILD_DOG_EXTRACTION_2026-09-15.md](WILD_DOG_EXTRACTION_2026-09-15.md)와 [WILD_BOAR_EXTRACTION_2026-09-15.md](WILD_BOAR_EXTRACTION_2026-09-15.md)다. 전용 cooked shader graph와 WildDog BoneMod의 실행 의미는 metadata/raw archive에 보존한 미구현 범위다.

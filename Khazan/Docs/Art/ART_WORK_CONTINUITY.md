@@ -398,3 +398,12 @@
 - 이번 Apes Content·전용 스크립트·Art 문서 204개 경로를 `da37752472259d84cd20d49302c6e73fdd0f2ad3` (`art: restore source-selected ApesStoneHandElite variants and animations`)로 main에 커밋하고 origin에 push했다. Git LFS 2개/6.3 MB 업로드 완료 및 원격 main의 동일 hash를 확인했다.
 - staged scope/whitespace 검사를 통과했으며 기존 사용자 변경 9개는 stage/commit에서 제외해 작업 트리에 그대로 보존했다. 최종 script EOF 정리 후 외부 archive를 다시 동기화해 최종 hash 검증 수는 1,527개다. 원본 JSON ZIP의 423개 entry도 각각 bytes/SHA-256을 대조했다.
 - 요청한 사용처 분류·선별 추출·UE 임포트·에셋/시간축/화면 검증·원본 보관·Git 전달은 완료다. 정본에 명시한 전용 shader/BoneMod/AI 등의 구현 제한은 유지한다. 이 전달 확인은 별도 문서 커밋으로 반영한다.
+
+## 2026-09-15 WildDog·WildBoar 선별 추출·검증·보관 완료
+
+- HeinMach/StormPass spawn metadata를 확인해 WildDog는 StormPass `CB_WhiteDog` 17개, WildBoar는 StormPass `CB_WildBoar_New` 2개를 live 기준으로 선택했다. HeinMach에는 두 종 spawn이 없었다. 일반 PicaroonDog/Ghost와 표시용이 아닌 Boar helper는 UE 라이브러리에서 제외하고 JSON 분류 근거를 보존했다.
+- 원작 RandomLook cache에 따라 두 종 모두 CoatV1~V3 세 외형을 구성했다. 각 V1/V2/V3 ActorX의 material chunk 외 payload가 같아 종별 공용 mesh 하나만 임포트했다. 최종 WildDog 125개, WildBoar 109개 UE 에셋이며 staging/임시 package는 0개다.
+- 재생용 시퀀스는 WildDog 82개(direct 17/composite 65), WildBoar 74개(direct 11/composite 63)다. 직접 시간축은 모두 원본 30/1 FPS이며 source segment/repeat/play rate/dilation을 bake하고 저장 길이·전 bone RAW/COMPRESSED pose·root 설정을 검증했다.
+- library/animation/assembly/fresh audit의 process exit 0과 실제 UnrealEditor warmup 후 D3D12/SM6 렌더를 확인했다. Dog material 12개/BP 3개와 Boar material 9개/BP 3개가 compile·reload됐고 최종 lit/base-color 이미지에서 각 coat 세 가지를 직접 확인했다.
+- 외부 archive `Desktop/카잔/EnemyExtracts/WildDog_20260915` 1,244개 파일과 `WildBoar_20260915` 1,121개 파일을 SHA-256으로 검증했다. raw cooked package는 각각 311개/283개, metadata failure는 0이며 원본 JSON 전체를 프로젝트 `SourceMetadata.zip`/Index에도 포함했다.
+- source 감사 시 작업 시작 후 사용자가 변경한 기존 문서 4개를 감지해 그대로 보존했다. 기존 14개 사용자 작업 파일을 stage하지 않으며 Source/Config 보호 파일 41개의 hash mismatch는 0개다. 남은 절차는 두 Content 루트, 전용 스크립트 26개와 Art 문서만 선택 stage해 main commit/push하고 원격 hash를 확인하는 것이다.

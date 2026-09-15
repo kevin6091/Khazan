@@ -188,3 +188,12 @@
 - 기본/V3의 geometry/bind/weights/UV/colors는 같고 material chunk만 다르다. `MeshDerivationAudit.json`은 source bind 97개, 모든 skin weight 45,190행의 vertex/bone 대응 보존과 PSA 453-bone 재매핑을 확인한다. skeleton package는 실제로 Yetuga와 공유한다.
 - `AnimationLibrary.csv`, `AnimationImportManifest.json`, `PlaybackEventTimes.json`: 직접 시퀀스 10개와 Composite bake 82개, FPS/길이/root 계약과 notify/event 1,000행. 원본 중복 UE 시퀀스는 없다.
 - 외부 원본은 `Desktop/카잔/EnemyExtracts/ApesStoneHandElite_20260915`; 단계 도구 `Scripts/Enemies/*apes_stone_hand*.py`. `run_apes_stone_hand_editor_stage.py`는 phase별 process exit와 임시 plugin 옵션을 기록한다. 게임 Config/uproject를 수정하지 않는다.
+
+### 2026-09-15 WildDog·WildBoar 실사용 버전
+
+- [WILD_DOG_EXTRACTION_2026-09-15.md](WILD_DOG_EXTRACTION_2026-09-15.md): StormPass `CB_WhiteDog`의 SCS override, V3/V2/V1 배열과 source material index 0/1/2의 역방향 대응, 일반 PicaroonDog/Ghost 제외 근거, 애니메이션 82개와 BP 역할의 정본.
+- [WILD_BOAR_EXTRACTION_2026-09-15.md](WILD_BOAR_EXTRACTION_2026-09-15.md): StormPass `CB_WildBoar_New`와 `CD_RD_M_WildBoar_001`의 세 live material outcome, helper mesh 제외, 애니메이션 74개와 표시용 scale fallback의 정본.
+- 프로젝트 루트는 `/Game/_Art/Enemies/Shared/Beasts/WildDog`와 `/Game/_Art/Enemies/Shared/Beasts/WildBoar`다. 각 `Metadata/Extraction_20260915/VariantUsage.json`은 CDO·component override·effective recipe와 제외 결정을, `LevelPresence.json`은 HeinMach 0 및 StormPass Dog 17/Boar 2 spawn 근거를 보존한다.
+- V1/V2/V3 geometry는 `MATT0000` 이외 ActorX chunk가 같다. 각 `MeshDerivationAudit.json`에서 Dog 48 bone/35,029 weight, Boar 71 bone/12,528 weight와 alias를 확인한다. 원본 LOD0/1/2는 외부 archive에 있고 프로젝트는 LOD0 하나다.
+- `AnimationLibrary.csv`, `AnimationImportManifest.json`, `AnimationTimingAudit.json`, `PlaybackEventTimes.json`은 Dog direct 17/composite 65/event 429, Boar direct 11/composite 63/event 460의 FPS·길이·root 설정·시간 변환 근거다. UE에는 재생 결과만 `Animations/Playback/A_EN_PLAY_*`로 남긴다.
+- `ValidationSummary.json`, `RenderValidationSummary.json`, `FinalExtractionReport.json`, `ArchiveSummary.json`은 fresh UE 감사, 실제 RHI compile/render와 archive 완료 판정이다. 외부 원본은 `Desktop/카잔/EnemyExtracts/WildDog_20260915`, `WildBoar_20260915`; 단계 도구는 `Scripts/Enemies/*wild_dog*.py`, `*wild_boar*.py`다.
