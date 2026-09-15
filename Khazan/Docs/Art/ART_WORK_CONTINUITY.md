@@ -407,3 +407,9 @@
 - library/animation/assembly/fresh audit의 process exit 0과 실제 UnrealEditor warmup 후 D3D12/SM6 렌더를 확인했다. Dog material 12개/BP 3개와 Boar material 9개/BP 3개가 compile·reload됐고 최종 lit/base-color 이미지에서 각 coat 세 가지를 직접 확인했다.
 - 외부 archive `Desktop/카잔/EnemyExtracts/WildDog_20260915` 1,244개 파일과 `WildBoar_20260915` 1,121개 파일을 SHA-256으로 검증했다. raw cooked package는 각각 311개/283개, metadata failure는 0이며 원본 JSON 전체를 프로젝트 `SourceMetadata.zip`/Index에도 포함했다.
 - source 감사 시 작업 시작 후 사용자가 변경한 기존 문서 4개를 감지해 그대로 보존했다. 기존 14개 사용자 작업 파일을 stage하지 않으며 Source/Config 보호 파일 41개의 hash mismatch는 0개다. 남은 절차는 두 Content 루트, 전용 스크립트 26개와 Art 문서만 선택 stage해 main commit/push하고 원격 hash를 확인하는 것이다.
+
+### 2026-09-15 WildDog·WildBoar main 전달 완료
+
+- WildDog/WildBoar Content 314개 경로, 전용 스크립트 26개와 Art 문서 5개의 총 345개 경로를 `d791f0fc` (`art: restore live WildDog and WildBoar variants`)로 main에 커밋하고 origin에 push했다. Git LFS 객체 4개/6.5 MB 업로드를 완료했다.
+- stage 범위 검사와 `git diff --cached --check`를 통과했다. 기존 사용자 변경 14개는 커밋에서 제외해 작업 트리에 유지했으며 Player/맵/C++/Engineering/Animation 파일을 이번 Art 커밋에 포함하지 않았다.
+- 사용처 판정, 실사용 외형 선별, 모델·재질·텍스처·애니메이션 임포트, source/fresh/RHI 검증, 원본 archive와 첫 Git 전달은 완료됐다. 원격 main hash 최종 확인과 이 전달 기록 자체의 문서 커밋만 수행하면 된다.
