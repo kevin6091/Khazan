@@ -205,3 +205,37 @@
 - `HeinMach/Humanoids`는 실제 병종, `HeinMach/Shared`는 공용 장비·rig·pose carrier·애니메이션, `Shared/Beasts`와 `Shared/Elites`는 레벨 공용 비인간형/엘리트 라이브러리다. `OtherRegions/Humanoids/Mage`에는 normal/hard 변형을 함께 둔다.
 - `EmptyDirectoryCleanup.json`은 제거된 63개 디렉터리, `ValidationSummary.json`은 1,940개 에셋과 애니메이션/메시/BP 계약 검증, `WorkspacePreservation.json`은 범위 밖 사용자 작업 보존 기록이다.
 - 이동 전 영향 자산 외부 백업은 `Desktop/카잔/EnemyExtracts/EnemyAssetStructureCleanup_20260915`; 재현 도구는 `Scripts/Enemies/*enemy_asset_structure*.py`다.
+
+## 2026-09-16 DualAxeSword Weak Attack Dilation
+
+- 원작 `AC_Kazan_DualAxeSword_Com_WeakAtk01`은 `FastAtk01_M1`의 `0–3.53 s`를 segment rate `1.0`으로 쓰면서 213-point `T_Original → T_Dilation` table로 실제 길이를 `3.4326434 s`로 바꾼다. 구간별 변화는 AnimSequence `RateScale` override가 아니다.
+- raw curve key, mapping 예시, 인접 table rate, WeakAtk01–05 비교와 207-sample bake 계약은 [DAS_ANIMATION_TIMING_AUDIT_2026-09-08.md §7](DAS_ANIMATION_TIMING_AUDIT_2026-09-08.md#7-2026-09-16--weakatk01-구간별-재생-속도-표적-확인)을 먼저 본다.
+- 전체 213 mapping point와 계산 provenance는 `Saved/ImportReports/Khazan_DAS_WeakAttack_Timing_20260916.json`에 있다. source snapshot이 바뀌지 않으면 package를 다시 전수 추출하지 않는다.
+- P1.5에서는 Dilation을 재생용 pose 시간축에 한 번만 bake하고 Sequence/Montage/Ability task의 배율을 모두 `1.0`으로 둔다. notify 45개와 원작 root-motion 실행은 아직 구현 범위가 아니다.
+
+### 2026-09-16 Weak Attack 콤보·Root Motion 보정
+
+- 위 마지막 문장의 `root-motion 실행은 아직 구현 범위가 아니다`는 P1.5 적용 범위를 사용자 확정 방침이 대체한다. 공격 playback Sequence는 Root track도 Dilation 시간축에 bake하고 `Enable Root Motion=true`로 사용한다.
+- 표준 1–5타 source는 `FastAtk01_M1`, `FastAtk02_M1`, `FastAtk03_M1`, `FastAtk04_M1`, `Com_WeakAtk05`다. `FastAtk02_Loop`는 표준 Skill Blueprint 단계에서 참조되지 않는 별도 Composite source다.
+- 원작 상태 단계, 해금 시 `WeakAtk04 → WeakAtk05` 연결, source root 변위와 flag 근거는 [DAS 시간축 검사 §8](DAS_ANIMATION_TIMING_AUDIT_2026-09-08.md#8-2026-09-16--weakatk-콤보-source와-root-motion-추가-확인)을 우선 조회한다.
+- 원본 snapshot은 `Saved/OriginalAttackTiming/Metadata`, 계산 report는 `Saved/ImportReports/Khazan_DAS_WeakAttack_Timing_20260916.json`과 `Saved/ImportReports/Khazan_DAS_PSA_SourceMetadata.json`이다. source가 바뀌지 않으면 재전수 추출하지 않는다.
+## 2026-09-16 DualAxeSword 애니메이션 복원 자료
+
+- [DAS_ANIMATION_RESTORATION_2026-09-16.md](DAS_ANIMATION_RESTORATION_2026-09-16.md): 원작 AnimSequence/Composite 전수 범위, source timing과 Dilation bake 계약, `C_P_Kazan` Root Motion topology 보정, 비로코모션 write manifest, locomotion audit-only 보호 목록, 백업·배치·fresh audit 재개 절차.
+- 기계 판독 정본은 `Saved/ImportReports/Khazan_DAS_OriginalMetadataAudit_20260916.json`, `Saved/ImportReports/Khazan_DAS_Animation_ProjectInventory_20260916.json`, `Saved/Extracted/DualAxeSword_20260916/AnimationImportManifest.json`이다.
+- 실제 UE API를 통한 저장 전 전수 검사는 `Saved/ImportReports/Khazan_DAS_AnimationImportPreflight_20260916.json`이며 710/710개 pass, Content write 0이다.
+
+### 2026-09-16 최종 적용 정정
+
+- 위 710개/locomotion 280개 전체 보호 기록은 사용자 범위 정정 전 준비 이력이다. 최종 보호 범위는 현재 ABP 참조 9개이며, 미사용 locomotion 271개를 복원 대상에 포함했다.
+- 최종 manifest는 source 457개 + 미사용 파생 locomotion 164개 + Composite playback 360개 = 981개다. 기존 608개를 같은 package로 교체하고 373개를 생성했다.
+- current locomotion 9개 판정은 `Saved/ImportReports/Khazan_DAS_OriginalMetadataAudit_20260916.json`의 `current_locomotion_audit`를 사용한다. 유효 cadence는 30 fps지만 9개 모두 exact-source rebuild review가 필요하며, Sync Marker 37개 때문에 marker-aware migration이 필요하다.
+- 저장 후 집계는 `Saved/ImportReports/Khazan_DAS_AnimationImportAudit_20260916.json`, 독립 재로드 정본은 `Saved/ImportReports/Khazan_DAS_AnimationFinalAudit_20260916.json`이다. 둘 다 981/981 `passed`이며 보호 9개 hash도 동일하다.
+- 작업 전 기존 608개 backup은 `Saved/ArtBackups/DAS_Animation_PreTimingFix_20260916_182555`다.
+
+### 2026-09-17 DualAxeSword Composite exact 60 Hz
+
+- 최신 재생 시간축 정본은 [DAS_ANIMATION_RESTORATION_2026-09-16.md의 exact 60 Hz 절](DAS_ANIMATION_RESTORATION_2026-09-16.md#2026-09-17-composite-재생본의-정확한-60-hz-교정)이다. 이전 Composite playback의 `60.***`/`59.***` 분수 FPS는 폐기된 V4 생성 계약이다.
+- 현재 `PlaybackDerivation=CompositePlayback` 360개는 모두 data-model 및 platform target `60/1`이다. 시간 가감속은 pose의 source-time mapping에 bake되어 있고 Sequence/Montage 추가 rate는 `1.0`이다.
+- 전수 근거는 `Saved/ImportReports/Khazan_DAS_CompositeExact60_Preflight_20260917.json`, `Khazan_DAS_CompositeExact60_Import_20260917.json`, `Khazan_DAS_CompositeExact60_FinalAudit_20260917.json`이다. 수정 전 361 package backup은 `Saved/ArtBackups/DAS_Composite_PreExact60_20260917_184000`이다.
+- 재현 도구는 `Scripts/Animation/fix_das_composite_playback_60fps.py`, 독립 감사는 `audit_das_composite_playback_60fps.py`다. generator 자체도 `prepare_das_animation_timing.py`의 exact 60 Hz 계약으로 고쳤다.

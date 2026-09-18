@@ -428,3 +428,42 @@
 - stage 전 A 37/M 661/D 21의 정확한 범위를 확인했으며 범위 밖 stage 0, 남은 Enemy/Art task 변경 0, `git diff --cached --check` 및 `git lfs fsck --pointers`를 통과했다.
 - 기존 사용자 변경 15개는 작업 트리에 그대로 남겼다. 이 중 `KhazanLocomotionComponent.h`는 Enemy 정리 도중 추가 편집된 hash까지 보존했으며 Player/맵/C++/Engineering/Animation 변경을 Enemy 커밋에 포함하지 않았다.
 - 구조 정리·백업·fresh Unreal 계약 감사·metadata 발행·첫 Git 전달은 완료됐다. 이 전달 확인 절만 후속 문서 커밋으로 main에 반영한다.
+## 2026-09-16 DualAxeSword 원본 시간축 복원 — Editor 종료 대기
+
+- 상세 정본: [DAS_ANIMATION_RESTORATION_2026-09-16.md](DAS_ANIMATION_RESTORATION_2026-09-16.md)
+- 준비 완료: 원본 AnimSequence 457개, skill AnimComposite 397개 전수 비교. write manifest는 비로코모션 source 350개와 playback 360개, 합계 710개다. 보호 locomotion destination과 교집합은 0이다.
+- 마지막 검증: UE 읽기 전용 inventory exit 0, offline analyzer/preparation passed, 7개 Python script syntax passed. 현재 ABP 직접 locomotion 9개 및 보호 AnimSequence 280개를 확정했다.
+- 중단 원인: 일반 Unreal Editor PID 13372가 열린 상태다. Computer Use surface에는 Windows 앱이 노출되지 않아 Save All/정상 종료를 자동화할 수 없다. 라이브 에디터가 저장 후 commandlet 결과를 되덮는 것을 막기 위해 package mutation을 시작하지 않았다.
+- 재개: 사용자가 Editor에서 Save All 후 종료 → inventory/analyzer/preparation 재실행 → `backup_das_animation_timing.py` → `run_das_animation_batches.py 10` pilot → 전체 `run_das_animation_batches.py` → `audit_das_animation_timing_import.py` fresh audit 순서다.
+
+### 2026-09-16 DualAxeSword import preflight 갱신
+
+- 읽기 전용 UE commandlet preflight가 710/710개를 통과했다. 기존 교체 337개, 새 생성 373개, Composite playback 360개, Dilation bake 250개, Root Motion 활성 대상 591개이며 보호 locomotion destination 교집합은 0이다.
+- root topology 이관의 component pose 보존 최대 오차는 위치 `1.02280922446851e-16 cm`, quaternion 성분 `3.33066907387547e-16`, scale `1.4210854715202e-14`다. report는 `Saved/ImportReports/Khazan_DAS_AnimationImportPreflight_20260916.json`이다.
+- preflight는 Content package를 저장하지 않았다. 현재 일반 Unreal Editor가 계속 열려 있어 실제 변경 시작 조건은 동일하다. 에디터 Save All/완전 종료 후 disk inventory를 다시 고정하고 backup → 10개 pilot → 전체 batch → fresh audit 순서로 재개한다.
+
+## 2026-09-16 DualAxeSword 원본 시간축 복원 — 범위 정정 및 완료
+
+- 사용자의 정정에 따라 locomotion 보호 범위를 전체 280개에서 현재 `ABP_Player`가 참조하는 9개로 좁혔다. 미사용 locomotion 271개는 복원 대상이다.
+- 271개 구성은 source locomotion 107개, 미사용 InGame 57개, `RT_DAS_*` 107개다. source 107개는 전체 source 복원에, 나머지 164개는 파생 locomotion 교체에 포함했다.
+- 현재 참조 9개도 검사했다. 24 fps × `RateScale 1.25`로 유효 cadence는 30 fps지만 원본과 sample 수/유효 길이가 다르다. AnimNotify event는 0개이고 8개에 Sync Marker 37개가 있어 이번에는 hash 보호했다. 정확한 원본 timeline 전환은 marker-aware 후속 migration 대상이다.
+- 최종 manifest는 981개다: source 457개, 미사용 파생 locomotion 164개, Composite playback 360개. 기존 교체 608개, 신규 생성 373개이며 Composite basename은 원작 이름을 유지했다.
+- 작업 전 백업은 `Saved/ArtBackups/DAS_Animation_PreTimingFix_20260916_182555`다. 기존 608개와 보호 9개를 hash로 고정했다.
+- UE 5.8 preflight 981/981, checkpoint import 981/981, 별도 fresh-process final audit 981/981가 모두 `passed`다. final audit는 backup 608개와 보호 locomotion 9개 hash, 현재 dependency 9개, playback inventory, timing/property/metadata, RAW/COMPRESSED pose를 확인했다.
+- 최종 보고서는 `Saved/ImportReports/Khazan_DAS_AnimationImportAudit_20260916.json`과 `Saved/ImportReports/Khazan_DAS_AnimationFinalAudit_20260916.json`이다. 재개할 미완료 import 작업은 없다.
+- 후속 범위는 현재 참조 locomotion 9개의 marker-aware exact-source migration 여부 결정, 생성된 공격 playback의 Montage/Ability 연결, PIE에서 콤보·Root Motion·타격/VFX event 품질 검증이다.
+
+## 2026-09-17 DualAxeSword Root Motion 이동량 결함 교정 완료
+
+- 이전 2026-09-16 완료 판정은 CharacterMovement 월드 이동을 검사하지 않은 한계가 있었다. 사용자가 에디터에서 과도한 이동을 확인한 뒤 실제 PIE로 재현했고, 삽입 root scale에 따른 약 100배 이동과 Composite 경계 reset을 확인했다.
+- `prepare_das_animation_timing.py`와 importer를 `20260917_DAS_RootMotionScaleAndContinuityV4` 계약으로 갱신했다. 플레이어 Root Motion 630개는 `C_P_Kazan` translation만 `0.01` 정규화하고, Composite 351개는 segment/trim/reverse/loop/dilation delta를 누적한다.
+- 메인 Content 재임포트 981/981와 fresh final audit 981/981가 완료됐다. 실패 0, 보호 locomotion 9개 hash 일치, backup 608개 검증 완료다. 정확한 보고서는 `Khazan_DAS_RootMotionScaleImport_20260917.json`과 `Khazan_DAS_RootMotionScaleFinalAudit_20260917.json`이다.
+- 격리 CharacterMovement PIE도 통과했다. `FastAtk01_M1` 종료 오차 `0.00035 cm`, `Flow_StrongAtk03_01` 경계·종료 오차 `0 cm`다. 보고서는 `Khazan_DAS_RootMotionPIEProbe_20260917.json`이다.
+- 이번 import 복구 작업에 재개할 중단 지점은 없다. 후속 작업은 실제 WeakAttack Ability/Montage에서 콤보 1–5타, 카메라·충돌·타격 정지·Motion Warping을 함께 보는 플레이 품질 검증이다. 그 단계 전까지 전체 기술 연출 완료로 확대하지 않는다.
+
+### 2026-09-17 Mesh Component scale 독립 계약으로 정정 완료
+
+- animation preparation/import에서 임시 Player Mesh scale `0.009` 전제를 제거했다. `0.009` 기반 기존 이동표와 단일-scale 보고서는 당시 런타임 관측 이력이며 최신 에셋 계약이 아니다.
+- 현행 `0.01` 보정은 라이브 `SK_Khazan`의 `C_P_Kazan` reference scale `100`의 역수임을 UE 검사로 고정했다. component scale은 에셋 입력이 아니며 `0.005`, `0.01`, `0.02` 세 임의 값에서 실제 CharacterMovement 결과를 정규화해 동일한 source 변위가 나오는 것을 확인했다.
+- 최신 보고서는 `Saved/ImportReports/Khazan_DAS_AssetSpaceMovementAudit_20260917.json`과 `Saved/ImportReports/Khazan_DAS_RootMotionScaleIndependencePIE_20260917.json`이며 모두 `passed`다. 전자는 968개/failure 0, 후자는 6개 runtime probe/failure 0이다.
+- Content 재임포트는 필요하지 않아 수행하지 않았다. 메인 Unreal Editor와 사용자 C++의 임시 `0.009` 설정은 변경하지 않았다. 이 정정 작업에 재개할 미완료 지점은 없다.

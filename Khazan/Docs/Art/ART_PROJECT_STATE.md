@@ -259,3 +259,63 @@
 - 최초 빈 leaf 37개와 이동 후 빈 상위 계층을 하위부터 제거해 총 63개 디렉터리를 정리했다. 최종 empty/Legacy 명칭 디렉터리와 ObjectRedirector는 0개다. 과거 Legacy/Archive JSON은 근거 자료로 보존했다.
 - fresh Unreal 감사에서 전체 목록·class, 영향 없는 package 1,262개 hash, 영향 자산 678개 로드, 애니메이션 1,354개·메시 35개·BP 28개 계약, 내부 dependency와 카탈로그 6개를 검사했다. 계약 오차/누락/redirector는 0이며 process exit 0이다.
 - 정본은 [ENEMY_ASSET_LIBRARY_STRUCTURE_2026-09-15.md](ENEMY_ASSET_LIBRARY_STRUCTURE_2026-09-15.md), 현재 조회 자료는 `Content/_Art/Enemies/Metadata/Structure_20260915`이다. 캐릭터 C++/Player/Config는 이 작업에서 수정하지 않았다.
+
+## 2026-09-16 DualAxeSword WeakAtk01 원작 시간축 표적 확인
+
+- 원작 `AC_Kazan_DualAxeSword_Com_WeakAtk01`의 segment와 213-point Dilation mapping을 직접 확인했다. source `FastAtk01_M1`의 `0–3.53 s`는 실제로 `3.4326434 s`에 재생되며 table 인접 진행률은 약 `0.911179–1.417051x`다.
+- 조사 정본은 [DAS_ANIMATION_TIMING_AUDIT_2026-09-08.md §7](DAS_ANIMATION_TIMING_AUDIT_2026-09-08.md#7-2026-09-16--weakatk01-구간별-재생-속도-표적-확인), 수치 report는 `Saved/ImportReports/Khazan_DAS_WeakAttack_Timing_20260916.json`이다.
+- P1.5 적용안은 mapping을 별도 playback AnimSequence에 bake하고 runtime 배율을 `1.0`으로 유지하는 것이다. 이번 확인에서는 Content asset, 게임 C++/BP를 수정하거나 Editor에서 import/build/PIE하지 않았다.
+
+## 2026-09-16 DualAxeSword Weak Attack 콤보·Root Motion 추가 판정
+
+- 원작 Skill Blueprint와 Composite를 대조해 표준 1–4타와 해금 5타 source를 확정했다. 2타는 `FastAtk02_M1`이며 사용자가 처음 고른 `FastAtk02_Loop`는 표준 단계에 참조되지 않는 별도 variant다.
+- 1–4타 source metadata의 `bEnableRootMotion=true`, `bForceRootLock=true`를 확인했다. 1–5타 PSA Root track의 계산 변위도 모두 0이 아니며, 사용자의 모든 스킬 Root Motion 방침에 따라 파생 playback Sequence의 Root를 제거하거나 `Enable Root Motion=false`로 바꾸지 않는다.
+- 최신 근거는 [DAS_ANIMATION_TIMING_AUDIT_2026-09-08.md §8](DAS_ANIMATION_TIMING_AUDIT_2026-09-08.md#8-2026-09-16--weakatk-콤보-source와-root-motion-추가-확인)이다. P1.5는 Root 포함 1타 playback Sequence와 combo Montage 골격을 사용자 적용하는 단계이며, 실제 Content asset/C++/BP/build/PIE는 아직 변경·검증하지 않았다.
+## 2026-09-16 DualAxeSword 원본 시간축 복원 준비 완료·임포트 대기
+
+- 원작 AnimSequence 457개와 DualAxeSword skill AnimComposite 397개를 전수 대조했다. 현재 source 444개는 모두 원본 sample count/길이/sample rate와 다르며, 비로코모션 기존 337개 교체·누락 source 13개 생성·Composite playback 360개 생성의 710개 write manifest를 확정했다.
+- 활성 Dilation Composite는 전체 253개, 현재 스켈레톤으로 생성 가능한 범위에서는 250개다. segment trim/rate/loop와 위치별 Dilation을 pose 시간축에 bake하며 캐릭터 Root 움직임은 현재 스켈레톤 최상위 `C_P_Kazan`으로 옮겨 실제 Root Motion 추출이 가능하게 하는 계약이다.
+- 현재 ABP가 직접 쓰는 locomotion 9개와 semantic/runtime locomotion AnimSequence를 합친 280개는 검사만 하고 보호한다. 24 fps + RateScale 1.25로 유효 cadence는 30 fps지만 원본과 key 수/유효 길이/root 설정 차이가 있어 후속 별도 결정을 요구한다.
+- 실제 UE package write는 아직 시작하지 않았다. 열린 일반 Editor를 저장·종료한 뒤 기존 337개 hash backup, 10개 pilot, 전체 batch, 710개 fresh pose 및 locomotion hash audit 순으로 실행한다. 상세 정본은 `DAS_ANIMATION_RESTORATION_2026-09-16.md`다.
+
+### 2026-09-16 DualAxeSword import preflight 통과
+
+- UE 5.8 읽기 전용 commandlet에서 준비된 710개 전부의 pose hash/shape, skeleton track, root topology 이관, rational frame grid, destination 보호 경계를 검사해 exit 0/pass를 확인했다.
+- 이 단계는 Content package를 저장하지 않았다. 실제 임포트는 열린 일반 Unreal Editor를 Save All 후 종료한 다음 기존 337개를 별도 hash 백업하고 시작한다.
+
+## 2026-09-16 DualAxeSword 원본 시간축·미사용 로코모션 임포트 완료
+
+- [범위 정정] 앞 절의 locomotion 280개 전체 보호/710개 manifest는 사용자 정정 전 기록이다. 현재 참조 9개만 보호하고 미사용 locomotion 271개를 복원했다.
+- [검사] 현재 참조 9개는 24 fps × `RateScale 1.25`로 유효 30 fps다. 원본과 sample 수·유효 길이 차이는 남으며, AnimNotify event 0개/Sync Marker 37개를 확인했다. 9개 package SHA-256은 작업 전후 동일하다.
+- [완료] 원본 source 457개, 미사용 파생 locomotion 164개, 원작 이름 Composite playback 360개, 총 981개를 Unreal Content에 저장했다. 기존 교체 608개, 신규 생성 373개다.
+- [이름] 기존 source/InGame/Runtime package 이름을 유지했고 Composite playback basename도 원작 `AC_...` 이름을 그대로 사용했다.
+- [Root Motion] 캐릭터 playback은 Root를 포함한 pose를 원작 시간 mapping으로 bake하고 `C_P_Kazan` root로 이관했다. Root Motion 활성 630개, Force Root Lock 600개가 최종 manifest 계약과 일치한다.
+- [검증] preflight 981/981, checkpoint import 981/981, fresh-process final audit 981/981 모두 passed다. final audit failure 0, backup file 608개 및 보호 locomotion 9개 hash 검증을 통과했다.
+- [백업/정본] `Saved/ArtBackups/DAS_Animation_PreTimingFix_20260916_182555`, [DAS_ANIMATION_RESTORATION_2026-09-16.md](DAS_ANIMATION_RESTORATION_2026-09-16.md), `Saved/ImportReports/Khazan_DAS_AnimationFinalAudit_20260916.json`이 복원·검증 정본이다.
+- [경계] Object/Missile 또는 미추출 Design 무기 source를 쓰는 Composite 37개는 캐릭터 animation으로 잘못 만들지 않고 metadata-only로 유지했다. C++/Blueprint/Montage 연결과 PIE 품질 검증은 아직 별도 단계다.
+
+## 2026-09-17 DualAxeSword Root Motion 이동량 V4 교정 완료
+
+- [판정 정정] 2026-09-16 감사는 시간축·pose·package 계약만 확인했고 CharacterMovement 월드 이동을 확인하지 않아 이동 품질 판정으로는 불충분했다.
+- [원인] Composite segment/loop 경계의 절대 Root reset과 `SK_Khazan`의 삽입 root `C_P_Kazan` scale `100`을 고려하지 않은 Root Motion 추출 단위가 각각 경계 역이동과 약 100배 이동을 만들었다.
+- [수정] Composite 351개의 Root delta를 UE `FTransform` 순서로 누적하고, Root Motion 활성 플레이어 애셋 630개의 이관 root translation만 `0.01`로 정규화했다. Mesh scale `0.009`, runtime Root Motion 배율 `1.0`, rotation/scale/비Root pose는 유지했다.
+- [보호] 현재 `ABP_Player` 참조 locomotion 9개는 수정하지 않았고 final audit에서 SHA-256 9개가 모두 일치했다.
+- [적용] 메인 Content 981/981 배치 처리 완료. 630개가 V4로 재작성됐고 351개는 이미 현재 계약이라 검증 후 건너뛰었다. 애셋 이름과 package 경로는 유지했다.
+- [검증] V4 preflight, 메인 import, 별도 fresh final audit가 모두 passed/failure 0이다. 격리 CharacterMovement PIE에서 `FastAtk01_M1`은 `118.39194 cm`로 원본 기반 기대값 오차 `0.00035 cm`, 합성 공격 경계와 종료는 `135.0 cm`로 오차 `0 cm`였다.
+- [보고서] `Saved/ImportReports/Khazan_DAS_RootMotionScaleImport_20260917.json`, `Khazan_DAS_RootMotionScaleFinalAudit_20260917.json`, `Khazan_DAS_RootMotionPIEProbe_20260917.json`. 상세 정본은 [DAS_ANIMATION_RESTORATION_2026-09-16.md](DAS_ANIMATION_RESTORATION_2026-09-16.md)의 2026-09-17 절이다.
+- [남은 품질 검증] 실제 WeakAttack Ability/Montage 연결 후 1–5타 화면 검수와 source에 실제로 포함된 장거리 flash 기술의 targeting/Motion Warping 적합성 검토다. 현재 수치 감사만으로 모든 기술의 최종 연출 품질까지 완료했다고 보지 않는다.
+
+### 2026-09-17 Root Motion의 임시 Mesh scale 전제 제거
+
+- 앞 절의 Mesh scale `0.009` 기반 월드 환산은 당시 런타임 관측 기록일 뿐 애니메이션 에셋 계약이 아니다. 현재 `0.009`를 animation preparation/import 입력으로 사용하는 코드와 최신 보고서는 없다.
+- V4 보정 `0.01`은 라이브 `SK_Khazan`의 `C_P_Kazan` reference scale `100`의 역수다. preflight/final audit가 실제 Skeleton과 manifest의 역수 관계를 검사하도록 갱신했다.
+- asset-space 전수 검사 968개/Root Motion 630개 failure 0, component scale `0.005`·`0.01`·`0.02`의 격리 CharacterMovement PIE 6개 probe가 모두 통과했다. 정본 보고서는 `Khazan_DAS_AssetSpaceMovementAudit_20260917.json`과 `Khazan_DAS_RootMotionScaleIndependencePIE_20260917.json`이다.
+- 현재 V4 Content는 Skeleton 계약에 맞으므로 재임포트하지 않았다. 컴포넌트 scale 변경은 에셋 재가공 사유가 아니며, Skeleton의 삽입 root reference scale/topology 변경만 preparation 재실행 사유다.
+
+### 2026-09-17 DualAxeSword Composite playback exact 60 Hz 교정
+
+- [원인 정정] 이전 Composite 생성식이 정수 interval 수와 cooked 실수 길이를 동시에 보존한 뒤 `intervals / duration`을 FPS로 기록해, 360개 중 359개의 sample rate가 `60/1`이 아니었다. Dilation 가감속과 sampling rate를 분리하지 못한 파이프라인 결함이다.
+- [적용] `PlaybackDerivation=CompositePlayback` 360개 전체를 exact `60/1`로 재표본화했다. frame 수는 `round(old duration × 60)`, 길이는 `frames / 60`이며 endpoint pose/Root Motion과 기존 property/package/name을 보존했다. source/locomotion cadence는 이번 대상이 아니다.
+- [WeakAttack] 1–5타는 각각 206/200/298/269/156 frames이며 모두 Root Motion·Force Root Lock 유지다. 현재 1번만 든 `AM_DAS_WeakAtkCombo`의 segment cache와 Montage 길이도 `3.4333333969 s`로 갱신했다.
+- [보호] 수정 전 360개와 Montage는 `Saved/ArtBackups/DAS_Composite_PreExact60_20260917_184000`에 361/361 hash 검증 백업했다. Character Mesh Component scale은 변환 입력으로 사용하지 않았다.
+- [검증] import 360/360, fresh-process exact-60 final audit 360/360, backup 361/361이 모두 `passed`다. 최종 보고서는 `Khazan_DAS_CompositeExact60_{Preflight,Backup,Import,FinalAudit}_20260917.json`, 상세 정본은 [DAS_ANIMATION_RESTORATION_2026-09-16.md](DAS_ANIMATION_RESTORATION_2026-09-16.md)의 exact 60 Hz 절이다.

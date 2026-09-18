@@ -321,3 +321,118 @@
 - 최신 UE 5.8.2 UBT에서 UHT, compile, DLL link, metadata가 `Result: Succeeded`다. 새 Editor/PIE 증거는 없어 P1.2 runtime과 M2.2 이동 회귀는 누적 검증 대기다.
 - 다음 사용자 구현은 P1.3이다. `UKhazanBasicAttackAbility`가 `UGameplayAbility`를 직접 상속하고 `InstancedPerActor`와 Commit/즉시 End 관측만 제공한다. build 뒤 기존 Definition에 native class + `Input.Action.Attack` entry 한 개를 작성한다.
 - 이번에는 안내 문서만 append했다. 게임 Source/BP/DataAsset을 어시스턴트가 수정하거나 build/PIE를 새로 실행하지 않았다.
+
+## 2026-09-16 — 싱글 플레이 제품 계약과 WeakAttack native rename 적용
+
+- 프로젝트 목표를 The First Berserker: Khazan의 액션을 실제 완성도로 재현하는 Standalone 싱글 플레이 모작으로 재확정했다. 단계별 test/probe는 품질 gate이며 최종 gameplay를 대체하지 않는다.
+- GAS 구현은 tranek/GASDocumentation의 ASC·Spec·Ability instance·AbilityTask 구분을 적극 참고한다. 해당 자료는 UE 5.3 비공식 multiplayer sample 설명이므로 네트워크 구조를 그대로 이식하지 않고, UE 5.8.2 engine source와 현재 싱글 플레이 Architecture를 최종 기준으로 둔다.
+- `UKhazanBasicAttackAbility`와 두 Source 파일을 `UKhazanWeakAttackAbility`, `KhazanWeakAttackAbility.h/.cpp`로 직접 변경했다. `InstancedPerActor`를 유지하고 `NetExecutionPolicy=ServerOnly`를 명시했다.
+- `DefaultEngine.ini`에 옛 native class path에서 새 path로 가는 class redirect를 추가했다. `DA_CharacterDefinition_Khazan`은 아직 옛 문자열을 직렬화하고 있으나 다음 module build와 Editor load/save에서 redirect로 이관할 수 있다.
+- 기존 `Input.Action.Attack`과 CharacterDefinition의 한 grant 구조는 유지한다. 실제 `GA_WeakAttack_Khazan` asset은 아직 없고 P1.5 playback Sequence/Montage/Root Motion 구현도 미적용이다.
+- 이번 rename 뒤 cold build, Definition resave, PIE는 실행하지 않았다. 작업 트리에 이미 있던 PlayerController와 `FastAtk04_M1.uasset` 사용자 변경은 수정하지 않았다.
+
+## 2026-09-16 P1.5 최신 절차 재검토
+
+- 사용자가 아직 P1.5를 적용하지 않았다고 확인해 실제 Source와 원작 WeakAtk01 metadata, UE 5.8 `AbilityTask_PlayMontageAndWait` 구현을 다시 대조했다.
+- 제품 P1.5에서 원작 근거 없는 `MaxAllowedGait=Run` 임시 constraint를 제거했다. 현재 범위의 실행 자원은 Dilation·Root track이 bake된 playback Sequence를 재생하는 Montage task 한 건이다.
+- UE 5.8의 blend-out 뒤 interrupt 누락 조건을 확인해 task의 `bAllowInterruptAfterBlendOut`을 `true`로 정정했다. 종료 delegate는 completed/interrupted/cancelled만 사용하고 Blend Out 자체에서는 Ability를 끝내지 않는다.
+- 원작 `Step1.AnimBlendAlpha=0.1`과 `RigRotToTarget.StartBlendTime=0.24/EndBlendTime=0.3`의 소유 객체가 서로 다름을 확인했다. 후자는 Montage blend 근거가 아니다.
+- 이번 작업은 설명과 Engineering 문서 보정만 수행했다. 게임 Source/BP/AnimSequence/Montage는 추가 수정하지 않았고 build·PIE도 실행하지 않았다.
+
+## 2026-09-17 P1.5 Montage 시작 확인 및 추상화 검토
+
+- 사용자가 P1.5 절차를 적용해 좌클릭 시 WeakAttack Montage가 재생됨을 확인했다. 현재 Source와 로그에서도 `PlayMontageAndWait`를 통한 `Attack01` 시작 경로를 확인했다.
+- 시작 재생은 확인됐지만 강제 cancel, 다른 Montage interrupt, Blend Out 직후 interrupt, PIE 재진입 cleanup은 이번 검토에서 실행하지 않았다.
+- 별도 Montage interface나 정적 utility는 현재 한 소비자와 엔진 `UAbilityTask_PlayMontageAndWait`의 기존 책임을 고려해 추가하지 않는 것으로 판단했다. 우선 가능한 정리는 Ability 내부 task 시작 함수 추출과 중복 abort callback 통합이다.
+- P3/P6에서 Montage와 GameplayEvent 대기 계약이 여러 Ability에 실제로 반복되면 game-specific AbilityTask 공통화를 다시 판단한다.
+- 이번 작업은 설명과 Engineering 문서 상태 갱신만 수행했다. 게임 Source/BP/asset은 수정하지 않았다.
+
+## 2026-09-17 공격 조합·유지 입력 아키텍처 감사와 다음 단계
+
+- 실제 Source는 여전히 단일 `Input.Action.Attack`의 `Started`만 ASC `TryActivateAbility()`에 전달하며 active Spec press/release, Right Mouse Button, combo buffer와 charge release 소비가 없다. 실제 `AM_DAS_WeakAtkCombo`도 `Attack01` segment/section 한 개만 가진다.
+- 원작 metadata에서 Weak=`SkillM01/FastAttack`, Strong=`SkillM02/StrongAttack`, 혼합 `SkillM01 + SecondInputType SkillM02`, `Pressed`, Strong `Released`, charge step을 확인했다. 따라서 기존 아키텍처의 Ability-local node/window/buffer 소유 방향은 유효하지만 단일 Attack tag/input phase 계약은 불충분하다고 판정했다.
+- ARCH-33/34/35로 Weak/Strong 의미 입력, Started/Completed/Canceled 번역, ASC의 GAS generic press/release protocol, Ability-local combo/charge 상태, 혼합 입력의 typed Gameplay Event 지연 도입을 확정했다. `InputBufferComponent`, 전역 FIFO, 거대 ComboManager, Enhanced Input Hold trigger는 도입하지 않는다.
+- 저장된 `PlaybackEvents.json`에서 WeakAtk01의 별도 `ReserveInput`/`SkillInputProg` 후보와 Strong Start/Charge release 창의 Dilation 변환 시간을 확인했다. Weak Step1의 Pressed→Step2 graph 연결과 NotifyEnable 조건도 확인해 reservation/capture와 progression/consume을 두 지역 window로 분리하기로 했다. 정확한 proprietary begin/end 부작용과 Strong state branch는 원작 runtime 소비 연결을 더 확인한 뒤 적용하며 임의 buffer/hold 임계값을 넣지 않는다.
+- 다음 사용자 구현은 P1.6-A다. native Weak/Strong tag 추가와 asset 이관 후 ASC `AbilityInputTagPressed/Released`, Controller의 양쪽 키 Started/Completed/Canceled를 연결한다. 이 단계에서는 2타나 Strong Ability를 가짜로 실행하지 않는다.
+- 이후 P6-A에서 `DAS_Khazan_WeakAtk02`와 `Attack02`, `WaitInputPress(false)`, 지역 buffer/window로 01→02 한 edge를 검증하고, Strong과 혼합 branch는 독립 checkpoint로 확장한다.
+
+## 2026-09-17 — Enhanced Input Combo와 연타 queue 아키텍처 검토
+
+- 실제 Source는 여전히 단일 `Input.Action.Attack/Started` 활성화만 지원하며 현재 입력 queue는 없다. 활성 WeakAttack 중 추가 클릭은 Ability에 전달되지 않고 미래 section용으로 보존되지 않는다.
+- 로컬 UE 5.8에서 `UInputTriggerCombo`와 관련 step/cancel 타입이 deprecated이며 validation도 미래 제거 warning을 발생시키는 것을 확인했다. 이 기능은 순서 패턴만 인식하고 montage window, Ability 수명, unlock/cost를 알지 못하므로 전투 콤보 기반으로 채택하지 않았다.
+- Enhanced Input은 Weak/Strong의 press/release/cancel edge까지만 만들고, ASC는 Spec 입력 protocol을 중계하며, 활성 Attack Ability가 원작 Notify window와 read-only Combo Definition을 사용해 branch를 결정하는 계약을 유지했다.
+- P6의 연타 queue는 node-local 단일 slot과 `first accepted input wins`로 시작한다. 추가 난타를 FIFO로 쌓아 여러 미래 타를 자동 실행하지 않으며, section 진입 뒤 재arm하고 cancel/interruption/end에서 reset한다. 원작 overwrite 정책은 미확인으로 남겼다.
+- `CombatInputBufferComponent`가 montage/window/tree를 중재하는 안은 상태 이중화 때문에 채택하지 않았다. 실제 cross-Ability recovery queue나 공유 command history가 생길 때 semantic event history만 소유하는 작은 구조를 다시 검토한다.
+- 이번 검토에서는 게임 Source, BP, InputAction, Montage asset을 수정하거나 build/PIE를 수행하지 않았다. 다음 적용 단계는 기존 P1.6-A이며 InputAction에 Combo/Hold/Chord trigger를 추가하지 않는다.
+- 이번 작업은 Engineering 문서만 append했다. 게임 Source, InputAction, MappingContext, DataAsset, Blueprint, Montage는 수정하지 않았고 build·PIE도 수행하지 않았다.
+
+## 2026-09-17 — P1.6-A 착수 직전 실제 이름과 Source 재확인
+
+- 현재 실제 asset은 `GA_Player_WeakAttack`, `AM_DAS_WeakAtkCombo`이며 이번 단계에서 이름을 변경하지 않는다.
+- 현재 `UKhazanWeakAttackAbility`는 지역 `UAbilityTask_PlayMontageAndWait* Task`만 사용한다. 선언되지 않은 `MontageTask` 대입은 최신 디스크 Source에 없으므로 별도 수정이 필요하지 않다.
+- 현재 task의 `OnCancelled`가 기존 abort handler에 연결되지 않은 P1.5 잔여 결함을 확인했다. Montage 시작 실패와 external task cancel 뒤 active Ability 잔류를 막기 위해 첫 cold build 전에 해당 delegate bind 한 줄을 추가해야 한다.
+- P1.6-A의 적용 범위는 native Weak/Strong input tag, 두 InputAction과 IMC/DataAsset 연결, ASC의 pressed/released Spec protocol, PlayerController의 Started/Completed/Canceled 번역이다. Ability combo state와 Strong Ability는 아직 추가하지 않는다.
+- 이번 작업은 실제 프로젝트 재확인과 공동 구현 절차 보강만 수행했다. 게임 Source/asset 변경, cold build, PIE 검증은 사용자가 절차를 적용한 뒤 수행한다.
+
+## 2026-09-17 — P1.6-A 사용자 적용 감사와 P6-A 안내
+
+- 새 Weak/Strong native tag, InputAction 둘, IMC와 InputData 연결, Weak CharacterDefinition grant, ASC generic press/release adapter, Controller phase callback이 실제 Source/asset에 반영됐다. UBT `Result: Succeeded`, 새 module DLL, PIE의 반복된 WeakAttack `Attack01` 시작을 확인했다.
+- 완료 gate에는 두 보정이 남았다. `Input_WeakAttackCanceled()`가 press를 재호출하는 오타를 release로 고쳐야 하며, `DA_InputData`에서 누락된 `Input.Action.Jump → IA_Jump` row를 복구해야 한다. 현재 PIE 로그에도 Jump lookup error가 있다.
+- 다음 공격 구현은 P6-A다. `DAS_Khazan_WeakAtk02`를 `AM_DAS_WeakAtkCombo`에 추가하고, generic begin/end GameplayEvent window NotifyState, 네 event tag, Weak Ability의 reservation/advance depth·buffer 한 건·`WaitInputPress(false)`·`Attack01→Attack02` section 확정을 연결한다.
+- 겹치는 원작 reservation 창 때문에 bool 대신 지역 depth counter를 사용한다. ASC, Controller, AnimInstance, 별도 Buffer Component에는 combo mutable state를 추가하지 않는다.
+- 이번 턴에는 설명과 Engineering 문서만 갱신했다. 게임 Source/asset, build, PIE는 직접 변경하거나 실행하지 않았다.
+
+## 2026-09-17 — P6-A window transport 단순화 감사
+
+- 사용자가 Jump DataAsset row 삭제가 의도된 시험 기능 제거라고 확인했다. 이전 Jump row 복구 항목은 취소됐다. 실제 Controller의 Weak Canceled callback은 현재 Released 전달로 보정돼 있다.
+- UE 5.8 engine source와 현재 Montage를 다시 확인해, P6-A에는 custom GameplayEventWindow NotifyState와 window event tag 네 개를 추가하지 않기로 했다. 내장 `Montage Notify Window`의 두 Notify Name과 AnimInstance Begin/End delegate를 활성 WeakAttack Ability가 직접 구독한다.
+- 원작 `ReserveInput`/`SkillInputProg` playback 구간, 서로 다른 두 의미, depth counter, Ability-local one-slot buffer와 runtime section link 계약은 유지한다. ASC는 현재 pressed/released Spec protocol 이상으로 확장하지 않는다.
+- 현재 `AM_DAS_WeakAtkCombo`는 Attack01 section/segment 한 개, notify 0개이며 Attack02 Sequence는 Root Motion/Force Root Lock true, Rate Scale 1.0, 길이 3.3280539513 s다. UE는 새 section을 이전 section의 next로 자동 연결하므로 editor에서 authored link를 None으로 되돌리는 절차가 필요하다.
+- 이번 재검토는 read-only Source/asset/engine 검사와 Engineering 문서 append만 수행했다. 게임 Source와 Content asset은 수정하지 않았고 build/PIE도 새로 실행하지 않았다.
+
+## 2026-09-17 — 지속 가능한 최소 설계 기준 확정
+
+- 모든 후속 Source·아키텍처 제안은 새 타입을 제시하기 전에 엔진 기능과 기존 owner로 해결 가능한지, 확인된 카잔 최종 기능을 감당하는지, 마이그레이션 전용 구조가 남는지를 필수 심사한다. 적은 코드 자체보다 확정된 제품 범위를 유지하는 최소 계약을 선택한다.
+- P6-A는 custom event/notify/task 계층을 만들지 않되 2타 전용 bool과 함수로도 고정하지 않는다. 활성 WeakAttack Ability의 한 칸 `FGameplayTag` buffer와 현재 section 기반 transition 함수가 1–5타 및 확인된 혼합 입력까지 같은 책임 경계로 확장된다.
+- 이번 반영은 설계 정본과 절차 문서만 갱신했다. 게임 Source, Blueprint, Montage와 Input asset은 수정하지 않았고 build·PIE도 수행하지 않았다.
+
+## 2026-09-17 — P6-A 조기 combo cross-fade 설계 확정
+
+- 사용자가 지적한 full recovery sequence 사이의 부자연스러운 끝 연결을 반영해 UE 5.8.2 montage section 이동과 montage replay 동작을 표적 확인했다. section next/jump에는 segment cross-fade가 없으므로 기존 `Attack01 -> Attack02` runtime next-section 안을 폐기했다.
+- 최종 P6-A는 full Attack01/02 segment와 authored Next `None`을 유지한다. 합법 window 입력 시 현재 `PlayMontageAndWait` task를 `EndTask()`하고 같은 `AM_DAS_WeakAtkCombo`를 `Attack02` section에서 다시 재생해 현재 `0.1 s Hermite Cubic` Blend In으로 조기 교차 전환한다. 무입력 Attack01은 full recovery까지 완료한다.
+- 같은 asset의 이전 montage instance가 blend-out 중 남을 수 있으므로 Ability가 active montage instance ID를 저장하고 Notify payload의 asset과 ID를 함께 검사한다. root motion은 새 Attack02 montage instance가 이어받으며 translation scale은 `1.0`을 유지한다.
+- current ASC가 active Spec의 Ability `InputPressed()`를 이미 호출하므로 P6-A는 `WaitInputPress` task를 추가하지 않는다. 즉시 section/instance가 교체되므로 별도 `bTransitionCommitted`도 추가하지 않는다. custom notify/event/task와 전역 buffer component 역시 만들지 않는다.
+- 이번 작업은 read-only 원작 metadata·현재 asset·UE engine source 검사와 Engineering 문서 append만 수행했다. 게임 Source와 Content asset은 수정하지 않았고 build·PIE도 새로 수행하지 않았다.
+
+## 2026-09-17 — 캐릭터 아키텍처 v3 전면 재감사
+
+- UE 5.8.2 engine source 기준으로 `Montage_JumpToSection`은 대상 section 위치로 즉시 `SetPosition()`하며 Montage Blend In/Out을 다시 적용하지 않는 것을 확인했다.
+- Inertialization은 section jump의 pose pop 완화에 유효하지만, 다음 section 첫 frame Notify 방식은 경계 marker 누락 가능성과 현재 설치본에 해당 내장 Notify가 없다는 이유로 제외했다. 최신안은 `ComboCommit` 코드에서 `RequestMontageInertialization()`을 요청한 뒤 GAS의 `MontageJumpToSection()`을 호출한다.
+- 현재 ABP의 Inertialization 노드는 `DefaultSlot`보다 앞에 있어 Slot request를 받을 수 없다. 기존 노드를 `DefaultSlot` 뒤, 향후 IK 전으로 이동하는 안을 문서에 확정했으며 asset에는 아직 적용하지 않았다.
+- 현행 WeakAttack 515줄 실행, 빈 Ability base, 복제 input callback, custom asset registry, 빈 Tick/BeginPlay, 미사용 Anim snapshot, native presentation hardcode, 미래 Manager/Component 선행안 등을 단순화 대상으로 집계했다. Locomotion constraint handle, ASC exact tag→Spec scan, 한 칸 buffer, Root Motion, Game Thread snapshot 경계는 유지 대상으로 판정했다.
+- [Architecture v3](CHARACTER_GAMEPLAY_ARCHITECTURE.md#character-architecture-v3-native-minimal-20260917), [P6 v3 이관](CHARACTER_TAG_ABILITY_MIGRATION.md#p6-native-inertialization-v3-20260917), [Source/BP asset 이관](SOURCE_BP_CONFIG_ARCHITECTURE.md), Animation 현행 정본을 갱신했다. Source·Config·Blueprint·Montage·AnimSequence는 수정하지 않았고 cold build/PIE도 새로 수행하지 않았다.
+
+## 2026-09-18 — P6-v3.1 적용 직전 실물 재확인
+
+- 실제 Montage는 `Attack01`/segment 하나/Notify 0개이며 Source만 `Attack02`와 구 window를 가정한다. Sequence 01–05의 Root Motion과 Force Root Lock, Rate Scale 1.0은 유지돼 있다.
+- 증분 전체 build는 성공했지만 Controller가 재컴파일되지 않았다. Controller single-file compile로 `Engine/LocalPlayer.h` 누락 오류를 재현했고 ASC single-file compile로 `AbilitySpec.ActivationInfo` deprecation 두 건을 재현했다.
+- 빈 native Ability base를 직접 부모로 삼는 `GA_GamePlayAbility` asset이 있으므로 base 삭제는 현재 combo 이관에서 제외했다. 참조 asset 정리와 함께 별도 checkpoint로 수행한다.
+- 최신 실제 적용 절차는 Migration의 [P6-v3.1 체크포인트](CHARACTER_TAG_ABILITY_MIGRATION.md#p6-v3-1-current-checkpoint-20260918)다. 첫 gate는 01→02 한 task Jump, code-side inertialization, Root Motion/locomotion 회귀까지다.
+- 이번 확인은 Source/Content를 수정하지 않았고 PIE를 수행하지 않았다.
+
+## 2026-09-18 — P6-v3.1 2타 미전환 원인 확정
+
+- 사용자 적용본은 `AM_DAS_WeakAtkCombo`에 `Attack01`/`Attack02`와 이름이 정확한 `ComboInputOpen`/`ComboCommit` 점 Notify를 저장했다.
+- `UKhazanWeakAttackAbility`는 activation에서 runtime state를 `INDEX_NONE`으로 reset한 뒤 Attack01 재생 성공 시 `CurrentComboStepIndex=0`을 설정하지 않는다. 이 때문에 Commit마다 유효 index 검사에서 반환해 Jump가 실행되지 않는다.
+- 최소 보정은 첫 task `ReadyForActivation()` 전에 `CurrentComboStepIndex = Attack01Index`를 설정하는 한 문장이다. 새 상태나 타입은 필요하지 않다.
+- 저장된 두 Notify의 Tick Type은 `Queued`로 확인됐다. 현 증상의 원인은 아니지만 확정 contract의 `Branching Point`와 다르므로 코드 보정 뒤 함께 바로잡아야 한다.
+- 자세한 흐름과 검증 gate는 Migration의 [P6-v3.1 01→02 전환 차단 원인](CHARACTER_TAG_ABILITY_MIGRATION.md#p6-v3-1-attack02-blocker-20260918)에 기록했다. 이번 점검은 read-only Source/asset 검사와 문서 갱신만 수행했다.
+
+## 2026-09-18 — P6-v3.2 콤보 후반 입력과 Root Motion recovery 전환 확정
+
+- 사용자 보정 후 Attack01→Attack02는 동작한다. 다음 결함은 Commit 뒤 입력이 버려지는 좁은 콤보 창과 Attack02 Root Motion Montage가 자연 종료될 때까지 locomotion capsule 구동이 나타나지 않는 것이다.
+- WeakAttack/Blueprint에는 이동 차단 tag가 없고 raw move intent는 계속 기록된다. ABP가 `Root Motion from Montages Only`이고 CMC가 Anim Root Motion velocity로 일반 velocity를 덮는 것이 현재 정지의 직접 원인이다.
+- ARCH-44에서 콤보를 `ComboInputOpen → ComboCommit → ComboInputEnd`의 3상태 입력으로 개정했다. Open–Commit은 고정 Commit까지 buffer, Commit–End는 입력 즉시 Jump, End 뒤에는 닫는다.
+- 외부 행동 전환은 combo End와 분리한다. 첫 수직 절편은 `RecoveryCancelOpen` 한 point, 보존된 Locomotion raw intent, point 이후 Move Started event로 WeakAttack을 조기 종료하고 task의 native Montage Blend Out으로 locomotion에 복귀한다.
+- 현재 저장 Montage의 두 point는 각각 `0.220553502 s`, `0.529886901 s`, Tick Type `Queued`다. 새 End/Recovery point와 Branching Point 전환은 아직 적용되지 않았다.
+- 상세 계약과 다음 적용 순서는 Architecture [ARCH-44](CHARACTER_GAMEPLAY_ARCHITECTURE.md#arch-44-three-phase-combo-and-recovery-exit-20260918)와 Migration [P6-v3.2](CHARACTER_TAG_ABILITY_MIGRATION.md#p6-v3-2-three-phase-input-recovery-exit-20260918)이다.

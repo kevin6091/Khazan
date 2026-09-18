@@ -1061,3 +1061,314 @@ InGame의 마지막 Turn 목록은 2026-09-07 표적 감사가 근거다. 아래
 - [판정 입력] Pivot 후보는 이전의 유효한 평면 진행 방향과 새 raw `MoveInputWorld` 사이의 반전으로 계산한다. 기존 `MovementDirectionAngle`은 Actor 정면 대비 속도 방향 관측이므로 Pivot trigger 값으로 바꾸지 않는다. 진입 뒤 목표 방향은 해당 maneuver 동안 고정하고 raw 입력은 계속 최신값으로 기록한 뒤 종료 시 다시 정책을 해결한다.
 - [수치 상태] 방향각 임계값, 최소 속도/입력량, 짧게 사용할 Sprint Stop 구간, 제동/회전/재가속 시간은 이번에 확정하지 않았다. 원작 metadata 직접값을 우선 표적 확인하고, 없으면 `SprintPivotConfig` 한곳의 명시적 임시 튜닝값으로 구분한다. 기존 이동 수치나 Sequence 전체 길이를 근거 없이 Pivot 수치로 전용하지 않는다.
 - [구현 시점] P1 공통 액션 승인/취소, P2 Stamina, P3 HitReact/Death 결과, P4 Locomotion Linked Layer를 먼저 검증한 뒤 P5에서 SprintPivot을 구현한다. P6 Combo와 P7 Dodge/Parry를 추가할 때 Pivot 중단 회귀를 다시 수행한다.
+
+## 2026-09-16 — P1.5 공격 Montage 사전 확인과 로코모션 경계
+
+- 이번 기록은 다음 공동 구현 절차를 위한 read-only 확인이며 C++/ABP/animation asset을 수정한 결과가 아니다.
+- 후보 `/Game/_Art/Kazan/Animation/Weapons/DualAxeSword/Shared/Combat/Attacks/FastAttack/CA_P_Kazan_DualAxeSword_Off_FastAtk01_M1`은 Player mesh와 `ABP_Player`가 쓰는 같은 `/Game/_Art/Kazan/Character/Meshs/SK_Khazan` skeleton이다.
+- 후보의 asset 직접 조회값은 `Play Length=10.375 s`, `Rate Scale=1.0`, `Enable Root Motion=false`, `Force Root Lock=false`다. 같은 FastAttack 폴더의 8개 Sequence가 모두 10.375초이므로 이 길이를 원작 1타의 확정 timing으로 사용하지 않는다. Montage segment의 실제 표현 시작/끝 frame은 Editor 시각 확인이 남아 있다.
+- Main ABP의 마지막 정본 구조 `Locomotion -> DefaultSlot -> Output Pose`와 `Root Motion from Montages Only` 관측은 유지한다. P1.5 Montage는 `DefaultGroup.DefaultSlot`을 사용하며 source root motion이 꺼져 있어 CMC 구동 경계를 바꾸지 않는다.
+- P1.5의 `MaxAllowedGait=Run`은 원작값이 아니라 Ability 실행별 constraint handle의 적용/해제와 Sprint raw intent 보존을 확인하는 임시 튜닝값이다. rotation override는 적용하지 않는다.
+- 공격 Montage 실행 중에도 AnimInstance는 기존 Game Thread snapshot을 통해 resolved locomotion 값을 관측한다. Ability/task/ASC를 worker thread에서 직접 읽거나 쓰는 경로는 추가하지 않는다.
+
+## 2026-09-16 — DualAxeSword 공격 애니메이션 이름과 원본 PSA 확인
+
+- [확인한 원본] 프로젝트의 FastAttack AnimSequence `AssetImportData`는 `C:/Users/user/Desktop/카잔/Blender/Animation/Part_07_301_to_350/<동일 이름>.fbx`를 가리킨다. 별도로 추출된 원작 PSA `C:/Users/user/Desktop/카잔/BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/DualAxeSword/<동일 이름>.psa`의 `ANIMINFO`와 `ANIMKEYS`를 읽어 이름별 sample 수와 원본 시간을 대조했다.
+- [`Off`] 원작 제작팀의 약어 정의표는 확보하지 못했다. 다만 같은 무기군에 `..._Off_Stand`와 별도 `..._LockOn_Walk/Run...` 묶음이 있고 공격·피격·회피에도 `Off`가 반복되므로, 현재 근거상 `Off`는 off-hand가 아니라 **Lock-On이 꺼진 기본/비고정 상태** 표기일 가능성이 가장 높다. 파일명만으로 gameplay lock-on 규칙이 자동 적용되는 것은 아니다.
+- [`M1`] 정확한 풀네임은 미확인이다. 이 접미사는 FastAttack뿐 아니라 Dodge, DodgeAttack, Guard, Grapple에도 붙고 조사 범위에는 `M2`나 `M3`가 없었다. 아래처럼 대응본보다 일관되게 긴 별도 motion variant이지만 PSA의 `RootInclude=0`이고 root track 이동도 없어, `M1=Root Motion`으로 해석할 근거는 없다. `Motion 1` 같은 풀네임도 원본 정의표 없이 확정하지 않는다.
+- [`Loop`] 이름은 제작자가 붙인 별도 시퀀스/구간 표식이며 Unreal의 반복 재생 설정이 아니다. 실제 반복 횟수는 Sequence Player의 loop 설정, Montage segment의 `Loop Count`, section 연결 또는 Ability 흐름이 결정한다. 따라서 `Loop`라는 이름의 클립을 단발 공격이 한 번 재생하는 것도 모순이 아니다.
+
+| 원본 PSA | sample 수 | 30fps 구간 길이 |
+|---|---:|---:|
+| `FastAtk01_M1` | 107 | `106 / 30 = 3.5333 s` |
+| `FastAtk02` | 69 | `68 / 30 = 2.2667 s` |
+| `FastAtk02_Loop` | 61 | `60 / 30 = 2.0000 s` |
+| `FastAtk02_M1` | 102 | `101 / 30 = 3.3667 s` |
+| `FastAtk03` | 63 | `62 / 30 = 2.0667 s` |
+| `FastAtk03_M1` | 147 | `146 / 30 = 4.8667 s` |
+| `FastAtk04` | 57 | `56 / 30 = 1.8667 s` |
+| `FastAtk04_M1` | 131 | `130 / 30 = 4.3333 s` |
+
+- [`FastAtk02_Loop` 판정] 이 파일은 `FastAtk02`의 asset flag가 아니라 61 samples/2.0초인 독립 원본이다. 경계 pose가 완전히 동일하다는 근거도 확보하지 못했으므로 seamless 반복이라고 단정하지 않는다. 현재 gameplay의 2타가 단발이라는 관측과 양립하며, 원작 Montage/AnimGraph 참조가 없는 상태에서는 1회용 대체 take, 유지·반복용 중간 phase, 또는 남은 제작/legacy variant 가운데 어느 것인지 확정할 수 없다.
+- [P1.5 보정] 현재 프로젝트에 임포트된 FastAttack 8개가 모두 `10.375 s`인 직접 조회값은 서로 다른 원본 PSA 길이와 일치하지 않는다. 따라서 `10.375 s`는 원본 동작 시간이 아니며 공통 FBX timeline 또는 import 범위가 포함된 결과로 판단한다. 정확한 발생 원인은 FBX take/frame range를 열어 추가 확인해야 한다. P1.5에서 임의로 눈대중 crop하기 전에 원본 PSA 시간과 FBX take/frame range에 맞게 import 범위를 바로잡고 시각 검증한다. 특히 이름만 보고 `FastAtk02_Loop`를 콤보 2타로 선택하거나 반복 재생을 켜지 않는다.
+- [변경·검증 경계] 이번 확인은 파일명 목록, uasset import source, 원본 PSA binary metadata의 읽기 전용 대조다. 헤드리스 조회 중 자동 리임포트로 표시된 FastAttack uasset 4개는 즉시 검사 전 상태로 복원했으며 Source, BP, Montage, AnimSequence의 최종 내용은 변경하지 않았다. 원작 실행 그래프와 notify/hit window는 아직 미확인이다.
+
+## 2026-09-16 — P1.5 WeakAtk01 Dilation과 표현 경계
+
+- 원작 `AC_Kazan_DualAxeSword_Com_WeakAtk01`은 `FastAtk01_M1`의 `0–3.53 s`를 `AnimPlayRate=1.0`, 1회 사용하면서 213-point Dilation table로 `3.4326434 s`에 재생한다. 이는 AnimSequence `RateScale`이 위치별로 바뀌는 구현이 아니다.
+- P1.5 표현은 `A_DAS_WeakAtk01_Playback` 파생 Sequence에 mapping을 pose 시간축으로 한 번 bake하고 Sequence/Montage/Ability task를 모두 `1.0x`로 재생하는 방식으로 정했다. Main AnimInstance/Linked Layer에 curve, timer, ASC 직접 조회를 추가하지 않는다.
+- 원작 source의 root motion/force root lock은 true지만 P1.5는 기존 CMC 이동 경계를 유지해 playback Sequence의 root motion 이동을 비활성화한다. 원작 공간 이동 복원이 완료됐다는 뜻이 아니다.
+- 정확한 original/package/curve 수치는 Art [DAS 시간축 검사 §7](../Art/DAS_ANIMATION_TIMING_AUDIT_2026-09-08.md#7-2026-09-16--weakatk01-구간별-재생-속도-표적-확인), 사용자 적용 순서는 Engineering [P1.5 최신 보정](../Engineering/CHARACTER_TAG_ABILITY_P1_MINIMAL_WALKTHROUGH.md#p1-5-dilation-integrated-20260916)을 따른다.
+- 이번 기록에서는 locomotion C++, ABP, AnimSequence/Montage를 수정하거나 build/PIE하지 않았다. 현재 BasicAttack Source는 여전히 Commit 직후 즉시 종료하는 P1.3 상태다.
+
+<a id="2026-09-16-skill-root-motion-combo-correction"></a>
+## 2026-09-16 — 스킬 Root Motion·약공격 콤보 보정
+
+- 사용자 확정 방침: 공격/스킬은 Root Motion을 사용하며 파생 공격 Sequence에서 `Enable Root Motion=false`로 바꾸지 않는다. 이는 현재 Walk/Run/Sprint/Stop의 locomotion in-place 정책을 일괄 변경하는 지시가 아니다.
+- 바로 위 이름 조사 절의 `PSA RootInclude=0이고 root track 이동도 없다`는 판정 중 **root 이동 없음은 철회**한다. `ANIMKEYS` 첫 bone `Root`를 직접 재검사한 결과 1–5타에 실변위가 있다. `RootInclude` 필드만으로 root track 무변위를 판정할 수 없다. 다만 이것이 `M1` 접미사의 뜻을 Root Motion으로 확정하는 근거는 아니다.
+- Main ABP의 현행 `Root Motion from Montages Only`를 공격 경로에도 사용한다. 공격은 Montage slot으로 재생하고, AnimInstance가 추출한 root delta를 CharacterMovementComponent가 collision 경로에서 소비한다. ASC나 AnimInstance worker가 이동을 직접 작성하지 않는다.
+- 원작 WeakAtk 표준 source는 1 `FastAtk01_M1`, 2 `FastAtk02_M1`, 3 `FastAtk03_M1`, 4 `FastAtk04_M1`, 해금 5 `Com_WeakAtk05`다. `FastAtk02_Loop`는 별도 Composite이며 표준 2타가 아니다.
+- Dilation playback Sequence 생성 때 Root를 포함한 모든 track을 같은 역 mapping으로 재표본화한다. runtime `Rate Scale`, Montage segment rate, Ability task rate, root-motion translation scale은 모두 `1.0`이다.
+- P1.5는 `AM_DAS_WeakAttackCombo`의 `Attack01` section만 먼저 검증한다. section 자동 연결은 비워 두며, P6에서 활성 Ability의 지역 입력 buffer와 의미 notify/event로 1→2→3→4, 해금 시 4→5를 예약한다.
+- 이번에는 게임 Source, ABP, AnimSequence, Montage를 직접 수정하거나 build/PIE하지 않았다. 기존 locomotion 구현과 사용자 변경은 보존했다.
+<a id="2026-09-16-das-timing-audit-only"></a>
+## 2026-09-16 DualAxeSword 원본 시간축 비교 — locomotion audit-only 경계
+
+- 사용자의 최신 범위에 따라 현재 `ABP_Player` dependency closure가 직접 쓰는 DAS AnimSequence 9개는 검사만 했고 저장하지 않았다. source `/Locomotion/`, `InGame/DAS/Locomotion`, 전용 runtime library를 합친 보호 AnimSequence는 280개다.
+- 현재 9개는 24 fps key grid와 RateScale 1.25를 사용하므로 유효 재생 cadence는 30 fps다. 따라서 24 fps라는 사실만으로 현재 재생이 느리다고 판정하지 않는다.
+- 원본 cooked source와는 key 수·유효 길이 차이가 남아 있다. Stop은 원본 Root Motion/Force Root Lock과 현행 root-locked CMC 정책도 다르다. 이 차이를 이번 비로코모션 복원에 섞지 않고 `Saved/ImportReports/Khazan_DAS_OriginalMetadataAudit_20260916.json`의 `current_locomotion_audit`에 원본 field와 계산값을 기록했다.
+- 비로코모션 캐릭터 playback에는 사용자의 모든 스킬 Root Motion 방침을 적용한다. 원본 `Root` motion을 현재 skeleton bone index 0인 `C_P_Kazan`으로 component pose 보존 방식으로 옮긴다. 이는 locomotion Stop의 현행 root-locked 정책을 자동 변경한다는 뜻이 아니다.
+- 상세 Art 정본은 [DAS_ANIMATION_RESTORATION_2026-09-16.md](../Art/DAS_ANIMATION_RESTORATION_2026-09-16.md)다. 현재는 import 데이터와 검증 도구까지 준비됐고 일반 Editor 종료 전이라 Content package는 아직 변경되지 않았다.
+
+### 2026-09-16 DAS 비로코모션 import preflight 후 보호 상태
+
+- 별도 UE 5.8 읽기 전용 commandlet에서 비로코모션 import manifest 710개를 전수 검사했고 `Saved/ImportReports/Khazan_DAS_AnimationImportPreflight_20260916.json`이 pass했다.
+- 보호 locomotion 280개와 manifest destination의 교집합은 0이며, preflight는 Content package를 생성·dirty·save하지 않았다. 현재 9개 ABP locomotion dependency와 그 에셋은 계속 audit-only 범위다.
+
+### 2026-09-16 사용자 범위 정정 후 locomotion 적용 결과
+
+- 앞 절의 280개 전체 보호는 최신 사용자 지시로 대체됐다. 전체 280개를 검사하되 현재 `ABP_Player` dependency 9개만 보호하고, 미사용 271개는 복원했다.
+- 미사용 271개는 source locomotion 107개, InGame 파생본 57개, Runtime `RT_DAS_*` 107개다. 세 묶음 모두 원본 pose와 source rate를 반영해 Unreal package에 저장했다.
+- 파생 InGame/Runtime 164개는 기존 이름, crop/loop 역할, root-lock 설정을 유지했다. 기존 Sync Marker는 초 값을 복사하지 않고 원래 프레임 위치를 새 source frame grid에 매핑했다.
+- 현재 참조 9개는 작업 전후 hash가 같다. 이 9개는 24 fps × `RateScale 1.25`라 유효 cadence가 30 fps이므로 속도 보정 자체는 이미 적용되어 있다.
+- 다만 9개 모두 원본과 sample 수 또는 유효 길이가 다르다. Stop 계열에는 현행 root-locked 정책과 원본 Root Motion/Force Root Lock 계약 차이도 있다. 원작 timeline과 정확히 맞추려면 현재 ABP 전환·발 위상 계약을 함께 다루는 별도 migration이 필요하다.
+- 검사에서 AnimNotify event는 9개 모두 0개였다. Idle을 제외한 8개에 Sync Marker가 총 37개 있다. 사용자가 말한 “애니노티파이 보존”의 실제 현재 데이터는 이 notify track/Sync Marker 계약이다.
+- 최종 검증은 `Saved/ImportReports/Khazan_DAS_AnimationFinalAudit_20260916.json`이며 current dependency 9개, 보호 file 9개, 전체 import 981개를 fresh process에서 확인해 `passed`다.
+
+## 2026-09-17 — DefaultSlot 이후 Inertialization 검수와 제안 상태
+
+이 절은 WeakAttack section jump 품질 검토 때문에 현재 ABP graph와 UE 5.8.2 inertialization request 경로를 대조한 결과다. **아직 `ABP_Player`를 수정한 결과가 아니며**, 위 7절의 마지막 관측 구조가 현재 구현이다.
+
+### 현재 graph에서 확인된 문제
+
+현재 마지막 관측 구조는 다음과 같다.
+
+```text
+GroundedLocomotion → Inertialization → Grounded Output
+상위 Locomotion State Machine → DefaultSlot → Output Pose
+```
+
+UE의 Slot node는 자기 Slot Group용 inertialization request를 downstream의 `IInertializationRequester`에 전달한다. 현재 Inertialization node는 `DefaultSlot`보다 upstream에 있으므로 WeakAttack의 Slot Group request를 받을 수 없다.
+
+### 최신 제안 graph
+
+같은 공간의 node를 두 개로 늘리지 않고 기존 Inertialization node를 최종 합성 경계로 이동한다.
+
+```text
+Locomotion State Machine
+  → DefaultSlot
+  → Inertialization
+  → Output Pose
+```
+
+- 한 node가 Grounded state transition과 DefaultSlot Montage request를 모두 받는 것을 기본안으로 한다.
+- 향후 실제 IK/Control Rig가 추가되면 Inertialization은 그 앞에 둔다.
+- 상체/하체처럼 서로 다른 pose 공간에 독립 감쇠가 필요하다는 실제 품질 근거가 생길 때만 별도 node를 추가한다.
+- Inertialization request가 없을 때는 일반 pose 경로로 통과한다.
+
+### WeakAttack request의 소유자
+
+다음 section 첫 frame에 관성화 Notify를 두지 않는다. UE 5.8.2 설치본에는 `PlayRequestInertialization`/`Request Inertialization`이라는 내장 Notify가 확인되지 않았고, Jump가 section 시작에 위치를 둔 뒤 같은 시작 시각의 Branching Point는 건너뛸 수 있다.
+
+활성 WeakAttack Ability가 `ComboCommit`을 소비해 전환을 확정한 Game Thread 호출 안에서 다음 순서를 사용한다.
+
+1. `UAnimInstance::RequestMontageInertialization(WeakAttackMontage, Duration, nullptr)`
+2. `UGameplayAbility::MontageJumpToSection(NextSection)`
+
+관성화는 skeletal pose/curve offset을 감쇠하는 표현 기능이다. Montage가 추출해 CMC가 소비하는 root-motion translation/yaw delta를 보간하지 않는다. 따라서 pose pop 검사와 capsule root-motion 연속성 검사를 별도 합격 조건으로 둔다.
+
+### 기존 locomotion 회귀 검사
+
+- Idle/WalkRun/Sprint/Stop의 모든 inertial transition request가 최종 node에 도달하는지 확인한다.
+- Stop 진입, Stop→Idle, Stop 중 재입력, Sprint↔WalkRun에서 기존 blend와 발 선택이 유지되는지 확인한다.
+- Sync Group `Locomotion`의 LeftFoot/RightFoot marker와 StopEntryFoot 결과가 변하지 않는지 확인한다.
+- Animation Insights에서 Montage section, notify, graph update와 pose를 기록하고 Message Log에 missing inertialization requester 오류가 없는지 확인한다.
+- 관성화가 시작되면 outgoing source pose 평가가 중단될 수 있으므로, 전환 뒤 반드시 실행돼야 할 gameplay Notify를 outgoing recovery 구간에 두지 않는다.
+
+이번 기록은 Architecture/Migration 제안과 Animation 현행의 차이를 명시한 것이다. ABP, Montage, AnimSequence, Source를 직접 수정하거나 PIE 검증하지 않았다.
+
+## 2026-09-18 — WeakAttack Root Motion 중 이동 입력 관측 경계
+
+- 현행 `AKhazanPlayer::HandleInputMove()`는 이동 허용 판정보다 먼저 `LocomotionComponent::SetMoveInputWorld()`를 호출하므로 WeakAttack Montage 중에도 raw 이동 intent를 갱신한다.
+- 현재 `GA_Player_WeakAttack`에는 `Block.Movement.Input` 및 Activation/Block/Cancel tag가 저장돼 있지 않다. 이동이 늦는 현상을 명시적 input block으로 해석하지 않는다.
+- `ABP_Player`의 저장 설정은 `Root Motion from Montages Only`다. UE 5.8.2 CMC는 Anim Root Motion 중 일반 `CalcVelocity()`를 생략하고 animation root-motion velocity를 적용한다. 따라서 Montage를 조기 종료하지 않는 현행 WeakAttack에서는 이동 intent가 있어도 Attack02 전체 재생 뒤에 locomotion 이동이 나타난다.
+- 제안된 `RecoveryCancelOpen`은 raw intent를 지우거나 Root Motion을 비활성화하지 않는다. 활성 Attack Ability를 authored recovery 지점에서 종료해 Montage Blend Out과 함께 기존 locomotion graph/CMC 권한으로 복귀시키는 경계다.
+- 이 절은 실제 locomotion Source/ABP/Montage 변경이 아니다. 적용 뒤에는 attack blend-out frame의 capsule translation/yaw, movement 반응 시각, Stop/WalkRun/Sprint 상태와 발 위상 회귀를 별도 검증한다.
+<a id="2026-09-18-run-sprint-stop-root-motion-migration"></a>
+## 2026-09-18 — Run/Sprint Stop Sequence Root Motion 이관 정본
+
+### 현 저장 상태
+
+- `BP_KhazanPlayer` Mesh는 `ABP_Player`를 사용하며 `AnimRootMotionTranslationScale=1.0`이다.
+- `ABP_Player`의 저장된 Root Motion Mode는 `Root Motion from Everything`이고 최종 pose 경로는 `Locomotion State Machine -> DefaultSlot -> Inertialization -> Output Pose`이다.
+- `DAS_Khazan_Run_Stop_LF`, `DAS_Khazan_Run_Stop_RF`, `DAS_Khazan_Sprint_Stop`은 `EnableRootMotion=true`, `ForceRootLock=true`, `RootMotionRootLock=RefPose`, `UseNormalizedRootMotionScale=true`, `RateScale=1.25`이다.
+- 세 시퀀스의 skeleton bone index 0 `C_P_Kazan`에는 translation track이 있다. raw 시작-끝 Y delta는 각각 약 1474.622070, 4485.568237, 13757.930786 asset units다. 이 값은 capsule의 cm 이동량이나 원작 목표 거리로 해석하지 않는다.
+- 세 Stop Sequence Player는 현재 `Locomotion` Sync Group의 `Always Leader`이다. Root Motion을 0으로 만드는 직접 증거는 아니지만 단발 Stop의 길이/재생률을 반복 cycle에 맞추는 계약은 불필요하므로 표적 이관 때 `Do Not Sync`로 바꾼다.
+
+### 체크박스만으로 해결되지 않는 이유
+
+현재 에셋과 ABP는 엔진의 추출 조건을 이미 만족한다. 따라서 `Enable Root Motion`이나 `Root Motion from Everything`을 다시 켜는 것은 해결책이 아니다. 이 세 에셋은 이전 복원 작업에서 현재 ABP dependency 보호 목록에 포함되어 최신 V4 root-motion translation 보정의 적용 대상에서 제외됐다. 즉 pose와 기존 root-locked 동작 보존은 검증됐지만 CharacterMovement가 소비하는 월드 root motion은 아직 검증되지 않았다.
+
+### 런타임 판별 순서
+
+1. PIE에서 `ShowDebug Animation`으로 Stop state와 선택된 LF/RF/Sprint Sequence가 실제 active인지 확인한다.
+2. `log LogRootMotion Log`를 실행하고 Stop을 재현한다. 필요하면 해당 카테고리를 `VeryVerbose`로 올린다.
+3. Stop이 active가 아니면 `bShouldEnterStop`, `StopGait`, `StopEntryFoot`과 전이 조건 문제다.
+4. Stop은 active인데 `ExtractedRootMotion`이 identity/없음이면 에셋 root track, graph weight, Root Motion Mode를 확인한다.
+5. local extracted delta는 있는데 world delta가 비정상적으로 작으면 component transform과 현재 Mesh scale을 관측한다. 이 결과를 에셋에 역보정하지 않는다.
+6. world root motion은 존재하지만 capsule이 움직이지 않으면 CharacterMovement movement mode, collision, floor/wall blocking을 확인한다.
+
+Root Motion을 켠 Sequence Editor preview에서 Mesh가 제자리처럼 보이는 것은 추출이 동작해서 root translation이 pose에서 제거된 결과일 수 있다. 반드시 PIE의 Mesh 상대 위치가 아니라 Actor/capsule 위치와 `LogRootMotion`을 함께 본다.
+
+현재 Mesh Component scale `0.009`는 엔진의 local-root-to-world 변환에도 실제로 참여한다. 따라서 정규화된 에셋의 local root delta가 존재해도 현 임시 캐릭터 조립 상태에서는 world capsule delta가 매우 작게 보일 수 있다. 이것은 에셋에 `1 / 0.009`를 곱혀 해결하지 않는다. 먼저 로그에서 local/world delta를 분리하고, 캐릭터 mesh/skeleton/capsule을 canonical scale로 이관하는 별도 작업과 함께 최종 월드 거리를 검증한다.
+
+### 표적 이관 절차
+
+현재 workspace에는 기존 범용 pipeline이 입력으로 요구하는 `Saved/Extracted/DualAxeSword_20260916`와 2026-09-16 원본 감사·인벤토리 보고서가 남아 있지 않다. 따라서 아래 이관이 필요해져도 기존 import script부터 실행하지 않는다.
+
+1. 위 세 `.uasset`과 source 변환 입력의 hash를 백업한다.
+2. 원본 PSA `CA_P_Kazan_DualAxeSword_Run_Stop_F_LF`, `...Run_Stop_F_RF`, `...Sprint_Stop_F`만 다시 읽는 read-only 감사와 3-row manifest를 먼저 만든다. 기존 ActorX→Unreal 변환과 같이 Y 부호를 뒤집은 좌표에서 원본 `Root` endpoint delta는 각각 `(0, 50, 0)`, `(0, 50, 0)`, `(0, 약 148.995651, 0)` source units로 확인됐다. 최종 목표 거리는 재생 trim과 skeleton 변환을 적용한 뒤 다시 계산한다.
+3. 기존 범용 `prepare_das_animation_timing.py`/preflight의 보호 목록을 해제하지 않는다. 세 Stop만 명시하는 별도 manifest 또는 `--allow-current-stop-root-motion`처럼 좁은 opt-in 경로를 만든다.
+4. 기존 topology adapter와 같은 방식으로 source `Root` local transform을 skeleton index 0 `C_P_Kazan`으로 옮기고 child `Root`는 reference pose에 고정한다.
+5. translation은 삽입된 `C_P_Kazan` reference scale 100에서 유도한 `0.01`을 reference origin 기준으로 적용한다. 캐릭터 Mesh Component scale `0.009`는 입력으로 사용하지 않는다.
+6. 현 24 fps key grid, trim/length, Sync Marker, 압축·import 설정을 보존한다. `RateScale=1.25`는 원작 timing 근거를 별도로 갱신하기 전에는 이번 root-motion 이관에서 바꾸지 않는다.
+7. fresh Editor process에서 preflight -> import -> audit 순으로 실행하고 같은 package path/name에 저장한다.
+8. ABP Stop의 다섯 Sequence Player 중 이번 대상 세 개만 Sync Method를 `Do Not Sync`로 바꾼다. Loop=false, Always Reset on Entry, 기존 LF/RF/Sprint 선택 로직은 유지한다.
+9. Stop->Idle은 Sequence 완료 기반 자동 전이를 유지한다. Stop 중 이동 재입력 전이는 기존 WalkRun/Sprint 경로와 최종 Inertialization node를 사용한다.
+
+실제 asset 재임포트 전에 8번의 Sync Group 분리만 먼저 적용하고 PIE 로그를 다시 본다. 여기서 non-zero root motion이 capsule까지 전달되면 asset 재임포트는 보류하고 현 root curve의 거리/방향 품질만 평가한다. local extraction이 계속 identity이거나 현 root track의 단위·방향이 canonical 계약과 다를 때만 1~7번 표적 이관으로 진행한다.
+
+### 합격 조건
+
+- Run LF, Run RF, Sprint 각각에서 capsule이 authored root curve를 따라 움직이고 Mesh가 capsule에서 이탈하거나 마지막 frame에 snap하지 않는다.
+- 벽 앞에서는 CMC collision에 막히며 벽을 관통하지 않는다.
+- Stop 초반·중간·후반의 새 이동 입력이 Stop을 빠져나와 이동을 재개하고, 취소 순간에 두 이동원이 겹치지 않는다.
+- WeakAttack Montage root motion도 `Root Motion from Everything` 아래에서 기존대로 동작하며 Idle/Walk/Run/Sprint loop는 capsule을 끌지 않는다.
+- 에셋 공간 delta와 현재 임시 component scale을 거친 PIE world delta를 별도로 기록한다. `0.009`를 애니메이션 제작 배율로 고정하지 않는다.
+
+2026-09-18 자동 commandlet PIE는 world tick이 진행되지 않아 런타임 root-motion 로그를 확보하지 못했다. 위 정적 상태는 저장 asset/engine source에서 확인했으며 실제 capsule 소비 여부는 Editor PIE 검증 대상으로 남아 있다.
+
+
+<a id="2026-09-18-run-sprint-stop-root-motion-exact-diagnosis"></a>
+## 2026-09-18 — Run/Sprint Stop Root Motion 0의 정확한 원인
+
+### 결론
+
+현재 DAS_Khazan_Run_Stop_LF, DAS_Khazan_Run_Stop_RF, DAS_Khazan_Sprint_Stop은 이동 키를 가지고 있지만, 그 키가 **런타임 루트모션 추출기가 요구하는 최상위 루트 트랙 위치에 있지 않다**. 세 에셋의 실제 skeleton root는 bone index 0인 C_P_Kazan이지만, 데이터 모델에서 C_P_Kazan 트랙은 마지막 index 225에 있고 첫 트랙은 bip001이다. 따라서 UE 5.8 런타임은 이 세 에셋을 “루트 트랙 없음”으로 판정하고 reference root transform을 반환한다. 시작과 끝이 모두 같은 reference transform이므로 최종 root-motion delta는 identity, 즉 translation 0이 된다.
+
+### 확인 근거
+
+- 실행 중 ABP_Player의 Root Motion Mode는 Root Motion from Everything이었다.
+- 세 Stop 에셋은 모두 EnableRootMotion=true, ForceRootLock=true, RootMotionRootLock=RefPose, UseNormalizedRootMotionScale=true였다.
+- 데이터 모델의 C_P_Kazan에는 실제 이동 키가 있다.
+  - Run Stop LF: Y 종료 delta 약 1474.649414 asset units
+  - Run Stop RF: Y 종료 delta 약 4485.595581 asset units
+  - Sprint Stop: Y 종료 delta 약 13757.930786 asset units
+- 그러나 UAnimationBlueprintLibrary::ExtractRootTrackTransform, 즉 엔진의 UAnimSequence::ExtractRootTrackTransform 경로로 시작/중간/끝을 표본 추출하면 세 에셋 모두 translation (0,0,0)이었다.
+- 정상 대조군 DAS_Khazan_WeakAtk01은 데이터 모델의 첫 트랙이 c_p_kazan이고, 같은 엔진 API가 중간에서 Y 약 133.546585, 끝에서 Y 약 131.539429를 반환한다. PIE LogRootMotion에서도 이 공격 몽타주는 non-zero local/world root motion을 생성했다.
+- 따라서 CMC, capsule collision, ABP_Player의 Root Motion Mode, DefaultSlot, Mesh component scale이 이번 0 추출의 선행 원인은 아니다. 이 경로들은 정상 대조군 공격 몽타주에서 실제로 동작했다.
+
+### 결함이 생긴 경로
+
+Scripts/Animation/bake_das_stop_root_to_dummy.py는 원본 child Root 이동을 최상위 C_P_Kazan으로 옮기면서 다음 순서를 사용했다.
+
+1. controller.add_bone_curve(PARENT, true)로 C_P_Kazan 트랙을 추가한다.
+2. 키를 기록한다.
+3. 기존 Root 트랙을 제거한다.
+
+add_bone_curve로 추가한 트랙은 기존 226개 트랙의 끝에 붙었다. 기존 첫 트랙 Root를 제거한 뒤에는 bip001이 index 0, C_P_Kazan이 index 225가 되었다. 검증기는 트랙 이름을 set으로 비교하여 순서를 검사하지 않았고, AnimPoseExtensions의 RAW/COMPRESSED pose 샘플만 비교했다. 이 샘플러는 index 225의 뼈 트랙도 평가할 수 있으므로 검증을 통과했지만, runtime root-motion 전용 추출 계약은 검증하지 못했다.
+
+UE 5.8 UAnimSequence::ExtractRootTrackTransform_Lockless는 compressed track table의 **첫 항목**이 skeleton bone index 0인지 검사한다. 현재 세 Stop 에셋은 첫 항목이 bip001이므로 이 조건이 실패하고, skeleton root의 reference pose로 fallback한다. 그 결과 ExtractRootMotionFromRange의 start/end가 같아진다.
+
+### 이전 진단의 정정
+
+- “RAW와 COMPRESSED pose에서 C_P_Kazan 이동이 같다”는 사실은 runtime root-motion 추출 성공을 의미하지 않는다.
+- Stop Sequence Player의 Sync Group이나 BlendList 가중치는 별도 품질 점검 대상이지만, 현재 root-motion translation이 0인 직접 원인은 아니다. 에셋 단독 추출 단계에서 이미 identity가 반환된다.
+- RootMotionMontage: None은 state-machine AnimSequence 재생에서는 정상 표기이며 원인이 아니다.
+- 0.009 Mesh component scale도 local root 추출이 0인 원인이 아니다. 다만 트랙 순서를 고친 뒤에는 현재 큰 asset-space delta가 실제 capsule 이동으로 전달되므로, 거리는 component scale 0.009에 맞춰 역보정하지 말고 canonical skeleton/import 단위에서 별도로 검증해야 한다.
+
+### 수정 시 지켜야 할 계약
+
+1. 세 에셋을 재작성할 때 skeleton bone index 0인 C_P_Kazan을 데이터 모델과 compressed mapping의 첫 root track으로 만든다.
+2. 단순 재압축만 하지 않는다. 현재 데이터 모델 순서가 잘못되어 있으므로 root-first 순서로 데이터 자체를 재구성하거나 올바른 계층과 순서로 다시 임포트한다.
+3. Root child의 이동을 C_P_Kazan으로 합성한 뒤 child Root는 reference pose를 유지하되, 다른 뼈의 component-space pose, frame grid, marker, notify, curve, attribute를 보존한다.
+4. 검증기에 다음 필수 조건을 추가한다.
+   - track_names[0]이 case-insensitive c_p_kazan
+   - ExtractRootTrackTransform(0)과 중간/끝의 차이가 비영점
+   - 예상 구간 ExtractRootMotionFromRange가 비영점
+   - PIE LogRootMotion의 local delta가 비영점이고 CMC world delta로 전달됨
+5. 거리 보정에는 임시 Mesh scale 0.009를 입력값으로 사용하지 않는다. 원작 source transform, skeleton reference transform, Unreal canonical 단위 변환으로 계산하고 PIE world displacement는 결과 검증으로만 사용한다.
+
+이번 조사는 에셋과 게임 소스를 수정하거나 저장하지 않은 read-only 진단이다.
+
+### 2026-09-18 — 수정 경로 결정: 현재 시퀀스의 root-first 재삽입
+
+재임포트는 필수가 아니다. UE 5.8 AnimationDataController에는 `insert_bone_track(bone_name, desired_index, should_transact)`가 남아 있으며, 현재 세 Stop 시퀀스의 `C_P_Kazan` T/R/S 키를 보존한 뒤 기존 트랙을 제거하고 desired index 0에 다시 삽입할 수 있다. 이 방식은 다른 225개 bone track, marker, notify, curve, attribute와 에셋 경로/참조를 그대로 둔 채 현재 직접 결함인 track order만 고치는 최소 수정이다.
+
+다만 `InsertBoneTrack`은 UE 5.1부터 deprecated 표시가 있는 API다. 현재 UE 5.8 구현에서는 원하는 index에 실제로 `BoneAnimationTracks.InsertDefaulted_GetRef`를 수행하므로 세 기존 에셋의 표적 복구에는 사용할 수 있지만, 장기 import pipeline은 이 deprecated 호출에 의존하지 않고 최초 데이터 생성 시 `C_P_Kazan`을 첫 트랙으로 만들도록 고친다.
+
+원본을 그대로 Reimport하는 것은 해결이 아니다. 기존 이관 스크립트의 baseline 계약 자체가 source에는 child `Root`가 있고 `C_P_Kazan` track은 없다는 것이었으므로, 같은 source를 그대로 다시 임포트하면 최상위 skeleton root motion이 없는 이전 상태로 되돌아간다. Reimport를 선택하려면 source/preprocess 단계에서 `Root` 이동을 skeleton bone index 0 `C_P_Kazan`으로 합성하고 그 트랙을 첫 번째로 생성해야 한다.
+
+현재 시퀀스 표적 수정 순서는 다음으로 고정한다.
+
+1. 세 uasset과 키/marker/notify/curve/attribute hash를 백업한다.
+2. 각 시퀀스의 현재 `C_P_Kazan` transform keys를 메모리에 보존한다.
+3. 하나의 controller bracket 안에서 기존 `C_P_Kazan` track을 제거하고 index 0에 삽입한 뒤 동일 keys를 복원한다.
+4. 저장과 압축 데이터 재생성을 거친 새 Editor process에서 `track_names[0] == c_p_kazan`과 `ExtractRootTrackTransform` 비영점을 확인한다.
+5. 다른 모든 bone의 RAW/COMPRESSED component-space pose와 marker/notify/curve/attribute가 수정 전과 같은지 검사한다.
+6. PIE에서 local root delta, world root delta, capsule displacement를 순서대로 검사한다.
+
+이 순서 재배치는 키 값이나 단위를 바꾸는 작업이 아니다. Mesh component scale `0.009`를 사용한 보정도 함께 하지 않는다. 순서를 고친 뒤 드러나는 실제 이동 거리 품질은 원작 source와 canonical skeleton/import 변환을 기준으로 별도 판정한다.
+
+<a id="2026-09-18-run-sprint-stop-root-first-repair-applied"></a>
+## 2026-09-18 — Run/Sprint Stop C_P_Kazan root-first 복구 적용 완료
+
+### 앞선 수정 경로의 정정
+
+실제 UE 5.8 소스와 복제 에셋으로 확인한 결과, 위 절에서 제안한 `insert_bone_track(C_P_Kazan, 0)` 단독 방식은 이 세 에셋에 사용할 수 없다. 세 Stop은 일반 `UAnimDataModel`이 아니라 FK Control Rig 기반 `UAnimationSequencerDataModel`을 사용한다. 이 모델의 `UAnimSequencerController::InsertBoneTrack` 구현은 `DesiredIndex`를 사용하지 않고 `AddBoneControl`로 파라미터를 끝에 추가한 뒤 항상 0을 반환한다. 따라서 반환값만 검사하면 성공처럼 보이지만 실제 트랙 순서는 바뀌지 않는다.
+
+또한 순서만 고친 복제본에서 기존 `C_P_Kazan` translation이 Run LF 약 `3525→5000`, Run RF 약 `514→5000`, Sprint 약 `1128→14886`으로 추출되는 것을 확인했다. 이는 이전 Root→C_P_Kazan 합성 과정에서 최상위 `C_P_Kazan`의 reference scale 100이 translation에 한 번 더 반영된 값이다. 이 값을 그대로 root-first로 만들면 0 추출은 해결되지만 이동 거리가 100배가 되므로 채택하지 않았다.
+
+### 실제 적용 내용
+
+다음 세 현행 에셋을 같은 경로에서 직접 수정했다.
+
+- `/Game/_Art/Kazan/Animation/InGame/DAS/Locomotion/Run/DAS_Khazan_Run_Stop_LF`
+- `/Game/_Art/Kazan/Animation/InGame/DAS/Locomotion/Run/DAS_Khazan_Run_Stop_RF`
+- `/Game/_Art/Kazan/Animation/InGame/DAS/Locomotion/Sprint/DAS_Khazan_Sprint_Stop`
+
+스켈레톤 계층은 변경하지 않았다. `SK_Khazan`의 bone index 0은 작업 전후 모두 `C_P_Kazan`이며, 자식 계층 `C_P_Kazan → Root → Bip001`도 그대로다. 수정한 것은 각 AnimSequence의 FK Control Rig transform-parameter 순서와 `C_P_Kazan` translation뿐이다.
+
+1. 모든 226개 transform parameter의 채널 이름, 키 시간, float 값, 보간 모드, tangent mode/weight/value, default, pre/post extrapolation을 메모리에 보존했다.
+2. FK Control Rig hierarchy의 본/컨트롤은 제거하지 않고 section의 transform parameter만 비웠다.
+3. `C_P_Kazan`을 먼저 만들고 기존 나머지 225개 트랙을 원래 상대 순서대로 다시 만들었다.
+4. 보존한 채널 데이터를 그대로 복구했다.
+5. 예외적으로 `C_P_Kazan.Location.X/Y/Z`만 reference origin 기준으로 `1 / 100 = 0.01`을 적용했다. 100은 `SK_Khazan`의 `C_P_Kazan` reference scale `(100,100,100)`에서 직접 읽은 값이다. 캐릭터 Mesh Component scale `0.009`는 계산 입력에 사용하지 않았다.
+6. `C_P_Kazan` rotation/scale, 다른 모든 본의 translation/rotation/scale, 프레임 수·프레임률·길이·RateScale, marker, notify, curve, metadata, Root Motion 설정은 유지했다.
+
+적용 전 파일은 `Saved/ArtBackups/DAS_StopRootTrackOrder_20260918_180611`에 SHA-256 manifest와 함께 보존했다. 최종 편집·재로드 보고서는 같은 폴더의 `final_repair_report.json`이다.
+
+### 저장 후 결과
+
+| 에셋 | 수정 전 첫 트랙 / C_P_Kazan index | 수정 후 첫 트랙 | 엔진 root-track 시작→끝 변위 |
+| --- | --- | --- | ---: |
+| Run Stop LF | `bip001` / 225 | `c_p_kazan` | 약 `14.74649` |
+| Run Stop RF | `bip001` / 225 | `c_p_kazan` | 약 `44.85595` |
+| Sprint Stop | `bip001` / 225 | `c_p_kazan` | 약 `137.57931` |
+
+- 세 에셋 모두 `EnableRootMotion=true`, `ForceRootLock=true`, `RootMotionRootLock=RefPose`, `UseNormalizedRootMotionScale=true`를 유지한다.
+- 저장 후 package reload에서 세 에셋 모두 `track_names[0] == c_p_kazan`을 유지했다.
+- 기대한 0.01 변환과 재로드 결과의 최대 local 위치 오차는 Run 두 개 약 `0.0000018311`, Sprint 약 `0.0000048828`이었고 회전·scale 오차는 0이었다.
+- 재로드 뒤 RAW와 COMPRESSED 전체 포즈 표본의 최대 위치·회전·scale 오차는 세 에셋 모두 0이었다.
+- 비루트 translation 채널과 모든 rotation/scale 채널은 보존됐고, marker/notify/설정도 보존됐다.
+- 임시 복제 검증 에셋 `/Game/__CodexTemp/DAS_Khazan_Run_Stop_LF_RootFirstProbe_20260918`은 검증 후 삭제했다.
+
+별도 `UnrealEditor-Cmd` 프로세스에서도 `Saved/ImportReports/Khazan_DAS_StopRootFirst_FreshVerify_20260918.json`이 3/3 `passed`를 기록했다. Python 검증 자체는 정상 완료했지만 프로세스 종료 코드는 기존 프로젝트 설정의 `/Script/GameFeatures.GameFeatureData` 로드 ensure 때문에 1이었다. 이 ensure는 세 Stop 에셋 검사보다 먼저 발생한 별도 AssetManager 설정 문제이며, 검증 스크립트 결과와 에셋 저장에는 영향을 주지 않았다.
+
+PIE read-only 입력 주입에서는 Run/Sprint Stop 진입과 입력 해제 뒤 지면 위 actor 이동을 확인했다. 결과는 `Saved/ImportReports/Khazan_DAS_StopRootFirst_PIE_20260918.json`에 기록했다. 이 actor 변위에는 CharacterMovement 제동도 함께 들어가므로 authored root curve 거리의 근거로 사용하지 않으며, 위 표의 거리는 엔진 `ExtractRootTrackTransform` 결과를 사용한다.
+
+### 후속 파이프라인 계약
+
+`Scripts/Animation/bake_das_stop_root_to_dummy.py`의 과거 `add_bone_curve → Root 제거` 순서는 root track을 마지막에 붙이고 translation을 100배로 만드는 원인이므로 다시 실행하지 않는다. 현행 범용 `prepare_das_animation_timing.py`와 `import_das_animation_timing.py`에는 이미 `C_P_Kazan`을 첫 output bone으로 만들고 reference scale에서 유도한 `root_motion_translation_scale=0.01`을 적용하는 계약이 있다. 이후 재생용 에셋 생성은 그 root-first 계약과 최종 `ExtractRootTrackTransform` 검증을 사용한다.
+
+같은 작업에서 과거 스크립트의 `build` 모드는 명시적으로 실패하도록 막았다. `verify`는 과거 보고서 확인 용도로만 남기며, 신규/재생성 작업은 위 범용 파이프라인을 사용한다.

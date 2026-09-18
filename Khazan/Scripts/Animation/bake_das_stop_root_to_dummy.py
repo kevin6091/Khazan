@@ -1,9 +1,10 @@
-"""Bake only Root -> C_P_Kazan onto three new Stop sequences.
+"""Historical Root -> C_P_Kazan Stop transfer verifier.
 
-The AnimSequence's UE 5.8 AnimationSequencerDataModel is an FK Control Rig
-sequence. Only those two bone tracks are changed through its data controller.
-Other Control Rig channels (including key times/tangents) are hash checked.
-Default mode is read-only verify; use STOP_ROOT_MODE='build' once in Editor.
+The former build path is intentionally disabled. It appended C_P_Kazan after
+the other FK Control Rig parameters and retained a 100x translation caused by
+the inserted root's reference scale. Use the root-first topology contract in
+prepare_das_animation_timing.py/import_das_animation_timing.py instead.
+Default mode remains read-only verify for historical reports.
 """
 
 import hashlib
@@ -152,6 +153,11 @@ def verify_pair(before, compressed=False):
 def run(mode):
     if mode not in ('build', 'verify'):
         raise ValueError('STOP_ROOT_MODE must be build or verify')
+    if mode == 'build':
+        raise RuntimeError(
+            'Obsolete unsafe build path disabled: it does not satisfy the UE 5.8 '
+            'AnimationSequencerDataModel root-first and reference-scale contracts'
+        )
     manifest = json.loads((BACKUP / 'manifest.json').read_text(encoding='utf-8'))
     report = {'status': 'in_progress', 'mode': mode, 'backup': str(BACKUP), 'assets': []}
     report_path = REPORTS / ('Khazan_DAS_StopRootTransfer_' + mode + '_20260908.json')

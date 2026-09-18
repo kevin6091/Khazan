@@ -141,3 +141,32 @@ Engineering 작업에서는 `Docs/Art`를 읽거나 갱신하지 않는다. 런�
 - 현재 공동 구현은 [P1 최소 실습판의 P1.3 BasicAttack class와 첫 granted Spec](Docs/Engineering/CHARACTER_TAG_ABILITY_P1_MINIMAL_WALKTHROUGH.md#p1-2-applied-p1-3-basic-attack-spec-20260915)이다.
 - 용어는 `FKhazanInitialAbilityGrant` 정적 지시 → 임시 `FGameplayAbilitySpec` → authority `GiveAbility()` → ASC 소유 granted Spec/Handle → 이후 `TryActivateAbility()`와 Ability instance 실행 순으로 구분한다. `EndAbility()`는 실행만 끝내며 `ClearAbility()`가 grant 자체를 회수한다.
 
+<a id="single-player-weak-attack-contract-20260916"></a>
+## 2026-09-16 싱글 플레이 모작·WeakAttack 최신 계약
+
+- 이 프로젝트의 제품 목표는 **The First Berserker: Khazan의 실제 플레이 감각과 액션 완성도를 재현하는 Standalone 싱글 플레이 모작**이다. 단계별 probe, 로그, 최소 수직 절편은 제작 결과가 아니라 품질 검증 수단이다. 테스트만 통과하는 임시 동작을 최종 기능으로 남기지 않는다.
+- 캐릭터·전투 후속 작업은 최신 Architecture의 `ARCH-30`–`ARCH-32`를 먼저 읽는다. 가상의 멀티플레이 확장성을 위해 client prediction, RPC, PlayerState ASC, 복제용 상태 사본을 선행 구현하지 않는다. 다만 Standalone도 authority를 가지므로 `GiveAbility()`의 authority 조건과 같은 GAS 엔진 계약은 유지한다.
+- 원작 데이터의 `WeakAtk01`–`WeakAtk05`를 실행하는 기존 `BasicAttack`은 같은 행동을 가리킨 임시 명칭이었다. 현재·미래 정본 명칭은 `WeakAttack`이며, 과거 절의 `BasicAttack` 표기는 이력으로만 읽는다.
+- 실제 native class/file은 `UKhazanWeakAttackAbility`와 `KhazanWeakAttackAbility.h/.cpp`로 변경됐다. 기존 직렬화 class 경로는 `DefaultEngine.ini`의 `CoreRedirects`가 새 class로 이관한다. 이후 Blueprint/Montage 이름은 `GA_WeakAttack_Khazan`, `AM_DAS_WeakAttackCombo`를 사용한다.
+- `Input.Action.Attack`은 물리 공격 입력을 Ability Spec에 전달하는 라우팅 태그이므로 이번 class 명칭 변경 대상이 아니다. 약공격 행동의 정체성, 콤보 상태와 수명은 `UKhazanWeakAttackAbility`가 소유한다.
+- GAS 설계 근거로 [tranek/GASDocumentation](https://github.com/tranek/GASDocumentation)을 적극 참고하되, 해당 문서는 UE 5.3 기준의 비공식·멀티플레이 sample 설명이다. 이 프로젝트의 UE 5.8.2 plugin source와 싱글 플레이 제품 계약이 API·네트워크 부분의 최종 기준이다.
+
+<a id="character-architecture-v3-entry-20260917"></a>
+## 2026-09-17 캐릭터 아키텍처 v3 최신 조회점
+
+- 캐릭터·전투 후속 작업은 이 라우터 다음에 [Architecture v3 네이티브 최소 구조](Docs/Engineering/CHARACTER_GAMEPLAY_ARCHITECTURE.md#character-architecture-v3-native-minimal-20260917), 이어 [P6 v3 단일-task Jump와 관성화 이관](Docs/Engineering/CHARACTER_TAG_ABILITY_MIGRATION.md#p6-native-inertialization-v3-20260917)을 읽는다. 이전 P6의 Montage 재시작·instance ID·두 window depth 설계는 조사 이력이다.
+- WeakAttack section 전환은 한 `PlayMontageAndWait`, authored `Next Section=None`, `ComboInputOpen`/`ComboCommit` point, Ability-local 한 칸 buffer, `RequestMontageInertialization()` 직후 `MontageJumpToSection()`을 최신 계약으로 사용한다.
+- Inertialization은 pose 전환을 완화하지만 Montage Root Motion의 capsule translation/yaw 연속성을 만들어 주지 않는다. visual pose와 root-motion delta를 별도 gate로 검증한다.
+- 현재 문서만 재설계됐으며 Source·Blueprint·Montage·AnimSequence·Input asset에는 아직 v3가 적용되지 않았다.
+
+## 2026-09-18 P6-v3.1 실제 구현 진입점
+
+- 다음 공동 구현은 [P6-v3.1 실제 현재 상태와 01→02 적용 체크포인트](Docs/Engineering/CHARACTER_TAG_ABILITY_MIGRATION.md#p6-v3-1-current-checkpoint-20260918)부터 시작한다.
+- Controller/ASC build 기준점을 먼저 닫고, 한 task WeakAttack Source와 Attack02 Montage/최종 Inertialization graph를 같은 기능 checkpoint에서 적용한다. 03–05, Strong 혼합 입력과 다른 아키텍처 정리는 01→02 pose·Root Motion gate 뒤에 진행한다.
+
+## 2026-09-18 P6-v3.2 콤보 후반 입력·회수부 이동 전환
+
+- 01→02 Jump 동작 확인 이후 최신 계약은 Architecture [ARCH-44](Docs/Engineering/CHARACTER_GAMEPLAY_ARCHITECTURE.md#arch-44-three-phase-combo-and-recovery-exit-20260918)와 Migration [P6-v3.2](Docs/Engineering/CHARACTER_TAG_ABILITY_MIGRATION.md#p6-v3-2-three-phase-input-recovery-exit-20260918)이다.
+- 콤보 입력은 `ComboInputOpen → ComboCommit → ComboInputEnd`의 3상태를 사용한다. 외부 행동 전환은 별도 `RecoveryCancelOpen`으로 다루며 combo End와 같은 상태로 합치지 않는다.
+- 현재 구현 작업은 먼저 3상태 콤보만 적용·검증하고, 그 다음 Attack02 locomotion early exit를 수직 검증한다. Source/asset 실제 적용 여부는 문서가 아니라 현재 파일과 PIE 결과로 판단한다.
+

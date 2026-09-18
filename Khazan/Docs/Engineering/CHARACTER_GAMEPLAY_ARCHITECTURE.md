@@ -1575,3 +1575,592 @@ P1 첫 절편의 실제 소비자는 한 번 누르는 Attack이다. 따라서 �
 3. 묶음 자체를 별도 asset으로 교체하거나 독립 로드해야 한다.
 
 이때도 부여 source가 반환 Spec handle을 소유하고 자기 묶음만 회수한다. 미래 가능성만으로 지금 DataAsset, granted-handle struct, remove protocol을 만들지 않는다.
+
+
+## 2026-09-16 — ARCH-17/22 P1.3 확인과 P1.4 적용 경계
+
+- 실제 Source의 `UKhazanAbilitySystemComponent`는 Dynamic Spec Source Tag exact match 뒤 engine Spec handle로 `TryActivateAbility()`를 호출하는 얇은 adapter이며 ARCH-22 경계를 유지한다.
+- 실제 Source의 `UKhazanBasicAttackAbility`는 빈 프로젝트 base 없이 `UGameplayAbility`를 직접 상속하고, CharacterDefinition의 초기 grant가 class와 `Input.Action.Attack` mapping을 제공한다. 별도 AbilitySet/readiness 원장을 만들지 않았으므로 ARCH-16/17과 v2.4 계약을 유지한다.
+- 2026-09-16 UE 5.8.2 cold build는 성공했다. Definition asset에도 BasicAttack class와 Attack input tag가 저장돼 있다. PIE debug HUD의 Spec 정확히 한 개 여부와 locomotion 회귀는 사용자가 화면에서 확인할 범위다.
+- 다음 P1.4는 PlayerController의 Attack `Started` edge를 기존 ASC adapter에 연결하는 제안이다. 새 tag, Component, request/result, held processor, pressed/released 전달을 만들지 않는다. 실제 Source 적용·PIE 완료로 기록하지 않는다.
+- 아키텍처 계약 변경은 없다. P1.4 상세 절차는 `CHARACTER_TAG_ABILITY_P1_MINIMAL_WALKTHROUGH.md`의 2026-09-16 절에 둔다.
+
+## 2026-09-16 — ARCH-06/09/17/22 P1.4 적용 확인과 P1.5 실행 소유권
+
+- 실제 PlayerController Source는 물리 Attack `Started` edge만 기존 ASC의 exact Input Tag adapter에 전달한다. Controller는 Spec handle, Montage task, movement constraint를 보관하지 않는다. 이는 ARCH-17/22의 입력·grant 경계를 유지한다.
+- P1.5 제안에서 `UKhazanBasicAttackAbility`의 한 `InstancedPerActor` 실행이 `UAbilityTask_PlayMontageAndWait`, 발급 LocomotionComponent의 weak pointer, `FKhazanMovementConstraintHandle` 한 건을 보관한다. `EndAbility()`가 정상/중단/취소/EndPlay의 공통 cleanup 지점이며 다른 원인의 constraint를 제거하지 않는다. 이는 ARCH-06/09의 실행 수명과 handle cleanup 계약을 구체화한다.
+- `LocomotionComponent`는 기존 공개 API로 제약을 합성하고 CMC policy를 다시 계산한다. Ability가 CMC, raw input, AnimInstance 파생 값을 직접 쓰지 않는다. Main ABP는 기존 `DefaultSlot` 합성으로 Montage를 표현한다.
+- Ability 설정을 담는 `GA_BasicAttack_Khazan`은 native 구현의 content subclass이며 새 C++ 공통 base나 AbilitySet 계층이 아니다. CharacterDefinition의 기존 한 grant class를 이 Blueprint class로 교체하고 Input Tag는 유지한다.
+- 후보 공격 Sequence의 직접 확인 길이는 `10.375 s`, Rate Scale은 `1.0`, root motion은 disabled다. 같은 폴더 8개가 같은 길이이므로 실제 Montage segment 구간은 아직 미확인이다. 임시 gait cap `Run`도 원작값이 아닌 handle 수명 검증값이다.
+- 아키텍처 계약 변경은 없다. P1.5는 제안 상태이며 게임 Source/asset 적용·PIE 완료로 기록하지 않는다. 구체 절차는 `CHARACTER_TAG_ABILITY_P1_MINIMAL_WALKTHROUGH.md#p1-4-applied-p1-5-montage-constraint-20260916`에 둔다.
+
+<a id="skill-root-motion-combo-contract-20260916"></a>
+## 2026-09-16 — ARCH-01/03/04/06/09/22/24 스킬 Root Motion·콤보 계약 정정
+
+- 사용자 확정 방침에 따라 이 프로젝트의 스킬/공격 재생 자산은 Root Motion을 사용한다. 위 5.4절의 “공격마다 in-place 또는 Root Motion을 선택” 문장은 **스킬/공격 범위에서 대체**하며, locomotion loop/Stop의 현행 in-place 정책까지 일괄 변경한다는 뜻은 아니다.
+- `UKhazanAbilitySystemComponent`는 granted Spec, 활성화, owned tag/effect, 그리고 실제 소비자가 생기는 시점의 일반 pressed/released 전달만 담당한다. montage 위치, 구간별 재생률, 콤보 단계, 입력 buffer, 해금 분기를 ASC 멤버로 올리지 않는다. 이는 ARCH-22의 얇은 입력 adapter 계약을 유지한다.
+- `UKhazanBasicAttackAbility`의 한 `InstancedPerActor` 활성 실행이 약공격 콤보 전체 수명, 현재 단계, 지역 입력 buffer, `PlayMontageAndWait` task, movement constraint handle과 모든 종료 cleanup을 소유한다. 공격 단계마다 Ability를 끝내고 다시 활성화하는 구조는 사용하지 않는다. 이는 ARCH-03/09/24의 액션 수명 계약이다.
+- 원작 Composite Dilation은 파생 playback AnimSequence에 bake한다. 이때 몸 포즈뿐 아니라 `Root` 트랙도 같은 `T_Dilation → T_Original` mapping으로 재표본화한다. 파생 Sequence의 `Enable Root Motion=true`, 원본에서 직접 확인된 1–4타의 `Force Root Lock=true`, Sequence/Montage/task 재생 배율 `1.0`, task root-motion translation scale `1.0`을 사용한다.
+- Main AnimInstance는 현재 `Root Motion from Montages Only`를 유지한다. Montage가 포즈와 root delta를 평가하고 CharacterMovementComponent가 그 delta를 충돌 포함 이동으로 소비한다. ASC, Character Tick, AnimNotifyState, AnimInstance worker가 매 frame 위치나 재생률을 쓰지 않는다. 이는 ARCH-01/04/06의 표현·이동 경계다.
+- `Force Root Lock`은 추출된 이동을 끄는 옵션이 아니다. 추출 뒤 스켈레탈 포즈의 root 기준을 고정하는 설정이다. 실제 root delta 사용 여부는 `Enable Root Motion`과 AnimInstance Root Motion Mode가 결정한다.
+- 첫 통합 checkpoint P1.5는 하나의 콤보 Montage와 `Attack01` section을 만들고, section의 자동 다음 연결을 비워 둔 채 1타의 Root Motion·Dilation·정상/취소 cleanup만 검증한다. P6에서 같은 활성 Ability에 pressed 입력을 전달하고, notify/gameplay event로 열린 창에서만 `Attack01→02→03→04`, 해금 시 `04→05` section 연결을 결정한다. Ability가 GAS의 `CurrentMontageSetNextSectionName`을 호출하고 ASC는 명령 전달·복제를 담당한다.
+- 입력 창 Notify는 의미 이벤트만 전달한다. Notify나 Float Curve가 ASC 또는 Montage play rate를 계속 변경하지 않는다. interruption에서 Notify End가 누락되어도 Ability의 `EndAbility()`가 buffer/window/task/constraint를 모두 reset하는 것이 최종 cleanup 계약이다.
+- 이 절은 위 2026-09-16 P1.5 기록의 `root motion disabled` 및 `AM_DAS_BasicAttack01` 단발 자산 전제를 대체한다. 실제 Source, Blueprint, AnimSequence, Montage, build, PIE는 아직 사용자 적용 전이다.
+
+<a id="single-player-production-gas-weak-attack-20260916"></a>
+## 2026-09-16 — ARCH-30/31/32 싱글 플레이 제품 경계·GAS 근거·WeakAttack 명명
+
+### ARCH-30 — 목표는 테스트 예제가 아니라 완성도 높은 싱글 플레이 모작이다
+
+- 제품 실행 환경은 Standalone 싱글 플레이이며 멀티플레이는 요구사항이 아니다. 원작의 공격 시간축, Root Motion, 충돌, 입력 창, 취소, 자원 소비, 피격 결과와 표현을 하나의 실제 gameplay 경로로 완성한다.
+- P1 등의 수직 절편과 debug HUD, probe, console cancel은 그 경로를 단계별로 검증하는 장치다. 임시 즉시 `EndAbility()`, placeholder animation, 시험 전용 Component나 gameplay 상태를 최종 구현으로 남기지 않는다.
+- 가상의 client/server 분리를 위해 prediction ledger, RPC bridge, replicated combo state, PlayerState ASC를 선행 추가하지 않는다. 영구 해금과 저장 진행도는 Progression/Save가 소유하고, 새 Character가 만들어질 때 Definition·장비·진행도에서 Ability를 다시 부여한다. 현재 Character 소유 ASC는 Avatar와 함께 끝나는 전투 실행 상태를 맡는다.
+
+### ARCH-31 — GAS 참고 근거와 싱글 플레이 적용 범위
+
+- [tranek/GASDocumentation](https://github.com/tranek/GASDocumentation)의 ASC, grant, Spec, Ability instance, input, AbilityTask, tag/effect 수명 설명을 GAS 구현의 기본 참고 자료로 사용한다. 문서 자체가 밝히듯 UE 5.3 기준의 비공식 자료이므로 UE 5.8.2에서 API·기본값·수명 동작이 다르면 현재 엔진 plugin source를 최종 근거로 삼는다.
+- 문서의 핵심 구분을 현재 구조에 유지한다. ASC는 granted `FGameplayAbilitySpec`과 tag/effect를 보관하고, Spec은 class·입력 연결·runtime grant 상태를 가진다. 활성 Ability instance가 공격 한 번 또는 콤보 체인의 실행 상태를 가지며, Montage·입력 대기처럼 시간을 갖는 작업은 AbilityTask가 수행한다.
+- `GiveAbility()`를 `HasAuthority()`에서 호출하고 `ServerOnly` Ability를 쓰는 것은 Standalone world에서도 GAS가 요구하는 authority 경계를 지키는 것이다. 이는 멀티플레이 지원 목표를 뜻하지 않는다. 새 gameplay Ability는 별도 근거가 없는 한 `ServerOnly`를 명시하고, local prediction과 direct input replication은 도입하지 않는다.
+- active Spec 입력 전달이 P6에서 필요해지면 ASC는 `AbilitySpecInputPressed()`와 GAS generic replicated event가 기대하는 일반 입력 계약까지만 제공한다. 싱글 플레이에서도 기존 AbilityTask 생태계와 맞추기 위한 engine protocol로 사용하며 combo step, buffer, window, montage position은 Ability 지역 상태로 둔다.
+- `InstancedPerActor` Ability는 ASC마다 한 instance를 재사용하므로 모든 activation 시작과 `EndAbility()`에서 combo index, buffered input, window, task pointer, constraint handle을 명시적으로 초기화·정리한다. 이는 tranek 문서의 instancing 주의사항과 현재 ARCH-09 cleanup 계약을 함께 만족한다.
+- authored skill Root Motion은 AnimSequence/Montage → AnimInstance → CMC 경로를 사용한다. GAS의 RootMotionSource AbilityTask 예시는 별도 이동 생성 기법이며, 원작 애니메이션 root track을 대체하는 근거로 사용하지 않는다.
+
+### ARCH-32 — `WeakAttack`이 도메인 정본 명칭이다
+
+- 원작 Skill Blueprint와 Composite의 `WeakAtk01`–`WeakAtk05`를 실행하는 현재 `BasicAttack`은 약공격과 같은 행동이었다. 범용 기본 공격이라는 별도 gameplay 개념은 확인되지 않았으므로 `BasicAttack` 명칭을 폐기하고 `WeakAttack`을 사용한다.
+- native 구현은 `UKhazanWeakAttackAbility`, content subclass는 `GA_WeakAttack_Khazan`, 콤보 Montage는 `AM_DAS_WeakAttackCombo`, task instance name은 `WeakAttackComboMontage`를 사용한다. 과거 문서의 `UKhazanBasicAttackAbility`, `GA_BasicAttack_Khazan`, `AM_DAS_BasicAttack01`, `BasicAttackComboMontage`는 새 구현에 복사하지 않는다.
+- 물리 입력 라우팅 태그 `Input.Action.Attack`은 행동 class 이름이 아니므로 유지한다. Weak/Strong 입력을 별도 태그로 분리해야 한다는 원작 근거와 실제 소비자가 생기면 입력 계약 변경으로 따로 검토한다.
+- 2026-09-16 실제 Source class/file을 `UKhazanWeakAttackAbility`와 `KhazanWeakAttackAbility.h/.cpp`로 변경하고 `NetExecutionPolicy=ServerOnly`를 명시했다. 기존 Definition asset의 `/Script/Khazan.KhazanBasicAttackAbility` 참조는 class redirect로 새 class에 연결한다. Montage/Blueprint/full combo 구현과 build·PIE 검증은 여전히 P1.5 이후 작업이다.
+
+<a id="p1-5-production-lifetime-correction-20260916"></a>
+## 2026-09-16 — ARCH-06/09/31 P1.5 제품 수명 계약 보정
+
+- 앞 P1.5 제안의 `MaxAllowedGait=Run` movement constraint는 원작 공격 정책이 아니라 handle cleanup을 보기 위한 시험값이었다. 실제 소비되는 공격 전용 이동·회전 정책이 확인되지 않은 상태에서 제품 코드에 이 제약을 만들지 않는다. P1.5의 authored 이동은 Dilation이 bake된 Montage Root Motion이 만들고 CMC가 충돌을 포함해 소비한다.
+- 이후 원작 근거로 공격 중 회전, 입력 이동, 타깃 보정 정책이 확인되면 `UKhazanWeakAttackAbility`가 해당 실행에 필요한 constraint handle만 발급·소유하고 `EndAbility()`에서 반환한다. P1.5에서 미리 빈 handle, weak component pointer, 임시 gait cap을 넣지 않는다.
+- P1.5의 실행 자원은 `UAbilityTask_PlayMontageAndWait` 한 건이다. 정상 완료는 `OnCompleted`, Montage 교체는 `OnInterrupted`, task 시작 실패·외부 task 취소는 `OnCancelled`에서 공통 종료 함수로 들어간다. `OnBlendOut`은 공격 수명 종료 신호로 사용하지 않는다.
+- UE 5.8의 `bAllowInterruptAfterBlendOut=false`는 정상 Blend Out 시작 뒤 Montage가 끊기면 `OnInterrupted`도 `OnCompleted`도 오지 않을 수 있다. 실행이 active로 고착되지 않도록 P1.5는 `bAllowInterruptAfterBlendOut=true`를 명시한다. `bStopWhenAbilityEnds=true`, task rate `1.0`, root-motion translation scale `1.0`, 시작 section `Attack01`도 명시한다.
+- 원작 `SB_Kazan_DualAxeSword_Com_WeakAtk`의 `Step1`은 `AnimBlendAlpha=0.1`, `AnimPlayRate=1.0`, `AnimLoopCount=1`, `bApplyAttackSpeed=true`다. `AC_...WeakAtk01`의 `StartBlendTime=0.24`와 `EndBlendTime=0.3`은 `xxAnimNotifyState_RigRotToTarget`의 왼손 보정 필드이며 Montage Blend In/Out 근거가 아니다. `AnimBlendAlpha`가 원작 런타임에서 초 단위 Montage blend와 동일하다는 소비 코드까지는 확보하지 못했으므로 P1.5에서 양자를 확정값으로 등치하지 않는다.
+- P1.5의 `AM_DAS_WeakAttackCombo/Attack01`은 1타 통합 계약이다. P6에서 2–5타를 붙이기 전 `AnimBlendAlpha`가 단계 전환 cross-fade를 뜻하는지 확인한다. 한 Montage의 section 경계로 같은 전환 품질을 낼 수 없다는 증거가 나오면 한 Ability instance가 콤보 전체 수명을 소유한다는 ARCH-09 계약은 유지하면서 presentation asset/task 분할만 바꿀 수 있다.
+- 이 보정은 P1.5의 제품 구현 계약이며 실제 Source, playback Sequence, Montage, Ability Blueprint, cold build, PIE 적용 완료를 뜻하지 않는다.
+
+## 2026-09-17 — ARCH-09/31 P1.5 Montage 추상화 판단
+
+- 현재 `UKhazanWeakAttackAbility`는 `UAbilityTask_PlayMontageAndWait`를 생성하고 완료·중단·취소 delegate를 Ability 종료 경로에 연결한다. 사용자는 좌클릭 PIE에서 `Attack01` Montage 재생을 확인했고 `Saved/Logs/Khazan.log`에도 시작 로그가 반복 기록됐다. 이 증거는 시작 경로 확인이며 강제 cancel, Montage interrupt, Blend Out 직후 interrupt, 다음 PIE cleanup까지 모두 검증됐다는 뜻은 아니다.
+- 엔진 AbilityTask가 ASC를 통한 Montage 재생, Ability cancel 연결, Montage delegate 연결·해제, Ability 종료 시 Montage 정리와 root-motion translation scale 복원을 이미 소유한다. 따라서 같은 일을 전달만 하는 `IMontagePlayer`나 정적 `UKhazanMontageUtility`는 v2.2의 새 구조 생성 기준을 충족하지 않는다.
+- 현재 한 소비자의 가독성 정리는 `UKhazanWeakAttackAbility`의 private 함수로 Montage task 생성·delegate 연결을 묶고, `OnInterrupted`와 `OnCancelled`를 같은 종료 callback으로 합치는 범위가 적절하다. Ability는 commit 여부와 정상/취소 종료 정책을 계속 소유한다.
+- `MontageTask` 멤버는 실행 중 task를 Ability 코드가 다시 조회·취소할 실제 소비가 없다면 필수 생명주기 소유자가 아니다. 활성 task의 보존과 Ability 종료 cleanup은 `UGameplayAbility`의 active task 경로가 수행한다. 다만 P6의 section 전환 구현에서 실제 소비가 생기는지 확인한 뒤 제거 여부를 확정한다.
+- 두 개 이상의 Ability에서 Montage 재생과 GameplayEvent 대기 정책이 실제로 반복되는 P3/P6 시점에는 game-specific `UAbilityTask` 추출을 다시 검토한다. 그 task는 엔진 delegate와 event 수집을 소유하고, 콤보 상태·commit·Ability 종료 판단은 실행 Ability에 남긴다.
+- 이번 검토에서는 게임 Source, Blueprint, Montage를 수정하지 않았다.
+
+<a id="attack-input-language-combo-hold-20260917"></a>
+## 2026-09-17 — ARCH-33/34/35 약·강 입력 조합과 유지 입력 계약
+
+### 확인된 현재 상태와 원작 근거
+
+- 실제 `AKhazanPlayerController`는 `/Game/Input/IA_Attack`의 `Started`만 받아 `Input.Action.Attack`으로 ASC를 호출한다. `/Game/Input/IMC_Default`에는 Left Mouse Button만 연결돼 있고 Right Mouse Button 입력은 없다. `UKhazanAbilitySystemComponent`도 inactive Spec에 `TryActivateAbility()`만 호출하므로 active Ability에 press/release를 전달하지 못한다.
+- 실제 `/Game/_Art/Kazan/Animation/InGame/DAS/WeakAtk/AM_DAS_WeakAtkCombo`에는 `Attack01` section과 `DAS_Khazan_WeakAtk01` segment만 있다. 따라서 현재 자산만으로는 두 번째 입력을 받아도 `Attack02`로 진행할 presentation 경로가 없다. 이전 절의 제안명 `AM_DAS_WeakAttackCombo`보다 실제 저장된 원본 유지 이름 `AM_DAS_WeakAtkCombo`를 현행 이름으로 사용한다.
+- 원작 `.../Common/WeakAtk/SI_Kazan_DualAxeSword_Com_WeakAtk`은 `AttackType=FastAttack`, `SkillInputType=SkillM01`이고, `SB_...WeakAtk`은 `SkillM01`과 `Pressed`를 사용한다.
+- 원작 `.../Common/StrongAtk/SI_Kazan_DualAxeSword_Com_StrongAtk`은 `AttackType=StrongAttack`, `SkillInputType=SkillM02`다. `SB_...StrongAtk`에는 `SkillM01`, `SkillM02`, `SecondInputType=SkillM02`, `Pressed`, `xxSetChargingStepFunc`, `DoChangeCharageStep`가 함께 존재한다. 따라서 약공격과 강공격의 조합 분기는 실제 요구다.
+- 원작 `AC_...StrongAtk01_Start`와 `AC_...StrongAtk01_Charge`의 `xxAnimNotifyState_SkillInputProg`은 `Released`를 검사한다. 저장된 `PlaybackEvents.json` 기준 Start의 release 창은 원본 `0.1593871–0.2 s`, playback `0.1992338551–0.24999997 s`다. Charge에는 원본 `0–1.3 s`, `0–0.717957 s`, `0.717919–1.3 s`의 release/charge-step 창이 있고 playback으로 각각 약 `0–1.1780140925 s`, `0.0001–0.6000966776 s`, `0.6000589403–1.1781134007 s`에 대응한다. 이는 단일 임의 hold threshold가 아니라 애니메이션 시간축의 release와 charge step 계약이라는 직접 근거다.
+- 원작 `AC_...WeakAtk01`의 두 `xxSkillInputProg` 구간은 원본 `0.31871584–0.6105073 s`, `0.6138552–1.0215641 s`이고 playback으로 약 `0.2929789424–0.5131536622 s`, `0.5165015501–0.9242099718 s`다. 두 NotifyState의 세부 enable/disable 의미는 원작 runtime 소비 코드까지 확인되지 않았으므로 둘을 임의로 하나의 확정 콤보 창이라고 합치지 않는다.
+- 같은 `AC_...WeakAtk01`에는 `xxAnimNotifyState_ReserveInput`이 별도로 세 구간 존재한다. 원본 `0.2282529–0.5708918 s`, `0.44233206–0.7362118 s`, `1.1393118–1.2893118 s`가 playback 약 `0.2205535080–0.4756474282 s`, `0.3825092135–0.6388580379 s`, `1.0419576641–1.1919575 s`로 변환된다. `SB_...WeakAtk`의 Step1 `Index8`은 `Pressed` 입력 event를 `Step2` 변경 함수에 연결한다. 반면 late `Index7` input-check는 `NotifyEnable` 조건 뒤 `Step1` same-step 변경으로 연결된다. 따라서 앞 두 reservation 후보와 늦은 reservation 후보를 모두 01→02 buffer로 취급하지 않는다. 입력 예약과 진행 판정이 별개라는 강한 근거지만 proprietary runtime 구현은 없으므로 정확한 begin/end 부작용은 추론으로 구분한다.
+
+### ARCH-33 — 공격 입력은 의미와 phase를 함께 전달한다
+
+- `Input.Action.Attack`을 `Input.Action.WeakAttack`과 `Input.Action.StrongAttack`으로 분리한다. 이는 ARCH-32에서 분리 근거가 생길 때 재검토하기로 한 조건이 충족된 변경이다. 원작 `SkillM01/M02`가 각각 실제 소비자이며 좌·우 입력 조합을 구별해야 한다.
+- Enhanced Input의 `Started`는 press, `Completed`는 정상 release, `Canceled`는 입력 평가 취소로 번역한다. 공격을 매 frame `Triggered`로 보내지 않는다. `Canceled`는 Spec의 pressed 상태를 해제하지만 성공적인 차지 release와 같은 결과로 취급하지 않는다.
+- PlayerController는 물리 키를 의미 입력과 phase로 번역하는 adapter다. combo node, buffer, hold duration, montage section, unlock 판단을 소유하지 않는다. 미래 AI는 마우스 phase를 흉내 내지 않고 같은 Ability 실행/분기 계약을 의미 action으로 요청한다.
+- `IA_WeakAttack`은 Left Mouse Button, `IA_StrongAttack`은 Right Mouse Button을 사용한다. Strong의 press를 즉시 Ability에 전달하고 release를 나중에 전달해야 하므로 Enhanced Input의 `Hold` trigger가 Ability 활성화를 지연시키는 구조는 사용하지 않는다.
+
+### ARCH-34 — ASC는 Spec 입력 protocol만 중계한다
+
+- `UKhazanAbilitySystemComponent`는 exact Dynamic Spec Source Tag로 Spec을 찾고 press/release 상태를 갱신한다. inactive Spec의 press는 활성화를 시도하고, active Spec의 press/release는 `AbilitySpecInputPressed/Released()`와 `InvokeReplicatedEvent(InputPressed/InputReleased, Spec.Handle, current activation prediction key)`를 모두 호출한다.
+- UE 5.8 `AbilityLocalInputPressed/Released()`가 위 두 호출을 따로 수행하며, `AbilitySpecInputPressed/Released()`만으로는 `UAbilityTask_WaitInputPress/Release`가 구독하는 generic replicated event가 발생하지 않는다. tag 기반 adapter도 이 engine protocol을 그대로 보존한다.
+- 현재 공격 Ability는 `InstancedPerActor`이므로 current instance activation info를 사용한다. 이 입력 protocol은 싱글 플레이에서도 기존 GAS AbilityTask와 맞추기 위한 수명 계약이며 ASC에 combo 상태를 넣는 근거가 아니다.
+- generic input event에는 어떤 Input Tag였는지 payload가 없다. 같은 Spec의 재입력처럼 의미가 자명한 단계에는 `WaitInputPress/Release`를 사용하고, active Weak Ability가 Strong press를 구별하는 실제 혼합 분기부터 별도 Gameplay Event tag와 payload를 추가한다. 소비자가 생기기 전에 전역 입력 event 사전을 만들지 않는다.
+
+### ARCH-35 — 콤보와 충전 상태는 활성 Ability의 지역 실행 문맥이다
+
+- `UKhazanWeakAttackAbility`의 한 활성 실행이 Weak chain의 current section/node, 입력 창, buffered semantic input 한 건, montage task와 cleanup을 소유한다. Weak 1타마다 Ability를 끝내고 다시 활성화하지 않는다.
+- Strong 입력의 첫 실제 소비 시 `UKhazanStrongAttackAbility`를 별도 실행 Ability로 만든다. Strong은 Start/Charge/Release와 charge step을 소유한다. Weak와 Strong의 상호 입력은 하나의 거대 Ability나 ComboManager를 만들 근거가 아니며, 확인된 branch window에서 의미 입력 event를 받아 같은 Ability의 section을 바꾸거나 다른 Ability 활성화를 요청한다.
+- 혼합 분기 단계에서는 현재 공격의 실행 lane/tag가 다른 공격 Ability의 독립 즉시 활성화를 막는다. 예를 들어 Weak 실행 중 Strong press는 Strong Spec의 일반 활성화 시도가 차단되고, 현재 Weak Ability가 typed Strong event를 합법 window에서만 소비해 전환을 요청한다. 대상 Ability 활성화 성공을 확인하기 전에 현재 실행을 먼저 끝내지 않는다. 같은 press를 generic input task와 typed event handler가 동시에 소비하지 않도록 own-input 재입력은 generic event, 다른 공격 키 분기는 typed event로 역할을 나눈다.
+- 동일 계열 연속 입력은 `WaitInputPress(false)`로 다음 press를 기다린다. `true`로 만들면 활성화에 사용된 첫 press를 즉시 다시 소비해 2타가 예약될 수 있으므로 사용하지 않는다. task는 한 번 broadcast하고 끝나므로 다음 입력이 필요하면 Ability가 새 task를 arm한다.
+- Strong은 활성화 직후 `WaitInputRelease`를 시작할 수 있다. 여기서 반환되는 `TimeHeld`는 task 생성부터 release까지의 관측값이며, 원작 charge step/window를 대체하는 단일 판정값으로 확정하지 않는다. exact step 판정은 Dilation 변환된 원작 Notify 구간과 Strong state 연결을 표적 조사한 뒤 작성한다.
+- AnimNotify/NotifyState는 window open/close 또는 의미 Gameplay Event만 보낸다. combo node와 buffered input의 권위는 Ability에 있고, interruption으로 Notify End가 누락돼도 `EndAbility()`가 window, buffer, held/release 상태와 task pointer를 초기화한다.
+- Weak 첫 구현도 `ReserveInput`과 `SkillInputProg`를 하나의 `bComboWindowOpen`으로 합치지 않는다. 활성 Ability에는 서로 겹칠 수 있는 `bInputReservationOpen`, `bComboAdvanceOpen` 같은 두 지역 사실과 buffered input 한 건을 둔다. press 시 advance가 열려 있으면 즉시 합법 edge를 소비하고, reservation만 열려 있으면 한 건을 보관하며, advance begin에서 보관 입력을 다시 평가한다. 두 창의 정확한 이벤트 의미가 추가 근거로 달라지면 이 지역 해석만 교체한다.
+- 첫 구현은 현재 node마다 buffered input 한 건으로 시작한다. 전역 FIFO `InputBufferComponent`, 범용 graph runtime, custom graph editor는 만들지 않는다. 원작 branch 표가 완성되고 두 개 이상의 무기/Ability가 같은 read-only schema를 실제 소비할 때 node/edge data화를 확장한다.
+
+<a id="enhanced-input-combo-queue-review-20260917"></a>
+## 2026-09-17 — ARCH-36/37 Enhanced Input Combo 검토와 연타 큐 계약
+
+### UE 5.8 엔진 확인
+
+- 로컬 UE 5.8의 `InputTriggers.h`에서 `FInputComboStepData`, `FInputCancelAction`, `UInputTriggerCombo`는 모두 `UE_DEPRECATED(5.8, ...)`로 선언돼 있다. Editor data validation도 Combo Trigger가 deprecated이며 미래 버전에서 제거될 것이라는 warning을 추가한다. 따라서 새 전투 기반을 이 타입에 의존시키지 않는다.
+- 현재 구현은 순서대로 지정된 InputAction의 설정 event를 관찰하고, 다음 step의 `TimeToPressKey`를 넘기거나 다른 combo action이 순서 밖에서 발생하거나 cancel action이 발생하면 index를 0으로 돌린다. 완성 시 한 frame `Triggered`를 반환하고 즉시 reset한다. 이 기능은 패턴 인식기이며, 공격 실행별 montage section·원작 Notify window·해금·비용·현재 Ability 수명·buffer 소비를 알지 못한다.
+- 같은 약공격 세 번을 Combo Trigger로 인식해도 입력 세 번이 현재 공격 section의 합법 창에서 발생했다는 보장이 없다. 패턴이 먼저 완성된 순간 공격 Ability가 block 상태라면 결과는 실행 queue로 남지 않는다. 반대로 긴 `TimeToPressKey`는 원작 animation window 밖의 입력까지 받아들일 수 있다.
+- `UInputTriggerChordAction`은 deprecated가 아니지만 한 action이 현재 `Triggered`인 동안 다른 action을 허용하는 비대칭 modifier 계약이다. 기본 설정은 같은 frame에 chord 결과가 발생하면 선행 action delegate를 억제할 수 있으나, 선행 약공이 이전 frame에 이미 시작된 뒤 강공이 들어오는 대칭 동시 입력을 되돌리지는 못한다. 따라서 stance+attack 같은 명시적 modifier에는 사용할 수 있지만 약공+강공 조합 전체의 공통 parser로 사용하지 않는다.
+- `FInputActionInstance::GetElapsedTime()`은 action이 Started/Ongoing/Triggered 상태로 평가된 시간을, `GetTriggeredTime()`은 Triggered 상태 시간을 제공한다. 이 값이나 Controller의 별도 WorldTime 누적을 Strong charge의 권위로 삼지 않는다. `WaitInputRelease`는 AbilityTask 생성 시점부터 release까지를 측정하므로 Strong activation 직후 시작해 관측값으로 사용할 수 있고, 실제 charge step과 release 허용은 animation에 고정된 원작 Notify/event window가 결정한다.
+
+### ARCH-36 — Enhanced Input은 전투 문법의 lexer다
+
+- `IA_WeakAttack`과 `IA_StrongAttack`은 별도 Digital InputAction으로 유지하며 공격용 `Hold`, `Combo` trigger를 붙이지 않는다. Controller는 `Started`, `Completed`, `Canceled` edge를 각각 semantic press, 정상 release, 취소 cleanup으로 번역한다. `Ongoing`/매 frame `Triggered`를 공격 명령으로 제출하지 않는다.
+- 연속 약공, 약→강, 강→약은 물리 키 패턴만으로 완성되는 명령이 아니다. 현재 attack node, 열려 있는 reservation/progression window, 해금, 비용과 실행 차단을 함께 보아야 하므로 활성 GameplayAbility가 판정한다.
+- 실제 원작에서 두 버튼을 동시에 누르는 독립 branch가 확인되기 전에는 `IA_WeakStrongChord`를 만들지 않는다. 확인될 경우에도 Chorded Action의 선행 키 순서 의존성이 원작 허용 오차와 맞는지 먼저 검증한다. 맞지 않으면 press edge와 현재 down 상태로 project-local chord를 한 번만 파생하며, 허용 시간은 원작 근거값 또는 명시한 임시 튜닝값으로 둔다.
+- 방향 커맨드처럼 Ability 실행과 무관하게 최근 입력 이력을 여러 소비자가 조회해야 하는 실제 기능이 생기면 deprecated Combo Trigger 대신 작은 project command recognizer를 검토한다. 현재 확인된 Weak/Strong 연속·유지 입력만으로는 그 구조를 만들지 않는다.
+
+### ARCH-37 — 콤보 큐는 활성 공격 실행의 node-local 단일 예약이다
+
+- `CombatInputBufferComponent`가 montage/Notify window와 Combo Tree를 함께 추적하는 구조는 채택하지 않는다. 그렇게 하면 Ability와 Component가 current node, 유효 window, branch 선택, 취소 cleanup을 동시에 소유하게 된다.
+- 런타임 상태는 활성 Weak 또는 Strong Ability가 소유한다. 현재 node, reservation window, advance window, 한 건의 buffered semantic input, 현재 node의 다음 edge가 이미 확정됐는지 나타내는 transition-committed 사실, 현재 montage section을 Ability 종료와 함께 reset한다. Notify/NotifyState는 창의 begin/end 신호만 보내며 권위 상태를 저장하지 않는다.
+- 읽기 전용 Combo Definition은 충분한 실제 branch가 생기는 P6-D에서 도입할 수 있다. node는 montage section/action 참조를, edge는 요구 input tag와 phase, 필요한 window 종류, unlock/state 조건과 다음 node를 표현한다. runtime index, pressed 상태, buffer, stamina 값은 DataAsset에 저장하지 않는다.
+- 첫 P6 구현의 큐 용량은 현재 node당 한 건이다. reservation이 닫혀 있으면 press를 버리고, 열려 있고 slot이 비었으면 저장한다. slot이 이미 찼으면 같은 키 연타와 다른 공격 키를 모두 추가 적재하지 않고 먼저 합법적으로 예약된 입력을 유지한다. 이 `first accepted input wins`는 연타 한 번으로 여러 미래 타가 자동 실행되는 것을 막기 위한 명시적 초기 정책이며, 원작 overwrite 정책은 아직 미확인이다.
+- press를 slot에 넣기 전 현재 node에 해당 input의 정적 edge가 있고 현재 unlock/state 조건이 맞는지 확인한다. 존재하지 않거나 해금되지 않은 입력은 slot을 차지하지 않는다. advance window에서 직접 들어온 후보 또는 reservation slot의 입력을 고른 뒤 Ability가 cost/target과 현재 section을 다시 검증한다. 성공한 경우에만 buffer를 소비하고 transition을 committed로 잠근 뒤 `Montage_SetNextSection` 또는 확인된 전환을 수행한다. 동적 검증에 실패하면 후보를 버리고 현재 합법 공격은 먼저 종료하지 않는다.
+- transition이 committed된 뒤에는 같은 section의 남은 window에서 들어오는 모든 추가 press를 무시하고 input wait를 재arm하지 않는다. section이 실제로 다음 node에 들어간 뒤 current node를 바꾸고 committed를 해제하며 새 node용 slot을 비운 다음 input wait를 새로 arm한다. 같은 node에서 연타한 여러 press를 Attack02·03·04에 걸쳐 보존하지 않는다. release는 held 상태 또는 charge branch를 갱신하는 edge이며 일반 press FIFO 원소로 추가하지 않는다. `Canceled`, montage interrupt, Ability cancel/end, Pawn 교체에서는 모든 지역 입력 상태를 지운다.
+- Attack→Dodge처럼 서로 다른 Ability 사이의 recovery queue, 또는 여러 Ability가 공유해야 하는 방향 command history가 실제로 생기면 별도 입력 buffer/history owner를 다시 심사한다. 그 구조는 semantic input event와 만료/소비만 소유하고 montage section, combo graph, stamina, Ability 활성 여부를 판정하지 않는다.
+
+### 채택된 실행 흐름
+
+```text
+Physical key
+  -> Enhanced Input: Weak/Strong + Started/Completed/Canceled
+  -> PlayerController: 장치 입력을 semantic tag/phase로 번역
+  -> Khazan ASC: Spec.InputPressed와 GAS generic input protocol 중계
+       -> inactive own Spec: TryActivateAbility
+       -> active own Spec: WaitInputPress/Release
+       -> active attack의 other-key branch: typed Gameplay Event
+  -> Active Attack Ability
+       <- montage Notify/event: reservation/advance/charge window
+       <- read-only Combo Definition: 현재 node에서 가능한 edge
+       -> GAS tag/cost/unlock 재검증
+       -> Montage section 전환 또는 대상 Ability handoff
+```
+
+이 흐름에서 ASC는 전투 입력 상태 머신이 아니고, Controller는 hold/combo 판정자가 아니며, AnimNotifyState는 buffer owner가 아니다. 활성 Ability 하나가 현재 실행의 최종 소비자이므로 interrupt와 `EndAbility()`에서 입력 상태와 animation 수명을 함께 닫을 수 있다.
+
+## 2026-09-17 — ARCH-38 P6-A 창 중첩과 Montage→Ability 이벤트 경계
+
+- P6-A의 실제 WeakAtk01 `ReserveInput` 후보 둘은 `0.3825092135–0.4756474282 s`에서 서로 겹친다. 따라서 Notify 하나가 끝날 때 다른 Notify가 아직 열려 있을 수 있으며 단일 bool을 Begin=true/End=false로 쓰면 창이 조기에 닫힌다. 활성 WeakAttack Ability는 reservation과 advance 각각의 활성 깊이 `int32`를 지역 상태로 소유하고 `depth > 0`을 열린 상태로 해석한다. 모든 값은 activation 시작과 `EndAbility()`에서 0으로 reset한다.
+- Montage의 window NotifyState는 begin/end `Gameplay Event`만 Avatar ASC에 보낸다. event tag는 실행 상태나 Owned Tag가 아니며 NotifyState도 buffer, current node, transition 결정을 저장하지 않는다. 활성 `UKhazanWeakAttackAbility`가 `WaitGameplayEvent`로 이벤트를 받고 depth·buffer·transition을 변경한다.
+- P6-A의 입력 대기는 `WaitInputPress(false)` 한 건이다. advance가 열렸으면 즉시 `Attack01→Attack02`를 확정하고, reservation만 열렸으면 최초 입력 한 건만 보관하며, 어느 창도 아니면 그 press를 버리고 새 task를 arm한다. transition 확정 뒤에는 P6-A 실행에서 입력 대기를 다시 arm하지 않는다.
+- `Attack01`과 `Attack02`의 authored Next Section은 모두 `None`이다. Ability가 현재 Montage와 현재 section을 재검증한 뒤 `CurrentMontageSetNextSectionName(Attack01, Attack02)`가 실제로 설정된 경우에만 transition-committed를 true로 만든다. Montage 완료·중단·cancel과 Pawn 수명 종료는 Ability task cleanup과 `EndAbility()` reset으로 닫는다.
+- 이 한 edge에는 Combo DataAsset, 전역 buffer Component, 범용 graph runtime을 만들지 않는다. 같은 schema를 요구하는 실제 분기가 생기는 P6-D 전까지 section 이름과 한 edge는 WeakAttack Ability의 좁은 계약으로 유지한다.
+
+## 2026-09-17 — ARCH-39 P6-A Montage window 전달 경로 단순화
+
+- ARCH-38의 window 소유권, reservation/advance 분리, depth counter, Ability-local buffer 계약은 유지한다. 다만 P6-A에서 window begin/end를 전달하기 위해 제안했던 전역 Gameplay Event tag 네 개와 custom `KhazanAnimNotifyState_GameplayEventWindow`, `WaitGameplayEvent` task 네 개는 현재 소비자 수에 비해 계층이 많으므로 채택하지 않는다.
+- UE 5.8에는 Montage 전용 `UAnimNotify_PlayMontageNotifyWindow`와 `UAnimInstance::OnPlayMontageNotifyBegin/End`가 이미 있다. P6-A Montage에는 내장 `Montage Notify Window`를 사용하고 `NotifyName` 두 개(`InputReservation`, `ComboAdvance`)만 작성한다. Begin/End 구분은 서로 다른 engine delegate가 제공하므로 네 개의 전역 tag가 필요하지 않다.
+- 활성 `UKhazanWeakAttackAbility`가 자신이 시작한 `WeakAttackMontage`의 AnimInstance delegate에 activation 동안만 bind한다. callback은 payload의 `SequenceAsset`이 해당 Montage인지 확인한 뒤 reservation/advance depth를 변경한다. `EndAbility()`는 bind했던 AnimInstance에서 두 delegate를 제거하고 depth, buffer, transition state를 reset한다. ASC와 AnimInstance에는 combo mutable state를 추가하지 않는다.
+- Gameplay Event 경로 자체를 폐기하는 결정은 아니다. 다른 입력 key의 의미를 활성 Ability에 payload와 함께 전달하거나, 둘 이상의 Ability/시스템이 같은 animation event를 실제로 소비할 때 사용한다. 같은 montage를 시작한 한 Ability만 자기 window를 소비하는 P6-A에는 direct montage notify delegate가 더 작은 계약이다.
+- 동일한 montage+notify bind/filter/unbind 코드가 둘 이상의 실제 Ability에 반복되면 그때 game-specific AbilityTask로 추출한다. 첫 소비자만 있는 현재 단계에서는 custom AbilityTask도 만들지 않는다.
+- 2026-09-17 Editor/Python read-only 확인에서 `AM_DAS_WeakAtkCombo`는 `Attack01` section 한 개, `DAS_Khazan_WeakAtk01` segment 한 개, notify 0개다. UE 5.8 `UAnimMontage::AddAnimCompositeSection()`은 새 section 추가 시 이전 section의 `NextSectionName`이 `None`이면 새 section으로 자동 연결한다. 따라서 `Attack02` section을 만든 직후 authored `Attack01 -> Attack02` 연결을 다시 `None`으로 지워야 하며, runtime Ability가 합법 입력을 소비한 경우에만 연결한다.
+
+## 2026-09-17 — ARCH-40 카잔 전투의 지속 가능한 최소 구조
+
+- 이후 설계 목표는 현재 checkpoint의 코드량만 줄이는 것이 아니라, 확인된 카잔 전투를 완성할 수 있는 구조 중 가장 작은 계약을 고르는 것이다. 이 프로젝트에서 이미 확정된 범위는 Standalone 싱글 플레이, 공격·스킬의 authored Root Motion, Weak 1–4타와 해금 5타, Strong press/hold/release, 확인된 Weak↔Strong 분기, montage 시간축의 입력 창이다. 가상의 네트워크·범용 전투 프레임워크는 넣지 않지만 이 확정 범위를 P6-A 한 edge 때문에 잃지도 않는다.
+- 변하지 않을 책임 경계는 `Enhanced Input/Controller = 물리 입력을 의미와 phase로 번역`, `ASC = granted Spec 활성화와 engine press/release/event 전달`, `활성 Attack Ability = 현재 section·입력 한 건·창·전환·취소 수명`, `Montage = Root Motion·포즈·시간 창`, `Progression = 해금 사실`이다. 마이그레이션 단계가 늘어도 이 상태를 다른 Manager나 Component로 옮기지 않는다.
+- P6-A의 한 칸 buffer는 Weak 전용 bool이 아니라 유효하지 않은 값이 empty를 뜻하는 `FGameplayTag BufferedInputTag`로 둔다. own-input `WaitInputPress`는 `Input.Action.WeakAttack`을 저장하고, 이후 확인된 other-key event는 같은 칸에 Strong tag를 저장할 수 있다. FIFO, timestamp와 전역 queue는 추가하지 않는다.
+- 전환 함수도 `TryCommitAttack02()`처럼 checkpoint 결과를 이름에 고정하지 않는다. 현재 montage section과 buffered semantic input을 받아 합법한 다음 section을 찾고 연결하는 `TryCommitBufferedTransition()` 같은 Ability 내부 계약으로 둔다. P6-A에는 `Attack01 + Weak → Attack02` 규칙 하나만 존재하고, P6-B/D는 같은 함수의 확인된 규칙만 늘린다. 범용 graph runtime이나 별도 Combo Manager를 만들지 않는다.
+- `InputReservationDepth`, `ComboAdvanceDepth`, 한 칸 tag, transition-committed 사실은 실제 겹치는 원작 window와 한 section당 한 입력 정책 때문에 필요한 최소 지역 상태다. AnimInstance 직접 Montage Notify delegate는 엔진 기능을 그대로 쓰는 transport이며 전투 상태를 소유하지 않는다.
+- 공통 AbilityTask 추출은 소비자 수만으로 결정하지 않는다. 여러 실제 Ability에서 동일한 montage-notify 필터, bind/unbind, interruption cleanup 정책이 반복되고 그 중복이 오류나 정책 불일치를 만들 때만 추출한다. 추출하더라도 위 책임과 데이터 계약은 바꾸지 않는 지역 구현 정리여야 한다.
+
+## 2026-09-17 — ARCH-41 전체 회복 시퀀스의 조기 콤보 전환과 cross-fade
+
+- `DAS_Khazan_WeakAtk01`과 `DAS_Khazan_WeakAtk02`는 각각 공격 뒤 정자세 회복까지 포함한 전체 시퀀스다. 따라서 Attack01 section 끝에서 Attack02를 authored next로 재생하면 1타 회복을 모두 기다린 뒤 2타가 시작되어 콤보가 끊겨 보인다. 반대로 Attack01 segment 자체를 짧게 잘라 두면 무입력 1타에서도 회복부가 사라진다. 두 경우 모두 채택하지 않는다.
+- 로컬 UE 5.8.2의 `FAnimMontageInstance::SetNextSectionName`/section advance와 `FAnimTrack::GetAnimationPose`를 확인했다. section link 또는 jump는 다음 section 위치로 재생 위치를 옮길 뿐, 인접 segment 사이에 별도 pose cross-fade를 만들지 않는다. 그러므로 ARCH-38의 `CurrentMontageSetNextSectionName(Attack01, Attack02)` 전환안은 이 절에서 대체한다.
+- 한 `UKhazanWeakAttackAbility` 실행이 콤보 수명을 계속 소유하되, 합법 입력을 소비하는 순간 현재 `PlayMontageAndWait` task만 `EndTask()`로 닫고 같은 `AM_DAS_WeakAtkCombo`를 목표 section(`Attack02`)에서 새 task로 다시 재생한다. UE `UAnimInstance::Montage_PlayInternal`은 같은 group의 기존 montage를 새 montage의 Blend In 설정으로 정지시키고 새 instance를 시작하므로 Attack01의 현재 pose가 blend-out되는 동안 Attack02 시작 pose가 blend-in된다. 입력이 없으면 기존 Attack01 task가 전체 회복부까지 정상 완료한다.
+- 현재 Montage의 editor 확인값은 Blend In/Out `0.1 s`, Blend Option `Hermite Cubic`, Rate Scale `1.0`이다. 원작 `SB_Kazan_DualAxeSword_Com_WeakAtk`의 Step1/Step2에는 `AnimBlendAlpha=0.1`, `AnimPlayRate=1.0`, `AnimLoopCount=1`이 직접 기록돼 있다. `AnimBlendAlpha`를 UE Montage 초 단위 Blend In으로 대응시키는 것은 프로젝트 구현 매핑이며 proprietary 소비 코드로 동일 의미가 증명된 것은 아니다. 현재 `0.1 s`를 유지하고 원작 영상·PIE pose/root-motion 품질로 검증한다.
+- 새 재생은 root-motion montage instance도 Attack02 instance로 교체한다. `AnimRootMotionTranslationScale=1.0`을 유지하고 Actor 위치를 코드로 보간하거나 mesh 임시 scale을 이동 배율에 사용하지 않는다. 전환 프레임의 capsule 변위·회전·속도 불연속은 PIE에서 별도 품질 gate로 확인한다.
+- 같은 Montage asset의 이전 instance가 `0.1 s` 동안 blend-out될 수 있으므로 payload의 `SequenceAsset` 비교만으로는 이전 instance의 늦은 Notify를 배제할 수 없다. Ability는 새 재생 직후 `FAnimMontageInstance::GetInstanceID()`를 저장하고 `FBranchingPointNotifyPayload::MontageInstanceID`까지 일치하는 Begin/End만 소비한다. 이는 재생 방식 때문에 생긴 필수 식별값이며 combo 상태를 AnimInstance로 옮기는 것이 아니다.
+- 현재 ASC는 active Spec에 `AbilitySpecInputPressed()`를 호출하며 엔진은 이를 활성 Ability instance의 `InputPressed()` virtual로 전달한다. P6-A의 동일 Weak key 연타는 `UKhazanWeakAttackAbility::InputPressed()`에서 직접 한 칸 buffer로 제출한다. 이를 위해 매 입력마다 `WaitInputPress` task를 재생성하지 않는다. ASC의 generic replicated event 전달은 Strong release 등 다른 AbilityTask 소비자를 위해 그대로 유지한다.
+- 새 전환은 즉시 `CurrentSectionName`과 active montage instance를 Attack02로 교체한다. 이전 section의 중복 예약을 막기 위한 별도 `bTransitionCommitted`는 더 이상 필요하지 않다. P6-A의 최소 mutable 상태는 current section, active montage instance ID, reservation/advance depth, `FGameplayTag` 한 칸 buffer, 현재 montage task와 bind한 AnimInstance다.
+- custom notify/event tag/AbilityTask, 전역 input-buffer component, section별 recovery duplicate, 별도 montage 다섯 개는 만들지 않는다. 향후 단계마다 서로 다른 blend 설정이 실제로 확인되거나 같은 montage-notify 수명 코드가 여러 Ability에 반복될 때만 asset/task 분리를 재검토한다.
+- `UAnimationLibrary::ExtractRootTrackTransform`을 `1/120 s` 중앙 차분으로 표본 확인한 파생값에서 Attack02 시작의 root 이동 속도는 playback asset 좌표 Y축 약 `335.36 asset-unit/s`, Attack01 `0.3825092135 s`는 약 `328.62`, `0.55 s`는 약 `93.76`이었다. 앞서 확인한 bone pose 최접근 구간 `0.54–0.57 s`와 root 속도 최접근 시점이 같지 않으므로 pose 한 기준으로 고정 cut을 선정하지 않는다. 이 값은 mesh scale을 적용한 world 속도나 원작 직접 기록값이 아니며, PIE capsule 연속성의 표적 관측 지점을 고르는 데만 사용한다.
+
+## 2026-09-17 — ARCH-42 WeakAttack 콤보 창 계약 단순화 재검토
+
+- 실제 `UKhazanWeakAttackAbility`는 header 76줄과 cpp 439줄, 합계 515줄이며 현재 실행 가능한 edge는 `Attack01 + Weak → Attack02` 하나다. 코드량 대부분은 콤보 규칙이 아니라 두 종류의 NotifyState Begin/End, 겹침 depth, 이전 Montage instance 식별, task 교체 방어와 cleanup에서 발생했다. 이 상태로 section별 분기를 복사해 5타를 완성하는 방식은 채택하지 않는다.
+- 원작 metadata의 `ReserveInput`과 input-progression 후보가 서로 다른 이름과 겹치는 시간 구간을 가진다는 사실만으로 두 런타임 상태창의 정확한 의미가 증명되지는 않는다. 따라서 ARCH-40의 `InputReservationDepth`와 `ComboAdvanceDepth`를 제품 구조의 필수 상태로 본 판정은 철회한다. 원작 시간 후보와 영상은 프로젝트 Montage에서 입력 허용 시작점과 전환 확정점을 고르는 근거로 사용하되, 원작 내부 이벤트를 일대일로 복제하지 않는다.
+- Weak 연속타의 최소 authored 계약은 각 공격에 `ComboInputOpen` 점 Notify 하나와 `ComboCommit` 점 Notify 하나다. Open 이후 최초 semantic input 한 건만 `BufferedInputTag`에 저장하고 Commit에서 현재 step, 입력 tag, 해금 조건을 다시 검사한다. Commit 뒤에는 입력을 닫고 buffer를 비운다. NotifyState End, 겹침 depth, 여러 window의 합성은 없다.
+- 활성 Ability의 최소 mutable 상태는 `CurrentComboStep`, `BufferedInputTag`, `bAcceptingComboInput`, 현재 Montage task와 delegate 제거를 위한 AnimInstance reference다. Step은 `1..5`의 section 배열을 인덱싱하고 `1→2`, `2→3`, `3→4`는 같은 증가 규칙을 사용한다. `4→5`에서만 Progression이 소유한 해금 tag를 ASC에서 확인한다. 잠긴 경우 4타 회복을 그대로 끝내며 별도 5타 Ability를 만들지 않는다.
+- `MontageSetNextSectionName()`은 UE 5.8.2 source상 next-section index를 바꿀 뿐 pose cross-fade를 만들지 않는다. 각 원본 시퀀스가 회복부까지 포함하고 전환 보간이 필요하다는 제품 조건 때문에 ARCH-41의 같은 Montage 재생/목표 section 시작 방식은 유지한다. 다만 전환은 `ComboCommit` 점에서만 일어나므로 전환 전 Open/Commit을 이미 지난 이전 instance의 늦은 NotifyState End를 구별할 필요가 없어지고 active Montage instance ID 상태를 제거할 수 있다.
+- `UKhazanWeakAttackAbility`는 한 번의 활성 수명 동안 전체 Weak chain을 계속 소유한다. ASC는 입력 전달만 하고 combo step, window, unlock branch를 소유하지 않는다. Combo DataAsset, 전역 buffer component, custom Notify class, custom AbilityTask는 여전히 만들지 않는다. 동일한 Montage 재생·Notify 수명 코드가 두 번째 실제 Ability에 반복될 때만 공통 task 추출을 다시 심사한다.
+- 이 절은 구조 재검토 결과이며 아직 Source·Montage에 적용되지 않았다. 실제 Open/Commit 시간은 저장된 원작 metadata 후보와 원작 영상, PIE pose/root-motion 연속성을 함께 검증해 section별로 확정한다.
+
+## 2026-09-17 — ARCH-43 단일-task 브랜치 컷 확정과 Jump 의미 교정
+
+### 채택 범위
+
+회수 동작까지 들어 있는 각 WeakAttack 시퀀스를 온전히 보존하고, 모든 Montage section의 authored `Next Section`을 `None`으로 두는 브랜치 컷 구조를 P6의 기본 표현 계약으로 채택한다. 입력이 없으면 현재 section이 회수 동작까지 재생된 뒤 Montage와 Ability가 자연 완료된다. 합법적인 입력 한 건이 예약돼 있으면 현재 타수의 authored branch 지점에서 다음 section으로 이동한다.
+
+| 제안 요소 | 판정 | 프로젝트 계약 |
+|---|---|---|
+| `Attack01`–`Attack05` 전체 시퀀스와 unlinked section | 채택 | 각 section은 자기 공격과 전체 회수를 가진다. 자동 연결은 전부 `None`이다. |
+| 한 번의 `PlayMontageAndWait`로 전체 Weak chain 실행 | 채택 | 같은 Montage instance를 유지하고 마지막으로 진입한 unlinked section이 끝날 때 task가 완료된다. |
+| `MontageJumpToSection`으로 회수부를 건너뜀 | 채택 | 활성 Ability의 `MontageJumpToSection()`을 통해 ASC의 현재 Montage 명령 경로를 사용한다. |
+| 입력 가능 구간 어디서든 입력 즉시 Jump | 기본안에서 제외 | 입력 시점마다 출발 pose와 root 속도가 달라진다. 고정 `ComboCommit` 지점에서만 Jump해 authored cut을 재현한다. |
+| `State.Combo.CanAdvance` loose tag | 제외 | 한 Ability 실행 안에서만 소비되는 일시적 창이다. ASC 공유 상태로 올릴 소비자가 없고 중단 cleanup 위험만 늘어난다. |
+| `Event.Combo.WindowOpened` Gameplay Event | 제외 | Montage와 이를 실행한 같은 Ability 사이의 지역 신호다. AnimInstance의 내장 Montage Notify delegate로 충분하다. |
+| custom `ANS_ComboWindow` | 제외 | UE 내장 `Montage Notify`로 필요한 두 point를 전달할 수 있다. 별도 Notify class는 의미나 수명을 추가하지 않는다. |
+| 전역 input-buffer component·Combo Manager·범용 graph runtime | 제외 | 현재 실행 Ability의 한 칸 buffer와 순차 section 규칙으로 충분하다. |
+
+이 판정은 ARCH-41의 “타수마다 같은 Montage를 새 task로 다시 재생”을 기본 경로에서 대체하고, ARCH-42의 `ComboInputOpen`/`ComboCommit` 고정 지점은 유지하면서 전환 명령만 task 재생에서 section jump로 바꾼다. 과거 절은 조사 이력으로 보존하지만 P6 구현은 이 절을 따른다.
+
+### UE 5.8.2에서 Jump가 실제로 하는 일
+
+- `UGameplayAbility::MontageJumpToSection()`은 이 Ability가 ASC의 현재 animating ability일 때 `CurrentMontageJumpToSection()`을 호출한다. Ability가 `UAnimInstance`를 직접 찾아 명령하는 것보다 현재 GAS Montage 소유 관계를 보존한다.
+- `FAnimMontageInstance::JumpToSectionName()`은 대상 section 위치를 계산하고 `SetPosition(NewPosition)`을 호출한다. Montage를 다시 재생하거나 Blend In을 다시 적용하지 않는다.
+- `FAnimMontageInstance::SetNextSectionName()`은 section 연결 인덱스만 바꾼다. 이것도 pose cross-fade를 만들지 않는다.
+- 따라서 “`JumpToSection`이 Montage Blend In Time으로 다음 타수에 보간한다”는 설명은 사실이 아니다. 한 task를 유지할 수 있다는 장점과 자동 보간이 없다는 품질 조건을 함께 받아들여야 한다.
+
+Jump 전환 품질은 코드가 만든 임의 보간이 아니라 `현재 타수의 고정 cut pose/root delta`와 `다음 타수 section 시작 pose/root delta`의 호환성으로 결정한다. 먼저 원작 metadata 후보와 영상을 이용해 고정 branch 지점을 정하고, PIE에서 capsule 위치·yaw·root-motion 속도와 상체/하체 pose 튐을 확인한다. 호환되는 지점을 찾을 수 없다는 실제 증거가 생기면 같은 Montage 재생에 의한 cross-fade, 별도 transition clip 또는 AnimGraph inertialization을 서로 비교해 하나로 교체한다. 여러 전환 방식을 미리 동시에 유지하는 runtime 분기는 만들지 않는다. Inertialization은 pose 완화 수단이며 Root Motion 연속성을 대신 검증해 주지 않는다.
+
+### 타수마다 필요한 authored 신호
+
+`Attack01`–`Attack04`에는 UE 내장 `Montage Notify` 두 개만 둔다.
+
+1. `ComboInputOpen`: 이 타수에서 다음 분기용 입력 한 건을 받기 시작하는 지점이다.
+2. `ComboCommit`: 입력을 닫고, 저장된 입력·현재 타수·해금 상태를 다시 검사해 다음 section으로 Jump하는 유일한 지점이다.
+
+`ComboInputOpen` 뒤 첫 semantic input만 `BufferedInputTag`에 들어간다. `ComboCommit`에서 입력이 없거나 edge가 없거나 5타가 잠겨 있으면 buffer를 비우고 현재 section의 회수부를 그대로 재생한다. 전환이 성공하면 현재 step을 먼저 다음 step으로 갱신하고, 입력 허용을 닫고, buffer를 비운 뒤 `MontageJumpToSection(NextSection)`을 호출한다. 다음 section의 `ComboInputOpen`을 만나기 전 입력은 그 다음 타수로 이월하지 않는다. 이 규칙으로 연타가 한꺼번에 3·4·5타까지 예약되는 것을 막는다.
+
+고정 point 두 개를 쓰는 이유는 단순히 NotifyState 코드를 줄이기 위해서가 아니다. 입력을 받을 수 있는 구간과 실제 pose/root-motion을 자르는 순간을 분리하면, 플레이어 입력 반응성과 애니메이션 전환 품질을 각각 authored할 수 있다. 원작 `ReserveInput`과 `SkillInputProg`가 별도 시간 구간으로 기록된 사실과도 모순되지 않는다. 다만 proprietary 소비 의미가 확인되지 않았으므로 기존 구간의 시작·끝 값을 그대로 두 point로 단정하지 않는다. Attack01의 저장된 playback 후보는 `ReserveInput 0.2205535080–0.4756474282 s`, `0.3825092135–0.6388580379 s`, progression `0.2929789424–0.5131536622 s`, `0.5165015501–0.9242099718 s`이며, 최종 Open/Commit 위치는 원작 영상과 cut 품질 검증으로 확정한다.
+
+원작 근거가 이후 “구간 안의 어느 프레임에서도 즉시 cancel”을 요구하고 그 전체 구간의 pose/root-motion 연속성이 확인되면, 두 point 계약을 내장 `Montage Notify Window`와 Ability-local phase로 교체할 수 있다. 그 경우에도 ASC tag나 Gameplay Event는 추가하지 않는다. section jump로 열린 NotifyState를 벗어나면 UE가 이전 state의 `NotifyEnd`를 발생시키므로, `WaitingForWindow / WindowOpen / WindowClosed` 같은 지역 phase에서 `WindowOpen`일 때만 End를 소비해야 한다. 현재는 그러한 가변 즉시 전환 근거가 없으므로 이 예외 구조를 먼저 구현하지 않는다.
+
+UE 5.8.2의 `FAnimMontageInstance::Terminate()`도 Montage 중단 시 활성 State Branching Point 전부에 `NotifyEnd`를 보낸다. 따라서 Window End 자체를 무조건 “콤보 확정”으로 쓰려면 자연 종료와 interrupt/cancel 종료를 다시 구별해야 한다. `ComboCommit` point는 중단 때문에 합성되는 End가 없으므로 이 예외 상태와 필터를 만들지 않는 더 작은 계약이다.
+
+### Ability의 최소 runtime 상태와 책임
+
+활성 `UKhazanWeakAttackAbility`가 가지는 mutable 상태는 다음으로 제한한다.
+
+- `CurrentComboStepIndex`: `Attack01`–`Attack05` 고정 section 배열의 0-based index다. activation에서 0으로 시작하고 종료에서 `INDEX_NONE`으로 reset한다.
+- `BufferedInputTag`: 현재 타수에서 받은 최초 semantic input 한 건이다. invalid tag가 빈 상태다.
+- `bAcceptingComboInput`: `ComboInputOpen`과 `ComboCommit` 사이에만 `true`다.
+- `ActiveMontageTask`: activation에서 한 번 만든 `PlayMontageAndWait` task다.
+- `BoundAnimInstance`: 내장 Montage Notify Begin delegate를 `EndAbility()`에서 제거하기 위한 weak reference다.
+
+section 이름 배열은 정적 사실이며 runtime 상태가 아니다. `CurrentSectionName`, Montage instance ID, 두 window depth, Notify End handler, step별 task 재생과 `bTransitionCommitted`는 제거 대상이다. payload는 해당 `WeakAttackMontage`에서 온 Notify인지 stateless하게 확인한다.
+
+`InputPressed()`는 입력 허용 중이고 slot이 비어 있을 때만 `Input.Action.WeakAttack`을 저장한다. `ComboCommit` handler 한 곳이 현재 index와 tag로 다음 section을 결정한다. `1→2`, `2→3`, `3→4`는 같은 순차 규칙이고 `4→5`에서만 Progression/Save가 ASC에 투영한 확정 해금 사실을 읽는다. 아직 그 투영 tag 이름이 Source에 없으므로 임의 문자열을 만들지 않는다. 잠금 실패는 현재 4타를 취소하지 않고 회수까지 완료시킨다.
+
+정상 완료, Montage interrupt, Ability cancel, Pawn 교체와 EndPlay는 모두 기존 `EndAbility()` cleanup으로 모인다. 여기서 Notify delegate를 해제하고 task pointer, step, buffer와 입력 허용 사실을 reset한다. ASC는 Spec 활성화와 active Spec input 전달, 현재 Montage 명령 중계만 맡으며 combo step·재생 속도·window를 저장하지 않는다.
+
+<a id="character-architecture-v3-native-minimal-20260917"></a>
+## 2026-09-17 — 아키텍처 v3 확정: UE 네이티브 우선·최소 실행 소유자
+
+### 결정의 지위와 우선순위
+
+이 절은 현재 Source, UE 5.8.2 엔진 Source, 최신 원작 metadata 보고서와 실제 제품 범위를 다시 대조한 전면 재감사 결과다. 기존 v2.2의 GAS 중심 단순성 원칙과 ARCH-43의 단일-task 브랜치 컷을 유지하되, 구현보다 큰 추상화와 UE 네이티브 기능을 중복한 부분을 아래 계약으로 대체한다.
+
+- v1의 제어 HFSM, v2.1의 ActionRequest/Result·Request/Execution 원장·전신 lane, ARCH-38~41의 custom event/window·두 depth·Montage 재시작 경로는 과거 이력이다. 새 구현에 복사하지 않는다.
+- v2의 7계층은 책임을 점검하는 분류표로만 남긴다. 7개 Manager/Component/DataAsset을 만드는 구현 청사진으로 사용하지 않는다.
+- 최신 실행 구조는 `입력 어댑터 → ASC → 활성 Ability/Task → Montage/AnimGraph/CMC`이며, 실제 두 번째 소비자나 독립 수명이 생긴 기능만 별도 타입으로 추출한다.
+- 이 절은 문서 아키텍처를 확정한 것이며 현재 Source, Blueprint, Montage, AnimSequence를 적용 완료로 뜻하지 않는다.
+
+### [적발된 설계 결함]
+
+| 영역 | 확인된 결함 | 판정과 조치 |
+|---|---|---|
+| WeakAttack 실행 | 현행 `UKhazanWeakAttackAbility`는 01→02 한 edge에 section별 task 재생, instance ID, 두 NotifyState depth, Begin/End handler를 가진다. | 기능보다 큰 상태다. ARCH-43의 한 task·두 point Notify·step index·한 칸 buffer로 교체한다. |
+| section 전환 | `JumpToSection` 또는 `SetNextSection`이 Montage Blend In/Out으로 section 사이를 보간한다는 과거 설명이 있었다. | UE 5.8.2에서 Jump는 위치를 `SetPosition`하고 SetNext는 연결 index만 바꾼다. section 내부 cross-fade는 없다. |
+| 관성화 Notify | 다음 section 첫 frame에 `PlayRequestInertialization`/`Request Inertialization` Notify를 두면 Jump 순간 항상 실행된다는 안. | 현재 UE 5.8.2 설치본에 그 이름의 내장 AnimNotify가 없다. section 시작과 같은 시각의 Branching Point는 검색에서 `TriggerTime <= StartTrackPos`로 건너뛸 수 있다. custom Notify를 만들지 않고 Commit 코드가 request와 Jump를 연속 수행한다. |
+| 관성화 범위 | Inertialization이 root 이동 에너지까지 이어 주어 popping을 완전히 없앤다는 주장. | Inertialization은 평가 pose/curve의 offset을 감쇠한다. Montage root motion은 별도 시간 구간에서 추출되어 CMC로 가므로 capsule의 translation/yaw delta는 보간하지 않는다. authored cut과 root delta 검증은 계속 필수다. |
+| AnimGraph 배치 | 현재 정본의 Inertialization은 `GroundedLocomotion` 뒤, `DefaultSlot` 앞에 있다. | Slot이 만든 inertialization request의 downstream에 있지 않아 공격 Montage request를 받을 수 없다. 기존 노드를 최종 Slot 뒤로 이동해 한 노드가 locomotion과 slot request를 함께 받는 것을 기본안으로 한다. |
+| Ability base | 현재 `UKhazanGameplayAbility`는 공통 동작과 데이터가 없는 빈 subclass다. | 실제 두 Ability가 공유하는 코드가 생기기 전에는 제거하고 `UKhazanWeakAttackAbility`가 `UGameplayAbility`를 직접 상속한다. |
+| ASC 입력 | ASC가 combo 상태까지 가져가야 한다는 과거 후보와 `ActivationInfo` deprecated fallback이 남아 있다. | ASC는 exact input tag→Spec press/release/activation만 중계한다. Combo state는 올리지 않는다. `InstancedPerActor`의 실제 primary instance activation info를 사용하도록 정리한다. |
+| 입력 callback | Weak/Strong마다 Started/Completed/Canceled 함수를 복제했고 Completed와 Canceled를 같은 release 의미로 합쳤다. | tag payload를 받는 세 generic callback으로 줄인다. Strong cancel이 실제 소비될 때 정상 release와 별도 의미 event로 보낸다. |
+| Enhanced Input Combo | 고정 키 순서를 `UInputTriggerCombo`로 전투 콤보의 권위로 삼는 안. | UE 5.8에서 관련 타입이 deprecated이며 montage node/window, 해금, 비용, cancel 상태를 알지 못한다. 전투 콤보 기반으로 사용하지 않는다. |
+| Enhanced Input 전처리 | `AKhazanPlayer`가 장치 dead zone을 다시 계산한다. | 장치 dead zone·축 swizzle·negate는 InputAction/MappingContext modifier가 소유한다. Gait 선택처럼 gameplay 의미가 있는 threshold만 프로젝트 설정에 남긴다. |
+| Asset 로딩 | `UKhazanAssetManager`+`UKhazanAssetData`가 GameplayTag→SoftPath registry, preload, 별도 hard-reference map을 중복 구현한다. | 현재 실제 소비는 InputData와 CharacterDefinition 두 개다. cache map은 조회에 쓰이지 않고 release API는 streamable handle을 해제하지 않는다. 직접 asset reference로 단순화하고, 나중에 streaming이 필요할 때 UE Primary Asset/Bundle API를 사용한다. |
+| GameInstance | `UKhazanGameInstance`의 유일한 제품 책임이 custom AssetManager 초기화이며 constructor/Shutdown은 비어 있다. | AssetManager 이관 뒤 실제 GameInstance 수명이 생기지 않으면 C++ subclass를 제거한다. |
+| Character/Player/Monster | 빈 `BeginPlay`/`Tick`, 활성화된 Actor Tick, 빈 Monster shell과 중복 `AKhazanPawn`이 남아 있다. | 참조 검사를 통과한 빈 override와 Tick을 제거한다. `AKhazanPawn`/빈 Monster 삭제는 Blueprint parent reference를 먼저 확인한다. |
+| Player presentation | camera arm/pitch, mesh 위치·회전, 특히 임시 `0.009` scale이 native constructor에 고정돼 있다. | BP/character presentation data로 옮긴다. animation/root motion 데이터를 이 임시 mesh scale에 맞춰 변형하지 않는다. |
+| Anim snapshot | `MoveInputWorld`, `MaxAcceleration`, `MaxBrakingDeceleration`, `RequestedGait`, `MaxAllowedGait`를 매 frame 복사하지만 C++ 파생 계산에서 읽지 않는다. | BP 비공개 snapshot의 미사용 필드를 제거한다. BlueprintReadOnly 멤버는 실제 ABP reference audit 뒤 필요한 것만 유지한다. |
+| Anim transition | 모든 Start 제외가 확정됐는데 `bShouldPlayStart`를 매 frame false로 쓰며, 속도 임계값 일부는 출처 표시 없이 cpp literal이다. | `bShouldPlayStart`를 제거한다. 실제 필요한 animation threshold는 한 설정 영역에 원작값/계산값/임시값 상태를 표시한다. |
+| 수학 API | native C++에서 `UKismetMathLibrary`를 단순 forward/right/unrotate/atan2 연산에 사용한다. | `FRotationMatrix`, `FRotator::UnrotateVector`, `FMath::Atan2/RadiansToDegrees`로 줄인다. 새 utility class는 만들지 않는다. |
+| Locomotion intent | 동시에 하나뿐인 possessor 입력 source에 random GUID handle과 진단 enum까지 둔다. | 현재 동작을 당장 깨지 않지만 A1 AI 연결 때 source pointer 검증만으로 충분한지 다시 측정한다. 같은 Controller 재빙의의 stale callback이 실제 없으면 intent GUID/type을 제거한다. |
+| Locomotion constraint | 여러 제한 원인이 같은 bool을 덮지 않도록 handle map을 둔 구조. | 이것은 공격·Stamina·상태 효과의 중첩 cleanup에 필요한 구조이므로 유지한다. 현재 소비 없이 priority 종류를 더 늘리지는 않는다. |
+| 미래 Combat/Target/Interaction | 이름만 정한 Component, Manager, Result, DataAsset을 단계 계획에 미리 고정한 부분. | 첫 실제 hit/target/interaction을 Ability/Task/Actor owner에서 수직 구현하고 독립 수명 또는 둘 이상의 실제 소비가 확인될 때만 추출한다. |
+| StateTree | Player action과 GAS 실행을 StateTree에 다시 표현하거나 BT와 StateTree를 동시에 두는 후보. | Player에는 사용하지 않는다. 첫 Monster AI부터 StateTree를 유일한 상위 AI orchestration 기본안으로 사용하되 Task는 CMC/ASC 요청과 완료 대기만 맡는다. |
+| Debug/production 경계 | GameMode가 Cog 창을 항상 등록하고 Cog 모듈을 runtime public dependency로 둔다. | 개발 빌드 전용 경계로 옮긴다. Shipping gameplay 초기화와 debug UI 등록을 섞지 않는다. |
+| 현재 build 상태 | `KhazanPlayerController.cpp`가 `ULocalPlayer::GetSubsystem`을 사용하면서 `Engine/LocalPlayer.h`를 직접 include하지 않는다. ASC는 deprecated `FGameplayAbilitySpec::ActivationInfo`를 읽는다. | 아키텍처와 별개인 즉시 정리 항목이다. cold build 전에 include와 activation-info 경로를 고친다. |
+
+### [아키텍처 재설계안]
+
+#### 1. 런타임 소유자는 다섯 경계만 유지한다
+
+```text
+Enhanced Input / AI StateTree
+    ↓ 의미 입력 또는 행동 선택
+PlayerController / AI Task
+    ↓ input tag press/release 또는 Ability 활성화
+Khazan ASC
+    ↓ granted Spec 활성화, GAS tag/effect/cost/cancel
+활성 GameplayAbility + 엔진 AbilityTask
+    ↓ Montage section, authored Notify, root motion
+AnimGraph(DefaultSlot → Inertialization) + CharacterMovementComponent
+```
+
+1. **입력/AI 의도:** Enhanced Input은 장치 값을 정규화하고 press/release/cancel을 만든다. Controller는 의미 tag로 번역한다. 미래 AI StateTree는 물리 키를 흉내 내지 않고 Ability를 요청한다.
+2. **GAS 공통 상태:** ASC는 granted Spec, Owned Tag/Effect/Attribute와 input protocol을 소유한다. 전역 combo parser나 montage controller가 아니다.
+3. **액션 실행:** 활성 Ability가 자기 실행의 current step, 한 칸 buffer, cost, cancel, Montage task와 cleanup을 소유한다.
+4. **이동:** CMC가 실제 capsule 이동과 root motion을 처리한다. LocomotionComponent는 공통 gait/rotation/input block과 실제 중첩 제약만 해결한다.
+5. **표현:** Montage/AnimBP/Sync Marker/Inertialization/GameplayCue가 pose와 피드백을 표현한다. gameplay 승인과 피해 결과를 작성하지 않는다.
+
+GameplayCue, Motion Warping, Targeting, hit trace, Interaction은 위 다섯 경계에 실제 기능으로 붙는다. 각각을 선행 Manager로 만들지 않는다.
+
+#### 2. Weak 1–5타의 최종 최소 계약
+
+- Montage 하나, `Attack01`–`Attack05` section 다섯 개, 각 section의 authored `Next Section=None`을 사용한다.
+- `Attack01`–`Attack04`마다 내장 Montage Notify point `ComboInputOpen`과 `ComboCommit`만 둔다. gameplay 분기이므로 `Branching Point`를 사용한다.
+- activation마다 `PlayMontageAndWait` task를 한 번만 `Attack01`에서 시작한다.
+- mutable state는 `CurrentComboStepIndex`, `BufferedInputTag`, `bAcceptingComboInput`, `ActiveMontageTask`, delegate 제거용 `BoundAnimInstance`만 둔다.
+- Open 뒤 최초 합법 입력 한 건만 저장한다. Commit이 오면 입력을 닫고 edge·section·해금·현재 Montage 소유권을 검증한다.
+- `1→2→3→4`는 같은 순차 규칙을 사용한다. `4→5`에서만 Progression이 ASC에 투영한 실제 해금 tag를 확인한다. 그 tag가 확정되기 전에는 문자열을 만들지 않는다.
+- 성공 시 Ability private 함수 하나가 관성화 request를 제출하고 `MontageJumpToSection()`을 호출한다. 실패/무입력/잠금이면 현재 section의 recovery를 끝까지 재생한다.
+- Weak→Strong 등 다른 입력의 실제 branch가 생기면 같은 one-slot tag와 같은 Commit 경계에 확인된 edge만 추가한다. 범용 Combo Graph/DataAsset은 두 무기 또는 둘 이상의 실제 실행 class가 같은 schema를 공유할 때만 추출한다.
+
+#### 3. Jump와 관성화의 정확한 순서
+
+`ComboCommit`의 Branching Point callback은 Game Thread의 Montage advance 중 실행된다. 전환 검증을 통과한 경우 다음 순서를 한 함수 안에서 수행한다.
+
+```cpp
+AnimInstance->RequestMontageInertialization(
+    WeakAttackMontage,
+    ComboSectionInertializationDuration,
+    nullptr);
+
+MontageJumpToSection(NextSectionName);
+```
+
+- `RequestMontageInertialization()`은 Montage의 Slot Group에 다음 AnimGraph update용 request를 기록한다. `MontageJumpToSection()`은 GAS가 현재 animating ability인지 확인하는 경로를 유지한다.
+- request를 다음 section 첫 frame Notify에 맡기지 않는다. 첫 frame marker의 경계 누락과 한 frame 늦은 요청을 피한다.
+- `ComboSectionInertializationDuration`은 Ability content 설정 한 곳에 둔다. 원작 Step의 `AnimBlendAlpha=0.1`을 초 단위 duration으로 대응하는 값은 **원작 필드 기반 프로젝트 매핑 후보**이며 proprietary 의미가 증명된 직접값은 아니다. `0.15 s`는 현재 근거가 없으므로 기본 범위로 확정하지 않는다.
+- BlendProfile은 실제 손/무기/발 QA에서 전신 동일 감쇠가 문제라는 증거가 생길 때 추가한다. 미리 per-step 배열이나 profile asset을 만들지 않는다.
+- Dead Blending은 UE 5.8에서 experimental이므로 shipping 기본안으로 바꾸지 않는다.
+
+#### 4. AnimGraph의 한 노드 배치
+
+현재 기본안은 기존 Grounded 내부 Inertialization을 복제하지 않고 최종 합성 경계로 이동하는 것이다.
+
+```text
+Locomotion State Machine
+    → DefaultSlot
+    → Inertialization
+    → (향후 실제 IK/Control Rig가 있으면 그 앞)
+    → Output Pose
+```
+
+UE 문서상 request를 만든 노드보다 downstream이면 되고, 한 Inertialization 노드가 여러 request를 처리할 수 있다. 따라서 이 배치가 내부 locomotion transition과 DefaultSlot Montage request를 함께 받는지 ABP Debugger/Animation Insights로 검증한다. 서로 다른 상·하체 공간이 실제 필요할 때만 두 번째 노드를 추가한다.
+
+관성화가 시작되면 outgoing source pose는 더 평가되지 않으므로, Commit 뒤 반드시 실행돼야 할 gameplay Notify를 recovery 쪽에 두지 않는다. hit/cost/branch의 필수 신호는 Commit 이전 또는 다음 section의 정상 진행 구간에 둔다.
+
+#### 5. Root Motion 품질 gate
+
+관성화 합격과 Root Motion 합격을 따로 본다.
+
+- visual pose: 손·무기·골반·양발의 한 frame pop과 관성 감쇠 중 ghosting/overshoot를 확인한다.
+- capsule: Commit 직전 frame, 전환 frame, 다음 frame의 world translation/yaw delta를 기록한다.
+- collision: 벽, 경사, 적 capsule 접촉에서 CMC가 전환 delta를 소비하는지 확인한다.
+- authored data: cut 시각과 다음 section 첫 root delta의 방향·크기가 맞지 않으면 Commit 또는 next clip 시작 범위를 조정한다.
+- animation/root data를 임시 mesh scale `0.009`에 맞춰 보정하거나 Actor를 코드로 보간하지 않는다.
+
+관성화가 pose를 개선해도 capsule 속도/yaw가 튀면 완료가 아니다. 이 경우 먼저 authored cut/root track을 고치고, 해결 불가한 실제 edge에만 별도 transition clip 또는 Montage instance cross-fade를 비교한다. production runtime에 두 전환 방식을 동시에 남기지 않는다.
+
+#### 6. UE 네이티브 기능 채택표
+
+| 기능 | 채택 방식 |
+|---|---|
+| Enhanced Input modifiers | dead zone, axis swizzle, negate와 장치별 scaling에 사용한다. |
+| Enhanced Input Chord | 원작에 실제 동시 modifier 입력이 확인된 명령에만 사용한다. Weak/Strong 순차 콤보 parser로 쓰지 않는다. |
+| Enhanced Input Combo Trigger | UE 5.8 deprecated이므로 신규 기반에서 제외한다. |
+| GAS Ability/Task | 비용·태그·취소·Montage 실행 수명의 기본이다. 현재 `PlayMontageAndWait`를 유지한다. |
+| Montage Notify point | Combo Open/Commit처럼 한 시각의 authored 결정에 사용한다. |
+| AnimNotifyState/Notify Window | hit trace, 무적, guard처럼 실제 duration이 의미일 때만 사용한다. Ability 종료가 최종 cleanup이다. |
+| Inertialization | section jump의 pose pop 완화와 locomotion transition에 한 downstream 노드를 공유한다. |
+| Sync Marker/State Machine | 기존 locomotion 발 위상·Stop 선택에 유지한다. |
+| Motion Warping | 타깃 보정이 필요한 실제 Root Motion 공격부터 도입한다. combo section 연결 자체를 대신하지 않는다. |
+| GameplayCue | 확정된 hit/guard/parry 결과의 VFX/SFX/카메라·진동 피드백에 사용한다. |
+| StateTree | 첫 Monster AI의 상위 판단과 보스 패턴 orchestration 기본안이다. Player action/GAS의 두 번째 상태 원본으로 쓰지 않는다. |
+| Primary Asset/Asset Bundle | runtime streaming과 독립 unload가 실제 필요해질 때 custom registry 대신 사용한다. |
+
+#### 7. 구현 단순화 순서
+
+1. cold build blocker인 `Engine/LocalPlayer.h` include와 ASC deprecated activation-info 접근을 정리한다.
+2. 빈 `UKhazanGameplayAbility`, 빈 Tick/BeginPlay, 미사용 `Input.Action.Jump`와 snapshot 필드를 reference audit 후 제거한다.
+3. WeakAttack을 ARCH-43/v3 한 task 구조로 바꾸고 01→02 한 edge만 먼저 검증한다.
+4. ABP의 기존 Inertialization 노드를 `DefaultSlot` 뒤로 이동하고 request-before-jump를 연결한다.
+5. pose와 root-motion gate를 통과한 뒤 같은 배열 규칙으로 03/04, 실제 해금 tag가 준비되면 05를 연다.
+6. input callback을 tag payload 기반 generic 함수로 정리하고 Enhanced Input asset에서 dead zone을 소유한다.
+7. Character/InputData를 명시적 asset reference로 이관한 뒤 custom AssetManager/AssetData/GameInstance 초기화 계층을 제거한다. runtime streaming 소비가 생기면 UE Primary Asset으로 다시 연결한다.
+8. 첫 실제 hit, Strong charge, dodge/parry, Monster AI 순으로 수직 기능을 추가한다. 각 단계에서 반복이 확인되기 전에는 custom AbilityTask, CombatComponent, Combo DataAsset, TargetingComponent를 만들지 않는다.
+
+### 유지하는 구조
+
+- Character 소유 ASC와 `IAbilitySystemInterface`, CharacterDefinition의 작은 `InitialAbilityGrants` 배열은 유지한다.
+- ASC의 exact Dynamic Spec Source Tag 검색은 Ability 수가 적은 현재 프로젝트에서 충분하다. 별도 tag→handle cache를 만들지 않는다.
+- 한 타수당 one-slot `first accepted input wins`와 section 진입 전 미래 입력을 쌓지 않는 정책을 유지한다.
+- `LocomotionComponent → CMC`, 원인별 movement constraint handle, Montage Root Motion, `Root Motion from Montages Only`를 유지한다.
+- Main AnimInstance의 Game Thread snapshot→thread-safe 파생 계산 경계와 locomotion Sync Marker를 유지한다.
+
+### 적용 상태
+
+이번 전면 재감사는 Architecture/Migration/Animation/Source-BP-Config 문서를 갱신한다. Source, Config, Blueprint, Montage, AnimSequence와 DataAsset은 수정하지 않았으며 cold build와 PIE도 새로 실행하지 않았다. 현행 WeakAttack 515줄 구조와 현재 ABP node 위치는 아직 디스크에 남아 있으므로 다음 구현에서 위 순서대로 이관한다.
+
+### v3 보완 — Weak/Strong 조합·홀드 입력의 최소 전달 계약
+
+- 같은 입력의 재입력은 GAS의 active Spec `InputPressed`/`InputReleased` 경로를 그대로 사용한다. Weak 연타를 위해 별도 event나 전역 queue를 중복 발행하지 않는다.
+- 활성 Weak가 Strong을, 활성 Strong이 Weak를 구별해야 하는 첫 실제 branch에서만 반대 키의 semantic press/release를 typed Gameplay Event로 전달한다. GAS generic input event에는 원래 Input Tag payload가 없으므로 이 경우에는 event가 실제로 새 의미를 운반한다. Montage window begin/end를 event로 우회하는 과거 구조와 목적이 다르다.
+- Controller는 `Started`에서 press 시각을 하나 기록하고, `Completed`/`Canceled`에서 hold duration과 종료 원인을 만든다. node별 hold threshold, charge step, 해금, stamina와 분기 허용 여부는 Enhanced Input Trigger가 아니라 현재 실행 Ability가 판정한다.
+- Enhanced Input의 `Hold`는 UI나 전역 입력처럼 실행 문맥과 무관하게 같은 threshold를 쓰는 기능에만 사용한다. 카잔 공격의 node별 hold 분기를 InputAction asset 여러 개로 복제하지 않는다.
+- 실제 동시 입력 branch가 확인되면 Enhanced Input `Chorded Action`을 먼저 비교한다. 키 순서와 허용 오차가 원작과 맞지 않을 때만 위 press 시각 두 개로 chord를 파생한다.
+- 현재 공격 Ability의 한 칸 `BufferedInputTag`만 다음 edge 후보를 소유한다. typed event는 입력을 전달할 뿐 current node, Montage window, unlock, cost 또는 transition을 소유하지 않는다.
+- 다른 공격 Ability로 handoff가 필요하면 대상 Ability 활성화 성공을 확인한 뒤 출발 Ability를 끝낸다. press 시작 시각이나 이미 계산된 hold duration처럼 경계를 넘어야 하는 최소값만 `FGameplayEventData` 또는 명시적 activation payload로 넘기며 전역 combo session을 만들지 않는다.
+
+<a id="arch-44-three-phase-combo-and-recovery-exit-20260918"></a>
+## 2026-09-18 — ARCH-44: 3상태 콤보 입력과 회수부 행동 전환
+
+### 기존 두 point 계약의 실제 결함
+
+ARCH-43의 `ComboInputOpen → ComboCommit` 계약은 Commit 전에 들어온 입력을 고정 cut에서 실행하는 데는 충분하지만, Commit을 지난 직후 들어온 합법 입력도 모두 버린다. 원작 재현 목표에서 필요한 것은 다음 세 상태다.
+
+1. `Closed`: 다음 콤보 입력을 받지 않는다.
+2. `BufferUntilCommit`: 입력을 한 건 저장하지만 즉시 Jump하지 않는다.
+3. `ImmediateCommit`: 입력 창은 계속 열려 있고, 새 입력 한 건이 들어오면 즉시 전환한다.
+
+따라서 ARCH-43의 “타수마다 Open/Commit 두 point”는 다음 계약으로 대체한다.
+
+- `ComboInputOpen`: `Closed → BufferUntilCommit`. 기존 buffer를 비운다.
+- `ComboCommit`: 저장된 입력이 있으면 이 고정 지점에서 전환한다. 저장 입력이 없으면 `BufferUntilCommit → ImmediateCommit`으로 바꾸고 입력을 계속 기다린다.
+- `ComboInputEnd`: `ImmediateCommit → Closed`. 전환 없이 남은 buffer를 비운다.
+- Open–Commit 입력은 Commit까지 기다린다. Commit–End 입력은 들어온 프레임에 즉시 전환한다. End 이후 입력은 현재 타수에 예약하지 않는다.
+- 세 개 모두 duration 0의 내장 `Montage Notify` point와 `Branching Point` tick을 사용한다. `ComboInputEnd`도 point 이름일 뿐 `OnPlayMontageNotifyEnd` delegate나 NotifyState가 아니다.
+- 한 타수의 첫 합법 입력만 소비하는 one-slot 정책, 한 Montage task, authored `Next=None`, code-side inertialization 후 section Jump는 유지한다.
+
+세 상태를 표현하려면 기존 `bAcceptingComboInput`에 `bComboCommitReached` 한 비트를 추가하거나 하나의 3값 enum으로 교체해야 한다. 현재 작은 Source에서는 bool 한 개 추가가 최소 변경이다. ASC tag, Gameplay Event, custom NotifyState, 전역 buffer나 Combo Manager는 필요하지 않다.
+
+Commit 이후 Jump는 입력 프레임에 따라 출발 pose와 Root Motion delta가 달라진다. Inertialization은 pose만 완화하므로 Commit–End 전체 범위의 capsule translation/yaw가 다음 section 시작과 허용 가능한지 프레임별로 검사한다. 품질이 깨지는 뒤쪽 프레임은 `ComboInputEnd`를 앞당겨 authored 범위에서 제외한다.
+
+### 공격 중 이동이 끝까지 기다리는 현재 원인
+
+현재 저장본은 다음 사실을 가진다.
+
+- `GA_Player_WeakAttack` CDO의 Activation Owned/Required/Blocked, Block/Cancel Ability tag container는 모두 비어 있다. C++도 `Block.Movement.Input`을 부여하지 않는다.
+- `AKhazanPlayer::HandleInputMove()`는 `LocomotionComponent::SetMoveInputWorld()`로 raw 이동 의도를 먼저 기록한 뒤 허용 gate를 거쳐 `AddMovementInput()`을 호출한다.
+- `ABP_Player`는 `Root Motion from Montages Only`다.
+- UE 5.8.2 CMC는 `HasAnimRootMotion()` 동안 일반 `CalcVelocity()`를 건너뛰고 animation root-motion velocity로 `Velocity`를 덮는다.
+
+따라서 현상은 현재 입력 자체가 사라진 것이 아니라, Attack02 Root Motion Montage를 중단하는 경로가 없어 montage가 끝날 때까지 일반 이동 속도가 capsule을 구동하지 못하는 것이다. 이는 엔진 동작으로는 정상이나 카잔 제품 동작의 완료 상태는 아니다.
+
+### 콤보 point와 외부 행동 전환 point를 분리한다
+
+`ComboInputEnd`는 “다음 타수 입력을 더 받지 않는 시각”이다. 이동·회피·다른 스킬로 현재 공격을 끊을 수 있는 시각과 의미가 다르다. 두 시각이 우연히 같더라도 C++ 계약을 합치지 않고 Montage에서 같은 프레임에 서로 다른 이름을 둘 수 있다.
+
+첫 외부 전환 marker는 `RecoveryCancelOpen` point 하나로 둔다.
+
+- point 전: 현재 타수의 공격 실행과 Root Motion을 유지한다.
+- point 도달 시 이미 유효한 raw 이동 intent가 있으면 WeakAttack Ability를 조기 종료한다.
+- point 이후 새 이동 입력이 시작되면 즉시 WeakAttack을 종료한다.
+- 한 번 열린 뒤 section 자연 종료까지 다시 닫히지 않는 계약이면 별도 `RecoveryCancelEnd`를 만들지 않는다. 원작에서 다시 닫히는 구간이 확인될 때만 End가 필요하다.
+- Ability 종료는 현재 `PlayMontageAndWait`의 `bStopWhenAbilityEnds=true`를 사용한다. task가 GAS 소유 Montage를 정지하고 Montage Blend Out으로 locomotion graph에 복귀한다. 별도 utility가 같은 Montage를 이중 정지하지 않는다.
+
+이미 눌린 이동은 `LocomotionComponent`의 raw intent가 보존하므로 별도 이동 buffer bool이 필요 없다. point 이후 처음 눌린 이동을 active Ability에 알리는 교차 경계만 필요하다. 이때 polling Tick, Player→WeakAttack cast, 전역 command queue를 만들지 않는다. Enhanced Input의 Move Started를 의미 event 한 건으로 ASC에 전달하고 활성 Ability가 내장 `WaitGameplayEvent`로 받는 방식을 첫 수직 절편으로 사용한다. 이 event는 Montage가 같은 Ability에 보내는 combo window 신호를 우회하는 것이 아니라, 입력 owner와 action owner 사이에 실제 새 의미를 전달하므로 정당하다.
+
+이동은 대상 Ability가 없으므로 출발 Ability를 종료해 locomotion으로 복귀한다. 다른 Montage/Ability로 전환할 때는 대상 Ability 활성화가 성공한 뒤 같은 Slot Group의 새 Montage가 이전 Montage를 interrupt하도록 한다. 대상 활성화 실패 전에 출발 Montage부터 정지해 빈 자세를 만들지 않는다. 피격·사망 같은 강제 경로까지 막으므로 일반 취소 창 구현에 `SetCanBeCanceled(false)`를 전역 gate로 사용하지 않는다.
+
+### 적용 상태
+
+이번 절은 Source/Content를 수정한 결과가 아니다. 현재 저장 Montage에는 `ComboInputOpen`과 `ComboCommit` 두 point만 있으며 둘 다 `Queued`다. `ComboInputEnd`, `RecoveryCancelOpen`, 3상태 입력 및 이동 handoff는 다음 구현 checkpoint다.
+
+<a id="arch-45-edge-triggered-locomotion-exit-20260918"></a>
+## 2026-09-18 — ARCH-45: ComboInputEnd 이후 새 이동 입력으로 로코모션 전환
+
+### ARCH-44 이동 전환 계약 정정
+
+ARCH-44의 3단계 콤보 입력 계약(`ComboInputOpen → ComboCommit → ComboInputEnd`)은 유지한다. 다만 이동 전환에 대해 기록한 `RecoveryCancelOpen`과 현재 raw 이동 intent 조회 방식은 이번 결정으로 철회한다.
+
+- 이동 입력은 콤보 입력처럼 예약하거나 버퍼링하지 않는다.
+- `ComboInputEnd`가 지난 뒤 새로 발생한 Move Input Action의 `Started` edge만 현재 공격을 끝낸다.
+- `ComboInputEnd` 이전에 누르고 계속 유지한 방향은 End 이후 취소 요청으로 재사용하지 않는다. 다시 놓고 눌러 새 `Started`가 발생해야 한다.
+- Move Action의 기존 `Triggered`는 매 프레임 locomotion intent와 `AddMovementInput()`을 갱신하는 현재 책임을 그대로 유지한다.
+- 이번 단계에서는 `ComboInputEnd` 자체가 콤보 입력 창을 닫는 동시에 이동 취소 허용을 여는 경계다. 같은 프레임에 네 번째 Notify point를 중복 배치하지 않는다. 다른 공격에서 두 시각이 실제로 달라지는 authored 근거가 생길 때만 별도 `MovementCancelOpen` point로 분리한다.
+
+### 최소 런타임 경로
+
+```text
+IA_Move Started
+  → PlayerController가 Event.Input.MoveStarted를 ASC에 전달
+  → 활성 WeakAttack의 WaitGameplayEvent task가 수신
+  → bCanCancelToLocomotion 검사
+      false: 아무 상태도 저장하지 않고 무시
+      true : FinishAbility(true)
+  → EndAbility
+  → PlayMontageAndWait(bStopWhenAbilityEnds=true)가 현재 Montage를 Blend Out
+  → Root Motion Montage에서 locomotion graph로 복귀
+```
+
+Controller는 물리 키를 의미 이벤트로 번역할 뿐 공격 Ability를 cast하거나 찾지 않는다. ASC는 `HandleGameplayEvent()`로 사건을 전달할 뿐 콤보 phase나 몽타주를 소유하지 않는다. 활성 Ability가 자기 authored gate와 실행 수명을 판단한다. 싱글 플레이 전용 프로젝트이므로 이 경로에 입력 RPC나 예측 계층을 추가하지 않는다.
+
+`FinishAbility(true)` 시점은 입력을 받은 프레임이다. 다만 시각적인 pose 전환은 Montage asset의 Blend Out 설정을 사용한다. 이는 자연 종료를 기다린다는 뜻이 아니라 그 프레임부터 재생 중단과 locomotion blend가 시작된다는 뜻이다. Blend Out 동안 남은 Root Motion이 체감상 이동 시작을 늦추는지는 별도 runtime gate로 확인하며, 확인 없이 0초 정지나 Root Motion 비활성화를 적용하지 않는다.
+
+### 공통화 결정
+
+현재 구현에는 콤보 Ability가 `UKhazanWeakAttackAbility` 하나뿐이므로 다음 추상화는 만들지 않는다.
+
+- **인터페이스:** UInterface는 `CurrentComboStepIndex`, one-slot buffer, phase, AbilityTask, delegate cleanup 같은 실행 상태와 수명을 소유하지 못한다. 각 Ability에 동일 구현을 다시 두게 되므로 중복 제거 수단이 아니다.
+- **Jump 유틸리티:** `UGameplayAbility::MontageJumpToSection()`이 이미 ASC의 현재 animating Ability/Montage 경로를 사용한다. 한 줄을 감싸는 helper는 책임을 줄이지 않는다.
+- **Notify 자동 배치 템플릿:** Open/Commit/End 시각은 각 clip의 타격·회수·Root Motion에 맞춘 authored 데이터다. 공통 비율로 자동 배치하면 잘못된 타이밍을 양산한다.
+- **커스텀 Combo AbilityTask/Combo Component/DataAsset graph:** 현재 `PlayMontageAndWait`, `WaitGameplayEvent`, 세 Notify point, one-slot buffer로 필요한 수명이 표현된다. 엔진 task를 합친 새 task나 전역 manager를 지금 추가하면 cleanup과 디버깅 경로만 늘어난다.
+
+두 번째 실제 콤보 Ability를 구현하기 직전에 `UKhazanComboGameplayAbility : UKhazanGameplayAbility` 추출을 수행한다. 그때 두 Ability에서 실제로 동일한 것으로 확인된 항목만 옮긴다.
+
+- 공통 후보: 단일 Montage task 수명, Notify delegate bind/unbind, Open/Commit/End phase, one-slot 입력 소비, inertialization request 후 section jump, 이동 Started event 대기, 정상/취소 cleanup.
+- 파생 Ability 책임: 입력 tag 조합, hold 판정, 다음 node/section 결정, unlock/cost 조건, 공격별 Montage와 authored section 집합.
+- 선형 `CurrentIndex + 1` 규칙을 공통 base의 고정 정책으로 만들지 않는다. Weak/Strong 조합과 hold branch가 실제로 들어오면 파생 클래스의 `ResolveTransition(...)` 계약으로 분리한다.
+- 두 번째 Montage부터 이름 누락·point 순서·Branching Point 설정 오류가 반복될 때 Editor-only validator를 추가한다. validator는 타이밍을 생성하지 않고 계약만 검사한다.
+
+이 결정은 이후 모든 콤보 Ability에 코드를 복사하겠다는 뜻이 아니다. 현재 vertical slice를 먼저 완성하고, 두 번째 소비자가 생기는 첫 시점에 동작을 보존한 채 base로 추출한다.
+
+### 적용 상태
+
+이번 기록은 아키텍처 결정과 다음 공동 구현 절차다. Source, Blueprint, Montage asset은 이 기록으로 직접 수정하지 않았으며 `ComboInputEnd`의 실제 asset 배치, cold build, PIE 결과는 사용자의 적용 후 확인 대상이다.
+
+<a id="arch-46-minimal-move-event-payload-20260918"></a>
+## 2026-09-18 — ARCH-46: Move Started 이벤트의 최소 GameplayEvent payload
+
+ARCH-45의 Controller → ASC 이벤트 전달에서 `FGameplayEventData::Instigator`, `Target`, `EventTag`를 채우라는 설명은 현재 소비 계약보다 과했다. 이 항목은 다음처럼 정정한다.
+
+- 이벤트의 수신 대상은 `HandleGameplayEvent()`를 호출한 **ASC 인스턴스**로 이미 결정된다. payload의 `Target`은 전달 주소가 아니다.
+- `Instigator`와 `Target`은 이벤트 의미상 행위자·대상이 필요할 때 소비자가 읽는 선택 metadata다. 현재 WeakAttack의 Move Started callback은 둘을 읽지 않으므로 채우지 않는다.
+- 라우팅 태그는 `HandleGameplayEvent(EventTag, &Payload)`의 첫 번째 인자다. UE의 gameplay-event activation 및 `WaitGameplayEvent` 경로는 callback용 복사본에 일치한 태그를 채우므로 송신 측에서 `Payload.EventTag`를 중복 대입하지 않는다.
+- 엔진 경로는 payload 포인터가 null이 아니라고 전제하므로 `nullptr` 대신 **비어 있는 지역 `FGameplayEventData`**를 전달한다.
+- 현재 구현은 기존 `Input.Action.Move` 태그를 Move `Started` edge에서만 보내므로 그대로 사용한다. Started/Completed/Ongoing을 서로 다른 의미로 동시에 전달해야 할 실제 소비자가 생길 때만 별도 event tag를 분리한다.
+
+따라서 Controller의 책임은 자신의 현재 Pawn에서 ASC를 얻고, 빈 non-null payload와 함께 해당 태그를 한 번 전달하는 것까지다. 별도 Pawn 지역 변수와 중복 유효성 검사는 필요하지 않다. Character의 ASC 소유 관계와 payload actor metadata는 서로 다른 계약이며, 전자가 후자를 요구하지 않는다.
+<a id="arch-47-run-sprint-stop-sequence-root-motion-20260918"></a>
+## 2026-09-18 — ARCH-47: Run/Sprint Stop의 Sequence Root Motion 계약
+
+### 결정과 범위
+
+- 기존의 locomotion 전체 root-locked 정책 중 `DAS_Khazan_Run_Stop_LF`, `DAS_Khazan_Run_Stop_RF`, `DAS_Khazan_Sprint_Stop` 세 시퀀스는 예외가 아니라 **의도적으로 capsule을 구동하는 Sequence Root Motion**으로 이관한다.
+- 이번 결정은 RunStop 두 발 변형과 SprintStop에만 적용한다. WalkStop 두 시퀀스와 Walk/Run/Sprint 반복 이동은 현재 계약을 유지하며, 별도 근거 없이 함께 바꾸지 않는다.
+- 이 프로젝트는 싱글 플레이이고 Stop은 Locomotion State Machine의 Sequence Player가 재생하므로 Main ABP의 Root Motion Mode는 `Root Motion from Everything`을 사용한다. `Montages Only`로 되돌리거나 Stop을 몽타주/GameplayAbility로 감싸지 않는다.
+- 동작 경로는 `Stop Sequence -> AnimInstance root-motion extraction -> SkeletalMeshComponent -> CharacterMovementComponent -> capsule`이다. ASC, WeakAttack Ability, PlayerController, AnimInstance worker에서 위치를 직접 더하지 않는다.
+
+### 소유권과 취소
+
+- Stop 진입 여부와 LF/RF/Sprint 선택은 기존 Locomotion 데이터 계약이 소유한다.
+- Stop 재생 중 새 이동 입력이 들어오면 기존 State Machine 전이로 WalkRun/Sprint에 복귀한다. 전이가 시작된 프레임부터 outgoing Stop의 root motion 기여도도 pose blend weight와 함께 감소하거나 종료되어야 하며, 별도 이동 버퍼나 Stop Ability를 만들지 않는다.
+- Stop 종료는 해당 Sequence Player의 완료를 기준으로 Idle로 전이한다. 속도가 먼저 0이 되었다는 이유만으로 Stop을 자르지 않는다.
+- Stop은 단발이며 길이와 marker 구성이 서로 다른 독립 클립이므로 반복 보행용 `Locomotion` Sync Group의 `Always Leader`로 두지 않는다. Stop Sequence Player는 `Do Not Sync`를 기본 계약으로 삼고 LF/RF 선택은 기존 `StopEntryFoot` snapshot으로 고정한다.
+
+### 에셋 공간과 크기 계약
+
+- source의 이동 트랙은 skeleton bone index 0인 `C_P_Kazan`에 있어야 한다. child `Root`에 이동을 남긴 채 `Enable Root Motion`만 켜는 방식은 허용하지 않는다.
+- 현 skeleton의 삽입된 `C_P_Kazan` reference scale 100을 보정하는 translation 배율은 `1 / 100 = 0.01`이다. 이는 skeleton topology에서 유도된 에셋 변환값이다.
+- 캐릭터 Mesh Component의 현재 임시 scale `0.009`는 에셋 전처리 입력이 아니다. 이를 역수로 보상하는 `AnimRootMotionTranslationScale`, `AddActorWorldOffset`, CMC 속도 보정은 추가하지 않는다.
+- 최종 월드 이동량은 component transform과 collision을 거친 결과이므로, 에셋 공간 추출량과 PIE capsule 이동량을 분리해 검증한다.
+
+### 상태
+
+이 절은 이후 구현 계약을 확정한다. 2026-09-18 저장본에는 세 Stop 에셋의 Root Motion 플래그와 ABP의 `Root Motion from Everything`이 이미 있으나, 세 에셋은 기존 보호 목록 때문에 최신 skeleton-scale 보정 import를 거치지 않았다. 표적 재변환·재임포트와 PIE capsule 검증은 다음 Animation 단계에서 수행한다.

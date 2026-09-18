@@ -174,3 +174,30 @@
 - Character는 GameWorld 초기화에서 GetAssetByName(CharacterDefinitionAssetName, false)로 이미 Preload된 객체만 받아 LocomotionComponent에 config를 값 복사한다. false는 누락을 즉석 동기 로드로 숨기지 않고 preload 계약 실패를 드러내기 위한 소비자 정책이다.
 - CharacterDefinition UPROPERTY는 Transient, VisibleInstanceOnly, BlueprintReadOnly다. 이는 런타임 결과 관측을 허용하면서 BP 기본값이 catalog 선택과 별개의 hard reference가 되는 것을 막는다.
 - 현재 Player의 저장 selector, catalog entry/path/label, Definition config는 일치한다. cold build와 새 프로세스 PIE 검증 전이므로 runtime 완료 판정은 보류한다.
+
+## 2026-09-17 — UE 네이티브 asset reference 이관 결정
+
+Architecture [v3](CHARACTER_GAMEPLAY_ARCHITECTURE.md#character-architecture-v3-native-minimal-20260917)의 전면 감사에서 현재 custom asset 계층을 다시 검사했다. 2026-09-11 복원은 당시 승인 범위에서 기존 동작을 보존한 결과이며, 아래 최신 제품 구조 결정이 충돌 범위를 대체한다.
+
+### 적발된 중복과 결함
+
+- 실제 runtime 소비자는 `DA_InputData`와 `DA_CharacterDefinition_Khazan` 두 개뿐이다.
+- `UKhazanAssetData`는 GameplayTag→SoftObjectPath와 label index를 직접 구축해 UE Asset Registry/Primary Asset 개념과 별도 catalog를 유지한다.
+- `UKhazanAssetManager::NameToLoadedAsset`은 hard reference를 보관하지만 `GetAssetByName()`은 그 map을 조회하지 않고 매번 catalog path의 `ResolveObject()`/`TryLoad()`를 사용한다.
+- `LoadPrimaryAssetsWithType()`와 `RequestSyncLoad()`의 handle은 지역 변수이며, `ReleaseByName/Label/All()`은 map entry만 제거한다. 따라서 API 이름이 암시하는 native AssetManager bundle unload 계약과 실제 동작이 일치하지 않는다.
+- GameInstance subclass는 이 custom preload 호출 외에 실제 제품 수명이 없고, Input/Character가 자기 의존 asset을 tag 문자열을 통해 간접 조회한다. 누락은 runtime에서야 드러나며 editor reference validation 이점도 잃는다.
+
+### 최신 최소 계약
+
+1. `AKhazanPlayerController`의 content subclass가 `UKhazanInputData`를 명시적 asset reference로 가진다. 항상 시작 때 필요한 작은 입력 설정이므로 현재는 hard `TObjectPtr`이면 충분하다.
+2. 각 Character Blueprint/default가 자기 `UKhazanCharacterDefinitionData`를 명시적 reference로 가진다. runtime 관측용 별도 pointer와 tag selector를 동시에 두지 않는다.
+3. `UKhazanCharacterDefinitionData`의 작은 `InitialAbilityGrants`와 Locomotion config는 그대로 유지한다. AbilitySet은 독립 부여/회수 source가 실제 생길 때만 추출한다.
+4. 위 두 reference 이관과 저장 asset 검증 뒤 `UKhazanAssetData`, custom preload/load/release wrapper, AssetData/AssetLabel native tags, `UKhazanGameInstance::Init()`의 initialize 호출과 `AssetManagerClassName` custom 지정 제거를 별도 checkpoint에서 수행한다.
+5. 이후 level streaming, 장비 bundle, 다수 enemy definition을 ID로 비동기 로드하고 독립 unload해야 하는 실제 요구가 생기면 `UPrimaryDataAsset`, `FPrimaryAssetId`, Asset Bundle과 `FStreamableHandle`을 사용한다. tag→path parallel registry는 다시 만들지 않는다.
+
+### 이관 안전 조건
+
+- Reference Viewer로 `PDA_AssetData`, `BP_GameInstance`, native `UKhazanGameInstance`, `UKhazanAssetManager`, `UKhazanAssetData`의 Blueprint/Config 참조를 먼저 기록한다.
+- Controller/Character reference를 먼저 저장하고 새 프로세스에서 Input mapping, Definition, Ability grant, locomotion config를 확인한다.
+- 이 검증이 끝나기 전에 catalog와 custom manager를 삭제하지 않는다. 한 checkpoint에서 lookup source와 fallback을 동시에 잃지 않는다.
+- 이번 문서 개정에서는 Source, Config와 uasset을 수정하지 않았다.

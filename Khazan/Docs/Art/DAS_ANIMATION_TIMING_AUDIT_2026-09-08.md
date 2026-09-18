@@ -139,3 +139,99 @@ RateScale만 변경하는 경우 marker를 따로 0.8배 위치로 옮기지 않
 - 원작 실행 시 최종 PlayRate, Time Dilation, montage/graph 조정, PSA를 추출한 정확한 exporter 버전은 미확인이다. 따라서 최종 원작 속도까지 100% 동일하다고 보장하지 않는다.
 - 동일 질문은 이 문서와 감사 JSON을 먼저 읽는다. source snapshot이나 현재 에셋이 바뀐 경우에만 해당 파일을 표적 재검사한다.
 
+## 7. 2026-09-16 — WeakAtk01 구간별 재생 속도 표적 확인
+
+이번 확인은 일반 locomotion 시퀀스의 고정 배속과 별개로, 원작 DualAxeSword 약공격 Composite가 시간축을 어떻게 바꾸는지 표적 조사한 결과다. 원본 package와 계산 결과는 `Saved/ImportReports/Khazan_DAS_WeakAttack_Timing_20260916.json`에 보존했다.
+
+### 원본 데이터 계약
+
+- 원작 gameplay asset은 `BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/WeakAtk/AC_Kazan_DualAxeSword_Com_WeakAtk01`이며 class는 `AnimComposite`다.
+- Composite의 단일 segment는 `CA_P_Kazan_DualAxeSword_Off_FastAtk01_M1`의 `0.0–3.53 s`를 `AnimPlayRate=1.0`, `LoopingCount=1`로 사용한다.
+- source AnimSequence 직접값은 `SequenceLength=3.5333333 s`, `NumFrames=107`, `bEnableRootMotion=true`, `bForceRootLock=true`다. Composite는 마지막 약 `0.0033333 s`를 제외한 `3.53 s`를 소비한다.
+- source와 Composite 모두 별도 `RateScale` override가 직렬화돼 있지 않다. 구간별 속도 변화의 근거는 AnimSequence `RateScale`이나 segment `AnimPlayRate`가 아니라 Composite의 저장된 `DilationCurve`다.
+- `DilationCurve.TimePerFrame=0.016666668 s`, `DilationSequenceLength=3.4326434 s`, `BakedDilationCurveName=Dilation`, 저장 mapping point는 213개다. 이 table은 `T_Original → T_Dilation`을 직접 제공한다.
+- raw float curve의 linear key는 `(0.0027076453, -0.10675841)`, `(0.4, 0.4170467)`, `(0.53995734, 0.4170467)`, `(0.59256727, 0.0)`다. 재현에는 raw 네 key를 임의 공식으로 다시 적분하지 않고 저장된 213-point table을 정본으로 사용한다.
+
+table의 인접 구간에서 계산한 실제 source 진행률 `ΔT_Original / ΔT_Dilation`은 약 `0.911179–1.417051`이다. 전체 평균만 계산하면 `3.53 / 3.4326434 = 1.02836199`지만, 이 고정 배율 하나는 전체 길이만 같게 만들 뿐 처음의 느린 준비와 중간 가속을 재현하지 못한다.
+
+| 실제 재생 경과 `T_Dilation` | 평가할 source 위치 `T_Original` | 해당 table 구간의 source 진행률 |
+| ---: | ---: | ---: |
+| `0.000000 s` | `0.000000 s` | 약 `0.911179x` |
+| `0.100000 s` | `0.095550 s` | 약 `1.010529x` |
+| `0.200000 s` | `0.204107 s` | 약 `1.164346x` |
+| `0.300000 s` | `0.327971 s` | 약 `1.318163x` |
+| `0.400000 s` | `0.467117 s` | 약 `1.417048x` |
+| `0.495476 s` | `0.592567 s` | 약 `1.036595x` |
+| `0.600000 s` | `0.697354 s` | 약 `1.0x` |
+| `3.4326434 s` | `3.530000 s` | 약 `1.0x` |
+
+### 프로젝트용 재생 에셋 계산 계약
+
+UE 5.8의 Montage Time Stretch Curve는 non-default Montage play rate일 때 사용하는 별도 weight 계약이고 음수 원본 Dilation key를 그대로 복사하는 필드가 아니다. `Montage_SetPlayRate()`를 Tick에서 계속 갱신하면 Ability에 별도 시간 상태와 취소/동기화 경계를 추가한다. P1.5에서는 이미 Enemy 재생 라이브러리에서 검증한 방식대로 원작 mapping을 pose에 bake한 별도 AnimSequence를 사용한다.
+
+1. 출력 시간 `T_Dilation`을 `0–3.4326434 s`에서 균일 표본화한다.
+2. 저장된 mapping의 역함수를 구간 선형 보간해 각 출력 시각의 `T_Original`을 구한다.
+3. source segment `0–3.53 s`의 pose를 해당 위치에서 평가한다. translation/scale은 선형, quaternion은 같은 반구를 선택한 정규화 선형 보간을 사용한다.
+4. 원본 `TimePerFrame`의 60 Hz를 목표로 `round(3.4326434 × 60)=206` interval, 207 sample을 만든다. 길이를 정확히 유지하는 계산 frame rate는 `5110687/85161 ≈ 60.01205951 fps`다.
+5. 출력 AnimSequence `RateScale`, Montage segment `AnimPlayRate`, Ability task `Rate`는 모두 `1.0`으로 둔다. 어느 한 곳에서도 평균 배율 `1.02836199`를 다시 곱하지 않는다.
+
+원작 Composite에는 notify 45개가 있지만 P1.5는 표현 재생과 Ability 수명만 다룬다. hit/cancel/move/VFX 등 notify 의미를 자동 이식하지 않으며 P3/P6에서 필요한 이벤트만 `T_Original → T_Dilation`으로 변환해 별도 gameplay 계약으로 구현한다. 원작 source의 root-motion flag도 직접 확인됐지만 P1.5의 현재 CMC 구동 범위에서는 root 이동을 활성화하지 않는다. 따라서 이 단계의 결과는 원작 **포즈 시간축** 재현이며 원작 공간 이동까지 완료한 결과가 아니다.
+
+### 후속 공격에 재사용할 표적 결과
+
+| Composite | source 구간 | Composite 길이 | Dilation 길이 | 인접 table 진행률 범위 |
+| --- | --- | ---: | ---: | ---: |
+| `WeakAtk01` | `FastAtk01_M1`, `0–3.53`, `+1.0x` | `3.53` | `3.4326434` | `0.911179–1.417051x` |
+| `WeakAtk01_Block` | `FastAtk01_M1`, `0–0.365`, `-1.0x` | `0.365` | `0.7411443` | `0.285714–1.000001x` |
+| `WeakAtk02` | `FastAtk02_M1`, `0–3.47`, `+1.0x` | `3.47` | `3.328054` | `0.999970–1.489833x` |
+| `WeakAtk02_Block` | `FastAtk02_M1`, `0–0.307143`, `-1.0x` | `0.307143` | `0.5568775` | `0.357143–1.000004x` |
+| `WeakAtk02_Loop` | `FastAtk02_Loop`, `0–2.0`, `+1.0x` | `2.0` | 없음 | 고정 `1.0x` |
+| `WeakAtk03` | `FastAtk03_M1`, `0–4.9`, `+1.0x` | `4.9` | `4.9616776` | `0.584378–1.000024x` |
+| `WeakAtk04` | `FastAtk04_M1`, `0–4.33`, `+1.0x` | `4.33` | `4.4874234` | `0.465587–1.000024x` |
+| `WeakAtk05` | `Com_WeakAtk05`, `0–2.6`, `+1.0x` | `2.6` | `2.599998` | 사실상 `1.0x` |
+
+이번 작업은 원본 package metadata의 읽기 전용 표적 확인과 report 작성이다. project AnimSequence/Montage, C++, Blueprint는 생성·수정·빌드·PIE하지 않았다.
+
+## 8. 2026-09-16 — WeakAtk 콤보 source와 Root Motion 추가 확인
+
+원작 `SB_Kazan_DualAxeSword_Com_WeakAtk`의 CDO `SubStateInfos`와 각 `xxChangeNextStepFunc`를 표적 대조했다.
+
+| 원작 sub-state | Composite | 표준 press 결과/조건 |
+| --- | --- | --- |
+| `Step1` | `WeakAtk01` | `Step2` |
+| `Step2` | `WeakAtk02` | `Step3` |
+| `Step3` | `WeakAtk03` | `Step4` |
+| `Step4` | `WeakAtk04` | `SP_Kazan_DualAxeSword_Flow_HyperMaster` 활성 시 `SpecialSubStateTag=Step5` |
+| `Step5` | `WeakAtk04` | press 시 `Step6` |
+| `Step6` | `WeakAtk05` | 마지막 공격 |
+
+따라서 공격 번호 기준 원작 표준 source는 `FastAtk01_M1`, `FastAtk02_M1`, `FastAtk03_M1`, `FastAtk04_M1`, `Com_WeakAtk05`다. `FastAtk02_Loop`를 사용하는 별도 `WeakAtk02_Loop` Composite는 이 Skill Blueprint의 `SubStateInfos` 어디에서도 참조되지 않는다. 해당 Composite에는 `EInputType::Absorb`인 `xxSkillInputProg`가 별도로 있으므로 표준 2타와 합치지 않고 특수 분기 후보로 보존한다. 정확한 진입 owner는 이번 자료만으로 확정하지 않았다.
+
+`Step1`–`Step6`의 직접값은 모두 `AnimPlayRate=1.0`, `AnimLoopCount=1`, `bApplyAttackSpeed=true`다. 이 `bApplyAttackSpeed`는 캐릭터의 gameplay 공격 속도 배율을 적용할 수 있다는 별도 계약이며, 각 Composite 내부의 Dilation mapping과 같은 값이 아니다. 현재 프로젝트에는 확정된 Attack Speed attribute가 없으므로 P1.5 runtime task rate는 항등값 `1.0`으로 유지한다.
+
+선정 source의 PSA `Root` 첫/끝 translation과 전 구간 이동을 계산했다. 아래 값은 PSA 좌표에서 Y 부호를 프로젝트 변환 규칙에 맞춘 **원본 기반 계산값**이며, 실제 UE world forward 축과 collision 결과는 import 후 검증한다.
+
+| source | samples | root 시작→끝 변위 `(cm)` | root path distance `(cm)` |
+| --- | ---: | ---: | ---: |
+| `FastAtk01_M1` | 107 | `(0, 131.546982, 0)` | `181.456085` |
+| `FastAtk02_M1` | 102 | `(0, 122.070999, 0)` | `185.975418` |
+| `FastAtk03_M1` | 147 | `(0, 142.787994, 0)` | `220.271576` |
+| `FastAtk04_M1` | 131 | `(0, 220.000000, 0)` | `300.872437` |
+| `Com_WeakAtk05` | 79 | `(0, 208.660980, 0)` | `251.408783` |
+
+1–4타 source package는 모두 `bEnableRootMotion=true`, `bForceRootLock=true`를 직접 직렬화한다. 5타 source package의 해당 flag는 현재 표적 추출본에 없지만 PSA Root track의 실변위는 위와 같다. 사용자가 모든 스킬에 Root Motion을 사용한다고 확정했으므로 파생 playback Sequence는 몸 pose와 Root track을 같은 Dilation 시간축으로 재표본화하고 `Enable Root Motion=true`로 만든다.
+
+이 절은 위 §7의 `P1.5에서는 root 이동을 활성화하지 않는다`는 프로젝트 적용 결론을 대체한다. §7의 원본 Dilation table, 길이, source rate 계산은 그대로 유효하다. Float Curve/AnimNotifyState에서 매 tick Montage rate를 바꾸지 않으며, Sequence/Montage/Ability task의 상수 배율은 모두 `1.0`이다.
+
+이번 확인은 `Saved/OriginalAttackTiming/Metadata/.../SB_Kazan_DualAxeSword_Com_WeakAtk.json`, 각 WeakAtk Composite/source AnimSequence metadata, `Saved/ImportReports/Khazan_DAS_PSA_SourceMetadata.json`의 읽기 전용 분석이다. project AnimSequence/Montage/C++/Blueprint/build/PIE는 변경·실행하지 않았다.
+
+## 9. 2026-09-16 전수 시간축 복원 적용 결과
+
+§7–8은 당시 읽기 전용 분석 범위를 설명한다. 이후 사용자의 직접 임포트 요청에 따라 원본 시간축 복원을 실제 Content에 적용했다.
+
+- 원본 source 457개, 미사용 파생 locomotion 164개, Composite playback 360개, 총 981개를 저장했다.
+- Composite playback 360개 중 250개에는 원작 Dilation mapping이 pose와 Root track에 함께 bake됐다. playback basename은 원작 `AC_...` 이름을 유지한다.
+- 현재 ABP가 참조하는 locomotion 9개는 별도로 전수 검사하고 hash 보호했다. 24 fps × `RateScale 1.25`로 유효 30 fps지만 원본과 sample 수/유효 길이가 달라 marker-aware exact-source migration 검토가 필요하다.
+- 미사용 locomotion 271개는 source 107개 + InGame 57개 + Runtime 107개이며 모두 복원했다. 파생본의 Sync Marker는 프레임 위치 기준으로 새 시간축에 이관했다.
+- 최종 fresh-process audit는 981/981개와 보호 locomotion 9개를 검증해 `passed`다. 정본은 `Saved/ImportReports/Khazan_DAS_AnimationFinalAudit_20260916.json`이다.
+- 이 적용은 Animation Content 복원까지다. Montage/Ability event 연결과 PIE에서의 콤보·Root Motion·피격/VFX 품질 판정은 아직 후속 범위다.

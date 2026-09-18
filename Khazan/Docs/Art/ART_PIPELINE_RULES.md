@@ -167,3 +167,29 @@
 - `_ImportStaging`, `SourceSequences`, `PlaybackClips`, `*SourceReferences`, `Archive`는 실제로 비어 있을 때만 하위부터 제거한다. `LegacyAssetMoves.json`, `LegacyIdleDuplicates.json`, `ArchiveSummary.json` 같은 이력 파일은 런타임 에셋과 구분해 보존한다.
 - 현재 Enemy package 조회 정본은 `Content/_Art/Enemies/Metadata/Structure_20260915/CurrentAssets.json`과 `RenameMap.json`이다. 과거 importer/manifest의 destination은 당시 이력이며 현재 경로로 사용하지 않는다.
 - 경로 정리 전후에 AnimSequence 시간축/root 설정, SkeletalMesh skeleton/LOD/material slot, Blueprint component 계약을 수치까지 비교한다. 단순 로드 성공만으로 경로 이동의 무변경을 확정하지 않는다.
+
+## 2026-09-17 애니메이션 Root Motion 스케일 독립 규칙
+
+- AnimSequence의 bone translation을 가공할 때 Character·SkeletalMeshComponent·Actor의 현재 런타임 scale을 입력값으로 사용하지 않는다. 해당 scale은 캐릭터 조립과 월드 변환 단계의 상태이며 애니메이션 에셋 계약이 아니다.
+- 다른 root topology로 이관할 때 필요한 translation 보정은 대상 Skeleton의 실제 reference pose에서 삽입 root의 uniform scale을 읽어 그 역수로 계산한다. 현재 `SK_Khazan`의 `C_P_Kazan` reference scale은 `100`, 따라서 현행 보정 `0.01`은 `1 / 100`에서 나온 값이다.
+- preparation manifest의 보정값과 라이브 Skeleton reference scale의 역수 관계를 UE preflight와 final audit에서 검사한다. 상수 값이 우연히 현재와 같다는 이유만으로 통과시키지 않는다.
+- 월드 이동 검증은 임의의 단일 컴포넌트 scale에 고정하지 않고 여러 scale에서 실행한 뒤, `현재 컴포넌트 scale × 삽입 root reference scale`로 정규화한 결과가 같은 source-root 변위로 수렴하는지 확인한다.
+- 컴포넌트 scale만 바뀌면 애니메이션을 재가공하지 않는다. 대상 Skeleton의 reference topology 또는 삽입 root scale이 바뀌면 기존 manifest가 preflight에서 실패해야 하며, 새 Skeleton 계약으로 preparation부터 다시 수행한다.
+
+## 2026-09-17 시간 리매핑 재생본의 고정 sample-rate 규칙
+
+- Dilation, segment rate, trim, loop 같은 시간 리매핑을 pose에 bake할 때 구간별 속도와 AnimSequence sample rate를 분리한다. 가변 속도는 source-time mapping에만 들어가고 출력 data model은 명시한 고정 rational rate를 사용한다.
+- 60 Hz 재생본은 `fps=60/1`, `frames=round(authored_duration×60)`, `duration=frames/60`을 계약으로 삼는다. `fps=frames/authored_duration`으로 다시 계산해 `60.***` 또는 `59.***` 분수를 만들지 않는다.
+- 양자화된 시간축에서는 `source_time=authored_duration×frame/frames`로 두 endpoint를 보존한다. Notify/event/marker도 authored time과 quantized time의 비율을 적용하며, 시간축 변경 뒤 Montage segment의 source end, cached play length와 Montage data-model 길이를 함께 갱신한다.
+- 검증은 FPS 표시값만 보지 않는다. `FrameRate == 60/1`, `Keys == Frames+1`, `PlayLength == Frames/60`, platform target rate, 첫/중간/마지막 RAW·COMPRESSED pose, Root Motion/property 보존을 별도 새 UE process에서 확인한다.
+- 수백 package를 교체할 때 live Editor에서 Force Delete를 장시간 반복하지 않는다. immutable package 백업 후 짧은 commandlet checkpoint를 사용하고 각 process exit와 per-asset report를 확인한다.
+
+## 2026-09-18 Unreal Root Motion wrapper/dummy bone repair skill
+
+- 반복되는 루트 모션 계층/트랙 문제에 사용할 개인 스킬을 `C:/Users/user/.codex/skills/unreal-root-motion-repair`에 확립했다. `Root`라는 문자열을 실제 루트로 가정하지 않고, 대상 Skeleton의 bone index 0과 parent 없음 여부를 실제 루트 판정 기준으로 사용한다.
+- 이동이 자식 `Root`에 있고 그 위 wrapper/dummy bone이 실제 루트인 경우, 자식 이동/실제 루트 트랙 누락/트랙 순서/참조 스케일/런타임 소비 실패를 서로 다른 고장 유형으로 먼저 진단한다. 애니메이션 데이터를 고치기 전에 AnimBP·Montage·CharacterMovement의 소비 문제인지도 분리한다.
+- 애니메이션 translation 보정에 Character, Actor, SkeletalMeshComponent 또는 preview scale을 사용하지 않는다. 필요한 보정은 대상 Skeleton reference transform과 실제 계층 변환식에서 유도하며 `/100` 또는 `0.01`을 고정값으로 쓰지 않는다.
+- UE 5.8 `AnimationSequencerDataModel`에서는 `InsertBoneTrack`의 requested index와 성공 반환만 신뢰하지 않는다. 실제 bone-track/Control Rig transform-parameter 순서를 재검사하고, 재구성 시 key time/value, interpolation, tangent mode/value/weight, default, extrapolation을 보존한다. AUTO key 추가 뒤 인접 tangent가 재계산되므로 value → mode → tangent 순서로 복원한다.
+- 수정 전에는 모든 대상의 dirty 상태와 topology/data model을 전수 preflight하고, `.uasset` byte backup과 SHA-256 manifest를 만든 뒤 임시 duplicate에서 수술을 증명한다. 배치는 전부 in-memory 검증 후 저장하고, 실패하면 전체를 원복한다.
+- 스킬의 `scripts/audit_root_motion.py`는 읽기 전용이다. 2026-09-18 현재 세 DAS Stop AnimSequence에서 실제 root/track 0, reference scale, 자식 `Root`, root-motion 설정과 추출 변위를 검사했으며 대상 패키지를 dirty로 만들지 않았다. 결과는 `Saved/ImportReports/RootMotionSkillAudit_20260918.json`에 있다.
+- 이번 스킬 정리 작업에서는 게임 AnimSequence, Skeleton, Blueprint, C++를 수정하거나 재임포트하지 않았다.

@@ -325,3 +325,41 @@
 - P1.3 합격: build 성공, 기존 Definition locomotion 값 보존, ASC debug Ability 목록에 inactive BasicAttack Spec 정확히 한 개, activation log 0회, 기존 이동/PIE 종료 회귀 없음.
 - 다음 단계: P1.4에서만 PlayerController Attack의 `Started`를 ASC InputTag activation에 연결한다.
 - 이번 작업은 Engineering 문서만 append했다. 게임 Source/BP/DataAsset은 수정하지 않았다.
+
+## 2026-09-17 — P6-A WeakAttack 단순화 적용 대기
+
+- 현재 상태: `UKhazanWeakAttackAbility`는 `Attack01→Attack02`를 실행하기 위해 515줄과 두 window depth, Montage instance ID, task 재생 수명을 직접 관리한다. 정적 검토에서 제품 범위에 비해 과도하다고 판정했고 Architecture ARCH-42와 Migration 최신 절에 단순화 계약을 기록했다.
+- 마지막 검증: UBT `-SingleFile`로 `KhazanWeakAttackAbility.cpp` compile 성공. `KhazanAbilitySystemComponent.cpp`와 `KhazanGameplayTags.cpp`도 compile됐으며 ASC에는 `AbilitySpec.ActivationInfo` deprecation warning 두 건이 있다. `KhazanPlayerController.cpp:30`은 `Engine/LocalPlayer.h` 누락으로 C2027/C2059/C2143 오류가 재현됐다.
+- 남은 작업: 게임 Source와 Montage는 이번 설명 작업에서 수정하지 않았다. PlayerController include를 먼저 고친 뒤 WeakAttack의 `InputReservation`/`ComboAdvance` NotifyState Begin/End를 `ComboInputOpen`/`ComboCommit` 점 Notify로 교체하고 1–5 section index 구조로 정리해야 한다.
+- 정확한 재개 절차: Router → Architecture ARCH-42 → Migration의 `P6-A 재감사` → 현재 WeakAttack h/cpp 순으로 읽는다. include 수정 후 에디터와 Live Coding을 완전히 종료한 cold build를 실행한다. 그 다음 코드 축소와 Montage Notify 배치를 적용하고 다시 cold build, PIE의 L/LL/LLLL/잠금 전후 LLLLL·mash·interrupt·Root Motion 연속성을 확인한다.
+
+## 2026-09-17 — P6 브랜치 컷 재개 기준 갱신
+
+- 최신 설계 정본은 Architecture `ARCH-43`이다. ARCH-41의 section별 Montage task 재생과 ARCH-42의 재생 기반 전환은 조사 이력으로 남지만 구현 기본안에서는 대체됐다.
+- 확정 방향은 전체 회수 시퀀스, `Attack01`–`Attack05` unlinked section, 타수별 `ComboInputOpen`/`ComboCommit` point, Ability-local 한 칸 tag buffer, 한 번의 `PlayMontageAndWait`, 고정 Commit에서 `UGameplayAbility::MontageJumpToSection()` 호출이다.
+- ASC loose state tag, window Gameplay Event, custom ANS, 전역 input buffer, Combo Manager는 만들지 않는다. Jump에는 자동 cross-fade가 없으므로 authored cut의 pose와 Root Motion 연속성 검증이 완료 gate다.
+- 현재 Source는 아직 이전 구조 그대로다. 재개 순서는 Router → Architecture ARCH-43 → Migration의 `P6 브랜치 컷 최종 재검토` → 현재 WeakAttack h/cpp다. 먼저 `KhazanPlayerController.cpp`의 `Engine/LocalPlayer.h` include와 cold build를 확인한 뒤, Montage와 Ability를 한 task 구조로 함께 바꾸고 다시 cold build·PIE 품질 검증을 수행한다.
+
+## 2026-09-18 — P6-v3.1 정확한 재개점
+
+- 현재 Source/Content에는 v3가 아직 적용되지 않았다. 실제 Montage는 Attack01 하나와 Notify 0개이고, 현행 Ability는 존재하지 않는 Attack02와 구 window 이름을 기대한다.
+- 먼저 `KhazanPlayerController.cpp`에 `Engine/LocalPlayer.h`를 추가하고 ASC의 deprecated Spec ActivationInfo fallback을 제거한다. 두 single-file compile과 full Development Editor build를 통과하기 전 combo 파일을 바꾸지 않는다.
+- 다음으로 Migration의 [P6-v3.1](CHARACTER_TAG_ABILITY_MIGRATION.md#p6-v3-1-current-checkpoint-20260918)에 따라 WeakAttack 두 Source 파일을 한-task 구조로 교체하고 build한다. 빈 `UKhazanGameplayAbility`는 `GA_GamePlayAbility` asset 정리 전 삭제하지 않는다.
+- Editor에서 Attack02 segment/section, `ComboInputOpen`/`ComboCommit` point, `DefaultSlot → Inertialization`을 적용하고 저장한 뒤 PIE의 단발/정상 2타/조기·지연 입력/mash/interruption/Root Motion/locomotion 회귀를 확인한다.
+- Source와 Content를 사용자가 적용한 뒤 실제 diff·build·asset 저장값을 다시 대조한다. 이번 턴에는 설명·read-only 검사·build 진단만 수행했다.
+
+## 2026-09-18 — P6-v3.1 2타 미전환 보정 대기
+
+- 현재 상태: Attack01과 Attack02 segment/section, `ComboInputOpen`/`ComboCommit` point는 저장돼 있으나 WeakAttack Source가 첫 타 시작 시 `CurrentComboStepIndex`를 0으로 설정하지 않는다. runtime index가 `-1`인 채 Commit에 들어가 유효 index 검사에서 반환하므로 2타가 실행되지 않는다.
+- 정확한 재개: `StartWeakAttackMontage()`에서 task delegate 세 개를 연결한 뒤 `Task->ReadyForActivation()` 전에 `CurrentComboStepIndex = KhazanWeakAttackAbilityPrivate::Attack01Index;`를 추가한다. Montage의 두 point는 Tick Type을 `Queued`에서 `Branching Point`로 바꾼다.
+- 적용 후 에디터와 Live Coding을 닫고 Development Editor cold build를 통과한다. PIE에서 한 번 입력은 Attack01 full recovery, Open–Commit 사이 두 번째 입력은 Attack02 Jump, Open 전과 Commit 뒤 입력은 미예약, mash는 한 건만 소비되는지 확인한다.
+- 실패가 남으면 다음 debugger 관측점은 ASC `AbilitySpecInputPressed`, Ability `InputPressed`, `SubmitComboInput`의 buffer 대입, `HandleMontageNotifyBegin`, `TryCommitBufferedTransition` 순서다. 이번에는 원인이 정적 제어 흐름에서 결정적으로 드러나 attach를 수행하지 않았다.
+- 이번 점검에서 게임 Source와 Content asset은 수정하지 않았다. 저장 asset read-only inspection과 Engineering 문서 append만 수행했다.
+
+## 2026-09-18 — P6-v3.2 적용 대기
+
+- 현재 상태: index 초기화 보정으로 01→02 Jump는 동작한다. 현재 Source는 Commit에서 입력 창을 즉시 닫으므로 Commit 뒤 입력은 버리고, Attack02에는 locomotion recovery handoff가 없어 Root Motion Montage 전체 종료 뒤에야 일반 이동이 보인다.
+- 첫 재개는 Migration의 [P6-v3.2](CHARACTER_TAG_ABILITY_MIGRATION.md#p6-v3-2-three-phase-input-recovery-exit-20260918)다. 먼저 `ComboInputEnd`와 `bComboCommitReached`만 추가해 3상태 콤보를 build/PIE 검증한다.
+- 3상태 gate 통과 뒤 `RecoveryCancelOpen`을 Attack02에 먼저 배치하고, 이미 유지 중인 move intent와 point 이후 Move Started semantic event로 early exit를 검증한다. 이동 전환과 Strong/Dodge Ability handoff를 한 번에 구현하지 않는다.
+- 현재 디스크 Montage의 Open/Commit은 아직 `Queued`다. 세 combo point와 recovery point는 gameplay 분기이므로 저장 전에 `Branching Point`인지 확인한다.
+- 이번 작업은 read-only Source/asset/UE 5.8.2 engine 검사와 문서 append다. 게임 Source와 Content asset, build와 PIE는 변경·실행하지 않았다.
