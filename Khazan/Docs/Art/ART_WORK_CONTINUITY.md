@@ -476,3 +476,10 @@
 - 중단 원인: 실행 중인 Unreal Editor가 `Content/_Art/Kazan/Character/Meshs/Player_PhysicsAsset.uasset`를 열고 있어 폴더 이동이 거부된다. 에디터에는 저장되지 않은 사용자 작업이 있을 수 있으므로 프로세스를 강제 종료하지 않았다.
 - 정확한 재개 절차: 사용자가 작업을 저장하고 Unreal Editor를 정상 종료한 뒤 `UnrealEditor` 프로세스가 없는지 확인한다. 그 다음 `Content/_Art/Kazan` 전체를 `Saved/ArtBackups/KazanToPlayer_PreCleanup_20260923_1110` 아래 quarantine으로 이동하고, Content에 이전 루트가 없고 새 루트 파일 수가 유지되는지 검증한다. 이후 commandlet Asset Registry 감사를 다시 실행해 이전 package·이전 dependency·외부 referencer가 0인지 확인하고 대표 map/asset load를 검증한 뒤 완료 기록을 추가한다.
 - Git 반영 상태: 2026-09-23 main push 준비 index에는 `Content/_Art/Kazan` 파일이 0개이고 `Content/_Art/Player` 파일이 9,491개다. 따라서 커밋과 새 checkout에서는 Player만 남는다. 현재 로컬의 이전 폴더 실파일은 Unreal Editor 잠금과 검증 backup 때문에 index 밖에 보존돼 있으며, 에디터 정상 종료 뒤 위 절차로 제거한다.
+
+## 2026-09-23 `_Art/Kazan` → `_Art/Player` 복구 및 정리 완료
+
+- Unreal Editor 정상 종료 뒤 `Content/_Art/Kazan`을 `Saved/ArtBackups/KazanToPlayer_PreCleanup_20260923_1110/Kazan_RemovedFromContent_20260923_Final`로 격리 이동했다. Content의 이전 root는 없어졌고 격리본은 304개 파일, 378,181,586 bytes다. 선행 backup과 격리본의 SHA-256 전수 비교는 mismatch 0이다.
+- 최종 UE 5.8.2 Asset Registry 감사 결과는 이전 root asset 0, Player root asset 9,458, Player에서 이전 root로 향하는 dependency edge 0이다. `SKM_Player`, StrongAttack Montage, HeinMach World, StormPass World 대표 4종은 모두 새 경로에서 실제 load됐다.
+- `/Game/_Art/Kazan/.../AM_DAS_StrongAttackCombo` 이전 경로 load는 Core Redirect를 거쳐 `/Game/_Art/Player/.../AM_DAS_StrongAttackCombo`로 정확히 해석됐다. 결과는 `Saved/KZArtFolderFinalVerify.json`, 로그는 `Saved/Logs/KZArtFolderFinalVerify.log`다.
+- commandlet 자체 exit code 1은 이 작업과 무관한 기존 `GameFeatureData` class load ensure 때문이다. Python 검증 스크립트는 성공했고 `old=0`, `new=9458`, `old_dependency_edges=0`, `representative_failures=0`, `redirect_failures=0`을 기록했다.

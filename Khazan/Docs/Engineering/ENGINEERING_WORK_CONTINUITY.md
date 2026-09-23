@@ -371,3 +371,10 @@
 - `KZComboAttackAbility.h/.cpp`에는 Art package 경로 literal이 없고 asset 참조는 설정 가능한 property로 연결되므로 수정하지 않았다. 이번 복구에서 gameplay Source 변경은 필요하지 않다.
 - 남은 검증은 Unreal Editor 정상 종료 뒤 이전 Content root를 quarantine으로 이동한 상태에서 commandlet을 재실행해 redirect 구문, Asset Registry 이전 참조 0, 대표 package load를 함께 확인하는 것이다. 현재 blocker와 정확한 파일 이동 재개 순서는 `Docs/Art/ART_WORK_CONTINUITY.md`의 2026-09-23 절에 기록했다.
 - main push 전 검증에서 233개 Python 파일의 `ast.parse`와 Source/Config/Docs/Scripts staged diff check가 통과했다. UE 5.8.2 Development Editor build는 UHT와 22개 C++ compile action이 모두 성공했고, 실행 중인 PID 8020이 `Binaries/Win64/UnrealEditor-Khazan.dll`을 잠가 최종 link만 `LNK1104`로 중단됐다. 이 결과를 코드 컴파일 실패나 완전한 build 성공으로 확대하지 않는다.
+
+## 2026-09-23 — Player package root 전환 검증 완료
+
+- 이전 Content root 제거 뒤 UE 5.8.2 commandlet에서 Player asset 9,458개, 이전 root asset 0개, 이전 root dependency edge 0개를 확인했다. SkeletalMesh·AnimMontage·HeinMach World·StormPass World 대표 package load와 wildcard Package Redirect load가 모두 성공했다.
+- Source/Config/Scripts의 이전 경로는 Core Redirect의 `OldName`을 제외하고 제거됐고, `KZComboAttackAbility`를 포함한 KZ Source는 UHT와 개별 C++ compile action을 통과했다. 최종 DLL link 성공 여부는 에디터가 닫힌 상태의 후속 cold build에서 별도로 확인해야 하며, 앞선 `LNK1104`는 열린 Editor의 DLL lock 결과다.
+- 대용량 Git 전송은 Player asset을 여섯 묶음으로 먼저 올린 뒤 코드·설정·이전 root 삭제를 마지막 커밋으로 반영했다. `main`의 최종 트리는 `Content/_Art/Kazan` 0개, `Content/_Art/Player` 9,491개 파일을 가진다.
+- 에디터 종료 뒤 `Build.bat KhazanEditor Win64 Development ... -WaitMutex -NoHotReloadFromIDE`를 다시 실행해 `UnrealEditor-Khazan.dll` link와 target metadata 작성까지 `Result: Succeeded`를 확인했다. PIE 플레이 검증은 이번 폴더 복구 범위에 포함하지 않았다.
