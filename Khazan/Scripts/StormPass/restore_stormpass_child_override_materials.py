@@ -34,7 +34,7 @@ REPORT_PATH = os.path.join(
     "StormPass_ChildOverrideMaterial_Restoration.json",
 )
 OVERRIDE_ROOT = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/OverrideMaterials"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/OverrideMaterials"
 )
 MATERIAL_ROOT = OVERRIDE_ROOT + "/ChildOverrides/Materials"
 TEXTURE_ROOT = OVERRIDE_ROOT + "/Textures"

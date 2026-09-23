@@ -16,9 +16,9 @@ except ImportError:
     unreal = None  # Source metadata preparation can run without an editor.
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '../..'))
-META = os.path.join(ROOT, 'Content/_Art/Kazan/Environment/StormPass/Metadata')
+META = os.path.join(ROOT, 'Content/_Art/Player/Environment/StormPass/Metadata')
 RAW = os.path.join(ROOT, 'Saved/Extracted/StormPass/AdditionalMetadata_20260907')
-PARENT = '/Game/_Art/Kazan/Environment/StormPass/Reconstructed/MaterialRepairs/Surfaces/M_SP_WorldSurface_Native'
+PARENT = '/Game/_Art/Player/Environment/StormPass/Reconstructed/MaterialRepairs/Surfaces/M_SP_WorldSurface_Native'
 PLAN = os.path.join(META, 'StormPass_InheritedSurfaceControls_20260907.json')
 MASTER = 'BBQ/Content/BaseMaterials/WorldProp/WorldPropMaster/M_WorldProp'
 CONTROL_NAMES = ('MetallicAdjust', 'Metallic_Min', 'Metallic_Max', 'RoughnessAdjust', 'Diffuse_Intensity')

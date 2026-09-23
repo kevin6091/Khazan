@@ -24,9 +24,9 @@ REPORTS = PROJECT / 'Saved/ImportReports'
 H = runpy.run_path(str(PROJECT / 'Scripts/Animation/recover_khazan_missing_bone_tracks.py'),
                    run_name='stop_root_helpers')
 ASSETS = [
-    '/Game/_Art/Kazan/Animation/InGame/DAS/Locomotion/Run/DAS_Khazan_Run_Stop_LF',
-    '/Game/_Art/Kazan/Animation/InGame/DAS/Locomotion/Run/DAS_Khazan_Run_Stop_RF',
-    '/Game/_Art/Kazan/Animation/InGame/DAS/Locomotion/Sprint/DAS_Khazan_Sprint_Stop',
+    '/Game/_Art/Player/Animation/InGame/DAS/Locomotion/Run/DAS_Player_Run_Stop_LF',
+    '/Game/_Art/Player/Animation/InGame/DAS/Locomotion/Run/DAS_Player_Run_Stop_RF',
+    '/Game/_Art/Player/Animation/InGame/DAS/Locomotion/Sprint/DAS_Player_Sprint_Stop',
 ]
 ROOT = 'Root'
 PARENT = 'C_P_Kazan'
@@ -122,7 +122,7 @@ def verify_pair(before, compressed=False):
     bones = [str(n) for n in reference.get_bone_names() if str(n).lower() != 'c_p_kazan']
     options = H['evaluation_options'](unreal.AnimDataEvalType.COMPRESSED if compressed else unreal.AnimDataEvalType.RAW)
     if compressed:
-        options.optional_skeletal_mesh = unreal.load_asset('/Game/_Art/Kazan/Character/Meshs/SKM_Khazan')
+        options.optional_skeletal_mesh = unreal.load_asset('/Game/_Art/Player/Character/Meshs/SKM_Player')
         options.should_retarget = True
     world_error, root_static_error = [0.0]*3, [0.0]*3
     parent_motion = []

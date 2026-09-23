@@ -186,7 +186,7 @@ def main() -> None:
                 raise RuntimeError("Unsupported operation: " + str(operation))
 
             is_player_root_motion = (
-                row["skeleton_destination"].endswith("/SK_Khazan")
+                row["skeleton_destination"].endswith("/SK_Player")
                 and bool(row["properties"].get("bEnableRootMotion", False))
             )
             if is_player_root_motion:
@@ -239,7 +239,7 @@ def main() -> None:
 
             if row["kind"] == "CompositePlayback":
                 root_bake = row.get("root_motion_bake")
-                is_player = row["skeleton_destination"].endswith("/SK_Khazan")
+                is_player = row["skeleton_destination"].endswith("/SK_Player")
                 if is_player:
                     if not root_bake:
                         raise RuntimeError(

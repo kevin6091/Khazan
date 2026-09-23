@@ -9,7 +9,7 @@ if ($Mode -eq 'Capture') {
                (git -C $repositoryDir -c core.quotepath=false ls-files --others --exclude-standard)) |
         ForEach-Object { $_ } | Sort-Object -Unique
     $records = foreach ($relative in $paths) {
-        if ($relative -match '^Khazan/(Scripts/StormPass/|Docs/Art/|Content/_Art/Kazan/Environment/StormPass/)') { continue }
+        if ($relative -match '^Khazan/(Scripts/StormPass/|Docs/Art/|Content/_Art/Player/Environment/StormPass/)') { continue }
         $absolute = [IO.Path]::GetFullPath((Join-Path $repositoryDir $relative))
         if (-not $absolute.StartsWith($repositoryDir.Replace('/', '\') + '\', [StringComparison]::OrdinalIgnoreCase)) {
             throw "Path outside repository: $relative"

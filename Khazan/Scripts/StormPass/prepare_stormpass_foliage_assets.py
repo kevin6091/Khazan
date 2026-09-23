@@ -33,7 +33,7 @@ REPORT_PATH = os.path.join(
     "StormPass_Foliage_AssetPreparation.json",
 )
 FOLIAGE_ASSET_ROOT = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/FoliageAssets"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/FoliageAssets"
 )
 STAGE_NAME = "StormPass_FoliageLibrary"
 GENERATED_STAGE_PATH = os.path.join(

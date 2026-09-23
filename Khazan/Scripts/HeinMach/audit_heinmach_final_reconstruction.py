@@ -31,21 +31,21 @@ def load_exclusion_module():
 
 
 exclusions = load_exclusion_module()
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 FOG_MESH_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/FogSheets/Meshes/"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/FogSheets/Meshes/"
     "HeinMach_FogSheetPlane/StaticMeshes/SM_FS_FogSheet_Plane."
     "SM_FS_FogSheet_Plane"
 )
 FOG_BASE_MATERIAL_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/FogSheets/Materials/"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/FogSheets/Materials/"
     "M_HeinMach_FogSheet_Preview_V5.M_HeinMach_FogSheet_Preview_V5"
 )
 FOG_MATERIAL_ROOT = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/FogSheets/Materials"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/FogSheets/Materials"
 )
 TERRAIN_PREVIEW_MATERIAL_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/TerrainPreview/"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/TerrainPreview/"
     "MI_HeinMach_Terrain_Snow_Preview.MI_HeinMach_Terrain_Snow_Preview"
 )
 SOURCE_TERRAIN_LABELS = ("HM_Terrain_Landscape1", "HM_Terrain_Landscape2")

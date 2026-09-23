@@ -12,9 +12,9 @@ import runpy
 import unreal
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '../..'))
-META = os.path.join(ROOT, 'Content/_Art/Kazan/Environment/StormPass/Metadata')
+META = os.path.join(ROOT, 'Content/_Art/Player/Environment/StormPass/Metadata')
 STATE = os.path.join(META, 'StormPass_PhaseVisibilityBaseline_20260907.json')
-MAP = '/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment'
+MAP = '/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment'
 VARIANTS = ('boss_phase_1', 'boss_phase_2', 'boss_phase_clear')
 
 
@@ -150,7 +150,7 @@ def repair_cart_sections():
     source_indices = [s['MaterialIndex'] for s in raw['RenderData']['LODs'][0]['Sections']]
     if source_indices != [0, 1, 2, 3, 5, 4]:
         raise RuntimeError('Cart source section layout changed')
-    root = '/Game/_Art/Kazan/Environment/StormPass/Reconstructed/SourceAssets/StormPass_StaticMeshLibrary/'
+    root = '/Game/_Art/Player/Environment/StormPass/Reconstructed/SourceAssets/StormPass_StaticMeshLibrary/'
     mesh = unreal.load_asset(root + 'StaticMeshes/SM_WP_BANTU_Cart_Wood_002')
     if mesh.get_num_sections(0) != 6:
         raise RuntimeError('Cart imported section count changed')

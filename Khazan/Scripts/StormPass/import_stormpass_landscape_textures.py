@@ -43,7 +43,7 @@ REPORT_PATH = os.path.join(
     "StormPass_Landscape_TextureImport.json",
 )
 DESTINATION_ROOT = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/Landscape/Textures"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/Landscape/Textures"
 )
 SURFACE_ROOT = DESTINATION_ROOT + "/Surface"
 WEIGHT_ROOT = DESTINATION_ROOT + "/Weightmaps"

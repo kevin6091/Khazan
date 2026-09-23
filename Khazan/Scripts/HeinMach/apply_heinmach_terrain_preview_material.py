@@ -14,19 +14,19 @@ import traceback
 import unreal
 
 
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Maps/"
+    "/Game/_Art/Player/Environment/HeinMach/Maps/"
     "L_HeinMach_Environment_BeforeTerrainPreviewMaterial"
 )
 TERRAIN_LABELS = ("HM_Terrain_Landscape1", "HM_Terrain_Landscape2")
 MATERIAL_ROOT = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/TerrainPreview"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/TerrainPreview"
 )
 BASE_MATERIAL_PATH = MATERIAL_ROOT + "/M_HeinMach_Terrain_Snow_Preview"
 INSTANCE_PATH = MATERIAL_ROOT + "/MI_HeinMach_Terrain_Snow_Preview"
 SNOW_TEXTURE_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/OverrideMaterials/"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/OverrideMaterials/"
     "Textures/T_WLT_Snow_004A_D.T_WLT_Snow_004A_D"
 )
 REPORT_PATH = os.path.join(

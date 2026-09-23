@@ -26,7 +26,7 @@ import unreal
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.normpath(os.path.join(SCRIPT_DIR, "..", ".."))
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 REPORT_PATH = os.path.join(
     PROJECT_ROOT,
     "Saved",
@@ -35,7 +35,7 @@ REPORT_PATH = os.path.join(
 )
 MANAGED_PREFIXES = ("HM_Prop_", "HM_ChildProp_", "HM_FoliageBatch_")
 FOG_LABEL_PREFIX = "HM_FogSheet_"
-PROJECT_ASSET_PREFIX = "/Game/_Art/Kazan/Environment/HeinMach/"
+PROJECT_ASSET_PREFIX = "/Game/_Art/Player/Environment/HeinMach/"
 FOG_ASSET_TOKEN = "/FogSheets/"
 OPAQUE_NAME_RE = re.compile(r"_opaque(?:_\d+)?$", re.IGNORECASE)
 USD_TRANSLUCENT_PARENT = (

@@ -78,8 +78,8 @@ def backup():
         'Docs/Art/ENEMY_LIBRARY_CLEANUP_AND_PLAYBACK_2026-09-09.md'}
     names = subprocess.check_output(['git', 'ls-files', '-m', '-o', '--exclude-standard', '-z', '--', '.'], cwd=PROJECT).decode('utf-8').split('\0')
     names += [p.relative_to(PROJECT).as_posix() for p in (PROJECT / 'Config').glob('*.ini')]
-    names += ['Content/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment.umap',
-        'Content/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment.umap']
+    names += ['Content/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment.umap',
+        'Content/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment.umap']
     protected = {}
     for name in sorted(set(names)):
         if name in own_docs or name.startswith(('Content/_Art/Enemies/', 'Scripts/Enemies/')):

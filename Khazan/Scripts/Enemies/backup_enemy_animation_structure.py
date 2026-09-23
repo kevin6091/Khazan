@@ -67,8 +67,8 @@ def main():
         retained[row['file']] = row['sha256']
     dirty = subprocess.check_output(['git', 'ls-files', '-m', '-o', '--exclude-standard', '-z', '--', '.'], cwd=PROJECT).decode('utf-8').split('\0')
     dirty += [path.relative_to(PROJECT).as_posix() for path in (PROJECT / 'Config').glob('*.ini')]
-    dirty += ['Content/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment.umap',
-        'Content/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment.umap']
+    dirty += ['Content/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment.umap',
+        'Content/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment.umap']
     protected = {}
     for name in sorted(set(dirty)):
         if not name or name.startswith(('Content/_Art/Enemies/', 'Scripts/Enemies/')):

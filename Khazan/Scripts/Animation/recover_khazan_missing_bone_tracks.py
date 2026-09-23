@@ -17,18 +17,18 @@ import unreal
 PROJECT = Path(unreal.Paths.project_dir()).resolve()
 BACKUP = PROJECT / 'Saved/ArtBackups/Khazan_SkeletonRecovery_20260908_132146'
 REPORTS = PROJECT / 'Saved/ImportReports'
-TARGET_BASE = '/Game/_Art/Kazan/Animation/InGame/DAS/Locomotion/'
-SOURCE_BASE = '/Game/_Art/Kazan/Animation/Weapons/DualAxeSword/Shared/Locomotion/'
-PREVIEW_BASE = '/Game/_Recovery/KhazanSkeleton_20260908/'
+TARGET_BASE = '/Game/_Art/Player/Animation/InGame/DAS/Locomotion/'
+SOURCE_BASE = '/Game/_Art/Player/Animation/Weapons/DualAxeSword/Shared/Locomotion/'
+PREVIEW_BASE = '/Game/_Recovery/PlayerSkeleton_20260908/'
 PAIRS = [
-    ('Walk/DAS_Khazan_Walk_Loop', 'Walk/CA_P_Kazan_DualAxeSword_Walk_F'),
-    ('Run/DAS_Khazan_Run_Loop', 'Run/CA_P_Kazan_DualAxeSword_Run_F'),
-    ('Sprint/DAS_Khazan_Sprint_Loop', 'Sprint/CA_P_Kazan_DualAxeSword_Sprint_F'),
-    ('Walk/DAS_Khazan_Walk_Stop_LF', 'Walk/CA_P_Kazan_DualAxeSword_Walk_Stop_F_LF'),
-    ('Walk/DAS_Khazan_Walk_Stop_RF', 'Walk/CA_P_Kazan_DualAxeSword_Walk_Stop_F_RF'),
-    ('Run/DAS_Khazan_Run_Stop_LF', 'Run/CA_P_Kazan_DualAxeSword_Run_Stop_F_LF'),
-    ('Run/DAS_Khazan_Run_Stop_RF', 'Run/CA_P_Kazan_DualAxeSword_Run_Stop_F_RF'),
-    ('Sprint/DAS_Khazan_Sprint_Stop_LF', 'Sprint/CA_P_Kazan_DualAxeSword_Sprint_Stop_F_02'),
+    ('Walk/DAS_Player_Walk_Loop', 'Walk/CA_P_Kazan_DualAxeSword_Walk_F'),
+    ('Run/DAS_Player_Run_Loop', 'Run/CA_P_Kazan_DualAxeSword_Run_F'),
+    ('Sprint/DAS_Player_Sprint_Loop', 'Sprint/CA_P_Kazan_DualAxeSword_Sprint_F'),
+    ('Walk/DAS_Player_Walk_Stop_LF', 'Walk/CA_P_Kazan_DualAxeSword_Walk_Stop_F_LF'),
+    ('Walk/DAS_Player_Walk_Stop_RF', 'Walk/CA_P_Kazan_DualAxeSword_Walk_Stop_F_RF'),
+    ('Run/DAS_Player_Run_Stop_LF', 'Run/CA_P_Kazan_DualAxeSword_Run_Stop_F_LF'),
+    ('Run/DAS_Player_Run_Stop_RF', 'Run/CA_P_Kazan_DualAxeSword_Run_Stop_F_RF'),
+    ('Sprint/DAS_Player_Sprint_Stop_LF', 'Sprint/CA_P_Kazan_DualAxeSword_Sprint_Stop_F_02'),
 ]
 SETTINGS = ['enable_root_motion', 'force_root_lock', 'root_motion_root_lock',
             'rate_scale', 'interpolation', 'additive_anim_type', 'ref_pose_type']
@@ -151,7 +151,7 @@ def run(mode):
                 target = original
 
             controller = unreal.AnimationDataController.cast(target.controller)
-            controller.open_bracket('Restore missing Khazan bone tracks', True)
+            controller.open_bracket('Restore missing Player bone tracks', True)
             try:
                 for name, (positions, rotations, scales) in keys.items():
                     if not controller.add_bone_curve(name, True):

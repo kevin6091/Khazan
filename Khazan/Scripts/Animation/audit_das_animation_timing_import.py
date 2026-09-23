@@ -13,8 +13,8 @@ import unreal
 PROJECT = pathlib.Path(unreal.Paths.project_dir()).resolve()
 ROOT = PROJECT / "Saved/Extracted/DualAxeSword_20260916"
 REPORT = PROJECT / "Saved/ImportReports/Khazan_DAS_CompositeExact60PipelineFinalAudit_20260917.json"
-PLAYBACK_ROOT = "/Game/_Art/Kazan/Animation/Playback/DualAxeSword"
-PLAYER_ANIM_BLUEPRINT = "/Game/_Art/Kazan/Character/Bluprints/ABP_Player"
+PLAYBACK_ROOT = "/Game/_Art/Player/Animation/Playback/DualAxeSword"
+PLAYER_ANIM_BLUEPRINT = "/Game/_Art/Player/Character/Bluprints/ABP_Player"
 ROWS = json.loads((ROOT / "AnimationImportManifest.json").read_text(encoding="utf-8"))
 INVENTORY = json.loads(
     (
@@ -120,7 +120,7 @@ def verify_root_bake_contract(row: dict) -> tuple[int, list[float]]:
     if row["kind"] != "CompositePlayback":
         return 0, [0.0, 0.0]
     root_bake = row.get("root_motion_bake")
-    is_player = row["skeleton_destination"].endswith("/SK_Khazan")
+    is_player = row["skeleton_destination"].endswith("/SK_Player")
     if not is_player:
         if root_bake is not None:
             raise RuntimeError(
@@ -149,7 +149,7 @@ def verify_root_bake_contract(row: dict) -> tuple[int, list[float]]:
 
 def verify_root_translation_scale_contract(row: dict, skeleton):
     is_player_root_motion = (
-        row["skeleton_destination"].endswith("/SK_Khazan")
+        row["skeleton_destination"].endswith("/SK_Player")
         and bool(row["properties"].get("bEnableRootMotion", False))
     )
     if not is_player_root_motion:
@@ -217,9 +217,9 @@ def main() -> None:
         )
         closure = dependency_closure(registry, PLAYER_ANIM_BLUEPRINT, options)
         relevant_prefixes = (
-            "/Game/_Art/Kazan/Animation/Weapons/DualAxeSword/",
-            "/Game/_Art/Kazan/Animation/InGame/DAS/",
-            "/Game/_Art/Kazan/Animation/Locomotion/Runtime/DualAxeSword/",
+            "/Game/_Art/Player/Animation/Weapons/DualAxeSword/",
+            "/Game/_Art/Player/Animation/InGame/DAS/",
+            "/Game/_Art/Player/Animation/Locomotion/Runtime/DualAxeSword/",
             PLAYBACK_ROOT + "/",
         )
         current_locomotion = []

@@ -1372,3 +1372,10 @@ PIE read-only 입력 주입에서는 Run/Sprint Stop 진입과 입력 해제 뒤
 `Scripts/Animation/bake_das_stop_root_to_dummy.py`의 과거 `add_bone_curve → Root 제거` 순서는 root track을 마지막에 붙이고 translation을 100배로 만드는 원인이므로 다시 실행하지 않는다. 현행 범용 `prepare_das_animation_timing.py`와 `import_das_animation_timing.py`에는 이미 `C_P_Kazan`을 첫 output bone으로 만들고 reference scale에서 유도한 `root_motion_translation_scale=0.01`을 적용하는 계약이 있다. 이후 재생용 에셋 생성은 그 root-first 계약과 최종 `ExtractRootTrackTransform` 검증을 사용한다.
 
 같은 작업에서 과거 스크립트의 `build` 모드는 명시적으로 실패하도록 막았다. `verify`는 과거 보고서 확인 용도로만 남기며, 신규/재생성 작업은 위 범용 파이프라인을 사용한다.
+
+## 2026-09-22 — 현행 `KZ`/`Player` 명명 이관
+
+- 프로젝트 타입 접두사 변경에 따라 현행 심볼은 `UKZAnimInstance`, `UKZLocomotionComponent`, `FKZLocomotionIntent`, `FKZLocomotionConfig`, `FKZLocomotionIntentHandle`, `FKZMovementConstraintHandle`, `EKZGait`, `EKZRotationMode`, `EKZLocomotionIntentSource`, `EKZFoot`다. 파일명도 `KZAnimInstance.*`, `KZLocomotionComponent.*`, `KZLocomotionType.*`를 사용한다.
+- 주인공 역할 에셋은 `SK_Player`, `SKM_Player`, `Player_PhysicsAsset`, `DAS_Player_*` 및 `/Game/_Recovery/PlayerSkeleton_20260908`을 사용한다. 이 에셋들의 참조를 가진 AnimSequence·AnimBlueprint·Blueprint는 에디터에서 재저장됐다.
+- `_Art/Kazan`, `CA_P_Kazan_*`, `C_P_Kazan`은 원작 추출 출처와 스켈레톤 bone 이름이므로 변경하지 않았다. 위의 과거 절에 있는 `SK_Khazan`, `DAS_Khazan_*`, `UKhazan*`, `FKhazan*`, `EKhazan*` 표기는 당시 검증 기록이며 현재 경로·심볼로 사용하지 않는다.
+- 이번 이관은 locomotion 동작, root-motion track, notify, curve, frame rate와 수치를 변경하지 않았다. native redirect와 에셋 참조 재저장만 수행했으며 `KhazanEditor Win64 Development` 빌드와 `/Game` Blueprint 38개 compile 성공을 확인했다.

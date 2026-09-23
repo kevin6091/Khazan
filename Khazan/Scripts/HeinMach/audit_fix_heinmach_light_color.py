@@ -40,7 +40,7 @@ REPORT_PATH = os.path.join(
     "ImportReports",
     "HeinMach_LightColor_Metadata_Audit.json",
 )
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 SOURCE_PREFIX = "HM_SourceLight_"
 ROUTE_PREFIX = "HM_PreviewRouteFill_"
 EXPECTED_SOURCE_COUNT = 89

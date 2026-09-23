@@ -32,7 +32,7 @@ REPORT_PATH = os.path.join(
     "StormPass_Landscape_MeshImport.json",
 )
 DESTINATION_ROOT = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/Landscape/Meshes"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/Landscape/Meshes"
 )
 LANDSCAPE_GROUPS = {
     "StormPass_Landscape": "Main",

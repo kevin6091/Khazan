@@ -467,3 +467,12 @@
 - 현행 `0.01` 보정은 라이브 `SK_Khazan`의 `C_P_Kazan` reference scale `100`의 역수임을 UE 검사로 고정했다. component scale은 에셋 입력이 아니며 `0.005`, `0.01`, `0.02` 세 임의 값에서 실제 CharacterMovement 결과를 정규화해 동일한 source 변위가 나오는 것을 확인했다.
 - 최신 보고서는 `Saved/ImportReports/Khazan_DAS_AssetSpaceMovementAudit_20260917.json`과 `Saved/ImportReports/Khazan_DAS_RootMotionScaleIndependencePIE_20260917.json`이며 모두 `passed`다. 전자는 968개/failure 0, 후자는 6개 runtime probe/failure 0이다.
 - Content 재임포트는 필요하지 않아 수행하지 않았다. 메인 Unreal Editor와 사용자 C++의 임시 `0.009` 설정은 변경하지 않았다. 이 정정 작업에 재개할 미완료 지점은 없다.
+
+## 2026-09-23 `_Art/Kazan` → `_Art/Player` 폴더 이동 복구 대기
+
+- 현재 상태: 크래시 뒤 `Content/_Art/Kazan`과 `Content/_Art/Player`가 함께 남았다. Asset Registry 표적 감사에서 이전 루트는 271개 package, 새 루트는 9,458개 package였고 이전 package 271개는 모두 새 루트에 대응 항목이 있다. 새 루트 package에서 이전 루트로 향하는 dependency edge와 외부 referencer는 각각 0개였다. 감사 결과는 `Saved/KZArtFolderRepairAudit.json`이다.
+- 완료한 보존 조치: `Saved/ArtBackups/KazanToPlayer_PreCleanup_20260923_1110/Kazan`에 이전 폴더 304개 파일, 378,181,586 bytes를 복사했다. 원본과 backup의 SHA-256 전수 비교는 mismatch 0이다. 이전 폴더에만 있던 JSON metadata 33개는 충돌 없이 `Content/_Art/Player`의 같은 상대 경로로 복사했고 hash mismatch 0을 확인했다.
+- 마지막 검증: `Content/_Art/Kazan`은 현재도 304개 파일, 378,181,586 bytes이며 backup 대비 누락·크기 차이·hash mismatch가 모두 0이다. quarantine 이동 시도는 파일 잠금 때문에 시작되지 않았고 이동된 파일은 0개다. 따라서 이전 폴더 내용은 손실 없이 그대로 남아 있다.
+- 중단 원인: 실행 중인 Unreal Editor가 `Content/_Art/Kazan/Character/Meshs/Player_PhysicsAsset.uasset`를 열고 있어 폴더 이동이 거부된다. 에디터에는 저장되지 않은 사용자 작업이 있을 수 있으므로 프로세스를 강제 종료하지 않았다.
+- 정확한 재개 절차: 사용자가 작업을 저장하고 Unreal Editor를 정상 종료한 뒤 `UnrealEditor` 프로세스가 없는지 확인한다. 그 다음 `Content/_Art/Kazan` 전체를 `Saved/ArtBackups/KazanToPlayer_PreCleanup_20260923_1110` 아래 quarantine으로 이동하고, Content에 이전 루트가 없고 새 루트 파일 수가 유지되는지 검증한다. 이후 commandlet Asset Registry 감사를 다시 실행해 이전 package·이전 dependency·외부 referencer가 0인지 확인하고 대표 map/asset load를 검증한 뒤 완료 기록을 추가한다.
+- Git 반영 상태: 2026-09-23 main push 준비 index에는 `Content/_Art/Kazan` 파일이 0개이고 `Content/_Art/Player` 파일이 9,491개다. 따라서 커밋과 새 checkout에서는 Player만 남는다. 현재 로컬의 이전 폴더 실파일은 Unreal Editor 잠금과 검증 backup 때문에 index 밖에 보존돼 있으며, 에디터 정상 종료 뒤 위 절차로 제거한다.

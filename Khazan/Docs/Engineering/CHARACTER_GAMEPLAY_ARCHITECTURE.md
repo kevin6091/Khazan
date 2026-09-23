@@ -2164,3 +2164,441 @@ ARCH-45의 Controller → ASC 이벤트 전달에서 `FGameplayEventData::Instig
 ### 상태
 
 이 절은 이후 구현 계약을 확정한다. 2026-09-18 저장본에는 세 Stop 에셋의 Root Motion 플래그와 ABP의 `Root Motion from Everything`이 이미 있으나, 세 에셋은 기존 보호 목록 때문에 최신 skeleton-scale 보정 import를 거치지 않았다. 표적 재변환·재임포트와 PIE capsule 검증은 다음 Animation 단계에서 수행한다.
+
+<a id="arch-48-input-end-attack-handoff-20260921"></a>
+## 2026-09-21 — ARCH-48: ComboInputEnd 기반 공격 Ability handoff와 이동 입력 차단
+
+### 현재 구현에서 즉시 Weak/Strong 전환이 발생하는 이유
+
+- `UKhazanAbilitySystemComponent::AbilityInputTagPressed()`는 입력 태그와 정확히 일치하는 비활성 Spec을 찾으면 즉시 `TryActivateAbility()`를 호출한다.
+- 현재 `GA_Player_WeakAttack`과 `GA_Player_StrongAttack`에는 서로를 막는 Ability Asset Tag / Block Abilities With Tag 계약이 없다. 따라서 Weak가 활성 중이어도 Strong의 활성화 검사가 통과하며, 같은 Slot Group의 새 Montage가 기존 Montage를 interrupt할 수 있다.
+- `SetCanBeCanceled(false)`로 이 문제를 막지 않는다. 이 설정은 InputEnd 이전의 일반 공격 전환뿐 아니라 피격·사망 같은 강제 취소까지 함께 막기 때문이다.
+
+### 공격 상호 배타와 InputEnd 개방 계약
+
+- native `Ability.Action.Attack`을 Weak/Strong 및 이후 같은 전신 공격 Ability의 **Ability Asset Tag**로 사용한다. 이는 실행 중 캐릭터 상태가 아니라 block/cancel 검색용 Ability 분류다.
+- 공통 공격 Ability의 `Block Abilities With Tag`에도 `Ability.Action.Attack`을 둔다. 공격이 시작되면 GAS가 같은 분류의 새 공격 활성화를 막는다.
+- 각 section의 `ComboInputEnd` point에 도달하면 현재 Ability가 `SetShouldBlockOtherAbilities(false)`를 호출한다. UE 5.8.2의 이 API는 현재 instance가 적용한 `BlockAbilitiesWithTag` count만 해제하며, 이후 `EndAbility()`에서 같은 count를 중복 제거하지 않는다. 다음 활성화 때 `PreActivate()`가 blocking 상태를 다시 true로 초기화하므로 `InstancedPerActor` 재사용에도 누수가 없다.
+- 공통 공격 Ability의 `Cancel Abilities With Tag`에도 `Ability.Action.Attack`을 둔다. InputEnd 이후 대상 공격 활성화가 실제로 성공할 때 대상이 출발 공격을 취소한다. 대상 활성화 성공 전에 출발 Ability나 Montage를 먼저 끝내지 않는다.
+- 현재 외부 소비자가 없는 `State.Action.Attack`은 추가하지 않는다. Ability 분류와 이동 차단이라는 실제 두 소비 계약만 둔다.
+
+### 반대 공격 선입력과 한 칸 handoff
+
+- tag 차단만 추가하면 InputEnd 이전의 반대 공격 press는 활성화 실패 후 사라진다. 따라서 현재 활성 공격이 반대 공격의 semantic press를 받아 기존 `BufferedInputTag` 한 칸에 저장해야 한다.
+- ASC 입력 라우터는 Spec 활성화를 시도하기 **전에** 입력 태그를 빈 non-null `FGameplayEventData`와 함께 한 번 전달한다. 활성 Combo Ability는 자신의 반복 입력은 기존 `InputPressed()`로 받고, 반대 공격 태그만 `WaitGameplayEvent`로 듣는다. 새 전역 queue나 Controller의 Ability cast를 만들지 않는다.
+- `ComboInputOpen` 이전 입력은 저장하지 않는다. Open–End 사이에서 처음 승인된 입력 하나가 branch를 소유한다.
+- 자기 입력은 기존 규칙을 유지한다. Open–Commit이면 Commit까지 기다렸다가 같은 Ability의 다음 section으로 Jump하고, Commit–End이면 즉시 Jump한다.
+- 반대 공격 입력은 Commit에서 section Jump 대상으로 소비하지 않고 InputEnd까지 유지한다. InputEnd에서 공격 block을 해제한 뒤 ASC가 Dynamic Spec Source Tag로 대상 Spec을 찾아 활성화를 한 번 시도한다.
+- 대상 활성화가 성공하면 대상의 `Cancel Abilities With Tag`가 출발 공격을 끝내고 새 Montage가 시작된다. 실패하면 출발 공격은 회수부와 자연 종료를 계속한다. buffer는 한 번 소비하며 실패 전에 출발 Montage를 정지하지 않는다.
+- InputEnd 이후 새 반대 공격 press는 이미 attack block이 해제됐으므로 즉시 대상 Ability를 활성화한다. 향후 Strong hold 문법이 실제로 handoff 경계를 넘을 때만 press/release 시각 등 필요한 최소 metadata를 buffer 계약에 추가한다.
+
+### `Block.Movement.Input`의 원래 책임과 현재 누락
+
+- `UKhazanLocomotionComponent`는 이미 ASC의 `Block.Movement.Input` count 변경을 구독하고, count가 0이 아닐 때 `AddMovementInput()`으로 이어지는 이동 입력 출력을 차단한다.
+- 현재 Weak/Strong Ability는 이 태그를 부여하지 않는다. 지금 공격 중 일반 이동이 적용되지 않는 주원인은 Root Motion Montage가 CMC의 일반 velocity 계산을 대신하기 때문이며, 태그 기반 차단이 아니다.
+- 공통 공격 Ability의 `Activation Owned Tags`에 `Block.Movement.Input`을 둔다. GAS가 Activate에서 count를 더하고 정상 종료·취소·실패 cleanup의 `EndAbility()`에서 회수하므로 수동 `AddLooseGameplayTag/RemoveLooseGameplayTag` 쌍을 만들지 않는다.
+- 이 태그는 CMC 자체나 Root Motion을 정지시키지 않는다. 플레이어/AI locomotion 입력이 CMC로 출력되는 것만 막는다. `ComboInputEnd` 이후 Move event가 공격을 끝내면 Activation Owned Tag가 회수되고 다음 이동 갱신부터 CMC 입력이 다시 통과한다.
+- 2026-09-21 저장 Source에서는 `Input_MoveStarted()`가 비어 있고 `Input_Move()`의 `Triggered` 경로가 매 frame Move gameplay event를 보낸다. ARCH-45의 “End 이후 새 Started edge만 취소” 계약을 유지하려면 event 송신은 `Input_MoveStarted()`로 옮기고 `Input_Move()`에서는 locomotion intent와 `AddMovementInput()`만 갱신한다.
+
+### 공통화 경계
+
+StrongAttack이 두 번째 실제 콤보 Ability가 되었고 두 클래스가 Montage task, Notify bind/unbind, Open/Commit/End phase, buffer, 이동 취소 및 cleanup을 그대로 복제하고 있으므로 ARCH-45에서 보류했던 공통 base 추출을 지금 수행한다. 이 base는 공격 분류와 이동 차단까지 고정하므로 과거 후보명 `UKhazanComboGameplayAbility`보다 책임이 정확한 `UKhazanComboAttackAbility : UKhazanGameplayAbility`를 사용한다.
+
+- base가 소유할 것: 공격 tag container 기본값, Montage task 수명, Notify delegate, 3상태 입력 phase, 한 칸 buffer, 반대 입력 event 대기, InputEnd handoff, 이동 event 대기, 정상/취소 cleanup, 관성화 요청과 section Jump의 공통 절차.
+- 파생 Weak/Strong이 소유할 것: Montage asset, 유효 section 집합, 자기 입력과 허용 handoff 입력, 다음 node/section 해석, 해금·비용·hold 분기.
+- UInterface는 실행 상태와 AbilityTask 수명을 소유할 수 없으므로 사용하지 않는다. Combo Manager, 별도 buffer component, StateTree, custom AbilityTask 또는 DataAsset graph도 이번 요구에는 추가하지 않는다.
+- base에 `CurrentIndex + 1`을 고정하지 않는다. 현재 Weak/Strong은 선형이어도 이후 약→강, 강→약, hold branch는 파생 `ResolveTransition()`이 결정한다.
+
+### 적용 상태
+
+이번 절은 실제 Source와 로컬 UE 5.8.2 GameplayAbilities plugin 구현을 대조해 확정한 다음 공동 구현 계약이다. 게임 Source, Blueprint, Montage asset은 수정하지 않았고 cold build와 PIE도 실행하지 않았다.
+
+<a id="arch-49-held-move-after-input-end-20260921"></a>
+## 2026-09-21 — ARCH-49: 유지 중인 이동 입력의 ComboInputEnd 이후 전환
+
+### ARCH-45/46/48 이동 edge 계약 정정
+
+사용자 확정 동작은 `ComboInputEnd` 이후 새 Move `Started`만 받는 방식이 아니다. 공격 중부터 이동 입력을 계속 유지하고 있어도 현재 section의 `ComboInputEnd`가 지난 직후 로코모션으로 전환해야 한다. 따라서 ARCH-45의 “새 Started edge만 취소”, ARCH-46의 “Move Started에서만 이벤트 송신”, ARCH-48의 `Input_MoveStarted()` 이관 제안은 이동 입력 sampling 범위에서 이 절로 대체한다.
+
+- `AKhazanPlayerController::Input_Move()`는 Enhanced Input의 `Triggered` 동안 현재와 같이 매 frame `Input.Action.Move` Gameplay Event를 ASC에 보낸다.
+- 활성 Combo Attack Ability는 `ComboInputEnd` 전에는 이 이벤트를 받더라도 `bCanCancelToLocomotion == false`이므로 아무 상태도 저장하지 않고 무시한다.
+- `ComboInputEnd`가 `bCanCancelToLocomotion = true`로 바꾼 뒤, 방향 입력을 계속 유지 중이면 다음 `Triggered` event가 즉시 현재 공격을 종료한다.
+- 이는 공격 Ability 내부에 과거 이동 press를 보관하는 buffer가 아니다. Enhanced Input이 현재 유지 중인 물리 입력을 계속 보고하고, Ability는 authored gate가 열린 현재 frame의 신호만 소비한다.
+- `Input_MoveStarted()`는 이번 계약에서 gameplay event 송신 위치로 사용하지 않는다. 현재 빈 구현을 `Input_Move()`로 옮기거나 Move event를 Started 전용으로 바꾸지 않는다.
+
+### `Block.Movement.Input`과의 결합
+
+- 공격 Ability가 활성인 동안 `ActivationOwnedTags`의 `Block.Movement.Input`은 `AKhazanPlayer::HandleInputMove()` 안에서 `AddMovementInput()`으로 가는 출력을 막는다. 같은 frame의 Controller gameplay event 송신까지 막지는 않는다.
+- InputEnd 이후 유지 입력 event가 Ability를 종료하면 GAS가 `Block.Movement.Input` count를 회수한다. 다음 `Triggered` 갱신부터 같은 유지 입력이 정상적으로 `AddMovementInput()`까지 통과한다.
+- 따라서 Root Motion 공격 중 CMC locomotion이 섞이지 않으면서도, 플레이어가 방향키를 떼었다 다시 누를 필요 없이 회수 허용 시점부터 이동으로 복귀한다.
+- 공통 base로 이관할 callback 이름은 실제 event 의미에 맞춰 `HandleMoveInputTriggered` 또는 `HandleMoveInput`으로 둔다. 기존 `HandleMoveInputStarted`라는 이름을 새 base에 복사하지 않는다.
+
+### 적용 상태
+
+이번 절은 사용자가 확정한 현재 입력 의도를 문서에 반영한 것이다. `KhazanPlayerController.cpp`의 `Input_Move()` event 송신은 의도된 구현으로 보존하며, 게임 Source와 asset은 이번 기록에서 수정하지 않았다.
+
+<a id="arch-50-minimal-ability-taxonomy-and-interruption-20260921"></a>
+## 2026-09-21 — ARCH-50: 최소 Ability 태그 계층과 방향성 handoff·피격 재트리거
+
+### 태그 계층 원칙
+
+태그로 모든 Ability 쌍의 전환 관계를 표현하지 않는다. 태그는 여러 시스템이 실제로 함께 조회하는 **분류와 지속 상태**에만 쓰고, 현재 node에서 어떤 입력 edge를 허용하는지는 실행 중 Ability가 판정한다.
+
+```text
+Input.Action.*                 물리/의미 입력 라우팅
+
+Ability.Action                자발적인 전신 행동의 공통 분류
+└─ Ability.Action.Attack      Weak/Strong 및 이후 공격
+└─ Ability.Action.UseItem     물약 등 아이템 사용
+
+Ability.Reaction              외부 결과에 의해 강제되는 반응 분류
+└─ Ability.Reaction.Hit       피격 반응
+
+Event.Reaction.Hit            한 번 발생한 피격 문맥 전달
+Block.Movement.Input          ASC가 현재 소유하는 이동 입력 차단 사실
+Unlock.*                      영구/준영구 진행 조건
+```
+
+- 각 Ability의 Asset Tags에는 가장 구체적인 한 분류만 둔다. `Ability.Action.Attack`은 부모 `Ability.Action` 질의에도 계층 매칭되므로 둘을 중복 기입하지 않는다.
+- 아직 실제 Ability나 소비자가 없는 `Dodge`, `Skill`, `Death`, 세부 Hit 방향 태그는 선행 생성하지 않는다. 구현될 때 위 계층 아래 필요한 leaf만 추가한다.
+- `Input`, `Ability`, `Event`, `Block`, `Unlock`의 의미를 섞지 않는다. `StrongCanTransitionToWeak` 같은 pairwise 태그나 `State.Action.Attack`의 중복 사본을 만들지 않는다.
+
+### Action 상호 배타와 방향성 handoff
+
+- 전신 Action은 활성 중 `Block Abilities With Tag = Ability.Action`으로 다른 자발 행동의 임의 활성화를 막는다.
+- 전환 대상 Action은 `Cancel Abilities With Tag = Ability.Action`으로 둔다. 단, 대상이 먼저 정상 활성화된 경우에만 기존 Action을 취소한다.
+- `ComboInputEnd`는 모든 Action block을 무조건 해제하는 point가 아니다. 이 point는 현재 Ability의 `bCanExitAttack` gate만 연다.
+- 현재 Ability가 `CanHandoffToInput(InputTag, CurrentNode)`에서 허용한 요청에 대해서만 `SetShouldBlockOtherAbilities(false)` 후 대상 활성화를 시도한다. 활성화가 실패하고 출발 Ability가 여전히 활성이라면 `SetShouldBlockOtherAbilities(true)`로 count를 복구한다.
+- Weak→Strong을 허용하고 Strong→Weak을 금지하려면 Weak의 resolver만 Strong input을 승인하고 Strong resolver는 Weak input을 거부한다. 이 방향성은 Ability 실행 규칙이며 새 Gameplay Tag가 아니다.
+- InputEnd 전에 들어온 허용 입력은 기존 one-slot buffer에 보관했다가 InputEnd에서 handoff한다. InputEnd 이후 새 입력은 현재 Ability가 즉시 같은 resolver로 판정한다. 금지된 입력은 저장·활성화·차단 해제를 모두 하지 않는다.
+- 이 결정은 ARCH-48의 “InputEnd에서 항상 `SetShouldBlockOtherAbilities(false)`”를 대체한다.
+
+### ASC 입력 전달 순서 정정
+
+방향성 gate를 현재 Ability가 소유하므로 공격 입력의 Gameplay Event는 직접 Spec 처리를 마친 뒤 전달한다.
+
+```text
+입력 대상 Spec 처리
+  비활성·허용: 평소처럼 활성화
+  비활성·현재 Action block: 활성화 실패
+  활성: 기존 InputPressed 전달
+        ↓
+HandleGameplayEvent(InputTag)
+        ↓
+현재 실행 Ability가 buffer/handoff 허용 여부 판정
+```
+
+- idle에서 새 Ability가 먼저 활성화돼도 그 Ability는 자기 입력 이벤트를 기다리지 않고 반대 handoff 입력만 기다리므로 중복 소비가 없다.
+- active Action 때문에 대상 활성화가 실패한 뒤 event가 현재 Action에 도달하므로, 현재 Action이 방향성과 authored gate를 판정할 수 있다.
+- InputEnd 이후 허용 handoff라면 event callback에서 block을 잠시 해제하고 `TryActivateAbilityByInputTag()`를 호출한다. ASC의 원래 Spec 순회가 이미 끝났으므로 새 대상의 최초 press를 `InputPressed()`로 다시 전달하지 않는다.
+- `TryActivateAbilityByInputTag()`의 `AbilitySpec.IsActive()` 제외는 유지한다. 이 helper는 비활성 입력 Ability로 handoff하기 위한 API이며 피격 재트리거 경로가 아니다.
+
+### 피격 Ability의 반복 재생
+
+- HitReaction은 `InstancedPerActor`와 UE native `bRetriggerInstancedAbility = true`를 사용한다.
+- 피해 확정 경로는 `Event.Reaction.Hit` Gameplay Event를 대상 ASC에 보낸다. 같은 HitReaction Spec이 이미 활성이라도 엔진은 기존 instance의 `EndAbility()` cleanup을 수행한 뒤 같은 Spec을 새 activation으로 시작한다. 겹치는 두 instance를 유지하지 않고 Montage를 처음부터 다시 재생한다.
+- HitReaction Asset Tag는 `Ability.Reaction.Hit`이다. `Block Abilities With Tag`와 `Cancel Abilities With Tag`는 현재 수직 절편에서 `Ability.Action`을 사용한다.
+- HitReaction이 `Ability.Reaction.Hit` 또는 부모 `Ability.Reaction`을 block하면 `CanActivateAbility()`가 retrigger 분기보다 먼저 실패할 수 있으므로 자기 reaction 분류를 block하지 않는다.
+- HitReaction에 `SetCanBeCanceled(false)`를 사용하지 않는다. 사망·더 높은 우선순위 반응과 cleanup 경로를 막지 않아야 한다.
+
+### 물약과 피격의 결합
+
+- Potion Ability는 `Ability.Action.UseItem`으로 분류한다. Action 계층이므로 다른 자발 Action과 상호 배타 정책을 공유하지만 `Ability.Reaction.Hit`을 막지 않는다.
+- 피격이 발생하면 체력 피해 계산과 HitReaction 활성화는 별도 계약이다. HitReaction이 정상 활성화되면 `Cancel Abilities With Tag = Ability.Action`이 Potion Ability를 종료하고, Potion의 `PlayMontageAndWait` cleanup이 사용 모션을 중지한 뒤 Hit Montage가 시작된다.
+- 물약 회복 적용 시점은 Potion Ability의 별도 commit point가 소유한다. 피격이 그 point 전에 Potion을 취소하면 회복을 적용하지 않고, 이미 commit된 회복을 단순 Montage 취소로 되돌리지 않는다.
+- 향후 SuperArmor처럼 HitReaction은 억제하지만 Action 중단은 필요한 판정이 실제로 생기면 확정된 CombatResponse 결과가 Action cancel을 별도로 요청한다. 모든 피해에 무조건 cancel을 넣거나 이번 단계에 예외 태그를 선행 생성하지 않는다.
+
+### 현재 구현 확인과 다음 이관
+
+- `UKhazanAbilitySystemComponent::TryActivateAbilityByInputTag()`가 active Spec을 제외하는 현재 코드는 의도에 맞다.
+- 2026-09-21 저장 Source의 `KhazanGameplayTags.cpp`는 `Ability_Action_Attack`에 `UE_DECLARE_GAMEPLAY_TAG_EXTERN`을 한 번 더 사용했다. cpp에서는 `UE_DEFINE_GAMEPLAY_TAG(Ability_Action_Attack, "Ability.Action.Attack")`이어야 하며, 공통 attack base가 이 태그를 참조하기 전에 바로잡는다.
+- 다음 공동 구현은 `(1)` 위 tag 정의 수정 및 실제 소비용 부모 `Ability.Action` 추가, `(2)` ASC input event를 Spec 처리 뒤로 이동, `(3)` `UKhazanComboAttackAbility` 추출, `(4)` Weak만 Strong handoff를 승인하고 Strong은 Weak handoff를 거부, `(5)` Action/Movement block count와 실패 복구를 PIE에서 검증하는 순서다.
+
+### 적용 상태
+
+이번 절은 사용자 요구와 로컬 UE 5.8.2 `InternalTryActivateAbility()`·`ApplyAbilityBlockAndCancelTags()` 구현을 근거로 아키텍처를 정정한 것이다. 문서만 추가했으며 게임 Source, Blueprint, Montage는 수정하지 않았다. HitReaction과 Potion Ability는 아직 구현 완료 상태로 기록하지 않는다.
+
+<a id="arch-51-authored-combo-graph-and-semantic-input-phase-20260921"></a>
+## 2026-09-21 — ARCH-51: 다분기 콤보의 노드 그래프와 의미 입력 phase 계약
+
+### 기존 handoff안의 적용 한계와 유지할 경계
+
+- `Y 연타`, `Y → 다음 Y 유지 → X`, press/release에 따른 charge 분기처럼 실제 조합이 다양하다는 요구가 확인됐으므로, ARCH-37에서 보류했던 읽기 전용 Combo Definition의 도입 조건이 충족됐다.
+- ARCH-50의 `Ability.Action` 상호 배타, 현재 실행 Ability가 전환을 승인한다는 원칙, 피격의 별도 retrigger 경로는 유지한다. 다만 공격 키 press만 `HandleGameplayEvent(InputTag)`로 보내는 계약은 다른 키의 release/cancel 및 hold 상태를 보존하지 못하므로 공격 콤보 입력 전달 범위에서 이 절로 대체한다.
+- 입력 문자열 하나나 입력 순서 하나마다 GameplayAbility를 만들지 않는다. 현재 콤보 node가 이미 이전 입력의 결과를 나타내며, active Attack Ability 하나가 해당 실행의 node·입력 상태·window·pending edge·Montage 수명을 함께 소유한다.
+- 다른 GameplayAbility로 handoff하는 것은 비용·쿨다운·취소 정책·실행 수명의 소유자가 실제로 달라지는 edge에만 사용한다. 같은 공격 실행 안의 tap/hold/release 및 약·강 혼합 분기는 우선 같은 Ability의 node/section 또는 명시된 Montage 전환으로 처리한다.
+
+### 입력 phase는 태그 계층이 아니라 작은 값 타입으로 전달
+
+- `Input.Action.WeakAttack`과 `Input.Action.StrongAttack`은 의미 입력 tag로 유지한다. `Pressed`, `Released`, `Canceled`를 각 입력 아래 Gameplay Tag로 증식시키지 않는다.
+- ASC 경계에 `EKhazanAbilityInputPhase { Pressed, Released, Canceled }`와 `{ InputTag, Phase }` 한 건을 나타내는 값 타입을 둔다. Controller는 Enhanced Input의 `Started/Completed/Canceled`를 이 세 phase로 번역하고, ASC는 기존 Spec `InputPressed` 및 GAS generic replicated input protocol을 수행한 뒤 의미 입력 알림을 방송한다.
+- 활성 Combo Attack Ability는 이 ASC 알림을 activation에서 구독하고 `EndAbility()`에서 해제한다. 자기 입력과 다른 공격 입력을 같은 callback에서 받되, 한 물리 edge를 generic input task와 의미 입력 callback 양쪽에서 중복 소비하지 않는다. 콤보 base는 의미 입력 callback을 권위 경로로 사용하고 generic protocol은 GAS 호환을 위해 유지한다.
+- `Completed`는 정상 release edge이고 `Canceled`는 입력 평가 취소/Mapping Context 상실 cleanup이다. 둘 다 Spec의 `InputPressed`는 false로 만들지만, `Canceled`를 charge release 공격으로 소비하지 않는다. 현재 Controller가 두 경우를 모두 `AbilityInputTagReleased()`로 보내는 구현은 charge 구현 전에 분리한다.
+- Gameplay Event는 `Event.Reaction.Hit`처럼 gameplay 문맥과 payload를 전달하거나 Montage authored event를 AbilityTask가 기다리는 용도로 유지한다. 물리 입력의 모든 phase를 표현하기 위한 중복 tag 사전으로 사용하지 않는다.
+
+### Hold는 임의 시간 임계값이 아니라 입력 수명과 authored charge event의 결합
+
+- press에서 해당 의미 입력을 held 집합에 넣고 정상 release/cancel에서 제거한다. `Ongoing`을 매 frame 콤보 명령으로 제출하거나 Controller timer 하나로 tap/hold를 확정하지 않는다.
+- 원작 `StrongAtk01_Start/Charge` metadata에는 `Released` 검사 구간과 `xxSetChargingStepFunc`/`DoChangeCharageStep`가 있으므로, Strong Ability는 Montage의 release 허용 window와 charge-step authored event를 권위 경계로 사용한다.
+- charge-step event가 도착했을 때 Strong 입력이 아직 held이면 charge node로 진행하고, 그 전에 정상 release가 합법 window에서 들어오면 release edge를 선택한다. `Canceled`는 공격 edge를 선택하지 않고 현재 pending/held 상태를 정리한다.
+- 이후 원작에서 animation event와 독립된 실제 시간 임계값이 직접 확인될 때만 그 값을 Combo Definition의 명시적 설정으로 추가한다. 현재 단계에서는 임의 hold 초를 만들지 않는다.
+
+### 최소 읽기 전용 Combo Definition
+
+- node id는 `FName`을 사용한다. `Strong01`, `Strong01Charge`, `Strong01Release`, `MixedWeakAfterCharge` 같은 node 식별자를 Gameplay Tag로 만들지 않는다.
+- node는 재생할 Montage/section 또는 현재 Ability가 해석할 presentation 참조와 outgoing edge 목록을 가진다.
+- edge는 최소한 의미 `InputTag`, `InputPhase` 또는 authored event, 필요한 window/held 조건, 요구·차단 owner tag, target node, 실행 방식(`WithinAbility` 또는 실제 수명 변경이 있는 `AbilityHandoff`)을 가진다.
+- runtime current node, held input, 한 건 pending edge, window depth, transition committed, stamina/target 결과는 DataAsset에 저장하지 않는다. 모두 active Ability instance의 transient 상태다.
+- 현재 node마다 pending 입력은 한 건만 둔다. node가 바뀌면 slot을 비우므로 빠른 연타 전체를 미래 여러 타수에 FIFO로 보존하지 않는다. 정확한 overwrite/priority는 원작 branch 자료가 확인되기 전까지 기존 `first accepted valid edge wins` 계약을 유지한다.
+- 범용 graph editor, StateTree, 전역 ComboManager, 모든 Ability가 공유하는 입력 이력 Component는 만들지 않는다. plain DataAsset과 Combo Attack base의 작은 resolver로 시작한다.
+
+### `Y → Y Hold → X` 실행 예
+
+```text
+Y Started
+  -> StrongAttack Ability 활성화
+  -> current node = Strong01
+  -> held = { Strong }
+
+Y Completed
+  -> 현재 node의 Released edge가 합법하면 tap/release 공격으로 진행
+
+또는 다음 Y Started
+  -> current node의 Strong+Pressed edge를 한 건 예약
+  -> authored commit에서 Strong01Charge로 전환
+  -> held에 Strong 유지
+
+ChargeStep authored event
+  -> Strong이 아직 held이면 charge step/node 진행
+
+X Started
+  -> 별도 Weak Ability의 임의 활성화는 Ability.Action block으로 실패
+  -> active Strong execution이 Weak+Pressed edge를 조회
+  -> 정의가 WithinAbility이면 혼합 target node/section으로 전환
+  -> 정의가 실제 AbilityHandoff이면 해당 edge가 허용한 시점에만 block을 잠시 풀고 대상 Ability 활성화
+```
+
+이 구조에서 과거 입력 배열을 계속 저장할 필요가 없다. `Strong01Charge`라는 current node 자체가 `Y로 시작했고 다음 Y가 charge 경로로 소비됐다`는 축약된 이력이며, X는 그 node의 outgoing edge만 조회한다.
+
+### 2026-09-21 저장 Source의 실제 차이와 다음 순서
+
+- 저장 Source에는 `UKhazanComboAttackAbility`가 아직 없고 Weak/Strong은 각각 `UKhazanGameplayAbility`를 직접 상속한다.
+- `AbilityInputTagPressed()`는 여전히 Gameplay Event를 Spec 순회 전에 전송한다. ARCH-50에서 확정한 event-after-spec 순서도 아직 반영되지 않았다.
+- Controller의 attack `Completed`와 `Canceled`는 모두 `AbilityInputTagReleased()`로 들어가 phase 의미가 소실된다.
+- 따라서 다음 구현은 `(1)` ASC의 `{InputTag, Phase}` 의미 입력 계약과 cancel 경로, `(2)` Combo Definition의 최소 node/edge 타입, `(3)` 실제 공통 상태가 생긴 `UKhazanComboAttackAbility`, `(4)` Strong의 press/release/charge vertical slice, `(5)` 그 위에 첫 혼합 X edge를 추가하는 순서다. HitReaction/Potion retrigger·cancel 규칙은 이 공격 입력 그래프와 합치지 않는다.
+
+### 적용 상태
+
+이번 절은 복합 콤보 요구에 따라 아키텍처 계약을 보완한 기록이다. 게임 Source, Blueprint, Montage, DataAsset은 수정하지 않았고 Combo Definition 및 phase delegate의 빌드·PIE 검증도 아직 수행하지 않았다.
+
+<a id="arch-52-combo-rule-ownership-20260921"></a>
+## 2026-09-21 — ARCH-52: 콤보 규칙 원본과 실행 Ability의 책임 분리
+
+### 결론
+
+다수의 키 조합과 모든 전환 규칙을 각 GameplayAbility의 C++ 분기로 직접 작성하지 않는다. 정적 콤보 topology와 edge 조건은 읽기 전용 `UKhazanComboDefinitionData`가 소유하고, 현재 활성 Combo Attack Ability는 그 정의를 해석하여 현재 실행 한 건의 전이 가능 여부를 최종 판정하고 실행한다. Ability는 규칙 데이터베이스가 아니라 GAS 수명·비용·취소·Montage와 runtime state를 결합하는 실행 권위다.
+
+### 책임 경계
+
+- Enhanced Input/Controller: `Started`, `Completed`, `Canceled`를 의미 입력 tag와 phase로 번역한다. 조합 이력이나 콤보 tree를 소유하지 않는다.
+- ASC: Spec 입력 protocol과 의미 입력 방송, Ability 활성화·차단을 담당한다. 입력 FIFO나 현재 combo node를 소유하지 않는다.
+- Combo Definition DataAsset: node id, node가 재생할 Montage/section, 현재 node에서 가능한 input/authored-event edge, held-input 요구, owner-tag 요구, target node를 저장한다. 현재 node, buffer, held 상태나 Ability/Task 포인터는 저장하지 않는다.
+- active Combo Attack Ability: current node, held inputs, 한 건 pending edge, Open/Commit/End gate, Montage task와 delegate handle을 소유한다. Definition의 edge와 현재 ASC 상태를 대조하고 성공한 transition만 commit한다.
+- GAS tags/effects: 사망·피격·행동 상호 배타처럼 combo graph 밖의 공유 gameplay 상태와 전역 활성화/취소 정책을 소유한다. unlock처럼 특정 edge가 요구하는 상태는 edge의 owner-tag requirement로 조회하되 태그를 DataAsset이나 Ability가 임의 부여하지 않는다.
+- Montage authored points: 입력을 받을 시점과 commit/회수 종료, charge step처럼 애니메이션이 정하는 시간 경계를 소유한다. DataAsset에 frame time을 복제하지 않는다.
+
+### Ability 경계
+
+- 한 connected attack chain은 한 active Ability 실행으로 유지한다. Weak/Strong 입력이 섞여도 같은 비용·취소·실행 수명 안의 분기라면 node 또는 Montage를 전환하고 Ability handoff를 만들지 않는다.
+- Weak 시작과 Strong 시작 Ability는 같은 Combo Definition을 참조하고 서로 다른 entry node만 가질 수 있다. 어느 쪽으로 시작했는지는 Ability class 이름보다 runtime current node가 정확히 표현한다.
+- 별도 cooldown, 독립 cost commit, 다른 취소 정책이나 별도 실행 결과를 가진 실제 Skill로 넘어갈 때만 다른 Ability로 handoff한다. 단순히 입력 tag가 달라졌다는 이유로 Ability를 교체하지 않는다.
+
+### 최소 데이터 모델
+
+- node: `NodeId`, `Montage`, `MontageSectionName`, `InputEdges`, `AuthoredEventEdges`.
+- input edge: `InputTag`, `InputPhase`, `RequiredHeldInputs`, 엔진 `FGameplayTagRequirements`, `TargetNodeId`.
+- authored-event edge: `EventName`, `RequiredHeldInputs`, `FGameplayTagRequirements`, `TargetNodeId`.
+- 배열 순서를 동일 trigger의 우선순위로 사용하고, node/edge 수가 실제 병목으로 측정되기 전에는 runtime map/cache를 추가하지 않는다.
+- 범용 graph editor, StateTree, Enhanced Input Combo Trigger, 전역 ComboManager, 조합 문자열별 Ability class는 채택하지 않는다. `UDataAsset`, Montage authored point, GAS tag requirement와 active Ability의 작은 resolver로 구현한다.
+
+### 적용 상태
+
+이 절은 ARCH-51의 책임을 구체화한 설계 결정이다. 게임 Source와 asset은 수정하지 않았으며 `UKhazanComboDefinitionData`와 공통 Combo Attack Ability는 아직 구현되지 않았다.
+
+<a id="arch-53-source-neutral-combo-command-20260921"></a>
+## 2026-09-21 — ARCH-53: Player/AI 공통 source-neutral Combo Command
+
+### ARCH-51/52 정정
+
+Player의 `Pressed/Released/Canceled`를 Combo Definition의 공통 edge 계약으로 직접 사용하면 AI가 물리 키를 흉내 내야 한다. 이는 미래 AI가 Ability를 요청하고 Player/AI가 같은 실행 Ability를 공유한다는 ARCH-36의 경계와 충돌한다. 따라서 ARCH-51의 `InputPhase` edge와 ARCH-52의 `InputEdges`는 공통 Combo Definition 범위에서 이 절로 대체한다.
+
+`EKhazanAbilityInputPhase`를 `AKhazanPlayerController` 내부 타입으로 옮기지 않는다. 그렇게 하면 ASC·Combo Definition·AI가 PlayerController 선언에 의존한다. PlayerController의 세 Enhanced Input callback 자체가 물리 phase를 이미 표현하므로 별도 공유 input-phase enum은 입력 adapter 완료 뒤 필요하지 않다.
+
+### 두 경로의 분리
+
+1. **GAS Player input protocol:** `AbilityInputTagPressed/Released/Canceled`는 Player 입력에 대해 granted Spec의 `InputPressed`, `UGameplayAbility::InputPressed/Released`, generic replicated input task 경로만 처리한다. AI가 이 함수를 호출해 키를 흉내 내지 않는다.
+2. **공통 Combo Command:** `FKhazanComboCommand { CommandTag, Phase }`를 ASC의 native event로 방송한다. phase는 source-neutral `Begin`, `Release`, `Cancel`이며 PlayerController와 AI 의도 생산자가 같은 API로 제출한다.
+
+최소 command tag는 `Command.Attack.Weak`과 `Command.Attack.Strong` 두 개다. `Input.Action.*`는 Player 장치/Spec routing, `Command.Attack.*`는 Player·AI 공통 공격 의도, `Ability.Action.Attack`은 실행 Ability 분류라는 서로 다른 의미를 가진다. phase마다 GameplayTag를 늘리지 않는다.
+
+### Player와 AI 흐름
+
+```text
+Player Enhanced Input Started
+  -> ASC AbilityInputTagPressed(Input.Action.StrongAttack)
+  -> ASC SubmitComboCommand(Command.Attack.Strong, Begin)
+
+AI decision
+  -> 선택한 Attack Ability Spec 활성화
+  -> ASC SubmitComboCommand(Command.Attack.Strong, Begin)
+
+Player Completed 또는 AI의 charge release 결정
+  -> ASC SubmitComboCommand(Command.Attack.Strong, Release)
+```
+
+PlayerController는 물리 입력을 command로 번역하는 adapter다. AIController/BT/StateTree task는 Enhanced Input이나 PlayerController를 경유하지 않고 같은 ASC command API를 직접 호출한다. AI 판단 계층은 정확한 Montage frame, buffer와 section jump를 관리하지 않으며 원하는 공격 command만 제출한다.
+
+### 공통 Combo Attack Ability
+
+- activation에서 ASC command event를 구독하고 `EndAbility()`에서 delegate handle을 해제한다.
+- `Begin`은 command를 held set에 넣고 현재 node의 command edge를 제출한다. `Release`는 held에서 제거하면서 release edge를 제출하고, `Cancel`은 held/pending 상태만 정리하여 공격 edge를 실행하지 않는다.
+- current node, one-slot pending edge, Open/Commit/End gate, Montage task와 cleanup은 active Ability instance가 소유한다.
+- command가 없어도 Montage authored event edge는 자동 전환할 수 있다. 따라서 AI의 자동 연속 동작과 charge step도 물리 입력 없이 실행 가능하다.
+- Weak/Strong의 입력 조합이 같은 공격 실행 수명을 공유하면 동일 Ability 실행 안에서 node/Montage를 전환한다. 별도 Skill 수명으로 넘어갈 때만 Ability handoff를 사용한다.
+
+### Combo Definition 정정
+
+- `InputEdges`를 `CommandEdges`로 바꾼다.
+- command edge는 `CommandTag`, `CommandPhase`, `RequiredHeldCommands`, `OwnerTagRequirements`, `TargetNodeId`를 가진다.
+- authored-event edge는 그대로 유지한다. Player/AI source, Controller 포인터, input key, Spec handle, runtime held/buffer는 DataAsset에 저장하지 않는다.
+
+### 적용 상태와 다음 순서
+
+현재 Source의 `EKhazanAbilityInputPhase`/`FKhazanAbilityInputEvent`/ASC input event는 P6-D1 Player 경로로 구현됐으나 아직 소비자가 없다. 다음 단계는 이를 공통 Combo Command event로 교체한 뒤 cold build하는 것이다. 그 다음에만 command edge 기반 Combo Definition을 만들고, 실제 소비와 함께 `UKhazanComboAttackAbility`를 추출한다. 게임 Source와 asset은 이 문서 기록에서 수정하지 않았다.
+
+<a id="arch-54-command-consumer-vertical-slice-20260921"></a>
+## 2026-09-21 — ARCH-54: Combo Command 적용 감사와 소비자 수직 이관
+
+### 저장 Source에서 확인된 현재 상태
+
+- `EKhazanComboCommandPhase`, `FKhazanComboCommand`, ASC의 `SubmitComboCommand()`/native event, Controller의 `Started`/`Completed`/`Canceled` 변환은 Source에 적용됐다.
+- UBT 실행은 성공했으나 target이 `up to date`였으므로 이번 확인은 새 cold compile을 수행한 결과로 기록하지 않는다.
+- ASC command event를 구독하는 코드는 아직 없다. Weak/Strong 연타를 실제로 처리하는 경로는 계속 각 클래스의 `InputPressed()`와 `SubmitComboInput()`이다. 새 command 경로가 현재 동작을 만들었다고 해석하지 않는다.
+- Weak/Strong은 PlayerAbility 폴더로 이동했지만 Montage task, notify bind/unbind, Open/Commit/End gate, one-slot buffer, 이동 복귀 및 cleanup을 거의 전부 복제한다. 두 번째 실제 소비자가 이미 있으므로 공통 attack base 추출 조건이 충족됐다.
+- native 이름과 문자열 `Command_Player_Attack_*` / `Command.Player.Attack.*`는 Player와 AI가 함께 제출한다는 계약과 충돌한다. 실제 graph나 asset이 이 임시 tag를 저장하기 전에 `Command_Attack_Weak/Strong` / `Command.Attack.Weak/Strong`으로 정정한다.
+- `KhazanComboTypes.cpp`는 0 byte이고 header 밖 구현이 없으므로 유지할 책임이 없다. 타입을 header-only로 둘 동안 삭제한다.
+
+### 다음 단계는 유휴 schema가 아닌 하나의 수직 기능으로 진행
+
+1. Controller가 같은 ASC를 한 번 얻어 Player Spec input protocol을 먼저 처리하고 이어서 source-neutral command를 제출한다. 세 개의 단순 forwarding helper는 제거한다.
+2. plain `UDataAsset`에 `NodeId`, `Montage`, `SectionName`, `CommandEdges`만 둔다. edge는 command tag/phase, required held commands, owner tag requirements, target node만 가진다. runtime state, Controller, Spec handle, Task, buffer를 저장하지 않는다.
+3. `UKhazanComboAttackAbility`가 ASC command event를 실제 구독하고 Montage/notify/one-slot pending transition/held commands/이동 복귀/cleanup을 소유한다. `InputPressed()`와 command event를 동시에 콤보 입력으로 소비하지 않는다.
+4. Weak와 Strong의 현재 선형 회귀를 같은 base와 Definition으로 먼저 이관한다. `Weak04 -> Weak05` edge의 owner requirement에 `Unlock.Skill.DAS.WeakAttack05`를 둔다.
+5. 두 Blueprint가 새 base 경로로 저장되고 PIE 회귀가 끝난 뒤에만 동작 없는 native Weak/Strong wrapper를 제거한다. Blueprint reparent 전에 class 파일부터 삭제하지 않는다.
+
+### 이번 최소형에서 의도적으로 보류하는 것
+
+- authored charge event edge, Begin/Release 교체 우선순위, 서로 다른 Montage 사이의 task handoff, 실제 별도 Skill Ability handoff는 현재 선형 Weak/Strong 회귀 뒤 각각 실제 사례와 함께 추가한다.
+- 첫 수직 절편은 같은 Montage 안의 section jump만 commit한다. node에 Montage 참조를 두어 entry는 서로 다른 Montage를 사용할 수 있지만, cross-Montage edge는 해당 task 수명과 blend를 검증하기 전 asset에 만들지 않는다.
+- 범용 graph editor, command history FIFO, ComboManager, Controller/AI별 graph, phase gameplay tag는 만들지 않는다.
+
+### 공통/전용 폴더 경계
+
+- `Ability/Command`의 command 계약, `Ability/Combo`의 Definition과 ComboAttackAbility는 Player/AI 공통이다.
+- Player 전용 GameplayAbility Blueprint와 그 Definition asset은 Player 콘텐츠 폴더에 둘 수 있다. 폴더가 Player 전용이라는 사실과 C++ 실행 계약이 PlayerController에 의존하는 것은 서로 다른 문제다.
+
+이번 절은 저장 Source 정적 감사와 다음 이관 계약이다. 게임 Source와 asset은 수정하지 않았고, 문서만 추가했다.
+
+<a id="arch-55-family-specific-command-and-standalone-policy-20260921"></a>
+## 2026-09-21 — ARCH-55: Player/AI Monster 공격 어휘 분리와 Standalone 실행 정책 정정
+
+### Player/AI 공통성의 정확한 범위
+
+- ARCH-53/54에서 `Command.Player.Attack.*`를 Player와 AI가 함께 제출한다는 이유로 `Command.Attack.*`로 바꾸려 한 제안은 철회한다. 현재 `Command.Player.Attack.Weak/Strong`과 native 심볼 `Command_Player_Attack_Weak/Strong`을 유지한다.
+- Player와 AI Monster가 공유하는 것은 `FKhazanComboCommand`, ASC의 `SubmitComboCommand()` API, `UKhazanComboAttackAbility`의 실행 알고리즘이다. 공격 목록, GameplayAbility asset, Combo Definition, node topology와 command tag 어휘까지 같아야 한다는 뜻이 아니다.
+- Player Definition은 `Command.Player.*`를 사용한다. AI Monster는 첫 실제 소비자를 구현할 때 별도 `Command.AIMonster.*` 계층과 해당 Monster의 Ability/Combo Definition을 추가한다. AI 종류가 여러 개라는 이유만으로 사용되지 않는 세부 tag를 선행 생성하지 않는다.
+- 공통 Combo Ability는 특정 Player command를 C++에 하드코딩하지 않고 현재 Definition의 edge를 해석한다. 따라서 같은 C++ 실행기를 사용하면서 Player와 각 AI Monster가 전혀 다른 공격·스킬·애니메이션을 가질 수 있다.
+
+### 일반 Ability 입력과 Combo Command를 분리한다
+
+- `UKhazanAbilitySystemComponent::AbilityInputTagPressed/Released/Canceled()`는 공격 전용 API가 아니다. 물약, 회피, 상호작용과 이후 추가될 단발성 Ability를 포함하여 Player 입력을 granted Spec에 전달하는 일반 GAS 입력 경로로 유지한다.
+- `AKhazanPlayerController::RouteAttackInput()`은 콤보 공격 callback에서만 사용한다. 같은 ASC를 한 번 얻고 일반 Spec 입력 처리를 먼저 수행한 뒤, 공격에 필요한 `SubmitComboCommand()`를 추가 호출한다.
+- Combo command가 필요 없는 Ability는 `RouteAttackInput()`을 거치지 않고 `AbilityInputTagPressed/Released/Canceled()`만 호출한다. 모든 Player 행동을 Combo Definition이나 command graph로 밀어 넣지 않는다.
+- AI Controller/BT는 Player input protocol을 호출하지 않는다. 자신에게 부여된 AI Ability Spec을 선택·활성화하고, 콤보 실행에 필요한 경우에만 AI 전용 command를 같은 `SubmitComboCommand()` API로 제출한다.
+
+### Standalone NetExecutionPolicy
+
+- 이 프로젝트는 멀티플레이를 지원하지 않는 Standalone 게임이다. 공통 Combo Attack Ability의 `NetExecutionPolicy`는 `LocalOnly`로 명시한다.
+- 기존 Weak/Strong의 `ServerOnly`는 Standalone Actor가 Authority이기 때문에 실행됐던 것이며, 전용 서버가 필요하다는 뜻은 아니었다. 다만 제품 의도와 다른 정책명이므로 공통 base로 이관하면서 제거한다.
+- 해당 대입을 단순 삭제하면 enum 기본값인 `LocalPredicted`가 남으므로 삭제만 하지 않는다. `InstancedPerActor`와 `LocalOnly`를 생성자에서 각각 명시한다. Standalone에서는 PlayerController와 AIController가 모두 local controller로 판정되므로 Player/AI 공통 base 사용과 충돌하지 않는다.
+
+### ComboInputEnd의 실행 경계
+
+- `ComboInputOpen`부터 `ComboInputEnd` 전까지 들어온 공격 command는 현재 활성 Combo Ability가 Definition edge로 판정한다. 이 구간의 Weak/Strong 조합을 새 Ability의 임의 활성화에 맡기지 않는다.
+- `ComboInputEnd`는 해당 section의 콤보 분기 구간이 끝나고 회수부에서 다른 자발 Action으로 나갈 수 있는 지점이다. 이 point에서 pending command를 비우고 이동 종료 gate를 열며 `SetShouldBlockOtherAbilities(false)`로 현재 Ability가 적용한 `Ability.Action` block을 해제한다.
+- 이후 새 Action이 실제 활성화되면 그 Ability의 cancel policy 또는 같은 Slot montage interrupt가 기존 공격을 종료한다. 아무 입력도 없으면 기존 공격은 회수 모션을 끝까지 재생하고 자연 종료한다.
+- 다음 section으로의 정상 콤보 전이는 `ComboInputEnd` 전에 commit되므로 section jump 직전과 새 section의 `ComboInputOpen`에서는 block 상태를 유지한다.
+
+### 상속과 접근 지정자
+
+- `ActivateAbility()`와 `EndAbility()`는 엔진이 호출하고 파생형이 명시적으로 확장할 가능성이 있는 lifecycle override이므로 `protected`에 둔다.
+- montage callback, command resolver, pending commit, node transition, delegate bind/unbind와 runtime reset은 공통 base의 불변식을 구성한다. 빈 Weak/Strong migration shim이 호출하거나 재정의할 지점이 아니므로 `private`에 둔다.
+- 상속한다는 이유만으로 기존 구현 전체를 `protected`로 노출하지 않는다. 실제 charge authored event나 cross-Montage 전환에서 파생형 차이가 생길 때, 그 한 책임만 좁은 `protected virtual` hook으로 추가한다.
+- `ComboDefinition`과 `EntryNodeId`는 Blueprint CDO의 Defaults에서 설정하는 읽기 전용 구성값이다. 파생 C++ 코드가 실행 중 직접 바꾸지 않도록 private `EditDefaultsOnly`로 유지한다.
+
+이 절은 ARCH-53/54의 command semantic rename과 Player/AI 동일 command 어휘 가정을 대체한다. 게임 Source와 asset은 이 기록에서 수정하지 않았다.
+
+<a id="character-architecture-arch-56"></a>
+## 2026-09-22 — ARCH-56: 논리 조작 Command와 trigger·held 조건 분리
+
+### Command 식별자의 의미
+
+- Player Combo Command는 결과 공격명(`Weak`, `Strong`)이나 특정 장치의 물리 키명(`X`, `Y`, `LMB`, `RMB`)이 아니라 Player 전투 조작 슬롯을 나타낸다. 채택 명칭은 `Command.Player.Attack.Primary`, `Command.Player.Attack.Secondary`다.
+- Enhanced Input이 Gamepad 버튼·마우스·키보드·사용자 재바인딩을 Input Action에 매핑하고, PlayerController가 그 Action을 위 논리 Command로 번역한다. 화면의 버튼 글리프는 Enhanced Input 매핑에서 조회하며 Gameplay Tag 문자열에서 유추하지 않는다.
+- 현재 node와 Definition edge가 같은 Primary/Secondary 조작의 실제 결과를 결정한다. 따라서 같은 Primary가 현재 node에 따라 약공 연계, 차지 뒤 혼합 연계, 다른 무기 연계로 이어질 수 있다. 결과 공격명은 node/Ability/section의 책임이다.
+- `Command.Player.*`와 `Command.AIMonster.*`의 family 분리는 ARCH-55대로 유지한다. AI는 물리 키를 흉내 내지 않으며 자기 Definition의 command 어휘를 `SubmitComboCommand()`에 제출한다.
+- 현재 `Command.Player.Attack.Weak/Strong`을 Primary/Secondary로 바꾸는 것은 native 심볼, tag 문자열, Controller 전달값과 이미 저장된 Combo Definition 참조를 함께 확인해야 하는 semantic migration이다. 이 기록만으로 Source나 asset을 수정하지 않는다. `Input.Action.WeakAttack/StrongAttack`까지 바꿀지는 별도 판정한다. 해당 Input Tag가 초기 Ability 진입의 의미 이름이면 유지할 수 있고, 장치 독립 조작 슬롯을 뜻한다면 `Input.Action.Attack.Primary/Secondary`로 함께 정렬한다.
+
+### `CommandPhase`와 `RequiredHeldCommands`는 서로 다른 축이다
+
+- `EKhazanComboCommandPhase`는 한 시점에 발생한 trigger event다. `Begin`은 누르기/의도 시작, `Release`는 정상 해제와 release edge 평가, `Cancel`은 입력 문맥 상실·계획 취소·빙의 변경에서 공격 edge 없이 정리한다.
+- `RequiredHeldCommands`는 trigger가 발생한 순간에도 계속 유지 중이어야 하는 command 상태 조건이다. 예를 들어 Secondary를 유지한 채 Primary를 새로 누르는 분기는 trigger `{ Primary, Begin }`, condition `{ Secondary held }`로 표현한다.
+- `Hold`를 phase로 추가해도 위 분기를 대체할 수 없다. `Secondary Hold`는 Primary가 방금 눌렸다는 사실을 표현하지 못하고, 매 frame 보내면 중복 transition·buffer 오염이 생기며, 임계 도달 때 한 번만 보내면 그 임계값과 시간 소유자가 다시 필요하다.
+- 단일 버튼 차지는 `Begin`에서 held에 추가하고, Montage가 정한 charge-step authored point에서 현재 held 여부를 검사하며, `Release` edge가 현재 charge node의 해제 공격을 선택하는 방식으로 확장한다. 이때 단순 release edge의 `RequiredHeldCommands`에는 방금 놓은 자기 command를 넣지 않는다. Release 처리에서 Begin 존재를 검증한 뒤 자기 tag를 held에서 제거하므로 이 컨테이너는 해제 후에도 남아 있어야 하는 다른 command 조건을 뜻한다.
+- 정말로 animation timing과 독립된 “홀드 임계 도달” 사건이 필요한 실제 소비자가 생기면 `Hold`라는 연속 phase 대신 의미가 분명한 one-shot authored/runtime event를 별도 edge 종류로 추가한다. 현재 확인된 차지 요구만으로 phase를 늘리지 않는다.
+
+### 최소성 판정
+
+- `RequiredHeldCommands`는 `Y 유지 중 X`와 같은 실제 확정 조합을 표현하므로 제거하지 않는다. 일반 연타와 단일 버튼 release edge에서는 비워 둔다.
+- `Begin/Release/Cancel` 세 phase를 유지하고 `Hold` phase는 추가하지 않는다. 활성 Combo Ability의 `HeldCommands`가 activation 지역 상태를 소유하며 ASC는 command를 방송만 한다.
+- 데이터 배열 순서가 같은 trigger에 대한 우선순위다. 새 Manager, 전역 입력 이력, frame별 hold tick, 범용 command parser는 추가하지 않는다.
+
+이 절은 ARCH-55의 Player/AI family 분리를 유지하면서 그 절의 `Weak/Strong` command 명칭만 대체한다. 게임 Source와 asset은 이 기록에서 수정하지 않았고 build/PIE도 수행하지 않았다.
+
+<a id="character-architecture-arch-57"></a>
+## 2026-09-22 — ARCH-57: `KZ` 프로젝트 타입 접두사와 `Player` 주인공 역할명 확정
+
+### 명명 경계
+
+- C++ 런타임 타입의 프로젝트 접두사는 `Khazan`에서 `KZ`로 변경한다. 클래스·구조체·열거형·델리게이트·프로젝트 네임스페이스와 관련 파일명이 이 규칙을 따른다. 예: `UKhazanAbilitySystemComponent` → `UKZAbilitySystemComponent`, `FKhazanComboCommand` → `FKZComboCommand`, `KhazanGameplayTags` → `KZGameplayTags`.
+- 주인공 캐릭터라는 역할을 나타내는 타입·에셋·변수명은 `Khazan` 대신 `Player`를 사용한다. 예: `AKhazanPlayer` → `AKZPlayer`, `BP_KhazanPlayer` → `BP_Player`, `DA_CharacterDefinition_Khazan` → `DA_CharacterDefinition_Player`.
+- 프로젝트와 Unreal 모듈의 고유 정체성은 계속 `Khazan`이다. 따라서 `Khazan.uproject`, `Source/Khazan`, `Khazan.Build.cs`, Target 파일, 모듈 진입점 `Khazan.cpp/.h`, `KHAZAN_API`, `/Script/Khazan`은 변경하지 않는다. 이 이름들은 런타임 타입 접두사나 주인공 역할명이 아니다.
+- `_Art/Kazan`과 `CA_P_Kazan_*` 같은 원작 추출 경로·식별자는 원본 출처를 보존한다. `_Art/Kazan`에는 주인공뿐 아니라 HeinMach·StormPass 월드와 환경 리소스도 함께 있으므로 `Player` 역할 폴더로 해석하지 않는다.
+
+### 실제 적용 범위
+
+- native reflected type 44개와 대응 소스 파일·include·generated header·호출부를 `KZ` 계약으로 이관했다.
+- 주인공 의미를 가진 Blueprint, Character Definition, 파생 애니메이션, 모듈러 메시·스켈레톤·PhysicsAsset·머티리얼 69개를 `Player` 이름으로 이관하고 참조 에셋을 다시 저장했다.
+- `DefaultEngine.ini`에 기존 native class/struct/enum/property 경로용 Core Redirect를 두고, Gameplay Tag `AssetData.CharacterDefinition.Khazan`은 `AssetData.CharacterDefinition.Player`로 redirect했다. 새 저장 결과가 안정된 뒤에도 기존 저장 데이터와 외부 참조를 위한 호환 경계로 유지한다.
+- 이름 변경 전 사용자가 편집 중이던 주요 에셋 6개는 `Saved/KZNamingBackup/BeforeEditorMigration`에 별도 백업한 뒤 에디터 마이그레이션을 수행했다.
+- 현재 실행 가능한 Animation·Enemy 도구에 저장돼 있던 이전 native class 경로와 `SK_Khazan`/`SKM_Khazan`/`DAS_Khazan_*` 참조도 새 `KZ`/`Player` 경로로 맞췄다. 과거 결과 파일명, 원작 metadata, 프로젝트명 기반 로그·metadata key는 이관 당시 증거와 호환 계약이므로 변경하지 않았다.
+
+### 검증 결과
+
+- Unreal asset registry 재검사 결과 이름 또는 패키지 경로에 역할명 `Khazan`이 남은 에셋 0개, `/Game` redirector 0개, 이전 경로 잔존 0개, 새 목적지 누락 0개다.
+- native source 재검사 결과 의도적으로 유지한 모듈 정체성과 호환 redirect를 제외한 기존 `Khazan` 접두사 타입·include·파일명은 0개다.
+- `KhazanEditor Win64 Development` 빌드는 성공했다. `/Game` Blueprint 38개도 모두 compile됐으며 Blueprint compile failure는 0개다.
+- `CompileAllBlueprints` commandlet 프로세스는 Blueprint compile 전에 기존 `GameFeatures.GameFeatureData` 클래스를 찾지 못하는 startup ensure 때문에 종료 코드 1을 반환했다. 이번 명명 이관으로 생긴 Blueprint 오류와는 분리된 기존 프로젝트 설정 문제다.
+- 변경한 Python 도구 전체는 UE 5.8 bundled Python의 `compileall`을 통과했다.
+
+이 절은 제안이 아니라 2026-09-22에 실제 Source·Config·Unreal asset에 적용하고 검사한 명명 계약이다. 과거 절의 `UKhazan*`, `FKhazan*`, `EKhazan*` 표기는 당시 기록을 보존하며, 이후 구현은 이 절의 `KZ`/`Player` 경계를 따른다.

@@ -124,7 +124,7 @@ def main() -> None:
             "dilation_bakes": sum(asset["dilation_applied"] for asset in assets),
             "root_motion_assets": sum(asset["root_motion"] for asset in assets),
             "player_root_motion_normalized_assets": sum(
-                asset["root_motion"] and asset["skeleton"].endswith("/SK_Khazan")
+                asset["root_motion"] and asset["skeleton"].endswith("/SK_Player")
                 for asset in assets
             ),
             "skipped_already_current": sum(
@@ -193,7 +193,7 @@ def main() -> None:
                 asset["kind"] == "CompositePlayback" for asset in assets
             ),
             "player_root_motion_normalized_assets": sum(
-                asset["root_motion"] and asset["skeleton"].endswith("/SK_Khazan")
+                asset["root_motion"] and asset["skeleton"].endswith("/SK_Player")
                 for asset in assets
             ),
             "skipped_already_current": sum(

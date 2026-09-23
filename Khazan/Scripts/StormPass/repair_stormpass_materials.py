@@ -24,9 +24,9 @@ SCOPE_PATH = os.path.join(
     "Metadata",
     "StormPass_SourceScope.json",
 )
-MAP_PATH = "/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment"
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/StormPass/Maps/"
+    "/Game/_Art/Player/Environment/StormPass/Maps/"
     "L_StormPass_Environment_PreMaterialRebuild"
 )
 
@@ -64,7 +64,7 @@ def main():
     shared.UPDATE_MATERIAL_INSTANCES = False
     shared.MAP_PATH = MAP_PATH
     shared.CORRECTED_ROOT = (
-        "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/SourceAssets"
+        "/Game/_Art/Player/Environment/StormPass/Reconstructed/SourceAssets"
     )
     shared.PLACEMENT_PATH = os.path.join(
         PROJECT_ROOT,

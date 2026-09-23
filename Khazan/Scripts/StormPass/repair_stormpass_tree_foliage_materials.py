@@ -20,7 +20,7 @@ import unreal
 
 
 PROJECT_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", ".."))
-MAP_PATH = "/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment"
 REPORT_PATH = os.path.join(
     PROJECT_ROOT, "Saved", "ImportReports", "StormPass_TreeFoliageMaterial_Repair.json"
 )
@@ -50,15 +50,15 @@ RESOLVED_SOURCE_ROOT = os.path.join(
     "Material",
 )
 INSTANCE_ROOT = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/OverrideMaterials/"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/OverrideMaterials/"
     "ActorOverrides/Materials"
 )
 REPAIR_ROOT = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/MaterialRepairs/Trees"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/MaterialRepairs/Trees"
 )
 PARENT_PATH = REPAIR_ROOT + "/M_SP_SourceTreeFoliage_V2"
 BACKUP_ROOT = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/Backups/"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/Backups/"
     "PreTreeFoliageRepair_20260903/Materials"
 )
 
@@ -419,7 +419,7 @@ def build_foliage_parent():
         "/Engine/EngineMaterials/DefaultNormal"
     )
     default_surface = unreal.EditorAssetLibrary.load_asset(
-        "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/OverrideMaterials/"
+        "/Game/_Art/Player/Environment/StormPass/Reconstructed/OverrideMaterials/"
         "Textures/T_WT_COM_ThinTree_Base_001_02_S"
     )
     if not white or not default_normal or not default_surface:

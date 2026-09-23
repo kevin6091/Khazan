@@ -18,7 +18,7 @@ from typing import Iterable
 import unreal
 
 
-SOURCE_ROOT = "/Game/_Art/Kazan/Animation/Weapons/DualAxeSword"
+SOURCE_ROOT = "/Game/_Art/Player/Animation/Weapons/DualAxeSword"
 REPORT_NAME = "Khazan_DAS_Locomotion_SourceSurvey.json"
 
 LOCOMOTION_TOKENS = (

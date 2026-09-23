@@ -14,10 +14,10 @@ import os
 import unreal
 
 
-RUNTIME_ROOT = "/Game/_Art/Kazan/Animation/Locomotion/Runtime/DualAxeSword"
+RUNTIME_ROOT = "/Game/_Art/Player/Animation/Locomotion/Runtime/DualAxeSword"
 BUILD_REPORT = "Khazan_DAS_Locomotion_RuntimeBuild.json"
 AUDIT_REPORT = "Khazan_DAS_Locomotion_RuntimeAudit.json"
-EXPECTED_SKELETON = "/Game/_Art/Kazan/Character/Meshs/SK_Khazan.SK_Khazan"
+EXPECTED_SKELETON = "/Game/_Art/Player/Character/Meshs/SK_Player.SK_Player"
 SYNC_NAMES = {"LeftFoot", "RightFoot"}
 
 

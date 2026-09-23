@@ -76,7 +76,7 @@ def target_version(row: dict) -> str:
         return COMPOSITE_VERSION
     adapter = row["topology_adapter"]
     normalized_player_root_motion = (
-        row["skeleton_destination"].endswith("/SK_Khazan")
+        row["skeleton_destination"].endswith("/SK_Player")
         and bool(row["properties"].get("bEnableRootMotion", False))
         and abs(float(adapter.get("root_motion_translation_scale", 1.0)) - 1.0)
         > 1.0e-12
@@ -504,7 +504,7 @@ def create_sequence(row: dict):
 
     # UAnimSequence::Skeleton is read-only through the UE 5.8 Python property
     # bridge.  The four unreferenced weapon-object sequences entered the project
-    # on SK_Khazan, so a skeleton correction must recreate their package through
+    # on SK_Player, so a skeleton correction must recreate their package through
     # UAnimSequenceFactory (which calls SetSkeleton in C++) instead of attempting
     # to assign the property on the existing object.  The original package was
     # already hash-verified in the immutable pre-import backup above.

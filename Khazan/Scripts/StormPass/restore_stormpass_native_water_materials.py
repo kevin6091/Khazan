@@ -25,13 +25,13 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.normpath(os.path.join(SCRIPT_DIR, "..", ".."))
 FMODEL_ROOT = os.path.join(os.path.expanduser("~"), "Desktop", "\uce74\uc794")
 FMODEL_EXPORT_ROOT = os.path.join(FMODEL_ROOT, "Exports")
-MAP_PATH = "/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment"
 DEV_MAP_PATH = "/Game/Maps/DevMap"
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/StormPass/Maps/"
+    "/Game/_Art/Player/Environment/StormPass/Maps/"
     "L_StormPass_Environment_PreNativeWaterRestore"
 )
-ASSET_ROOT = "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/WaterAssets"
+ASSET_ROOT = "/Game/_Art/Player/Environment/StormPass/Reconstructed/WaterAssets"
 TEXTURE_ROOT = ASSET_ROOT + "/Textures"
 MATERIAL_ROOT = ASSET_ROOT + "/Materials"
 MASTER_MATERIAL_PATH = MATERIAL_ROOT + "/M_SP_Water_Material_AK_Preview"

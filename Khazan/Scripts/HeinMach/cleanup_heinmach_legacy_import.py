@@ -17,9 +17,9 @@ import traceback
 import unreal
 
 
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Maps/"
+    "/Game/_Art/Player/Environment/HeinMach/Maps/"
     "L_HeinMach_Environment_BeforeLegacyCleanup"
 )
 REPORT_PATH = os.path.join(
@@ -30,7 +30,7 @@ REPORT_PATH = os.path.join(
 
 LEGACY_STAGE_LABEL = "HeinMach_EnvironmentOnly"
 LEGACY_ASSET_ROOT = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Imported/"
+    "/Game/_Art/Player/Environment/HeinMach/Imported/"
     "HeinMach_EnvironmentOnly/StaticMeshes/"
 )
 TERRAIN_FOLDER = "HeinMach/Reconstructed/Terrain"

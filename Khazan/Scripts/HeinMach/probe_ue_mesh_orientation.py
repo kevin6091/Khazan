@@ -8,7 +8,7 @@ import unreal
 
 
 SOURCE_ASSET_ROOT = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/SourceAssets"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/SourceAssets"
 )
 REPORT_PATH = os.path.join(
     unreal.Paths.project_saved_dir(),

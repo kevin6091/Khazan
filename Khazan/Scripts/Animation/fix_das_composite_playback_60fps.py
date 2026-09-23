@@ -37,7 +37,7 @@ REPORT = (
     PROJECT
     / "Saved/ImportReports/Khazan_DAS_CompositeExact60_Import_20260917.json"
 )
-MONTAGE_PATH = "/Game/_Art/Kazan/Animation/InGame/DAS/WeakAttack/AM_DAS_WeakAtkCombo"
+MONTAGE_PATH = "/Game/_Art/Player/Animation/InGame/DAS/WeakAttack/AM_DAS_WeakAtkCombo"
 TEMP_ROOT = "/Game/__DAS_Exact60_Migration"
 TARGET_RATE = unreal.FrameRate(60, 1)
 VERSION = "20260917_DAS_CompositeExact60HzV5"
@@ -96,7 +96,7 @@ def discover_targets() -> list[str]:
     registry.search_all_assets(True)
     result = []
     for data in registry.get_assets_by_path(
-        "/Game/_Art/Kazan/Animation",
+        "/Game/_Art/Player/Animation",
         recursive=True,
         include_only_on_disk_assets=True,
     ):
@@ -112,8 +112,8 @@ def discover_targets() -> list[str]:
             f"Expected {EXPECTED_TARGET_COUNT} CompositePlayback assets, got {len(result)}"
         )
     allowed_roots = (
-        "/Game/_Art/Kazan/Animation/Playback/DualAxeSword/",
-        "/Game/_Art/Kazan/Animation/InGame/DAS/WeakAttack/",
+        "/Game/_Art/Player/Animation/Playback/DualAxeSword/",
+        "/Game/_Art/Player/Animation/InGame/DAS/WeakAttack/",
     )
     outside = [path for path in result if not path.startswith(allowed_roots)]
     if outside:

@@ -12,7 +12,7 @@ import traceback
 import unreal
 
 
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 REPORT_PATH = os.path.join(
     unreal.Paths.project_saved_dir(), "ImportReports", "HeinMach_Environment_Audit.json"
 )

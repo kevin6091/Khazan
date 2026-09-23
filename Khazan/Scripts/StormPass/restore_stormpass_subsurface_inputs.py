@@ -12,7 +12,7 @@ import unreal
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '../..'))
 base = runpy.run_path(os.path.join(ROOT, 'Scripts/StormPass/restore_stormpass_surface_controls.py'))
 read, write = base['read'], base['write']
-TEXTURE_ROOT = '/Game/_Art/Kazan/Environment/StormPass/Reconstructed/MaterialRepairs/Surfaces/Textures'
+TEXTURE_ROOT = '/Game/_Art/Player/Environment/StormPass/Reconstructed/MaterialRepairs/Surfaces/Textures'
 PARENT_ROOT = base['PARENT'].rsplit('/', 1)[0]
 MANIFEST = os.path.join(ROOT, 'Saved/Extracted/StormPass/AdditionalTextures_20260908/TargetedTextureManifest.json')
 REPORT = os.path.join(base['META'], 'StormPass_SubsurfaceRestoration_20260908.json')

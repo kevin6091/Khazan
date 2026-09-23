@@ -8,11 +8,11 @@ import unreal
 
 
 SANDBOX_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Maps/"
+    "/Game/_Art/Player/Environment/HeinMach/Maps/"
     "L_HeinMach_FoliageImportSandbox"
 )
 FOLIAGE_ASSET_ROOT = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/FoliageBatches"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/FoliageBatches"
 )
 REPORT_PATH = os.path.join(
     unreal.Paths.project_saved_dir(),

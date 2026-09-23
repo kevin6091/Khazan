@@ -16,12 +16,12 @@ import unreal
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 EXCLUSION_SCRIPT_PATH = os.path.join(SCRIPT_DIR, "heinmach_exclusions.py")
 FMODEL_ROOT = os.path.join(os.path.expanduser("~"), "Desktop", "\uce74\uc794")
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Maps/"
+    "/Game/_Art/Player/Environment/HeinMach/Maps/"
     "L_HeinMach_Environment_PreSurfaceFix"
 )
-RECONSTRUCTED_ROOT = "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed"
+RECONSTRUCTED_ROOT = "/Game/_Art/Player/Environment/HeinMach/Reconstructed"
 # The first reconstruction used USD asset sharing and material-slot merging.
 # Keep those assets untouched as a rollback source and import a corrected,
 # isolated library for the live reconstructed map.

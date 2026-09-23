@@ -1,4 +1,0 @@
-
-
-
-#include "Ability/KhazanGameplayAbility.h"

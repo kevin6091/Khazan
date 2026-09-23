@@ -47,10 +47,10 @@ def main():
     scope = load_json(SCOPE_PATH)
     shared.APPLY_CHANGES = False
     shared.MAP_PATH = (
-        "/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment"
+        "/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment"
     )
     shared.CORRECTED_ROOT = (
-        "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/SourceAssets"
+        "/Game/_Art/Player/Environment/StormPass/Reconstructed/SourceAssets"
     )
     shared.PLACEMENT_PATH = os.path.join(
         PROJECT_ROOT,

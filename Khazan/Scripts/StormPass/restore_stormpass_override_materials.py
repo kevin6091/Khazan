@@ -34,17 +34,17 @@ def main():
     shared = load_shared()
     report_root = os.path.join(PROJECT_ROOT, "Saved", "ImportReports")
     shared.MAP_PATH = (
-        "/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment"
+        "/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment"
     )
     shared.BACKUP_MAP_PATH = (
-        "/Game/_Art/Kazan/Environment/StormPass/Maps/"
+        "/Game/_Art/Player/Environment/StormPass/Maps/"
         "L_StormPass_Environment_PreOverrideMaterialRebuild"
     )
     shared.CORRECTED_ROOT = (
-        "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/SourceAssets"
+        "/Game/_Art/Player/Environment/StormPass/Reconstructed/SourceAssets"
     )
     shared.OVERRIDE_ROOT = (
-        "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/OverrideMaterials"
+        "/Game/_Art/Player/Environment/StormPass/Reconstructed/OverrideMaterials"
     )
     shared.MATERIAL_ROOT = shared.OVERRIDE_ROOT + "/ActorOverrides/Materials"
     shared.TEXTURE_ROOT = shared.OVERRIDE_ROOT + "/Textures"

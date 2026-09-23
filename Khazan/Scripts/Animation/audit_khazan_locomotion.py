@@ -8,9 +8,9 @@ import os
 import unreal
 
 
-RUNTIME_ROOT = "/Game/_Art/Kazan/Animation/Locomotion/Runtime/DualAxeSword"
-PROFILE_PATH = "/Game/_Art/Kazan/Animation/Locomotion/Profiles/DA_Locomotion_DualAxeSword"
-ABP_PATH = "/Game/_Art/Kazan/Character/Bluprints/ABP_Player"
+RUNTIME_ROOT = "/Game/_Art/Player/Animation/Locomotion/Runtime/DualAxeSword"
+PROFILE_PATH = "/Game/_Art/Player/Animation/Locomotion/Profiles/DA_Locomotion_DualAxeSword"
+ABP_PATH = "/Game/_Art/Player/Character/Bluprints/ABP_Player"
 
 EXPECTED_FRAMES = {
     "RT_DAS_Idle": 249,
@@ -140,7 +140,7 @@ def main() -> None:
         checks.extend(
             [
                 {"name": "abp.compile", "passed": "UP_TO_DATE" in graph_report["compile_status"]},
-                {"name": "abp.parent", "passed": graph_report["parent_class"] == "/Script/Khazan.KhazanAnimInstance"},
+                {"name": "abp.parent", "passed": graph_report["parent_class"] == "/Script/Khazan.KZAnimInstance"},
                 {"name": "abp.slot_count", "passed": len(slots) == 1},
                 {"name": "abp.root_from_slot", "passed": len(slots) == 1 and slots[0].get_name() in root_links},
                 {"name": "abp.slot_from_state_machine", "passed": len(machines) == 1 and machines[0].get_name() in slot_input_links},

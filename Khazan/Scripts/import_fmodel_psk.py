@@ -22,7 +22,7 @@ SOURCE_ROOT = os.path.join(
     "Character",
     "CHA_Model",
 )
-DESTINATION_ROOT = "/Game/_Art/Kazan/FModel/PSK"
+DESTINATION_ROOT = "/Game/_Art/Player/FModel/PSK"
 FACTORY_CLASS_PATH = "/Script/UnrealPSKPSA.PSKFactory"
 REPORT_PATH = os.path.join(
     unreal.Paths.project_saved_dir(), "ImportReports", "FModel_PSK_Import.json"

@@ -28,7 +28,7 @@ REPORT_PATH = (
     PROJECT
     / "Saved/ImportReports/Khazan_DAS_CompositeExact60_FinalAudit_20260917.json"
 )
-MONTAGE_PATH = "/Game/_Art/Kazan/Animation/InGame/DAS/WeakAttack/AM_DAS_WeakAtkCombo"
+MONTAGE_PATH = "/Game/_Art/Player/Animation/InGame/DAS/WeakAttack/AM_DAS_WeakAtkCombo"
 TEMP_ROOT = "/Game/__DAS_Exact60_Migration"
 VERSION = "20260917_DAS_CompositeExact60HzV5"
 EAL = unreal.EditorAssetLibrary
@@ -157,7 +157,7 @@ def verify_montage() -> dict:
         raise RuntimeError("WeakAttack montage changed during the exact-60 migration")
     segment = segments[0]
     reference = segment.get_editor_property("anim_reference")
-    expected_path = "/Game/_Art/Kazan/Animation/InGame/DAS/WeakAttack/DAS_Khazan_WeakAtk01"
+    expected_path = "/Game/_Art/Player/Animation/InGame/DAS/WeakAttack/DAS_Player_WeakAttack01"
     if package_path(reference) != expected_path:
         raise RuntimeError("WeakAttack montage reference changed unexpectedly")
     reference_length = float(reference.get_play_length())
@@ -209,7 +209,7 @@ def main() -> None:
         registry.search_all_assets(True)
         current = []
         for data in registry.get_assets_by_path(
-            "/Game/_Art/Kazan/Animation", True, True
+            "/Game/_Art/Player/Animation", True, True
         ):
             if str(data.asset_class_path.asset_name) != "AnimSequence":
                 continue

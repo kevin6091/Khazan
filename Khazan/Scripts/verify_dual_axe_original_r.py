@@ -3,11 +3,11 @@
 import unreal
 
 
-MESH_PATH = "/Game/_Art/Kazan/Item/Original/DualAxeSword_Original_R"
-INSTANCE_PATH = "/Game/_Art/Kazan/Material/Item/CM_I_DualAxeSword_Original001V2_R"
-PARENT_PATH = "/Game/_Art/Kazan/Material/Generated/Base/BASE_PCMetal_AK"
+MESH_PATH = "/Game/_Art/Player/Item/Original/DualAxeSword_Original_R"
+INSTANCE_PATH = "/Game/_Art/Player/Material/Item/CM_I_DualAxeSword_Original001V2_R"
+PARENT_PATH = "/Game/_Art/Player/Material/Generated/Base/BASE_PCMetal_AK"
 SLOT_NAME = "CM_I_DualAxeSword_Original001_R"
-TEXTURE_ROOT = "/Game/_Art/Kazan/Texture/Generated/"
+TEXTURE_ROOT = "/Game/_Art/Player/Texture/Generated/"
 EXPECTED = {
     "Tex_D": "CT_I_DualAxeSword_Original001V2_R_D",
     "Tex_S": "CT_I_DualAxeSword_Original001V2_R_S",

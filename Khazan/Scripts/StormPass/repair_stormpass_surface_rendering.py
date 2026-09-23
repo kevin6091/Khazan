@@ -15,7 +15,7 @@ import os
 import unreal
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", ".."))
-ASSET_ROOT = "/Game/_Art/Kazan/Environment/StormPass/"
+ASSET_ROOT = "/Game/_Art/Player/Environment/StormPass/"
 MAP = ASSET_ROOT + "Maps/L_StormPass_Environment"
 REPORTS = os.path.join(ROOT, "Saved", "ImportReports")
 PLAN = os.path.join(REPORTS, "StormPass_SurfaceRendering_Plan_20260907.json")

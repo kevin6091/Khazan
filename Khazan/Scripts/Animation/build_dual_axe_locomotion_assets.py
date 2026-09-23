@@ -1,4 +1,4 @@
-"""Build deterministic runtime locomotion assets for Khazan's DualAxeSword stance.
+"""Build deterministic runtime locomotion assets for the Player's DualAxeSword stance.
 
 The imported FBX sequences are preserved as source assets.  FModel/Blender FBX
 exports in the current snapshot all arrived as 249-frame sequences even when the
@@ -16,11 +16,11 @@ from dataclasses import dataclass
 import unreal
 
 
-SOURCE_ROOT = "/Game/_Art/Kazan/Animation/Weapons/DualAxeSword/Shared/Locomotion"
-RUNTIME_ROOT = "/Game/_Art/Kazan/Animation/Locomotion/Runtime/DualAxeSword"
-PROFILE_ROOT = "/Game/_Art/Kazan/Animation/Locomotion/Profiles"
+SOURCE_ROOT = "/Game/_Art/Player/Animation/Weapons/DualAxeSword/Shared/Locomotion"
+RUNTIME_ROOT = "/Game/_Art/Player/Animation/Locomotion/Runtime/DualAxeSword"
+PROFILE_ROOT = "/Game/_Art/Player/Animation/Locomotion/Profiles"
 PROFILE_PATH = f"{PROFILE_ROOT}/DA_Locomotion_DualAxeSword"
-ABP_PATH = "/Game/_Art/Kazan/Character/Bluprints/ABP_Player"
+ABP_PATH = "/Game/_Art/Player/Character/Bluprints/ABP_Player"
 SYNC_TRACK = "LocomotionSync"
 
 
@@ -186,9 +186,9 @@ def _create_or_load_profile():
     if profile is not None:
         return profile
 
-    profile_class = getattr(unreal, "KhazanLocomotionProfile", None)
+    profile_class = getattr(unreal, "KZLocomotionProfile", None)
     if profile_class is None:
-        raise RuntimeError("KhazanLocomotionProfile is not loaded. Build the C++ Editor target and restart UE.")
+        raise RuntimeError("KZLocomotionProfile is not loaded. Build the C++ Editor target and restart UE.")
 
     factory = unreal.DataAssetFactory()
     factory.set_editor_property("data_asset_class", profile_class)
@@ -277,7 +277,7 @@ def main() -> None:
     with open(report_path, "w", encoding="utf-8") as handle:
         json.dump(report, handle, ensure_ascii=False, indent=2)
 
-    unreal.log(f"Khazan locomotion runtime assets built: {len(clip_report)} clips")
+    unreal.log(f"Player locomotion runtime assets built: {len(clip_report)} clips")
     unreal.log(f"Report: {report_path}")
     print(json.dumps(report, ensure_ascii=False))
 

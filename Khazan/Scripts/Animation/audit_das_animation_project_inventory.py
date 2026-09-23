@@ -17,14 +17,14 @@ import unreal
 PROJECT = pathlib.Path(unreal.Paths.project_dir()).resolve()
 REPORT = PROJECT / "Saved/ImportReports/Khazan_DAS_Animation_ProjectInventory_20260916.json"
 
-SOURCE_ROOT = "/Game/_Art/Kazan/Animation/Weapons/DualAxeSword"
-INGAME_ROOT = "/Game/_Art/Kazan/Animation/InGame/DAS"
-LOCOMOTION_RUNTIME_ROOT = "/Game/_Art/Kazan/Animation/Locomotion/Runtime/DualAxeSword"
-PLAYBACK_ROOT = "/Game/_Art/Kazan/Animation/Playback/DualAxeSword"
-PLAYER_ANIM_BLUEPRINT = "/Game/_Art/Kazan/Character/Bluprints/ABP_Player"
+SOURCE_ROOT = "/Game/_Art/Player/Animation/Weapons/DualAxeSword"
+INGAME_ROOT = "/Game/_Art/Player/Animation/InGame/DAS"
+LOCOMOTION_RUNTIME_ROOT = "/Game/_Art/Player/Animation/Locomotion/Runtime/DualAxeSword"
+PLAYBACK_ROOT = "/Game/_Art/Player/Animation/Playback/DualAxeSword"
+PLAYER_ANIM_BLUEPRINT = "/Game/_Art/Player/Character/Bluprints/ABP_Player"
 TARGET_SKELETONS = {
-    "/Game/_Art/Kazan/Character/Meshs/SK_Khazan": "/Game/_Art/Kazan/Character/Meshs/SKM_Khazan",
-    "/Game/_Art/Kazan/Item/Imperial/DualAxeSword_Imperial_R_Skeleton": "/Game/_Art/Kazan/Item/Imperial/DualAxeSword_Imperial_R",
+    "/Game/_Art/Player/Character/Meshs/SK_Player": "/Game/_Art/Player/Character/Meshs/SKM_Player",
+    "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_R_Skeleton": "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_R",
 }
 
 

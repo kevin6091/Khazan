@@ -38,12 +38,12 @@ REPORT_PATH = os.path.join(
     "StormPass_StaticMesh_Reconstruction.json",
 )
 
-MAP_PATH = "/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment"
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/StormPass/Maps/"
+    "/Game/_Art/Player/Environment/StormPass/Maps/"
     "L_StormPass_Environment_PreRootPropRebuild"
 )
-RECONSTRUCTED_ROOT = "/Game/_Art/Kazan/Environment/StormPass/Reconstructed"
+RECONSTRUCTED_ROOT = "/Game/_Art/Player/Environment/StormPass/Reconstructed"
 DESTINATION_ROOT = RECONSTRUCTED_ROOT + "/SourceAssets"
 STAGE_NAME = "StormPass_StaticMeshLibrary"
 GENERATED_STAGE_PATH = os.path.join(

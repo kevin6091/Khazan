@@ -27,7 +27,7 @@ def main():
         if not n or n.startswith(('Content/_Art/Enemies/','Scripts/Enemies/')) or n in doc_own:continue
         f=PROJECT/n
         if f.is_file():protected[n]=sha(f)
-    for n in ['Content/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment.umap','Content/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment.umap']:
+    for n in ['Content/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment.umap','Content/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment.umap']:
         protected[n]=sha(PROJECT/n)
     out={'date':datetime.datetime.now().astimezone().isoformat(),'backup':str(backup),'deleted_asset_candidates':deleted,'retained_assets':retained,'protected_worktree_files':protected,'plan_sha256':sha(PLAN)}
     (backup/'BackupManifest.json').write_text(json.dumps(out,indent=2,ensure_ascii=False),encoding='utf-8')

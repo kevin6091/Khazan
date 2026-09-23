@@ -12,17 +12,17 @@ import traceback
 import unreal
 
 
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 SANDBOX_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Maps/"
+    "/Game/_Art/Player/Environment/HeinMach/Maps/"
     "L_HeinMach_FoliageImportSandbox"
 )
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Maps/"
+    "/Game/_Art/Player/Environment/HeinMach/Maps/"
     "L_HeinMach_Environment_BeforeFoliageRestore"
 )
 CORRECTED_SOURCE_ROOT = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/"
     "CorrectedSourceAssets"
 )
 FOLIAGE_FOLDER_ROOT = "HeinMach/Reconstructed/FoliageBatches"

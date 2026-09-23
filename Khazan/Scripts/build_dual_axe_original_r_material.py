@@ -20,12 +20,12 @@ if SCRIPT_DIR not in sys.path:
 import build_khazan_materials as khazan  # noqa: E402
 
 
-TARGET_MESH_PATH = "/Game/_Art/Kazan/Item/Original/DualAxeSword_Original_R"
+TARGET_MESH_PATH = "/Game/_Art/Player/Item/Original/DualAxeSword_Original_R"
 TARGET_JSON_NAME = "CM_I_DualAxeSword_Original001V2_R"
-TARGET_INSTANCE_ROOT = "/Game/_Art/Kazan/Material/Item"
+TARGET_INSTANCE_ROOT = "/Game/_Art/Player/Material/Item"
 TARGET_INSTANCE_PATH = TARGET_INSTANCE_ROOT + "/" + TARGET_JSON_NAME
 TARGET_SLOT_NAME = "CM_I_DualAxeSword_Original001_R"
-TARGET_PARENT_PATH = "/Game/_Art/Kazan/Material/Generated/Base/BASE_PCMetal_AK"
+TARGET_PARENT_PATH = "/Game/_Art/Player/Material/Generated/Base/BASE_PCMetal_AK"
 
 EXPECTED_CHAIN = (
     "CM_I_DualAxeSword_Original001V2_R",

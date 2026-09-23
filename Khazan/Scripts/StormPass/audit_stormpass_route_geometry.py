@@ -11,7 +11,7 @@ import math
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-METADATA = ROOT / "Content/_Art/Kazan/Environment/StormPass/Metadata"
+METADATA = ROOT / "Content/_Art/Player/Environment/StormPass/Metadata"
 
 
 def read(path):

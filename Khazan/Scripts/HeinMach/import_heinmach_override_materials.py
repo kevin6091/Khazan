@@ -15,8 +15,8 @@ import unreal
 
 
 FMODEL_ROOT = os.path.join(os.path.expanduser("~"), "Desktop", "\uce74\uc794")
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
-OVERRIDE_ROOT = "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/OverrideMaterials"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
+OVERRIDE_ROOT = "/Game/_Art/Player/Environment/HeinMach/Reconstructed/OverrideMaterials"
 OVERRIDE_MATERIAL_ROOT = OVERRIDE_ROOT + "/Materials"
 OVERRIDE_TEXTURE_ROOT = OVERRIDE_ROOT + "/Textures"
 USD_PREVIEW_PARENT = (

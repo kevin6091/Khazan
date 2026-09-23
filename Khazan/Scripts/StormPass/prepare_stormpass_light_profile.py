@@ -44,7 +44,7 @@ REPORT_PATH = os.path.join(
     "StormPass_LightProfile_AssetPreparation.json",
 )
 ASSET_FOLDER = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/LightAssets/IES"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/LightAssets/IES"
 )
 PROFILE_ASSET_PATH = ASSET_FOLDER + "/TLP_JellyFish"
 FAILED_PROBE_ASSET_PATHS = (

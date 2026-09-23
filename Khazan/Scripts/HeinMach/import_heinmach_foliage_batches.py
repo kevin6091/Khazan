@@ -24,10 +24,10 @@ GENERATED_STAGE_PATH = os.path.join(
     unreal.Paths.project_saved_dir(), "ImportSources", STAGE_NAME + ".usda"
 )
 DESTINATION_ROOT = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/FoliageBatches"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/FoliageBatches"
 )
 SANDBOX_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Maps/"
+    "/Game/_Art/Player/Environment/HeinMach/Maps/"
     "L_HeinMach_FoliageImportSandbox"
 )
 REPORT_PATH = os.path.join(

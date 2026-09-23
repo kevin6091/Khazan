@@ -21,9 +21,9 @@ APPLY_CHANGES = True
 UPDATE_MATERIAL_INSTANCES = True
 
 FMODEL_ROOT = os.path.join(os.path.expanduser("~"), "Desktop", "\uce74\uc794")
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 CORRECTED_ROOT = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/CorrectedSourceAssets"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/CorrectedSourceAssets"
 )
 PLACEMENT_PATH = os.path.join(
     unreal.Paths.project_content_dir(),

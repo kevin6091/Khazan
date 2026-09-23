@@ -23,8 +23,8 @@ SOURCE_LEVEL_ROOT = os.path.join(
     "HeinMach",
 )
 STAGE_NAME = "HeinMach_EnvironmentOnly"
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
-DESTINATION_ROOT = "/Game/_Art/Kazan/Environment/HeinMach/Imported"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
+DESTINATION_ROOT = "/Game/_Art/Player/Environment/HeinMach/Imported"
 GENERATED_STAGE_PATH = os.path.join(
     unreal.Paths.project_saved_dir(), "ImportSources", STAGE_NAME + ".usda"
 )

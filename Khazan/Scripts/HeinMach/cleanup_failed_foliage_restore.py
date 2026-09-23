@@ -7,7 +7,7 @@ import traceback
 import unreal
 
 
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 EXPECTED_BASE_ACTOR_COUNT = 2760
 IMPORT_REPORT_PATH = os.path.join(
     unreal.Paths.project_saved_dir(),

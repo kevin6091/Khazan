@@ -15,7 +15,7 @@ import unreal
 
 
 SOURCE_ROOT = os.path.join(os.path.expanduser("~"), "Desktop", "\uce74\uc794")
-KHAZAN_ROOT = "/Game/_Art/Kazan"
+KHAZAN_ROOT = "/Game/_Art/Player"
 GENERATED_ROOT = KHAZAN_ROOT + "/Material/Generated"
 MASTER_ROOT = GENERATED_ROOT + "/Masters"
 BASE_ROOT = GENERATED_ROOT + "/Base"
@@ -23,7 +23,7 @@ INSTANCE_ROOT = GENERATED_ROOT + "/Instances"
 TEXTURE_ROOT = KHAZAN_ROOT + "/Texture/Generated"
 
 CHARACTER_MASTER_NAME = "M_AKCartoonCharacter"
-EYE_SHADOW_MASTER_NAME = "M_Khazan_EyeShadow"
+EYE_SHADOW_MASTER_NAME = "M_Player_EyeShadow"
 EYE_SHADOW_NAME = "EyeShadow"
 
 KNOWN_PARENTS = {

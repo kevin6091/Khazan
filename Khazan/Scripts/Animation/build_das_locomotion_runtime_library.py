@@ -22,7 +22,7 @@ from dataclasses import dataclass
 import unreal
 
 
-RUNTIME_ROOT = "/Game/_Art/Kazan/Animation/Locomotion/Runtime/DualAxeSword"
+RUNTIME_ROOT = "/Game/_Art/Player/Animation/Locomotion/Runtime/DualAxeSword"
 SURVEY_REPORT = "Khazan_DAS_Locomotion_SourceSurvey.json"
 PSA_REPORT = "Khazan_DAS_PSA_SourceMetadata.json"
 BUILD_REPORT = "Khazan_DAS_Locomotion_RuntimeBuild.json"

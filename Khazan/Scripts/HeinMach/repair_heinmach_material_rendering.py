@@ -39,7 +39,7 @@ BACKUP_ROOT = os.path.join(
 )
 USD_OPAQUE_PARENT = "/USDCore/Materials/UsdPreviewSurface.UsdPreviewSurface"
 FOG_ASSET_TOKEN = "/FogSheets/"
-PROJECT_ASSET_PREFIX = "/Game/_Art/Kazan/Environment/HeinMach/"
+PROJECT_ASSET_PREFIX = "/Game/_Art/Player/Environment/HeinMach/"
 
 
 def load_json(path):

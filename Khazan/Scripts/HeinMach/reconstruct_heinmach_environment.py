@@ -15,16 +15,16 @@ import traceback
 import unreal
 
 
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Maps/"
+    "/Game/_Art/Player/Environment/HeinMach/Maps/"
     "L_HeinMach_Environment_BeforeReconstruction"
 )
-RECONSTRUCTED_ROOT = "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed"
+RECONSTRUCTED_ROOT = "/Game/_Art/Player/Environment/HeinMach/Reconstructed"
 MATERIAL_FOLDER = RECONSTRUCTED_ROOT + "/Materials"
 TERRAIN_MATERIAL_PATH = MATERIAL_FOLDER + "/M_HeinMach_Terrain_Preview"
 IMPORTED_TEXTURE_ROOT = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Imported/"
+    "/Game/_Art/Player/Environment/HeinMach/Imported/"
     "HeinMach_EnvironmentOnly/Textures"
 )
 TERRAIN_BASE_COLOR_PATH = IMPORTED_TEXTURE_ROOT + "/T_WT_VFS_Soil_Tile_001_D"

@@ -21,7 +21,7 @@ import unreal
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.normpath(os.path.join(SCRIPT_DIR, "..", ".."))
-MAP_PATH = "/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment"
 DEV_MAP_PATH = "/Game/Maps/DevMap"
 MAP_DISK_PATH = os.path.join(
     PROJECT_ROOT,
@@ -998,11 +998,11 @@ def audit_visual_material_integrity(actors):
     library = unreal.EditorAssetLibrary
     material_library = unreal.MaterialEditingLibrary
     environment_root = (
-        "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/"
+        "/Game/_Art/Player/Environment/StormPass/Reconstructed/"
         "EnvironmentAssets"
     )
     fog_root = (
-        "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/FogAssets"
+        "/Game/_Art/Player/Environment/StormPass/Reconstructed/FogAssets"
     )
     specifications = {
         "sky": {

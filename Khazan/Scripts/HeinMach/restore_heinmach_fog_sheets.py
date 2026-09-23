@@ -16,12 +16,12 @@ import unreal
 
 
 FMODEL_ROOT = os.path.join(os.path.expanduser("~"), "Desktop", "\uce74\uc794")
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Maps/"
+    "/Game/_Art/Player/Environment/HeinMach/Maps/"
     "L_HeinMach_Environment_BeforeFogSheetRestore"
 )
-RECONSTRUCTED_ROOT = "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed"
+RECONSTRUCTED_ROOT = "/Game/_Art/Player/Environment/HeinMach/Reconstructed"
 FOG_ROOT = RECONSTRUCTED_ROOT + "/FogSheets"
 FOG_MESH_ROOT = FOG_ROOT + "/Meshes"
 FOG_TEXTURE_ROOT = FOG_ROOT + "/Textures"

@@ -19,7 +19,7 @@ import unreal
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.normpath(os.path.join(SCRIPT_DIR, "..", ".."))
-MAP_PATH = "/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment"
 REPORT_PATH = os.path.join(
     PROJECT_ROOT, "Saved", "ImportReports", "StormPass_OreMaterial_Repair.json"
 )
@@ -40,15 +40,15 @@ SOURCE_ROOT = os.path.join(
     "Material",
 )
 INSTANCE_ROOT = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/OverrideMaterials/"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/OverrideMaterials/"
     "ActorOverrides/Materials"
 )
 REPAIR_ROOT = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/MaterialRepairs/Ore"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/MaterialRepairs/Ore"
 )
 PARENT_PATH = REPAIR_ROOT + "/M_SP_SourceOre_V2"
 BACKUP_ROOT = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/Backups/"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/Backups/"
     "PreOreMaterialRepair_20260904/Materials"
 )
 MATERIAL_COUNTS = {
@@ -237,7 +237,7 @@ def build_ore_parent(helper):
         "/Engine/EngineMaterials/DefaultNormal"
     )
     default_surface = unreal.EditorAssetLibrary.load_asset(
-        "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/OverrideMaterials/"
+        "/Game/_Art/Player/Environment/StormPass/Reconstructed/OverrideMaterials/"
         "Textures/T_WT_COM_Ore_Base_001_S"
     )
     if not white or not default_normal or not default_surface:

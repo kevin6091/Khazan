@@ -52,7 +52,7 @@ REPORT_PATH = os.path.join(
     "ImportReports",
     "StormPass_FoliageOverrideMaterial_Restoration.json",
 )
-RECONSTRUCTED_ROOT = "/Game/_Art/Kazan/Environment/StormPass/Reconstructed"
+RECONSTRUCTED_ROOT = "/Game/_Art/Player/Environment/StormPass/Reconstructed"
 SOURCE_ROOT = RECONSTRUCTED_ROOT + "/SourceAssets"
 FOLIAGE_ASSET_ROOT = RECONSTRUCTED_ROOT + "/FoliageAssets"
 OVERRIDE_ROOT = RECONSTRUCTED_ROOT + "/OverrideMaterials"

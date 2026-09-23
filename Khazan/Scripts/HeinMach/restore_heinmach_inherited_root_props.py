@@ -31,7 +31,7 @@ REPORT_PATH = os.path.join(
     "HeinMach_InheritedRootProp_Restoration.json",
 )
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Maps/"
+    "/Game/_Art/Player/Environment/HeinMach/Maps/"
     "L_HeinMach_Environment_PreTemplateCoverageFix"
 )
 

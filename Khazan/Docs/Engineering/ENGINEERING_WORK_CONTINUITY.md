@@ -363,3 +363,11 @@
 - 3상태 gate 통과 뒤 `RecoveryCancelOpen`을 Attack02에 먼저 배치하고, 이미 유지 중인 move intent와 point 이후 Move Started semantic event로 early exit를 검증한다. 이동 전환과 Strong/Dodge Ability handoff를 한 번에 구현하지 않는다.
 - 현재 디스크 Montage의 Open/Commit은 아직 `Queued`다. 세 combo point와 recovery point는 gameplay 분기이므로 저장 전에 `Branching Point`인지 확인한다.
 - 이번 작업은 read-only Source/asset/UE 5.8.2 engine 검사와 문서 append다. 게임 Source와 Content asset, build와 PIE는 변경·실행하지 않았다.
+
+## 2026-09-23 — Art package root 후속 정리 대기
+
+- `_Art/Kazan` → `_Art/Player` 전환을 위해 `Config/DefaultEngine.ini`의 `[CoreRedirects]`에 wildcard `PackageRedirects`를 추가했다. 이전 root가 사라진 뒤에도 저장되지 않은 외부 package 참조를 `/Game/_Art/Player`로 해석하기 위한 호환 경계다.
+- `Scripts`에서 이전 `/Game/_Art/Kazan`·`Content/_Art/Kazan` 경로 216곳, 87개 파일을 새 root로 기계적으로 갱신했다. 갱신 뒤 233개 Python 파일 전체를 `ast.parse`로 검사했고 실패는 0이다. `Source`와 `Scripts`에는 이전 경로가 남지 않았고 `Config`에는 redirect의 `OldName` 한 곳만 의도적으로 남아 있다.
+- `KZComboAttackAbility.h/.cpp`에는 Art package 경로 literal이 없고 asset 참조는 설정 가능한 property로 연결되므로 수정하지 않았다. 이번 복구에서 gameplay Source 변경은 필요하지 않다.
+- 남은 검증은 Unreal Editor 정상 종료 뒤 이전 Content root를 quarantine으로 이동한 상태에서 commandlet을 재실행해 redirect 구문, Asset Registry 이전 참조 0, 대표 package load를 함께 확인하는 것이다. 현재 blocker와 정확한 파일 이동 재개 순서는 `Docs/Art/ART_WORK_CONTINUITY.md`의 2026-09-23 절에 기록했다.
+- main push 전 검증에서 233개 Python 파일의 `ast.parse`와 Source/Config/Docs/Scripts staged diff check가 통과했다. UE 5.8.2 Development Editor build는 UHT와 22개 C++ compile action이 모두 성공했고, 실행 중인 PID 8020이 `Binaries/Win64/UnrealEditor-Khazan.dll`을 잠가 최종 link만 `LNK1104`로 중단됐다. 이 결과를 코드 컴파일 실패나 완전한 build 성공으로 확대하지 않는다.

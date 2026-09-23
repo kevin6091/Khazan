@@ -35,12 +35,12 @@ ORIGINAL_EXTERNAL_PREFIX = (
     "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/"
 )
 ORIGINAL_SKILL_PREFIX = "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/"
-UE_SOURCE_ROOT = "/Game/_Art/Kazan/Animation/Weapons/DualAxeSword"
-PLAYBACK_ROOT = "/Game/_Art/Kazan/Animation/Playback/DualAxeSword/Composite"
+UE_SOURCE_ROOT = "/Game/_Art/Player/Animation/Weapons/DualAxeSword"
+PLAYBACK_ROOT = "/Game/_Art/Player/Animation/Playback/DualAxeSword/Composite"
 CURRENT_LOCOMOTION_DERIVED_SOURCES = {
-    "DAS_Khazan_Walk_Loop": "CA_P_Kazan_DualAxeSword_Walk_F",
-    "DAS_Khazan_Run_Loop": "CA_P_Kazan_DualAxeSword_Run_F",
-    "DAS_Khazan_Sprint_Loop": "CA_P_Kazan_DualAxeSword_Sprint_F",
+    "DAS_Player_Walk_Loop": "CA_P_Kazan_DualAxeSword_Walk_F",
+    "DAS_Player_Run_Loop": "CA_P_Kazan_DualAxeSword_Run_F",
+    "DAS_Player_Sprint_Loop": "CA_P_Kazan_DualAxeSword_Sprint_F",
 }
 
 HEADER = struct.Struct("<20siii")

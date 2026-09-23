@@ -39,13 +39,13 @@ FMODEL_EXPORT_LEVEL_ROOT = os.path.join(
     "Level",
     "HeinMach",
 )
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Maps/"
+    "/Game/_Art/Player/Environment/HeinMach/Maps/"
     "L_HeinMach_Environment_PreLandscapeStaticRestore"
 )
 DESTINATION_ROOT = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/LandscapeStatic"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/LandscapeStatic"
 )
 MATERIAL_PATH = DESTINATION_ROOT + "/Materials/M_HeinMach_Landscape_Recovery"
 RECOVERY_MATERIAL_VERSION = 2

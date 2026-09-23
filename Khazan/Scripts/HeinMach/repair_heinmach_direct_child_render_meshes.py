@@ -28,7 +28,7 @@ REPORT_PATH = os.path.join(
     "HeinMach_DirectChild_TransformMaterial_Repair.json",
 )
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Maps/"
+    "/Game/_Art/Player/Environment/HeinMach/Maps/"
     "L_HeinMach_Environment_PreDirectChildTransformMaterialFix"
 )
 EXPECTED_COMPONENT_COUNT = 15
@@ -36,11 +36,11 @@ EXPECTED_MESH_COUNT = 3
 EXPECTED_RENDER_OVERRIDE_REFERENCE_COUNT = 29
 EXPECTED_NON_RENDER_REFERENCE_COUNT = 5
 MATERIAL_SEARCH_ROOTS = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/OverrideMaterials/Inherited/Materials",
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/CorrectedSourceAssets",
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/OverrideMaterials/Materials",
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/ChildRenderAssets",
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/SourceAssets",
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/OverrideMaterials/Inherited/Materials",
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/CorrectedSourceAssets",
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/OverrideMaterials/Materials",
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/ChildRenderAssets",
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/SourceAssets",
 )
 
 

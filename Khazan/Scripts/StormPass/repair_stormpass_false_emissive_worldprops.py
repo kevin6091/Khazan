@@ -18,7 +18,7 @@ import unreal
 
 
 PROJECT_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", ".."))
-MAP_PATH = "/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment"
 REPORT_PATH = os.path.join(
     PROJECT_ROOT,
     "Saved",
@@ -51,11 +51,11 @@ MASTER_SOURCE_PATH = os.path.join(
     "M_WorldProp.json",
 )
 INSTANCE_ROOT = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/OverrideMaterials/"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/OverrideMaterials/"
     "ActorOverrides/Materials"
 )
 BACKUP_ROOT = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/Backups/"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/Backups/"
     "PreFalseEmissiveWorldPropRepair_20260904/Materials"
 )
 EXPECTED_ACTOR_TOTAL = 14408

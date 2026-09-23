@@ -11,7 +11,7 @@ import unreal
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.normpath(os.path.join(SCRIPT_DIR, "..", ".."))
-MAP_PATH = "/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment"
 DEV_MAP_PATH = "/Game/Maps/DevMap"
 PLACEMENT_PATH = os.path.join(
     PROJECT_ROOT,
@@ -36,7 +36,7 @@ REPORT_PATH = os.path.join(
     "StormPass_OverrideMaterial_ReloadAudit.json",
 )
 OVERRIDE_ROOT = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/OverrideMaterials"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/OverrideMaterials"
 )
 TEXTURE_ROOT = OVERRIDE_ROOT + "/Textures"
 MATERIAL_ROOT = OVERRIDE_ROOT + "/ActorOverrides/Materials"

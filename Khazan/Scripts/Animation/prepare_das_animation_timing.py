@@ -49,19 +49,19 @@ WEAPON_SOURCE_SKELETON = (
     "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Item/DualAxeSword/Model/"
     "C_I_DualAxeSword_ImperialGuard001_R/C_I_DualAxeSword_ImperialGuard001_R_Skeleton"
 )
-PLAYER_SKELETON = "/Game/_Art/Kazan/Character/Meshs/SK_Khazan"
-PLAYER_MESH = "/Game/_Art/Kazan/Character/Meshs/SKM_Khazan"
+PLAYER_SKELETON = "/Game/_Art/Player/Character/Meshs/SK_Player"
+PLAYER_MESH = "/Game/_Art/Player/Character/Meshs/SKM_Player"
 # This compensation is derived only from the target skeleton's inserted root.
 # A Character mesh-component scale is runtime state and must never enter asset data.
 PLAYER_INSERTED_ROOT_REFERENCE_UNIFORM_SCALE = 100.0
 PLAYER_ROOT_MOTION_TRANSLATION_SCALE = (
     1.0 / PLAYER_INSERTED_ROOT_REFERENCE_UNIFORM_SCALE
 )
-WEAPON_SKELETON = "/Game/_Art/Kazan/Item/Imperial/DualAxeSword_Imperial_R_Skeleton"
-WEAPON_MESH = "/Game/_Art/Kazan/Item/Imperial/DualAxeSword_Imperial_R"
-RECOVERED_ROOT = "/Game/_Art/Kazan/Animation/Weapons/DualAxeSword/Recovered"
-INGAME_LOCOMOTION_ROOT = "/Game/_Art/Kazan/Animation/InGame/DAS/Locomotion"
-RUNTIME_LOCOMOTION_ROOT = "/Game/_Art/Kazan/Animation/Locomotion/Runtime/DualAxeSword"
+WEAPON_SKELETON = "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_R_Skeleton"
+WEAPON_MESH = "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_R"
+RECOVERED_ROOT = "/Game/_Art/Player/Animation/Weapons/DualAxeSword/Recovered"
+INGAME_LOCOMOTION_ROOT = "/Game/_Art/Player/Animation/InGame/DAS/Locomotion"
+RUNTIME_LOCOMOTION_ROOT = "/Game/_Art/Player/Animation/Locomotion/Runtime/DualAxeSword"
 
 
 def read(path: pathlib.Path):
@@ -436,7 +436,7 @@ def main() -> None:
     )
     player_target_tracks = list(canonical["track_names"])
     if len(player_target_tracks) != 226:
-        raise RuntimeError("Unexpected current SK_Khazan animation track contract")
+        raise RuntimeError("Unexpected current SK_Player animation track contract")
     weapon_target_tracks = list(
         inventory["target_skeletons"][WEAPON_SKELETON]["bone_names"]
     )
@@ -990,7 +990,7 @@ def main() -> None:
             skipped.append(
                 {
                     "source": audit_row["source_package"],
-                    "reason": "Composite uses a missile/object or unextracted weapon animation skeleton; metadata retained without assigning it to SK_Khazan.",
+                    "reason": "Composite uses a missile/object or unextracted weapon animation skeleton; metadata retained without assigning it to SK_Player.",
                     "unsupported_leaf_sources": audit_row["unsupported_leaf_sources"],
                 }
             )

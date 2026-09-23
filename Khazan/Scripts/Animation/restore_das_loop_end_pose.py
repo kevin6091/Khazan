@@ -20,7 +20,7 @@ BASELINE = BACKUP / 'loop_pose_before.json'
 REPORTS = PROJECT / 'Saved/ImportReports'
 HELPERS = runpy.run_path(str(PROJECT / 'Scripts/Animation/recover_khazan_missing_bone_tracks.py'),
                          run_name='loop_closure_helpers')
-ASSETS = ['/Game/_Art/Kazan/Animation/InGame/DAS/Locomotion/' + gait + '/DAS_Khazan_' + gait + '_Loop'
+ASSETS = ['/Game/_Art/Player/Animation/InGame/DAS/Locomotion/' + gait + '/DAS_Player_' + gait + '_Loop'
           for gait in ['Walk', 'Run', 'Sprint']]
 EXPECTED_LAST = [33, 119, 119]
 
@@ -75,7 +75,7 @@ def verify_one(before):
 
 def verify_compressed(before):
     asset = unreal.load_asset(before['path'])
-    mesh = unreal.load_asset('/Game/_Art/Kazan/Character/Meshs/SKM_Khazan')
+    mesh = unreal.load_asset('/Game/_Art/Player/Character/Meshs/SKM_Player')
     opts = HELPERS['evaluation_options'](unreal.AnimDataEvalType.COMPRESSED, mesh)
     opts.should_retarget = True
     first = HELPERS['sample'](asset, 0, opts)

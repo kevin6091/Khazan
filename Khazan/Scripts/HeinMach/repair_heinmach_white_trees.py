@@ -19,7 +19,7 @@ import unreal
 
 
 PROJECT_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", ".."))
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 REPORT_PATH = os.path.join(
     PROJECT_ROOT,
     "Saved",
@@ -43,12 +43,12 @@ SOURCE_TEXTURED_JSON = os.path.join(
     os.path.dirname(SOURCE_NULL_JSON), "WM_VFS_Tree_Branch_001_02.json"
 )
 MATERIAL_ROOT = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/CorrectedSourceAssets/"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/CorrectedSourceAssets/"
     "HeinMach_StaticMeshLibrary_Corrected/Materials"
 )
 TEXTURED_SIBLING_PATH = MATERIAL_ROOT + "/MI_WM_VFS_Tree_Branch_001_02"
 RECOVERED_ROOT = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/RecoveredMaterials/Trees"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/RecoveredMaterials/Trees"
 )
 RECOVERED_PATH = RECOVERED_ROOT + "/MI_WM_VFS_Tree_Branch_001_LOD2_Recovered"
 SUSPICIOUS_MATERIAL_PATHS = {

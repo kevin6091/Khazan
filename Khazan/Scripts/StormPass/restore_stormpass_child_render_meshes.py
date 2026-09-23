@@ -26,12 +26,12 @@ SHARED_PATH = os.path.join(
 MATERIAL_HELPER_PATH = os.path.join(
     PROJECT_ROOT, "Scripts", "HeinMach", "repair_heinmach_materials.py"
 )
-MAP_PATH = "/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment"
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/StormPass/Maps/"
+    "/Game/_Art/Player/Environment/StormPass/Maps/"
     "L_StormPass_Environment_PreChildRenderRestore"
 )
-RECONSTRUCTED_ROOT = "/Game/_Art/Kazan/Environment/StormPass/Reconstructed"
+RECONSTRUCTED_ROOT = "/Game/_Art/Player/Environment/StormPass/Reconstructed"
 SOURCE_ROOT = RECONSTRUCTED_ROOT + "/SourceAssets"
 DESTINATION_ROOT = RECONSTRUCTED_ROOT + "/ChildRenderAssets"
 OVERRIDE_MATERIAL_ROOT = (

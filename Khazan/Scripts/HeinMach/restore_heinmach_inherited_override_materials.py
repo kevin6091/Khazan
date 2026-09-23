@@ -28,16 +28,16 @@ import unreal
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.normpath(os.path.join(SCRIPT_DIR, "..", ".."))
 FMODEL_ROOT = os.path.join(os.path.expanduser("~"), "Desktop", "\uce74\uc794")
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Maps/"
+    "/Game/_Art/Player/Environment/HeinMach/Maps/"
     "L_HeinMach_Environment_PreInheritedMaterialFix"
 )
 CORRECTED_ROOT = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/CorrectedSourceAssets"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/CorrectedSourceAssets"
 )
 OVERRIDE_ROOT = (
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/OverrideMaterials"
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/OverrideMaterials"
 )
 MATERIAL_ROOT = OVERRIDE_ROOT + "/Inherited/Materials"
 TEXTURE_ROOT = OVERRIDE_ROOT + "/Textures"

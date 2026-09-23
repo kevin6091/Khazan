@@ -20,7 +20,7 @@ import unreal
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.normpath(os.path.join(SCRIPT_DIR, "..", ".."))
 FMODEL_ROOT = os.path.join(os.path.expanduser("~"), "Desktop", "\uce74\uc794")
-MAP_PATH = "/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment"
 METADATA_PATH = os.path.join(
     PROJECT_ROOT,
     "Content",
@@ -37,7 +37,7 @@ REPORT_PATH = os.path.join(
     "ImportReports",
     "StormPass_Fog_AssetPreparation.json",
 )
-FOG_ROOT = "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/FogAssets"
+FOG_ROOT = "/Game/_Art/Player/Environment/StormPass/Reconstructed/FogAssets"
 MESH_ROOT = FOG_ROOT + "/Meshes"
 TEXTURE_ROOT = FOG_ROOT + "/Textures"
 MATERIAL_ROOT = FOG_ROOT + "/Materials"

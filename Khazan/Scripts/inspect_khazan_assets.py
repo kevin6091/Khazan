@@ -1,7 +1,7 @@
 import unreal
 
 
-ROOT = "/Game/_Art/Kazan"
+ROOT = "/Game/_Art/Player"
 
 
 def log(message):

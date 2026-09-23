@@ -1019,3 +1019,161 @@ UE 5.8.2 Python 조회 스크립트 자체는 완료됐으나 commandlet 종료 
 3. Stop 루트 모션의 capsule·collision·재입력 취소를 통과한 뒤 WeakAttack의 다음 수직 기능은 Attack01의 실제 hit window와 피해 결과로 진행한다. 두 번째 combo Ability가 생기기 전에는 공통 Combo base/task/manager를 추가하지 않는다.
 
 이번 기록은 Source나 asset을 변경했다는 뜻이 아니다. 저장본 정적 감사 결과와 다음 공동 구현 절차만 확정했다.
+
+<a id="p6-d1-semantic-input-phase-transport-20260921"></a>
+## 2026-09-21 — P6-D1: ASC 의미 입력 phase 전달
+
+### 이번 공동 구현 범위
+
+- `Input.Action.WeakAttack`과 `Input.Action.StrongAttack`은 그대로 사용한다. `Pressed`, `Released`, `Canceled`용 Gameplay Tag는 추가하지 않는다.
+- `KhazanAbilitySystemComponent`에 C++ 전용 `EKhazanAbilityInputPhase`와 `FKhazanAbilityInputEvent`를 두고, ASC가 소유하는 native event로 `{ InputTag, Phase }` 한 건을 동기 방송한다.
+- Controller는 Enhanced Input의 `Started`를 `Pressed`, `Completed`를 `Released`, `Canceled`를 `Canceled`로 번역한다.
+- Combo Definition, 공통 Combo Attack Ability, hold/charge 판정, Weak/Strong 혼합 edge는 이번 단계에 만들지 않는다.
+
+### ASC 처리 순서
+
+1. `Pressed`는 기존처럼 일치 Spec의 `InputPressed`를 true로 만들고, 비활성 Spec은 활성화를 시도하며, 활성 Spec에는 `AbilitySpecInputPressed()`와 generic replicated `InputPressed`를 전달한다.
+2. Spec 순회용 `FScopedAbilityListLock`이 끝난 뒤 의미 `Pressed` event를 한 번 방송한다. 따라서 idle에서 방금 활성화된 Ability도 activation 중 구독을 마쳤다면 최초 press를 받을 수 있고, 다른 Action 때문에 대상 활성화가 실패한 경우에는 현재 실행 중인 Attack Ability가 반대 입력을 받을 수 있다.
+3. `Released`는 기존 Spec 및 generic replicated release 처리를 끝낸 뒤 의미 `Released` event를 방송한다.
+4. `Canceled`는 일치 Spec의 `InputPressed`만 false로 정리한 뒤 의미 `Canceled` event를 방송한다. GAS에는 `Canceled`와 구분되는 generic input event가 없으므로 `AbilitySpecInputReleased()`나 generic `InputReleased`를 합성하지 않는다. 차지 release 분기와 입력 평가 취소가 섞이지 않게 하기 위한 계약이다.
+5. 기존 `AbilityInputTagPressed()` 선두의 빈 `FGameplayEventData`와 `HandleGameplayEvent(InputTag, &Payload)`는 제거한다. 물리 입력 phase 전달은 ASC native event가 담당하고, Gameplay Event는 이동 gate나 피격처럼 gameplay 문맥을 전달하는 경로로 남긴다.
+
+### 소유권과 수명
+
+- ASC는 순간 입력 event의 방송자일 뿐 콤보 이력이나 입력 큐를 저장하지 않는다.
+- payload는 동기 방송 중에만 유효한 값이다. 수신자가 이후 frame까지 필요로 하는 상태는 active Ability가 값으로 복사해 소유한다.
+- 다음 P6-D3에서 공통 Combo Attack Ability가 activation 중 delegate handle을 등록하고 `EndAbility()`에서 반드시 해제한다. P6-D1에는 아직 수신자를 연결하지 않으므로 기존 Weak/Strong의 `InputPressed()` 콤보 경로와 중복 소비가 발생하지 않는다.
+- 모든 호출은 Enhanced Input → PlayerController → ASC → Ability의 Game Thread 경계에서 일어난다. AnimInstance worker thread에서 ASC delegate를 읽거나 쓰지 않는다.
+
+### 적용 및 검증 상태
+
+이번 기록은 사용자가 직접 적용할 다음 코드 단계의 계약이다. 현재 확인된 Source에는 아직 semantic input event와 `AbilityInputTagCanceled()`가 없고, Controller의 attack `Canceled`도 여전히 `AbilityInputTagReleased()`를 호출한다. 이 기록을 추가하면서 게임 Source, Blueprint, Montage, DataAsset은 수정하지 않았으며 build와 PIE도 수행하지 않았다.
+
+<a id="p6-d1-applied-audit-and-d2-entry-20260921"></a>
+## 2026-09-21 — P6-D1 적용 정적 감사와 P6-D2 진입
+
+### 확인된 적용
+
+- `EKhazanAbilityInputPhase`, `FKhazanAbilityInputEvent`, ASC native event와 `AbilityInputTagCanceled()`가 Source에 추가됐다.
+- Controller의 attack `Started/Completed/Canceled`는 각각 ASC의 Pressed/Released/Canceled 함수로 전달된다.
+- 공격 press 앞의 빈 `FGameplayEventData`/`HandleGameplayEvent(InputTag)` 경로는 제거됐고, Move의 기존 Gameplay Event 경로는 유지됐다.
+- Released와 Canceled 의미 event는 `FScopedAbilityListLock` 범위 밖에서 방송된다.
+
+### 다음 단계 전 필수 정정
+
+현재 `AbilityInputTagPressed()`의 `BroadcastAbilityInputEvent(...Pressed)`는 `FScopedAbilityListLock` 중괄호 안에 남아 있다. for loop를 닫은 다음 lock scope를 먼저 닫고, 그 아래에서 broadcast하도록 한 줄을 이동한다. 이후 subscriber가 callback에서 Ability를 활성화·종료해도 Spec list 변경이 입력 순회 잠금과 겹치지 않게 하기 위한 정정이다.
+
+현재 diff에는 ASC header/cpp의 trailing whitespace도 남아 있으므로 위 중괄호 정리와 함께 공백만 제거한다. 이는 동작 변경이 아니다.
+
+### P6-D2 범위
+
+ARCH-52에 따라 다음 단계는 입력 phase enum을 실제 두 소비자 ASC와 Combo Definition이 공유할 작은 value-type header로 이관하고, `UDataAsset` 기반의 최소 `UKhazanComboDefinitionData`와 node/input-edge/authored-event-edge 구조체를 추가한다. DataAsset은 정적 사실만 저장하며 runtime node·held input·buffer·Montage task를 넣지 않는다. 이 단계에서는 Weak/Strong의 기존 실행 코드를 DataAsset에 연결하거나 공통 Ability를 아직 추출하지 않는다.
+
+이번 감사는 저장 Source의 정적 확인이다. 사용자의 build/PIE 완료 여부는 별도 결과를 받지 못했으며, 어시스턴트는 게임 Source와 asset을 수정하거나 build/PIE를 수행하지 않았다.
+
+<a id="p6-d1-1-source-neutral-command-correction-20260921"></a>
+## 2026-09-21 — P6-D1.1: Player input event를 공통 Combo Command로 정정
+
+사용자 검토로 AI는 Enhanced Input phase 없이도 같은 ComboAbility를 실행해야 한다는 경계가 재확인됐다. 앞선 P6-D2 `KhazanAbilityInputTypes`/`InputEdges` 절차는 적용하지 않고 ARCH-53의 source-neutral command 이관을 먼저 수행한다.
+
+1. `Command.Attack.Weak`, `Command.Attack.Strong` native tag 두 개만 추가한다.
+2. `KhazanComboTypes.h`에 `EKhazanComboCommandPhase { Begin, Release, Cancel }`와 `{ CommandTag, Phase }` 값 타입을 둔다.
+3. ASC의 `EKhazanAbilityInputPhase`, `FKhazanAbilityInputEvent`, `OnAbilityInputEvent`, `BroadcastAbilityInputEvent`를 제거하고 `SubmitComboCommand`/`OnComboCommand` native event로 교체한다. Spec input 함수는 GAS Player input protocol만 수행한다.
+4. PlayerController는 각 attack callback에서 먼저 해당 ASC Spec input 함수를 호출하고, 그 함수가 반환한 뒤 대응 command를 제출한다. 이 순서로 최초 press에서 Ability activation/subscription이 command 방송보다 먼저 끝난다.
+5. AI 경로는 향후 선택한 Spec을 직접 활성화한 뒤 `SubmitComboCommand`만 호출한다. `AbilityInputTagPressed()`를 호출하지 않는다.
+6. cold build와 Player Weak/Strong 회귀를 통과한 뒤 P6-D2를 `CommandEdges` 기반으로 다시 진행한다.
+
+현재 Source/asset은 이 정정 기록에서 수정하지 않았고 build/PIE도 수행하지 않았다.
+
+<a id="p6-d1-1-applied-audit-and-d2-vertical-slice-20260921"></a>
+## 2026-09-21 — P6-D1.1 적용 감사와 P6-D2 수직 이관 진입
+
+### 적용 확인
+
+- `Source/Khazan/Ability/Command/KhazanComboTypes.h`에 source-neutral phase와 command payload가 추가됐다.
+- ASC는 Player Spec input 함수와 별도로 `SubmitComboCommand()`를 제공하고, Controller는 Spec input 처리 뒤 command를 제출한다.
+- Weak/Strong concrete Source는 `Ability/PlayerAbility`로 이동했고 Strong Ability Blueprint 및 CharacterDefinition grant가 추가됐다.
+- 2026-09-21 UBT 확인은 성공했지만 `Target is up to date`였으므로 cold build 완료로 간주하지 않는다. PIE 결과도 이번 감사에서 직접 확인하지 않았다.
+
+### 기능 단계 전 정정
+
+1. `Command_Player_Attack_Weak/Strong`을 `Command_Attack_Weak/Strong`으로 semantic rename하고 문자열도 `Command.Attack.Weak/Strong`으로 바꾼다. 아직 command graph asset과 subscriber가 없으므로 redirect를 추가할 저장 참조는 확인되지 않았다.
+2. `AKhazanPlayerController::RouteAttackInput()`에서 ASC를 한 번 얻어 phase별 `AbilityInputTag*()`를 직접 호출한 뒤 같은 ASC에 `SubmitComboCommand()`를 호출한다. 세 forwarding helper와 선언을 제거한다.
+3. cpp에서 enum 값을 직접 사용하므로 `Ability/Command/KhazanComboTypes.h`를 직접 include한다. ASC header를 통한 간접 include에 기대지 않는다.
+4. 0 byte `KhazanComboTypes.cpp`와 현재 diff의 trailing whitespace를 정리하고 cold build한다.
+
+### P6-D2의 실제 완료 단위
+
+DataAsset 타입만 만든 채 끝내지 않는다. 다음 한 단위의 완료 조건은 `Combo Definition + UKhazanComboAttackAbility + Weak/Strong 선형 회귀`다.
+
+1. `FKhazanComboCommandEdge`, `FKhazanComboNode`, `UKhazanComboDefinitionData`를 추가한다.
+2. `UKhazanComboAttackAbility`가 activation에서 ASC command delegate를 구독하고 EndAbility에서 handle을 제거한다.
+3. base가 Montage task, Montage notify, Open/Commit/End gate, held command set, pending command 한 건, section jump, 이동 입력 복귀와 모든 cleanup을 소유한다.
+4. concrete Ability의 `InputPressed()` 및 `SubmitComboInput()` 경로는 base command 소비와 같은 변경에서 제거하여 한 물리 입력을 두 번 처리하지 않게 한다.
+5. Player DAS Definition에 `Weak01..05`, `Strong01..03` node와 현재 선형 Begin edge를 작성하고 두 entry Ability를 연결한다.
+6. Weak 1~4, Weak05 locked/unlocked, Strong 선형 콤보, 빠른 연타 one-slot, Open 이전 무시, Open~Commit 지연, Commit~End 즉시 전이, 이동 복귀, 취소 cleanup을 PIE에서 확인한다.
+7. 이 회귀 뒤 charge authored event와 mixed command edge를 별도 수직 절편으로 추가한다. cross-Montage edge는 새 Montage task 교체 수명을 검증하기 전 만들지 않는다.
+
+이번 기록에서 게임 Source와 asset은 수정하지 않았다.
+
+<a id="p6-d2-combo-base-and-wrapper-clarification-20260921"></a>
+## 2026-09-21 — P6-D2 ComboAttackAbility와 native wrapper 정정 설명
+
+### 현재 저장 Source의 불완전 상태
+
+- `UKhazanComboAttackAbility.h`의 `ActivateAbility(...)`와 `EndAbility(...)`는 설명용 생략 기호가 Source에 들어간 상태이며 유효한 C++ 선언이 아니다. 두 함수는 `UGameplayAbility`의 전체 override signature로 작성해야 한다.
+- 현재 `UKhazanComboAttackAbility.cpp`에는 ComboAttackAbility 구현이 아니라 `UKhazanComboDefinitionData::FindNode()`가 중복으로 들어 있다. 해당 함수는 이미 `KhazanComboDefinitionData.cpp`에 있으므로 ComboAttackAbility cpp의 중복 정의를 제거하고 자신의 class 구현만 둔다.
+- 공통 Ability header에는 module export, 필요한 타입 include/forward declaration, dynamic delegate callback의 `UFUNCTION`, 접근 범위가 빠져 있다. 현재 파일을 빌드 가능한 적용 완료 상태로 보지 않는다.
+
+### `UKhazanComboAttackAbility`의 정확한 책임
+
+- 한 번 활성화된 공격 실행의 `CurrentNodeId`, held commands, pending command 한 건, Open/Commit/End gate, Montage task, notify/ASC delegate handle, 이동 복귀 gate와 cleanup을 소유한다.
+- Combo Definition의 정적 node/edge를 읽어 현재 command가 합법한지 판정하고, 승인된 same-Montage section 전이만 실행한다.
+- PlayerController 입력 바인딩, AI 전술 판단, 전역 입력 이력, 피해 계산과 영구 해금 상태는 소유하지 않는다.
+- `InstancedPerActor` 재사용을 전제로 activation 시작과 `EndAbility()` 모두에서 runtime state와 delegate를 정리한다.
+
+### wrapper라는 표현의 정확한 의미
+
+- `UKhazanWeakAttackAbility`와 `UKhazanStrongAttackAbility`는 객체를 감싸는 composition wrapper가 아니다. 기존 `GA_Player_WeakAttack`/`GA_Player_StrongAttack` Blueprint가 직렬화한 native parent class 경로를 보존한 채 공통 base로 이관하기 위한 임시 빈 subclass, 즉 migration shim이다.
+- 이관 중 상속은 `GA Blueprint -> 기존 Weak/Strong native shim -> UKhazanComboAttackAbility -> UKhazanGameplayAbility`다. shim에는 Montage, InputPressed, buffer, task, notify 또는 override를 남기지 않는다.
+- 두 Blueprint가 공통 base의 `ComboDefinition`과 각 `EntryNodeId`로 정상 동작하는 것을 확인한 뒤 에디터에서 직접 `UKhazanComboAttackAbility`로 reparent하고 저장한다. native shim reference가 없음을 확인한 다음에만 Weak/Strong native 파일을 삭제한다.
+- Weak/Strong에 실제로 다른 native 수명·외부 시스템 연동이 생기지 않는 한 빈 shim을 최종 아키텍처로 유지하지 않는다. Weak/Strong이라는 제품 의미는 서로 다른 Blueprint class, granted Spec input tag와 entry node로 이미 표현된다.
+
+이번 절은 잘못 축약된 구현 안내를 정정한 것이다. 게임 Source와 asset은 수정하지 않았고 문서만 추가했다.
+
+<a id="p6-d2-family-input-and-full-implementation-correction-20260921"></a>
+## 2026-09-21 — P6-D2.1 Player/AI 분리·일반 입력·전체 구현 안내 정정
+
+- `Command_Player_Attack_Weak/Strong`과 `Command.Player.Attack.Weak/Strong`을 유지한다. 앞 절의 source-neutral 명칭 변경은 Player와 AI Monster의 실제 공격/스킬/Definition이 서로 다르다는 제품 계약을 잘못 해석한 제안이었다.
+- 이에 따라 `FKhazanComboCommandEdge::CommandTag`와 `RequiredHeldCommands`의 editor filter도 `Categories="Command.Attack"`에서 `Categories="Command"`로 바꾼다. 현재 Player tag 경로는 `Command.Player.Attack.*`이므로 기존 filter 아래에는 나타나지 않는다.
+- Player와 AI가 공유하는 것은 command payload/API와 ComboAttackAbility 실행 알고리즘이다. AI Monster는 첫 실제 구현에서 AI 전용 command tag, granted Ability와 Combo Definition을 가진다.
+- ASC의 `AbilityInputTagPressed/Released/Canceled()`는 일반 Player Ability 입력 경로로 유지한다. `RouteAttackInput()`은 공격에서만 이 일반 경로 뒤에 Combo Command를 추가하며, 물약 등 command가 없는 Ability에 강요하지 않는다.
+- 공통 ComboAttackAbility는 `InstancedPerActor`, `LocalOnly`를 사용한다. 기존 Weak/Strong의 `ServerOnly`는 Standalone에서 Authority라 실행됐지만 제품 실행 정책을 정확히 나타내지 않으므로 이관하지 않는다.
+- `ComboInputEnd` 전 공격 command는 현재 Combo Definition으로만 분기하고, `ComboInputEnd`에서 pending command·window를 닫은 뒤 이동 gate와 `Ability.Action` block을 연다. 무입력이면 회수 모션을 끝까지 재생한다.
+- 공통 base의 전체 `.cpp`를 구현하기 전에 Weak/Strong을 빈 shim으로 바꾸지 않는다. base의 activation, command/notify/move callback, resolver, section transition, task 완료·중단, delegate 해제와 `EndAbility()` cleanup이 모두 작성되고 cold build가 통과한 뒤 같은 변경 묶음에서 shim으로 축소한다.
+- 내부 전환 함수는 `private`로 유지한다. 현재 shim은 실행기를 확장하는 subclass가 아니라 Blueprint native parent 경로를 보존하는 임시 class이므로 내부 함수 접근이 필요 없다. 실제 파생 차이가 생기면 필요한 한 지점만 protected virtual hook으로 추가한다.
+
+이번 정정에서도 게임 Source와 asset은 수정하지 않았고 build/PIE를 수행하지 않았다.
+
+<a id="p6-d2-2-logical-command-and-held-condition-20260922"></a>
+## 2026-09-22 — P6-D2.2: Player 논리 Command 명칭과 held 조건 확정
+
+- 현재 `Command.Player.Attack.Weak/Strong`은 결과 공격명이라 같은 조작이 현재 콤보 node에 따라 다른 공격으로 분기하는 계약을 흐린다. 다음 semantic migration의 목표명은 `Command.Player.Attack.Primary/Secondary`다. 물리 키 `X/Y`는 게임패드 배치·마우스·키보드·재바인딩과 결합되므로 내부 Command 이름으로 쓰지 않는다.
+- `EKhazanComboCommandPhase`는 `Begin/Release/Cancel`의 순간 trigger만 소유한다. 활성 Combo Ability의 `HeldCommands`는 지속 상태, `FKhazanComboCommandEdge::RequiredHeldCommands`는 trigger와 함께 검사할 chord 조건을 소유한다.
+- 차지는 command `Begin`에서 held를 시작하고 Montage authored charge-step에서 held 여부를 확인한 뒤 현재 node를 진행하며, 정상 `Release` edge에서 해제 공격을 선택한다. `Hold` phase나 frame별 Ongoing command는 추가하지 않는다.
+- `{ Primary Begin + Secondary held }` 같은 혼합 연계 때문에 `RequiredHeldCommands`는 실제 소비가 있다. 일반 연타와 단일 버튼 release edge에서는 비워 둔다. Release 처리 뒤의 조건은 계속 눌려 있는 다른 command만 뜻한다.
+- 적용 시 native tag 선언/정의, PlayerController 전달값, Combo Definition asset의 저장 tag 참조를 함께 점검한다. `Input.Action.WeakAttack/StrongAttack`은 초기 Ability 진입 의미인지 논리 조작 슬롯인지 먼저 판정한 뒤 별도 또는 동시 rename한다.
+- 이 절은 설계 정정 기록이다. 게임 Source·asset은 수정하지 않았고 build/PIE도 수행하지 않았다.
+
+<a id="kz-player-naming-migration-20260922"></a>
+## 2026-09-22 — `KZ`/`Player` 명명 마이그레이션 완료
+
+- 프로젝트 타입 접두사를 `Khazan`에서 `KZ`로 이관했다. Ability 계층은 `UKZGameplayAbility`, `UKZAbilitySystemComponent`, `UKZComboAttackAbility`, `UKZWeakAttackAbility`, `UKZStrongAttackAbility`를 사용하며 combo command 구조체·phase·delegate도 `FKZ`/`EKZ` 계약을 사용한다.
+- 주인공 역할은 `AKZPlayer`, `AKZPlayerController`, `BP_Player`, `BP_PlayerController`, `GA_Player_*`, `DA_CharacterDefinition_Player`로 통일했다. 일반 기반 타입은 `AKZCharacter`, 적 타입은 `AKZMonster`로 유지해 프로젝트 접두사와 gameplay 역할을 분리했다.
+- 기존 native reflected 경로는 `DefaultEngine.ini` Core Redirect로 새 타입에 연결했고, Character Definition tag는 `DefaultGameplayTags.ini`의 Gameplay Tag Redirect로 연결했다.
+- 에디터에서 직접 이름이 바뀐 주인공 에셋은 69개다. 의존 에셋을 재저장한 뒤 asset registry에서 이전 역할명 경로 0개, `/Game` redirector 0개, 목적지 누락 0개를 확인했다.
+- 최종 `KhazanEditor Win64 Development` 빌드는 성공했다. `/Game` Blueprint 38개는 전부 compile됐고 compile failure는 0개다. commandlet의 최종 종료 코드 1은 compile 시작 전 발생한 기존 `GameFeatures.GameFeatureData` startup ensure이며 이번 migration 오류가 아니다.
+- `Khazan.uproject`, `Source/Khazan`, `KHAZAN_API`, `/Script/Khazan`은 모듈 정체성이므로 유지한다. `_Art/Kazan`과 원작 `CA_P_Kazan_*` 식별자는 원본 추적 계약이므로 역할명 migration 대상에서 제외한다.
+- 실행 스크립트의 이전 class·skeleton·mesh·derived animation 경로도 `KZ`/`Player`로 갱신했고 UE 5.8 bundled Python `compileall`을 통과했다. 기존 report 파일명과 metadata key는 역사 기록 및 기존 에셋 호환을 위해 보존했다.
+
+이 절부터 후속 Ability 문서의 현행 타입명은 `KZ`를 기준으로 한다. 이전 절에 남아 있는 `UKhazan*`, `FKhazan*`, `EKhazan*` 표기는 당시 설계·구현 기록이며 현재 심볼로 해석하지 않는다.

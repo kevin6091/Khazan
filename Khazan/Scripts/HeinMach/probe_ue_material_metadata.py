@@ -13,10 +13,10 @@ REPORT_PATH = os.path.join(
 )
 
 CANDIDATES = [
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/CorrectedSourceAssets/HeinMach_StaticMeshLibrary_Corrected/Materials/MI_WM_MCN_House_Base_54.MI_WM_MCN_House_Base_54",
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/CorrectedSourceAssets/HeinMach_StaticMeshLibrary_Corrected/Materials/MI_WM_WOD_Ground_Stone_4.MI_WM_WOD_Ground_Stone_4",
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/CorrectedSourceAssets/HeinMach_StaticMeshLibrary_Corrected/Materials/MI_WM_WOD_Ground_VertexPainter_4.MI_WM_WOD_Ground_VertexPainter_4",
-    "/Game/_Art/Kazan/Environment/HeinMach/Reconstructed/CorrectedSourceAssets/HeinMach_StaticMeshLibrary_Corrected/Materials/MI_WM_COM_Mushroom_Small_0.MI_WM_COM_Mushroom_Small_0",
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/CorrectedSourceAssets/HeinMach_StaticMeshLibrary_Corrected/Materials/MI_WM_MCN_House_Base_54.MI_WM_MCN_House_Base_54",
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/CorrectedSourceAssets/HeinMach_StaticMeshLibrary_Corrected/Materials/MI_WM_WOD_Ground_Stone_4.MI_WM_WOD_Ground_Stone_4",
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/CorrectedSourceAssets/HeinMach_StaticMeshLibrary_Corrected/Materials/MI_WM_WOD_Ground_VertexPainter_4.MI_WM_WOD_Ground_VertexPainter_4",
+    "/Game/_Art/Player/Environment/HeinMach/Reconstructed/CorrectedSourceAssets/HeinMach_StaticMeshLibrary_Corrected/Materials/MI_WM_COM_Mushroom_Small_0.MI_WM_COM_Mushroom_Small_0",
 ]
 
 

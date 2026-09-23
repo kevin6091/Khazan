@@ -20,9 +20,9 @@ import unreal
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.normpath(os.path.join(SCRIPT_DIR, "..", ".."))
-MAP_PATH = "/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment"
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/StormPass/Maps/"
+    "/Game/_Art/Player/Environment/StormPass/Maps/"
     "L_StormPass_Environment_PreLightRestore"
 )
 METADATA_PATH = os.path.join(
@@ -48,7 +48,7 @@ REPORT_PATH = os.path.join(
     "StormPass_Light_Restoration.json",
 )
 PROFILE_ASSET_PATH = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/LightAssets/IES/"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/LightAssets/IES/"
     "TLP_JellyFish"
 )
 MANAGED_LABEL_PREFIX = "SP_SourceLight_"

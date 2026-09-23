@@ -45,11 +45,11 @@ def sha256(path: pathlib.Path) -> str:
 def capture_baseline() -> None:
     protected = [
         "Docs/Animation/LOCOMOTION_CURRENT_IMPLEMENTATION.md",
-        "Source/Khazan/Animation/KhazanAnimInstance.cpp",
-        "Source/Khazan/Character/Component/KhazanLocomotionComponent.cpp",
-        "Source/Khazan/Character/Component/KhazanLocomotionComponent.h",
-        "Source/Khazan/Character/Locomotion/KhazanLocomotionType.cpp",
-        "Source/Khazan/Character/Locomotion/KhazanLocomotionType.h",
+        "Source/Khazan/Animation/KZAnimInstance.cpp",
+        "Source/Khazan/Character/Component/KZLocomotionComponent.cpp",
+        "Source/Khazan/Character/Component/KZLocomotionComponent.h",
+        "Source/Khazan/Character/Locomotion/KZLocomotionType.cpp",
+        "Source/Khazan/Character/Locomotion/KZLocomotionType.h",
     ]
     target = PROJECT / "Content/_Art/Enemies/Shared/Beasts/BigBear"
     data = {

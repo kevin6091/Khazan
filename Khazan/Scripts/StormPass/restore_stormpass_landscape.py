@@ -71,13 +71,13 @@ RELOAD_REPORT_PATH = os.path.join(
     "ImportReports",
     "StormPass_Landscape_ReloadAudit.json",
 )
-MAP_PATH = "/Game/_Art/Kazan/Environment/StormPass/Maps/L_StormPass_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment"
 BACKUP_MAP_PATH = (
-    "/Game/_Art/Kazan/Environment/StormPass/Maps/"
+    "/Game/_Art/Player/Environment/StormPass/Maps/"
     "L_StormPass_Environment_PreLandscapeRestore"
 )
 MATERIAL_ROOT = (
-    "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/Landscape/Materials"
+    "/Game/_Art/Player/Environment/StormPass/Reconstructed/Landscape/Materials"
 )
 MATERIAL_PATHS = {
     "Main": MATERIAL_ROOT + "/M_SP_Landscape_Main",

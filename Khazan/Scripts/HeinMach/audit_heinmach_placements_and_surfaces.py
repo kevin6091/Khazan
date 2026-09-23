@@ -16,7 +16,7 @@ import unreal
 
 
 FMODEL_ROOT = os.path.join(os.path.expanduser("~"), "Desktop", "\uce74\uc794")
-MAP_PATH = "/Game/_Art/Kazan/Environment/HeinMach/Maps/L_HeinMach_Environment"
+MAP_PATH = "/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment"
 PLACEMENT_PATH = os.path.join(
     unreal.Paths.project_content_dir(),
     "_Art",
