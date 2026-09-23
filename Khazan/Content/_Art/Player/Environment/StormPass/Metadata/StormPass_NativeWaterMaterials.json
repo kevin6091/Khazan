@@ -1,0 +1,1890 @@
+{
+  "analysis": {
+    "child_component_override_was_null": true,
+    "cooked_master_graph_available_from_fmodel": false,
+    "master_scalar_parameter_count": 138,
+    "master_texture_parameter_count": 13,
+    "master_vector_parameter_count": 12,
+    "native_actor_runtime_water_material_binding_required": true,
+    "source_actor_count": 2,
+    "source_texture_count": 11,
+    "ue5_single_layer_water_preview_graph_required": true
+  },
+  "content_boundary": {
+    "collision_or_navigation_modified": false,
+    "gameplay_or_source_code_modified": false,
+    "visual_level_content_only": true
+  },
+  "master_parameters": {
+    "referenced_textures": [
+      {
+        "object_name": "Texture2D'DefaultTexture'",
+        "object_path": "Engine/Content/EngineResources/DefaultTexture.0"
+      },
+      {
+        "object_name": "",
+        "object_path": ""
+      },
+      {
+        "object_name": "Texture2D'BASE_Black_NoneSRGB'",
+        "object_path": "BBQ/Content/Art/Character/CHA_Material/Texture/Base/BASE_Black_NoneSRGB.0"
+      },
+      {
+        "object_name": "Texture2D'FT_S_Liquid_002'",
+        "object_path": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT_S_Liquid_002.0"
+      },
+      {
+        "object_name": "Texture2D'WLT_SeaFoam2'",
+        "object_path": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Texture/WLT_SeaFoam2.0"
+      },
+      {
+        "object_name": "Texture2D'Good64x64TilingNoiseHighFreq'",
+        "object_path": "Engine/Content/EngineMaterials/Good64x64TilingNoiseHighFreq.0"
+      },
+      {
+        "object_name": "Texture2D'FT_Water_12'",
+        "object_path": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/water/FT_Water_12.0"
+      },
+      {
+        "object_name": "Texture2D'DefaultNormal'",
+        "object_path": "Engine/Content/EngineMaterials/DefaultNormal.0"
+      },
+      {
+        "object_name": "Texture2D'DefaultDiffuse'",
+        "object_path": "Engine/Content/EngineMaterials/DefaultDiffuse.0"
+      },
+      {
+        "object_name": "Texture2D'LowResBlurredNoise'",
+        "object_path": "Engine/Content/Functions/Engine_MaterialFunctions02/ExampleContent/Textures/LowResBlurredNoise.0"
+      },
+      {
+        "object_name": "Texture2D'Black'",
+        "object_path": "Engine/Content/EngineResources/Black.0"
+      },
+      {
+        "object_name": "Texture2D'Black_1x1_EXR_Texture'",
+        "object_path": "Engine/Content/Functions/Engine_MaterialFunctions02/PivotPainter2/Black_1x1_EXR_Texture.0"
+      },
+      {
+        "object_name": "Texture2D'T_WaterFlow_01_Foam_Tiled_N'",
+        "object_path": "Engine/Plugins/Experimental/Water/Content/Textures/Foam/T_WaterFlow_01_Foam_Tiled_N.0"
+      },
+      {
+        "object_name": "TextureRenderTarget2D'WaterDistanceField'",
+        "object_path": "Engine/Plugins/Experimental/Water/Content/FluidSimulation/WaveFoam/WaterDistanceField.0"
+      },
+      {
+        "object_name": "Texture2D'T_WaterFlow_01_Foam_Tiled'",
+        "object_path": "Engine/Plugins/Experimental/Water/Content/Textures/Foam/T_WaterFlow_01_Foam_Tiled.0"
+      },
+      {
+        "object_name": "Texture2D'T_Foam_DistanceField_Fade_02'",
+        "object_path": "Engine/Plugins/Experimental/Landmass/Content/PreviewContent/Water/Textures/T_Foam_DistanceField_Fade_02.0"
+      },
+      {
+        "object_name": "TextureRenderTarget2D'FoamRT'",
+        "object_path": "Engine/Plugins/Experimental/Water/Content/FluidSimulation/WaveFoam/FoamRT.0"
+      },
+      {
+        "object_name": "VolumeTexture'T_VolumeNoiseShape128'",
+        "object_path": "Engine/Content/EngineSky/VolumetricClouds/T_VolumeNoiseShape128.0"
+      },
+      {
+        "object_name": "Texture2D'T_Water_TilingNormal_With_Height_02_Softened'",
+        "object_path": "Engine/Plugins/Experimental/Water/Content/Textures/Normals/T_Water_TilingNormal_With_Height_02_Softened.0"
+      },
+      {
+        "object_name": "Texture2D'water_d'",
+        "object_path": "Engine/Content/Functions/Engine_MaterialFunctions02/ExampleContent/Textures/water_d.0"
+      },
+      {
+        "object_name": "Texture2D'water_n'",
+        "object_path": "Engine/Content/Functions/Engine_MaterialFunctions02/ExampleContent/Textures/water_n.0"
+      },
+      {
+        "object_name": "Texture2D'FT_Ele_Noise'",
+        "object_path": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_Ele_Noise.0"
+      },
+      {
+        "object_name": "Texture2D'FT_Noise_3ch_001'",
+        "object_path": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_3ch_001.0"
+      },
+      {
+        "object_name": "Texture2D'FT_Noise_007'",
+        "object_path": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_007.0"
+      }
+    ],
+    "scalars": [
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Wave normal Z",
+        "value": 2.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Sim Foam Velocity Mip",
+        "value": 128.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "FD",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Water Distant Normal Offset",
+        "value": 5000.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Default Distant Water Scale",
+        "value": 3500.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Height Bias",
+        "value": -1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "FoamColorBright",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Fluidsim Velocity EdgeFalloff",
+        "value": 0.2
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poisonSpeed_Y",
+        "value": -0.05
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "PositionX",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "boost",
+        "value": 10.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfacefoamMaskPower",
+        "value": 1.2
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam normal offset",
+        "value": 0.001953
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Refraction",
+        "value": 1.15
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "FoamSizzleTiling",
+        "value": 3.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "River Flowmap Detection Velocity",
+        "value": 64.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "FoamClapMax",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Refract Caustic Position",
+        "value": 2.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Default Distant Normal Strength",
+        "value": 0.3
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "River Flowmap Depth Bias",
+        "value": 64.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Sim Foam Dpeth Min",
+        "value": 8.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "FoamWaveIntensity",
+        "value": 8.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Default Distant Normal StrengthB",
+        "value": 0.25
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "FoamTestIntensity",
+        "value": 255.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Water Fresnel Roughness",
+        "value": 0.1
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Normal I",
+        "value": 0.5
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Wave DF Mask Bias",
+        "value": -64.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "FoamWaveSpeed",
+        "value": 1.2
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Front Foam Scale",
+        "value": 654.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Scatter Bias",
+        "value": 0.25
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Anisotropy",
+        "value": 0.1
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "InstantFoamSize",
+        "value": 200.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Water Depth to Mask Waves",
+        "value": 100.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Max Fluid Displacement",
+        "value": 100.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Distance",
+        "value": 256.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poison_Foam_Falloff",
+        "value": 1.6
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceFoamSpeed",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "FoamIntentisy",
+        "value": 0.7
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceFoamWaveTiling",
+        "value": 4000.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceFoamStepMax",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Water Roughness",
+        "value": 0.02
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Velocity to Mask waves",
+        "value": 100.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceEndIndex",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Default Disant Water Speed",
+        "value": 0.75
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Texture Blend Width",
+        "value": 0.4
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poison_pow",
+        "value": 0.8
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Roughness",
+        "value": 0.4
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Sim Velocity Normal Strength",
+        "value": 40.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Water Distant Normal Length",
+        "value": 10000.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Sim Foam Scale",
+        "value": 350.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam powr",
+        "value": 0.2
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceFoamWaveIntensity",
+        "value": 8.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "WaterFoamMax",
+        "value": 1024.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Siulation Flowmap Speed",
+        "value": 0.75
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Critical Angle Bend Width",
+        "value": -0.75
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Far Normal Fresnel Power",
+        "value": 9.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Default Near Water Scale",
+        "value": 512.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "InstantFoamSoftness",
+        "value": 400.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Depth for Min Refraction",
+        "value": 5000.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "WaterBodyIndex",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "River Flowmap Speed",
+        "value": 0.003
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Fluidsim Normal Strength",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceFoamSize",
+        "value": 1200.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Fluid Eraose Ssaler",
+        "value": 0.5
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poison_Tiling2",
+        "value": 10.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "DistanceFoamGradientMin",
+        "value": 0.5
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Caustics Finite Offset",
+        "value": 16.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poisonSpeed_Y2",
+        "value": -0.05
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Water Depth Caustics Spread",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "HeightScale",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poison_Opacity",
+        "value": 0.5
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfacefoamBrightIntensity",
+        "value": 0.7
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "DistanceFoamOffset",
+        "value": 0.1
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "InstantFoamBaseHeight",
+        "value": -10.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Fluidsim Velocity Edgeoffset",
+        "value": 0.02
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SimFoam Contrast",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Sim Flowmap Detection",
+        "value": 1.5
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "StartIndex",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Refraction Bottom Amount",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "ShowSim",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "TestLocationControl",
+        "value": 100.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "River Foam Scale",
+        "value": 512.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Critical Angle Dot",
+        "value": 0.225
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Dpeth Min",
+        "value": 64.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Min focus size",
+        "value": 0.0005
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Multiply Refraction",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "River Normal Flatness",
+        "value": 0.5
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "UVScale",
+        "value": 600.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "PositionY",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poisonSpeed_X2",
+        "value": -0.125
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceStartIndex",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Water Opacity Mask Offset",
+        "value": -24.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "MaxDataCount",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceFoamWaveSpeed",
+        "value": 1.2
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Opacity",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Front Height Bias",
+        "value": -0.5
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Texture Blend Min",
+        "value": 0.4
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam MacroScale",
+        "value": 1536.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Depth for DF Foam",
+        "value": 64.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "FoamWaveTiling",
+        "value": 4000.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poison_LightFoam_Tiling",
+        "value": 4.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poisonSpeed_X",
+        "value": -0.125
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Fluid Displacement Multiplier",
+        "value": 0.2
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Caustics Water Depth Bias",
+        "value": 64.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Lip Refraction",
+        "value": 0.95
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Mask Wave Foam near FluidSim",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Sim Foam Normal",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Default Near Normal Strength",
+        "value": 0.25
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Boost",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "InstantFoamWaveTime",
+        "value": 0.2
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Scattering Mip",
+        "value": 8.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Velocity Debug",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Refraction Far",
+        "value": 1.02
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Attachment",
+        "value": 0.4
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceFoamIntensity",
+        "value": 2.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "RefractionDownsampleFactor",
+        "value": 2.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Water Specular",
+        "value": 0.225
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Wave over Rock Steepness",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Wave Over Object Mask Distance",
+        "value": 256.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "River Flowmap Depth Density",
+        "value": 0.003
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Phase Mip Bias",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Caustics Brightness Adjust",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Fluidsim Flow Density",
+        "value": 0.25
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Light Parallax",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "FoamContrast",
+        "value": 1.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "FoamMaskSubtract",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceFoamSpeedX",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "River Time Modulation Size",
+        "value": 2750.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Critical Angle Width",
+        "value": 0.01
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceFoamSpeedY",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poison_LightFoam_Speed",
+        "value": 2.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "FoamMaskIntensity",
+        "value": 20.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poison_Tiling",
+        "value": 10.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SIm Flowmap Speed",
+        "value": 1.5
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "WPO Flowmap",
+        "value": 6.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "EndIndex",
+        "value": 0.0
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Wave Foam Erase Near FluidsimSize",
+        "value": 0.5
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Caustics Waves Water Body Index",
+        "value": 0.0
+      }
+    ],
+    "textures": [
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poison_Tex",
+        "value": {
+          "object_name": "Texture2D'water_d'",
+          "object_path": "Engine/Content/Functions/Engine_MaterialFunctions02/ExampleContent/Textures/water_d.0"
+        }
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceInstantFoamMask",
+        "value": {
+          "object_name": "Texture2D'FT_Water_12'",
+          "object_path": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/water/FT_Water_12.0"
+        }
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceWaterFoamInfo",
+        "value": {
+          "object_name": "Texture2D'BASE_Black_NoneSRGB'",
+          "object_path": "BBQ/Content/Art/Character/CHA_Material/Texture/Base/BASE_Black_NoneSRGB.0"
+        }
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Velocity",
+        "value": {
+          "object_name": "Texture2D'Black_1x1_EXR_Texture'",
+          "object_path": "Engine/Content/Functions/Engine_MaterialFunctions02/PivotPainter2/Black_1x1_EXR_Texture.0"
+        }
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "TestFoam",
+        "value": {
+          "object_name": "",
+          "object_path": ""
+        }
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "InstantFoamWave",
+        "value": {
+          "object_name": "Texture2D'WLT_SeaFoam2'",
+          "object_path": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Texture/WLT_SeaFoam2.0"
+        }
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "WaterVelocityAndHeight",
+        "value": {
+          "object_name": "Texture2D'Black_1x1_EXR_Texture'",
+          "object_path": "Engine/Content/Functions/Engine_MaterialFunctions02/PivotPainter2/Black_1x1_EXR_Texture.0"
+        }
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "WaterFoamInfo",
+        "value": {
+          "object_name": "Texture2D'BASE_Black_NoneSRGB'",
+          "object_path": "BBQ/Content/Art/Character/CHA_Material/Texture/Base/BASE_Black_NoneSRGB.0"
+        }
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "NormalAndHeight",
+        "value": {
+          "object_name": "Texture2D'Black_1x1_EXR_Texture'",
+          "object_path": "Engine/Content/Functions/Engine_MaterialFunctions02/PivotPainter2/Black_1x1_EXR_Texture.0"
+        }
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "InstantFoamMask",
+        "value": {
+          "object_name": "Texture2D'FT_S_Liquid_002'",
+          "object_path": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT_S_Liquid_002.0"
+        }
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poison_Tex2",
+        "value": {
+          "object_name": "Texture2D'water_d'",
+          "object_path": "Engine/Content/Functions/Engine_MaterialFunctions02/ExampleContent/Textures/water_d.0"
+        }
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceFoamTex",
+        "value": {
+          "object_name": "Texture2D'T_Foam_DistanceField_Fade_02'",
+          "object_path": "Engine/Plugins/Experimental/Landmass/Content/PreviewContent/Water/Textures/T_Foam_DistanceField_Fade_02.0"
+        }
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poison_Noise",
+        "value": {
+          "object_name": "Texture2D'FT_Ele_Noise'",
+          "object_path": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_Ele_Noise.0"
+        }
+      }
+    ],
+    "vectors": [
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Absorption",
+        "value": [
+          10.0,
+          150.0,
+          350.0,
+          8.0
+        ]
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceFoamColor",
+        "value": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "poisonColor",
+        "value": [
+          0.223958,
+          0.119696,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Scattering",
+        "value": [
+          1.0,
+          1.0,
+          1.0,
+          0.5
+        ]
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "TestFoamColor",
+        "value": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "FoamLocation",
+        "value": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Scattering",
+        "value": [
+          1.0,
+          1.0,
+          1.0,
+          5.0
+        ]
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "InstantFoamColor",
+        "value": [
+          0.434028,
+          0.434028,
+          0.434028,
+          0.0
+        ]
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "SurfaceFoamInnerColor",
+        "value": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Water Albedo",
+        "value": [
+          0.85,
+          0.85,
+          0.85,
+          0.5
+        ]
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "foramnormal",
+        "value": [
+          0.5,
+          0.5,
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "association": "GlobalParameter",
+        "index": -1,
+        "name": "Foam Emissive",
+        "value": [
+          0.28744,
+          1.0,
+          0.1875,
+          1.0
+        ]
+      }
+    ]
+  },
+  "material_instances": {
+    "skoffa": {
+      "base_property_overrides": {
+        "BlendMode": "BLEND_Masked",
+        "OpacityMaskClipValue": 0.3333,
+        "ShadingModel": "MSM_SingleLayerWater",
+        "TwoSided": true
+      },
+      "name": "Water_Material_SkoffaCave_CustomMesh_AK",
+      "package": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Material/Water_Material_SkoffaCave_CustomMesh_AK",
+      "parent": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Material/Water_Material_AK",
+      "scalars": [
+        {
+          "name": "Default Disant Water Speed",
+          "value": 0.5
+        },
+        {
+          "name": "Default Distant Normal Strength",
+          "value": 1.0
+        },
+        {
+          "name": "Default Distant Normal StrengthB",
+          "value": 0.25
+        },
+        {
+          "name": "Default Distant Water Scale",
+          "value": 3500.0
+        },
+        {
+          "name": "Default Near Normal Strength",
+          "value": 0.25
+        },
+        {
+          "name": "Default Near Water Scale",
+          "value": 200.0
+        },
+        {
+          "name": "Far Normal Fresnel Power",
+          "value": 5.0
+        },
+        {
+          "name": "Water Distant Normal Length",
+          "value": 10000.0
+        },
+        {
+          "name": "Water Distant Normal Offset",
+          "value": 5000.0
+        },
+        {
+          "name": "poison_Foam_Falloff",
+          "value": 10.0
+        },
+        {
+          "name": "poison_LightFoam_Speed",
+          "value": -0.5
+        },
+        {
+          "name": "poison_LightFoam_Tiling",
+          "value": 100.0
+        },
+        {
+          "name": "poison_Opacity",
+          "value": 100.0
+        },
+        {
+          "name": "poison_pow",
+          "value": 0.25
+        },
+        {
+          "name": "poison_Tiling",
+          "value": 60.0
+        },
+        {
+          "name": "poison_Tiling2",
+          "value": 15.0
+        },
+        {
+          "name": "poisonSpeed_X",
+          "value": -0.02
+        },
+        {
+          "name": "poisonSpeed_X2",
+          "value": 0.005
+        },
+        {
+          "name": "poisonSpeed_Y",
+          "value": 0.02
+        },
+        {
+          "name": "poisonSpeed_Y2",
+          "value": 0.0005
+        },
+        {
+          "name": "boost",
+          "value": 5.0
+        },
+        {
+          "name": "DistanceFoamGradientMin",
+          "value": 0.552381
+        },
+        {
+          "name": "DistanceFoamOffset",
+          "value": 1.0
+        },
+        {
+          "name": "HeightScale",
+          "value": 0.0
+        },
+        {
+          "name": "SurfaceFoamIntensity",
+          "value": 0.5
+        },
+        {
+          "name": "SurfaceFoamSize",
+          "value": 25.0
+        },
+        {
+          "name": "SurfaceFoamSpeed",
+          "value": 9.0
+        },
+        {
+          "name": "SurfaceFoamSpeedX",
+          "value": 0.1
+        },
+        {
+          "name": "SurfaceFoamSpeedY",
+          "value": 0.1
+        },
+        {
+          "name": "SurfaceFoamWaveIntensity",
+          "value": 3.0
+        },
+        {
+          "name": "SurfaceFoamWaveSpeed",
+          "value": 0.5
+        },
+        {
+          "name": "SurfaceFoamWaveTiling",
+          "value": 4000.0
+        },
+        {
+          "name": "Critical Angle Bend Width",
+          "value": -0.75
+        },
+        {
+          "name": "Anisotropy",
+          "value": 0.9
+        },
+        {
+          "name": "Depth for Min Refraction",
+          "value": 5000.0
+        },
+        {
+          "name": "Refraction",
+          "value": 1.15
+        },
+        {
+          "name": "Refraction Far",
+          "value": 1.02
+        },
+        {
+          "name": "Water Fresnel Roughness",
+          "value": 0.25
+        },
+        {
+          "name": "Water Roughness",
+          "value": 0.3
+        },
+        {
+          "name": "Water Specular",
+          "value": 0.08
+        },
+        {
+          "name": "FoamColorBright",
+          "value": 0.5
+        },
+        {
+          "name": "RefractionDepthBias",
+          "value": 0.0
+        }
+      ],
+      "switches": [
+        {
+          "name": "Enable Water VS Mapping",
+          "override": true,
+          "value": false
+        },
+        {
+          "name": "poison",
+          "override": true,
+          "value": true
+        },
+        {
+          "name": "UseScalarWaterBodyIndex",
+          "override": true,
+          "value": true
+        }
+      ],
+      "textures": [
+        {
+          "name": "poison_Noise",
+          "object_name": "Texture2D'FT_Sparkle_Noise_002'",
+          "object_path": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Sparkle_Noise_002.0"
+        },
+        {
+          "name": "poison_Tex",
+          "object_name": "Texture2D'FT_S_Tile_03B'",
+          "object_path": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_S_Tile_03B.0"
+        },
+        {
+          "name": "poison_Tex2",
+          "object_name": "Texture2D'FT_Noise_Water'",
+          "object_path": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_Water.0"
+        }
+      ],
+      "vectors": [
+        {
+          "name": "Absorption",
+          "value": [
+            40.0,
+            230.0,
+            30.0,
+            15.0
+          ]
+        },
+        {
+          "name": "Scattering",
+          "value": [
+            150.0,
+            45.0,
+            25.0,
+            0.45
+          ]
+        },
+        {
+          "name": "poisonColor",
+          "value": [
+            0.993021,
+            4.185291,
+            5.495954,
+            0.0
+          ]
+        },
+        {
+          "name": "SurfaceFoamColor",
+          "value": [
+            0.012303,
+            0.046875,
+            0.015982,
+            0.0
+          ]
+        },
+        {
+          "name": "SurfaceFoamInnerColor",
+          "value": [
+            0.322917,
+            0.154231,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "Water Albedo",
+          "value": [
+            0.109375,
+            0.107511,
+            0.039811,
+            0.5
+          ]
+        }
+      ]
+    },
+    "stormpass": {
+      "base_property_overrides": {
+        "BlendMode": "BLEND_Masked",
+        "OpacityMaskClipValue": 0.3333,
+        "ShadingModel": "MSM_SingleLayerWater",
+        "TwoSided": true
+      },
+      "name": "Water_Material_StormPass_CustomMesh_AK",
+      "package": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Material/Water_Material_StormPass_CustomMesh_AK",
+      "parent": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Material/Water_Material_SkoffaCave_CustomMesh_AK",
+      "scalars": [
+        {
+          "name": "Default Near Water Scale",
+          "value": 200.0
+        },
+        {
+          "name": "poison_Opacity",
+          "value": 25.0
+        },
+        {
+          "name": "Water Fresnel Roughness",
+          "value": 0.0
+        },
+        {
+          "name": "Water Roughness",
+          "value": 0.2
+        },
+        {
+          "name": "Water Specular",
+          "value": 0.1
+        },
+        {
+          "name": "FoamColorBright",
+          "value": 1.0
+        },
+        {
+          "name": "RefractionDepthBias",
+          "value": 0.0
+        }
+      ],
+      "switches": [
+        {
+          "name": "poison",
+          "override": true,
+          "value": true
+        }
+      ],
+      "textures": [
+        {
+          "name": "poison_Noise",
+          "object_name": "Texture2D'FT_Noise_011'",
+          "object_path": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_Noise_011.0"
+        }
+      ],
+      "vectors": [
+        {
+          "name": "Absorption",
+          "value": [
+            15.0,
+            1.0,
+            1.0,
+            15.0
+          ]
+        },
+        {
+          "name": "Scattering",
+          "value": [
+            10.0,
+            10.0,
+            10.0,
+            10.0
+          ]
+        },
+        {
+          "name": "poisonColor",
+          "value": [
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    "stormpass_inst1": {
+      "base_property_overrides": {
+        "BlendMode": "BLEND_Masked",
+        "OpacityMaskClipValue": 0.3333,
+        "ShadingModel": "MSM_SingleLayerWater",
+        "TwoSided": true
+      },
+      "name": "Water_Material_StormPass_CustomMesh_AK_Inst1",
+      "package": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Material/Water_Material_StormPass_CustomMesh_AK_Inst1",
+      "parent": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Material/Water_Material_StormPass_CustomMesh_AK",
+      "scalars": [
+        {
+          "name": "Anisotropy",
+          "value": 0.3
+        },
+        {
+          "name": "Depth for Min Refraction",
+          "value": 5000.0
+        },
+        {
+          "name": "Refraction",
+          "value": 1.15
+        },
+        {
+          "name": "Refraction Far",
+          "value": 1.02
+        },
+        {
+          "name": "Water Fresnel Roughness",
+          "value": 0.0
+        },
+        {
+          "name": "Water Roughness",
+          "value": 0.2
+        },
+        {
+          "name": "Water Specular",
+          "value": 0.13
+        },
+        {
+          "name": "RefractionDepthBias",
+          "value": 0.0
+        }
+      ],
+      "switches": [],
+      "textures": [],
+      "vectors": [
+        {
+          "name": "Water Albedo",
+          "value": [
+            0.109375,
+            0.107511,
+            0.039811,
+            0.5
+          ]
+        }
+      ]
+    }
+  },
+  "schema_version": 1,
+  "scope": "StormPass native xxWaterBodyCustomActor visual materials only",
+  "source_material_json_hashes": {
+    "master": "A40F4A952F4582B649B1221D0784919AB1C5EF83441E3FFBE48073CA3E51A141",
+    "skoffa": "F019CF3866F10D976CA3BA661D060F7817F2DD3BD47BF27A369A7614C4142846",
+    "stormpass": "D40BD2712EDBAB4926E9D16702483B9EC6F5494FCEABA3C884D38719A4EB706B",
+    "stormpass_inst1": "6242D7D27468F07611897DE955DB7865A668948FC137E2B3A0F07382311D3750"
+  },
+  "source_material_packages": {
+    "master": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Material/Water_Material_AK",
+    "skoffa": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Material/Water_Material_SkoffaCave_CustomMesh_AK",
+    "stormpass": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Material/Water_Material_StormPass_CustomMesh_AK",
+    "stormpass_inst1": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Material/Water_Material_StormPass_CustomMesh_AK_Inst1"
+  },
+  "source_mesh_package": "BBQ/Content/_Kazan_/Art/Terrain/Terrain_Data/Water/Data/WLP_WaterPlan_10x10",
+  "source_textures": [
+    {
+      "compression_settings": "TC_Default",
+      "json_path": "C:\\Users\\user\\Desktop\\카잔\\Exports\\BBQ\\Content\\Art\\Character\\CHA_Material\\Texture\\Base\\BASE_Black_NoneSRGB.json",
+      "json_sha256": "C5A639E792CA31E012743283744E21DAD505E850E7D2AA350CB44ED24A75C72A",
+      "lod_group": "",
+      "name": "BASE_Black_NoneSRGB",
+      "package": "BBQ/Content/Art/Character/CHA_Material/Texture/Base/BASE_Black_NoneSRGB",
+      "pixel_format": "PF_DXT1",
+      "png_path": "C:\\Users\\user\\Desktop\\카잔\\BBQ\\Content\\Art\\Character\\CHA_Material\\Texture\\Base\\BASE_Black_NoneSRGB.png",
+      "png_sha256": "79FBFF0BBF92E29686427B7AC6C9D36CEBF4262D1916F73C10A713E08B0F3E30",
+      "size_x": 8,
+      "size_y": 8,
+      "srgb": false
+    },
+    {
+      "compression_settings": "TC_Default",
+      "json_path": "C:\\Users\\user\\Desktop\\카잔\\Exports\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\BBQ_Texture\\Noise\\FT_Noise_011.json",
+      "json_sha256": "D667EFF084772EF4FE0B4353AF800AF57F62681D76A66AE7E710952C3B35F45F",
+      "lod_group": "TEXTUREGROUP_Effects",
+      "name": "FT_Noise_011",
+      "package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_Noise_011",
+      "pixel_format": "PF_DXT1",
+      "png_path": "C:\\Users\\user\\Desktop\\카잔\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\BBQ_Texture\\Noise\\FT_Noise_011.png",
+      "png_sha256": "EA358AD43C8B8C75D654BB9C4A4F7C07B7DF2709828B590AC9301F5ADBD8FF6C",
+      "size_x": 1024,
+      "size_y": 1024,
+      "srgb": true
+    },
+    {
+      "compression_settings": "TC_Default",
+      "json_path": "C:\\Users\\user\\Desktop\\카잔\\Exports\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\BBQ_Texture\\Mask\\FT_S_Liquid_002.json",
+      "json_sha256": "8C7A099F52C234278DC9595725C636EE901CC7559A48EEA82A649AB33046580B",
+      "lod_group": "TEXTUREGROUP_Effects",
+      "name": "FT_S_Liquid_002",
+      "package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT_S_Liquid_002",
+      "pixel_format": "PF_DXT1",
+      "png_path": "C:\\Users\\user\\Desktop\\카잔\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\BBQ_Texture\\Mask\\FT_S_Liquid_002.png",
+      "png_sha256": "FA0628F05F9A71EBD20DC234BC0BF2CD771F36AC83A4EE41179534B89C89C717",
+      "size_x": 512,
+      "size_y": 512,
+      "srgb": true
+    },
+    {
+      "compression_settings": "TC_Default",
+      "json_path": "C:\\Users\\user\\Desktop\\카잔\\Exports\\BBQ\\Content\\Art\\Terrain\\Terrain_Data\\Water\\Texture\\WLT_SeaFoam2.json",
+      "json_sha256": "C8553EC8F694EB52EB593498C6CDA0626E9E4F45D65594A7DF3F4F2B0D0A0467",
+      "lod_group": "",
+      "name": "WLT_SeaFoam2",
+      "package": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Texture/WLT_SeaFoam2",
+      "pixel_format": "PF_DXT1",
+      "png_path": "C:\\Users\\user\\Desktop\\카잔\\BBQ\\Content\\Art\\Terrain\\Terrain_Data\\Water\\Texture\\WLT_SeaFoam2.png",
+      "png_sha256": "8514181BC388F1A2DF28C6BB7B60F99F81F8D6635DCC22306B0B634828152CEB",
+      "size_x": 512,
+      "size_y": 512,
+      "srgb": true
+    },
+    {
+      "compression_settings": "TC_Default",
+      "json_path": "C:\\Users\\user\\Desktop\\카잔\\Exports\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\water\\FT_Water_12.json",
+      "json_sha256": "D4F6FC4B2FBAEDB3C6302AB43E67776EA13330426EE402BAF43E4F858073A7BD",
+      "lod_group": "TEXTUREGROUP_Effects",
+      "name": "FT_Water_12",
+      "package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/water/FT_Water_12",
+      "pixel_format": "PF_DXT1",
+      "png_path": "C:\\Users\\user\\Desktop\\카잔\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\water\\FT_Water_12.png",
+      "png_sha256": "A86F3DE9FF877884011DBC53722D6031EA37B102668278147D8D183E00870E6F",
+      "size_x": 1024,
+      "size_y": 1024,
+      "srgb": true
+    },
+    {
+      "compression_settings": "TC_Default",
+      "json_path": "C:\\Users\\user\\Desktop\\카잔\\Exports\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\BBQ_Texture\\Noise\\FT_Ele_Noise.json",
+      "json_sha256": "7D635BD07CFCBADE3EA04EFC57041C751F1FB0E42A00F59D36577BCB199E8EE9",
+      "lod_group": "TEXTUREGROUP_Effects",
+      "name": "FT_Ele_Noise",
+      "package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_Ele_Noise",
+      "pixel_format": "PF_DXT1",
+      "png_path": "C:\\Users\\user\\Desktop\\카잔\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\BBQ_Texture\\Noise\\FT_Ele_Noise.png",
+      "png_sha256": "0763644DC4FE95E5A630ED521B713609F5BA352C5E693B4216C3C18FCF47A9BA",
+      "size_x": 1024,
+      "size_y": 1024,
+      "srgb": true
+    },
+    {
+      "compression_settings": "TC_BC7",
+      "json_path": "C:\\Users\\user\\Desktop\\카잔\\Exports\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\Noise\\FT_Noise_3ch_001.json",
+      "json_sha256": "B75E47D493861E7200DD14D9CB1DED80BC355D99B93D891195EF15ADDBEAA6BE",
+      "lod_group": "TEXTUREGROUP_Effects",
+      "name": "FT_Noise_3ch_001",
+      "package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_3ch_001",
+      "pixel_format": "PF_BC7",
+      "png_path": "C:\\Users\\user\\Desktop\\카잔\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\Noise\\FT_Noise_3ch_001.png",
+      "png_sha256": "F1A59DD1D92DC7E235F95F3364FD505818B82E72B32E528D968C121CB9A2DAB7",
+      "size_x": 1024,
+      "size_y": 1024,
+      "srgb": false
+    },
+    {
+      "compression_settings": "TC_BC7",
+      "json_path": "C:\\Users\\user\\Desktop\\카잔\\Exports\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\Noise\\FT_Noise_007.json",
+      "json_sha256": "CB02DBE3BC35ACD235F03655624F78D39DE7B96C8F51D33AF91A11A1F72D875F",
+      "lod_group": "TEXTUREGROUP_Effects",
+      "name": "FT_Noise_007",
+      "package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_007",
+      "pixel_format": "PF_BC7",
+      "png_path": "C:\\Users\\user\\Desktop\\카잔\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\Noise\\FT_Noise_007.png",
+      "png_sha256": "BFA8E08E624DCD8F90D6FEA3C6D40E0157482985E8CE5749077029C98AF4D8A8",
+      "size_x": 512,
+      "size_y": 512,
+      "srgb": false
+    },
+    {
+      "compression_settings": "TC_BC7",
+      "json_path": "C:\\Users\\user\\Desktop\\카잔\\Exports\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\Noise\\FT_S_Tile_03B.json",
+      "json_sha256": "F6C11FD3BB3E50577AB9DB34F8135C4791CBCE57E81DDD23170A9CAEA67EF4B5",
+      "lod_group": "TEXTUREGROUP_Effects",
+      "name": "FT_S_Tile_03B",
+      "package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_S_Tile_03B",
+      "pixel_format": "PF_BC7",
+      "png_path": "C:\\Users\\user\\Desktop\\카잔\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\Noise\\FT_S_Tile_03B.png",
+      "png_sha256": "8D660787FE4C1936F52742F3593E0A981ABEC33D50CD741910F52EDC2FFB58B7",
+      "size_x": 512,
+      "size_y": 512,
+      "srgb": false
+    },
+    {
+      "compression_settings": "TC_Default",
+      "json_path": "C:\\Users\\user\\Desktop\\카잔\\Exports\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\Noise\\FT_Noise_Water.json",
+      "json_sha256": "886B7D908FA044E48F919E4E861223AF12AB51D6F0C3B5D2343ED7CBD565BA8F",
+      "lod_group": "TEXTUREGROUP_Effects",
+      "name": "FT_Noise_Water",
+      "package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_Water",
+      "pixel_format": "PF_DXT1",
+      "png_path": "C:\\Users\\user\\Desktop\\카잔\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\Noise\\FT_Noise_Water.png",
+      "png_sha256": "24791BA9F83C21CE62BB3CF92224743EACCC853601BA482C9B6DC75AD8362122",
+      "size_x": 2048,
+      "size_y": 2048,
+      "srgb": false
+    },
+    {
+      "compression_settings": "TC_BC7",
+      "json_path": "C:\\Users\\user\\Desktop\\카잔\\Exports\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\Noise\\FT_Sparkle_Noise_002.json",
+      "json_sha256": "F37307DBCB1E0C5A92D816BF6763D98C9368BCCAA4877C4B51E46877F4D821B8",
+      "lod_group": "TEXTUREGROUP_Effects",
+      "name": "FT_Sparkle_Noise_002",
+      "package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Sparkle_Noise_002",
+      "pixel_format": "PF_BC7",
+      "png_path": "C:\\Users\\user\\Desktop\\카잔\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Texture\\Noise\\FT_Sparkle_Noise_002.png",
+      "png_sha256": "D0DD4AD36BC1D03AB3BE682D92A94A5F38A7E96F68EAEA1F9E7693BBA775437D",
+      "size_x": 1024,
+      "size_y": 1024,
+      "srgb": false
+    }
+  ],
+  "status": "analyzed",
+  "water_actors": [
+    {
+      "actor_instance_path": "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/WaterAssets/Materials/MI_SP_Water_Boss_Phase_1_Actor_02379",
+      "cast_shadow": false,
+      "child_override_material_packages": [
+        null
+      ],
+      "child_world_transform": {
+        "location_cm": {
+          "x": 161151.0,
+          "y": 51448.0,
+          "z": 118.0
+        },
+        "rotation_degrees": {
+          "pitch": 0.0,
+          "roll": 0.0,
+          "yaw": 0.0
+        },
+        "scale": {
+          "x": 15.0,
+          "y": 10.0,
+          "z": 1.0
+        }
+      },
+      "collision_profile_name": "OverlapAll",
+      "effect_color": [
+        5.0,
+        0.15,
+        0.15,
+        1.0
+      ],
+      "foam_color": [
+        0.25,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "label": "SP_ChildProp_StormPass_Boss_Phase_1_02379_00076",
+      "source_actor_index": 2379,
+      "source_actor_name": "xxWaterBodyCustomActor_1",
+      "source_actor_type": "xxWaterBodyCustomActor",
+      "source_component_index": 76,
+      "source_component_name": "CustomMeshComponent",
+      "source_level": "StormPass_Boss_Phase_1",
+      "source_level_json": "C:\\Users\\user\\Desktop\\카잔\\Exports\\BBQ\\Content\\_Kazan_\\Level\\StormPass\\StormPass_Boss_Phase_1.json",
+      "source_level_json_sha256": "583ECA937394D6470AEBA109E582FFF07A62CB579FC70231E61C200237DAB470",
+      "source_material_key": "stormpass",
+      "source_material_package": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Material/Water_Material_StormPass_CustomMesh_AK",
+      "source_mesh_package": "BBQ/Content/_Kazan_/Art/Terrain/Terrain_Data/Water/Data/WLP_WaterPlan_10x10",
+      "visible": true
+    },
+    {
+      "actor_instance_path": "/Game/_Art/Kazan/Environment/StormPass/Reconstructed/WaterAssets/Materials/MI_SP_Water_Boss_Phase_2_Actor_02538",
+      "cast_shadow": false,
+      "child_override_material_packages": [
+        null
+      ],
+      "child_world_transform": {
+        "location_cm": {
+          "x": 163006.2,
+          "y": 51876.9,
+          "z": 118.0
+        },
+        "rotation_degrees": {
+          "pitch": 0.0,
+          "roll": 0.0,
+          "yaw": 0.0
+        },
+        "scale": {
+          "x": 9.0,
+          "y": 8.25,
+          "z": 1.0
+        }
+      },
+      "collision_profile_name": "OverlapAll",
+      "effect_color": [
+        5.0,
+        0.1,
+        0.1,
+        1.0
+      ],
+      "foam_color": [
+        0.4,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "label": "SP_ChildProp_StormPass_Boss_Phase_2_02538_00179",
+      "source_actor_index": 2538,
+      "source_actor_name": "xxWaterBodyCustomActor1",
+      "source_actor_type": "xxWaterBodyCustomActor",
+      "source_component_index": 179,
+      "source_component_name": "CustomMeshComponent",
+      "source_level": "StormPass_Boss_Phase_2",
+      "source_level_json": "C:\\Users\\user\\Desktop\\카잔\\Exports\\BBQ\\Content\\_Kazan_\\Level\\StormPass\\StormPass_Boss_Phase_2.json",
+      "source_level_json_sha256": "598CC505F0C48944FEBB7E740D59A87618B27B1729F1675A438DB93553C945EA",
+      "source_material_key": "stormpass_inst1",
+      "source_material_package": "BBQ/Content/Art/Terrain/Terrain_Data/Water/Material/Water_Material_StormPass_CustomMesh_AK_Inst1",
+      "source_mesh_package": "BBQ/Content/_Kazan_/Art/Terrain/Terrain_Data/Water/Data/WLP_WaterPlan_10x10",
+      "visible": true
+    }
+  ]
+}
