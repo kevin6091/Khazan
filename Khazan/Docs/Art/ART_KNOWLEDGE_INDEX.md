@@ -239,3 +239,9 @@
 - 현재 `PlaybackDerivation=CompositePlayback` 360개는 모두 data-model 및 platform target `60/1`이다. 시간 가감속은 pose의 source-time mapping에 bake되어 있고 Sequence/Montage 추가 rate는 `1.0`이다.
 - 전수 근거는 `Saved/ImportReports/Khazan_DAS_CompositeExact60_Preflight_20260917.json`, `Khazan_DAS_CompositeExact60_Import_20260917.json`, `Khazan_DAS_CompositeExact60_FinalAudit_20260917.json`이다. 수정 전 361 package backup은 `Saved/ArtBackups/DAS_Composite_PreExact60_20260917_184000`이다.
 - 재현 도구는 `Scripts/Animation/fix_das_composite_playback_60fps.py`, 독립 감사는 `audit_das_composite_playback_60fps.py`다. generator 자체도 `prepare_das_animation_timing.py`의 exact 60 Hz 계약으로 고쳤다.
+
+## 2026-09-29 Enemy LockOn 기준점
+
+- [LOCKON_TARGET_ANCHOR_AUDIT_20260929.md](LOCKON_TARGET_ANCHOR_AUDIT_20260929.md): 원작 `xxLockOnSphereComponent`, 현재 복원 메시 소켓, `LookAt01`과 LockOn 기준의 구분, gameplay `LockOnTargetPoint` 이관 계약의 정본이다.
+- 조사한 현재 Enemy 메시에는 공통 `LockOnTarget` 소켓이 없다. `LookAt01`은 머리의 별도 시선 소켓이며 원작 Character BP의 `xxLockOnSphereComponent`를 대체하지 않는다.
+- 기계 판독 요약은 `Saved/ImportReports/KZ_LockOnTargetAnchorAudit_20260929.json`이다. 이번 감사에서 C++/Blueprint/SkeletalMesh/Skeleton을 수정하지 않았다.

@@ -3,6 +3,7 @@
 #include "Component/KZLocomotionComponent.h"
 #include "Data/KZCharacterDefinitionData.h"
 #include "Ability/KZAbilitySystemComponent.h"
+#include "Attribute/KZAttributeSet.h"
 #include "GameplayAbilitySpec.h"
 #include "LogChannels.h"
 #include "Engine/World.h"
@@ -16,6 +17,9 @@ AKZCharacter::AKZCharacter()
 	LocomotionComponent = CreateDefaultSubobject<UKZLocomotionComponent>(TEXT("LocomotionComponent"));
 
 	AbilitySystemComponent = CreateDefaultSubobject<UKZAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+	
+	AttributeSet = CreateDefaultSubobject<UKZAttributeSet>(TEXT("KZPlayerAttributeSet"));
+	AbilitySystemComponent->AddAttributeSetSubobject(AttributeSet.Get());
 }
 
 void AKZCharacter::BeginPlay()
@@ -49,7 +53,7 @@ void AKZCharacter::PostInitializeComponents()
 	// 생성자에서 하지 않는 이유 : ASC의 OnRegister()가 ActorInfo 저장소를 준비함.
 	// 따라서 생성자에서 ASC를 만들고 여기서 ActorInfo를 연결.
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
-
+	
 	CharacterDefinition =
 		UKZAssetManager::GetAssetByName<UKZCharacterDefinitionData>
 	(CharacterDefinitionAssetName, false);
@@ -74,6 +78,27 @@ void AKZCharacter::PostInitializeComponents()
 
 	if (HasAuthority())
 	{
+		FGameplayEffectContextHandle Context = AbilitySystemComponent->MakeEffectContext();
+
+		Context.AddSourceObject(this);
+
+		for (const TSubclassOf<UGameplayEffect>& EffectClass : CharacterDefinition->GetInitialEffects())
+		{
+			if (!EffectClass)
+			{
+				continue;
+			}
+
+			FGameplayEffectSpecHandle Spec = AbilitySystemComponent->MakeOutgoingSpec(EffectClass, 1.f, Context);
+
+			if (!Spec.IsValid())
+			{
+				continue;
+			}
+
+			AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*Spec.Data.Get());
+		}
+		
 		for (const FKZInitialAbilityGrant& InitialAbilityGrant : CharacterDefinition->GetInitialAbilityGrants())
 		{
 			if (!InitialAbilityGrant.AbilityClass)
@@ -118,6 +143,11 @@ void AKZCharacter::PossessedBy(AController* NewController)
 // 빙의 해제
 void AKZCharacter::UnPossessed()
 {
+	if (UKZAbilitySystemComponent* ASC = Cast<UKZAbilitySystemComponent>(AbilitySystemComponent))
+	{
+		ASC->ClearComboCommands();
+	}
+	
 	Super::UnPossessed();
 
 	if (AbilitySystemComponent->GetAvatarActor_Direct() == this)

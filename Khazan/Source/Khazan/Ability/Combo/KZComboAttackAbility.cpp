@@ -9,36 +9,30 @@
 #include "Animation/AnimMontage.h"
 #include "KZGameplayTags.h"
 #include "LogChannels.h"
+#include "Character/KZCharacter.h"
+#include "Character/Component/KZLocomotionComponent.h"
+#include "Character/Locomotion/KZLocomotionType.h"
 
 namespace KZComboAttackAbilityPrivate
 {
 	// Ability Task와 몽타주 노티파이가 함께 사용하는 이름이다.
 	const FName MontageTaskName(TEXT("ComboAttackMontage"));
 
-	const FName ComboInputOpenNotifyName(TEXT("ComboInputOpen"));
-	const FName ComboCommitNotifyName(TEXT("ComboCommit"));
-	const FName ComboInputEndNotifyName(TEXT("ComboInputEnd"));
+	const FName InputOpenNotifyName(TEXT("InputOpen"));
+	const FName CommitNotifyName(TEXT("InputCommit"));
+	const FName InputEndNotifyName(TEXT("InputEnd"));
+	
+	const FName HoldCommitNotifyName(TEXT("HoldCommit"));
+	const FName HoldEndNotifyName(TEXT("HoldEnd"));
 }
 
 UKZComboAttackAbility::UKZComboAttackAbility()
 {
-	// 실행 상태를 멤버로 보관하기 위해 캐릭터마다 인스턴스 하나를 사용한다.
-	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
-
-	// 이 프로젝트는 싱글 플레이이므로 현재 로컬에서만 실행한다.
-	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalOnly;
-
 	// GAS가 이 Ability를 공격 행동으로 구분할 때 쓰는 태그다.
 	FGameplayTagContainer AssetTags;
 	AssetTags.AddTag(KZGameplayTags::Ability_Action_Attack);
 	SetAssetTags(AssetTags);
-
-	// ComboInputEnd 전에는 다른 일반 행동이 시작되지 않게 막는다.
-	BlockAbilitiesWithTag.AddTag(KZGameplayTags::Ability_Action);
-
-	// InputEnd 이후 새 행동이 시작되면 이 공격을 끝낼 수 있다.
-	CancelAbilitiesWithTag.AddTag(KZGameplayTags::Ability_Action);
-
+	
 	// 공격 중에는 이동을 막고, Ability가 끝나면 GAS가 자동으로 태그를 뺀다.
 	ActivationOwnedTags.AddTag(KZGameplayTags::Block_Movement_Input);
 }
@@ -185,7 +179,8 @@ bool UKZComboAttackAbility::StartEntryMontage()
 
 void UKZComboAttackAbility::HandleComboCommand(const FKZComboCommand& Command)
 {
-	// 누르기, 떼기, 취소에 맞춰 현재 버튼 상태를 갱신한다.
+	// ASC가 held 상태를 갱신한 뒤 보낸 외부 입력 사건을 현재 node에서 처리한다.
+	// 이 Ability는 버튼 상태를 따로 저장하지 않는다.
 	if (!IsActive() || !Command.CommandTag.IsValid())
 	{
 		return;
@@ -195,31 +190,43 @@ void UKZComboAttackAbility::HandleComboCommand(const FKZComboCommand& Command)
 	{
 	case EKZComboCommandPhase::Begin:
 		// 이미 누른 버튼의 중복 Begin은 무시한다.
-		if (HeldCommands.HasTagExact(Command.CommandTag))
+		// Begin만 일반 Combo Buffer를 사용한다.
+		if (ComboWindowPhase == EKZComboWindowPhase::Closed ||
+			PendingCommandTag.IsValid() ||
+			FindMatchingCommandEdge(Command) == nullptr)
 		{
 			return;
 		}
-
-		HeldCommands.AddTag(Command.CommandTag);
-		break;
+		
+		PendingCommandTag = Command.CommandTag;
+		
+		if (ComboWindowPhase == EKZComboWindowPhase::CommitToEnd)
+		{
+			CommitPendingCommand();
+		}
+		
+		return;
 
 	case EKZComboCommandPhase::Release:
-		// 먼저 누른 기록이 없는 Release는 무시한다.
-		if (!HeldCommands.HasTagExact(Command.CommandTag))
-		{
-			return;
-		}
-
-		HeldCommands.RemoveTag(Command.CommandTag);
-		break;
+		// Release는 Colsed 상태에서도 즉시 처리한다.
+		RunCommand(Command);
+		return;
 
 	case EKZComboCommandPhase::Cancel:
-		// Cancel은 공격을 실행하지 않고 입력 상태만 정리한다.
-		HeldCommands.RemoveTag(Command.CommandTag);
-
+		// 취소된 버튼 자체가 pending Begin이라면 무조건 버린다.
+		// FindMatchingCommandEdge()는 trigger 버튼 자체가 held인지 검사하지 않으므로
+		// 이 검사가 없으면 취소된 Begin이 InputCommit에서 실행될 수 있다.
+		if (PendingCommandTag == Command.CommandTag)
+		{
+			ClearPendingCommand();
+			return;
+		}
+		
+		// 다른 버튼의 Cancel도 pending Edge의 추가 hold 조건을 깨뜨릴 수 있다.
+		// 예: pending=X이고 RequiredHeldCommands={Y}일 때 Y Cancel이면 정리한다.
 		if (PendingCommandTag.IsValid())
 		{
-			const FKZComboCommand PendingCommand(PendingCommandTag, PendingCommandPhase);
+			const FKZComboCommand PendingCommand(PendingCommandTag, EKZComboCommandPhase::Begin);
 
 			if (FindMatchingCommandEdge(PendingCommand) == nullptr)
 			{
@@ -232,81 +239,230 @@ void UKZComboAttackAbility::HandleComboCommand(const FKZComboCommand& Command)
 	default:
 		return;
 	}
+}
 
-	// 창이 닫혀 있어도 눌림 상태는 기억하지만 다음 공격으로 쓰지는 않는다.
-	if (ComboWindowPhase == EKZComboWindowPhase::Closed)
+bool UKZComboAttackAbility::RunCommand(const FKZComboCommand& Command)
+{
+	const FKZComboCommandEdge* Edge = FindMatchingCommandEdge(Command);
+
+	if (Edge == nullptr)
 	{
-		return;
+		return false;
 	}
 
-	// 연타 입력은 쌓지 않고 현재 노드에 한 건만 저장한다.
-	if (PendingCommandTag.IsValid())
+	return ApplyEdge(*Edge, Command);
+}
+
+bool UKZComboAttackAbility::ApplyEdge(const FKZComboCommandEdge& Edge, const FKZComboCommand& Command)
+{
+	// TargetNodeId가 다른 granted Ability의 Entry인지 먼저 확인한다.
+	// Entry가 아니면 현재 Ability 안의 일반 노드 전환으로 처리한다.
+	UKZAbilitySystemComponent* ASC = Cast<UKZAbilitySystemComponent>(GetAbilitySystemComponentFromActorInfo());
+	
+	if (!IsValid(ASC))
 	{
-		return;
+		return false;
+	}
+	
+	const FGameplayAbilitySpecHandle SourceHandle = GetCurrentAbilitySpecHandle();
+	
+	if (!ASC->HasComboEntry(ComboDefinition, Edge.TargetNodeId, SourceHandle))
+	{
+		// 다른 entry Ability가 없으면 현재 Ability 내부 Node다.
+		return TransitionToNode(Edge.TargetNodeId);
+	}
+	
+	const bool bWasBlocking = IsBlockingOtherAbilities();
+
+	// StrongCharge early Release는 InputEnd 전이므로
+	// source block을 잠시 풀어야 StrongAttack을 시작할 수 있다.
+	if (bWasBlocking)
+	{
+		SetShouldBlockOtherAbilities(false);
+	}
+	
+	const bool bInputPressed = ASC->IsComboCommandHeld(Command.CommandTag);
+	
+	const bool bActivated = ASC->TryActivateComboEntry(
+		ComboDefinition,
+		Edge.TargetNodeId,
+		SourceHandle,
+		bInputPressed);
+	
+	if (!bActivated)
+	{
+		if (IsActive() && bWasBlocking)
+		{
+			SetShouldBlockOtherAbilities(true);
+		}
+		
+		return false;
+	}
+	
+	// Target의 CancelAbilitiesWithTag가 source를 취소하는 것이 정상이다.
+	// 잘못된 Blueprint 설정으로 source가 남았다면 여기서 정리한다.
+	if (IsActive())
+	{
+		FinishAbility(false);
 	}
 
-	if (FindMatchingCommandEdge(Command) == nullptr)
+	return true;
+}
+
+bool UKZComboAttackAbility::IsHoldType(const EKZComboHold Hold) const
+{
+	// 시간은 재지 않는다. HoldCommit Notify를 지났는지만 비교한다.
+	switch (Hold)
 	{
-		return;
+	case EKZComboHold::Any:
+		return true;
+
+	case EKZComboHold::BeforeCommit:
+		return !bHoldCommitted;
+
+	case EKZComboHold::AfterCommit:
+		return bHoldCommitted;
+
+	default:
+		return false;
+	}
+}
+
+bool UKZComboAttackAbility::IsMoveType(const EKZComboMove Move) const
+{
+	// 과거 입력을 저장하지 않고 LocomotionComponent의 현재 입력을 즉시 읽는다.
+	if (Move == EKZComboMove::Any)
+	{
+		return true;
 	}
 
-	PendingCommandTag = Command.CommandTag;
-	PendingCommandPhase = Command.Phase;
-
-	// Commit 뒤에 받은 입력은 기다리지 않고 바로 실행한다.
-	if (ComboWindowPhase == EKZComboWindowPhase::CommitToEnd)
+	const AKZCharacter* Character = Cast<AKZCharacter>(GetAvatarActorFromActorInfo());
+	if (!IsValid(Character))
 	{
-		CommitPendingCommand();
+		return false;
 	}
+
+	const UKZLocomotionComponent* Locomotion = Character->GetLocomotionComponent();
+	if (!IsValid(Locomotion))
+	{
+		return false;
+	}
+
+	const FKZLocomotionIntent& Intent =	Locomotion->GetLocomotionIntent();
+
+	if (Intent.InputAmount <= 0.0f)
+	{
+		return Move == EKZComboMove::NonRun;
+	}
+
+	switch (Intent.RequestedGait)
+	{
+	case EKZGait::Walk:
+		return Move == EKZComboMove::NonRun;
+
+	case EKZGait::Run:
+		return Move == EKZComboMove::Run;
+
+	case EKZGait::Sprint:
+		return Move == EKZComboMove::Run;
+
+	default:
+		return false;
+	}
+}
+
+bool UKZComboAttackAbility::MatchesEdge(const FKZComboCommandEdge& Edge, const FKZComboCommand& Command) const
+{
+	if (Edge.CommandTag != Command.CommandTag || Edge.CommandPhase != Command.Phase ||
+	   !IsHoldType(Edge.Hold) ||
+	   !IsMoveType(Edge.Move))
+	{
+		return false;
+	}
+
+	const UKZAbilitySystemComponent* ASC = Cast<UKZAbilitySystemComponent>(GetAbilitySystemComponentFromActorInfo());
+
+	if (!IsValid(ASC) || 
+		!ASC->GetHeldComboCommands().HasAllExact(Edge.RequiredHeldCommands) || 
+		!Edge.OwnerTagRequirements.RequirementsMet(ASC->GetOwnedGameplayTags()))
+	{
+		return false;
+	}
+
+	const FKZComboNode* TargetNode = ComboDefinition->FindNode(Edge.TargetNodeId);
+
+	return TargetNode != nullptr && IsNodePlayable(*TargetNode);
+}
+
+bool UKZComboAttackAbility::RunHeld(const EKZComboCommandPhase Phase)
+{
+	if (!IsActive() || !IsValid(ComboDefinition))
+	{
+		return false;
+	}
+
+	// 이 함수는 CommandTag가 없는 Montage 사건만 처리한다.
+	if (Phase != EKZComboCommandPhase::InputEnd &&
+		Phase != EKZComboCommandPhase::HoldCommit &&
+		Phase != EKZComboCommandPhase::HoldEnd)
+	{
+		return false;
+	}
+
+	const UKZAbilitySystemComponent* ASC = Cast<UKZAbilitySystemComponent>(GetAbilitySystemComponentFromActorInfo());
+
+	const FKZComboNode* CurrentNode = ComboDefinition->FindNode(CurrentNodeId);
+
+	if (!IsValid(ASC) || CurrentNode == nullptr)
+	{
+		return false;
+	}
+
+	const FGameplayTagContainer& HeldCommands = ASC->GetHeldComboCommands();
+
+	// held tag 순서가 아니라 authored Edge 순서로 검사한다.
+	for (const FKZComboCommandEdge& Edge :  CurrentNode->CommandEdges)
+	{
+		if (Edge.CommandPhase != Phase || !HeldCommands.HasTagExact(Edge.CommandTag))
+		{
+			continue;
+		}
+
+		const FKZComboCommand Command(Edge.CommandTag, Phase);
+
+		if (!MatchesEdge(Edge, Command))
+		{
+			continue;
+		}
+
+		// ApplyEdge가 다른 node/Ability로 전환하면서
+		// 현재 Ability를 끝낼 수 있으므로 성공 즉시 반환한다.
+		return ApplyEdge(Edge, Command);
+	}
+
+	return false;
 }
 
 const FKZComboCommandEdge* UKZComboAttackAbility::FindMatchingCommandEdge(const FKZComboCommand& Command) const
 {
-	// 현재 노드에서 입력, 홀드, 해금 조건이 모두 맞는 전환을 찾는다.
+	// 현재 노드의 Edge를 위에서부터 검사하고 모든 조건이 맞는 첫 Edge를 돌려준다.
 	if (!IsActive() || !IsValid(ComboDefinition) || !Command.CommandTag.IsValid())
 	{
 		return nullptr;
 	}
 
 	const FKZComboNode* CurrentNode = ComboDefinition->FindNode(CurrentNodeId);
-
-	const UAbilitySystemComponent* ASC = GetAbilitySystemComponentFromActorInfo();
-
-	if (CurrentNode == nullptr || !IsValid(ASC))
+	if (CurrentNode == nullptr)
 	{
 		return nullptr;
 	}
-
-	const FGameplayTagContainer& OwnerTags = ASC->GetOwnedGameplayTags();
-
-	// 같은 입력이 여러 개면 배열에서 먼저 나온 규칙을 사용한다.
+	
 	for (const FKZComboCommandEdge& Edge : CurrentNode->CommandEdges)
 	{
-		if (Edge.CommandTag != Command.CommandTag || Edge.CommandPhase != Command.Phase)
+		if (MatchesEdge(Edge, Command))
 		{
-			continue;
+			return &Edge;
 		}
-
-		// 함께 눌러야 하는 버튼이 빠졌으면 이 규칙을 건너뛴다.
-		if (!HeldCommands.HasAllExact(Edge.RequiredHeldCommands))
-		{
-			continue;
-		}
-
-		// 해금이나 상태 태그 조건이 맞지 않으면 건너뛴다.
-		if (!Edge.OwnerTagRequirements.RequirementsMet(OwnerTags))
-		{
-			continue;
-		}
-
-		const FKZComboNode* TargetNode = ComboDefinition->FindNode(Edge.TargetNodeId);
-
-		if (TargetNode == nullptr || !IsNodePlayable(*TargetNode))
-		{
-			continue;
-		}
-
-		return &Edge;
 	}
 
 	return nullptr;
@@ -314,28 +470,18 @@ const FKZComboCommandEdge* UKZComboAttackAbility::FindMatchingCommandEdge(const 
 
 bool UKZComboAttackAbility::CommitPendingCommand()
 {
-	// 저장한 입력이 지금도 유효하면 다음 공격으로 보낸다.
+	// InputOpen 때 저장한 Begin 한 건을 InputCommit에서 다시 검사한다.
 	if (!IsActive() || !PendingCommandTag.IsValid())
 	{
 		return false;
 	}
-
-	const FKZComboCommand PendingCommand(PendingCommandTag, PendingCommandPhase);
-
-	// 기다리는 동안 해금이나 홀드 상태가 바뀔 수 있어 다시 검사한다.
-	const FKZComboCommandEdge* Edge = FindMatchingCommandEdge(PendingCommand);
-
-	const FName TargetNodeId = Edge != nullptr ? Edge->TargetNodeId : NAME_None;
-
+	
+	// PendingCommandTag를 지역 변수로 복사한 뒤 지워야 한다.
+	// 지금 순서는 먼저 지우므로 아래 Command에는 빈 태그가 들어간다.
+	const FGameplayTag CommandTag = PendingCommandTag;
 	ClearPendingCommand();
-
-	if (Edge == nullptr)
-	{
-		return false;
-	}
-
-	// 맞는 규칙을 찾았으면 목표 노드로 이동한다.
-	return TransitionToNode(TargetNodeId);
+	
+	return RunCommand(FKZComboCommand(CommandTag, EKZComboCommandPhase::Begin));
 }
 
 bool UKZComboAttackAbility::TransitionToNode(const FName TargetNodeId)
@@ -378,10 +524,9 @@ bool UKZComboAttackAbility::TransitionToNode(const FName TargetNodeId)
 
 	ClearPendingCommand();
 	ComboWindowPhase = EKZComboWindowPhase::Closed;
-	bCanExitToLocomotion = false;
-
-	// 새 공격의 InputEnd 전까지 다른 행동을 다시 막는다.
-	SetShouldBlockOtherAbilities(true);
+	bHoldCommitted = false;
+	ResetInputEnd();
+	
 
 	if (ComboTransitionInertializationDuration > 0.0f)
 	{
@@ -394,6 +539,19 @@ bool UKZComboAttackAbility::TransitionToNode(const FName TargetNodeId)
 	// 새 섹션 첫 노티파이가 올바른 노드를 보도록 이름부터 바꾼다.
 	CurrentNodeId = TargetNodeId;
 
+	// GE_Cost 지불
+	const FGameplayAbilitySpecHandle Handle = GetCurrentAbilitySpecHandle();
+	const FGameplayAbilityActorInfo* ActorInfo = GetCurrentActorInfo();
+	const FGameplayAbilityActivationInfo ActivationInfo = GetCurrentActivationInfo();
+	if (CheckCost(Handle, ActorInfo))
+	{
+		ApplyCost(Handle, ActorInfo, ActivationInfo);
+	}
+	else
+	{
+		UE_LOG(LogAttribute, Log, TEXT("No Cost"));
+	}
+	
 	MontageJumpToSection(TargetNode->SectionName);
 
 	UE_LOG(LogAbility, Log, TEXT("%s transitioned Combo node %s -> %s."),
@@ -412,20 +570,23 @@ void UKZComboAttackAbility::HandleMontageNotifyBegin(const FName NotifyName, con
 		return;
 	}
 
-	if (NotifyName == KZComboAttackAbilityPrivate::ComboInputOpenNotifyName)
+	ProcessMontageNotify(NotifyName);
+}
+
+void UKZComboAttackAbility::ProcessMontageNotify(FName NotifyName)
+{
+	// Input 계열은 일반 콤보 입력 창, Hold 계열은 차지 성공 구간을 다룬다.
+	// 두 시간축은 서로 독립적이다.
+	if (NotifyName == KZComboAttackAbilityPrivate::InputOpenNotifyName)
 	{
 		// 새 입력 창을 열 때 이전 노드의 예약 입력을 지운다.
 		ClearPendingCommand();
-
 		ComboWindowPhase = EKZComboWindowPhase::OpenToCommit;
-
-		bCanExitToLocomotion = false;
-
-		SetShouldBlockOtherAbilities(true);
+		
 		return;
 	}
 
-	if (NotifyName == KZComboAttackAbilityPrivate::ComboCommitNotifyName)
+	if (NotifyName == KZComboAttackAbilityPrivate::CommitNotifyName)
 	{
 		// Open을 지나지 않은 잘못된 Commit은 무시한다.
 		if (ComboWindowPhase != EKZComboWindowPhase::OpenToCommit)
@@ -437,28 +598,41 @@ void UKZComboAttackAbility::HandleMontageNotifyBegin(const FName NotifyName, con
 		ComboWindowPhase = EKZComboWindowPhase::CommitToEnd;
 
 		// 미리 눌러 둔 입력이 있으면 이 지점에서 실행한다.
-		if (PendingCommandTag.IsValid())
-		{
-			CommitPendingCommand();
-		}
-
+		CommitPendingCommand();
+		
 		return;
 	}
 
-	if (NotifyName == KZComboAttackAbilityPrivate::ComboInputEndNotifyName)
+	if (NotifyName == KZComboAttackAbilityPrivate::InputEndNotifyName)
 	{
 		// 이 공격의 콤보 입력 구간이 끝났으므로 예약 입력을 버린다.
 		ClearPendingCommand();
 
 		ComboWindowPhase = EKZComboWindowPhase::Closed;
+		
+		// 먼저 target Ability를 시작할 수 있게 차단을 푼다.
+		SetInputEnded();
+		// 그 뒤 계속 held인 입력의 handoff Edge를 검사한다.
+		RunHeld(EKZComboCommandPhase::InputEnd);
+		
+		return;
+	}
+	
+	if (NotifyName == KZComboAttackAbilityPrivate::HoldCommitNotifyName)
+	{
+		// Release가 같은 frame에 와도 이후에는 성공으로 판정하도록
+		// Edge 검사보다 먼저 상태를 바꾼다.
+		bHoldCommitted = true;
+		RunHeld(EKZComboCommandPhase::HoldCommit);
+		return;
+	}
 
-		bCanExitToLocomotion = true;
-
-		// 이제 이동이나 다른 행동으로 나갈 수 있다.
-		// 새 입력이 없으면 몽타주는 회수 동작까지 재생한다.
-		SetShouldBlockOtherAbilities(false);
+	if (NotifyName == KZComboAttackAbilityPrivate::HoldEndNotifyName)
+	{
+		RunHeld(EKZComboCommandPhase::HoldEnd);
 	}
 }
+
 
 bool UKZComboAttackAbility::IsNodePlayable(const FKZComboNode& Node) const
 {
@@ -491,7 +665,7 @@ void UKZComboAttackAbility::HandleMoveInput(FGameplayEventData Payload)
 	// 이 이벤트는 값이 아니라 이동 입력이 있다는 사실만 사용한다.
 	(void)Payload;
 
-	if (!IsActive() || !bCanExitToLocomotion)
+	if (!IsActive() || !HasInputEnded())
 	{
 		return;
 	}
@@ -578,18 +752,15 @@ void UKZComboAttackAbility::ClearPendingCommand()
 {
 	// 예약 입력이 없다는 기본 상태로 되돌린다.
 	PendingCommandTag = FGameplayTag();
-	PendingCommandPhase = EKZComboCommandPhase::Begin;
 }
 
 void UKZComboAttackAbility::ResetRuntimeState()
 {
 	// 다음 activation이 이전 콤보 상태를 이어받지 않게 모두 비운다.
-	HeldCommands.Reset();
 	ClearPendingCommand();
-
 	CurrentNodeId = NAME_None;
 	ComboWindowPhase = EKZComboWindowPhase::Closed;
-	bCanExitToLocomotion = false;
+	bHoldCommitted = false;
 }
 
 void UKZComboAttackAbility::HandleMontageCompleted()

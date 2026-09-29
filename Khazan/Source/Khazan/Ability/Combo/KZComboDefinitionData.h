@@ -20,11 +20,20 @@ struct FKZComboCommandEdge
 	UPROPERTY(EditAnywhere, Category = "Combo", meta = (Categories = "Command"))
 	FGameplayTag CommandTag;
 
-	// 버튼을 눌렀을 때인지 뗐을 때인지 정한다.
+	// Begin, Release, InputEnd, HoldCommit, HoldEnd 중 언제 검사할 Edge인지 정한다.
 	UPROPERTY(EditAnywhere, Category = "Combo")
 	EKZComboCommandPhase CommandPhase = EKZComboCommandPhase::Begin;
 
-	// 이 전환을 할 때 계속 누르고 있어야 하는 다른 명령들이다.
+	// HoldCommit 전후 중 어느 상태에서 허용되는 Edge인지 정한다.
+	UPROPERTY(EditAnywhere, Category = "Combo")
+	EKZComboHold Hold = EKZComboHold::Any;
+
+	// Edge를 실제 검사하는 순간의 이동 입력 상태다.
+	UPROPERTY(EditAnywhere, Category = "Combo")
+	EKZComboMove Move = EKZComboMove::Any;
+	
+	// 현재 명령 말고 추가로 계속 누르고 있어야 하는 명령들이다.
+	// 예: X 사건에 Y도 필요할 때만 Y를 넣는다. Y 사건에 Y를 다시 넣지는 않는다.
 	UPROPERTY(EditAnywhere, Category = "Combo", meta = (Categories = "Command"))
 	FGameplayTagContainer RequiredHeldCommands;
 

@@ -378,3 +378,151 @@
 - Source/Config/Scripts의 이전 경로는 Core Redirect의 `OldName`을 제외하고 제거됐고, `KZComboAttackAbility`를 포함한 KZ Source는 UHT와 개별 C++ compile action을 통과했다. 최종 DLL link 성공 여부는 에디터가 닫힌 상태의 후속 cold build에서 별도로 확인해야 하며, 앞선 `LNK1104`는 열린 Editor의 DLL lock 결과다.
 - 대용량 Git 전송은 Player asset을 여섯 묶음으로 먼저 올린 뒤 코드·설정·이전 root 삭제를 마지막 커밋으로 반영했다. `main`의 최종 트리는 `Content/_Art/Kazan` 0개, `Content/_Art/Player` 9,491개 파일을 가진다.
 - 에디터 종료 뒤 `Build.bat KhazanEditor Win64 Development ... -WaitMutex -NoHotReloadFromIDE`를 다시 실행해 `UnrealEditor-Khazan.dll` link와 target metadata 작성까지 `Result: Succeeded`를 확인했다. PIE 플레이 검증은 이번 폴더 복구 범위에 포함하지 않았다.
+
+## 2026-09-23 — StrongCharge 수직 절편 적용 대기
+
+- 목표 동작: Y press에서 Charge 시작, `ChargeReady` 전 정상 release는 `StrongAttack01`, 이후 release는 `StrongChargeAttack`, release 없이 `ChargeEnd`까지 유지해도 `StrongChargeAttack`으로 전환한다. `Canceled`는 공격 edge가 아니다.
+- 마지막 정적 확인: `UKZComboAttackAbility`는 command held set과 Open/Commit/End 창, 한 칸 pending, same-Montage section jump를 이미 소유한다. `AuthoredEventEdges`와 node-lifetime immediate command edge는 아직 없다. Strong native class는 빈 migration shim이다.
+- 마지막 asset 확인: 별도 UE 5.8.2 read-only commandlet 보고서 `Saved/KZStrongChargeInspect.json`의 내부 status는 `passed`다. Strong Montage는 Attack01–03만 포함하고 길이는 `14.366667 s`; Charge/ChargeAttack sequence는 각각 `1.5 s`와 `5.433333 s`; GA entry는 `StrongAttack01`; Definition에는 charge node가 없다. commandlet 종료 코드 1은 기존 `GameFeatures.GameFeatureData` startup ensure이며 검사 script 실패가 아니다.
+- 선행 불일치: 사용자가 Source tag를 `Input.Action.X/Y`, `Command.Player.Attack.X/Y`로 바꿨지만 `DA_InputData`, `DA_CharacterDefinition_Player`, `DA_Player_Combo_Definition`에는 이전 Weak/Strong tag가 저장돼 있다. 세 asset을 새 tag로 재저장하거나 redirect를 적용하기 전에는 입력 Spec과 Combo edge가 일치하지 않는다.
+- 정확한 재개 절차: (1) 열린 Editor에서 사용자 변경을 보존해 저장한 뒤 Editor/Live Coding을 종료하고 새 tag Source를 cold build한다. (2) Editor를 다시 열어 위 세 asset의 Input/Command tag를 X/Y로 바꾸고 Weak/Strong 회귀를 확인한다. (3) `KZComboDefinitionData`에 command timing과 authored-event edge를, `KZComboAttackAbility`에 immediate edge 처리·authored edge resolver·same-presentation logical transition을 적용하고 cold build한다. (4) Strong Montage에 Charge/ChargeAttack segment와 section, `ChargeReady=0.600000 s`, `ChargeEnd=1.178113 s` Branching Point를 추가한다. (5) Definition에 `StrongChargeStart`, `StrongChargeReady`, `StrongChargeAttack` node/edge를 만들고 GA entry를 `StrongChargeStart`로 바꾼다.
+- PIE 합격 행렬: 0.600 s 전 release→StrongAttack01, 0.600 s 후 release→StrongChargeAttack, 1.178113 s까지 hold→자동 StrongChargeAttack, Canceled→공격 분기 없음, mash 1회 소비, 기존 Strong01→02→03와 Weak01→05 회귀, interruption/EndAbility 후 held·pending·delegate 잔존 0을 확인한다.
+- 이번 작업에서 어시스턴트는 게임 Source/Config/Content를 수정하지 않았다. Engineering 문서만 append했고 실제 C++ build와 PIE는 사용자 적용 뒤 검증해야 한다.
+
+## 2026-09-23 — StrongCharge 선행 tag 불일치 해소 및 Spec tag 판정
+
+- 사용자가 에셋을 다시 저장한 뒤 raw on-disk 확인에서 `DA_InputData`, `DA_CharacterDefinition_Player`는 `Input.Action.X/Y`, `DA_Player_Combo_Definition`은 `Command.Player.Attack.X/Y`를 가진다. 바로 앞 절의 Weak/Strong 저장 불일치는 이전 검사 시점 기록이며 현재 해소됐다.
+- `GetDynamicSpecSourceTags()`의 InputTag는 granted Spec의 Player 입력 binding으로 유지한다. `Ability.Action.Attack` Asset Tag는 block/cancel/query용 Ability 분류이므로 Y 입력 Spec 검색에 사용하지 않는다.
+- StrongCharge의 command timing/authored-event C++ 확장, Montage section/notify, charge node와 GA entry 변경은 아직 적용하지 않았다. 재개는 바로 앞 절의 절차 (3)부터 시작한다.
+
+## 2026-09-23 — StrongCharge 과확장안 철회
+
+- `FKZComboAuthoredEventEdge`, `EKZComboCommandTiming`, same-section logical node를 추가하는 미적용 제안은 철회했다. `HeldCommands`는 지속 여부만 알며 경과 시간을 측정하지 않는다는 누락을 범용 graph 확장으로 덮지 않는다.
+- 재개 구현은 (1) ASC가 같은 InputTag 후보 중 활성 Spec 하나 또는 첫 활성화 성공 Spec 하나만 선택하고 실패 Spec의 `InputPressed`를 복구하며 release/cancel도 선택 Spec만 처리, (2) 미사용 `TryActivateAbilityByInputTag()` 제거 여부 확인, (3) 공통 Combo base에 narrow unhandled-notify hook과 node transition 접근만 제공, (4) `UKZStrongAttackAbility`에서 `WaitInputRelease` 및 `Charging/Ready/Resolved` phase로 tap/charged 분기, (5) Montage에 `ChargeReady`와 `ChargeEnd` 두 authored point 추가 순서다.
+- `Cancel`은 charge release로 소비하지 않고 활성 Combo Ability를 canceled 종료하여 task/delegate/held/pending을 정리한다. Combo Definition schema는 현재 `FKZComboNode`와 `FKZComboCommandEdge` 그대로 유지한다.
+- 이전 proposal diff는 적용 검사만 했으며 게임 Source에 적용된 적이 없다. 수정된 설계를 실제 적용·cold build·PIE한 결과도 아직 없다.
+
+## 2026-09-23 — StrongCharge/StrongAttack 실행 분리 재정정
+
+- 사용자가 `Y Begin`에는 별도 StrongCharge Ability가 실행되고, 최소 charge 전 release에서 기존 StrongAttack Ability가 새로 활성화되는 실행 모델임을 명시했다. 기존 StrongAttack class 안에 charge phase를 넣는 ARCH-61 제안은 철회하고 Architecture ARCH-62로 대체했다.
+- 현행 `AbilityInputTagPressed()` 사용자 적용본은 활성 동일 입력 Spec을 처리한 뒤 `return`이 없어 비활성 Y 후보 루프까지 내려갈 수 있다. Pressed는 활성 Spec 처리 직후 반환하고, Released/Canceled는 exact InputTag이면서 `InputPressed == true`인 선택 Spec 하나만 처리한 뒤 반환해야 한다.
+- 재개 순서는 ASC 세 입력 함수의 단일 Spec 소유권 완성, Combo base의 `ProcessMontageNotify` 확장점과 protected transition/finish, held Cancel 종료, 새 `UKZStrongChargeAbility`, `GA_Player_StrongCharge`와 Definition/Montage 설정 순이다. 실패 release는 Charge 종료 뒤 exact granted `GA_Player_StrongAttack` class를 활성화하고, 성공 release/timeout은 Charge 실행 안의 `StrongChargeAttack` node로 이동한다.
+- 이번 정정에서는 게임 Source/Content를 수정하거나 build/PIE하지 않았다.
+
+## 2026-09-23 — Input Canceled 선택 Spec 종료 보정
+
+- `AbilityInputTagCanceled()`는 선택 Spec의 `InputPressed`를 false로 만든 뒤 활성 상태면 `CancelAbilityHandle()`로 그 Spec만 canceled 종료한다. `InputReleased` replicated event는 보내지 않아 charge release 분기를 깨우지 않는다.
+- 공통 Combo base의 기존 `Cancel` command 처리는 held/pending cleanup으로 유지한다. Charge 취소를 위해 모든 Combo 실행을 광범위하게 종료하는 변경은 적용하지 않는다.
+- 게임 Source/Content 수정과 build/PIE는 아직 없다.
+
+## 2026-09-23 — Combo hold Edge 구조 재설계 대기
+
+- 사용자 확인으로 `UKZStrongChargeAbility`가 성공/실패를 직접 분기하는 구현은 폐기 대상이 됐다. 모든 Node→Node 전이는 하나의 Combo Edge schema와 공통 runtime으로 처리해야 하며, 별도 authored-event Edge 배열을 만들지 않는다.
+- 현행 한계는 Ability-local `HeldCommands`, command 도착 순간에만 수행되는 Edge 검사, 닫힌 window에서 입력 후보를 버리는 처리, same-Montage만 허용하는 `TransitionToNode()`다. 이 때문에 `RequiredHeldCommands`만으로 `WeakAttack01 도중 Y hold → authored 종료 시 StrongCharge`를 표현할 수 없다.
+- 정본 계약은 Architecture ARCH-64다. 재개 순서는 (1) ASC에 command held/start-time ledger와 release duration snapshot 추가, (2) 기존 Edge 하나에 Command/HoldThreshold/NodeEvent trigger와 command/node 시간 조건 및 optional target Ability 추가, (3) node event와 hold threshold에서 같은 resolver 호출, (4) cross-Montage node player와 generic Ability handoff 구현, (5) `UKZStrongChargeAbility`의 charge 전용 state/task/notify/hardcoded target 제거, (6) DataAsset Edge 재작성, (7) cold build와 PIE 행렬 검증이다.
+- 필요한 데이터 예시는 WeakAttack01 node event + RequiredHeld Y → GA_Player_StrongCharge/StrongCharge, StrongCharge의 early Y Release → GA_Player_StrongAttack/StrongAttack01, ready Y Release → StrongChargeAttack, held timeout → StrongChargeAttack이다.
+- 이번 정정에서는 게임 Source/Content를 수정하지 않았고 build/PIE도 수행하지 않았다.
+
+## 2026-09-23 — 최소 InputEnd/Combo Edge 계약으로 재정리
+
+- ARCH-64의 범용 trigger/min-max/duration-origin/target-Ability 프로퍼티 제안은 과도하여 Architecture ARCH-65로 대체했다.
+- 공통 `UKZActionAbility`는 `bInputEnded` 하나로 모든 주요 Montage Action의 교체 가능 시점을 연다. 기존 Combo의 `bCanExitToLocomotion`을 대체하고, `ComboInputOpen/ComboCommit`은 Combo 전용으로 유지하며 `ComboInputEnd`는 공통 `InputEnd`로 바꾼다.
+- 기존 Edge는 현재 다섯 필드를 유지하고 `CommandPhase`의 Hold/InputEnd, `HoldTime`, Begin 순간 `Move(Any/Stand/Walk/Run/Sprint)`만 추가한다. 시간은 항상 current node 안에서 command가 연속 held였던 시간 하나로 계산하고 Edge 배열의 첫 일치 항목을 소비한다.
+- ASC runtime state는 `CommandTag -> {BeginTime, Move}` map 하나다. Combo Ability에는 node enter time과 다음 Hold edge timer만 추가하고 Ability-local `HeldCommands` 및 StrongCharge 전용 state/task/notify/hardcoded handoff는 제거한다.
+- target Ability 필드는 추가하지 않는다. target node가 다른 granted Combo Ability의 고유 EntryNodeId이면 공통 handoff하고, 아니면 현재 Ability 안에서 전환한다.
+- Monster는 별도 hold/Combo 기반을 선행 생성하지 않는다. Player 입력 adapter와 Monster AI 결정은 분리하되 공통 Action Ability의 InputEnd/Montage/GAS 수명은 공유한다.
+- 게임 Source/Content 수정, build와 PIE는 아직 수행하지 않았다.
+
+## 2026-09-24 — Move/Hold/Release 계약 보정
+
+- Architecture ARCH-66이 ARCH-65의 Begin 시점 Move snapshot을 폐기했다. Edge의 Move는 검사 순간 `LocomotionIntent.InputAmount`와 `RequestedGait`에서 읽으며, ASC에는 `CommandTag -> BeginTime`만 저장한다.
+- Hold는 매 frame 전달되는 입력이나 bool이 아니라 Edge의 HoldTime에 예약한 timer 사건이다. HoldTime은 실시간 누적 멤버가 아니며 Release/Hold/InputEnd에서 `Now - max(BeginTime, NodeEnterTime)`으로 계산한다.
+- Enhanced Input `Completed`가 Release를 명시한다. Release는 계산한 HeldTime을 일회성 command 값으로 넘기고 held map을 정리한다. `Canceled`는 map만 정리하고 Release Edge를 실행하지 않는다.
+- StrongCharge는 ready 이상 Release, 0초 Release fallback, max-time Hold의 세 Edge로 early release/charged release/held timeout을 구분한다. InputEnd는 release가 아니라 Montage의 교체 및 held handoff 경계다.
+- 이번 보정에서도 게임 Source/Content를 수정하거나 build/PIE하지 않았다.
+
+## 2026-09-24 — Montage Notify 기반 Hold 계약으로 단순화
+
+- Architecture ARCH-67이 ARCH-65/66의 HoldTime, BeginTime, NodeEnterTime, hold timer와 transient HeldTime을 폐기했다. 현재 StrongCharge는 node 진입부터 Y held를 보장하므로 Montage authored 경계가 충분하다.
+- 인식할 Notify 역할은 `InputOpen`, `InputCommit`, `InputEnd`, `HoldCommit`, `HoldEnd` 다섯 종류다. Input의 buffer 시간축과 Hold의 charge 시간축은 독립이며, 각 section은 필요한 Notify만 가진다.
+- ASC에는 held CommandTag set만 남기고 활성 Combo node에는 `bHoldCommitted` 하나만 둔다. HoldCommit 전/후 Release Edge와 held 상태의 HoldEnd Edge를 같은 resolver에서 처리한다.
+- StrongCharge Edge는 Y/Release+BeforeCommit→StrongAttack01, Y/Release+AfterCommit→StrongChargeAttack, Y/HoldEnd+AfterCommit→StrongChargeAttack이다. InputEnd/HoldEnd 사건은 현재 held command만 생성하므로 같은 command를 RequiredHeldCommands에 중복 작성하지 않는다.
+- 시간 측정은 미래에 node 중간의 늦은 Begin부터 command별 실제 경과 시간을 요구할 때만 다시 도입한다. 이번 검토에서는 게임 Source/Content를 수정하거나 build/PIE하지 않았다.
+
+## 2026-09-24 — Notify Hold Edge 사용자 구현 절차 작성
+
+- Migration의 P6-D3 절에 현재 Source에서 ARCH-67로 이관하는 네 checkpoint를 기록했다: 값 타입/ASC/Controller, Action InputEnd/Combo resolver, 공통 node·Ability handoff, StrongCharge 하드코딩 제거/asset 작성이다.
+- 현재 저장 `AM_DAS_StrongChargeAttack`에는 `ChargeReady`, `ChargeEnd`, `ComboInputEnd`가 있고 Definition에는 `StrongCharge`, `StrongChargeAttack` node가 있음을 raw asset 문자열로 표적 확인했다. 새 asset 생성 대신 같은 authored frame의 역할 이름을 이관한다.
+- 구현상 핵심 보정은 Begin만 input buffer를 사용하고 Release/Notify event는 즉시 resolver로 보내는 것, held set을 ASC에 두는 것, InputEnd handoff 전에 action block을 여는 것이다.
+- 이번 작업에서는 설명 문서만 append했다. 게임 Source/Content, build와 PIE는 사용자가 각 checkpoint를 적용한 뒤 검증해야 한다.
+- 현재 grant 선택은 `StrongCharge=Input.Action.Y`, `StrongAttack=InputTag 없음`으로 고정했다. idle Y는 StrongCharge 하나만 시작하고 StrongAttack은 Release Edge handoff로만 활성화한다.
+
+## 2026-09-26 — Notify Hold Edge 사용자 적용본 전수 점검
+
+- P6-D3 사용자 적용본은 아직 중간 이관 상태다. `HasComboEntry()`는 본문과 반환이 없고 `TryActivateComboEntry()`는 찾지 않은 `TargetSpec`을 사용한다. Combo 쪽에는 제거된 `HeldCommands`, `bCanExitToLocomotion` 참조와 선언·정의되지 않은 `RunHeld()` 호출이 남아 있다.
+- 2026-09-26 UE 5.8 `KhazanEditor Win64 Development` cold build는 위 항목에서 컴파일 오류 10개로 실패했다. `KZActionAbility`, Controller, Character와 값 타입 자체의 compile action은 통과했지만 전체 build 성공은 아니다.
+- 컴파일 오류 뒤의 동작 누락도 확인했다. Edge 검색이 `Hold`와 `Move`를 호출하지 않고, pending tag를 지운 뒤 실행하며, local node 전환에서 `bHoldCommitted`와 `InputEnd`를 reset하지 않는다. ASC Release는 선택 Spec 종료 뒤 다음 후보로 계속 진행하고, Cancel은 `InputPressed` 소유권을 검사하지 않는다. active 동일 Spec의 InputEnd 이후 재입력과 local cross-Montage 재생도 아직 없다.
+- 저장 Content는 새 계약으로 이관되지 않았다. Character Definition에는 StrongCharge와 StrongAttack이 모두 `Input.Action.Y`로 남아 있고, StrongCharge Montage는 `ChargeReady/ChargeEnd/ComboInputEnd`, 일반 공격 Montage는 `ComboInputOpen/ComboCommit/ComboInputEnd`를 사용한다. Definition에는 새 `Hold/Move` 값과 StrongCharge 세 Edge가 저장되지 않았다.
+- 현재 Combo Source에는 적중 판정이나 피해 GameplayEffect 적용 경로가 없다. `StrongChargeAttack`을 별도 node로 고르는 것까지가 이번 graph 범위이며, 일반 StrongAttack과 다른 피해값은 이후 Combat 실행 데이터에서 node별로 연결해야 한다. Edge에 피해 수치를 섞지 않는다.
+- 이번 점검에서 게임 동작 로직과 Content는 수정하지 않았다. `KZComboTypes`, Definition, ASC, Action, Combo, Controller와 빈 StrongCharge wrapper에 역할을 설명하는 쉬운 주석만 추가했다.
+- 재개 순서는 ASC 단일 Spec 소유권과 Combo Entry 검색 완성 → 공통 Edge 조건/held Notify resolver와 node reset 완성 → same/cross Montage 전환 완성 → cold build → Editor에서 grant·Definition·Notify 이관/저장 → Blueprint compile → PIE 검증 행렬이다.
+
+## 2026-09-27 — Cancel pending·같은 Spec 재입력·held Notify 설명 보정
+
+- Cancel에서 `PendingCommandTag == canceled CommandTag` 검사는 취소된 trigger 자체를 버린다. Begin Edge는 trigger command 자체의 held 여부를 요구하지 않으므로 일반 `FindMatchingCommandEdge()` 재검사만으로는 이 경우를 잡지 못한다. 아래 재검사는 별도의 canceled command가 pending Edge의 `RequiredHeldCommands`를 깨뜨린 경우를 처리한다.
+- 같은 InputTag/같은 active Action Spec의 재입력은 `InputEnd` 전에는 기존 generic press와 Combo Begin으로 처리하고, `InputEnd` 뒤에는 기존 실행을 취소한 다음 같은 Spec Handle을 다시 활성화한다. 실패해도 다른 동일 InputTag 후보로 한 press를 넘기지 않는다.
+- `RunHeld()`는 CommandTag가 없는 `InputEnd/HoldCommit/HoldEnd` Montage 사건을 ASC held set과 현재 node의 Edge 배열로 결합한다. held tag 순회가 아니라 Edge 배열 순서로 검사해 authored 우선순위를 유지하며, 첫 성공 전이 뒤 즉시 반환한다.
+- 이번 보정은 설명과 production comment만 갱신했다. `RunHeld()` 본문과 ASC 재입력 분기는 아직 사용자 구현 대상이며 build/PIE 완료로 기록하지 않는다.
+
+## 2026-09-27 — P6-D3 사용자 구현 완료 확인과 재개 지점
+
+- 앞 절의 “`RunHeld()`와 재입력 미구현” 상태는 이후 사용자 구현으로 해소됐다. 현재 Source에는 ASC 선택 Spec 소유권, 같은 Spec InputEnd 뒤 재활성화, held Notify resolver, Hold/Move/held/tag Edge 조건, Entry Ability handoff와 node reset이 들어 있다.
+- 최신 PIE 로그는 WeakAttack01→02→03→04, StrongAttack01→02→03, StrongCharge→StrongChargeAttack을 기록했고 해당 PIE 세션은 Combo 오류 없이 종료됐다. 사용자는 콤보 시스템 동작 완료를 확인했다.
+- `KhazanEditor Win64 Development` UBT는 성공하며 target은 up-to-date였다. 최신 module DLL 생성 시각은 최신 ASC/Combo Source보다 뒤다.
+- 남은 P6 제한은 같은 Ability 안의 cross-Montage node 전환 거부, `NonRun/Run`만 있는 Move 분류, Combo Definition/Notify의 편집 시점 validation 부재다. 현재 Player graph 동작을 막지는 않으므로 실제 소비 없이 새 구조를 추가하지 않는다.
+- 전체 아키텍처는 미완료다. 다음 재개는 Router → Architecture의 2026-09-27 적용 감사 → Migration의 2026-09-27 P6-D3 상태를 읽고, P2 최소 Stamina/WeakAttack Cost 한 경로부터 시작한다. 그 뒤 P3 WeakAttack01 hit window→damage→HitReact→Death→Cue를 한 단계씩 구현한다.
+- StrongCharge/StrongAttack handoff는 서로 다른 Ability activation을 만들고 각 activation이 현재 `CommitAbility()`를 호출한다. 비용을 추가할 때 원작의 비용 단위가 확인되기 전 양쪽 Ability에 같은 Cost를 복제하지 않는다.
+
+## 2026-09-27 — Stamina·LockOn·Dodge 계획 뒤 재개 지점
+
+- 사용자 새 우선순위는 `Stamina/Cost → LockOn Walk·Run 8방 → Dodge → P3 hit/damage`다. Architecture ARCH-68, Migration의 같은 날짜 구현 순서, Animation 정본의 후보 감사부터 읽는다.
+- 실제 게임 Source/Content에는 아직 세 기능을 적용하지 않았다. 이번 변경은 설명 준비, read-only asset 검사와 문서 기록뿐이다.
+- 재개 1: `UKZAttributeSet`의 Stamina/MaxStamina 등록 → 초기 Instant GE → WeakAttack Cost GE → 부족/경계값 검증. Strong/Charge Cost는 보류한다.
+- 재개 2: Player가 외부 target과 한 movement constraint handle을 소유하는 최소 LockOn 진입/해제 → target yaw → Walk/Run 1D Blend Space와 ABP 전이 → cleanup을 검증한다.
+- 재개 3: `UKZActionAbility`의 공통 InputEnd notify bind/filter를 두 번째 소비자인 Dodge에 맞게 이관한 뒤 기존 Combo 회귀를 먼저 실행한다. 그 다음 InGame에 복제한 M1 8방 시퀀스로 Dodge Montage/Ability/Input/Cost를 연결한다.
+- 마지막 gate는 Player mesh scale 0.009 아래의 local/world root-motion delta와 capsule 변위다. 애니메이션 translation을 component scale의 역수로 보정하지 않는다.
+
+## 2026-09-29 — LockOn L1 상세 설명 재개 지점
+
+- 사용자 보고상 P2-C Stamina regen Effect 작성은 끝났다. 정적으로 관련 AttributeSet/태그/Effect asset 존재만 확인했으며 새 build와 PIE 검증은 하지 않았다.
+- 현재 `KZPlayer.cpp`의 `StartLockOn`, `StopLockOn`, `UpdateLockOnFacing`, `IsLockedOn`은 골격 상태다. `StartLockOn`과 `IsLockedOn`에는 반환문도 아직 없다. `Tick`은 빈 override이고 `UnPossessed`는 LockOn handle을 회수하지 않는다.
+- 재개 1: `StartLockOn`에서 target·동일 world·Locomotion 유효성을 검사하고, 부분 상태를 정리한 뒤 Run 상한/LockOn 회전 constraint를 `this` source로 한 번 취득한다. 이미 정상 LockOn이면 handle을 재발급하지 않고 target만 교체한다.
+- 재개 2: `UpdateLockOnFacing`은 target/handle/Controller가 하나라도 무효면 `StopLockOn`으로 정리한다. 유효하면 target-player 벡터의 Z를 제거하고, 0벡터가 아닐 때 Controller의 기존 Pitch/Roll을 보존한 채 Yaw만 target 방향으로 쓴다.
+- 재개 3: `Tick`에서 target 또는 handle 상태가 남아 있을 때 facing을 갱신하고, `UnPossessed`에서 intent source 종료 전에 `StopLockOn`을 호출한다. `StopLockOn`은 자기 handle 한 건만 LocomotionComponent에 반환하고 target을 reset한다.
+- 재개 4: L1 build/PIE에서 Run 상한, 전후좌우 이동 중 target facing, target Destroy, 반복 Stop, UnPossess, 다른 gait/rotation constraint 공존을 확인한다. 통과 뒤 L2 Blend Space/ABP로 간다.
+- 설명 작업에서 게임 파일을 직접 고치지 않았다.
+
+## 2026-09-29 — LockOn 획득·anchor·camera 개정 후 재개점
+
+### 현재 상태
+
+- 저장 `KZPlayer.cpp`에는 외부 actor를 받는 `StartLockOn`, target/constraint, 평면 yaw 즉시 갱신이 구현돼 있다. 새 ARCH-69의 화면 검색·Monster anchor·camera pitch/보간·toggle input은 아직 적용되지 않았다.
+- `AKZMonster`는 현재 빈 기반에 가깝고 `LockOnTargetPoint`가 없다. Input GameplayTag, InputAction, IMC/DA_InputData 항목과 Controller bind도 없다.
+- 사용자는 Stamina 재생 GameplayEffect를 완료했다고 보고했다. 이번 LockOn 감사에서 별도 runtime 확인은 하지 않았다.
+
+### 마지막 검증
+
+- 현재 C++를 읽어 target Z를 Player Z로 덮어쓰는 코드, Yaw 즉시 SetControlRotation, UnPossess cleanup과 constraint 소유를 확인했다.
+- 원작 인간형/Yetuga/Apes/WildDog/WildBoar metadata에서 `xxLockOnSphereComponent`와 다수의 `bUseRotToTargetLockOnSphereLocation=true`를 확인했다.
+- UE 5.8 read-only 검사에서 Yetuga 7, Apes 7, WildDog 5, WildBoar 9, BigBear 0개의 현재 mesh socket을 확인했으며 공통 LockOn socket은 없었다. `BP_Player` SpringArm의 Pawn Control Rotation=true, rotation lag=false도 확인했다.
+- 검사 Python은 정상 완료했다. commandlet 종료 코드 1은 기존 `/Script/GameFeatures.GameFeatureData` ensure이며 asset은 저장하지 않았다.
+
+### 남은 작업과 정확한 재개 순서
+
+1. `AKZMonster`에 capsule/root 부착 `LockOnTargetPoint` SceneComponent와 world-location getter를 추가한다. gameplay Monster BP별 위치는 현재 capsule/mesh transform을 확인해 설정하고 원본 raw 위치를 무검증 복사하지 않는다.
+2. Player에 `UKZTargetingComponent`를 만들고 target weak reference, movement constraint handle, `Toggle/TryStart/Stop`, tick enable/disable와 EndPlay cleanup을 옮긴다. 기존 Player의 중복 target/handle은 이관 뒤 제거한다.
+3. 첫 입력에서만 활성 `AKZMonster`를 순회하고 actual view forward, viewport projection/bounds, Visibility trace, normalized center score 순으로 한 대상을 고른다.
+4. `Input.Action.LockOn`, InputAction, IMC mapping, DA_InputData entry와 Controller Started bind를 추가한다. 실제 물리 키는 사용자가 선택한 mapping을 사용한다.
+5. full 3D target point로 camera LookAt을 만들고 `LockOnViewInterpSpeed` 한 설정값으로 `RInterpTo`한다. 임시 시작값 `12.0 1/s`를 원작 미확인 값으로 표시한다. Lock 중 `Input_TurnCamera`는 무시한다.
+6. build 후 PIE에서 중앙/좌우/상하 높이 차, 벽 뒤 후보 제외, 후보 없음, 두 번째 입력 해제, target Destroy, UnPossess, Stop 뒤 camera 입력과 constraint 잔존 0을 확인한다.
+7. L1이 닫힌 뒤 기존 L2 Walk/Run 8방 Blend Space와 ABP 선택을 연결한다.

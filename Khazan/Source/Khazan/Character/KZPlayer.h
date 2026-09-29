@@ -7,6 +7,8 @@
 #include "Character/Component/KZLocomotionComponent.h"
 #include "KZPlayer.generated.h"
 
+class UKZAttributeSet;
+
 UCLASS()
 class KHAZAN_API AKZPlayer : public AKZCharacter
 {
@@ -33,7 +35,21 @@ public:
 	// 입력 시스템이 Sprint를 취소하면 모드와 관계없이 요청을 해제한다.
 	void HandleInputSprintCanceled();
 
+	// 외부 선택자가 넘긴 유효한 Actor를 현재 LockOn 대상으로 설정한다.
+	UFUNCTION(BlueprintCallable, Category = "KZ|LockOn")
+	bool StartLockOn(AActor* Target);
+
+	// 현재 LockOn 원인이 취득한 이동 제약 한 건만 회수한다.
+	UFUNCTION(BlueprintCallable, Category = "KZ|LockOn")
+	void StopLockOn();
+
+	// target과 constraint handle이 함께 살아 있는지 확인한다.
+	bool IsLockedOn() const;
+
 private:
+	// 활성 LockOn target을 향하도록 Controller Yaw를 갱신한다.
+	void UpdateLockOnFacing();
+	
 	// 현재 raw 입력과 Sprint 요청으로부터 RequestedGait만 갱신한다.
 	// 속도나 CMC 설정은 직접 변경하지 않는다.
 	void RefreshRequestedGait();
@@ -56,12 +72,16 @@ protected:
 	// Sprint토글 스위치. true = 토글, false = 홀드
 	UPROPERTY(EditDefaultsOnly, Category = "Locomotion|Input")
 	bool bToggleSprint = true;
-
+	
 private:
 	// 현재 Controller를 Source로 LocomotionComponent가 발급한
 	// 이 Pawn 수명의 raw Intent 작성 권한이다.
 	FKZLocomotionIntentHandle PlayerIntentHandle;
 
 	bool bSprintRequested = false;
+	
+	UPROPERTY(Transient)
+	TWeakObjectPtr<AActor> LockOnTarget;
 
+	FKZMovementConstraintHandle LockOnConstraintHandle;
 };

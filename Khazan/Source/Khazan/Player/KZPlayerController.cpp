@@ -58,12 +58,12 @@ void AKZPlayerController::SetupInputComponent()
 		auto TurnCameraAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_Turn);
 		EnhancedInputComponent->BindAction(TurnCameraAction, ETriggerEvent::Triggered, this, &ThisClass::Input_TurnCamera);
 
-		auto WeakAttackAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_WeakAttack);
+		auto WeakAttackAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_X);
 		EnhancedInputComponent->BindAction(WeakAttackAction, ETriggerEvent::Started, this, &ThisClass::Input_WeakAttackStarted);
 		EnhancedInputComponent->BindAction(WeakAttackAction, ETriggerEvent::Completed, this, &ThisClass::Input_WeakAttackCompleted);
 		EnhancedInputComponent->BindAction(WeakAttackAction, ETriggerEvent::Canceled, this, &ThisClass::Input_WeakAttackCanceled);
 
-		auto StrongAttackAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_StrongAttack);
+		auto StrongAttackAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_Y);
 		EnhancedInputComponent->BindAction(StrongAttackAction, ETriggerEvent::Started, this, &ThisClass::Input_StrongAttackStarted);
 		EnhancedInputComponent->BindAction(StrongAttackAction, ETriggerEvent::Completed, this, &ThisClass::Input_StrongAttackCompleted);
 		EnhancedInputComponent->BindAction(StrongAttackAction, ETriggerEvent::Canceled, this, &ThisClass::Input_StrongAttackCanceled);
@@ -74,22 +74,22 @@ void AKZPlayerController::SetupInputComponent()
 
 void AKZPlayerController::Input_WeakAttackStarted(const FInputActionValue&)
 {
-	RouteAttackInput( KZGameplayTags::Input_Action_WeakAttack,
-		KZGameplayTags::Command_Player_Attack_Weak,
+	RouteAttackInput( KZGameplayTags::Input_Action_X,
+		KZGameplayTags::Command_Player_Attack_X,
 		EKZComboCommandPhase::Begin);
 }
 
 void AKZPlayerController::Input_WeakAttackCompleted(const FInputActionValue&)
 {
-	RouteAttackInput( KZGameplayTags::Input_Action_WeakAttack,
-		KZGameplayTags::Command_Player_Attack_Weak,
+	RouteAttackInput( KZGameplayTags::Input_Action_X,
+		KZGameplayTags::Command_Player_Attack_X,
 		EKZComboCommandPhase::Release);
 }
 
 void AKZPlayerController::Input_WeakAttackCanceled(const FInputActionValue&)
 {
-	RouteAttackInput( KZGameplayTags::Input_Action_WeakAttack,
-		KZGameplayTags::Command_Player_Attack_Weak,
+	RouteAttackInput( KZGameplayTags::Input_Action_X,
+		KZGameplayTags::Command_Player_Attack_X,
 		EKZComboCommandPhase::Cancel);
 }
 
@@ -99,21 +99,21 @@ void AKZPlayerController::Input_WeakAttackCanceled(const FInputActionValue&)
 
 void AKZPlayerController::Input_StrongAttackStarted(const FInputActionValue&)
 {
-	RouteAttackInput(KZGameplayTags::Input_Action_StrongAttack,
-		KZGameplayTags::Command_Player_Attack_Strong,
+	RouteAttackInput(KZGameplayTags::Input_Action_Y,
+		KZGameplayTags::Command_Player_Attack_Y,
 		EKZComboCommandPhase::Begin);
 }
 
 void AKZPlayerController::Input_StrongAttackCompleted(const FInputActionValue&)
 {
-	RouteAttackInput(KZGameplayTags::Input_Action_StrongAttack,
-		KZGameplayTags::Command_Player_Attack_Strong,
+	RouteAttackInput(KZGameplayTags::Input_Action_Y,
+		KZGameplayTags::Command_Player_Attack_Y,
 		EKZComboCommandPhase::Release);}
 
 void AKZPlayerController::Input_StrongAttackCanceled(const FInputActionValue&)
 {
-	RouteAttackInput(KZGameplayTags::Input_Action_StrongAttack,
-		KZGameplayTags::Command_Player_Attack_Strong,
+	RouteAttackInput(KZGameplayTags::Input_Action_Y,
+		KZGameplayTags::Command_Player_Attack_Y,
 		EKZComboCommandPhase::Cancel);
 }
 
@@ -204,26 +204,30 @@ UKZAbilitySystemComponent* AKZPlayerController::GetKZAbilitySystemComponent() co
 void AKZPlayerController::RouteAttackInput(const FGameplayTag& InputTag, const FGameplayTag& CommandTag,
 	EKZComboCommandPhase CommandPhase)
 {
-
+	// InputTag는 어떤 Ability Spec이 버튼을 소유하는지 찾는다.
+	// CommandTag는 실행 중인 Combo Graph가 어떤 Edge를 검사할지 정한다.
 	switch (CommandPhase)
 	{
 	case EKZComboCommandPhase::Begin:
 		AbilityInputTagPressed(InputTag);
+		SubmitComboCommand(CommandTag, CommandPhase);
 		break;
 
 	case EKZComboCommandPhase::Release:
+		// generic release task가 Ability를 끝내기 전에 graph가 Release를 소비한다.
+		SubmitComboCommand(CommandTag, CommandPhase);
 		AbilityInputTagReleased(InputTag);
 		break;
 
 	case EKZComboCommandPhase::Cancel:
+		// Ability 취소 전에 held/pending을 먼저 정리한다.
+		SubmitComboCommand(CommandTag, CommandPhase);
 		AbilityInputTagCanceled(InputTag);
 		break;
 
 	default:
 		return;
 	}
-
-	SubmitComboCommand(CommandTag, CommandPhase);
 }
 
 void AKZPlayerController::SubmitComboCommand(const FGameplayTag& CommandTag, EKZComboCommandPhase CommandPhase)

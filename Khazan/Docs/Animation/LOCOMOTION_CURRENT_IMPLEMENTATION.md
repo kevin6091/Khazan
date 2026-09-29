@@ -1379,3 +1379,35 @@ PIE read-only 입력 주입에서는 Run/Sprint Stop 진입과 입력 해제 뒤
 - 주인공 역할 에셋은 `SK_Player`, `SKM_Player`, `Player_PhysicsAsset`, `DAS_Player_*` 및 `/Game/_Recovery/PlayerSkeleton_20260908`을 사용한다. 이 에셋들의 참조를 가진 AnimSequence·AnimBlueprint·Blueprint는 에디터에서 재저장됐다.
 - `_Art/Kazan`, `CA_P_Kazan_*`, `C_P_Kazan`은 원작 추출 출처와 스켈레톤 bone 이름이므로 변경하지 않았다. 위의 과거 절에 있는 `SK_Khazan`, `DAS_Khazan_*`, `UKhazan*`, `FKhazan*`, `EKhazan*` 표기는 당시 검증 기록이며 현재 경로·심볼로 사용하지 않는다.
 - 이번 이관은 locomotion 동작, root-motion track, notify, curve, frame rate와 수치를 변경하지 않았다. native redirect와 에셋 참조 재저장만 수행했으며 `KhazanEditor Win64 Development` 빌드와 `/Game` Blueprint 38개 compile 성공을 확인했다.
+
+## 2026-09-27 — LockOn 8방과 Dodge 후보 read-only 감사
+
+- 현재 C++에는 `EKZRotationMode::LockOn`, movement policy의 controller-desired rotation, Game Thread snapshot의 resolved `RotationMode`, Actor-local 실제 속도 기반 `MovementDirectionAngle`이 있다. target 선택·target 유효성 수명·target yaw 작성과 LockOn 전용 ABP pose는 아직 없다.
+- InGame LockOn Walk 8개는 모두 30 fps, 34 frame, 약 1.133333 s, RateScale 1, root motion off다. Run 8개는 모두 30 fps, 20 frame, 약 0.666667 s, RateScale 1, root motion off다. 두 세트 모두 notify가 없고 `c_p_kazan`과 `root`의 시작→끝 translation은 0이다.
+- Walk/Run 방향 pose는 현행 `MovementDirectionAngle` 하나를 쓰는 별도 1D Blend Space 두 개로 연결한다. 축은 -180°~180°이고 B를 양 끝에 중복 배치하며 `BL/L/FL/F/FR/R/BR`을 45° 간격으로 배치한다. 새 방향 float를 AnimInstance에 추가하지 않는다.
+- LockOn Sprint 폴더에는 8방 `SprintStart`와 단일 Stop만 있고 loop가 없다. 모든 Start 제외 정책을 유지하므로 첫 LockOn 범위는 Walk/Run이며, 활성 LockOn constraint가 최대 gait를 Run으로 제한한다.
+- Dodge runtime 후보는 `Weapons/DualAxeSword/Shared/Combat/Evasion/Dodge`의 `CA_P_Kazan_DualAxeSword_Off_Dodge_{F,RF,R,RB,B,LB,L,LF}_M1` 8개다. 모두 30 fps, 32 frame, 약 1.066667 s, RateScale 1, Root Motion/Force Root Lock 활성, 첫 track `c_p_kazan`이다. 방향별 최상위 root endpoint는 약 450 asset unit이고 대각선은 약 318.202/318.202다.
+- `Common/Evasion/Dodge/CA_P_Kazan_NonCombat_Dodge_*` 8개는 현재 24 fps, 249 frame, 10.375 s이며 root motion 설정도 꺼져 있어 이번 Dodge Montage의 런타임 후보에서 제외한다.
+- M1 원본은 InGame 폴더 밖에 있으므로 원본을 직접 runtime 참조하지 않고 InGame/DAS/Dodge 아래에 보존 복제한 8개로 Montage를 만든다. 각 section의 이름은 프로젝트 의미 순서 `F/FR/R/BR/B/BL/L/FL`로 통일하고 원본 RF/RB/LB/LF를 대응시킨다.
+- 현재 저장 ABP CDO의 Root Motion Mode는 `Root Motion from Everything`이다. Dodge는 추가 `SetActorLocation`, impulse, velocity 덮어쓰기를 겹치지 않고 Montage/CMC 경로만 사용한다.
+- 현재 Player native mesh scale `0.009`는 root-motion world displacement 품질 gate다. Dodge 거리 문제를 시퀀스에 `1/0.009`로 역보정하지 않는다. PIE에서 extracted local delta, component/world delta, capsule displacement를 나눠 확인하고 필요하면 캐릭터 조립 scale을 별도 수정한다.
+- read-only 보고서는 `Saved/KZStaminaLockOnDodgeInspect.json`이다. 검사 스크립트는 모두 `passed`였고 Content를 저장하지 않았다. commandlet exit 1은 기존 `/Script/GameFeatures.GameFeatureData` ensure 때문이며 Python 검사는 정상 완료했다.
+- 이번 감사에서는 Source, Blueprint, Montage, AnimSequence를 수정하지 않았다. 위 Blend Space/Montage/Notify와 런타임 검증은 사용자 적용 대상이다.
+
+## 2026-09-29 — LockOn L1 적용 전 현행 차이
+
+- 현재 `AKZPlayer`에 LockOn target/constraint 멤버와 함수 골격이 추가됐지만 target yaw 공급과 cleanup은 아직 구현되지 않았다. `UKZLocomotionComponent`의 `LockOn` resolved policy와 `UKZAnimInstance`의 `RotationMode`/`MovementDirectionAngle` 전달 경로는 기존대로 존재한다.
+- 현재 ABP 저장본은 `MovementDirectionAngle`과 `RotationMode`를 아직 참조하지 않는다. LockOn pose는 미연결 상태다.
+- 2026-09-27 보고서가 기록한 Walk 원본 asset 이름과 달리, 현재 작업 트리의 Walk 8개는 사용자가 `DAS_Player_LockOn_Walk_{B,BL,BR,F,FL,FR,L,R}`로 이름을 바꿨다. 이 변경을 보존한다. Run 8개는 현재 `CA_P_Kazan_DualAxeSword_LockOn_Run_{B,F,LB,LF,L,RB,RF,R}_1` 이름이다.
+- L2는 새 방향 멤버를 만들지 않고 현재 `MovementDirectionAngle`의 Actor-local 실제 속도 각도를 그대로 쓴다. 기하학적 sample 위치는 B=-180/+180, BL/LB=-135, L=-90, FL/LF=-45, F=0, FR/RF=45, R=90, BR/RB=135도다.
+- 사용자의 Stamina regen 완료 보고는 LockOn pose 계약을 바꾸지 않는다. 이번 설명 작업에서 C++/ABP/Blend Space/AnimSequence를 수정하거나 build/PIE를 실행하지 않았다.
+
+## 2026-09-29 — LockOn target·높이·camera 계약 개정
+
+- [현행 소스] `AKZPlayer::StartLockOn(AActor*)`는 외부 target을 받고, `UpdateLockOnFacing()`은 target Z를 Player Z로 덮어쓴 뒤 Controller Yaw를 즉시 쓴다. 화면 후보 검색, Monster별 target point, camera Pitch와 보간, 입력 toggle은 아직 없다.
+- [최신 결정] 첫 입력에서 camera에 보이고 가리지 않은 `AKZMonster` 중 normalized screen-center score가 가장 작은 대상을 고른다. 두 번째 입력은 재검색하지 않고 해제한다.
+- [높이 정정] PlayerZ/TargetZ 일치는 폐기한다. Monster별 full 3D `LockOnTargetPoint`를 camera가 바라보고 Player capsule은 기존 CMC controller-desired Yaw만 따라간다.
+- [원작/에셋] 공통 LockOn skeleton socket은 없으며, 저장 원작에는 캐릭터별 `xxLockOnSphereComponent`가 있다. `LookAt01`은 별도 머리 시선 socket이다. 상세 근거는 `Docs/Art/LOCKON_TARGET_ANCHOR_AUDIT_20260929.md`다.
+- [표현 경계] target 검색·camera·constraint 수명은 새 TargetingComponent의 game-thread 책임이다. Main AnimInstance/Locomotion Layer는 target을 보관하지 않고 기존 `RotationMode`와 `MovementDirectionAngle`만 소비한다.
+- [camera] 현재 BP SpringArm은 Pawn Control Rotation을 사용하고 rotation lag는 꺼져 있다. full LookAt ControlRotation을 `RInterpTo`로 보간한다. `12.0 1/s`는 원작 미확인 임시 camera 값이고, capsule의 현행 `540 deg/s`도 프로젝트 이관값이다.
+- [적용/검증] 이번 단계에서 게임 C++/BP/Input/Animation asset은 수정하지 않았고 build/PIE도 실행하지 않았다. Walk/Run 8방 L2는 이 L1 개정이 적용·검증된 뒤 진행한다.

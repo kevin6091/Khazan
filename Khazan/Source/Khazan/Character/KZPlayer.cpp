@@ -1,6 +1,7 @@
 #include "Character/KZPlayer.h"
 
 
+#include "GameFramework/Controller.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -23,6 +24,11 @@ AKZPlayer::AKZPlayer()
 void AKZPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (LockOnTarget.IsValid() || LockOnConstraintHandle.IsValid())
+	{
+		UpdateLockOnFacing();
+	}
 }
 
 void AKZPlayer::PossessedBy(AController* NewController)
@@ -53,6 +59,9 @@ void AKZPlayer::UnPossessed()
 	// 홀드 Sprint는 Move Released만으로 false가 되지 않을 수 있으므로
 	// 빙의 종료에서는 모드와 관계없이 반드시 정리한다.
 	bSprintRequested = false;
+
+	// 현재 Player가 소유한 LockOn target과 constraint를 먼저 정리한다.
+	StopLockOn();
 
 	if (UKZLocomotionComponent* Locomotion = GetLocomotionComponent())
 	{
@@ -163,6 +172,104 @@ void AKZPlayer::HandleInputSprintCanceled()
 	// 입력 방식과 관계없이 요청을 확실히 해제한다.
 	bSprintRequested = false;
 	RefreshRequestedGait();
+}
+
+bool AKZPlayer::StartLockOn(AActor* Target)
+{
+	if (!IsValid(Target) || Target == this || Target->GetWorld() != GetWorld() || !IsValid(GetController()))
+	{
+		return false;
+	}
+
+	UKZLocomotionComponent* Locomotion = GetLocomotionComponent();
+
+	if (!IsValid(Locomotion))
+	{
+		return false;
+	}
+
+	// 이미 정상적인 LockOn이면 제약을 중복 취득하지 않고 대상만 교체한다.
+	if (IsLockedOn())
+	{
+		LockOnTarget = Target;
+		UpdateLockOnFacing();
+		return true;
+	}
+
+	// target만 남았거나 handle만 남은 비정상적인 부분 상태를 먼저 정리한다.
+	StopLockOn();
+
+	FKZMovementConstraint Constraint;
+	Constraint.MaxAllowedGait = EKZGait::Run;
+	Constraint.bOverrideRotationMode = true;
+	Constraint.RotationModeOverride = EKZRotationMode::LockOn;
+
+	// 프로젝트의 기본 LockOn 회전 우선순위다.
+	// 원작 gameplay 수치가 아니라 제약 충돌 해결용 기술값이다.
+	Constraint.RotationModeOverridePriority = 0;
+	Constraint.DebugName = TEXT("LockOn");
+
+	FKZMovementConstraintHandle NewHandle = Locomotion->AcquireMovementConstraint(this, Constraint);
+
+	if (!NewHandle.IsValid())
+	{
+		return false;
+	}
+
+	LockOnTarget = Target;
+	LockOnConstraintHandle = MoveTemp(NewHandle);
+
+	UpdateLockOnFacing();
+	return true;
+}
+
+void AKZPlayer::StopLockOn()
+{
+	if (LockOnConstraintHandle.IsValid())
+	{
+		if (UKZLocomotionComponent* Locomotion = GetLocomotionComponent())
+		{
+			Locomotion->ReleaseMovementConstraint(LockOnConstraintHandle);
+		}
+	}
+
+	LockOnConstraintHandle.Reset();
+	LockOnTarget.Reset();
+}
+
+void AKZPlayer::UpdateLockOnFacing()
+{
+	AActor* Target = LockOnTarget.Get();
+	AController* OwningController = GetController();
+
+	if (!IsValid(Target) || !LockOnConstraintHandle.IsValid() || !IsValid(OwningController))
+	{
+		StopLockOn();
+		return;
+	}
+
+	const FVector PlayerLocation = GetActorLocation();
+
+	// TargetLocation.Z를 Player 높이와 맞추므로 위아래 높이 차이는 capsule Pitch로 들어가지 않는다.
+	FVector TargetLocation = Target->GetActorLocation();
+	TargetLocation.Z = PlayerLocation.Z;
+
+	if ((TargetLocation - PlayerLocation).IsNearlyZero())
+	{
+		return;
+	}
+
+	const FRotator TargetFacing = UKismetMathLibrary::FindLookAtRotation(PlayerLocation, TargetLocation);
+
+	FRotator NewControlRotation = OwningController->GetControlRotation();
+	NewControlRotation.Yaw = TargetFacing.Yaw;
+
+	OwningController->SetControlRotation(NewControlRotation);
+}
+
+bool AKZPlayer::IsLockedOn() const
+{
+	return LockOnTarget.IsValid() && LockOnConstraintHandle.IsValid();
 }
 
 void AKZPlayer::RefreshRequestedGait()

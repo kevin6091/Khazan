@@ -11,6 +11,7 @@
 class UKZLocomotionComponent;
 class UAbilitySystemComponent;
 class UKZCharacterDefinitionData;
+class UKZAttributeSet;
 
 UCLASS()
 class KHAZAN_API AKZCharacter : public ACharacter, public IAbilitySystemInterface
@@ -54,10 +55,11 @@ public:
 	// Controller의 소유가 해제될 때 호출. Pawn 빙의 해제
 	virtual void UnPossessed() override;
 
-private:
+protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Character|AbilitySystem", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent = nullptr;
-
+	
+private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Character|Locomotion", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UKZLocomotionComponent> LocomotionComponent;
 
@@ -66,4 +68,7 @@ private:
 
 	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadOnly, Category = "Character|Definition", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UKZCharacterDefinitionData> CharacterDefinition = nullptr;
+	
+	UPROPERTY(VisibleAnywhere, Category = "KZ|Ability", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UKZAttributeSet> AttributeSet;
 };

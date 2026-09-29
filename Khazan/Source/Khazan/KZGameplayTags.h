@@ -15,16 +15,16 @@ namespace KZGameplayTags
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_Jump);
 
 	// Attack
-	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_WeakAttack);
-	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_StrongAttack);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_X);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_Y);
 
 #pragma endregion
 
 	// Player, AI가 공통으로 제출하는 커맨드 의도.
 #pragma region Command Tags
 
-	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Command_Player_Attack_Weak);
-	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Command_Player_Attack_Strong);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Command_Player_Attack_X);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Command_Player_Attack_Y);
 
 #pragma endregion
 
@@ -46,6 +46,10 @@ namespace KZGameplayTags
 
 	// Block Tags
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Block_Movement_Input);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Block_StaminaRegen);
+	
+	// Delay Tags
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Delay_StaminaRegen);
 
 
 #pragma region Unlock Tags

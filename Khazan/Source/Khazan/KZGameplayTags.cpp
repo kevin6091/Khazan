@@ -14,16 +14,16 @@ namespace KZGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Input_Action_Jump, "Input.Action.Jump");
 
 	// Attack
-	UE_DEFINE_GAMEPLAY_TAG(Input_Action_WeakAttack, "Input.Action.WeakAttack");
-	UE_DEFINE_GAMEPLAY_TAG(Input_Action_StrongAttack, "Input.Action.StrongAttack");
+	UE_DEFINE_GAMEPLAY_TAG(Input_Action_X, "Input.Action.X");
+	UE_DEFINE_GAMEPLAY_TAG(Input_Action_Y, "Input.Action.Y");
 
 #pragma endregion
 
 #pragma region Command Tags
 
-	UE_DEFINE_GAMEPLAY_TAG(Command_Player_Attack_Weak, "Command.Player.Attack.Weak");
+	UE_DEFINE_GAMEPLAY_TAG(Command_Player_Attack_X, "Command.Player.Attack.X");
 
-	UE_DEFINE_GAMEPLAY_TAG(Command_Player_Attack_Strong, "Command.Player.Attack.Strong");
+	UE_DEFINE_GAMEPLAY_TAG(Command_Player_Attack_Y, "Command.Player.Attack.Y");
 
 #pragma endregion
 
@@ -44,6 +44,10 @@ namespace KZGameplayTags
 
 	// Block Tags
 	UE_DEFINE_GAMEPLAY_TAG(Block_Movement_Input, "Block.Movement.Input");
+	UE_DEFINE_GAMEPLAY_TAG(Block_StaminaRegen, "Block.StaminaRegen");
+	
+	// Delay Tags
+	UE_DEFINE_GAMEPLAY_TAG(Delay_StaminaRegen, "Delay.StaminaRegen");
 
 #pragma region Unlock Tags
 

@@ -29,7 +29,8 @@ class KHAZAN_API UKZCharacterDefinitionData : public UDataAsset
 public:
 	const FKZLocomotionConfig& GetLocomotionConfig() const;
 	const TArray<FKZInitialAbilityGrant>& GetInitialAbilityGrants() const;
-
+	const TArray<TSubclassOf<class UGameplayEffect>>& GetInitialEffects() const;
+	
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character|Locomotion",
 		meta = (AllowPrivateAccess = "true"))
@@ -38,4 +39,7 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character|Abilities",
 	meta = (AllowPrivateAccess = "true"))
 	TArray<FKZInitialAbilityGrant> InitialAbilityGrants;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "KZ|Ability")
+	TArray<TSubclassOf<class UGameplayEffect>> InitialEffects;
 };

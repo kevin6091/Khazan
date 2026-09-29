@@ -319,3 +319,11 @@
 - [WeakAttack] 1–5타는 각각 206/200/298/269/156 frames이며 모두 Root Motion·Force Root Lock 유지다. 현재 1번만 든 `AM_DAS_WeakAtkCombo`의 segment cache와 Montage 길이도 `3.4333333969 s`로 갱신했다.
 - [보호] 수정 전 360개와 Montage는 `Saved/ArtBackups/DAS_Composite_PreExact60_20260917_184000`에 361/361 hash 검증 백업했다. Character Mesh Component scale은 변환 입력으로 사용하지 않았다.
 - [검증] import 360/360, fresh-process exact-60 final audit 360/360, backup 361/361이 모두 `passed`다. 최종 보고서는 `Khazan_DAS_CompositeExact60_{Preflight,Backup,Import,FinalAudit}_20260917.json`, 상세 정본은 [DAS_ANIMATION_RESTORATION_2026-09-16.md](DAS_ANIMATION_RESTORATION_2026-09-16.md)의 exact 60 Hz 절이다.
+
+## 2026-09-29 Enemy LockOn anchor read-only 감사
+
+- [확인] Yetuga, ApesStoneHandElite, WildDog, WildBoar의 현재 저장 SkeletalMesh 소켓과 BigBear의 현재 소켓 부재를 UE 5.8에서 읽었다. 공통 `LockOnTarget` 소켓은 없다.
+- [원작 근거] 인간형·Yetuga·Apes·Dog·Boar Character metadata에 캐릭터별 `xxLockOnSphereComponent`가 있고 다수 CDO의 `bUseRotToTargetLockOnSphereLocation=true`를 확인했다. BigBear `SourceClosure`도 해당 component export type을 확인한다.
+- [판정] `LookAt01`은 머리 시선 소켓이고 별도 LockOn 컴포넌트가 있으므로 LockOn 정본으로 사용하지 않는다. gameplay에서는 Monster별 SceneComponent 기준점을 둔다.
+- [정본] 상세는 [LOCKON_TARGET_ANCHOR_AUDIT_20260929.md](LOCKON_TARGET_ANCHOR_AUDIT_20260929.md), 요약 report는 `Saved/ImportReports/KZ_LockOnTargetAnchorAudit_20260929.json`이다.
+- [보호] 게임 Source와 Content asset은 수정·저장하지 않았다. UE 검사 script는 완료됐고 commandlet exit 1은 기존 `GameFeatureData` ensure 때문이다.

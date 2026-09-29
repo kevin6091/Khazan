@@ -436,3 +436,35 @@
 - 외부 행동 전환은 combo End와 분리한다. 첫 수직 절편은 `RecoveryCancelOpen` 한 point, 보존된 Locomotion raw intent, point 이후 Move Started event로 WeakAttack을 조기 종료하고 task의 native Montage Blend Out으로 locomotion에 복귀한다.
 - 현재 저장 Montage의 두 point는 각각 `0.220553502 s`, `0.529886901 s`, Tick Type `Queued`다. 새 End/Recovery point와 Branching Point 전환은 아직 적용되지 않았다.
 - 상세 계약과 다음 적용 순서는 Architecture [ARCH-44](CHARACTER_GAMEPLAY_ARCHITECTURE.md#arch-44-three-phase-combo-and-recovery-exit-20260918)와 Migration [P6-v3.2](CHARACTER_TAG_ABILITY_MIGRATION.md#p6-v3-2-three-phase-input-recovery-exit-20260918)이다.
+
+## 2026-09-27 — Notify/Edge 기반 Player 콤보 수직 절편 동작 확인
+
+- 현재 Source와 Content에는 `InputOpen/InputCommit/InputEnd/HoldCommit/HoldEnd`, held command set, 공통 Action InputEnd, Edge 조건의 Hold·Move·추가 held·owner tag, local section 전환과 Combo Entry Ability handoff가 적용됐다.
+- 사용자는 콤보 시스템 동작을 확인했다. 같은 날 PIE 로그에도 Weak 1→4, Strong 1→3, StrongCharge→StrongChargeAttack 전환과 정상 PIE teardown이 남아 있다.
+- `KhazanEditor Win64 Development` UBT 검사는 성공했으며 현재 module DLL은 최신 Source 뒤에 생성됐다.
+- 현재 Player 콤보/차지 실행 기반은 다음 기능을 올릴 수 있는 상태다. 전체 캐릭터 아키텍처 구현은 완료되지 않았다. Stamina/Cost, hit·damage·HP, HitReact/Death/Cue, Jump 경로의 제품 필요성 판정·정리, Monster AI, 회피·방어, 타깃·워핑, 상호작용과 Encounter가 남아 있다.
+- 다음 우선순위는 P2 최소 Stamina Cost 한 경로, 이어서 P3 WeakAttack01의 실제 적중→피해→반응→사망→Cue 수직 절편이다. Combo 쪽은 새 추상화를 늘리지 않고 DataAsset validation과 실제로 필요한 cross-Montage Edge만 요구가 생길 때 보강한다.
+
+## 2026-09-27 — 다음 제작 우선순위 변경
+
+- 사용자 결정으로 다음 순서는 `P2 Stamina/Cost → LockOn Walk·Run 8방 → Dodge motion/cost → P3 hit·damage`다.
+- 현재 세 기능은 미구현이다. LockOn enum/policy/snapshot과 InGame 8방 Walk·Run 시퀀스는 존재하지만 target 수명과 ABP pose 소비가 없고, AttributeSet/Cost GE/Dodge Ability·Input·Montage는 없다.
+- read-only asset 검사에서 LockOn 16개는 in-place loop 세트, Combat Dodge M1 8개는 root-first Root Motion 세트로 확인됐다. 세부 수치와 경로는 Animation 현행 정본의 2026-09-27 절에 기록했다.
+
+## 2026-09-29 — Stamina regen 완료 보고 후 LockOn 진입 상태
+
+- 사용자는 Stamina regen GameplayEffect를 마저 완성했다고 보고했다. 정적 저장본에는 `Stamina/MaxStamina` AttributeSet, 초기 Stamina Effect, Regen/Delay Effect와 관련 태그가 존재한다. 이번 점검에서 수치와 PIE 동작은 새로 검증하지 않았다.
+- 현재 작업 대상은 LockOn L1이다. `KZPlayer.h/.cpp`에는 target weak pointer, movement constraint handle과 함수 골격이 추가됐지만 함수 본문, 매 프레임 target yaw 갱신, target invalid/UnPossess cleanup은 아직 구현되지 않았다.
+- LockOn 정책은 Player가 target 수명과 자기 constraint handle을 소유하고, LocomotionComponent가 Run 상한·LockOn 회전 정책을 합성하며, CMC가 실제 capsule 회전을 수행하는 기존 ARCH-68 경계를 유지한다.
+- 이번 설명 작업은 Source/Content를 수정하지 않았고 build/PIE를 수행하지 않았다.
+
+## 2026-09-29 — LockOn 화면 중앙 획득 계약 확정
+
+- [설계] 화면에 투영되고 Visibility가 확보된 `AKZMonster` 중 정규화 화면 중심 거리 제곱이 가장 작은 한 대상을 첫 LockOn target으로 선택한다. 검색은 입력 Started 시 한 번만 수행한다.
+- [구조] 검색·현재 target·anchor·camera·constraint cleanup이라는 독립 수명이 생겨 `UKZTargetingComponent`를 Player에 두기로 했다. ARCH-68의 Player 직접 소유 최소안은 ARCH-69가 대체한다.
+- [높이] `TargetLocation.Z=PlayerLocation.Z` 계약은 폐기했다. Monster별 `LockOnTargetPoint`의 full 3D 위치를 camera LookAt에 사용하고 capsule은 기존 CMC Yaw 경로로만 회전한다.
+- [원작] 공통 LockOn skeleton socket은 확인되지 않았다. 원작 Character metadata에는 캐릭터별 `xxLockOnSphereComponent`가 있고 `LookAt01`은 별도 머리 시선 socket이다. Art 정본은 `Docs/Art/LOCKON_TARGET_ANCHOR_AUDIT_20260929.md`다.
+- [camera] 현재 `BP_Player` SpringArm은 Pawn Control Rotation 사용, camera/rotation lag off다. Controller full LookAt을 `RInterpTo`로 보간하고 CMC는 그 Yaw를 기존 RotationRate로 따른다. 첫 임시 보간값은 `12.0 1/s`이며 원작값이 아니다.
+- [toggle] 첫 입력은 검색 후 Start, 두 번째 입력은 검색 없이 Stop한다. Lock 중 manual turn은 차단하고 Stop 뒤 현재 camera 방향에서 수동 입력을 재개한다.
+- [Stamina] 사용자는 Stamina 재생 GameplayEffect 완료를 보고했다. 이번 작업에서는 해당 asset의 runtime 재검증을 수행하지 않았다.
+- [변경 경계] 게임 Source/Content/Input asset은 수정하지 않았다. 문서와 read-only metadata/asset 감사만 갱신했으며 build/PIE는 미실행이다.

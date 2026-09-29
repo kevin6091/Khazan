@@ -10,3 +10,8 @@ UKZCharacterDefinitionData::GetInitialAbilityGrants() const
 {
 	return InitialAbilityGrants;
 }
+
+const TArray<TSubclassOf<UGameplayEffect>>& UKZCharacterDefinitionData::GetInitialEffects() const
+{
+	return InitialEffects;
+}
