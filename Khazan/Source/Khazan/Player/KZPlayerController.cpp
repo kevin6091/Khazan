@@ -58,6 +58,9 @@ void AKZPlayerController::SetupInputComponent()
 		auto TurnCameraAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_Turn);
 		EnhancedInputComponent->BindAction(TurnCameraAction, ETriggerEvent::Triggered, this, &ThisClass::Input_TurnCamera);
 
+		const UInputAction* LockOnAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_LockOn);
+		EnhancedInputComponent->BindAction(LockOnAction, ETriggerEvent::Started, this, &ThisClass::Input_LockOnStarted);
+		
 		auto WeakAttackAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_X);
 		EnhancedInputComponent->BindAction(WeakAttackAction, ETriggerEvent::Started, this, &ThisClass::Input_WeakAttackStarted);
 		EnhancedInputComponent->BindAction(WeakAttackAction, ETriggerEvent::Completed, this, &ThisClass::Input_WeakAttackCompleted);
@@ -184,9 +187,25 @@ void AKZPlayerController::Input_SprintCanceled(const FInputActionValue& InputVal
 
 void AKZPlayerController::Input_TurnCamera(const FInputActionValue& InputValue)
 {
+	if (const AKZPlayer* PlayerCharacter = Cast<AKZPlayer>(GetPawn()))
+	{
+		if (PlayerCharacter->IsLockedOn())
+		{
+			return;
+		}
+	}
+	
 	const FVector2D Val = InputValue.Get<FVector2D>();
 	AddYawInput(Val.X);
 	AddPitchInput(Val.Y);
+}
+
+void AKZPlayerController::Input_LockOnStarted(const FInputActionValue& InputValue)
+{
+	if (AKZPlayer* PlayerCharacter = Cast<AKZPlayer>(GetPawn()))
+	{
+		PlayerCharacter->ToggleLockOn();
+	}
 }
 
 UKZAbilitySystemComponent* AKZPlayerController::GetKZAbilitySystemComponent() const

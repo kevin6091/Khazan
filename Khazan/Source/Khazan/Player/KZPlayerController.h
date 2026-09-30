@@ -42,7 +42,9 @@ private:
 	void Input_SprintCanceled(const FInputActionValue& InputValue);
 
 	void Input_TurnCamera(const FInputActionValue& InputValue);
-
+	
+	void Input_LockOnStarted(const FInputActionValue& InputValue);
+	
 	void Input_WeakAttackStarted(const FInputActionValue&);
 	void Input_WeakAttackCompleted(const FInputActionValue&);
 	void Input_WeakAttackCanceled(const FInputActionValue&);

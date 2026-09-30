@@ -17,6 +17,9 @@ namespace KZGameplayTags
 	// Attack
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_X);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_Y);
+	
+	// LockOn
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_LockOn);
 
 #pragma endregion
 

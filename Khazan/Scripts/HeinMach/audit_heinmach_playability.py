@@ -69,6 +69,20 @@ def rotator_payload(value):
     return [float(value.pitch), float(value.yaw), float(value.roll)]
 
 
+def break_hit(hit):
+    if not hit:
+        return None
+    gameplay_statics = unreal.get_default_object(unreal.GameplayStatics)
+    values = gameplay_statics.call_method("BreakHitResult", args=(hit,))
+    return {
+        "blocking_hit": bool(values[0]),
+        "location": values[4],
+        "actor": values[9],
+        "component": values[10],
+        "distance_cm": float(values[3]),
+    }
+
+
 def body_setup_payload(mesh):
     body_setup = safe_property(mesh, "body_setup") if mesh else None
     if not body_setup:
@@ -419,17 +433,35 @@ def main():
                 world,
                 start,
                 end,
-                unreal.TraceTypeQuery.TRACE_TYPE_QUERY1,
+                unreal.TraceTypeQuery.ECC_VISIBILITY,
                 False,
                 [],
                 unreal.DrawDebugTrace.NONE,
                 True,
             )
+            broken_hit = break_hit(hit)
             downward_trace = {
-                "blocking_hit": bool(hit.blocking_hit),
-                "actor": hit.actor.get_actor_label() if hit.actor else None,
-                "location_cm": vector_payload(hit.location),
-                "distance_cm": float(hit.distance),
+                "blocking_hit": bool(
+                    broken_hit and broken_hit["blocking_hit"]
+                ),
+                "actor": (
+                    broken_hit["actor"].get_actor_label()
+                    if broken_hit and broken_hit["actor"]
+                    else None
+                ),
+                "component": (
+                    broken_hit["component"].get_name()
+                    if broken_hit and broken_hit["component"]
+                    else None
+                ),
+                "location_cm": (
+                    vector_payload(broken_hit["location"])
+                    if broken_hit
+                    else None
+                ),
+                "distance_cm": (
+                    broken_hit["distance_cm"] if broken_hit else None
+                ),
             }
         except Exception as exc:
             downward_trace = {"error": str(exc)}
@@ -444,12 +476,29 @@ def main():
                 unreal.DrawDebugTrace.NONE,
                 True,
             )
+            broken_hit = break_hit(hit)
             downward_pawn_profile_trace = {
-                "blocking_hit": bool(hit.blocking_hit),
-                "actor": hit.actor.get_actor_label() if hit.actor else None,
-                "component": hit.component.get_name() if hit.component else None,
-                "location_cm": vector_payload(hit.location),
-                "distance_cm": float(hit.distance),
+                "blocking_hit": bool(
+                    broken_hit and broken_hit["blocking_hit"]
+                ),
+                "actor": (
+                    broken_hit["actor"].get_actor_label()
+                    if broken_hit and broken_hit["actor"]
+                    else None
+                ),
+                "component": (
+                    broken_hit["component"].get_name()
+                    if broken_hit and broken_hit["component"]
+                    else None
+                ),
+                "location_cm": (
+                    vector_payload(broken_hit["location"])
+                    if broken_hit
+                    else None
+                ),
+                "distance_cm": (
+                    broken_hit["distance_cm"] if broken_hit else None
+                ),
             }
         except Exception as exc:
             downward_pawn_profile_trace = {"error": str(exc)}

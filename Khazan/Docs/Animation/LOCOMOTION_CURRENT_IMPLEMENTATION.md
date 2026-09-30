@@ -1411,3 +1411,47 @@ PIE read-only 입력 주입에서는 Run/Sprint Stop 진입과 입력 해제 뒤
 - [표현 경계] target 검색·camera·constraint 수명은 새 TargetingComponent의 game-thread 책임이다. Main AnimInstance/Locomotion Layer는 target을 보관하지 않고 기존 `RotationMode`와 `MovementDirectionAngle`만 소비한다.
 - [camera] 현재 BP SpringArm은 Pawn Control Rotation을 사용하고 rotation lag는 꺼져 있다. full LookAt ControlRotation을 `RInterpTo`로 보간한다. `12.0 1/s`는 원작 미확인 임시 camera 값이고, capsule의 현행 `540 deg/s`도 프로젝트 이관값이다.
 - [적용/검증] 이번 단계에서 게임 C++/BP/Input/Animation asset은 수정하지 않았고 build/PIE도 실행하지 않았다. Walk/Run 8방 L2는 이 L1 개정이 적용·검증된 뒤 진행한다.
+
+## 2026-09-29 — HeinMach 월드 이동 검증과 로코모션 경계
+
+- HeinMach의 지형·prop collision, route wall, Recast bounds/modifier/link를 복원한 뒤 현행 `BP_Player`를 실제 possess해 `IA_Move`로 평면 약 `706.74 cm` 이동했고 입력 해제 뒤 grounded 상태를 확인했다.
+- 이번 적용은 AnimInstance, ABP, locomotion sequence, gait/rotation mode, CharacterDefinition 수치를 변경하지 않았다. 현행 Controller → locomotion intent → CMC 이동 경로가 플레이 맵의 공통 collision과 정상 결합되는지만 검증했다.
+- source route wall은 Player와 미래 Character의 CMC가 함께 소비하는 월드 제약이며 AnimInstance에 맵별 이동 가능 여부를 추가하지 않는다. Recast/PIE 정본은 `Saved/ImportReports/HeinMach_Playability_RuntimeVerification.json`이다.
+
+## 2026-09-30 — LockOn Walk/Run 8방 L2 적용 전 저장본 감사와 연결 계약
+
+- [현재 C++] `UKZLockOnComponent::StartLockOn()`은 한 movement constraint에 `MaxAllowedGait=Run`, `bOverrideRotationMode=true`, `RotationModeOverride=LockOn`을 기록한다. `UKZLocomotionComponent`는 LockOn에서 controller-desired rotation을 사용하며, `UKZAnimInstance` snapshot은 이미 `RotationMode`, `LocomotionGait`, Actor-local 실제 속도각 `MovementDirectionAngle`을 공급한다. 애니메이션 연결을 위해 새 `bIsLockedOn`이나 새 방향 float를 추가하지 않는다.
+- [현재 빈 에셋] 사용자가 만든 `/Game/_Art/Player/Animation/InGame/DAS/Locomotion/LockOn/Run/BS_DAS_Player_LockOn_Run`은 저장본에서 `BlendSpace1D`가 아니라 2축 `/Script/Engine.BlendSpace`다. sample은 0개이고 축은 기본 상태에 가까운 `Speed 0..100`, `Direction 0..100`이다. 현행 gait 선택을 중복하지 않도록 이 빈 2D 에셋은 보존 이름으로 옮기거나 제거한 뒤 같은 이름의 1D 에셋으로 다시 만든다.
+- [채택 구조] Walk와 Run을 한 Speed×Direction 2D 에셋에 합치지 않고 `BS_DAS_Player_LockOn_Walk`, `BS_DAS_Player_LockOn_Run` 두 `BlendSpace1D`로 분리한다. Walk/Run 결정과 hysteresis는 기존 `LocomotionGait`가 계속 소유하고, 두 Blend Space는 `MovementDirectionAngle`만 소비한다. LockOn Sprint loop는 없고 constraint가 gait를 Run으로 제한한다.
+- [공통 1D 설정] Skeleton은 `SK_Player`, 축 이름은 `Direction`, 범위는 `-180..180 deg`, Grid Divisions는 8, Snap to Grid와 Wrap Input은 켠다. angle input smoothing과 sample weight smoothing은 원작 근거가 없으므로 첫 정확성 검사에서는 0으로 두고, Axis to Scale Animation은 angle 축이므로 None을 유지한다. Loop와 Allow Marker Based Sync는 켜고 sample Rate Scale은 1.0을 유지한다.
+- [sample 계약] 서로 다른 애니메이션은 8개지만 Back을 경계 양쪽에 놓으므로 sample point는 9개다. `-180 B, -135 BL/LB, -90 L, -45 FL/LF, 0 F, +45 FR/RF, +90 R, +135 BR/RB, +180 B`다. 현재 Run의 left-back 파일만 `DAS_PlayerLockOn_Run_LB`로 `Player` 뒤 underscore가 빠져 있으며 사용자 파일을 자동 rename하지 않는다.
+- [현재 marker 차이] 저장본의 LockOn Walk 8개에는 각각 `LeftFoot`, `RightFoot` marker가 1개씩 있지만 LockOn Run 8개에는 marker가 0개다. Walk Blend Space는 marker sync를 사용할 수 있다. Run은 첫 연결에서 동일 길이 clip의 normalized phase로 재생되며, LockOn 진입/해제나 Walk↔Run에서 발 위상 pop이 보이면 실제 접지 frame을 확인해 Run 각 clip에 marker를 authoring해야 한다. 확인되지 않은 marker 시간을 Walk에서 복사하지 않는다.
+- [현재 ABP] 저장 `ABP_Player`은 `AnimGraph → Locomotion → Grounded → GroundedLocomotion → WalkRun` 안에서 `DAS_Player_Walk_Loop`과 `DAS_Player_Run_Loop`을 `Blend Poses by EKZGait`로 고른다. 두 player는 Sync Method `Sync Group`, Group `Locomotion`, Role `Can Be Leader`다. 해당 gait blend는 저장값 `0.10 s`, Hermite Cubic, Standard Blend다. 아직 Blend Space Player, `RotationMode`, `MovementDirectionAngle` 소비는 없다.
+- [ABP 연결 결정] 새 State와 State Transition을 만들지 않는다. 기존 WalkRun pose를 False, 새 LockOn Walk/Run gait-select pose를 True로 받는 최종 `Blend Poses by Bool` 하나를 WalkRun state 안에 두고, `RotationMode == EKZRotationMode::LockOn` 비교 결과를 Active Value로 연결한다. 새 두 Blend Space Player의 Direction에는 같은 `MovementDirectionAngle`을 연결하고 기존 loop와 같은 `Locomotion / Can Be Leader / Sync Group`을 사용한다. Bool blend의 양방향 시간·곡선은 우선 현재 WalkRun 저장값인 `0.10 s / Hermite Cubic / Standard Blend`를 재사용한다. 이는 원작 metadata 값이 아니라 현재 프로젝트 일관성을 위한 이관값이다.
+- [보존되는 동작] Idle은 현재 Idle state, 입력 해제는 현재 Stop state, 공중은 현재 `Airborne_TEMP`, 비LockOn Sprint는 현재 Sprint state를 계속 사용한다. LockOn 중 이동할 때만 WalkRun 내부 True pose가 8방으로 바뀐다. 따라서 기존 `bShouldWalkRun`, `bShouldSprint`, `bShouldEnterStop`, `bShouldBeIdle` 전이 그래프는 수정하지 않는다.
+- [검사 산출물] 읽기 전용 보고서는 `Saved/ImportReports/KZ_LockOnLocomotion_ReadOnly_20260930.json`이다. Python 검사는 정상 완료했으며 Content/Source/ABP를 저장하지 않았다. commandlet 종료 코드 1은 기존 `/Script/GameFeatures.GameFeatureData` AssetManager ensure 때문이다.
+- [미적용] 이번 설명·감사에서 Blend Space, AnimSequence, ABP, C++을 수정하거나 build/PIE를 실행하지 않았다. 위 설정과 노드 연결, Run marker 보강 여부는 사용자 적용 및 PIE 검증 대상이다.
+
+## 2026-09-30 — LockOn 비동기화 결정과 Stop→WalkRun 빠른 포즈 전환 조사
+
+- [사용자 결정] LockOn Walk/Run은 Sync Group에 넣지 않는다. 바로 앞 L2 연결안의 `Locomotion / Can Be Leader / Sync Group` 지시는 LockOn 두 Blend Space Player에 한해 폐기한다. 기존 비LockOn loop의 동기화 정책을 이 결정만으로 변경하지 않는다.
+- [현 저장본 read-only] `ABP_Player`의 LockOn Walk/Run Blend Space Player는 모두 `Method=Do Not Sync`, `GroupName=None`, `PlayRate=1`, `Loop=true`이고 `MovementDirectionAngle`이 X 입력에 연결돼 있다. 기존 Walk/Run/Sprint loop는 `Locomotion` Sync Group이다. Walk Stop LF/RF는 아직 그 그룹에 속하지만 Run Stop LF/RF와 Sprint Stop은 `Do Not Sync`다. WalkRun의 LockOn 선택 `Blend Poses by Bool`은 저장값 양방향 `0.10 s`, Standard Blend다. 이 값은 현 프로젝트 저장값이지 원작 검증값이 아니다.
+- [현 저장본 차이] 이름이 `BS_DAS_Player_LockOn_Walk/Run`인 두 에셋은 모두 `BlendSpace1D`가 아닌 2축 `BlendSpace`다. 9개 샘플은 방향 X축의 `-180..180 deg`에 놓였고 Y는 전부 0이다. X 연결은 맞지만 현재 에셋 차원을 1D 구현 완료로 기록하지 않는다. InGame LockOn 폴더의 현 작업 트리에는 Walk/Run 전용 Stop 에셋이 없다.
+- [소스에서 확인한 재현 가능 경로] `UKZAnimInstance::UpdateKinematics_AnyThread()`는 실제 평면 속도가 `MovingSpeedThreshold=3 cm/s` 이하일 때 `MovementDirectionAngle=0 deg`로 만든다. 그러나 입력이 돌아온 같은 프레임에는 실제 속도와 관계없이 `bShouldWalkRun=true`가 될 수 있다. 이때 LockOn 측면/후면 재출발은 첫 WalkRun pose가 전방 샘플이고, 다음 유효 속도 프레임에 방향 샘플이 급히 바뀔 수 있다. `Snapshot.MoveInputWorld`는 이미 수집하지만 현재 방향 계산에는 사용하지 않는다. 이는 코드상 가능한 경로이며 해당 사용자의 시각적 튐을 PIE로 확정한 관측은 아니다.
+- [추가 가능한 겹침] 입력이 돌아와도 `!bIsMoving`이면 `LocomotionGait`를 Walk로 둔다. Run 의도로 재출발한 경우 속도가 `RunEnterSpeed`를 넘으면 Run으로 다시 전환한다. C++ 기본값 `220 cm/s`는 BP override 가능하며 원작 확인값으로 취급하지 않는다. 또한 LockOn의 옆/뒤 포즈와 현재 공통 전방 Stop LF/RF의 자세 차이, Stop 발 선택 함수의 `GetSyncGroupPosition("Locomotion")` 의존성은 별도 품질 요인이다. LockOn 비동기화 중 이 그룹의 유효 좌우 마커가 없으면 `StopEntryFoot=None`이 될 수 있다.
+- [원인 분리 절차] PIE에서 LockOn 전방·측면·후면별로 Stop 초반/후반 재입력을 재현한다. 프레임별 `GroundSpeed`, `InputAmount`, `MoveInputWorld`, `MovementDirectionAngle`, `LocomotionGait`, `StopEntryFoot`, active state/clip과 Stop→WalkRun edge의 blend logic·duration을 함께 관찰한다. 속도 0 근처에서 `Direction=0`을 거친 직후 각도가 점프하면 위 방향 경로가 확인된다. Run에서만 이중 포즈가 나타나면 Walk→Run 추가 전환을 확인한다. capsule 속도/위치가 튀는지 Mesh pose만 튀는지도 구분한다.
+- [제안만 함] 첫 수정 후보는 LockOn에서 유효 입력이 있으나 실제 속도 방향이 아직 불안정한 재출발 구간에 이미 snapshot된 `MoveInputWorld`를 Actor-local 각도로 변환해 방향 샘플을 고르는 것이다. 입력이 없고 실제로 이동 중일 때는 실제 속도각을 유지한다. 새 gameplay 상태나 공통 멤버는 선행 추가하지 않는다. 이후에도 자세가 튀면 해당 Stop→WalkRun 전이의 실제 블렌드 및 최종 Inertialization 경로를 표적 조정하고, 공통 전방 Stop과 8방 포즈의 구조적 차이는 LockOn Stop 자료/표현 계약으로 따로 해결한다. 재생률이나 시간에 임의 수치를 넣지 않는다.
+- [검증 범위] 이번 조사는 현 C++과 저장된 ABP/Blend Space를 별도 `UnrealEditor-Cmd`에서 읽었고 게임 Source/Content/BP를 수정하지 않았다. 라이브 에디터의 미저장 변경 및 PIE 프레임별 포즈는 관측하지 못했다. commandlet은 JSON 검사를 마친 뒤 기존 `/Script/GameFeatures.GameFeatureData` ensure로 종료 코드 1을 반환했다. 따라서 직접 원인 확정과 수정 효과 검증은 위 PIE 절차가 남아 있다.
+
+## 2026-09-30 — LockOn Blend Space 내부 marker sync 구분
+
+- [추가 확인] 위 절의 `Do Not Sync`는 ABP Blend Space Player가 외부 Sync Group에 참여하지 않는다는 뜻이다. 현 Walk/Run Blend Space 에셋에는 별도로 `Allow Marker Based Sync=true`가 저장돼 있다. UE 5.8.2 `UBlendSpace::TickAssetPlayer`는 단독 animation context에서도 유효 marker sample이 있으면 내부 샘플 marker sync를 시도한다. 따라서 현재 Walk의 방향 샘플은 외부 그룹에 없더라도 내부 동기화 가능성이 있다. Run 8개는 앞선 저장본 검사에서 marker가 0개라 이 경로가 현재 작동한다는 근거는 없다.
+- [최신 계약] 사용자의 "LockOn은 Sync를 안 한다"는 결정은 외부 Sync Group과 Blend Space 내부 marker sync 모두 사용하지 않는 것으로 해석한다. 적용 시 `BS_DAS_Player_LockOn_Walk`와 `BS_DAS_Player_LockOn_Run`의 `Allow Marker Based Sync`를 끄고, ABP 두 Player의 `Method=Do Not Sync`를 유지한다. 단순히 기존 발 marker를 삭제할 필요는 없다. 이전 L2의 두 에셋에 대한 `Allow Marker Based Sync=true` 지시는 폐기한다.
+- [원인 한계] Walk 내부 marker sync는 방향 sample 변경 시 발 위상을 재배치할 수 있으므로 빠른 포즈 변화의 후보지만, 현재 증상에서 실제로 작동했는지는 PIE로 확인하지 않았다. Run 재출발에도 같은 현상이 있다면 내부 marker sync 하나로는 설명되지 않으며 앞 절의 속도각 0→목표각, Walk→Run 중간 선택, Stop→WalkRun 전이 포즈를 분리 조사한다. 이번에는 에셋 설정을 변경하지 않았다.
+- [공유 Stop 경계] LockOn 중에도 현재 공통 Stop state에 들어가며 Walk Stop LF/RF Player는 여전히 `Locomotion` Sync Group이다. LockOn 재생 경로 전체에서 Sync를 배제하려면 이 두 단발 Walk Stop도 `Do Not Sync`로 바꾸는 안을 검토한다. 비LockOn 발 선택은 Stop 진입 전 loop 그룹의 marker를 읽으므로, Stop Player 자체의 Sync 해제와 발 선택 입력의 수명은 구분한다. LockOn loop는 그룹 밖이어서 현재 `SelectStopEntryFoot_AnyThread()`가 유효한 발 마커를 못 얻을 수 있으며, 이를 근거 없이 LF로 확정하는 현재 기본 분기도 별도 검사한다.
+
+## 2026-09-30 — Player 삽입 최상위 본 scale 변경 문의 (미적용)
+
+- [현행] `SK_Player`의 본 인덱스 0 `C_P_Kazan` reference scale은 `(100,100,100)`이다. 기존 Root Motion 준비본의 top-root translation `1/100` 보정과 preflight는 이 topology에 종속된다. `Root`는 그 자식 본이며 이름만으로 실제 최상위 본이라 판단하지 않는다.
+- [제안만 함] HeinMach 시각 크기 조정은 Mesh Component scale을 `0.009 → 0.01`로 조정하는 별도 캐릭터 조립 작업이다. 이 경우 AnimSequence asset-space 계약은 유지된다. 반면 reference scale을 `100 → 1`로 영구 변경하는 것은 메시 geometry/skin bind와 공유 애니메이션의 Root Motion 재계산을 포함한 에셋 이관이며, Skeleton Editor의 Bone Manipulation 미리보기 값 변경으로 완료되지 않는다.
+- [검증 범위] 현행 Skeleton/메시 수치는 `Saved/ImportReports/HeinMach_PlayerScaleAudit_20260930.json`과 기존 Root Motion 검증 기록에서 확인했다. 이번 문의로 게임 C++·BP·Skeleton·SkeletalMesh·AnimSequence를 수정하지 않았고, 새 scale의 PIE 결과도 없다. 원본 크기 대조와 편집 도구의 세부 근거는 [Art 상태](../Art/ART_PROJECT_STATE.md)의 같은 날짜 절을 따른다.

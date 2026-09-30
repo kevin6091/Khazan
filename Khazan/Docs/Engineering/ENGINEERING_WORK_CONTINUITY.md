@@ -526,3 +526,59 @@
 5. full 3D target point로 camera LookAt을 만들고 `LockOnViewInterpSpeed` 한 설정값으로 `RInterpTo`한다. 임시 시작값 `12.0 1/s`를 원작 미확인 값으로 표시한다. Lock 중 `Input_TurnCamera`는 무시한다.
 6. build 후 PIE에서 중앙/좌우/상하 높이 차, 벽 뒤 후보 제외, 후보 없음, 두 번째 입력 해제, target Destroy, UnPossess, Stop 뒤 camera 입력과 constraint 잔존 0을 확인한다.
 7. L1이 닫힌 뒤 기존 L2 Walk/Run 8방 Blend Space와 ABP 선택을 연결한다.
+
+## 2026-09-29 — LockOn Targeting 사용자 적용 순서 확정
+
+- 이번 공동 구현 설명의 적용 순서는 `AKZMonster` anchor → 새 `UKZTargetingComponent` → `AKZPlayer` 조립/기존 직접 소유 제거 → GameplayTag와 `AKZPlayerController` Started toggle → `IA_LockOn`/`IMC_Default`/`DA_InputData` → gameplay Monster BP별 anchor 위치 → cold build/PIE 검증이다.
+- `UKZLocomotionComponent`의 공개 제약 API와 `EKZRotationMode::LockOn` 적용 경로는 그대로 소비한다. Target, camera view, screen projection, visibility trace를 LocomotionComponent에 추가하지 않는다.
+- TargetingComponent는 비잠금 상태에서 tick하지 않는다. 첫 Started에서만 `AKZMonster`를 순회하며, 잠금 뒤 tick은 target validity와 full 3D camera LookAt 보간만 담당한다. 순간적인 화면 이탈이나 가림은 이번 단계의 자동 해제 원인이 아니다.
+- `AKZPlayer`의 현 `StartLockOn(AActor*)`, `UpdateLockOnFacing()`, `LockOnTarget`, `LockOnConstraintHandle`은 Component 이관 뒤 제거한다. Player에는 `ToggleLockOn/StopLockOn/IsLockedOn`의 얇은 전달과 native component 조립만 남긴다.
+- 에디터 입력 설정은 native `Input.Action.LockOn`이 로드된 cold build 뒤 진행한다. 물리 키는 사용자 매핑 결정이며, Action은 Boolean, Controller bind는 `Started` 한 번이다.
+- `LockOnViewInterpSpeed=12.0 1/s`는 원작 미확인 임시값이다. 기존 CharacterDefinition의 yaw `RotationRate=540 deg/s`와 역할이 다르며 두 값 모두 실제 PIE 회전 감각과 frame-rate 변화에서 별도로 확인한다.
+- 이번 절은 적용 순서와 책임을 기록한 것이다. 게임 Source/Content는 수정하지 않았고 새 build/PIE 결과도 없다.
+
+## 2026-09-29 — `KZLockOnComponent` 부분 적용과 최신 빌드 실패 재개점
+
+### 현재 상태
+
+- `AKZMonster`에는 capsule에 부착된 `LockOnTargetPoint`와 const getter가 실제 Source에 추가됐다.
+- 새 `UKZLockOnComponent`에는 기본 비활성 component tick, toggle 진입, 활성 `AKZMonster` 순회, actual camera view 전방 검사, viewport 투영/경계, Visibility trace, 정규화 화면 중심 점수와 camera 거리 tie-break가 작성됐다.
+- `LockOnViewInterpSpeed=12.0 1/s`는 원작 미확인 임시 튜닝값으로 선언됐다.
+- `StopLockOn()`, `IsLockedOn()`, `StartLockOn()`, `UpdateLockOnFacing()` 본문은 아직 비어 있다. 새 Component도 `AKZPlayer`에 조립되지 않았고 기존 Player의 직접 target/constraint 소유 구현이 남아 있다.
+- `Input.Action.LockOn`, InputAction, IMC/DA_InputData row와 Controller `Started` bind는 아직 없다.
+- GAS 쪽 현재 경계는 유지된다. Action/Combo Ability, exact InputTag 단일 Spec, held command, Move `GameplayEvent`→`WaitGameplayEvent`, 다섯 Montage Notify와 Block/Delay/Ability 태그는 기존 검증 상태이며 LockOn 입력 수명과 합치지 않는다.
+
+### 마지막 검증과 실패 원인
+
+- 2026-09-29 22:14 `KhazanEditor Win64 Development`에서 UHT는 성공했다.
+- C++ compile은 `KZLockOnComponent.cpp`의 `IsLockedOn()`과 `StartLockOn()`이 bool 값을 반환하지 않아 C4716 두 건으로 실패했다. 최종 결과는 `Result: Failed (OtherCompilationError)`다.
+- 마지막 module DLL은 21:28 생성본이고 `KZLockOnComponent.cpp` 최종 저장 시각 22:11보다 오래됐다. 따라서 신규 Component가 실행 모듈에 반영됐거나 PIE에서 검증됐다고 기록하지 않는다.
+
+### 정확한 재개 순서
+
+1. `StopLockOn()`에 자기 movement constraint handle 반환, target/handle reset, tick disable을 구현한다.
+2. `IsLockedOn()`의 target+handle 동시 유효성 반환과 `StartLockOn()`의 owner/target/world/Locomotion 검증, 부분 상태 cleanup, Run 상한·LockOn rotation constraint 취득, target 저장, tick enable을 구현한다.
+3. `UpdateLockOnFacing()`에서 invalid 상태를 `StopLockOn()`으로 정리하고 Monster anchor full 3D LookAt을 `RInterpTo`로 Controller rotation에 출력한다.
+4. cold build를 먼저 통과시킨 뒤 `AKZPlayer`에 Component를 조립하고 기존 직접 LockOn 필드/함수를 제거해 단일 소유권으로 이관한다.
+5. `Input.Action.LockOn`과 InputAction/IMC/DA_InputData/Controller toggle을 연결하고 Lock 중 manual camera turn 차단을 적용한다.
+6. 다시 cold build한 뒤 중앙·가장자리·뒤쪽·벽 뒤·높이 차·후보 없음·두 번째 toggle·target Destroy·UnPossess·EndPlay·constraint 공존을 PIE에서 확인한다.
+7. L1이 닫힌 뒤 기존 `RotationMode`와 `MovementDirectionAngle`을 소비하는 LockOn Walk/Run 8방으로 진행한다.
+
+## 2026-09-30 — LockOn 8방 L2 사용자 적용 재개 지점
+
+- 현재 `UKZLockOnComponent::StartLockOn()`은 Run 상한과 `EKZRotationMode::LockOn` constraint를 취득한다. AnimInstance에는 이미 `RotationMode`, `LocomotionGait`, `MovementDirectionAngle`이 있으므로 L2를 위해 C++ 멤버를 추가하지 않는다.
+- 사용자가 만든 `BS_DAS_Player_LockOn_Run` 저장본은 sample 0개의 2D `BlendSpace`다. 첫 재개 작업은 이를 보존 이름으로 옮기거나 제거한 뒤 `SK_Player`용 `BlendSpace 1D`로 다시 만들고, Walk 폴더에도 `BS_DAS_Player_LockOn_Walk` 1D를 만드는 것이다.
+- 두 에셋의 Direction 축은 `-180..180`, Grid 8, Wrap/Snap 활성이다. Back을 -180/+180에 중복하고 나머지 7방을 45도 간격으로 배치한다. angle smoothing/weight smoothing은 정확성 검증 동안 0, sample Rate Scale은 1.0이다. 세부 파일 대응은 Animation 정본의 2026-09-30 절을 따른다.
+- 다음으로 `ABP_Player → AnimGraph → Locomotion → Grounded → GroundedLocomotion → WalkRun`에서 기존 normal Walk/Run gait-select를 보존한다. 별도 LockOn Walk/Run gait-select를 만들고 두 결과를 최종 `Blend Poses by Bool`에 연결한다. `RotationMode == LockOn`이 True, normal이 False다. Bool blend는 현행 WalkRun 저장 설정 `0.10 s / Hermite Cubic / Standard Blend`를 우선 복제한다.
+- 새 Blend Space Player 둘은 `Direction=MovementDirectionAngle`, Loop true, Sync Method `Sync Group`, Group `Locomotion`, Role `Can Be Leader`로 둔다. Idle/Stop/Sprint/Airborne state와 기존 전이는 바꾸지 않는다.
+- 적용 뒤 Compile/Save 후 PIE에서 LockOn on/off를 정지·Walk·Run 각각 시험하고 F/FR/R/BR/B/BL/L/FL, ±180 경계, target 선회 중 방향, 입력 해제 Stop, LockOn 중 Sprint 차단, target 소멸 cleanup을 확인한다. Anim Debug에서 `RotationMode`, `LocomotionGait`, `MovementDirectionAngle`을 함께 본다.
+- LockOn Walk 8개에는 좌우 발 marker가 있지만 Run 8개에는 marker가 없다. Run의 발 pop이 확인될 때만 실제 접지 frame을 찾아 marker를 추가한다. 임의 시간을 넣거나 Walk marker 시간을 그대로 복사하지 않는다.
+- 이번 감사 산출물은 `Saved/ImportReports/KZ_LockOnLocomotion_ReadOnly_20260930.json`이다. 게임 Source/Content/ABP는 수정하지 않았고 build/PIE도 실행하지 않았다.
+
+## 2026-09-30 — LockOn Pitch 제한 적용 후 런타임 검증 재개점
+
+- 현재 `KZLockOnComponent.h/.cpp`에 거리 대신 각도 기준의 LockOn 내려다보기 제한이 적용돼 있다. `MaxLookDownAngleDegrees=20°`는 원작 미확인 임시 튜닝값이며 `BP_Player`의 inherited component defaults에서 조절할 수 있다. 기존 Player pivot `+250 cm`는 보존했다.
+- 마지막 검증: UE 5.8 Editor target의 UHT 및 변경 C++ compile 성공, Editor DLL link는 실행 중인 Unreal Editor의 점유 때문에 `LNK1104` 실패. Game target도 변경 C++ compile 성공, 전체 build는 변경하지 않은 `KZLocomotionComponent.cpp:8`의 `InterchangeResult.h` 누락 `C1083`으로 실패. PIE는 수행하지 못했다.
+- 재개 1: 사용자 작업을 저장한 뒤 Unreal Editor를 정상 종료한다. `Build.bat KhazanEditor Win64 Development -Project=<Khazan.uproject 절대 경로> -WaitMutex -NoHotReloadFromIDE`로 Editor target을 다시 빌드한다. Game target의 기존 `InterchangeResult.h` 문제는 별도 빌드 범위에서 해결한다.
+- 재개 2: 새 Editor 프로세스로 `BP_Player`의 `LockOnComponent > MaxLookDownAngleDegrees` 설정을 확인한다. PIE에서 같은 높이 적을 근거리·원거리에서 잠그고 Controller/Camera Pitch가 음수 `-20°` 아래로 내려가지 않는지, SpringArm의 과도한 상승이 사라졌는지 확인한다. 높은 곳의 target은 양수 Pitch로 올려다볼 수 있어야 한다. LockOn 해제 뒤 일반 camera 입력도 확인한다.
+- 재개 3: 카메라 높이와 framing이 원하는 정도와 다르면 이 임시 각도를 component defaults에서 조절하고, target anchor/BP SpringArm offset·collision의 별도 영향을 확인한다. 원작 카메라 Pitch metadata가 확보되면 같은 의미·조건인지 확인한 후 임시값 교체를 판단한다.

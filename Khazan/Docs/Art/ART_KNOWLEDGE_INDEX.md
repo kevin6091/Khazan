@@ -245,3 +245,20 @@
 - [LOCKON_TARGET_ANCHOR_AUDIT_20260929.md](LOCKON_TARGET_ANCHOR_AUDIT_20260929.md): 원작 `xxLockOnSphereComponent`, 현재 복원 메시 소켓, `LookAt01`과 LockOn 기준의 구분, gameplay `LockOnTargetPoint` 이관 계약의 정본이다.
 - 조사한 현재 Enemy 메시에는 공통 `LockOnTarget` 소켓이 없다. `LookAt01`은 머리의 별도 시선 소켓이며 원작 Character BP의 `xxLockOnSphereComponent`를 대체하지 않는다.
 - 기계 판독 요약은 `Saved/ImportReports/KZ_LockOnTargetAnchorAudit_20260929.json`이다. 이번 감사에서 C++/Blueprint/SkeletalMesh/Skeleton을 수정하지 않았다.
+
+## 2026-09-29 HeinMach 플레이 가능 경로·충돌
+
+- [HEINMACH_PLAYABILITY_COLLISION_20260929.md](HEINMACH_PLAYABILITY_COLLISION_20260929.md): DualAxeSword 인간형 튜토리얼 시작점, 원작 자동 진행 125 actions/1,485 route points, 지형·prop collision, 2,281 route wall, 242 NavMesh bounds, 26 NavArea_Null modifier, 14 원작 link와 10 복원 보정 link의 출처·적용·PIE 검증 정본이다.
+- 기계 판독 자료는 `Saved/ImportReports/HeinMach_OriginalAutomationRoute.json`, `HeinMach_Playability_Restoration.json`, `HeinMach_RouteCollision_SourceMapping.json`, `HeinMach_Playability_RuntimeVerification.json`이다.
+
+## 2026-09-30 Character camera 부착점과 컷씬 camera
+
+- [CHARACTER_CAMERA_MOUNT_AUDIT_20260930.md](CHARACTER_CAMERA_MOUNT_AUDIT_20260930.md): Player `Cine_Cam_Start/End`의 현재 reference-bone 형식, UE attach 가능 여부, 일반 camera 조립, Yetuga/BigBear socket, 원작 컷씬 직접 부착과 조사 한계의 정본이다.
+- Player의 확인된 원작 컷씬 부착점은 `Cine_Cam_End`다. `Cine_Cam_Start`는 attach 가능한 후보이나 저장 Level metadata에서는 사용처를 확인하지 못했다.
+- Yetuga 본체·IceRock 보조 mesh와 BigBear를 확인했다. Yetuga/Apes의 `LookAt01`과 gameplay `LockOnTargetPoint`는 camera mount가 아니며, 보스용 camera/cine 명칭 socket은 현재 애셋과 조사한 원작 Skeleton metadata에서 확인되지 않았다.
+- 기계 판독 자료는 `Saved/ImportReports/KZ_CharacterCameraMountAudit_20260930.json`과 `KZ_OriginalCharacterCameraMountAudit_20260930.json`, 재현 도구는 `Scripts/Character/audit_character_camera_mounts.py`와 `audit_original_character_camera_mounts.py`다.
+
+## 2026-09-30 HeinMach Player 상대 스케일 근거
+
+- 원본 `C_P_Kazan.psk` 정점 경계, 원본 ThornTree USDA cm 단위와 복원 HeinMach 메시의 동일 경계, 현행 `SK_Player` 삽입 최상위 본의 `100`배를 대조한 결과는 [ART_PROJECT_STATE.md](ART_PROJECT_STATE.md)의 같은 날짜 절과 `Saved/ImportReports/HeinMach_PlayerScaleAudit_20260930.json`에 있다.
+- 현행 topology의 계산된 Player Mesh Component 상대 스케일은 `0.01`이다. 원작 actor scale `1`의 직접 복사가 아니며, 현재 `0.009`에서 사용자 적용 전이므로 실제 게임플레이 크기와 Root Motion은 미검증이다.

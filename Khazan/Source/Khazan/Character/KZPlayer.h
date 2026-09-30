@@ -8,6 +8,7 @@
 #include "KZPlayer.generated.h"
 
 class UKZAttributeSet;
+class UKZLockOnComponent;
 
 UCLASS()
 class KHAZAN_API AKZPlayer : public AKZCharacter
@@ -18,7 +19,6 @@ public:
 	AKZPlayer();
 
 public:
-	virtual void Tick(float DeltaTime) override;
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void UnPossessed() override;
 
@@ -35,21 +35,16 @@ public:
 	// 입력 시스템이 Sprint를 취소하면 모드와 관계없이 요청을 해제한다.
 	void HandleInputSprintCanceled();
 
-	// 외부 선택자가 넘긴 유효한 Actor를 현재 LockOn 대상으로 설정한다.
-	UFUNCTION(BlueprintCallable, Category = "KZ|LockOn")
-	bool StartLockOn(AActor* Target);
+	// 첫 입력은 검색·시작, 다음 입력은 해제를 요청한다.
+	void ToggleLockOn();
 
-	// 현재 LockOn 원인이 취득한 이동 제약 한 건만 회수한다.
-	UFUNCTION(BlueprintCallable, Category = "KZ|LockOn")
+	// UnPossess 등 Player 수명 경계에서 명시적으로 해제한다.
 	void StopLockOn();
 
-	// target과 constraint handle이 함께 살아 있는지 확인한다.
+	// Controller의 수동 카메라 입력 차단에 사용한다.
 	bool IsLockedOn() const;
-
-private:
-	// 활성 LockOn target을 향하도록 Controller Yaw를 갱신한다.
-	void UpdateLockOnFacing();
 	
+private:
 	// 현재 raw 입력과 Sprint 요청으로부터 RequestedGait만 갱신한다.
 	// 속도나 CMC 설정은 직접 변경하지 않는다.
 	void RefreshRequestedGait();
@@ -80,8 +75,6 @@ private:
 
 	bool bSprintRequested = false;
 	
-	UPROPERTY(Transient)
-	TWeakObjectPtr<AActor> LockOnTarget;
-
-	FKZMovementConstraintHandle LockOnConstraintHandle;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Character|Targeting", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UKZLockOnComponent> LockOnComponent;
 };

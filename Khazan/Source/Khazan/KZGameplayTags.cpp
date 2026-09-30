@@ -16,6 +16,9 @@ namespace KZGameplayTags
 	// Attack
 	UE_DEFINE_GAMEPLAY_TAG(Input_Action_X, "Input.Action.X");
 	UE_DEFINE_GAMEPLAY_TAG(Input_Action_Y, "Input.Action.Y");
+	
+	// LockOn
+	UE_DEFINE_GAMEPLAY_TAG(Input_Action_LockOn, "Input.Action.LockOn");
 
 #pragma endregion
 

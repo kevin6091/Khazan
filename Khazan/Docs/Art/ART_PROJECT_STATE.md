@@ -327,3 +327,34 @@
 - [판정] `LookAt01`은 머리 시선 소켓이고 별도 LockOn 컴포넌트가 있으므로 LockOn 정본으로 사용하지 않는다. gameplay에서는 Monster별 SceneComponent 기준점을 둔다.
 - [정본] 상세는 [LOCKON_TARGET_ANCHOR_AUDIT_20260929.md](LOCKON_TARGET_ANCHOR_AUDIT_20260929.md), 요약 report는 `Saved/ImportReports/KZ_LockOnTargetAnchorAudit_20260929.json`이다.
 - [보호] 게임 Source와 Content asset은 수정·저장하지 않았다. UE 검사 script는 완료됐고 commandlet exit 1은 기존 `GameFeatureData` ensure 때문이다.
+
+## 2026-09-29 HeinMach DualAxeSword 시작·진행 경로 플레이 가능화 완료
+
+- 원본 `HeinMach_Spawn_Main01/MISSION01_START`를 `HM_Tutorial_PlayerStart_DualAxeSword`로 확정했다. 두 인간형 tutorial anchor와 맨손 오프닝 제외를 유지했다.
+- Landscape 48개와 source 판정 prop 8,987개의 collision을 저장하고, `HeinMach_Chrcollision`의 활성 비degenerate wall 2,281개, Nav bounds 242개, NavArea_Null 26개, 원작 NavLink 14개를 복원했다.
+- 원작 `xxAutomationTestActor_1`의 63 MoveTo/1,485점/1,422구간을 전수 검증했고, 복원 Recast gap 10곳은 원본 route 기반 forward link로 연결했다. 전 점·전 구간과 첫 tutorial route가 통과했다.
+- PIE에서 DualAxeSword R/L mesh가 부착된 `BP_Player`가 `IA_Move`로 약 `706.74 cm` 이동한 뒤 지면 상태였고 hidden route wall의 Pawn 차단이 확인됐다.
+- 상세 수치·출처 구분·임시 보정·후속 gameplay 경계는 [HEINMACH_PLAYABILITY_COLLISION_20260929.md](HEINMACH_PLAYABILITY_COLLISION_20260929.md)와 `Saved/ImportReports/HeinMach_Playability_RuntimeVerification.json`이 정본이다.
+
+## 2026-09-30 Character camera mount read-only 감사
+
+- 현재 Player mesh의 `Cine_Cam_Start`와 `Cine_Cam_End`는 authored socket이 아니라 `Root` 직속 reference bone이다. 두 이름 모두 UE scene attachment API가 유효한 attach 지점으로 판정한다.
+- 원작 StormPass Level metadata에서 별도 `CineCameraActor1`이 Player skeletal component의 `Cine_Cam_End`에 붙은 직접 사례를 확인했다. `Cine_Cam_Start`의 실제 사용처는 저장 Level 집합에서 확인되지 않았다.
+- Yetuga와 Apes의 `LookAt01`은 머리 시선 socket이며 camera mount로 판정하지 않는다. Yetuga 본체와 IceRock 보조 mesh, BigBear를 함께 확인했으며 Yetuga/BigBear의 현재 Blueprint에는 camera/spring arm component가 없고 원작 Skeleton metadata에도 camera/cine 명칭 socket은 없다.
+- 현재 일반 camera는 Player capsule 아래 SpringArm과 Camera로 조립되며 animated mesh에 붙지 않는다. `KZLockOnComponent`는 view/control rotation만 갱신하고 camera를 target에 attach하지 않는다.
+- 상세 근거는 [CHARACTER_CAMERA_MOUNT_AUDIT_20260930.md](CHARACTER_CAMERA_MOUNT_AUDIT_20260930.md), report는 `Saved/ImportReports/KZ_CharacterCameraMountAudit_20260930.json`과 `KZ_OriginalCharacterCameraMountAudit_20260930.json`이다. 게임 Source/Content asset은 수정·저장하지 않았다.
+
+## 2026-09-30 HeinMach Player 상대 스케일 원본 대조 (읽기 전용)
+
+- 원본 `BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Model/C_P_Kazan.psk`의 `PNTS0000` 45,751점에서 Z 최소 `1.670107 cm`, 최대 `201.293518 cm`, 경계 높이 `199.623411 cm`를 직접 계산했다. 원본 `HeinMach_Cine_LevelEvent02`의 `C_P_Kazan2_6` actor는 scale `(1,1,1)`이며 skeletal component에 별도 `RelativeScale3D` override가 없다. 이 컷씬 actor는 게임플레이 Player CDO의 직접 대체 근거가 아니다.
+- 원본 `BBQ/Content/Art/World/World_Model/Prop/Tree/WP_STA_ThornTree_BIG_003.usda`는 `metersPerUnit=0.01`이고 경계 크기가 `(1095.45545, 667.08045, 509.59073) cm`다. 복원 맵의 동일 메시 경계 크기 `(1095.455444, 667.080444, 509.590729) cm`와 일치하며, actor scale `0.5640706`도 원본 HeinMach 배치 metadata와 일치한다. 따라서 확인한 환경 표본에는 추가 100배 배율이 없다.
+- 현재 `/Game/_Art/Player/Character/Meshs/SKM_Player`의 로컬 경계 높이는 `19791.514145 cm`이고 `/Game/_Art/Player/Character/Meshs/SK_Player`의 삽입 최상위 본 `C_P_Kazan` reference scale은 `(100,100,100)`이다. 해당 현행 임포트 topology를 원본 cm 단위에 맞추는 Mesh Component 역배율은 **`(0.01,0.01,0.01)` = `1/100`**이다. 이는 원작에 직렬화된 `RelativeScale3D=0.01` 직접 확인값이 아니라 원본 단위와 현재 임포트 topology에서 계산한 값이다.
+- 현행 `0.009`에서는 경계 높이 약 `178.124 cm`, 계산값 `0.01`에서는 약 `197.915 cm`다. 원본 PSK의 `199.623 cm`와 남는 약 `0.86%` 차이는 서로 다른 메시/포즈의 AABB 비교이므로 그 차이를 맞추려 `0.0100863`으로 튜닝하지 않는다.
+- 읽기 전용 UE commandlet 보고서는 `Saved/ImportReports/HeinMach_PlayerScaleAudit_20260930.json`이다. 맵 SHA-256 전후 동일(`20FE65479279A9BD12E631FDE55A4237861C14EBF7EA3BE445544FCADA453BCE`); Player/맵/애니메이션 asset 및 Source 변경과 `0.01` PIE 적용 검증은 하지 않았다.
+
+## 2026-09-30 `SK_Player` 최상위 본 `100 → 1` 에디터 편집 가능성 (설명만)
+
+- 현재 본 인덱스 0은 `C_P_Kazan`이며 reference scale은 `(100,100,100)`이다. 원본 PSK의 `Root`는 별개이며 현재 `C_P_Kazan → Root → Bip001` 계층이다. 현행 `SKM_Player` 로컬 경계는 약 `19791.51 cm` 높이라 단순히 Skeleton의 숫자만 1로 바꾸는 것은 약 `200 cm`짜리 임포트 메시/바인드 계약을 동시에 만드는 조작이 아니다.
+- UE 5.8 Skeleton Editor의 일반 Bone Manipulation은 애니메이션 미리보기 변경으로, 창을 다시 열면 원래 transform으로 복귀한다. `Skeletal Mesh Editing Tools`의 Skeleton Editing은 영구 본 편집을 지원하지만 현재 공유 Skeleton의 reference pose를 바꾸는 작업이며 메시 geometry·skin bind·애니메이션·소켓·physics를 함께 검증하고 필요한 데이터를 이관해야 한다. 참고: Epic [Skeleton Editor](https://dev.epicgames.com/documentation/unreal-engine/skeleton-editor-in-unreal-engine), [Skeleton Editing](https://dev.epicgames.com/documentation/unreal-engine/skeleton-editing-in-unreal-engine).
+- 현재 Root Motion preparation은 삽입 최상위 본 scale `100`의 역수 `0.01`을 실제 Skeleton에서 읽어 적용하고 preflight에서도 검사한다. 본을 1로 바꾸면 기존 계약은 유효하지 않다. 현 목표가 HeinMach에서 원본 크기를 맞추는 것뿐이라면 Mesh Component 상대 스케일 `0.01` 변경이 별도 애니메이션 이관을 요구하지 않는 경로다.
+- 이 절은 설명/검토만 기록한다. 게임 Skeleton·SkeletalMesh·AnimSequence·Blueprint·Source는 수정하지 않았고, 최상위 본 1배 이관/PIE 검증도 수행하지 않았다.

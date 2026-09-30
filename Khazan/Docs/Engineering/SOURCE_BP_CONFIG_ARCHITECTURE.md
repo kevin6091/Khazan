@@ -201,3 +201,26 @@ Architecture [v3](CHARACTER_GAMEPLAY_ARCHITECTURE.md#character-architecture-v3-n
 - Controller/Character reference를 먼저 저장하고 새 프로세스에서 Input mapping, Definition, Ability grant, locomotion config를 확인한다.
 - 이 검증이 끝나기 전에 catalog와 custom manager를 삭제하지 않는다. 한 checkpoint에서 lookup source와 fallback을 동시에 잃지 않는다.
 - 이번 문서 개정에서는 Source, Config와 uasset을 수정하지 않았다.
+
+## 2026-09-29 — HeinMach 시작 맵·GameMode·월드 adapter 연결
+
+- `DefaultEngine.ini`의 `GameDefaultMap`은 `/Game/_Art/Player/Environment/HeinMach/Maps/L_HeinMach_Environment`로 변경했다. `EditorStartupMap=/Game/Maps/DevMap`은 유지한다.
+- HeinMach World Settings의 GameMode override는 `/Game/Bluprints/GameSystem/BP_GameMode.BP_GameMode_C`, 그 default pawn은 `/Game/_Art/Player/Character/Bluprints/BP_Player.BP_Player_C`다.
+- map actor로 저장되는 native adapter는 `AKZLevelRouteCollisionActor`, `AKZNavMeshBoundsBox`, `AKZNavModifierBox`다. source metadata를 uasset 없는 런타임 lookup으로 다시 읽지 않고, restore script가 source transform을 맵에 직렬화한다.
+- route compatibility metadata는 `Content/_Art/Player/Environment/HeinMach/Metadata/HeinMach_AutomationRouteNavCompatibility.json`이며 원작 직접 NavLink와 구분한다.
+- PIE에서 Player의 `DA_CharacterDefinition_Player`, `DualAxeSword_Original_R/L` 부착, CharacterMovement 이동을 확인했다. Enemy spawn/mission tutorial Blueprint는 이번 연결 범위가 아니다.
+
+## 2026-09-30 — Gameplay camera와 cinematic attachment의 현재 경계
+
+- native `AKZPlayer` 생성 순서는 `SpringArm->SetupAttachment(GetCapsuleComponent())`, `Camera->SetupAttachment(SpringArm)`이다. 저장된 `BP_Player` CDO도 `CollisionCylinder → SpringArm → Camera`, Socket Name `None`으로 일치한다.
+- 일반 gameplay view의 회전 소유자는 Controller다. SpringArm은 Pawn Control Rotation을 사용한다. `UKZLockOnComponent`는 target 검색에서 실제 view를 읽고, 현재 매 프레임 활성 경로에서는 Player actor 위치를 pivot으로 `SetControlRotation()`을 호출한다. LockOn 시작/종료가 camera component attachment를 바꾸지 않는다.
+- `AKZMonster::LockOnTargetPoint`는 capsule 아래의 SceneComponent다. target full 3D 위치 제공이 책임이며 camera parent나 cinematic mount 책임을 갖지 않는다.
+- Player `Cine_Cam_Start/End`는 SkeletalMesh/Skeleton socket 객체가 아니라 reference bone이다. UE attachment API가 bone name도 해석하므로 cinematic actor를 붙일 수 있고, 원작 StormPass에서 `Cine_Cam_End` 사용이 직접 확인됐다.
+- 현재 Yetuga 본체·IceRock 보조 mesh와 BigBear에는 별도 cinematic camera component나 camera/cine socket이 없다. 보스 고정 shot 요구가 생기면 명시적 cinematic anchor를 별도 책임으로 추가하며 `LookAt01` 또는 `LockOnTargetPoint`를 겸용하지 않는다.
+- 이번 기록은 현재 Source/BP/metadata 분석이며 구조나 asset을 변경한 결정이 아니다. 애셋 수치와 출처는 [Art camera mount 감사](../Art/CHARACTER_CAMERA_MOUNT_AUDIT_20260930.md)를 따른다.
+
+## 2026-09-30 — HeinMach Player Mesh 상대 스케일 분석 (미적용)
+
+- `AKZPlayer` 생성자 `KZPlayer.cpp:22`가 `GetMesh()->SetRelativeScale3D(FVector(0.009f, 0.009f, 0.009f))`를 설정하고, 저장된 `BP_Player` CDO `CharacterMesh0`도 `0.009`를 보인다. `KZLocomotionType.h`에는 이 스케일 설정이 없다.
+- 원본 캐릭터 PSK/HeinMach 환경의 cm 단위와 현행 `SK_Player` 삽입 최상위 본 reference scale `100`의 역수로 계산한 목표는 Mesh Component 상대 스케일 `0.01`이다. 원본/현행 실측과 계산의 구분은 [Art 상태](../Art/ART_PROJECT_STATE.md)의 같은 날짜 절과 `Saved/ImportReports/HeinMach_PlayerScaleAudit_20260930.json`을 따른다. 사용자 요청에 따라 이번에는 C++·BP·맵을 수정하지 않았다.
+- `0.009 → 0.01`은 보이는 메시와 Mesh Component transform을 거치는 Root Motion 월드 이동에 `0.01/0.009 = 1.111111`배를 적용한다. 기존 애니메이션 asset-space translation 보정 `0.01`은 삽입 root의 역수라는 별도 계약이므로 재임포트 대상이 아니다. 현재 Player capsule `radius=34 cm`, `half-height=88 cm`는 Mesh scale과 별개다. 사용자 적용 후 유효 BP CDO scale, 캡슐 정렬, PIE Root Motion을 확인해야 한다.

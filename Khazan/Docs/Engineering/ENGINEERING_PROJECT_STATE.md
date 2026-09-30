@@ -468,3 +468,26 @@
 - [toggle] 첫 입력은 검색 후 Start, 두 번째 입력은 검색 없이 Stop한다. Lock 중 manual turn은 차단하고 Stop 뒤 현재 camera 방향에서 수동 입력을 재개한다.
 - [Stamina] 사용자는 Stamina 재생 GameplayEffect 완료를 보고했다. 이번 작업에서는 해당 asset의 runtime 재검증을 수행하지 않았다.
 - [변경 경계] 게임 Source/Content/Input asset은 수정하지 않았다. 문서와 read-only metadata/asset 감사만 갱신했으며 build/PIE는 미실행이다.
+
+## 2026-09-29 — HeinMach 공통 월드 이동 기반 적용·검증 완료
+
+- `AKZLevelRouteCollisionActor`가 원작 route wall 2,281개를 hidden HISM collision으로 저장하고, `AKZNavMeshBoundsBox` 242개와 `AKZNavModifierBox` 26개가 source box transform을 직렬화한다. `NavigationSystem` module 의존성을 추가했다.
+- 맵에는 원작 NavLink 14개와 원본 자동 경로에서 계산한 forward compatibility link 10개가 있으며, Player/AI별 이동 코드를 복제하지 않고 CMC와 PathFollowing이 같은 월드 데이터를 소비한다.
+- HeinMach World Settings는 `BP_GameMode`, 프로젝트 `GameDefaultMap`은 HeinMach다. `EditorStartupMap`은 DevMap을 유지한다.
+- 일반 Editor에서 Recast build/save 후 원작 1,485점·1,422구간과 source link 필수 방향 19/19가 통과했다. PIE `BP_Player`는 DualAxeSword 장착 상태로 약 `706.74 cm` 지상 이동했고 source wall이 Pawn을 막았다.
+- `KhazanEditor Win64 Development`와 4개 HeinMach Python script compile이 성공했다. commandlet exit 1은 script 실패가 아니라 기존 `GameFeatureData` ensure이며 report status를 별도로 확인했다.
+- Encounter/적 spawn/전투 학습, 상호작용, 특수 drop 실행은 이번 월드 이동 기반에 포함하지 않았다. 구조 계약은 Architecture의 ARCH-70, 원본 수치는 Art의 `HEINMACH_PLAYABILITY_COLLISION_20260929.md`를 따른다.
+
+## 2026-09-30 — Player·보스 camera attachment read-only 분석
+
+- 현재 `BP_Player`는 `CollisionCylinder → SpringArm → Camera` 구조다. SpringArm과 Camera의 Socket Name은 `None`이며 gameplay camera는 animated mesh에 직접 붙지 않는다.
+- Player mesh의 `Cine_Cam_Start/End`는 authored socket이 아닌 `Root` 직속 reference bone이지만 UE attach API에서 유효하다. 원작 StormPass metadata는 별도 CineCameraActor가 `Cine_Cam_End`를 실제 사용한 사례를 보존한다.
+- `UKZLockOnComponent`는 target 검색에서 현재 view를 읽는다. 매 프레임 활성 경로는 Player actor 위치와 Monster `LockOnTargetPoint`로 control rotation을 계산하며, camera 위치 pivot 블록은 현재 주석 상태다. CameraComponent/SpringArm의 parent나 attachment는 변경하지 않는다. `LockOnTargetPoint`는 view target anchor이며 camera mount가 아니다.
+- Yetuga/BigBear Blueprint에는 camera/spring arm component가 없고, Yetuga 본체·IceRock 보조 mesh와 BigBear 및 원작 Skeleton metadata에는 camera/cine 전용 socket이 없다. `LookAt01`은 머리 시선 기준으로 유지한다.
+- 세부 애셋 근거는 Art의 [CHARACTER_CAMERA_MOUNT_AUDIT_20260930.md](../Art/CHARACTER_CAMERA_MOUNT_AUDIT_20260930.md)다. 이번 분석에서 C++/Blueprint/Content는 수정하지 않았고 build/PIE도 수행하지 않았다.
+
+## 2026-09-30 — LockOn 카메라 내려다보기 각도 제한 적용
+
+- 현행 `UKZLockOnComponent::UpdateLockOnFacing()`의 `ToTarget.Z` 거리 범위 제한 `[-50, 250] cm`를 제거했다. 수평 거리가 짧아지면 같은 높이 차도 급한 음수 Pitch가 되던 원인을 각도 한계로 바꿨다. `Player actor + 250 cm` pivot, target anchor, yaw 보간, SpringArm attachment와 LockOn 수명은 유지했다.
+- Component defaults에 `MaxLookDownAngleDegrees=20°`를 추가했다. 원작 metadata 미확인 **임시 튜닝값**이며 양의 크기로 저장하고 실제 음수 Pitch 하한에 적용한다. 목표 Pitch와 `RInterpTo` 출력 모두 하한을 제한하므로 거리와 무관하게 내려다보기 각도가 제한된다. 양의 Pitch에는 LockOn 전용 제한을 두지 않았다. 수치 변경 이유·영향은 Architecture의 2026-09-30 ARCH-69 개정 절에 기록했다.
+- UE 5.8 `KhazanEditor Win64 Development`에서 UHT와 변경 Source compile은 통과했으나, 열린 Unreal Editor가 `UnrealEditor-Khazan.dll`을 점유해 link `LNK1104`로 실패했다. `Khazan Win64 Development`에서도 변경 Source compile은 통과했으나 기존 `KZLocomotionComponent.cpp:8`의 `InterchangeResult.h` 누락 `C1083`으로 전체 target build가 실패했다. 이 작업 범위에서 해당 파일은 수정하지 않았다. 새 Editor binary 적용과 PIE 카메라 동작은 아직 검증하지 않았다.

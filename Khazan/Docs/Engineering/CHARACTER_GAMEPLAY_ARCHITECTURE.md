@@ -2958,3 +2958,21 @@ Notify 순서는 section별로 `InputOpen < InputCommit < InputEnd`, `HoldCommit
 LockOn 중 수동 `Input_TurnCamera`는 camera target 출력과 충돌하므로 현재 범위에서는 소비하지 않는다. target 전환 입력이 실제 요구될 때 같은 component의 별도 명령으로 추가한다. 해제 시 control rotation을 과거 각도로 되돌리지 않고 현재 시점에서 수동 camera 입력을 재개한다.
 
 이번 절은 설계와 표적 asset/metadata 감사 결과다. 게임 C++/Blueprint/Input asset과 Enemy asset에는 아직 적용하지 않았고 build/PIE도 수행하지 않았다.
+
+<a id="character-architecture-arch-70"></a>
+## 2026-09-29 — ARCH-70: 월드 진행 collision·navigation과 Character 이동 책임
+
+- 레벨이 walkable surface, 물리 장애물, 진행 경계, NavMesh bounds, NavArea_Null과 off-mesh 연결을 소유한다. Player/Monster 클래스에 HeinMach 좌표나 맵별 route 분기를 넣지 않는다. 이는 ARCH-04/08/11/23/29의 이동·Player/AI·레벨 진행 경계를 구체화한다.
+- `AKZLevelRouteCollisionActor`는 source box 2,281개를 직렬화하는 hidden HISM container다. `AKZNavMeshBoundsBox`와 `AKZNavModifierBox`도 source brush의 단순 box transform을 저장하는 level adapter다. 이 타입들이 movement intent, gait, action 또는 encounter state를 소유하지 않는다.
+- Player와 미래 AI Character의 capsule 이동/충돌 해결은 CMC가 수행한다. AI의 경로 요청은 같은 Recast와 source/compatibility NavLink를 소비한다. 별도 Player 전용 invisible wall이나 AI 전용 복제 지형을 만들지 않는다.
+- 원작 자동 Player route에서 계산한 compatibility link 10개는 복원 geometry의 Recast 단절을 연결하는 맵 데이터다. forward drop/link를 실제로 실행할 animation, Ability/Task, 취소·착지 결과가 필요하면 해당 action 수명 소유자가 구현한다. NavLink가 gameplay 결과를 확정하지 않는다.
+- `NavArea_Null` 26개는 원본 `NavModifierVolume`의 단일 ±100 cm convex와 actor transform을 그대로 사용한다. source `NavLinkProxy6`의 적용 snap radius `50 cm`와 compatibility link의 `50 cm`는 복원 전용 임시값이며 원본값으로 승격하지 않는다.
+- 적용 상태: map/GameMode/GameDefaultMap, 세 level adapter, NavigationSystem dependency와 restore/audit/runtime verify scripts가 실제 저장됐다. 일반 Editor Recast/PIE와 Development Editor build를 통과했다. `KZPlayer`의 locomotion 의미나 CharacterDefinition 수치는 이번 작업에서 변경하지 않았다.
+- 검증 정본은 `Saved/ImportReports/HeinMach_Playability_RuntimeVerification.json`이다. 현재 보장은 63 MoveTo의 1,485점·1,422구간 Recast 연결, DualAxeSword Player 이동과 source wall 충돌이다. Encounter, 인간형 적 spawn/AI, tutorial 학습 UI와 interaction action은 별도 수직 절편이다.
+
+## 2026-09-30 — ARCH-69 개정: LockOn 카메라의 비대칭 Pitch 제한
+
+- 현행 `UKZLockOnComponent::UpdateLockOnFacing()`은 실제 camera 위치 대신 `Player actor location + (0, 0, 250 cm)`를 고정 pivot으로 사용한다. 이 `250 cm` 및 기존 `ToTarget.Z` 범위 `[-50, 250] cm`는 현재 Source 값이며 원작 metadata에서 확인한 값이 아니다. 기존 ARCH-69의 실제 camera 위치 full LookAt 설명은 현재 구현과 다르다.
+- 새 요구는 LockOn 중 수평 거리에 관계없이 일정 각도보다 더 아래로 내려다보지 않고, 위쪽 target은 바라볼 수 있게 하는 것이다. 따라서 target anchor의 3D 높이는 유지하되, 거리 벡터의 Z를 제한하던 처리를 제거하고 계산된 Controller Pitch의 음수 하한을 제한한다. UE Pitch는 양수가 올려다보기, 음수가 내려다보기다. 최종 보간 출력에도 같은 하한을 적용해 LockOn 진입 전 시선이 이미 하한 아래였던 경우를 포함한다. 위쪽 Pitch에는 LockOn 전용 제한을 두지 않는다.
+- 현재 component가 카메라 출력과 target 수명을 계속 소유한다. Player/Locomotion/AnimInstance나 SpringArm attachment를 이 변경 때문에 바꾸지 않는다. `MaxLookDownAngleDegrees=20°`는 원작 근거가 없는 **임시 튜닝값**이다. component defaults에서 조절하며, `20°` 선택은 급한 탑다운을 피하면서 낮은 target을 조금 내려다볼 수 있게 하는 시작점이다. 현재 SpringArm 길이 `600 cm` 기준 충돌·offset이 없으면 이 각도에서 arm 회전으로 생기는 상승량은 약 `600 sin(20°)=205 cm`이며, 값이 작을수록 카메라 상승 상한도 낮아진다. 실제 높이와 framing은 BP offset·collision과 PIE에서 검증해야 한다.
+- 원래 full 3D LookAt의 무제한 Pitch 계약은 이 비대칭 제한 범위에서 대체한다. 카메라 회전 보간, CMC Yaw 회전, target 획득/해제 수명은 ARCH-69의 기존 계약을 유지한다.
