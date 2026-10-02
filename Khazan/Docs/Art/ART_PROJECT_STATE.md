@@ -358,3 +358,33 @@
 - UE 5.8 Skeleton Editor의 일반 Bone Manipulation은 애니메이션 미리보기 변경으로, 창을 다시 열면 원래 transform으로 복귀한다. `Skeletal Mesh Editing Tools`의 Skeleton Editing은 영구 본 편집을 지원하지만 현재 공유 Skeleton의 reference pose를 바꾸는 작업이며 메시 geometry·skin bind·애니메이션·소켓·physics를 함께 검증하고 필요한 데이터를 이관해야 한다. 참고: Epic [Skeleton Editor](https://dev.epicgames.com/documentation/unreal-engine/skeleton-editor-in-unreal-engine), [Skeleton Editing](https://dev.epicgames.com/documentation/unreal-engine/skeleton-editing-in-unreal-engine).
 - 현재 Root Motion preparation은 삽입 최상위 본 scale `100`의 역수 `0.01`을 실제 Skeleton에서 읽어 적용하고 preflight에서도 검사한다. 본을 1로 바꾸면 기존 계약은 유효하지 않다. 현 목표가 HeinMach에서 원본 크기를 맞추는 것뿐이라면 Mesh Component 상대 스케일 `0.01` 변경이 별도 애니메이션 이관을 요구하지 않는 경로다.
 - 이 절은 설명/검토만 기록한다. 게임 Skeleton·SkeletalMesh·AnimSequence·Blueprint·Source는 수정하지 않았고, 최상위 본 1배 이관/PIE 검증도 수행하지 않았다.
+
+## 2026-10-01 StormPass Blade Phantom 두 보스 환경 폴리싱 적용
+
+- 정본: [STORMPASS_BLADE_PHANTOM_POLISH_2026-10-01.md](STORMPASS_BLADE_PHANTOM_POLISH_2026-10-01.md). Phase1 성채 홀과 Phase2 숲/landscape는 같은 보스 좌표 영역의 원작 sublevel 변형으로 확인했다. 원본 진입·보스 spawn·컷씬 staging을 구분해 editor-only 마커 5개와 검수 카메라 2개를 저장했다.
+- 기존 root/child 배치, foliage 3,218 instance 및 landscape 16 component를 보존했다. 렌더 슬롯 3,143개의 source→UE 대응을 검증하고, native surface MI 188개를 페이즈 전용으로 분리해 원작 WEP global 값을 적용했다. DeepGray/DeepNight sky, cloud off, 페이즈 sun/sky/fog 및 BossClear PP enabled 조건을 연결했다.
+- 누락된 원본 깃발 14개와 하위 light 28개를 추가하고, 원본 배치/텍스처의 native fire·화염벽 47곳을 보완했다. 기존 Phase2 fog sheet 7개에는 원본 FogSheetColor를 native bridge로 연결했다. 원작 VM/cloth/custom shading 완전 포팅과 구분하며 임시 exposure·광도·FX 크기/시간 값은 metadata policy에 명시했다.
+- `L_StormPass_Environment` 저장/실제 World 재로드 후 Phase1/2의 geometry/material/slot/추가 render/표시/environment 검사가 통과했다. 초기 actor 14,426 → 최종 14,522, 원래 arena actor 누락 0. 최종 저장 검수 모드는 Phase1이며 source phase를 동시에 켜지 않는다.
+- 플레이어·HeinMach·게임 C++는 수정하지 않았다. 기존 사용자 변경과 작업 중 외부에서 갱신된 Engineering 문서를 보존했다. 자동 gameplay phase transition, 원작 water-spline Niagara DI 9개와 FX/cloth 실행 그래프의 완전 복원은 이번 완료 범위가 아니다.
+
+## 2026-10-01 StormPass 페이즈 좌표 설명 보완 (읽기 전용)
+
+- 원본 streaming entry와 물 actor root를 재확인했다. 두 source phase의 저장 배치 좌표 영역은 겹치며, 성채 홀과 숲/landscape라는 실제 전투 환경은 다르다. 두 streaming entry에는 `LevelTransform`이 직렬화돼 있지 않다. 원작 runtime offset/teleport와 정확한 전환 호출 순서까지 확인한 결론은 아니다.
+- 두 ArenaReference 마커는 하나의 원본 공통 `TargetPoint_Boss` 복제 표식이며, ReviewCamera도 같은 비교 시점이다. 카메라 선택만으로 페이즈 환경이 바뀌지 않는다. 기존 `view('boss_phase_1'/'boss_phase_2')`를 사용한다. 자동 gameplay 전환은 미구현이다.
+- 상세 보완은 [폴리싱 정본 하단](STORMPASS_BLADE_PHANTOM_POLISH_2026-10-01.md), 데이터는 `BladePhantom_ArenaPolish_20261001/PhaseCoordinateClarification.json`에 추가했다. 이번 확인은 World 읽기와 metadata/문서 기록만 수행했으며 게임 파일은 변경하지 않았다.
+
+## 2026-10-01 StormPass Phase1 과노출·흰빛 재검토 적용
+
+- 원작 Phase1 전투 스크린샷 3장을 직접 비교해 이전 흰 광역 보조광/과노출을 수정했다. [폴리싱 정본의 Phase1 밝기 재검토 절](STORMPASS_BLADE_PHANTOM_POLISH_2026-10-01.md)에 source field와 native 보정값을 구분했다. 기존 3 EV는 임시 2.25 EV로 대체하고 13 root/28 child light의 광도·falloff adapter, sky intensity, PP를 `PolishPolicy.json`에 모았다. 원작 photometric 단위 확정값은 아니다.
+- 원작 WEP의 붉은 volumetric fog는 에디터 `r.VolumetricFog=0` 때문에 빠져 있었다. 검수 전환의 Phase1 분기에서 session CVar를 켠다. 실제 `sg.ShadowQuality=1`; UE 5.8의 Shadows High 이상이 해당 기능을 켜는 기본 품질 분기다. project/scalability INI는 바꾸지 않았다.
+- 원본 Phase1 core fire atlas RGB × 실제 core emitter StartColor `(0.964706,1,0)`를 연결했다. parent/MI/texture 각 2개만 저장했다. color texture의 sRGB는 source flag 직접 확인값이 아니라 native 색 해석이며 compression 이후 설정·저장·readback으로 확인했다.
+- 두 페이즈 전환 후 Phase2 point light 11개/PP 원상 유지, 표시·environment 검사 실패 0. Phase1 맵 저장/실제 World 재로드 후 light 41개와 PP 및 PlayerStart pose 유지, actor 14,522, 임시 capture 없음. 원본 geometry/추가 render/표시 감사 실패 0.
+- 최종 화면: `Saved/ArtReviews/BladePhantom_20261001/Phase1_LightReview_Delivery.png`. metadata는 `Phase1LightReviewSourceManifest`, `Phase1LightReviewBefore/After`, `LightReview_ReloadVerification`, `LightReview_*Reloaded.json`을 먼저 확인한다. 현재 전달 맵은 Phase1이다. 게임 C++/캐릭터/HeinMach와 사용자 메시 배치를 수정하지 않았으며 관련 없는 dirty Dodge asset도 저장하지 않았다.
+
+## 2026-10-02 StormPass 두 전장 나란히 배치 완료
+
+- 사용자 요청으로 현행 `/Game/Maps/L_StormPass_Environment`에서 Phase1 성채는 유지하고 Phase2 전체 1,120 actor를 +X 20,390 cm 평행 이동했다. 이전 source 동일 좌표/상호 배타 표시 설명은 source 기록이며, 현재 authoring에서는 두 전장과 bounded PP를 동시에 활성화한다. 20 m 여유는 원작 값이 아닌 명시적 임시 편집 간격이며 실제 bounds로 이동량을 계산했다.
+- `StormPass/01_BladePhantom/ArenaMarkers`에 주 마커 두 개: `SP_BP_Phase1_ArenaReference_TargetPoint_Boss` `(162650,51600,695)`, Phase2 동명 마커 `(183040,51600,695) cm`. Outliner `ArenaReference` 검색/선택/F로 접근한다. 마커는 editor-only 참조이며 runtime spawn이 아니다. 기존 `view('boss_phase_1/2')`와 route variant 명령은 이제 양쪽을 표시한 채 시점만 바꾼다.
+- Phase2 terrain의 복제 native material RootXY도 +X 20,390 cm 이동해 UV를 유지했다. 별도 channel 1 sun과 Phase2 local lighting channel을 사용하지만 sky/fog/간접 GI는 Phase1 전역 환경을 공유한다. 기존 Phase1 밝기 보정을 보존했다.
+- 기존 중심 지면 미검출을 보완해 invisible `BlockAll/QueryAndPhysics` 지원 바닥 2개를 각 blood-water core에 추가했다. 현재 바닥 bbox/물 범위 기반 authoring 근사이며 원작 collision 복원이 아니다. 저장/World 교체 재로드 후 지면 trace 8/8, marker/PP/landscape/PlayerStart 계약 실패 0; actor 14,525. 실제 Character/AI PIE·전 레벨 NavMesh 검증은 수행하지 않았다.
+- 정본/수치·검증 한계: [폴리싱 정본의 2026-10-02 절](STORMPASS_BLADE_PHANTOM_POLISH_2026-10-01.md). 자료는 `Metadata/BladePhantom_SideBySide_20261002`, 최종 보고서 `ReloadVerificationWithCollision.json`, 백업은 `Saved/ArtBackups/StormPass_SideBySide_20261002`. 현재 사용자 맵 이동/PlayerStart/삭제 메시와 관련 없는 C++/BP 변경을 보존했다.

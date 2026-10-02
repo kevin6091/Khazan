@@ -1455,3 +1455,39 @@ PIE read-only 입력 주입에서는 Run/Sprint Stop 진입과 입력 해제 뒤
 - [현행] `SK_Player`의 본 인덱스 0 `C_P_Kazan` reference scale은 `(100,100,100)`이다. 기존 Root Motion 준비본의 top-root translation `1/100` 보정과 preflight는 이 topology에 종속된다. `Root`는 그 자식 본이며 이름만으로 실제 최상위 본이라 판단하지 않는다.
 - [제안만 함] HeinMach 시각 크기 조정은 Mesh Component scale을 `0.009 → 0.01`로 조정하는 별도 캐릭터 조립 작업이다. 이 경우 AnimSequence asset-space 계약은 유지된다. 반면 reference scale을 `100 → 1`로 영구 변경하는 것은 메시 geometry/skin bind와 공유 애니메이션의 Root Motion 재계산을 포함한 에셋 이관이며, Skeleton Editor의 Bone Manipulation 미리보기 값 변경으로 완료되지 않는다.
 - [검증 범위] 현행 Skeleton/메시 수치는 `Saved/ImportReports/HeinMach_PlayerScaleAudit_20260930.json`과 기존 Root Motion 검증 기록에서 확인했다. 이번 문의로 게임 C++·BP·Skeleton·SkeletalMesh·AnimSequence를 수정하지 않았고, 새 scale의 PIE 결과도 없다. 원본 크기 대조와 편집 도구의 세부 근거는 [Art 상태](../Art/ART_PROJECT_STATE.md)의 같은 날짜 절을 따른다.
+
+## 2026-10-01 — 공격 종료 후 LockOn 방향별 튐 조사 (구현 변경 없음)
+
+- [사용자 관측] WeakAttack01 중 InputEnd 전에 L을 유지하면 Run L 복귀에서 튐이 두드러지고 F는 잘 보이지 않는다. GA WeakAttack의 exit duration 2.5초는 사용자 진단 실험이며 유지한다. 직접 키 조작으로 재현해 달라는 요청 이후 Python 이동 입력 주입을 사용하지 않는다.
+- [현행 Source] 방향은 여전히 실제 Actor-local CMC 속도각이며 낮은 속도는 F=0이다. `Snapshot.MoveInputWorld`는 수집만 하고 이 방향에 사용하지 않는다. 유효 입력 복귀 시 정지 상태에서는 Walk를 선택하고 이후 속도 hysteresis로 Run을 선택한다. 앞선 Stop→WalkRun 기록과 같은 방향/gait 중간 선택이 공격 종료에도 발생할 수 있지만 튐의 확정 원인은 아니다.
+- [입력 순서] Controller는 Player의 Move 처리 뒤에 Move GameplayEvent를 보낸다. Player는 공격 중 raw intent만 저장하고 CMC 입력을 차단할 수 있다. 그 뒤 ComboAction이 InputEnd 이후 event에서 종료되므로 첫 복귀 포즈의 속도가 이미 L인지는 별도 런타임 확인 대상이다.
+- [라이브 ABP 읽기] 최종 포즈 경로는 Locomotion→DefaultSlot→Inertialization→Output이다. 현재 공격 종료 요청 하나가 그 뒤의 방향/gait/clip 변화마다 새 관성화 요청을 자동 생성한다고 설명하지 않는다.
+- [엔진 기술적 근거] 설치 UE 5.8 `AnimNode_Inertialization.cpp`는 현재 target pose에 초기 차이의 감쇠 보정을 적용한다. `CalcInertialFloat`는 초기 차이/속도로 개별 보정 시간을 요청 시간보다 짧게 할 수 있으며, 추가 요청도 유효 시간을 변경할 수 있다. 2.5초 이전 튐만으로 관성화 전체를 배제하거나 관성화 자체의 결함을 확정하지 않는다. 이는 원작 metadata가 아닌 엔진 코드 확인이다.
+- [검증 한계] 직접 Windows 제어 helper가 native pipe unavailable이고 UE Editor가 종료돼 직접 키 WeakAttack→L/F 비교/튐 프레임을 관측하지 못했다. 초기 Python 진단 callback은 sample 0의 실패이며 검증 증거에서 제외한다. Source/BP/에셋 수정, build와 수정 효과 검증은 없다.
+- [다음 절차] angle F→L, Walk→Run, 샘플/phase, 실제 활성 관성화 시간을 튐 프레임과 대조한다. 그 결과에 따라 기존 snapshot/함수 또는 해당 ABP 설정의 작은 변경만 제안한다. 상세 증거/재개는 [Engineering Diagnostics](../Engineering/BUILD_RUNTIME_DIAGNOSTICS.md)와 [Continuity](../Engineering/ENGINEERING_WORK_CONTINUITY.md)의 같은 날짜 절에 기록했다.
+
+## 2026-10-01 — 실제 패드 PIE의 공격 복귀 F/Walk 중간 선택 확인과 제안
+
+- [관측 완료] Rider 기존 Khazan 구성으로 Editor를 다시 열고 DevMap PIE에서 실제 패드 조작을 읽기 전용으로 수집했다. Python 입력 주입은 없다. 3,444 engine frame, callback error null이며 관측을 종료·해제했다. 현재 Editor connected/PIE Idle이다.
+- [확인한 현행 동작] full L 종료 frame 9599: 입력 -91.35도/세기 1/유효 이동 true, 컴포넌트 ResolvedGait Run, native 방향 약 0도/92.62 cm/s/LocomotionGait Walk. 이후 9601=-29.67도, 9603=-64.56도, 9607=-82.03도/Run이다. 첫 복귀의 VelocityLocal X가 양수 92.62이므로 공격 전진 속도 경로이며 무속도 fallback은 아니다. Walk L에서도 같은 F 중간 선택을 관측했다.
+- [F 비교] F 종료 9855 입력 -1.98도/선택 약 0도이고 9857=-3.65도, 9861=-2.90도/Run이다. 방향 변화가 L보다 작다. 속도·각도는 현재 PIE 관측이며 원작값이 아니다. 8 frame의 gait 변화와 수집 wall-clock 약 0.0667초는 진단 기록이지 blend tuning 값이 아니다.
+- [현 에셋] LockOn Walk/Run 모두 X smoothing=0, sample weight interpolation speed=0, Allow Marker Based Sync=false다. 각 X=0 sample은 F clip이다. source/API의 F 입력 경로를 확인했고 bone pose/clip phase/관성화 내부 상태의 정확한 튐 frame은 직접 캡처하지 않았다.
+- [제안만] ARCH-73: 지상·유효 입력·LockOn 이동 포즈 각도에 이미 snapshot된 MoveInputWorld의 actor-local 각도를 사용한다. 같은 조건의 gait는 기존 ResolvedGait로 선택한다. 실제 velocity/speed/acceleration은 계속 실제 관측이며 CMC는 그대로 구동한다. 현재 Source에는 아직 적용하지 않았으므로 앞선 실제 속도각/hysteresis 설명은 계속 현행이다.
+- [작은 수정] `KZAnimInstance.cpp` 기존 두 함수만 +12/-3, 새 runtime 멤버/파일/Reset/helper 0개다. 코드·각 줄의 책임·thread/출처·검증 순서는 [Diagnostics](../Engineering/BUILD_RUNTIME_DIAGNOSTICS.md)의 바로 위 후속 절, 적용용 diff는 [LockOnRecoveryPose_20261001.patch](../Engineering/Examples/LockOnRecoveryPose_20261001.patch)다.
+- [검증 대기] patch의 실제 target 문맥/변경 건수와 설치 API를 확인했다. 적용/build/수정 후 PIE·시각적 튐 제거는 아직 없다. 방향 hunk만 먼저 비교한 뒤 gait hunk를 확인하고, 일반 LockOn 방향/세기 전환의 발 미끄러짐과 기존 Stop/non-LockOn을 회귀 확인한다. 남는 튐은 clip/Slot/관성화 frame 증거로 분리한다.
+- [재사용 자료] `Saved/ImportReports/WeakAttackLockOnExit_20261001_raw.json` 및 `_summary.json`. 추가 전수조사보다 이 자료와 실제 변경 Source부터 재개한다.
+
+## 2026-10-02 — 현행 LockOn 선택 반영 확인 및 Dodge → Idle 관측
+
+- [현행 Source 확인] `KZAnimInstance.cpp:112`에서 지상·유효 이동 입력·LockOn이면 기존 MoveInputWorld를 ActorYawRotation.UnrotateVector로 변환한 각도를 사용한다. gait도 같은 유효 입력 경계 안에서 LockOn이면 ResolvedGait를 사용한다. 앞선 10월 1일 절의 미적용 표기는 당시 상태이며 현재 Source에는 해당 선택이 존재한다. 이번 조사에서 이 코드를 새로 적용하거나 빌드한 것은 아니다.
+- [실제 PIE 관측] 사용자가 조작하고 어시스턴트가 상태를 읽었다. v1 5,771/v2 1,165 frame을 저장했고 callback error는 null이다. Python으로 입력/Ability를 실행하지 않았다. 무입력 자연 복귀와 InputEnd 이후 이동 중단을 분리했다.
+- [현재 종료 계약] 공통 ComboAction은 자연 OnCompleted에서 정상 종료하며 OnBlendOut 종료 handler를 연결하지 않는다. Dodge 몽타주 자연 종료는 Standard/HermiteCubic 0.25 s다. 기존 LocomotionExitInertializationDuration 약 0.24 s는 이동 이벤트로 Montage_Stop(0)을 하는 경로다. 이 숫자들은 현재 프로젝트 에셋/CDO 확인값이며 원작 metadata 검증값이 아니다.
+- [관측 사실/한계] 무입력 L 종료에서 작은 반대 속도와 Idle 후보 true → false → true가 반복된다. Slot weight는 연속 감소하고 관측한 머리·골반·발에는 종료의 큰 단일 frame jump가 없었다. 후보 bool은 실제 활성 state의 확인값이 아니므로 Idle ↔ WalkRun 왕복을 확정하지 않는다. 이동 중단 L의 큰 frame 간 본 회전 변화는 별도 경로다. 상체/무기 및 사용자가 본 정확한 튐 frame은 추가 대조가 필요하다.
+- [현행 ABP/추가 관측] `/Game/_Art/Player/Character/Bluprints/ABP_Player`의 Locomotion → DefaultSlot → Inertialization → Output을 export로 확인했다. Slot source 업데이트/SM 재진입/clip phase는 후보이며 설정 수정/원인 확정이 아니다. 어깨·팔·손을 추가한 v3 observer를 설치했고 재개/해제와 저장 자료는 Engineering Continuity/Diagnostics의 같은 날짜 L Dodge 절에 기록한다. 새 gameplay 관측 멤버/helper/클래스와 임의 blend 수치를 추가하지 않았다.
+
+## 2026-10-02 — Dodge 자연 복귀의 본 포즈와 Actor 회전 분리
+
+- [새 실제 관측] 사용자가 다시 PIE를 조작했고 v3 1,084 frame/error null을 저장했다. L 3/R 2 Dodge의 종료를 상체·손 포함 component/world pose로 비교했다. 로컬 pose만 보는 기존 관측 범위를 보완했다.
+- [직접 확인한 불연속] 세 L 모두 몽타주 가중치가 0이 된 직후 Actor Yaw가 한 frame 약 +7 deg 돌아갔고 두 R은 약 -7 deg였다. 첫 L frame 183579에서 머리의 component-space 변화는 약 0.046 deg, world-space Root 변화는 약 7.013 deg다. 현재 종료 시 큰 전체 자세 변화의 작성자는 Actor/capsule 회전 경로다. Slot weight 연속성만으로 화면 전체 튐을 배제할 수 없다.
+- [Source/설정 대조] 실측 ±720 deg/s는 `DA_CharacterDefinition_Player.LocomotionConfig.RotationRate.Yaw=720 deg/s`와 일치한다. 현재 BP_Player CMC CDO는 bAllowPhysicsRotationDuringAnimRootMotion=false이며 엔진은 Root Motion 중 일반 PhysicsRotation을 건너뛴다. LockOn의 ControlRotation 갱신과 CMC desired rotation 경로는 존재한다. 측면 회피 동안 누적된 방향 차이를 종료 후 따라잡는 설명과 일치한다. 원작값/새 튜닝값/함수 중단점 hit로 표현하지 않는다.
+- [제안/검증 경계] 기존 Allow Physics Rotation During Anim Root Motion 옵션을 비교하는 것이 다음 작은 원인 검증이다. 다른 Root Motion 공격의 회전에도 적용되므로 회피뿐 아니라 WeakAttack/콤보를 함께 확인해야 한다. 현재 C++/BP/에셋을 수정하지 않았고 설정 변경 효과는 아직 미검증이다. 관성화 시간을 늘리는 작업을 이 Actor 회전 지연의 해결로 취급하지 않는다. 자세한 frame/report/후속 v4 관측은 Engineering Diagnostics와 Continuity의 같은 날짜 새 절에 있다.

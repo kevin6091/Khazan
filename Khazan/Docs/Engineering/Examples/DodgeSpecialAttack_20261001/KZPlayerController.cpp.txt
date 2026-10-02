@@ -1,0 +1,330 @@
+
+
+
+#include "KZPlayerController.h"
+
+#include "InputAction.h"
+#include "Engine/LocalPlayer.h"
+#include "GameFramework/Pawn.h"
+#include "InputActionValue.h"
+#include "EnhancedInputComponent.h"
+#include "EnhancedPlayerInput.h"
+#include "LogChannels.h"
+#include "EnhancedInputSubsystems.h"
+#include "KZGameplayTags.h"
+#include "Character/KZCharacter.h"
+#include "Character/KZPlayer.h"
+#include "Data/KZInputData.h"
+#include "System/KZAssetManager.h"
+#include "Ability/KZAbilitySystemComponent.h"
+#include "Ability/Combo/KZComboTypes.h"
+
+AKZPlayerController::AKZPlayerController(const FObjectInitializer& ObjectInitializer)
+	:Super(ObjectInitializer)
+{
+}
+
+void AKZPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (const UKZInputData* InputData = UKZAssetManager::GetAssetByName<UKZInputData>(KZGameplayTags::AssetData_InputData))
+	{
+
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = GetLocalPlayer()->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
+		{
+			Subsystem->AddMappingContext(InputData->InputMappingContext, 0);
+		}
+	}
+}
+
+void AKZPlayerController::SetupInputComponent()
+{
+	Super::SetupInputComponent();
+
+	if (const UKZInputData* InputData = UKZAssetManager::GetAssetByName<UKZInputData>(KZGameplayTags::AssetData_InputData))
+	{
+		UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
+
+		auto MoveAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_Move);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Started, this, &ThisClass::Input_MoveStarted);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Completed, this, &ThisClass::Input_MoveReleased);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Canceled, this, &ThisClass::Input_MoveReleased);
+
+		auto SprintAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_Sprint);
+		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Started, this, &ThisClass::Input_Sprint);
+		EnhancedInputComponent->BindAction( SprintAction, ETriggerEvent::Completed, this, &ThisClass::Input_SprintReleased);
+		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Canceled, this, &ThisClass::Input_SprintCanceled);
+
+		auto TurnCameraAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_Turn);
+		EnhancedInputComponent->BindAction(TurnCameraAction, ETriggerEvent::Triggered, this, &ThisClass::Input_TurnCamera);
+
+		const UInputAction* LockOnAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_LockOn);
+		EnhancedInputComponent->BindAction(LockOnAction, ETriggerEvent::Started, this, &ThisClass::Input_LockOnStarted);
+		
+        // 한 번의 Started로 방향 요청 한 번만 보낸다.
+        const UInputAction* DodgeAction =
+            InputData->FindInputActionByTag(KZGameplayTags::Input_Action_A);
+        if (IsValid(DodgeAction))
+        {
+            EnhancedInputComponent->BindAction(
+                DodgeAction, ETriggerEvent::Started,
+                this, &ThisClass::Input_DodgeStarted);
+        }
+
+		auto WeakAttackAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_X);
+		EnhancedInputComponent->BindAction(WeakAttackAction, ETriggerEvent::Started, this, &ThisClass::Input_WeakAttackStarted);
+		EnhancedInputComponent->BindAction(WeakAttackAction, ETriggerEvent::Completed, this, &ThisClass::Input_WeakAttackCompleted);
+		EnhancedInputComponent->BindAction(WeakAttackAction, ETriggerEvent::Canceled, this, &ThisClass::Input_WeakAttackCanceled);
+
+		auto StrongAttackAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_Y);
+		EnhancedInputComponent->BindAction(StrongAttackAction, ETriggerEvent::Started, this, &ThisClass::Input_StrongAttackStarted);
+		EnhancedInputComponent->BindAction(StrongAttackAction, ETriggerEvent::Completed, this, &ThisClass::Input_StrongAttackCompleted);
+		EnhancedInputComponent->BindAction(StrongAttackAction, ETriggerEvent::Canceled, this, &ThisClass::Input_StrongAttackCanceled);
+	}
+}
+
+#pragma region WeakAttack
+
+void AKZPlayerController::Input_WeakAttackStarted(const FInputActionValue&)
+{
+	RouteAttackInput( KZGameplayTags::Input_Action_X,
+		KZGameplayTags::Command_Player_Attack_X,
+		EKZComboCommandPhase::Begin);
+}
+
+void AKZPlayerController::Input_WeakAttackCompleted(const FInputActionValue&)
+{
+	RouteAttackInput( KZGameplayTags::Input_Action_X,
+		KZGameplayTags::Command_Player_Attack_X,
+		EKZComboCommandPhase::Release);
+}
+
+void AKZPlayerController::Input_WeakAttackCanceled(const FInputActionValue&)
+{
+	RouteAttackInput( KZGameplayTags::Input_Action_X,
+		KZGameplayTags::Command_Player_Attack_X,
+		EKZComboCommandPhase::Cancel);
+}
+
+#pragma endregion
+
+#pragma region StrongAttack
+
+void AKZPlayerController::Input_StrongAttackStarted(const FInputActionValue&)
+{
+	RouteAttackInput(KZGameplayTags::Input_Action_Y,
+		KZGameplayTags::Command_Player_Attack_Y,
+		EKZComboCommandPhase::Begin);
+}
+
+void AKZPlayerController::Input_StrongAttackCompleted(const FInputActionValue&)
+{
+	RouteAttackInput(KZGameplayTags::Input_Action_Y,
+		KZGameplayTags::Command_Player_Attack_Y,
+		EKZComboCommandPhase::Release);}
+
+void AKZPlayerController::Input_StrongAttackCanceled(const FInputActionValue&)
+{
+	RouteAttackInput(KZGameplayTags::Input_Action_Y,
+		KZGameplayTags::Command_Player_Attack_Y,
+		EKZComboCommandPhase::Cancel);
+}
+
+#pragma endregion
+
+#pragma region Input_Move
+
+void AKZPlayerController::Input_MoveStarted(const FInputActionValue& InputValue)
+{
+
+}
+
+void AKZPlayerController::Input_Move(const FInputActionValue& InputValue)
+{
+	if (AKZPlayer* PlayerCharacter = Cast<AKZPlayer>(GetPawn()))
+	{
+		PlayerCharacter->HandleInputMove(InputValue.Get<FVector2D>(), GetControlRotation());
+	}
+
+	UKZAbilitySystemComponent* ASC = GetKZAbilitySystemComponent();
+
+	if (!IsValid(ASC))
+	{
+		return;
+	}
+
+	FGameplayEventData Payload;
+	ASC->HandleGameplayEvent(KZGameplayTags::Input_Action_Move, &Payload);
+}
+
+void AKZPlayerController::Input_MoveReleased(const FInputActionValue& InputValue)
+{
+	if (AKZPlayer* PlayerCharacter = Cast<AKZPlayer>(GetPawn()))
+	{
+		PlayerCharacter->HandleInputMoveReleased();
+	}
+}
+
+#pragma endregion
+
+#pragma region Input_Sprint
+
+void AKZPlayerController::Input_Sprint(const FInputActionValue& InputValue)
+{
+	if (AKZPlayer* PlayerCharacter = Cast<AKZPlayer>(GetPawn()))
+	{
+		PlayerCharacter->HandleInputSprint();
+	}
+}
+
+void AKZPlayerController::Input_SprintReleased(const FInputActionValue& InputValue)
+{
+	if (AKZPlayer* PlayerCharacter = Cast<AKZPlayer>(GetPawn()))
+	{
+		PlayerCharacter->HandleInputSprintReleased();
+	}
+}
+
+void AKZPlayerController::Input_SprintCanceled(const FInputActionValue& InputValue)
+{
+	if (AKZPlayer* PlayerCharacter = Cast<AKZPlayer>(GetPawn()))
+	{
+		PlayerCharacter->HandleInputSprintCanceled();
+	}
+}
+
+#pragma endregion
+
+void AKZPlayerController::Input_TurnCamera(const FInputActionValue& InputValue)
+{
+	if (const AKZPlayer* PlayerCharacter = Cast<AKZPlayer>(GetPawn()))
+	{
+		if (PlayerCharacter->IsLockedOn())
+		{
+			return;
+		}
+	}
+	
+	const FVector2D Val = InputValue.Get<FVector2D>();
+	AddYawInput(Val.X);
+	AddPitchInput(Val.Y);
+}
+
+void AKZPlayerController::Input_LockOnStarted(const FInputActionValue& InputValue)
+{
+	if (AKZPlayer* PlayerCharacter = Cast<AKZPlayer>(GetPawn()))
+	{
+		PlayerCharacter->ToggleLockOn();
+	}
+}
+
+UKZAbilitySystemComponent* AKZPlayerController::GetKZAbilitySystemComponent() const
+{
+	const AKZCharacter* ControlledCharacter = Cast<AKZCharacter>(GetPawn());
+
+	if (!IsValid(ControlledCharacter))
+	{
+		return nullptr;
+	}
+
+	return Cast<UKZAbilitySystemComponent>(ControlledCharacter->GetAbilitySystemComponent());
+}
+
+void AKZPlayerController::RouteAttackInput(
+    const FGameplayTag& InputTag,
+    const FGameplayTag& CommandTag,
+    EKZComboCommandPhase CommandPhase)
+{
+    switch (CommandPhase)
+    {
+    case EKZComboCommandPhase::Begin:
+    {
+        // 먼저 graph에 기회를 주고, 소비 여부로 신규 일반 실행만 중재한다.
+        const bool bConsumed = SubmitComboCommand(CommandTag, CommandPhase);
+        AbilityInputTagPressed(InputTag, !bConsumed);
+        break;
+    }
+
+    case EKZComboCommandPhase::Release:
+        SubmitComboCommand(CommandTag, CommandPhase);
+        AbilityInputTagReleased(InputTag);
+        break;
+
+    case EKZComboCommandPhase::Cancel:
+        SubmitComboCommand(CommandTag, CommandPhase);
+        AbilityInputTagCanceled(InputTag);
+        break;
+
+    default:
+        return;
+    }
+}
+
+bool AKZPlayerController::SubmitComboCommand(
+    const FGameplayTag& CommandTag, EKZComboCommandPhase CommandPhase)
+{
+    if (UKZAbilitySystemComponent* ASC = GetKZAbilitySystemComponent())
+    {
+        return ASC->SubmitComboCommand(CommandTag, CommandPhase);
+    }
+    return false;
+}
+
+void AKZPlayerController::AbilityInputTagPressed(
+    const FGameplayTag& InputTag, bool bAllowNewActivation)
+{
+    if (UKZAbilitySystemComponent* ASC = GetKZAbilitySystemComponent())
+    {
+        ASC->AbilityInputTagPressed(InputTag, bAllowNewActivation);
+    }
+}
+
+void AKZPlayerController::AbilityInputTagReleased(const FGameplayTag& InputTag)
+{
+	if (UKZAbilitySystemComponent* ASC = GetKZAbilitySystemComponent())
+	{
+		ASC->AbilityInputTagReleased(InputTag);
+	}
+}
+
+void AKZPlayerController::AbilityInputTagCanceled(const FGameplayTag& InputTag)
+{
+	if (UKZAbilitySystemComponent* ASC = GetKZAbilitySystemComponent())
+	{
+		ASC->AbilityInputTagCanceled(InputTag);
+	}
+}
+
+void AKZPlayerController::Input_DodgeStarted(const FInputActionValue&)
+{
+    AKZPlayer* PlayerCharacter = Cast<AKZPlayer>(GetPawn());
+    UKZAbilitySystemComponent* ASC = GetKZAbilitySystemComponent();
+    UEnhancedPlayerInput* EnhancedPlayerInput = Cast<UEnhancedPlayerInput>(PlayerInput);
+    const UKZInputData* InputData =
+        UKZAssetManager::GetAssetByName<UKZInputData>(KZGameplayTags::AssetData_InputData);
+
+    if (!IsValid(PlayerCharacter) || !IsValid(ASC) ||
+        !IsValid(EnhancedPlayerInput) || !IsValid(InputData))
+    {
+        return;
+    }
+
+    // 과거 Locomotion Intent가 아니라 현재 IA_Move 값을 읽는다.
+    const UInputAction* MoveAction =
+        InputData->FindInputActionByTag(KZGameplayTags::Input_Action_Move);
+    if (!IsValid(MoveAction) || MoveAction->ValueType != EInputActionValueType::Axis2D)
+    {
+        UE_LOG(LogAbility, Error, TEXT("Dodge needs a valid Axis2D Move action."));
+        return;
+    }
+
+    const FVector2D MovementInput =
+        EnhancedPlayerInput->GetActionValue(MoveAction).Get<FVector2D>();
+    const EKZDodgeDirection Direction =
+        PlayerCharacter->ResolveDodgeDirection(MovementInput, GetControlRotation());
+
+    // 최초 Dodge는 Combo command 대신 방향 요청 API를 사용한다.
+    ASC->TryActivateDirectionalDodge(Direction);
+}

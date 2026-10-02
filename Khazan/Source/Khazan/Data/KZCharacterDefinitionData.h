@@ -37,7 +37,7 @@ private:
 	FKZLocomotionConfig LocomotionConfig;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character|Abilities",
-	meta = (AllowPrivateAccess = "true"))
+	meta = (AllowPrivateAccess = "true", TitleProperty = "{AbilityClass} [{InputTag}]"))
 	TArray<FKZInitialAbilityGrant> InitialAbilityGrants;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "KZ|Ability")

@@ -1,0 +1,27 @@
+
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Ability/Combo/KZComboActionAbility.h"
+#include "Ability/KZDodgeTypes.h"
+#include "KZDodgeAbility.generated.h"
+
+UCLASS()
+class KHAZAN_API UKZDodgeAbility : public UKZComboActionAbility
+{
+	GENERATED_BODY()
+	
+public:
+	UKZDodgeAbility();
+
+    // granted Spec의 CDO에서 읽는 방향 설정이다. 실행 중에 갱신하지 않는다.
+    EKZDodgeDirection GetDodgeDirection() const
+    {
+        return DodgeDirection;
+    }
+
+private:
+    UPROPERTY(EditDefaultsOnly, Category = "Dodge")
+    EKZDodgeDirection DodgeDirection = EKZDodgeDirection::F;
+};

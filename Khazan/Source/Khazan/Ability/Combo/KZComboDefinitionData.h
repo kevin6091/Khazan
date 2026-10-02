@@ -65,7 +65,8 @@ struct KHAZAN_API FKZComboNode
 	FName SectionName = NAME_None;
 
 	// 이 공격 다음에 갈 수 있는 모든 전환 규칙이다.
-	UPROPERTY(EditAnywhere, Category = "Combo")
+	UPROPERTY(EditAnywhere, Category = "Combo",
+		meta = (TitleProperty = "{CommandTag} | {CommandPhase} | Hold={Hold} | Move={Move} -> {TargetNodeId}"))
 	TArray<FKZComboCommandEdge> CommandEdges;
 };
 
@@ -82,6 +83,6 @@ public:
 
 private:
 	// 이 콤보에 들어 있는 모든 공격 노드다.
-	UPROPERTY(EditAnywhere, Category = "Combo")
+	UPROPERTY(EditAnywhere, Category = "Combo", meta = (TitleProperty = "NodeId"))
 	TArray<FKZComboNode> Nodes;
 };

@@ -1,0 +1,74 @@
+#pragma once
+
+#include "CoreMinimal.h"
+#include "AbilitySystemComponent.h"
+#include "Ability/Combo/KZComboTypes.h"
+#include "Ability/KZDodgeTypes.h"
+#include "GameplayTagContainer.h"
+#include "KZAbilitySystemComponent.generated.h"
+
+class UKZComboDefinitionData;
+
+// 입력 태그로 Ability를 찾고 콤보 명령을 전달하는 프로젝트 ASC다.
+UCLASS()
+class KHAZAN_API UKZAbilitySystemComponent : public UAbilitySystemComponent
+{
+	GENERATED_BODY()
+
+public:
+	// 다른 granted Combo Ability가 이 Definition의 EntryNode를 시작점으로 쓰는지 찾는다.
+	bool HasComboEntry(const UKZComboDefinitionData* Definition, FName EntryNodeId,	FGameplayAbilitySpecHandle IgnoreHandle);
+
+	// 실제 CommandTag와 target InputTag가 맞을 때만 held 입력 소유권을 넘긴다.
+	bool TryActivateComboEntry(
+		const UKZComboDefinitionData* Definition,
+		FName EntryNodeId,
+		FGameplayAbilitySpecHandle IgnoreHandle,
+		const FGameplayTag& CommandTag);
+
+    // 같은 방향의 granted Dodge Spec 한 개만 선택한다.
+    bool TryActivateDirectionalDodge(EKZDodgeDirection Direction);
+	
+	// 활성 콤보 Ability들에게 공격 명령 한 건을 알린다.
+	DECLARE_EVENT_TwoParams(UKZAbilitySystemComponent, FOnComboCommand, const FKZComboCommand&, bool&);
+
+	// 활성 Spec에는 press를 전달한다. false면 신규 activation과 cancel/restart를 막는다.
+	void AbilityInputTagPressed(const FGameplayTag& InputTag, bool bAllowNewActivation = true);
+
+	// 버튼을 뗀 입력을 해당 Input Tag의 Ability Spec에 전달한다.
+	void AbilityInputTagReleased(const FGameplayTag& InputTag);
+
+	// 취소 입력은 실제 입력 owner의 눌림을 정리하고 활성 실행을 cancel한다.
+	void AbilityInputTagCanceled(const FGameplayTag& InputTag);
+
+	// held를 갱신하고 동기 방송한다. Begin의 유효 예약/실행 승인 소비 여부를 반환한다.
+	bool SubmitComboCommand(const FGameplayTag& CommandTag, EKZComboCommandPhase Phase);
+	
+	// 콤보 Ability가 명령 수신을 연결할 때 사용한다.
+	FOnComboCommand& OnComboCommand()
+	{
+		return ComboCommandEvent;
+	}
+	
+	// 이 명령 버튼이 지금도 눌려 있는지 확인한다.
+	bool IsComboCommandHeld(const FGameplayTag& CommandTag) const
+	{
+		return HeldComboCommands.HasTagExact(CommandTag);
+	}
+
+	// Notify가 현재 눌린 모든 명령을 검사할 때 읽는다. 호출자는 수정할 수 없다.
+	const FGameplayTagContainer& GetHeldComboCommands() const
+	{
+		return HeldComboCommands;
+	}
+
+	// UnPossess/EndPlay에서 정상 Release 공격을 만들지 않고 모두 정리한다.
+	void ClearComboCommands();
+
+private:
+	// SubmitComboCommand가 방송하는 내부 이벤트다.
+	FOnComboCommand ComboCommandEvent;
+	
+	// Pawn 입력 수명 동안 현재 눌려 있는 논리 공격 명령이다.
+	FGameplayTagContainer HeldComboCommands;
+};

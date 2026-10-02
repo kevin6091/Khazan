@@ -7,6 +7,7 @@
 #include "GameplayAbilitySpec.h"
 #include "LogChannels.h"
 #include "Engine/World.h"
+#include "KZGameplayTags.h"
 #include "System/KZAssetManager.h"
 
 // Sets default values
@@ -54,9 +55,7 @@ void AKZCharacter::PostInitializeComponents()
 	// 따라서 생성자에서 ASC를 만들고 여기서 ActorInfo를 연결.
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	
-	CharacterDefinition =
-		UKZAssetManager::GetAssetByName<UKZCharacterDefinitionData>
-	(CharacterDefinitionAssetName, false);
+	CharacterDefinition = UKZAssetManager::GetAssetByName<UKZCharacterDefinitionData>(CharacterDefinitionAssetName, false);
 
 	//  Character가 사용할 정적 Definition이 지정됐는지 검사한다.
 	if (!IsValid(CharacterDefinition))
@@ -104,8 +103,7 @@ void AKZCharacter::PostInitializeComponents()
 			if (!InitialAbilityGrant.AbilityClass)
 			{
 				UE_LOG(LogDefault, Error,
-					TEXT("%s has an InitialAbilityGrant with no AbilityClass "
-						 "in %s (InputTag: %s)."),
+					TEXT("%s has an InitialAbilityGrant with no AbilityClass in %s (InputTag: %s)."),
 					*GetNameSafe(this),
 					*GetNameSafe(CharacterDefinition),
 					*InitialAbilityGrant.InputTag.ToString());
@@ -145,6 +143,10 @@ void AKZCharacter::UnPossessed()
 {
 	if (UKZAbilitySystemComponent* ASC = Cast<UKZAbilitySystemComponent>(AbilitySystemComponent))
 	{
+		FGameplayTagContainer ActionTags;
+		ActionTags.AddTag(KZGameplayTags::Ability_Action);
+
+		ASC->CancelAbilities(&ActionTags);
 		ASC->ClearComboCommands();
 	}
 	

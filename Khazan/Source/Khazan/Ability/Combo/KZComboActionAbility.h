@@ -1,0 +1,191 @@
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Ability/KZActionAbility.h"
+#include "Ability/Combo/KZComboTypes.h"
+#include "Animation/AnimNotifies/AnimNotify.h"
+#include "KZComboActionAbility.generated.h"
+
+class UAbilityTask_PlayMontageAndWait;
+class UAnimInstance;
+class UKZComboDefinitionData;
+
+struct FKZComboCommandEdge;
+struct FKZComboNode;
+
+// 현재 공격이 콤보 입력을 어떻게 받을지 나타낸다.
+enum class EKZComboWindowPhase : uint8
+{
+	// 콤보 입력을 받지 않는다.
+	Closed,
+
+	// 입력을 한 번 저장하고 ComboCommit을 기다린다.
+	OpenToCommit,
+
+	// 입력이 들어오면 바로 다음 공격으로 넘어간다.
+	CommitToEnd
+};
+
+UCLASS()
+class KHAZAN_API UKZComboActionAbility : public UKZActionAbility
+{
+	GENERATED_BODY()
+
+public:
+	UKZComboActionAbility();
+	
+	
+	const UKZComboDefinitionData* GetComboDefinition() const
+	{
+		return ComboDefinition;
+	}
+
+	FName GetEntryNodeId() const
+	{
+		return EntryNodeId;
+	}
+	
+protected:
+    // GAS gate에 더해, 이전 Action을 취소하기 전에 필수 entry 데이터를 검사한다.
+    virtual bool CanActivateAbility(
+        FGameplayAbilitySpecHandle Handle,
+        const FGameplayAbilityActorInfo* ActorInfo,
+        const FGameplayTagContainer* SourceTags = nullptr,
+        const FGameplayTagContainer* TargetTags = nullptr,
+        FGameplayTagContainer* OptionalRelevantTags = nullptr) const override;
+
+	// 시작 노드를 확인하고 첫 몽타주를 재생한다.
+	virtual void ActivateAbility(
+		FGameplayAbilitySpecHandle Handle,
+		const FGameplayAbilityActorInfo* ActorInfo,
+		FGameplayAbilityActivationInfo ActivationInfo,
+		const FGameplayEventData* TriggerEventData) override;
+
+	// 입력과 몽타주 연결을 끊고 이번 상태를 정리한다.
+	virtual void EndAbility(
+		FGameplayAbilitySpecHandle Handle,
+		const FGameplayAbilityActorInfo* ActorInfo,
+		FGameplayAbilityActivationInfo ActivationInfo,
+		bool bReplicateEndAbility,
+		bool bWasCancelled) override;
+
+	// 검증된 현재 Combo Montage에서 발생한 Notify를 처리한다.
+	virtual void ProcessMontageNotify(FName NotifyName);
+	
+	// 같은 몽타주의 다른 공격 섹션으로 이동한다.
+	bool TransitionToNode(FName TargetNodeId);
+
+	// 현재 Ability가 실행 중일 때만 안전하게 끝낸다.
+	void FinishAbility(bool bWasCancelled);
+	
+private:
+	// 몽타주가 자연스럽게 끝났을 때 Ability를 끝낸다.
+	UFUNCTION()
+	void HandleMontageCompleted();
+
+	// 몽타주가 취소되거나 끊겼을 때 Ability를 취소 상태로 끝낸다.
+	UFUNCTION()
+	void HandleMontageAborted();
+
+	// 현재 콤보 몽타주의 다섯 Notify를 공통 처리 함수로 넘긴다.
+	UFUNCTION()
+	void HandleMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& Payload);
+
+	// 이동 가능 구간에서 이동 입력이 오면 공격을 끝낸다.
+	UFUNCTION()
+	void HandleMoveInput(FGameplayEventData Payload);
+
+	// ASC가 보낸 공격 명령을 현재 콤보 상태에 맞게 처리한다.
+	void HandleComboCommand(const FKZComboCommand& Command);
+
+	// 시작 노드의 몽타주와 섹션을 재생한다.
+	bool StartEntryMontage();
+
+	// 노드의 몽타주와 섹션이 실제로 재생 가능한지 확인한다.
+	bool IsNodePlayable(const FKZComboNode& Node) const;
+
+	// 현재 재생 중인 콤보 몽타주에서 온 노티파이인지 확인한다.
+	bool IsNotifyFromCurrentMontage(const FBranchingPointNotifyPayload& Payload) const;
+
+	// 현재 노드에서 명령과 조건이 모두 맞는 전환을 찾는다.
+	const FKZComboCommandEdge* FindMatchingCommandEdge(const FKZComboCommand& Command) const;
+
+	// 저장해 둔 입력을 다시 검사하고 다음 노드로 전환한다.
+	bool CommitPendingCommand();
+
+	// ASC의 콤보 명령을 받기 시작한다.
+	void BindComboCommandDelegate();
+
+	// ASC의 콤보 명령을 더 이상 받지 않는다.
+	void UnbindComboCommandDelegate();
+
+	// 몽타주의 노티파이를 받기 시작한다.
+	void BindMontageNotifyDelegate(UAnimInstance* AnimInstance);
+
+	// 몽타주의 노티파이를 더 이상 받지 않는다.
+	void UnbindMontageNotifyDelegate();
+
+	// 저장해 둔 콤보 입력 한 건을 지운다.
+	void ClearPendingCommand();
+
+	// 이번 실행에서 사용한 콤보 상태를 초기값으로 되돌린다.
+	void ResetRuntimeState();
+
+	// 현재 노드에서 Command와 맞는 Edge 하나를 찾아 실행한다.
+	bool RunCommand(const FKZComboCommand& Command);
+	
+	// Target이 현재 Ability의 노드면 섹션을 바꾸고, 다른 Entry Ability면 그 Ability를 시작한다.
+	bool ApplyEdge(const FKZComboCommandEdge& Edge, const FKZComboCommand& Command);
+	
+	// 현재 노드가 HoldCommit 전인지 후인지 Edge 조건과 비교한다.
+	bool IsHoldType(const EKZComboHold Hold) const;
+	
+	// Edge를 검사하는 바로 그 순간의 이동 의도를 읽어 Move 조건과 비교한다.
+	bool IsMoveType(const EKZComboMove Move) const;
+	
+	bool MatchesEdge(const FKZComboCommandEdge& Edge, const FKZComboCommand& Command) const;
+
+	// CommandTag가 없는 InputEnd/HoldCommit/HoldEnd Notify를
+	// 현재 held command들의 Edge 검사로 바꾼다.
+	bool RunHeld(EKZComboCommandPhase Phase);
+private:
+	// 노드와 전환 규칙이 들어 있는 콤보 데이터다.
+	UPROPERTY(EditDefaultsOnly, Category = "KZ|Combo")
+	TObjectPtr<UKZComboDefinitionData> ComboDefinition = nullptr;
+
+	// Ability가 시작할 첫 노드 이름이다.
+	UPROPERTY(EditDefaultsOnly, Category = "KZ|Combo")
+	FName EntryNodeId = NAME_None;
+
+	// 기존 프로젝트 임시 튜닝값: Combo section 전환 관성화 시간(s). 원작 동일값은 미확인이다.
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "KZ|Combo|Animation",
+		meta = (AllowPrivateAccess = "true", ClampMin = "0.0", Units = "s"))
+	float ComboTransitionInertializationDuration = 0.08f;
+
+	// 기존 프로젝트 임시 튜닝값: 이동 복귀 관성화 시간(s). 원작 동일값은 미확인이다.
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "KZ|Combo|Animation",
+		meta = (AllowPrivateAccess = "true", ClampMin = "0.0", Units = "s"))
+	float LocomotionExitInertializationDuration = 0.24f;
+
+	// 현재 몽타주 재생을 관리하는 Ability Task다.
+	UPROPERTY(Transient)
+	TObjectPtr<UAbilityTask_PlayMontageAndWait> ActiveMontageTask = nullptr;
+
+	// 노티파이를 연결한 AnimInstance다.
+	TWeakObjectPtr<UAnimInstance> BoundAnimInstance;
+
+	// ASC 콤보 명령 연결을 해제할 때 사용하는 번호다.
+	FDelegateHandle ComboCommandDelegateHandle;
+
+	// ComboCommit까지 기다리는 입력 한 건이다.
+	FGameplayTag PendingCommandTag;
+
+	// 지금 재생 중인 공격 노드 이름이다.
+	FName CurrentNodeId = NAME_None;
+
+	// 현재 콤보 입력 구간이다.
+	EKZComboWindowPhase ComboWindowPhase = EKZComboWindowPhase::Closed;
+	
+	// 현재 노드가 최소 차지 성공 지점(HoldCommit)을 지났는지 나타낸다.
+	bool bHoldCommitted = false;
+};

@@ -53,6 +53,9 @@ private:
 	void Input_StrongAttackCompleted(const FInputActionValue&);
 	void Input_StrongAttackCanceled(const FInputActionValue&);
 
+	void Input_DodgeStarted(const FInputActionValue&);
+	void Input_DodgeCompleted(const FInputActionValue&);
+	void Input_DodgeCanceled(const FInputActionValue&);
 protected:
 
 };

@@ -1,0 +1,458 @@
+#include "Ability/KZAbilitySystemComponent.h"
+
+#include "GameplayAbilitySpec.h"
+#include "Abilities/GameplayAbility.h"
+#include "Ability/Combo/KZComboActionAbility.h"
+#include "Ability/KZActionAbility.h"
+#include "Ability/Combo/KZComboDefinitionData.h"
+#include "Ability/PlayerAbility/KZDodgeAbility.h"
+#include "KZGameplayTags.h"
+#include "LogChannels.h"
+
+
+bool UKZAbilitySystemComponent::HasComboEntry(const UKZComboDefinitionData* Definition, FName EntryNodeId,
+                                              FGameplayAbilitySpecHandle IgnoreHandle)
+{
+	if (!IsValid(Definition) || EntryNodeId.IsNone())
+	{
+		return false;
+	}
+
+	FScopedAbilityListLock AbilityListLock(*this);
+
+	for (const FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
+	{
+		if (!AbilitySpec.Ability || AbilitySpec.Handle == IgnoreHandle)
+		{
+			continue;
+		}
+
+		const UKZComboActionAbility* ComboActionAbility = Cast<UKZComboActionAbility>(AbilitySpec.Ability);
+
+		if (IsValid(ComboActionAbility) &&
+			ComboActionAbility->GetComboDefinition() == Definition &&
+			ComboActionAbility->GetEntryNodeId() == EntryNodeId)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool UKZAbilitySystemComponent::TryActivateComboEntry(
+    const UKZComboDefinitionData* Definition,
+    FName EntryNodeId,
+    FGameplayAbilitySpecHandle IgnoreHandle,
+    const FGameplayTag& CommandTag)
+{
+    if (!IsValid(Definition) || EntryNodeId.IsNone())
+    {
+        return false;
+    }
+
+    FScopedAbilityListLock AbilityListLock(*this);
+    FGameplayAbilitySpec* TargetSpec = nullptr;
+
+    for (FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
+    {
+        if (!AbilitySpec.Ability || AbilitySpec.Handle == IgnoreHandle)
+        {
+            continue;
+        }
+
+        const UKZComboActionAbility* ComboAbility =
+            Cast<UKZComboActionAbility>(AbilitySpec.Ability);
+        if (!IsValid(ComboAbility) ||
+            ComboAbility->GetComboDefinition() != Definition ||
+            ComboAbility->GetEntryNodeId() != EntryNodeId)
+        {
+            continue;
+        }
+
+        if (TargetSpec != nullptr)
+        {
+            UE_LOG(LogAbility, Error,
+                TEXT("Duplicate granted Combo Entry: %s"), *EntryNodeId.ToString());
+            return false;
+        }
+        TargetSpec = &AbilitySpec;
+    }
+
+    if (TargetSpec == nullptr || TargetSpec->IsActive())
+    {
+        return false;
+    }
+
+    // 실제 소비자가 있는 X/Y만 물리 입력 binding으로 대응시킨다.
+    FGameplayTag InputTag;
+    if (CommandTag == KZGameplayTags::Command_Player_Attack_X)
+    {
+        InputTag = KZGameplayTags::Input_Action_X;
+    }
+    else if (CommandTag == KZGameplayTags::Command_Player_Attack_Y)
+    {
+        InputTag = KZGameplayTags::Input_Action_Y;
+    }
+
+    const bool bTargetOwnsInput =
+        InputTag.IsValid() &&
+        IsComboCommandHeld(CommandTag) &&
+        TargetSpec->GetDynamicSpecSourceTags().HasTagExact(InputTag);
+
+    const FGameplayAbilitySpecHandle TargetHandle = TargetSpec->Handle;
+    const bool bPreviousTargetInputPressed = TargetSpec->InputPressed;
+    FGameplayAbilitySpec* SourceSpec = FindAbilitySpecFromHandle(IgnoreHandle);
+    const bool bTransferSourceInput =
+        bTargetOwnsInput &&
+        SourceSpec != nullptr &&
+        SourceSpec->InputPressed &&
+        SourceSpec->GetDynamicSpecSourceTags().HasTagExact(InputTag);
+
+    // 같은 버튼 handoff의 이전 owner를 남기면 Released가 이전 Spec에서 반환한다.
+    if (bTransferSourceInput)
+    {
+        SourceSpec->InputPressed = false;
+    }
+    TargetSpec->InputPressed = bTargetOwnsInput;
+
+    if (TryActivateAbility(TargetHandle))
+    {
+        // GAS activation 승인이다. 이후 Commit/Task 성공의 transaction 보장은 아니다.
+        return true;
+    }
+
+    // callback 뒤에는 이전 포인터를 계속 사용하지 않고 Handle로 다시 찾는다.
+    if (FGameplayAbilitySpec* FailedTarget = FindAbilitySpecFromHandle(TargetHandle))
+    {
+        FailedTarget->InputPressed = bPreviousTargetInputPressed;
+    }
+    if (bTransferSourceInput)
+    {
+        if (FGameplayAbilitySpec* PreviousSource = FindAbilitySpecFromHandle(IgnoreHandle))
+        {
+            PreviousSource->InputPressed = true;
+        }
+    }
+    return false;
+}
+
+bool UKZAbilitySystemComponent::TryActivateDirectionalDodge(EKZDodgeDirection Direction)
+{
+    if (static_cast<uint8>(Direction) > static_cast<uint8>(EKZDodgeDirection::LF))
+    {
+        return false;
+    }
+
+    FScopedAbilityListLock AbilityListLock(*this);
+    FGameplayAbilitySpec* TargetSpec = nullptr;
+    for (FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
+    {
+        const UKZDodgeAbility* DodgeDefaults = Cast<UKZDodgeAbility>(AbilitySpec.Ability);
+        if (!IsValid(DodgeDefaults) || DodgeDefaults->GetDodgeDirection() != Direction)
+        {
+            continue;
+        }
+
+        if (TargetSpec != nullptr)
+        {
+            UE_LOG(LogAbility, Error,
+                TEXT("Duplicate granted Dodge direction: %d"), static_cast<int32>(Direction));
+            return false;
+        }
+        TargetSpec = &AbilitySpec;
+    }
+
+    if (TargetSpec == nullptr)
+    {
+        UE_LOG(LogAbility, Warning,
+            TEXT("No granted Dodge for direction: %d"), static_cast<int32>(Direction));
+        return false;
+    }
+
+    const FGameplayAbilitySpecHandle TargetHandle = TargetSpec->Handle;
+    if (TargetSpec->IsActive())
+    {
+        UGameplayAbility* PrimaryInstance = TargetSpec->GetPrimaryInstance();
+        const UKZActionAbility* ActionInstance = Cast<UKZActionAbility>(PrimaryInstance);
+        if (!IsValid(ActionInstance) || !ActionInstance->HasInputEnded())
+        {
+            return false;
+        }
+
+        // 비용/태그/entry를 먼저 검사한다. public base API로 실제 override를 호출한다.
+        if (!AbilityActorInfo.IsValid() ||
+            !PrimaryInstance->CanActivateAbility(TargetHandle, AbilityActorInfo.Get()))
+        {
+            return false;
+        }
+
+        CancelAbilityHandle(TargetHandle);
+        TargetSpec = FindAbilitySpecFromHandle(TargetHandle);
+        if (TargetSpec == nullptr || TargetSpec->IsActive())
+        {
+            return false;
+        }
+    }
+
+    // Dodge는 A press/release owner가 아니라 방향 요청으로 시작하는 graph-only Spec이다.
+    const bool bPreviousInputPressed = TargetSpec->InputPressed;
+    TargetSpec->InputPressed = false;
+    if (TryActivateAbility(TargetHandle))
+    {
+        return true;
+    }
+
+    if (FGameplayAbilitySpec* FailedSpec = FindAbilitySpecFromHandle(TargetHandle))
+    {
+        FailedSpec->InputPressed = bPreviousInputPressed;
+    }
+    return false;
+}
+
+void UKZAbilitySystemComponent::AbilityInputTagPressed(
+    const FGameplayTag& InputTag, bool bAllowNewActivation)
+{
+    if (!InputTag.IsValid())
+    {
+        return;
+    }
+
+    FScopedAbilityListLock AbilityListLock(*this);
+    for (FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
+    {
+        if (!AbilitySpec.Ability || !AbilitySpec.IsActive() ||
+            !AbilitySpec.GetDynamicSpecSourceTags().HasTagExact(InputTag))
+        {
+            continue;
+        }
+
+        UGameplayAbility* PrimaryInstance = AbilitySpec.GetPrimaryInstance();
+        if (!IsValid(PrimaryInstance))
+        {
+            UE_LOG(LogAbility, Error,
+                TEXT("Input Ability must use InstancedPerActor: %s"),
+                *GetNameSafe(AbilitySpec.Ability));
+            return;
+        }
+
+        const UKZActionAbility* ActionInstance = Cast<UKZActionAbility>(PrimaryInstance);
+        if (bAllowNewActivation && IsValid(ActionInstance) && ActionInstance->HasInputEnded())
+        {
+            const FGameplayAbilitySpecHandle RestartHandle = AbilitySpec.Handle;
+            if (!AbilityActorInfo.IsValid() ||
+                !PrimaryInstance->CanActivateAbility(RestartHandle, AbilityActorInfo.Get()))
+            {
+                return;
+            }
+
+            CancelAbilityHandle(RestartHandle);
+            FGameplayAbilitySpec* RestartSpec = FindAbilitySpecFromHandle(RestartHandle);
+            if (RestartSpec == nullptr || RestartSpec->IsActive())
+            {
+                return;
+            }
+
+            RestartSpec->InputPressed = true;
+            if (!TryActivateAbility(RestartHandle))
+            {
+                if (FGameplayAbilitySpec* FailedSpec = FindAbilitySpecFromHandle(RestartHandle))
+                {
+                    FailedSpec->InputPressed = false;
+                }
+            }
+            return;
+        }
+
+        // 콤보가 소비했어도 활성 Spec의 GAS press protocol은 유지한다.
+        const FGameplayAbilitySpecHandle ActiveHandle = AbilitySpec.Handle;
+        AbilitySpec.InputPressed = true;
+        AbilitySpecInputPressed(AbilitySpec);
+
+        FGameplayAbilitySpec* ActiveSpec = FindAbilitySpecFromHandle(ActiveHandle);
+        if (ActiveSpec != nullptr && ActiveSpec->IsActive())
+        {
+            InvokeReplicatedEvent(
+                EAbilityGenericReplicatedEvent::InputPressed,
+                ActiveHandle,
+                PrimaryInstance->GetCurrentActivationInfo().GetActivationPredictionKey());
+        }
+        return;
+    }
+
+    if (!bAllowNewActivation)
+    {
+        return;
+    }
+
+    for (FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
+    {
+        if (!AbilitySpec.Ability || AbilitySpec.IsActive() ||
+            !AbilitySpec.GetDynamicSpecSourceTags().HasTagExact(InputTag))
+        {
+            continue;
+        }
+
+        const FGameplayAbilitySpecHandle CandidateHandle = AbilitySpec.Handle;
+        AbilitySpec.InputPressed = true;
+        if (TryActivateAbility(CandidateHandle))
+        {
+            return;
+        }
+        if (FGameplayAbilitySpec* FailedSpec = FindAbilitySpecFromHandle(CandidateHandle))
+        {
+            FailedSpec->InputPressed = false;
+        }
+    }
+}
+
+void UKZAbilitySystemComponent::AbilityInputTagReleased(const FGameplayTag& InputTag)
+{
+	// 버튼에서 손을 뗀 상태를 같은 Input Tag의 Spec에 전달한다.
+	if (!InputTag.IsValid())
+	{
+		return;
+	}
+	{
+		FScopedAbilityListLock AbilityListLock(*this);
+
+		for (FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
+		{
+			// 실행 여부와 상관없이 눌림 상태부터 해제한다.
+			if (!AbilitySpec.Ability || !AbilitySpec.InputPressed ||
+				!AbilitySpec.GetDynamicSpecSourceTags().HasTagExact(InputTag))
+			{
+				continue;
+			}
+
+			AbilitySpec.InputPressed = false;
+
+			// press 후 Ability가 먼저 끝났더라도
+			// 다른 동일 InputTag Spec에 Release를 넘기면 안 된다.
+			if (!AbilitySpec.IsActive())
+			{
+				return;
+			}
+
+			AbilitySpecInputReleased(AbilitySpec);
+
+			// InputReleased override에서 Ability가 끝날 수 있다.
+			if (!AbilitySpec.IsActive())
+			{
+				return;
+			}
+
+			UGameplayAbility* PrimaryInstance = AbilitySpec.GetPrimaryInstance();
+
+			if (!ensureMsgf(IsValid(PrimaryInstance),
+			                TEXT("Input-routed Ability must use InstancedPerActor. Ability=%s"),
+			                *GetNameSafe(AbilitySpec.Ability)))
+			{
+				continue;
+			}
+
+			// WaitInputRelease 같은 GAS 입력 Task에도 알려준다.
+			InvokeReplicatedEvent(EAbilityGenericReplicatedEvent::InputReleased, AbilitySpec.Handle,
+			                      PrimaryInstance->GetCurrentActivationInfo().GetActivationPredictionKey());
+
+			// 선택된 Spec 하나만 처리한다.
+			return;
+		}
+	}
+}
+
+void UKZAbilitySystemComponent::AbilityInputTagCanceled(const FGameplayTag& InputTag)
+{
+	// Canceled는 정상 Release가 아니므로 눌림 상태만 지운다.
+	if (!InputTag.IsValid())
+	{
+		return;
+	}
+
+	FScopedAbilityListLock AbilityListLock(*this);
+
+	for (FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
+	{
+		// 반드시 AbilitySpec.InputPressed가 true인 실제 입력 소유자만 선택해야 한다.
+		if (!AbilitySpec.Ability ||
+			!AbilitySpec.InputPressed ||
+			!AbilitySpec.GetDynamicSpecSourceTags().HasTagExact(InputTag))
+		{
+			continue;
+		}
+
+		AbilitySpec.InputPressed = false;
+
+		if (AbilitySpec.IsActive())
+		{
+			// WaitInputRelease는 깨우지 않고  선택된 실행 자체를 canceled 종료한다.
+			CancelAbilityHandle(AbilitySpec.Handle);
+		}
+		return;
+	}
+
+	return;
+}
+
+bool UKZAbilitySystemComponent::SubmitComboCommand(
+    const FGameplayTag& CommandTag, EKZComboCommandPhase Phase)
+{
+    if (!CommandTag.IsValid())
+    {
+        return false;
+    }
+
+    switch (Phase)
+    {
+    case EKZComboCommandPhase::Begin:
+        if (HeldComboCommands.HasTagExact(CommandTag))
+        {
+            return false;
+        }
+        HeldComboCommands.AddTag(CommandTag);
+        break;
+
+    case EKZComboCommandPhase::Release:
+        if (!HeldComboCommands.HasTagExact(CommandTag))
+        {
+            return false;
+        }
+        HeldComboCommands.RemoveTag(CommandTag);
+        break;
+
+    case EKZComboCommandPhase::Cancel:
+        HeldComboCommands.RemoveTag(CommandTag);
+        break;
+
+    default:
+        // InputEnd/HoldCommit/HoldEnd는 Montage에서 Ability로 직접 전달한다.
+        return false;
+    }
+
+    const FKZComboCommand Command(CommandTag, Phase);
+    bool bConsumed = false;
+    ComboCommandEvent.Broadcast(Command, bConsumed);
+
+    // 이 지역 bool 참조는 동기 Broadcast 동안만 유효하다.
+    return Phase == EKZComboCommandPhase::Begin && bConsumed;
+}
+
+void UKZAbilitySystemComponent::ClearComboCommands()
+{
+	const FGameplayTagContainer CommandsToCancel = HeldComboCommands;
+
+	for (const FGameplayTag& CommandTag : CommandsToCancel)
+	{
+		SubmitComboCommand(CommandTag, EKZComboCommandPhase::Cancel);
+	}
+
+	HeldComboCommands.Reset();
+
+	// UnPossess 이후 이전 Pawn 입력 소유권이 Spec에 남지 않게 한다.
+	FScopedAbilityListLock AbilityListLock(*this);
+
+	for (FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
+	{
+		AbilitySpec.InputPressed = false;
+	}
+}

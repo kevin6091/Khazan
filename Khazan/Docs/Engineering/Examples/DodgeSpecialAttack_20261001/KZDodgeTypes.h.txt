@@ -1,0 +1,18 @@
+#pragma once
+
+#include "CoreMinimal.h"
+#include "KZDodgeTypes.generated.h"
+
+// 캐릭터 정면에서 오른쪽으로 도는 순서다. 8방 섹터 계산의 index와 일치해야 한다.
+UENUM(BlueprintType)
+enum class EKZDodgeDirection : uint8
+{
+    F  = 0 UMETA(DisplayName = "Forward"),
+    RF = 1 UMETA(DisplayName = "Right Forward"),
+    R  = 2 UMETA(DisplayName = "Right"),
+    RB = 3 UMETA(DisplayName = "Right Back"),
+    B  = 4 UMETA(DisplayName = "Back"),
+    LB = 5 UMETA(DisplayName = "Left Back"),
+    L  = 6 UMETA(DisplayName = "Left"),
+    LF = 7 UMETA(DisplayName = "Left Forward")
+};

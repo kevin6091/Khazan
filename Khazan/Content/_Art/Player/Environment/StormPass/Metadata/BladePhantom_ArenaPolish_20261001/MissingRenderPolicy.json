@@ -1,0 +1,27 @@
+{
+  "temporary_native_adapter": {
+    "unspecified_light_intensity_candelas": 30.0,
+    "explicit_source_light_to_candelas": 10.0,
+    "light_status": "Temporary native adapter: source custom C++ intensity units/defaults are unconfirmed. Serialized nonzero intensity uses x10 candela; unspecified active lights use 30 cd and native white. Chosen by render review after the earlier x750 adapter saturated the arena; x1 was too dim to read the hall. Serialized zero-intensity placeholders remain off.",
+    "niagara_fire_full_size_cm": [
+      120.0,
+      160.0
+    ],
+    "fire_opacity_scale": 0.5,
+    "fire_emissive_gain": 1.0,
+    "atlas_a_columns": 8,
+    "atlas_a_rows": 8,
+    "fire_status": "Niagara sprite sizes and Atlas-A hardcoded grid are unconfirmed; size/grid are temporary display settings. Use original actor scale, exact texture, source FM_FireSubUV_A Speed=35, and source B_01 SubUVTexRC=(8,4), Speed=30. Cascade fire uses its serialized core StartSize and Fire_core_size.",
+    "flag_wave_amplitude_cm": 9.0,
+    "flag_wave_cycles_per_second": 0.25,
+    "flag_status": "Small native cloth wave, temporary. Source FlagWave_Big records Height_Light=60 and Speed_Light=.25 but source shader units/formula are not reconstructed. Native 9 cm avoids large reference-pose deformation; no Chaos/PhysX cloth port.",
+    "unspecified_light_radius_cm": 1000.0,
+    "added_light_cast_shadows": false,
+    "light_radius_shadow_boundary": "Unknown native radius uses temporary 1000 cm. Added fill lights do not cast shadows to avoid redundant local shadow atlases; this is a native presentation choice, not a verified source shadow setting.",
+    "cascade_atlas_frames_per_second": 30.0,
+    "cascade_animation_boundary": "Native continuous flipbook uses temporary 30 frames/s; source looping_speed is not proven to be frames/s. Source core material atlas grids, separate emissive/opacity textures and serialized StartSize are preserved. Source emitter spawn/lifetime/distortion are not ported.",
+    "billboard_scale_boundary": "UE 5.8 MaterialBillboardComponent.cpp builds camera-facing world-size vertices with transform scale cancelled by ViewToLocal. Bake source scale into element size: FireWall width uses authored local Y (length), height Z; ordinary fire uses X/Z. This axis mapping is a native approximation of the source emitter, not recovered Niagara code.",
+    "niagara_atlas_speed_boundary": "Native atlas graph interprets source FM_FireSubUV_A Speed=35 and FMI_FireSubUV_B_01 Speed=30 as frames/s; the proprietary source shader speed unit/formula is unverified. These are source values used through a native timing approximation."
+  },
+  "boundary": "No gameplay phase logic, damage, blocking, camera attachment or Character edits. Fire proxies have no collision. Water spline Niagara interfaces are recorded separately; existing native water surfaces are retained."
+}

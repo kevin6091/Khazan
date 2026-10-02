@@ -1,0 +1,470 @@
+{
+  "date": "2026-10-01",
+  "purpose": "Clarify overlapping phase coordinates versus distinct battle environments and review-marker semantics. Read-only world inspection; no map/source/asset edits.",
+  "source_directory": "C:\\Users\\user\\Desktop\\카잔\\Exports\\BBQ\\Content\\_Kazan_\\Level\\StormPass",
+  "source_sha256": {
+    "StormPass_All.json": "6ee219dee2b1b586666b161f9314a718159f9e17d81d3bffdcff0a5e1041b586",
+    "StormPass_Boss_Phase_1.json": "583eca937394d6470aeba109e582fff07a62cb579fc70231e61c200237dab470",
+    "StormPass_Boss_Phase_2.json": "598cc505f0c48944febb7e740d59a87618b27b1729f1675a438db93553c945ea",
+    "StormPass_Cinema_Phase.json": "9ded315ea84986811862470a1f6141db4e2d6bd604aa1711bcffb9888f009557",
+    "StormPass_Spawn_Main01.json": "839f5d37dba6047a5e9c3b70a78ea8683de321d511fef9d444e326fb28efd2f2"
+  },
+  "streaming_entries": [
+    {
+      "source_json": "StormPass_All.json",
+      "export_index": 105,
+      "type": "LevelStreamingDynamic",
+      "name": "LevelStreamingDynamic_3",
+      "serialized_properties": {
+        "bInitiallyLoaded": true,
+        "WorldAsset": {
+          "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Boss_Phase_2.StormPass_Boss_Phase_2",
+          "SubPathString": ""
+        },
+        "bShouldBeLoaded": true,
+        "LevelColor": {
+          "R": 0.40625,
+          "G": 0.0,
+          "B": 1.0,
+          "A": 1.0,
+          "Hex": "AB00FF"
+        }
+      },
+      "level_transform_serialized": false
+    },
+    {
+      "source_json": "StormPass_All.json",
+      "export_index": 116,
+      "type": "LevelStreamingDynamic",
+      "name": "LevelStreamingDynamic_4",
+      "serialized_properties": {
+        "bInitiallyLoaded": true,
+        "WorldAsset": {
+          "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Boss_Phase_1.StormPass_Boss_Phase_1",
+          "SubPathString": ""
+        },
+        "bShouldBeLoaded": true,
+        "LevelColor": {
+          "R": 0.0,
+          "G": 1.0,
+          "B": 0.60156274,
+          "A": 1.0,
+          "Hex": "00FFCC"
+        }
+      },
+      "level_transform_serialized": false
+    }
+  ],
+  "arena_water_root_placements": [
+    {
+      "source_json": "StormPass_Boss_Phase_1.json",
+      "actor_export_index": 2379,
+      "actor_name": "xxWaterBodyCustomActor_1",
+      "root_export_index": 80,
+      "transform_fields": {
+        "RelativeLocation": {
+          "X": 161151.0,
+          "Y": 51448.0,
+          "Z": 118.0
+        },
+        "RelativeScale3D": {
+          "X": 15.0,
+          "Y": 10.0,
+          "Z": 1.0
+        }
+      },
+      "unit": "cm; scale dimensionless",
+      "interpretation": "Root placement comparison only. Water-body origins are not player spawn points."
+    },
+    {
+      "source_json": "StormPass_Boss_Phase_2.json",
+      "actor_export_index": 2538,
+      "actor_name": "xxWaterBodyCustomActor1",
+      "root_export_index": 233,
+      "transform_fields": {
+        "RelativeLocation": {
+          "X": 163006.2,
+          "Y": 51876.9,
+          "Z": 118.0
+        },
+        "RelativeScale3D": {
+          "X": 9.0,
+          "Y": 8.25,
+          "Z": 1.0
+        }
+      },
+      "unit": "cm; scale dimensionless",
+      "interpretation": "Root placement comparison only. Water-body origins are not player spawn points."
+    }
+  ],
+  "marker_semantics": {
+    "arena_reference": "Both phase reference markers duplicate one original TargetPoint_Boss, not two independently confirmed phase starts.",
+    "reference_location_cm": [
+      162650,
+      51600,
+      695
+    ],
+    "review_camera_location_cm": [
+      162240,
+      51600,
+      596.66724
+    ],
+    "review_camera_rotation_pitch_yaw_roll_degrees": [
+      0,
+      -10,
+      0
+    ],
+    "review_camera_source": "Mission02_Start_BossZone plus previously disclosed temporary review height.",
+    "camera_select_changes_variant": false,
+    "live_marker_positions_checked": true
+  },
+  "source_sequences": [
+    {
+      "metadata_path": "Saved\\Extracted\\StormPass\\BladePhantomPhaseTransition_20261001\\BBQ\\Content\\_Kazan_\\Art\\Cinematic\\M_Sequencer\\StormPass\\BP01\\MC_StormPass_BP01_Master.json",
+      "sha256": "f3d1c2311b1860e5a0c11a4d01784abeecb279b2a3d6c9b8f36b9a034e5d9d1c",
+      "sequence_export_index": 178,
+      "binding_references": {
+        "BindingIdToReferences": [
+          {
+            "Key": "A75120F3-4B931684-A71EA181-8ECE8FDD",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Phase.StormPass_Cinema_Phase",
+                    "SubPathString": "PersistentLevel.C_M_BladePhantom2_2"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "FFD533F1-477BA22F-8A77DE90-F0B4D2BD",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Phase.StormPass_Cinema_Phase",
+                    "SubPathString": "PersistentLevel.C_M_BladePhantom_2"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "CD4C82E4-4B940F25-4CBDAF88-310B2AFD",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Phase.StormPass_Cinema_Phase",
+                    "SubPathString": "PersistentLevel.C_P_Kazan_5"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "function_bytecode_serialized": false
+    },
+    {
+      "metadata_path": "Saved\\Extracted\\StormPass\\BladePhantomPhaseTransition_20261001\\BBQ\\Content\\_Kazan_\\Art\\Cinematic\\M_Sequencer\\StormPass\\BS\\MC_StormPass_BS_Master.json",
+      "sha256": "46f847736bf9c71f1b6b6b3cc1599900674b3170094b2ba42a3e03e6e3951fe0",
+      "sequence_export_index": 478,
+      "binding_references": {
+        "BindingIdToReferences": [
+          {
+            "Key": "80E6E902-4B9479F0-E219B191-25827896",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.C_M_BladePhantom2_2"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "BA04464B-4DEED83C-F467FAA1-0C7E4032",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.C_M_BladePhantom3_5"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "07B4B69E-490D8733-888F9692-8EFD9C71",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.C_M_BladePhantom4_2"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "C4B48ABA-45453ACF-FF65E480-A6C989F1",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.C_M_BladePhantom5_7"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "353B70D5-41EBA4BC-FAA0E08C-7A84E3F2",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.C_M_BladePhantom6_12"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "0A04B95F-4155D24B-73C0AFB5-FC65D1FF",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.C_M_BladePhantom7_17"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "B024B2FA-42971EA1-400C76BF-A981B4B1",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.C_M_BladePhantom8_22"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "BDF82746-4FCA9DB8-88F48889-EA47E161",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.C_M_BladePhantom9_25"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "48A5A470-479FE75E-51F87287-4AF49C1E",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.C_M_BladePhantom10_2"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "21FBBC4B-42535F9C-D677C298-6133D8FD",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.C_M_BladePhantom_5"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "70B640B9-4A7887F3-BDFB38B5-320B5C45",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.xxWaterBodyCustomActor_3"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "F6276C0D-49325DBC-1F3E4792-D47626ED",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.xxWaterBodyCustomActor_1"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "74169EDA-467EB329-81712387-063B289C",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Light.StormPass_Light",
+                    "SubPathString": "PersistentLevel.WEP_StormPass_StormOutside_2"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "0BD83583-41B0D7D5-882C7192-DB3057FC",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.CEP_StormPass_Blizzard_2"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "6B7BD944-4C3F163B-A79115B2-F12C28C0",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.C_P_Kazan2_2"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "9FD9205C-44FD9158-82B6228F-CA9D372A",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "/Game/_Kazan_/Level/StormPass/StormPass_Cinema_Boss_Start.StormPass_Cinema_Boss_Start",
+                    "SubPathString": "PersistentLevel.C_P_Kazan_2"
+                  },
+                  "ObjectPath": ""
+                }
+              ]
+            }
+          },
+          {
+            "Key": "33571B27-4E63A843-1ADFB5A0-B1C5D235",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "None",
+                    "SubPathString": ""
+                  },
+                  "ObjectPath": "NiagaraComponent0"
+                }
+              ]
+            }
+          },
+          {
+            "Key": "C4B66AF6-4484864C-C40869A2-C464E639",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "None",
+                    "SubPathString": ""
+                  },
+                  "ObjectPath": "NiagaraComponent0"
+                }
+              ]
+            }
+          },
+          {
+            "Key": "F4BBF6D1-4CBE58CE-F9968B8C-51E63311",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "None",
+                    "SubPathString": ""
+                  },
+                  "ObjectPath": "NiagaraComponent0"
+                }
+              ]
+            }
+          },
+          {
+            "Key": "3D18BE29-4D9B6483-9731B0AB-18EF1923",
+            "Value": {
+              "References": [
+                {
+                  "ExternalObjectPath": {
+                    "AssetPathName": "None",
+                    "SubPathString": ""
+                  },
+                  "ObjectPath": "NiagaraComponent0"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "function_bytecode_serialized": false
+    }
+  ],
+  "conclusion": {
+    "original_serialized_placement": "Distinct Phase1 castle-hall and Phase2 forest/landscape levels overlap the boss coordinate neighborhood. No nonidentity LevelTransform is serialized on the two original streaming entries.",
+    "runtime_limit": "Missing serialized LevelTransform is not proof against all possible runtime offsets. Exact phase-switch call order, player relocation and native game code were not validated. This metadata extraction omits Blueprint function bytecode.",
+    "project_behavior": "Editor view mode selects one environment with its lights. Review cameras share one comparison pose and do not select the environment. Gameplay automatic phase transition remains unimplemented."
+  }
+}

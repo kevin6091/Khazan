@@ -29,8 +29,7 @@ public:
 	DECLARE_EVENT_OneParam(UKZAbilitySystemComponent, FOnComboCommand, const FKZComboCommand&);
 
 	// 버튼을 누른 입력을 해당 Input Tag의 Ability Spec에 전달한다.
-	void AbilityInputTagPressed(const FGameplayTag& InputTag);
-
+	void AbilityInputTagPressed(const FGameplayTag& InputTag, FGameplayAbilitySpecHandle RequestedHandle = FGameplayAbilitySpecHandle());
 	// 버튼을 뗀 입력을 해당 Input Tag의 Ability Spec에 전달한다.
 	void AbilityInputTagReleased(const FGameplayTag& InputTag);
 

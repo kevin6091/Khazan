@@ -262,3 +262,32 @@
 
 - 원본 `C_P_Kazan.psk` 정점 경계, 원본 ThornTree USDA cm 단위와 복원 HeinMach 메시의 동일 경계, 현행 `SK_Player` 삽입 최상위 본의 `100`배를 대조한 결과는 [ART_PROJECT_STATE.md](ART_PROJECT_STATE.md)의 같은 날짜 절과 `Saved/ImportReports/HeinMach_PlayerScaleAudit_20260930.json`에 있다.
 - 현행 topology의 계산된 Player Mesh Component 상대 스케일은 `0.01`이다. 원작 actor scale `1`의 직접 복사가 아니며, 현재 `0.009`에서 사용자 적용 전이므로 실제 게임플레이 크기와 Root Motion은 미검증이다.
+
+## 2026-10-01 StormPass Blade Phantom arena 정본
+
+- [STORMPASS_BLADE_PHANTOM_POLISH_2026-10-01.md](STORMPASS_BLADE_PHANTOM_POLISH_2026-10-01.md): 두 source phase의 장소/동일 좌표 변형, spawn dependency와 컷씬 참조, 실제 수정·수치 출처·native 근사 범위·재로드 검증·검수 전환 절차의 정본이다.
+- 저장 자료는 `Content/_Art/Player/Environment/StormPass/Metadata/BladePhantom_ArenaPolish_20261001`이다. `OriginalAnchors`, `SurfaceAssignments`, `SkyPresets`, `MissingRenderPlan/Applied`, `CascadeCoreSources`, `FogBridge`, `*Reloaded`, `ReloadVerification`을 먼저 사용한다. 기존 source material plan의 `_Art/Kazan` 문자열은 현행 `_Art/Player`로 정규화해 조회한다.
+- Source slot의 순서를 UE ordinal slot으로 단정하지 않는다. 두 water actor의 `WorldGridMaterial`은 원작 런타임 WaterBody 재질 바인딩 placeholder다. 기존 native tree의 옛 selector 값보다 실제 그래프의 roughness=G/AO=R/nonmetallic 계약을 확인한다.
+- 검수 전환은 `polish_blade_phantom_arenas.py:view`, 감사는 `finish_blade_phantom_arena_polish.py`를 사용한다. 기존 전체 재복원/PlayerStart route-anchor 재배치를 선행하지 않는다. 원작/계산/임시값은 정책 JSON과 결과 문서에서 구분한다.
+
+## 2026-10-01 StormPass Phase1/2 위치 해석 보완
+
+- [폴리싱 정본의 같은 날짜 추가 확인](STORMPASS_BLADE_PHANTOM_POLISH_2026-10-01.md)과 `Metadata/BladePhantom_ArenaPolish_20261001/PhaseCoordinateClarification.json`을 먼저 본다. 공통 참조 마커/비교 카메라 좌표의 일치와 전투 환경의 일치는 서로 다른 문제다. Phase1 성채와 Phase2 숲의 저장 배치는 같은 보스 좌표 영역을 공유한다.
+- 원본 `StormPass_All` streaming export `105/116`에는 `LevelTransform`이 직렬화되지 않았다. 물 actor root 위치와 source hash도 보완 report에 있다. 표적 추출한 BP01/BS master metadata는 `Saved/Extracted/StormPass/BladePhantomPhaseTransition_20261001`이며 Blueprint Function bytecode/원작 native runtime은 이 JSON만으로 확인할 수 없다. 정확한 runtime 전환·teleport를 검증한 자료로 사용하지 않는다.
+- 기존 ReviewCamera를 선택해도 변형은 전환되지 않는다. `view('boss_phase_1')` / `view('boss_phase_2')`는 editor 환경 선택이고 gameplay 자동 전환이 아니다.
+
+## 2026-10-01 StormPass Phase1 밝기·흰빛 보정 정본
+
+- [폴리싱 정본의 마지막 Phase1 밝기 재검토 절](STORMPASS_BLADE_PHANTOM_POLISH_2026-10-01.md) 및 `Metadata/BladePhantom_ArenaPolish_20261001/Phase1LightReviewSourceManifest.json`을 먼저 사용한다. 이전 3 EV/candela adapter보다 이번 정책이 우선한다. 새 수치는 원작 광도 단위 확정이 아닌 native 임시 튜닝이며 `PolishPolicy.json:temporary_native_adapter.phase1_light_review`에 모였다.
+- 원작 스크린샷 3장, source WEP·local light·child inherited field, 실제 core emitter 색과 source/native 저장 파일 SHA가 manifest에 있다. `CascadeCoreColorSources.json`은 Small export 87 / Medium 102의 실제 core StartColor를 근거로 한다. 별개 root light 색을 원작 불꽃 색의 직접 근거로 재사용하지 않는다.
+- `r.VolumetricFog=0`이면 asset에 기록된 원본 발광 안개가 보이지 않는다. UE 5.8 기본 품질 계약은 **Shadows High 이상**이며 Effects 품질과 혼동하지 않는다. `view('boss_phase_1')`는 현재 editor session의 fog CVar도 켠다. project INI 변경이나 runtime 품질 시스템 구현은 아니다.
+- texture compression 변경은 sRGB를 재설정할 수 있다. P1 color atlas는 Default compression 이후 sRGB를 설정·저장하고 실제 readback을 확인한다. 재귀 MaterialEditingLibrary 검사에는 null node/child 보호가 필요하다.
+- `Phase1LightReviewAfter`, `LightReview_ReloadVerification`, `LightReview_Phase2Regression` 및 `LightReview_*Reloaded`가 최종 감사 자료다. 원본 배치·PlayerStart 유지, Phase2 local light/PP 불변, 저장된 Phase1 조명 정책을 재사용한 전환 검사를 확인했다. gameplay 자동 페이즈 전환은 계속 미구현이다.
+
+## 2026-10-02 StormPass 인접 전장 authoring 정본
+
+- [STORMPASS_BLADE_PHANTOM_POLISH_2026-10-01.md](STORMPASS_BLADE_PHANTOM_POLISH_2026-10-01.md)의 2026-10-02 추가 절과 `Metadata/BladePhantom_SideBySide_20261002`를 우선 확인한다. 사용자 요청에 따라 현재 `/Game/Maps/L_StormPass_Environment`는 Phase1 유지/Phase2 +X 20,390 cm, 두 전장 동시 표시다. 옛 alias umap은 현행 맵 redirector다. 원본 동일 좌표 fact를 현재 배치 규칙으로 적용하지 않는다.
+- 재사용 데이터: `ActorsBefore`, `ForegroundBoundsBefore`, `Layout`, `LayoutAppliedAudit`, `SideBySide_*Reloaded`, `GroundSupportReloaded`, 최종 `ReloadVerificationWithCollision`, `SideBySideSourceManifest`. HISM local mesh bbox만으로 footprint를 판단하지 않고 3,218 instance world transforms를 반영한 저장 bounds를 사용한다. 먼 Background 산은 배치 간격 판단에서 제외하되 보존한다.
+- `polish_blade_phantom_arenas.py:side_layout/show_side_by_side/view`와 route `set_variant`가 같은 layout을 소비한다. `separate_arenas` 반복 호출은 offset을 누적하지 않는다. `ArenaMarkers`의 editor-only 마커 두 개로 접근한다. 원본 좌표 기준 전체 재복원/route-anchor 재배치/Save All은 실행하지 않는다.
+- 이동 후 fixed world-origin terrain shader는 geometry delta와 RootXY delta를 함께 적용해야 한다. 복제 parent만 변경하고 원본 parent는 유지한다. 양쪽 bounded PP/source local lights/분리 sun을 검사하되 shared sky/fog/GI 및 Pawn lighting channel 불변 범위를 숨기지 않는다.
+- 지원 바닥 두 개는 원작 collision 미검증을 보완하는 native authoring 근사다. top Z는 중심 마커 XY를 포함하는 floor tile bbox에서 선택하며 높은 진입/계단 타일과 평균하지 않는다. UE 5.8 Python `HitResult`는 직접 `.impact_point`가 아니라 `to_dict()`의 `blocking_hit/impact_point/impact_normal/hit_actor`를 사용한다. 재로드 지면 trace 8/8을 Character/AI PIE나 전체 길/NavMesh 검증으로 확대하지 않는다.

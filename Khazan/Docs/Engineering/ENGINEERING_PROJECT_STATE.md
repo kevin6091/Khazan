@@ -491,3 +491,97 @@
 - 현행 `UKZLockOnComponent::UpdateLockOnFacing()`의 `ToTarget.Z` 거리 범위 제한 `[-50, 250] cm`를 제거했다. 수평 거리가 짧아지면 같은 높이 차도 급한 음수 Pitch가 되던 원인을 각도 한계로 바꿨다. `Player actor + 250 cm` pivot, target anchor, yaw 보간, SpringArm attachment와 LockOn 수명은 유지했다.
 - Component defaults에 `MaxLookDownAngleDegrees=20°`를 추가했다. 원작 metadata 미확인 **임시 튜닝값**이며 양의 크기로 저장하고 실제 음수 Pitch 하한에 적용한다. 목표 Pitch와 `RInterpTo` 출력 모두 하한을 제한하므로 거리와 무관하게 내려다보기 각도가 제한된다. 양의 Pitch에는 LockOn 전용 제한을 두지 않았다. 수치 변경 이유·영향은 Architecture의 2026-09-30 ARCH-69 개정 절에 기록했다.
 - UE 5.8 `KhazanEditor Win64 Development`에서 UHT와 변경 Source compile은 통과했으나, 열린 Unreal Editor가 `UnrealEditor-Khazan.dll`을 점유해 link `LNK1104`로 실패했다. `Khazan Win64 Development`에서도 변경 Source compile은 통과했으나 기존 `KZLocomotionComponent.cpp:8`의 `InterchangeResult.h` 누락 `C1083`으로 전체 target build가 실패했다. 이 작업 범위에서 해당 파일은 수정하지 않았다. 새 Editor binary 적용과 PIE 카메라 동작은 아직 검증하지 않았다.
+
+## 2026-09-30 — 방향별 Dodge/DodgeAttack Combo 설계 감사
+
+- 현재 Source의 `UKZComboAttackAbility`와 단일 `FKZComboCommandEdge`는 node별 Command/phase, held, Move, owner-tag 조건과 다른 Entry Ability handoff를 이미 처리한다. Dodge/방향을 Edge 범용 조건으로 추가할 필요는 없다. 방향은 activation 때 선택된 Dodge EntryNodeId에 고정하고, 각 Dodge node의 공격 Edge가 해당 DodgeAttack Entry를 가리키는 설계를 ARCH-71에 기록했다.
+- 현재 `RouteAttackInput()`은 X/Y Begin에서 일반 Spec press를 Combo Command보다 먼저 제출한다. DodgeAttack과 일반 공격이 경쟁할 수 있으므로 입력 순서 회귀가 선행돼야 한다. `UKZComboAttackAbility`는 Attack AssetTag를 constructor에서 부여하므로 Dodge를 직접 파생시키지 않고 공통 Combo Action 실행 부분만 추출하는 방안을 채택했다.
+- 현재 InGame에는 Dodge M1 8방과 DodgeAttack F/B/L/R 시퀀스 파일이 있다. 대각선 DodgeAttack의 원작 연결, DodgeAttack unlock producer, 비용/Notify 지점은 확인되지 않았다. 첫 제품 구조는 8 Dodge Blueprint Ability와 4 cardinal DodgeAttack Blueprint Ability, 하나의 Dodge Combo Definition을 전제로 하며 대각선 연결은 임시 데이터로 표시한다.
+- 이번 작업은 현행 Source/Content와 저장 Engineering·Animation 기록의 표적 감사 및 설계 문서 추가만 했다. 게임 C++/BP/Montage/Input asset은 수정하지 않았고 새 build/PIE도 수행하지 않았다. 파일별 적용 순서는 Migration의 2026-09-30 D4 절에 기록했다.
+
+## 2026-10-01 — Dodge 현재 적용과 Weak/Strong 해금형 Combo 후속 절차
+
+- [현재 Source] UKZDodgeAbility는 UKZActionAbility 파생이며 Dodge AssetTag와 이동 입력/스태미나 회복 차단 태그만 설정한다. 사용자가 Input.Action.A, Command.Player.Dodge.A, Ability.Action.Dodge를 추가했다. KZComboAttackAbility에도 Block.StaminaRegen이 추가됐다. Combo 공통 base, Dodge direction/activation/몽타주와 Controller binding은 아직 없다.
+- [저장 asset] `/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_{F,RF,R,RB,B,LB,L,LF}` 8개와 UKZDodgeAbility 상속을 확인했다. 현재 표적 경로에 IA_Dodge/AM_DAS_Dodge, Dodge Cost/Unlock GE, DodgeAttack Ability는 확인되지 않았다. InGame Dodge/DodgeAttack sequence는 존재한다. BP 전체 EventGraph/미저장 에디터 상태는 검사하지 않았다.
+- [마지막 저장 검증] 2026-10-01 10:29 UBT Log.txt는 KZDodgeAbility/KZGameplayTags C++ 및 UHT의 Live Coding 빌드 Succeeded다. 에디터 로그에는 8 Dodge BP 재컴파일이 기록돼 있다. 본체 DLL은 09:50 저장본이며 Live Coding patch와 cold build를 구분한다. 이번 턴은 build/PIE를 새로 실행하지 않았고 Dodge 동작을 입증하는 PIE 결과도 확인하지 않았다.
+- [새 요구] Dodge→Weak와 Dodge→Strong의 특수 스킬에 별도 해금 태그/Edge를 두는 계약을 ARCH-72에 기록했다. 방향은 현재 Dodge node가 보존하므로 범용 IsDodging/DodgeDirection Edge 필드는 추가하지 않는다. 두 특수 가족의 실제 스킬/모션 대응과 방향별 분기는 아직 미확인이다.
+- [구조 제안] 기존 Combo 실행을 UKZComboActionAbility로 이관하고 기존 Attack 부모 class를 유지한다. 8 Dodge BP와 확인된 특수 Entry는 기존 DA_Player_Combo_Definition을 공유하고 CharacterDefinition에서 graph-only grant한다. 잠긴 특수 공격은 grant 회수가 아니라 Edge/Ability의 요구 태그로 제한한다.
+- [선행 보완] Command 소비 반환/Begin 순서, 소비된 press의 동일 Spec restart 금지, graph-only InputPressed 보정, local 전환 Cost 실패 시 jump 거절, editor graph 검증 및 UnPossessed Action 취소를 함께 확인해야 한다. UE PreActivate 취소는 target Commit/몽타주보다 먼저이므로 TryActivate true를 완전한 전환 성공이나 rollback으로 설명하지 않는다.
+- [해금 전 동작] 기본 회피공격 유무는 사용자에게 선택 질문을 남겼다. 답변 전 설명의 임시 가정은 특수 Edge 차단/InputEnd 전 Dodge 유지/InputEnd 이후 일반 공격 진입이며 원작 확인값이 아니다.
+- [완료 경계] 현재 진행상황 감사와 공동 구현 절차 문서만 완료했다. 게임 Source/Content/BP를 변경하지 않았다. 적용 체크포인트·필드·에디터 경로·PIE 기대 결과는 Migration의 2026-10-01 D4 절을 따른다.
+
+## 2026-10-01 — Combo Action 사용자 부분 적용 재확인·전체 코드 보완안 제공
+
+- 앞선 초기 상태 기록 이후 사용자 Source에는 UKZComboActionAbility가 생성돼 기존 Combo 실행을 소유한다. UKZComboAttackAbility는 Attack AssetTag ctor만 남고 UKZDodgeAbility는 새 base를 상속한다. ASC HasComboEntry/TryActivateComboEntry의 include/cast도 새 base다. 이를 실제 Source로 확인했으며 사용자 코드를 편집하지 않았다.
+- 공통 CanActivate 사전 데이터 검사와 local 전환의 CheckCost 실패 return은 아직 Source에 없다. 현재 비용 부족에도 CurrentNodeId/section을 변경하는 분기를 확인했다. per-node ApplyCost를 보존한 전체 h/cpp 보완안을 Docs/Engineering/Examples/ComboAction_20261001에 첨부했다.
+- 현재 bConsumed/Begin command 선행/graph-only InputPressed 보정, Definition validation과 UnPossessed Action cancel은 미반영이다. Dodge 방향/defaults/입력/몽타주/특수 스킬·해금은 이번에 구현하지 않았다.
+- 설명과 검증 범위는 Migration의 하단 D4 코드 첨부 절에 기록했다. 설치 UE 5.8 GAS API와 제안 파일을 정적으로 대조했으며 새 build/PIE 결과는 없다. 전체 첨부는 설명용 제안이고 게임 Source 적용 완료가 아니다.
+
+## 2026-10-01 — Dodge 특별 공격 공동 구현 설명 산출물
+
+- 공통 ComboAction의 CanActivate/비용 조기 반환은 현재 사용자 Source에 적용돼 있다. 앞선 미적용 상태 기록은 과거 검사 시점이다.
+- Dodge input/direction dispatch, X/Y 소비 중재, 실제 binding 기반 Spec 입력 이관, graph validation, 수명 cleanup과 별도 Weak/Strong unlock gate의 전체 코드/에디터 안내를 Examples/DodgeSpecialAttack_20261001/GUIDE.md와 코드 zip으로 첨부했다.
+- 이번 실제 수정은 Engineering 설명 문서/코드 사본뿐이다. 게임 Source 15개 hash는 동일하고 새 runtime enum도 미생성이다. 새 build/PIE는 없다.
+- 임시 4/8/24-frame Notify와 특별 공격 motion/direction 대응을 원작값과 분리했다. 비용, 무적/피해/Cue, 제품 Save producer와 방향별 root-motion 품질은 해당 자료/실제 실행에 따라 후속 검증한다.
+
+## 2026-10-01 — Dodge 기존 구조 재사용·최소 변경 재검토
+
+- 사용자 요청으로 현재 Source와 앞선 전체 제안을 재검토했다. ComboAction 공통 실행/CanActivate/Cost gate 및 Dodge enum/defaults/getter는 이미 있다. 이를 반복 구현하지 않는다.
+- 새 runtime 파일 없이 기존 Player/Controller/ASC h/cpp에서 방향 계산/지역 Spec 선택/기존 press의 optional Spec Handle 필터로 연결하는 제안을 ARCH-72 하단에 기록했다. Dodge 8 grant는 같은 A binding, 특별 공격은 graph-only로 구분한다.
+- 현행 InputEnd 전 Action block/InputEnd 때 ComboWindow Closed를 유지하면 기존 X/Y 라우팅과 ComboAction handler로 해금 Edge를 처리할 수 있다. 앞선 bConsumed/입력 순서 변경/전체 파일 교체·IsDataValid 선행은 현재 Dodge의 필수로 삼지 않는다.
+- 기존 graph node/edge/owner tag 요구/Ability 요구 태그/GE/Task를 재사용한다. graph-only 입력 기록, restart 비용 사전 승인 및 Character 수명 누락은 기존 함수의 작은 보완으로 구분한다.
+- 설명·설계 문서만 갱신했다. 게임 Source/BP/에셋 적용, 새 build/PIE는 없다. 정확한 재개는 Migration/Continuity 마지막 절을 따른다.
+
+
+
+## 2026-10-01 — 전 기능 최소 변경 원칙 명시와 Dodge 상세 안내
+
+- 사용자 요청에 따라 AGENTS/Engineering 규칙/Router에 모든 구현·기능 추가의 기존 구조 재사용·작은 수정 원칙과 MD 기반 최신 상태/방향/스타일 확인 방침을 날짜별로 추가했다. 설명 요청은 계속 사용자가 직접 적용하는 공동 구현 방식이다.
+- Dodge 최신 안내: [DODGE_MINIMAL_IMPLEMENTATION_GUIDE_20261001.md](DODGE_MINIMAL_IMPLEMENTATION_GUIDE_20261001.md). 소스는 [기존 7파일 변경 patch](Examples/DodgeMinimal_20261001.patch)로 첨부했다. 새 runtime 파일/클래스 0개, 현재 ComboAction 실행/입력창/비용/Edge 재사용, 8 BP와 같은 A grant 유지, 해금형 target은 graph-only다.
+- 이번 완료 범위는 정책 MD·구현 설명·참조 patch 작성과 정적 확인이다. patch 문맥 검사 통과 및 시작 대비 게임 Source 9개 SHA256 동일을 확인했다. C++/BP/Config/에셋 적용, cold build/PIE, InGame 실제 root-motion/비용·무적·피해·Save는 완료로 기록하지 않는다.
+
+## 2026-10-01 — WeakAttack01 → LockOn L 포즈 튐 원인 조사 진행 상태
+
+- 사용자의 2.5초는 복귀 관성화 진단 실험이고 보존한다. 실제 Source의 Move 처리→GameplayEvent 순서, 공격 이동 gate/종료, 실제 속도 기반 방향과 Walk→Run 중간 선택 및 라이브 ABP 최종 관성화 경로를 확인했다.
+- 방향/gait/샘플 변화와 관성화 본별 보정·추가 요청을 분리해야 한다. 코드상 후보이며 직접 튐 프레임과 일치하는 증거는 아직 없다. 관성화 한계 또는 단일 원인으로 확정하지 않는다.
+- 직접 키 PIE 요청은 미완료다. Windows 제어 helper native pipe 오류와 UE Editor 종료/연결 끊김 때문에 수행하지 못했다. 초기 Python probe 오류는 수집 frame 0이며 증거에서 제외했다. agent 중단점은 정리했고 user 중단점은 보존했다.
+- 변경은 관련 MD 기록뿐이며 게임 Source/BP/에셋과 설정은 수정하지 않았다. 근거는 `BUILD_RUNTIME_DIAGNOSTICS.md`, 정확한 재개는 `ENGINEERING_WORK_CONTINUITY.md`의 같은 날짜 절을 따른다.
+
+## 2026-10-01 — 공격 복귀의 실제 L 입력/F 방향 선택 확인 후 수정안 준비
+
+- Editor 재실행/연결 후 실제 패드 PIE를 읽기 전용으로 관측했다. 3,444 frame, error null이다. full L 입력/Resolved Run에도 공격 종료 첫 native 방향은 F/Anim gait Walk였고 8 frame 뒤 L 근처/Run으로 바뀌었다. 속도 0 기본값이 아닌 공격의 전진 속도 경로다. F 비교는 방향 변화가 작았고 Walk L도 F 중간 선택이 있었다.
+- 새 runtime 파일/멤버 없이 KZAnimInstance.cpp 두 곳에서 LockOn의 방향을 기존 입력 snapshot, gait를 기존 ResolvedGait로 고르는 ARCH-73 제안과 Examples/LockOnRecoveryPose_20261001.patch를 준비했다. 실제 target 문맥 검사/1파일 +12/-3 확인이 완료됐다.
+- 게임 Source/BP/에셋 적용과 수정안 build/수정 후 PIE는 아직 없다. 첫 F/Walk 중간 선택은 확인했지만 모든 시각적 튐의 원인/수정 효과를 확정하지 않는다. 방향→gait 순서의 사용자 적용/단일 공격 A/B와 일반 이동 회귀가 다음이다.
+- Raw/summary는 Saved/ImportReports/WeakAttackLockOnExit_20261001_{raw,summary}.json이다. callback/참조를 정리했고 마지막 Editor connected/PIE Idle이다. Diagnostics/Animation 정본/Architecture/Continuity에 사실·제안·검증 경계를 날짜별 추가했다.
+
+## 2026-10-02 — Ability Definition 배열 원소 식별용 metadata 적용
+
+- 직접 수정 완료: `KZComboDefinitionData.h`의 `Nodes`/`CommandEdges`, `KZCharacterDefinitionData.h`의 `InitialAbilityGrants`에 UE 네이티브 `TitleProperty`를 추가했다. 접힌 원소의 제목은 각각 NodeId, 명령·phase·Hold·Move·target, AbilityClass·InputTag다. 새 runtime 타입/표시 이름 저장/Editor customization 없이 기존 멤버를 재사용했다.
+- 설치 UE 5.8 PropertyEditor formatter와 UHT 생성 metadata를 확인했다. 모듈 DLL이 갱신됐고 직접 `KhazanEditor Win64 Development` 빌드 명령의 exit 0/`Result: Succeeded`를 확인했다. Rider 상태의 false/진단 없음은 UBT 성공과 분리 기록한다.
+- 에디터는 연결되지 않은 종료 상태였으며 실제 Details 화면은 아직 미확인이다. 새 Editor에서 `DA_Player_Combo_Definition`의 Nodes/CommandEdges와 `DA_CharacterDefinition_Player`의 InitialAbilityGrants를 펼치고 개별 원소를 접어 제목을 확인한다. 구현 근거/정확한 문자열/배열 적용 위치는 `SOURCE_BP_CONFIG_ARCHITECTURE.md`의 같은 날짜 절이다.
+- 이번 작업의 `KZAnimInstance.cpp`와 두 Definition uasset의 시작/종료 hash가 동일하다. 기존 사용자 gameplay 변경을 보존했고 새 PIE는 수행하지 않았다.
+
+## 2026-10-02 — 사용자 DodgeAttack 4방 연결 및 F 실패 원인 확인
+
+- 사용자 보고로 4방 DodgeAttack 연결과 B/L/R 동작을 확인했다. 실제 Source에는 `UKZDodgeAttackAbility : UKZComboAttackAbility`가 추가돼 있고 F/B/L/R Blueprint Ability 및 shared Definition 노드/초기 grant가 있다. 이번 조사 자체에서 B/L/R 플레이를 새로 재현한 것은 아니다.
+- F만의 설정 차이: Editor live CDO의 `GA_Player_DodgeAttack_F.EntryNodeId=None`, 나머지는 각각 `DodgeAttack_B/L/R`다. F target node는 `DodgeAttack_F`로 존재한다. 기존 PIE 로그와 현재 Source를 대조해 ASC가 F Entry를 찾지 못한 뒤 다른 montage의 local 전환을 거절하는 경로를 확인했다.
+- 안내한 최소 수정은 F BP Class Defaults의 Entry Node Id를 `DodgeAttack_F`로 설정/Compile/Save하고 새 PIE에서 확인하는 것이다. gameplay 코드/에셋 직접 수정과 수정 후 PIE는 수행하지 않았다. 상세 근거와 정확한 실패 경로는 `BUILD_RUNTIME_DIAGNOSTICS.md`의 같은 날짜 F 진단 절이다.
+
+## 2026-10-02 — LockOn L Dodge → Idle 사용자 조작 관측 진행
+
+- 사용자가 PIE를 직접 조작하고 어시스턴트가 읽기 전용 callback으로 상태를 수집했다. v1 5,771 frame/v2 1,165 frame/error null을 Saved/ImportReports에 보존했다. 게임 Source/BP/에셋 직접 수정과 수정 효과 확인은 없다.
+- 무입력 자연 종료는 몽타주 Standard 0.25 s 블렌드이며 이동 입력의 조기 중단만 기존 0.24 s 관성화 요청을 사용한다. 자연 종료의 Slot weight는 연속 감소하고 작은 반대 속도 때문에 Idle 후보가 재변화한다. 이동 중단 L에는 별도로 큰 frame 간 본 회전 변화가 있다. 두 경로를 구분했고 화면 튐의 직접 원인은 아직 확정하지 않았다.
+- 실제 현행 `KZAnimInstance.cpp`에 이전 ARCH-73의 LockOn 유효 입력 기반 방향 및 ResolvedGait 선택이 반영돼 있음을 Source로 확인했다. 이전 날짜의 미적용 기록은 그때의 사실로 보존하며 현재 소스를 옛 설명에 맞춰 되돌리지 않는다. 이번에 해당 코드를 작성/빌드한 것은 아니다.
+- 머리·골반·발만으로 상체/무기 튐까지 배제하지 않는다. 어깨·팔·손을 포함한 v3 observer를 준비했다. 원인 후보/설정 출처/디버거 한계/정확한 재개와 정리는 Diagnostics와 Continuity의 같은 날짜 L Dodge 절을 따른다.
+
+## 2026-10-02 — 새 L/R Dodge 관측: 종료 후 Actor 회전 확인
+
+- 사용자 새 PIE에서 v3 1,084 frame/error null을 실제 확보했다. WeakAttack 2회/L Dodge 3회/R Dodge 2회, 상체/손의 component/world pose 포함이다. `Saved/ImportReports/DodgeIdleLive_20261002_v3.json`을 저장했다.
+- L 세 번 모두 회피 중 고정된 Actor Yaw가 종료 후 한 frame 약 +7 deg, R 두 번은 약 -7 deg로 보정된다. 측정 각속도 ±720 deg/s는 실제 CharacterDefinition의 LocomotionConfig.RotationRate.Yaw=720과 일치한다. 첫 L은 로컬 머리 회전 변화 약 0.046 deg에 대해 전체 world Root가 약 7.013 deg 돌아갔다. 큰 종료 변화는 Actor/capsule 회전에서 관측됐다.
+- Source/CDO는 Root Motion 동안 CMC PhysicsRotation을 중지하고 종료 뒤 LockOn desired rotation을 따라잡는 경로와 일치한다. 원인 검증의 작은 다음 단계는 기존 CharacterMovement의 Allow Physics Rotation During Anim Root Motion checkbox 비교다. 어시스턴트는 게임 설정/Source를 바꾸지 않았고 수정 후 해결은 검증하지 않았다. 자세한 근거/범위는 Diagnostics의 새 1,084 frame 절이다.
+- v3 저장 후 v4 read-only 관측으로 전환했다. 추가 Controller/CMC 회전/root-motion 관측과 사용자 화면상의 튐 순간 대응은 후속 비교 항목이다. 책임/실행 수명 구조를 새로 확장하지 않았다.
+
+## 2026-10-02 — DodgeAttack handoff 블렌드 설정 확인
+
+- 사용자 시간 소유자 질문에 대해 actual handoff Source/엔진 API/live montage 설정을 확인했다. 현재 Dodge → 다른 DodgeAttack Ability는 ComboTransitionInertializationDuration을 사용하지 않고 새 montage의 Standard Blend In을 사용한다. AM_DAS_Player_DodgeAttack Blend In과 outgoing AM_DAS_Player_Dodge Blend Out은 모두 현재 0.25 s/HermiteCubic다. 원작 검증값이 아닌 현 프로젝트 에셋값이다.
+- 같은 montage section jump의 native 0.08 s와 이동 복귀 중단의 native 0.24 s를 이 handoff와 구분한다. 설정 report/엔진 중단 규칙/직접 조절 위치는 Diagnostics의 같은 날짜 DodgeAttack 블렌드 절이다. 게임 Source/BP/에셋 변경이나 변경 효과의 PIE 검증은 없다.

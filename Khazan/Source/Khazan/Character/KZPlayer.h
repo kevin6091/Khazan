@@ -9,6 +9,7 @@
 
 class UKZAttributeSet;
 class UKZLockOnComponent;
+enum class EKZDodgeDirection : uint8;
 
 UCLASS()
 class KHAZAN_API AKZPlayer : public AKZCharacter
@@ -44,6 +45,9 @@ public:
 	// Controller의 수동 카메라 입력 차단에 사용한다.
 	bool IsLockedOn() const;
 	
+	// Dodge뱡향 계산
+	EKZDodgeDirection ResolveDodgeDirection(const FVector2D& MovementInput, const FRotator& ControlRotation) const;
+	
 private:
 	// 현재 raw 입력과 Sprint 요청으로부터 RequestedGait만 갱신한다.
 	// 속도나 CMC 설정은 직접 변경하지 않는다.
@@ -62,7 +66,7 @@ protected:
 
 	// 이 값 이하의 장치 입력은 실제 입력 해제로 처리한다.
 	UPROPERTY(EditDefaultsOnly, Category = "Locomotion|Input", meta = (ClampMin = "0.0", ClampMax = "1.0"))
-	float MoveInputDeadZone = 0.1f;
+	float MoveInputDeadZone = 0.05f;
 
 	// Sprint토글 스위치. true = 토글, false = 홀드
 	UPROPERTY(EditDefaultsOnly, Category = "Locomotion|Input")

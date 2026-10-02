@@ -2,7 +2,7 @@
 
 #include "GameplayAbilitySpec.h"
 #include "Abilities/GameplayAbility.h"
-#include "Ability/Combo/KZComboAttackAbility.h"
+#include "Ability/Combo/KZComboActionAbility.h"
 #include "Ability/KZActionAbility.h"
 #include "Combo/KZComboDefinitionData.h"
 
@@ -24,11 +24,11 @@ bool UKZAbilitySystemComponent::HasComboEntry(const UKZComboDefinitionData* Defi
 			continue;
 		}
 
-		const UKZComboAttackAbility* ComboAttackAbility = Cast<UKZComboAttackAbility>(AbilitySpec.Ability);
+		const UKZComboActionAbility* ComboActionAbility = Cast<UKZComboActionAbility>(AbilitySpec.Ability);
 
-		if (IsValid(ComboAttackAbility) &&
-			ComboAttackAbility->GetComboDefinition() == Definition &&
-			ComboAttackAbility->GetEntryNodeId() == EntryNodeId)
+		if (IsValid(ComboActionAbility) &&
+			ComboActionAbility->GetComboDefinition() == Definition &&
+			ComboActionAbility->GetEntryNodeId() == EntryNodeId)
 		{
 			return true;
 		}
@@ -55,7 +55,7 @@ bool UKZAbilitySystemComponent::TryActivateComboEntry(const UKZComboDefinitionDa
 			continue;
 		}
 
-		const UKZComboAttackAbility* ComboAbility = Cast<UKZComboAttackAbility>(AbilitySpec.Ability);
+		const UKZComboActionAbility* ComboAbility = Cast<UKZComboActionAbility>(AbilitySpec.Ability);
 
 		if (!IsValid(ComboAbility) ||
 			ComboAbility->GetComboDefinition() != Definition ||
@@ -79,7 +79,10 @@ bool UKZAbilitySystemComponent::TryActivateComboEntry(const UKZComboDefinitionDa
 	}
 
 	const bool bPreviousInputPressed = TargetSpec->InputPressed;
-	TargetSpec->InputPressed = bInputPressed;
+	
+	const bool bHasInputBinding = !TargetSpec->GetDynamicSpecSourceTags().IsEmpty();
+	
+	TargetSpec->InputPressed = bInputPressed && bHasInputBinding;;
 
 	if (TryActivateAbility(TargetSpec->Handle))
 	{
@@ -90,7 +93,7 @@ bool UKZAbilitySystemComponent::TryActivateComboEntry(const UKZComboDefinitionDa
 	return false;
 }
 
-void UKZAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag& InputTag)
+void UKZAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag& InputTag, FGameplayAbilitySpecHandle RequestedHandle)
 {
 	// 유효한 입력만 Ability에 전달한다.
 	if (!InputTag.IsValid())
@@ -104,14 +107,19 @@ void UKZAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag& Input
 		// 이미 실행 중인 동일 입력 Spec이 입력을 계속 소유한다.
 		for (FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
 		{
+			// 특정 Spec을 요청했을때. 현재 검사 중인 Spec이 그 Spec이 아니라면 Continue
+			if (RequestedHandle.IsValid() && AbilitySpec.Handle != RequestedHandle)
+			{
+				continue;
+			}
+			
 			// 정확히 같은 Input Tag의 Spec만 처리한다.
 			if (!AbilitySpec.Ability || !AbilitySpec.IsActive() || !AbilitySpec.GetDynamicSpecSourceTags().
 				HasTagExact(InputTag))
 			{
 				continue;
 			}
-
-
+			
 			// PrimaryInstance가 UKZActionAbility이고 InputEnd를 지났다면
 			// 아래 일반 InputPressed 전달보다 먼저 현재 실행을 취소하고 
 			// 같은 Spec Handle을 새 activation으로 다시 시작해야 한다.
@@ -132,14 +140,19 @@ void UKZAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag& Input
 			{
 				const FGameplayAbilitySpecHandle RestartHandle = AbilitySpec.Handle;
 
+				// 현재 실행을 취소하기 전에 새 실행 가능 여부를 확인한다.
+				if (!AbilityActorInfo.IsValid() || !PrimaryInstance->CanActivateAbility(RestartHandle, AbilityActorInfo.Get()))
+				{
+					return;
+				}
+				
 				// 아직 active인 이전 회수 모션 실행을 먼저 끝낸다.
 				CancelAbilityHandle(RestartHandle);
 
-				// Cancel callback 중 Spec 배열 상태가 바뀔 수 있으므로
-				// 기존 AbilitySpec 참조를 계속 사용하지 않고 Handle로 다시 찾는다.
+				// 취소 과정에서 Spec이 제거될 수 있으므로 다시 찾는다.
 				FGameplayAbilitySpec* RestartSpec = FindAbilitySpecFromHandle(RestartHandle);
 
-				if (RestartSpec == nullptr)
+				if (RestartSpec == nullptr || RestartSpec->IsActive())
 				{
 					return;
 				}
@@ -178,6 +191,11 @@ void UKZAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag& Input
 		// 비활성 후보를 grant 순서대로 시도한다.
 		for (FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
 		{
+			if (RequestedHandle.IsValid() && AbilitySpec.Handle != RequestedHandle)
+			{
+				continue;
+			}
+			
 			if (!AbilitySpec.Ability || AbilitySpec.IsActive() || !AbilitySpec.GetDynamicSpecSourceTags().
 			                                                                   HasTagExact(InputTag))
 			{

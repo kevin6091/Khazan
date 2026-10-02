@@ -1,0 +1,105 @@
+
+
+
+#include "Ability/Combo/KZComboDefinitionData.h"
+
+#if WITH_EDITOR
+#include "Animation/AnimMontage.h"
+#include "Misc/DataValidation.h"
+#include "UObject/Class.h"
+#endif
+
+const FKZComboNode* UKZComboDefinitionData::FindNode(const FName NodeId) const
+{
+	// 배열에서 같은 NodeId를 가진 첫 노드를 찾는다.
+	return Nodes.FindByPredicate(
+		[NodeId](const FKZComboNode& Node)
+		{
+			return Node.NodeId == NodeId;
+		});
+}
+
+#if WITH_EDITOR
+EDataValidationResult UKZComboDefinitionData::IsDataValid(
+    FDataValidationContext& Context) const
+{
+    const EDataValidationResult ParentResult = Super::IsDataValid(Context);
+    bool bHasErrors = false;
+
+    const auto ReportError = [&Context, &bHasErrors](const FString& Message)
+    {
+        Context.AddError(FText::FromString(Message));
+        bHasErrors = true;
+    };
+
+    TSet<FName> NodeIds;
+    for (const FKZComboNode& Node : Nodes)
+    {
+        if (Node.NodeId.IsNone())
+        {
+            ReportError(TEXT("Combo NodeId is empty."));
+        }
+        else if (NodeIds.Contains(Node.NodeId))
+        {
+            ReportError(FString::Printf(
+                TEXT("Duplicate Combo NodeId: %s"), *Node.NodeId.ToString()));
+        }
+        else
+        {
+            NodeIds.Add(Node.NodeId);
+        }
+
+        if (!IsValid(Node.Montage) || Node.SectionName.IsNone() ||
+            Node.Montage->GetSectionIndex(Node.SectionName) == INDEX_NONE)
+        {
+            ReportError(FString::Printf(
+                TEXT("Node %s has an invalid Montage/Section."),
+                *Node.NodeId.ToString()));
+        }
+    }
+
+    // 모든 NodeId를 모은 뒤 검사하므로 배열 뒤쪽 target도 정상으로 인정한다.
+    for (const FKZComboNode& Node : Nodes)
+    {
+        for (int32 EdgeIndex = 0; EdgeIndex < Node.CommandEdges.Num(); ++EdgeIndex)
+        {
+            const FKZComboCommandEdge& Edge = Node.CommandEdges[EdgeIndex];
+            if (!Edge.CommandTag.IsValid() ||
+                Edge.CommandPhase == EKZComboCommandPhase::Cancel)
+            {
+                ReportError(FString::Printf(
+                    TEXT("Node %s Edge %d has an invalid command or unsupported Cancel phase."),
+                    *Node.NodeId.ToString(), EdgeIndex));
+            }
+
+            if (Edge.TargetNodeId.IsNone() || !NodeIds.Contains(Edge.TargetNodeId))
+            {
+                ReportError(FString::Printf(
+                    TEXT("Node %s Edge %d targets missing Node %s."),
+                    *Node.NodeId.ToString(), EdgeIndex, *Edge.TargetNodeId.ToString()));
+            }
+
+            for (int32 EarlierIndex = 0; EarlierIndex < EdgeIndex; ++EarlierIndex)
+            {
+                const FKZComboCommandEdge& Earlier = Node.CommandEdges[EarlierIndex];
+                FKZComboCommandEdge Conditions = Edge;
+                Conditions.TargetNodeId = Earlier.TargetNodeId;
+
+                // target을 제외한 모든 reflected 조건이 완전히 같으면 뒤의 Edge는 가려진다.
+                if (FKZComboCommandEdge::StaticStruct()->CompareScriptStruct(
+                    &Earlier, &Conditions, 0))
+                {
+                    ReportError(FString::Printf(
+                        TEXT("Node %s Edges %d and %d have identical conditions."),
+                        *Node.NodeId.ToString(), EarlierIndex, EdgeIndex));
+                    break;
+                }
+            }
+        }
+    }
+
+    return bHasErrors || ParentResult == EDataValidationResult::Invalid
+        ? EDataValidationResult::Invalid
+        : EDataValidationResult::Valid;
+}
+#endif

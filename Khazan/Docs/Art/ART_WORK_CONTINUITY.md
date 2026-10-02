@@ -493,3 +493,76 @@
 - 중단 원인은 일반 Unreal Editor PID `27180`에 같은 프로젝트가 열린 상태이며 Computer Use에 제어 가능한 Windows surface가 노출되지 않는 점이다. 라이브 에디터의 미저장 상태 또는 후속 저장이 commandlet 결과를 덮어쓰는 것을 막기 위해 실제 맵에는 아직 TargetPoint를 저장하지 않았다.
 - 정확한 재개 절차: 사용자가 Unreal Editor에서 `Save All` 후 정상 종료 → `Scripts/HeinMach/audit_heinmach_respawn_targeting.py` 재실행 → PlayerStart transform과 map hash 재고정 → `Scripts/HeinMach/target_heinmach_respawns.py` 실행. 적용 스크립트는 현재 맵을 `Saved/ArtBackups/HeinMach_RespawnTargets_PreApply_20260930`에 먼저 복사하고, 기존 actor/StaticMeshActor/PlayerStart 보존 검사와 Monster `47/47` coverage가 통과할 때만 저장한다. 이후 fresh read-only audit와 PIE surface 확인을 수행한다.
 - 현재 사전 검사 보고서는 `Saved/ImportReports/HeinMach_RespawnTarget_Preflight_20260930.json`이다. commandlet process exit `1`은 기존 `/Script/GameFeatures.GameFeatureData` ensure 때문이며 Python 표식 `KZ_HEINMACH_RESPAWN_PREFLIGHT_PASSED_WITH_RUNTIME_SURFACE_UNVERIFIED`와 report status를 실제 판정으로 사용한다.
+
+## 2026-10-01 StormPass Blade Phantom arena polish — 작업 중 체크포인트
+
+- 범위는 `L_StormPass_Environment`의 두 보스 환경과 Art 문서/검수 도구다. 작업 전 map 및 phase metadata를 `Saved/ArtBackups/StormPass_BladePhantom_PrePolish_20261001`에 보존했다. 기존 C++/Engineering 변경, HeinMach map, PlayerStart를 수정하지 않는다.
+- 원작 phase 1은 성채 홀, phase 2는 숲/landscape 환경이며 동일 좌표 영역의 서로 배타적인 source sublevel이다. `SA_BladePhantom.DependentLevelPath`는 phase 2를 지목한다. source spawn/TargetPoint와 컷씬 staging 좌표를 구분해 editor-only 마커 5개와 검수 카메라 2개를 추가했다.
+- 검증 완료: root prop 1,862, child prop 515, 기존 source light 24, fog sheet 7, foliage component 7/instance 3,218, landscape component 16의 원본 transform/존재 비교 failure 0. 페이즈 전용 native surface MI 188개에 source WEP global material 값을 적용했다. DeepGray/DeepNight sky와 zero-cloud preset을 반영하고 phase별 sun/sky/fog profile 전환을 연결했다.
+- 추가 복원: source PSK 깃발 14개(원본 bounds 일치), 하위 light 28개, fire/화염벽 native billboard 47개. 조명 단위, cloth wave와 FX 실행은 native adapter이며 원작 실행 그래프/광도 단위의 완전 재현을 주장하지 않는다. `MissingRenderPolicy.json`에 임시값과 근거를 기록했다.
+- 체크포인트 map은 phase 1과 추가 actor 89개까지 저장했다. 이후 phase 2 렌더 검수 상태는 RAM에 있으며 최종 저장/재로드 감사 전이다. 보고서: `Content/_Art/Player/Environment/StormPass/Metadata/BladePhantom_ArenaPolish_20261001`; 이미지: `Saved/ArtReviews/BladePhantom_20261001`.
+- 남은 작업: phase 2 fog-sheet MPC 색 native 연결, source material-slot/override 대응 감사, FX shader/표시 검수, 두 phase 최종 이미지, 사용자 파일 hash 보존 검사, 최종 map 저장/재로드 및 Art 결과 문서 추가.
+- 정확한 재개: 라이브 StormPass에서 `runpy.run_path('Scripts/StormPass/polish_blade_phantom_arenas.py')`의 `view('boss_phase_1'/'boss_phase_2')`로 검수한다. 추가 render 적용은 `restore_blade_phantom_missing_render.py`의 `prepare_flag/prepare_fire_materials/place_missing/register_variants`를 재사용한다(기존 label 재사용). `preflight_backup()`를 재실행해 새 상태로 기존 backup을 덮어쓰거나, 오래된 전체 map rebuild/route-anchor 복원을 실행하지 않는다. 검사 통과 후 `save_polish()`로 이 map만 저장하고 재로드 검사한다.
+
+### 2026-10-01 StormPass Blade Phantom arena 폴리싱 — 저장·재로드 완료
+
+- 위 체크포인트의 남은 Art 수정/검수를 완료했다. Phase2 fog sheet 색 native bridge를 마지막 재질 단계로 저장했고, source 슬롯 3,143개·재질 203개·source geometry 및 추가 render 89개를 검사했다. 물 runtime binding 2개와 나무 legacy selector의 오탐은 원작 metadata/실제 shader graph로 판정했다.
+- Phase1과 Phase2를 각각 저장하고 실제 World가 교체되는 재로드를 수행했다. geometry/material/slot/추가 render/variant/environment 감사 실패 0, 기존 arena actor 누락 0, 최종 actor 14,522다. native flag bounds 오차 최대 `0.000004296875 cm`, editor-only marker/camera 7개가 유지된다. UE가 재생성하는 editor-only icon sprite의 임시 visibility는 gameplay contract에서 제외하며 native MaterialBillboard FX는 검사했다.
+- 최종 전달 map은 Phase1 검수 모드다. 재개할 미완료 map 적용 단계는 없다. 정확한 재검수는 결과 정본의 Output Log Python 명령으로 `view('boss_phase_1'/'boss_phase_2')`를 선택하고 마커·ReviewCamera를 확인한 뒤 본체와 finish helper의 read-only 감사기를 사용한다. 바깥 경로는 `view('traversal')`다.
+- 결과 정본: [STORMPASS_BLADE_PHANTOM_POLISH_2026-10-01.md](STORMPASS_BLADE_PHANTOM_POLISH_2026-10-01.md). Source/정책/재로드 자료는 `Metadata/BladePhantom_ArenaPolish_20261001`, 렌더는 `Saved/ArtReviews/BladePhantom_20261001`이다. 원본 backup은 보존했다.
+- Source/HeinMach 보호 파일은 hash 동일하며 기존 사용자 작업을 되돌리지 않았다. 작업 중 Engineering 문서 4개에서 외부 변경을 감지했으나 Art 도구의 작성 대상이 아니며 그대로 보존했다. 도구 import가 만든 기존 `.pyc` 변경은 복구했다. Git commit/push는 요청하지 않아 수행하지 않았다.
+- 후속 범위는 원작 Niagara/Cascade/cloth 실행과 water-spline DI 9개의 상세 포팅 또는 gameplay 자동 페이즈 전환이다. 원작 renderer 단위/실행 그래프가 확인되지 않은 설정은 임시값/근사로 계속 표시한다. 현재 요청의 저장된 환경 폴리싱 및 두 장소 마킹과 이 후속 개발을 구분한다.
+
+### 2026-10-01 Phase1 밝기/흰빛 재검토 — 진행 체크포인트
+
+- 사용자 피드백으로 원작 스크린샷 3장을 `Saved/ArtReviews/BladePhantom_LightingReview_20261001`에 확보했다. 낮은 적갈색 명도, 작은 따뜻한 불빛, 남아 있는 성채 음영을 비교한다. 이번 조명 수정 수치는 native adapter/임시 튜닝이며 원작 photometric 단위 확정값이 아니다.
+- 수정 전 map·정책·스크립트와 Phase1 fire parent/MI/texture 6개는 `Saved/ArtBackups/StormPass_Phase1_LightReview_20261001`에 보존했다. 검수 중 에디터 저장본은 그 안의 `EditorSavedDuringReview`에 추가 보존했다. 저장된 검수 중 map에는 임시 SceneCapture actor가 포함될 수 있으므로 완료 전 `save_polish()`로 제거한다. 사용자 배치나 PlayerStart를 백업으로 일괄 되돌리지 않는다.
+- `Phase1LightReviewBefore.json`에는 41개 local light, PP, sun/sky, PlayerStart의 실제 사전 값이 있다. 기존 root light 13개는 source Intensity 2.5/3 × 750을 candela로 쓰며, 하위 light 28개는 별도의 이전 adapter를 사용했다. PP는 3 EV이다. 노출만 1 EV로 낮추는 비교는 성채 전체를 검게 만들었으므로 최종 수정으로 채택하지 않는다.
+- Phase1 core fire 원본 RGB texture를 밝기 mask로 바꾼 뒤 다른 root light의 파란색으로 칠한 기존 근사를 수정 중이다. 실제 `core_fire`의 StartColor는 Small export 87 / Medium export 102에서 `(0.964706,1,0)`이며, source/LOD/sha 근거는 `CascadeCoreColorSources.json`이다. `restore_blade_phantom_missing_render.py`의 재현 경로는 원본 atlas RGB × core StartColor로 수정했다. map/최종 조명 적용 및 렌더 검수 완료 전이다.
+- 07:56:54 UTC 에디터 충돌은 MaterialEditor→Python 경로의 null pointer다. UE 5.8 `MaterialEditingLibrary.cpp:GetInputsForMaterialExpression`은 연결되지 않은 pin에 `None`을 반환하고 MaterialExpression null을 검사하지 않는다. 재귀 그래프 검사에서 `None`을 다시 전달한 호출을 원인으로 좁혔다. 재개 시 `if not node: return` 및 non-null child만 재귀하는 보호를 반드시 적용한다. 해당 호출을 그대로 반복하지 않는다. 이 충돌 전에 Phase1 fire asset 6개는 새 상태로 저장되지 않았다(parent hash 사전 값과 동일).
+- 정확한 재개: 라이브 UE/Rider health와 현재 dirty map부터 확인한다. 관련 없는 dirty `AM_DAS_Player_Dodge`는 저장/변경하지 않는다. StormPass를 열고 null-safe graph 연결 수정으로 Phase1 fire asset 6개만 저장한다. 13 root/28 child light와 Phase1 PP를 원작 화면에 맞춰 native adapter로 비교한다. 정책을 기존 `PolishPolicy.json`에 모으고 `apply_phase_environment`의 Phase1 분기에서 재사용한다. Phase2/바깥 광원은 변경하지 않는다. 안정된 비교 렌더 뒤 `save_polish()`→map 재로드→정책/표시/PlayerStart/원본 geometry 검증을 완료하고 아래에 결과를 추가한다.
+
+### 2026-10-01 Phase1 밝기·흰빛 재검토 — 저장·재로드 완료
+
+- 위 체크포인트의 적용·저장·검증을 완료했다. 원본 core fire RGB/StartColor를 연결한 6개 asset을 저장했다. compression이 sRGB를 재설정하는 추가 문제는 적용 순서를 바꾼 후 저장/readback 검사로 해결했다. null node를 다시 native graph API에 넘기지 않는 직접 연결 검사로 확인했다.
+- 이전 3 EV와 candela 변환을 이번 native adapter로 대체했다. 정책은 `PolishPolicy.json`의 Phase1 전용 설정, 재현은 `polish_blade_phantom_arenas.py:apply_phase_environment`다. 원작 field/계산/임시값·선정 이유·검증 기준을 [Art 정본의 마지막 절](STORMPASS_BLADE_PHANTOM_POLISH_2026-10-01.md)에 추가했다.
+- 빠진 붉은 안개의 원인은 실제 session `r.VolumetricFog=0`이었다. 현재 CVar는 1이고 `sg.ShadowQuality=1`은 유지했다. UE 5.8 기본 Shadows High 이상이 fog를 활성화한다. Phase1 검수 전환은 session CVar를 켜며 프로젝트/scalability INI는 변경하지 않는다. 다른 변형에도 해당 session 렌더 기능은 적용될 수 있으나 Phase2 asset 설정은 바꾸지 않았다.
+- 두 페이즈 전환 및 Phase1 저장 후 실제 World 교체 재로드를 완료했다. local light 41개와 PP 노출/bloom/FilmSlope 저장값, PlayerStart pose 유지. actor 14,522, 임시 capture 없음, dirty map 없음. Phase2 point light 11개 및 PP 설정 불변. geometry·추가 render 89개·visibility 3,220개·environment 감사 실패 0. 최종 unrelated dirty content는 사용자가 작업 중인 `GA_Player_DodgeAbility_B`였으며 저장하지 않았다.
+- 마지막 검증은 `LightReview_ReloadVerification.json`, `LightReview_*Reloaded.json`, `LightReview_Phase2Regression.json`이다. source/저장 hash와 비교 원작 이미지는 `Phase1LightReviewSourceManifest.json`, 최종 렌더는 `Saved/ArtReviews/BladePhantom_20261001/Phase1_LightReview_Delivery.png`다. 백업 `Saved/ArtBackups/StormPass_Phase1_LightReview_20261001`과 검수 중 에디터 저장본은 보존했다.
+- 미완료 저장 단계는 없다. 정확한 재검수: 연결/현재 map/dirty 상태 확인 → 정본의 Output Log Python 명령으로 `view('boss_phase_1'/'boss_phase_2')` → 환경/variant 감사 → 필요 시 이 맵만 `save_polish()`로 저장. 새 조사 전에 위 manifest/정책/보고서를 읽는다. 전체 map rebuild, route-anchor 복원, save-all로 사용자의 PlayerStart·삭제 메시·Dodge 작업을 되돌리거나 저장하지 않는다. 원작 custom renderer/full FX 포팅과 gameplay 자동 phase 전환은 별도 후속 범위다.
+
+### 2026-10-02 두 전장 인접 배치 — 충돌 바닥 검사 전 체크포인트
+
+- 사용자가 옮긴 현행 `/Game/Maps/L_StormPass_Environment`에서 Phase1은 유지하고 Phase2 전체 1,120 actor를 X +20,390 cm 평행 이동했다. 양쪽 표시·충돌 baseline과 bounded PP를 동시에 활성화하고 `ArenaMarkers` 폴더의 주 마커 두 개를 분리했다. 새 Phase2 landscape material의 world origin도 같은 양만큼 이동하여 UV 정합을 유지했다. 별도 sun 1개 추가, actor 14,523. 맵 저장 및 World 교체 재로드 검증 실패 0.
+- 자료/백업: `Metadata/BladePhantom_SideBySide_20261002`, `Saved/ArtBackups/StormPass_SideBySide_20261002`. 원래 겹친 source 좌표와 백업은 보존한다. 사용자 PlayerStart, 삭제 메시, 게임 C++/BP는 수정하지 않았다.
+- 마지막 검사에서 기존 중심 바닥은 Visibility 지면 trace 4개 모두 미검출이었다. 각 전장 혈수 영역에 보이지 않는 BlockAll 충돌 상자 1개씩 보완하는 단계가 남았다. 이것은 원작 collision metadata 복원이 아닌 편집용 근사다.
+- 첫 floor preflight는 다섯 바닥 타일의 높이가 모두 같다는 잘못된 가정으로 중단됐으며, 해당 호출은 scene을 변경하지 않았다. 중심 마커 XY를 포함하는 `HISM_WP_Base_Floor_001_500X500_a5` 타일의 실제 bbox maxZ 89.00001 cm / 두께 20 cm를 선택하도록 수정했다. 진입·계단의 높은 타일은 배제한다.
+- 재개: UE health → 현재 World·dirty map 확인 → 다른 clean map이면 현행 StormPass를 로드 → 기존 `polish_blade_phantom_arenas.py`의 `add_arena_collision_floors()` 실행 → 단순/복합 지면 trace → 이 맵만 저장 → World 교체 재로드 후 지원 바닥·2마커·UV·PlayerStart 확인 → Art 결과/manifest 추가. 다른 dirty map을 버리거나 Save All, 원본 좌표로 route 재복원, 전체 맵 재생성을 하지 않는다. 캐릭터/AI PIE 및 전 레벨 NavMesh 검증은 아직 수행하지 않았다.
+
+### 2026-10-02 두 전장 인접 배치 — 지원 바닥 포함 저장·재로드 완료
+
+- 위 체크포인트의 지원 바닥 적용/검증을 완료했다. 중심을 포함하는 floor tile a5의 bbox에서 topZ 89.00001 cm/두께 20 cm를 선택하여 두 blood-water core에 보이지 않는 BlockAll floor를 추가했다. source 타일 높이 전체가 같다는 가정은 사용하지 않는다. 최초 preflight는 변경 전 중단되었고, 이후 HitResult 직접 속성 조회 실패는 `to_dict()`로 해결했다. source collision 변경 없음.
+- 최종 현행 map actor 14,525. map 저장 후 실제 World 교체 재로드, 중심/진입/보스 표식 단순·복합 trace 8/8, 두 마커/PP/geometry 표시, landscape material 16개 및 사용자 PlayerStart pose 유지, dirty map/content 없음. 미완료 적용 단계 없음. viewport screenshot API는 실패하여 새 이미지 검증을 주장하지 않는다.
+- 최종 자료: `Metadata/BladePhantom_SideBySide_20261002/ReloadVerificationWithCollision.json`, `GroundSupportReloaded.json`, `Layout.json`, `SideBySideSourceManifest.json`; 기존 분리-only `ReloadVerification.json`은 이 단계보다 먼저 생성된 기록으로 보존한다. 전체 결과는 Art 폴리싱 정본 하단 2026-10-02 절이다.
+- 재개는 UE health/현재 World/dirty 상태 확인 → 현행 `/Game/Maps/L_StormPass_Environment` → Outliner `ArenaReference` 또는 기존 helper `view('boss_phase_1/2')`로 시점 선택이다. 양쪽은 계속 표시된다. `separate_arenas`를 다시 이동 도구로 사용하지 말고, 변경 필요 시 저장 `Layout/ActorsBefore/ForegroundBoundsBefore`를 기준으로 표적 작업한다. `add_arena_collision_floors`는 기존 layout 기록이 있으면 사용자 삭제 floor를 자동 재생성하지 않는다. 백업 덮어쓰기/전체 map rebuild/Save All을 하지 않는다.
+- 후속 별도 범위는 실제 Character/AI PIE의 지지·이동 및 필요한 NavMesh/벽 조사, runtime boss 전환/teleport/respawn 연결, 완전히 분리된 sky/fog/GI renderer다. 이번 사용자 요청의 인접 전장과 각 1개 주 마커는 저장까지 완료했다. 게임 C++/BP 및 HeinMach를 이 작업에서 편집하지 않았다.
+
+### 2026-10-02 InGame 애니메이션 재생 속도 보정 — 사전 분석 체크포인트
+
+- 사용자 직접 수정 요청 범위는 `/Game/_Art/Player/Animation/InGame` 아래 애니메이션이다. 현재 AnimSequence 140개, Montage 5개, BlendSpace 2개, LevelSequence 3개를 읽었다. 아직 게임 애니메이션 쓰기/저장은 하지 않았다.
+- Router → Art 규칙/지식 인덱스 → `DAS_ANIMATION_RESTORATION_2026-09-16.md`의 V4 공간 계약 및 V5 exact 60 Hz 계약을 확인했다. 원본 시간축을 가진 CA와 Dilation-baked playback을 구분하며 기존 WeakAttack 5개의 사용자 crop과 9개 현행 locomotion의 24 fps × 1.25 보정을 유지한다.
+- 예전 `Saved/Extracted/DualAxeSword_20260916` 원본 자료는 현재 없었다. 현행 metadata tag의 정확한 OriginalPackage와 남은 exact60 report에서 필요한 원본만 `Saved/Extracted/InGame_Playback_20261002/Metadata`에 표적 재추출했다. 원작 package basename과 export Object Name이 다른 강공격/가드 이동이 있어 full package 참조를 키로 사용해야 한다.
+- 실제 Player Mesh relative scale은 약 0.01, SK_Player의 C_P_Kazan reference scale은 100이었다. component scale은 시간 보정 입력이 아니며 기존 root translation 정규화를 재적용하지 않는다. gameplay C++/BP/Skeleton/mesh는 수정하지 않는다.
+- 현재 계획은 기본 분기의 segment rate/Dilation을 기존 source pose 순서에 bake하고 현재 full-source 범위를 보존하는 것이다. 원작 Composite가 소비하지 않은 prefix/tail은 기존 source cadence로 유지하며 이를 원작 Composite 전체의 직접 복제로 표현하지 않는다. 출력은 exact 60/1, RateScale 1.0이다. 원작 raw source가 여러 다른 위치에서 반복 사용되는 UltimateSlash Air/Loop는 한 source RateScale로 표현할 수 없어 완성된 기존 Composite playback을 InGame 안에 준비하는 계약을 검토했다.
+- 자료: `Saved/ImportReports/InGame_Playback_SequenceSnapshot_20261002.json`, `InGame_Playback_MontageSnapshot_20261002.json`, `InGame_MontageExports_20261002`, `Saved/Extracted/InGame_Playback_20261002/ScopeMapping.json`, `SkillStateConsumptions.json`, `PlaybackPlan.json`. 계획은 강공격 package/object 이름 차이와 Walk 3개 원본 추가 조회를 반영해 최종 고정 전이다.
+- 정확한 재개: UE health/PIE stopped/dirty 상태 확인 → 최종 full-package 계획 검증 → InGame package byte backup 및 범위 밖 보존 manifest → temporary duplicate에서 재표본화/endpoint/root track/몽타주 section·notify 리타이밍 증명 → 대상만 적용/저장 → 새 process RAW/COMPRESSED/time/root/property 감사 → Art 결과와 이 절 아래 완료 기록. 전체 DAS importer/Force Delete 반복/Save All/원본 또는 사용자의 crop 복원을 실행하지 않는다.
+
+### 2026-10-02 두 레벨 shader/look 재복원 — 조사·백업 체크포인트
+
+- 사용자 새 요청: HeinMach/StormPass의 누락 전역 shader·material·toon을 최대한 복원하고 StormPass는 보스 2개 전장만 사용한다. Phase2 distant background 및 주변 landscape는 보존/검토하며 다른 source route actor는 명세/백업 후 정리한다. HeinMach 사용자 PlayerStart·삭제·transform override 보존 조건 유지.
+- 먼저 Art Router/상태/지식/규칙/StormPass 정본을 확인했다. 기존 canonical HeinMach material/fog report 상당수는 현재 Saved/ImportReports에 없으므로 문서의 완료 기록만으로 현재 적용 상태를 단정하지 않는다. 원본 Source와 현행 맵에서 표적 재감사를 진행한다.
+- FModel의 현재 provider를 사용하는 기존 EnemyExtractor로 ERP_Base, WEP base/HeinMach_OP/Phase2, M_AKCartoonCharacter 등 9 package와 WorldMPC/WorldProp master/CTP_Snow를 표적 재추출했다. shader model MSM_BBQCartoon 및 ShadingSmoothness/CellShadingThreshold/Shading Width/Shading Intensity, outline settings는 보존됐지만 MaterialExpression/function 본문은 cooked export에서 제거됐다. 원본 전용 엔진 shader의 완전 복사 가능성을 주장하지 않는다.
+- 현재 StormPass 양쪽 PP의 WeightedBlendables는 비어 있다. Phase2 sky/height fog/GI가 Phase1 환경을 공유하고 source covering color 등은 native graph에 연결되지 않았다. 새로운 native shader adapter, 지역 direct light/fog, Phase2 sky/background 및 HeinMach source PP/표면 누락을 실제 적용할 예정이다. 게임 C++/전투·애니메이션은 대상이 아니다.
+- 라이브 UE PID 27896/PIE Idle, 두 현재 `/Game/Maps` 맵이 존재하며 마지막 dirty maps/content는 없다. immutable 백업 `Saved/ArtBackups/LevelLook_PreRestore_20261002`에 두 맵/Player BP/Config/현재 phase helper 3개를 보존했다. 원본 재추출/요청은 `Saved/Extracted/LookRestoration_20261002`에 있다.
+- computer-use 스킬을 읽고 @oai/sky 초기화를 시도했으나 native pipe unavailable (os error 2)로 실패했다. UI를 실제 확인한 것으로 기록하지 않는다. 지원 API로 UE shader/RHI 및 재로드를 검사하고 Rider viewport 캡처를 필요한 범위에서 시도한다. custom UI helper를 띄우거나 키/설정 내용을 출력하지 않는다.
+- 정확한 재개: UE health/dirty 상태 → 표적 native scene snapshots/HeinMach exclusions 확인 → backup manifest 유지 → source look manifest와 기존 기능을 사용하는 Art builder 작성 → 새 shader compile/scene 적용 → 이 작업 asset 및 대상 맵만 저장 → 각 맵 World 교체 재로드/geometry·material·PP·character stencil·background·source 값 검사 → 화면 검수 가능 여부와 근사/미복원 목록을 명시 → Art MD에 날짜별 실제 결과 추가. 이전 전체 map rebuild/Source reset/Save All을 하지 않는다.

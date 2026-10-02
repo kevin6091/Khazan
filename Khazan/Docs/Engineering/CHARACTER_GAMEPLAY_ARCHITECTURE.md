@@ -2976,3 +2976,155 @@ LockOn 중 수동 `Input_TurnCamera`는 camera target 출력과 충돌하므로 
 - 새 요구는 LockOn 중 수평 거리에 관계없이 일정 각도보다 더 아래로 내려다보지 않고, 위쪽 target은 바라볼 수 있게 하는 것이다. 따라서 target anchor의 3D 높이는 유지하되, 거리 벡터의 Z를 제한하던 처리를 제거하고 계산된 Controller Pitch의 음수 하한을 제한한다. UE Pitch는 양수가 올려다보기, 음수가 내려다보기다. 최종 보간 출력에도 같은 하한을 적용해 LockOn 진입 전 시선이 이미 하한 아래였던 경우를 포함한다. 위쪽 Pitch에는 LockOn 전용 제한을 두지 않는다.
 - 현재 component가 카메라 출력과 target 수명을 계속 소유한다. Player/Locomotion/AnimInstance나 SpringArm attachment를 이 변경 때문에 바꾸지 않는다. `MaxLookDownAngleDegrees=20°`는 원작 근거가 없는 **임시 튜닝값**이다. component defaults에서 조절하며, `20°` 선택은 급한 탑다운을 피하면서 낮은 target을 조금 내려다볼 수 있게 하는 시작점이다. 현재 SpringArm 길이 `600 cm` 기준 충돌·offset이 없으면 이 각도에서 arm 회전으로 생기는 상승량은 약 `600 sin(20°)=205 cm`이며, 값이 작을수록 카메라 상승 상한도 낮아진다. 실제 높이와 framing은 BP offset·collision과 PIE에서 검증해야 한다.
 - 원래 full 3D LookAt의 무제한 Pitch 계약은 이 비대칭 제한 범위에서 대체한다. 카메라 회전 보간, CMC Yaw 회전, target 획득/해제 수명은 ARCH-69의 기존 계약을 유지한다.
+
+## 2026-09-30 — ARCH-71: 방향별 Dodge와 해금형 DodgeAttack의 Combo 계약 제안
+
+사용자는 Dodge를 8방 각각 별도 Ability로 표현하고, LockOn에서 8방을 사용하며 비잠금에서는 Forward만 쓰기로 했다. Dodge 도중 공격은 Dodge 방향에 따라 다른 DodgeAttack Ability로 이어지고 해금 조건을 가진다. 이는 ARCH-68의 비콤보 `UKZActionAbility` 파생 Dodge 설계를 대체하는 새 요구다. 아래는 **설계/적용 순서이며 Source·BP·Montage 적용 완료가 아니다.**
+
+### Edge가 맡는 것과 맡지 않는 것
+
+- `FKZComboNode::NodeId`가 현재 Dodge 여부와 고정된 방향을 이미 나타낸다. `Dodge_F`, `Dodge_FR` 등의 노드에만 DodgeAttack Edge를 작성하면 `bIsDodging`·`DodgeDirection` 공통 Edge 조건이 필요 없다. 같은 Edge schema의 `CommandTag/Phase`, `OwnerTagRequirements`, `TargetNodeId`를 재사용한다. 특정 방향에서만 다른 공격을 허용하는 경우도 그 Dodge 노드의 Edge/target으로 표현한다.
+- Edge는 **현재 실행 안에서 허용한 전환**만 기록한다. 첫 Dodge 방향 선택, 8개 granted Spec 중 하나의 활성화, Cost/쿨다운, Root Motion/충돌, 영속 해금 사실과 취소/EndPlay 수명은 각각 입력 adapter·ASC·Ability/Task·Progression의 책임이다. 모든 gameplay 분기를 범용 Edge predicate로 몰아넣지 않는다.
+- DodgeAttack 해금은 영속 Progression/Save가 원본이고 Pawn 준비 시 ASC에 `Unlock.Skill.DAS.DodgeAttack` 같은 프로젝트 semantic tag로 투영한다. 실제 태그 이름은 원작 내부 tag 확인 결과가 아니다. Dodge 노드의 공격 Edge는 `OwnerTagRequirements`로 이를 요구한다. 해당 spec은 graph-only grant로 두고 물리 `InputTag`를 배정하지 않는다. Progression producer가 아직 없으므로 초기에는 locked 경로를 확인하고 개발용 tag 부여로 unlocked 경로를 시험한다.
+
+### 최소 실행 구조
+
+- 현행 `UKZComboAttackAbility`는 Notify·Montage task·한 칸 command buffer·node/edge 해석·handoff·cleanup을 모두 갖고 있지만 constructor에서 `Ability.Action.Attack`을 부여한다. 이 실행 부분만 공통 `UKZComboActionAbility : UKZActionAbility`로 올리고, 기존 `UKZComboAttackAbility`는 Attack tag를 설정하는 얇은 파생형으로 유지한다. 저장된 Weak/Strong Blueprint 부모 경로를 바꾸지 않는다. `UKZDodgeAbility`는 공통 base에서 파생해 Dodge tag와 진입 방향 설정만 소유한다. DodgeAttack은 새 빈 native subclass 없이 기존 Attack 파생형의 Blueprint 변형으로 시작한다. ASC의 entry 조회 cast는 공통 base로 바꾼다.
+- 8개 Dodge Blueprint Ability는 동일한 native 구현·Combo Definition을 공유하되 각각 고유 방향과 `Dodge_<방향>` EntryNodeId를 가진다. 하나의 물리 `IA_Dodge`가 Started 때 방향을 한 번 고정한다. 비잠금은 입력 방향과 무관하게 F; LockOn은 그 순간의 월드 이동 의도를 actor-local 정면/오른쪽에 투영해 8등분한다. 무입력은 F다. 기존 Player deadzone을 재사용하며 CMC 실제 속도로 방향을 추정하지 않는다. AI는 물리 입력을 흉내 내지 않고 같은 ASC 방향 요청 API에 선택한 방향을 넘길 수 있다.
+- ASC의 좁은 `TryActivateDirectionalDodge(Direction)`가 granted Dodge spec 중 설정된 방향과 일치하는 하나를 선택한다. 같은 방향 중복 grant는 오류다. `Input.Action.Dodge.<방향>` 태그 8개나 방향별 C++ 클래스 8개는 만들지 않는다. 같은 Dodge Spec 재입력은 `InputEnd` 이후 기존 Action처럼 이전 실행을 정리하고 새 activation을 시작하며, 그 전에는 차단한다.
+- Dodge와 DodgeAttack은 하나의 읽기 전용 Dodge Combo Definition을 공유한다. Dodge 8개 노드는 한 Dodge Montage의 해당 section을 재생하고, 각 노드의 X/Begin Edge가 해금 tag와 authored 입력창을 통과하면 대상 DodgeAttack Entry로 handoff한다. 출발 Dodge를 먼저 끝내지 않고 대상의 activation/Commit이 성공할 때만 이전 실행을 정리한다. 각 activation의 Cost 단위는 별도 확인한다. 기존 Attack Cost GE를 복사하지 않는다.
+- 현재 InGame DodgeAttack 시퀀스는 F/B/L/R 네 방향만 파일 존재를 확인했다. 우선 네 개의 DodgeAttack Blueprint Ability와 EntryNode를 사용하고, 대각선 Dodge 노드에서 어느 cardinal 공격으로 잇는지는 Combo Definition Edge 데이터로 작성한다. 첫 임시 연결 후보는 FR/FL→F, BR/BL→B이며 원작 분기 근거는 미확인이다. 원작 규칙 또는 사용자 방향 결정이 나오면 데이터만 바꾼다. 8방 공격 asset이 확보되어 실제 공격별 비용/취소/모션 차이가 생기면 Entry Ability를 8개로 늘려도 runtime schema는 그대로다.
+- 현행 X/Y Started의 `AbilityInputTagPressed()` 선행은 Dodge `InputEnd` 뒤 일반 공격을 DodgeAttack Edge보다 먼저 활성화할 수 있다. Started에서 ASC held Combo Command를 먼저 제출하고 활성 node의 Edge를 평가한 뒤 일반 InputTag 진입을 시도하는 순서로 바꿔야 한다. 첫 idle 공격은 새 entry 활성화가 뒤따르며, 기존 Weak/Strong 연타·charge·handoff 회귀를 반드시 검사한다. Release/Cancel은 현재의 command 선행 정리 계약을 유지한다.
+- Dodge/Attack Montage의 section Next는 의도하지 않은 다음 section으로 이어지지 않게 `None`으로 작성한다. Dodge의 InputOpen/InputCommit/InputEnd 시점은 authored motion과 실제 조작 검증으로 정하고 임의 시간을 넣지 않는다. Root Motion 이동은 Montage/CMC 한 경로만 사용한다. invulnerability는 피해 판정 소비자가 구현될 때 Dodge window와 실행별 Effect handle로 추가한다.
+
+### 사전 안정화와 제품 검증
+
+- 8 Dodge + 4 DodgeAttack 노드를 넣기 전에 `UKZComboDefinitionData::IsDataValid()`로 중복 NodeId, 없는 target, 잘못된 Montage/section, 동일·가려진 Edge를 검출한다. 현재 `ApplyEdge()`는 target Entry Spec이 없으면 local node로 해석하므로 실제 handoff target의 grant와 Definition 공유도 시작 시 검사한다.
+- locked/unlocked, 8방/비잠금 F, 같은 방향 재입력, DodgeAttack 성공·Cost 실패 시 Dodge 보존, X/Y 기존 콤보, InputEnd 전후, UnPossess/EndPlay cleanup, CMC capsule 이동·벽/경사, LockOn 선회 중 월드 회피 궤적을 각각 PIE에서 확인한다. 현재 Character `UnPossessed()`는 held command만 비우고 active Action을 명시적으로 취소하지 않으므로 이 수명 경계도 Dodge 적용 시 함께 닫는다.
+
+### 2026-09-30 입력 중재 보정
+
+위의 “Command를 먼저 제출한 뒤 일반 Spec 진입을 시도”만으로는 즉시 DodgeAttack handoff가 성공한 같은 X press에서 새 일반 WeakAttack도 시도할 수 있다. 또한 Command를 소비했다는 이유로 GAS input protocol을 아예 건너뛰면 현재 X/Y Spec의 `InputPressed`와 Cancel 수명이 깨진다. 이를 다음의 작은 반환 계약으로 구체화한다.
+
+- `SubmitComboCommand(Begin)`은 현재 Combo Ability가 Begin Edge를 예약하거나 성공적으로 실행했는지 `bConsumed`를 반환한다. native event의 callback이 한 `bool& bConsumed`를 true로 올리고, ASC는 기존 held command 갱신을 먼저 수행한다. Release/Cancel은 기존 cleanup 순서를 유지하며 반환값은 입력 entry 중재에 사용하지 않는다.
+- Controller는 Begin에서 `bConsumed=SubmitComboCommand(...)` 다음 `AbilityInputTagPressed(InputTag, bAllowNewActivation=!bConsumed)`를 호출한다. ASC는 허용값과 관계없이 같은 InputTag의 **이미 활성인** 선택 Spec에 GAS press를 전달한다. 소비된 Begin은 비활성 일반 공격 Spec의 새 activation만 건너뛴다. 따라서 Dodge가 X를 소비하면 WeakAttack은 시작하지 않고, 기존 Weak/Strong이 자기 X/Y를 소비해도 `InputPressed` 및 후속 Release/Cancel은 유지된다.
+- 첫 idle press는 구독 중인 Combo Ability가 없어 `bConsumed=false`이므로 기존처럼 entry Spec이 활성화된다. Dodge Edge가 해금/Cost/Window 때문에 실패하면 false가 되어 그 순간 허용된 일반 Action 진입만 기존 GAS block/InputEnd 계약에 따라 시도한다. 성공 handoff 뒤 같은 press가 두 번째 Action을 시작하지 않는지 회귀한다.
+- `DodgeAttack`처럼 `InputTag`가 비어 있는 graph-only target Spec에는 handoff 시 `InputPressed=true`를 넘기지 않는다. 그 Spec은 물리 Release로 찾아 정리할 수 없고, 필요한 held 사실은 ASC의 Combo Command set에 이미 있다. 기존 `TryActivateComboEntry()`의 무조건적인 `bInputPressed` 대입을 target Spec의 입력 binding 유무에 맞게 보정한다.
+
+## 2026-10-01 — ARCH-72: Dodge→Weak/Strong 해금 분리와 현행 적용 감사
+
+### 현재 적용과 새 요구
+
+- 사용자는 현재 진행상황과 다음 공동 구현 절차를 요청했고, Dodge→Weak와 Dodge→Strong이 각각 해금형 특수 스킬로 이어진다는 요구를 명확히 했다. 이번 작업은 Source/저장 Blueprint/로그의 읽기 전용 감사와 문서 설명이다. 게임 C++/BP/Content를 수정하지 않았다.
+- 현재 `UKZDodgeAbility : UKZActionAbility`는 constructor에서 `Ability.Action.Dodge`, `Block.Movement.Input`, `Block.StaminaRegen`만 설정한다. 방향 설정, ActivateAbility/몽타주 task, Combo Definition/EntryNodeId, Combo delegate/Notify 처리는 없다. `UKZComboActionAbility` 추출과 방향별 ASC 선택도 아직 없다.
+- `/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_{F,RF,R,RB,B,LB,L,LF}` 8개의 파일과 `UKZDodgeAbility` 상속 관계는 Rider asset hierarchy로 확인했다. F/R의 property 조회는 빈 결과였으므로 이를 전체 EventGraph 검사나 실행 검증으로 해석하지 않는다.
+- 실제 입력 태그는 사용자가 추가한 `Input.Action.A`이며, Command는 `Command.Player.Dodge.A`다. 앞 절의 `Input.Action.Dodge`는 미적용 제안명이다. 새 절차는 현재 A 태그와 기존 Blueprint 이름을 재사용한다. Controller에는 아직 Dodge binding이 없다.
+- 표적 경로에서 `IA_Dodge`, `AM_DAS_Dodge`, Dodge Combo Definition, Dodge Cost/Unlock GE와 DodgeAttack Ability는 확인되지 않았다. Dodge/DodgeAttack InGame Sequence는 존재한다. 2026-10-01 10:29 UBT 로그는 Dodge/Tag C++의 Live Coding `Succeeded`이고 에디터 로그는 8개 Dodge BP 재컴파일을 기록한다. 이것은 새 cold build/회피 PIE 통과가 아니다.
+
+### 이전 제안에서 보완할 계약
+
+1. ARCH-71의 단일 `Unlock.Skill.DAS.DodgeAttack`/X-only 분기를 대신해 두 특수 행동을 별도 요구로 표현한다. 제안 semantic tag는 `Unlock.Skill.DAS.DodgeAttack.Weak`와 `.Strong`이다. 프로젝트 명칭이며 원작 내부 태그 확인값이 아니다. 실제 스킬 트리가 둘을 함께 해금한다면 같은 producer가 두 태그를 부여하면 된다.
+2. 각 Dodge node의 X/Begin Edge는 Weak 해금 태그와 `DodgeWeakAttack_<방향>` target을, Y/Begin Edge는 Strong 해금 태그와 `DodgeStrongAttack_<방향>` target을 사용한다. Hold/Move는 Any, 추가 held command는 실제 필요가 없으면 비운다. NodeId가 Dodge와 방향을 이미 고정하므로 범용 Edge에 IsDodging/DodgeDirection을 추가하지 않는다.
+3. target 특수 공격 Ability의 `ActivationRequiredTags`도 같은 해금 사실을 읽는다. Edge는 그 전환의 허용 여부, Ability는 직접 Spec/AI 활성화를 포함한 실행 승인 경계를 맡는다. 상태 작성자는 하나이며 별도 해금 bool은 만들지 않는다. 해금 태그를 ActivationOwnedTags에 넣지 않는다.
+4. 초기 구성은 기존 `/Game/Data/ComboCommand/DA_Player_Combo_Definition`에 Dodge/특수 공격 node를 추가하는 것으로 단순화한다. 모든 관련 Ability는 같은 Definition을 참조한다. 현 ASC는 Definition pointer와 EntryNodeId의 일치로 handoff를 찾으므로 별도 Dodge Definition은 일반 공격 graph와 연결되지 않는다. ARCH-71의 별도 Dodge Definition은 독립 graph가 실제 필요한 경우의 선택지로 남긴다.
+5. 방향별 Dodge 8개와 작성된 특수 공격 Entry Ability는 CharacterDefinition에서 처음부터 graph-only grant하고 InputTag는 비운다. 잠긴 특수 스킬도 grant는 유지하되 Edge/ActivationRequiredTags로 실행을 제한한다. 현재 ApplyEdge는 target Spec이 없으면 local node로 해석하므로 grant 누락을 해금 정책으로 사용하지 않는다. 같은 Definition/EntryNodeId 및 같은 Dodge 방향의 중복 grant는 오류다.
+6. 공통 Combo 실행/Notify/task/cleanup과 두 현재 소비자가 공유하는 이동·회복 차단 태그는 `UKZComboActionAbility`로 이관한다. `UKZComboAttackAbility`는 기존 직렬화 class/Blueprint 부모를 유지하고 Attack AssetTag만 설정한다. `UKZDodgeAbility`는 새 공통 base와 방향 defaults를 사용한다. 별도 빈 DodgeAttack native class나 Player/AnimInstance의 Dodge 상태 사본은 만들지 않는다.
+
+### 입력·비용·실패 경계 보정
+
+- `bConsumed`는 OpenToCommit에서 유효 Begin을 예약했을 때 true, CommitToEnd에서는 Edge 실행이 성공했을 때 true다. 실패한 즉시 실행을 소비 성공으로 보고하지 않는다. 이미 true인 reference를 다른 listener가 false로 내리지 않는다.
+- `AbilityInputTagPressed(InputTag, bAllowNewActivation=false)`는 비활성 후보뿐 아니라 현재 active Spec의 InputEnd 후 cancel/restart도 금지한다. 기존 활성 Spec의 GAS press 전달은 유지한다. 그렇지 않으면 같은 Ability의 local Edge 성공 직후 소비된 press가 새 activation으로 다시 실행될 수 있다.
+- graph-only target에는 `InputPressed=false`를 유지하고 X/Y held 사실은 기존 ASC command set에서 읽는다. 입력 binding이 있는 StrongCharge 등은 실제 command와 binding이 일치할 때만 ownership을 넘긴다.
+- 현 `TransitionToNode()`는 CheckCost 실패에도 state를 바꾸고 section jump를 실행한다. 비용 gate를 state reset/CurrentNodeId 변경/관성화/점프 전에 두고 실패 시 false로 반환하는 보완이 필요하다. 현 per-node ApplyCost 정책은 사용자의 기존 변경이며 임의로 activation-only로 되돌리지 않는다. Dodge→특수 공격은 다른 Ability activation의 Commit 비용이며 local node 비용과 중복 청구하지 않는다.
+- UE 5.8 `UGameplayAbility::CanActivateAbility()`는 비용/태그를 먼저 검사하지만 `PreActivate()`의 CancelAbilitiesWithTag 처리는 override ActivateAbility의 Commit/몽타주 재생보다 앞선다. `TryActivateAbility()`의 true를 Commit과 재생의 완전한 성공/rollback 보장으로 설명하지 않는다. 일반적인 사전 비용 부족은 source block을 복구하고 Dodge를 보존할 수 있으나 activation 후 task/데이터 실패는 별도 검증 대상이다. 공통 CanActivateAbility에서 필수 entry data를 사전 검증하고 authoring 검증을 우선한다. 범용 transaction/rollback 계층은 이번에 추가하지 않는다.
+- 동일 방향 re-Dodge의 cancel/restart에서도 비용·태그·entry data를 가능한 범위에서 먼저 검사한다. 기존 실행을 취소한 뒤 새 비용 부족을 발견하는 경로를 성공적인 회피 보존으로 기록하지 않는다.
+- UnPossessed는 현재 ClearComboCommands만 수행한다. Ability.Action 취소를 ActorInfo 유효 시점에 명시해 task/delegate/OwnedTags를 끝내고 입력 기록을 정리한다. EndPlay의 DestroyActiveState와 별개다.
+
+### 원작·데이터 미확인과 이번 검증 범위
+
+- InGame에는 Off_DodgeAtk F/B/L/R와 Com_DodgeAtk F/B의 JustMoment, RecklessRush, RecklessRush_Charge가 있다. 저장 `Khazan_DAS_CompositeExact60_FinalAudit_20260917.json`은 playback composite 복원 결과다. 파일명/재생 시간만으로 Weak=JustMoment, Strong=RecklessRush, 원작 해금 조건·차지 규칙을 확정하지 않는다.
+- 8방 Dodge 존재가 8방 Weak 특수 공격과 8방 Strong 특수 공격 존재를 뜻하지 않는다. 각 가족의 실제 모션 대응과 대각선 매핑을 확인한 만큼만 Entry Ability를 작성한다. 이전 FR/FL→F, BR/BL→B 임시 후보는 원작 확인값이 아니며 자동 적용하지 않는다.
+- 해금 전 기본 회피공격 유무는 사용자 확인 질문을 남겼다. 답변 전 설명의 임시 동작은 특수 스킬 Edge 불일치, InputEnd 전 기존 Dodge 유지, 이후 일반 공격 진입 허용이다. 이는 원작 확정 규칙이 아니다. 기본 회피공격이 있는 경우 unlocked special Edge와 잠긴 경우의 fallback Edge를 같은 node 데이터로 표현할 수 있다.
+- 방향 계산은 press 때 현재 Move action value와 camera Yaw를 읽어 월드 의도→Actor local로 변환한다. 360°/8=45°, 반구간 22.5°는 균등 8방 양자화의 수학값이다. deadzone은 기존 Player 설정을 재사용하며 새 gameplay literal을 넣지 않는다. 게임플레이/Ability 접근은 Game Thread에서 하고 AnimInstance worker가 방향·해금 상태를 작성하지 않는다.
+- Dodge/DodgeAttack 비용, Notify frame, 전이/블렌드 시간과 실제 Skeleton/Root Motion/LockOn 중 회피 궤적은 새로 확인하지 않았다. 기존 mesh scale 기록은 과거값이고 현재 native source는 0.01이므로 BP 최종 scale을 다시 확인한다. 이번 문서 감사는 build/PIE 실행이나 source 적용을 포함하지 않는다.
+
+## 2026-10-01 — ARCH-71/72 공통 Combo Action 부분 적용 재확인과 코드 설명 보완
+
+- 사용자가 `KZComboActionAbility.cpp`의 코드 첨부와 상세 설명을 요구했다. 이번 점검에서 실제 Source는 위 초기 감사보다 앞서 있다. `UKZComboActionAbility : UKZActionAbility`에 실행 상태/Definition/Entry getter/Task/Notify/Edge/cleanup이 옮겨졌고, 기존 `UKZComboAttackAbility`는 Attack AssetTag ctor만 남았다. `UKZDodgeAbility`도 새 공통 base를 상속하며 Dodge AssetTag만 설정한다.
+- `UKZAbilitySystemComponent::HasComboEntry/TryActivateComboEntry`의 include/cast도 실제로 `UKZComboActionAbility`를 사용한다. 이전 절의 "공통 base 추출과 Dodge parent 연결이 아직 없다"는 기록은 당시 검사 시점에 한정된다. 해당 사용자 변경을 되돌리지 않았다.
+- 남은 공통 base 보완은 `CanActivateAbility()`의 entry/ASC/AnimInstance 사전 검사와 `TransitionToNode()`의 비용 부족 시 조기 반환이다. 현재 Source는 CheckCost 실패에도 state reset/CurrentNodeId 변경/section jump를 실행한다. local node마다 ApplyCost를 적용하는 사용자 정책은 그대로 보존하는 설명용 보완안을 만들었다.
+- 전체 코드 보완안은 `Examples/ComboAction_20261001/KZComboActionAbility.h.txt`와 `.cpp.txt`다. 기존 함수/API와 한 인자 Combo Command delegate를 유지하고 CanActivate 선언/정의, local Cost gate 및 사실과 다른 주석만 보완했다. 이 파일은 게임 Source 적용이나 build/PIE 통과 결과가 아니다.
+- `CanActivateAbility`는 CDO/실행 인스턴스 양쪽에서 호출될 수 있으므로 전달된 ActorInfo와 authored entry 설정을 읽고 실행 상태를 쓰지 않는다. `Super::CanActivateAbility`의 비용/쿨다운/태그 gate를 유지한다. Activate의 재검사와 Commit 실패 cleanup도 유지하며 PreActivate 이후 Task 재생 실패의 rollback을 보장하지 않는다.
+- 현 `SubmitComboCommand`는 void/한 인자 event이며 Controller Begin은 generic press 선행이다. ARCH-72의 bConsumed/command 선행/graph-only InputPressed 보정과 graph validation은 아직 미반영이다. Dodge 방향/defaults/입력/몽타주/특수 공격/해금은 이번 설명에서 적용하지 않았다.
+- 원작 동일값을 새로 검증하지 않았다. 기존 header의 Combo 관성화 0.08 s와 이동 복귀 0.24 s는 현재 프로젝트 임시 튜닝값으로 표시하고 수치는 보존했다. 같은 frame의 HoldCommit/Release는 Game Thread에서 실제 먼저 처리된 사건이 판정을 결정하며, Notify가 항상 먼저라고 보장하지 않는다.
+- 검증은 실제 Source 및 설치 UE 5.8 GameplayAbilities의 CanActivate/PreActivate/EndAbility/Cost/Task API 표적 대조와 제안 파일 diff 확인이다. 게임 C++/BP/Content는 편집하지 않았고 새 build/PIE를 실행하지 않았다.
+
+## 2026-10-01 — ARCH-72 입력 소유권 계약 구체화와 Dodge 공동 구현 안내
+
+- 사용자가 Dodge 입력부터 Ability 실행, X/Y 해금형 특별 공격까지 직접 따라 구현할 수 있는 전체 소스와 함수·변수·에디터 설명을 요청했다. 현행 Source를 다시 확인한 결과 공통 ComboAction의 CanActivateAbility와 TransitionToNode 비용 조기 반환은 이미 사용자 코드에 반영됐다. 앞 절의 미적용 기록은 당시 검사 시점에 한정한다.
+- ARCH-03/04/07/09/10/72의 입력 수명 계약을 구체화한다. TryActivateComboEntry의 마지막 인자는 모호한 bool 대신 실제 CommandTag로 제안한다. ASC는 X→Input.Action.X, Y→Input.Action.Y 대응과 target Spec의 실제 binding, 현재 held 사실을 모두 확인해서 InputPressed를 결정한다. InputTag가 없는 graph-only DodgeAttack에는 false를 유지한다.
+- 같은 물리 입력을 가진 다른 Entry로 handoff할 때 source Spec의 InputPressed도 target으로 이관한다. source가 true로 남으면 기존 Released의 grant-order 탐색이 비활성 source에서 반환해 target의 WaitInputRelease가 깨질 수 있다. 실행 실패 시 handle로 다시 찾은 두 Spec의 이전 입력값을 복구한다. 다른 버튼의 입력 소유권은 건드리지 않는다. 영속 input owner manager나 Player/AnimInstance 상태 사본은 만들지 않는다.
+- Command의 소비 반환은 동기 native delegate의 bool 참조를 통해 전달한다. Begin의 유효 예약 또는 즉시 실행 승인만 true로 올리며 Release/Cancel은 기존 정리 경로다. 일반 GAS press는 유지하되 소비된 Begin으로 비활성 activation 및 InputEnd 후 같은 Spec restart를 시도하지 않는다. restart는 CanActivate 사전 검사 후 기존 실행을 취소한다.
+- 에디터 검증은 빈/중복 NodeId, target 누락, Montage/section 오류, 지원하지 않는 Cancel Edge와 완전히 같은 조건의 중복 Edge를 대상으로 한다. 서로 다른 조건이 배열 순서로 가려지는 모든 경우, BP grant 누락, Notify 위치/순서와 원작 모션 대응까지 자동 증명한다고 설명하지 않는다.
+- 설명용 산출물은 Examples/DodgeSpecialAttack_20261001 아래의 전체 소스 제안과 단계별 안내다. 게임 Source/BP/Content에 적용하거나 build/PIE 완료로 기록하지 않는다. Weak/Strong의 원작 motion 대응, 대각선 target, 비용, Notify frame, 영속 해금 producer는 확인된 것과 임시 authoring을 구분한다.
+
+## 2026-10-01 — ARCH-72 공동 구현 안내의 임시 authoring과 검증 범위
+
+- 전체 [소스와 구현 안내](Examples/DodgeSpecialAttack_20261001/GUIDE.md)를 작성했다. 16개 전체 h/cpp 제안, Source baseline hash 및 정적 대조 결과를 첨부했다. 설명 작업이며 게임 파일 적용/새 build/PIE는 수행하지 않았다.
+- 즉시 따라 할 수 있는 Dodge point Notify 위치로 각 section local InputOpen=4 frame, InputCommit=8 frame, InputEnd=24 frame을 **어시스턴트 선정 임시 튜닝값**으로 제안했다. 원작 입력창 근거는 없다. 초기 회피 피드백, 한 칸 예약 구간, 뒤쪽 회복 교체를 검증하는 시작점이며 Montage authoring에 모아 저장한다. Open<Commit<End<section end를 유지하고 응답/오입력/회피 잘림을 조정 기준으로 삼는다.
+- 30 fps 시간 환산 입력은 Saved/KZStaminaLockOnDodgeInspect.json의 dodge_combat_m1[0].frame_rate numerator=30/denominator=1, number_of_frames=32, play_length=1.0666667222976685이다. path는 Weapons/DualAxeSword/Shared/Combat/Evasion/Dodge/CA_P_Kazan_DualAxeSword_Off_Dodge_F_M1이다. 이는 현재 UE 후보의 저장 감사/임포트 관측이며 원작 gameplay window 직접 metadata가 아니다. InGame 복제본의 실제 frame rate/길이는 Editor에서 다시 확인하고 절대 Notify 시간은 section start+local frame/FPS로 계산한다.
+- Weak F/B→JustMoment, Strong F/B→RecklessRush와 L/R 양쪽 가족→동일 Off_DodgeAtk_L/R_M1, 대각선 RF/LF→F 및 RB/LB→B는 전체 입력 경로 시험용 **임시 콘텐츠 대응**이다. 원작 스킬/입력/대각선 규칙 확인 결과가 아니다. F 두 갈래부터 검사하며 현재 파일 수를 16 고유 모션이 있는 것으로 표현하지 않는다.
+- 새 액션 비용은 None인 입력/몽타주 시험 구성을 명시했으며 원작 무비용으로 확정하지 않았다. 기존 X/Y 비용과 local per-node ApplyCost를 보존한다. 피해/무적/Cue/Save producer는 실제 소비 구현 시 닫는다.
+
+## 2026-10-01 — ARCH-72 최소 변경 재검토: 기존 입력 경로로 방향별 Dodge 연결
+
+사용자가 앞선 Dodge 제안의 변경량과 기존 구조 재사용을 재검토하도록 요청했다. 실제 ASC, Controller, Action/ComboAction, Dodge, Definition/grant Source를 읽었다. 이번 결과는 설계·설명이며 게임 Source/BP/에셋 적용 또는 build/PIE 완료가 아니다.
+
+- 현재 UKZDodgeAbility는 이미 UKZComboActionAbility를 상속하며 EKZDodgeDirection/defaults/getter도 KZDodgeAbility.h에 있다. 공통 실행 추출, CanActivate 사전 검사, local Cost gate를 다시 구현하지 않는다. Montage Task/window/buffer/OwnerTagRequirements/ApplyEdge/TryActivateComboEntry/정상·취소 cleanup은 현행 기능을 재사용한다.
+- 앞선 전체 16파일 제안에는 이미 존재하는 코드의 전체 사본, 타입 헤더 분리, editor validation 및 공통 입력·수명 보완이 함께 들어 있었다. 이 전체 교체와 IsDataValid 선행을 Dodge 추가의 최소 필수 단계로 삼은 설명을 대체한다. 독립 Dodge 실행기, 새 Task/Component/Manager/DataAsset/native DodgeAttack class를 만들지 않는다.
+- 새 runtime KZDodgeTypes.h는 필수가 아니다. 현재 enum 정의 위치를 유지하고 Player/ASC header에서 필요한 경우 enum class EKZDodgeDirection : uint8; 전방 선언, 사용하는 cpp에서 기존 Dodge header include로 연결한다. 같은 UENUM을 두 곳에 정의하지 않는다.
+- 방향별 최초 선택은 Controller 입력 adapter가 현재 Move action value로 Player의 지역 방향 계산을 호출하고, ASC의 granted Spec을 읽어 Dodge defaults 방향이 일치하는 Spec Handle 하나를 찾는 제안으로 축소한다. 선택은 Game Thread에서 목록 lock 안에서 하고 handle만 보관해 이후 기존 입력 경로에 전달한다. 없는/중복 방향이면 실패하며 invalid handle을 일반 A fallback으로 넘기지 않는다.
+- 기존 AbilityInputTagPressed(InputTag)에 선택적인 FGameplayAbilitySpecHandle RequestedHandle 인자를 추가하는 안을 권장한다. 기본값은 invalid handle이며 기존 X/Y 호출은 유지된다. 유효 handle이 있으면 기존 active/inactive 두 순회 모두 해당 Spec만 검사하고, 기존 exact InputTag 검사도 유지한다. 기존 Spec 입력 기록/engine TryActivateAbility/GAS press/동일 Spec InputEnd restart 경로를 그대로 쓴다. 별도 TryActivateDirectionalDodge public 함수와 그 안의 restart/activation 복제는 필요하지 않다.
+- 이 안은 앞선 8 Dodge graph-only grant 계약을 변경한다. Dodge 8개는 모두 기존 Input.Action.A를 binding하며 RequestedHandle이 한 press의 variant를 선택한다. A Completed/Canceled도 기존 tag release/cancel 경로로 연결한다. 해금형 특별 공격 Entry는 계속 InputTag 없는 graph-only grant다. 방향별 input tag 8개와 영속 input-owner map은 만들지 않는다.
+- 같은 방향 재입력은 현행 InputEnd 계약을 유지한다. 다른 방향 target은 source InputEnd 전 GAS Action block으로 거절되고 InputEnd 뒤에는 새 Action의 기존 cancel 정책으로 source를 정리한다. 같은 Spec restart는 cancel 전에 기존 CanActivate/Cost/data 승인을 확인하는 작은 공통 보완을 유지한다. 비용 실패에 source를 먼저 취소하는 현행 순서를 완성 동작으로 삼지 않는다.
+- X/Y Begin은 기존 Combo Command를 먼저 평가하고 소비 여부로 신규 activation 및 같은 Spec restart를 중재하는 공통 보완이 여전히 필요하다. 소비돼도 기존 active Spec의 GAS press 수명은 유지한다. 즉시 특별 공격 전환 후 같은 press가 일반 공격을 새로 시작하는 충돌을 제거하며 새 전투 이벤트 계층을 만들지 않는다.
+- TryActivateComboEntry는 기존 handoff를 유지한다. graph-only target의 InputPressed=false와 실제 같은 binding을 가진 handoff의 입력 소유권 정리는 공통 입력 계약 보완으로 설명한다. 기존 Weak/Strong/Charge 회귀를 생략하거나 현재 bool 인자가 실제 입력 binding까지 증명한다고 설명하지 않는다.
+- 해금은 기존 Edge OwnerTagRequirements와 target ActivationRequiredTags, GE 소유 tag로 표현한다. 새 해금 상태/manager나 Edge schema를 추가하지 않는다. tag 사전 등록은 기존 native tag 영역 또는 프로젝트 tag 설정으로 가능하다. 영속 Save producer는 별도 실제 구현 경계다.
+- IsDataValid 자동 검사 및 무관한 정리는 별도 보강 단계로 둔다. entry/section/grant/방향 중복은 실제 BP/DataAsset 설정과 현행 CanActivate에서 확인한다. UnPossessed Action 취소 누락은 기존 Character 수명 함수의 작은 공통 보완으로 따로 제시하며 새 cleanup 시스템을 만들지 않는다.
+
+변경 범위: 새 runtime 파일/타입은 0개인 구성이 가능하다. 주요 Dodge 추가는 Controller 입력 연결/지역 Spec 선택, Player 지역 방향 계산, 기존 ASC press의 handle 필터다. X/Y 소비 및 handoff 입력 기록은 기존 ASC/ComboAction/Controller의 공통 보정이고, montage/node/edge/해금은 기존 에셋 데이터다. 8개 BP 요구를 유지하며 하나의 Ability로 몰래 합치지 않는다. 이후 안내는 전체 파일 교체보다 현재 Source를 기준으로 한 작은 diff로 제공한다.
+
+
+## 2026-10-01 — ARCH-72 추가 축소: 현행 InputEnd 계약이면 X/Y 중재 변경 불필요
+
+위 최소 변경 검토 뒤 현행 native 제어 흐름과 설치 UE GAS block 조건을 추가 확인했다. 같은 날짜 위 절의 “X/Y 소비 반환/command 선행이 여전히 필수” 결론은 아래 현행 계약 범위에서는 대체한다.
+
+- 현재 UKZActionAbility는 InputEnd 전 Ability.Action을 block하고 일반 Attack은 Ability.Action.Attack AssetTag를 가진다. UE AreAbilityTagsBlocked는 부모 tag를 포함해 이를 거절한다. 현재 RouteAttackInput Begin의 generic press → Combo Command 순서에서, Dodge InputEnd 전 일반 공격 activation은 거절된 뒤 살아 있는 Dodge가 기존 Command/Edge로 특수 공격을 예약·실행할 수 있다.
+- 현재 ComboAction ProcessMontageNotify(InputEnd)는 Pending을 비우고 ComboWindowPhase를 Closed로 만든 다음 Action block을 해제한다. 이후 새 X/Y Begin은 일반 공격 진입이고 Dodge Begin Edge는 닫힌 창에서 실행되지 않는다. InputEnd Notify의 RunHeld는 별도 authored InputEnd Edge를 동기적으로 평가하는 기존 경로다.
+- 따라서 “InputEnd 전 특별 공격, InputEnd 뒤 일반 공격”이라는 현재 경계에서 bConsumed event/Begin 순서/bAllowNewActivation을 필수 추가하지 않는다. 기존 X/Y 흐름과 ComboAction handler를 유지하고 Dodge node의 Begin Edge/owner tag/target Entry 데이터를 추가하는 것이 더 작은 제안이다. 앞선 입력창 종료 뒤에도 특수 Edge를 우선해야 한다는 가정은 현재 소스에 없었다.
+- 향후 일반 Action을 허용하면서 같은 X/Y를 다른 열린 Edge가 우선 소비해야 하는 실제 정책으로 변경할 경우 command 선행/소비 중재를 다시 검토한다. 해당 기능을 현재 Dodge의 필수 기반으로 선행 추가하지 않는다.
+- 최소 공통 보정은 graph-only 특수 target에 InputPressed를 기록하지 않는 기존 TryActivateComboEntry 분기와, 같은 Spec restart의 비용/data 사전 승인이다. 현재 DynamicSpecSourceTags의 작성자는 CharacterDefinition grant의 InputTag 하나뿐이라는 계약을 확인했다. 일반 binding/Charge의 입력 소유권 재설계는 Dodge 특수 target 구현과 구분해 회귀/별도 수정하며 전체 CommandTag API 변경을 무조건 요구하지 않는다.
+- 핵심 Dodge 수정은 기존 Player/Controller/ASC 세 클래스의 h/cpp에 한정할 수 있다. 기존 Dodge/ComboAction/ComboDefinition/CharacterDefinition native class와 schema는 유지한다. tag 사전 등록은 기존 경로로 하고 UnPossessed 취소는 Character의 별도 작은 수명 보완이다. 새 runtime 파일은 필요 없다.
+
+이 결론은 현행 native Action block/InputEnd 정책이 BP에서도 유지된다는 전제의 정적 제어 흐름 분석이다. BP의 override와 실제 입력창/방향/비용/Release/Cancel은 적용 후 PIE로 확인해야 한다. 이번에 runtime 동작을 실행 관측한 결과는 아니다.
+
+
+
+## 2026-10-01 — ARCH-72 최소 Dodge의 구체 코드 안내와 상시 최소 변경 방침
+
+- 사용자 최신 방침을 [AGENTS.md](../../AGENTS.md), [UE5_ENGINEERING_RULES.md](UE5_ENGINEERING_RULES.md), Router 하단에 기록했다. 모든 구현·기능 추가에서 현재 구조/기능을 우선 재사용하고, 새 구조는 기존 경로로 해결되지 않는 실제 책임·수명·소비자와 더 작은 대안이 부족한 이유를 확인한 뒤 제안한다. 최신 MD 상태/스타일 확인과 실제 Source 대조를 매 작업의 기준으로 유지한다.
+- [DODGE_MINIMAL_IMPLEMENTATION_GUIDE_20261001.md](DODGE_MINIMAL_IMPLEMENTATION_GUIDE_20261001.md)와 [변경 부분 patch](Examples/DodgeMinimal_20261001.patch)를 작성했다. 바로 위 추가 축소 계약을 구체화한 사용자 적용 안내다. 기존 Player/Controller/ASC h/cpp 6파일과 Character UnPossessed 1파일만 대상으로 하고 새 runtime 파일/클래스는 0개다. 현 ComboAction/Dodge/Definition native 코드는 교체하지 않는다.
+- 현재 입력값 → Player의 지역 inverse-yaw/atan 방향 계산 → Controller의 A-bound Dodge defaults/방향 Spec 선택 → 기존 ASC press의 optional RequestedHandle 순서다. ASC active/inactive 두 순회에 handle 필터를 넣고 exact input tag 조건을 유지한다. 지역 값만 만들며 Main AnimInstance의 velocity 각도를 입력 방향으로 재사용하지 않는다.
+- 같은 Spec InputEnd restart는 Cancel 전에 기존 CanActivate/비용/data 승인을 조회하고 Cancel 뒤 Spec이 없어졌거나 active이면 중단한다. graph-only target의 InputPressed=false는 현재 DynamicSpecSourceTags 작성자가 grant InputTag뿐이라는 소스 계약을 이용한 작은 보완이다. 별도 입력 owner manager를 만들지 않으며 기존 binding/Charge의 입력 수명은 회귀 확인 대상으로 둔다.
+- X/Y generic press → ComboCommand 순서와 현 ComboAction event/window/buffer/Edge/handoff는 유지한다. InputEnd 전 Action block, InputEnd 때 Closed 후 unblock이라는 native 정책을 BP가 유지하는 조건이다. Dodge 8 grant는 모두 A, 특별 공격 grant는 InputTag empty, 해금은 기존 owner/activation 요구와 GE다. Save/피해/무적은 이번 연결의 구현 완료 범위가 아니다.
+- 실제 검증: 설치 UE 5.8 API와 현행 소스/표적 asset 존재를 확인했고 patch 문맥 check가 통과했다. 이번 작업 시작 대비 Source 9개 SHA256이 모두 동일하다. 게임 C++/BP/Config/에셋에 제안을 적용하지 않았고 build/PIE도 수행하지 않았다. 임시 Notify 4/8/24 frame·특별 공격 모션 대응의 출처/영향/조정 조건은 새 안내에 명시했다.
+
+## 2026-10-01 — ARCH-73 제안: LockOn 복귀의 이동 포즈를 기존 입력·gait 정책으로 선택
+
+- [근거] 실제 패드 입력을 읽기 전용으로 수집한 PIE에서 L 입력 약 -91.35도/세기 1/이동 허용 true/컴포넌트 ResolvedGait Run인데 공격 종료 첫 관측의 AnimInstance 방향은 약 0도, LocomotionGait는 Walk였다. 8프레임 뒤 방향 -82.03도와 Run으로 바뀌었다. Raw 자료는 `Saved/ImportReports/WeakAttackLockOnExit_20261001_raw.json`, 요약은 같은 이름의 `_summary.json`이다. 전진 속도가 남아 있었으므로 이 사례는 속도 0 fallback이 아니다.
+- [제안 지위] 다음 계약은 사용자 적용용이며 구현 완료/수정 효과 검증을 의미하지 않는다. 현재 actual-velocity 각도·속도 hysteresis 구현 기록은 이번 코드가 적용되기 전까지 현행이다.
+- [책임/변경 범위] 기존 `UKZAnimInstance::UpdateKinematics_AnyThread`의 지역 계산과 `UpdateLocomotionSelection_AnyThread` 한 분기만 수정한다. 새 runtime 파일/멤버/태그/상태 수명/공통 helper는 없다. `KZPlayer`의 raw intent, ASC/Ability 입력·취소, CMC 정책은 재사용한다.
+- [방향 제안] 지상·유효 이동 허용 입력·LockOn일 때 `MovementDirectionAngle`은 기존 snapshot의 `MoveInputWorld`를 snapshot Actor Yaw로 역회전한 입력 방향각이다. 나머지 조건에서는 현 실제 속도각/fallback을 유지한다. 이 필드는 이 조건에서 순수 속도 관측값이 아니라 이동 포즈 선택값이 된다. `VelocityWorld/Local`, `GroundSpeed`, `AccelerationWorld`, `bIsMoving`은 계속 실제 운동 관측이다.
+- [gait 제안] 지상 유효 입력의 LockOn 포즈는 기존 LocomotionComponent가 확정한 `ResolvedGait`를 사용한다. 스틱 세기/요청/상한으로 이미 Walk/Run을 판정하므로 새 임계값을 추가하지 않는다. 비LockOn의 현재 실제 속도 hysteresis와 기존 Sprint 결과는 유지한다. 가속/감속 중에도 의도된 gait를 즉시 표시한다는 표현 정책 변경이며 발 미끄러짐/일반 방향 변경을 후속 QA한다.
+- [작성자/소비자/스레드] Player 입력 어댑터→LocomotionComponent가 기존 의도를 쓰고, GameThread가 기존 FKZAnimGameThreadData에 복사한다. AnyThread 함수는 const snapshot만 읽어 현재 프레임의 포즈 각도/gait를 작성한다. 실제 소비자는 현재 LockOn Walk/Run Blend Space 및 ABP gait 선택이다. worker에서 Actor/ASC를 새로 읽지 않는다. 지역 `const FVector InputLocal`은 함수 호출 안에서만 살고 Reset이 없다. 기존 관측 초기화/입력 해제·차단/Stop 이력/취소 수명을 재사용한다. 새로운 Player 전용 데이터나 미래 AI helper를 만들지 않는다.
+- [수치/검증] 새 gameplay tuning literal이 없다. 기존 atan2의 기하학 각도와 기존 ResolvedGait만 쓴다. 수정안은 `Examples/LockOnRecoveryPose_20261001.patch`(기존 1파일 +12/-3)다. 실제 Git 루트의 `Khazan/Source/...` 경로로 문맥 검사와 변경 건수 확인이 통과했다. Source 적용/수정안 build/수정 후 PIE는 아직 없다. 방향 hunk→gait hunk 순서로 확인한 뒤 시각적 튐의 잔존 여부를 판정한다.

@@ -1,12 +1,15 @@
 #include "Character/KZPlayer.h"
 
 
+#include "AbilitySystemComponent.h"
+#include "KZGameplayTags.h"
 #include "GameFramework/Controller.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Character/Component/KZLockOnComponent.h"
+#include "Ability/PlayerAbility/KZDodgeAbility.h"
 
 AKZPlayer::AKZPlayer()
 {
@@ -41,6 +44,8 @@ void AKZPlayer::PossessedBy(AController* NewController)
 		PlayerIntentHandle =
 			Locomotion->BeginLocomotionIntentSource(NewController, EKZLocomotionIntentSource::PlayerController);
 	}
+	
+	GetAbilitySystemComponent()->AddLooseGameplayTag(KZGameplayTags::Unlock_Skill_DAS_WeakAttack05);
 }
 
 void AKZPlayer::UnPossessed()
@@ -186,6 +191,44 @@ void AKZPlayer::StopLockOn()
 bool AKZPlayer::IsLockedOn() const
 {
 	return LockOnComponent && LockOnComponent->IsLockedOn();
+}
+
+EKZDodgeDirection AKZPlayer::ResolveDodgeDirection(const FVector2D& MovementInput, const FRotator& ControlRotation) const
+{
+	if (!IsLockedOn())
+	{
+		return EKZDodgeDirection::F;
+	}
+	else if (MovementInput.Length() <= MoveInputDeadZone)
+	{
+		return EKZDodgeDirection::B;
+	}
+
+	const FRotator CameraYaw(0.0, ControlRotation.Yaw, 0.0);
+
+	const FVector CameraForward = UKismetMathLibrary::GetForwardVector(CameraYaw);
+
+	const FVector CameraRight = UKismetMathLibrary::GetRightVector(CameraYaw);
+
+	const FVector WorldInput = CameraForward * MovementInput.X + CameraRight * MovementInput.Y;
+
+	const FRotator ActorYaw(0.0, GetActorRotation().Yaw, 0.0);
+
+	const FVector LocalInput = UKismetMathLibrary::LessLess_VectorRotator(WorldInput, ActorYaw);
+
+	double AngleDegrees = UKismetMathLibrary::DegAtan2(LocalInput.Y, LocalInput.X);
+
+	if (AngleDegrees < 0.0)
+	{
+		AngleDegrees += 360.0;
+	}
+
+	constexpr int32 DirectionCount = 8;
+	constexpr double SectorDegrees = 360.0 / DirectionCount;
+
+	const int32 DirectionIndex = FMath::FloorToInt((AngleDegrees + SectorDegrees * 0.5) / SectorDegrees) % DirectionCount;
+
+	return static_cast<EKZDodgeDirection>(DirectionIndex);
 }
 
 void AKZPlayer::RefreshRequestedGait()

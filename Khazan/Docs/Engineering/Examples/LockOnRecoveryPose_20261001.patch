@@ -1,0 +1,33 @@
+diff --git a/Khazan/Source/Khazan/Animation/KZAnimInstance.cpp b/Khazan/Source/Khazan/Animation/KZAnimInstance.cpp
+--- a/Khazan/Source/Khazan/Animation/KZAnimInstance.cpp
++++ b/Khazan/Source/Khazan/Animation/KZAnimInstance.cpp
+@@ -109,7 +109,15 @@ void UKZAnimInstance::UpdateKinematics_AnyThread(const FKZAnimGameThreadData& Snapshot, float DeltaSeconds)
+ 	// 움직이는 중인지. Input말고도 다른 요인으로도 움직인다면 true.
+ 	bIsMoving = GroundSpeed > MovingSpeedThreshold;
+ 
+-	if (bIsMoving) // 이동 중일 때, 캐릭터 정면기준 이동 방향의 각도.
++	// LockOn 이동 포즈는 공격의 잔여 속도 대신 유효한 이동 입력을 따른다.
++	if (bIsGrounded && bHasMovementInput &&
++		Snapshot.RotationMode == EKZRotationMode::LockOn)
++	{
++		const FVector InputLocal = ActorYawRotation.UnrotateVector(Snapshot.MoveInputWorld);
++		MovementDirectionAngle =
++			static_cast<float>(UKismetMathLibrary::DegAtan2(InputLocal.Y, InputLocal.X));
++	}
++	else if (bIsMoving)
+ 	{
+ 		// 앞쪽: 약 0도. 오른쪽: 약 +90도. 왼쪽: 약 -90도.
+ 		MovementDirectionAngle =
+@@ -164,9 +172,10 @@ void UKZAnimInstance::UpdateLocomotionSelection_AnyThread()
+ 	const bool bHasGroundedMovementInput = bIsGrounded && bHasMovementInput;
+ 	if (bHasGroundedMovementInput)
+ 	{
+-		if (ResolvedGait == EKZGait::Sprint)
++		if (ResolvedGait == EKZGait::Sprint ||
++			RotationMode == EKZRotationMode::LockOn)
+ 		{
+-			LocomotionGait = EKZGait::Sprint;
++			LocomotionGait = ResolvedGait;
+ 		}
+ 		else if (!bIsMoving)
+ 		{

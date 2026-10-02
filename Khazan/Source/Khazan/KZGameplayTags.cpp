@@ -19,14 +19,17 @@ namespace KZGameplayTags
 	
 	// LockOn
 	UE_DEFINE_GAMEPLAY_TAG(Input_Action_LockOn, "Input.Action.LockOn");
+	
+	// Dodge
+	UE_DEFINE_GAMEPLAY_TAG(Input_Action_A, "Input.Action.A");
 
 #pragma endregion
 
 #pragma region Command Tags
 
 	UE_DEFINE_GAMEPLAY_TAG(Command_Player_Attack_X, "Command.Player.Attack.X");
-
 	UE_DEFINE_GAMEPLAY_TAG(Command_Player_Attack_Y, "Command.Player.Attack.Y");
+	UE_DEFINE_GAMEPLAY_TAG(Command_Player_Dodge_A, "Command.Player.Dodge.A");
 
 #pragma endregion
 
@@ -34,6 +37,7 @@ namespace KZGameplayTags
 
 	UE_DEFINE_GAMEPLAY_TAG(Ability_Action, "Ability.Action");
 	UE_DEFINE_GAMEPLAY_TAG(Ability_Action_Attack, "Ability.Action.Attack");
+	UE_DEFINE_GAMEPLAY_TAG(Ability_Action_Dodge, "Ability.Action.Dodge");
 
 #pragma endregion
 
@@ -43,8 +47,7 @@ namespace KZGameplayTags
 
 	// AssetLabel Tags
 	UE_DEFINE_GAMEPLAY_TAG(AssetLabel_Preload, "AssetLabel.Preload");
-
-
+	
 	// Block Tags
 	UE_DEFINE_GAMEPLAY_TAG(Block_Movement_Input, "Block.Movement.Input");
 	UE_DEFINE_GAMEPLAY_TAG(Block_StaminaRegen, "Block.StaminaRegen");

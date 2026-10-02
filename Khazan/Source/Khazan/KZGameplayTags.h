@@ -20,6 +20,9 @@ namespace KZGameplayTags
 	
 	// LockOn
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_LockOn);
+	
+	// Dodge
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Action_A);
 
 #pragma endregion
 
@@ -28,6 +31,7 @@ namespace KZGameplayTags
 
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Command_Player_Attack_X);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Command_Player_Attack_Y);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Command_Player_Dodge_A);
 
 #pragma endregion
 
@@ -36,6 +40,7 @@ namespace KZGameplayTags
 
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Action);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Action_Attack);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Action_Dodge);
 
 #pragma endregion
 
@@ -59,6 +64,7 @@ namespace KZGameplayTags
 
 	// Skill
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Unlock_Skill_DAS_WeakAttack05);
+	
 
 #pragma endregion
 

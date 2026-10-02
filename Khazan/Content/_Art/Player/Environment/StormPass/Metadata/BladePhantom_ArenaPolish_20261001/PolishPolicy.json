@@ -1,0 +1,79 @@
+{
+  "scope": "Environment/editor review only; no boss gameplay, teleport, PlayerStart or Character changes.",
+  "source": "StormPass_EnvironmentProfile.json -> profiles.boss_phase_1 / boss_phase_2; original JSON hashes retained there.",
+  "temporary_native_adapter": {
+    "phase1_exposure_bias_ev": 2.25,
+    "reason": "2026-10-01 reference review supersedes the overbright 3 EV adapter. Native light units, film-pass and fog quality differ from the source renderer; these are explicitly temporary visual corrections, not original photometric values.",
+    "fog_density_scale": 0.01,
+    "fog_height_falloff_scale": 0.1,
+    "fog_scale_status": "Retained earlier native adapter coefficients; source-renderer unit conversion is unverified, not an original measurement.",
+    "review_camera_lift_cm": 300.0,
+    "review_camera_fov_degrees": 80.0,
+    "camera_status": "Editor review viewpoint only, not a gameplay camera/spawn tuning value.",
+    "phase1_light_review": {
+      "status": "Temporary native tuning; source photometric unit conversion and custom film shader are unverified.",
+      "root_source_intensity_scale": 0.05,
+      "added_source_intensity_scale": 0.08,
+      "added_unspecified_intensity": 2.0,
+      "added_light_falloff_exponent": 1.0,
+      "added_light_color_source": "profiles.boss_phase_1.components.sky_light.properties.LightColor; native warm fill palette, not original torch color",
+      "sky_source_intensity_scale": 0.48,
+      "post_process_scalars": {
+        "bloom_intensity": 0.5
+      },
+      "post_process_vectors": {
+        "color_gain_shadows": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "color_gain_highlights": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "color_saturation_midtones": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "color_saturation_highlights": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "color_saturation_shadows": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "scene_color_tint_linear_rgba": [
+        1.0,
+        0.65,
+        0.75,
+        1.0
+      ],
+      "enable_volumetric_fog_for_editor_review": true,
+      "render_setting_boundary": "r.VolumetricFog is enabled for this editor session; no project/scalability INI is changed."
+    }
+  },
+  "original_direct_values": {
+    "phase1_surface": {
+      "GlobalMetallic": 0.5,
+      "GlobalRoughness": 0.5,
+      "GlobalSpecular": 0.25
+    },
+    "phase2_surface": {
+      "GlobalMetallic": 0.4,
+      "GlobalRoughness": 0.4,
+      "GlobalSpecular": 0.2
+    }
+  },
+  "remaining_boundary": "Source-only rendering features (covering, BBQ shading, wind, film-pass) remain approximations; no source shader bytecode is available."
+}

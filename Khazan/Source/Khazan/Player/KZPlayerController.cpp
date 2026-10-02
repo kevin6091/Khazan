@@ -16,6 +16,9 @@
 #include "System/KZAssetManager.h"
 #include "Ability/KZAbilitySystemComponent.h"
 #include "Ability/Combo/KZComboTypes.h"
+#include "EnhancedPlayerInput.h"
+#include "GameplayAbilitySpec.h"
+#include "Ability/PlayerAbility/KZDodgeAbility.h"
 
 AKZPlayerController::AKZPlayerController(const FObjectInitializer& ObjectInitializer)
 	:Super(ObjectInitializer)
@@ -70,6 +73,12 @@ void AKZPlayerController::SetupInputComponent()
 		EnhancedInputComponent->BindAction(StrongAttackAction, ETriggerEvent::Started, this, &ThisClass::Input_StrongAttackStarted);
 		EnhancedInputComponent->BindAction(StrongAttackAction, ETriggerEvent::Completed, this, &ThisClass::Input_StrongAttackCompleted);
 		EnhancedInputComponent->BindAction(StrongAttackAction, ETriggerEvent::Canceled, this, &ThisClass::Input_StrongAttackCanceled);
+
+		const UInputAction* DodgeAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_A);
+		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Started, this, &ThisClass::Input_DodgeStarted);
+		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Completed, this, &ThisClass::Input_DodgeCompleted);
+		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Canceled, this, &ThisClass::Input_DodgeCanceled);
+		
 	}
 }
 
@@ -118,6 +127,80 @@ void AKZPlayerController::Input_StrongAttackCanceled(const FInputActionValue&)
 	RouteAttackInput(KZGameplayTags::Input_Action_Y,
 		KZGameplayTags::Command_Player_Attack_Y,
 		EKZComboCommandPhase::Cancel);
+}
+
+void AKZPlayerController::Input_DodgeStarted(const FInputActionValue&)
+{
+	AKZPlayer* PlayerCharacter = Cast<AKZPlayer>(GetPawn());
+
+    UKZAbilitySystemComponent* ASC = GetKZAbilitySystemComponent();
+
+    const UEnhancedPlayerInput* EnhancedPlayerInput = Cast<UEnhancedPlayerInput>(PlayerInput);
+
+    const UKZInputData* InputData = UKZAssetManager::GetAssetByName<UKZInputData>(KZGameplayTags::AssetData_InputData);
+
+    if (!IsValid(PlayerCharacter) || !IsValid(ASC) || !IsValid(EnhancedPlayerInput) || !IsValid(InputData))
+    {
+        return;
+    }
+
+    const UInputAction* MoveAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_Move);
+
+    if (!IsValid(MoveAction))
+    {
+        return;
+    }
+
+    const FVector2D MovementInput = EnhancedPlayerInput->GetActionValue(MoveAction).Get<FVector2D>();
+
+    const EKZDodgeDirection Direction = PlayerCharacter->ResolveDodgeDirection(MovementInput, GetControlRotation());
+
+    FGameplayAbilitySpecHandle SelectedDodgeHandle;
+    {
+        FScopedAbilityListLock AbilityListLock(*ASC);
+
+        for (const FGameplayAbilitySpec& Spec :
+            ASC->GetActivatableAbilities())
+        {
+            if (!Spec.Ability || !Spec.GetDynamicSpecSourceTags().HasTagExact(KZGameplayTags::Input_Action_A))
+            {
+                continue;
+            }
+
+            const UKZDodgeAbility* DodgeDefaults = Cast<UKZDodgeAbility>(Spec.Ability);
+
+            if (!IsValid(DodgeDefaults) || DodgeDefaults->GetDodgeDirection() != Direction)
+            {
+                continue;
+            }
+
+            if (!ensureMsgf(!SelectedDodgeHandle.IsValid(), TEXT("Duplicate granted Dodge direction: %d"), 
+            	static_cast<int32>(Direction)))
+            {
+                return;
+            }
+
+            SelectedDodgeHandle = Spec.Handle;
+        }
+    }
+
+    if (!ensureMsgf(SelectedDodgeHandle.IsValid(), TEXT("No A-bound Dodge for direction: %d"),
+        static_cast<int32>(Direction)))
+    {
+        return;
+    }
+
+    ASC->AbilityInputTagPressed(KZGameplayTags::Input_Action_A, SelectedDodgeHandle);
+}
+
+void AKZPlayerController::Input_DodgeCompleted(const FInputActionValue&)
+{
+	AbilityInputTagReleased(KZGameplayTags::Input_Action_A);
+}
+
+void AKZPlayerController::Input_DodgeCanceled(const FInputActionValue&)
+{
+	AbilityInputTagCanceled(KZGameplayTags::Input_Action_A);
 }
 
 #pragma endregion

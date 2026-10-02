@@ -109,11 +109,15 @@ void UKZAnimInstance::UpdateKinematics_AnyThread(const FKZAnimGameThreadData& Sn
 	// 움직이는 중인지. Input말고도 다른 요인으로도 움직인다면 true.
 	bIsMoving = GroundSpeed > MovingSpeedThreshold;
 
-	if (bIsMoving) // 이동 중일 때, 캐릭터 정면기준 이동 방향의 각도.
+	if (bIsGrounded && bHasMovementInput && Snapshot.RotationMode == EKZRotationMode::LockOn)
 	{
-		// 앞쪽: 약 0도. 오른쪽: 약 +90도. 왼쪽: 약 -90도.
-		MovementDirectionAngle =
-			static_cast<float>(UKismetMathLibrary::DegAtan2(VelocityLocal.Y, VelocityLocal.X));
+		const FVector InputLocal = ActorYawRotation.UnrotateVector(Snapshot.MoveInputWorld);
+
+		MovementDirectionAngle = static_cast<float>(UKismetMathLibrary::DegAtan2(InputLocal.Y, InputLocal.X));
+	}
+	else if (bIsMoving)
+	{
+		MovementDirectionAngle = static_cast<float>(UKismetMathLibrary::DegAtan2(VelocityLocal.Y, VelocityLocal.X));
 	}
 	else
 	{
@@ -164,9 +168,9 @@ void UKZAnimInstance::UpdateLocomotionSelection_AnyThread()
 	const bool bHasGroundedMovementInput = bIsGrounded && bHasMovementInput;
 	if (bHasGroundedMovementInput)
 	{
-		if (ResolvedGait == EKZGait::Sprint)
+		if (ResolvedGait == EKZGait::Sprint || RotationMode == EKZRotationMode::LockOn)
 		{
-			LocomotionGait = EKZGait::Sprint;
+			LocomotionGait = ResolvedGait;
 		}
 		else if (!bIsMoving)
 		{

@@ -14,7 +14,7 @@ import unreal
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '../..'))
 META = os.path.join(ROOT, 'Content/_Art/Player/Environment/StormPass/Metadata')
 STATE = os.path.join(META, 'StormPass_PhaseVisibilityBaseline_20260907.json')
-MAP = '/Game/_Art/Player/Environment/StormPass/Maps/L_StormPass_Environment'
+MAP = '/Game/Maps/L_StormPass_Environment'
 VARIANTS = ('boss_phase_1', 'boss_phase_2', 'boss_phase_clear')
 
 
@@ -73,6 +73,10 @@ def capture_phase_baseline():
 def set_variant(variant='traversal', save=False):
     if variant not in ('traversal',) + VARIANTS:
         raise ValueError('Unknown review variant')
+    layout_file = os.path.join(META, 'BladePhantom_SideBySide_20261002', 'Layout.json')
+    if os.path.isfile(layout_file) and read(layout_file).get('enabled'):
+        polish = runpy.run_path(os.path.join(ROOT, 'Scripts/StormPass/polish_blade_phantom_arenas.py'))
+        return polish['show_side_by_side'](variant, save=save)
     baseline = capture_phase_baseline()
     by_label = {a.get_actor_label(): a for a in actors()}
     layers = unreal.get_editor_subsystem(unreal.LayersSubsystem)
@@ -101,6 +105,12 @@ def set_variant(variant='traversal', save=False):
         layers.set_layer_visibility(name, value == variant)
     result = {'active_variant': variant, 'counts': {k: len(v) for k, v in groups.items()},
               'retained_actors': sum(len(v) for v in groups.values()), 'deleted_actors': 0}
+    # The boss WEP also owns global sun/sky/fog state. Geometry visibility alone
+    # left the two arenas using the outside sky and surface environment.
+    polish_policy = os.path.join(META, 'BladePhantom_ArenaPolish_20261001', 'PolishPolicy.json')
+    if os.path.isfile(polish_policy):
+        polish = runpy.run_path(os.path.join(ROOT, 'Scripts/StormPass/polish_blade_phantom_arenas.py'))
+        result['environment'] = polish['apply_phase_environment'](variant)
     write(os.path.join(META, 'StormPass_CurrentReviewVariant.json'), result)
     if save and not unreal.get_editor_subsystem(unreal.LevelEditorSubsystem).save_current_level():
         raise RuntimeError('Map save failed')

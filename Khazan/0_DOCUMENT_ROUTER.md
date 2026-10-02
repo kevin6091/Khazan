@@ -170,3 +170,10 @@ Engineering 작업에서는 `Docs/Art`를 읽거나 갱신하지 않는다. 런�
 - 콤보 입력은 `ComboInputOpen → ComboCommit → ComboInputEnd`의 3상태를 사용한다. 외부 행동 전환은 별도 `RecoveryCancelOpen`으로 다루며 combo End와 같은 상태로 합치지 않는다.
 - 현재 구현 작업은 먼저 3상태 콤보만 적용·검증하고, 그 다음 Attack02 locomotion early exit를 수직 검증한다. Source/asset 실제 적용 여부는 문서가 아니라 현재 파일과 PIE 결과로 판단한다.
 
+
+## 2026-10-01 — 최소 변경·문서 인지 상시 기준
+
+- 모든 구현·기능 추가는 기존 구조/엔진 기능/현재 데이터의 재사용과 작은 수정이 우선이다. 불가피한 근거 없이 방대한 구조·소스코드를 추가하지 않는다. 상세 규칙은 AGENTS.md와 Docs/Engineering/UE5_ENGINEERING_RULES.md의 같은 날짜 “모든 구현의 최소 변경과 MD 기반 작업 인지”를 따른다.
+- 작업 도메인을 판정한 뒤 해당 최신 상태/규칙/Architecture/Migration 및 필요한 continuity·현행 구현 기록을 활용해 현황, 게임 목표, 사용자 지향점과 공동 구현 스타일을 확인한다. 과거 설계나 미적용 첨부를 현재 구현으로 취급하지 않는다.
+- 캐릭터/Dodge의 최신 설계는 Architecture/Migration 하단의 2026-10-01 최소 변경 절이다. 기존 ComboAction/Dodge enum을 유지하고 기존 ASC 입력 경로를 Spec Handle로 좁혀 연결한다. InputEnd 전 Action block/InputEnd 때 ComboWindow Closed를 유지하는 범위에서 X/Y 순서·command event는 그대로 쓴다.
+
