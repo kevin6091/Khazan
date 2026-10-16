@@ -1306,3 +1306,18 @@ Package06_LockOnRumble의 새 Shipping compile51.47초, cook8590/91.98초/0error
 Shipping target up to date/Succeeded2.68초, cook7619/103.02초/0error·기존6warning, UATexit0/239.366초다. 전체41파일2,111,968,044bytes(약2.11GB), VC prerequisite·실행안내 포함/PDB0. 새 패키지의 소유 Shipping 프로세스는 별도 UserDir/offscreen/nosound에서90.234초 생존·crash0 후 해당 프로세스만 종료했다. 실제 전투·외관/FPS·패드·음악 청취까지 검증했다고 확대하지 않는다.
 
 게임 Source/Config/자산 변경0이며 전체 입력 SHA 유지다. 기존 packaging runner에 출력/task 환경 변수만 추가해 재사용했다. 정본 Metadata/Release_20261016/FinalVerification.json·PackageReadback.json·ReleaseFiles.json·Smoke01/Result.json. 필수 잔여0.
+
+
+## 2026-10-16 — 현재 프로젝트 Git main 분할 Push 완료
+
+사용자 요청의 프로젝트 스냅샷을15개 묶음으로 순차 commit/push했고, 각 묶음의 원격 main SHA를 검증했다. 시작은7d7cc2db2ad66a9a316169e9736eb979bb57a731, 최종 스냅샷은0305b6a9a138c7875578042e52b231302983ef89다. 2026-10-16 17:50 KST 검사에서 local HEAD와 ls-remote의 refs/heads/main이 동일했다. 이 완료 문서 기록은 별도 후속 커밋으로 전송한다.
+
+초기 선택30,553개와 base→최종 commit의 변경 경로30,553개가 정확히 일치했다. 선택 누락0, 계획 외 commit0, 잔여 tracked/staged 변경0이다. Source/Config/Content/Docs/Scripts/uproject와 텍스트 Metadata가 포함되며, 첨부한 Source/Khazan/AI/KZMonsterAIController.cpp도 반영됐다. 선택 파일의 초기 원시 크기는9,846,030,742bytes이며 실제 네트워크 전송량으로 해석하지 않는다. 기존 이력·Git LFS SK*.uasset 규칙을 유지하고 강제 push/기존 commit 재작성은 하지 않았다.
+
+제외 목록41,983개/초기33,045,614,220bytes는 검사 시 모두 미추적 상태로 로컬에 남아 있고, 제외 파일이 새로 추적된 사례나 추가 미분류 잔여는0이다. 대상은 과거 binary 에셋 백업, 검사 이미지/영상/오디오, 로그, 브라우저 프로필과 신규 생성 캐시다. 텍스트 Metadata의 원본 근거·보고서·과거 소스/충돌 진단 기록은 보존했다. 기존 ignore 설정을 바꾸거나 제외 파일을 삭제하지 않았다. 전체 working tree가 clean하다는 뜻은 아니며, 프로젝트의 선택 업로드 범위가 완료됐다는 뜻이다.
+
+Git 검증: batch1–11의 staged diff check는 성공했다. batch12–15에는 기존 텍스트의 whitespace/EOF 경고가 있어 그대로 보존했다. conflict-marker12개는 Metadata/BeastDodge_20261012/Rebase02·03/Conflicts 아래 과거 충돌 진단2파일뿐이고, 이번 선택의 현행 Source에는 해당 표식이0이다. 검사 결과를 전체 diff-check 성공이나 새 C++ 빌드 성공으로 표현하지 않는다. 이번 작업의 새 gameplay Source/BP/asset 편집0, UE build/BP compile/PIE0이며 문서에 Git 결과만 추가했다.
+
+로컬 상세 증거는 저장소 루트 .git/codex-main-upload-20261016/{inventory,plan,omitted,snapshot-verification}.json, batch-01.json부터 batch-15.json 및 각 push/diff-check 로그다. 모든 batch의 pushed=true를 확인했다. 앞선 진행/재개 절차는 완료 상태로 대체하며 prepare나 기존 batch를 다시 실행하지 않는다. 후속은 새 요청의 현재 Git 변경과 원격 main부터 확인하고, 로컬 보존 자료까지 추가 업로드하는 작업은 별도 범위로 판단한다.
+
+<!-- GitMainSplitPush_20261016_completed -->
