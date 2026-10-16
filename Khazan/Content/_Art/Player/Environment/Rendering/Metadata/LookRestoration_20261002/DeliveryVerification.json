@@ -1,0 +1,157 @@
+{
+  "status": "Source-backed native look assets saved; serialized scene and shader compilation checks passed; final viewport QA remains pending",
+  "final_files": [
+    {
+      "file": "Content\\Maps\\L_StormPass_Environment.umap",
+      "bytes": 7803954,
+      "sha256": "9471ec2f7b5cb60c058e697e1de8de392060a5f0643dd0fd353b7b815dba9c52"
+    },
+    {
+      "file": "Content\\Maps\\L_HeinMach_Environment.umap",
+      "bytes": 31656345,
+      "sha256": "be5a453e7a10ad5fb5c656c19fbaa3e6bb45b773bca75e804ae7e9816fc1fb47"
+    },
+    {
+      "file": "Config\\DefaultEngine.ini",
+      "bytes": 7860,
+      "sha256": "4457280675c01d2ee55e156bbb4ec4ad162dc377b232a95f6259630cf064f299"
+    }
+  ],
+  "backup_main_verified": 7,
+  "backup_additional_verified": 102,
+  "fresh_process_exit_code": 0,
+  "fresh_process_log": "Saved/Logs/LookFreshAudit_Final_20261002.log",
+  "fresh_process_summary": {
+    "passed": true,
+    "maps": [
+      {
+        "level": "StormPass",
+        "actors": 2547,
+        "used_materials": 210
+      },
+      {
+        "level": "HeinMach",
+        "actors": 9609,
+        "used_materials": 662
+      }
+    ],
+    "Player_components": [
+      {
+        "component": "DualAxeSword_Original_R_GEN_VARIABLE",
+        "custom_depth": true,
+        "stencil": 254
+      },
+      {
+        "component": "DualAxeSword_Original_L_GEN_VARIABLE",
+        "custom_depth": true,
+        "stencil": 254
+      },
+      {
+        "component": "CharacterMesh0",
+        "custom_depth": true,
+        "stencil": 254
+      }
+    ],
+    "custom_depth_project": 3,
+    "boundary": "Fresh map/material/Blueprint serialization readback under NullRHI; no visual, shader execution or combat PIE proof"
+  },
+  "native_controls_final": {
+    "WorldToonWeight": 0.16,
+    "CharacterToonWeight": 1.0,
+    "WorldOutlineOpacity": 0.16,
+    "CharacterOutlineOpacity": 0.8,
+    "DepthEdgeThreshold": 0.004,
+    "NormalEdgeThreshold": 0.3,
+    "StencilDepthToleranceCm": 2.0,
+    "FogDensityScale": 0.01,
+    "FogFalloffScale": 0.1,
+    "LocalFogDensityScale": 0.15,
+    "Phase2LocalFogDensityScale": 0.6,
+    "Phase1LocalFogRadiusCm": 7500.0,
+    "Phase2LocalFogRadiusCm": 6000.0,
+    "CoveringColorWeight": 0.85,
+    "SnowLuminanceStart": 0.03,
+    "SnowLuminanceEnd": 0.2,
+    "SnowNeutralityTolerance": 0.5,
+    "SnowUpNormalWeight": 0.35,
+    "WorldCoveringBaseMask": 0.3,
+    "FoliageCoveringBaseMask": 0.0,
+    "CoveringGlowScale": 0.002,
+    "WaterPollutionWeight": 0.85,
+    "WaterPollutionAbsorptionPerCm": 0.02,
+    "NativeHazeStartCm": 1000.0,
+    "NativeHazeLuminanceScale": 8.0,
+    "SkySunBackgroundScale": 0.25,
+    "SkyNebulaNoiseStrengthUV": 0.02,
+    "Phase2FixedEV100": 2.5,
+    "Phase2BloomIntensity": 0.5,
+    "Phase2SaturationNative": 0.85,
+    "Phase2ShadowSaturationNative": 0.85
+  },
+  "shader_compilation": {
+    "materials": [
+      {
+        "asset": "/Game/_Art/Player/Environment/Rendering/Materials/M_KZ_NativeCartoonOutline",
+        "pixel_instructions": 110,
+        "vertex_instructions": 148
+      },
+      {
+        "asset": "/Game/_Art/Player/Environment/Rendering/Materials/M_KZ_SourceSky_Adapter",
+        "pixel_instructions": 197,
+        "vertex_instructions": 162
+      },
+      {
+        "asset": "/Game/_Art/Player/Environment/Rendering/Materials/M_SP_Phase1_SunMask",
+        "pixel_instructions": 96,
+        "vertex_instructions": 148
+      },
+      {
+        "asset": "/Game/_Art/Player/Environment/Rendering/Materials/M_SP_Phase2_SunMask",
+        "pixel_instructions": 96,
+        "vertex_instructions": 148
+      },
+      {
+        "asset": "/Game/_Art/Player/Environment/Rendering/Materials/M_SP_Phase2_World_Covering",
+        "pixel_instructions": 423,
+        "vertex_instructions": 841
+      },
+      {
+        "asset": "/Game/_Art/Player/Environment/Rendering/Materials/M_SP_Phase2_Trees_Covering",
+        "pixel_instructions": 263,
+        "vertex_instructions": 201
+      },
+      {
+        "asset": "/Game/_Art/Player/Environment/Rendering/Materials/M_SP_Phase2_SourcePollution_Water",
+        "pixel_instructions": 1168,
+        "vertex_instructions": 148
+      },
+      {
+        "asset": "/Game/_Art/Player/Environment/Rendering/HeinMachTerrain/Materials/M_HM_SourceWeighted_Landscape1",
+        "pixel_instructions": 471,
+        "vertex_instructions": 148
+      },
+      {
+        "asset": "/Game/_Art/Player/Environment/Rendering/HeinMachTerrain/Materials/M_HM_SourceWeighted_Landscape2",
+        "pixel_instructions": 494,
+        "vertex_instructions": 148
+      }
+    ],
+    "boundary": "SM6 editor compilation statistics; not original shader equivalence or gameplay timing proof"
+  },
+  "visual_QA": "Initial/intermediate Phase2 screenshots viewed and compared; final viewport failed/stale; final EV/mask/sky, HeinMach and P1 visual regression pending",
+  "current_editor_observation": {
+    "process_id": 30964,
+    "editor_world": null,
+    "PIE_state": "Idle",
+    "preservation": "Different editor session/automation left as found"
+  },
+  "unrecovered": [
+    "Original BBQCartoon/HalfCartoon engine functions",
+    "Complete NTP/rim/hatching/leaf execution",
+    "FFX CACAO and original custom PP code",
+    "Runtime WEP/sky/fog/GI/camera follow",
+    "Height/RVT/displacement",
+    "Complete water fluidsim/waves/pollution notify"
+  ],
+  "canonical_doc": "Docs/Art/LEVEL_LOOK_RESTORATION_2026-10-02.md"
+}

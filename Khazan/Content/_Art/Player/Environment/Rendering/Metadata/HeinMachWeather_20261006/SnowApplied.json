@@ -1,0 +1,48 @@
+{
+  "asset": "/Game/_Art/Player/Environment/Rendering/HeinMachWeather/NS_HM_SourceSnow_TwoLayers.NS_HM_SourceSnow_TwoLayers",
+  "original_particle": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Level/BBQ_Level/Enviroment/FP_World_IceBlizzard",
+  "GPU_emitters": 2,
+  "source_spawn_rate_per_second": [
+    1250,
+    2500
+  ],
+  "source_lifetime_seconds": [
+    5,
+    6
+  ],
+  "source_size_cm": [
+    0.5,
+    0.75
+  ],
+  "source_OP_yaw_degrees": 120,
+  "world_bounds_cm": [
+    [
+      -55334.88178502084,
+      -77086.76143475005,
+      -18514.390493740324
+    ],
+    [
+      141734.90200706298,
+      117776.63718367612,
+      132480.66550736612
+    ]
+  ],
+  "source_dust": {
+    "life_seconds": [
+      1,
+      2
+    ],
+    "compiled_GPU_size_cm": [
+      0.3,
+      0.3
+    ],
+    "spawn_sphere_radius_cm": 50,
+    "original_vector_samples": 512
+  },
+  "native_controls": {
+    "RadianceScale": 256.0,
+    "SourceOPSpawn": 500.0,
+    "SpaceAdaptation": "World-space particles spawned around the camera, instead of attaching existing flakes to camera movement."
+  },
+  "boundary": "Native Niagara adaptation of both source GPU snow/dust emitters. Ground collision/event puffs, rotating dust vector field, MaxBlizzard replacement and full regional wind/rate controller remain separate source contracts."
+}

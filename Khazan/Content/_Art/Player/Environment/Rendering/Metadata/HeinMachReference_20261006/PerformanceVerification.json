@@ -1,0 +1,139 @@
+{
+  "conditions": {
+    "background": true,
+    "assets_saved": false,
+    "viewport": [
+      1280,
+      720
+    ],
+    "frame_cap": 30,
+    "limits": "Development offscreen; Rider editor concurrently running. Sequential effects comparison, not a production frame-rate guarantee.",
+    "variants": [
+      {
+        "name": "LegacySnow",
+        "system": "/Game/__HeinMachQA/NS_HM_LegacySnow",
+        "particles": {
+          "Source_Flakes_Fast_Large": 8600,
+          "Source_Dust": 2298
+        },
+        "csv": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Saved\\ArtStaging\\HeinMachReference_20261006\\Saved\\Profiling\\CSV\\HM_Reference_LegacySnow_20261006.csv"
+      },
+      {
+        "name": "SparseSnow",
+        "system": "/Game/_Art/Player/Environment/Rendering/HeinMachWeather/NS_HM_SourceSnow_TwoLayers",
+        "particles": {
+          "Source_Flakes_Fast_Large": 2382,
+          "Source_Dust": 784
+        },
+        "csv": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Saved\\ArtStaging\\HeinMachReference_20261006\\Saved\\Profiling\\CSV\\HM_Reference_SparseSnow_20261006.csv"
+      },
+      {
+        "name": "NoSnow",
+        "system": null,
+        "csv": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Saved\\ArtStaging\\HeinMachReference_20261006\\Saved\\Profiling\\CSV\\HM_Reference_NoSnow_20261006.csv"
+      }
+    ]
+  },
+  "variants": [
+    {
+      "name": "LegacySnow",
+      "particles": {
+        "Source_Flakes_Fast_Large": 8600,
+        "Source_Dust": 2298
+      },
+      "metrics": {
+        "FrameTime": {
+          "frames": 200,
+          "median": 44.9995,
+          "p95": 46.888670000000005
+        },
+        "GPUTime": {
+          "frames": 200,
+          "median": 34.65965,
+          "p95": 42.65381
+        },
+        "GPU/NiagaraGPUSimulation": {
+          "frames": 200,
+          "median": 0.0164,
+          "p95": 0.022814999999999995
+        },
+        "GPU/Translucency": {
+          "frames": 200,
+          "median": 0.11115,
+          "p95": 5.22723
+        },
+        "GPU/TemporalSuperResolution": {
+          "frames": 200,
+          "median": 6.7395499999999995,
+          "p95": 7.99627
+        }
+      }
+    },
+    {
+      "name": "SparseSnow",
+      "particles": {
+        "Source_Flakes_Fast_Large": 2382,
+        "Source_Dust": 784
+      },
+      "metrics": {
+        "FrameTime": {
+          "frames": 201,
+          "median": 44.4356,
+          "p95": 46.9119
+        },
+        "GPUTime": {
+          "frames": 200,
+          "median": 33.8942,
+          "p95": 41.30653
+        },
+        "GPU/NiagaraGPUSimulation": {
+          "frames": 200,
+          "median": 0.0138,
+          "p95": 0.019209999999999994
+        },
+        "GPU/Translucency": {
+          "frames": 200,
+          "median": 0.1019,
+          "p95": 0.356835
+        },
+        "GPU/TemporalSuperResolution": {
+          "frames": 200,
+          "median": 6.03085,
+          "p95": 7.719359999999999
+        }
+      }
+    },
+    {
+      "name": "NoSnow",
+      "particles": null,
+      "metrics": {
+        "FrameTime": {
+          "frames": 201,
+          "median": 44.4283,
+          "p95": 46.6987
+        },
+        "GPUTime": {
+          "frames": 200,
+          "median": 33.22925,
+          "p95": 40.99308
+        },
+        "GPU/NiagaraGPUSimulation": {
+          "frames": 0,
+          "status": "No active snow system; GPU stat not emitted"
+        },
+        "GPU/Translucency": {
+          "frames": 200,
+          "median": 0.0573,
+          "p95": 0.0723549999999999
+        },
+        "GPU/TemporalSuperResolution": {
+          "frames": 200,
+          "median": 6.1942,
+          "p95": 7.838474999999998
+        }
+      }
+    }
+  ],
+  "timing_unit": "milliseconds",
+  "boundary": "Sequential 200-frame Development offscreen sample with another editor open; not a shipping FPS guarantee."
+}

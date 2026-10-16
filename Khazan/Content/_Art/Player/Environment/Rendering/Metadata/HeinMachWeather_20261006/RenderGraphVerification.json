@@ -1,0 +1,374 @@
+{
+  "materials": [
+    {
+      "name": "M_HM_RegionalLook",
+      "root": "<Object '/Game/_Art/Player/Environment/Rendering/HeinMachWeather/M_HM_RegionalLook.M_HM_RegionalLook:MaterialExpressionCustom_0' (0x0000027A592BA500) Class 'MaterialExpressionCustom'>",
+      "pixel_instructions": 110,
+      "domain": "<MaterialDomain.MD_POST_PROCESS: 4>",
+      "native_shadow_code_present": true,
+      "source_sky_code_present": true,
+      "disable_pre_exposure_scale": true,
+      "compile_errors": [],
+      "exported": true
+    },
+    {
+      "name": "M_HM_SourceSky",
+      "root": "<Object '/Game/_Art/Player/Environment/Rendering/HeinMachWeather/M_HM_SourceSky.M_HM_SourceSky:MaterialExpressionMultiply_11' (0x0000027A592BFA00) Class 'MaterialExpressionMultiply'>",
+      "pixel_instructions": 198,
+      "domain": "<MaterialDomain.MD_SURFACE: 0>",
+      "compile_errors": [],
+      "exported": true
+    },
+    {
+      "name": "M_HM_SourceSnow",
+      "root": "<Object '/Game/_Art/Player/Environment/Rendering/HeinMachWeather/M_HM_SourceSnow.M_HM_SourceSnow:MaterialExpressionComponentMask_0' (0x0000027A59492400) Class 'MaterialExpressionComponentMask'>",
+      "pixel_instructions": 107,
+      "domain": "<MaterialDomain.MD_SURFACE: 0>",
+      "opacity_root": "<Object '/Game/_Art/Player/Environment/Rendering/HeinMachWeather/M_HM_SourceSnow.M_HM_SourceSnow:MaterialExpressionComponentMask_3' (0x0000027A59493000) Class 'MaterialExpressionComponentMask'>",
+      "alpha_only_masks": [
+        {
+          "name": "MaterialExpressionComponentMask_2",
+          "r": false,
+          "g": false,
+          "b": false,
+          "a": true
+        },
+        {
+          "name": "MaterialExpressionComponentMask_3",
+          "r": false,
+          "g": false,
+          "b": false,
+          "a": true
+        }
+      ],
+      "translucency_pass": "<MaterialTranslucencyPass.MTP_BEFORE_DOF: 0>",
+      "compile_errors": [],
+      "exported": true
+    },
+    {
+      "name": "M_HM_SourceDust",
+      "root": "<Object '/Game/_Art/Player/Environment/Rendering/HeinMachWeather/M_HM_SourceDust.M_HM_SourceDust:MaterialExpressionComponentMask_0' (0x0000027A59492800) Class 'MaterialExpressionComponentMask'>",
+      "pixel_instructions": 107,
+      "domain": "<MaterialDomain.MD_SURFACE: 0>",
+      "opacity_root": "<Object '/Game/_Art/Player/Environment/Rendering/HeinMachWeather/M_HM_SourceDust.M_HM_SourceDust:MaterialExpressionComponentMask_4' (0x0000027A59492000) Class 'MaterialExpressionComponentMask'>",
+      "alpha_only_masks": [
+        {
+          "name": "MaterialExpressionComponentMask_3",
+          "r": false,
+          "g": false,
+          "b": false,
+          "a": true
+        },
+        {
+          "name": "MaterialExpressionComponentMask_4",
+          "r": false,
+          "g": false,
+          "b": false,
+          "a": true
+        }
+      ],
+      "translucency_pass": "<MaterialTranslucencyPass.MTP_BEFORE_DOF: 0>",
+      "compile_errors": [],
+      "exported": true
+    }
+  ],
+  "volumes": [
+    {
+      "label": "HM_PreviewPostProcess",
+      "priority": -100.0,
+      "blend_weight": 1.0,
+      "blend_radius": 100.0,
+      "unbound": true,
+      "enabled": true,
+      "auto_exposure_min_brightness": "8.0",
+      "override_auto_exposure_min_brightness": true,
+      "auto_exposure_max_brightness": "8.0",
+      "override_auto_exposure_max_brightness": true,
+      "color_gain": "<Struct 'Vector4' (0x0000027A5ADE9F70) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain": false,
+      "color_gain_shadows": "<Struct 'Vector4' (0x0000027A5ADEA010) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain_shadows": true,
+      "color_gain_highlights": "<Struct 'Vector4' (0x0000027A5ADEA150) {x: 1.500000, y: 1.500000, z: 1.500000, w: 1.000000}>",
+      "override_color_gain_highlights": true,
+      "user_flags": "0",
+      "override_user_flags": true,
+      "blendables": [
+        {
+          "weight": 1.0,
+          "object": "<Object '/Game/_Art/Player/Environment/Rendering/HeinMachWeather/MI_HM_RegionalLook_OP.MI_HM_RegionalLook_OP' (0x0000027A592D4000) Class 'MaterialInstanceConstant'>"
+        }
+      ]
+    },
+    {
+      "label": "HM_Environment_PP_HeinMach_Light_209",
+      "priority": 12.0,
+      "blend_weight": 1.0,
+      "blend_radius": 100.0,
+      "unbound": false,
+      "enabled": true,
+      "auto_exposure_min_brightness": "8.0",
+      "override_auto_exposure_min_brightness": true,
+      "auto_exposure_max_brightness": "8.0",
+      "override_auto_exposure_max_brightness": true,
+      "color_gain": "<Struct 'Vector4' (0x0000027A5ADEF370) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain": false,
+      "color_gain_shadows": "<Struct 'Vector4' (0x0000027A5ADEF410) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain_shadows": true,
+      "color_gain_highlights": "<Struct 'Vector4' (0x0000027A5ADEF550) {x: 1.500000, y: 1.500000, z: 1.500000, w: 1.000000}>",
+      "override_color_gain_highlights": true,
+      "user_flags": "0",
+      "override_user_flags": true,
+      "blendables": [
+        {
+          "weight": 1.0,
+          "object": "<Object '/Game/_Art/Player/Environment/Rendering/HeinMachWeather/MI_HM_RegionalLook_Blizzard1.MI_HM_RegionalLook_Blizzard1' (0x0000027A592D1800) Class 'MaterialInstanceConstant'>"
+        }
+      ]
+    },
+    {
+      "label": "HM_Environment_PP_HeinMach_Light_210",
+      "priority": 13.0,
+      "blend_weight": 1.0,
+      "blend_radius": 100.0,
+      "unbound": false,
+      "enabled": true,
+      "auto_exposure_min_brightness": "8.0",
+      "override_auto_exposure_min_brightness": true,
+      "auto_exposure_max_brightness": "8.0",
+      "override_auto_exposure_max_brightness": true,
+      "color_gain": "<Struct 'Vector4' (0x0000027A5A341370) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain": false,
+      "color_gain_shadows": "<Struct 'Vector4' (0x0000027A5A341410) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain_shadows": true,
+      "color_gain_highlights": "<Struct 'Vector4' (0x0000027A5A341550) {x: 1.500000, y: 1.500000, z: 1.500000, w: 1.000000}>",
+      "override_color_gain_highlights": true,
+      "user_flags": "0",
+      "override_user_flags": true,
+      "blendables": [
+        {
+          "weight": 1.0,
+          "object": "<Object '/Game/_Art/Player/Environment/Rendering/HeinMachWeather/MI_HM_RegionalLook_Blizzard2.MI_HM_RegionalLook_Blizzard2' (0x0000027A592D2000) Class 'MaterialInstanceConstant'>"
+        }
+      ]
+    },
+    {
+      "label": "HM_Environment_PP_HeinMach_Light_211",
+      "priority": 40.0,
+      "blend_weight": 1.0,
+      "blend_radius": 100.0,
+      "unbound": false,
+      "enabled": true,
+      "auto_exposure_min_brightness": "8.0",
+      "override_auto_exposure_min_brightness": true,
+      "auto_exposure_max_brightness": "8.0",
+      "override_auto_exposure_max_brightness": true,
+      "color_gain": "<Struct 'Vector4' (0x0000027A5ADEAD70) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain": false,
+      "color_gain_shadows": "<Struct 'Vector4' (0x0000027A5ADEAE10) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain_shadows": true,
+      "color_gain_highlights": "<Struct 'Vector4' (0x0000027A5ADEAF50) {x: 1.500000, y: 1.500000, z: 1.500000, w: 1.000000}>",
+      "override_color_gain_highlights": true,
+      "user_flags": "0",
+      "override_user_flags": true,
+      "blendables": [
+        {
+          "weight": 1.0,
+          "object": "<Object '/Game/_Art/Player/Environment/Rendering/HeinMachWeather/MI_HM_RegionalLook_Boss.MI_HM_RegionalLook_Boss' (0x0000027A592D2800) Class 'MaterialInstanceConstant'>"
+        }
+      ]
+    },
+    {
+      "label": "HM_Environment_PP_HeinMach_Light_212",
+      "priority": 50.0,
+      "blend_weight": 1.0,
+      "blend_radius": 50.0,
+      "unbound": false,
+      "enabled": true,
+      "auto_exposure_min_brightness": "4.0",
+      "override_auto_exposure_min_brightness": true,
+      "auto_exposure_max_brightness": "4.0",
+      "override_auto_exposure_max_brightness": true,
+      "color_gain": "<Struct 'Vector4' (0x0000027A5ADEBB70) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain": false,
+      "color_gain_shadows": "<Struct 'Vector4' (0x0000027A5ADEBC10) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain_shadows": true,
+      "color_gain_highlights": "<Struct 'Vector4' (0x0000027A5ADEBD50) {x: 1.500000, y: 1.500000, z: 1.500000, w: 1.000000}>",
+      "override_color_gain_highlights": true,
+      "user_flags": "1",
+      "override_user_flags": true,
+      "blendables": [
+        {
+          "weight": 1.0,
+          "object": "<Object '/Game/_Art/Player/Environment/Rendering/HeinMachWeather/MI_HM_RegionalLook_Cave1.MI_HM_RegionalLook_Cave1' (0x0000027A592D3000) Class 'MaterialInstanceConstant'>"
+        }
+      ]
+    },
+    {
+      "label": "HM_Environment_PP_HeinMach_Light_213",
+      "priority": 50.0,
+      "blend_weight": 1.0,
+      "blend_radius": 50.0,
+      "unbound": false,
+      "enabled": true,
+      "auto_exposure_min_brightness": "4.0",
+      "override_auto_exposure_min_brightness": true,
+      "auto_exposure_max_brightness": "4.0",
+      "override_auto_exposure_max_brightness": true,
+      "color_gain": "<Struct 'Vector4' (0x0000027A5ADEC970) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain": false,
+      "color_gain_shadows": "<Struct 'Vector4' (0x0000027A5ADECA10) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain_shadows": true,
+      "color_gain_highlights": "<Struct 'Vector4' (0x0000027A5ADECB50) {x: 1.500000, y: 1.500000, z: 1.500000, w: 1.000000}>",
+      "override_color_gain_highlights": true,
+      "user_flags": "1",
+      "override_user_flags": true,
+      "blendables": [
+        {
+          "weight": 1.0,
+          "object": "<Object '/Game/_Art/Player/Environment/Rendering/HeinMachWeather/MI_HM_RegionalLook_Cave1.MI_HM_RegionalLook_Cave1' (0x0000027A592D3000) Class 'MaterialInstanceConstant'>"
+        }
+      ]
+    },
+    {
+      "label": "HM_Environment_PP_HeinMach_Light_214",
+      "priority": 30.0,
+      "blend_weight": 1.0,
+      "blend_radius": 100.0,
+      "unbound": false,
+      "enabled": true,
+      "auto_exposure_min_brightness": "8.0",
+      "override_auto_exposure_min_brightness": true,
+      "auto_exposure_max_brightness": "8.0",
+      "override_auto_exposure_max_brightness": true,
+      "color_gain": "<Struct 'Vector4' (0x0000027A5ADED770) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain": false,
+      "color_gain_shadows": "<Struct 'Vector4' (0x0000027A5ADED810) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain_shadows": true,
+      "color_gain_highlights": "<Struct 'Vector4' (0x0000027A5ADED950) {x: 1.500000, y: 1.500000, z: 1.500000, w: 1.000000}>",
+      "override_color_gain_highlights": true,
+      "user_flags": "0",
+      "override_user_flags": true,
+      "blendables": [
+        {
+          "weight": 1.0,
+          "object": "<Object '/Game/_Art/Player/Environment/Rendering/HeinMachWeather/MI_HM_RegionalLook_Escape.MI_HM_RegionalLook_Escape' (0x0000027A592D3800) Class 'MaterialInstanceConstant'>"
+        }
+      ]
+    },
+    {
+      "label": "HM_Environment_PP_HeinMach_Light_215",
+      "priority": 100.0,
+      "blend_weight": 1.0,
+      "blend_radius": 100.0,
+      "unbound": false,
+      "enabled": true,
+      "auto_exposure_min_brightness": "8.0",
+      "override_auto_exposure_min_brightness": true,
+      "auto_exposure_max_brightness": "8.0",
+      "override_auto_exposure_max_brightness": true,
+      "color_gain": "<Struct 'Vector4' (0x0000027A5ADEE570) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain": false,
+      "color_gain_shadows": "<Struct 'Vector4' (0x0000027A5ADEE610) {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}>",
+      "override_color_gain_shadows": true,
+      "color_gain_highlights": "<Struct 'Vector4' (0x0000027A5ADEE750) {x: 1.500000, y: 1.500000, z: 1.500000, w: 1.000000}>",
+      "override_color_gain_highlights": true,
+      "user_flags": "0",
+      "override_user_flags": true,
+      "blendables": [
+        {
+          "weight": 1.0,
+          "object": "<Object '/Game/_Art/Player/Environment/Rendering/HeinMachWeather/MI_HM_RegionalLook_OP.MI_HM_RegionalLook_OP' (0x0000027A592D4000) Class 'MaterialInstanceConstant'>"
+        }
+      ]
+    }
+  ],
+  "lighting": [
+    {
+      "label": "HM_PreviewSun",
+      "actor_hidden": false,
+      "components": [
+        {
+          "name": "LightComponent0",
+          "intensity": "20000.0",
+          "visible": "True",
+          "hidden_in_game": "False",
+          "affects_world": "True",
+          "mobility": "<ComponentMobility.MOVABLE: 2>",
+          "indirect_lighting_intensity": "1.0",
+          "cast_shadows": "True"
+        },
+        {
+          "name": "ArrowComponent0",
+          "visible": "True",
+          "hidden_in_game": "True",
+          "mobility": "<ComponentMobility.MOVABLE: 2>",
+          "visible_in_real_time_sky_captures": "True",
+          "visible_in_reflection_captures": "True",
+          "render_in_main_pass": "True"
+        },
+        {
+          "name": "BillboardComponent_0",
+          "visible": "True",
+          "hidden_in_game": "True",
+          "mobility": "<ComponentMobility.MOVABLE: 2>",
+          "visible_in_real_time_sky_captures": "True",
+          "visible_in_reflection_captures": "True",
+          "render_in_main_pass": "True"
+        }
+      ]
+    },
+    {
+      "label": "HM_PreviewSkyLight",
+      "actor_hidden": false,
+      "components": [
+        {
+          "name": "Sprite",
+          "visible": "True",
+          "hidden_in_game": "True",
+          "mobility": "<ComponentMobility.MOVABLE: 2>",
+          "visible_in_real_time_sky_captures": "True",
+          "visible_in_reflection_captures": "True",
+          "render_in_main_pass": "True"
+        },
+        {
+          "name": "SkyLightComponent0",
+          "intensity": "1.0",
+          "visible": "True",
+          "hidden_in_game": "False",
+          "affects_world": "True",
+          "mobility": "<ComponentMobility.MOVABLE: 2>",
+          "indirect_lighting_intensity": "1.0",
+          "source_type": "<SkyLightSourceType.SLS_CAPTURED_SCENE: 0>",
+          "cubemap": "None",
+          "real_time_capture": "True",
+          "lower_hemisphere_is_black": "False",
+          "cast_shadows": "True"
+        },
+        {
+          "name": "BillboardComponent_0",
+          "visible": "True",
+          "hidden_in_game": "True",
+          "mobility": "<ComponentMobility.MOVABLE: 2>",
+          "visible_in_real_time_sky_captures": "True",
+          "visible_in_reflection_captures": "True",
+          "render_in_main_pass": "True"
+        }
+      ]
+    },
+    {
+      "label": "HM_Environment_SourceSkyMesh",
+      "actor_hidden": false,
+      "components": [
+        {
+          "name": "StaticMeshComponent0",
+          "visible": "True",
+          "hidden_in_game": "False",
+          "mobility": "<ComponentMobility.STATIC: 0>",
+          "visible_in_real_time_sky_captures": "True",
+          "visible_in_reflection_captures": "True",
+          "render_in_main_pass": "True"
+        }
+      ]
+    }
+  ]
+}

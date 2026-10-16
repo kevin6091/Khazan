@@ -1,0 +1,262 @@
+{
+  "post_process": [
+    {
+      "label": "SP_Environment_PP_StormPass_Boss_Phase_1_117",
+      "post_process": {
+        "preserved_phase1_light_review": true
+      }
+    },
+    {
+      "label": "SP_Environment_PP_StormPass_Boss_Phase_2_244",
+      "post_process": {
+        "copied_source_fields": [
+          "ambient_occlusion_bias",
+          "ambient_occlusion_fade_distance",
+          "ambient_occlusion_intensity",
+          "ambient_occlusion_mip_blend",
+          "ambient_occlusion_mip_scale",
+          "ambient_occlusion_power",
+          "ambient_occlusion_quality",
+          "ambient_occlusion_radius",
+          "auto_exposure_bias",
+          "bloom1_tint",
+          "bloom_dirt_mask_intensity",
+          "bloom_intensity",
+          "bloom_threshold",
+          "chromatic_aberration_start_offset",
+          "color_contrast_highlights",
+          "color_contrast_midtones",
+          "color_correction_highlights_min",
+          "color_correction_shadows_max",
+          "color_gain_highlights",
+          "color_gain_shadows",
+          "color_saturation",
+          "color_saturation_highlights",
+          "color_saturation_midtones",
+          "color_saturation_shadows",
+          "depth_of_field_far_blur_size",
+          "depth_of_field_near_blur_size",
+          "expand_gamut",
+          "film_slope",
+          "lens_flare_bokeh_size",
+          "lens_flare_intensity",
+          "lens_flare_threshold",
+          "motion_blur_amount",
+          "motion_blur_max",
+          "motion_blur_per_object_size",
+          "motion_blur_target_fps",
+          "scene_color_tint",
+          "scene_fringe_intensity",
+          "screen_space_reflection_max_roughness",
+          "screen_space_reflection_quality",
+          "vignette_intensity"
+        ],
+        "unsupported_source_fields": [
+          "AutoExposureBiasBackup",
+          "Bloom1Size",
+          "BloomDirtMaskTint",
+          "FFXCACAOEnable",
+          "FFXCACAORadius",
+          "FFXCACAOShadowMultiplier",
+          "GrainIntensity",
+          "LensFlareBokehShape"
+        ],
+        "neutralized_zero_gain": [
+          "color_gain_shadows"
+        ],
+        "boundary": "Native UE color grade, not recovered proprietary tonemapper or CACAO shader",
+        "temporary_native_exposure_correction": {
+          "Phase2FixedEV100": 2.5,
+          "Phase2BloomIntensity": 0.5,
+          "Phase2SaturationNative": 0.85,
+          "Phase2ShadowSaturationNative": 0.85
+        }
+      }
+    }
+  ],
+  "global_sky": "/Game/_Art/Player/Environment/StormPass/Reconstructed/BladePhantomPolish/Sky/MI_SP_BP_SkyColor_DeepNight.MI_SP_BP_SkyColor_DeepNight",
+  "global_sky_source": {
+    "source_package": "BBQ/Content/Art/ArtRendering/AR_Data/SkyMaterial/SkyColor_DeepNight",
+    "source_sha256": "d07205798b908cd14eeb187d4ac18dbb8ae9722f2b294c880ecd56d503ddf44e",
+    "source_json": "Saved\\Extracted\\StormPass\\BladePhantom_20261001\\BBQ\\Content\\Art\\ArtRendering\\AR_Data\\SkyMaterial\\SkyColor_DeepNight.json",
+    "parent": {
+      "ObjectName": "Material'Base_Backdrop'",
+      "ObjectPath": "BBQ/Content/BaseMaterials/Cloud/Base_Backdrop.0"
+    },
+    "scalars": {
+      "NebulaDesaturation": 3.0,
+      "NebulaIntensity": 0.25,
+      "NebulaNoiseUVScale": 0.25,
+      "NebulaUVScale": 0.25,
+      "Horizon Falloff": 2.0,
+      "StarBlinkWeight": 0.5,
+      "StarBlinkSpeed": 2.0,
+      "StarBlinkUVScale": 10.0,
+      "StarBrightness": 1.0,
+      "StarColorWeight": 0.75,
+      "StarPower": 4.0,
+      "StarUVScale": 2.0,
+      "StarHorizonHeightMin": 0.0,
+      "StarHorizonHeightMax": 50000.0,
+      "SunlightBackgroundIntensity": 1.533792,
+      "SunlightBackgroundRadius": 0.5,
+      "RefractionDepthBias": 0.0
+    },
+    "vectors": {
+      "Bottom color": {
+        "R": 0.729167,
+        "G": 0.418844,
+        "B": 0.067356,
+        "A": 1.0,
+        "Hex": "DEAD49"
+      },
+      "Overall Color": {
+        "R": 0.25045,
+        "G": 0.108342,
+        "B": 0.614583,
+        "A": 1.0,
+        "Hex": "895CCE"
+      },
+      "Sky Color": {
+        "R": 0.114619,
+        "G": 0.062899,
+        "B": 0.197917,
+        "A": 1.0,
+        "Hex": "5F477B"
+      },
+      "StarBaseColor": {
+        "R": 4.0,
+        "G": 0.0,
+        "B": 0.0,
+        "A": 1.0,
+        "Hex": "FF0000"
+      },
+      "SunSideColor": {
+        "R": 0.196946,
+        "G": 0.12481,
+        "B": 0.354167,
+        "A": 1.0,
+        "Hex": "7B63A1"
+      }
+    },
+    "cached_textures": [
+      {
+        "ObjectName": "Texture2D'FTW_Sky_Star_Mask_001'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/World/FTW_Sky_Star_Mask_001.0"
+      },
+      null,
+      {
+        "ObjectName": "Texture2D'FTW_Sky_Cloud_Distortion'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/World/FTW_Sky_Cloud_Distortion.0"
+      },
+      {
+        "ObjectName": "Texture2D'FTW_Smoke_Noise_002'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/World/FTW_Smoke_Noise_002.0"
+      },
+      {
+        "ObjectName": "Texture2D'FTW_Sky_Nebula'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/World/FTW_Sky_Nebula.0"
+      }
+    ]
+  },
+  "local_fog": [
+    {
+      "label": "SP_BP_Phase1_LocalFog",
+      "pose": {
+        "location": [
+          162650.0,
+          51600.0,
+          695.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          15.0,
+          15.0,
+          15.0
+        ]
+      },
+      "radius_cm": 7500.0,
+      "fog_density_source": 1.0,
+      "density_native_scale": 0.15,
+      "boundary": "Native spherical local fog, source color/phase. Density conversion and sphere are authoring approximations."
+    },
+    {
+      "label": "SP_BP_Phase2_LocalFog",
+      "pose": {
+        "location": [
+          183040.0,
+          51600.0,
+          695.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          12.0,
+          12.0,
+          12.0
+        ]
+      },
+      "radius_cm": 6000.0,
+      "fog_density_source": 1.5,
+      "density_native_scale": 0.6,
+      "boundary": "Native spherical local fog, source color/phase. Density conversion and sphere are authoring approximations."
+    }
+  ],
+  "covering_color_source": {
+    "A": 0.0,
+    "B": 0.0,
+    "G": 0.0,
+    "Hex": "AE0000",
+    "R": 0.421875
+  },
+  "covering_color_weight_native": 0.85,
+  "background_components": [
+    "SP_Landscape_Main_LandscapeComponent_271",
+    "SP_Landscape_Main_LandscapeComponent_272",
+    "SP_Landscape_Main_LandscapeComponent_273",
+    "SP_Landscape_Main_LandscapeComponent_274"
+  ],
+  "PlayerStart_before": {
+    "location": [
+      30357.803,
+      60165.047,
+      2183.912
+    ],
+    "rotation": [
+      -21.01207733154297,
+      0.0,
+      -0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "PlayerStart_after": {
+    "location": [
+      162240.0,
+      51600.0,
+      296.66724
+    ],
+    "rotation": [
+      0.0,
+      -10.000030517578125,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "PlayerStart_source_entry": "SP_BP_Phase1_PlayerEntry_Mission02_Start_BossZone",
+  "boundary": "Source phase palette/sky/fog settings; native spherical fog and shared Phase2 skylight/GI. Full runtime proprietary WEP blend remains unavailable."
+}

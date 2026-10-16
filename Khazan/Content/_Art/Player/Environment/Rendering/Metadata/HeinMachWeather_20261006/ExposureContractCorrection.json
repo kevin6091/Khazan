@@ -1,0 +1,45 @@
+{
+  "material": "/Game/_Art/Player/Environment/Rendering/HeinMachWeather/M_HM_RegionalLook.M_HM_RegionalLook",
+  "disable_pre_exposure_scale": true,
+  "contract": "PostProcessInput0 and custom sky/shadow outputs stay in pre-exposed HDR. No second engine PreExposure multiplication.",
+  "engine_evidence": "UE5.8 PostProcessMaterialShaders.usf 387-389; MaterialTemplate.ush SceneTextureLookup pre-exposure scaling.",
+  "pixel_shader_instructions": 110,
+  "map_edited": false,
+  "native_controls": {
+    "OutdoorEV100": 8.0,
+    "CaveEV100": 4.0,
+    "BloomIntensity": 0.35,
+    "LensFlareIntensity": 0.0,
+    "DirtMaskIntensity": 0.0,
+    "WorldOutlineOpacity": 0.08,
+    "WorldToonWeight": 0.08,
+    "HM_NativeShadowFillScale": 8.0
+  },
+  "profiles": [
+    {
+      "profile": "OP",
+      "shadow_radiance_native": 256.0
+    },
+    {
+      "profile": "Blizzard1",
+      "shadow_radiance_native": 256.0
+    },
+    {
+      "profile": "Blizzard2",
+      "shadow_radiance_native": 256.0
+    },
+    {
+      "profile": "Boss",
+      "shadow_radiance_native": 256.0
+    },
+    {
+      "profile": "Cave1",
+      "shadow_radiance_native": 16.0
+    },
+    {
+      "profile": "Escape",
+      "shadow_radiance_native": 256.0
+    }
+  ],
+  "calibration_evidence": "NativeDiagnosisShadowCalibration.json and actual game screenshots. 8 is native calibration, not a recovered BBQ field."
+}

@@ -1,0 +1,235 @@
+{
+  "background": true,
+  "saved_assets_modified": false,
+  "checks": {
+    "actors": {
+      "before": 9609,
+      "after": 9610,
+      "added": [
+        "HM_Environment_SourceSnow"
+      ],
+      "removed": [],
+      "changed_poses": [
+        "HM_Environment_PP_HeinMach_Light_209",
+        "HM_Environment_PP_HeinMach_Light_210",
+        "HM_Environment_PP_HeinMach_Light_211",
+        "HM_Environment_PP_HeinMach_Light_212",
+        "HM_Environment_PP_HeinMach_Light_213",
+        "HM_Environment_PP_HeinMach_Light_214",
+        "HM_Environment_PP_HeinMach_Light_215",
+        "HM_Environment_SourceSkyMesh"
+      ],
+      "all_other_poses_preserved": true,
+      "PlayerStart": [
+        12113.049,
+        12296.91,
+        282.70361,
+        0.0,
+        -114.98620605468753,
+        0.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "sky": {
+      "stencil": 252,
+      "mesh": "/Game/_Art/Player/Environment/StormPass/Reconstructed/EnvironmentAssets/Meshes/WAS_SkyMesh/WAS_SkyMesh/StaticMeshes/SM_WAS_SkyMesh.SM_WAS_SkyMesh",
+      "material": "/Game/_Art/Player/Environment/Rendering/HeinMachWeather/MI_HM_SourceSky_OP.MI_HM_SourceSky_OP",
+      "pose": [
+        7917.611,
+        -10604.79,
+        -13768.473,
+        0.0,
+        0.0,
+        0.0,
+        50.0,
+        50.0,
+        50.0
+      ]
+    },
+    "volumes": [
+      {
+        "label": "HM_PreviewPostProcess",
+        "enabled": true,
+        "unbound": true,
+        "priority": -100.0,
+        "radius_cm": 100.0,
+        "user_flags": 0,
+        "EV100": [
+          8.0,
+          8.0
+        ]
+      },
+      {
+        "label": "HM_Environment_PP_HeinMach_Light_209",
+        "enabled": true,
+        "unbound": false,
+        "priority": 12.0,
+        "radius_cm": 100.0,
+        "user_flags": 0,
+        "EV100": [
+          8.0,
+          8.0
+        ]
+      },
+      {
+        "label": "HM_Environment_PP_HeinMach_Light_210",
+        "enabled": true,
+        "unbound": false,
+        "priority": 13.0,
+        "radius_cm": 100.0,
+        "user_flags": 0,
+        "EV100": [
+          8.0,
+          8.0
+        ]
+      },
+      {
+        "label": "HM_Environment_PP_HeinMach_Light_211",
+        "enabled": true,
+        "unbound": false,
+        "priority": 40.0,
+        "radius_cm": 100.0,
+        "user_flags": 0,
+        "EV100": [
+          8.0,
+          8.0
+        ]
+      },
+      {
+        "label": "HM_Environment_PP_HeinMach_Light_212",
+        "enabled": true,
+        "unbound": false,
+        "priority": 50.0,
+        "radius_cm": 50.0,
+        "user_flags": 1,
+        "EV100": [
+          4.0,
+          4.0
+        ]
+      },
+      {
+        "label": "HM_Environment_PP_HeinMach_Light_213",
+        "enabled": true,
+        "unbound": false,
+        "priority": 50.0,
+        "radius_cm": 50.0,
+        "user_flags": 1,
+        "EV100": [
+          4.0,
+          4.0
+        ]
+      },
+      {
+        "label": "HM_Environment_PP_HeinMach_Light_214",
+        "enabled": true,
+        "unbound": false,
+        "priority": 30.0,
+        "radius_cm": 100.0,
+        "user_flags": 0,
+        "EV100": [
+          8.0,
+          8.0
+        ]
+      },
+      {
+        "label": "HM_Environment_PP_HeinMach_Light_215",
+        "enabled": true,
+        "unbound": false,
+        "priority": 100.0,
+        "radius_cm": 100.0,
+        "user_flags": 0,
+        "EV100": [
+          8.0,
+          8.0
+        ]
+      }
+    ],
+    "snow": {
+      "system": "/Game/_Art/Player/Environment/Rendering/HeinMachWeather/NS_HM_SourceSnow_TwoLayers.NS_HM_SourceSnow_TwoLayers",
+      "auto_activate": true,
+      "cast_shadow": false,
+      "bounds": "<Struct 'Box' (0x000001ADF88E3B90) {min: {x: -55334.881785, y: -77086.761435, z: -18514.390494}, max: {x: 141734.902007, y: 117776.637184, z: 132480.665507}, is_valid: True}>",
+      "pose": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        119.99999999999999,
+        -0.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "materials": [
+      {
+        "name": "M_HM_SourceSky",
+        "emissive_connected": true
+      },
+      {
+        "name": "M_HM_RegionalLook",
+        "emissive_connected": true,
+        "disable_pre_exposure_scale": true
+      },
+      {
+        "name": "M_HM_SourceSnow",
+        "emissive_connected": true,
+        "alpha_only": true,
+        "pass_before_DOF": true
+      },
+      {
+        "name": "M_HM_SourceDust",
+        "emissive_connected": true,
+        "alpha_only": true,
+        "pass_before_DOF": true
+      }
+    ],
+    "regional_native_parameters": [
+      {
+        "profile": "OP",
+        "native_shadow_scale": 8.0,
+        "native_shadow_radiance": 256.0
+      },
+      {
+        "profile": "Blizzard1",
+        "native_shadow_scale": 8.0,
+        "native_shadow_radiance": 256.0
+      },
+      {
+        "profile": "Blizzard2",
+        "native_shadow_scale": 8.0,
+        "native_shadow_radiance": 256.0
+      },
+      {
+        "profile": "Boss",
+        "native_shadow_scale": 8.0,
+        "native_shadow_radiance": 256.0
+      },
+      {
+        "profile": "Cave1",
+        "native_shadow_scale": 8.0,
+        "native_shadow_radiance": 16.0
+      },
+      {
+        "profile": "Escape",
+        "native_shadow_scale": 8.0,
+        "native_shadow_radiance": 256.0
+      }
+    ],
+    "compiled_system": {
+      "export": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Saved\\Extracted\\HeinMachWeather_20261006\\NativeSnowTwoLayers.t3d",
+      "emitter_handles": [
+        "0",
+        "1"
+      ],
+      "names": [
+        "Source_Flakes_Fast_Large",
+        "Source_Dust"
+      ]
+    }
+  },
+  "map_sha256": "f229d15245e511fa3c347c96ccdd0dc1bf35ce158332e63d064aad4d8cf6f7a2",
+  "passed": true
+}
