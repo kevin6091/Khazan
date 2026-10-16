@@ -1,0 +1,125 @@
+{
+  "utc": "2026-10-07T08:34:02.360821+00:00",
+  "asset": "/Game/_Art/Player/Character/Meshs/Hair/Player_Original_Hair_RigidBody_PhysicsAsset",
+  "original_game_physics_values_confirmed": false,
+  "original_search_scope": "Reuse completed BodyCollisionTuning scoped investigation; no new original player physics exports provided.",
+  "imported_geometry_evidence": {
+    "mesh": "/Game/_Art/Player/Character/Meshs/Hair/Player_Original_Hair",
+    "skeleton": "/Game/_Art/Player/Character/Meshs/Hair/Player_Original_Hair_Skeleton",
+    "weighted_secondary_bones": 69,
+    "source": "HairBoneWeights.txt; native imported LOD0 section skin influences"
+  },
+  "temporary_tuning": {
+    "source": "Assistant selected for user feel request; NOT original-game values",
+    "contact_capsule_radius_cm": 0.5,
+    "mass_per_length_kg_per_cm": 0.002,
+    "total_simulated_mass_kg": 1.8203,
+    "linear_damping_per_second": 0.1,
+    "angular_damping_root_to_tip_per_second": [
+      1.5,
+      0.8
+    ],
+    "swing1_and_swing2_limit_root_to_tip_degrees": [
+      8,
+      18
+    ],
+    "twist_limit_root_to_tip_degrees": [
+      3,
+      6
+    ],
+    "angular_drive_mode": "SLERP acceleration; orientation and relative angular velocity drives enabled",
+    "angular_drive_omega_root_to_tip_per_second": [
+      28,
+      10
+    ],
+    "angular_stiffness_root_to_tip": [
+      784,
+      100
+    ],
+    "angular_drive_damping_root_to_tip": [
+      56,
+      20
+    ],
+    "formulas": [
+      "t=(depth-1)/(chain-body-count-1); interpolate root to tip",
+      "k=omega^2; c=2*omega (near-critical acceleration spring)",
+      "mass=temporary linear density * imported segment length",
+      "Temporary isotropic inertia target = largest thin-capsule principal inertia; mass and contact geometry unchanged",
+      "q_i=(targetI/2)/(trace(thinBodyI)/2-thinBodyI_i); detS=(qX*qY*qZ)^(1/5); S_i=sqrt(q_i/detS)"
+    ],
+    "inertia_units": "kg*cm^2",
+    "inertia_scale_units": "dimensionless",
+    "numeric_body_details": "AppliedPerBone_InertiaConditioned.txt",
+    "reasons": "Fine bending on all 65 weighted ponytail bones, supported roots, flexible tips, small swing and damped recovery, less contact-induced axial spinning",
+    "tuning_owner": "Existing hair PA body instances and constraint default profiles; author settings centralized in TemporaryTuning.ini"
+  },
+  "engine_import_calculations": {
+    "wrapper_scale": 100,
+    "component_scale": 0.01,
+    "capsule_segment": "next child pivot difference in unit bone frame; capsule center=segment/2; cylinder length=segment length-2*radius",
+    "weighted_tip_without_end_marker": "Continue last measured segment vector; explicit modelling assumption",
+    "new_joint_connector_translation": "unit child-relative-parent translation / observed wrapper100; engine restores scale during RBAN initialization",
+    "existing_old_joint_conversion_reapplied": false,
+    "constraints": "SetDefaultProfile before save/PIE; PhysicsConstraintTemplate::Serialize and SkeletalMeshComponentPhysics::InstantiatePhysicsAsset apply default profile"
+  },
+  "scope": {
+    "simulated_bones": 65,
+    "ponytail_strands": 14,
+    "kinematic_anchor_bodies": 3,
+    "face_locks_unchanged_copy_pose_bones": 4,
+    "changed_packages": 1,
+    "new_runtime_cpp_files": 0,
+    "mesh_skeleton_material_changes": false
+  },
+  "validation": {
+    "utc": "2026-10-07T08:30:28.654114+00:00",
+    "status": "IsolatedComplete",
+    "native_pie_passed": true,
+    "smaller_motion_confirmed": true,
+    "native_saved_reload_passed": true,
+    "saved_default_profiles_confirmed": 65,
+    "stock_saved_reload_passed": true,
+    "guard_passed": true,
+    "heal_passed": true,
+    "before": {
+      "rootSamples": 1162.0,
+      "rootRmsCm": 0.033945,
+      "rootPeakCm": 0.329305,
+      "tipSamples": 1328.0,
+      "tipRmsCm": 8.81066,
+      "tipPeakCm": 25.20777,
+      "bendRmsDegrees": 20.046051,
+      "bendPeakDegrees": 55.571588,
+      "independentlyRespondingJoints": 18.0
+    },
+    "after": {
+      "rootSamples": 1708.0,
+      "rootRmsCm": 0.104467,
+      "rootPeakCm": 0.491532,
+      "tipSamples": 1952.0,
+      "tipRmsCm": 7.200052,
+      "tipPeakCm": 16.502579,
+      "bendRmsDegrees": 8.601447,
+      "bendPeakDegrees": 27.974185,
+      "independentlyRespondingJoints": 65.0
+    },
+    "tip_peak_reduction_percent": 34.53376082057238,
+    "tip_rms_reduction_percent": 18.280219643023333,
+    "simulated_bodies": 65,
+    "kinematic_bodies": 3,
+    "dynamic_strands": 14,
+    "face_locks_copy_pose_bones": 4,
+    "main_integration_complete": false,
+    "new_runtime_files": 0,
+    "limits": [
+      "Original-game physics values unverified",
+      "Measured comparison, not deterministic or statistical proof",
+      "Not every vertex, LOD, action or prolonged hardware condition inspected"
+    ]
+  },
+  "limitations": [
+    "Original game physics matching unverified",
+    "Proxy collisions do not guarantee every mesh vertex never penetrates",
+    "Not all attacks, LODs, frame rates or long hardware sessions tested"
+  ]
+}

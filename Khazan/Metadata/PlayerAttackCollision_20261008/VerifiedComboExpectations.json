@@ -1,0 +1,83 @@
+{
+  "utc": "2026-10-08T06:48:06.095269+00:00",
+  "reviewed": true,
+  "reviewer": "/root/damage_audit",
+  "expected_reject": true,
+  "negative_case": "weak5_y_early",
+  "positive_cases": [
+    "weak_y_buffered",
+    "weak_y_committed",
+    "charge_02_03",
+    "rb_overfury",
+    "weak5_y",
+    "weak5_y_committed"
+  ],
+  "raw_error": "Target montage/section not observed before QA deadline",
+  "summary": {
+    "positive_successes": 6,
+    "negative_expected_rejections": 1,
+    "raw_timeout_preserved": true
+  },
+  "negative_input_events": [
+    {
+      "frame": 230,
+      "key": "y",
+      "edge": "press"
+    },
+    {
+      "frame": 233,
+      "key": "y",
+      "edge": "release"
+    }
+  ],
+  "input_open_montage_seconds": 9.884994,
+  "input_commit_montage_seconds": 10.22421,
+  "early_input_observed_rows": [
+    {
+      "frame": 230,
+      "time": 4.153072394430637,
+      "montage": "AM_DAS_WeakAttackCombo",
+      "section": "Attack05",
+      "position": 9.701347351074219
+    },
+    {
+      "frame": 231,
+      "time": 4.169739097356796,
+      "montage": "AM_DAS_WeakAttackCombo",
+      "section": "Attack05",
+      "position": 9.718013763427734
+    },
+    {
+      "frame": 232,
+      "time": 4.186405997723341,
+      "montage": "AM_DAS_WeakAttackCombo",
+      "section": "Attack05",
+      "position": 9.734681129455566
+    },
+    {
+      "frame": 233,
+      "time": 4.20453729480505,
+      "montage": "AM_DAS_WeakAttackCombo",
+      "section": "Attack05",
+      "position": 9.752812385559082
+    }
+  ],
+  "timing_note": "Probe schedules Y at frame230; real injection occurs on following ticks231..232 and release233. Every sampled position in the entire pulse is before current authored Weak05 InputOpen. The raw legacy target-montage timeout is an expected rejection, not a successful target transition.",
+  "evidence_sha256": {
+    "ComboRegression/SuiteState.json": "7db3d0c320421b28d1777f4c249be750f2c5a41a98cc71c30f2314a7451fead9",
+    "ComboRegression/Runtime_weak5_y_early.json": "941420ca81f10a1ad050cc3699b8e51163d4c78a44913e96d9aa28fe9f96f7a2",
+    "AssetAudit/Current_AM_DAS_WeakAttackCombo.t3d": "eaeacf1c09005fdfb87da4a37cf81f06addf3a84a107ec4925d57e10c243c8bb",
+    "run_combo_regression.py": "eaecddced5279a79bb5bb8f8b6a689b34d3487aee7f0b92a758dcb2cbbe2012f"
+  },
+  "work_script_sha256": {
+    "Scripts/Engineering/combo_runtime_probe.py": "37a94613f9f01a2f35eb4a840d92f2776fea066e22d1287f65bb2fd49c41dc50",
+    "Scripts/Engineering/combo_runtime_suite.py": "1754acaade1cc9bb6089cea2b98736acb6b2d3da5b83e0e6eb25ce74c2bbbab0"
+  },
+  "review_basis": [
+    "Current WeakAttackCombo exported notify12 is InputOpen; branching marker12 TriggerTime9.884994 seconds, Attack05 starts9.633333 seconds.",
+    "Runtime all Attack01..05 sections and weak montage only; no Spinning montage/sections anywhere.",
+    "Actual EnhancedInput route true and exact five X taps plus one Y tap recorded; Y frame230 position9.701347351074219, release233 position9.752812385559082.",
+    "Probe explicitly selects9.7 seconds for weak5_y_early; six positive cases retain raw error:null.",
+    "No raw runtime, suite result, gameplay Source or asset bytes were changed."
+  ]
+}

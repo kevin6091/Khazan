@@ -1,0 +1,519 @@
+{
+  "success": true,
+  "asset_saves": 0,
+  "map": "/Game/Maps/DevMap.DevMap",
+  "actors": 25,
+  "lights": [
+    {
+      "actor": "DirectionalLight",
+      "component": "/Game/Maps/DevMap.DevMap:PersistentLevel.DirectionalLight_0.LightComponent0",
+      "class": "DirectionalLightComponent",
+      "properties": {
+        "intensity": 6000.0,
+        "light_color": "(B=255,G=255,R=255,A=255)",
+        "cast_shadows": true,
+        "mobility": "<ComponentMobility.MOVABLE: 2>",
+        "visible": true,
+        "indirect_lighting_intensity": 1.0,
+        "volumetric_scattering_intensity": 1.0,
+        "specular_scale": 1.0,
+        "diffuse_scale": 1.0,
+        "shadow_bias": 0.5,
+        "shadow_slope_bias": 0.5,
+        "contact_shadow_length": 0.0,
+        "light_source_angle": 2.5,
+        "light_source_soft_angle": 0.0,
+        "affects_world": true,
+        "lighting_channels": "(bChannel0=True,bChannel1=False,bChannel2=False)"
+      }
+    },
+    {
+      "actor": "SkyLight",
+      "component": "/Game/Maps/DevMap.DevMap:PersistentLevel.SkyLight_0.SkyLightComponent0",
+      "class": "SkyLightComponent",
+      "properties": {
+        "intensity": 1.2000000476837158,
+        "light_color": "(B=255,G=255,R=255,A=255)",
+        "cast_shadows": true,
+        "mobility": "<ComponentMobility.MOVABLE: 2>",
+        "visible": true,
+        "indirect_lighting_intensity": 1.0,
+        "volumetric_scattering_intensity": 1.0,
+        "source_type": "<SkyLightSourceType.SLS_CAPTURED_SCENE: 0>",
+        "cubemap": "None",
+        "real_time_capture": true,
+        "lower_hemisphere_is_black": false,
+        "lower_hemisphere_color": "(R=0.000000,G=0.000000,B=0.000000,A=1.000000)",
+        "occlusion_max_distance": 1000.0,
+        "occlusion_exponent": 1.0,
+        "min_occlusion": 0.0,
+        "occlusion_combine_mode": "<OcclusionCombineMode.OCM_MINIMUM: 0>",
+        "affects_world": true
+      }
+    }
+  ],
+  "postprocess": [
+    {
+      "actor": "Art_NaturalLighting_DevMap",
+      "properties": {
+        "priority": 0.0,
+        "unbound": true,
+        "enabled": true,
+        "blend_weight": 1.0
+      },
+      "settings": "(bOverride_TemperatureType=False,bOverride_WhiteTemp=False,bOverride_WhiteTint=False,bOverride_ColorSaturation=False,bOverride_ColorContrast=False,bOverride_ColorGamma=False,bOverride_ColorGain=False,bOverride_ColorOffset=False,bOverride_ColorSaturationShadows=False,bOverride_ColorContrastShadows=False,bOverride_ColorGammaShadows=False,bOverride_ColorGainShadows=False,bOverride_ColorOffsetShadows=False,bOverride_ColorSaturationMidtones=False,bOverride_ColorContrastMidtones=False,bOverride_ColorGammaMidtones=False,bOverride_ColorGainMidtones=False,bOverride_ColorOffsetMidtones=False,bOverride_ColorSaturationHighlights=False,bOverride_ColorContrastHighlights=False,bOverride_ColorGammaHighlights=False,bOverride_ColorGainHighlights=False,bOverride_ColorOffsetHighlights=False,bOverride_ColorCorrectionShadowsMax=False,bOverride_ColorCorrectionHighlightsMin=False,bOverride_ColorCorrectionHighlightsMax=False,bOverride_BlueCorrection=False,bOverride_ExpandGamut=False,bOverride_ToneCurveAmount=False,bOverride_TonemappingMethod=False,bOverride_FilmSlope=False,bOverride_FilmToe=True,bOverride_FilmShoulder=False,bOverride_FilmBlackClip=False,bOverride_FilmWhiteClip=False,bOverride_SceneColorTint=False,bOverride_SceneFringeIntensity=False,bOverride_ChromaticAberrationStartOffset=False,bOverride_bMegaLights=False,bOverride_MegaLightsFrontLayerTranslucency=False,bOverride_AmbientCubemapTint=False,bOverride_AmbientCubemapIntensity=False,bOverride_BloomMethod=False,bOverride_BloomIntensity=False,bOverride_BloomGaussianIntensity=False,bOverride_BloomThreshold=False,bOverride_Bloom1Tint=False,bOverride_Bloom1Size=False,bOverride_Bloom2Size=False,bOverride_Bloom2Tint=False,bOverride_Bloom3Tint=False,bOverride_Bloom3Size=False,bOverride_Bloom4Tint=False,bOverride_Bloom4Size=False,bOverride_Bloom5Tint=False,bOverride_Bloom5Size=False,bOverride_Bloom6Tint=False,bOverride_Bloom6Size=False,bOverride_BloomSizeScale=False,bOverride_BloomConvolutionIntensity=False,bOverride_BloomConvolutionTexture=False,bOverride_BloomConvolutionScatterDispersion=False,bOverride_BloomConvolutionSize=False,bOverride_BloomConvolutionCenterUV=False,bOverride_BloomConvolutionPreFilterMin=False,bOverride_BloomConvolutionPreFilterMax=False,bOverride_BloomConvolutionPreFilterMult=False,bOverride_BloomConvolutionBufferScale=False,bOverride_BloomDirtMaskIntensity=False,bOverride_BloomDirtMaskTint=False,bOverride_BloomDirtMask=False,bOverride_CameraShutterSpeed=False,bOverride_CameraISO=False,bOverride_AutoExposureMethod=False,bOverride_AutoExposureLowPercent=False,bOverride_AutoExposureHighPercent=False,bOverride_AutoExposureMinBrightness=True,bOverride_AutoExposureMaxBrightness=True,bOverride_AutoExposureSpeedUp=True,bOverride_AutoExposureSpeedDown=True,bOverride_AutoExposureBias=True,bOverride_AutoExposureBiasCurve=False,bOverride_AutoExposureMeterMask=False,bOverride_AutoExposureApplyPhysicalCameraExposure=False,bOverride_HistogramLogMin=False,bOverride_HistogramLogMax=False,bOverride_LocalExposureMethod=False,bOverride_LocalExposureHighlightContrastScale=True,bOverride_LocalExposureShadowContrastScale=True,bOverride_LocalExposureHighlightContrastCurve=False,bOverride_LocalExposureShadowContrastCurve=False,bOverride_LocalExposureHighlightThreshold=False,bOverride_LocalExposureShadowThreshold=False,bOverride_LocalExposureDetailStrength=False,bOverride_LocalExposureBlurredLuminanceBlend=False,bOverride_LocalExposureBlurredLuminanceKernelSizePercent=False,bOverride_LocalExposureHighlightThresholdStrength=False,bOverride_LocalExposureShadowThresholdStrength=False,bOverride_LocalExposureMiddleGreyBias=False,bOverride_LensFlareIntensity=False,bOverride_LensFlareTint=False,bOverride_LensFlareTints=False,bOverride_LensFlareBokehSize=False,bOverride_LensFlareBokehShape=False,bOverride_LensFlareThreshold=False,bOverride_VignetteIntensity=False,bOverride_VignetteType=False,bOverride_VignetteCenter=False,bOverride_VignetteColor=False,bOverride_VignetteSize=False,bOverride_VignetteSoftness=False,bOverride_VignetteTexture=False,bOverride_Sharpen=False,bOverride_FilmGrainIntensity=False,bOverride_FilmGrainIntensityShadows=False,bOverride_FilmGrainIntensityMidtones=False,bOverride_FilmGrainIntensityHighlights=False,bOverride_FilmGrainShadowsMax=False,bOverride_FilmGrainHighlightsMin=False,bOverride_FilmGrainHighlightsMax=False,bOverride_FilmGrainScale=False,bOverride_FilmGrainTexture=False,bOverride_AmbientOcclusionIntensity=True,bOverride_AmbientOcclusionStaticFraction=False,bOverride_AmbientOcclusionRadius=False,bOverride_AmbientOcclusionFadeDistance=False,bOverride_AmbientOcclusionFadeRadius=False,bOverride_AmbientOcclusionRadiusInWS=False,bOverride_AmbientOcclusionPower=False,bOverride_AmbientOcclusionBias=False,bOverride_AmbientOcclusionQuality=False,bOverride_AmbientOcclusionMipBlend=False,bOverride_AmbientOcclusionMipScale=False,bOverride_AmbientOcclusionMipThreshold=False,bOverride_AmbientOcclusionTemporalBlendWeight=False,bOverride_RayTracingAO=False,bOverride_RayTracingAOSamplesPerPixel=False,bOverride_RayTracingAOIntensity=False,bOverride_RayTracingAORadius=False,bOverride_IndirectLightingColor=False,bOverride_IndirectLightingIntensity=False,bOverride_ColorGradingIntensity=False,bOverride_ColorGradingLUT=False,bOverride_DepthOfFieldEnabled=False,bOverride_DepthOfFieldFocalDistance=False,bOverride_DepthOfFieldFstop=False,bOverride_DepthOfFieldMinFstop=False,bOverride_DepthOfFieldBladeCount=False,bOverride_DepthOfFieldSensorWidth=False,bOverride_DepthOfFieldSqueezeFactor=False,bOverride_DepthOfFieldDepthBlurRadius=False,bOverride_DepthOfFieldUseHairDepth=False,bOverride_DepthOfFieldPetzvalBokeh=False,bOverride_DepthOfFieldPetzvalBokehFalloff=False,bOverride_DepthOfFieldPetzvalExclusionBoxExtents=False,bOverride_DepthOfFieldPetzvalExclusionBoxRadius=False,bOverride_DepthOfFieldAspectRatioScalar=False,bOverride_DepthOfFieldMatteBoxFlags=False,bOverride_DepthOfFieldBarrelRadius=False,bOverride_DepthOfFieldBarrelLength=False,bOverride_DepthOfFieldDepthBlurAmount=False,bOverride_DepthOfFieldFocalRegion=False,bOverride_DepthOfFieldNearTransitionRegion=False,bOverride_DepthOfFieldFarTransitionRegion=False,bOverride_DepthOfFieldScale=False,bOverride_DepthOfFieldNearBlurSize=False,bOverride_DepthOfFieldFarBlurSize=False,bOverride_MobileHQGaussian=False,bOverride_DepthOfFieldOcclusion=False,bOverride_DepthOfFieldSkyFocusDistance=False,bOverride_DepthOfFieldVignetteSize=False,bOverride_MotionBlurAmount=False,bOverride_MotionBlurMax=False,bOverride_MotionBlurTargetFPS=False,bOverride_MotionBlurPerObjectSize=False,bOverride_ReflectionMethod=False,bOverride_LumenReflectionQuality=True,bOverride_ScreenSpaceReflectionIntensity=False,bOverride_ScreenSpaceReflectionQuality=False,bOverride_ScreenSpaceReflectionMaxRoughness=False,bOverride_ScreenSpaceReflectionRoughnessScale=False,bOverride_UserFlags=False,bOverride_RayTracingReflectionsMaxRoughness=False,bOverride_RayTracingReflectionsMaxBounces=False,bOverride_RayTracingReflectionsSamplesPerPixel=False,bOverride_RayTracingReflectionsShadows=False,bOverride_RayTracingReflectionsTranslucency=False,bOverride_TranslucencyType=False,bOverride_RayTracingTranslucencyMaxRoughness=False,bOverride_RayTracingTranslucencyRefractionRays=False,bOverride_RayTracingTranslucencySamplesPerPixel=False,bOverride_RayTracingTranslucencyShadows=False,bOverride_RayTracingTranslucencyRefraction=False,bOverride_RayTracingTranslucencyMaxPrimaryHitEvents=False,bOverride_RayTracingTranslucencyMaxSecondaryHitEvents=False,bOverride_RayTracingTranslucencyUseRayTracedRefraction=False,bOverride_DynamicGlobalIlluminationMethod=False,bOverride_LumenSceneLightingQuality=True,bOverride_LumenSceneDetail=False,bOverride_LumenSceneViewDistance=False,bOverride_LumenSceneLightingUpdateSpeed=False,bOverride_LumenFinalGatherQuality=True,bOverride_LumenFinalGatherLightingUpdateSpeed=False,bOverride_LumenFinalGatherScreenTraces=False,bOverride_LumenMaxTraceDistance=False,bOverride_LumenDiffuseColorBoost=False,bOverride_LumenAmbientOcclusionIntensity=False,bOverride_LumenSkylightLeaking=False,bOverride_LumenSkylightLeakingTint=False,bOverride_LumenFullSkylightLeakingDistance=False,bOverride_LumenRayLightingMode=False,bOverride_LumenReflectionsScreenTraces=False,bOverride_LumenFrontLayerTranslucencyReflections=False,bOverride_LumenMaxRoughnessToTraceReflections=False,bOverride_LumenMaxReflectionBounces=False,bOverride_LumenMaxRefractionBounces=False,bOverride_LumenSurfaceCacheResolution=False,bOverride_RayTracingGI=False,bOverride_RayTracingGIMaxBounces=False,bOverride_RayTracingGISamplesPerPixel=False,bOverride_PathTracingMaxBounces=False,bOverride_PathTracingSamplesPerPixel=False,bOverride_PathTracingMaxPathIntensity=False,bOverride_PathTracingEnableEmissiveMaterials=False,bOverride_PathTracingEnableReferenceDOF=False,bOverride_PathTracingEnableReferenceAtmosphere=False,bOverride_PathTracingEnableDenoiser=False,bOverride_PathTracingIncludeEmissive=False,bOverride_PathTracingIncludeDiffuse=False,bOverride_PathTracingIncludeIndirectDiffuse=False,bOverride_PathTracingIncludeSpecular=False,bOverride_PathTracingIncludeIndirectSpecular=False,bOverride_PathTracingIncludeVolume=False,bOverride_PathTracingIncludeIndirectVolume=False,bMobileHQGaussian=False,BloomMethod=BM_SOG,AutoExposureMethod=AEM_Histogram,TemperatureType=TEMP_WhiteBalance,WhiteTemp=6500.000000,WhiteTint=0.000000,ColorSaturation=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorContrast=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorGamma=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorGain=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorOffset=(X=0.000000,Y=0.000000,Z=0.000000,W=0.000000),ColorSaturationShadows=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorContrastShadows=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorGammaShadows=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorGainShadows=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorOffsetShadows=(X=0.000000,Y=0.000000,Z=0.000000,W=0.000000),ColorSaturationMidtones=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorContrastMidtones=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorGammaMidtones=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorGainMidtones=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorOffsetMidtones=(X=0.000000,Y=0.000000,Z=0.000000,W=0.000000),ColorSaturationHighlights=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorContrastHighlights=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorGammaHighlights=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorGainHighlights=(X=1.000000,Y=1.000000,Z=1.000000,W=1.000000),ColorOffsetHighlights=(X=0.000000,Y=0.000000,Z=0.000000,W=0.000000),ColorCorrectionHighlightsMin=0.500000,ColorCorrectionHighlightsMax=1.000000,ColorCorrectionShadowsMax=0.090000,BlueCorrection=0.600000,ExpandGamut=1.000000,ToneCurveAmount=1.000000,TonemappingMethod=Filmic,FilmSlope=0.880000,FilmToe=0.450000,FilmShoulder=0.260000,FilmBlackClip=0.000000,FilmWhiteClip=0.040000,SceneColorTint=(R=1.000000,G=1.000000,B=1.000000,A=1.000000),SceneFringeIntensity=0.000000,ChromaticAberrationStartOffset=0.000000,BloomIntensity=0.675000,BloomGaussianIntensity=1.000000,BloomThreshold=-1.000000,BloomSizeScale=4.000000,Bloom1Size=0.300000,Bloom2Size=1.000000,Bloom3Size=2.000000,Bloom4Size=10.000000,Bloom5Size=30.000000,Bloom6Size=64.000000,Bloom1Tint=(R=0.346500,G=0.346500,B=0.346500,A=1.000000),Bloom2Tint=(R=0.138000,G=0.138000,B=0.138000,A=1.000000),Bloom3Tint=(R=0.117600,G=0.117600,B=0.117600,A=1.000000),Bloom4Tint=(R=0.066000,G=0.066000,B=0.066000,A=1.000000),Bloom5Tint=(R=0.066000,G=0.066000,B=0.066000,A=1.000000),Bloom6Tint=(R=0.061000,G=0.061000,B=0.061000,A=1.000000),BloomConvolutionIntensity=1.000000,BloomConvolutionScatterDispersion=1.000000,BloomConvolutionSize=1.000000,BloomConvolutionTexture=None,BloomConvolutionCenterUV=(X=0.500000,Y=0.500000),BloomConvolutionPreFilterMin=7.000000,BloomConvolutionPreFilterMax=15000.000000,BloomConvolutionPreFilterMult=15.000000,BloomConvolutionBufferScale=0.133000,BloomDirtMask=None,BloomDirtMaskIntensity=0.000000,BloomDirtMaskTint=(R=0.500000,G=0.500000,B=0.500000,A=1.000000),DynamicGlobalIlluminationMethod=Lumen,IndirectLightingColor=(R=1.000000,G=1.000000,B=1.000000,A=1.000000),IndirectLightingIntensity=1.000000,LumenRayLightingMode=Default,LumenSceneLightingQuality=2.000000,LumenSceneDetail=1.000000,LumenSceneViewDistance=20000.000000,LumenSceneLightingUpdateSpeed=1.000000,LumenFinalGatherQuality=2.000000,LumenFinalGatherLightingUpdateSpeed=1.000000,LumenFinalGatherScreenTraces=True,LumenMaxTraceDistance=20000.000000,LumenDiffuseColorBoost=1.000000,LumenAmbientOcclusionIntensity=1.000000,LumenSkylightLeaking=0.000000,LumenSkylightLeakingTint=(R=1.000000,G=1.000000,B=1.000000,A=1.000000),LumenFullSkylightLeakingDistance=1000.000000,LumenSurfaceCacheResolution=1.000000,ReflectionMethod=Lumen,LumenReflectionQuality=2.000000,LumenReflectionsScreenTraces=True,LumenFrontLayerTranslucencyReflections=False,LumenMaxRoughnessToTraceReflections=0.400000,LumenMaxReflectionBounces=1,LumenMaxRefractionBounces=0,ScreenSpaceReflectionIntensity=100.000000,ScreenSpaceReflectionQuality=50.000000,ScreenSpaceReflectionMaxRoughness=0.600000,bMegaLights=True,MegaLightsFrontLayerTranslucency=False,AmbientCubemapTint=(R=1.000000,G=1.000000,B=1.000000,A=1.000000),AmbientCubemapIntensity=1.000000,AmbientCubemap=None,CameraShutterSpeed=60.000000,CameraISO=100.000000,DepthOfFieldFstop=4.000000,DepthOfFieldMinFstop=1.200000,DepthOfFieldBladeCount=5,AutoExposureBias=0.000000,AutoExposureBiasBackup=0.000000,bOverride_AutoExposureBiasBackup=False,AutoExposureApplyPhysicalCameraExposure=True,AutoExposureBiasCurve=None,AutoExposureMeterMask=None,AutoExposureLowPercent=10.000000,AutoExposureHighPercent=90.000000,AutoExposureMinBrightness=7.000000,AutoExposureMaxBrightness=14.000000,AutoExposureSpeedUp=1.000000,AutoExposureSpeedDown=1.000000,HistogramLogMin=-10.000000,HistogramLogMax=20.000000,LocalExposureMethod=Bilateral,LocalExposureHighlightContrastScale=0.900000,LocalExposureShadowContrastScale=0.950000,LocalExposureHighlightContrastCurve=None,LocalExposureShadowContrastCurve=None,LocalExposureHighlightThreshold=0.000000,LocalExposureShadowThreshold=0.000000,LocalExposureDetailStrength=1.000000,LocalExposureBlurredLuminanceBlend=0.600000,LocalExposureBlurredLuminanceKernelSizePercent=50.000000,LocalExposureHighlightThresholdStrength=1.000000,LocalExposureShadowThresholdStrength=1.000000,LocalExposureMiddleGreyBias=0.000000,LensFlareIntensity=1.000000,LensFlareTint=(R=1.000000,G=1.000000,B=1.000000,A=1.000000),LensFlareBokehSize=3.000000,LensFlareThreshold=8.000000,LensFlareBokehShape=None,LensFlareTints[0]=(R=1.000000,G=0.800000,B=0.400000,A=0.600000),LensFlareTints[1]=(R=1.000000,G=1.000000,B=0.600000,A=0.530000),LensFlareTints[2]=(R=0.800000,G=0.800000,B=1.000000,A=0.460000),LensFlareTints[3]=(R=0.500000,G=1.000000,B=0.400000,A=0.390000),LensFlareTints[4]=(R=0.500000,G=0.800000,B=1.000000,A=0.310000),LensFlareTints[5]=(R=0.900000,G=1.000000,B=0.800000,A=0.270000),LensFlareTints[6]=(R=1.000000,G=0.800000,B=0.400000,A=0.220000),LensFlareTints[7]=(R=0.900000,G=0.700000,B=0.700000,A=0.150000),VignetteIntensity=0.400000,VignetteType=CosineFourthLaw,VignetteCenter=(X=0.500000,Y=0.500000),VignetteColor=(R=0.000000,G=0.000000,B=0.000000,A=1.000000),VignetteSize=(X=1.000000,Y=1.000000),VignetteSoftness=5.000000,VignetteTexture=None,Sharpen=0.000000,FilmGrainIntensity=0.000000,FilmGrainIntensityShadows=1.000000,FilmGrainIntensityMidtones=1.000000,FilmGrainIntensityHighlights=1.000000,FilmGrainShadowsMax=0.090000,FilmGrainHighlightsMin=0.500000,FilmGrainHighlightsMax=1.000000,FilmGrainScale=(X=1.000000,Y=1.000000),FilmGrainTexture=None,AmbientOcclusionIntensity=0.350000,AmbientOcclusionStaticFraction=1.000000,AmbientOcclusionRadius=200.000000,AmbientOcclusionRadiusInWS=False,AmbientOcclusionFadeDistance=8000.000000,AmbientOcclusionFadeRadius=5000.000000,AmbientOcclusionPower=2.000000,AmbientOcclusionBias=3.000000,AmbientOcclusionQuality=50.000000,AmbientOcclusionMipBlend=0.600000,AmbientOcclusionMipScale=1.700000,AmbientOcclusionMipThreshold=0.010000,AmbientOcclusionTemporalBlendWeight=0.100000,RayTracingAO=False,RayTracingAOSamplesPerPixel=1,RayTracingAOIntensity=1.000000,RayTracingAORadius=200.000000,ColorGradingIntensity=1.000000,ColorGradingLUT=None,DepthOfFieldEnabled=True,DepthOfFieldSensorWidth=24.576000,DepthOfFieldSqueezeFactor=1.000000,DepthOfFieldFocalDistance=0.000000,DepthOfFieldDepthBlurAmount=1.000000,DepthOfFieldDepthBlurRadius=0.000000,DepthOfFieldUseHairDepth=False,DepthOfFieldPetzvalBokeh=0.000000,DepthOfFieldPetzvalBokehFalloff=1.000000,DepthOfFieldPetzvalExclusionBoxExtents=(X=0.000000,Y=0.000000),DepthOfFieldPetzvalExclusionBoxRadius=0.000000,DepthOfFieldAspectRatioScalar=1.000000,DepthOfFieldBarrelRadius=5.000000,DepthOfFieldBarrelLength=0.000000,DepthOfFieldMatteBoxFlags[0]=(Pitch=0.000000,Roll=0.000000,Length=0.000000),DepthOfFieldMatteBoxFlags[1]=(Pitch=0.000000,Roll=0.000000,Length=0.000000),DepthOfFieldMatteBoxFlags[2]=(Pitch=0.000000,Roll=0.000000,Length=0.000000),DepthOfFieldFocalRegion=0.000000,DepthOfFieldNearTransitionRegion=300.000000,DepthOfFieldFarTransitionRegion=500.000000,DepthOfFieldScale=0.000000,DepthOfFieldNearBlurSize=15.000000,DepthOfFieldFarBlurSize=15.000000,DepthOfFieldOcclusion=0.400000,DepthOfFieldSkyFocusDistance=0.000000,DepthOfFieldVignetteSize=200.000000,MotionBlurAmount=0.500000,MotionBlurMax=5.000000,MotionBlurTargetFPS=30,MotionBlurPerObjectSize=0.000000,TranslucencyType=Raster,RayTracingTranslucencyMaxRoughness=0.600000,RayTracingTranslucencyRefractionRays=3,RayTracingTranslucencySamplesPerPixel=1,RayTracingTranslucencyMaxPrimaryHitEvents=4,RayTracingTranslucencyMaxSecondaryHitEvents=2,RayTracingTranslucencyShadows=Hard_shadows,RayTracingTranslucencyRefraction=True,RayTracingTranslucencyUseRayTracedRefraction=False,PathTracingMaxBounces=32,PathTracingSamplesPerPixel=2048,PathTracingMaxPathIntensity=24.000000,PathTracingEnableEmissiveMaterials=True,PathTracingEnableReferenceDOF=False,PathTracingEnableReferenceAtmosphere=False,PathTracingEnableDenoiser=True,PathTracingIncludeEmissive=True,PathTracingIncludeDiffuse=True,PathTracingIncludeIndirectDiffuse=True,PathTracingIncludeSpecular=True,PathTracingIncludeIndirectSpecular=True,PathTracingIncludeVolume=True,PathTracingIncludeIndirectVolume=True,UserFlags=0,WeightedBlendables=(Array=))"
+    }
+  ],
+  "poses": {
+    "DirectionalLight": [
+      "DirectionalLight",
+      0.0,
+      0.0,
+      400.0,
+      -49.51711035415601,
+      -10.308600787602971,
+      112.36067200001975,
+      1.0,
+      1.0000000149011612,
+      1.0000000149011612
+    ],
+    "SkyAtmosphere": [
+      "SkyAtmosphere",
+      0.0,
+      0.0,
+      -6000.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "SkyLight": [
+      "SkyLight",
+      0.0,
+      0.0,
+      600.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "ExponentialHeightFog": [
+      "ExponentialHeightFog",
+      -5600.0,
+      -50.0,
+      -6850.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "VolumetricCloud": [
+      "VolumetricCloud",
+      0.0,
+      0.0,
+      700.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "PlayerStart": [
+      "PlayerStart",
+      -350.0,
+      0.0,
+      1292.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "SM_SkySphere": [
+      "StaticMeshActor",
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      400.0,
+      400.0,
+      400.0
+    ],
+    "Floor": [
+      "StaticMeshActor",
+      0.0,
+      0.0,
+      -0.5,
+      0.0,
+      0.0,
+      0.0,
+      32.0,
+      32.0,
+      8.0
+    ],
+    "Cube": [
+      "StaticMeshActor",
+      1040.0,
+      830.0,
+      137.00010844726057,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      2.75
+    ],
+    "RecastNavMesh-Default": [
+      "RecastNavMesh",
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "DevAI_Navigation": [
+      "NavMeshBoundsVolume",
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      4.0,
+      4.0,
+      1.0
+    ],
+    "DevTest_FallPlatform": [
+      "StaticMeshActor",
+      0.0,
+      0.0,
+      600.0,
+      0.0,
+      0.0,
+      0.0,
+      12.0,
+      8.0,
+      12.0
+    ],
+    "Art_NaturalLighting_DevMap": [
+      "PostProcessVolume",
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "DevIdle_Patrol": [
+      "BP_Monster_Swordsman_C",
+      3000.0,
+      2600.0,
+      102.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "DevAI_Swordsman": [
+      "BP_Monster_Swordsman_C",
+      1900.0,
+      -1300.0,
+      102.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "DevIdle_Basic": [
+      "BP_Monster_Swordsman_C",
+      -3100.0,
+      -1600.0,
+      102.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "DevIdle_Search": [
+      "BP_Monster_Swordsman_C",
+      -3100.0,
+      0.0,
+      102.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "DevIdle_Sit": [
+      "BP_Monster_Swordsman_C",
+      -3100.0,
+      1600.0,
+      102.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "DevIdle_Talk01": [
+      "BP_Monster_Swordsman_C",
+      3000.0,
+      -500.0,
+      102.0,
+      0.0,
+      89.99999999999999,
+      -0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "DevIdle_Talk02": [
+      "BP_Monster_Swordsman_C",
+      3000.0,
+      -250.0,
+      102.0,
+      0.0,
+      -90.00000000000001,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "DevAI_SwordShield": [
+      "BP_Monster_SwordShield_C",
+      1900.0,
+      1300.0,
+      102.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "DevAI_HeavySwordsman": [
+      "BP_Monster_HeavySwordsman_C",
+      -1900.0,
+      1300.0,
+      123.5,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "DevAI_HalberdElite": [
+      "BP_Monster_HalberdElite_C",
+      -1900.0,
+      -1300.0,
+      140.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "DevTest_ApesStoneHandElite": [
+      "BP_Monster_ApesStoneHandElite_C",
+      5500.0,
+      -2200.0,
+      240.0,
+      7.016709298534872e-15,
+      180.0,
+      180.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "DevTest_Yetuga": [
+      "BP_Monster_Yetuga_C",
+      5500.0,
+      2200.0,
+      265.0,
+      7.016709298534872e-15,
+      180.0,
+      180.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "views": [
+    {
+      "name": "Player",
+      "camera": [
+        -959.9999999999997,
+        0.0,
+        1380.1499772071836,
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "image": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\SceneLook_20261012\\DevAfter01\\Player.png"
+    },
+    {
+      "name": "PlayerFront",
+      "camera": [
+        40.0,
+        -170.0,
+        1355.1499772071838,
+        -6.0,
+        156.0,
+        1.998796291135043e-16
+      ],
+      "image": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\SceneLook_20261012\\DevAfter01\\PlayerFront.png"
+    },
+    {
+      "name": "Monsters",
+      "camera": [
+        2000.0,
+        -2700.0,
+        260.0,
+        -3.999999999999999,
+        26.000000000000007,
+        9.963503974491393e-17
+      ],
+      "image": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\SceneLook_20261012\\DevAfter01\\Monsters.png"
+    }
+  ],
+  "player_starts": [
+    {
+      "actor": "PlayerStart",
+      "pose": [
+        "PlayerStart",
+        -350.0,
+        0.0,
+        1292.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "quality_qa_only": {
+    "sg.ResolutionQuality": 100,
+    "sg.AntiAliasingQuality": 3,
+    "sg.TextureQuality": 2,
+    "sg.PostProcessQuality": 2,
+    "sg.ShadowQuality": 2,
+    "sg.GlobalIlluminationQuality": 2,
+    "sg.ReflectionQuality": 2,
+    "sg.EffectsQuality": 2,
+    "sg.ViewDistanceQuality": 2,
+    "sg.FoliageQuality": 2,
+    "sg.ShadingQuality": 2,
+    "r.ScreenPercentage": 100,
+    "r.AntiAliasingMethod": 4,
+    "r.MaxAnisotropy": 8,
+    "r.Streaming.MipBias": 0,
+    "r.Streaming.PoolSize": 1600,
+    "r.Tonemapper.Sharpen": 0.25,
+    "t.MaxFPS": 30
+  },
+  "cvars": {
+    "r.Lumen.DiffuseIndirect.Allow": 1.0,
+    "r.Lumen.HardwareRayTracing": 1.0,
+    "r.Shadow.Virtual.Enable": 1.0,
+    "r.DefaultFeature.AutoExposure": 1.0,
+    "r.DefaultFeature.AmbientOcclusion": 1.0,
+    "r.LumenScene.SurfaceCache.AtlasSize": 8192.0,
+    "r.Shadow.Virtual.MaxPhysicalPages": 2048.0,
+    "r.VolumetricFog": 1.0
+  },
+  "player_materials": [
+    {
+      "component": "CharacterMesh0",
+      "materials": [
+        "/Game/_Art/Player/Material/CM_P_Kazan_Eye.CM_P_Kazan_Eye",
+        "/Game/_Art/Player/Material/CM_P_Kazan_FaceV2.CM_P_Kazan_FaceV2",
+        "/Game/_Art/Player/Material/EyeShadow.EyeShadow",
+        "/Game/_Art/Player/Material/CM_P_Kazan_Hair010.CM_P_Kazan_Hair010",
+        "/Game/_Art/Player/Material/CM_P_Kazan_Nude_UpperV2.CM_P_Kazan_Nude_UpperV2",
+        "/Game/_Art/Player/Material/CM_P_Kazan_Nude_LowerV2.CM_P_Kazan_Nude_LowerV2",
+        "/Game/_Art/Player/Material/CM_P_Kazan_Nude_InnerWear001.CM_P_Kazan_Nude_InnerWear001"
+      ]
+    },
+    {
+      "component": "Torso",
+      "materials": [
+        "/Game/_Art/Player/Character/Meshs/Torso/CM_P_Kazan_BC_Original_Torso001A.CM_P_Kazan_BC_Original_Torso001A",
+        "/Game/_Art/Player/Character/Meshs/Torso/CM_P_Kazan_BC_Original_Torso001B.CM_P_Kazan_BC_Original_Torso001B",
+        "/Game/_Art/Player/Character/Meshs/Torso/CM_P_Kazan_Nude_UpperV2.CM_P_Kazan_Nude_UpperV2"
+      ]
+    },
+    {
+      "component": "Shoes",
+      "materials": [
+        "/Game/_Art/Player/Character/Meshs/Shoes/CM_P_Kazan_Original_Shoes001.CM_P_Kazan_Original_Shoes001",
+        "/Game/_Art/Player/Character/Meshs/Shoes/CM_P_Kazan_Nude_LowerV2.CM_P_Kazan_Nude_LowerV2"
+      ]
+    },
+    {
+      "component": "Leg",
+      "materials": [
+        "/Game/_Art/Player/Character/Meshs/Leg/CM_P_Kazan_OrigianlWounded_Leg001A.CM_P_Kazan_OrigianlWounded_Leg001A",
+        "/Game/_Art/Player/Character/Meshs/Leg/CM_P_Kazan_OrigianlWounded_Leg001B.CM_P_Kazan_OrigianlWounded_Leg001B",
+        "/Game/_Art/Player/Character/Meshs/Leg/CM_P_Kazan_Nude_LowerV3.CM_P_Kazan_Nude_LowerV3"
+      ]
+    },
+    {
+      "component": "Hair",
+      "materials": [
+        "/Game/_Art/Player/Character/Meshs/Hair/CM_P_Kazan_BC_Original_Hair001.CM_P_Kazan_BC_Original_Hair001",
+        "/Game/_Art/Player/Character/Meshs/Hair/CM_P_Kazan_Hair010.CM_P_Kazan_Hair010",
+        "/Game/_Art/Player/Character/Meshs/Hair/CM_P_Kazan_Mercenary_Hair001.CM_P_Kazan_Mercenary_Hair001"
+      ]
+    },
+    {
+      "component": "Arm",
+      "materials": [
+        "/Game/_Art/Player/Character/Meshs/Arm/CM_P_Kazan_BC_Original_Arm001.CM_P_Kazan_BC_Original_Arm001",
+        "/Game/_Art/Player/Character/Meshs/Arm/CM_P_Kazan_Nude_UpperV2.CM_P_Kazan_Nude_UpperV2"
+      ]
+    },
+    {
+      "component": "DualAxeSword_Imperial_R",
+      "materials": [
+        "/Game/_Art/Player/Material/Item/CM_I_DualAxeSword_ImperialGuard001_R.CM_I_DualAxeSword_ImperialGuard001_R"
+      ]
+    },
+    {
+      "component": "DualAxeSword_Imperial_L",
+      "materials": [
+        "/Game/_Art/Player/Material/Item/CM_I_DualAxeSword_ImperialGuard001_L.CM_I_DualAxeSword_ImperialGuard001_L"
+      ]
+    }
+  ],
+  "dirty_content": []
+}

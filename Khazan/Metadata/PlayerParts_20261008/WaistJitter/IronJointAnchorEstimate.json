@@ -1,0 +1,919 @@
+{
+  "generated_at_kst": "2026-10-08T11:24:14.041951+09:00",
+  "mode": "ReadOnlyOfflineTargetedJointAnchorReconstructionFromStoredNativeReportsAndInstalledEngineSource",
+  "asset_modified": false,
+  "editor_or_native_action_performed": false,
+  "original_game_values_verified": false,
+  "conclusion": "현재 derived Iron Frame2의 1/100 translation은 현행 UE5.8 RBAN ref-pose connector 변환과 일치한다. raw Frame2와 unit relative offset 차이만으로 anchor 단위 버그를 주장할 수 없다. 엔진 경로를 적용한 unit ref anchor gap은 6자리 저장 로그 반올림 범위의 작은 값이다. 실제 런타임 접촉/관절 떨림의 원인은 별도 PIE 제어 실험이 필요하다.",
+  "inputs": {
+    "native_ref_report": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261007\\NativeAudit.log",
+    "native_ref_report_sha256": "1EB700A61228B111EFAF42FFEFBD5F0B82B9AF47C900C6A6BF2E768934A67545",
+    "current_readonly_native_audit": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261008\\WaistJitter\\BaselineIronPhysicsAudit.json",
+    "current_readonly_native_audit_sha256": "CC18A4A1A0070D50CE77B1D7A6A2796CE305BC704C39034F01FEFF6C89C16C98",
+    "imported_wrapper_scale": 100.0,
+    "parent_imported_component_transform": [
+      [
+        0.0,
+        390.701773,
+        10666.92969
+      ],
+      [
+        90.0,
+        179.99986,
+        0.0
+      ],
+      [
+        100.0,
+        99.999994,
+        100.0
+      ]
+    ],
+    "raw_bone_evidence": [
+      {
+        "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261007\\NativeAudit.log",
+        "line": 2724,
+        "raw": "[2026.10.07-02.41.31:773][350]LogAutomationController: Bone part=Leg index=0 name=C_P_Kazan_OrigianlWounded_Leg001 parent=-1 local=0.000000,0.000000,0.000000|0.000000,0.000000,-0.000009|100.000000,100.000000,100.000000 component=0.000000,0.000000,0.000000|0.000000,0.000000,-0.000009|100.000000,100.000000,100.000000"
+      },
+      {
+        "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261007\\NativeAudit.log",
+        "line": 2727,
+        "raw": "[2026.10.07-02.41.31:774][350]LogAutomationController: Bone part=Leg index=3 name=Bip001-Pelvis parent=2 local=0.000000,0.000000,0.000000|90.000000,89.999934,0.000000|1.000000,1.000000,1.000000 component=0.000000,390.701773,10666.929690|90.000000,179.999860,0.000000|100.000000,99.999994,100.000000"
+      },
+      {
+        "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261007\\NativeAudit.log",
+        "line": 2766,
+        "raw": "[2026.10.07-02.41.31:775][350]LogAutomationController: Bone part=Leg index=42 name=B_Iron_01_01_R_Pelvis parent=3 local=11.392341,3.305164,-14.637007|-36.498668,176.076639,95.134934|1.000000,1.000000,1.000000 component=-1463.701514,60.189018,11806.163727|-53.320248,-174.716944,-91.442397|100.000000,99.999976,100.000012"
+      },
+      {
+        "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261007\\NativeAudit.log",
+        "line": 2767,
+        "raw": "[2026.10.07-02.41.31:775][350]LogAutomationController: Bone part=Leg index=43 name=B_Iron_01_01_L_Pelvis parent=3 local=11.392388,3.305083,14.637344|36.498818,176.076741,-95.134620|1.000000,1.000000,1.000000 component=1463.733598,60.189703,11806.168496|-53.320108,-5.283182,-88.557482|100.000012,99.999994,100.000000"
+      }
+    ],
+    "engine_and_helper_source_evidence": [
+      {
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\AnimGraphRuntime\\Private\\BoneControllers\\AnimNode_RigidBody.cpp",
+        "line_start": 1152,
+        "line_end": 1171,
+        "sha256": "65C1EBC92A58915ABA2FBD82303148EF980ABDA7BAD51623AD60F4AFB725B8CF",
+        "raw_lines": [
+          "\t\t// Instantiate a FBodyInstance/FConstraintInstance set that will be cloned into the Immediate Physics sim.",
+          "\t\t// NOTE: We do not have a skeleton at the moment, so we have to use the ref pose",
+          "\t\tTArray<FBodyInstance*> HighLevelBodyInstances;",
+          "\t\tTArray<FConstraintInstance*> HighLevelConstraintInstances;",
+          "",
+          "\t\t// Chaos relies on the initial pose to set up constraint positions",
+          "\t\tconstexpr bool bCreateBodiesInRefPose = true;",
+          "\t\tSkeletalMeshComp->InstantiatePhysicsAssetRefPose(",
+          "\t\t\t*UsePhysicsAsset, ",
+          "\t\t\tSimulationSpace == ESimulationSpace::WorldSpace ? SkeletalMeshComp->GetComponentToWorld().GetScale3D() : FVector(1.f), ",
+          "\t\t\tHighLevelBodyInstances, ",
+          "\t\t\tHighLevelConstraintInstances, ",
+          "\t\t\tnullptr, ",
+          "\t\t\tnullptr, ",
+          "\t\t\tINDEX_NONE, ",
+          "\t\t\tFPhysicsAggregateHandle(),",
+          "\t\t\tbCreateBodiesInRefPose);",
+          "",
+          "\t\tTMap<FName, ImmediatePhysics::FActorHandle*> NamesToHandles;",
+          "\t\tTArray<ImmediatePhysics::FActorHandle*> IgnoreCollisionActors;"
+        ]
+      },
+      {
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Engine\\Private\\SkeletalMeshComponentPhysics.cpp",
+        "line_start": 962,
+        "line_end": 985,
+        "sha256": "19F12AAE09E09A948CB8439352253B2E332A1A603173E8019BD4F19C09985A45",
+        "raw_lines": [
+          "void USkeletalMeshComponent::InstantiatePhysicsAssetRefPose(const UPhysicsAsset& PhysAsset, const FVector& Scale3D, TArray<FBodyInstance*>& OutBodies, TArray<FConstraintInstance*>& OutConstraints, FPhysScene* PhysScene /*= nullptr*/, USkeletalMeshComponent* OwningComponent /*= nullptr*/, int32 UseRootBodyIndex /*= INDEX_NONE*/, const FPhysicsAggregateHandle& UseAggregate, bool bCreateBodiesInRefPose) const",
+          "{",
+          "\tif(GetSkeletalMeshAsset())",
+          "\t{",
+          "\t\tconst FReferenceSkeleton& RefSkeleton = GetSkeletalMeshAsset()->GetRefSkeleton();",
+          "",
+          "\t\tif (bCreateBodiesInRefPose)",
+          "\t\t{",
+          "\t\t\t// Create the bodies posed in component-space with the ref pose",
+          "\t\t\tTArray<FTransform> CachedTransforms;",
+          "\t\t\tTArray<bool> CachedTransformReady;",
+          "\t\t\tCachedTransforms.SetNumUninitialized(RefSkeleton.GetRefBonePose().Num());",
+          "\t\t\tCachedTransformReady.SetNumZeroed(RefSkeleton.GetRefBonePose().Num());",
+          "",
+          "\t\t\tauto BoneTMCallable = [&](int32 BoneIndex)",
+          "\t\t\t{",
+          "\t\t\t\treturn FAnimationRuntime::GetComponentSpaceTransformWithCache(RefSkeleton, RefSkeleton.GetRefBonePose(), BoneIndex, CachedTransforms, CachedTransformReady);",
+          "\t\t\t};",
+          "",
+          "\t\t\tInstantiatePhysicsAsset_Internal(PhysAsset, Scale3D, OutBodies, OutConstraints, BoneTMCallable, PhysScene, OwningComponent, UseRootBodyIndex, UseAggregate);",
+          "\t\t}",
+          "\t\telse",
+          "\t\t{",
+          "\t\t\t// Create the bodies with each body in its local ref pose (all bodies will be on top of each other close to the origin, but should still have the correct scale)"
+        ]
+      },
+      {
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Engine\\Private\\SkeletalMeshComponentPhysics.cpp",
+        "line_start": 1071,
+        "line_end": 1085,
+        "sha256": "19F12AAE09E09A948CB8439352253B2E332A1A603173E8019BD4F19C09985A45",
+        "raw_lines": [
+          "\t\t\t// Create physics body instance.",
+          "\t\t\tFTransform BoneTransform = BoneTransformGetter(BoneIndex);",
+          "",
+          "\t\t\tFInitBodySpawnParams SpawnParams(OwningComponent);",
+          "",
+          "\t\t\tif(OwningComponent == nullptr)",
+          "\t\t\t{",
+          "\t\t\t\t//special case where we don't use the skel mesh, but we still want to do certain logic like skeletal mesh",
+          "\t\t\t\tSpawnParams.bStaticPhysics = false;",
+          "\t\t\t\tSpawnParams.bPhysicsTypeDeterminesSimulation = true;",
+          "\t\t\t}",
+          "",
+          "\t\t\tSpawnParams.Aggregate = UseAggregate;",
+          "\t\t\tBodyInst->InitBody(PhysicsAssetBodySetup, BoneTransform, OwningComponent, PhysScene, SpawnParams);",
+          ""
+        ]
+      },
+      {
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Engine\\Private\\SkeletalMeshComponentPhysics.cpp",
+        "line_start": 1151,
+        "line_end": 1171,
+        "sha256": "19F12AAE09E09A948CB8439352253B2E332A1A603173E8019BD4F19C09985A45",
+        "raw_lines": [
+          "\t\t\t// Applies the adjusted / relative scale of the body instance.",
+          "\t\t\t// Also, remove component scale as it will be reapplied in InitConstraint.",
+          "\t\t\t// GetBoneTransform already accounts for component scale.",
+          "\t\t\tauto ScalePosition = [](const FBodyInstance* InBody, const float InScale, FVector& OutPosition)",
+          "\t\t\t{",
+          "\t\t\t\tconst FBodyInstance& DefaultBody = InBody->GetBodySetup()->DefaultInstance;",
+          "\t\t\t\tconst FVector ScaledDefaultBodyScale = DefaultBody.Scale3D * InScale;",
+          "\t\t\t\tconst FVector AdjustedBodyScale = InBody->Scale3D * ScaledDefaultBodyScale.Reciprocal();",
+          "\t\t\t\tOutPosition *= AdjustedBodyScale;",
+          "\t\t\t};",
+          "",
+          "\t\t\t// Do this separately so both are logged if invalid.",
+          "\t\t\tconst bool Body1Valid = ValidateBody(Body1, ConInst->ConstraintBone1);",
+          "\t\t\tconst bool Body2Valid = ValidateBody(Body2, ConInst->ConstraintBone2);",
+          "",
+          "\t\t\tif(Body1Valid && Body2Valid)",
+          "\t\t\t{",
+          "\t\t\t\tScalePosition(Body1, Scale, ConInst->Pos1);",
+          "\t\t\t\tScalePosition(Body2, Scale, ConInst->Pos2);",
+          "\t\t\t\tConInst->InitConstraint(Body1, Body2, Scale, OwningComponent",
+          "\t\t\t\t\t, OwningComponent ? FOnConstraintBroken::CreateUObject(OwningComponent, &USkeletalMeshComponent::OnConstraintBrokenWrapper) : FOnConstraintBroken()"
+        ]
+      },
+      {
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Engine\\Private\\PhysicsEngine\\BodyInstance.cpp",
+        "line_start": 389,
+        "line_end": 400,
+        "sha256": "576ADD474807E3B9FBE63A735C217F82D4B57DE9947F25673BB4B3DEB8B2C07A",
+        "raw_lines": [
+          "\t, bOverrideIterationCounts(false)",
+          "\t, bInterpolateWhenSubStepping(true)",
+          "\t, bPendingCollisionProfileSetup(false)",
+          "\t, bInertiaConditioning(true)\t",
+          "\t, bOneWayInteraction(false)",
+          "\t, bOverrideSolverAsyncDeltaTime(false)",
+          "\t, SolverAsyncDeltaTime(1.f / 60)",
+          "\t, CollisionProfileName(UCollisionProfile::CustomCollisionProfileName)",
+          "\t, Scale3D(1.0f)",
+          "\t, MaxDepenetrationVelocity(0.f)",
+          "\t, MassInKgOverride(100.f)",
+          "\t, ExternalCollisionProfileBodySetup(nullptr)"
+        ]
+      },
+      {
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Engine\\Private\\PhysicsEngine\\BodyInstance.cpp",
+        "line_start": 1515,
+        "line_end": 1522,
+        "sha256": "576ADD474807E3B9FBE63A735C217F82D4B57DE9947F25673BB4B3DEB8B2C07A",
+        "raw_lines": [
+          "\t\tInstance->OwnerComponent = PrimitiveComp;",
+          "\t\tInstance->BodyInstanceOwner = BodyInstanceOwner;",
+          "\t\tInstance->SourceObject = SourceObject;",
+          "\t\tInstance->BodySetup = BodySetup;",
+          "\t\tInstance->Scale3D = Transform.GetScale3D();",
+          "#if USE_BODYINSTANCE_DEBUG_NAMES",
+          "\t\tInstance->CharDebugName = PhysXName;",
+          "#endif"
+        ]
+      },
+      {
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Engine\\Private\\PhysicsEngine\\ConstraintInstance.cpp",
+        "line_start": 622,
+        "line_end": 629,
+        "sha256": "805C42A978DE3ECD1BFC1E492BA7D171FBA1BF3027E6197EED2EFD572347ABF4",
+        "raw_lines": [
+          "void FConstraintInstance::InitConstraint_AssumesLocked(Chaos::FPhysicsObject* Body1, Chaos::FPhysicsObject* Body2, float InScale, FOnConstraintBroken InConstraintBrokenDelegate, FOnPlasticDeformation InPlasticDeformationDelegate)",
+          "{",
+          "\tOnConstraintBrokenDelegate = InConstraintBrokenDelegate;",
+          "\tOnPlasticDeformationDelegate = InPlasticDeformationDelegate;",
+          "\tLastKnownScale = InScale;",
+          "",
+          "\tUserData = FChaosUserData(this);",
+          ""
+        ]
+      },
+      {
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Engine\\Private\\PhysicsEngine\\ImmediatePhysics\\ImmediatePhysicsAdapters.cpp",
+        "line_start": 425,
+        "line_end": 442,
+        "sha256": "539F1B2A8A4B8F4E32C67CA77BA0BD2410BFF89A56FC98BAFA7FA77E3040B018",
+        "raw_lines": [
+          "\tFJointSetup MakeJointSetup(const FConstraintInstance* InConstraintInstance, FActorHandle* InActor1, FActorHandle* InActor2)",
+          "\t{",
+          "\t\tusing namespace Chaos;",
+          "",
+          "\t\tFJointSetup JointSetup;",
+          "\t\tJointSetup.Actor1 = InActor1;",
+          "\t\tJointSetup.Actor2 = InActor2;",
+          "",
+          "\t\tif (InConstraintInstance != nullptr)",
+          "\t\t{",
+          "\t\t\tUpdateJointSettingsFromConstraintProfile(InConstraintInstance->ProfileInstance, JointSetup.ConstraintSettings);",
+          "\t\t\tFReal JointScale = InConstraintInstance->GetLastKnownScale();",
+          "\t\t\tJointSetup.ConstraintSettings.ConnectorTransforms[0] = InConstraintInstance->GetRefFrame(EConstraintFrame::Frame1);",
+          "\t\t\tJointSetup.ConstraintSettings.ConnectorTransforms[1] = InConstraintInstance->GetRefFrame(EConstraintFrame::Frame2);",
+          "\t\t\tJointSetup.ConstraintSettings.ConnectorTransforms[0].ScaleTranslation(JointScale);",
+          "\t\t\tJointSetup.ConstraintSettings.ConnectorTransforms[1].ScaleTranslation(JointScale);",
+          "",
+          "\t\t\tJointSetup.ConstraintSettings.Sanitize();"
+        ]
+      },
+      {
+        "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Scripts\\Engineering\\PlayerPartsAuthorEditor.cpp",
+        "line_start": 73,
+        "line_end": 91,
+        "sha256": "EA664A1D6E5AC4A49D855630C7474BB2F872F399BAE2CA75C01FBDAB1173E72C",
+        "raw_lines": [
+          "UPhysicsAsset* WorldSimulationAsset(USkeletalMesh* Mesh, UPhysicsAsset* Source, const FString& Part)",
+          "{",
+          "\t// UE 5.8 ref-pose joint creation applies imported bone scale (100) before",
+          "\t// RBAN starts at component .01 * root 100 = unit world bone scale.",
+          "\t// ImmediatePhysicsAdapters reconstructs geometry at the unit actor scale:",
+          "\t// preserve shapes; convert ONLY joint-frame positions by 1 / imported scale.",
+          "\tconst FVector ImportedScale = Mesh->GetRefSkeleton().GetRefBonePose()[0].GetScale3D();",
+          "\tcheck(ImportedScale.Equals(FVector(ImportedScale.X)) && ImportedScale.X > 0.);",
+          "\tconst float UnitConversion = 1.f / ImportedScale.X;",
+          "\tconst FString Path = Base + TEXT(\"Meshs/\") + Part + TEXT(\"/Player_Original_\") + Part + TEXT(\"_RigidBody_PhysicsAsset\");",
+          "\t// Rebuild from Source on each author pass, never scale an existing result twice.",
+          "\tUPhysicsAsset* Result = CastChecked<UPhysicsAsset>(StaticDuplicateObject(Source, CreatePackage(*Path), *FPackageName::GetLongPackageAssetName(Path)));",
+          "\tFAssetRegistryModule::AssetCreated(Result);",
+          "\tfor (UPhysicsConstraintTemplate* Constraint : Result->ConstraintSetup)",
+          "\t{",
+          "\t\tConstraint->DefaultInstance.Pos1 *= UnitConversion; Constraint->DefaultInstance.Pos2 *= UnitConversion;",
+          "\t\t// These Original constraints have locked linear axes; angular limits, damping",
+          "\t\t// and collision-pair policy remain exactly as the component's source asset.",
+          "\t}"
+        ]
+      },
+      {
+        "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Scripts\\Engineering\\PlayerPartsAuthorEditor.cpp",
+        "line_start": 1255,
+        "line_end": 1261,
+        "sha256": "EA664A1D6E5AC4A49D855630C7474BB2F872F399BAE2CA75C01FBDAB1173E72C",
+        "raw_lines": [
+          "\t\t\tItem->SetStringField(TEXT(\"current_principal_kg_cm2\"), FString::Printf(TEXT(\"%.12g/%.12g/%.12g\"), double(Current.Inertia.X), double(Current.Inertia.Y), double(Current.Inertia.Z)));",
+          "\t\t\tItem->SetStringField(TEXT(\"unconditioned_principal_kg_cm2\"), FString::Printf(TEXT(\"%.12g/%.12g/%.12g\"), double(Unconditioned.Inertia.X), double(Unconditioned.Inertia.Y), double(Unconditioned.Inertia.Z)));",
+          "\t\t\tItem->SetNumberField(TEXT(\"current_minimum_principal_kg_cm2\"), FVector(Current.Inertia).GetMin()); Item->SetNumberField(TEXT(\"current_maximum_principal_kg_cm2\"), FVector(Current.Inertia).GetMax());",
+          "\t\t\tItem->SetStringField(TEXT(\"current_com\"), Current.CoMTransform.ToString()); Item->SetStringField(TEXT(\"unconditioned_com\"), Unconditioned.CoMTransform.ToString()); Item->SetStringField(TEXT(\"frame1\"), C.GetRefFrame(EConstraintFrame::Frame1).ToString()); Item->SetStringField(TEXT(\"frame2\"), C.GetRefFrame(EConstraintFrame::Frame2).ToString());",
+          "\t\t\tconst int32 BoneIndex = Ref.FindBoneIndex(Bone), ParentIndex = AnatomyRef.FindBoneIndex(C.ConstraintBone2), ParentBody = AnatomyPA->FindBodyIndex(C.ConstraintBone2);",
+          "\t\t\tif (!TestTrue(TEXT(\"Iron single capsule and current parent single anatomy capsule available\"), BoneIndex != INDEX_NONE && ParentIndex != INDEX_NONE && ParentBody != INDEX_NONE && Body->AggGeom.GetElementCount() == 1 && Body->AggGeom.SphylElems.Num() == 1 && AnatomyPA->SkeletalBodySetups[ParentBody]->AggGeom.GetElementCount() == 1 && AnatomyPA->SkeletalBodySetups[ParentBody]->AggGeom.SphylElems.Num() == 1)) { bValid = false; break; }",
+          "\t\t\tconst FKSphylElem& Capsule = Body->AggGeom.SphylElems[0]; const FKSphylElem& Pelvis = AnatomyPA->SkeletalBodySetups[ParentBody]->AggGeom.SphylElems[0];"
+        ]
+      },
+      {
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Private\\Math\\Transform.cpp",
+        "line_start": 50,
+        "line_end": 57,
+        "sha256": "96E2A1AEBEF70C4301CFED538F39F56DB8575BFB638452FBC24406C48EFE5EB3",
+        "raw_lines": [
+          "FString TTransform<T>::ToString() const",
+          "{",
+          "\tconst TRotator<T> R(Rotator());",
+          "\tconst TVector<T> TT(GetTranslation());",
+          "\tconst TVector<T> S(GetScale3D());",
+          "",
+          "\treturn FString::Printf(TEXT(\"%f,%f,%f|%f,%f,%f|%f,%f,%f\"), TT.X, TT.Y, TT.Z, R.Pitch, R.Yaw, R.Roll, S.X, S.Y, S.Z);",
+          "}"
+        ]
+      },
+      {
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Private\\Math\\UnrealMath.cpp",
+        "line_start": 448,
+        "line_end": 466,
+        "sha256": "E9B9583BECB9679F01A6DE82E97B7DBF8043F61457F75ACEDB1454ED2F4F0EB0",
+        "raw_lines": [
+          "\tconst float DEG_TO_RAD = UE_PI/(180.f);",
+          "\tconst float RADS_DIVIDED_BY_2 = DEG_TO_RAD/2.f;",
+          "\tfloat SP, SY, SR;",
+          "\tfloat CP, CY, CR;",
+          "",
+          "\tconst float PitchNoWinding = FMath::Fmod(Pitch, 360.0f);",
+          "\tconst float YawNoWinding = FMath::Fmod(Yaw, 360.0f);",
+          "\tconst float RollNoWinding = FMath::Fmod(Roll, 360.0f);",
+          "",
+          "\tFMath::SinCos(&SP, &CP, PitchNoWinding * RADS_DIVIDED_BY_2);",
+          "\tFMath::SinCos(&SY, &CY, YawNoWinding * RADS_DIVIDED_BY_2);",
+          "\tFMath::SinCos(&SR, &CR, RollNoWinding * RADS_DIVIDED_BY_2);",
+          "",
+          "\tFQuat4f RotationQuat;",
+          "\tRotationQuat.X =  CR*SP*SY - SR*CP*CY;",
+          "\tRotationQuat.Y = -CR*SP*CY - SR*CP*SY;",
+          "\tRotationQuat.Z =  CR*CP*SY - SR*SP*CY;",
+          "\tRotationQuat.W =  CR*CP*CY + SR*SP*SY;",
+          "#endif // PLATFORM_ENABLE_VECTORINTRINSICS"
+        ]
+      },
+      {
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Core\\Private\\Math\\UnrealMath.cpp",
+        "line_start": 483,
+        "line_end": 540,
+        "sha256": "E9B9583BECB9679F01A6DE82E97B7DBF8043F61457F75ACEDB1454ED2F4F0EB0",
+        "raw_lines": [
+          "FQuat4d FRotator3d::Quaternion() const",
+          "{",
+          "\tDiagnosticCheckNaN();",
+          "",
+          "#if PLATFORM_ENABLE_VECTORINTRINSICS",
+          "\tconst VectorRegister4Double Angles = MakeVectorRegisterDouble(Pitch, Yaw, Roll, 0.0);",
+          "\tconst VectorRegister4Double AnglesNoWinding = VectorMod360(Angles);",
+          "\tconst VectorRegister4Double HalfAngles = VectorMultiply(AnglesNoWinding, GlobalVectorConstants::DOUBLE_DEG_TO_RAD_HALF);",
+          "",
+          "\tVectorRegister4Double SinAngles, CosAngles;",
+          "\tVectorSinCos(&SinAngles, &CosAngles, &HalfAngles);",
+          "",
+          "\t// Vectorized conversion, measured 20% faster than using scalar version after VectorSinCos.",
+          "\t// Indices within VectorRegister (for shuffles): P=0, Y=1, R=2",
+          "\tconst VectorRegister4Double SR = VectorReplicate(SinAngles, 2);",
+          "\tconst VectorRegister4Double CR = VectorReplicate(CosAngles, 2);",
+          "",
+          "\tconst VectorRegister4Double SY_SY_CY_CY_Temp = VectorShuffle(SinAngles, CosAngles, 1, 1, 1, 1);",
+          "",
+          "\tconst VectorRegister4Double SP_SP_CP_CP = VectorShuffle(SinAngles, CosAngles, 0, 0, 0, 0);",
+          "\tconst VectorRegister4Double SY_CY_SY_CY = VectorShuffle(SY_SY_CY_CY_Temp, SY_SY_CY_CY_Temp, 0, 2, 0, 2);",
+          "",
+          "\tconst VectorRegister4Double CP_CP_SP_SP = VectorShuffle(CosAngles, SinAngles, 0, 0, 0, 0);",
+          "\tconst VectorRegister4Double CY_SY_CY_SY = VectorShuffle(SY_SY_CY_CY_Temp, SY_SY_CY_CY_Temp, 2, 0, 2, 0);",
+          "",
+          "\tconst uint64 Neg = uint64(1) << 63;",
+          "\tconst uint64 Pos = uint64(0);",
+          "\tconst VectorRegister4Double SignBitsLeft = MakeVectorRegisterDoubleMask(Pos, Neg, Pos, Pos);",
+          "\tconst VectorRegister4Double SignBitsRight = MakeVectorRegisterDoubleMask(Neg, Neg, Neg, Pos);",
+          "\tconst VectorRegister4Double LeftTerm = VectorBitwiseXor(SignBitsLeft, VectorMultiply(CR, VectorMultiply(SP_SP_CP_CP, SY_CY_SY_CY)));",
+          "\tconst VectorRegister4Double RightTerm = VectorBitwiseXor(SignBitsRight, VectorMultiply(SR, VectorMultiply(CP_CP_SP_SP, CY_SY_CY_SY)));",
+          "",
+          "\tconst VectorRegister4Double Result = VectorAdd(LeftTerm, RightTerm);",
+          "\tFQuat4d RotationQuat = FQuat4d::MakeFromVectorRegister(Result);",
+          "#else",
+          "\tconst double DEG_TO_RAD = UE_DOUBLE_PI / (180.0);",
+          "\tconst double RADS_DIVIDED_BY_2 = DEG_TO_RAD / 2.0;",
+          "\tdouble SP, SY, SR;",
+          "\tdouble CP, CY, CR;",
+          "",
+          "\tconst double PitchNoWinding = FMath::Fmod(Pitch, 360.0);",
+          "\tconst double YawNoWinding = FMath::Fmod(Yaw, 360.0);",
+          "\tconst double RollNoWinding = FMath::Fmod(Roll, 360.0);",
+          "",
+          "\tFMath::SinCos(&SP, &CP, PitchNoWinding * RADS_DIVIDED_BY_2);",
+          "\tFMath::SinCos(&SY, &CY, YawNoWinding * RADS_DIVIDED_BY_2);",
+          "\tFMath::SinCos(&SR, &CR, RollNoWinding * RADS_DIVIDED_BY_2);",
+          "",
+          "\tFQuat4d RotationQuat;",
+          "\tRotationQuat.X = CR * SP * SY - SR * CP * CY;",
+          "\tRotationQuat.Y = -CR * SP * CY - SR * CP * SY;",
+          "\tRotationQuat.Z = CR * CP * SY - SR * SP * CY;",
+          "\tRotationQuat.W = CR * CP * CY + SR * SP * SY;",
+          "#endif // PLATFORM_ENABLE_VECTORINTRINSICS",
+          "",
+          "#if ENABLE_NAN_DIAGNOSTIC || DO_CHECK",
+          "\t// Very large inputs can cause NaN's. Want to catch this here",
+          "\tif (RotationQuat.ContainsNaN())"
+        ]
+      }
+    ]
+  },
+  "math": {
+    "unit_ref_component_pose": "UnitT=ImportedComponentT/100; UnitR=ImportedComponentR; UnitScale=(1,1,1)",
+    "expected_parent_connector": "ExpectedConnector2T=Rotate(Inverse(ParentR), ChildUnitT-ParentUnitT); ExpectedConnector2R=Inverse(ParentR)*ChildR; Connector1=Identity",
+    "engine_adjusted_connector": "AdjustedPos2=SavedPos2 * (RefBodyInstance.Scale3D / (DefaultBody.Scale3D * InitScale)); EffectivePos2=AdjustedPos2*GetLastKnownScale(); GetLastKnownScale=InitScale -> EffectivePos2=SavedPos2*RefBodyScale/DefaultBodyScale",
+    "actual_engine_ref_body_creation": "InstantiatePhysicsAssetRefPose bCreateBodiesInRefPose=true returns imported component-space reference transform without applying Scale3D argument; InitBody sets BI.Scale3D=that transform scale (approximately100). The component/world .01 enters InitScale, then cancels between ScalePosition and MakeJointSetup.",
+    "default_body_scale_basis": "FBodyInstance constructor Scale3D(1); current JSON does not serialize Scale3D and no native live-scale readback is present. Calculations assume unchanged DefaultBody.Scale3D=1; author source has no explicit scale assignment to the preserved Iron default bodies.",
+    "unit_reference_world_anchor": "Anchor1=ChildUnitT+Rotate(ChildR,EffectivePos1); Anchor2=ParentUnitT+Rotate(ParentR,EffectivePos2); gap=|Anchor1-Anchor2|. A common rigid world transform preserves this gap.",
+    "quaternion_conversion": "UE FRotator fields are Pitch/Yaw/Roll degrees; quaternion formula sourced from installed UnrealMath.cpp and Transform.cpp, not conventional external Euler assumptions.",
+    "units": "Positions and anchor gaps in cm; rotations in degrees/quaternion; scales dimensionless; saved FTransform logs rounded to6decimal digits",
+    "rotator_quaternion_formula": "With SP/SY/SR=sin(Pitch/Yaw/Roll * pi/360), CP/CY/CR=cos(...): Qx=CR*SP*SY-SR*CP*CY; Qy=-CR*SP*CY-SR*CP*SY; Qz=CR*CP*SY-SR*SP*CY; Qw=CR*CP*CY+SR*SP*SY. Rotate(Q,V)=V+2*Qw*(Qxyz cross V)+Qxyz cross (2*Qxyz cross V)."
+  },
+  "iron_results": [
+    {
+      "bone": "B_Iron_01_01_R_Pelvis",
+      "parent": "Bip001-Pelvis",
+      "source_asset": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_PhysicsAsset.Player_Original_Leg_PhysicsAsset",
+      "current_derived_asset": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_RigidBody_PhysicsAsset.Player_Original_Leg_RigidBody_PhysicsAsset",
+      "saved_current_frame1": "0.000000,0.000000,0.000000|0.000000,0.000000,-0.000000|1.000000,1.000000,1.000000",
+      "saved_current_frame2": "0.113923,0.033052,-0.146370|-36.498668,176.076639,95.134934|1.000000,1.000000,1.000000",
+      "saved_source_frame2": "11.392341,3.305164,-14.637007|-36.498668,176.076639,95.134934|1.000000,1.000000,1.000000",
+      "imported_local_transform": [
+        [
+          11.392341,
+          3.305164,
+          -14.637007
+        ],
+        [
+          -36.498668,
+          176.076639,
+          95.134934
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "imported_component_transform": [
+        [
+          -1463.701514,
+          60.189018,
+          11806.163727
+        ],
+        [
+          -53.320248,
+          -174.716944,
+          -91.442397
+        ],
+        [
+          100.0,
+          99.999976,
+          100.000012
+        ]
+      ],
+      "unit_child_component_position_cm": [
+        -14.63701514,
+        0.6018901799999999,
+        118.06163726999999
+      ],
+      "unit_parent_component_position_cm": [
+        0.0,
+        3.90701773,
+        106.6692969
+      ],
+      "unit_child_relative_parent_position_cm": [
+        11.392340369999989,
+        3.3051633149650965,
+        -14.637007064006196
+      ],
+      "unit_child_relative_parent_quaternion_xyzw": [
+        -0.23516132660483138,
+        -0.693305810287042,
+        0.6483212545947639,
+        -0.20905921345962203
+      ],
+      "source_frame2_minus_expected_unit_position_cm": [
+        6.300000112702264e-07,
+        6.850349034692726e-07,
+        6.400619589896905e-08
+      ],
+      "source_frame2_position_error_cm": 9.328824289722142e-07,
+      "saved_frame2_rotation_error_degrees_to_ref_relative": 7.443026089337883e-06,
+      "engine_conditioned_connector2_translation_cm": [
+        11.392299999999999,
+        3.305199801688,
+        -14.637
+      ],
+      "engine_conditioned_connector2_minus_expected_cm": [
+        -4.036999999001978e-05,
+        3.6486722903461555e-05,
+        7.064006195989236e-06
+      ],
+      "reference_unit_anchor1_component_position_cm": [
+        -14.63701514,
+        0.6018901799999999,
+        118.06163726999999
+      ],
+      "reference_unit_anchor2_component_position_cm": [
+        -14.63700807608297,
+        0.6018536932598315,
+        118.06159690000001
+      ],
+      "predicted_reference_unit_anchor_gap_cm": 5.48718327583338e-05,
+      "counterfactual_gap_if_saved_frame2_were_used_without_engine_body_scale_adjustment_cm": 18.651755235102943,
+      "current_reference_capsule": {
+        "center": {
+          "x": 7.788322263390921,
+          "y": -2.318277806385428,
+          "z": 0.3073638396244095
+        },
+        "rotation": {
+          "pitch": 0.8730986699101198,
+          "yaw": -90.00000000000001,
+          "roll": 4.258740131838598
+        },
+        "radius": 1,
+        "length": 21.74235725402832,
+        "restOffset": 0,
+        "bIsGenerated": false,
+        "name": "None",
+        "bContributeToMass": true,
+        "collisionEnabled": "QueryAndPhysics"
+      },
+      "current_ref_capsule_body_pelvis_clearance_cm": -8.846295497096518,
+      "current_reference_vertex_support": [
+        {
+          "selection": "AllPositive",
+          "count": 579,
+          "bone_local_min_cm": [
+            -3.6887130737304688,
+            -10.459304809570312,
+            -21.42331886291504
+          ],
+          "bone_local_max_cm": [
+            17.86273956298828,
+            5.7926025390625,
+            21.558855056762695
+          ],
+          "capsule_local_min_cm": [
+            -8.11185535374639,
+            -10.108396540716713,
+            -21.52708581884841
+          ],
+          "capsule_local_max_cm": [
+            8.11185055709159,
+            10.108400106041671,
+            21.527085677207538
+          ],
+          "max_capsule_axis_radial_cm": 11.703379168035177,
+          "capsule_phi_min_cm": 2.1004700890834416,
+          "capsule_phi_max_cm": 13.245626862367205,
+          "capsule_covered_vertices": 0,
+          "parent_phi_min_cm": -2.7135717475156422,
+          "parent_inside_vertices": 227,
+          "capsule_negative_z_extent_beyond_support_cm": 0,
+          "capsule_positive_z_extent_beyond_support_cm": 0
+        },
+        {
+          "selection": "Dominant",
+          "count": 536,
+          "bone_local_min_cm": [
+            -3.6887130737304688,
+            -10.459304809570312,
+            -21.42331886291504
+          ],
+          "bone_local_max_cm": [
+            17.86273956298828,
+            5.7926025390625,
+            21.558855056762695
+          ],
+          "capsule_local_min_cm": [
+            -8.11185535374639,
+            -10.108396540716713,
+            -21.52708581884841
+          ],
+          "capsule_local_max_cm": [
+            8.11185055709159,
+            10.108400106041671,
+            21.527085677207538
+          ],
+          "max_capsule_axis_radial_cm": 11.703379168035177,
+          "capsule_phi_min_cm": 2.1004700890834416,
+          "capsule_phi_max_cm": 13.245626862367205,
+          "capsule_covered_vertices": 0,
+          "parent_phi_min_cm": -2.7135717475156422,
+          "parent_inside_vertices": 184,
+          "capsule_negative_z_extent_beyond_support_cm": 0,
+          "capsule_positive_z_extent_beyond_support_cm": 0
+        }
+      ],
+      "source_reference_vertex_support": [
+        {
+          "selection": "AllPositive",
+          "count": 579,
+          "bone_local_min_cm": [
+            -3.6887130737304688,
+            -10.459304809570312,
+            -21.42331886291504
+          ],
+          "bone_local_max_cm": [
+            17.86273956298828,
+            5.7926025390625,
+            21.558855056762695
+          ],
+          "capsule_local_min_cm": [
+            -8.11185535374639,
+            -10.108396540716713,
+            -21.52708581884841
+          ],
+          "capsule_local_max_cm": [
+            8.11185055709159,
+            10.108400106041671,
+            21.527085677207538
+          ],
+          "max_capsule_axis_radial_cm": 11.703379168035177,
+          "capsule_phi_min_cm": -7.1090121039097225,
+          "capsule_phi_max_cm": 4.036144669374041,
+          "capsule_covered_vertices": 452,
+          "parent_phi_min_cm": -2.7135717475156422,
+          "parent_inside_vertices": 227,
+          "capsule_negative_z_extent_beyond_support_cm": 0,
+          "capsule_positive_z_extent_beyond_support_cm": 0
+        },
+        {
+          "selection": "Dominant",
+          "count": 536,
+          "bone_local_min_cm": [
+            -3.6887130737304688,
+            -10.459304809570312,
+            -21.42331886291504
+          ],
+          "bone_local_max_cm": [
+            17.86273956298828,
+            5.7926025390625,
+            21.558855056762695
+          ],
+          "capsule_local_min_cm": [
+            -8.11185535374639,
+            -10.108396540716713,
+            -21.52708581884841
+          ],
+          "capsule_local_max_cm": [
+            8.11185055709159,
+            10.108400106041671,
+            21.527085677207538
+          ],
+          "max_capsule_axis_radial_cm": 11.703379168035177,
+          "capsule_phi_min_cm": -7.1090121039097225,
+          "capsule_phi_max_cm": 4.036144669374041,
+          "capsule_covered_vertices": 418,
+          "parent_phi_min_cm": -2.7135717475156422,
+          "parent_inside_vertices": 184,
+          "capsule_negative_z_extent_beyond_support_cm": 0,
+          "capsule_positive_z_extent_beyond_support_cm": 0
+        }
+      ],
+      "profiles_identical_to_source_in_preserved_iron_policy": true,
+      "source_to_current_frame2_translation_factor": "1/imported_wrapper_scale (100); values displayed by FTransform.ToString round to 6 decimals"
+    },
+    {
+      "bone": "B_Iron_01_01_L_Pelvis",
+      "parent": "Bip001-Pelvis",
+      "source_asset": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_PhysicsAsset.Player_Original_Leg_PhysicsAsset",
+      "current_derived_asset": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_RigidBody_PhysicsAsset.Player_Original_Leg_RigidBody_PhysicsAsset",
+      "saved_current_frame1": "0.000000,0.000000,0.000000|0.000000,0.000000,-0.000000|1.000000,1.000000,1.000000",
+      "saved_current_frame2": "0.113924,0.033051,0.146373|36.498818,176.076741,-95.134620|1.000000,1.000000,1.000000",
+      "saved_source_frame2": "11.392388,3.305083,14.637344|36.498818,176.076741,-95.134620|1.000000,1.000000,1.000000",
+      "imported_local_transform": [
+        [
+          11.392388,
+          3.305083,
+          14.637344
+        ],
+        [
+          36.498818,
+          176.076741,
+          -95.13462
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "imported_component_transform": [
+        [
+          1463.733598,
+          60.189703,
+          11806.168496
+        ],
+        [
+          -53.320108,
+          -5.283182,
+          -88.557482
+        ],
+        [
+          100.000012,
+          99.999994,
+          100.0
+        ]
+      ],
+      "unit_child_component_position_cm": [
+        14.63733598,
+        0.60189703,
+        118.06168496000001
+      ],
+      "unit_parent_component_position_cm": [
+        0.0,
+        3.90701773,
+        106.6692969
+      ],
+      "unit_child_relative_parent_position_cm": [
+        11.39238806,
+        3.305084934231213,
+        14.63734405588968
+      ],
+      "unit_child_relative_parent_quaternion_xyzw": [
+        -0.23516213310215478,
+        -0.6933039736423757,
+        -0.6483226558411742,
+        0.20906005168272276
+      ],
+      "source_frame2_minus_expected_unit_position_cm": [
+        -5.999999963535174e-08,
+        -1.9342312129744244e-06,
+        -5.5889678662879305e-08
+      ],
+      "source_frame2_position_error_cm": 1.9359685021667567e-06,
+      "saved_frame2_rotation_error_degrees_to_ref_relative": 6.830189170012753e-06,
+      "engine_conditioned_connector2_translation_cm": [
+        11.3924,
+        3.305099801694,
+        14.6373
+      ],
+      "engine_conditioned_connector2_minus_expected_cm": [
+        1.1940000000265627e-05,
+        1.4867462786671837e-05,
+        -4.405588967948404e-05
+      ],
+      "reference_unit_anchor1_component_position_cm": [
+        14.63733598,
+        0.60189703,
+        118.06168496000001
+      ],
+      "reference_unit_anchor2_component_position_cm": [
+        14.637291924073994,
+        0.6018821626448605,
+        118.0616969
+      ],
+      "predicted_reference_unit_anchor_gap_cm": 4.800548369641668e-05,
+      "counterfactual_gap_if_saved_frame2_were_used_without_engine_body_scale_adjustment_cm": 18.652029373826988,
+      "current_reference_capsule": {
+        "center": {
+          "x": 7.788296606765461,
+          "y": -2.3188193979676592,
+          "z": -0.30727706683898814
+        },
+        "rotation": {
+          "pitch": -0.8744968288057303,
+          "yaw": -90,
+          "roll": -4.259396750256255
+        },
+        "radius": 1,
+        "length": 21.74236488342285,
+        "restOffset": 0,
+        "bIsGenerated": false,
+        "name": "None",
+        "bContributeToMass": true,
+        "collisionEnabled": "QueryAndPhysics"
+      },
+      "current_ref_capsule_body_pelvis_clearance_cm": -8.964483665948768,
+      "current_reference_vertex_support": [
+        {
+          "selection": "AllPositive",
+          "count": 579,
+          "bone_local_min_cm": [
+            -3.6888504028320312,
+            -10.459587097167969,
+            -21.558856964111328
+          ],
+          "bone_local_max_cm": [
+            17.86261749267578,
+            5.792304992675781,
+            21.423322677612305
+          ],
+          "capsule_local_min_cm": [
+            -8.112098337761836,
+            -10.108286452529612,
+            -21.527094102553654
+          ],
+          "capsule_local_max_cm": [
+            8.11210310717001,
+            10.108286677821134,
+            21.527094553084208
+          ],
+          "max_capsule_axis_radial_cm": 11.703398281005375,
+          "capsule_phi_min_cm": 2.100489984688581,
+          "capsule_phi_max_cm": 13.245377257508993,
+          "capsule_covered_vertices": 0,
+          "parent_phi_min_cm": -4.714789478550934,
+          "parent_inside_vertices": 277,
+          "capsule_negative_z_extent_beyond_support_cm": 0,
+          "capsule_positive_z_extent_beyond_support_cm": 0
+        },
+        {
+          "selection": "Dominant",
+          "count": 536,
+          "bone_local_min_cm": [
+            -3.6888504028320312,
+            -10.459587097167969,
+            -21.558856964111328
+          ],
+          "bone_local_max_cm": [
+            17.86261749267578,
+            5.792304992675781,
+            21.423322677612305
+          ],
+          "capsule_local_min_cm": [
+            -8.112098337761836,
+            -10.108286452529612,
+            -21.527094102553654
+          ],
+          "capsule_local_max_cm": [
+            8.11210310717001,
+            10.108286677821134,
+            21.527094553084208
+          ],
+          "max_capsule_axis_radial_cm": 11.703398281005375,
+          "capsule_phi_min_cm": 2.100489984688581,
+          "capsule_phi_max_cm": 13.245377257508993,
+          "capsule_covered_vertices": 0,
+          "parent_phi_min_cm": -4.714789478550934,
+          "parent_inside_vertices": 263,
+          "capsule_negative_z_extent_beyond_support_cm": 0,
+          "capsule_positive_z_extent_beyond_support_cm": 0
+        }
+      ],
+      "source_reference_vertex_support": [
+        {
+          "selection": "AllPositive",
+          "count": 579,
+          "bone_local_min_cm": [
+            -3.6888504028320312,
+            -10.459587097167969,
+            -21.558856964111328
+          ],
+          "bone_local_max_cm": [
+            17.86261749267578,
+            5.792304992675781,
+            21.423322677612305
+          ],
+          "capsule_local_min_cm": [
+            -8.112098337761836,
+            -10.108286452529612,
+            -21.527094102553654
+          ],
+          "capsule_local_max_cm": [
+            8.11210310717001,
+            10.108286677821134,
+            21.527094553084208
+          ],
+          "max_capsule_axis_radial_cm": 11.703398281005375,
+          "capsule_phi_min_cm": -7.1088758600379816,
+          "capsule_phi_max_cm": 4.036011412782431,
+          "capsule_covered_vertices": 452,
+          "parent_phi_min_cm": -4.714789478550934,
+          "parent_inside_vertices": 277,
+          "capsule_negative_z_extent_beyond_support_cm": 0,
+          "capsule_positive_z_extent_beyond_support_cm": 0
+        },
+        {
+          "selection": "Dominant",
+          "count": 536,
+          "bone_local_min_cm": [
+            -3.6888504028320312,
+            -10.459587097167969,
+            -21.558856964111328
+          ],
+          "bone_local_max_cm": [
+            17.86261749267578,
+            5.792304992675781,
+            21.423322677612305
+          ],
+          "capsule_local_min_cm": [
+            -8.112098337761836,
+            -10.108286452529612,
+            -21.527094102553654
+          ],
+          "capsule_local_max_cm": [
+            8.11210310717001,
+            10.108286677821134,
+            21.527094553084208
+          ],
+          "max_capsule_axis_radial_cm": 11.703398281005375,
+          "capsule_phi_min_cm": -7.1088758600379816,
+          "capsule_phi_max_cm": 4.036011412782431,
+          "capsule_covered_vertices": 418,
+          "parent_phi_min_cm": -4.714789478550934,
+          "parent_inside_vertices": 263,
+          "capsule_negative_z_extent_beyond_support_cm": 0,
+          "capsule_positive_z_extent_beyond_support_cm": 0
+        }
+      ],
+      "profiles_identical_to_source_in_preserved_iron_policy": true,
+      "source_to_current_frame2_translation_factor": "1/imported_wrapper_scale (100); values displayed by FTransform.ToString round to 6 decimals"
+    }
+  ],
+  "interpretation": [
+    "Shape/contact remains a concrete competing cause: thin current Iron capsules overlap separate imported anatomy pelvis capsule by approximately8.85/8.96cm in unit reference reconstruction. This is not actual RBAN skin collision depth.",
+    "New native support resolves previous unknown: each Iron has579 AllPositive vertices and536 Dominant vertices. Current1cm capsule covers0 of both; source broad capsule covers452/579 and418/536. Thus current collider does not fit the supported armor surface; source broad geometry is imported-project evidence, not directly verified original-game metadata.",
+    "A thin capsule can lie deep inside the body and generate collision torques while not representing its visible mesh support. These saved facts identify a geometry/contact candidate, but do not prove it causes the published-pose jitter.",
+    "Multiplying current savedFrame2 by100 to match the unit relative offset before the engine conversion would apply wrapper compensation twice in the examined RBAN path."
+  ],
+  "limits": [
+    "No actual ImmediatePhysics FJointSetup ConnectorTransforms, LastKnownScale, temporary BI.Scale3D, particle actor poses, or first-solve anchor separation were read by this subtask.",
+    "The unit-ref reconstructed anchor gap is conditional on examined engine path/default body scale and is not a measured animated pre-sim or live contact-frame gap. Ref-pose temporary actor creation positions retain the imported wrapper; RBAN subsequently resets bodies from output pose before normal simulation.",
+    "Body anatomy and Leg imported reference skeleton poses differ; ref collider overlap and reference skin support are not proof of animated skinned-body clearance.",
+    "BaselineIronPhysicsAudit.frame1/frame2 are default stored frames only; quaternion/position serialized6decimal digits bounds precision. Existing raw helper records do not export actual effective joint translations.",
+    "Collision point-plane cached separation can be stale; InitialPhi/current contact metrics cannot assert zero visible skin penetration.",
+    "Reference vertex capsule coverage is a skin-support fit diagnostic, not a requirement that every render vertex be enclosed by a rigid proxy. A narrow proxy may be intentional; fitting changes require runtime stability/contact controls and visual inspection."
+  ],
+  "optional_followup_readonly_probe": "If actual anchor validity remains in doubt, extend parent-owned existing native probe only: record after InstantiatePhysicsAssetRefPose both temporary BI.Scale3D/DefaultInstance.Scale3D, CI.GetRefFrame and CI.GetLastKnownScale; compute MakeJointSetup.ConnectorTransforms; record actual actor X/R connector world anchor gap after RBAN first reset before solve. Do not change any saved frame or shape based only on this conditional reconstruction."
+}

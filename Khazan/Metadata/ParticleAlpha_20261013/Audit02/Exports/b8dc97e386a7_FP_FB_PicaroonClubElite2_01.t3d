@@ -1,0 +1,74 @@
+Begin Object Class=/Script/Engine.ParticleSystem Name="FP_FB_PicaroonClubElite2_01" ExportPath="/Script/Engine.ParticleSystem'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01'"
+   Begin Object Class=/Script/Engine.ParticleModuleRequired Name="A3" ExportPath="/Script/Engine.ParticleModuleRequired'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A3'"
+      Begin Object Class=/Script/Engine.DistributionFloatConstant Name="RequiredDistributionSpawnRate" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A3.RequiredDistributionSpawnRate'"
+      End Object
+   End Object
+   Begin Object Class=/Script/Engine.ParticleModuleSpawn Name="A4" ExportPath="/Script/Engine.ParticleModuleSpawn'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A4'"
+      Begin Object Class=/Script/Engine.DistributionFloatConstant Name="A5" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A4.A5'"
+      End Object
+      Begin Object Class=/Script/Engine.DistributionFloatConstant Name="BurstScaleDistribution" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A4.BurstScaleDistribution'"
+      End Object
+      Begin Object Class=/Script/Engine.DistributionFloatConstant Name="RequiredDistributionSpawnRateScale" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A4.RequiredDistributionSpawnRateScale'"
+      End Object
+   End Object
+   Begin Object Class=/Script/Engine.ParticleModuleLifetime Name="A6" ExportPath="/Script/Engine.ParticleModuleLifetime'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A6'"
+      Begin Object Class=/Script/Engine.DistributionFloatConstant Name="A7" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A6.A7'"
+      End Object
+   End Object
+   Begin Object Class=/Script/Engine.ParticleModuleSize Name="A8" ExportPath="/Script/Engine.ParticleModuleSize'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A8'"
+      Begin Object Class=/Script/Engine.DistributionVectorConstant Name="A9" ExportPath="/Script/Engine.DistributionVectorConstant'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A8.A9'"
+      End Object
+   End Object
+   Begin Object Class=/Script/Engine.ParticleLODLevel Name="A2" ExportPath="/Script/Engine.ParticleLODLevel'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A2'"
+   End Object
+   Begin Object Class=/Script/Engine.ParticleSpriteEmitter Name="A1" ExportPath="/Script/Engine.ParticleSpriteEmitter'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A1'"
+   End Object
+   Begin Object Name="A3" ExportPath="/Script/Engine.ParticleModuleRequired'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A3'"
+      Begin Object Name="RequiredDistributionSpawnRate" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A3.RequiredDistributionSpawnRate'"
+      End Object
+      Material="/Script/Engine.MaterialInstanceConstant'/Game/_Art/Effects/Shared/Materials/MonsterHuman/FMI_TestTickleParticle_01.FMI_TestTickleParticle_01'"
+      EmitterDuration=1.200000
+      SpawnRate=(Distribution="/Script/Engine.DistributionFloatConstant'RequiredDistributionSpawnRate'")
+      EmitterLoops=1
+   End Object
+   Begin Object Name="A4" ExportPath="/Script/Engine.ParticleModuleSpawn'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A4'"
+      Begin Object Name="A5" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A4.A5'"
+      End Object
+      Begin Object Name="BurstScaleDistribution" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A4.BurstScaleDistribution'"
+         Constant=1.000000
+      End Object
+      Begin Object Name="RequiredDistributionSpawnRateScale" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A4.RequiredDistributionSpawnRateScale'"
+         Constant=1.000000
+      End Object
+      Rate=(Distribution="/Script/Engine.DistributionFloatConstant'A5'")
+      RateScale=(Distribution="/Script/Engine.DistributionFloatConstant'RequiredDistributionSpawnRateScale'")
+      BurstList(0)=(Count=12)
+      BurstScale=(Distribution="/Script/Engine.DistributionFloatConstant'BurstScaleDistribution'")
+   End Object
+   Begin Object Name="A6" ExportPath="/Script/Engine.ParticleModuleLifetime'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A6'"
+      Begin Object Name="A7" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A6.A7'"
+         Constant=1.200000
+      End Object
+      Lifetime=(Distribution="/Script/Engine.DistributionFloatConstant'A7'")
+   End Object
+   Begin Object Name="A8" ExportPath="/Script/Engine.ParticleModuleSize'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A8'"
+      Begin Object Name="A9" ExportPath="/Script/Engine.DistributionVectorConstant'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A8.A9'"
+         Constant=(X=24.000000,Y=24.000000,Z=24.000000)
+      End Object
+      StartSize=(Distribution="/Script/Engine.DistributionVectorConstant'A9'")
+   End Object
+   Begin Object Name="A2" ExportPath="/Script/Engine.ParticleLODLevel'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A2'"
+      RequiredModule="/Script/Engine.ParticleModuleRequired'FP_FB_PicaroonClubElite2_01:A3'"
+      Modules(0)="/Script/Engine.ParticleModuleLifetime'FP_FB_PicaroonClubElite2_01:A6'"
+      Modules(1)="/Script/Engine.ParticleModuleSize'FP_FB_PicaroonClubElite2_01:A8'"
+      SpawnModule="/Script/Engine.ParticleModuleSpawn'FP_FB_PicaroonClubElite2_01:A4'"
+   End Object
+   Begin Object Name="A1" ExportPath="/Script/Engine.ParticleSpriteEmitter'/Game/_Art/Effects/Monsters/Human/FP_FB_PicaroonClubElite2_01.FP_FB_PicaroonClubElite2_01:A1'"
+      EmitterName="Empty001_0_0"
+      LODLevels(0)="/Script/Engine.ParticleLODLevel'FP_FB_PicaroonClubElite2_01:A2'"
+      DetailModeBitmask=15
+   End Object
+   Emitters(0)="/Script/Engine.ParticleSpriteEmitter'A1'"
+   LODDistances(0)=0.000000
+   LODSettings(0)=()
+End Object

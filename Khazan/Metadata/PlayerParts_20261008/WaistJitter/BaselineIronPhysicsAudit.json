@@ -1,0 +1,2082 @@
+{
+	"mode": "ReadOnlyOriginalImportAndDerivedUnitActorAudit",
+	"original_game_physics_verified": false,
+	"support_source": "ImportedLOD0InverseRefBoneLocalCm;Dominant=LargestWeightFirstValidInfluenceSlot;ReferenceOnlyNotRuntimeSkin",
+	"support_round_trip_max_error_cm": 1.4711878029629589e-05,
+	"anatomy_asset": "/Game/_Art/Player/Character/Meshs/Player_PhysicsAsset.Player_PhysicsAsset",
+	"bodies": [
+		{
+			"asset": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_PhysicsAsset.Player_Original_Leg_PhysicsAsset",
+			"bone": "B_Iron_01_01_R_Pelvis",
+			"parent": "Bip001-Pelvis",
+			"physics_type": 2,
+			"body_collision_response": 0,
+			"geometry_bone_local_cm":
+			{
+				"sphereElems": [],
+				"boxElems": [],
+				"sphylElems": [
+					{
+						"center":
+						{
+							"x": 7.7883222633909206,
+							"y": -2.3182778063854279,
+							"z": 0.3073638396244095
+						},
+						"rotation":
+						{
+							"pitch": 0.87309866991011975,
+							"yaw": -90.000000000000014,
+							"roll": 4.2587401318385982
+						},
+						"radius": 10.209482192993164,
+						"length": 21.74235725402832,
+						"restOffset": 0,
+						"bIsGenerated": false,
+						"name": "None",
+						"bContributeToMass": true,
+						"collisionEnabled": "QueryAndPhysics"
+					}
+				],
+				"convexElems": [],
+				"taperedCapsuleElems": [],
+				"levelSetElems": [],
+				"skinnedLevelSetElems": [],
+				"mLLevelSetElems": [],
+				"skinnedTriangleMeshElems": []
+			},
+			"body_settings":
+			{
+				"positionSolverIterationCount": 8,
+				"velocitySolverIterationCount": 2,
+				"projectionSolverIterationCount": 1,
+				"objectType": "ECC_PhysicsBody",
+				"collisionEnabled": "QueryAndPhysics",
+				"sleepFamily": "Normal",
+				"dOFMode": "Default",
+				"bUseCCD": false,
+				"bUseMACD": false,
+				"bAllowPartialIslandSleep": true,
+				"bIgnoreAnalyticCollisions": false,
+				"bNotifyRigidBodyCollision": false,
+				"bSmoothEdgeCollisions": false,
+				"bLockTranslation": true,
+				"bLockRotation": true,
+				"bLockXTranslation": false,
+				"bLockYTranslation": false,
+				"bLockZTranslation": false,
+				"bLockXRotation": false,
+				"bLockYRotation": false,
+				"bLockZRotation": false,
+				"bOverrideMaxAngularVelocity": false,
+				"bOverrideMaxDepenetrationVelocity": false,
+				"bOverrideWalkableSlopeOnInstance": false,
+				"bOverrideIterationCounts": false,
+				"bInterpolateWhenSubStepping": true,
+				"bInertiaConditioning": true,
+				"bOneWayInteraction": false,
+				"bOverrideSolverAsyncDeltaTime": false,
+				"solverAsyncDeltaTime": 0.01666666753590107,
+				"collisionProfileName": "Custom",
+				"collisionResponses":
+				{
+					"responseArray": []
+				},
+				"maxDepenetrationVelocity": 0,
+				"massInKgOverride": 100,
+				"linearDamping": 0.0099999997764825821,
+				"angularDamping": 0,
+				"customDOFPlaneNormal":
+				{
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"cOMNudge":
+				{
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"massScale": 1,
+				"gravityGroupIndex": 0,
+				"inertiaTensorScale":
+				{
+					"x": 1,
+					"y": 1,
+					"z": 1
+				},
+				"walkableSlopeOverride":
+				{
+					"walkableSlopeBehavior": "WalkableSlope_Default",
+					"walkableSlopeAngle": 0
+				},
+				"physMaterialOverride": "None",
+				"maxAngularVelocity": 3600,
+				"customSleepThresholdMultiplier": 1,
+				"stabilizationThresholdMultiplier": 1,
+				"physicsBlendWeight": 0,
+				"bSimulatePhysics": false,
+				"bOverrideMass": false,
+				"bEnableGravity": true,
+				"bUpdateKinematicFromSimulation": false,
+				"bGyroscopicTorqueEnabled": false,
+				"bAutoWeld": false,
+				"bStartAwake": true,
+				"bGenerateWakeEvents": false,
+				"bUpdateMassWhenScaleChanges": true
+			},
+			"current_joint_profile":
+			{
+				"projectionLinearTolerance": 5,
+				"projectionAngularTolerance": 180,
+				"projectionLinearAlpha": 1,
+				"projectionAngularAlpha": 0,
+				"shockPropagationAlpha": 0.30000001192092896,
+				"linearBreakThreshold": 300,
+				"linearPlasticityThreshold": 0.10000000149011612,
+				"angularBreakThreshold": 500,
+				"angularPlasticityThreshold": 10,
+				"contactTransferScale": 0,
+				"linearLimit":
+				{
+					"limit": 0,
+					"xMotion": "LCM_Locked",
+					"yMotion": "LCM_Locked",
+					"zMotion": "LCM_Locked",
+					"stiffness": 0,
+					"damping": 0,
+					"restitution": 0,
+					"contactDistance": 5,
+					"bSoftConstraint": false
+				},
+				"coneLimit":
+				{
+					"swing1LimitDegrees": 45,
+					"swing2LimitDegrees": 45,
+					"swing1Motion": "ACM_Limited",
+					"swing2Motion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"twistLimit":
+				{
+					"twistLimitDegrees": 45,
+					"twistMotion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"bDisableCollision": false,
+				"bParentDominates": false,
+				"bEnableShockPropagation": false,
+				"bEnableProjection": true,
+				"bEnableMassConditioning": true,
+				"bUseLinearJointSolver": true,
+				"bAngularBreakable": false,
+				"bAngularPlasticity": false,
+				"bLinearBreakable": false,
+				"bLinearPlasticity": false,
+				"linearDrive":
+				{
+					"positionTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"velocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"xDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"yDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"zDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"bAccelerationMode": true
+				},
+				"angularDrive":
+				{
+					"twistDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"swingDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"slerpDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"orientationTarget":
+					{
+						"pitch": 0,
+						"yaw": 0,
+						"roll": 0
+					},
+					"angularVelocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"angularDriveMode": "SLERP",
+					"bAccelerationMode": true,
+					"limitViolationResponse": "None"
+				},
+				"linearPlasticityType": "CCPT_Free"
+			},
+			"default_joint_profile":
+			{
+				"projectionLinearTolerance": 5,
+				"projectionAngularTolerance": 180,
+				"projectionLinearAlpha": 1,
+				"projectionAngularAlpha": 0,
+				"shockPropagationAlpha": 0.30000001192092896,
+				"linearBreakThreshold": 300,
+				"linearPlasticityThreshold": 0.10000000149011612,
+				"angularBreakThreshold": 500,
+				"angularPlasticityThreshold": 10,
+				"contactTransferScale": 0,
+				"linearLimit":
+				{
+					"limit": 0,
+					"xMotion": "LCM_Locked",
+					"yMotion": "LCM_Locked",
+					"zMotion": "LCM_Locked",
+					"stiffness": 0,
+					"damping": 0,
+					"restitution": 0,
+					"contactDistance": 5,
+					"bSoftConstraint": false
+				},
+				"coneLimit":
+				{
+					"swing1LimitDegrees": 45,
+					"swing2LimitDegrees": 45,
+					"swing1Motion": "ACM_Limited",
+					"swing2Motion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"twistLimit":
+				{
+					"twistLimitDegrees": 45,
+					"twistMotion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"bDisableCollision": false,
+				"bParentDominates": false,
+				"bEnableShockPropagation": false,
+				"bEnableProjection": true,
+				"bEnableMassConditioning": true,
+				"bUseLinearJointSolver": true,
+				"bAngularBreakable": false,
+				"bAngularPlasticity": false,
+				"bLinearBreakable": false,
+				"bLinearPlasticity": false,
+				"linearDrive":
+				{
+					"positionTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"velocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"xDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"yDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"zDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"bAccelerationMode": true
+				},
+				"angularDrive":
+				{
+					"twistDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"swingDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"slerpDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"orientationTarget":
+					{
+						"pitch": 0,
+						"yaw": 0,
+						"roll": 0
+					},
+					"angularVelocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"angularDriveMode": "SLERP",
+					"bAccelerationMode": true,
+					"limitViolationResponse": "None"
+				},
+				"linearPlasticityType": "CCPT_Free"
+			},
+			"profiles_identical": true,
+			"current_mass_kg": 6.2763358843544657,
+			"unconditioned_mass_kg": 6.2763358843544657,
+			"current_principal_kg_cm2": "840.141197532/301.913645629/840.141215643",
+			"unconditioned_principal_kg_cm2": "840.141197532/301.913645629/840.141215643",
+			"current_minimum_principal_kg_cm2": 301.91364562901128,
+			"current_maximum_principal_kg_cm2": 840.14121564277491,
+			"current_com": "7.788322,-2.318278,0.307364|4.258765,179.968043,-90.873065|1.000000,1.000000,1.000000",
+			"unconditioned_com": "7.788322,-2.318278,0.307364|4.258765,179.968043,-90.873065|1.000000,1.000000,1.000000",
+			"frame1": "0.000000,0.000000,0.000000|0.000000,0.000000,-0.000000|1.000000,1.000000,1.000000",
+			"frame2": "11.392341,3.305164,-14.637007|-36.498668,176.076639,95.134934|1.000000,1.000000,1.000000",
+			"ref_capsule_parent_clearance_cm": -18.055777690089684,
+			"ref_clearance_method": "ExactCapsuleAxisSegmentDistanceMinusBothRadii;NegativeMeansOverlap",
+			"parent_capsule_radius_cm": 16.276193618774414,
+			"parent_capsule_cylinder_length_cm": 19.531467437744141,
+			"bone_pivot_capsule_local_cm": [
+				-2.3226922138125037,
+				-7.7466186051552555,
+				-0.84961712675524526
+			],
+			"ref_parent_axis_start_cm": [
+				-9.0579435688280157,
+				1.5400248836561723,
+				110.40495075188731
+			],
+			"ref_parent_axis_end_cm": [
+				9.2208499972879352,
+				-4.5556894766643952,
+				107.21023754467141
+			],
+			"ref_capsule_axis_start_cm": [
+				-16.043211265007354,
+				-10.16504092018527,
+				111.13830708133936
+			],
+			"ref_capsule_axis_end_cm": [
+				-18.827866586070375,
+				11.351213935622678,
+				109.71473035892676
+			],
+			"ref_closest_capsule_axis_point_cm": [
+				-17.418318137134555,
+				0.46002627964580434,
+				110.43532236391925
+			],
+			"ref_closest_parent_axis_point_cm": [
+				-9.0579435688280157,
+				1.5400248836561723,
+				110.40495075188731
+			],
+			"reference_vertex_support": [
+				{
+					"selection": "AllPositive",
+					"count": 579,
+					"bone_local_min_cm": [
+						-3.6887130737304688,
+						-10.459304809570312,
+						-21.423318862915039
+					],
+					"bone_local_max_cm": [
+						17.862739562988281,
+						5.7926025390625,
+						21.558855056762695
+					],
+					"capsule_local_min_cm": [
+						-8.1118553537463907,
+						-10.108396540716713,
+						-21.527085818848409
+					],
+					"capsule_local_max_cm": [
+						8.1118505570915893,
+						10.108400106041671,
+						21.527085677207538
+					],
+					"max_capsule_axis_radial_cm": 11.703379168035177,
+					"capsule_phi_min_cm": -7.1090121039097225,
+					"capsule_phi_max_cm": 4.0361446693740408,
+					"capsule_covered_vertices": 452,
+					"parent_phi_min_cm": -2.7135717475156422,
+					"parent_inside_vertices": 227,
+					"capsule_negative_z_extent_beyond_support_cm": 0,
+					"capsule_positive_z_extent_beyond_support_cm": 0
+				},
+				{
+					"selection": "Dominant",
+					"count": 536,
+					"bone_local_min_cm": [
+						-3.6887130737304688,
+						-10.459304809570312,
+						-21.423318862915039
+					],
+					"bone_local_max_cm": [
+						17.862739562988281,
+						5.7926025390625,
+						21.558855056762695
+					],
+					"capsule_local_min_cm": [
+						-8.1118553537463907,
+						-10.108396540716713,
+						-21.527085818848409
+					],
+					"capsule_local_max_cm": [
+						8.1118505570915893,
+						10.108400106041671,
+						21.527085677207538
+					],
+					"max_capsule_axis_radial_cm": 11.703379168035177,
+					"capsule_phi_min_cm": -7.1090121039097225,
+					"capsule_phi_max_cm": 4.0361446693740408,
+					"capsule_covered_vertices": 418,
+					"parent_phi_min_cm": -2.7135717475156422,
+					"parent_inside_vertices": 184,
+					"capsule_negative_z_extent_beyond_support_cm": 0,
+					"capsule_positive_z_extent_beyond_support_cm": 0
+				}
+			]
+		},
+		{
+			"asset": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_PhysicsAsset.Player_Original_Leg_PhysicsAsset",
+			"bone": "B_Iron_01_01_L_Pelvis",
+			"parent": "Bip001-Pelvis",
+			"physics_type": 2,
+			"body_collision_response": 0,
+			"geometry_bone_local_cm":
+			{
+				"sphereElems": [],
+				"boxElems": [],
+				"sphylElems": [
+					{
+						"center":
+						{
+							"x": 7.7882966067654609,
+							"y": -2.3188193979676592,
+							"z": -0.30727706683898814
+						},
+						"rotation":
+						{
+							"pitch": -0.87449682880573032,
+							"yaw": -90,
+							"roll": -4.2593967502562551
+						},
+						"radius": 10.209365844726562,
+						"length": 21.742364883422852,
+						"restOffset": 0,
+						"bIsGenerated": false,
+						"name": "None",
+						"bContributeToMass": true,
+						"collisionEnabled": "QueryAndPhysics"
+					}
+				],
+				"convexElems": [],
+				"taperedCapsuleElems": [],
+				"levelSetElems": [],
+				"skinnedLevelSetElems": [],
+				"mLLevelSetElems": [],
+				"skinnedTriangleMeshElems": []
+			},
+			"body_settings":
+			{
+				"positionSolverIterationCount": 8,
+				"velocitySolverIterationCount": 2,
+				"projectionSolverIterationCount": 1,
+				"objectType": "ECC_PhysicsBody",
+				"collisionEnabled": "QueryAndPhysics",
+				"sleepFamily": "Normal",
+				"dOFMode": "Default",
+				"bUseCCD": false,
+				"bUseMACD": false,
+				"bAllowPartialIslandSleep": true,
+				"bIgnoreAnalyticCollisions": false,
+				"bNotifyRigidBodyCollision": false,
+				"bSmoothEdgeCollisions": false,
+				"bLockTranslation": true,
+				"bLockRotation": true,
+				"bLockXTranslation": false,
+				"bLockYTranslation": false,
+				"bLockZTranslation": false,
+				"bLockXRotation": false,
+				"bLockYRotation": false,
+				"bLockZRotation": false,
+				"bOverrideMaxAngularVelocity": false,
+				"bOverrideMaxDepenetrationVelocity": false,
+				"bOverrideWalkableSlopeOnInstance": false,
+				"bOverrideIterationCounts": false,
+				"bInterpolateWhenSubStepping": true,
+				"bInertiaConditioning": true,
+				"bOneWayInteraction": false,
+				"bOverrideSolverAsyncDeltaTime": false,
+				"solverAsyncDeltaTime": 0.01666666753590107,
+				"collisionProfileName": "Custom",
+				"collisionResponses":
+				{
+					"responseArray": []
+				},
+				"maxDepenetrationVelocity": 0,
+				"massInKgOverride": 100,
+				"linearDamping": 0.0099999997764825821,
+				"angularDamping": 0,
+				"customDOFPlaneNormal":
+				{
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"cOMNudge":
+				{
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"massScale": 1,
+				"gravityGroupIndex": 0,
+				"inertiaTensorScale":
+				{
+					"x": 1,
+					"y": 1,
+					"z": 1
+				},
+				"walkableSlopeOverride":
+				{
+					"walkableSlopeBehavior": "WalkableSlope_Default",
+					"walkableSlopeAngle": 0
+				},
+				"physMaterialOverride": "None",
+				"maxAngularVelocity": 3600,
+				"customSleepThresholdMultiplier": 1,
+				"stabilizationThresholdMultiplier": 1,
+				"physicsBlendWeight": 0,
+				"bSimulatePhysics": false,
+				"bOverrideMass": false,
+				"bEnableGravity": true,
+				"bUpdateKinematicFromSimulation": false,
+				"bGyroscopicTorqueEnabled": false,
+				"bAutoWeld": false,
+				"bStartAwake": true,
+				"bGenerateWakeEvents": false,
+				"bUpdateMassWhenScaleChanges": true
+			},
+			"current_joint_profile":
+			{
+				"projectionLinearTolerance": 5,
+				"projectionAngularTolerance": 180,
+				"projectionLinearAlpha": 1,
+				"projectionAngularAlpha": 0,
+				"shockPropagationAlpha": 0.30000001192092896,
+				"linearBreakThreshold": 300,
+				"linearPlasticityThreshold": 0.10000000149011612,
+				"angularBreakThreshold": 500,
+				"angularPlasticityThreshold": 10,
+				"contactTransferScale": 0,
+				"linearLimit":
+				{
+					"limit": 0,
+					"xMotion": "LCM_Locked",
+					"yMotion": "LCM_Locked",
+					"zMotion": "LCM_Locked",
+					"stiffness": 0,
+					"damping": 0,
+					"restitution": 0,
+					"contactDistance": 5,
+					"bSoftConstraint": false
+				},
+				"coneLimit":
+				{
+					"swing1LimitDegrees": 45,
+					"swing2LimitDegrees": 45,
+					"swing1Motion": "ACM_Limited",
+					"swing2Motion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"twistLimit":
+				{
+					"twistLimitDegrees": 45,
+					"twistMotion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"bDisableCollision": false,
+				"bParentDominates": false,
+				"bEnableShockPropagation": false,
+				"bEnableProjection": true,
+				"bEnableMassConditioning": true,
+				"bUseLinearJointSolver": true,
+				"bAngularBreakable": false,
+				"bAngularPlasticity": false,
+				"bLinearBreakable": false,
+				"bLinearPlasticity": false,
+				"linearDrive":
+				{
+					"positionTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"velocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"xDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"yDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"zDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"bAccelerationMode": true
+				},
+				"angularDrive":
+				{
+					"twistDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"swingDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"slerpDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"orientationTarget":
+					{
+						"pitch": 0,
+						"yaw": 0,
+						"roll": 0
+					},
+					"angularVelocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"angularDriveMode": "SLERP",
+					"bAccelerationMode": true,
+					"limitViolationResponse": "None"
+				},
+				"linearPlasticityType": "CCPT_Free"
+			},
+			"default_joint_profile":
+			{
+				"projectionLinearTolerance": 5,
+				"projectionAngularTolerance": 180,
+				"projectionLinearAlpha": 1,
+				"projectionAngularAlpha": 0,
+				"shockPropagationAlpha": 0.30000001192092896,
+				"linearBreakThreshold": 300,
+				"linearPlasticityThreshold": 0.10000000149011612,
+				"angularBreakThreshold": 500,
+				"angularPlasticityThreshold": 10,
+				"contactTransferScale": 0,
+				"linearLimit":
+				{
+					"limit": 0,
+					"xMotion": "LCM_Locked",
+					"yMotion": "LCM_Locked",
+					"zMotion": "LCM_Locked",
+					"stiffness": 0,
+					"damping": 0,
+					"restitution": 0,
+					"contactDistance": 5,
+					"bSoftConstraint": false
+				},
+				"coneLimit":
+				{
+					"swing1LimitDegrees": 45,
+					"swing2LimitDegrees": 45,
+					"swing1Motion": "ACM_Limited",
+					"swing2Motion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"twistLimit":
+				{
+					"twistLimitDegrees": 45,
+					"twistMotion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"bDisableCollision": false,
+				"bParentDominates": false,
+				"bEnableShockPropagation": false,
+				"bEnableProjection": true,
+				"bEnableMassConditioning": true,
+				"bUseLinearJointSolver": true,
+				"bAngularBreakable": false,
+				"bAngularPlasticity": false,
+				"bLinearBreakable": false,
+				"bLinearPlasticity": false,
+				"linearDrive":
+				{
+					"positionTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"velocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"xDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"yDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"zDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"bAccelerationMode": true
+				},
+				"angularDrive":
+				{
+					"twistDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"swingDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"slerpDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"orientationTarget":
+					{
+						"pitch": 0,
+						"yaw": 0,
+						"roll": 0
+					},
+					"angularVelocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"angularDriveMode": "SLERP",
+					"bAccelerationMode": true,
+					"limitViolationResponse": "None"
+				},
+				"linearPlasticityType": "CCPT_Free"
+			},
+			"profiles_identical": true,
+			"current_mass_kg": 6.276208064790624,
+			"unconditioned_mass_kg": 6.276208064790624,
+			"current_principal_kg_cm2": "840.114351595/301.900795206/840.114347229",
+			"unconditioned_principal_kg_cm2": "840.114351595/301.900795206/840.114347229",
+			"current_minimum_principal_kg_cm2": 301.90079520641802,
+			"current_maximum_principal_kg_cm2": 840.11435159503549,
+			"current_com": "7.788297,-2.318820,-0.307277|0.869680,90.064787,-85.739578|1.000000,1.000000,1.000000",
+			"unconditioned_com": "7.788297,-2.318820,-0.307277|0.869680,90.064787,-85.739578|1.000000,1.000000,1.000000",
+			"frame1": "0.000000,0.000000,0.000000|0.000000,0.000000,-0.000000|1.000000,1.000000,1.000000",
+			"frame2": "11.392388,3.305083,14.637344|36.498818,176.076741,-95.134620|1.000000,1.000000,1.000000",
+			"ref_capsule_parent_clearance_cm": -18.173849510675332,
+			"ref_clearance_method": "ExactCapsuleAxisSegmentDistanceMinusBothRadii;NegativeMeansOverlap",
+			"parent_capsule_radius_cm": 16.276193618774414,
+			"parent_capsule_cylinder_length_cm": 19.531467437744141,
+			"bone_pivot_capsule_local_cm": [
+				-2.3232390548089938,
+				-7.7465945498129436,
+				0.84955270947094208
+			],
+			"ref_parent_axis_start_cm": [
+				-9.0579435688280157,
+				1.5400248836561723,
+				110.40495075188731
+			],
+			"ref_parent_axis_end_cm": [
+				9.2208499972879352,
+				-4.5556894766643952,
+				107.21023754467141
+			],
+			"ref_capsule_axis_start_cm": [
+				18.828042031704474,
+				11.351118433828603,
+				109.7145284769235
+			],
+			"ref_capsule_axis_end_cm": [
+				16.0428025934965,
+				-10.165074543923922,
+				111.13801424779163
+			],
+			"ref_closest_capsule_axis_point_cm": [
+				16.674893848886338,
+				-5.2821200503353936,
+				110.81496377837973
+			],
+			"ref_closest_parent_axis_point_cm": [
+				9.2208499972879352,
+				-4.5556894766643952,
+				107.21023754467141
+			],
+			"reference_vertex_support": [
+				{
+					"selection": "AllPositive",
+					"count": 579,
+					"bone_local_min_cm": [
+						-3.6888504028320312,
+						-10.459587097167969,
+						-21.558856964111328
+					],
+					"bone_local_max_cm": [
+						17.862617492675781,
+						5.7923049926757812,
+						21.423322677612305
+					],
+					"capsule_local_min_cm": [
+						-8.1120983377618359,
+						-10.108286452529612,
+						-21.527094102553654
+					],
+					"capsule_local_max_cm": [
+						8.1121031071700092,
+						10.108286677821134,
+						21.527094553084208
+					],
+					"max_capsule_axis_radial_cm": 11.703398281005375,
+					"capsule_phi_min_cm": -7.1088758600379816,
+					"capsule_phi_max_cm": 4.0360114127824307,
+					"capsule_covered_vertices": 452,
+					"parent_phi_min_cm": -4.7147894785509337,
+					"parent_inside_vertices": 277,
+					"capsule_negative_z_extent_beyond_support_cm": 0,
+					"capsule_positive_z_extent_beyond_support_cm": 0
+				},
+				{
+					"selection": "Dominant",
+					"count": 536,
+					"bone_local_min_cm": [
+						-3.6888504028320312,
+						-10.459587097167969,
+						-21.558856964111328
+					],
+					"bone_local_max_cm": [
+						17.862617492675781,
+						5.7923049926757812,
+						21.423322677612305
+					],
+					"capsule_local_min_cm": [
+						-8.1120983377618359,
+						-10.108286452529612,
+						-21.527094102553654
+					],
+					"capsule_local_max_cm": [
+						8.1121031071700092,
+						10.108286677821134,
+						21.527094553084208
+					],
+					"max_capsule_axis_radial_cm": 11.703398281005375,
+					"capsule_phi_min_cm": -7.1088758600379816,
+					"capsule_phi_max_cm": 4.0360114127824307,
+					"capsule_covered_vertices": 418,
+					"parent_phi_min_cm": -4.7147894785509337,
+					"parent_inside_vertices": 263,
+					"capsule_negative_z_extent_beyond_support_cm": 0,
+					"capsule_positive_z_extent_beyond_support_cm": 0
+				}
+			]
+		},
+		{
+			"asset": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_RigidBody_PhysicsAsset.Player_Original_Leg_RigidBody_PhysicsAsset",
+			"bone": "B_Iron_01_01_R_Pelvis",
+			"parent": "Bip001-Pelvis",
+			"physics_type": 2,
+			"body_collision_response": 0,
+			"geometry_bone_local_cm":
+			{
+				"sphereElems": [],
+				"boxElems": [],
+				"sphylElems": [
+					{
+						"center":
+						{
+							"x": 7.7883222633909206,
+							"y": -2.3182778063854279,
+							"z": 0.3073638396244095
+						},
+						"rotation":
+						{
+							"pitch": 0.87309866991011975,
+							"yaw": -90.000000000000014,
+							"roll": 4.2587401318385982
+						},
+						"radius": 1,
+						"length": 21.74235725402832,
+						"restOffset": 0,
+						"bIsGenerated": false,
+						"name": "None",
+						"bContributeToMass": true,
+						"collisionEnabled": "QueryAndPhysics"
+					}
+				],
+				"convexElems": [],
+				"taperedCapsuleElems": [],
+				"levelSetElems": [],
+				"skinnedLevelSetElems": [],
+				"mLLevelSetElems": [],
+				"skinnedTriangleMeshElems": []
+			},
+			"body_settings":
+			{
+				"positionSolverIterationCount": 8,
+				"velocitySolverIterationCount": 2,
+				"projectionSolverIterationCount": 1,
+				"objectType": "ECC_PhysicsBody",
+				"collisionEnabled": "QueryAndPhysics",
+				"sleepFamily": "Normal",
+				"dOFMode": "Default",
+				"bUseCCD": false,
+				"bUseMACD": false,
+				"bAllowPartialIslandSleep": true,
+				"bIgnoreAnalyticCollisions": false,
+				"bNotifyRigidBodyCollision": false,
+				"bSmoothEdgeCollisions": false,
+				"bLockTranslation": true,
+				"bLockRotation": true,
+				"bLockXTranslation": false,
+				"bLockYTranslation": false,
+				"bLockZTranslation": false,
+				"bLockXRotation": false,
+				"bLockYRotation": false,
+				"bLockZRotation": false,
+				"bOverrideMaxAngularVelocity": false,
+				"bOverrideMaxDepenetrationVelocity": false,
+				"bOverrideWalkableSlopeOnInstance": false,
+				"bOverrideIterationCounts": false,
+				"bInterpolateWhenSubStepping": true,
+				"bInertiaConditioning": true,
+				"bOneWayInteraction": false,
+				"bOverrideSolverAsyncDeltaTime": false,
+				"solverAsyncDeltaTime": 0.01666666753590107,
+				"collisionProfileName": "Custom",
+				"collisionResponses":
+				{
+					"responseArray": []
+				},
+				"maxDepenetrationVelocity": 0,
+				"massInKgOverride": 6.2763357162475586,
+				"linearDamping": 0.05000000074505806,
+				"angularDamping": 0.34999999403953552,
+				"customDOFPlaneNormal":
+				{
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"cOMNudge":
+				{
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"massScale": 1,
+				"gravityGroupIndex": 0,
+				"inertiaTensorScale":
+				{
+					"x": 2.7735678366462473,
+					"y": 3.794849593491068,
+					"z": 0.61719246420935969
+				},
+				"walkableSlopeOverride":
+				{
+					"walkableSlopeBehavior": "WalkableSlope_Default",
+					"walkableSlopeAngle": 0
+				},
+				"physMaterialOverride": "None",
+				"maxAngularVelocity": 3600,
+				"customSleepThresholdMultiplier": 1,
+				"stabilizationThresholdMultiplier": 1,
+				"physicsBlendWeight": 0,
+				"bSimulatePhysics": false,
+				"bOverrideMass": true,
+				"bEnableGravity": true,
+				"bUpdateKinematicFromSimulation": false,
+				"bGyroscopicTorqueEnabled": false,
+				"bAutoWeld": false,
+				"bStartAwake": true,
+				"bGenerateWakeEvents": false,
+				"bUpdateMassWhenScaleChanges": true
+			},
+			"current_joint_profile":
+			{
+				"projectionLinearTolerance": 5,
+				"projectionAngularTolerance": 180,
+				"projectionLinearAlpha": 1,
+				"projectionAngularAlpha": 0,
+				"shockPropagationAlpha": 0.30000001192092896,
+				"linearBreakThreshold": 300,
+				"linearPlasticityThreshold": 0.10000000149011612,
+				"angularBreakThreshold": 500,
+				"angularPlasticityThreshold": 10,
+				"contactTransferScale": 0,
+				"linearLimit":
+				{
+					"limit": 0,
+					"xMotion": "LCM_Locked",
+					"yMotion": "LCM_Locked",
+					"zMotion": "LCM_Locked",
+					"stiffness": 0,
+					"damping": 0,
+					"restitution": 0,
+					"contactDistance": 5,
+					"bSoftConstraint": false
+				},
+				"coneLimit":
+				{
+					"swing1LimitDegrees": 45,
+					"swing2LimitDegrees": 45,
+					"swing1Motion": "ACM_Limited",
+					"swing2Motion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"twistLimit":
+				{
+					"twistLimitDegrees": 45,
+					"twistMotion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"bDisableCollision": false,
+				"bParentDominates": false,
+				"bEnableShockPropagation": false,
+				"bEnableProjection": true,
+				"bEnableMassConditioning": true,
+				"bUseLinearJointSolver": true,
+				"bAngularBreakable": false,
+				"bAngularPlasticity": false,
+				"bLinearBreakable": false,
+				"bLinearPlasticity": false,
+				"linearDrive":
+				{
+					"positionTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"velocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"xDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"yDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"zDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"bAccelerationMode": true
+				},
+				"angularDrive":
+				{
+					"twistDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"swingDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"slerpDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"orientationTarget":
+					{
+						"pitch": 0,
+						"yaw": 0,
+						"roll": 0
+					},
+					"angularVelocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"angularDriveMode": "SLERP",
+					"bAccelerationMode": true,
+					"limitViolationResponse": "None"
+				},
+				"linearPlasticityType": "CCPT_Free"
+			},
+			"default_joint_profile":
+			{
+				"projectionLinearTolerance": 5,
+				"projectionAngularTolerance": 180,
+				"projectionLinearAlpha": 1,
+				"projectionAngularAlpha": 0,
+				"shockPropagationAlpha": 0.30000001192092896,
+				"linearBreakThreshold": 300,
+				"linearPlasticityThreshold": 0.10000000149011612,
+				"angularBreakThreshold": 500,
+				"angularPlasticityThreshold": 10,
+				"contactTransferScale": 0,
+				"linearLimit":
+				{
+					"limit": 0,
+					"xMotion": "LCM_Locked",
+					"yMotion": "LCM_Locked",
+					"zMotion": "LCM_Locked",
+					"stiffness": 0,
+					"damping": 0,
+					"restitution": 0,
+					"contactDistance": 5,
+					"bSoftConstraint": false
+				},
+				"coneLimit":
+				{
+					"swing1LimitDegrees": 45,
+					"swing2LimitDegrees": 45,
+					"swing1Motion": "ACM_Limited",
+					"swing2Motion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"twistLimit":
+				{
+					"twistLimitDegrees": 45,
+					"twistMotion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"bDisableCollision": false,
+				"bParentDominates": false,
+				"bEnableShockPropagation": false,
+				"bEnableProjection": true,
+				"bEnableMassConditioning": true,
+				"bUseLinearJointSolver": true,
+				"bAngularBreakable": false,
+				"bAngularPlasticity": false,
+				"bLinearBreakable": false,
+				"bLinearPlasticity": false,
+				"linearDrive":
+				{
+					"positionTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"velocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"xDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"yDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"zDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"bAccelerationMode": true
+				},
+				"angularDrive":
+				{
+					"twistDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"swingDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"slerpDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"orientationTarget":
+					{
+						"pitch": 0,
+						"yaw": 0,
+						"roll": 0
+					},
+					"angularVelocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"angularDriveMode": "SLERP",
+					"bAccelerationMode": true,
+					"limitViolationResponse": "None"
+				},
+				"linearPlasticityType": "CCPT_Free"
+			},
+			"profiles_identical": true,
+			"current_mass_kg": 6.2763357580500863,
+			"unconditioned_mass_kg": 6.2763357580500863,
+			"current_principal_kg_cm2": "921.775608199/213.221010381/847.199775668",
+			"unconditioned_principal_kg_cm2": "280.404148198/3.10190266891/280.404157529",
+			"current_minimum_principal_kg_cm2": 213.22101038073555,
+			"current_maximum_principal_kg_cm2": 921.77560819925861,
+			"current_com": "7.788322,-2.318278,0.307364|-20.464447,1.731828,95.532593|1.000000,1.000000,1.000000",
+			"unconditioned_com": "7.788322,-2.318278,0.307364|4.258551,179.953921,-90.874113|1.000000,1.000000,1.000000",
+			"frame1": "0.000000,0.000000,0.000000|0.000000,0.000000,-0.000000|1.000000,1.000000,1.000000",
+			"frame2": "0.113923,0.033052,-0.146370|-36.498668,176.076639,95.134934|1.000000,1.000000,1.000000",
+			"ref_capsule_parent_clearance_cm": -8.8462954970965182,
+			"ref_clearance_method": "ExactCapsuleAxisSegmentDistanceMinusBothRadii;NegativeMeansOverlap",
+			"parent_capsule_radius_cm": 16.276193618774414,
+			"parent_capsule_cylinder_length_cm": 19.531467437744141,
+			"bone_pivot_capsule_local_cm": [
+				-2.3226922138125037,
+				-7.7466186051552555,
+				-0.84961712675524526
+			],
+			"ref_parent_axis_start_cm": [
+				-9.0579435688280157,
+				1.5400248836561723,
+				110.40495075188731
+			],
+			"ref_parent_axis_end_cm": [
+				9.2208499972879352,
+				-4.5556894766643952,
+				107.21023754467141
+			],
+			"ref_capsule_axis_start_cm": [
+				-16.043211265007354,
+				-10.16504092018527,
+				111.13830708133936
+			],
+			"ref_capsule_axis_end_cm": [
+				-18.827866586070375,
+				11.351213935622678,
+				109.71473035892676
+			],
+			"ref_closest_capsule_axis_point_cm": [
+				-17.418318137134555,
+				0.46002627964580434,
+				110.43532236391925
+			],
+			"ref_closest_parent_axis_point_cm": [
+				-9.0579435688280157,
+				1.5400248836561723,
+				110.40495075188731
+			],
+			"reference_vertex_support": [
+				{
+					"selection": "AllPositive",
+					"count": 579,
+					"bone_local_min_cm": [
+						-3.6887130737304688,
+						-10.459304809570312,
+						-21.423318862915039
+					],
+					"bone_local_max_cm": [
+						17.862739562988281,
+						5.7926025390625,
+						21.558855056762695
+					],
+					"capsule_local_min_cm": [
+						-8.1118553537463907,
+						-10.108396540716713,
+						-21.527085818848409
+					],
+					"capsule_local_max_cm": [
+						8.1118505570915893,
+						10.108400106041671,
+						21.527085677207538
+					],
+					"max_capsule_axis_radial_cm": 11.703379168035177,
+					"capsule_phi_min_cm": 2.1004700890834416,
+					"capsule_phi_max_cm": 13.245626862367205,
+					"capsule_covered_vertices": 0,
+					"parent_phi_min_cm": -2.7135717475156422,
+					"parent_inside_vertices": 227,
+					"capsule_negative_z_extent_beyond_support_cm": 0,
+					"capsule_positive_z_extent_beyond_support_cm": 0
+				},
+				{
+					"selection": "Dominant",
+					"count": 536,
+					"bone_local_min_cm": [
+						-3.6887130737304688,
+						-10.459304809570312,
+						-21.423318862915039
+					],
+					"bone_local_max_cm": [
+						17.862739562988281,
+						5.7926025390625,
+						21.558855056762695
+					],
+					"capsule_local_min_cm": [
+						-8.1118553537463907,
+						-10.108396540716713,
+						-21.527085818848409
+					],
+					"capsule_local_max_cm": [
+						8.1118505570915893,
+						10.108400106041671,
+						21.527085677207538
+					],
+					"max_capsule_axis_radial_cm": 11.703379168035177,
+					"capsule_phi_min_cm": 2.1004700890834416,
+					"capsule_phi_max_cm": 13.245626862367205,
+					"capsule_covered_vertices": 0,
+					"parent_phi_min_cm": -2.7135717475156422,
+					"parent_inside_vertices": 184,
+					"capsule_negative_z_extent_beyond_support_cm": 0,
+					"capsule_positive_z_extent_beyond_support_cm": 0
+				}
+			]
+		},
+		{
+			"asset": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_RigidBody_PhysicsAsset.Player_Original_Leg_RigidBody_PhysicsAsset",
+			"bone": "B_Iron_01_01_L_Pelvis",
+			"parent": "Bip001-Pelvis",
+			"physics_type": 2,
+			"body_collision_response": 0,
+			"geometry_bone_local_cm":
+			{
+				"sphereElems": [],
+				"boxElems": [],
+				"sphylElems": [
+					{
+						"center":
+						{
+							"x": 7.7882966067654609,
+							"y": -2.3188193979676592,
+							"z": -0.30727706683898814
+						},
+						"rotation":
+						{
+							"pitch": -0.87449682880573032,
+							"yaw": -90,
+							"roll": -4.2593967502562551
+						},
+						"radius": 1,
+						"length": 21.742364883422852,
+						"restOffset": 0,
+						"bIsGenerated": false,
+						"name": "None",
+						"bContributeToMass": true,
+						"collisionEnabled": "QueryAndPhysics"
+					}
+				],
+				"convexElems": [],
+				"taperedCapsuleElems": [],
+				"levelSetElems": [],
+				"skinnedLevelSetElems": [],
+				"mLLevelSetElems": [],
+				"skinnedTriangleMeshElems": []
+			},
+			"body_settings":
+			{
+				"positionSolverIterationCount": 8,
+				"velocitySolverIterationCount": 2,
+				"projectionSolverIterationCount": 1,
+				"objectType": "ECC_PhysicsBody",
+				"collisionEnabled": "QueryAndPhysics",
+				"sleepFamily": "Normal",
+				"dOFMode": "Default",
+				"bUseCCD": false,
+				"bUseMACD": false,
+				"bAllowPartialIslandSleep": true,
+				"bIgnoreAnalyticCollisions": false,
+				"bNotifyRigidBodyCollision": false,
+				"bSmoothEdgeCollisions": false,
+				"bLockTranslation": true,
+				"bLockRotation": true,
+				"bLockXTranslation": false,
+				"bLockYTranslation": false,
+				"bLockZTranslation": false,
+				"bLockXRotation": false,
+				"bLockYRotation": false,
+				"bLockZRotation": false,
+				"bOverrideMaxAngularVelocity": false,
+				"bOverrideMaxDepenetrationVelocity": false,
+				"bOverrideWalkableSlopeOnInstance": false,
+				"bOverrideIterationCounts": false,
+				"bInterpolateWhenSubStepping": true,
+				"bInertiaConditioning": true,
+				"bOneWayInteraction": false,
+				"bOverrideSolverAsyncDeltaTime": false,
+				"solverAsyncDeltaTime": 0.01666666753590107,
+				"collisionProfileName": "Custom",
+				"collisionResponses":
+				{
+					"responseArray": []
+				},
+				"maxDepenetrationVelocity": 0,
+				"massInKgOverride": 6.2762079238891602,
+				"linearDamping": 0.05000000074505806,
+				"angularDamping": 0.34999999403953552,
+				"customDOFPlaneNormal":
+				{
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"cOMNudge":
+				{
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"massScale": 1,
+				"gravityGroupIndex": 0,
+				"inertiaTensorScale":
+				{
+					"x": 2.7734196956159547,
+					"y": 3.7946930857139844,
+					"z": 0.61721000284553773
+				},
+				"walkableSlopeOverride":
+				{
+					"walkableSlopeBehavior": "WalkableSlope_Default",
+					"walkableSlopeAngle": 0
+				},
+				"physMaterialOverride": "None",
+				"maxAngularVelocity": 3600,
+				"customSleepThresholdMultiplier": 1,
+				"stabilizationThresholdMultiplier": 1,
+				"physicsBlendWeight": 0,
+				"bSimulatePhysics": false,
+				"bOverrideMass": true,
+				"bEnableGravity": true,
+				"bUpdateKinematicFromSimulation": false,
+				"bGyroscopicTorqueEnabled": false,
+				"bAutoWeld": false,
+				"bStartAwake": true,
+				"bGenerateWakeEvents": false,
+				"bUpdateMassWhenScaleChanges": true
+			},
+			"current_joint_profile":
+			{
+				"projectionLinearTolerance": 5,
+				"projectionAngularTolerance": 180,
+				"projectionLinearAlpha": 1,
+				"projectionAngularAlpha": 0,
+				"shockPropagationAlpha": 0.30000001192092896,
+				"linearBreakThreshold": 300,
+				"linearPlasticityThreshold": 0.10000000149011612,
+				"angularBreakThreshold": 500,
+				"angularPlasticityThreshold": 10,
+				"contactTransferScale": 0,
+				"linearLimit":
+				{
+					"limit": 0,
+					"xMotion": "LCM_Locked",
+					"yMotion": "LCM_Locked",
+					"zMotion": "LCM_Locked",
+					"stiffness": 0,
+					"damping": 0,
+					"restitution": 0,
+					"contactDistance": 5,
+					"bSoftConstraint": false
+				},
+				"coneLimit":
+				{
+					"swing1LimitDegrees": 45,
+					"swing2LimitDegrees": 45,
+					"swing1Motion": "ACM_Limited",
+					"swing2Motion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"twistLimit":
+				{
+					"twistLimitDegrees": 45,
+					"twistMotion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"bDisableCollision": false,
+				"bParentDominates": false,
+				"bEnableShockPropagation": false,
+				"bEnableProjection": true,
+				"bEnableMassConditioning": true,
+				"bUseLinearJointSolver": true,
+				"bAngularBreakable": false,
+				"bAngularPlasticity": false,
+				"bLinearBreakable": false,
+				"bLinearPlasticity": false,
+				"linearDrive":
+				{
+					"positionTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"velocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"xDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"yDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"zDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"bAccelerationMode": true
+				},
+				"angularDrive":
+				{
+					"twistDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"swingDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"slerpDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"orientationTarget":
+					{
+						"pitch": 0,
+						"yaw": 0,
+						"roll": 0
+					},
+					"angularVelocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"angularDriveMode": "SLERP",
+					"bAccelerationMode": true,
+					"limitViolationResponse": "None"
+				},
+				"linearPlasticityType": "CCPT_Free"
+			},
+			"default_joint_profile":
+			{
+				"projectionLinearTolerance": 5,
+				"projectionAngularTolerance": 180,
+				"projectionLinearAlpha": 1,
+				"projectionAngularAlpha": 0,
+				"shockPropagationAlpha": 0.30000001192092896,
+				"linearBreakThreshold": 300,
+				"linearPlasticityThreshold": 0.10000000149011612,
+				"angularBreakThreshold": 500,
+				"angularPlasticityThreshold": 10,
+				"contactTransferScale": 0,
+				"linearLimit":
+				{
+					"limit": 0,
+					"xMotion": "LCM_Locked",
+					"yMotion": "LCM_Locked",
+					"zMotion": "LCM_Locked",
+					"stiffness": 0,
+					"damping": 0,
+					"restitution": 0,
+					"contactDistance": 5,
+					"bSoftConstraint": false
+				},
+				"coneLimit":
+				{
+					"swing1LimitDegrees": 45,
+					"swing2LimitDegrees": 45,
+					"swing1Motion": "ACM_Limited",
+					"swing2Motion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"twistLimit":
+				{
+					"twistLimitDegrees": 45,
+					"twistMotion": "ACM_Limited",
+					"stiffness": 50,
+					"damping": 5,
+					"restitution": 0,
+					"contactDistance": 1,
+					"bSoftConstraint": true
+				},
+				"bDisableCollision": false,
+				"bParentDominates": false,
+				"bEnableShockPropagation": false,
+				"bEnableProjection": true,
+				"bEnableMassConditioning": true,
+				"bUseLinearJointSolver": true,
+				"bAngularBreakable": false,
+				"bAngularPlasticity": false,
+				"bLinearBreakable": false,
+				"bLinearPlasticity": false,
+				"linearDrive":
+				{
+					"positionTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"velocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"xDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"yDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"zDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"bAccelerationMode": true
+				},
+				"angularDrive":
+				{
+					"twistDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"swingDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"slerpDrive":
+					{
+						"stiffness": 50,
+						"damping": 1,
+						"maxForce": 0,
+						"bEnablePositionDrive": false,
+						"bEnableVelocityDrive": false
+					},
+					"orientationTarget":
+					{
+						"pitch": 0,
+						"yaw": 0,
+						"roll": 0
+					},
+					"angularVelocityTarget":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"angularDriveMode": "SLERP",
+					"bAccelerationMode": true,
+					"limitViolationResponse": "None"
+				},
+				"linearPlasticityType": "CCPT_Free"
+			},
+			"profiles_identical": true,
+			"current_mass_kg": 6.276207857304116,
+			"unconditioned_mass_kg": 6.276207857304116,
+			"current_principal_kg_cm2": "921.7566318/213.17856209/847.19430014",
+			"unconditioned_principal_kg_cm2": "280.39862466/3.10183946955/280.398621104",
+			"current_minimum_principal_kg_cm2": 213.17856209009642,
+			"current_maximum_principal_kg_cm2": 921.75663180000834,
+			"current_com": "7.788297,-2.318820,-0.307278|20.465991,1.734486,84.459303|1.000000,1.000000,1.000000",
+			"unconditioned_com": "7.788297,-2.318820,-0.307278|0.869680,90.064786,-85.739578|1.000000,1.000000,1.000000",
+			"frame1": "0.000000,0.000000,0.000000|0.000000,0.000000,-0.000000|1.000000,1.000000,1.000000",
+			"frame2": "0.113924,0.033051,0.146373|36.498818,176.076741,-95.134620|1.000000,1.000000,1.000000",
+			"ref_capsule_parent_clearance_cm": -8.9644836659487677,
+			"ref_clearance_method": "ExactCapsuleAxisSegmentDistanceMinusBothRadii;NegativeMeansOverlap",
+			"parent_capsule_radius_cm": 16.276193618774414,
+			"parent_capsule_cylinder_length_cm": 19.531467437744141,
+			"bone_pivot_capsule_local_cm": [
+				-2.3232390548089938,
+				-7.7465945498129436,
+				0.84955270947094208
+			],
+			"ref_parent_axis_start_cm": [
+				-9.0579435688280157,
+				1.5400248836561723,
+				110.40495075188731
+			],
+			"ref_parent_axis_end_cm": [
+				9.2208499972879352,
+				-4.5556894766643952,
+				107.21023754467141
+			],
+			"ref_capsule_axis_start_cm": [
+				18.828042031704474,
+				11.351118433828603,
+				109.7145284769235
+			],
+			"ref_capsule_axis_end_cm": [
+				16.0428025934965,
+				-10.165074543923922,
+				111.13801424779163
+			],
+			"ref_closest_capsule_axis_point_cm": [
+				16.674893848886338,
+				-5.2821200503353936,
+				110.81496377837973
+			],
+			"ref_closest_parent_axis_point_cm": [
+				9.2208499972879352,
+				-4.5556894766643952,
+				107.21023754467141
+			],
+			"reference_vertex_support": [
+				{
+					"selection": "AllPositive",
+					"count": 579,
+					"bone_local_min_cm": [
+						-3.6888504028320312,
+						-10.459587097167969,
+						-21.558856964111328
+					],
+					"bone_local_max_cm": [
+						17.862617492675781,
+						5.7923049926757812,
+						21.423322677612305
+					],
+					"capsule_local_min_cm": [
+						-8.1120983377618359,
+						-10.108286452529612,
+						-21.527094102553654
+					],
+					"capsule_local_max_cm": [
+						8.1121031071700092,
+						10.108286677821134,
+						21.527094553084208
+					],
+					"max_capsule_axis_radial_cm": 11.703398281005375,
+					"capsule_phi_min_cm": 2.1004899846885809,
+					"capsule_phi_max_cm": 13.245377257508993,
+					"capsule_covered_vertices": 0,
+					"parent_phi_min_cm": -4.7147894785509337,
+					"parent_inside_vertices": 277,
+					"capsule_negative_z_extent_beyond_support_cm": 0,
+					"capsule_positive_z_extent_beyond_support_cm": 0
+				},
+				{
+					"selection": "Dominant",
+					"count": 536,
+					"bone_local_min_cm": [
+						-3.6888504028320312,
+						-10.459587097167969,
+						-21.558856964111328
+					],
+					"bone_local_max_cm": [
+						17.862617492675781,
+						5.7923049926757812,
+						21.423322677612305
+					],
+					"capsule_local_min_cm": [
+						-8.1120983377618359,
+						-10.108286452529612,
+						-21.527094102553654
+					],
+					"capsule_local_max_cm": [
+						8.1121031071700092,
+						10.108286677821134,
+						21.527094553084208
+					],
+					"max_capsule_axis_radial_cm": 11.703398281005375,
+					"capsule_phi_min_cm": 2.1004899846885809,
+					"capsule_phi_max_cm": 13.245377257508993,
+					"capsule_covered_vertices": 0,
+					"parent_phi_min_cm": -4.7147894785509337,
+					"parent_inside_vertices": 263,
+					"capsule_negative_z_extent_beyond_support_cm": 0,
+					"capsule_positive_z_extent_beyond_support_cm": 0
+				}
+			]
+		}
+	],
+	"success": true
+}

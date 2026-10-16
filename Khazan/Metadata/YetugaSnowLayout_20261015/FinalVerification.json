@@ -1,0 +1,70 @@
+{
+    "movement_action_animation_cases":  6,
+    "after_loaded_module_sha256":  "8ab30b71f985d92ab7ce23eb0e3dad33e8ebf0ae0c86a8983f202ebbddd0db9d",
+    "root_cause":  "The full 9x9 T_Smoke03_SubUV_9x9 atlas was displayed inside 1x1 snow cards, appearing as aligned small clouds",
+    "unchanged_protected_assets":  39,
+    "fix":  "Scoped clone of existing soft snow material samples and blends one smoke atlas frame per particle, using normalized particle age",
+    "before_loaded_module_sha256":  "80221660910cdcd0b4224cc5cda53f3cb284887e71027cd4b7dd91b74b718466",
+    "shader_compile_failures":  0,
+    "particle_system_changes":  0,
+    "assets":  [
+                   {
+                       "sha256":  "1aa7787fb6a79e3fd46f5f54d125b07a73653a76bc950834dd1b7821dd290ba9",
+                       "asset":  "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SnowFlipbook9x9.M_KZGiant_SnowFlipbook9x9"
+                   },
+                   {
+                       "sha256":  "ccd2431edbbe613d75970250bc155c75bbe2df6178ef1f7ee00d15577e82fe20",
+                       "asset":  "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/MI_Atlas_MI_KZGiant_Snow_FMI_World_SubUV_color_A_05_1x1.MI_Atlas_MI_KZGiant_Snow_FMI_World_SubUV_color_A_05_1x1"
+                   },
+                   {
+                       "sha256":  "a25d67ef31422c88453884d2c56678a0d5a9286f22e9bf486d05307ab7add5d4",
+                       "asset":  "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/MI_Atlas_MI_KZGiant_Snow_FMI_World_SubUV_color_A_06_1x1.MI_Atlas_MI_KZGiant_Snow_FMI_World_SubUV_color_A_06_1x1"
+                   }
+               ],
+    "limits":  [
+                   "DevMap D3D12 fixture; source clips and two actual saved GAS patterns, not an exhaustive gameplay/performance run",
+                   "Original custom flipbook shader unavailable; normalized particle-age playback is marked TEMP reconstruction",
+                   "Some late particle captures are after the brief smoke burst; use the movement screenshots for visual judgement",
+                   "Concurrent GPU QA produced a video-memory-budget warning in one action frame; this is not a performance validation"
+               ],
+    "new_runtime_files":  0,
+    "frame_grid":  {
+                       "columns":  9,
+                       "rows":  9,
+                       "frames":  81,
+                       "source_texture":  "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/SubUV/T_Smoke03_SubUV_9x9",
+                       "basis":  "Existing imported texture and visually verified 9x9 cells; UV layout correction, not gameplay tuning"
+                   },
+    "previous_death_decal_packages_unchanged":  8,
+    "affected_yetuga_dust_systems":  17,
+    "completed":  "2026-10-15T04:50:54.3130418+09:00",
+    "new_materials":  1,
+    "real_gas_pattern_cases":  2,
+    "saved_packages":  3,
+    "after_actual_loaded_module":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Binaries\\Win64\\UnrealEditor-Khazan.dll",
+    "backup":  "Backup/Content",
+    "build_reran":  false,
+    "visual_evidence":  {
+                            "texture_grid":  "Textures/T_Smoke03_SubUV_9x9.png",
+                            "after_turn":  "AfterRHI01/009_Locomotion_TurnBackRun_00.png",
+                            "before":  "BeforeRHI02/008_Locomotion_SideMove_L_Long_01.png",
+                            "after":  "AfterRHI01/008_Locomotion_SideMove_L_Long_01.png"
+                        },
+    "project":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan",
+    "concurrent_native_builds":  "Loaded module differed between before/after because independent native builds progressed; this task preserved them and did not write Source, Config or DLLs",
+    "source_changes":  0,
+    "completed_cases":  15,
+    "status":  "passed_main_applied",
+    "unchanged_particle_systems":  23,
+    "after_driver":  "AfterRHI01/Driver.json",
+    "frame_clock":  {
+                        "status":  "TEMP reconstruction",
+                        "mapping":  "normalized particle age * (81 - 1)",
+                        "reason":  "Original custom flipbook shader is unavailable; use the existing particle lifetime without changing spawn, velocity or alpha"
+                    },
+    "owned_editors_closed":  true,
+    "particle_cases":  7,
+    "before_driver":  "BeforeRHI02/Driver.json",
+    "reparented_instances":  2,
+    "animation_changes":  0
+}

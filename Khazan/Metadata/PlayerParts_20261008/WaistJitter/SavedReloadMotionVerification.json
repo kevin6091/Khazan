@@ -1,0 +1,201 @@
+{
+  "label": "SavedReload",
+  "limitations": [
+    "Native angle/count checks and limited positive-dt fixture samples; no complete visual or zero-penetration claim.",
+    "Improvement against CauseProof is reported separately from native success; isolated control had collision disabled and is not an approved final configuration."
+  ],
+  "causeProof": {
+    "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261008\\WaistJitter\\CauseProof.json",
+    "sha256": "580D0E05374EEB03B41ECC59F12411E5723587050814FCD661E0F1C4433EB61C",
+    "limitations": [
+      "Cached manifold gaps are not skin penetration.",
+      "Original-game Iron physics fields remain unverified.",
+      "Constraint-scale reconstruction is conditional reference analysis; actual first-reset connector audit was not required once contact A/B established cause.",
+      "Current candidate uses newly intaken concurrent player BP/source changes; baseline/control used earlier BP versions."
+    ]
+  },
+  "native": {
+    "log": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261008\\WaistJitter\\SavedReloadNative.log",
+    "logSha256": "66B8A0EA536E5752835C1A65F34AB7046B1D36E6821AC67A9E7C045A42DA9C1A",
+    "issues": [],
+    "assertionErrors": [],
+    "hair": {
+      "rootSamples": 3360,
+      "rootRmsCm": 0.101127,
+      "rootPeakCm": 0.525609,
+      "tipSamples": 3840,
+      "tipRmsCm": 6.620238,
+      "tipPeakCm": 16.576473,
+      "bendRmsDegrees": 8.052471,
+      "bendPeakDegrees": 31.588156,
+      "independentlyRespondingJoints": 65
+    },
+    "cloth": {
+      "Torso": {
+        "part": "Torso",
+        "bendSamples": 1920,
+        "bendRmsDegrees": 3.624256,
+        "bendPeakDegrees": 11.892356,
+        "peakBone": "B_Cape_01_03_L_Armor001",
+        "tipSamples": 960,
+        "tipRmsCm": 10.143422,
+        "tipPeakCm": 26.609979,
+        "secondaryRespondingBones": 8,
+        "directSimulatedBones": 8,
+        "independentlyRespondingJoints": 8
+      },
+      "Leg": {
+        "part": "Leg",
+        "bendSamples": 7200,
+        "bendRmsDegrees": 14.731626,
+        "bendPeakDegrees": 32.207188,
+        "peakBone": "B_Cloth_01_05_R_Pelvis",
+        "tipSamples": 3360,
+        "tipRmsCm": 13.343832,
+        "tipPeakCm": 54.160668,
+        "secondaryRespondingBones": 30,
+        "directSimulatedBones": 30,
+        "independentlyRespondingJoints": 30
+      }
+    },
+    "clothScope": {
+      "Torso": {
+        "part": "Torso",
+        "angular": "SavedDirectSimulatedJointFrames",
+        "tip": "AllSecondaryLeafBones",
+        "observedJoints": 8,
+        "nonSimulatedRefBendPeakDegrees": 2e-06,
+        "nonSimulatedRefPeakBone": "B_Cape_02_01_L_Armor001"
+      },
+      "Leg": {
+        "part": "Leg",
+        "angular": "SavedDirectSimulatedJointFrames",
+        "tip": "AllSecondaryLeafBones",
+        "observedJoints": 30,
+        "nonSimulatedRefBendPeakDegrees": 3e-06,
+        "nonSimulatedRefPeakBone": "B_Cloth_01_02_L_Pelvis"
+      }
+    },
+    "selectedBlock": {
+      "startLine": 2084,
+      "completedLine": 2325,
+      "beginEventsLine": 2326,
+      "endEventsLine": 2736,
+      "start": "[2026.10.08-02.59.18:596][639]LogAutomationController: Display: Test Started. Name={PIE} Path={Khazan.PlayerParts.PIE}"
+    },
+    "nativeResult": "Success",
+    "waistScope": {
+      "label": "SavedReload",
+      "csv": "../../../../../../Users/user/Desktop/GitProject/Khazan_PlayerPartsWork_20261007/Khazan/Saved/PlayerWaistJitter_SavedReload.csv",
+      "saved": 1,
+      "noIronContactDiagnostic": 0,
+      "idleLateSeconds": 3,
+      "afterReleaseLateSeconds": 2,
+      "publishedPoseOnly": 1,
+      "contactDepth": "CachedActivePointPlaneGapNotSkinPhi",
+      "firstQuaternionExcluded": 1
+    }
+  },
+  "iron": {
+    "csv": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261008\\WaistJitter\\PlayerWaistJitter_SavedReload.csv",
+    "csvSha256": "2F14625598ED6AC1211460595DED59FE5B5FD97E7901F8BB1EBA76F8481AB7BB",
+    "positiveDtOnly": true,
+    "initialPhysicsOffExcluded": true,
+    "excludedLateSamples": {
+      "zeroOrNegativeDt": 4,
+      "noPreviousOrActor": 0
+    },
+    "issues": [],
+    "rows": [
+      {
+        "phase": "IdleLate",
+        "bone": "B_Iron_01_01_R_Pelvis",
+        "samples": 90,
+        "candidateJointStepRmsDegrees": 0.16772630890919965,
+        "candidateActorJointStepRmsDegrees": 0.16772631762847556,
+        "candidateJointSpeedRmsDegreesPerSecond": 5.0317843122429835,
+        "baselineJointStepRmsDegrees": 80.5082749261814,
+        "contactIsolatedJointStepRmsDegrees": 0.8341077622595224,
+        "reductionPercentVsCauseBaseline": 99.79166575229318,
+        "ratioVsContactIsolatedControl": 0.20108469972134568,
+        "improvedVsCauseBaseline": true,
+        "activeContactSamples": 343.0,
+        "contactImpulseSum": 5830.758571636999,
+        "collisionFlags": [
+          "1"
+        ],
+        "enabledFlags": [
+          "1"
+        ]
+      },
+      {
+        "phase": "IdleLate",
+        "bone": "B_Iron_01_01_L_Pelvis",
+        "samples": 90,
+        "candidateJointStepRmsDegrees": 0.20513743267819043,
+        "candidateActorJointStepRmsDegrees": 0.20513744127407219,
+        "candidateJointSpeedRmsDegreesPerSecond": 6.1541205758400075,
+        "baselineJointStepRmsDegrees": 78.84448569703834,
+        "contactIsolatedJointStepRmsDegrees": 0.7356471653092197,
+        "reductionPercentVsCauseBaseline": 99.73982019051219,
+        "ratioVsContactIsolatedControl": 0.2788530186097619,
+        "improvedVsCauseBaseline": true,
+        "activeContactSamples": 360.0,
+        "contactImpulseSum": 8347.208074365,
+        "collisionFlags": [
+          "1"
+        ],
+        "enabledFlags": [
+          "1"
+        ]
+      },
+      {
+        "phase": "AfterReleaseLate",
+        "bone": "B_Iron_01_01_R_Pelvis",
+        "samples": 60,
+        "candidateJointStepRmsDegrees": 0.20716211546017438,
+        "candidateActorJointStepRmsDegrees": 0.20716211098247675,
+        "candidateJointSpeedRmsDegreesPerSecond": 6.214870481484771,
+        "baselineJointStepRmsDegrees": 82.46490888045771,
+        "contactIsolatedJointStepRmsDegrees": 1.1622162899592539,
+        "reductionPercentVsCauseBaseline": 99.74878755306639,
+        "ratioVsContactIsolatedControl": 0.17824747187757733,
+        "improvedVsCauseBaseline": true,
+        "activeContactSamples": 161.0,
+        "contactImpulseSum": 3951.7474818459996,
+        "collisionFlags": [
+          "1"
+        ],
+        "enabledFlags": [
+          "1"
+        ]
+      },
+      {
+        "phase": "AfterReleaseLate",
+        "bone": "B_Iron_01_01_L_Pelvis",
+        "samples": 60,
+        "candidateJointStepRmsDegrees": 0.19776303873681825,
+        "candidateActorJointStepRmsDegrees": 0.1977629638380407,
+        "candidateJointSpeedRmsDegreesPerSecond": 5.932898168641018,
+        "baselineJointStepRmsDegrees": 82.55557435381688,
+        "contactIsolatedJointStepRmsDegrees": 1.1733272978133653,
+        "reductionPercentVsCauseBaseline": 99.76044859443502,
+        "ratioVsContactIsolatedControl": 0.16854891137824302,
+        "improvedVsCauseBaseline": true,
+        "activeContactSamples": 240.0,
+        "contactImpulseSum": 5501.273979001998,
+        "collisionFlags": [
+          "1"
+        ],
+        "enabledFlags": [
+          "1"
+        ]
+      }
+    ],
+    "allLateRowsImprovedVsCauseBaseline": true
+  },
+  "nativeMotionChecksPassed": true,
+  "lateSampleCollisionChecksPassed": true,
+  "ironJitterImprovedVsCauseBaseline": true,
+  "allChecksPassed": true
+}

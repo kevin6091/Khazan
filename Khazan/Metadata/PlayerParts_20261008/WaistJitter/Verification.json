@@ -1,0 +1,69 @@
+{
+  "utc": "2026-10-08T03:04:28.137815+00:00",
+  "native_pie_passed": true,
+  "native_saved_reload_passed": true,
+  "stock_saved_reload_passed": true,
+  "normal_delta_all_parts_passed": true,
+  "native_saved_reload_conditions": "Fresh fixed 1/30-s NullRHI process; original colliding simulated Iron2 plus Original5 and Hair/Torso/Leg native QA.",
+  "hair_motion": {
+    "rootSamples": 3360,
+    "rootRmsCm": 0.101127,
+    "rootPeakCm": 0.525609,
+    "tipSamples": 3840,
+    "tipRmsCm": 6.620238,
+    "tipPeakCm": 16.576473,
+    "bendRmsDegrees": 8.052471,
+    "bendPeakDegrees": 31.588156,
+    "independentlyRespondingJoints": 65
+  },
+  "motion": {
+    "Torso": {
+      "after": {
+        "part": "Torso",
+        "bendSamples": 1920,
+        "bendRmsDegrees": 3.624256,
+        "bendPeakDegrees": 11.892356,
+        "peakBone": "B_Cape_01_03_L_Armor001",
+        "tipSamples": 960,
+        "tipRmsCm": 10.143422,
+        "tipPeakCm": 26.609979,
+        "secondaryRespondingBones": 8,
+        "directSimulatedBones": 8,
+        "independentlyRespondingJoints": 8
+      }
+    },
+    "Leg": {
+      "after": {
+        "part": "Leg",
+        "bendSamples": 7200,
+        "bendRmsDegrees": 14.731626,
+        "bendPeakDegrees": 32.207188,
+        "peakBone": "B_Cloth_01_05_R_Pelvis",
+        "tipSamples": 3360,
+        "tipRmsCm": 13.343832,
+        "tipPeakCm": 54.160668,
+        "secondaryRespondingBones": 30,
+        "directSimulatedBones": 30,
+        "independentlyRespondingJoints": 30
+      }
+    }
+  },
+  "only_two_capsule_centers_changed": true,
+  "physics_source": "Assistant geometry-derived temporary repair; original-game physics unverified.",
+  "native_reports": [
+    "CandidateMotionVerification.json",
+    "SavedReloadMotionVerification.json",
+    "NormalDeltaMotionVerification.json"
+  ],
+  "stock_report": "StockSavedReadback.json",
+  "stock_idle_iron": "StockObservation.json",
+  "stock_selected_main_base_dll_sha256": "9314DF5646B92EDBB61D3E0F3BEABCF99277FA1FEA286DA265C20BBABC8B30EF",
+  "stock_limitation": "Selected mapped Main base DLL only. Main live coding patches are recorded, not copied; no claim of live-patched Main behavior equivalence.",
+  "main_handoff_pending": true,
+  "scope_limitations": [
+    "Limited idle/moving/release samples; not all animation poses or mesh triangle collision.",
+    "Baseline/control used earlier BP/source; final candidate also uses latest Work intake and corrected test bypass.",
+    "Native contact flags measured in native fixture; stock Python observes published final poses."
+  ],
+  "guard_heal": "Not repeated: game runtime Source/Config unchanged by this physics data repair."
+}

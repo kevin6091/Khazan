@@ -1,0 +1,131 @@
+Begin Object Class=/Script/Engine.Material Name="DefaultParticle" ExportPath="/Script/Engine.Material'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle'"
+   Begin Object Class=/Script/Engine.MaterialEditorOnlyData Name="DefaultParticleEditorOnlyData" ExportPath="/Script/Engine.MaterialEditorOnlyData'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:DefaultParticleEditorOnlyData'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionCustom Name="MaterialExpressionCustom_0" ExportPath="/Script/Engine.MaterialExpressionCustom'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionCustom_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionEyeAdaptationInverse Name="MaterialExpressionEyeAdaptationInverse_0" ExportPath="/Script/Engine.MaterialExpressionEyeAdaptationInverse'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionEyeAdaptationInverse_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionMultiply Name="MaterialExpressionMultiply_0" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionMultiply_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionParticleColor Name="MaterialExpressionParticleColor_0" ExportPath="/Script/Engine.MaterialExpressionParticleColor'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionParticleColor_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionParticleRelativeTime Name="MaterialExpressionParticleRelativeTime_0" ExportPath="/Script/Engine.MaterialExpressionParticleRelativeTime'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionParticleRelativeTime_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionParticleRelativeTime Name="MaterialExpressionParticleRelativeTime_1" ExportPath="/Script/Engine.MaterialExpressionParticleRelativeTime'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionParticleRelativeTime_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionScalarParameter Name="MaterialExpressionScalarParameter_0" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionScalarParameter_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionScalarParameter Name="MaterialExpressionScalarParameter_1" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionScalarParameter_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionScalarParameter Name="MaterialExpressionScalarParameter_2" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionScalarParameter_2'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTextureCoordinate Name="MaterialExpressionTextureCoordinate_0" ExportPath="/Script/Engine.MaterialExpressionTextureCoordinate'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionTextureCoordinate_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTextureCoordinate Name="MaterialExpressionTextureCoordinate_1" ExportPath="/Script/Engine.MaterialExpressionTextureCoordinate'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionTextureCoordinate_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTime Name="MaterialExpressionTime_1" ExportPath="/Script/Engine.MaterialExpressionTime'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionTime_1'"
+   End Object
+   Begin Object Name="DefaultParticleEditorOnlyData" ExportPath="/Script/Engine.MaterialEditorOnlyData'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:DefaultParticleEditorOnlyData'"
+      EmissiveColor=(Expression="/Script/Engine.MaterialExpressionEyeAdaptationInverse'DefaultParticle:MaterialExpressionEyeAdaptationInverse_0'")
+      Opacity=(Expression="/Script/Engine.MaterialExpressionMultiply'DefaultParticle:MaterialExpressionMultiply_0'")
+      OpacityMask=(Expression="/Script/Engine.MaterialExpressionParticleColor'DefaultParticle:MaterialExpressionParticleColor_0'",OutputIndex=4,Mask=1,MaskA=1)
+      ExpressionCollection=(Expressions=("/Script/Engine.MaterialExpressionParticleRelativeTime'DefaultParticle:MaterialExpressionParticleRelativeTime_0'","/Script/Engine.MaterialExpressionTextureCoordinate'DefaultParticle:MaterialExpressionTextureCoordinate_1'","/Script/Engine.MaterialExpressionParticleRelativeTime'DefaultParticle:MaterialExpressionParticleRelativeTime_1'","/Script/Engine.MaterialExpressionTime'DefaultParticle:MaterialExpressionTime_1'","/Script/Engine.MaterialExpressionParticleColor'DefaultParticle:MaterialExpressionParticleColor_0'","/Script/Engine.MaterialExpressionEyeAdaptationInverse'DefaultParticle:MaterialExpressionEyeAdaptationInverse_0'","/Script/Engine.MaterialExpressionTextureCoordinate'DefaultParticle:MaterialExpressionTextureCoordinate_0'","/Script/Engine.MaterialExpressionScalarParameter'DefaultParticle:MaterialExpressionScalarParameter_0'","/Script/Engine.MaterialExpressionCustom'DefaultParticle:MaterialExpressionCustom_0'","/Script/Engine.MaterialExpressionMultiply'DefaultParticle:MaterialExpressionMultiply_0'","/Script/Engine.MaterialExpressionScalarParameter'DefaultParticle:MaterialExpressionScalarParameter_1'","/Script/Engine.MaterialExpressionScalarParameter'DefaultParticle:MaterialExpressionScalarParameter_2'"))
+   End Object
+   Begin Object Name="MaterialExpressionCustom_0" ExportPath="/Script/Engine.MaterialExpressionCustom'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionCustom_0'"
+      Code="float2 d=min(UV,1.0-UV); float w=max(Width,max(fwidth(UV.x),fwidth(UV.y))*Pixels); float edge=smoothstep(0.0,max(w,0.00001),min(d.x,d.y)); float2 p=UV*2.0-1.0; return edge*pow(saturate(1.0-dot(p,p)),Softness);"
+      OutputType=CMOT_Float1
+      Description="TEMP user requested smooth particle boundary; 4% inward UV feather"
+      Inputs(0)=(InputName="UV",Input=(Expression="/Script/Engine.MaterialExpressionTextureCoordinate'DefaultParticle:MaterialExpressionTextureCoordinate_0'"))
+      Inputs(1)=(InputName="Width",Input=(Expression="/Script/Engine.MaterialExpressionScalarParameter'DefaultParticle:MaterialExpressionScalarParameter_0'"))
+      Inputs(2)=(InputName="Pixels",Input=(Expression="/Script/Engine.MaterialExpressionScalarParameter'DefaultParticle:MaterialExpressionScalarParameter_1'"))
+      Inputs(3)=(InputName="Softness",Input=(Expression="/Script/Engine.MaterialExpressionScalarParameter'DefaultParticle:MaterialExpressionScalarParameter_2'"))
+      MaterialExpressionEditorX=650
+      MaterialExpressionEditorY=130
+      MaterialExpressionGuid=EC399C624D00B82699429F80587D0297
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   Begin Object Name="MaterialExpressionEyeAdaptationInverse_0" ExportPath="/Script/Engine.MaterialExpressionEyeAdaptationInverse'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionEyeAdaptationInverse_0'"
+      LightValueInput=(Expression="/Script/Engine.MaterialExpressionParticleColor'DefaultParticle:MaterialExpressionParticleColor_0'",Mask=1,MaskR=1,MaskG=1,MaskB=1)
+      MaterialExpressionGuid=549DF0FA470173B2872775A441D2EDE5
+      Material="/Script/Engine.Material'DefaultParticle'"
+      Desc="2026-10-11 user requirement: preserve VFX emissive color across scene exposure; native full inverse, alpha defaults1."
+   End Object
+   Begin Object Name="MaterialExpressionMultiply_0" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionMultiply_0'"
+      A=(Expression="/Script/Engine.MaterialExpressionParticleColor'DefaultParticle:MaterialExpressionParticleColor_0'",OutputIndex=4,Mask=1,MaskA=1)
+      B=(Expression="/Script/Engine.MaterialExpressionCustom'DefaultParticle:MaterialExpressionCustom_0'")
+      MaterialExpressionEditorX=870
+      MaterialExpressionEditorY=100
+      MaterialExpressionGuid=0E6794984EE5A4FFF6E48A9170E769F8
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   Begin Object Name="MaterialExpressionParticleColor_0" ExportPath="/Script/Engine.MaterialExpressionParticleColor'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionParticleColor_0'"
+      MaterialExpressionEditorX=-140
+      MaterialExpressionGuid=8580839547F67F15558A34A1E1785059
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   Begin Object Name="MaterialExpressionParticleRelativeTime_0" ExportPath="/Script/Engine.MaterialExpressionParticleRelativeTime'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionParticleRelativeTime_0'"
+      MaterialExpressionEditorX=-580
+      MaterialExpressionGuid=878AC1B743660E6AC3532F8B1D2B8E4C
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   Begin Object Name="MaterialExpressionParticleRelativeTime_1" ExportPath="/Script/Engine.MaterialExpressionParticleRelativeTime'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionParticleRelativeTime_1'"
+      MaterialExpressionEditorX=-580
+      MaterialExpressionGuid=A57F29BA43641A08506FBEBF3729DD3C
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   Begin Object Name="MaterialExpressionScalarParameter_0" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionScalarParameter_0'"
+      DefaultValue=0.040000
+      ParameterName="ParryEdgeFeatherUV"
+      ExpressionGUID=0920F35C42C7A3A475038C999B53EC41
+      MaterialExpressionEditorX=400
+      MaterialExpressionEditorY=260
+      MaterialExpressionGuid=5BA8C0344A61E693CAB3C0B1F2462F74
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   Begin Object Name="MaterialExpressionScalarParameter_1" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionScalarParameter_1'"
+      DefaultValue=1.250000
+      ParameterName="ParryEdgeSoftnessPixels"
+      ExpressionGUID=6B389A324A279612196420AAAA0AC23B
+      MaterialExpressionEditorX=400
+      MaterialExpressionEditorY=380
+      MaterialExpressionGuid=D3E629814FC3129A311D679F2BE393FA
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   Begin Object Name="MaterialExpressionScalarParameter_2" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionScalarParameter_2'"
+      DefaultValue=2.000000
+      ParameterName="ParrySparkSoftnessPower"
+      ExpressionGUID=3032F3AF45A618D9858FE392BD439758
+      MaterialExpressionEditorX=450
+      MaterialExpressionEditorY=470
+      MaterialExpressionGuid=26AE23174E2F4649D2D16881DB787BDE
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   Begin Object Name="MaterialExpressionTextureCoordinate_0" ExportPath="/Script/Engine.MaterialExpressionTextureCoordinate'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionTextureCoordinate_0'"
+      MaterialExpressionEditorX=400
+      MaterialExpressionEditorY=100
+      MaterialExpressionGuid=977D81D94AE684ECAE211CB46204E66B
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   Begin Object Name="MaterialExpressionTextureCoordinate_1" ExportPath="/Script/Engine.MaterialExpressionTextureCoordinate'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionTextureCoordinate_1'"
+      MaterialExpressionEditorX=-800
+      MaterialExpressionGuid=7D07154340560D8E3D12CDB58DFACDFE
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   Begin Object Name="MaterialExpressionTime_1" ExportPath="/Script/Engine.MaterialExpressionTime'/Game/_Art/Effects/Combat/GuardParry/PlayerParry/Materials/DefaultParticle.DefaultParticle:MaterialExpressionTime_1'"
+      MaterialExpressionEditorX=-360
+      MaterialExpressionGuid=7CDB81464BD47AAFC077C699A01F499C
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   BlendMode=BLEND_Translucent
+   ShadingModel=MSM_Unlit
+   ShadingModels=(ShadingModelField=1)
+   bUsedWithParticleSprites=True
+   bUsedWithBeamTrails=True
+   bUsedWithMeshParticles=True
+   bUsedWithNiagaraSprites=True
+   bUsedWithNiagaraRibbons=True
+   bUsedWithNiagaraMeshParticles=True
+   StateId=F43A9E1A4EC30384C17DB0B0889AE7F0
+   EditorOnlyData="/Script/Engine.MaterialEditorOnlyData'DefaultParticleEditorOnlyData'"
+   LightingGuid=A19267FC4FAE8729AEABBD9CB6EA1C40
+End Object

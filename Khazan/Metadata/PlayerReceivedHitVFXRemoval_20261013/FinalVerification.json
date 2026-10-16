@@ -1,0 +1,80 @@
+{
+    "status":  "complete",
+    "completed_at":  "2026-10-13T10:14:33+09:00",
+    "project":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan",
+    "asset":  "/Game/Data/Character/DA_CharacterDefinition_Player",
+    "changed_property":  "HitReactions.ImpactEffect",
+    "before_effect":  "/Game/_Art/Effects/Combat/AttackContact/PP_Combat_HitBurst.PP_Combat_HitBurst",
+    "after_effect":  null,
+    "before_sha256":  "4e56b842280cc118e753097d26a69f5a2d296632fb4eda8115d5871c3425c363",
+    "after_sha256":  "75bf42b03fe756a08438bd6773b0bb74b34504aca09d59560f8e1d9c68ccdb6c",
+    "other_exported_fields_unchanged":  true,
+    "gameplay_runtime_source_changes":  0,
+    "existing_dev_test_changes":  [
+                                      "Source/Khazan/Tests/KZParryPIETest.cpp:134 optional configured received-hit effect count"
+                                  ],
+    "shared_effect_asset_deletions":  0,
+    "protected_sha256":  {
+                             "Content/Bluprints/AbilitySystem/Abilities/Player/Guard/GA_Player_Guard.uasset":  "794c2b284b616f40961559eb76e296d2ad6c24904d2a43c49bc9e96b58f75766",
+                             "Content/_Art/Effects/Combat/AttackContact/PP_Combat_HitBurst.uasset":  "0f7e11716af9187914a41a262e3b6399b15ade581df0f3d13ff4931c1314e087",
+                             "Content/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.uasset":  "72f520c38f6ec3f64b9b8575a077c46392824856843b4dd487c9a824ffdff6e6"
+                         },
+    "build_exit_code":  0,
+    "native_cases":  [
+                         "PARRY_CASE EarlyMelee HP=100 ST=46 attackerST=45 effects=1",
+                         "PARRY_CASE LateMeleeNormalGuard HP=100 ST=42 attackerST=50 effects=0",
+                         "PARRY_CASE Unblockable HP=93 ST=42 attackerST=50 effects=0",
+                         "PARRY_CASE RearMelee HP=93 ST=42 attackerST=50 effects=0",
+                         "PARRY_CASE SameHitGroupDedup HP=100 ST=46 attackerST=45 effects=1",
+                         "PARRY_CASE TwoIndependentEarlyHits HP=100 ST=42 attackerST=40 effects=2",
+                         "PARRY_CASE EarlyThenLateNoReopen HP=100 ST=38 attackerST=45 effects=1",
+                         "PARRY_CASE MovingGuardSkipsStart HP=100 ST=46 attackerST=45 effects=1",
+                         "PARRY_CASE ReleaseBeforeHit HP=93 ST=42 attackerST=50 effects=0",
+                         "PARRY_CASE CancelBeforeHit HP=93 ST=42 attackerST=50 effects=0",
+                         "PARRY_CASE EarlyFieldSweep HP=100 ST=46 attackerST=45 effects=1",
+                         "PARRY_CASE RearFieldSweep HP=93 ST=42 attackerST=50 effects=0",
+                         "PARRY_CASE LateFieldNormalGuard HP=100 ST=42 attackerST=50 effects=0",
+                         "PARRY_CASE ParryTriggersExhaustion HP=100 ST=46 attackerST=0 effects=1",
+                         "PARRY_CASE ResourceAndLifetime HP=100 ST=46 attackerST=35 effects=9",
+                         "PARRY_CASE QuickReleaseRetainsParryPose HP=100 ST=46 attackerST=45 effects=1",
+                         "PARRY_CASE MovingQuickReleaseRetainsParryPose HP=100 ST=46 attackerST=45 effects=1"
+                     ],
+    "actual_hp_damage_cases":  5,
+    "received_hit_effect_count_in_damage_cases":  0,
+    "native_driver":  {
+                          "project":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan",
+                          "actual_module":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Binaries\\Win64\\UnrealEditor-Khazan-731301.dll",
+                          "module_sha256":  "3f0ef023d75715c065404b25668851d81f61d7854a1600aaa99c234f26c03c63",
+                          "tests":  [
+                                        {
+                                            "test":  "Khazan.Parry.PIE",
+                                            "passed":  true,
+                                            "completion":  "[2026.10.13-01.13.24:015][ 83]LogAutomationController: Display: Test Completed. Result={Success} Name={PIE} Path={Khazan.Parry.PIE}"
+                                        }
+                                    ],
+                          "status":  "passed",
+                          "saved_packages":  0
+                      },
+    "native_process_exit":  {
+                                "exit_code":  0,
+                                "elapsed_seconds":  76.10899999999674
+                            },
+    "evidence":  [
+                     "Apply02/Result.json",
+                     "Build01/Build.log",
+                     "Native02/Result.json",
+                     "Native02/Driver.json",
+                     "Native02/Editor.log"
+                 ],
+    "previous_failures":  [
+                              "Apply01: optional None field omitted by text exporter; aborted before asset save",
+                              "Native01: driver and native FWait both requested PIE; restarted world invalidated pawn; fixed driver only"
+                          ],
+    "user_editor_control":  0,
+    "live_riderlink_connected":  false,
+    "live_python_remote_nodes":  0,
+    "live_editor_cache":  "Not read or mutated; reload player Definition if a previously loaded editor still shows the old received-hit effect.",
+    "remaining_required_project_changes":  [
+
+                                           ]
+}

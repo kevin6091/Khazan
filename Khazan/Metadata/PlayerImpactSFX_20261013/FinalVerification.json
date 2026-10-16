@@ -1,0 +1,49 @@
+﻿{
+    "time_kst":  "2026-10-14T00:13:43.6403260+09:00",
+    "project":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan",
+    "runtime_status":  "implemented_and_fresh_verified",
+    "current_open_editor":  "restart_required_to_load_new_module",
+    "source_sha256":  {
+                          "Source/Khazan/Ability/Combo/KZComboActionAbility.cpp":  "1b05510203633bb7046b34e5a8f7ba58c70db937d117a08496f3bd1496079907",
+                          "Source/Khazan/Ability/MonsterAbility/KZExhaustionAbility.cpp":  "e23f96ef437992264d68448533bb14f600af1f2a06e55f194eb906d25b94f720",
+                          "Source/Khazan/Tests/KZCombatPresentationPIETest.cpp":  "553abdcdfe547e5a4539a8ea6354444310548c92b2e4b79a3c37d343610e89ba"
+                      },
+    "main_module":  {
+                        "name":  "UnrealEditor-Khazan-2026101401.dll",
+                        "sha256":  "58cf48aae3170eb3fbef996bf69d03ec423bdb4085de49f7072ef8801ea3a85d",
+                        "build_log":  "Metadata/PlayerImpactSFX_20261013/SuffixBuild02.log"
+                    },
+    "sfx":  {
+                "main_combo_asset":  "Content/Data/ComboCommand/DA_Player_Combo_Definition.uasset",
+                "main_combo_sha256":  "0dbdfd3f8b97ca0aba6a6f530d0ea9e26fbcddd238fb99164b09280a3e6493df",
+                "main_asset_applied":  false,
+                "prepared_asset":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Saved\\ImportReports\\GameplayAudio_20261011\\PlayerImpactReview_20261013\\Prepared\\Content\\Data\\ComboCommand\\DA_Player_Combo_Definition.uasset",
+                "prepared_sha256":  "6835a1677640ece0f64fa5dd4f5704fb1bd4c25fb2e53489b580158268edcad7",
+                "prepared_readback_passed":  true,
+                "non_audio_nodes_equal":  true,
+                "player_windows":  60,
+                "runtime_common_cue_suppressed":  "SC_efx_pc_dualaxesword_com_impact",
+                "actual_audio_test":  "Khazan.Combat.PlayerAttackCollision.PIE",
+                "actual_audio_passed":  true,
+                "body_cue_observed":  true,
+                "common_cue_observed":  false,
+                "pcm_peak":  0.24237060546875,
+                "clipped_samples":  0,
+                "evidence":  "Metadata/PlayerImpactSFX_20261013/AudioRegression01/Regression.json"
+            },
+    "death":  {
+                  "brutal_cases":  12,
+                  "brutal_passed":  true,
+                  "max_death_pose_error_model_cm":  4.5496934130773415E-13,
+                  "terminal_screenshots":  12,
+                  "normal_and_interrupted_cases":  12,
+                  "normal_regression_passed":  true,
+                  "brutal_evidence":  "Metadata/CombatFinishFollowup_20261012/BrutalDeathVisual01",
+                  "normal_evidence":  "Metadata/CombatFinishFollowup_20261012/NormalDeathRegression01"
+              },
+    "pending":  [
+                    "Main combo asset is locked by an existing editor. Prepared audio-only asset is saved and fresh-audited but not copied to Content.",
+                    "Existing open editor retains its loaded old module until restart.",
+                    "Once unlocked, compare Main asset SHA to the recorded baseline before applying the prepared asset; then remove the narrow runtime legacy-cue guard and rerun build/audio/death checks."
+                ]
+}

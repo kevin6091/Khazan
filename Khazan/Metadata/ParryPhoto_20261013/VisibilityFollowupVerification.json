@@ -1,0 +1,41 @@
+{
+  "date_kst": "2026-10-13",
+  "scope": "Main project parry visibility follow-up",
+  "main_project": "C:/Users/user/Desktop/GitProject/Khazan/Khazan",
+  "status": "main_saved_runtime_verified_visual_parity_incomplete",
+  "corrected_prior_claim": "Earlier successful spawn/build tests did not establish that distortion or camera feedback was perceptible in HeinMach gameplay.",
+  "main_saved_sha256": {
+    "Source/Khazan/Ability/PlayerAbility/KZGuardAbility.cpp": "345ea3dcfc45ac7b5acb639cb393598add2eec9aa8c93598f08e626687e5fbd7",
+    "Source/Khazan/Ability/PlayerAbility/KZGuardAbility.h": "41fcb55c168b3231ddc090dcded675c3835cd2a71b468fa21ecf9abddd77db3f",
+    "Content/Bluprints/AbilitySystem/Abilities/Player/Guard/GA_Player_Guard.uasset": "68c42789e10fe06654b4fb13e5a5e1a9a8ab6d2feb358159b80efe73793c2271",
+    "Content/_Art/Effects/Combat/GuardParry/PlayerParry/Reference/PP_Player_Parry_Reference.uasset": "594df8e7c4a12dc2dc85843147dc4cd22b9c7fb53885e4c71e3990d822fe61c5",
+    "Content/_Art/Effects/Combat/GuardParry/PlayerParry/Reference/BP_Parry_SourceCameraShake.uasset": "77061a1399eab590693ed6a4bb846d5030e5ee783b16887aeed1b66d12f3d843",
+    "Content/_Art/Effects/Combat/GuardParry/PlayerParry/Reference/M_Parry_Distortion.uasset": "6e46bf5dc552415ff3aadf7e1a639861886b7becc7d072ee59cc84ffbe42114e",
+    "Content/_Art/Effects/Combat/GuardParry/PlayerParry/Reference/M_Parry_ScreenRadialBlur.uasset": "61f607a7235c199fa6945e647d2287ad21d02d0df17477ab6adf8905754125ed"
+  },
+  "source_metadata": {
+    "package": "AC_Kazan_DualAxeSword_Com_Guard_Suc_Just_L.json",
+    "xxPP_RadialBlur": {"duration_seconds": 0.16745299, "blend_in_seconds": 0.02, "blend_out_seconds": 0.3, "end_scalar": 0.2},
+    "xxCameraMod_Shake": {"duration_seconds": 0.35907653, "fade_in_out_seconds": 0.17953826, "source_location_y_cm": -100, "source_fov_degrees": 3, "final_scale": 0.1},
+    "xxPostprocessVol": {"link_seconds": 0.06747712, "duration_seconds": 0.09992252, "blend_in_seconds": 0.05, "blend_out_seconds": 0.25, "preset": "CPP_PC_JustGuard_C", "status": "source preset and cooked shader not extracted"}
+  },
+  "assistant_temporary_visibility_values": {
+    "ParryCameraFeedbackScale": 3.0,
+    "ParryBlurUVScale": 0.12,
+    "post_process_priority": 100
+  },
+  "verification": {
+    "build": "Metadata/ParryPhoto_20261013/HeinCameraBuild03/Exit.json: exit_code 0, module suffix 731310",
+    "actual_main_module": "Binaries/Win64/UnrealEditor-Khazan-731310.dll",
+    "actual_main_module_sha256": "fa63a0dd8ca0ca50b03adb2b041bb114e9423dbfc3b06f5e7681f1150c33cc31",
+    "heinmach_rhi": "Metadata/ParryPhoto_20261013/HeinCameraRHI03/Driver.json: passed, saved_packages 0",
+    "pie": "Khazan.Parry.PIE: 17/17 actual melee, field and lifetime cases passed; approved parry screen/camera active, normal guard inactive, both expired",
+    "camera_early_parry": {"max_location_delta_cm": 29.1216, "max_fov_delta_degrees": 0.87365},
+    "shader": "HeinCameraRHI03/ShaderWarmup.json: screen blur 91 pixel instructions; no material compile errors found in Editor.log",
+    "particle_distortion_on_off": "Metadata/ParryPhoto_20261013/DistortionGrid04: RHI checkerboard on/off confirms refractive pixel displacement with no square card",
+    "screenshots": ["Metadata/ParryPhoto_20261013/HeinCameraRHI03/01_ActualParryImpact.png", "Metadata/ParryPhoto_20261013/HeinCameraRHI03/02_ActualParryMotion.png", "Metadata/ParryPhoto_20261013/HeinCameraRHI03/03_ActualParryEffectTail.png"]
+  },
+  "visual_assessment": "HeinMach captures show a pink collision flash and visible radial screen blur. The broad red-purple veil/ring in Parry_PinkPurpleHalo.png remains substantially weaker; original pixel-identical appearance is not verified. The photographed camera is a QA scene-look pose; real player camera was measured separately.",
+  "implementation_note": "Successful parry feedback executes in UKZGuardAbility::TryGuardHit. KZAnimNotify_CombatEffect.cpp is a generic animation particle notify and was not changed. An engine APostProcessVolume is transient, unbound, local, and self-expires; no new runtime class was added.",
+  "remaining": ["Recover the original NewJustGuard/CPP_PC_JustGuard shader or recreate the broad halo against the reference photograph", "Visual compare at the player's ordinary HeinMach camera under representative combat lighting", "Shipping, network, performance and real audio output remain outside this verification"]
+}

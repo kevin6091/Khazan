@@ -1,0 +1,64 @@
+Begin Object Class=/Script/Engine.Material Name="DefaultParticle" ExportPath="/Script/Engine.Material'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle'"
+   Begin Object Class=/Script/Engine.MaterialEditorOnlyData Name="DefaultParticleEditorOnlyData" ExportPath="/Script/Engine.MaterialEditorOnlyData'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle:DefaultParticleEditorOnlyData'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionEyeAdaptationInverse Name="MaterialExpressionEyeAdaptationInverse_0" ExportPath="/Script/Engine.MaterialExpressionEyeAdaptationInverse'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle:MaterialExpressionEyeAdaptationInverse_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionParticleColor Name="MaterialExpressionParticleColor_0" ExportPath="/Script/Engine.MaterialExpressionParticleColor'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle:MaterialExpressionParticleColor_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionParticleRelativeTime Name="MaterialExpressionParticleRelativeTime_0" ExportPath="/Script/Engine.MaterialExpressionParticleRelativeTime'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle:MaterialExpressionParticleRelativeTime_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionParticleRelativeTime Name="MaterialExpressionParticleRelativeTime_1" ExportPath="/Script/Engine.MaterialExpressionParticleRelativeTime'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle:MaterialExpressionParticleRelativeTime_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTextureCoordinate Name="MaterialExpressionTextureCoordinate_1" ExportPath="/Script/Engine.MaterialExpressionTextureCoordinate'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle:MaterialExpressionTextureCoordinate_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTime Name="MaterialExpressionTime_1" ExportPath="/Script/Engine.MaterialExpressionTime'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle:MaterialExpressionTime_1'"
+   End Object
+   Begin Object Name="DefaultParticleEditorOnlyData" ExportPath="/Script/Engine.MaterialEditorOnlyData'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle:DefaultParticleEditorOnlyData'"
+      EmissiveColor=(Expression="/Script/Engine.MaterialExpressionEyeAdaptationInverse'DefaultParticle:MaterialExpressionEyeAdaptationInverse_0'")
+      OpacityMask=(Expression="/Script/Engine.MaterialExpressionParticleColor'DefaultParticle:MaterialExpressionParticleColor_0'",OutputIndex=4,Mask=1,MaskA=1)
+      ExpressionCollection=(Expressions=("/Script/Engine.MaterialExpressionParticleRelativeTime'DefaultParticle:MaterialExpressionParticleRelativeTime_0'","/Script/Engine.MaterialExpressionTextureCoordinate'DefaultParticle:MaterialExpressionTextureCoordinate_1'","/Script/Engine.MaterialExpressionParticleRelativeTime'DefaultParticle:MaterialExpressionParticleRelativeTime_1'","/Script/Engine.MaterialExpressionTime'DefaultParticle:MaterialExpressionTime_1'","/Script/Engine.MaterialExpressionParticleColor'DefaultParticle:MaterialExpressionParticleColor_0'","/Script/Engine.MaterialExpressionEyeAdaptationInverse'DefaultParticle:MaterialExpressionEyeAdaptationInverse_0'"))
+   End Object
+   Begin Object Name="MaterialExpressionEyeAdaptationInverse_0" ExportPath="/Script/Engine.MaterialExpressionEyeAdaptationInverse'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle:MaterialExpressionEyeAdaptationInverse_0'"
+      LightValueInput=(Expression="/Script/Engine.MaterialExpressionParticleColor'DefaultParticle:MaterialExpressionParticleColor_0'",Mask=1,MaskR=1,MaskG=1,MaskB=1)
+      MaterialExpressionGuid=549DF0FA470173B2872775A441D2EDE5
+      Material="/Script/Engine.Material'DefaultParticle'"
+      Desc="2026-10-11 user requirement: preserve VFX emissive color across scene exposure; native full inverse, alpha defaults1."
+   End Object
+   Begin Object Name="MaterialExpressionParticleColor_0" ExportPath="/Script/Engine.MaterialExpressionParticleColor'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle:MaterialExpressionParticleColor_0'"
+      MaterialExpressionEditorX=-140
+      MaterialExpressionGuid=8580839547F67F15558A34A1E1785059
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   Begin Object Name="MaterialExpressionParticleRelativeTime_0" ExportPath="/Script/Engine.MaterialExpressionParticleRelativeTime'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle:MaterialExpressionParticleRelativeTime_0'"
+      MaterialExpressionEditorX=-580
+      MaterialExpressionGuid=878AC1B743660E6AC3532F8B1D2B8E4C
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   Begin Object Name="MaterialExpressionParticleRelativeTime_1" ExportPath="/Script/Engine.MaterialExpressionParticleRelativeTime'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle:MaterialExpressionParticleRelativeTime_1'"
+      MaterialExpressionEditorX=-580
+      MaterialExpressionGuid=A57F29BA43641A08506FBEBF3729DD3C
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   Begin Object Name="MaterialExpressionTextureCoordinate_1" ExportPath="/Script/Engine.MaterialExpressionTextureCoordinate'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle:MaterialExpressionTextureCoordinate_1'"
+      MaterialExpressionEditorX=-800
+      MaterialExpressionGuid=7D07154340560D8E3D12CDB58DFACDFE
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   Begin Object Name="MaterialExpressionTime_1" ExportPath="/Script/Engine.MaterialExpressionTime'/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle.DefaultParticle:MaterialExpressionTime_1'"
+      MaterialExpressionEditorX=-360
+      MaterialExpressionGuid=7CDB81464BD47AAFC077C699A01F499C
+      Material="/Script/Engine.Material'DefaultParticle'"
+   End Object
+   BlendMode=BLEND_Masked
+   ShadingModel=MSM_Unlit
+   ShadingModels=(ShadingModelField=1)
+   bUsedWithParticleSprites=True
+   bUsedWithBeamTrails=True
+   bUsedWithMeshParticles=True
+   bUsedWithNiagaraSprites=True
+   bUsedWithNiagaraRibbons=True
+   bUsedWithNiagaraMeshParticles=True
+   StateId=1085DC154A55150BFC1FE0AA72AA4B68
+   EditorOnlyData="/Script/Engine.MaterialEditorOnlyData'DefaultParticleEditorOnlyData'"
+   LightingGuid=CD6487444C3791BB2B88F68CBCD85C73
+End Object

@@ -1,0 +1,91 @@
+Begin Object Class=/Script/Engine.Material Name="M_Glow" ExportPath="/Script/Engine.Material'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow'"
+   Begin Object Class=/Script/Engine.MaterialEditorOnlyData Name="M_GlowEditorOnlyData" ExportPath="/Script/Engine.MaterialEditorOnlyData'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:M_GlowEditorOnlyData'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionMultiply Name="MaterialExpressionMultiply_1" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:MaterialExpressionMultiply_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionMultiply Name="MaterialExpressionMultiply_2" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:MaterialExpressionMultiply_2'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionParticleColor Name="MaterialExpressionParticleColor_0" ExportPath="/Script/Engine.MaterialExpressionParticleColor'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:MaterialExpressionParticleColor_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionPower Name="MaterialExpressionPower_0" ExportPath="/Script/Engine.MaterialExpressionPower'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:MaterialExpressionPower_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionScalarParameter Name="MaterialExpressionScalarParameter_0" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:MaterialExpressionScalarParameter_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTextureSampleParameter2D Name="MaterialExpressionTextureSampleParameter2D_0" ExportPath="/Script/Engine.MaterialExpressionTextureSampleParameter2D'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:MaterialExpressionTextureSampleParameter2D_0'"
+   End Object
+   Begin Object Class=/Script/UnrealEd.SceneThumbnailInfoWithPrimitive Name="SceneThumbnailInfoWithPrimitive_0" ExportPath="/Script/UnrealEd.SceneThumbnailInfoWithPrimitive'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:SceneThumbnailInfoWithPrimitive_0'"
+   End Object
+   Begin Object Name="M_GlowEditorOnlyData" ExportPath="/Script/Engine.MaterialEditorOnlyData'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:M_GlowEditorOnlyData'"
+      EmissiveColor=(Expression="/Script/Engine.MaterialExpressionMultiply'M_Glow:MaterialExpressionMultiply_1'")
+      Opacity=(Expression="/Script/Engine.MaterialExpressionMultiply'M_Glow:MaterialExpressionMultiply_2'")
+      OpacityMask=(Expression="/Script/Engine.MaterialExpressionMultiply'M_Glow:MaterialExpressionMultiply_2'")
+      ExpressionCollection=(Expressions=("/Script/Engine.MaterialExpressionMultiply'M_Glow:MaterialExpressionMultiply_1'","/Script/Engine.MaterialExpressionMultiply'M_Glow:MaterialExpressionMultiply_2'","/Script/Engine.MaterialExpressionParticleColor'M_Glow:MaterialExpressionParticleColor_0'","/Script/Engine.MaterialExpressionPower'M_Glow:MaterialExpressionPower_0'","/Script/Engine.MaterialExpressionTextureSampleParameter2D'M_Glow:MaterialExpressionTextureSampleParameter2D_0'","/Script/Engine.MaterialExpressionScalarParameter'M_Glow:MaterialExpressionScalarParameter_0'"))
+      ParameterGroupData(0)=(GroupName="None")
+      ParameterGroupData(1)=(GroupName="None")
+   End Object
+   Begin Object Name="MaterialExpressionMultiply_1" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:MaterialExpressionMultiply_1'"
+      A=(Expression="/Script/Engine.MaterialExpressionPower'M_Glow:MaterialExpressionPower_0'")
+      B=(Expression="/Script/Engine.MaterialExpressionParticleColor'M_Glow:MaterialExpressionParticleColor_0'",Mask=1,MaskR=1,MaskG=1,MaskB=1)
+      MaterialExpressionEditorX=-222
+      MaterialExpressionEditorY=196
+      MaterialExpressionGuid=6422E00D46747029BB07599DDE9FCBC7
+      Material="/Script/Engine.Material'M_Glow'"
+   End Object
+   Begin Object Name="MaterialExpressionMultiply_2" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:MaterialExpressionMultiply_2'"
+      A=(Expression="/Script/Engine.MaterialExpressionPower'M_Glow:MaterialExpressionPower_0'")
+      B=(Expression="/Script/Engine.MaterialExpressionParticleColor'M_Glow:MaterialExpressionParticleColor_0'",OutputIndex=4,Mask=1,MaskA=1)
+      MaterialExpressionEditorX=-212
+      MaterialExpressionEditorY=340
+      MaterialExpressionGuid=B3BF6C13427742DC74FFA68E9A703D59
+      Material="/Script/Engine.Material'M_Glow'"
+   End Object
+   Begin Object Name="MaterialExpressionParticleColor_0" ExportPath="/Script/Engine.MaterialExpressionParticleColor'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:MaterialExpressionParticleColor_0'"
+      MaterialExpressionEditorX=-496
+      MaterialExpressionEditorY=352
+      MaterialExpressionGuid=F11411CD49E91C4C9F34CD8AAA693C5D
+      Material="/Script/Engine.Material'M_Glow'"
+   End Object
+   Begin Object Name="MaterialExpressionPower_0" ExportPath="/Script/Engine.MaterialExpressionPower'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:MaterialExpressionPower_0'"
+      Base=(Expression="/Script/Engine.MaterialExpressionTextureSampleParameter2D'M_Glow:MaterialExpressionTextureSampleParameter2D_0'",OutputIndex=1,Mask=1,MaskR=1)
+      Exponent=(Expression="/Script/Engine.MaterialExpressionScalarParameter'M_Glow:MaterialExpressionScalarParameter_0'")
+      MaterialExpressionEditorX=-538
+      MaterialExpressionEditorY=230
+      MaterialExpressionGuid=3383279E4F042E437E2C608CC96B3905
+      Material="/Script/Engine.Material'M_Glow'"
+   End Object
+   Begin Object Name="MaterialExpressionScalarParameter_0" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:MaterialExpressionScalarParameter_0'"
+      DefaultValue=2.000000
+      ParameterName="pow"
+      ExpressionGUID=E8D9B94C4C317ED96F2FB0AFA78A07CC
+      MaterialExpressionEditorX=-662
+      MaterialExpressionEditorY=354
+      MaterialExpressionGuid=46EC27E249FB46D0268B4D983BFA6B2E
+      Material="/Script/Engine.Material'M_Glow'"
+   End Object
+   Begin Object Name="MaterialExpressionTextureSampleParameter2D_0" ExportPath="/Script/Engine.MaterialExpressionTextureSampleParameter2D'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:MaterialExpressionTextureSampleParameter2D_0'"
+      ParameterName="T_Glow"
+      ExpressionGUID=12C595E74B0FCC4BE2F44F90A125E905
+      Texture="/Script/Engine.Texture2D'/Game/VFX/03_SlashHit/Textures/T_RadialFlare.T_RadialFlare'"
+      MaterialExpressionEditorX=-768
+      MaterialExpressionEditorY=112
+      MaterialExpressionGuid=1388083A4DBDFED13758DCAB6403D877
+      Material="/Script/Engine.Material'M_Glow'"
+   End Object
+   Begin Object Name="SceneThumbnailInfoWithPrimitive_0" ExportPath="/Script/UnrealEd.SceneThumbnailInfoWithPrimitive'/Game/VFX/03_SlashHit/Materials/M_Glow.M_Glow:SceneThumbnailInfoWithPrimitive_0'"
+   End Object
+   BlendMode=BLEND_Translucent
+   ShadingModel=MSM_Unlit
+   ShadingModels=(ShadingModelField=1)
+   bUsedWithNiagaraSprites=True
+   bUsedWithNiagaraMeshParticles=True
+   EditorY=16
+   PixelDepthOffsetMode=PDOM_Legacy
+   StateId=E78468A2431DC9841F5EF782DDF3DB77
+   EditorOnlyData="/Script/Engine.MaterialEditorOnlyData'M_GlowEditorOnlyData'"
+   TextureStreamingDataVersion=1
+   TextureStreamingData(0)=(SamplingScale=1.000000,UVChannelIndex=0,TextureName="T_RadialFlare",TextureReference="/Game/VFX/03_SlashHit/Textures/T_RadialFlare.T_RadialFlare")
+   ReferencedDefaultTextures(0)="/Script/Engine.Texture2D'/Game/VFX/03_SlashHit/Textures/T_RadialFlare.T_RadialFlare'"
+   ThumbnailInfo="/Script/UnrealEd.SceneThumbnailInfoWithPrimitive'SceneThumbnailInfoWithPrimitive_0'"
+   ParameterOverviewExpansion=(("-12Global", True))
+   LightingGuid=2679CA304EB54E0654EFE1AE069BB844
+End Object

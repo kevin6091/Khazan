@@ -1,0 +1,265 @@
+--- before/Source/Khazan/Data/KZCharacterDefinitionData.h
++++ Source/Khazan/Data/KZCharacterDefinitionData.h
+@@ -43,7 +43,9 @@
+ 	None,
+ 	Short,
+ 	Knockback,
+-	Launch
++	Launch,
++	// Fixed front victim pose when configured; otherwise retains Knockback.
++	VictimFront
+ };
+ 
+ /** Serialized original target/status gates. Evaluated on GT by AI/Ability only. */
+@@ -87,6 +89,10 @@
+ 	TArray<TObjectPtr<UAnimMontage>> Knockbacks;
+ 	UPROPERTY(EditAnywhere, Category = "Reaction")
+ 	TArray<TObjectPtr<UAnimMontage>> Launches;
++	// StrongCombo's fixed unpaired reaction. Assigned only on humanoid definitions;
++	// the existing victim montage is reused without its paired root travel.
++	UPROPERTY(EditAnywhere, Category = "Reaction")
++	TObjectPtr<UAnimMontage> VictimFront;
+ 	// Temporary project tuning for authored in-place hit clips; not original metadata distances.
+ 	// The engine RootMotionSource uses world cm. Duration comes from the authored reaction section chain.
+ 	UPROPERTY(EditAnywhere, Category = "Reaction|Movement", meta = (ClampMin = "0", Units = "cm"))
+--- before/Source/Khazan/Character/KZCharacter.cpp
++++ Source/Khazan/Character/KZCharacter.cpp
+@@ -14,6 +14,7 @@
+ #include "Kismet/GameplayStatics.h"
+ #include "Particles/ParticleSystem.h"
+ #include "Particles/ParticleSystemComponent.h"
++#include "Animation/AnimMontage.h"
+ 
+ // Sets default values
+ AKZCharacter::AKZCharacter()
+@@ -194,7 +195,13 @@
+ 	FGameplayEventData Event;
+ 	Event.Instigator = Attacker;
+ 	Event.Target = this;
++	UAnimMontage* VictimFront = Type == EKZHitReactionType::VictimFront && IsA<AKZMonster>() && CharacterDefinition
++		? CharacterDefinition->GetHitReactionSettings().VictimFront.Get() : nullptr;
++	// The approved hit carries the fixed pose through the existing Short event.
++	// Bodies without this humanoid setting keep StrongCombo's previous Knockback.
++	Event.OptionalObject = VictimFront;
+ 	Event.EventTag = Type == EKZHitReactionType::Launch ? KZGameplayTags::Event_Combat_Hit_Launch :
+-		(Type == EKZHitReactionType::Knockback ? KZGameplayTags::Event_Combat_Hit_Knockback : KZGameplayTags::Event_Combat_Hit_Short);
++		(Type == EKZHitReactionType::Knockback || (Type == EKZHitReactionType::VictimFront && !VictimFront)
++			? KZGameplayTags::Event_Combat_Hit_Knockback : KZGameplayTags::Event_Combat_Hit_Short);
+ 	AbilitySystemComponent->HandleGameplayEvent(Event.EventTag, &Event);
+ }
+--- before/Source/Khazan/Ability/KZHitReactionAbility.cpp
++++ Source/Khazan/Ability/KZHitReactionAbility.cpp
+@@ -85,7 +85,8 @@
+ 	const FGameplayEventData* Payload) const
+ {
+ 	return Payload && !bEnding && Super::ShouldAbilityRespondToEvent(ActorInfo, Payload) &&
+-		SelectMontage(ActorInfo, Payload->EventTag, false);
++		((Payload->EventTag == KZGameplayTags::Event_Combat_Hit_Short && Cast<UAnimMontage>(Payload->OptionalObject.Get())) ||
++			SelectMontage(ActorInfo, Payload->EventTag, false));
+ }
+ 
+ bool UKZHitReactionAbility::CanActivateAbility(FGameplayAbilitySpecHandle Handle,
+@@ -104,7 +105,8 @@
+ 		ASC->HasMatchingGameplayTag(KZGameplayTags::State_Exhausted)) return false;
+ 	if (Cast<AKZMonster>(Character) &&
+ 		(!FMath::IsFinite(Attributes->GetStamina()) || Attributes->GetStamina() <= 0.f)) return false;
+-	return SelectMontage(ActorInfo, KZGameplayTags::Event_Combat_Hit_Short, false) ||
++	return Character->GetCharacterDefinition()->GetHitReactionSettings().VictimFront ||
++		SelectMontage(ActorInfo, KZGameplayTags::Event_Combat_Hit_Short, false) ||
+ 		SelectMontage(ActorInfo, KZGameplayTags::Event_Combat_Hit_Knockback, false) ||
+ 		SelectMontage(ActorInfo, KZGameplayTags::Event_Combat_Hit_Launch, false) ||
+ 		SelectMontage(ActorInfo, KZGameplayTags::Event_Combat_ShieldBlock, false);
+@@ -119,7 +121,9 @@
+ 	if (!IsActive() || ExecutionSerial != Serial) return;
+ 	AKZCharacter* Character = ActorInfo ? Cast<AKZCharacter>(ActorInfo->AvatarActor.Get()) : nullptr;
+ 	CurrentEvent = TriggerEventData ? TriggerEventData->EventTag : FGameplayTag();
+-	PlayingMontage = SelectMontage(ActorInfo, CurrentEvent, true);
++	PlayingMontage = CurrentEvent == KZGameplayTags::Event_Combat_Hit_Short && TriggerEventData
++		? const_cast<UAnimMontage*>(Cast<UAnimMontage>(TriggerEventData->OptionalObject.Get())) : nullptr;
++	if (!PlayingMontage) PlayingMontage = SelectMontage(ActorInfo, CurrentEvent, true);
+ 	BoundCharacter = Character;
+ 	BoundAnimInstance = ActorInfo ? ActorInfo->GetAnimInstance() : nullptr;
+ 	BoundMovement = Character ? Character->GetCharacterMovement() : nullptr;
+@@ -180,7 +184,8 @@
+ 	if (!bForcedChain && Cast<AKZMonster>(Character))
+ 	{
+ 		const FKZHitReactionSettings& Settings = Character->GetCharacterDefinition()->GetHitReactionSettings();
+-		if ((CurrentEvent == KZGameplayTags::Event_Combat_Hit_Knockback && Settings.Knockbacks.Contains(PlayingMontage)) ||
++		if ((CurrentEvent == KZGameplayTags::Event_Combat_Hit_Short && Settings.VictimFront == PlayingMontage) ||
++			(CurrentEvent == KZGameplayTags::Event_Combat_Hit_Knockback && Settings.Knockbacks.Contains(PlayingMontage)) ||
+ 			(bLaunch && Settings.Launches.Contains(PlayingMontage)))
+ 		{
+ 			// Original NoAir/NoBlow replacement poses carry paired-grapple travel.
+--- before/Source/Khazan/Tests/KZKnockbackPIETest.cpp
++++ Source/Khazan/Tests/KZKnockbackPIETest.cpp
+@@ -32,6 +32,12 @@
+ #include "Serialization/JsonSerializer.h"
+ #include "UObject/SavePackage.h"
+ #include "Misc/PackageName.h"
++#include "Ability/Combo/KZComboActionAbility.h"
++#include "Ability/Combo/KZComboDefinitionData.h"
++#include "AI/KZMonsterAIController.h"
++#include "Components/StateTreeAIComponent.h"
++#include "Perception/AIPerceptionComponent.h"
++#include "UObject/UnrealType.h"
+ 
+ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FKZKnockbackAuthor,"Khazan.AnimationTiming.AuthorKnockback",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+ bool FKZKnockbackAuthor::RunTest(const FString&)
+@@ -186,6 +192,150 @@
+ 		FString Json;FJsonSerializer::Serialize(Report,TJsonWriterFactory<>::Create(&Json));FFileHelper::SaveStringToFile(Json,*(Output/TEXT("KnockbackRuntime.json")));Cleanup();return true;
+ 	}
+ };
++// Owned PIE fixture: run actual saved StrongCombo windows, not synthetic hit events.
++// Oversized query capsules and high floor are QA geometry; no asset/CDO is modified.
++class FKZStrongVictimCommand final:public IAutomationLatentCommand
++{
++	FAutomationTestBase* Test;TWeakObjectPtr<AKZPlayer> Player;TWeakObjectPtr<AKZMonster> Monster;
++	TWeakObjectPtr<AAIController> Controller;TWeakObjectPtr<AStaticMeshActor> Floor;
++	TWeakObjectPtr<UKZComboActionAbility> Attack;FGameplayAbilitySpecHandle Handle;FName SavedEntry;
++	FNameProperty* Entry=nullptr;FTransform SavedTransform;float SavedStamina=0;
++	FCollisionResponseContainer SavedResponses;TEnumAsByte<EMovementMode> SavedMode;uint8 SavedCustomMode=0;
++	FDelegateHandle DamageHandle;int32 Case=0,Accepted=0,BlendOutFrames=0;bool Checked=false,Cleaned=false;
++	double Deadline=FPlatformTime::Seconds()+240.;TArray<TSharedPtr<FJsonValue>> Rows;
++	const FString Families[4]={TEXT("Swordsman"),TEXT("SwordShield"),TEXT("HeavySwordsman"),TEXT("HalberdElite")};
++public:
++	FKZStrongVictimCommand(FAutomationTestBase* T,AKZPlayer* P):Test(T),Player(P),SavedTransform(P->GetActorTransform()),
++		SavedResponses(P->GetCapsuleComponent()->GetCollisionResponseToChannels()),SavedMode(P->GetCharacterMovement()->MovementMode),SavedCustomMode(P->GetCharacterMovement()->CustomMovementMode)
++	{
++		auto* ASC=Cast<UKZAbilitySystemComponent>(P->GetAbilitySystemComponent());SavedStamina=ASC->GetNumericAttribute(UKZAttributeSet::GetStaminaAttribute());
++		ASC->CancelAllAbilities();ASC->ClearComboCommands();P->HandleInputMoveReleased();
++		for(const FGameplayAbilitySpec& S:ASC->GetActivatableAbilities())
++			if(const auto* A=Cast<UKZComboActionAbility>(S.Ability);A&&A->GetEntryNodeId()==TEXT("StrongAttack01")){Handle=S.Handle;break;}
++		if(!Test->TestTrue(TEXT("Actual granted StrongCombo exists"),Handle.IsValid()&&ASC->TryActivateAbility(Handle)))return;
++		Attack=Cast<UKZComboActionAbility>(ASC->FindAbilitySpecFromHandle(Handle)->GetPrimaryInstance());
++		if(!Test->TestTrue(TEXT("Only live instanced attack is edited"),Attack.IsValid()&&!Attack->HasAnyFlags(RF_ClassDefaultObject)))return;
++		SavedEntry=Attack->GetEntryNodeId();ASC->CancelAbilityHandle(Handle);Entry=FindFProperty<FNameProperty>(UKZComboActionAbility::StaticClass(),TEXT("EntryNodeId"));
++		P->GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Ignore);
++		Floor=P->GetWorld()->SpawnActor<AStaticMeshActor>(FVector(0,0,10000),FRotator::ZeroRotator);
++		Floor->GetStaticMeshComponent()->SetMobility(EComponentMobility::Movable);
++		Floor->GetStaticMeshComponent()->SetStaticMesh(LoadObject<UStaticMesh>(nullptr,TEXT("/Engine/BasicShapes/Cube.Cube")));
++		Floor->SetActorScale3D(FVector(100,100,.2));Floor->GetStaticMeshComponent()->SetCollisionProfileName(TEXT("BlockAll"));
++		DamageHandle=ASC->OnGameplayEffectAppliedDelegateToTarget.AddLambda([this](UAbilitySystemComponent* Target,const FGameplayEffectSpec& Spec,FActiveGameplayEffectHandle)
++		{if(Monster.IsValid()&&Target==Monster->GetAbilitySystemComponent()&&Spec.GetContext().GetSourceObject()==Attack.Get())++Accepted;});
++	}
++	~FKZStrongVictimCommand(){Cleanup();}
++	void RemoveTarget()
++	{if(Monster.IsValid()){Monster->GetAbilitySystemComponent()->CancelAllAbilities();Monster->Destroy();Monster.Reset();}if(Controller.IsValid()){Controller->Destroy();Controller.Reset();}}
++	void Cleanup()
++	{
++		if(Cleaned)return;Cleaned=true;RemoveTarget();
++		if(Player.IsValid())
++		{
++			auto* ASC=Player->GetAbilitySystemComponent();ASC->OnGameplayEffectAppliedDelegateToTarget.Remove(DamageHandle);ASC->CancelAbilityHandle(Handle);
++			if(Attack.IsValid()&&Entry)Entry->SetPropertyValue_InContainer(Attack.Get(),SavedEntry);
++			ASC->SetNumericAttributeBase(UKZAttributeSet::GetStaminaAttribute(),SavedStamina);
++			Player->SetActorTransform(SavedTransform,false,nullptr,ETeleportType::TeleportPhysics);
++			Player->GetCapsuleComponent()->SetCollisionResponseToChannels(SavedResponses);Player->GetCharacterMovement()->SetMovementMode(SavedMode,SavedCustomMode);
++		}
++		if(Floor.IsValid()){Floor->Destroy();Floor.Reset();}
++	}
++	bool Finish()
++	{
++		auto Report=MakeShared<FJsonObject>();Report->SetBoolField(TEXT("passed"),!Test->HasAnyErrors());Report->SetArrayField(TEXT("actual_strong_cases"),Rows);
++		FString Json;FJsonSerializer::Serialize(Report,TJsonWriterFactory<>::Create(&Json));
++		FFileHelper::SaveStringToFile(Json,*(FPlatformMisc::GetEnvironmentVariable(TEXT("KZ_MONSTER_REPAIR_OUT"))/TEXT("StrongVictimRuntime.json")));Cleanup();return true;
++	}
++	bool Update()override
++	{
++		if(!Player.IsValid()||!Attack.IsValid()||!Entry||FPlatformTime::Seconds()>Deadline){Test->AddError(TEXT("Strong victim fixture invalid/timeout"));return Finish();}
++		auto* ASC=Cast<UKZAbilitySystemComponent>(Player->GetAbilitySystemComponent());
++		if(!Monster.IsValid())
++		{
++			if(Case==12)
++			{
++				for(const TCHAR* F:{TEXT("ApesStoneHandElite"),TEXT("Yetuga")})
++				{
++					UClass* C=LoadClass<AKZMonster>(nullptr,*FString::Printf(TEXT("/Game/Bluprints/Monsters/BP_Monster_%s.BP_Monster_%s_C"),F,F));
++					FActorSpawnParameters Params;Params.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
++					AKZMonster* M=Player->GetWorld()->SpawnActor<AKZMonster>(C,FVector(2500,0,10200),FRotator::ZeroRotator,Params);
++					if(!Test->TestNotNull(TEXT("Giant fallback fixture"),M))continue;
++					M->GetAbilitySystemComponent()->CancelAllAbilities();M->PlayHitReaction(EKZHitReactionType::VictimFront,Player.Get());
++					Test->TestTrue(TEXT("Unconfigured giant retains Knockback pool"),M->GetCharacterDefinition()->GetHitReactionSettings().Knockbacks.Contains(M->GetMesh()->GetAnimInstance()->GetCurrentActiveMontage()));
++					if(AController* AI=M->GetController())AI->Destroy();M->Destroy();
++				}
++				return Finish();
++			}
++			const FString Family=Families[Case/3];const FName NodeId(*FString::Printf(TEXT("StrongAttack%02d"),Case%3+1));
++			const FKZComboNode* Node=Attack->GetComboDefinition()->FindNode(NodeId);if(!Test->TestNotNull(TEXT("Saved strong node"),Node))return Finish();
++			float Radius=0.f;
++			for(const auto& W:Node->AttackWindows)
++			{
++				Test->TestTrue(TEXT("Every real StrongCombo window selects VictimFront"),W.HitReaction==EKZHitReactionType::VictimFront);
++				for(const auto& K:W.Keys)Radius=FMath::Max(Radius,static_cast<float>(Node->CollisionToActor.TransformPosition(K.Center).Size()+W.Extent.Size()));
++			}
++			UClass* C=LoadClass<AKZMonster>(nullptr,*FString::Printf(TEXT("/Game/Bluprints/Monsters/BP_Monster_%s.BP_Monster_%s_C"),*Family,*Family));
++			FActorSpawnParameters Params;Params.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
++			Monster=Player->GetWorld()->SpawnActor<AKZMonster>(C,FVector(150,0,10010+Radius+250),FRotator(0,Case%2?180:0,0),Params);
++			if(!Test->TestTrue(TEXT("Actual humanoid initialized"),Monster.IsValid()&&Monster->GetCharacterDefinition()))return Finish();
++			Controller=Cast<AAIController>(Monster->GetController());
++			if(auto* AI=Cast<AKZMonsterAIController>(Controller.Get())){AI->SetActorTickEnabled(false);AI->GetStateTreeComponent()->StopLogic(TEXT("Owned StrongCombo fixture"));AI->GetStateTreeComponent()->SetComponentTickEnabled(false);AI->GetPerceptionComponent()->Deactivate();AI->StopMovement();}
++			Monster->GetCapsuleComponent()->SetCapsuleSize(Radius+250,Radius+250);Monster->GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Ignore);
++			auto* Victim=Monster->GetAbilitySystemComponent();Victim->CancelAllAbilities();
++			Victim->SetNumericAttributeBase(UKZAttributeSet::GetMaxHPAttribute(),1000);Victim->SetNumericAttributeBase(UKZAttributeSet::GetHPAttribute(),1000);
++			Victim->SetNumericAttributeBase(UKZAttributeSet::GetMaxStaminaAttribute(),1000);Victim->SetNumericAttributeBase(UKZAttributeSet::GetStaminaAttribute(),1000);
++			Player->GetCharacterMovement()->StopMovementImmediately();Player->SetActorLocationAndRotation(FVector(0,0,10010+Player->GetCapsuleComponent()->GetScaledCapsuleHalfHeight()+UCharacterMovementComponent::MIN_FLOOR_DIST),FRotator::ZeroRotator,false,nullptr,ETeleportType::TeleportPhysics);Player->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
++			ASC->SetNumericAttributeBase(UKZAttributeSet::GetStaminaAttribute(),ASC->GetNumericAttribute(UKZAttributeSet::GetMaxStaminaAttribute()));ASC->ClearComboCommands();
++			Entry->SetPropertyValue_InContainer(Attack.Get(),NodeId);Accepted=0;Checked=false;BlendOutFrames=0;
++			if(!Test->TestTrue(TEXT("Actual StrongCombo activates"),ASC->TryActivateAbility(Handle)))return Finish();return false;
++		}
++		if(Accepted>0)
++		{
++			auto* Anim=Monster->GetMesh()->GetAnimInstance();auto* Victim=Monster->GetAbilitySystemComponent();
++			UAnimMontage* Expected=Monster->GetCharacterDefinition()->GetHitReactionSettings().VictimFront;
++			if(Victim->HasMatchingGameplayTag(KZGameplayTags::State_HitReacting))
++			{
++				// GetCurrentActiveMontage excludes blend-out instances while the Task
++				// still legitimately owns its hit tag until OnCompleted.
++				if(UAnimMontage* Current=Anim->GetCurrentActiveMontage())
++					Test->TestTrue(*FString::Printf(TEXT("Accepted StrongCombo fixed pose: actual=%s expected=%s"),*Current->GetPathName(),*Expected->GetPathName()),Current==Expected);
++				else ++BlendOutFrames;
++				if(auto* I=Anim->GetActiveInstanceForMontage(Expected))
++				{Test->TestTrue(TEXT("Unpaired victim disables only its montage root motion"),I->IsRootMotionDisabled());Checked=true;}
++				const auto& RMS=Monster->GetCharacterMovement()->CurrentRootMotion;
++				Test->TestFalse(TEXT("VictimFront acquires no Knockback/Launch motion task"),RMS.HasActiveRootMotionSources());
++			}
++			if(!Attack->IsActive()&&!Victim->HasMatchingGameplayTag(KZGameplayTags::State_HitReacting))
++			{
++				Test->TestTrue(TEXT("Actual accepted hit was observed during fixed pose"),Checked);
++				const FKZComboNode* Node=Attack->GetComboDefinition()->FindNode(FName(*FString::Printf(TEXT("StrongAttack%02d"),Case%3+1)));
++				TSet<FName> Groups;int32 ExpectedHits=0;
++				for(const auto& W:Node->AttackWindows){if(W.HitGroup.IsNone())++ExpectedHits;else Groups.Add(W.HitGroup);}
++				Test->TestEqual(TEXT("Existing actual window/group dedup retained"),Accepted,ExpectedHits+Groups.Num());
++				const auto& Settings=Monster->GetCharacterDefinition()->GetHitReactionSettings();
++				Monster->PlayHitReaction(EKZHitReactionType::Short,Player.Get());Test->TestTrue(TEXT("Other short hits retain their pool"),Settings.ShortHits.Contains(Anim->GetCurrentActiveMontage()));Victim->CancelAllAbilities();
++				Monster->PlayHitReaction(EKZHitReactionType::Knockback,Player.Get());Test->TestTrue(TEXT("Other Knockbacks retain their pool"),Settings.Knockbacks.Contains(Anim->GetCurrentActiveMontage()));Victim->CancelAllAbilities();
++				Monster->PlayHitReaction(EKZHitReactionType::VictimFront,Player.Get());Monster->PlayHitReaction(EKZHitReactionType::VictimFront,Player.Get());
++				Test->TestTrue(TEXT("Repeated front reaction retains fixed pose"),Anim->GetCurrentActiveMontage()==Settings.VictimFront);Victim->CancelAllAbilities();
++				Test->TestFalse(TEXT("Cancel releases its reaction tag"),Victim->HasMatchingGameplayTag(KZGameplayTags::State_HitReacting));
++				auto Row=MakeShared<FJsonObject>();Row->SetStringField(TEXT("family"),Families[Case/3]);Row->SetStringField(TEXT("node"),Node->NodeId.ToString());Row->SetStringField(TEXT("montage"),Expected->GetPathName());Row->SetNumberField(TEXT("accepted_hits"),Accepted);Row->SetNumberField(TEXT("inactive_blend_out_frames"),BlendOutFrames);Rows.Add(MakeShared<FJsonValueObject>(Row));
++				RemoveTarget();++Case;
++			}
++		}
++		return false;
++	}
++};
++class FKZStrongVictimFindPlayer final:public IAutomationLatentCommand
++{
++	FAutomationTestBase* Test;double Deadline=FPlatformTime::Seconds()+90.;
++public:
++	FKZStrongVictimFindPlayer(FAutomationTestBase* T):Test(T){}
++	bool Update()override
++	{
++		for(const FWorldContext& C:GEngine->GetWorldContexts())if(C.WorldType==EWorldType::PIE)for(TActorIterator<AKZPlayer> It(C.World());It;++It)if(It->GetController()&&It->GetAbilitySystemComponent()->GetNumericAttribute(UKZAttributeSet::GetHPAttribute())>0){FAutomationTestFramework::Get().EnqueueLatentCommand(MakeShared<FKZStrongVictimCommand>(Test,*It));return true;}
++		if(FPlatformTime::Seconds()>Deadline){Test->AddError(TEXT("No initialized PIE Player"));return true;}return false;
++	}
++};
+ class FKZKnockbackFindPlayer final:public IAutomationLatentCommand
+ {
+ 	FAutomationTestBase* Test;double Deadline=FPlatformTime::Seconds()+90.;
+@@ -200,4 +350,6 @@
+ }
+ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FKZKnockbackPIE,"Khazan.AnimationTiming.KnockbackPIE",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+ bool FKZKnockbackPIE::RunTest(const FString&){ADD_LATENT_AUTOMATION_COMMAND(FKZKnockbackFindPlayer(this));return true;}
++IMPLEMENT_SIMPLE_AUTOMATION_TEST(FKZStrongVictimPIE,"Khazan.CombatReaction.StrongVictimFrontPIE",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
++bool FKZStrongVictimPIE::RunTest(const FString&){ADD_LATENT_AUTOMATION_COMMAND(FKZStrongVictimFindPlayer(this));return true;}
+ #endif

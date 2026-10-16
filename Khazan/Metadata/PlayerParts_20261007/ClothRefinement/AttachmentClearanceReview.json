@@ -1,0 +1,1840 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-07T12:02:20.623441+00:00",
+  "status": "Read-only targeted calculation; no asset or gameplay source changes",
+  "question": "Does the first 18.669cm cloth capsule starting at B_Cloth_03_03_F_Pelvis intersect anatomy despite its reference pivot being outside?",
+  "provenance": {
+    "category": "Current imported project geometry + UE technical calculations; not original-game verified physics parameters",
+    "reference_log": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261007\\NativeAudit.log",
+    "reference_log_sha256": "1eb700a61228b111efaf42ffefbd5f0b82b9af47c900c6a6bf2e768934a67545",
+    "runtime_log": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261007\\ClothRefinement\\PIE_JointFrames_Failed.log",
+    "runtime_log_sha256": "134b0eceeca395c725bbf298efa3c06cdffb071263163a84c55ac3623a59eb4b",
+    "runtime_stage": "Stage 3 Snapshot after first controlled movement interval, before second movement interval. Time 2026.10.07-11.53.20:677..678 UTC, frame367",
+    "not_peak_frame": true,
+    "native_peak_reported_in_same_run": {
+      "bone": "B_Cloth_03_03_F_Pelvis",
+      "joint_peak_degrees": 83.167543,
+      "peak_report_line": "[2026.10.07-11.53.20:681][368]LogAutomationController: ClothMotion part=Leg bendSamples=3810 bendRmsDegrees=19.547727 bendPeakDegrees=83.167543 peakBone=B_Cloth_03_03_F_Pelvis tipSamples=1778 tipRmsCm=15.940712 tipPeakCm=68.877405 secondaryRespondingBones=30 directSimulatedBones=30 independentlyRespondingJoints=30"
+    },
+    "anatomy_package": "/Game/_Art/Player/Character/Meshs/Player_PhysicsAsset",
+    "anatomy_file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Content\\_Art\\Player\\Character\\Meshs\\Player_PhysicsAsset.uasset",
+    "anatomy_current_file_sha256": "d9710cb09a8d4a7fa17059a0994901e8422bf1deea6694c4421e3845ec6ef410",
+    "anatomy_property_fields": "USkeletalBodySetup.AggGeom.SphylElems[0].Center/Rotation/Radius/Length; geometry remains cm at observed unit RBAN actor scale",
+    "reference_pose_fields": "USkeletalMesh.GetRefSkeleton(): raw local and component ref bone transforms; unit translation = logged component translation / imported wrapper100, scale reset1 as existing author pipeline",
+    "current_pose_fields": "RigidShape part=Leg named kinematic actor bone world transform. Existing native snapshot verifies copied anchors follow actual parent mesh; source main-body geometry is used, not the disabled broader part PA anatomy geometry",
+    "engine_rotation_formula_source": "C:/Program Files/Epic Games/UE_5.8/Engine/Source/Runtime/Core/Private/Math/UnrealMath.cpp:519-536, FRotator3d::Quaternion"
+  },
+  "units": {
+    "length": "cm",
+    "rotation_inputs": "degrees in native Pitch,Yaw,Roll order",
+    "quaternion": "xyzw, unitless"
+  },
+  "inputs": {
+    "bone": "B_Cloth_03_03_F_Pelvis",
+    "constraint_parent": "B_Cloth_03_02_F_Pelvis",
+    "segment_child": "B_Cloth_03_04_F_Pelvis",
+    "cloth_radius_cm": 1.0,
+    "calculated_segment_length_cm": 18.669048631024115,
+    "source_ref_bone": {
+      "index": 82,
+      "parent_index": 81,
+      "local": {
+        "raw_native_transform": "18.039351,-0.000031,0.000010|-0.000007,0.000001,-0.000027|1.000000,1.000000,1.000000",
+        "position_cm": [
+          18.039351,
+          -3.1e-05,
+          1e-05
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          -7e-06,
+          1e-06,
+          -2.7e-05
+        ],
+        "quaternion_xyzw": [
+          2.3561944848615138e-07,
+          6.108652587596739e-08,
+          8.726631866798305e-09,
+          0.9999999999999704
+        ],
+        "raw_scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "unit_component": {
+        "raw_native_transform": "-1266.049027,1753.464453,9675.695528|-79.838836,129.850140,-112.720753|100.000012,100.000006,100.000054",
+        "position_cm": [
+          -12.66049027,
+          17.53464453,
+          96.75695528
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          -79.838836,
+          129.85014,
+          -112.720753
+        ],
+        "quaternion_xyzw": [
+          -0.05137919827843551,
+          0.728992427222172,
+          0.15840654075850416,
+          0.6639560127613241
+        ],
+        "raw_scale": [
+          100.000012,
+          100.000006,
+          100.000054
+        ]
+      },
+      "raw_log_line": "[2026.10.07-02.41.31:778][350]LogAutomationController: Bone part=Leg index=82 name=B_Cloth_03_03_F_Pelvis parent=81 local=18.039351,-0.000031,0.000010|-0.000007,0.000001,-0.000027|1.000000,1.000000,1.000000 component=-1266.049027,1753.464453,9675.695528|-79.838836,129.850140,-112.720753|100.000012,100.000006,100.000054"
+    },
+    "source_ref_child": {
+      "index": 83,
+      "parent_index": 82,
+      "local": {
+        "raw_native_transform": "18.669046,-0.000013,0.000031|0.000006,-0.000109,0.000006|1.000000,1.000000,1.000000",
+        "position_cm": [
+          18.669046,
+          -1.3e-05,
+          3.1e-05
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          6e-06,
+          -0.000109,
+          6e-06
+        ],
+        "quaternion_xyzw": [
+          -5.235992736475423e-08,
+          -5.235982775485796e-08,
+          -9.512044450783205e-07,
+          0.9999999999995449
+        ],
+        "raw_scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "unit_component": {
+        "raw_native_transform": "-1477.090333,2006.317420,7838.071869|-79.838940,129.850347,-112.720951|100.000006,100.000000,100.000054",
+        "position_cm": [
+          -14.770903330000001,
+          20.063174200000002,
+          78.38071869000001
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          -79.83894,
+          129.850347,
+          -112.720951
+        ],
+        "quaternion_xyzw": [
+          -0.051379922649716026,
+          0.7289923323592608,
+          0.15840594271636685,
+          0.6639562035421113
+        ],
+        "raw_scale": [
+          100.000006,
+          100.0,
+          100.000054
+        ]
+      },
+      "raw_log_line": "[2026.10.07-02.41.31:778][350]LogAutomationController: Bone part=Leg index=83 name=B_Cloth_03_04_F_Pelvis parent=82 local=18.669046,-0.000013,0.000031|0.000006,-0.000109,0.000006|1.000000,1.000000,1.000000 component=-1477.090333,2006.317420,7838.071869|-79.838940,129.850347,-112.720951|100.000006,100.000000,100.000054"
+    },
+    "source_ref_parent": {
+      "index": 81,
+      "parent_index": 80,
+      "local": {
+        "raw_native_transform": "0.000001,-0.000012,-0.000021|0.000088,0.000007,-0.000067|1.000000,1.000000,1.000000",
+        "position_cm": [
+          1e-06,
+          -1.2e-05,
+          -2.1e-05
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          8.8e-05,
+          7e-06,
+          -6.7e-05
+        ],
+        "quaternion_xyzw": [
+          5.846853463289764e-07,
+          -7.679448351609043e-07,
+          6.10869728258498e-08,
+          0.9999999999995323
+        ],
+        "raw_scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "unit_component": {
+        "raw_native_transform": "-1062.124843,1509.142350,11451.337406|-79.838840,129.850108,-112.720694|100.000012,100.000006,100.000054",
+        "position_cm": [
+          -10.621248430000001,
+          15.091423500000001,
+          114.51337406
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          -79.83884,
+          129.850108,
+          -112.720694
+        ],
+        "quaternion_xyzw": [
+          -0.05137935789406112,
+          0.7289923494048577,
+          0.1584067099996679,
+          0.6639560454718826
+        ],
+        "raw_scale": [
+          100.000012,
+          100.000006,
+          100.000054
+        ]
+      },
+      "raw_log_line": "[2026.10.07-02.41.31:778][350]LogAutomationController: Bone part=Leg index=81 name=B_Cloth_03_02_F_Pelvis parent=80 local=0.000001,-0.000012,-0.000021|0.000088,0.000007,-0.000067|1.000000,1.000000,1.000000 component=-1062.124843,1509.142350,11451.337406|-79.838840,129.850108,-112.720694|100.000012,100.000006,100.000054"
+    },
+    "current_actual_root": {
+      "simulated": true,
+      "part_pa_shape_dimensions_cm_raw": "X=18.669 Y=2.000 Z=2.000",
+      "world": {
+        "raw_native_transform": "9.074535,17.016873,84.326205|-84.487550,54.574347,-109.245619|1.000000,1.000000,1.000000",
+        "position_cm": [
+          9.074535,
+          17.016873,
+          84.326205
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          -84.48755,
+          54.574347,
+          -109.245619
+        ],
+        "quaternion_xyzw": [
+          0.3579933395559033,
+          0.6226336644188548,
+          -0.2906653177315915,
+          0.6322038926121492
+        ],
+        "raw_scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "raw_log_line": "[2026.10.07-11.53.20:678][367]LogAutomationController: RigidShape part=Leg bone=B_Cloth_03_03_F_Pelvis simulated=1 dimensionsCm=X=18.669 Y=2.000 Z=2.000 world=9.074535,17.016873,84.326205|-84.487550,54.574347,-109.245619|1.000000,1.000000,1.000000"
+    },
+    "current_kinematic_parent": {
+      "simulated": false,
+      "part_pa_shape_dimensions_cm_raw": "X=2.000 Y=2.000 Z=2.000",
+      "world": {
+        "raw_native_transform": "7.893007,12.819829,101.830700|-76.012789,74.277169,-128.617372|1.000000,1.000000,1.000000",
+        "position_cm": [
+          7.893007,
+          12.819829,
+          101.8307
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          -76.012789,
+          74.277169,
+          -128.617372
+        ],
+        "quaternion_xyzw": [
+          0.4048701041097758,
+          0.6414875974295992,
+          -0.23610277929884843,
+          0.6073132130536096
+        ],
+        "raw_scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "raw_log_line": "[2026.10.07-11.53.20:678][367]LogAutomationController: RigidShape part=Leg bone=B_Cloth_03_02_F_Pelvis simulated=0 dimensionsCm=X=2.000 Y=2.000 Z=2.000 world=7.893007,12.819829,101.830700|-76.012789,74.277169,-128.617372|1.000000,1.000000,1.000000"
+    },
+    "all_reference_anatomy_capsules": [
+      {
+        "bone": "Bip001-Pelvis",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          3.67,
+          1.418,
+          -0.125
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          23.215965,
+          -90.0,
+          -7.640043
+        ],
+        "quaternion_xyzw": [
+          -0.09581819671517909,
+          -0.18810970706862734,
+          -0.6816265385873376,
+          0.7005846652462865
+        ],
+        "radius_cm": 16.27619,
+        "cylinder_length_cm": 19.53147,
+        "reference_bone": {
+          "index": 3,
+          "parent_index": 2,
+          "local": {
+            "raw_native_transform": "-0.000000,-0.000000,0.000008|89.499924,89.998497,7.485580|1.000000,1.000000,1.000000",
+            "position_cm": [
+              -0.0,
+              -0.0,
+              8e-06
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              89.499924,
+              89.998497,
+              7.48558
+            ],
+            "quaternion_xyzw": [
+              0.4639636400881585,
+              -0.52953847881112,
+              0.4686031209696166,
+              0.5336083349724643
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "0.000078,-0.001402,10517.200470|88.051166,-42.961385,132.386439|100.000000,99.999988,99.999988",
+            "position_cm": [
+              7.799999999999999e-07,
+              -1.402e-05,
+              105.1720047
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              88.051166,
+              -42.961385,
+              132.386439
+            ],
+            "quaternion_xyzw": [
+              -0.7148821798949428,
+              -0.020149473186959588,
+              -0.6979617533391138,
+              0.037240548797411066
+            ],
+            "raw_scale": [
+              100.0,
+              99.999988,
+              99.999988
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:752][349]LogAutomationController: Bone part=Body index=3 name=Bip001-Pelvis parent=2 local=-0.000000,-0.000000,0.000008|89.499924,89.998497,7.485580|1.000000,1.000000,1.000000 component=0.000078,-0.001402,10517.200470|88.051166,-42.961385,132.386439|100.000000,99.999988,99.999988"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:764][350]LogAutomationController: Capsule part=Body bone=Bip001-Pelvis center=X=3.670 Y=1.418 Z=-0.125 rotation=P=23.215965 Y=-90.000000 R=-7.640043 radius=16.27619 length=19.53147"
+      },
+      {
+        "bone": "Bip001-Spine",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          5.972,
+          -3.311,
+          -0.096
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          11.037926,
+          -90.0,
+          0.857822
+        ],
+        "quaternion_xyzw": [
+          -0.07327297402774209,
+          -0.06273547355603847,
+          -0.7043182947770842,
+          0.7033001288760937
+        ],
+        "radius_cm": 13.33665,
+        "cylinder_length_cm": 16.00285,
+        "reference_bone": {
+          "index": 4,
+          "parent_index": 3,
+          "local": {
+            "raw_native_transform": "8.186849,2.277422,0.371003|0.596440,0.540167,-4.322329|1.000000,1.000000,1.000000",
+            "position_cm": [
+              8.186849,
+              2.277422,
+              0.371003
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              0.59644,
+              0.540167,
+              -4.322329
+            ],
+            "quaternion_xyzw": [
+              0.0377340803505149,
+              -0.005023378996944989,
+              0.004906689214613943,
+              0.9992631431432389
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "75.742202,-242.881842,11328.840827|87.249061,-41.369014,129.652370|99.999994,100.000000,99.999988",
+            "position_cm": [
+              0.75742202,
+              -2.4288184200000003,
+              113.28840827
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              87.249061,
+              -41.369014,
+              129.65237
+            ],
+            "quaternion_xyzw": [
+              -0.7165551710919303,
+              -0.04315093575247711,
+              -0.6929132808057282,
+              0.06751199010651207
+            ],
+            "raw_scale": [
+              99.999994,
+              100.0,
+              99.999988
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:752][349]LogAutomationController: Bone part=Body index=4 name=Bip001-Spine parent=3 local=8.186849,2.277422,0.371003|0.596440,0.540167,-4.322329|1.000000,1.000000,1.000000 component=75.742202,-242.881842,11328.840827|87.249061,-41.369014,129.652370|99.999994,100.000000,99.999988"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:764][350]LogAutomationController: Capsule part=Body bone=Bip001-Spine center=X=5.972 Y=-3.311 Z=-0.096 rotation=P=11.037926 Y=-90.000000 R=0.857822 radius=13.33665 length=16.00285"
+      },
+      {
+        "bone": "Bip001-Spine1",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          8.961,
+          -0.579,
+          0.114
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          1.221225,
+          -90.0,
+          0.258469
+        ],
+        "quaternion_xyzw": [
+          -0.009130450741520916,
+          -0.005940780394837661,
+          -0.7070818249172441,
+          0.7070478306799737
+        ],
+        "radius_cm": 14.05822,
+        "cylinder_length_cm": 17.24732,
+        "reference_bone": {
+          "index": 5,
+          "parent_index": 4,
+          "local": {
+            "raw_native_transform": "9.175044,0.011653,-0.000934|-2.031994,3.414704,4.584979|1.000000,1.000000,1.000000",
+            "position_cm": [
+              9.175044,
+              0.011653,
+              -0.000934
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -2.031994,
+              3.414704,
+              4.584979
+            ],
+            "quaternion_xyzw": [
+              -0.04050465059696765,
+              0.0165178892653261,
+              0.03047493951677997,
+              0.9985778941453114
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "108.878080,-273.149864,12245.247648|84.462701,-83.944977,91.811907|99.999988,100.000000,99.999988",
+            "position_cm": [
+              1.0887807999999999,
+              -2.73149864,
+              122.45247648
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              84.462701,
+              -83.944977,
+              91.811907
+            ],
+            "quaternion_xyzw": [
+              -0.7081402592816002,
+              0.007928762414967039,
+              -0.7034542539675077,
+              0.06022142879550785
+            ],
+            "raw_scale": [
+              99.999988,
+              100.0,
+              99.999988
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:752][349]LogAutomationController: Bone part=Body index=5 name=Bip001-Spine1 parent=4 local=9.175044,0.011653,-0.000934|-2.031994,3.414704,4.584979|1.000000,1.000000,1.000000 component=108.878080,-273.149864,12245.247648|84.462701,-83.944977,91.811907|99.999988,100.000000,99.999988"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:764][350]LogAutomationController: Capsule part=Body bone=Bip001-Spine1 center=X=8.961 Y=-0.579 Z=0.114 rotation=P=1.221225 Y=-90.000000 R=0.258469 radius=14.05822 length=17.24732"
+      },
+      {
+        "bone": "Bip001-Spine2",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          14.275,
+          2.284,
+          2.533
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          14.766474,
+          -90.0,
+          -80.802464
+        ],
+        "quaternion_xyzw": [
+          0.3853041899669623,
+          -0.5236991833731023,
+          -0.47512015883810477,
+          0.5929086617632627
+        ],
+        "radius_cm": 21.62219,
+        "cylinder_length_cm": 22.68958,
+        "reference_bone": {
+          "index": 6,
+          "parent_index": 5,
+          "local": {
+            "raw_native_transform": "14.713261,0.026985,0.000746|-0.840655,-7.373162,-1.575269|1.000000,1.000000,1.000000",
+            "position_cm": [
+              14.713261,
+              0.026985,
+              0.000746
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -0.840655,
+              -7.373162,
+              -1.575269
+            ],
+            "quaternion_xyzw": [
+              0.014189219905677843,
+              0.006436311668136362,
+              -0.06439141880033442,
+              0.9978030793275089
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "124.126658,-417.004562,13709.447248|88.044610,114.166373,-71.676755|99.999988,100.000000,99.999988",
+            "position_cm": [
+              1.24126658,
+              -4.17004562,
+              137.09447248
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              88.04461,
+              114.166373,
+              -71.676755
+            ],
+            "quaternion_xyzw": [
+              0.7017129334334012,
+              0.047280669958135846,
+              0.7104568752624985,
+              -0.02478962873557472
+            ],
+            "raw_scale": [
+              99.999988,
+              100.0,
+              99.999988
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:752][349]LogAutomationController: Bone part=Body index=6 name=Bip001-Spine2 parent=5 local=14.713261,0.026985,0.000746|-0.840655,-7.373162,-1.575269|1.000000,1.000000,1.000000 component=124.126658,-417.004562,13709.447248|88.044610,114.166373,-71.676755|99.999988,100.000000,99.999988"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:764][350]LogAutomationController: Capsule part=Body bone=Bip001-Spine2 center=X=14.275 Y=2.284 Z=2.533 rotation=P=14.766474 Y=-90.000000 R=-80.802464 radius=21.62219 length=22.68958"
+      },
+      {
+        "bone": "Bip001-Neck",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          4.896,
+          -1.125,
+          -0.067
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          -0.0,
+          165.979588,
+          -87.16693
+        ],
+        "quaternion_xyzw": [
+          0.08413989499039902,
+          0.6842567877652783,
+          0.7189557619297833,
+          0.08840666748674657
+        ],
+        "radius_cm": 7.60916,
+        "cylinder_length_cm": 9.02623,
+        "reference_bone": {
+          "index": 7,
+          "parent_index": 6,
+          "local": {
+            "raw_native_transform": "30.237429,2.837757,-0.000800|1.405800,-12.997844,5.064418|1.000000,1.000000,1.000000",
+            "position_cm": [
+              30.237429,
+              2.837757,
+              -0.0008
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              1.4058,
+              -12.997844,
+              5.064418
+            ],
+            "quaternion_xyzw": [
+              -0.04528093541538664,
+              -0.0071766491047385705,
+              -0.11360400386272985,
+              0.9924677641625907
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "110.634398,-605.038759,16740.620036|75.127218,92.689159,-87.836139|99.999988,100.000012,99.999988",
+            "position_cm": [
+              1.1063439800000001,
+              -6.050387590000001,
+              167.40620036
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              75.127218,
+              92.689159,
+              -87.836139
+            ],
+            "quaternion_xyzw": [
+              0.6972773857690858,
+              0.09464970154129942,
+              0.7050267168169886,
+              0.08822136854204027
+            ],
+            "raw_scale": [
+              99.999988,
+              100.000012,
+              99.999988
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:752][349]LogAutomationController: Bone part=Body index=7 name=Bip001-Neck parent=6 local=30.237429,2.837757,-0.000800|1.405800,-12.997844,5.064418|1.000000,1.000000,1.000000 component=110.634398,-605.038759,16740.620036|75.127218,92.689159,-87.836139|99.999988,100.000012,99.999988"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:764][350]LogAutomationController: Capsule part=Body bone=Bip001-Neck center=X=4.896 Y=-1.125 Z=-0.067 rotation=P=-0.000000 Y=165.979588 R=-87.166930 radius=7.60916 length=9.02623"
+      },
+      {
+        "bone": "Bip001-Head",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          6.323,
+          -4.526,
+          2.052
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          9.273157,
+          112.211393,
+          -90.0
+        ],
+        "quaternion_xyzw": [
+          0.4404825287751249,
+          0.553150198267949,
+          0.6169012539356076,
+          0.3455905711860135
+        ],
+        "radius_cm": 15.42213,
+        "cylinder_length_cm": 15.99743,
+        "reference_bone": {
+          "index": 8,
+          "parent_index": 7,
+          "local": {
+            "raw_native_transform": "11.135082,0.000005,-0.000012|0.060577,1.037838,1.301920|1.000000,1.000000,1.000000",
+            "position_cm": [
+              11.135082,
+              5e-06,
+              -1.2e-05
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              0.060577,
+              1.037838,
+              1.30192
+            ],
+            "quaternion_xyzw": [
+              -0.011355895952763886,
+              -0.0006314729910001529,
+              0.00905012985446706,
+              0.9998943644298577
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "97.223838,-319.545751,17816.823628|76.166587,92.599866,-86.621277|99.999988,100.000036,99.999982",
+            "position_cm": [
+              0.97223838,
+              -3.19545751,
+              178.16823627999997
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              76.166587,
+              92.599866,
+              -86.621277
+            ],
+            "quaternion_xyzw": [
+              0.6975036943286477,
+              0.08026733130197183,
+              0.706385175230149,
+              0.0898094434824071
+            ],
+            "raw_scale": [
+              99.999988,
+              100.000036,
+              99.999982
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:752][349]LogAutomationController: Bone part=Body index=8 name=Bip001-Head parent=7 local=11.135082,0.000005,-0.000012|0.060577,1.037838,1.301920|1.000000,1.000000,1.000000 component=97.223838,-319.545751,17816.823628|76.166587,92.599866,-86.621277|99.999988,100.000036,99.999982"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:765][350]LogAutomationController: Capsule part=Body bone=Bip001-Head center=X=6.323 Y=-4.526 Z=2.052 rotation=P=9.273157 Y=112.211393 R=-90.000000 radius=15.42213 length=15.99743"
+      },
+      {
+        "bone": "Bip001-L-UpperArm",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          14.18,
+          1.093,
+          0.57
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          -0.0,
+          -93.388248,
+          -77.049264
+        ],
+        "quaternion_xyzw": [
+          0.4272091529333157,
+          -0.45325020126975984,
+          -0.5693110451962271,
+          0.5366018342463066
+        ],
+        "radius_cm": 10.66045,
+        "cylinder_length_cm": 19.47815,
+        "reference_bone": {
+          "index": 46,
+          "parent_index": 45,
+          "local": {
+            "raw_native_transform": "15.710398,0.000003,0.000025|-74.375725,-8.920016,32.610992|1.000000,1.000000,1.000000",
+            "position_cm": [
+              15.710398,
+              3e-06,
+              2.5e-05
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -74.375725,
+              -8.920016,
+              32.610992
+            ],
+            "quaternion_xyzw": [
+              -0.17787947143969918,
+              0.5957557056566847,
+              0.10972631136942777,
+              0.7754960795588192
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "1954.128447,-785.545505,16226.985078|-69.593606,-22.404686,34.965227|100.000012,100.000024,100.000012",
+            "position_cm": [
+              19.54128447,
+              -7.855455050000001,
+              162.26985077999998
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -69.593606,
+              -22.404686,
+              34.965227
+            ],
+            "quaternion_xyzw": [
+              -0.13625092805537614,
+              0.5818637560270502,
+              0.01600625075938042,
+              0.8016321188442801
+            ],
+            "raw_scale": [
+              100.000012,
+              100.000024,
+              100.000012
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:754][349]LogAutomationController: Bone part=Body index=46 name=Bip001-L-UpperArm parent=45 local=15.710398,0.000003,0.000025|-74.375725,-8.920016,32.610992|1.000000,1.000000,1.000000 component=1954.128447,-785.545505,16226.985078|-69.593606,-22.404686,34.965227|100.000012,100.000024,100.000012"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:765][350]LogAutomationController: Capsule part=Body bone=Bip001-L-UpperArm center=X=14.180 Y=1.093 Z=0.570 rotation=P=-0.000000 Y=-93.388248 R=-77.049264 radius=10.66045 length=19.47815"
+      },
+      {
+        "bone": "Bip001-L-Forearm",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          12.564,
+          0.953,
+          0.102
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          0.0,
+          -91.284104,
+          -88.759114
+        ],
+        "quaternion_xyzw": [
+          0.4889835086861801,
+          -0.5000671970648062,
+          -0.5110164201934391,
+          0.49969004887568375
+        ],
+        "radius_cm": 6.56451,
+        "cylinder_length_cm": 17.30015,
+        "reference_bone": {
+          "index": 47,
+          "parent_index": 46,
+          "local": {
+            "raw_native_transform": "33.983994,-0.000000,0.000007|0.000009,27.269997,-0.000005|1.000000,1.000000,1.000000",
+            "position_cm": [
+              33.983994,
+              -0.0,
+              7e-06
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              9e-06,
+              27.269997,
+              -5e-06
+            ],
+            "quaternion_xyzw": [
+              6.09181689657159e-08,
+              -6.604042939148888e-08,
+              0.2357357809393058,
+              0.9718171852693939
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "3049.626223,-1237.181510,13041.858635|-67.612530,57.948069,-41.389262|100.000006,100.000012,100.000006",
+            "position_cm": [
+              30.496262230000003,
+              -12.3718151,
+              130.41858635
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -67.61253,
+              57.948069,
+              -41.389262
+            ],
+            "quaternion_xyzw": [
+              0.00475516682087479,
+              0.597584362543805,
+              0.20452848914698712,
+              0.7752666735768218
+            ],
+            "raw_scale": [
+              100.000006,
+              100.000012,
+              100.000006
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:754][349]LogAutomationController: Bone part=Body index=47 name=Bip001-L-Forearm parent=46 local=33.983994,-0.000000,0.000007|0.000009,27.269997,-0.000005|1.000000,1.000000,1.000000 component=3049.626223,-1237.181510,13041.858635|-67.612530,57.948069,-41.389262|100.000006,100.000012,100.000006"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:765][350]LogAutomationController: Capsule part=Body bone=Bip001-L-Forearm center=X=12.564 Y=0.953 Z=0.102 rotation=P=0.000000 Y=-91.284104 R=-88.759114 radius=6.56451 length=17.30015"
+      },
+      {
+        "bone": "Bip001-L-Hand",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          10.45,
+          -3.397,
+          -1.142
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          -0.0,
+          77.209156,
+          -79.980356
+        ],
+        "quaternion_xyzw": [
+          0.5022170024550097,
+          0.4009802698744323,
+          0.4780360774598326,
+          0.5987273288094916
+        ],
+        "radius_cm": 7.03812,
+        "cylinder_length_cm": 11.4972,
+        "reference_bone": {
+          "index": 48,
+          "parent_index": 47,
+          "local": {
+            "raw_native_transform": "29.991476,-0.000002,0.000003|-4.041246,-2.030807,-100.937149|1.000000,1.000000,1.000000",
+            "position_cm": [
+              29.991476,
+              -2e-06,
+              3e-06
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -4.041246,
+              -2.030807,
+              -100.937149
+            ],
+            "quaternion_xyzw": [
+              0.7710726819346403,
+              0.008779577712959435,
+              -0.0384628592566476,
+              0.6355237577361735
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "3655.820453,-269.022315,10268.758607|-71.950644,61.663167,-145.886892|100.000006,100.000012,100.000018",
+            "position_cm": [
+              36.55820453,
+              -2.69022315,
+              102.68758607
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -71.950644,
+              61.663167,
+              -145.886892
+            ],
+            "quaternion_xyzw": [
+              0.576028490269616,
+              0.5444748067529221,
+              -0.36057548720953186,
+              0.4916540259498379
+            ],
+            "raw_scale": [
+              100.000006,
+              100.000012,
+              100.000018
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:754][349]LogAutomationController: Bone part=Body index=48 name=Bip001-L-Hand parent=47 local=29.991476,-0.000002,0.000003|-4.041246,-2.030807,-100.937149|1.000000,1.000000,1.000000 component=3655.820453,-269.022315,10268.758607|-71.950644,61.663167,-145.886892|100.000006,100.000012,100.000018"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:765][350]LogAutomationController: Capsule part=Body bone=Bip001-L-Hand center=X=10.450 Y=-3.397 Z=-1.142 rotation=P=-0.000000 Y=77.209156 R=-79.980356 radius=7.03812 length=11.49720"
+      },
+      {
+        "bone": "Bip001-R-UpperArm",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          14.134,
+          0.72,
+          -0.549
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          0.0,
+          87.341763,
+          -77.13146
+        ],
+        "quaternion_xyzw": [
+          0.4509252540327559,
+          0.4304753016210118,
+          0.5399091052258574,
+          0.5655577672210041
+        ],
+        "radius_cm": 10.25811,
+        "cylinder_length_cm": 19.47284,
+        "reference_bone": {
+          "index": 99,
+          "parent_index": 98,
+          "local": {
+            "raw_native_transform": "15.710395,0.000000,-0.000024|76.134888,-12.678631,-34.812038|1.000000,1.000000,1.000000",
+            "position_cm": [
+              15.710395,
+              0.0,
+              -2.4e-05
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              76.134888,
+              -12.678631,
+              -34.812038
+            ],
+            "quaternion_xyzw": [
+              0.16910543155351238,
+              -0.6107609101495226,
+              0.10037055533184842,
+              0.7670073110960568
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "-1736.926724,-856.252096,16210.330093|-71.590869,-153.086574,142.358793|100.000012,100.000048,100.000024",
+            "position_cm": [
+              -17.36926724,
+              -8.56252096,
+              162.10330093000002
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -71.590869,
+              -153.086574,
+              142.358793
+            ],
+            "quaternion_xyzw": [
+              0.004847764585268199,
+              0.7905756207985922,
+              -0.1256518433806534,
+              0.5993148598462166
+            ],
+            "raw_scale": [
+              100.000012,
+              100.000048,
+              100.000024
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:757][349]LogAutomationController: Bone part=Body index=99 name=Bip001-R-UpperArm parent=98 local=15.710395,0.000000,-0.000024|76.134888,-12.678631,-34.812038|1.000000,1.000000,1.000000 component=-1736.926724,-856.252096,16210.330093|-71.590869,-153.086574,142.358793|100.000012,100.000048,100.000024"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:765][350]LogAutomationController: Capsule part=Body bone=Bip001-R-UpperArm center=X=14.134 Y=0.720 Z=-0.549 rotation=P=0.000000 Y=87.341763 R=-77.131460 radius=10.25811 length=19.47284"
+      },
+      {
+        "bone": "Bip001-R-Forearm",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          12.391,
+          0.976,
+          0.025
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          0.0,
+          88.934487,
+          -88.502883
+        ],
+        "quaternion_xyzw": [
+          0.49799175415414865,
+          0.48881580268740243,
+          0.5017582006812706,
+          0.5111771042277208
+        ],
+        "radius_cm": 6.55877,
+        "cylinder_length_cm": 17.40108,
+        "reference_bone": {
+          "index": 100,
+          "parent_index": 99,
+          "local": {
+            "raw_native_transform": "33.983994,-0.000003,-0.000004|0.000000,23.180063,0.000014|1.000000,1.000000,1.000000",
+            "position_cm": [
+              33.983994,
+              -3e-06,
+              -4e-06
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              0.0,
+              23.180063,
+              1.4e-05
+            ],
+            "quaternion_xyzw": [
+              -1.1968196594712083e-07,
+              -2.4545480166027788e-08,
+              0.2009074885193509,
+              0.9796102189426322
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "-2693.904283,-1342.036485,12985.841235|-71.467717,128.202052,-141.884806|100.000024,100.000048,100.000024",
+            "position_cm": [
+              -26.939042829999998,
+              -13.42036485,
+              129.85841235
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -71.467717,
+              128.202052,
+              -141.884806
+            ],
+            "quaternion_xyzw": [
+              0.16358141297233023,
+              0.773482001945183,
+              -0.002682891341397431,
+              0.6123393798302521
+            ],
+            "raw_scale": [
+              100.000024,
+              100.000048,
+              100.000024
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:757][349]LogAutomationController: Bone part=Body index=100 name=Bip001-R-Forearm parent=99 local=33.983994,-0.000003,-0.000004|0.000000,23.180063,0.000014|1.000000,1.000000,1.000000 component=-2693.904283,-1342.036485,12985.841235|-71.467717,128.202052,-141.884806|100.000024,100.000048,100.000024"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:765][350]LogAutomationController: Capsule part=Body bone=Bip001-R-Forearm center=X=12.391 Y=0.976 Z=0.025 rotation=P=0.000000 Y=88.934487 R=-88.502883 radius=6.55877 length=17.40108"
+      },
+      {
+        "bone": "Bip001-R-Hand",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          10.376,
+          -3.321,
+          1.071
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          0.0,
+          -102.900881,
+          -81.614272
+        ],
+        "quaternion_xyzw": [
+          0.4072648147238096,
+          -0.5110939925996651,
+          -0.5919590212639748,
+          0.4717020442617473
+        ],
+        "radius_cm": 6.84152,
+        "cylinder_length_cm": 11.32621,
+        "reference_bone": {
+          "index": 101,
+          "parent_index": 100,
+          "local": {
+            "raw_native_transform": "29.991468,-0.000000,-0.000010|2.049691,2.352900,87.217316|1.000000,1.000000,1.000000",
+            "position_cm": [
+              29.991468,
+              -0.0,
+              -1e-05
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              2.049691,
+              2.3529,
+              87.217316
+            ],
+            "quaternion_xyzw": [
+              -0.6892073691229049,
+              -0.02710681890867138,
+              0.002529930338018115,
+              0.7240524995936558
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "-3283.427300,-592.942575,10142.215556|-71.375890,118.402341,-45.418242|100.000036,100.000048,100.000024",
+            "position_cm": [
+              -32.834272999999996,
+              -5.92942575,
+              101.42215556
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -71.37589,
+              118.402341,
+              -45.418242
+            ],
+            "quaternion_xyzw": [
+              -0.3017031532548264,
+              0.5448782239809176,
+              0.5282619445386207,
+              0.5770807970291257
+            ],
+            "raw_scale": [
+              100.000036,
+              100.000048,
+              100.000024
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:757][349]LogAutomationController: Bone part=Body index=101 name=Bip001-R-Hand parent=100 local=29.991468,-0.000000,-0.000010|2.049691,2.352900,87.217316|1.000000,1.000000,1.000000 component=-3283.427300,-592.942575,10142.215556|-71.375890,118.402341,-45.418242|100.000036,100.000048,100.000024"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:765][350]LogAutomationController: Capsule part=Body bone=Bip001-R-Hand center=X=10.376 Y=-3.321 Z=1.071 rotation=P=0.000000 Y=-102.900881 R=-81.614272 radius=6.84152 length=11.32621"
+      },
+      {
+        "bone": "Bip001-L-Thigh",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          22.252,
+          1.765,
+          0.712
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          -0.0,
+          96.276528,
+          -88.541674
+        ],
+        "quaternion_xyzw": [
+          0.4658340378778056,
+          0.5198785704996474,
+          0.5332821279867128,
+          0.47784421421595724
+        ],
+        "radius_cm": 13.58335,
+        "cylinder_length_cm": 24.86644,
+        "reference_bone": {
+          "index": 196,
+          "parent_index": 3,
+          "local": {
+            "raw_native_transform": "-0.000023,-0.000019,10.253304|13.947207,-176.107010,165.108963|1.000000,1.000000,1.000000",
+            "position_cm": [
+              -2.3e-05,
+              -1.9e-05,
+              10.253304
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              13.947207,
+              -176.10701,
+              165.108963
+            ],
+            "quaternion_xyzw": [
+              -0.04915457755805286,
+              0.9831307843206539,
+              -0.1326396720241007,
+              -0.11595001436603748
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "1021.659598,83.434051,10493.692411|-76.309721,27.071127,141.993601|100.000000,100.000024,99.999988",
+            "position_cm": [
+              10.21659598,
+              0.83434051,
+              104.93692411
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -76.309721,
+              27.071127,
+              141.993601
+            ],
+            "quaternion_xyzw": [
+              -0.7699203636992216,
+              0.021565051647105843,
+              0.6278240138907423,
+              0.11222561958319921
+            ],
+            "raw_scale": [
+              100.0,
+              100.000024,
+              99.999988
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:763][350]LogAutomationController: Bone part=Body index=196 name=Bip001-L-Thigh parent=3 local=-0.000023,-0.000019,10.253304|13.947207,-176.107010,165.108963|1.000000,1.000000,1.000000 component=1021.659598,83.434051,10493.692411|-76.309721,27.071127,141.993601|100.000000,100.000024,99.999988"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:765][350]LogAutomationController: Capsule part=Body bone=Bip001-L-Thigh center=X=22.252 Y=1.765 Z=0.712 rotation=P=-0.000000 Y=96.276528 R=-88.541674 radius=13.58335 length=24.86644"
+      },
+      {
+        "bone": "Bip001-L-Foot",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          5.563,
+          -9.681,
+          -0.257
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          0.0,
+          10.299173,
+          -86.075385
+        ],
+        "quaternion_xyzw": [
+          0.6797246884365514,
+          0.061256810039216084,
+          0.0656033071122836,
+          0.7279547769261383
+        ],
+        "radius_cm": 6.63805,
+        "cylinder_length_cm": 15.47132,
+        "reference_bone": {
+          "index": 198,
+          "parent_index": 197,
+          "local": {
+            "raw_native_transform": "48.630184,-0.000004,0.000002|10.747723,-2.744175,-6.055971|1.000000,1.000000,1.000000",
+            "position_cm": [
+              48.630184,
+              -4e-06,
+              2e-06
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              10.747723,
+              -2.744175,
+              -6.055971
+            ],
+            "quaternion_xyzw": [
+              0.050337037508501506,
+              -0.09475586754829282,
+              -0.018860886952906882,
+              0.9940481754741003
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "2840.523654,171.704805,1206.409835|-90.000000,162.204930,0.000000|100.000000,100.000018,100.000000",
+            "position_cm": [
+              28.40523654,
+              1.7170480499999998,
+              12.06409835
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -90.0,
+              162.20493,
+              0.0
+            ],
+            "quaternion_xyzw": [
+              -0.6985978264867589,
+              0.10936670804214735,
+              0.6985978264867589,
+              0.10936670804214735
+            ],
+            "raw_scale": [
+              100.0,
+              100.000018,
+              100.0
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:763][350]LogAutomationController: Bone part=Body index=198 name=Bip001-L-Foot parent=197 local=48.630184,-0.000004,0.000002|10.747723,-2.744175,-6.055971|1.000000,1.000000,1.000000 component=2840.523654,171.704805,1206.409835|-90.000000,162.204930,0.000000|100.000000,100.000018,100.000000"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:765][350]LogAutomationController: Capsule part=Body bone=Bip001-L-Foot center=X=5.563 Y=-9.681 Z=-0.257 rotation=P=0.000000 Y=10.299173 R=-86.075385 radius=6.63805 length=15.47132"
+      },
+      {
+        "bone": "Muscle_L-Calf",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          23.519,
+          2.752,
+          -1.143
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          0.0,
+          -93.588695,
+          -89.693108
+        ],
+        "quaternion_xyzw": [
+          0.48280053297326264,
+          -0.5140287153871123,
+          -0.516789395061724,
+          0.485393496320198
+        ],
+        "radius_cm": 9.26383,
+        "cylinder_length_cm": 24.76932,
+        "reference_bone": {
+          "index": 202,
+          "parent_index": 197,
+          "local": {
+            "raw_native_transform": "0.000007,-0.083643,-0.000005|-0.000005,0.098927,0.000009|1.000000,1.000000,1.000000",
+            "position_cm": [
+              7e-06,
+              -0.083643,
+              -5e-06
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -5e-06,
+              0.098927,
+              9e-06
+            ],
+            "quaternion_xyzw": [
+              -7.857745567701545e-08,
+              4.3565411551762174e-08,
+              0.0008633008273289324,
+              0.9999996273557672
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "2002.776630,592.131602,5978.247304|-78.886847,-26.651888,-165.354788|99.999994,100.000018,100.000000",
+            "position_cm": [
+              20.0277663,
+              5.921316020000001,
+              59.782473040000006
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -78.886847,
+              -26.651888,
+              -165.354788
+            ],
+            "quaternion_xyzw": [
+              0.7639942879569855,
+              -0.09775050165515894,
+              -0.6358546043334623,
+              -0.04946200100278614
+            ],
+            "raw_scale": [
+              99.999994,
+              100.000018,
+              100.0
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:764][350]LogAutomationController: Bone part=Body index=202 name=Muscle_L-Calf parent=197 local=0.000007,-0.083643,-0.000005|-0.000005,0.098927,0.000009|1.000000,1.000000,1.000000 component=2002.776630,592.131602,5978.247304|-78.886847,-26.651888,-165.354788|99.999994,100.000018,100.000000"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:765][350]LogAutomationController: Capsule part=Body bone=Muscle_L-Calf center=X=23.519 Y=2.752 Z=-1.143 rotation=P=0.000000 Y=-93.588695 R=-89.693108 radius=9.26383 length=24.76932"
+      },
+      {
+        "bone": "Bip001-R-Thigh",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          21.793,
+          1.475,
+          -0.665
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          -0.0,
+          -83.442354,
+          -87.941158
+        ],
+        "quaternion_xyzw": [
+          0.5182118608137911,
+          -0.4620536199836881,
+          -0.4789624740791856,
+          0.5371758259600137
+        ],
+        "radius_cm": 13.3331,
+        "cylinder_length_cm": 25.15249,
+        "reference_bone": {
+          "index": 207,
+          "parent_index": 3,
+          "local": {
+            "raw_native_transform": "0.000000,0.000010,-10.253304|-7.134491,174.887132,-172.315104|1.000000,1.000000,1.000000",
+            "position_cm": [
+              0.0,
+              1e-05,
+              -10.253304
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -7.134491,
+              174.887132,
+              -172.315104
+            ],
+            "quaternion_xyzw": [
+              0.04025149332647378,
+              0.9950138224015496,
+              0.06404772348185761,
+              0.06500153560984469
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "-1021.659476,-83.435898,10540.706240|-80.791118,-151.926694,-15.906805|99.999988,100.000024,99.999982",
+            "position_cm": [
+              -10.21659476,
+              -0.83435898,
+              105.4070624
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -80.791118,
+              -151.926694,
+              -15.906805
+            ],
+            "quaternion_xyzw": [
+              0.6482216142339693,
+              0.05343769062602259,
+              -0.7534900156236992,
+              0.09594763371684657
+            ],
+            "raw_scale": [
+              99.999988,
+              100.000024,
+              99.999982
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:764][350]LogAutomationController: Bone part=Body index=207 name=Bip001-R-Thigh parent=3 local=0.000000,0.000010,-10.253304|-7.134491,174.887132,-172.315104|1.000000,1.000000,1.000000 component=-1021.659476,-83.435898,10540.706240|-80.791118,-151.926694,-15.906805|99.999988,100.000024,99.999982"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:765][350]LogAutomationController: Capsule part=Body bone=Bip001-R-Thigh center=X=21.793 Y=1.475 Z=-0.665 rotation=P=-0.000000 Y=-83.442354 R=-87.941158 radius=13.33310 length=25.15249"
+      },
+      {
+        "bone": "Bip001-R-Foot",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          5.695,
+          -9.692,
+          0.139
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          0.0,
+          -169.684979,
+          -88.241807
+        ],
+        "quaternion_xyzw": [
+          0.06258195068933085,
+          -0.6933561703292183,
+          -0.7149659328983118,
+          0.06453243610127292
+        ],
+        "radius_cm": 6.51118,
+        "cylinder_length_cm": 15.59636,
+        "reference_bone": {
+          "index": 209,
+          "parent_index": 208,
+          "local": {
+            "raw_native_transform": "48.630184,0.000001,-0.000006|-8.853452,-11.848297,8.876717|1.000000,1.000000,1.000000",
+            "position_cm": [
+              48.630184,
+              1e-06,
+              -6e-06
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -8.853452,
+              -11.848297,
+              8.876717
+            ],
+            "quaternion_xyzw": [
+              -0.06880118988503497,
+              0.08450503896189969,
+              -0.0966541693394234,
+              0.9893347594266347
+            ],
+            "raw_scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "-2187.370746,-1562.032855,1250.805823|-90.000000,-159.154764,0.000000|99.999982,100.000030,99.999976",
+            "position_cm": [
+              -21.873707460000002,
+              -15.62032855,
+              12.50805823
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -90.0,
+              -159.154764,
+              0.0
+            ],
+            "quaternion_xyzw": [
+              0.6954396131289519,
+              0.12792085244812046,
+              -0.6954396131289519,
+              0.12792085244812046
+            ],
+            "raw_scale": [
+              99.999982,
+              100.00003,
+              99.999976
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:764][350]LogAutomationController: Bone part=Body index=209 name=Bip001-R-Foot parent=208 local=48.630184,0.000001,-0.000006|-8.853452,-11.848297,8.876717|1.000000,1.000000,1.000000 component=-2187.370746,-1562.032855,1250.805823|-90.000000,-159.154764,0.000000|99.999982,100.000030,99.999976"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:765][350]LogAutomationController: Capsule part=Body bone=Bip001-R-Foot center=X=5.695 Y=-9.692 Z=0.139 rotation=P=0.000000 Y=-169.684979 R=-88.241807 radius=6.51118 length=15.59636"
+      },
+      {
+        "bone": "Muscle_R-Calf",
+        "shape_type": "capsule",
+        "element_index": 0,
+        "center_bone_local_cm": [
+          23.396,
+          2.767,
+          1.143
+        ],
+        "rotation_pitch_yaw_roll_degrees": [
+          0.0,
+          86.44701,
+          -89.692857
+        ],
+        "quaternion_xyzw": [
+          0.5138771254399076,
+          0.4829596095685891,
+          0.48555555439995846,
+          0.5166392542832208
+        ],
+        "radius_cm": 9.25964,
+        "cylinder_length_cm": 24.75209,
+        "reference_bone": {
+          "index": 213,
+          "parent_index": 208,
+          "local": {
+            "raw_native_transform": "0.000008,-0.054059,-0.000001|0.000001,0.064179,0.019781|1.000001,1.000000,1.000000",
+            "position_cm": [
+              8e-06,
+              -0.054059,
+              -1e-06
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              1e-06,
+              0.064179,
+              0.019781
+            ],
+            "quaternion_xyzw": [
+              -0.00017262175685006913,
+              -1.0540648138344061e-07,
+              0.0005600673911878808,
+              0.999999828263103
+            ],
+            "raw_scale": [
+              1.000001,
+              1.0,
+              1.0
+            ]
+          },
+          "unit_component": {
+            "raw_native_transform": "-1679.117020,-428.277240,5952.426553|-75.196819,-114.145194,-52.940065|100.000089,100.000030,99.999988",
+            "position_cm": [
+              -16.7911702,
+              -4.2827724,
+              59.52426553
+            ],
+            "rotation_pitch_yaw_roll_degrees": [
+              -75.196819,
+              -114.145194,
+              -52.940065
+            ],
+            "quaternion_xyzw": [
+              0.6503932726487622,
+              0.0004570043337429053,
+              -0.7431391924045169,
+              0.15726577107760703
+            ],
+            "raw_scale": [
+              100.000089,
+              100.00003,
+              99.999988
+            ]
+          },
+          "raw_log_line": "[2026.10.07-02.41.31:764][350]LogAutomationController: Bone part=Body index=213 name=Muscle_R-Calf parent=208 local=0.000008,-0.054059,-0.000001|0.000001,0.064179,0.019781|1.000001,1.000000,1.000000 component=-1679.117020,-428.277240,5952.426553|-75.196819,-114.145194,-52.940065|100.000089,100.000030,99.999988"
+        },
+        "raw_log_line": "[2026.10.07-02.41.31:765][350]LogAutomationController: Capsule part=Body bone=Muscle_R-Calf center=X=23.396 Y=2.767 Z=1.143 rotation=P=0.000000 Y=86.447010 R=-89.692857 radius=9.25964 length=24.75209"
+      }
+    ],
+    "available_current_anatomy_bone_poses": {
+      "Bip001-Pelvis": {
+        "simulated": false,
+        "part_pa_shape_dimensions_cm_raw": "X=57.777 Y=83.474 Z=61.226",
+        "world": {
+          "raw_native_transform": "0.522830,-0.151874,93.064473|84.964495,-72.319736,178.811266|1.000000,1.000000,1.000000",
+          "position_cm": [
+            0.52283,
+            -0.151874,
+            93.064473
+          ],
+          "rotation_pitch_yaw_roll_degrees": [
+            84.964495,
+            -72.319736,
+            178.811266
+          ],
+          "quaternion_xyzw": [
+            -0.5995290714604099,
+            0.4294670777076375,
+            -0.5497540152893898,
+            -0.39229254939684244
+          ],
+          "raw_scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "raw_log_line": "[2026.10.07-11.53.20:677][367]LogAutomationController: RigidShape part=Leg bone=Bip001-Pelvis simulated=0 dimensionsCm=X=57.777 Y=83.474 Z=61.226 world=0.522830,-0.151874,93.064473|84.964495,-72.319736,178.811266|1.000000,1.000000,1.000000"
+      },
+      "Bip001-Spine": {
+        "simulated": false,
+        "part_pa_shape_dimensions_cm_raw": "X=33.096 Y=33.254 Z=51.644",
+        "world": {
+          "raw_native_transform": "-1.825325,-1.767235,101.078439|84.293917,-131.837006,111.731038|1.000000,1.000000,1.000000",
+          "position_cm": [
+            -1.825325,
+            -1.767235,
+            101.078439
+          ],
+          "rotation_pitch_yaw_roll_degrees": [
+            84.293917,
+            -131.837006,
+            111.731038
+          ],
+          "quaternion_xyzw": [
+            -0.5941800023913633,
+            0.4066401996542669,
+            -0.6064674791998246,
+            -0.3373293189990275
+          ],
+          "raw_scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "raw_log_line": "[2026.10.07-11.53.20:678][367]LogAutomationController: RigidShape part=Leg bone=Bip001-Spine simulated=0 dimensionsCm=X=33.096 Y=33.254 Z=51.644 world=-1.825325,-1.767235,101.078439|84.293917,-131.837006,111.731038|1.000000,1.000000,1.000000"
+      },
+      "Bip001-L-Thigh": {
+        "simulated": false,
+        "part_pa_shape_dimensions_cm_raw": "X=59.836 Y=28.187 Z=26.003",
+        "world": {
+          "raw_native_transform": "3.826804,-9.816466,92.164680|-49.029077,-18.460426,120.963432|1.000000,1.000000,1.000000",
+          "position_cm": [
+            3.826804,
+            -9.816466,
+            92.16468
+          ],
+          "rotation_pitch_yaw_roll_degrees": [
+            -49.029077,
+            -18.460426,
+            120.963432
+          ],
+          "quaternion_xyzw": [
+            -0.7487120548433626,
+            0.328785507587905,
+            0.28448517357272773,
+            0.5003983762460545
+          ],
+          "raw_scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "raw_log_line": "[2026.10.07-11.53.20:678][367]LogAutomationController: RigidShape part=Leg bone=Bip001-L-Thigh simulated=0 dimensionsCm=X=59.836 Y=28.187 Z=26.003 world=3.826804,-9.816466,92.164680|-49.029077,-18.460426,120.963432|1.000000,1.000000,1.000000"
+      },
+      "Bip001-R-Thigh": {
+        "simulated": false,
+        "part_pa_shape_dimensions_cm_raw": "X=59.799 Y=28.030 Z=25.948",
+        "world": {
+          "raw_native_transform": "-2.781136,9.512723,93.964242|-63.646956,116.243716,9.473960|1.000000,1.000000,1.000000",
+          "position_cm": [
+            -2.781136,
+            9.512723,
+            93.964242
+          ],
+          "rotation_pitch_yaw_roll_degrees": [
+            -63.646956,
+            116.243716,
+            9.47396
+          ],
+          "quaternion_xyzw": [
+            -0.4832996044869825,
+            0.2179410535329958,
+            0.7420552887778689,
+            0.410215964931215
+          ],
+          "raw_scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "raw_log_line": "[2026.10.07-11.53.20:678][367]LogAutomationController: RigidShape part=Leg bone=Bip001-R-Thigh simulated=0 dimensionsCm=X=59.799 Y=28.030 Z=25.948 world=-2.781136,9.512723,93.964242|-63.646956,116.243716,9.473960|1.000000,1.000000,1.000000"
+      }
+    }
+  },
+  "calculation": {
+    "ue_quaternion": "For half-angle sine/cosine SP/SY/SR and CP/CY/CR: X=CR*SP*SY-SR*CP*CY; Y=-CR*SP*CY-SR*CP*SY; Z=CR*CP*SY-SR*SP*CY; W=CR*CP*CY+SR*SP*SY",
+    "point_in_anatomy_shape_local": "shapeRotation^-1 * (boneRotation^-1 * (worldPoint-boneTranslation) - shapeCenter)",
+    "capsule_phi": "sqrt(x*x+y*y+(z-clamp(z,-cylinderLength/2,+cylinderLength/2))^2)-anatomyRadius",
+    "anatomy_union_phi": "min(Phi over available anatomy capsules)",
+    "cloth_reference_centerline": "P(t)=refRoot + t*(refChild-refRoot), t=0..1",
+    "cloth_capsule_axis": "Capsule fitted center=L/2 along bone-local X, cylinderLength=L-2r. Cap-center axis is d=r..L-r. Surface clearance estimate=min(anatomyPhi(capCenter(d))-r)",
+    "samples_per_axis": 1001,
+    "axis_discretization_cm": 0.016669048631024114,
+    "sampling_note": "Continuous phi is 1-Lipschitz; nearest sample overestimate is bounded by half the axis sample spacing for unchanged primitive transforms. This is a computed capsule separation bound, not rendered vertex penetration. Four current-pose anatomy bodies are available; a negative result would prove overlap against that subset, but positive cannot exclude unavailable body shapes. Reference evaluates all18 anatomy shapes.",
+    "rest_root_position": "kinParentTranslation + kinParentQuaternion.rotate(rawLocalRootTranslation)",
+    "rest_joint_orientation": "worldFrame2=kinParentWorldQuaternion*rawLocalRootRefQuaternion (new saved Frame1 identity and Frame2 ref-local rotation). Reconstructed from rounded ref data, not a new actual saved-frame readback.",
+    "joint_angle_degrees": "2*acos(abs(dot(actualRootWorldQuaternion, reconstructedWorldFrame2)))*180/pi",
+    "linear_lock_error": "norm(actualRootWorldPosition - restRootPosition)"
+  },
+  "results": {
+    "reference": {
+      "anatomy_capsule_count": 18,
+      "root_pivot_phi_cm_and_nearest_bone": [
+        5.056201430845551,
+        "Bip001-Pelvis"
+      ],
+      "child_pivot_phi_cm_and_nearest_bone": [
+        11.21603049502861,
+        "Bip001-R-Thigh"
+      ],
+      "sampled_whole_pivot_segment_min_phi_cm_t_nearest_bone": [
+        5.056201430845551,
+        0.0,
+        "Bip001-Pelvis"
+      ],
+      "sampled_capsule_surface_clearance_cm_d_nearest_bone": [
+        4.816456876209077,
+        1.0,
+        "Bip001-Pelvis"
+      ],
+      "conclusion": "The full reference capsule is clear of the existing anatomy proxies; reference embedding is not supported."
+    },
+    "current_stage3": {
+      "available_anatomy_shape_count": 4,
+      "actual_root_pivot_phi_cm_and_nearest_bone": [
+        0.886949320132155,
+        "Bip001-R-Thigh"
+      ],
+      "hypothetical_rest_root_pivot_phi_cm_and_nearest_bone": [
+        0.8869466698023825,
+        "Bip001-R-Thigh"
+      ],
+      "actual_capsule_surface_clearance_cm_d_nearest_bone": [
+        0.0800664972319467,
+        1.0,
+        "Bip001-R-Thigh"
+      ],
+      "hypothetical_rest_capsule_surface_clearance_cm_d_nearest_bone": [
+        0.1297268092425945,
+        1.0,
+        "Bip001-R-Thigh"
+      ],
+      "joint_deflection_degrees_reconstructed_ref_frames": 8.988449833186332,
+      "joint_deflection_degrees_parent_only_approx": 8.988444099784221,
+      "linear_locked_pivot_error_cm": 9.930857044608178e-06,
+      "conclusion": "Motion of the right thigh reduces root-region capsule clearance from about4.82cm in reference pose to about0.08cm in this snapshot. The locked pivot is accurately maintained; this snapshot has only about8.99degrees joint deflection. It is not the83.17degree peak frame and does not prove geometry penetration at that peak."
+    }
+  },
+  "precision_and_limits": [
+    "Native component/local transforms are printed to six decimals; geometry centers to three decimals, radii/lengths to five decimals. Quaternions are recalculated from native Pitch/Yaw/Roll fields with UE formula. Results are approximate text-derived calculations.",
+    "Imported reference wrapper100 removed only from component translations; anatomy/cloth shape dimensions were not divided again. Very small imported scale residuals are normalized to1 consistently with existing native author.",
+    "Reference root Phi5.056201 reproduces native author5.056269cm within text-rounding precision; current computations use source primary anatomy shapes rather than disabled imported Leg skeleton broad shapes.",
+    "Current snapshot body poses are synchronized native QA observations for the available copied hip/spine/thigh anchors; full runtime collider particle transforms at the peak83.17degree frame were not captured.",
+    "No skinned cloth vertex/full mesh penetration, every animation, long-session or original-game physics parity conclusion is supported by this review."
+  ],
+  "minimal_temporary_policy": {
+    "category": "Assistant temporary attachment stability policy, not original metadata and not automatic evidence of reference embedding",
+    "proposed_extra_anchor_bone": "B_Cloth_03_03_F_Pelvis",
+    "action": "Retain this first weighted segment as kinematic CopyPose with collision disabled in the existing derived Leg PA. Keep B_Cloth_03_04/05/06_F_Pelvis and B_Cloth_03_03_01_01/02_F_Pelvis descendants simulated. Existing other cloth rules/data pipeline remain.",
+    "reason": "Actual saved-joint QA repeatedly shows root83degrees despite small authored limits/support; this branch has motion-dependent near-body clearance and a linearly locked attachment pivot. One extra attachment anchor prevents this root joint from trying to escape body contact while retaining lower/branch cloth response.",
+    "limitations": "The exact peak-frame collision cause is not proven. The anchored material region has reduced independent motion and its render vertices may still overlap proxy/mesh during some poses. Re-test actual saved joint deflection on remaining simulated joints, actual body collider pose/shape/contact, stable Hair SHA/behavior and rendered cloth."
+  }
+}

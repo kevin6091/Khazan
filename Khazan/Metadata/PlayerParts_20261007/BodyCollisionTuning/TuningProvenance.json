@@ -1,0 +1,52 @@
+{
+  "utc": "2026-10-07T06:13:04.942361+00:00",
+  "original_game_physics_values_verified": false,
+  "search_scope": [
+    "Engineering saved physics diagnostics and Player parts canonical document",
+    "Project Metadata/Saved extracted player animation and gameplay metadata",
+    "C:/Users/user/Desktop/\uce74\uc794/BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Model",
+    "C:/Users/user/Desktop/\uce74\uc794/Exports (player physics exports not found)"
+  ],
+  "finding": "Player PSK and animation metadata exist; Player PhysicsAsset/cloth damping metadata not located in inspected saved extracts. Imported Original names do not establish original-game physics settings.",
+  "temporary_tuning": {
+    "linear_damping": {
+      "before": 0.01,
+      "after": 0.05,
+      "unit": "s^-1"
+    },
+    "angular_damping": {
+      "before": 0,
+      "after": 0.35,
+      "unit": "s^-1"
+    },
+    "cloth_contact_radius": {
+      "after": 1.0,
+      "unit": "cm"
+    },
+    "hair_contact_radius": {
+      "after": 0.75,
+      "unit": "cm"
+    }
+  },
+  "reason": "Slight extra velocity damping. One thin physical capsule per simulated body, avoiding thick fitted garment collision. Calculated mass/CoM/body-axis inertia diagonals retained.",
+  "engine_sources": [
+    "Engine/Source/Runtime/AnimGraphRuntime/Private/BoneControllers/AnimNode_RigidBody.cpp: CollectClothColliderObjects, UpdateClothColliderObjects",
+    "Engine/Source/Runtime/Engine/Classes/Components/SkeletalMeshComponent.h: AddClothCollisionSource",
+    "Engine/Source/Runtime/Experimental/Chaos/Private/Chaos/MassProperties.cpp: CalculateMassPropertiesOfImplicitUnion",
+    "Engine/Source/Runtime/Engine/Private/PhysicsEngine/ImmediatePhysics/ImmediatePhysicsChaos/ImmediatePhysicsActorHandle_Chaos.cpp: CreateParticleHandle"
+  ],
+  "verification_pending": [
+    "Original-game physics parity",
+    "All skinned vertices/every combat pose/long-duration hardware QA"
+  ],
+  "rejected_design": "Original mass-only/NoCollision shapes were still re-enabled by ImmediatePhysicsActorHandle CreateParticleHandle; logs and screenshots retained.",
+  "verified": [
+    "18 current-pose anatomical colliders per part",
+    "Actual contact manifolds and impulses in all three simulations",
+    "52 single thin shapes and calculated mass/CoM/inertia-diagonal checks",
+    "Rendered idle/movement/back view",
+    "Guard/Heal regression",
+    "Current-main stock DLL saved/runtime reload",
+    "Main 7-package integration/fresh load; 155 protected files unchanged"
+  ]
+}

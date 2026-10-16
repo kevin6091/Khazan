@@ -1,0 +1,556 @@
+{
+    "report_version":  2,
+    "updated_utc":  "2026-10-07 14:21:50 UTC",
+    "selectedOptionStatus":  "Applied to Main PA2; fixed30, saved fresh-process normal delta, actual Main module stock Guard/Heal and Original5 runtime readback passed. Remaining Leg proxy overlap is documented.",
+    "scope":  "Torso cape and Leg cloth/leather derived RigidBody PhysicsAssets; Hair assets/settings are preserved. New cloth changes exclude retained Iron, although per-Leg solver settings also govern the two retained Iron bodies.",
+    "original_game_values":  "Unconfirmed in scoped original physics metadata/report search. Original-named imported mesh/PhysicsAsset does not verify original-game simulation settings. Feel values and conditioning/coverage/QA policies below are assistant temporary tuning.",
+    "numeric_classification":  {
+                                   "direct_original_game_values":  "None verified for these physics settings.",
+                                   "imported_and_engine_measured_values":  "RefSkeleton transforms, imported LOD0 vertices/weights, shape support and freshly computed ImmediatePhysics mass/principal inertia. These are current import/engine measurements, not original-game proof.",
+                                   "calculated_values":  "Geometry support, chain interpolation, drives, connector conversion and uniform inertia scaling use the documented inputs/formulas.",
+                                   "temporary_tuning_values":  "TemporaryTuning.ini exact snapshot below; assistant-selected values, not user-specified or original-game metadata."
+                               },
+    "current_ini_snapshot":  {
+                                 "source":  "Metadata/PlayerParts_20261007/ClothRefinement/TemporaryTuning.ini",
+                                 "section":  "ClothRefinement",
+                                 "values":  {
+                                                "ContactRadiusCm":  1,
+                                                "MassPerLengthKgPerCm":  0.003,
+                                                "RootOmegaPerSecond":  25.454545,
+                                                "TipOmegaPerSecond":  9.090909,
+                                                "RootSwingDegrees":  8.8,
+                                                "TipSwingDegrees":  19.8,
+                                                "RootTwistDegrees":  3.3,
+                                                "TipTwistDegrees":  6.6,
+                                                "LinearDampingPerSecond":  0.1,
+                                                "RootAngularDampingPerSecond":  1.35,
+                                                "TipAngularDampingPerSecond":  0.72,
+                                                "CoincidentAnchorToleranceCm":  1,
+                                                "FixedTimeStepSeconds":  0.016666667,
+                                                "PositionIterations":  24,
+                                                "UseLinearJointSolverTorso":  true,
+                                                "UseLinearJointSolverLeg":  false,
+                                                "TrimTerminalBackwardsOverlap":  true,
+                                                "HardAngularLimits":  true,
+                                                "AdditionalProtectedAttachmentBonesLeg":  "",
+                                                "ParentDominates":  false,
+                                                "ProjectionAngularAlpha":  0.8,
+                                                "VelocityIterations":  4,
+                                                "ProjectionIterations":  4,
+                                                "UseDominantTerminalSupport":  true,
+                                                "RotationInvariantInertiaConditioning":  true,
+                                                "UseDominantClothStripBoxesLeg":  true,
+                                                "UniformPrincipalInertiaFloorMultiplierLeg":  4,
+                                                "UseFullDominantClothStripBoundsLeg":  true,
+                                                "RootSwingDegreesLeg":  32
+                                            },
+                                 "units":  {
+                                               "ContactRadiusCm":  "cm",
+                                               "MassPerLengthKgPerCm":  "kg/cm",
+                                               "RootOmegaPerSecond":  "rad/s (drive frequency parameter)",
+                                               "TipOmegaPerSecond":  "rad/s (drive frequency parameter)",
+                                               "RootSwingDegrees":  "degrees",
+                                               "TipSwingDegrees":  "degrees",
+                                               "RootTwistDegrees":  "degrees",
+                                               "TipTwistDegrees":  "degrees",
+                                               "RootSwingDegreesLeg":  "degrees; Leg-only root exception",
+                                               "LinearDampingPerSecond":  "1/s (engine damping input)",
+                                               "RootAngularDampingPerSecond":  "1/s (engine damping input)",
+                                               "TipAngularDampingPerSecond":  "1/s (engine damping input)",
+                                               "CoincidentAnchorToleranceCm":  "cm",
+                                               "FixedTimeStepSeconds":  "seconds",
+                                               "ProjectionAngularAlpha":  "dimensionless post-solve angular projection fraction",
+                                               "UniformPrincipalInertiaFloorMultiplierLeg":  "dimensionless"
+                                           },
+                                 "observed_utc":  "2026-10-07 14:17:27 UTC",
+                                 "application_status":  "INI Root32 matches the parent-selected full-bounds/Floor4/Root32 native fixed30 candidate. Current INI/source contents are separate from final saved/stock/Main validation, which remains pending."
+                             },
+    "temporary_values":  {
+                             "source":  "Assistant selected, centralized in TemporaryTuning.ini. Author helper writes existing PA body DefaultInstance/constraint DefaultProfile; work-editor requests set existing per-asset SolverSettings. Pending settings are not evidence of saved application.",
+                             "contact_radius_cm":  1,
+                             "mass_per_length_kg_per_cm":  0.003,
+                             "root_tip_omega_per_second":  [
+                                                               25.454545,
+                                                               9.090909
+                                                           ],
+                             "torso_root_tip_swing_degrees":  [
+                                                                  8.8,
+                                                                  19.8
+                                                              ],
+                             "root_tip_twist_degrees":  [
+                                                            3.3,
+                                                            6.6
+                                                        ],
+                             "root_tip_angular_damping_per_second":  [
+                                                                         1.35,
+                                                                         0.72
+                                                                     ],
+                             "linear_damping_per_second":  0.1,
+                             "coincident_anchor_tolerance_cm":  1,
+                             "additional_protected_attachment_bones_leg":  "",
+                             "root_swing_degrees_leg_pending_exception":  {
+                                                                              "ini_value":  32,
+                                                                              "selection_status":  "Parent selected Root32 after successful native fixed30 Root24/Root32 comparison; final saved/stock/Main validation pending.",
+                                                                              "source_status":  "Current author helper consumes RootSwingDegreesLeg at PlayerPartsAuthorEditor.cpp:638-640 and applies it at the existing constraint authoring path: bLegRootClearanceOverride = Part == Leg \u0026\u0026 Depth[Index] == 0. Both Swing1/Swing2 receive the override; downstream swing, twist, omega and damping retain the existing interpolation.",
+                                                                              "source_classification":  "Assistant temporary body-avoidance clearance envelope, not original-game metadata and not the base Hair-relative 10% allowance.",
+                                                                              "implementation_and_saved_runtime_status":  "Actual native fixed30 Root32 run passed in PIE_FullStrip_Root32_Success.log at 2026.10.07-14.17.53:459-467. Normal-delta fresh-process and final saved/stock/Main readback remain pending."
+                                                                          },
+                             "hard_angular_limits":  {
+                                                         "enabled":  true,
+                                                         "fields":  [
+                                                                        "FConstraintProfileProperties.ConeLimit.bSoftConstraint=false",
+                                                                        "FConstraintProfileProperties.TwistLimit.bSoftConstraint=false"
+                                                                    ],
+                                                         "caveat":  "Hard-only trials still failed; default soft limits alone were not the established root cause. The restoring SLERP drive remains soft/continuous inside limited angular freedom; Hair/Iron constraint inputs are preserved."
+                                                     },
+                             "parent_dominates":  {
+                                                      "value":  false,
+                                                      "caveat":  "false keeps normal two-body response. The old INI comment about preventing upstream collision torque describes a rejected parent-dominates trial, not this false value."
+                                                  },
+                             "angular_projection_alpha":  0.8,
+                             "fixed_time_step_seconds":  0.016666667,
+                             "position_iterations":  24,
+                             "velocity_iterations":  4,
+                             "projection_iterations":  4,
+                             "use_linear_joint_solver":  {
+                                                             "Torso":  true,
+                                                             "Leg":  false
+                                                         },
+                             "solver_evidence":  {
+                                                     "saved_float_step_seconds":  0.01666666753590107,
+                                                     "use_manifolds":  true,
+                                                     "source":  "Isolated Saved/PlayerPartsMailbox/150-strip-inertia4-test.response.json and 155-fullstrip-native-test.response.json before/after SolverSettings readback: position24, velocity4, projection4, Torso linear=true, Leg=false.",
+                                                     "superseded_snapshot":  "SavedSolverReadback.json contains position12 and is historical; it is not current 24/4/4 proof.",
+                                                     "runtime_path":  "AnimNode_RigidBody caches the used PA SolverSettings and applies them to FSimulation; nonnegative ImmediatePhysics iteration/solver CVars and per-object Game config can override. Current RuntimeCvars.json relevant override values are -1, but final saved/stock/Main readback remains pending."
+                                                 },
+                             "relative_to_completed_hair":  {
+                                                                "source":  "Metadata/PlayerParts_20261007/HairRefinement/TemporaryTuning.ini",
+                                                                "hair_root_tip_swing_degrees":  [
+                                                                                                    8,
+                                                                                                    18
+                                                                                                ],
+                                                                "hair_root_tip_twist_degrees":  [
+                                                                                                    3,
+                                                                                                    6
+                                                                                                ],
+                                                                "hair_root_tip_omega_per_second":  [
+                                                                                                       28,
+                                                                                                       10
+                                                                                                   ],
+                                                                "hair_root_tip_angular_damping_per_second":  [
+                                                                                                                 1.5,
+                                                                                                                 0.8
+                                                                                                             ],
+                                                                "formulas":  {
+                                                                                 "swing_and_twist":  "Hair values * 1.1 for base cloth values. Selected Leg-only Depth==0 RootSwingDegreesLeg=32 is an explicit body-clearance exception, independently documented and validated by the native fixed30 trial.",
+                                                                                 "omega":  "Hair omega / 1.1.",
+                                                                                 "angular_damping":  "Hair angular damping * 0.9."
+                                                                             },
+                                                                "caveat":  "10% means angular-limit freedom only; it does not promise 10% greater flutter, tip travel, world displacement or all physics properties. Contact radius/density, inertia floor and geometry are separate policies."
+                                                            }
+                         },
+    "calculated_values":  {
+                              "source":  {
+                                             "author":  "Scripts/Engineering/PlayerPartsAuthorEditor.cpp: FKZPlayerClothAuthor",
+                                             "meshes":  [
+                                                            "/Game/_Art/Player/Character/Meshs/Torso/Player_Original_Torso",
+                                                            "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg"
+                                                        ],
+                                             "anatomy_mesh":  "/Game/_Art/Player/Character/Meshs/SKM_Player",
+                                             "anatomy_physics":  "/Game/_Art/Player/Character/Meshs/Player_PhysicsAsset",
+                                             "fields":  [
+                                                            "FSkeletalMeshModel.LODModels[0].Sections[].SoftVertices[].Position/InfluenceBones/InfluenceWeights",
+                                                            "Sections[].BoneMap",
+                                                            "RefSkeleton.GetRefBonePose/parent indices",
+                                                            "GetRefBasesInvMatrix",
+                                                            "FActorSetup.Mass/Inertia/CoMTransform"
+                                                        ]
+                                         },
+                              "chain_interpolation":  {
+                                                          "fraction":  "f = Depth / (Depth + Remaining), or 0 when the denominator is zero; only the actual simulated chain supplies depth/remaining.",
+                                                          "formula":  "Lerp(root, tip, f) for swing/twist/omega/angular damping. Existing author constraint path substitutes RootSwingDegreesLeg only for Part==Leg \u0026\u0026 Depth[Index]==0; selected value32 has native fixed30 evidence, final saved/stock/Main validation pending."
+                                                      },
+                              "angular_drive":  {
+                                                    "fields":  "AngularDriveMode=SLERP, orientation and angular velocity drives enabled, acceleration mode=true, target orientation identity, target angular velocity zero.",
+                                                    "formulas":  "Spring=omega^2; drive damping=2*omega; API force-limit input remains 0.",
+                                                    "units":  "omega rad/s; engine acceleration-drive spring/damping inputs derive from this parameter; not original-game values.",
+                                                    "default_profile":  "Joint-\u003eSetDefaultProfile(C) synchronizes the default profile actually consumed during PIE creation."
+                                                },
+                              "coordinate_convention":  {
+                                                            "wrapper":  "Observed uniform imported ref-root scale100; current character component scale .01 gives unit world bone scale. Ref component translations are divided by wrapper and scale set to one for unit reference calculations.",
+                                                            "vertex_bone_local":  "boneLocalCm = inverseRefMatrix[bone] * importedRawVertexPosition. Inverse-ref removes the wrapper; do not divide these local geometry points by wrapper again.",
+                                                            "reference_surface":  "Imported render LOD0 PositionVertexBuffer.VertexPosition / ref-root wrapper scale gives reference mesh-space cm.",
+                                                            "connector":  "Frame1 identity. Frame2 uses child UnitRef relative to actual constraint parent UnitRef, then only its translation is divided by wrapper100. Source ref-pose BI.Scale3D100, AdjustedBodyScale=BI.Scale3D/(DefaultBI.Scale3D*componentScale), and MakeJointSetup multiplies GetLastKnownScale(componentScale); the /100 convention compensates the temporary ref-pose factor. Shape dimensions remain cm.",
+                                                            "verification":  "Peak ActorWorld and render bone translations/rotations matched at approximately 1e-6 cm/degrees in saved probes; earlier 100x-packing hypothesis was not supported."
+                                                        },
+                              "mass":  {
+                                           "formula":  "massKg = MassPerLengthKgPerCm * measured segment LengthCm.",
+                                           "caveat":  "Mass uses the existing longitudinal segment/terminal extent Length contract. Full box coverage may have a different Box.X length; mass is not redefined as box volume density."
+                                       },
+                              "contact_geometry":  {
+                                                       "internal_segment":  "Nonzero child segment sets Direction, Length and midpoint; no unconditional parent extrapolation.",
+                                                       "terminal_support":  "UseDominantTerminalSupport=true selects actual largest imported skin-weight owned points; otherwise positive-weight support. Projection extent is measured, TrimTerminalBackwardsOverlap starts applied terminal capsule/mass extent at max(0, raw minimum), and front-side weighted transverse mean supplies capsule center.",
+                                                       "dominant_ties":  "Author support retains the first valid imported influence slot on equal weight. QA render-weight subset uses lowest skeleton bone index on maximum ties. These conventions are disclosed; no arbitrary weight threshold is used.",
+                                                       "leg_strip_policy":  {
+                                                                                "UseDominantClothStripBoxesLeg":  true,
+                                                                                "UseFullDominantClothStripBoundsLeg":  true,
+                                                                                "prerequisite":  "Leg only, a nonempty dominant-owned support cloud and measured Width \u003e 2*ContactRadiusCm; otherwise the existing one-capsule fallback.",
+                                                                                "axes":  "X=existing segment Direction. In its transverse U/V plane, weighted covariance principal angle=.5*atan2(2*CovUV, CovUU-CovVV); Y=normalized principal transverse direction; Z=X cross Y.",
+                                                                                "raw_fields":  "MinX/MaxX, MinY/MaxY, MinZ/MaxZ are min/max dot(imported bone-local dominant point, fitted X/Y/Z), in cm. Width=MaxY-MinY; weighted normal mean is separately logged.",
+                                                                                "full_bounds_true":  "Box.X=max(2*Radius, MaxX-MinX); Box.Y=MaxY-MinY; Box.Z=max(2*Radius, MaxZ-MinZ); center=X*(MinX+MaxX)/2 + Y*(MinY+MaxY)/2 + Z*(MinZ+MaxZ)/2; rotation=MakeFromXY(X,Y).",
+                                                                                "full_bounds_false":  "Thin-strip prior trial: Box.X=existing Length; Box.Y=Width; Box.Z=2*Radius; X center follows existing contact center, Y uses raw midpoint, Z uses weighted normal mean.",
+                                                                                "terminal_caveat":  "When full bounds is applied, raw dominant support including negative longitudinal support is covered by the box; this can override the front-only terminal contact coverage while Length/mass/connector contract stays separate. This is assistant measured-coverage policy, not original-game geometry.",
+                                                                                "logs":  "ClothStripSupport fields useDominantStripPolicy/useFullDominantBoundsPolicy/fullDominantBoundsApplied/shape/fallback/supportCount/supportWeight/lengthCm/boxLengthCm/widthCm/thicknessCm/rawProjectionXMinMaxCm/rawLateralYMinMaxCm/rawNormalZMinMaxCm/axes/proposedBoxCenter/actualCenter."
+                                                                            }
+                                                   },
+                              "inertia":  {
+                                              "policy":  "RotationInvariantInertiaConditioning=true. Virtual uniform minimum-principal-moment floor; NOT isotropic inertia and NOT source-game metadata.",
+                                              "thin_input":  "Fresh ImmediatePhysics::MakeDynamicActorSetup on the current newly selected contact geometry at identity with the existing mass override and initial InertiaTensorScale=(1,1,1). \u0027thin\u0027 names this unconditioned candidate measurement, not an untouched original-game tensor.",
+                                              "formulas":  {
+                                                               "multiplier":  "m=UniformPrincipalInertiaFloorMultiplierLeg(4) for Leg, m=1 for Torso.",
+                                                               "target":  "TargetMinimumPrincipalKgCm2 = max(Ithin.x, Ithin.y, Ithin.z) * m.",
+                                                               "scale":  "s = (TargetMinimumPrincipalKgCm2 / min(Ithin))^(1/5); DefaultInstance.InertiaTensorScale=(s,s,s).",
+                                                               "effect":  "ImmediatePhysics bInertaScaleIncludeMass=true causes uniform s to multiply the ENTIRE body-axis tensor by s^5. All three eigenvalues scale by the same factor; minimum becomes Target. Eigenvalue ratios remain unequal/preserved, so this does not make an isotropic tensor."
+                                                           },
+                                              "preserved_by_conditioning":  "Mass override, contact geometry and center of mass are fixed during the inertia-conditioning step. Separately choosing full bounds can change geometry and its unconditioned CoM; preservation compares before/after conditioning for that same chosen shape.",
+                                              "engine_sources":  [
+                                                                     "C:/Program Files/Epic Games/UE_5.8/Engine/Source/Runtime/Engine/Private/PhysicsEngine/ImmediatePhysics/ImmediatePhysicsAdapters.cpp: CreateGeometry(bInertaScaleIncludeMass=true)",
+                                                                     "C:/Program Files/Epic Games/UE_5.8/Engine/Source/Runtime/Engine/Private/PhysicsEngine/BodyUtils.cpp: ApplyMassPropertiesModifiers rotates to body axes and applies InertiaTensorScale",
+                                                                     "C:/Program Files/Epic Games/UE_5.8/Engine/Source/Runtime/Experimental/Chaos/Public/Chaos/Utilities.h: ScaleInertia(FMatrix33, Scale, bScaleMass)"
+                                                                 ],
+                                              "fresh_readback":  "Author re-instantiates bodies after assigning stored scale and logs ClothInertiaFinal actual principal values, mass, CoM and error. It tests positive eigenvalues and mass/minimum relative error and CoM error within technical QA .001. These QA tolerances are engine-test policy, not gameplay source values.",
+                                              "prior_thin_strip_leg_example":  {
+                                                                                   "source":  "Metadata/PlayerParts_20261007/ClothRefinement/PIE_StripInertia4_Success.log at 2026.10.07-14.01.28:893, B_Cloth_02_03_F_Pelvis",
+                                                                                   "thin_principal_logged_rounded_kg_cm2":  [
+                                                                                                                                4.883,
+                                                                                                                                1.645,
+                                                                                                                                3.275
+                                                                                                                            ],
+                                                                                   "rounding":  "FVector.ToString has rounded these three input values; do not treat them as full-precision calculation inputs.",
+                                                                                   "target_minimum_kg_cm2":  19.53057066,
+                                                                                   "actual_principal_kg_cm2":  [
+                                                                                                                   57.95717444,
+                                                                                                                   19.53057002,
+                                                                                                                   38.86980931
+                                                                                                               ],
+                                                                                   "actual_mass_kg":  0.056007159,
+                                                                                   "actual_com_cm":  [
+                                                                                                         9.335,
+                                                                                                         1.918,
+                                                                                                         0.935
+                                                                                                     ],
+                                                                                   "mass_relative_error":  0,
+                                                                                   "minimum_relative_error":  -3.28854486E-08,
+                                                                                   "caveat":  "Prior thin-strip Floor4 example only; the selected full-bounds/Root32 candidate has separate native fixed30 evidence. Its final saved/stock/Main readback remains pending."
+                                                                               },
+                                              "rejected_legacy":  "Body-axis equal-diagonal Q/determinant conditioning is retained only as a disabled helper branch when RotationInvariantInertiaConditioning=false. Off-diagonal terms remained and a very small principal moment survived, so it did not guarantee an isotropic tensor or the intended principal floor. It is rejected for current cloth; Hair\u0027s protected existing implementation is unchanged."
+                                          },
+                              "attachment_protection":  {
+                                                            "source":  "Imported reference skeleton plus existing Main body capsule/sphere/box union SDF.",
+                                                            "policy":  "Non-Iron cloth reference pivot Phi \u003c= temporary ContactRadiusCm becomes kinematic. Non-cloth parent/Leg unweighted coincident attachment rules also select anchors. Additional explicit Leg runtime pins are currently empty.",
+                                                            "limit":  "Reference-pivot and capsule-segment clearance do not guarantee the full animated skinned cloth surface stays outside or prove actual body-skin intersection. Kinematic heavily weighted attachment vertices can dominate the all-positive result."
+                                                        }
+                          },
+    "body_collision":  {
+                           "source":  "Actual MainMesh Player_PhysicsAsset18 external anatomical kinematic actors; Main body geometry remains a protected input.",
+                           "shape_response":  "Internal part collision pairs disabled; each new cloth body uses one chosen capsule or box; existing Iron body/constraint inputs preserved.",
+                           "measurement":  "Current final-pose linear LOD0 skinning vertex world position -\u003e external actor inverse transform -\u003e actual implicit geometry.PhiWithNormal (actor local, not CoM local). Negative Phi is body-proxy depth in cm, not a signed distance to the visible body\u0027s triangle skin."
+                       },
+    "validation_evidence":  {
+                                "fixed_step_QA":  "-UseFixedTimeStep -FPS=30; controlled movement/turn/stop sequence and unchanged QA thresholds Hair35deg/cloth45deg. Camera arm-only front/rear framing is temporary, does not alter control rotation or injected input.",
+                                "before_fixed30_actual_baseline":  {
+                                                                       "log":  "Metadata/PlayerParts_20261007/ClothRefinement/PIE_Before_Fixed30.log",
+                                                                       "exact_run":  "2026.10.07-13.59.12:187-188, final historical coarse-PA baseline in a log also containing an earlier candidate. Do not label its 13:58 candidate block baseline.",
+                                                                       "Torso":  {
+                                                                                     "bend_rms_deg":  39.288148,
+                                                                                     "bend_peak_deg":  82.92839,
+                                                                                     "tip_rms_cm":  57.035564,
+                                                                                     "direct_simulated_bones":  6
+                                                                                 },
+                                                                       "Leg":  {
+                                                                                   "bend_rms_deg":  46.299694,
+                                                                                   "bend_peak_deg":  129.865832,
+                                                                                   "tip_rms_cm":  24.96622,
+                                                                                   "direct_simulated_bones":  26
+                                                                               },
+                                                                       "membership_caveat":  "Baseline Leg dominantDirectSimVertices5722; prior refined candidate3835. Raw inside counts require their own denominators/membership; do not present them as identical fixed vertex sets."
+                                                                   },
+                                "prior_thin_strip_floor4_reference_front":  {
+                                                                                "log":  "Metadata/PlayerParts_20261007/ClothRefinement/PIE_StripInertia4_Reference_Front_Success.log",
+                                                                                "exact_run":  "2026.10.07-14.05.13:181-188; native isolated test success for prior thin-strip Floor4. Historical comparison only; it does not validate selected full-bounds/Root32 or final saved/stock/Main.",
+                                                                                "Torso":  {
+                                                                                              "bend_rms_deg":  3.764723,
+                                                                                              "bend_peak_deg":  11.961719,
+                                                                                              "tip_rms_cm":  10.191403
+                                                                                          },
+                                                                                "Leg":  {
+                                                                                            "bend_rms_deg":  11.475966,
+                                                                                            "bend_peak_deg":  30.859183,
+                                                                                            "tip_rms_cm":  10.601596
+                                                                                        },
+                                                                                "Hair":  {
+                                                                                             "bend_rms_deg":  8.687415,
+                                                                                             "bend_peak_deg":  31.588255,
+                                                                                             "tip_rms_cm":  7.357307,
+                                                                                             "comparison":  "Identical fixed30 Hair metrics in baseline/cited candidate; protected Hair not rewritten."
+                                                                                         }
+                                                                            },
+                                "prior_thin_strip_floor4_reference_leg":  {
+                                                                              "log":  "Metadata/PlayerParts_20261007/ClothRefinement/PIE_StripInertia4_Reference_Front_Success.log",
+                                                                              "stage":  3,
+                                                                              "unique_mapped_bodies":  18,
+                                                                              "all_positive_vertices":  5772,
+                                                                              "all_positive_reference_inside":  56,
+                                                                              "all_positive_current_inside":  480,
+                                                                              "all_positive_current_newly_inside":  452,
+                                                                              "reference_minimum_phi_cm":  -4.464166,
+                                                                              "current_minimum_phi_cm":  -12.119104,
+                                                                              "dominant_direct_sim_vertices":  3835,
+                                                                              "dominant_reference_inside":  4,
+                                                                              "dominant_current_inside":  177,
+                                                                              "dominant_current_newly_inside":  177,
+                                                                              "current_all_positive_worst":  {
+                                                                                                                 "vertex":  5763,
+                                                                                                                 "dominant_bone":  "B_Cloth_01_03_F_Pelvis",
+                                                                                                                 "dominant_fraction":  0.701961,
+                                                                                                                 "direct_sim_cloth_fraction":  0.019608,
+                                                                                                                 "reference_phi_cm":  2.322774,
+                                                                                                                 "current_phi_cm":  -12.119104
+                                                                                                             },
+                                                                              "caveat":  "Current177 newly inside dominant vertices vs4 reference inside means remaining proxy overlap is not explained only by original reference placement or the low-weight kinematic all-positive worst. CurrentPose vs ReferencePose comparison changes animation and simulation jointly; it does not isolate physics alone. It still does not prove actual visible body-skin intersection."
+                                                                          },
+                                "prior_thin_strip_floor4_dominant_leg_stages":  [
+                                                                                    {
+                                                                                        "stage":  3,
+                                                                                        "inside":  177,
+                                                                                        "peak_cm":  8.034348,
+                                                                                        "rms_cm":  0.56389
+                                                                                    },
+                                                                                    {
+                                                                                        "stage":  4,
+                                                                                        "inside":  567,
+                                                                                        "peak_cm":  11.846358,
+                                                                                        "rms_cm":  2.182183
+                                                                                    },
+                                                                                    {
+                                                                                        "stage":  5,
+                                                                                        "inside":  528,
+                                                                                        "peak_cm":  9.906542,
+                                                                                        "rms_cm":  1.77082
+                                                                                    }
+                                                                                ],
+                                "candidate_remaining_validation":  "Parent-selected full-bounds/Floor4/LegRoot32 candidate passed native fixed30. Fresh normal-delta process, final saved readback, stock/Main loaded Normal DLL and Main application/verification remain pending. Parent owns validation/handoff; no final completion claim.",
+                                "full_bounds_root24_trial":  {
+                                                                 "log":  "Metadata/PlayerParts_20261007/ClothRefinement/PIE_FullStrip_Root24_Success.log",
+                                                                 "exact_run":  "2026.10.07-14.14.47:730-738; native isolated fixed30 PASS. Historical Root24 comparison, not selected final Root32.",
+                                                                 "applied_candidate":  {
+                                                                                           "UniformPrincipalInertiaFloorMultiplierLeg":  4,
+                                                                                           "UseFullDominantClothStripBoundsLeg":  true,
+                                                                                           "RootSwingDegreesLeg":  24
+                                                                                       },
+                                                                 "Leg":  {
+                                                                             "bend_rms_deg":  13.622402,
+                                                                             "bend_peak_deg":  28.102828,
+                                                                             "tip_rms_cm":  12.883414,
+                                                                             "tip_peak_cm":  46.373942,
+                                                                             "direct_simulated_bones":  30
+                                                                         },
+                                                                 "dominant_direct_sim_vertices":  3835,
+                                                                 "dominant_stages":  [
+                                                                                         {
+                                                                                             "stage":  3,
+                                                                                             "inside":  116,
+                                                                                             "minimum_phi_cm":  -8.695494,
+                                                                                             "rms_penetration_cm":  0.506465
+                                                                                         },
+                                                                                         {
+                                                                                             "stage":  4,
+                                                                                             "inside":  439,
+                                                                                             "minimum_phi_cm":  -10.186553,
+                                                                                             "rms_penetration_cm":  1.764896
+                                                                                         },
+                                                                                         {
+                                                                                             "stage":  5,
+                                                                                             "inside":  414,
+                                                                                             "minimum_phi_cm":  -8.398555,
+                                                                                             "rms_penetration_cm":  1.302734
+                                                                                         }
+                                                                                     ]
+                                                             },
+                                "selected_full_bounds_root32_trial":  {
+                                                                          "log":  "Metadata/PlayerParts_20261007/ClothRefinement/PIE_FullStrip_Root32_Success.log",
+                                                                          "exact_run":  "2026.10.07-14.17.53:459-467; native isolated fixed30 PASS. This copied log also contains the prior14:14:47 Root24 block; only the14:17:53 block supports Root32.",
+                                                                          "applied_candidate":  {
+                                                                                                    "UniformPrincipalInertiaFloorMultiplierLeg":  4,
+                                                                                                    "UseFullDominantClothStripBoundsLeg":  true,
+                                                                                                    "RootSwingDegreesLeg":  32,
+                                                                                                    "PositionIterations":  24,
+                                                                                                    "VelocityIterations":  4,
+                                                                                                    "ProjectionIterations":  4
+                                                                                                },
+                                                                          "Torso":  {
+                                                                                        "bend_rms_deg":  3.764723,
+                                                                                        "bend_peak_deg":  11.961719,
+                                                                                        "tip_rms_cm":  10.191403,
+                                                                                        "tip_peak_cm":  26.927262,
+                                                                                        "direct_simulated_bones":  8
+                                                                                    },
+                                                                          "Leg":  {
+                                                                                      "bend_rms_deg":  15.33012,
+                                                                                      "bend_peak_deg":  32.207126,
+                                                                                      "peak_bone":  "B_Cloth_01_05_R_Pelvis",
+                                                                                      "tip_rms_cm":  14.58709,
+                                                                                      "tip_peak_cm":  54.160593,
+                                                                                      "direct_simulated_bones":  30
+                                                                                  },
+                                                                          "Hair":  {
+                                                                                       "bend_rms_deg":  8.687415,
+                                                                                       "bend_peak_deg":  31.588255,
+                                                                                       "tip_rms_cm":  7.357307,
+                                                                                       "tip_peak_cm":  16.576767,
+                                                                                       "comparison":  "Exact fixed30 metrics unchanged from cited baseline/Root24/Root32; Hair settings and assets preserved."
+                                                                                   },
+                                                                          "leg_surface_reference_stage3":  {
+                                                                                                               "unique_mapped_bodies":  18,
+                                                                                                               "all_positive_vertices":  5772,
+                                                                                                               "reference_inside":  56,
+                                                                                                               "current_inside":  408,
+                                                                                                               "current_newly_inside":  380,
+                                                                                                               "reference_minimum_phi_cm":  -4.464166,
+                                                                                                               "current_minimum_phi_cm":  -12.149147,
+                                                                                                               "all_positive_worst":  {
+                                                                                                                                          "vertex":  5763,
+                                                                                                                                          "dominant_bone":  "B_Cloth_01_03_F_Pelvis",
+                                                                                                                                          "dominant_fraction":  0.701961,
+                                                                                                                                          "direct_sim_cloth_fraction":  0.019608,
+                                                                                                                                          "reference_phi_cm":  2.322774
+                                                                                                                                      },
+                                                                                                               "dominant_direct_sim_vertices":  3835,
+                                                                                                               "dominant_reference_inside":  4,
+                                                                                                               "dominant_current_inside":  111,
+                                                                                                               "dominant_current_newly_inside":  111
+                                                                                                           },
+                                                                          "dominant_stages":  [
+                                                                                                  {
+                                                                                                      "stage":  3,
+                                                                                                      "inside":  111,
+                                                                                                      "minimum_phi_cm":  -7.724334,
+                                                                                                      "rms_penetration_cm":  0.481565,
+                                                                                                      "worst_vertex":  12432,
+                                                                                                      "worst_bone":  "B_Cloth_01_05_R_Pelvis"
+                                                                                                  },
+                                                                                                  {
+                                                                                                      "stage":  4,
+                                                                                                      "inside":  390,
+                                                                                                      "minimum_phi_cm":  -9.641862,
+                                                                                                      "rms_penetration_cm":  1.558305,
+                                                                                                      "worst_vertex":  6657,
+                                                                                                      "worst_bone":  "B_Cloth_03_03_F_Pelvis"
+                                                                                                  },
+                                                                                                  {
+                                                                                                      "stage":  5,
+                                                                                                      "inside":  350,
+                                                                                                      "minimum_phi_cm":  -8.041948,
+                                                                                                      "rms_penetration_cm":  1.11738,
+                                                                                                      "worst_vertex":  6660,
+                                                                                                      "worst_bone":  "B_Cloth_03_03_F_Pelvis"
+                                                                                                  }
+                                                                                              ],
+                                                                          "torso_surface_scope":  "Dominant simulated subset735 vertices: zero inside across stages3/4/5. Reference all-positive867 had15 inside; current0 at stage3.",
+                                                                          "interpretation":  "Root32 improved dominant Leg proxy overlap relative to Root24 at all three sampled stages. Residual overlap remains, including simulation-dominant vertices. This is collision-proxy Phi, not visible body-skin depth or proof of no body penetration. Similar Hair/Leg peak angles do not imply similar world flutter; Leg RMS/tip distances also reflect panel length and sustained body-clearance pose.",
+                                                                          "completion_limit":  "Native fixed30 QA success only. Fresh normal-delta process, final saved readback, stock Main loaded Normal DLL and final application/verification remain pending."
+                                                                      }
+                            },
+    "validation_limits":  [
+                              "Cloth angular QA uses saved direct simulated Bone1/Bone2 connector world rotations; current ActorWorld checks agree. Retained Iron excluded, kinematic reference motion separate; leaf displacement includes all secondary leaves.",
+                              "Legacy cached manifold point-plane gaps may include disabled manifold points and are not fresh geometric minimum penetration. InitialPhi zero is depenetration allowance bookkeeping, not no-overlap proof.",
+                              "Surface probe includes any positive direct-sim cloth weight; dominant subset selects actual maximum render skin weight, lowest skeleton bone index on ties. Mixed/kinematic attachment weighting must be interpreted from raw/fraction weights.",
+                              "Surface probe is current-pose linear LOD0 vertices against body proxy geometry. No morph/WPO/triangle interiors/continuous sweeps/all LODs/combat or prolonged hardware proof.",
+                              "Reference probe uses same proxy geometry in imported body reference frames, only after unique complete 18-body mapping within the existing .1cm pose tolerance; ambiguous mapping is skipped. Imported reference placement is not original-game physics truth.",
+                              "Fewer flips/low bend RMS and a native automation success do not mean all cloth body penetration is fixed. Proxy overlap remains explicitly measured.",
+                              "Per-object Game config and nonnegative ImmediatePhysics global overrides can supersede saved PA solver values; final stock/Main readback is required.",
+                              "Virtual inertia scales an anisotropic tensor uniformly; isotropy is neither implemented nor claimed."
+                          ],
+    "ownership":  "Existing part AnimInstance/CopyPose/RigidBody/ImmediatePhysics. Native author/probe helpers are isolated-editor automation only; no new product runtime class/manager, gameplay state, input or GAS changes.",
+    "source_snapshot_sha256":  [
+                                   {
+                                       "Path":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261007\\ClothRefinement\\TemporaryTuning.ini",
+                                       "Hash":  "68C31C9B6D0477CA8F7E0041457916441924B565A4AAF8C5CA8FD39E1DE9B8A9"
+                                   },
+                                   {
+                                       "Path":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Scripts\\Engineering\\PlayerPartsAuthorEditor.cpp",
+                                       "Hash":  "05A1AD9BB7D7F153A99BCC95D9E96A466871E76CA9733AB7AAC4CCB79377C15E"
+                                   },
+                                   {
+                                       "Path":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261007\\ClothRefinement\\PIE_Before_Fixed30.log",
+                                       "Hash":  "F310F5E6B3F1A10BCA69BFEA6749F6489B0851A3898F4C107F2423B94A4E82D3"
+                                   },
+                                   {
+                                       "Path":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261007\\ClothRefinement\\PIE_StripInertia4_Reference_Front_Success.log",
+                                       "Hash":  "CE947B9C97DC3874D9520FC3564BBBA295E175BE15934D48AFF228182B137102"
+                                   },
+                                   {
+                                       "Path":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261007\\ClothRefinement\\PIE_FullStrip_Root24_Success.log",
+                                       "Hash":  "D6A301E0DC69668D599F27033004DEA79601D2494DE91BC8B5FB21FA43795F38"
+                                   },
+                                   {
+                                       "Path":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261007\\ClothRefinement\\PIE_FullStrip_Root32_Success.log",
+                                       "Hash":  "5BC20E950ED70A392CDC7A2267FB2992D92E05EA829B6957DC18F6F5835D7FB2"
+                                   }
+                               ],
+    "revision_history":  [
+                             {
+                                 "date":  "2026-10-07",
+                                 "status":  "Superseded historical report, preserved for audit; its position12/body-axis diagonal inertia descriptions are not current.",
+                                 "snapshot":  {
+                                                  "scope":  "Torso cape and Leg cloth/leather derived RigidBody PhysicsAssets only; Hair unchanged",
+                                                  "original_game_values":  "Unconfirmed in existing scoped Player physics metadata/report search. Original-named imported PA is not original-game proof.",
+                                                  "temporary_values":  {
+                                                                           "source":  "Assistant selected; centralized TemporaryTuning.ini, persisted existing PA DefaultInstance/constraint DefaultProfile",
+                                                                           "contact_radius_cm":  1,
+                                                                           "mass_per_length_kg_per_cm":  0.003,
+                                                                           "root_tip_angular_damping_per_second":  [
+                                                                                                                       1.35,
+                                                                                                                       0.72
+                                                                                                                   ],
+                                                                           "linear_damping_per_second":  0.1,
+                                                                           "coincident_root_distance_cm":  1,
+                                                                           "additional_protected_attachment_bones_leg":  "Disabled for current hard-limit candidate. Trial pin B_Cloth_03_03_F_Pelvis reduced leaf RMS but retained another81deg terminal flip; its positive reference capsule clearance4.816cm did not justify ref-pose embedding. Trial remains in saved logs/CandidateHistory.",
+                                                                           "hard_angular_limits":  "Assistant temporary bounded-angle policy: new cloth ConeLimit/TwistLimit.bSoftConstraint=false. UE5.8 ConstraintTypes.cpp defaults these true with stiffness50/damping5; engine defaults are technical explanation, not original-game values. Existing acceleration SLERP spring/damping remain unchanged for smooth recovery within limited angular freedom. Hair and retained Iron profiles are not changed.",
+                                                                           "fixed_time_step_seconds":  0.016666667,
+                                                                           "position_iterations":  12,
+                                                                           "solver_choice":  "Torso linear, Leg nonlinear after linear6/12 attempts retained large cloth bends; velocity1/projection1/manifolds kept. Per-Leg solver also governs its two retained Iron bodies; their geometry/mass/constraint inputs are preserved. New cloth bend QA excludes Iron, whose imported constraints are outside the cloth tuning scope.",
+                                                                           "relative_to_completed_hair":  "Root/tip swing and twist limits multiplied by 1.1; omega divided by 1.1; angular damping multiplied by 0.9. This means small additional angular freedom, not guaranteed 10 percent world displacement."
+                                                                       },
+                                                  "calculated_values":  {
+                                                                            "source":  "Current imported Original mesh LOD0 SoftVertices/positive skin weights and RefSkeleton hierarchy; UE5.8 immediate actor mass/inertia",
+                                                                            "connector_translation":  "Only new constraint parent frame translation divided by observed ref wrapper100; capsule dimensions remain cm",
+                                                                            "mass":  "Contact segment measured length cm multiplied by temporary linear density, kg",
+                                                                            "angular_drive":  "Acceleration mode SLERP: spring=omega^2, relative damping=2*omega, target identity/zero relative angular velocity; default profile explicitly synchronized",
+                                                                            "inertia":  "Keep thin contact geometry/mass, target body-axis diagonal equal to largest thin principal moment; invert engine ScaleInertia using Q=(target/2)/(trace(Ithin)/2-Ithin), detS=(QxQyQz)^(1/5), S=sqrt(Q/detS). Assistant temporary conditioning policy; calculated engine/import results, not original-game values.",
+                                                                            "geometry":  "Measured nonzero child segment for internal links; actual weighted bone-local vertex projection for terminals, no unconditional extrapolation of parent segment. UE inverse reference matrix handles imported raw vertex units. Final terminal contact projection starts at max(0, raw minimum) and uses the front-side vertex lateral mean, avoiding duplicate parent-side contact geometry; raw/applied limits are retained in per-bone report.",
+                                                                            "attachment_protection":  "Read-only SKM_Player reference skeleton and Player_PhysicsAsset capsule/sphere/box signed-distance union. Non-Iron cloth pivot phi \u003c= temporary 1cm ContactRadius becomes animation-driven kinematic; its descendants with clearance retain simulation. This reference placement calculation does not change Main body geometry or guarantee every animated skin vertex stays outside."
+                                                                        },
+                                                  "ownership":  "Existing part AnimInstance/CopyPose/RigidBody/ImmediatePhysics; no runtime class, gameplay state, input or GAS changes",
+                                                  "body_collision":  "Existing actual MainMesh Player_PhysicsAsset18 external anatomical kinematic colliders. Internal part collisions remain disabled. Embedded garment attachment anchors remain animation-driven.",
+                                                  "validation_limits":  [
+                                                                            "Cloth angular QA measures saved direct simulated constraint Bone1/Bone2 connector world rotations, excluding retained Iron. Kinematic reference motion is reported separately; leaf displacement still covers all secondary leaf bones. Baseline and final comparisons must use the same saved-joint frame metric.",
+                                                                            "Native movement/turn/stop signed separation uses cached manifold planes transformed with solved poses; includes possibly disabled manifold points, not current geometry minimum skin penetration. InitialPhi is initial overlap depenetration allowance bookkeeping, default zero; not raw pre-solve depth. Cape can stay clear of body during the controlled sequence and resolve no impulse.",
+                                                                            "Finite/bounds/unit scale and stock saved final poses do not prove every garment vertex, LOD, combat or prolonged hardware case",
+                                                                            "Full off-diagonal tensor isotropy and original-game identical physics unverified"
+                                                                        ]
+                                              }
+                             }
+                         ],
+    "final_validation":  {
+                             "completed_utc":  "2026-10-07T14:33:38.7775152Z",
+                             "note":  "This final validation supersedes earlier pending trial-snapshot descriptions; original-game physics values remain unconfirmed.",
+                             "Main_source_or_DLL_written":  false,
+                             "stock_module":  "StockModuleBinding.json",
+                             "verification":  "Verification.json",
+                             "main_ready":  "MainReadyAudit.json",
+                             "main_world_preserved":  "/Game/Maps/L_HeinMach_Environment.L_HeinMach_Environment",
+                             "main_handoff":  "MainSelectiveHandoff.json",
+                             "protected_files_unchanged":  161
+                         }
+}

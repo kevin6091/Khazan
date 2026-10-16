@@ -1,0 +1,237 @@
+[
+  {
+    "Type": "xxDamageInfo",
+    "Name": "SD_Kazan_DualAxeSword_Yaksha_UltimateSlash_Loop",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SD_Kazan_DualAxeSword_Yaksha_UltimateSlash_Loop",
+    "Properties": {
+      "AttackInfo": {
+        "SkillPowerInfo": {
+          "SkillPowerBonus": 39425
+        },
+        "StaminaAttackInfo": {
+          "StaminaAttackRate": 200
+        },
+        "AttackerReactionTableSelect": {
+          "AttackerReactionTag": {
+            "DataTable": {
+              "ObjectName": "DataTable'AttackerReaction_Common'",
+              "ObjectPath": "BBQ/Content/_Common/Constants/AttackerReaction/AttackerReaction_Common.0"
+            },
+            "RowName": "충격량2등급+"
+          }
+        },
+        "AttackableFlags": [
+          "ECharacterAttackableFlag::EnableAttackableDownState"
+        ],
+        "EtcInfo": {
+          "ExceptOnAttackChangedBattleResoureces": [
+            {
+              "ChangeBattleResource": "EBattleResourceGroup::Group0",
+              "IsNoChange": true,
+              "ChangeValue": 0
+            }
+          ]
+        }
+      },
+      "AttackerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true,
+        "TimeSectionDelayData": {
+          "LoopTime": 0.0333
+        }
+      },
+      "DamagerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true,
+        "TimeSectionDelayData": {
+          "LoopTime": 0.0333
+        }
+      },
+      "DamagerKnockData": {
+        "KnockBackMoveType": "EKnockbackMoveType::UseCurve",
+        "KnockCurveVector": {
+          "ObjectName": "CurveVector'CV_common_groundKnock_strong'",
+          "ObjectPath": "BBQ/Content/_Common/MoveCurve/CV_common_groundKnock_strong.0"
+        },
+        "TimeSyncType": "ETimeSyncType::SyncAnimation",
+        "KnockbackDistanceTime": 0.5,
+        "KnockbackHeight": 450.0,
+        "KnockbackForce": 300.0,
+        "DownEnemyPushRate": 0.001,
+        "SuperArmorKnockbackRate": 1.0
+      },
+      "SpecialDamageAniminfo": {
+        "CommonAnimationTag": "ECommonAnimationTag::DamageU"
+      },
+      "DamagerRotatorInfo": {
+        "RotatorDirTime": 0.01
+      },
+      "DamagerHitEffect": {
+        "ParticleInfo": {
+          "ParticleMode": "MaterialEffect",
+          "Particle": {
+            "ObjectName": "ParticleSystem'PP_Atk_Sword_Strong'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Attack/PP_Atk_Sword_Strong.141"
+          },
+          "EffectData": {
+            "ObjectName": "xxMaterialEffectParticleData'PA_Dmg_Strong'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Dmg/PA_Dmg_Strong.0"
+          },
+          "RelativeLocation": {
+            "X": 0.0,
+            "Y": 0.0,
+            "Z": 75.0
+          },
+          "RelativeRotation": {
+            "Pitch": 0.0,
+            "Yaw": 0.0,
+            "Roll": 155.0
+          }
+        },
+        "DecalData": {
+          "DecalMode": "DecalMode_MaterialEffect",
+          "DecalMaterial": {
+            "ObjectName": "MaterialInstanceConstant'PD_Blood_Strong'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/PhysicsDecal/PD_Blood_Strong.0"
+          },
+          "MaterialEffect": {
+            "ObjectName": "xxMaterialEffectMaterialData'PA_Decal_Strong'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Decal/PA_Decal_Strong.0"
+          },
+          "RandomDecalScale": {
+            "BasedVector": {
+              "X": 200.0,
+              "Y": 300.0,
+              "Z": 300.0
+            },
+            "MinVector": {
+              "X": 0.0,
+              "Y": -20.0,
+              "Z": -20.0
+            },
+            "MaxVector": {
+              "X": 0.0,
+              "Y": 20.0,
+              "Z": 20.0
+            },
+            "bFixedRatio": false
+          },
+          "RandomPosition": {
+            "BasedVector": {
+              "X": 300.0,
+              "Y": -100.0,
+              "Z": 0.0
+            }
+          },
+          "RandomRotator": {
+            "BasedRotator": {
+              "Pitch": -100.0,
+              "Yaw": 110.0,
+              "Roll": 0.0
+            },
+            "MaxRotator": {
+              "Pitch": 0.0,
+              "Yaw": 20.0,
+              "Roll": 0.0
+            }
+          },
+          "LifeSpan": 2.0,
+          "OpacityCurve": {
+            "ObjectName": "CurveFloat'FC_Decal_FadeOut'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/Curve/BBQ_Curve/FC_Decal_FadeOut.0"
+          },
+          "RandomScalarParams": [
+            {
+              "Key": "Random_Ch_Value",
+              "Value": {
+                "ScalarType": "EScalarParamType::Random",
+                "DefaultValue": 0.0,
+                "RandomMin": 0.0,
+                "RandomMax": 2.0,
+                "bRandomFloat": false
+              }
+            }
+          ]
+        }
+      },
+      "AttackerHitEffect": {
+        "ParticleInfo": {
+          "Particle": {
+            "ObjectName": "ParticleSystem'PP_Atk_GreatSword_Super'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Attack/PP_Atk_GreatSword_Super.16"
+          },
+          "bSyncData": true,
+          "RelativeLocation": {
+            "X": 0.0,
+            "Y": 0.0,
+            "Z": 75.0
+          },
+          "RelativeRotation": {
+            "Pitch": 0.0,
+            "Yaw": 0.0,
+            "Roll": 155.0
+          }
+        },
+        "bUseDecal": false,
+        "DecalData": {
+          "DecalMode": "DecalMode_MaterialEffect",
+          "DecalMaterial": {
+            "ObjectName": "MaterialInstanceConstant'PD_Blood_Strong'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/PhysicsDecal/PD_Blood_Strong.0"
+          },
+          "MaterialEffect": {
+            "ObjectName": "xxMaterialEffectMaterialData'PA_Decal_Strong'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Decal/PA_Decal_Strong.0"
+          },
+          "RandomDecalScale": {
+            "BasedVector": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            }
+          },
+          "RandomRotator": {
+            "BasedRotator": {
+              "Pitch": -100.0,
+              "Yaw": 110.0,
+              "Roll": 0.0
+            },
+            "MaxRotator": {
+              "Pitch": 0.0,
+              "Yaw": 20.0,
+              "Roll": 0.0
+            }
+          },
+          "LifeSpan": 2.5,
+          "OpacityCurve": {
+            "ObjectName": "CurveFloat'FC_Decal_FadeOut'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/Curve/BBQ_Curve/FC_Decal_FadeOut.0"
+          },
+          "RandomScalarParams": [
+            {
+              "Key": "Random_Ch_Value",
+              "Value": {
+                "ScalarType": "EScalarParamType::Random",
+                "DefaultValue": 0.0,
+                "RandomMin": 0.0,
+                "RandomMax": 2.0,
+                "bRandomFloat": false
+              }
+            }
+          ]
+        }
+      },
+      "DamageSounds": [
+        {
+          "ObjectName": "AkAudioEvent'efx_dualaxesword_ultimateslash_hits'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/skill/dualaxesword/skill/efx_dualaxesword_ultimateslash_hits.0"
+        }
+      ],
+      "bCustomDamageSound": true,
+      "CustomDamageSound": "ECustomDamageSoundKey::Key1",
+      "AttackStrength": "EBattleDirecting_AttackStrength::AttackStrength_02"
+    }
+  }
+]

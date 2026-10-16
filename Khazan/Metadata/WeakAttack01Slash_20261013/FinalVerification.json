@@ -1,0 +1,92 @@
+{
+  "status": "complete",
+  "files": {
+    "Source/Khazan/Ability/KZActionAbility.cpp": "6f49a86a28e5499b4dcd94ee40bca3922e9a790307af3a1cacb6583879d08e0d",
+    "Source/Khazan/Animation/Notifies/KZAnimNotify_CombatEffect.h": "578f476874249f64d888cfc437e89352b131831a6e7cbdae2fedee4286e89900",
+    "Source/Khazan/Tests/KZCombatEffectPIETest.cpp": "d53dbcde1f7d4216588c1999dc55153690e864964880ca0b6a4af66d6bcc2537",
+    "Content/_Art/Player/Animation/InGame/DAS/WeakAttack/AM_DAS_WeakAttackCombo.uasset": "44c839b8869db097b1e4a40d9992f8b42d3325a40eb0da83890f5f5d68a15682"
+  },
+  "build": "MainBuild04/Exit.json",
+  "saved": "SavedMain01/SavedVerification.json",
+  "full_main_rhi": "MainRHI01/Driver.json",
+  "loaded_module": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Binaries\\Win64\\UnrealEditor-Khazan.dll",
+  "module_sha256": "df9764361d10eec695f0855e34b0dacfb98da06138303a1c8db17cbd7a1f0ed3",
+  "natural_nodes": 18,
+  "gpu_samples": 70,
+  "gpu_nodes": 17,
+  "max_gpu_expected_anchor_error_cm": 3.1e-05,
+  "weak01_gpu": [
+    {
+      "node": "WeakAttack01",
+      "emitter": "Slash_Additive",
+      "side": "Weapon_R",
+      "scale_y": 2.0,
+      "orientation_deg": 90.000002,
+      "local_position_cm": 0.0,
+      "actual_gpu_tip_error_cm": 2.6e-05
+    },
+    {
+      "node": "WeakAttack01",
+      "emitter": "Slash_Translucent",
+      "side": "Weapon_R",
+      "scale_y": 2.0,
+      "orientation_deg": 90.000002,
+      "local_position_cm": 0.0,
+      "actual_gpu_tip_error_cm": 2.6e-05
+    }
+  ],
+  "actual_hp_hit": true,
+  "screenshots": 289,
+  "material_compile_failures": [],
+  "protected_shared_assets_unchanged": {
+    "Content/VFX/01_ARPGEssentials/KZ_Slash.uasset": "3b9eb34b6bb2963ee8fe0eb1bc698ed427e742d59c9c43abe30494d6036f4a37",
+    "Content/VFX/01_ARPGEssentials/Meshes/SM_VFX_SlashRing_01.uasset": "bb17545e9cd539f7af1448a182518672552f041ae1a28b4384a76bfc1f9362a8",
+    "Content/VFX/01_ARPGEssentials/Meshes/SM_VFX_SlashRing_02.uasset": "8f878d4bf3d93931d43a9ee4af196acfbfe9e6d65a493321eaf601022b36eac3",
+    "Content/_Art/Effects/DualAxeSword/Core/FP_DAS_PlaneSlash_Enhanced.uasset": "872a2ed3936f67d55834421f21503b14155fe5ebf22f522fe8401fbc67a91036",
+    "Content/_Art/Player/Animation/InGame/DAS/OverFury/AM_DAS_Player_OverFury.uasset": "62f00526d1abe9a9c7bbe947c8d76cdd9a82372b760106ff17ca7ccf388939cd"
+  },
+  "tuning": {
+    "source": "TEMP user-requested visual adjustment, not original game values",
+    "avatar_forward_cm": 35,
+    "xy_size_multiplier": 1.15
+  },
+  "new_runtime_classes_files": 0,
+  "rejected_candidate": "CandidateVisual01 mirror did not fix wrong hand; negative-scale feature removed",
+  "scope": "WeakAttack01 4 notify children; other transform/clock/GUID/audio/HP/ST/GAS/physics/collider fields unchanged",
+  "remaining": [],
+  "passed": true,
+  "yaw90_validation": "MainYaw90RHI01/Driver.json",
+  "brutal_cases": 4,
+  "completed_kst": "2026-10-13T15:25:54.376024+09:00",
+  "visual_review": [
+    "MainRHI01/Slash_00_Frame004_View1.png",
+    "MainRHI01/Slash_00_Frame005_View2.png",
+    "MainRHI01/Slash_00_Frame006_View0.png",
+    "MainYaw90RHI01/Slash_00_Frame004_View1.png",
+    "MainYaw90RHI01/Slash_00_Frame005_View2.png"
+  ],
+  "accuracy_boundary": "GPU error is against the reference FX marker plus the explicit 35cm avatar offset, not physical vertex parity. Imperial_R nearest vertex is 13.147cm from the old virtual tip. No original shader/pixel parity claim.",
+  "concurrent_source_changes": [
+    {
+      "file": "Source/Khazan/Animation/Notifies/KZAnimNotify_CombatEffect.h",
+      "tested_sha": "578f476874249f64d888cfc437e89352b131831a6e7cbdae2fedee4286e89900",
+      "current_sha": "ad4f82e59d7927011a4cf04149dfdb1f8e4cea153af95aebb75889d6ade4159f",
+      "ownership": "separate WeakAttack02 Sequencer task; preserved"
+    },
+    {
+      "file": "Source/Khazan/Tests/KZCombatEffectPIETest.cpp",
+      "tested_sha": "d53dbcde1f7d4216588c1999dc55153690e864964880ca0b6a4af66d6bcc2537",
+      "current_sha": "cf0517b403c6111f79a0fb40922ec44d9d1c98909125e48fec9c58d48972f325",
+      "ownership": "separate WeakAttack02 Sequencer task; preserved"
+    }
+  ],
+  "verification_binding": "MainBuild04 and both actual loaded DLLs, SHA df9764361d10eec695f0855e34b0dacfb98da06138303a1c8db17cbd7a1f0ed3; task Action/asset bytes unchanged. Separate new Sequencer development is not claimed tested by this receipt.",
+  "historical_failures": [
+    "BeforeSourceOnly01 syntax failure",
+    "BeforeSourceOnly02 unsupported TGA",
+    "EquippedProbe01/02 NullRHI MeshObject exporter assertion",
+    "CandidateVisual01 mirror rejected and product feature removed",
+    "CandidateBuild01 private full build intentionally stopped",
+    "MainBuild02 unchanged-source build after script encoding failure; MainBuild04 passed"
+  ]
+}

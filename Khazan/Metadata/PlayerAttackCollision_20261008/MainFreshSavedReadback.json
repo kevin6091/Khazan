@@ -1,0 +1,361 @@
+{
+  "utc": "2026-10-08T06:55:14.270737+00:00",
+  "pid": 2512,
+  "project": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan",
+  "success": true,
+  "asset_saved": false,
+  "PIE_started": false,
+  "existing_Main_touched": false,
+  "draw_green_enabled": true,
+  "effect": "/Game/Bluprints/AbilitySystem/Effects/Attack/GE_ComboAttack_Damage.GE_ComboAttack_Damage_C",
+  "modifiers": [
+    "(Attribute=(AttributeName=\"HP\",Attribute=/Script/Khazan.KZAttributeSet:HP,AttributeOwner=\"/Script/CoreUObject.Class'/Script/Khazan.KZAttributeSet'\"),ModifierOp=AddBase,ModifierMagnitude=(MagnitudeCalculationType=SetByCaller,ScalableFloatMagnitude=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),AttributeBasedMagnitude=(Coefficient=(Value=1.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PreMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PostMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),BackingAttribute=(AttributeToCapture=(AttributeName=\"\",Attribute=,AttributeOwner=None),AttributeSource=Source,bSnapshot=False),AttributeCurve=(CurveTable=None,RowName=\"\"),AttributeCalculationType=AttributeMagnitude,FinalChannel=Channel0,SourceTagFilter=(GameplayTags=),TargetTagFilter=(GameplayTags=)),CustomMagnitude=(CalculationClassMagnitude=None,Coefficient=(Value=1.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PreMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PostMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),FinalLookupCurve=(CurveTable=None,RowName=\"\")),SetByCallerMagnitude=(DataName=\"KZAttackHPDamage\",DataTag=(TagName=\"\"))),EvaluationChannelSettings=(Channel=Channel0),SourceTags=(RequireTags=(GameplayTags=),IgnoreTags=(GameplayTags=),TagQuery=(TokenStreamVersion=0,TagDictionary=,QueryTokenStream=,UserDescription=\"\",AutoDescription=\"\")),TargetTags=(RequireTags=(GameplayTags=),IgnoreTags=(GameplayTags=),TagQuery=(TokenStreamVersion=0,TagDictionary=,QueryTokenStream=,UserDescription=\"\",AutoDescription=\"\")))",
+    "(Attribute=(AttributeName=\"Stamina\",Attribute=/Script/Khazan.KZAttributeSet:Stamina,AttributeOwner=\"/Script/CoreUObject.Class'/Script/Khazan.KZAttributeSet'\"),ModifierOp=AddBase,ModifierMagnitude=(MagnitudeCalculationType=SetByCaller,ScalableFloatMagnitude=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),AttributeBasedMagnitude=(Coefficient=(Value=1.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PreMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PostMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),BackingAttribute=(AttributeToCapture=(AttributeName=\"\",Attribute=,AttributeOwner=None),AttributeSource=Source,bSnapshot=False),AttributeCurve=(CurveTable=None,RowName=\"\"),AttributeCalculationType=AttributeMagnitude,FinalChannel=Channel0,SourceTagFilter=(GameplayTags=),TargetTagFilter=(GameplayTags=)),CustomMagnitude=(CalculationClassMagnitude=None,Coefficient=(Value=1.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PreMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PostMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),FinalLookupCurve=(CurveTable=None,RowName=\"\")),SetByCallerMagnitude=(DataName=\"KZAttackStaminaDamage\",DataTag=(TagName=\"\"))),EvaluationChannelSettings=(Channel=Channel0),SourceTags=(RequireTags=(GameplayTags=),IgnoreTags=(GameplayTags=),TagQuery=(TokenStreamVersion=0,TagDictionary=,QueryTokenStream=,UserDescription=\"\",AutoDescription=\"\")),TargetTags=(RequireTags=(GameplayTags=),IgnoreTags=(GameplayTags=),TagQuery=(TokenStreamVersion=0,TagDictionary=,QueryTokenStream=,UserDescription=\"\",AutoDescription=\"\")))"
+  ],
+  "nodes": [
+    {
+      "node_id": "WeakAttack01",
+      "windows": 1,
+      "keys": 18,
+      "HPDamage": [
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0
+      ]
+    },
+    {
+      "node_id": "WeakAttack02",
+      "windows": 1,
+      "keys": 16,
+      "HPDamage": [
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0
+      ]
+    },
+    {
+      "node_id": "WeakAttack03",
+      "windows": 2,
+      "keys": 35,
+      "HPDamage": [
+        10.0,
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "node_id": "WeakAttack04",
+      "windows": 2,
+      "keys": 12,
+      "HPDamage": [
+        10.0,
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "node_id": "WeakAttack05",
+      "windows": 2,
+      "keys": 8,
+      "HPDamage": [
+        10.0,
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "node_id": "StrongAttack01",
+      "windows": 2,
+      "keys": 24,
+      "HPDamage": [
+        10.0,
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "node_id": "StrongAttack02",
+      "windows": 2,
+      "keys": 24,
+      "HPDamage": [
+        10.0,
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "node_id": "StrongAttack03",
+      "windows": 2,
+      "keys": 12,
+      "HPDamage": [
+        10.0,
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "node_id": "StrongCharge",
+      "windows": 4,
+      "keys": 49,
+      "HPDamage": [
+        10.0,
+        10.0,
+        10.0,
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "node_id": "StrongChargeAttack",
+      "windows": 4,
+      "keys": 49,
+      "HPDamage": [
+        10.0,
+        10.0,
+        10.0,
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "node_id": "ChargeAttack02",
+      "windows": 3,
+      "keys": 34,
+      "HPDamage": [
+        10.0,
+        10.0,
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "node_id": "ChargeAttack03",
+      "windows": 4,
+      "keys": 8,
+      "HPDamage": [
+        10.0,
+        10.0,
+        10.0,
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "node_id": "Dodge_F",
+      "windows": 0,
+      "keys": 0,
+      "HPDamage": [],
+      "StaminaDamage": []
+    },
+    {
+      "node_id": "Dodge_RF",
+      "windows": 0,
+      "keys": 0,
+      "HPDamage": [],
+      "StaminaDamage": []
+    },
+    {
+      "node_id": "Dodge_R",
+      "windows": 0,
+      "keys": 0,
+      "HPDamage": [],
+      "StaminaDamage": []
+    },
+    {
+      "node_id": "Dodge_RB",
+      "windows": 0,
+      "keys": 0,
+      "HPDamage": [],
+      "StaminaDamage": []
+    },
+    {
+      "node_id": "Dodge_B",
+      "windows": 0,
+      "keys": 0,
+      "HPDamage": [],
+      "StaminaDamage": []
+    },
+    {
+      "node_id": "Dodge_LB",
+      "windows": 0,
+      "keys": 0,
+      "HPDamage": [],
+      "StaminaDamage": []
+    },
+    {
+      "node_id": "Dodge_L",
+      "windows": 0,
+      "keys": 0,
+      "HPDamage": [],
+      "StaminaDamage": []
+    },
+    {
+      "node_id": "Dodge_LF",
+      "windows": 0,
+      "keys": 0,
+      "HPDamage": [],
+      "StaminaDamage": []
+    },
+    {
+      "node_id": "DodgeAttack_F",
+      "windows": 1,
+      "keys": 39,
+      "HPDamage": [
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0
+      ]
+    },
+    {
+      "node_id": "DodgeAttack_R",
+      "windows": 1,
+      "keys": 26,
+      "HPDamage": [
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0
+      ]
+    },
+    {
+      "node_id": "DodgeAttack_B",
+      "windows": 1,
+      "keys": 25,
+      "HPDamage": [
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0
+      ]
+    },
+    {
+      "node_id": "DodgeAttack_L",
+      "windows": 1,
+      "keys": 33,
+      "HPDamage": [
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0
+      ]
+    },
+    {
+      "node_id": "SpinningAttack01",
+      "windows": 7,
+      "keys": 37,
+      "HPDamage": [
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "node_id": "OverFury",
+      "windows": 20,
+      "keys": 104,
+      "HPDamage": [
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0
+      ],
+      "StaminaDamage": [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    }
+  ],
+  "attack_nodes": 18,
+  "window_count": 60,
+  "key_count": 553,
+  "player_BP_status": "<BlueprintStatus.BS_UP_TO_DATE: 3>",
+  "dirty_content": [],
+  "world": "/Game/Maps/DevMap.DevMap"
+}

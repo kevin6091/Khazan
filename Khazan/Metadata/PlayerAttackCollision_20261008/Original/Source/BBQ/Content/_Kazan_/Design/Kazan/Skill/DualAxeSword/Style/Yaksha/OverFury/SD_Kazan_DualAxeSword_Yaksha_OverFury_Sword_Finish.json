@@ -1,0 +1,272 @@
+[
+  {
+    "Type": "xxDamageInfo",
+    "Name": "SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish",
+    "Properties": {
+      "AttackInfo": {
+        "SkillPowerInfo": {
+          "SkillPowerBonus": 175900
+        },
+        "StaminaAttackInfo": {
+          "StaminaAttackRate": 3500
+        },
+        "AttackerReactionTableSelect": {
+          "AttackerReactionTag": {
+            "DataTable": {
+              "ObjectName": "DataTable'AttackerReaction_Common'",
+              "ObjectPath": "BBQ/Content/_Common/Constants/AttackerReaction/AttackerReaction_Common.0"
+            },
+            "RowName": "충격량6등급+"
+          }
+        },
+        "AttackableFlags": [
+          "ECharacterAttackableFlag::EnableAttackableDownState"
+        ],
+        "EtcInfo": {
+          "ExceptOnAttackChangedBattleResoureces": [
+            {
+              "ChangeBattleResource": "EBattleResourceGroup::Group0",
+              "IsNoChange": true,
+              "ChangeValue": 0
+            }
+          ]
+        }
+      },
+      "SkillFuncInfoMap": [
+        {
+          "Key": "EDamageInfoSkillFuncIndex::Index1",
+          "Value": {
+            "SkillTag": {
+              "ObjectName": "xxDamageInfoEventTag'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish:xxDamageInfoEventTag_1'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.2"
+            },
+            "Funcs": [
+              {
+                "ObjectName": "xxDamageInfoFuncBloodLustWoundExcute'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish:xxDamageInfoFuncBloodLustWoundExcute_0'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.6"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "EDamageInfoSkillFuncIndex::Index2",
+          "Value": {
+            "SkillTag": {
+              "ObjectName": "xxDamageInfoEventTag'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish:xxDamageInfoEventTag_2'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.3"
+            },
+            "Funcs": [
+              {
+                "ObjectName": "xxDamageInfoFuncAdditionalDamage'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish:xxDamageInfoFuncAdditionalDamage_1'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.5"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "EDamageInfoSkillFuncIndex::Index3",
+          "Value": {
+            "SkillTag": {
+              "ObjectName": "xxDamageInfoEventTag'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish:xxDamageInfoEventTag_0'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.1"
+            },
+            "Funcs": [
+              {
+                "ObjectName": "xxDamageInfoFuncAdditionalDamage'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish:xxDamageInfoFuncAdditionalDamage_0'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.4"
+              }
+            ]
+          }
+        }
+      ],
+      "AttackerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true,
+        "bDeActiveStart": true,
+        "TimeSectionDelayData": {
+          "DelayRate": 0.0,
+          "LoopTime": 0.1
+        }
+      },
+      "DamagerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true,
+        "TimeSectionDelayData": {
+          "DelayRate": 0.0,
+          "LoopTime": 0.1
+        }
+      },
+      "DamagerKnockData": {
+        "KnockBackMoveType": "EKnockbackMoveType::UseCurve",
+        "KnockCurveVector": {
+          "ObjectName": "CurveVector'CV_common_groundKnock_strong'",
+          "ObjectPath": "BBQ/Content/_Common/MoveCurve/CV_common_groundKnock_strong.0"
+        },
+        "KnockCurveScale": {
+          "X": 300.0,
+          "Y": 1.0,
+          "Z": 1.0
+        },
+        "TimeSyncType": "ETimeSyncType::SyncAnimation",
+        "KnockbackDistanceTime": 1.0,
+        "KnockbackHeight": 100.0,
+        "KnockbackForce": 100.0
+      },
+      "SpecialDamageAniminfo": {
+        "DamageStrength": "EDamageTypeByStrength::DamageStrong",
+        "CommonAnimationTag": "ECommonAnimationTag::DamageR"
+      },
+      "AttackerHitEffect": {
+        "ParticleInfo": {
+          "bSyncData": true
+        }
+      },
+      "DamageSounds": [
+        {
+          "ObjectName": "AkAudioEvent'efx_dualaxesword_ragingcleave_hit'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/skill/dualaxesword/skill/efx_dualaxesword_ragingcleave_hit.0"
+        }
+      ],
+      "bCustomDamageSound": true,
+      "CustomDamageSound": "ECustomDamageSoundKey::Key3",
+      "AttackStrength": "EBattleDirecting_AttackStrength::AttackStrength_04"
+    }
+  },
+  {
+    "Type": "xxDamageInfoEventTag",
+    "Name": "xxDamageInfoEventTag_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfoEventTag'",
+    "Outer": {
+      "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.0"
+    },
+    "Properties": {
+      "EventTag": "EDamageInfoEventTag::OnAttackBeforeServer",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxDamageInfoTagCondition_SelfSpell'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish:xxDamageInfoEventTag_0.xxDamageInfoTagCondition_SelfSpell_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.7"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDamageInfoEventTag",
+    "Name": "xxDamageInfoEventTag_1",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfoEventTag'",
+    "Outer": {
+      "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.0"
+    },
+    "Properties": {
+      "EventTag": "EDamageInfoEventTag::OnDamagerAfterServer"
+    }
+  },
+  {
+    "Type": "xxDamageInfoEventTag",
+    "Name": "xxDamageInfoEventTag_2",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfoEventTag'",
+    "Outer": {
+      "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.0"
+    },
+    "Properties": {
+      "EventTag": "EDamageInfoEventTag::OnAttackBeforeServer",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxDamageInfoTagCondition_SelfSpell'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish:xxDamageInfoEventTag_2.xxDamageInfoTagCondition_SelfSpell_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.8"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDamageInfoFuncAdditionalDamage",
+    "Name": "xxDamageInfoFuncAdditionalDamage_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfoFuncAdditionalDamage'",
+    "Outer": {
+      "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.0"
+    },
+    "Properties": {
+      "ComputedSkillDamageInfo": {
+        "CustomSkillPowerBonusAdd": 30000
+      }
+    }
+  },
+  {
+    "Type": "xxDamageInfoFuncAdditionalDamage",
+    "Name": "xxDamageInfoFuncAdditionalDamage_1",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfoFuncAdditionalDamage'",
+    "Outer": {
+      "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.0"
+    },
+    "Properties": {
+      "ComputedSkillDamageInfo": {
+        "CustomSkillPowerBonusAdd": 50000
+      }
+    }
+  },
+  {
+    "Type": "xxDamageInfoFuncBloodLustWoundExcute",
+    "Name": "xxDamageInfoFuncBloodLustWoundExcute_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfoFuncBloodLustWoundExcute'",
+    "Outer": {
+      "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.0"
+    },
+    "Properties": {
+      "SpawnSkillObjectCOI": {
+        "ObjectName": "xxBaseCustomObjectInfo'COI_Kazan_DualAxe_OverFury_Hurt'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/COI_Kazan_DualAxe_OverFury_Hurt.0"
+      },
+      "LimitBloodLustOverlapCount": 10
+    }
+  },
+  {
+    "Type": "xxDamageInfoTagCondition_SelfSpell",
+    "Name": "xxDamageInfoTagCondition_SelfSpell_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfoTagCondition_SelfSpell'",
+    "Outer": {
+      "ObjectName": "xxDamageInfoEventTag'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish:xxDamageInfoEventTag_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.1"
+    },
+    "Properties": {
+      "SpellInfo": {
+        "ObjectName": "xxSpellInfo'SP_Kazan_DualAxeSword_Yaksha_OverFury_Count'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SP_Kazan_DualAxeSword_Yaksha_OverFury_Count.3"
+      },
+      "bCheckOverlapCount": true,
+      "OverlapCount": 3
+    }
+  },
+  {
+    "Type": "xxDamageInfoTagCondition_SelfSpell",
+    "Name": "xxDamageInfoTagCondition_SelfSpell_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfoTagCondition_SelfSpell'",
+    "Outer": {
+      "ObjectName": "xxDamageInfoEventTag'SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish:xxDamageInfoEventTag_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SD_Kazan_DualAxeSword_Yaksha_OverFury_Sword_Finish.3"
+    },
+    "Properties": {
+      "SpellInfo": {
+        "ObjectName": "xxSpellInfo'SP_Kazan_DualAxeSword_Yaksha_OverFury_Count'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SP_Kazan_DualAxeSword_Yaksha_OverFury_Count.3"
+      },
+      "bCheckOverlapCount": true,
+      "OverlapCount": 2
+    }
+  }
+]

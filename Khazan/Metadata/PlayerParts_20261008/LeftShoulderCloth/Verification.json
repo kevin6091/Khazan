@@ -1,0 +1,793 @@
+{
+  "utc": "2026-10-08T01:33:06.095972+00:00",
+  "native_pie_passed": true,
+  "native_saved_reload_passed": true,
+  "stock_saved_reload_passed": true,
+  "native_saved_reload_conditions": "Fresh process fixed timestep 1/30 s; full native PIE Success",
+  "normal_delta_all_parts_passed": false,
+  "normal_delta_observation": {
+    "generatedUtc": "2026-10-08T01:30:11.543274+00:00",
+    "status": "ObservedNormalDeltaHairInstability",
+    "scope": "Offline observation of three preserved normal-delta native PIE runs; no editor/test rerun, asset edit or QA threshold change.",
+    "runs": [
+      {
+        "label": "CandidateFreshNormalDeltaFirst",
+        "file": {
+          "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261008\\LeftShoulderCloth\\SavedReloadNative_FirstNormalDeltaFail.log",
+          "bytes": 500287,
+          "sha256": "B091B14518CADFC8F1FD2A11C6ED72A4C7BDE2A9DC7595834E292736C49C6A01"
+        },
+        "selectedResult": "Fail",
+        "lastCompletedResult": {
+          "result": "Fail",
+          "line": 3102,
+          "raw": "[2026.10.08-01.21.43:491][964]LogAutomationController: Error: Test Completed. Result={Fail} Name={PIE} Path={Khazan.PlayerParts.PIE}"
+        },
+        "selectedLineRange": [
+          3103,
+          3376
+        ],
+        "eventsComplete": true,
+        "assertionErrors": [
+          {
+            "line": 3364,
+            "raw": "[2026.10.08-01.21.43:509][965]LogAutomationController: Error: Expected 'Refined hair has no large joint flip (35-degree QA envelope)' to be true. [C:\\Users\\user\\Desktop\\GitProject\\Khazan_PlayerPartsWork_20261007\\Khazan\\Source\\Khazan\\Tests\\PlayerPartsPIEEditor.cpp(412)]"
+          }
+        ],
+        "hairOnlyFailure": true,
+        "Hair": {
+          "rootSamples": 1778.0,
+          "rootRmsCm": 0.123558,
+          "rootPeakCm": 1.283148,
+          "tipSamples": 2032.0,
+          "tipRmsCm": 7.418098,
+          "tipPeakCm": 22.614116,
+          "bendRmsDegrees": 9.258434,
+          "bendPeakDegrees": 60.07903,
+          "independentlyRespondingJoints": 65.0
+        },
+        "Torso": {
+          "part": "Torso",
+          "bendSamples": 1016.0,
+          "bendRmsDegrees": 5.273932,
+          "bendPeakDegrees": 23.880193,
+          "peakBone": "B_Cape_01_03_01_02_L_Armor001",
+          "tipSamples": 508.0,
+          "tipRmsCm": 11.942815,
+          "tipPeakCm": 39.79731,
+          "secondaryRespondingBones": 8.0,
+          "directSimulatedBones": 8.0,
+          "independentlyRespondingJoints": 8.0
+        },
+        "Leg": {
+          "part": "Leg",
+          "bendSamples": 3810.0,
+          "bendRmsDegrees": 15.19981,
+          "bendPeakDegrees": 32.21147,
+          "peakBone": "B_Cloth_02_05_B_Pelvis",
+          "tipSamples": 1778.0,
+          "tipRmsCm": 14.892725,
+          "tipPeakCm": 54.602871,
+          "secondaryRespondingBones": 30.0,
+          "directSimulatedBones": 30.0,
+          "independentlyRespondingJoints": 30.0
+        },
+        "torsoBelowExisting45DegreeEnvelope": true,
+        "commandLineRaw": "LogInit: Command Line: /Game/Maps/DevMap -NullRHI -PlayerClothSurfaceProbe -PlayerShoulderMotionProbe -PlayerClothView -EnablePlugins=GameFeatures -skipcompile -NoLiveCoding -NoSourceControl -DisablePlugins=RiderLink,ModelContextProtocol,XGEController -Unattended -NoSplash -NoSound -ExecCmds=\"py C:/Users/user/Desktop/GitProject/Khazan_PlayerPartsWork_20261007/Khazan/Saved/player_parts_isolated_editor.py,t.MaxFPS 60\" -log=PlayerPartsWorkEditor.log",
+        "useFixedTimeStepFlagPresent": false,
+        "interpretationScope": "Last native PIE buffered event block only; earlier runs in copied logs excluded."
+      },
+      {
+        "label": "CandidateNormalDeltaSecond",
+        "file": {
+          "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261008\\LeftShoulderCloth\\SavedReloadNative_SecondNormalDeltaFail.log",
+          "bytes": 694865,
+          "sha256": "70102752C0EB67F228057FEAECE467E714D4A665C2FBC279B09F302D45B55B66"
+        },
+        "selectedResult": "Fail",
+        "lastCompletedResult": {
+          "result": "Fail",
+          "line": 4345,
+          "raw": "[2026.10.08-01.22.48:420][738]LogAutomationController: Error: Test Completed. Result={Fail} Name={PIE} Path={Khazan.PlayerParts.PIE}"
+        },
+        "selectedLineRange": [
+          4346,
+          4619
+        ],
+        "eventsComplete": true,
+        "assertionErrors": [
+          {
+            "line": 4607,
+            "raw": "[2026.10.08-01.22.48:439][738]LogAutomationController: Error: Expected 'Refined hair has no large joint flip (35-degree QA envelope)' to be true. [C:\\Users\\user\\Desktop\\GitProject\\Khazan_PlayerPartsWork_20261007\\Khazan\\Source\\Khazan\\Tests\\PlayerPartsPIEEditor.cpp(412)]"
+          }
+        ],
+        "hairOnlyFailure": true,
+        "Hair": {
+          "rootSamples": 1680.0,
+          "rootRmsCm": 0.162957,
+          "rootPeakCm": 1.763996,
+          "tipSamples": 1920.0,
+          "tipRmsCm": 8.515457,
+          "tipPeakCm": 30.575172,
+          "bendRmsDegrees": 9.429898,
+          "bendPeakDegrees": 59.592638,
+          "independentlyRespondingJoints": 65.0
+        },
+        "Torso": {
+          "part": "Torso",
+          "bendSamples": 960.0,
+          "bendRmsDegrees": 4.082375,
+          "bendPeakDegrees": 15.335114,
+          "peakBone": "B_Cape_01_03_L_Armor001",
+          "tipSamples": 480.0,
+          "tipRmsCm": 10.742507,
+          "tipPeakCm": 34.125362,
+          "secondaryRespondingBones": 8.0,
+          "directSimulatedBones": 8.0,
+          "independentlyRespondingJoints": 8.0
+        },
+        "Leg": {
+          "part": "Leg",
+          "bendSamples": 3600.0,
+          "bendRmsDegrees": 15.125271,
+          "bendPeakDegrees": 32.210357,
+          "peakBone": "B_Cloth_01_05_R_Pelvis",
+          "tipSamples": 1680.0,
+          "tipRmsCm": 14.747297,
+          "tipPeakCm": 52.844496,
+          "secondaryRespondingBones": 30.0,
+          "directSimulatedBones": 30.0,
+          "independentlyRespondingJoints": 30.0
+        },
+        "torsoBelowExisting45DegreeEnvelope": true,
+        "commandLineRaw": "LogInit: Command Line: /Game/Maps/DevMap -NullRHI -PlayerClothSurfaceProbe -PlayerShoulderMotionProbe -PlayerClothView -EnablePlugins=GameFeatures -skipcompile -NoLiveCoding -NoSourceControl -DisablePlugins=RiderLink,ModelContextProtocol,XGEController -Unattended -NoSplash -NoSound -ExecCmds=\"py C:/Users/user/Desktop/GitProject/Khazan_PlayerPartsWork_20261007/Khazan/Saved/player_parts_isolated_editor.py,t.MaxFPS 60\" -log=PlayerPartsWorkEditor.log",
+        "useFixedTimeStepFlagPresent": false,
+        "interpretationScope": "Last native PIE buffered event block only; earlier runs in copied logs excluded."
+      },
+      {
+        "label": "RestoredTorsoNormalDeltaControl",
+        "file": {
+          "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261008\\LeftShoulderCloth\\OriginalTorso_NormalDeltaControl.log",
+          "bytes": 890045,
+          "sha256": "0272720F9FE05B27D2B4EA103EEC15D98D520CB430A91140066C67F6D6AC574B"
+        },
+        "selectedResult": "Fail",
+        "lastCompletedResult": {
+          "result": "Fail",
+          "line": 5592,
+          "raw": "[2026.10.08-01.23.58:640][417]LogAutomationController: Error: Test Completed. Result={Fail} Name={PIE} Path={Khazan.PlayerParts.PIE}"
+        },
+        "selectedLineRange": [
+          5593,
+          5866
+        ],
+        "eventsComplete": true,
+        "assertionErrors": [
+          {
+            "line": 5854,
+            "raw": "[2026.10.08-01.23.58:654][418]LogAutomationController: Error: Expected 'Refined hair has no large joint flip (35-degree QA envelope)' to be true. [C:\\Users\\user\\Desktop\\GitProject\\Khazan_PlayerPartsWork_20261007\\Khazan\\Source\\Khazan\\Tests\\PlayerPartsPIEEditor.cpp(412)]"
+          }
+        ],
+        "hairOnlyFailure": true,
+        "Hair": {
+          "rootSamples": 1442.0,
+          "rootRmsCm": 0.124675,
+          "rootPeakCm": 0.840695,
+          "tipSamples": 1648.0,
+          "tipRmsCm": 7.148046,
+          "tipPeakCm": 22.713251,
+          "bendRmsDegrees": 9.528552,
+          "bendPeakDegrees": 71.87789,
+          "independentlyRespondingJoints": 65.0
+        },
+        "Torso": {
+          "part": "Torso",
+          "bendSamples": 824.0,
+          "bendRmsDegrees": 4.742518,
+          "bendPeakDegrees": 20.995945,
+          "peakBone": "B_Cape_01_03_01_02_L_Armor001",
+          "tipSamples": 412.0,
+          "tipRmsCm": 10.826281,
+          "tipPeakCm": 43.453101,
+          "secondaryRespondingBones": 8.0,
+          "directSimulatedBones": 8.0,
+          "independentlyRespondingJoints": 8.0
+        },
+        "Leg": {
+          "part": "Leg",
+          "bendSamples": 3090.0,
+          "bendRmsDegrees": 14.976792,
+          "bendPeakDegrees": 32.212337,
+          "peakBone": "B_Cloth_02_05_B_Pelvis",
+          "tipSamples": 1442.0,
+          "tipRmsCm": 14.602062,
+          "tipPeakCm": 53.519787,
+          "secondaryRespondingBones": 30.0,
+          "directSimulatedBones": 30.0,
+          "independentlyRespondingJoints": 30.0
+        },
+        "torsoBelowExisting45DegreeEnvelope": true,
+        "commandLineRaw": "LogInit: Command Line: /Game/Maps/DevMap -NullRHI -PlayerClothSurfaceProbe -PlayerShoulderMotionProbe -PlayerClothView -EnablePlugins=GameFeatures -skipcompile -NoLiveCoding -NoSourceControl -DisablePlugins=RiderLink,ModelContextProtocol,XGEController -Unattended -NoSplash -NoSound -ExecCmds=\"py C:/Users/user/Desktop/GitProject/Khazan_PlayerPartsWork_20261007/Khazan/Saved/player_parts_isolated_editor.py,t.MaxFPS 60\" -log=PlayerPartsWorkEditor.log",
+        "useFixedTimeStepFlagPresent": false,
+        "interpretationScope": "Last native PIE buffered event block only; earlier runs in copied logs excluded."
+      }
+    ],
+    "allThreeSelectedNativeTestsPassed": false,
+    "allThreeFailuresOnlyHairAssertion": true,
+    "allThreeTorsoPeaksBelowExisting45DegreeEnvelope": true,
+    "hairAssetChangesInThisTask": false,
+    "hairAssetInvarianceSource": "Parent reported protected Hair SHA unchanged; these logs are runtime observations and do not independently prove complete asset invariance.",
+    "restoredTorsoControlSource": "Parent restored the pre-change Torso PA for the OriginalTorso_NormalDeltaControl trial. This label is not original-game physics verification.",
+    "fixed30Evidence": {
+      "file": {
+        "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261008\\LeftShoulderCloth\\NativeComparison.json",
+        "bytes": 54625,
+        "sha256": "F65346D0CE1F29F1C1EFC7399A84589AF198E45573637FCDFD9AF4218BF95AB2"
+      },
+      "statement": "Separate fixed30 baseline/candidate tests passed with exactly equal logged Hair/Leg numeric metrics and Torso-only SLERP stiffness profile change."
+    },
+    "interpretation": [
+      "Hair peak60.079030/59.592638 degrees exceeded the existing35-degree envelope in the two candidate normal-delta observations.",
+      "The restored pre-change Torso control also failed the same Hair assertion, peak71.877890 degrees. The observed Hair failure therefore reproduces without the shoulder spring change; this does not isolate every possible additional effect.",
+      "Torso remained below its existing45-degree envelope in all three observations, with peaks23.880193/15.335114/20.995945 degrees.",
+      "No frame-timing or other root cause is confirmed by these three runs. Hair tuning was not broadened or changed.",
+      "Fixed30 success and the small shoulder change must not be described as all normal-delta tests passing."
+    ],
+    "limits": [
+      "Three observations, not a statistical long-run or every-action guarantee.",
+      "No Hair change or test-threshold relaxation was performed to hide the failures.",
+      "Source PA/body/skin collision equality and hardware behavior are outside this log-only observation."
+    ]
+  },
+  "hair_motion": {
+    "rootSamples": 2100.0,
+    "rootRmsCm": 0.106839,
+    "rootPeakCm": 0.525609,
+    "tipSamples": 2400.0,
+    "tipRmsCm": 7.357307,
+    "tipPeakCm": 16.576767,
+    "bendRmsDegrees": 8.687415,
+    "bendPeakDegrees": 31.588255,
+    "independentlyRespondingJoints": 65.0
+  },
+  "motion": {
+    "Torso": {
+      "before": {
+        "part": "Torso",
+        "bendSamples": 1200.0,
+        "bendRmsDegrees": 3.764723,
+        "bendPeakDegrees": 11.961719,
+        "peakBone": "B_Cape_01_03_L_Armor001",
+        "tipSamples": 600.0,
+        "tipRmsCm": 10.191403,
+        "tipPeakCm": 26.927262,
+        "secondaryRespondingBones": 8.0,
+        "directSimulatedBones": 8.0,
+        "independentlyRespondingJoints": 8.0
+      },
+      "after": {
+        "part": "Torso",
+        "bendSamples": 1200.0,
+        "bendRmsDegrees": 3.840786,
+        "bendPeakDegrees": 11.999827,
+        "peakBone": "B_Cape_01_03_L_Armor001",
+        "tipSamples": 600.0,
+        "tipRmsCm": 10.52969,
+        "tipPeakCm": 26.945201,
+        "secondaryRespondingBones": 8.0,
+        "directSimulatedBones": 8.0,
+        "independentlyRespondingJoints": 8.0
+      }
+    },
+    "Leg": {
+      "before": {
+        "part": "Leg",
+        "bendSamples": 4500.0,
+        "bendRmsDegrees": 15.33012,
+        "bendPeakDegrees": 32.207126,
+        "peakBone": "B_Cloth_01_05_R_Pelvis",
+        "tipSamples": 2100.0,
+        "tipRmsCm": 14.58709,
+        "tipPeakCm": 54.160593,
+        "secondaryRespondingBones": 30.0,
+        "directSimulatedBones": 30.0,
+        "independentlyRespondingJoints": 30.0
+      },
+      "after": {
+        "part": "Leg",
+        "bendSamples": 4500.0,
+        "bendRmsDegrees": 15.33012,
+        "bendPeakDegrees": 32.207126,
+        "peakBone": "B_Cloth_01_05_R_Pelvis",
+        "tipSamples": 2100.0,
+        "tipRmsCm": 14.58709,
+        "tipPeakCm": 54.160593,
+        "secondaryRespondingBones": 30.0,
+        "directSimulatedBones": 30.0,
+        "independentlyRespondingJoints": 30.0
+      }
+    }
+  },
+  "spring_scale": 0.95,
+  "numeric_source": "Assistant temporary tuning; original-game physics field unverified",
+  "changed_field": "Torso eight left-Cape AngularDrive.SlerpDrive.Stiffness only",
+  "profile_audit_passed": true,
+  "saved_default_profiles_match": true,
+  "shoulder_comparison": {
+    "Whole8": [
+      {
+        "field": "firstQuaternionExcluded",
+        "baseline": 1.0,
+        "candidate": 1.0,
+        "delta": 0.0,
+        "changePercent": 0.0
+      },
+      {
+        "field": "actualWorldElapsedSeconds",
+        "baseline": 1.0,
+        "candidate": 1.0,
+        "delta": 0.0,
+        "changePercent": 0.0
+      },
+      {
+        "field": "observedJoints",
+        "baseline": 8.0,
+        "candidate": 8.0,
+        "delta": 0.0,
+        "changePercent": 0.0
+      },
+      {
+        "field": "samples",
+        "baseline": 952.0,
+        "candidate": 952.0,
+        "delta": 0.0,
+        "changePercent": 0.0
+      },
+      {
+        "field": "deltaRmsDegrees",
+        "baseline": 1.077839,
+        "candidate": 1.077807,
+        "delta": -3.2000000000032e-05,
+        "changePercent": -0.0029689035189886435
+      },
+      {
+        "field": "deltaPeakDegrees",
+        "baseline": 16.404139,
+        "candidate": 16.468471,
+        "delta": 0.06433200000000028,
+        "changePercent": 0.3921693177557217
+      },
+      {
+        "field": "speedRmsDegreesPerSecond",
+        "baseline": 32.335161,
+        "candidate": 32.334203,
+        "delta": -0.0009579999999971278,
+        "changePercent": -0.0029627191279397924
+      },
+      {
+        "field": "speedPeakDegreesPerSecond",
+        "baseline": 492.12413,
+        "candidate": 494.054115,
+        "delta": 1.9299850000000447,
+        "changePercent": 0.39217442965051214
+      },
+      {
+        "field": "meanDeltaSeconds",
+        "baseline": 0.033333335,
+        "candidate": 0.033333335,
+        "delta": 0.0,
+        "changePercent": 0.0
+      }
+    ],
+    "ShortPanel02_02": [
+      {
+        "field": "firstQuaternionExcluded",
+        "baseline": 1.0,
+        "candidate": 1.0,
+        "delta": 0.0,
+        "changePercent": 0.0
+      },
+      {
+        "field": "actualWorldElapsedSeconds",
+        "baseline": 1.0,
+        "candidate": 1.0,
+        "delta": 0.0,
+        "changePercent": 0.0
+      },
+      {
+        "field": "observedJoints",
+        "baseline": 1.0,
+        "candidate": 1.0,
+        "delta": 0.0,
+        "changePercent": 0.0
+      },
+      {
+        "field": "samples",
+        "baseline": 119.0,
+        "candidate": 119.0,
+        "delta": 0.0,
+        "changePercent": 0.0
+      },
+      {
+        "field": "deltaRmsDegrees",
+        "baseline": 1.844196,
+        "candidate": 1.853725,
+        "delta": 0.00952900000000012,
+        "changePercent": 0.5167021292747691
+      },
+      {
+        "field": "deltaPeakDegrees",
+        "baseline": 16.404139,
+        "candidate": 16.468471,
+        "delta": 0.06433200000000028,
+        "changePercent": 0.3921693177557217
+      },
+      {
+        "field": "speedRmsDegreesPerSecond",
+        "baseline": 55.32588,
+        "candidate": 55.611735,
+        "delta": 0.2858550000000051,
+        "changePercent": 0.5166750171890715
+      },
+      {
+        "field": "speedPeakDegreesPerSecond",
+        "baseline": 492.12413,
+        "candidate": 494.054115,
+        "delta": 1.9299850000000447,
+        "changePercent": 0.39217442965051214
+      },
+      {
+        "field": "meanDeltaSeconds",
+        "baseline": 0.033333335,
+        "candidate": 0.033333335,
+        "delta": 0.0,
+        "changePercent": 0.0
+      }
+    ],
+    "LongCloth7": [
+      {
+        "field": "firstQuaternionExcluded",
+        "baseline": 1.0,
+        "candidate": 1.0,
+        "delta": 0.0,
+        "changePercent": 0.0
+      },
+      {
+        "field": "actualWorldElapsedSeconds",
+        "baseline": 1.0,
+        "candidate": 1.0,
+        "delta": 0.0,
+        "changePercent": 0.0
+      },
+      {
+        "field": "observedJoints",
+        "baseline": 7.0,
+        "candidate": 7.0,
+        "delta": 0.0,
+        "changePercent": 0.0
+      },
+      {
+        "field": "samples",
+        "baseline": 833.0,
+        "candidate": 833.0,
+        "delta": 0.0,
+        "changePercent": 0.0
+      },
+      {
+        "field": "deltaRmsDegrees",
+        "baseline": 0.917515,
+        "candidate": 0.914724,
+        "delta": -0.002790999999999988,
+        "changePercent": -0.30419121213277034
+      },
+      {
+        "field": "deltaPeakDegrees",
+        "baseline": 10.819421,
+        "candidate": 10.884757,
+        "delta": 0.06533600000000028,
+        "changePercent": 0.6038770466552719
+      },
+      {
+        "field": "speedRmsDegreesPerSecond",
+        "baseline": 27.525438,
+        "candidate": 27.441731,
+        "delta": -0.08370700000000042,
+        "changePercent": -0.3041077856781077
+      },
+      {
+        "field": "speedPeakDegreesPerSecond",
+        "baseline": 324.582621,
+        "candidate": 326.542679,
+        "delta": 1.9600580000000036,
+        "changePercent": 0.6038702854642374
+      },
+      {
+        "field": "meanDeltaSeconds",
+        "baseline": 0.033333335,
+        "candidate": 0.033333335,
+        "delta": 0.0,
+        "changePercent": 0.0
+      }
+    ]
+  },
+  "torso_surface": {
+    "baseline": {
+      "threeStagesComplete": true,
+      "allSampledTorsoVerticesOutside": true,
+      "stages": [
+        {
+          "stage": 3,
+          "valid": true,
+          "probe": {
+            "part": "Torso",
+            "stage": 3.0,
+            "timeSeconds": 4.033334,
+            "scope": "CurrentPoseLinearLOD0PositiveDirectSimulatedClothWeightsAgainstExternalAnatomyImplicitPhiCm",
+            "externalActors": 18.0,
+            "sampledVertices": 867.0,
+            "insideVertices": 0.0,
+            "minimumPhiCm": 0.531446,
+            "penetrationPeakCm": 0.0,
+            "penetrationRmsAcrossSampledVerticesCm": 0.0,
+            "finite": 1.0,
+            "worstVertex": 7798.0,
+            "worstExternalActor": 24.0,
+            "worstWorldPositionCm": "X=-11.612",
+            "Y": -18.286,
+            "Z": 143.35
+          },
+          "dominant": {
+            "part": "Torso",
+            "stage": 3.0,
+            "dominantTiePolicy": "LowestSkeletonBoneIndex",
+            "worstVertex": 7798.0,
+            "worstDominantBone": "B_Cape_01_01_L_Armor001",
+            "worstDominantWeightRaw": 39321.0,
+            "worstDominantWeightFraction": 0.6,
+            "worstMaximumWeightTies": 1.0,
+            "worstTotalWeightRaw": 65535.0,
+            "worstAllClothWeightFraction": 0.639216,
+            "worstDirectSimClothWeightFraction": 0.039216,
+            "dominantDirectSimVertices": 735.0,
+            "dominantDirectSimInsideVertices": 0.0,
+            "dominantDirectSimMinimumPhiCm": 8.652845,
+            "dominantDirectSimPenetrationPeakCm": 0.0,
+            "dominantDirectSimPenetrationRmsAcrossSubsetCm": 0.0,
+            "dominantDirectSimWorstVertex": 10892.0,
+            "dominantDirectSimWorstBone": "B_Cape_02_02_L_Armor001"
+          }
+        },
+        {
+          "stage": 4,
+          "valid": true,
+          "probe": {
+            "part": "Torso",
+            "stage": 4.0,
+            "timeSeconds": 6.033334,
+            "scope": "CurrentPoseLinearLOD0PositiveDirectSimulatedClothWeightsAgainstExternalAnatomyImplicitPhiCm",
+            "externalActors": 18.0,
+            "sampledVertices": 867.0,
+            "insideVertices": 0.0,
+            "minimumPhiCm": 0.675201,
+            "penetrationPeakCm": 0.0,
+            "penetrationRmsAcrossSampledVerticesCm": 0.0,
+            "finite": 1.0,
+            "worstVertex": 7798.0,
+            "worstExternalActor": 24.0,
+            "worstWorldPositionCm": "X=5.143",
+            "Y": -17.278,
+            "Z": 146.566
+          },
+          "dominant": {
+            "part": "Torso",
+            "stage": 4.0,
+            "dominantTiePolicy": "LowestSkeletonBoneIndex",
+            "worstVertex": 7798.0,
+            "worstDominantBone": "B_Cape_01_01_L_Armor001",
+            "worstDominantWeightRaw": 39321.0,
+            "worstDominantWeightFraction": 0.6,
+            "worstMaximumWeightTies": 1.0,
+            "worstTotalWeightRaw": 65535.0,
+            "worstAllClothWeightFraction": 0.639216,
+            "worstDirectSimClothWeightFraction": 0.039216,
+            "dominantDirectSimVertices": 735.0,
+            "dominantDirectSimInsideVertices": 0.0,
+            "dominantDirectSimMinimumPhiCm": 7.289111,
+            "dominantDirectSimPenetrationPeakCm": 0.0,
+            "dominantDirectSimPenetrationRmsAcrossSubsetCm": 0.0,
+            "dominantDirectSimWorstVertex": 10892.0,
+            "dominantDirectSimWorstBone": "B_Cape_02_02_L_Armor001"
+          }
+        },
+        {
+          "stage": 5,
+          "valid": true,
+          "probe": {
+            "part": "Torso",
+            "stage": 5.0,
+            "timeSeconds": 8.033334,
+            "scope": "CurrentPoseLinearLOD0PositiveDirectSimulatedClothWeightsAgainstExternalAnatomyImplicitPhiCm",
+            "externalActors": 18.0,
+            "sampledVertices": 867.0,
+            "insideVertices": 0.0,
+            "minimumPhiCm": 0.796661,
+            "penetrationPeakCm": 0.0,
+            "penetrationRmsAcrossSampledVerticesCm": 0.0,
+            "finite": 1.0,
+            "worstVertex": 7798.0,
+            "worstExternalActor": 24.0,
+            "worstWorldPositionCm": "X=12.155",
+            "Y": -13.285,
+            "Z": 147.832
+          },
+          "dominant": {
+            "part": "Torso",
+            "stage": 5.0,
+            "dominantTiePolicy": "LowestSkeletonBoneIndex",
+            "worstVertex": 7798.0,
+            "worstDominantBone": "B_Cape_01_01_L_Armor001",
+            "worstDominantWeightRaw": 39321.0,
+            "worstDominantWeightFraction": 0.6,
+            "worstMaximumWeightTies": 1.0,
+            "worstTotalWeightRaw": 65535.0,
+            "worstAllClothWeightFraction": 0.639216,
+            "worstDirectSimClothWeightFraction": 0.039216,
+            "dominantDirectSimVertices": 735.0,
+            "dominantDirectSimInsideVertices": 0.0,
+            "dominantDirectSimMinimumPhiCm": 7.33999,
+            "dominantDirectSimPenetrationPeakCm": 0.0,
+            "dominantDirectSimPenetrationRmsAcrossSubsetCm": 0.0,
+            "dominantDirectSimWorstVertex": 10892.0,
+            "dominantDirectSimWorstBone": "B_Cape_02_02_L_Armor001"
+          }
+        }
+      ],
+      "caveat": "Sampled linear LOD0 vertices against 18 body proxies, not skin triangles/all poses/continuous collision."
+    },
+    "candidate": {
+      "threeStagesComplete": true,
+      "allSampledTorsoVerticesOutside": true,
+      "stages": [
+        {
+          "stage": 3,
+          "valid": true,
+          "probe": {
+            "part": "Torso",
+            "stage": 3.0,
+            "timeSeconds": 4.033334,
+            "scope": "CurrentPoseLinearLOD0PositiveDirectSimulatedClothWeightsAgainstExternalAnatomyImplicitPhiCm",
+            "externalActors": 18.0,
+            "sampledVertices": 867.0,
+            "insideVertices": 0.0,
+            "minimumPhiCm": 0.533132,
+            "penetrationPeakCm": 0.0,
+            "penetrationRmsAcrossSampledVerticesCm": 0.0,
+            "finite": 1.0,
+            "worstVertex": 7798.0,
+            "worstExternalActor": 24.0,
+            "worstWorldPositionCm": "X=-11.613",
+            "Y": -18.287,
+            "Z": 143.351
+          },
+          "dominant": {
+            "part": "Torso",
+            "stage": 3.0,
+            "dominantTiePolicy": "LowestSkeletonBoneIndex",
+            "worstVertex": 7798.0,
+            "worstDominantBone": "B_Cape_01_01_L_Armor001",
+            "worstDominantWeightRaw": 39321.0,
+            "worstDominantWeightFraction": 0.6,
+            "worstMaximumWeightTies": 1.0,
+            "worstTotalWeightRaw": 65535.0,
+            "worstAllClothWeightFraction": 0.639216,
+            "worstDirectSimClothWeightFraction": 0.039216,
+            "dominantDirectSimVertices": 735.0,
+            "dominantDirectSimInsideVertices": 0.0,
+            "dominantDirectSimMinimumPhiCm": 8.653006,
+            "dominantDirectSimPenetrationPeakCm": 0.0,
+            "dominantDirectSimPenetrationRmsAcrossSubsetCm": 0.0,
+            "dominantDirectSimWorstVertex": 10892.0,
+            "dominantDirectSimWorstBone": "B_Cape_02_02_L_Armor001"
+          }
+        },
+        {
+          "stage": 4,
+          "valid": true,
+          "probe": {
+            "part": "Torso",
+            "stage": 4.0,
+            "timeSeconds": 6.033334,
+            "scope": "CurrentPoseLinearLOD0PositiveDirectSimulatedClothWeightsAgainstExternalAnatomyImplicitPhiCm",
+            "externalActors": 18.0,
+            "sampledVertices": 867.0,
+            "insideVertices": 0.0,
+            "minimumPhiCm": 0.676809,
+            "penetrationPeakCm": 0.0,
+            "penetrationRmsAcrossSampledVerticesCm": 0.0,
+            "finite": 1.0,
+            "worstVertex": 7798.0,
+            "worstExternalActor": 24.0,
+            "worstWorldPositionCm": "X=5.142",
+            "Y": -17.279,
+            "Z": 146.567
+          },
+          "dominant": {
+            "part": "Torso",
+            "stage": 4.0,
+            "dominantTiePolicy": "LowestSkeletonBoneIndex",
+            "worstVertex": 7798.0,
+            "worstDominantBone": "B_Cape_01_01_L_Armor001",
+            "worstDominantWeightRaw": 39321.0,
+            "worstDominantWeightFraction": 0.6,
+            "worstMaximumWeightTies": 1.0,
+            "worstTotalWeightRaw": 65535.0,
+            "worstAllClothWeightFraction": 0.639216,
+            "worstDirectSimClothWeightFraction": 0.039216,
+            "dominantDirectSimVertices": 735.0,
+            "dominantDirectSimInsideVertices": 0.0,
+            "dominantDirectSimMinimumPhiCm": 7.289754,
+            "dominantDirectSimPenetrationPeakCm": 0.0,
+            "dominantDirectSimPenetrationRmsAcrossSubsetCm": 0.0,
+            "dominantDirectSimWorstVertex": 10892.0,
+            "dominantDirectSimWorstBone": "B_Cape_02_02_L_Armor001"
+          }
+        },
+        {
+          "stage": 5,
+          "valid": true,
+          "probe": {
+            "part": "Torso",
+            "stage": 5.0,
+            "timeSeconds": 8.033334,
+            "scope": "CurrentPoseLinearLOD0PositiveDirectSimulatedClothWeightsAgainstExternalAnatomyImplicitPhiCm",
+            "externalActors": 18.0,
+            "sampledVertices": 867.0,
+            "insideVertices": 0.0,
+            "minimumPhiCm": 0.798317,
+            "penetrationPeakCm": 0.0,
+            "penetrationRmsAcrossSampledVerticesCm": 0.0,
+            "finite": 1.0,
+            "worstVertex": 7798.0,
+            "worstExternalActor": 24.0,
+            "worstWorldPositionCm": "X=12.155",
+            "Y": -13.286,
+            "Z": 147.834
+          },
+          "dominant": {
+            "part": "Torso",
+            "stage": 5.0,
+            "dominantTiePolicy": "LowestSkeletonBoneIndex",
+            "worstVertex": 7798.0,
+            "worstDominantBone": "B_Cape_01_01_L_Armor001",
+            "worstDominantWeightRaw": 39321.0,
+            "worstDominantWeightFraction": 0.6,
+            "worstMaximumWeightTies": 1.0,
+            "worstTotalWeightRaw": 65535.0,
+            "worstAllClothWeightFraction": 0.639216,
+            "worstDirectSimClothWeightFraction": 0.039216,
+            "dominantDirectSimVertices": 735.0,
+            "dominantDirectSimInsideVertices": 0.0,
+            "dominantDirectSimMinimumPhiCm": 7.340231,
+            "dominantDirectSimPenetrationPeakCm": 0.0,
+            "dominantDirectSimPenetrationRmsAcrossSubsetCm": 0.0,
+            "dominantDirectSimWorstVertex": 10892.0,
+            "dominantDirectSimWorstBone": "B_Cape_02_02_L_Armor001"
+          }
+        }
+      ],
+      "caveat": "Sampled linear LOD0 vertices against 18 body proxies, not skin triangles/all poses/continuous collision."
+    }
+  },
+  "unchanged_hair_leg_fixed30_metrics": true,
+  "protected_initial_count": 162,
+  "concurrent_protected_drift_preserved": [
+    {
+      "path": "Config/DefaultEditor.ini",
+      "before": "E45A0EA5247BAA1613CD48CCCEBB6F32F6F102E57B003816061B6ADA93128F3C",
+      "current": "BEF679DFB25108C26B1AECBE4974659C53EFF935CC36055B1AC79FDD444CD111"
+    }
+  ],
+  "private_helper_binaries_restored": true,
+  "guard_heal": "Not repeated: no gameplay/runtime Source changes; previous regression record retained",
+  "main_handoff_pending": true
+}

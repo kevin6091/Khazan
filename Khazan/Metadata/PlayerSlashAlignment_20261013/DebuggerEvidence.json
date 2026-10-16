@@ -1,0 +1,29 @@
+{
+  "status": "partial_runtime_evidence",
+  "session": "UnrealEditor (29740)",
+  "owned_pid": 29740,
+  "paused_location": "private KZAnimNotify_CombatEffect.cpp:355 -> 358 -> 364 -> 365",
+  "stack": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"frames\":[{\"presentation\":\"UKZAnimNotify_CombatEffect::SpawnComponent(const UKZAnimNotify_CombatEffect &, USkeletalMeshComponent *, bool, float, float) KZAnimNotify_CombatEffect.cpp:355\",\"index\":0,\"file\":\"file://C:/Users/user/Desktop/GitProject/Khazan_PlayerSlashWork_20261013/Khazan/Source/Khazan/Animation/Notifies/KZAnimNotify_CombatEffect.cpp\",\"line\":355,\"isCurrent\":true}],\"threadId\":\"Thread-1-[GameThread] (28220)\",\"totalFrames\":1}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "curve_keys": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Curve->Curve.Keys = Num=2, Max=4 {TArray<FRichCurveKey, TSizedDefaultAllocator<32>>}\n  ├─ + [0] = {InterpMode=RCIM_Linear, TangentMode=RCTM_Auto, TangentWeightMode=RCTWM_WeightedNone, ...} {FRichCurveKey}\n  │  ├─ + InterpMode = RCIM_Linear {TEnumAsByte<enum ERichCurveInterpMode>}\n  │  ├─ + TangentMode = RCTM_Auto {TEnumAsByte<enum ERichCurveTangentMode>}\n  │  ├─ + TangentWeightMode = RCTWM_WeightedNone {TEnumAsByte<enum ERichCurveTangentWeightMode>}\n  │  ├─ Time = 0 {float}\n  │  ├─ Value = 0 {float}\n  │  ├─ ArriveTangent = 0 {float}\n  │  ├─ ArriveTangentWeight = 0 {float}\n  │  ├─ LeaveTangent = 0 {float}\n  │  └─ LeaveTangentWeight = 0 {float}\n  ├─ + [1] = {InterpMode=RCIM_Linear, TangentMode=RCTM_Auto, TangentWeightMode=RCTWM_WeightedNone, ...} {FRichCurveKey}\n  │  ├─ + InterpMode = RCIM_Linear {TEnumAsByte<enum ERichCurveInterpMode>}\n  │  ├─ + TangentMode = RCTM_Auto {TEnumAsByte<enum ERichCurveTangentMode>}\n  │  ├─ + TangentWeightMode = RCTWM_WeightedNone {TEnumAsByte<enum ERichCurveTangentWeightMode>}\n  │  ├─ Time = 1 {float}\n  │  ├─ Value = 0 {float}\n  │  ├─ ArriveTangent = 0 {float}\n  │  ├─ ArriveTangentWeight = 0 {float}\n  │  ├─ LeaveTangent = 0 {float}\n  │  └─ LeaveTangentWeight = 0 {float}\n  └─ + Raw View = {AllocatorInstance={TSizedAllocatorBase<32,TSizedHeapAllocator<32,FMemory> >::ForAnyElementType={Data= // 0x000002317ba3bad0 {...}}}, ArrayNum=2, ArrayMax=4} {TArray<FRichCurveKey, TSizedDefaultAllocator<32>>}\n     ├─ + AllocatorInstance = {TSizedAllocatorBase<32,TSizedHeapAllocator<32,FMemory> >::ForAnyElementType={Data= // 0x000002317ba3bad0 {...}}} {TSizedHeapAllocator<32, FMemory>::ForAnyElementType}\n     ├─ ArrayNum = 2 {int}\n     └─ ArrayMax = 4 {int}"
+      }
+    ],
+    "isError": false
+  },
+  "hypothesis": "Pre-activation missing DI rejected: nonnull curve and 0/0 keys observed. Live GPU/after-activation parameters still require capture. Native tool returned only top-frame call path; optimized helper evaluations unavailable.",
+  "cleanup": "Both task line breakpoints removed; original8 user exception settings unchanged. Own attached session stopped; no other session/editor controlled."
+}

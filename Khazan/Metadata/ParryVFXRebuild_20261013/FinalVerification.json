@@ -1,0 +1,47 @@
+{
+  "date_local": "2026-10-14",
+  "status": "implemented_and_main_rhi_verified",
+  "original_source": {
+    "routing": "PP_Damage_Spray.ItemList[7].AttackStrength=NewJustGuard -> PP_AtkEx_JustGuard",
+    "particle_package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Attack/PP_AtkEx_JustGuard",
+    "postprocess_package": "BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard",
+    "postprocess_extract": "OriginalCPP/BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard.json",
+    "postprocess_extract_sha256": "7197c223f48c307ac46117c8479d583553ca459e960645045c15ab7303791171",
+    "direct_postprocess_fields": {
+      "Settings.bOverride_SceneFringeIntensity": true,
+      "Settings.SceneFringeIntensity": 1.5,
+      "Settings.bOverride_ChromaticAberrationStartOffset": true,
+      "Settings.ChromaticAberrationStartOffset": 0.25
+    }
+  },
+  "implementation": {
+    "guard_cpp_sha256": "1d8679be9a98ab43ad0b799f5747b7a37603994f28714040073bf443af0fc5f6",
+    "guard_blueprint_sha256": "bab9538b60b04ea0378b32e0a544911ab90ec7b7bbc9c521334090386537dcde",
+    "effect_sha256": "699a4270139ea5b1976d110cecf712deece7e58d86e4f7fb3c4c3e91f976a198",
+    "material_sha256": "c4f7747fb1078823b952948f60130966d71fef346fa68ece721a79199e6753f1",
+    "source_emitters_preserved": 13,
+    "enabled_source_emitters": ["flare_circle2", "refrac", "light"],
+    "disabled_travelling_sparks_on_user_request": ["spark_par_collision", "spark_par_sphere", "emitter1"],
+    "disabled_line_glows_due_to_reconstructed_shader_shape": ["flare_line_center_glow", "flare_line_glow"],
+    "material_adapter": "Original FT_Flare_004_LSY and T_GradientGlow textures plus source ParticleColor, distribution, life and Emi_pow=.8; reconstructed additive emission because cooked shader graph is unavailable.",
+    "temporary_values": {
+      "ParryVisibilityGain": {"value": 16.0, "unit": "linear emissive multiplier", "reason": "Original-source flare remained too dim against HeinMach snow in actual combat RHI"},
+      "edge_feather": {"value": 0.04, "unit": "UV fraction", "reason": "continuous sprite boundary fade; reused existing parry adapter"}
+    },
+    "existing_radial_blur_and_camera_shake": "retained"
+  },
+  "verification": {
+    "main_rhi": "../ParryPhoto_20261013/JustGuardMainRHI01",
+    "saved_readback": "../ParryPhoto_20261013/JustGuardMainRHI01/SavedReadback.json",
+    "actual_module": "UnrealEditor-Khazan-2026101401.dll",
+    "actual_module_sha256": "58cf48aae3170eb3fbef996bf69d03ec423bdb4085de49f7072ef8801ea3a85d",
+    "automation": "Khazan.Parry.PIE: passed, 17 cases, asset saves 0",
+    "rendered": "Actual HeinMach combat-camera screenshot shows a broad red/violet arc, screen radial blur and chromatic fringe; no travelling parry sparks or hard card boundary observed at sampled frames.",
+    "rendered_image": "../ParryPhoto_20261013/JustGuardMainRHI01/02_ActualParryMotion.png"
+  },
+  "limits": [
+    "Original cooked material shader topology and exact pixel/frame parity are unavailable and not claimed.",
+    "The original CPP notify blend-in/out timing is not fully reproduced by the existing transient radial-blur volume lifetime.",
+    "The sampled offscreen run does not establish Shipping, network, speaker output or performance parity."
+  ]
+}

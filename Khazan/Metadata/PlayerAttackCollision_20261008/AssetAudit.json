@@ -1,0 +1,179 @@
+{
+  "schema": "Khazan.AttackCollision.AssetAudit.v1",
+  "utc": "2026-10-08T06:14:36.673371+00:00",
+  "scope": "Read-only file and stored report inventory; no editor RPC/native processes, no Main mutations",
+  "documents": [
+    "0_DOCUMENT_ROUTER.md",
+    "Docs/Engineering/CHARACTER_GAMEPLAY_ARCHITECTURE.md",
+    "Docs/Engineering/CHARACTER_TAG_ABILITY_MIGRATION.md",
+    "Docs/Engineering/ENGINEERING_WORK_CONTINUITY.md",
+    "Docs/Engineering/HEAL_WEAPON_PRESENTATION_20261006.md"
+  ],
+  "source_comparison": [
+    {
+      "path": "Source\\Khazan\\Ability\\Combo\\KZComboActionAbility.cpp",
+      "main_sha256": "8c1e8e45784c00ccac120d18b1ff1a0f77a517db36f0ba1ba4a497f54d8b9bf1",
+      "work_sha256": "1c1adbf70868c3c024c6b3ede3316808033ee820dbbf974aaf9acc0ba903b198",
+      "equal": false
+    },
+    {
+      "path": "Source\\Khazan\\Ability\\Combo\\KZComboActionAbility.h",
+      "main_sha256": "cf6b21368d5b2e68a8f67d314ab56bea6616b13f8c2151531b8c5ed6e4072182",
+      "work_sha256": "6409ed15670cddd0961ba749c972fc995f49b8e1be164831c2302bc3eec73a4c",
+      "equal": false
+    },
+    {
+      "path": "Source\\Khazan\\Ability\\Combo\\KZComboDefinitionData.h",
+      "main_sha256": "99634739e3dc74a0881ef39a0d966029207a8d61de348aeb0f77d5f04a755630",
+      "work_sha256": "88f33c70932c18a1ef8dcf879dbce498721347a339b0f375883b91a6e2bca961",
+      "equal": false
+    },
+    {
+      "path": "Source\\Khazan\\Ability\\Combo\\KZComboDefinitionData.cpp",
+      "main_sha256": "2000977046a9a9013aa54ba66cdbf5d0f9396cab2631c986569937f77ea66032",
+      "work_sha256": "2000977046a9a9013aa54ba66cdbf5d0f9396cab2631c986569937f77ea66032",
+      "equal": true
+    },
+    {
+      "path": "Source\\Khazan\\Data\\KZCharacterDefinitionData.h",
+      "main_sha256": "d3ecec78d7cb3ede0fcc1b50a14bd1485372e278dab924c05db594e6bada041e",
+      "work_sha256": "d3ecec78d7cb3ede0fcc1b50a14bd1485372e278dab924c05db594e6bada041e",
+      "equal": true
+    },
+    {
+      "path": "Source\\Khazan\\Character\\KZPlayer.cpp",
+      "main_sha256": "3d1e6d1e6f80e0245259a3eb98cf774a3e96e2366007ac679856039b18236a7b",
+      "work_sha256": "3d1e6d1e6f80e0245259a3eb98cf774a3e96e2366007ac679856039b18236a7b",
+      "equal": true
+    },
+    {
+      "path": "Source\\Khazan\\Character\\KZPlayer.h",
+      "main_sha256": "f27dc46bb94f2ba9b97a9bdfe2848037f17c40c0d20455b241f735214172de28",
+      "work_sha256": "f27dc46bb94f2ba9b97a9bdfe2848037f17c40c0d20455b241f735214172de28",
+      "equal": true
+    }
+  ],
+  "source_comparison_note": "Earlier intake comparison had all seven equal. During parent implementation Work-only native collision changes now produce recorded differences; do not describe Work as byte-identical at this later time.",
+  "current_node_mapping": "Metadata/PlayerAttackCollision_20261008/AssetAudit/CurrentNodeMapping.json",
+  "definition": {
+    "path": "/Game/Data/ComboCommand/DA_Player_Combo_Definition",
+    "stored_nodes": 26,
+    "stored_ability_grants": 19,
+    "live_main_unread": true,
+    "node_source": "Saved/ImportReports/PlayerComboRepair_20261008/LiveDataBefore.json"
+  },
+  "weapons": {
+    "bp_path": "/Game/_Art/Player/Character/Bluprints/BP_Player",
+    "bp_sha256": "73c794afc3a12402f352a8bfc2f0eb611f03e1cfcd4502593d1fa5f4539afea2",
+    "current_serialized_asset_dependencies": [
+      "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_L",
+      "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_R"
+    ],
+    "proof": "20261007 NativeAudit and 20261006 EquipAudit are previous Original weapon component reports. Current Main BP file serializes Imperial weapon component names and Imperial mesh dependencies. Current live attachment transforms have not been reflected by this agent.",
+    "backpack_names_are_bones_not_skeletal_mesh_sockets": true,
+    "current_mesh_policy": {
+      "source": "Source/Khazan/Character/KZPlayer.cpp:24-25",
+      "relative_translation": [
+        0,
+        0,
+        -88
+      ],
+      "relative_rotation_pitch_yaw_roll": [
+        0,
+        -90,
+        0
+      ],
+      "relative_scale": [
+        0.01,
+        0.01,
+        0.01
+      ],
+      "wrapper_scale": [
+        100,
+        100,
+        100
+      ],
+      "baked_geometry_scale": 1
+    },
+    "current_serialized_component_names": [
+      "DualAxeSword_Imperial_L",
+      "DualAxeSword_Imperial_R",
+      "DualAxeSword_Imperial_L_GEN_VARIABLE",
+      "DualAxeSword_Imperial_R_GEN_VARIABLE"
+    ],
+    "previous_native_audit_components": [
+      {
+        "name": "DualAxeSword_Original_L",
+        "parent": "CharacterMesh0",
+        "attach_bone": "Weapon_L",
+        "relative_translation": [
+          0,
+          0,
+          0
+        ],
+        "relative_rotation": [
+          0,
+          0,
+          0
+        ],
+        "relative_scale": [
+          0.009,
+          0.009,
+          0.009
+        ],
+        "mesh": "/Game/_Art/Player/Item/Original/DualAxeSword_Original_L"
+      },
+      {
+        "name": "DualAxeSword_Original_R",
+        "parent": "CharacterMesh0",
+        "attach_bone": "Weapon_R",
+        "relative_translation": [
+          0,
+          0,
+          0
+        ],
+        "relative_rotation": [
+          0,
+          0,
+          0
+        ],
+        "relative_scale": [
+          0.009,
+          0.009,
+          0.009
+        ],
+        "mesh": "/Game/_Art/Player/Item/Original/DualAxeSword_Original_R"
+      }
+    ],
+    "difference_from_previous_report": "Original->Imperial weapon names/dependencies currently stored; preserve existing user/other-task BP. Weapon_L/R bone names remain serialized. Collision author samples bone pose without changing weapon meshes."
+  },
+  "fixture_reuse": {
+    "work": "C:\\Users\\user\\Desktop\\GitProject\\Khazan_ComboWork_20261008\\Khazan",
+    "intake": "Saved/ImportReports/PlayerComboRepair_20261008/PrivateWork/Intake.json",
+    "native_isolated_helper": "Saved/ImportReports/PlayerComboRepair_20261008/PrivateWork/SourceScripts/combo_isolated_editor.py",
+    "runtime_suite": "Saved/ImportReports/PlayerComboRepair_20261008/Tools/combo_runtime_suite.py",
+    "runtime_probe": "Saved/ImportReports/PlayerComboRepair_20261008/Tools/combo_runtime_probe.py",
+    "existing_cases": [
+      "weak_y_buffered",
+      "weak_y_committed",
+      "charge_02_03",
+      "rb_overfury",
+      "weak5_y",
+      "weak5_y_committed",
+      "weak5_y_early"
+    ],
+    "coverage_note": "These seven original cases verify EnhancedInput/section/cancellation pathways, not attack geometry, target dedup or GE damage."
+  },
+  "recommended_narrow_QA": [
+    "Saved fresh montage export resolves actual node section/sequence links, RateScale including OverFury clones, auto-section chains, crop and original dilation conversion.",
+    "At a metadata-derived active key center: original actor-ground shape to actual Player capsule world conversion; outside target negative case and explicit halfextent/radius boundary checks.",
+    "Per authored window targets: one target once, two targets each once; separate windows permit new hit; equal nonempty group shares one hit in same occurrence; repeated montage occurrence gets a new namespace.",
+    "Low-frame-rate step crosses whole windows: consume all crossed baked keys; exact finite cylinder/capsule test includes vertical separation.",
+    "Cancel/transition/EndAbility/EndPlay/failed montage clear timer/target sets, no stale damage.",
+    "Apply temporary absolute HP10/Stamina5 through existing GE Damage path; preserve current GameplayEffect/body blocks, death/guard reaction where supported.",
+    "Automatic SpinningAttack02 and ChargeAttack04 plus current OverFury all six segments must retain current visual motion/notify times."
+  ],
+  "author_tool": "Scripts/Engineering/player_attack_collision_author_20261008.py",
+  "author_scope": "One existing private Player Combo DataAsset only. Parent operates owned editor and runtime source; this agent never launches or touches Main.",
+  "original_physics_and_collision_claims": "Original collision shapes/windows are source metadata. Absolute damage, blockable policy, unspecified Shape, Cylinder dimension interpretation, pose fallback and different-CA OverFury01 normalized fractions are explicit assistant-selected interim contracts, not original equivalence."
+}

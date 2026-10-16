@@ -1,0 +1,109 @@
+[
+  {
+    "Type": "xxDamageInfo",
+    "Name": "SD_Kazan_DualAxeSword_Com_WeakAtk_SoulBringer_6_2",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/WeakAtk/SoulBringer_Anim/SD_Kazan_DualAxeSword_Com_WeakAtk_SoulBringer_6_2",
+    "Properties": {
+      "AttackInfo": {
+        "SkillPowerInfo": {
+          "SkillPowerBonus": 210000
+        },
+        "StaminaAttackInfo": {
+          "StaminaAttackRate": 2000
+        },
+        "AttackerReactionTableSelect": {
+          "AttackerReactionTag": {
+            "DataTable": {
+              "ObjectName": "DataTable'AttackerReaction_Common'",
+              "ObjectPath": "BBQ/Content/_Common/Constants/AttackerReaction/AttackerReaction_Common.0"
+            },
+            "RowName": "충격량5등급+"
+          }
+        },
+        "BattleResourceChange": [
+          {
+            "Group": "EBattleResourceGroup::Group0",
+            "ResourceAmount": 100
+          }
+        ],
+        "AttackableFlags": [
+          "ECharacterAttackableFlag::EnableAttackableDownState"
+        ],
+        "SpacialDamageCustomFlags": [
+          "ESpacialDamageCustomFlag::Kazan_SoulTakerGauge"
+        ]
+      },
+      "AttackerDelayInfo": {
+        "DamageTimeDelayComputType": "EDamageInfoDelayComputeType::None",
+        "IsRestDelay": true
+      },
+      "DamagerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true,
+        "TimeSectionDelayData": {
+          "EndTime": 0.25
+        }
+      },
+      "DamagerDelayInfoSecond": {
+        "DamageTimeDelayComputType": "EDamageInfoDelayComputeType::None"
+      },
+      "DamagerDelayInfoInAerial": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true,
+        "TimeSectionDelayData": {
+          "LoopTime": 0.065
+        }
+      },
+      "DamagerDelayInfoNoReaction": {
+        "DamageTimeDelayComputType": "EDamageInfoDelayComputeType::None"
+      },
+      "DamagerKnockData": {
+        "KnockBackMoveType": "EKnockbackMoveType::UseCurve",
+        "KnockbackDistance": {
+          "X": 150.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "KnockCurveVector": {
+          "ObjectName": "CurveVector'CV_common_groundKnock_strong'",
+          "ObjectPath": "BBQ/Content/_Common/MoveCurve/CV_common_groundKnock_strong.0"
+        },
+        "KnockCurveScale": {
+          "X": 150.0,
+          "Y": 1.0,
+          "Z": 1.0
+        },
+        "TimeSyncType": "ETimeSyncType::SyncAnimation",
+        "KnockbackDistanceTime": 1.0,
+        "KnockbackHeight": 250.0,
+        "KnockbackForce": 1300.0,
+        "DownEnemyPushRate": 0.8,
+        "SuperArmorKnockbackRate": 1.0
+      },
+      "AttackerKnockData": {
+        "DownEnemyPushRate": 1.0
+      },
+      "SpecialDamageAniminfo": {
+        "DamageStrength": "EDamageTypeByStrength::DamageStrong",
+        "CommonAnimationTag": "ECommonAnimationTag::DamageU"
+      },
+      "DamagerRotatorInfo": {
+        "RotatorDirTime": 0.0
+      },
+      "AttackerHitEffect": {
+        "ParticleInfo": {
+          "bSyncData": true
+        }
+      },
+      "DamageSounds": [
+        {
+          "ObjectName": "AkAudioEvent'Play_Player_DualAxeSword_HitMaterialSwitch'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/Player_Hit/Play_Player_DualAxeSword_HitMaterialSwitch.0"
+        }
+      ],
+      "AttackStrength": "EBattleDirecting_AttackStrength::AttackStrength_03"
+    }
+  }
+]

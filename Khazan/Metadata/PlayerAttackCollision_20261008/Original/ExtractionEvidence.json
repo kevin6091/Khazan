@@ -1,0 +1,45 @@
+{
+  "utc": "2026-10-08T06:12:44.605234+00:00",
+  "summary": {
+    "composite_count": 83,
+    "attack_window_count": 170,
+    "baked_key_count": 1153,
+    "skill_count": 6,
+    "damage_count": 85,
+    "shape_counts": {
+      "EAttackShape::AttackBoxComponent": 117,
+      "EAttackShape::Cylinder": 34,
+      "OMITTED_NATIVE_DEFAULT_UNKNOWN": 19
+    },
+    "interval_description_counts": {
+      "일반+컴포넌트, 1회 공격": 92,
+      "그룹2+컴포넌트, 1회 공격": 11,
+      "그룹1+컴포넌트, 1회 공격": 13,
+      "일반, 1회 공격": 48,
+      "그룹2, 1회 공격": 1,
+      "그룹1, 1회 공격": 4,
+      "일반+컴포넌트, 43msec 간격, 6회 공격": 1
+    }
+  },
+  "request_files": [
+    "Metadata/PlayerAttackCollision_20261008/Original/DodgeSD_Requests.json",
+    "Metadata/PlayerAttackCollision_20261008/Original/DodgeSI_Requests.json",
+    "Metadata/PlayerAttackCollision_20261008/Original/SD_Requests.json",
+    "Metadata/PlayerAttackCollision_20261008/Original/SI_Requests.json"
+  ],
+  "extractor": "Scripts/Enemies/EnemyExtractor/bin/Release/net10.0/EnemyExtractor.exe",
+  "read_only_source_and_assets": true,
+  "native_policy_verified": false,
+  "limitations_and_contracts": {
+    "source": "CUE4Parse metadata from the configured local FModel snapshot; saved original AC is reused, SI/SD freshly targeted.",
+    "time": "Raw LinkValue/EndLink/Duration and baked Key are seconds in the original AnimComposite timeline. Current sequence/montage mapping must apply the actual selected segment and current timing contract; raw key*60 is not a current montage frame.",
+    "units": "Rotator fields use Unreal degree representation. Box Size half-extents in cm and offset/rotation composition are proven by116/116 reconstructed original Bounds comparisons; see BoxSemantics.json. Cylinder axis/height convention remains unverified; all34 targeted Cylinder windows lack valid baked Bounds.",
+    "coordinate_frame": "Field names LocalCenterPos/LocalRotator indicate local transforms. Original PSA/current native pose corroborate root-motion-removed ground origin already rotated to actor-forward; see CoordinateCrosscheck.json. Native reference-frame code remains unavailable. Add current BP ground-origin offset once, no second mesh yaw or metadata scale .01.",
+    "damage": "SkillPowerBonus/StaminaAttackRate are original raw integer tuning fields. Their divisors and original absolute HP/stamina damage formula are not verified. Do not call them HP points or silently divide by10000/100000. Any seeded project damage is explicit temporary balancing.",
+    "omitted_properties": "An omitted property is a native/class default, not a proven value. All raw None fields are intentionally unresolved. Authoring may use a documented assumption.",
+    "baked_zero_samples": "Some Cylinder/default shapes have two zero baked transforms despite bBakingAttackComponent. They are not evidence of a meaningful moving collider trajectory; use explicit offsets and pose verification.",
+    "hit_policy": "Duration windows and descriptions1회 공격/group numbers are directly observed. The project inference is one hit per recipient per window/shared group, with separate windows enabling multi-hit. Original C++ per-recipient dedup, trace channel/visibility obstruction, immunity/team filter and event order are not extracted.",
+    "special_interval": "SpinningBeast_UltimateSlash_Loop export5 explicitly AttackCount6 and description43msec 간격,6회 공격, window .54829955–.8s. This auxiliary action is not automatically part of current SpinningAttack01/02. Its native rounding rule is unverified.",
+    "scope": "All already saved AC under the five current-player attack families are indexed for reuse, including variants not chosen by the current project. This is not new broad FModel extraction and does not mean every variant should be implemented."
+  }
+}

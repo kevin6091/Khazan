@@ -1,0 +1,60 @@
+{
+  "status": "source_and_actual_GPU_confirmed",
+  "asset": "/Game/VFX/01_ARPGEssentials/KZ_Slash",
+  "export": "Probe01/Asset_0.t3d",
+  "mesh": "SM_VFX_SlashRing_01",
+  "raw_radius_cm": 100,
+  "renderer_yaw_deg": 180,
+  "particle_initial_rotation": {
+    "field": "Constants.Slash_Additive / Slash_Translucent.InitialMeshOrientation.Rotation",
+    "raw_vector_turns": [
+      0,
+      0,
+      0.25
+    ],
+    "derived_yaw_deg": 90
+  },
+  "particle_initial_radial_size": {
+    "fields": [
+      "Constants.Slash_Additive.InitializeParticle.Mesh Uniform Scale",
+      "Constants.Slash_Translucent.InitializeParticle.Mesh Scale"
+    ],
+    "raw_uniform": 2,
+    "raw_nonuniform": [
+      2,
+      2,
+      1
+    ],
+    "unit": "mesh multiplicative scale"
+  },
+  "live_user_scale_lerp": {
+    "field": "NiagaraSystem.ExposedParameters.User.ScaleLerp",
+    "byte_offset": 32,
+    "raw_bytes": [
+      154,
+      153,
+      25,
+      62
+    ],
+    "raw_float": 0.15000000596046448
+  },
+  "scale_derivation": "InitialXY2 * lerp(1-ScaleLerp,1+ScaleLerp,CurveScale1) =2*(1+.15)=2.3; component override ScaleLerp0 retains measured constant2.",
+  "effective_reference_span_cm": 400,
+  "span_formula": "raw mesh diameter200 * initialXY2 =400 cm",
+  "extra_notify_yaw_deg": 90,
+  "yaw_formula": "notify90 + particle90 + renderer180 =360deg identity",
+  "endpoint_after_particle_renderer_cm": [
+    200,
+    0,
+    0
+  ],
+  "before_actual_GPU_evidence": "NativeGPUBefore01/GPUWeaponEndpoint.jsonl",
+  "before_GPU_tip_errors_cm": [
+    250.797736,
+    317.989179
+  ],
+  "invalidated_initial_hypothesis": "ScaleGraphDerivation.json took editor script-variable default1.1 instead of live system exposed.15 and omitted initial mesh2; it is retained as pre-GPU hypothesis, not final source evidence.",
+  "new_runtime_classes": 0,
+  "shared_Niagara_asset_edits": 0,
+  "next": "WorkBuild05, SavedWork02, full FinalRHI02 actual GPU endpoint + multi-view; Main remains unapplied."
+}

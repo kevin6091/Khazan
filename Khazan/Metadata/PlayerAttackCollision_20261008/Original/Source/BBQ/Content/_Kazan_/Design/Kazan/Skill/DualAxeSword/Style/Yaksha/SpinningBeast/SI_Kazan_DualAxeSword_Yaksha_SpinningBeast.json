@@ -1,0 +1,366 @@
+[
+  {
+    "Type": "xxSkillInfo",
+    "Name": "SI_Kazan_DualAxeSword_Yaksha_SpinningBeast",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SI_Kazan_DualAxeSword_Yaksha_SpinningBeast",
+    "Properties": {
+      "SkillName": {
+        "Namespace": "Skill",
+        "Key": "SI_Kazan_DualAxeSword_Yaksha_SpinningBeast_Name",
+        "SourceString": "용오름 베기",
+        "LocalizedString": "용오름 베기"
+      },
+      "SkillDescription": {
+        "Namespace": "Skill",
+        "Key": "SI_Kazan_DualAxeSword_Yaksha_SpinningBeast_Desc",
+        "SourceString": "빠른 공격, 회피 빠른 공격, 역풍 : 앙갚음 중 {Key_Y}\r\n\r\n<Short>제자리에서 솟아오르며 주위를 공격한다.</Short>\r\n상승 공격 이후 {Key_Y}를 추가 입력하면 하강 공격으로 연계할 수 있다.",
+        "LocalizedString": "빠른 공격, 회피 빠른 공격, 역풍 : 앙갚음 중 {Key_Y}\r\n\r\n<Short>제자리에서 솟아오르며 주위를 공격한다.</Short>\r\n상승 공격 이후 {Key_Y}를 추가 입력하면 하강 공격으로 연계할 수 있다."
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SB_Kazan_DualAxeSword_Yaksha_SpinningBeast.SB_Kazan_DualAxeSword_Yaksha_SpinningBeast_C",
+        "SubPathString": ""
+      },
+      "LevelUpGID": 1060,
+      "AttackType": "ESkillAttackType::FastAttack",
+      "KazanWeaponType": "EKazanWeaponType::DualAxeSword",
+      "StateBattleStance": "EStateBattleStance::Battle",
+      "StaminaConsumeRegainInfo": {
+        "StaminaConsumeValue": 1
+      },
+      "SkillTexture2": {
+        "AssetPathName": "/Game/_Kazan_/UserInterface/UITexture/Icons/SkillV2/DualWeaponV2/T_Icon_Skill_DualWeapon_A03_UI.T_Icon_Skill_DualWeapon_A03_UI",
+        "SubPathString": ""
+      },
+      "WeaponSkillCancelDatas": [
+        {
+          "Key": "EKazanWeaponType::DualAxeSword",
+          "Value": {
+            "SkillCancelDataGroupList": [
+              {
+                "Key": "ESkillCancelDataGroup::Group1",
+                "Value": {
+                  "ExplainGroup": "회피 일반 캔슬",
+                  "EnableCancelSkillInfos": [
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Moving/DualAxeSword/Dodge/Common/SI_Kazan_DualAxeSword_Com_Dodge.SI_Kazan_DualAxeSword_Com_Dodge",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/LightningStep/Dodge/SI_Kazan_DualAxeSword_Flow_LightningStep_Dodge.SI_Kazan_DualAxeSword_Flow_LightningStep_Dodge",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/FlowStep/Dodge/SI_Kazan_DualAxeSword_Flow_FlowStep_Dodge.SI_Kazan_DualAxeSword_Flow_FlowStep_Dodge",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/FlowStep/Dodge2/SI_Kazan_DualAxeSword_Flow_FlowStep_Dodge2.SI_Kazan_DualAxeSword_Flow_FlowStep_Dodge2",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Moving/DualAxeSword/Dodge/Common/SI_Kazan_DualAxeSword_Com_Dodge2.SI_Kazan_DualAxeSword_Com_Dodge2",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/MurderousWave/SI_Kazan_DualAxeSword_Yaksha_MurderousWave.SI_Kazan_DualAxeSword_Yaksha_MurderousWave",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/MurderousWave/SI_Kazan_DualAxeSword_Yaksha_MurderousWave_LightningStep.SI_Kazan_DualAxeSword_Yaksha_MurderousWave_LightningStep",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/TornadoSweep/SI_Kazan_DualAxeSword_Com_TornadoSweep.SI_Kazan_DualAxeSword_Com_TornadoSweep",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/TornadoSweep/SI_Kazan_DualAxeSword_Com_TornadoSweep_Escape.SI_Kazan_DualAxeSword_Com_TornadoSweep_Escape",
+                      "Value": true
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESkillCancelDataGroup::Group3",
+                "Value": {
+                  "ExplainGroup": "가드에서 해당 그룹을 등록한 스킬로 일반 캔슬되도록 하기",
+                  "EnableCancelSkillInfos": [
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Guard/SI_Kazan_DualAxeSword_Com_Guard.SI_Kazan_DualAxeSword_Com_Guard",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Guard/SI_Kazan_DualAxeSword_Com_Guard_Normal.SI_Kazan_DualAxeSword_Com_Guard_Normal",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/Domius_Guard/SI_Kazan_DualAxeSword_Yaksha_Domius_Guard.SI_Kazan_DualAxeSword_Yaksha_Domius_Guard",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/Domius_Guard/SI_Kazan_DualAxeSword_Yaksha_Dominus_Guard_Normal.SI_Kazan_DualAxeSword_Yaksha_Dominus_Guard_Normal",
+                      "Value": true
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESkillCancelDataGroup::Group11",
+                "Value": {
+                  "ExplainGroup": "빠른 연계 기술에서 기본 캔슬",
+                  "EnableCancelSkillInfos": [
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/WeakAtk/SI_Kazan_DualAxeSword_Com_WeakAtk.SI_Kazan_DualAxeSword_Com_WeakAtk",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Reflection/SI_Kazan_DualAxeSword_Com_Reflection.SI_Kazan_DualAxeSword_Com_Reflection",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/SprintAtk/SI_Kazan_DualAxeSword_Com_SprintAtk.SI_Kazan_DualAxeSword_Com_SprintAtk",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/FallAtk/SI_Kazan_DualAxeSword_Com_FallAtk.SI_Kazan_DualAxeSword_Com_FallAtk",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/DodgeAtk/SI_Kazan_DualAxeSword_Com_DodgeAtk.SI_Kazan_DualAxeSword_Com_DodgeAtk",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SI_Kazan_DualSwordAxe_Com_Grapple.SI_Kazan_DualSwordAxe_Com_Grapple",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/SprintAtk/SI_Kazan_DualAxeSword_Com_SprintStrAtk.SI_Kazan_DualAxeSword_Com_SprintStrAtk",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/MoonSlash/SI_Kazan_DualAxeSword_Flow_MoonSlash.SI_Kazan_DualAxeSword_Flow_MoonSlash",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/ShootingStar/SI_Kazan_DualAxeSword_Flow_ShootingStar.SI_Kazan_DualAxeSword_Flow_ShootingStar",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/FlowSwift/SI_Kazan_DualAxeSword_Flow_FlowSwift.SI_Kazan_DualAxeSword_Flow_FlowSwift",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/FlowSlash/SI_Kazan_DualAxeSword_Flow_FlowSlash.SI_Kazan_DualAxeSword_Flow_FlowSlash",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/FlowRise/SI_Kazan_DualAxeSword_Flow_FlowRise.SI_Kazan_DualAxeSword_Flow_FlowRise",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/Flow/SI_Kazan_DualAxeSword_Flow_Flow.SI_Kazan_DualAxeSword_Flow_Flow",
+                      "Value": true
+                    },
+                    {
+                      "Key": "",
+                      "Value": false
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/VoidCleave/SI_Kazan_DualAxeSword_Flow_VoidCleave.SI_Kazan_DualAxeSword_Flow_VoidCleave",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/OverFury/SI_Kazan_DualAxeSword_Yaksha_OverFury.SI_Kazan_DualAxeSword_Yaksha_OverFury",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/EvelTachyon/SI_Kazan_EvelTachyon.SI_Kazan_EvelTachyon",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/BloodRiven/SI_Kazan_DualAxeSword_Yaksha_BloodRiven.SI_Kazan_DualAxeSword_Yaksha_BloodRiven",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/Dominus_WeakATK/SI_Kazan_DualAxeSword_Yaksha_Dominus_WeakAtk.SI_Kazan_DualAxeSword_Yaksha_Dominus_WeakAtk",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/HalfMoon/SI_Kazan_DualAxeSword_Flow_HalfMoon.SI_Kazan_DualAxeSword_Flow_HalfMoon",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/FatalBlood/SI_Kazan_DualAxeSword_Yaksha_FatalBlood.SI_Kazan_DualAxeSword_Yaksha_FatalBlood",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/LightningDraw/SI_Kazan_DualAxeSword_Flow_LightningDraw.SI_Kazan_DualAxeSword_Flow_LightningDraw",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SI_Kazan_DualAxeSword_Yaksha_SpinningBeast.SI_Kazan_DualAxeSword_Yaksha_SpinningBeast",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/Dominus/SI_Kazan_DualAxeSword_Yaksha_Dominus.SI_Kazan_DualAxeSword_Yaksha_Dominus",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/Common/Recovery/SI_Kazan_Recovery.SI_Kazan_Recovery",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/SoulBringer_Liberation/SI_Kazan_DualAxeSword_Com_SoulBringer_Liberation_Idle.SI_Kazan_DualAxeSword_Com_SoulBringer_Liberation_Idle",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/BleedOut/SI_Kazan_DualAxeSword_Yaksha_BleedOut.SI_Kazan_DualAxeSword_Yaksha_BleedOut",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/BreakSlash/SI_Kazan_DualAxeSword_Flow_BreakSlash.SI_Kazan_DualAxeSword_Flow_BreakSlash",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/Common/Lantern/SI_Kazan_Lantern.SI_Kazan_Lantern",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/CounterAtk/SI_Kazan_DualAxeSword_Com_CounterAtk.SI_Kazan_DualAxeSword_Com_CounterAtk",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/FlowSwift/SI_Kazan_DualAxeSword_Flow_FlowSwift_Just.SI_Kazan_DualAxeSword_Flow_FlowSwift_Just",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/DodgeAtk/SI_Kazan_DualAxeSword_Com_DodgeStrAtk.SI_Kazan_DualAxeSword_Com_DodgeStrAtk",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/SecretSwordArt/SI_Kazan_DualAxeSword_Flow_SecretSwordArt.SI_Kazan_DualAxeSword_Flow_SecretSwordArt",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/MurderousWave/SI_Kazan_DualAxeSword_Yaksha_MurderousWave.SI_Kazan_DualAxeSword_Yaksha_MurderousWave",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/MurderousWave/SI_Kazan_DualAxeSword_Yaksha_MurderousWave_LightningStep.SI_Kazan_DualAxeSword_Yaksha_MurderousWave_LightningStep",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple_SoulBringer/SI_Kazan_DualSwordAxe_Com_Grapple_SoulBringer_Normal.SI_Kazan_DualSwordAxe_Com_Grapple_SoulBringer_Normal",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple_SoulBringer/SI_Kazan_DualSwordAxe_Com_Grapple_SoulBringer.SI_Kazan_DualSwordAxe_Com_Grapple_SoulBringer",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/CruelSlash/SI_Kazan_DualAxeSword_Yaksha_CruelSlash.SI_Kazan_DualAxeSword_Yaksha_CruelSlash",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/Common/Recovery_UsingSpirit/SI_Kazan_RecoveryUsingSpirit.SI_Kazan_RecoveryUsingSpirit",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/SoulBreak/SI_Kazan_DualAxeSword_Com_SoulBreak.SI_Kazan_DualAxeSword_Com_SoulBreak",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/FallAtk/SI_Kazan_DualAxeSword_Com_FallStrAtk.SI_Kazan_DualAxeSword_Com_FallStrAtk",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/Common/ItemEnchant/SI_Kazan_Com_ItemEnchant.SI_Kazan_Com_ItemEnchant",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/RecklessRush/SI_Kazan_DualAxeSword_Yaksha_RecklessRush_Active.SI_Kazan_DualAxeSword_Yaksha_RecklessRush_Active",
+                      "Value": true
+                    },
+                    {
+                      "Key": "/Game/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/StraightSlash/SI_Kazan_DualAxeSword_Flow_StraightSlash_Active.SI_Kazan_DualAxeSword_Flow_StraightSlash_Active",
+                      "Value": true
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "bDisableCancelEffect": true,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_U'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_U.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_D'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_D.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_Finish'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_Finish.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_Finish_02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_Finish_02.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_BeastRush'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_BeastRush.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_BeastRush_02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_BeastRush_02.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_BeastRush_Finish'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_BeastRush_Finish.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_BeastRush_Final_Finish'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_BeastRush_Final_Finish.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Flow_BreakSlash01_Normal'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/BreakSlash/SD_Kazan_DualAxeSword_Flow_BreakSlash01_Normal.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Flow_BreakSlash02_Normal'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Flow/BreakSlash/SD_Kazan_DualAxeSword_Flow_BreakSlash02_Normal.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_D_SuperSpeed'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SD_Kazan_DualAxeSword_Yaksha_SpinningBeast_D_SuperSpeed.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Kazan_DualAxeSword_Yaksha_UltimateSlash_Loop'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SD_Kazan_DualAxeSword_Yaksha_UltimateSlash_Loop.0"
+        }
+      ],
+      "SpellInfoList": [
+        {
+          "SpellInfo": {
+            "ObjectName": "xxSpellInfo'SP_Kazan_DualAxeSword_Yaksha_SpinningBeast_HitStack'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SP_Kazan_DualAxeSword_Yaksha_SpinningBeast_HitStack.2"
+          },
+          "DurationMS": 0
+        },
+        {
+          "SpellInfo": {
+            "ObjectName": "xxSpellInfo'SP_Kazan_DualAxeSword_Yaksha_BeastRush_DamageBalancing'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Style/Yaksha/SpinningBeast/SP_Kazan_DualAxeSword_Yaksha_BeastRush_DamageBalancing.3"
+          },
+          "DurationMS": 0
+        }
+      ]
+    }
+  }
+]

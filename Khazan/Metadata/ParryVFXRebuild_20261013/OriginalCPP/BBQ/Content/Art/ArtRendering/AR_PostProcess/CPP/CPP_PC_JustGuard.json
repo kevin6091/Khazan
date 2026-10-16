@@ -1,0 +1,164 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "CPP_PC_JustGuard_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard",
+    "Super": {
+      "ObjectName": "BlueprintGeneratedClass'CPP_Base_PostProcess_C'",
+      "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_Data/PostProcess/CPP_Base_PostProcess.0"
+    },
+    "Properties": {
+      "SimpleConstructionScript": {
+        "ObjectName": "SimpleConstructionScript'CPP_PC_JustGuard_C:SimpleConstructionScript_0'",
+        "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard.5"
+      }
+    },
+    "SuperStruct": {
+      "ObjectName": "BlueprintGeneratedClass'CPP_Base_PostProcess_C'",
+      "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_Data/PostProcess/CPP_Base_PostProcess.0"
+    },
+    "ClassFlags": "CLASS_Config | CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "CPP_PC_JustGuard_C'Default__CPP_PC_JustGuard_C'",
+      "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard.1"
+    }
+  },
+  {
+    "Type": "CPP_PC_JustGuard_C",
+    "Name": "Default__CPP_PC_JustGuard_C",
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard.CPP_PC_JustGuard_C'",
+    "Package": "BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard",
+    "Template": {
+      "ObjectName": "CPP_Base_PostProcess_C'Default__CPP_Base_PostProcess_C'",
+      "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_Data/PostProcess/CPP_Base_PostProcess.1"
+    },
+    "Properties": {
+      "Settings": {
+        "bOverride_SceneFringeIntensity": true,
+        "bOverride_ChromaticAberrationStartOffset": true,
+        "bOverride_BloomIntensity": false,
+        "bOverride_BloomThreshold": false,
+        "bOverride_LensFlareThreshold": false,
+        "bOverride_VignetteIntensity": false,
+        "bOverride_MotionBlurAmount": false,
+        "bOverride_MotionBlurMax": false,
+        "bOverride_MotionBlurTargetFPS": false,
+        "bOverride_MotionBlurPerObjectSize": false,
+        "ColorSaturation": {
+          "X": 0.45,
+          "Y": 0.45,
+          "Z": 0.45,
+          "W": 1.0
+        },
+        "SceneFringeIntensity": 1.5,
+        "ChromaticAberrationStartOffset": 0.25,
+        "LensFlareIntensity": 0.5,
+        "VignetteIntensity": 0.75,
+        "WeightedBlendables": {
+          "Array": [
+            {
+              "Weight": 1.0,
+              "Object": {
+                "ObjectName": "MaterialInstanceConstant'PPM_FilmicSharpen_Default'",
+                "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_Data/PostProcess/PPM_FilmicSharpen_Default.0"
+              }
+            },
+            {
+              "Weight": 1.0,
+              "Object": {
+                "ObjectName": "MaterialInstanceConstant'PPM_FilmPass_Bersker'",
+                "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_Data/PostProcess/PPM_FilmPass_Bersker.0"
+              }
+            },
+            {
+              "Weight": 1.0,
+              "Object": {
+                "ObjectName": "MaterialInstanceConstant'PPM_DepthOfField_Default'",
+                "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_Data/PostProcess/PPM_DepthOfField_Default.0"
+              }
+            }
+          ]
+        }
+      },
+      "BrushComponent": {
+        "ObjectName": "BrushComponent'Default__CPP_PC_JustGuard_C:BrushComponent0'",
+        "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard.2"
+      },
+      "RootComponent": {
+        "ObjectName": "BrushComponent'Default__CPP_PC_JustGuard_C:BrushComponent0'",
+        "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard.2"
+      }
+    }
+  },
+  {
+    "Type": "BrushComponent",
+    "Name": "BrushComponent0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BrushComponent'",
+    "Outer": {
+      "ObjectName": "CPP_PC_JustGuard_C'Default__CPP_PC_JustGuard_C'",
+      "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard.1"
+    },
+    "Template": {
+      "ObjectName": "BrushComponent'Default__CPP_Base_PostProcess_C:BrushComponent0'",
+      "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_Data/PostProcess/CPP_Base_PostProcess.2"
+    }
+  },
+  {
+    "Type": "SceneComponent",
+    "Name": "DefaultSceneRoot_GEN_VARIABLE",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SceneComponent'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CPP_PC_JustGuard_C'",
+      "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard.0"
+    }
+  },
+  {
+    "Type": "SCS_Node",
+    "Name": "SCS_Node_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SCS_Node'",
+    "Outer": {
+      "ObjectName": "SimpleConstructionScript'CPP_PC_JustGuard_C:SimpleConstructionScript_0'",
+      "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard.5"
+    },
+    "Properties": {
+      "ComponentClass": {
+        "ObjectName": "Class'SceneComponent'",
+        "ObjectPath": "/Script/Engine"
+      },
+      "ComponentTemplate": {
+        "ObjectName": "SceneComponent'CPP_PC_JustGuard_C:DefaultSceneRoot_GEN_VARIABLE'",
+        "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard.3"
+      },
+      "VariableGuid": "B3895F3B-47C33863-3A900699-236F1887",
+      "InternalVariableName": "DefaultSceneRoot"
+    }
+  },
+  {
+    "Type": "SimpleConstructionScript",
+    "Name": "SimpleConstructionScript_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SimpleConstructionScript'",
+    "Outer": {
+      "ObjectName": "BlueprintGeneratedClass'CPP_PC_JustGuard_C'",
+      "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard.0"
+    },
+    "Properties": {
+      "DefaultSceneRootNode": {
+        "ObjectName": "SCS_Node'CPP_PC_JustGuard_C:SimpleConstructionScript_0.SCS_Node_0'",
+        "ObjectPath": "BBQ/Content/Art/ArtRendering/AR_PostProcess/CPP/CPP_PC_JustGuard.4"
+      }
+    }
+  }
+]

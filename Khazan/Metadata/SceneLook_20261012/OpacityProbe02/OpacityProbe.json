@@ -1,0 +1,372 @@
+{
+  "success": true,
+  "connections": [
+    {
+      "node": "MaterialExpressionLinearInterpolate_3",
+      "class": "MaterialExpressionLinearInterpolate",
+      "inputs": [
+        {
+          "pin": "A",
+          "node": "MaterialExpressionScalarParameter_2",
+          "output": ""
+        },
+        {
+          "pin": "B",
+          "node": "MaterialExpressionMaterialFunctionCall_7",
+          "output": "Result"
+        },
+        {
+          "pin": "Alpha",
+          "node": "MaterialExpressionScalarParameter_6",
+          "output": ""
+        }
+      ]
+    },
+    {
+      "node": "MaterialExpressionScalarParameter_2",
+      "class": "MaterialExpressionScalarParameter",
+      "inputs": [],
+      "parameter_name": "Opacity",
+      "default_value": 1.0
+    },
+    {
+      "node": "MaterialExpressionMaterialFunctionCall_7",
+      "class": "MaterialExpressionMaterialFunctionCall",
+      "inputs": [
+        {
+          "pin": "Value",
+          "node": "MaterialExpressionTextureSampleParameter2D_3",
+          "output": "RGBA"
+        },
+        {
+          "pin": "Channel",
+          "node": "MaterialExpressionMaterialFunctionCall_6",
+          "output": "Result"
+        }
+      ]
+    },
+    {
+      "node": "MaterialExpressionTextureSampleParameter2D_3",
+      "class": "MaterialExpressionTextureSampleParameter2D",
+      "inputs": [
+        {
+          "pin": "UVs",
+          "node": "MaterialExpressionMaterialFunctionCall_31",
+          "output": "Result"
+        }
+      ],
+      "parameter_name": "OpacityTexture"
+    },
+    {
+      "node": "MaterialExpressionMaterialFunctionCall_31",
+      "class": "MaterialExpressionMaterialFunctionCall",
+      "inputs": [
+        {
+          "pin": "Scale",
+          "node": "MaterialExpressionMaterialFunctionCall_29",
+          "output": "Result"
+        },
+        {
+          "pin": "Rotation",
+          "node": "MaterialExpressionScalarParameter_27",
+          "output": ""
+        },
+        {
+          "pin": "TextureCoordinate",
+          "node": "MaterialExpressionReroute_25",
+          "output": "UV"
+        },
+        {
+          "pin": "Translation",
+          "node": "MaterialExpressionMaterialFunctionCall_30",
+          "output": "Result"
+        }
+      ]
+    },
+    {
+      "node": "MaterialExpressionMaterialFunctionCall_29",
+      "class": "MaterialExpressionMaterialFunctionCall",
+      "inputs": [
+        {
+          "pin": "X",
+          "node": "MaterialExpressionVectorParameter_12",
+          "output": "R"
+        },
+        {
+          "pin": "Y",
+          "node": "MaterialExpressionVectorParameter_12",
+          "output": "R"
+        }
+      ]
+    },
+    {
+      "node": "MaterialExpressionVectorParameter_12",
+      "class": "MaterialExpressionVectorParameter",
+      "inputs": [],
+      "parameter_name": "OpacityScaleTranslation",
+      "default_value": "<Struct 'LinearColor' (0x000002267C56C0F8) {r: 1.000000, g: 1.000000, b: 0.000000, a: 0.000000}>"
+    },
+    {
+      "node": "MaterialExpressionScalarParameter_27",
+      "class": "MaterialExpressionScalarParameter",
+      "inputs": [],
+      "parameter_name": "OpacityRotation",
+      "default_value": 0.0
+    },
+    {
+      "node": "MaterialExpressionReroute_25",
+      "class": "MaterialExpressionReroute",
+      "inputs": [
+        {
+          "pin": "None",
+          "node": "MaterialExpressionStaticSwitchParameter_26",
+          "output": ""
+        }
+      ]
+    },
+    {
+      "node": "MaterialExpressionStaticSwitchParameter_26",
+      "class": "MaterialExpressionStaticSwitchParameter",
+      "inputs": [
+        {
+          "pin": "True",
+          "node": "MaterialExpressionSwitch_8",
+          "output": ""
+        },
+        {
+          "pin": "False",
+          "node": "MaterialExpressionIf_46",
+          "output": ""
+        }
+      ],
+      "parameter_name": "bUseSwitch",
+      "default_value": false
+    },
+    {
+      "node": "MaterialExpressionSwitch_8",
+      "class": "MaterialExpressionSwitch",
+      "inputs": [
+        {
+          "pin": "SwitchValue",
+          "node": "MaterialExpressionReroute_24",
+          "output": "UVIndex"
+        },
+        {
+          "pin": "Default",
+          "node": "MaterialExpressionTextureCoordinate_64",
+          "output": ""
+        },
+        {
+          "pin": "UV0",
+          "node": "MaterialExpressionTextureCoordinate_64",
+          "output": ""
+        },
+        {
+          "pin": "UV1",
+          "node": "MaterialExpressionTextureCoordinate_65",
+          "output": ""
+        },
+        {
+          "pin": "UV2",
+          "node": "MaterialExpressionTextureCoordinate_66",
+          "output": ""
+        },
+        {
+          "pin": "UV3",
+          "node": "MaterialExpressionTextureCoordinate_67",
+          "output": ""
+        }
+      ]
+    },
+    {
+      "node": "MaterialExpressionReroute_24",
+      "class": "MaterialExpressionReroute",
+      "inputs": [
+        {
+          "pin": "None",
+          "node": "MaterialExpressionScalarParameter_19",
+          "output": ""
+        }
+      ]
+    },
+    {
+      "node": "MaterialExpressionScalarParameter_19",
+      "class": "MaterialExpressionScalarParameter",
+      "inputs": [],
+      "parameter_name": "OpacityUVIndex",
+      "default_value": 0.0
+    },
+    {
+      "node": "MaterialExpressionTextureCoordinate_64",
+      "class": "MaterialExpressionTextureCoordinate",
+      "inputs": []
+    },
+    {
+      "node": "MaterialExpressionTextureCoordinate_65",
+      "class": "MaterialExpressionTextureCoordinate",
+      "inputs": []
+    },
+    {
+      "node": "MaterialExpressionTextureCoordinate_66",
+      "class": "MaterialExpressionTextureCoordinate",
+      "inputs": []
+    },
+    {
+      "node": "MaterialExpressionTextureCoordinate_67",
+      "class": "MaterialExpressionTextureCoordinate",
+      "inputs": []
+    },
+    {
+      "node": "MaterialExpressionIf_46",
+      "class": "MaterialExpressionIf",
+      "inputs": [
+        {
+          "pin": "A",
+          "node": "MaterialExpressionReroute_24",
+          "output": "UVIndex"
+        },
+        {
+          "pin": "A > B",
+          "node": "MaterialExpressionIf_47",
+          "output": ""
+        },
+        {
+          "pin": "A == B",
+          "node": "MaterialExpressionIf_47",
+          "output": ""
+        },
+        {
+          "pin": "A < B",
+          "node": "MaterialExpressionTextureCoordinate_64",
+          "output": ""
+        }
+      ]
+    },
+    {
+      "node": "MaterialExpressionIf_47",
+      "class": "MaterialExpressionIf",
+      "inputs": [
+        {
+          "pin": "A",
+          "node": "MaterialExpressionReroute_24",
+          "output": "UVIndex"
+        },
+        {
+          "pin": "A > B",
+          "node": "MaterialExpressionIf_48",
+          "output": ""
+        },
+        {
+          "pin": "A == B",
+          "node": "MaterialExpressionIf_48",
+          "output": ""
+        },
+        {
+          "pin": "A < B",
+          "node": "MaterialExpressionTextureCoordinate_65",
+          "output": ""
+        }
+      ]
+    },
+    {
+      "node": "MaterialExpressionIf_48",
+      "class": "MaterialExpressionIf",
+      "inputs": [
+        {
+          "pin": "A",
+          "node": "MaterialExpressionReroute_24",
+          "output": "UVIndex"
+        },
+        {
+          "pin": "A > B",
+          "node": "MaterialExpressionTextureCoordinate_67",
+          "output": ""
+        },
+        {
+          "pin": "A == B",
+          "node": "MaterialExpressionTextureCoordinate_67",
+          "output": ""
+        },
+        {
+          "pin": "A < B",
+          "node": "MaterialExpressionTextureCoordinate_66",
+          "output": ""
+        }
+      ]
+    },
+    {
+      "node": "MaterialExpressionMaterialFunctionCall_30",
+      "class": "MaterialExpressionMaterialFunctionCall",
+      "inputs": [
+        {
+          "pin": "X",
+          "node": "MaterialExpressionVectorParameter_12",
+          "output": "B"
+        },
+        {
+          "pin": "Y",
+          "node": "MaterialExpressionVectorParameter_12",
+          "output": "B"
+        }
+      ]
+    },
+    {
+      "node": "MaterialExpressionMaterialFunctionCall_6",
+      "class": "MaterialExpressionMaterialFunctionCall",
+      "inputs": [
+        {
+          "pin": "X",
+          "node": "MaterialExpressionVectorParameter_6",
+          "output": "R"
+        },
+        {
+          "pin": "Y",
+          "node": "MaterialExpressionVectorParameter_6",
+          "output": "R"
+        },
+        {
+          "pin": "Z",
+          "node": "MaterialExpressionVectorParameter_6",
+          "output": "R"
+        },
+        {
+          "pin": "A",
+          "node": "MaterialExpressionVectorParameter_6",
+          "output": "R"
+        }
+      ]
+    },
+    {
+      "node": "MaterialExpressionVectorParameter_6",
+      "class": "MaterialExpressionVectorParameter",
+      "inputs": [],
+      "parameter_name": "OpacityTextureComponent",
+      "default_value": "<Struct 'LinearColor' (0x000002267C561478) {r: 1.000000, g: 0.000000, b: 0.000000, a: 0.000000}>"
+    },
+    {
+      "node": "MaterialExpressionScalarParameter_6",
+      "class": "MaterialExpressionScalarParameter",
+      "inputs": [],
+      "parameter_name": "UseOpacityTexture",
+      "default_value": 0.0
+    }
+  ],
+  "textures": [
+    {
+      "parameter": "BaseColorTexture",
+      "texture": "/Game/_Art/Player/Environment/HeinMach/Reconstructed/OverrideMaterials/Textures/T_WT_COM_ThinTree_Base_001_03_D.T_WT_COM_ThinTree_Base_001_03_D",
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\SceneLook_20261012\\OpacityProbe02\\BaseColorTexture.png"
+    },
+    {
+      "parameter": "OpacityTexture",
+      "texture": "/Game/_Art/Player/Environment/HeinMach/Reconstructed/OverrideMaterials/Textures/T_WT_COM_ThinTree_Base_001_03_D.T_WT_COM_ThinTree_Base_001_03_D",
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\SceneLook_20261012\\OpacityProbe02\\OpacityTexture.png"
+    },
+    {
+      "parameter": "EmissiveColorTexture",
+      "texture": "/Game/_Art/Player/Environment/HeinMach/Reconstructed/OverrideMaterials/Textures/T_WT_COM_ThinTree_Base_001_02_E.T_WT_COM_ThinTree_Base_001_02_E",
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\SceneLook_20261012\\OpacityProbe02\\EmissiveColorTexture.png"
+    }
+  ],
+  "asset_saves": 0
+}

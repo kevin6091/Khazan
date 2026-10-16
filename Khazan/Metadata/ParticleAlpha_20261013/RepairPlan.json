@@ -1,0 +1,841 @@
+{
+  "status": "planned",
+  "rows": [
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/FM_Dissolve_Hit_001",
+      "master": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_SubUV_Dissolve_001",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/Mask/FT_Hit_Spark_001.FT_Hit_Spark_001",
+      "parameter": "Base_Texture",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_1",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'Base_SubUV_Dissolve_001:MaterialExpressionTextureSampleParameter2D_0'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          1024,
+          1024
+        ],
+        "extrema": [
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          0.0,
+          0.0,
+          0.0,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Combat/Blood/PP_Dmg_Blood_Trail_Sub"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/FM_Subuv_Blood_Explo_003",
+      "master": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_SubUV",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/SubUV/FT_Subuv_Explo_002.FT_Subuv_Explo_002",
+      "parameter": "2DTex",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_3",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'Base_SubUV:MaterialExpressionTextureSampleParameter2D_6'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          1024,
+          1024
+        ],
+        "extrema": [
+          [
+            0,
+            255
+          ],
+          [
+            51,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          0.0,
+          255.0,
+          0.0,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_PartGroggy_blood_01"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/FM_Subuv_Lightning_Spark_002",
+      "master": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_SubUV",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/SubUV/FT_Subuv_Spark_001.FT_Subuv_Spark_001",
+      "parameter": "2DTex",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_3",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'Base_SubUV:MaterialExpressionTextureSampleParameter2D_6'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          512,
+          512
+        ],
+        "extrema": [
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            165
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          0.0,
+          255.0,
+          0.0,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Combat/GuardParry/PP_AtkEx_Parry"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Simple/FM_Simple_UVSprite_FluidSmoke_6",
+      "master": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_ShockWave_Sprite_001",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/Noise/FT_Noise_FluidSmoke_001.FT_Noise_FluidSmoke_001",
+      "parameter": "BaseTex",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_2",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'Base_ShockWave_Sprite_001:MaterialExpressionTextureSampleParameter2D_11'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          1024,
+          1024
+        ],
+        "extrema": [
+          [
+            0,
+            200
+          ],
+          [
+            0,
+            247
+          ],
+          [
+            0,
+            200
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          35.193603515625,
+          7.82177734375,
+          35.10888671875,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Combat/Shared/P_kazan_charge_start"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/SubUV/T_MM_subuv_smoke_01_Inst_27",
+      "master": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/T_MM_subuv_smoke_01",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/SubUV/T_Smoke03_SubUV_9x9.T_Smoke03_SubUV_9x9",
+      "parameter": "Main_tex",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_3",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'T_MM_subuv_smoke_01:MaterialExpressionTextureSampleParameter2D_1'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          1024,
+          1024
+        ],
+        "extrema": [
+          [
+            0,
+            214
+          ],
+          [
+            0,
+            219
+          ],
+          [
+            0,
+            214
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          5.01171875,
+          5.02734375,
+          5.01171875,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Combat/Shared/FP_breath_Small"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/SubUV/T_TMM_subuv_smoke_01_Inst",
+      "master": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/T_MM_subuv_smoke_01",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/SubUV/T_Smoke03_SubUV_9x9.T_Smoke03_SubUV_9x9",
+      "parameter": "Main_tex",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_3",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'T_MM_subuv_smoke_01:MaterialExpressionTextureSampleParameter2D_1'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          1024,
+          1024
+        ],
+        "extrema": [
+          [
+            0,
+            214
+          ],
+          [
+            0,
+            219
+          ],
+          [
+            0,
+            214
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          5.01171875,
+          5.02734375,
+          5.01171875,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Combat/Shared/FP_breath_Small"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/MonsterHuman/FMI_Glow_ac_001",
+      "master": "/Game/_Art/Effects/Shared/Materials/Dot/FM_Default_AC_A",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/Mask/FT_Bsse_Particle.FT_Bsse_Particle",
+      "parameter": "Base",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_4",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'FM_Default_AC_A:MaterialExpressionTextureSampleParameter2D_2'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          256,
+          256
+        ],
+        "extrema": [
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          0.515625,
+          1.375,
+          0.515625,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Monsters/Human/FP_EmpireHalberd_ChargeAtk_01"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/MonsterHuman/FMI_ShockWave_05_2s",
+      "master": "/Game/_Art/Effects/Shared/Materials/ShockWave/FM_ShockWave_01",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/ShockWave/FT_Noise_ShockwaveTile_001.FT_Noise_ShockwaveTile_001",
+      "parameter": "MainTex",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_1",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'FM_ShockWave_01:MaterialExpressionTextureSampleParameter2D_1'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          1024,
+          1024
+        ],
+        "extrema": [
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          32.435546875,
+          32.623291015625,
+          32.4375,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Monsters/Human/FP_EmpireHalberd_ChargeAtk_01"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/MonsterHuman/T_MM_subuv_smoke_01_Inst3",
+      "master": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/T_MM_subuv_smoke_2",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/SubUV/T_Smoke03_SubUV_9x9.T_Smoke03_SubUV_9x9",
+      "parameter": "Main_tex",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_2",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'T_MM_subuv_smoke_2:MaterialExpressionTextureSampleParameter2D_2'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          1024,
+          1024
+        ],
+        "extrema": [
+          [
+            0,
+            214
+          ],
+          [
+            0,
+            219
+          ],
+          [
+            0,
+            214
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          5.01171875,
+          5.02734375,
+          5.01171875,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Monsters/Human/PP_W_Dust_Front",
+        "/Game/_Art/Effects/Monsters/Human/PP_W_Wood_Round"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/MonsterHuman/T_NewMaterialInstanceConstant21",
+      "master": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_DefaltParticle",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/Mask/FT_Bsse_Particle.FT_Bsse_Particle",
+      "parameter": "BaseTex",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_1",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'Base_DefaltParticle:MaterialExpressionTextureSampleParameter2D_0'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          256,
+          256
+        ],
+        "extrema": [
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          0.515625,
+          1.375,
+          0.515625,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Monsters/Human/P_bladepierce_large"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/MonsterHuman/T_NewMaterialInstanceConstant21_2",
+      "master": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_DefaltParticle",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/Mask/FT_Bsse_Particle.FT_Bsse_Particle",
+      "parameter": "BaseTex",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_1",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'Base_DefaltParticle:MaterialExpressionTextureSampleParameter2D_0'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          256,
+          256
+        ],
+        "extrema": [
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          0.515625,
+          1.375,
+          0.515625,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Monsters/Human/P_bladepierce_large"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/MonsterHuman/T_NewMaterialInstanceConstant7_Inst",
+      "master": "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_ShockWave_Sprite_001_V2",
+      "texture": "/Game/_Art/Effects/Shared/Textures/MonsterHuman/FT_SmoothGrdiant_001.FT_SmoothGrdiant_001",
+      "parameter": "BaseTex",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_2",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'Base_ShockWave_Sprite_001_V2:MaterialExpressionTextureSampleParameter2D_11'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          16,
+          256
+        ],
+        "extrema": [
+          [
+            0,
+            255
+          ],
+          [
+            1,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          121.1669921875,
+          121.5751953125,
+          121.1904296875,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Monsters/Human/P_bladepierce_large"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/ShockWave/MI/FMI_ShockWave_05",
+      "master": "/Game/_Art/Effects/Shared/Materials/ShockWave/FM_ShockWave_01",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/ShockWave/FT_Noise_ShockwaveTile_001.FT_Noise_ShockwaveTile_001",
+      "parameter": "MainTex",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_1",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'FM_ShockWave_01:MaterialExpressionTextureSampleParameter2D_1'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          1024,
+          1024
+        ],
+        "extrema": [
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          32.435546875,
+          32.623291015625,
+          32.4375,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Monsters/Human/FP_EmpireHalberd_Pirce_01"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/ShockWave/MI/FMI_Shockwave_02_01",
+      "master": "/Game/_Art/Effects/Shared/Materials/ShockWave/FM_ShockWave_02",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/ShockWave/T_tiles_smoke_line.T_tiles_smoke_line",
+      "parameter": "Opa_t",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_6",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'FM_ShockWave_02:MaterialExpressionTextureSampleParameter2D_2'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          1024,
+          512
+        ],
+        "extrema": [
+          [
+            0,
+            247
+          ],
+          [
+            0,
+            247
+          ],
+          [
+            0,
+            247
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          16.68408203125,
+          16.69970703125,
+          16.68408203125,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Monsters/Human/P_bladepierce_large"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/Smoke/FMI/FMI_Smoke_B_01",
+      "master": "/Game/_Art/Effects/Shared/Materials/Smoke/FM_Smoke_B",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/Mask/FT_Mask_Fluid_001.FT_Mask_Fluid_001",
+      "parameter": "Main_tex",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_3",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'FM_Smoke_B:MaterialExpressionTextureSampleParameter2D_3'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          1024,
+          1024
+        ],
+        "extrema": [
+          [
+            0,
+            181
+          ],
+          [
+            0,
+            182
+          ],
+          [
+            0,
+            181
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          13.0107421875,
+          12.06640625,
+          13.0107421875,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Monsters/Human/FP_DeathEffect"
+      ]
+    },
+    {
+      "material": "/Game/_Art/Effects/Shared/Materials/SubUV/MI/FMI_Subuv_Smoke_06",
+      "master": "/Game/_Art/Effects/Shared/Materials/SubUV/FM_SubUv_Smoke_A",
+      "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/SubUV/T_Smoke03_SubUV_9x9.T_Smoke03_SubUV_9x9",
+      "parameter": "Main_Tex_Gray",
+      "alpha_links": [
+        {
+          "parent": "MaterialExpressionMultiply_6",
+          "line": "A=(Expression=\"/Script/Engine.MaterialExpressionTextureSampleParameter2D'FM_SubUv_Smoke_A:MaterialExpressionTextureSampleParameter2D_1'\",OutputIndex=4,Mask=1,MaskA=1)"
+        }
+      ],
+      "stats": {
+        "size": [
+          1024,
+          1024
+        ],
+        "extrema": [
+          [
+            0,
+            214
+          ],
+          [
+            0,
+            219
+          ],
+          [
+            0,
+            214
+          ],
+          [
+            255,
+            255
+          ]
+        ],
+        "border_mean_rgba": [
+          5.01171875,
+          5.02734375,
+          5.01171875,
+          255.0
+        ],
+        "constant_alpha": true
+      },
+      "systems": [
+        "/Game/_Art/Effects/Monsters/ApesYetuga/CineFX_bloodloop_small_05",
+        "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_PartGroggy_blood_01"
+      ]
+    }
+  ],
+  "default_particle": "/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle",
+  "targets": [
+    "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_DefaltParticle",
+    "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_ShockWave_Sprite_001",
+    "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_ShockWave_Sprite_001_V2",
+    "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_SubUV",
+    "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_SubUV_Dissolve_001",
+    "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/T_MM_subuv_smoke_01",
+    "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Base/T_MM_subuv_smoke_2",
+    "/Game/_Art/Effects/Shared/Materials/BBQ_Material/FM_Dissolve_Hit_001",
+    "/Game/_Art/Effects/Shared/Materials/BBQ_Material/FM_Subuv_Blood_Explo_003",
+    "/Game/_Art/Effects/Shared/Materials/BBQ_Material/FM_Subuv_Lightning_Spark_002",
+    "/Game/_Art/Effects/Shared/Materials/BBQ_Material/Simple/FM_Simple_UVSprite_FluidSmoke_6",
+    "/Game/_Art/Effects/Shared/Materials/BBQ_Material/SubUV/T_MM_subuv_smoke_01_Inst_27",
+    "/Game/_Art/Effects/Shared/Materials/BBQ_Material/SubUV/T_TMM_subuv_smoke_01_Inst",
+    "/Game/_Art/Effects/Shared/Materials/Dot/FM_Default_AC_A",
+    "/Game/_Art/Effects/Shared/Materials/MonsterHuman/FMI_Glow_ac_001",
+    "/Game/_Art/Effects/Shared/Materials/MonsterHuman/FMI_ShockWave_05_2s",
+    "/Game/_Art/Effects/Shared/Materials/MonsterHuman/T_MM_subuv_smoke_01_Inst3",
+    "/Game/_Art/Effects/Shared/Materials/MonsterHuman/T_NewMaterialInstanceConstant21",
+    "/Game/_Art/Effects/Shared/Materials/MonsterHuman/T_NewMaterialInstanceConstant21_2",
+    "/Game/_Art/Effects/Shared/Materials/MonsterHuman/T_NewMaterialInstanceConstant7_Inst",
+    "/Game/_Art/Effects/Shared/Materials/Other/DefaultParticle",
+    "/Game/_Art/Effects/Shared/Materials/ShockWave/FM_ShockWave_01",
+    "/Game/_Art/Effects/Shared/Materials/ShockWave/FM_ShockWave_02",
+    "/Game/_Art/Effects/Shared/Materials/ShockWave/MI/FMI_ShockWave_05",
+    "/Game/_Art/Effects/Shared/Materials/ShockWave/MI/FMI_Shockwave_02_01",
+    "/Game/_Art/Effects/Shared/Materials/Smoke/FMI/FMI_Smoke_B_01",
+    "/Game/_Art/Effects/Shared/Materials/Smoke/FM_Smoke_B",
+    "/Game/_Art/Effects/Shared/Materials/SubUV/FM_SubUv_Smoke_A",
+    "/Game/_Art/Effects/Shared/Materials/SubUV/MI/FMI_Subuv_Smoke_06"
+  ],
+  "excluded_mesh_rows": [
+    "/Game/_Art/Effects/Shared/Materials/MonsterApesYetuga/CM_M_Yetuga_Ice",
+    "/Game/_Art/Effects/Shared/Materials/MonsterApesYetuga/FMI_MeshShockWave_02",
+    "/Game/_Art/Effects/Shared/Materials/MonsterHuman/FMI_MeshShockWave_10",
+    "/Game/_Art/Effects/Shared/Materials/Object/MI/FMI_Rock_02",
+    "/Game/_Art/Effects/Shared/Materials/Other/WM_SKL_Ice_Special_008"
+  ],
+  "reason": "Current sample-A=255 ignores spatial density in R. Repair exact affected instances only; default switch0 retains other instances. Untextured DefaultParticle gets a soft elliptic spatial alpha.",
+  "temporary_presentation": {
+    "edge_feather_uv": 0.03,
+    "edge_softness_pixels": 1.25,
+    "untextured_ellipse_power": 2
+  },
+  "ownership_extensions": [
+    {
+      "owned_folder": "Content\\_Art\\Effects\\Shared\\Materials\\BBQ_Material\\Simple",
+      "read_only_junction_kept": "BorrowedReadOnlyLinks\\Simple_d923bc3af5"
+    },
+    {
+      "owned_folder": "Content\\_Art\\Effects\\Shared\\Materials\\BBQ_Material\\SubUV",
+      "read_only_junction_kept": "BorrowedReadOnlyLinks\\SubUV_541757973f"
+    },
+    {
+      "owned_folder": "Content\\_Art\\Effects\\Shared\\Materials\\ShockWave\\MI",
+      "read_only_junction_kept": "BorrowedReadOnlyLinks\\MI_c69194a34a"
+    },
+    {
+      "owned_folder": "Content\\_Art\\Effects\\Shared\\Materials\\Smoke\\FMI",
+      "read_only_junction_kept": "BorrowedReadOnlyLinks\\FMI_94b12d276c"
+    },
+    {
+      "owned_folder": "Content\\_Art\\Effects\\Shared\\Materials\\SubUV\\MI",
+      "read_only_junction_kept": "BorrowedReadOnlyLinks\\MI_7e84df75f8"
+    }
+  ],
+  "before": {
+    "Content/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_DefaltParticle.uasset": "8af6515e43c08738a2f87cc5816546178164b9813b18250f7ceb88221a6e0a2f",
+    "Content/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_ShockWave_Sprite_001.uasset": "cd7fa51f7ce2b9f2e61d63f4e98a24f56e5fa5f3c40e9ddc21b7ecbfea120f2c",
+    "Content/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_ShockWave_Sprite_001_V2.uasset": "2f19c24ee0f9e1ae8d742757f1be47dd35e67e3b9e0f2578ad68d752fda49e5e",
+    "Content/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_SubUV.uasset": "e342496a76005872b1caac72a00c1c33d76199f6af4e355b9da4ea7362b4a431",
+    "Content/_Art/Effects/Shared/Materials/BBQ_Material/Base/Base_SubUV_Dissolve_001.uasset": "f5b6b26b26a14f8076a7fd90cb6b7bb5ec1f346f584b241c595c57187cd49ab5",
+    "Content/_Art/Effects/Shared/Materials/BBQ_Material/Base/T_MM_subuv_smoke_01.uasset": "0a9af3520c4985a2d83c764cad43e9ece6457f1547ccf22c72b6949e485f6897",
+    "Content/_Art/Effects/Shared/Materials/BBQ_Material/Base/T_MM_subuv_smoke_2.uasset": "b619299234adc7dd07ea72f96ee7998631f92e9718c93cdce47a13f7236fe36f",
+    "Content/_Art/Effects/Shared/Materials/BBQ_Material/FM_Dissolve_Hit_001.uasset": "d5b974d6d781c0fdd91426d599ab690b06774b9e6c6b0e16fe58c6dc57a7e93a",
+    "Content/_Art/Effects/Shared/Materials/BBQ_Material/FM_Subuv_Blood_Explo_003.uasset": "676d6bca22f6af6a8771456736e6b778023a91322b29ff353d345f895fbf1413",
+    "Content/_Art/Effects/Shared/Materials/BBQ_Material/FM_Subuv_Lightning_Spark_002.uasset": "969dbd0a625b0c1d74eaf0438f895a918087a8da7c33f092a884d905a197625e",
+    "Content/_Art/Effects/Shared/Materials/BBQ_Material/Simple/FM_Simple_UVSprite_FluidSmoke_6.uasset": "aac544b5b4d9dbb7c9c62d8d1208b86409d17a90847c6474bf4e0e1da686c20a",
+    "Content/_Art/Effects/Shared/Materials/BBQ_Material/SubUV/T_MM_subuv_smoke_01_Inst_27.uasset": "2041aad1fdc25b7d5584be63e7eecb9bd8b4ae65c3b2fa7a560b2a501eaa6b11",
+    "Content/_Art/Effects/Shared/Materials/BBQ_Material/SubUV/T_TMM_subuv_smoke_01_Inst.uasset": "509fa72dc598debf9781f4dfc62da637b56632cb37b1d4093fd9245fd404f12b",
+    "Content/_Art/Effects/Shared/Materials/Dot/FM_Default_AC_A.uasset": "5b2f80a63ced1eee49ceac7bdff79b020fb9a6e88b758225e0c6b8440a50dec9",
+    "Content/_Art/Effects/Shared/Materials/MonsterHuman/FMI_Glow_ac_001.uasset": "08e3801eb41cc1fa3d97bf451961face7c5c393d7ae83861b12e872cfef50372",
+    "Content/_Art/Effects/Shared/Materials/MonsterHuman/FMI_ShockWave_05_2s.uasset": "dc68da8212f7142efeee06b0ba42f846ebc03378ddd5e54f86a3f7a53e9b3965",
+    "Content/_Art/Effects/Shared/Materials/MonsterHuman/T_MM_subuv_smoke_01_Inst3.uasset": "ce51cc782cf97c0020bb4b81aa5241db0ec98c67829be1d324e93644d4b80147",
+    "Content/_Art/Effects/Shared/Materials/MonsterHuman/T_NewMaterialInstanceConstant21.uasset": "16eebdd1792faef55f2996cf539be740c8a09917cf36ba38781c8033698383db",
+    "Content/_Art/Effects/Shared/Materials/MonsterHuman/T_NewMaterialInstanceConstant21_2.uasset": "61b043529137b4d1e9a828b0739154f5a6bc3c6f88f4e7d191682589c2533d0d",
+    "Content/_Art/Effects/Shared/Materials/MonsterHuman/T_NewMaterialInstanceConstant7_Inst.uasset": "ff2e55e4dca649ce948135096f4fe68584c7dd9595c06b461998093b9e396273",
+    "Content/_Art/Effects/Shared/Materials/Other/DefaultParticle.uasset": "5912f6401beabc60c58a52fda49171f128b646a918185eaf9d2c219dae6115ed",
+    "Content/_Art/Effects/Shared/Materials/ShockWave/FM_ShockWave_01.uasset": "9e0541337ac59cc08a4604f1558dca1b6cd5809c9cab6ecd7ca37e9bec69b7e1",
+    "Content/_Art/Effects/Shared/Materials/ShockWave/FM_ShockWave_02.uasset": "b4ca53ed56fa56f006045e53e90b560ca978796a4cc9fd9717bb292102c5a903",
+    "Content/_Art/Effects/Shared/Materials/ShockWave/MI/FMI_ShockWave_05.uasset": "d2f1ac65ae9e71aab5b48d378894322fb810ee3686cc267b3141c1e1f774ae1c",
+    "Content/_Art/Effects/Shared/Materials/ShockWave/MI/FMI_Shockwave_02_01.uasset": "bd8a303bddf254e79f9a8353ed5030ec65f7c11226334dfa2d204cfb537a3234",
+    "Content/_Art/Effects/Shared/Materials/Smoke/FMI/FMI_Smoke_B_01.uasset": "f9ebaa85c71102080ce83633f020172b249969501baca396e5eb57351f84a09b",
+    "Content/_Art/Effects/Shared/Materials/Smoke/FM_Smoke_B.uasset": "45e274aa111b15799b2d1e4b241d66494800fbd58e26c247c2665459b4a06dc3",
+    "Content/_Art/Effects/Shared/Materials/SubUV/FM_SubUv_Smoke_A.uasset": "0d0dd8af3aed7eae7e16c1c64bb4cd77efd7326592c5b297ee20fd906cb8484d",
+    "Content/_Art/Effects/Shared/Materials/SubUV/MI/FMI_Subuv_Smoke_06.uasset": "724d2595384f12bd4140e187299be741d5f36c54d086ccd67e876dd0468f0e49"
+  }
+}

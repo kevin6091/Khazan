@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-08",
+  "scope": "Read-only damage integration audit; no gameplay/editor/asset changes",
+  "source_baseline": "Main and ComboWork audited target source SHA256 matched at audit time",
+  "architecture": {
+    "current_contract": "CHARACTER_GAMEPLAY_ARCHITECTURE.md native-minimal v3 and latest ARCH-75/77/80 amendments",
+    "owner": "ASC AttributeSet/GameplayEffect owns HP and Stamina; current Ability owns hit execution and cleanup",
+    "smallest_boundary": "Existing KZComboActionAbility private per-hit helper; no new CombatResponse/HitComponent/IncomingDamage Attribute"
+  },
+  "existing_paths": [
+    {"file": "Source/Khazan/Attribute/KZAttributeSet.h", "evidence": "HP, MaxHP, Stamina, MaxStamina FGameplayAttributeData and accessors already exist"},
+    {"file": "Source/Khazan/Attribute/KZAttributeSet.cpp", "line": 33, "evidence": "PostGameplayEffectExecute clamps HP/Stamina into their maxima; no damage/reaction/death publication"},
+    {"file": "Source/Khazan/Character/KZCharacter.cpp", "line": 41, "evidence": "Common Character owns ASC/AttributeSet; initializes ActorInfo in PostInitializeComponents"},
+    {"file": "Source/Khazan/Character/KZCharacter.cpp", "line": 84, "evidence": "Authority applies CharacterDefinition.InitialEffects before initial Ability grants"},
+    {"file": "Source/Khazan/Character/KZCharacter.cpp", "line": 142, "evidence": "UnPossessed cancels Ability.Action and clears commands; EndPlay uses DestroyActiveState"},
+    {"file": "Source/Khazan/Ability/KZActionAbility.cpp", "line": 8, "evidence": "InstancedPerActor, LocalOnly existing policy; current task is standalone, not multiplayer damage replication"},
+    {"file": "Source/Khazan/Ability/KZAbilitySystemComponent.cpp", "line": 10, "evidence": "TryGuardHit delegates to active existing Guard primary instance"},
+    {"file": "Source/Khazan/Ability/PlayerAbility/KZGuardAbility.cpp", "line": 122, "evidence": "Held active Guard requires positive finite cost and sufficient Stamina; negative SetByCaller GuardStaminaDamage instant GE; true remains accepted after downstream montage failure"},
+    {"file": "Source/Khazan/Ability/Combo/KZComboDefinitionData.h", "line": 51, "evidence": "Existing editor FKZComboNode schema is minimal per-node/per-hit tuning location"},
+    {"file": "Source/Khazan/Ability/Combo/KZComboActionAbility.cpp", "line": 857, "evidence": "EndAbility unbinds delegates/resets current node then parent ends engine Tasks; add hit timer/callback reset here before Super"}
+  ],
+  "recommendation": {
+    "damage_data": "Per-node hit window/data editor values HPDamage/StaminaDamage, finite nonnegative. Use one common editor-selected instant damage GE instead of duplicate per-node GE classes",
+    "effect": "One instant GE with additive negative HP and Stamina SetByCaller modifiers; source ASC context contains Attacker and SourceObject, with actual hit result when available",
+    "target_checks": "Current scope: valid AKZMonster, target ASC/GetSet, HasAuthority on source, target MaxHP>0 and HP>0, owner ignored. MaxHP=0 means uninitialized rather than confirmed Dead state",
+    "guard": "Only for explicitly blockable hit: TryGuardHit before damage GE; true means omit HP and avoid second Stamina deduction; false does not mean GuardBreak exists",
+    "result": "Use WasSuccessfullyApplied for instant GE success rather than requiring persistent valid effect handle. Response, if introduced, happens after both modifiers finish; do not emit death from individual AttributeSet callbacks",
+    "cleanup": "Dedup state and scheduled sampling belong to current node/Ability and reset on node transition, End/cancel, natural completion, failed start, UnPossess and EndPlay. After GE callbacks recheck current Ability/node before further samples",
+    "new_runtime_files": 0,
+    "minimal_existing_runtime_files": ["Source/Khazan/Ability/Combo/KZComboDefinitionData.h", "Source/Khazan/Ability/Combo/KZComboActionAbility.h", "Source/Khazan/Ability/Combo/KZComboActionAbility.cpp"],
+    "not_required_for_damage_readiness": ["new AttributeSet fields", "ASC damage manager", "per-Monster damage function", "HitReact or Death animation", "new Dead/Invincible state without producer", "AI refactor"]
+  },
+  "monster_initial_stats": {
+    "status_at_audit": "Prepared concurrently in MonsterWork; Main initializer assets absent and four Main definitions locked by PID24552 according to stored report. Recheck before delivery, do not overwrite concurrent work",
+    "source": "Scripts/Engineering/configure_monster_initial_stats_20261008.py and Metadata/MonsterStats_20261008/InProcessReadback.json",
+    "value_source": "Explicit User settings 2026-10-08, not original metadata",
+    "values": [
+      {"family": "Swordsman", "HP": 100, "MaxHP": 100, "Stamina": 50, "MaxStamina": 50},
+      {"family": "SwordShield", "HP": 100, "MaxHP": 100, "Stamina": 50, "MaxStamina": 50},
+      {"family": "HeavySwordsman", "HP": 200, "MaxHP": 200, "Stamina": 50, "MaxStamina": 50},
+      {"family": "HalberdElite", "HP": 200, "MaxHP": 200, "Stamina": 50, "MaxStamina": 50},
+      {"family": "ApesStoneHandElite", "HP": 400, "MaxHP": 400, "Stamina": 100, "MaxStamina": 100},
+      {"family": "Yetuga", "HP": 1000, "MaxHP": 1000, "Stamina": 150, "MaxStamina": 150}
+    ],
+    "integration": "Common Character already applies InitialEffects. First four existing gameplay definitions; Apes/Yetuga definition/effect prepared only without registered gameplay actor"
+  },
+  "existing_tests": [
+    {"file": "Source/Khazan/Tests/KZGuardAbilityPIETest.cpp", "line": 102, "covers": "Invalid/too-expensive Guard hits rejected; held Guard repeated success costs; Release/Cancel/UnPossess cleanup"},
+    {"file": "Source/Khazan/Tests/KZHealAbilityPIETest.cpp", "line": 173, "covers": "HP lower/upper clamp; Heal cannot revive HP0; GE and direct MaxHP reductions clamp HP"},
+    {"file": "Source/Khazan/Tests/KZMonsterAIPIETest.cpp", "line": 69, "covers": "Enemy animation attacks never damage Player HP in existing scope; remains applicable if Monster hit windows stay empty"}
+  ],
+  "needed_focused_verification": [
+    "Real player attack overlap reduces initialized Monster HP and Stamina by editor values through GE",
+    "Multiple modular body components count once per hit/window; next authored strike can hit same target again",
+    "Multi-hit Spinning/OverFury actual hit count across fixture FPS and boundary/skipped-frame intervals",
+    "HP/Stamina never below zero; additional hits on HP0 do not cause duplicate result",
+    "Cancel/transition/natural End/UnPossess cannot deliver stale damage",
+    "Existing Heal/Guard and Monster no-player-damage regressions remain valid"
+  ],
+  "unimplemented_existing_semantics": ["Dead/Invincible/HitReact runtime tag and reaction producer", "Monster death/GuardBreak AI cleanup", "HP/Stamina UI", "networked damage replication"],
+  "original_damage_and_collision_policy": "Not investigated by this damage-only audit; defer to targeted original-metadata collision audit"
+}

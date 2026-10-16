@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "review_utc": "2026-10-08T06:14:40.532668+00:00",
+  "method": "Read-only source and installed UE5.8 engine implementation review; no gameplay/runtime verification claimed.",
+  "work_source_snapshot": [
+    {
+      "file": "Source/Khazan/Ability/Combo/KZComboDefinitionData.h",
+      "sha256": "88f33c70932c18a1ef8dcf879dbce498721347a339b0f375883b91a6e2bca961"
+    },
+    {
+      "file": "Source/Khazan/Ability/Combo/KZComboActionAbility.h",
+      "sha256": "c40c7c4dff1467f8880fc35eecde49b83e4adb4041c88a60b1b96668788bbec7"
+    },
+    {
+      "file": "Source/Khazan/Ability/Combo/KZComboActionAbility.cpp",
+      "sha256": "7d29d7a4b790422557805958e81331cccb554bb769c7e3c30c74dec68c119782"
+    }
+  ],
+  "verified_design": [
+    {
+      "contract": "Ability owns timer, query, hit sets and execution counter; EndAbility ResetRuntimeState clears timer/hit sets. CurrentNode transition resets both. No separate new collider runtime manager/component."
+    },
+    {
+      "contract": "Original duration windows are processed using every crossed baked key and interpolated endpoints; once-per-target set prevents damage per sample. Multiple independent windows provide repeated hits."
+    },
+    {
+      "contract": "TransitionToNode and cross-entry ApplyEdge flush old collision time before switching. Node-time is montage position minus entry-section start and allows automatic section chains (SpinningAttack02/ChargeAttack04)."
+    },
+    {
+      "contract": "Box actual center/extents/rotation authoring must consume proven BoxSemantics, not raw attachment center. Cylinder/default shape authoring remains explicitly temporary."
+    }
+  ],
+  "findings": [
+    {
+      "id": "REVIEW-COMPLETE-FLUSH",
+      "priority": "meaningful edge",
+      "location": "HandleMontageCompleted / UpdateAttackCollision",
+      "risk": "Queued montage ended callback may occur after active montage instance references were cleared. Montage_GetPosition returns0 when no active instance remains; final crossed window can be lost under a large hitch. Ordinary early attack windows usually finish before this edge.",
+      "source": [
+        "UE5.8 Engine/Private/Animation/AnimMontage.cpp FAnimMontageInstance::Terminate",
+        "UE5.8 Engine/Private/Animation/AnimInstance.cpp Montage_GetPosition / TriggerQueuedMontageEvents"
+      ],
+      "suggestion": "Allow completion-time override through last authored node attack window endpoint; preserve execution guard and do not sweep unrelated montage sections. Parent informed; later source may already incorporate fix."
+    },
+    {
+      "id": "REVIEW-SHAPE-EXTENT",
+      "priority": "small editor robustness",
+      "location": "QueryAttackCollision",
+      "risk": "Extent.GetMin()>0 requires unused Sphere Y/Z even schema says Sphere X only. Cylinder max(X,Y) radius compared through broadphase box(X,Y,Z) misses expanded radial side when X!=Y.",
+      "suggestion": "Validate only dimensions consumed by shape; Cylinder broadphase should use radius in both X/Y. Author equal X/Y currently avoidsCylinder issue."
+    },
+    {
+      "id": "REVIEW-GROUP-REPEAT",
+      "priority": "author contract",
+      "location": "HitId shared entire node",
+      "risk": "Raw Group1/Group2 reused across repeated OverFury animation segments must be namespaced per animation cycle/attack cohort, or repeated intended hits can be deduplicated for whole node. Overlapping windows belonging same group within cohort should share."
+    },
+    {
+      "id": "REVIEW-ROTATION-SWEEP",
+      "priority": "documented implementation limitation",
+      "location": "QueryAttackCollision SweepMultiByObjectType",
+      "risk": "Box sweeps use current sample rotation rather than a continuous rotation sweep; Cylinder uses sampled overlaps. Dense original 2-4ms baked samples reduce gap, but this does not prove native collision trajectory equivalence. Original channel/wall/team/re-hit event behavior unverified."
+    }
+  ],
+  "readonly": true
+}

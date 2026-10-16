@@ -1,0 +1,237 @@
+{
+  "mode": "ReadOnlySavedReferenceParentBasisAlignment",
+  "asset_changes": false,
+  "native_editor_actions": false,
+  "original_game_verified": false,
+  "parent_transform_inputs": [
+    {
+      "file": "Metadata/PlayerParts_20261007/NativeAudit.log",
+      "line": 2262,
+      "raw_line": "[2026.10.07-02.41.31:752][349]LogAutomationController: Bone part=Body index=3 name=Bip001-Pelvis parent=2 local=-0.000000,-0.000000,0.000008|89.499924,89.998497,7.485580|1.000000,1.000000,1.000000 component=0.000078,-0.001402,10517.200470|88.051166,-42.961385,132.386439|100.000000,99.999988,99.999988",
+      "kind": "imported_reference_bone_component_transform",
+      "part": "Body",
+      "bone": "Bip001-Pelvis",
+      "raw_translation": [
+        7.8e-05,
+        -0.001402,
+        10517.20047
+      ],
+      "rotator_pitch_yaw_roll_degrees": [
+        88.051166,
+        -42.961385,
+        132.386439
+      ],
+      "raw_scale": [
+        100.0,
+        99.999988,
+        99.999988
+      ],
+      "unit_translation_cm": [
+        7.8e-07,
+        -1.4020000000000001e-05,
+        105.1720047
+      ]
+    },
+    {
+      "file": "Metadata/PlayerParts_20261007/NativeAudit.log",
+      "line": 2727,
+      "raw_line": "[2026.10.07-02.41.31:774][350]LogAutomationController: Bone part=Leg index=3 name=Bip001-Pelvis parent=2 local=0.000000,0.000000,0.000000|90.000000,89.999934,0.000000|1.000000,1.000000,1.000000 component=0.000000,390.701773,10666.929690|90.000000,179.999860,0.000000|100.000000,99.999994,100.000000",
+      "kind": "imported_reference_bone_component_transform",
+      "part": "Leg",
+      "bone": "Bip001-Pelvis",
+      "raw_translation": [
+        0.0,
+        390.701773,
+        10666.92969
+      ],
+      "rotator_pitch_yaw_roll_degrees": [
+        90.0,
+        179.99986,
+        0.0
+      ],
+      "raw_scale": [
+        100.0,
+        99.999994,
+        100.0
+      ],
+      "unit_translation_cm": [
+        0.0,
+        3.90701773,
+        106.6692969
+      ]
+    }
+  ],
+  "parent_translation_difference_cm": [
+    -7.8e-07,
+    3.9070317500000002,
+    1.497292200000004
+  ],
+  "parent_translation_distance_cm": 4.1841105420016715,
+  "parent_rotation_difference_degrees": 5.043799276959802,
+  "parent_basis_equal": false,
+  "alignment_world_quaternion_xyzw": [
+    -0.0120852300793666,
+    -0.011964533593310622,
+    -0.04058209426482539,
+    -0.9990314763684396
+  ],
+  "formula": "AlignedIronPoint=BodyParentUnitT + Rotate(BodyParentUnitR * Inverse(LegParentUnitR), IronUnitPoint-LegParentUnitT); equivalent to Iron.GetRelativeTransform(LegParentUnit)*AnatomyParentUnit under Unreal FTransform multiplication. Parent shapes remain in BodyParentUnit basis. Radius/length unchanged.",
+  "source": "BaselineIronPhysicsAudit.json exact native capsule axis endpoints transformed using NativeAudit.log serialized imported Body/Leg parent poses; six-decimal pose log rounding applies.",
+  "results": [
+    {
+      "asset": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_PhysicsAsset.Player_Original_Leg_PhysicsAsset",
+      "bone": "B_Iron_01_01_R_Pelvis",
+      "original_unaligned_clearance_cm": -18.055777690089684,
+      "aligned_capsule_axis_start_cm": [
+        -14.73758315783574,
+        -15.430697597925855,
+        109.65275668398696
+      ],
+      "aligned_capsule_axis_end_cm": [
+        -19.286133074256103,
+        5.814793801915501,
+        108.83428994740085
+      ],
+      "body_pelvis_axis_start_cm": [
+        -9.057943568828016,
+        1.5400248836561723,
+        110.40495075188731
+      ],
+      "body_pelvis_axis_end_cm": [
+        9.220849997287935,
+        -4.555689476664395,
+        107.21023754467141
+      ],
+      "aligned_axis_distance_cm": 9.203452770469426,
+      "aligned_capsule_parent_clearance_cm": -17.282223041298153,
+      "aligned_closest_iron_axis_point_cm": [
+        -17.952266684331853,
+        -0.41546582728410897,
+        109.07430606050583
+      ],
+      "aligned_closest_body_axis_point_cm": [
+        -9.057943568828016,
+        1.5400248836561723,
+        110.40495075188731
+      ]
+    },
+    {
+      "asset": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_PhysicsAsset.Player_Original_Leg_PhysicsAsset",
+      "bone": "B_Iron_01_01_L_Pelvis",
+      "original_unaligned_clearance_cm": -18.173849510675332,
+      "aligned_capsule_axis_start_cm": [
+        18.23496583214904,
+        8.87894412555408,
+        107.97082394923098
+      ],
+      "aligned_capsule_axis_end_cm": [
+        17.2335545782409,
+        -12.819732400585416,
+        108.91689119758553
+      ],
+      "body_pelvis_axis_start_cm": [
+        -9.057943568828016,
+        1.5400248836561723,
+        110.40495075188731
+      ],
+      "body_pelvis_axis_end_cm": [
+        9.220849997287935,
+        -4.555689476664395,
+        107.21023754467141
+      ],
+      "aligned_axis_distance_cm": 8.495050605559767,
+      "aligned_capsule_parent_clearance_cm": -17.990508857941208,
+      "aligned_closest_iron_axis_point_cm": [
+        17.599838190608192,
+        -4.883063434098204,
+        108.57085061943413
+      ],
+      "aligned_closest_body_axis_point_cm": [
+        9.220849997287935,
+        -4.555689476664395,
+        107.21023754467141
+      ]
+    },
+    {
+      "asset": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_RigidBody_PhysicsAsset.Player_Original_Leg_RigidBody_PhysicsAsset",
+      "bone": "B_Iron_01_01_R_Pelvis",
+      "original_unaligned_clearance_cm": -8.846295497096518,
+      "aligned_capsule_axis_start_cm": [
+        -14.73758315783574,
+        -15.430697597925855,
+        109.65275668398696
+      ],
+      "aligned_capsule_axis_end_cm": [
+        -19.286133074256103,
+        5.814793801915501,
+        108.83428994740085
+      ],
+      "body_pelvis_axis_start_cm": [
+        -9.057943568828016,
+        1.5400248836561723,
+        110.40495075188731
+      ],
+      "body_pelvis_axis_end_cm": [
+        9.220849997287935,
+        -4.555689476664395,
+        107.21023754467141
+      ],
+      "aligned_axis_distance_cm": 9.203452770469426,
+      "aligned_capsule_parent_clearance_cm": -8.072740848304989,
+      "aligned_closest_iron_axis_point_cm": [
+        -17.952266684331853,
+        -0.41546582728410897,
+        109.07430606050583
+      ],
+      "aligned_closest_body_axis_point_cm": [
+        -9.057943568828016,
+        1.5400248836561723,
+        110.40495075188731
+      ]
+    },
+    {
+      "asset": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_RigidBody_PhysicsAsset.Player_Original_Leg_RigidBody_PhysicsAsset",
+      "bone": "B_Iron_01_01_L_Pelvis",
+      "original_unaligned_clearance_cm": -8.964483665948768,
+      "aligned_capsule_axis_start_cm": [
+        18.23496583214904,
+        8.87894412555408,
+        107.97082394923098
+      ],
+      "aligned_capsule_axis_end_cm": [
+        17.2335545782409,
+        -12.819732400585416,
+        108.91689119758553
+      ],
+      "body_pelvis_axis_start_cm": [
+        -9.057943568828016,
+        1.5400248836561723,
+        110.40495075188731
+      ],
+      "body_pelvis_axis_end_cm": [
+        9.220849997287935,
+        -4.555689476664395,
+        107.21023754467141
+      ],
+      "aligned_axis_distance_cm": 8.495050605559767,
+      "aligned_capsule_parent_clearance_cm": -8.781143013214647,
+      "aligned_closest_iron_axis_point_cm": [
+        17.599838190608192,
+        -4.883063434098204,
+        108.57085061943413
+      ],
+      "aligned_closest_body_axis_point_cm": [
+        9.220849997287935,
+        -4.555689476664395,
+        107.21023754467141
+      ]
+    }
+  ],
+  "conclusion": "Stored Body and Leg imported pelvis component-space unit reference poses are not equal. Existing mixed imported-ref parent_phi and clearance are not runtime shared-pelvis CopyPose clearance; corrected parent-aligned reference capsule comparison still overlaps. Existing native contact A/B evidence remains actual and unaffected.",
+  "limitations": [
+    "No actual runtime CopyPose parent/child or skinned support pose measured here.",
+    "No individual vertex positions in stored baseline report; cannot recompute aligned AllPositive/Dominant parent_phi or feasiblecenter536R with summary bounds. Existing native helper must transform points via the aligned BoneUnit basis and rerun those statistics before using them to reject feasible centers.",
+    "Iron relative-parent authored rest rotation could differ from live animation local pose; corrected ref alignment assumes preserving Leg reference local secondary pose under common Body parent.",
+    "Anatomy Body parent is ref pose, not animated live pose; author-ref alignment may be a useful static fit reference but does not guarantee runtime clearance."
+  ]
+}

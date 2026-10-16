@@ -1,0 +1,94 @@
+[
+  {
+    "Type": "xxDamageInfo",
+    "Name": "SD_Kazan_DualAxeSword_Com_StrongAtk03_2",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/StrongAtk/SD_Kazan_DualAxeSword_Com_StrongAtk03_2",
+    "Properties": {
+      "AttackInfo": {
+        "SkillPowerInfo": {
+          "SkillPowerBonus": 218100
+        },
+        "StaminaAttackInfo": {
+          "StaminaAttackRate": 6000
+        },
+        "AttackerReactionTableSelect": {
+          "AttackerReactionTag": {
+            "DataTable": {
+              "ObjectName": "DataTable'AttackerReaction_Common'",
+              "ObjectPath": "BBQ/Content/_Common/Constants/AttackerReaction/AttackerReaction_Common.0"
+            },
+            "RowName": "충격량4등급+"
+          }
+        },
+        "AttackableFlags": [
+          "ECharacterAttackableFlag::EnableAttackableDownState"
+        ]
+      },
+      "AttackerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true,
+        "TimeSectionDelayData": {
+          "LoopTime": 0.15
+        }
+      },
+      "DamagerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true,
+        "TimeSectionDelayData": {
+          "LoopTime": 0.15
+        }
+      },
+      "bUseDamagerDelayInfoSecond": true,
+      "DamagerDelayInfoSecond": {
+        "bDeActiveStart": true,
+        "TimeSectionDelayData": {
+          "EndTime": 0.8
+        }
+      },
+      "DamagerDelayInfoInAerial": {
+        "DamageTimeDelayComputType": "EDamageInfoDelayComputeType::None",
+        "IsRestDelay": true
+      },
+      "DamagerDelayInfoNoReaction": {
+        "DamageTimeDelayComputType": "EDamageInfoDelayComputeType::None"
+      },
+      "DamagerKnockData": {
+        "KnockBackMoveType": "EKnockbackMoveType::UseCurve",
+        "KnockCurveVector": {
+          "ObjectName": "CurveVector'CV_common_groundKnock_strong'",
+          "ObjectPath": "BBQ/Content/_Common/MoveCurve/CV_common_groundKnock_strong.0"
+        },
+        "KnockCurveScale": {
+          "X": 200.0,
+          "Y": 1.0,
+          "Z": 1.0
+        },
+        "TimeSyncType": "ETimeSyncType::SyncAnimation",
+        "KnockbackDistanceTime": 1.0
+      },
+      "SpecialDamageAniminfo": {
+        "DamageStrength": "EDamageTypeByStrength::DamageStrong"
+      },
+      "AttackerHitEffect": {
+        "ParticleInfo": {
+          "bSyncData": true
+        }
+      },
+      "DamageSounds": [
+        {
+          "ObjectName": "AkAudioEvent'pc_blank_hitmaterialswitch'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/Player_Hit/pc_blank_hitmaterialswitch.0"
+        }
+      ],
+      "CustomDamageSound": "ECustomDamageSoundKey::Key5",
+      "AttackMaterial": "EBattleDirecting_AttackMaterial::NewLeftHand",
+      "AttackStrength": "EBattleDirecting_AttackStrength::AttackStrength_04",
+      "EnvHitEffect": {
+        "ObjectName": "xxEnvHitEffectData'PA_World_PC_WallHit_Data'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_World/PC/PA_World_PC_WallHit_Data.0"
+      }
+    }
+  }
+]

@@ -1,0 +1,39 @@
+Begin Object Class=/Script/Engine.AnimMontage Name="AM_DAS_Player_SpinningAttack" ExportPath="/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/AM_DAS_Player_SpinningAttack.AM_DAS_Player_SpinningAttack'"
+   Begin Object Class=/Script/Engine.AnimDataModel Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/AM_DAS_Player_SpinningAttack.AM_DAS_Player_SpinningAttack:AnimDataModel'"
+   End Object
+   Begin Object Class=/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify Name="AnimNotify_PlayMontageNotify_0" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/AM_DAS_Player_SpinningAttack.AM_DAS_Player_SpinningAttack:AnimNotify_PlayMontageNotify_0'"
+   End Object
+   Begin Object Class=/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify Name="AnimNotify_PlayMontageNotify_1" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/AM_DAS_Player_SpinningAttack.AM_DAS_Player_SpinningAttack:AnimNotify_PlayMontageNotify_1'"
+   End Object
+   Begin Object Class=/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify Name="AnimNotify_PlayMontageNotify_2" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/AM_DAS_Player_SpinningAttack.AM_DAS_Player_SpinningAttack:AnimNotify_PlayMontageNotify_2'"
+   End Object
+   Begin Object Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/AM_DAS_Player_SpinningAttack.AM_DAS_Player_SpinningAttack:AnimDataModel'"
+      NumberOfFrames=359000
+      NumberOfKeys=359001
+   End Object
+   Begin Object Name="AnimNotify_PlayMontageNotify_0" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/AM_DAS_Player_SpinningAttack.AM_DAS_Player_SpinningAttack:AnimNotify_PlayMontageNotify_0'"
+      NotifyName="DoDown"
+   End Object
+   Begin Object Name="AnimNotify_PlayMontageNotify_1" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/AM_DAS_Player_SpinningAttack.AM_DAS_Player_SpinningAttack:AnimNotify_PlayMontageNotify_1'"
+      NotifyName="DoJump"
+   End Object
+   Begin Object Name="AnimNotify_PlayMontageNotify_2" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/AM_DAS_Player_SpinningAttack.AM_DAS_Player_SpinningAttack:AnimNotify_PlayMontageNotify_2'"
+      NotifyName="InputEnd"
+   End Object
+   BlendOut=(BlendTime=1.000000)
+   CompositeSections(0)=(SectionName="SpinningAttack01",NextSectionName="SpinningAttack02",LinkedMontage="/Script/Engine.AnimMontage'AM_DAS_Player_SpinningAttack'",SegmentIndex=0,SegmentLength=0.983333,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/DAS_Player_SpinningAttack01.DAS_Player_SpinningAttack01'")
+   CompositeSections(1)=(SectionName="SpinningAttack02",LinkedMontage="/Script/Engine.AnimMontage'AM_DAS_Player_SpinningAttack'",SegmentIndex=1,SegmentBeginTime=0.983333,SegmentLength=5.000000,LinkValue=0.983333,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/DAS_Player_SpinningAttack02.DAS_Player_SpinningAttack02'")
+   SlotAnimTracks(0)=(AnimTrack=(AnimSegments=((CachedPlayLength=4.016667,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/DAS_Player_SpinningAttack01.DAS_Player_SpinningAttack01'",AnimEndTime=0.983333),(CachedPlayLength=5.000000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/DAS_Player_SpinningAttack02.DAS_Player_SpinningAttack02'",StartPos=0.983333,AnimEndTime=5.000000))))
+   BranchingPointMarkers(0)=(NotifyIndex=0,TriggerTime=0.284252)
+   BranchingPointMarkers(1)=(NotifyIndex=1,TriggerTime=0.997298)
+   BranchingPointMarkers(2)=(NotifyIndex=2,TriggerTime=2.330040)
+   CommonTargetFrameRate=(Numerator=60)
+   Notifies(0)=(NotifyName="PlayMontageNotify",Notify="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'AnimNotify_PlayMontageNotify_1'",EndLink=(LinkValue=0.284252),Guid=1C667EEA4F7E900D4DBD02B5ECB0AEB5,LinkedMontage="/Script/Engine.AnimMontage'AM_DAS_Player_SpinningAttack'",SegmentIndex=0,SegmentLength=0.983333,LinkValue=0.284252,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/DAS_Player_SpinningAttack01.DAS_Player_SpinningAttack01'")
+   Notifies(1)=(NotifyName="PlayMontageNotify",Notify="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'AnimNotify_PlayMontageNotify_0'",EndLink=(LinkValue=0.997298),Guid=6EF1D4964F80044A3BB05B9177DEF408,LinkedMontage="/Script/Engine.AnimMontage'AM_DAS_Player_SpinningAttack'",SegmentIndex=1,SegmentBeginTime=0.983333,SegmentLength=5.000000,LinkValue=0.997298,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/DAS_Player_SpinningAttack02.DAS_Player_SpinningAttack02'")
+   Notifies(2)=(NotifyName="PlayMontageNotify",Notify="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'AnimNotify_PlayMontageNotify_2'",EndLink=(LinkValue=2.330040),Guid=2935725B40ACAD2348BF118BA4E0D1A1,LinkedMontage="/Script/Engine.AnimMontage'AM_DAS_Player_SpinningAttack'",SegmentIndex=1,SegmentBeginTime=0.983333,SegmentLength=5.000000,LinkValue=2.330040,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/SpinningAttack/DAS_Player_SpinningAttack02.DAS_Player_SpinningAttack02'")
+   SequenceLength=5.983333
+   AnimNotifyTracks(0)=(TrackName="1",TrackColor=(R=0.500000,G=0.500000,B=0.500000,A=1.000000))
+   DataModelInterface=AnimDataModel'AM_DAS_Player_SpinningAttack:AnimDataModel'
+   Skeleton="/Script/Engine.Skeleton'/Game/_Art/Player/Character/Meshs/SK_Player.SK_Player'"
+   PreviewSkeletalMesh="/Game/_Art/Player/Character/Meshs/SKM_Player.SKM_Player"
+End Object

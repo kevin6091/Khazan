@@ -1,0 +1,234 @@
+{
+  "generatedUtc": "2026-10-08T01:30:11.543274+00:00",
+  "status": "ObservedNormalDeltaHairInstability",
+  "scope": "Offline observation of three preserved normal-delta native PIE runs; no editor/test rerun, asset edit or QA threshold change.",
+  "runs": [
+    {
+      "label": "CandidateFreshNormalDeltaFirst",
+      "file": {
+        "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261008\\LeftShoulderCloth\\SavedReloadNative_FirstNormalDeltaFail.log",
+        "bytes": 500287,
+        "sha256": "B091B14518CADFC8F1FD2A11C6ED72A4C7BDE2A9DC7595834E292736C49C6A01"
+      },
+      "selectedResult": "Fail",
+      "lastCompletedResult": {
+        "result": "Fail",
+        "line": 3102,
+        "raw": "[2026.10.08-01.21.43:491][964]LogAutomationController: Error: Test Completed. Result={Fail} Name={PIE} Path={Khazan.PlayerParts.PIE}"
+      },
+      "selectedLineRange": [
+        3103,
+        3376
+      ],
+      "eventsComplete": true,
+      "assertionErrors": [
+        {
+          "line": 3364,
+          "raw": "[2026.10.08-01.21.43:509][965]LogAutomationController: Error: Expected 'Refined hair has no large joint flip (35-degree QA envelope)' to be true. [C:\\Users\\user\\Desktop\\GitProject\\Khazan_PlayerPartsWork_20261007\\Khazan\\Source\\Khazan\\Tests\\PlayerPartsPIEEditor.cpp(412)]"
+        }
+      ],
+      "hairOnlyFailure": true,
+      "Hair": {
+        "rootSamples": 1778.0,
+        "rootRmsCm": 0.123558,
+        "rootPeakCm": 1.283148,
+        "tipSamples": 2032.0,
+        "tipRmsCm": 7.418098,
+        "tipPeakCm": 22.614116,
+        "bendRmsDegrees": 9.258434,
+        "bendPeakDegrees": 60.07903,
+        "independentlyRespondingJoints": 65.0
+      },
+      "Torso": {
+        "part": "Torso",
+        "bendSamples": 1016.0,
+        "bendRmsDegrees": 5.273932,
+        "bendPeakDegrees": 23.880193,
+        "peakBone": "B_Cape_01_03_01_02_L_Armor001",
+        "tipSamples": 508.0,
+        "tipRmsCm": 11.942815,
+        "tipPeakCm": 39.79731,
+        "secondaryRespondingBones": 8.0,
+        "directSimulatedBones": 8.0,
+        "independentlyRespondingJoints": 8.0
+      },
+      "Leg": {
+        "part": "Leg",
+        "bendSamples": 3810.0,
+        "bendRmsDegrees": 15.19981,
+        "bendPeakDegrees": 32.21147,
+        "peakBone": "B_Cloth_02_05_B_Pelvis",
+        "tipSamples": 1778.0,
+        "tipRmsCm": 14.892725,
+        "tipPeakCm": 54.602871,
+        "secondaryRespondingBones": 30.0,
+        "directSimulatedBones": 30.0,
+        "independentlyRespondingJoints": 30.0
+      },
+      "torsoBelowExisting45DegreeEnvelope": true,
+      "commandLineRaw": "LogInit: Command Line: /Game/Maps/DevMap -NullRHI -PlayerClothSurfaceProbe -PlayerShoulderMotionProbe -PlayerClothView -EnablePlugins=GameFeatures -skipcompile -NoLiveCoding -NoSourceControl -DisablePlugins=RiderLink,ModelContextProtocol,XGEController -Unattended -NoSplash -NoSound -ExecCmds=\"py C:/Users/user/Desktop/GitProject/Khazan_PlayerPartsWork_20261007/Khazan/Saved/player_parts_isolated_editor.py,t.MaxFPS 60\" -log=PlayerPartsWorkEditor.log",
+      "useFixedTimeStepFlagPresent": false,
+      "interpretationScope": "Last native PIE buffered event block only; earlier runs in copied logs excluded."
+    },
+    {
+      "label": "CandidateNormalDeltaSecond",
+      "file": {
+        "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261008\\LeftShoulderCloth\\SavedReloadNative_SecondNormalDeltaFail.log",
+        "bytes": 694865,
+        "sha256": "70102752C0EB67F228057FEAECE467E714D4A665C2FBC279B09F302D45B55B66"
+      },
+      "selectedResult": "Fail",
+      "lastCompletedResult": {
+        "result": "Fail",
+        "line": 4345,
+        "raw": "[2026.10.08-01.22.48:420][738]LogAutomationController: Error: Test Completed. Result={Fail} Name={PIE} Path={Khazan.PlayerParts.PIE}"
+      },
+      "selectedLineRange": [
+        4346,
+        4619
+      ],
+      "eventsComplete": true,
+      "assertionErrors": [
+        {
+          "line": 4607,
+          "raw": "[2026.10.08-01.22.48:439][738]LogAutomationController: Error: Expected 'Refined hair has no large joint flip (35-degree QA envelope)' to be true. [C:\\Users\\user\\Desktop\\GitProject\\Khazan_PlayerPartsWork_20261007\\Khazan\\Source\\Khazan\\Tests\\PlayerPartsPIEEditor.cpp(412)]"
+        }
+      ],
+      "hairOnlyFailure": true,
+      "Hair": {
+        "rootSamples": 1680.0,
+        "rootRmsCm": 0.162957,
+        "rootPeakCm": 1.763996,
+        "tipSamples": 1920.0,
+        "tipRmsCm": 8.515457,
+        "tipPeakCm": 30.575172,
+        "bendRmsDegrees": 9.429898,
+        "bendPeakDegrees": 59.592638,
+        "independentlyRespondingJoints": 65.0
+      },
+      "Torso": {
+        "part": "Torso",
+        "bendSamples": 960.0,
+        "bendRmsDegrees": 4.082375,
+        "bendPeakDegrees": 15.335114,
+        "peakBone": "B_Cape_01_03_L_Armor001",
+        "tipSamples": 480.0,
+        "tipRmsCm": 10.742507,
+        "tipPeakCm": 34.125362,
+        "secondaryRespondingBones": 8.0,
+        "directSimulatedBones": 8.0,
+        "independentlyRespondingJoints": 8.0
+      },
+      "Leg": {
+        "part": "Leg",
+        "bendSamples": 3600.0,
+        "bendRmsDegrees": 15.125271,
+        "bendPeakDegrees": 32.210357,
+        "peakBone": "B_Cloth_01_05_R_Pelvis",
+        "tipSamples": 1680.0,
+        "tipRmsCm": 14.747297,
+        "tipPeakCm": 52.844496,
+        "secondaryRespondingBones": 30.0,
+        "directSimulatedBones": 30.0,
+        "independentlyRespondingJoints": 30.0
+      },
+      "torsoBelowExisting45DegreeEnvelope": true,
+      "commandLineRaw": "LogInit: Command Line: /Game/Maps/DevMap -NullRHI -PlayerClothSurfaceProbe -PlayerShoulderMotionProbe -PlayerClothView -EnablePlugins=GameFeatures -skipcompile -NoLiveCoding -NoSourceControl -DisablePlugins=RiderLink,ModelContextProtocol,XGEController -Unattended -NoSplash -NoSound -ExecCmds=\"py C:/Users/user/Desktop/GitProject/Khazan_PlayerPartsWork_20261007/Khazan/Saved/player_parts_isolated_editor.py,t.MaxFPS 60\" -log=PlayerPartsWorkEditor.log",
+      "useFixedTimeStepFlagPresent": false,
+      "interpretationScope": "Last native PIE buffered event block only; earlier runs in copied logs excluded."
+    },
+    {
+      "label": "RestoredTorsoNormalDeltaControl",
+      "file": {
+        "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261008\\LeftShoulderCloth\\OriginalTorso_NormalDeltaControl.log",
+        "bytes": 890045,
+        "sha256": "0272720F9FE05B27D2B4EA103EEC15D98D520CB430A91140066C67F6D6AC574B"
+      },
+      "selectedResult": "Fail",
+      "lastCompletedResult": {
+        "result": "Fail",
+        "line": 5592,
+        "raw": "[2026.10.08-01.23.58:640][417]LogAutomationController: Error: Test Completed. Result={Fail} Name={PIE} Path={Khazan.PlayerParts.PIE}"
+      },
+      "selectedLineRange": [
+        5593,
+        5866
+      ],
+      "eventsComplete": true,
+      "assertionErrors": [
+        {
+          "line": 5854,
+          "raw": "[2026.10.08-01.23.58:654][418]LogAutomationController: Error: Expected 'Refined hair has no large joint flip (35-degree QA envelope)' to be true. [C:\\Users\\user\\Desktop\\GitProject\\Khazan_PlayerPartsWork_20261007\\Khazan\\Source\\Khazan\\Tests\\PlayerPartsPIEEditor.cpp(412)]"
+        }
+      ],
+      "hairOnlyFailure": true,
+      "Hair": {
+        "rootSamples": 1442.0,
+        "rootRmsCm": 0.124675,
+        "rootPeakCm": 0.840695,
+        "tipSamples": 1648.0,
+        "tipRmsCm": 7.148046,
+        "tipPeakCm": 22.713251,
+        "bendRmsDegrees": 9.528552,
+        "bendPeakDegrees": 71.87789,
+        "independentlyRespondingJoints": 65.0
+      },
+      "Torso": {
+        "part": "Torso",
+        "bendSamples": 824.0,
+        "bendRmsDegrees": 4.742518,
+        "bendPeakDegrees": 20.995945,
+        "peakBone": "B_Cape_01_03_01_02_L_Armor001",
+        "tipSamples": 412.0,
+        "tipRmsCm": 10.826281,
+        "tipPeakCm": 43.453101,
+        "secondaryRespondingBones": 8.0,
+        "directSimulatedBones": 8.0,
+        "independentlyRespondingJoints": 8.0
+      },
+      "Leg": {
+        "part": "Leg",
+        "bendSamples": 3090.0,
+        "bendRmsDegrees": 14.976792,
+        "bendPeakDegrees": 32.212337,
+        "peakBone": "B_Cloth_02_05_B_Pelvis",
+        "tipSamples": 1442.0,
+        "tipRmsCm": 14.602062,
+        "tipPeakCm": 53.519787,
+        "secondaryRespondingBones": 30.0,
+        "directSimulatedBones": 30.0,
+        "independentlyRespondingJoints": 30.0
+      },
+      "torsoBelowExisting45DegreeEnvelope": true,
+      "commandLineRaw": "LogInit: Command Line: /Game/Maps/DevMap -NullRHI -PlayerClothSurfaceProbe -PlayerShoulderMotionProbe -PlayerClothView -EnablePlugins=GameFeatures -skipcompile -NoLiveCoding -NoSourceControl -DisablePlugins=RiderLink,ModelContextProtocol,XGEController -Unattended -NoSplash -NoSound -ExecCmds=\"py C:/Users/user/Desktop/GitProject/Khazan_PlayerPartsWork_20261007/Khazan/Saved/player_parts_isolated_editor.py,t.MaxFPS 60\" -log=PlayerPartsWorkEditor.log",
+      "useFixedTimeStepFlagPresent": false,
+      "interpretationScope": "Last native PIE buffered event block only; earlier runs in copied logs excluded."
+    }
+  ],
+  "allThreeSelectedNativeTestsPassed": false,
+  "allThreeFailuresOnlyHairAssertion": true,
+  "allThreeTorsoPeaksBelowExisting45DegreeEnvelope": true,
+  "hairAssetChangesInThisTask": false,
+  "hairAssetInvarianceSource": "Parent reported protected Hair SHA unchanged; these logs are runtime observations and do not independently prove complete asset invariance.",
+  "restoredTorsoControlSource": "Parent restored the pre-change Torso PA for the OriginalTorso_NormalDeltaControl trial. This label is not original-game physics verification.",
+  "fixed30Evidence": {
+    "file": {
+      "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\PlayerParts_20261008\\LeftShoulderCloth\\NativeComparison.json",
+      "bytes": 54625,
+      "sha256": "F65346D0CE1F29F1C1EFC7399A84589AF198E45573637FCDFD9AF4218BF95AB2"
+    },
+    "statement": "Separate fixed30 baseline/candidate tests passed with exactly equal logged Hair/Leg numeric metrics and Torso-only SLERP stiffness profile change."
+  },
+  "interpretation": [
+    "Hair peak60.079030/59.592638 degrees exceeded the existing35-degree envelope in the two candidate normal-delta observations.",
+    "The restored pre-change Torso control also failed the same Hair assertion, peak71.877890 degrees. The observed Hair failure therefore reproduces without the shoulder spring change; this does not isolate every possible additional effect.",
+    "Torso remained below its existing45-degree envelope in all three observations, with peaks23.880193/15.335114/20.995945 degrees.",
+    "No frame-timing or other root cause is confirmed by these three runs. Hair tuning was not broadened or changed.",
+    "Fixed30 success and the small shoulder change must not be described as all normal-delta tests passing."
+  ],
+  "limits": [
+    "Three observations, not a statistical long-run or every-action guarantee.",
+    "No Hair change or test-threshold relaxation was performed to hide the failures.",
+    "Source PA/body/skin collision equality and hardware behavior are outside this log-only observation."
+  ]
+}

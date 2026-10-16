@@ -1,0 +1,68 @@
+{
+  "draft_status": "Not applied to domain MD. Final numeric/runtime/Main evidence placeholders must be filled by root before append.",
+  "created_date_kst": "2026-10-08",
+  "report_folder": "Metadata/PlayerParts_20261008/LeftShoulderCloth",
+  "source_scope": "Existing editor helper action and isolated Work editor-only Json link dependencies; Main runtime files=0.",
+  "numeric_expectations_source": "Current imported/engine baseline AppliedPerBone.txt rounded decimal inputs interpreted as float32. These are calculation expectations, not proof of actual application.",
+  "baseline_asset_sha256": "BC422363C3B491B5E9F6618763CE52C3D544ED494189A7870530842A31F8C34F",
+  "policy_scale_decimal": 0.95,
+  "policy_scale_float32": 0.949999988079071,
+  "expected_omega_ratio": 0.9746794344808963,
+  "relative_damping_ratio_with_c_fixed": 1.0259783520851542,
+  "expected_joint_float32_table": [
+    {
+      "bone": "B_Cape_02_02_L_Armor001",
+      "before_stiffness": 647.933837890625,
+      "expected_after_stiffness": 615.537109375,
+      "unchanged_damping": 50.909088134765625
+    },
+    {
+      "bone": "B_Cape_01_02_L_Armor001",
+      "before_stiffness": 647.933837890625,
+      "expected_after_stiffness": 615.537109375,
+      "unchanged_damping": 50.909088134765625
+    },
+    {
+      "bone": "B_Cape_01_03_L_Armor001",
+      "before_stiffness": 456.4049377441406,
+      "expected_after_stiffness": 433.5846862792969,
+      "unchanged_damping": 42.727272033691406
+    },
+    {
+      "bone": "B_Cape_01_04_L_Armor001",
+      "before_stiffness": 211.57020568847656,
+      "expected_after_stiffness": 200.99169921875,
+      "unchanged_damping": 29.090906143188477
+    },
+    {
+      "bone": "B_Cape_01_05_L_Armor001",
+      "before_stiffness": 82.64460754394531,
+      "expected_after_stiffness": 78.51237487792969,
+      "unchanged_damping": 18.18181610107422
+    },
+    {
+      "bone": "B_Cape_01_03_01_01_L_Armor001",
+      "before_stiffness": 298.3470764160156,
+      "expected_after_stiffness": 283.4297180175781,
+      "unchanged_damping": 34.54545211791992
+    },
+    {
+      "bone": "B_Cape_01_03_01_02_L_Armor001",
+      "before_stiffness": 173.7602996826172,
+      "expected_after_stiffness": 165.07228088378906,
+      "unchanged_damping": 26.36363410949707
+    },
+    {
+      "bone": "B_Cape_01_03_01_03_L_Armor001",
+      "before_stiffness": 82.64460754394531,
+      "expected_after_stiffness": 78.51237487792969,
+      "unchanged_damping": 18.18181610107422
+    }
+  ],
+  "append_text_by_document": {
+    "Docs/Engineering/PLAYER_ORIGINAL_PARTS_PHYSICS_20261007.md": "\n\n<!-- LeftShoulderCloth_20261008 -->\n## 2026-10-08 — 왼쪽 어깨 천 SLERP 스프링 소폭 완화\n\n사용자의 “왼쪽 어깨 천이 이동 중 약간 뻣뻣하게 서 있으므로 아주 조금만 더 휘날리게” 요청에 따른 표적 조정이다. 2026-10-07 최종 ClothRefinement를 기준으로 `/Game/_Art/Player/Character/Meshs/Torso/Player_Original_Torso_RigidBody_PhysicsAsset`의 기존 왼쪽 Cape simulated 관절 8개만 대상으로 삼았다. 새 부착/geometry/body/physics solver를 재작성하지 않았다. 실제 최종 적용 단계는 {{FINAL_STATUS}}이며 근거는 `Metadata/PlayerParts_20261008/LeftShoulderCloth/{{FINAL_VERIFICATION_FILE}}`다.\n\n변경 필드는 각 `UPhysicsConstraintTemplate::DefaultInstance.ProfileInstance.AngularDrive.SlerpDrive.Stiffness` 하나이며 기준 저장값에 `SpringScale=0.95`를 한 번 곱한다. `SetDefaultProfile(C)`로 런타임 생성에 사용되는 default profile도 동기화한다. Damping, inactive Swing/Twist drives, drive mode/acceleration/targets/MaxForce, limits, connector frames, bodies/anchors/shape/mass/inertia, internal collision pairs/external18 anatomy collision, per-PA solver 설정은 보존한다. Hair·Leg·본체 PA/BP/ABP·Main runtime Source/DLL은 이번 조정 대상이 아니다. Main runtime 새 파일/타입은0이다.\n\n0.95는 어시스턴트가 선정한 임시 미세 튜닝값이며 사용자 지정 숫자나 원작 직접값이 아니다. 원작 physics 해당 property/값은 저장 자료 범위에서 미확인이다. 기준은 `Metadata/PlayerParts_20261007/ClothRefinement/AppliedPerBone.txt`·`TuningProvenance.json`과 새 `TemporaryTuning.ini`/`BeforeManifest.json`이다. Original이라는 에셋 이름은 원작 물리값 검증을 뜻하지 않는다. 기대값 표는 입력을 float32로 읽고 `float32(old * float32(0.95))`로 계산한 값으로, 실제 saved/readback 결과는 별도 보고서와 대조한다. 저장 배율은0.949999988079071이다.\n\n| Bone | 기준 Stiffness(float32) | 기대 Stiffness(float32) | 보존 Damping(float32) |\n| --- | ---: | ---: | ---: |\n| `B_Cape_02_02_L_Armor001` | 647.933837890625 | 615.537109375 | 50.909088134765625 |\n| `B_Cape_01_02_L_Armor001` | 647.933837890625 | 615.537109375 | 50.909088134765625 |\n| `B_Cape_01_03_L_Armor001` | 456.4049377441406 | 433.5846862792969 | 42.727272033691406 |\n| `B_Cape_01_04_L_Armor001` | 211.57020568847656 | 200.99169921875 | 29.090906143188477 |\n| `B_Cape_01_05_L_Armor001` | 82.64460754394531 | 78.51237487792969 | 18.18181610107422 |\n| `B_Cape_01_03_01_01_L_Armor001` | 298.3470764160156 | 283.4297180175781 | 34.54545211791992 |\n| `B_Cape_01_03_01_02_L_Armor001` | 173.7602996826172 | 165.07228088378906 | 26.36363410949707 |\n| `B_Cape_01_03_01_03_L_Armor001` | 82.64460754394531 | 78.51237487792969 | 18.18181610107422 |\n\n기존 저자 단계의 `spring=omega²`, `driveDamping=2omega`에서 spring만0.95배로 줄였다. 이 후속 override의 복원 주파수 비는 `sqrt(0.95)=0.9746794345`, damping 고정일 때 상대 감쇠비는 `1/sqrt(0.95)=1.0259783521`다. 새 omega를 INI에 저장하거나 damping을 다시 계산한 것이 아니다. 이 관계는 동일 관성/drive scaling에서의 계산이며 세계공간 flutter가5% 증가한다는 뜻이 아니다. 실제 반응과 몸 접촉은 별도 입력·화면·표면 검사로 판정한다.\n\n기존 `Scripts/Engineering/PlayerPartsAuthorEditor.cpp`에 editor-only 선택 action `Khazan.PlayerParts.LeftShoulderSpring`만 추가했다. `Saved/LeftShoulderCloth.ini`의 명시적 Apply/SpringScale와 [Baseline]8 bone stiffness를 사용한다. Apply=true는 전8관절의 baseline exact-match 후 실행해 중복곱을 차단한다. Apply=false는 전부baseline 또는 전부baseline×scale인 상태만 허용하며 에셋 저장 없이 `Saved/LeftShoulderProfileAudit.json`에 before/after/default 전체 profile을 기록한다. full `FConstraintInstance`와 default `FConstraintProfileProperties`의 StaticStruct 비교로 기대 스프링 필드 외 변화가 없는지 확인한다. scalar `GetAngularDriveParams`는 SwingDrive를 반환하므로 SLERP 검증은 SlerpDrive를 직접 읽는다.\n\n첫 compile 후 Json/JsonUtilities LNK2019는 `ColdBuild.log`에 보존했다. Work 전용 Build.cs의 `Target.bBuildEditor` guarded private dependency에 Json/JsonUtilities를 명시한 뒤 `ColdBuild_Retry.log`가 성공했다. 이 helper/build 의존성 변경은 격리 작업용이며 Main Build.cs 또는 runtime 모듈에 반영하지 않는다.\n\n| 검증 | 실제 결과/근거 |\n| --- | --- |\n| baseline8/profile 동일 및 read-only | {{BASELINE_AUDIT_RESULT}} / {{BASELINE_AUDIT_FILE}} |\n| 적용 후8spring-only profile/default 비교 | {{CANDIDATE_AUDIT_RESULT}} / {{CANDIDATE_AUDIT_FILE}} |\n| 동일 fixed30 baseline→candidate Torso RMS/peak/tip | {{BEFORE_TORSO_RMS_DEG}} / {{BEFORE_TORSO_PEAK_DEG}} deg / {{BEFORE_TORSO_TIP_CM}} cm → {{AFTER_TORSO_RMS_DEG}} / {{AFTER_TORSO_PEAK_DEG}} deg / {{AFTER_TORSO_TIP_CM}} cm; {{FIXED30_LOGS}} |\n| Hair/Leg 유지·body collision/표면/화면 | {{PROTECTED_RUNTIME_RESULT}} / {{SURFACE_RESULT}} / {{SCREENSHOT_FILES}} |\n| fresh saved profile·일반 시간 간격 | {{FRESH_SAVED_RESULT}} / {{NORMAL_DELTA_RESULT}} / {{FRESH_SAVED_LOGS}} |\n| 필요 stock 회귀·selected Main 전달/read-only | {{STOCK_RESULT}} / {{MAIN_HANDOFF_RESULT}} / {{MAIN_READY_RESULT}} |\n| 보호SHA/대상SHA | {{PROTECTED_SHA_RESULT}} / {{FINAL_TORSO_SHA256}} |\n\n기존 최종 Torso/Leg 물리 baseline은 유지하고 이8 spring override를 별도로 기록한다. 전체 `ClothAuthor` 재실행은 base omega² 스프링을 다시 써서 이번 override를 덮어쓰므로 후속 재개 절차가 아니다. 이후 변경은 새 저장본/프로필 감사에서 시작하며, 불가피한 full author가 필요하면 이 override를 명시적으로 재작성하고 fresh saved 검증을 갱신한다. 이전 Leg 잔여 body-proxy overlap과 전체 전투/LOD/모든 skin vertex·장시간 화면의 미확인 범위는 유지한다.\n",
+    "Docs/Engineering/ENGINEERING_PROJECT_STATE.md": "\n\n<!-- LeftShoulderCloth_20261008 -->\n## 2026-10-08 — 왼쪽 어깨 천 SLERP 스프링 소폭 완화\n\n왼쪽 어깨 천의 기존 Torso Cape8 active SLERP stiffness만 기준×.95로 조정했다. Damping/관성/형상/anchors/limits/충돌/solver 및 Hair/Leg는 유지했다. 임시 미세 튜닝이며 원작값은 미확인이다. 기존 editor-author helper에 선택 action을 추가했고 Main runtime 새 파일·Source/DLL·Build.cs 변경은0이다.\n\n현재 단계 {{FINAL_STATUS}}. profile8 exact baseline/단일 field/default 동기화 {{CANDIDATE_AUDIT_RESULT}}, fixed30 {{FIXED30_RESULT}}, fresh saved/normal delta {{FRESH_SAVED_RESULT}}/{{NORMAL_DELTA_RESULT}}, Main selective 적용/ready {{MAIN_HANDOFF_RESULT}}/{{MAIN_READY_RESULT}}. 근거 `Metadata/PlayerParts_20261008/LeftShoulderCloth/{{FINAL_VERIFICATION_FILE}}`와 Player physics 정본의 이번 절이다. 이전 ClothRefinement baseline과 Leg 잔여 proxy overlap을 보존하며 전체 ClothAuthor를 반복하지 않는다.\n",
+    "Docs/Engineering/PHYSICS_DIAGNOSTICS.md": "\n\n<!-- LeftShoulderCloth_20261008 -->\n## 2026-10-08 — 왼쪽 어깨 천 SLERP 스프링 소폭 완화\n\n재현은 사용자 Main에서 관측한 이동 중 왼쪽 어깨 천의 뻣뻣함이다. 기존 CopyPose/RigidBody·Torso derived PA의8 left-cape simulated joint를 표적으로 잡고 acceleration SLERP SlerpDrive.Stiffness만.95배로 낮췄다. 이 값은 assistant temporary tuning이며 original metadata 확인값이 아니다. Damping/전8관절의 다른 profile·frames/geometry/mass/inertia/anchors/body collision/solver는 유지했다.\n\ngetter 주의: float `GetAngularDriveParams`는 SwingDrive를 반환한다. 이번 검사와 JSON은 SlerpDrive 직접 field 및 `GetConstraintProfilePropertiesOrDefault(NAME_None)`을 사용하고 StaticStruct로 expected-only diff를 비교한다. 처음 Json link LNK2019는 ColdBuild.log에 보존, Work editor-only private Json/JsonUtilities 명시 후 retry build 통과. 제품 runtime 오류로 확정한 이력이 아니다.\n\n마지막 실제 검증 {{LAST_VERIFIED_STEP}}/{{LAST_VERIFIED_UTC}}: {{CANDIDATE_AUDIT_RESULT}}, {{FIXED30_RESULT}}, {{NORMAL_DELTA_RESULT}}, {{MAIN_READY_RESULT}}. 수치/화면/남은 범위는 `Metadata/PlayerParts_20261008/LeftShoulderCloth/{{FINAL_VERIFICATION_FILE}}`와 physics 정본을 따른다. angular PASS나 surface sample을 모든 pose의 관통0/원작 physics 일치로 확대하지 않는다.\n",
+    "Docs/Engineering/ENGINEERING_WORK_CONTINUITY.md": "\n\n<!-- LeftShoulderCloth_20261008 -->\n## 2026-10-08 — 왼쪽 어깨 천 SLERP 스프링 소폭 완화\n\n현재 상태 {{FINAL_STATUS}}; 마지막 실제 검증 {{LAST_VERIFIED_STEP}}/{{LAST_VERIFIED_UTC}}, 실패/미완료 원인 {{REMAINING_OR_FAILURE_REASON}}, 남은 작업 {{REMAINING_ACTIONS}}. 대상 Torso derived PA의 baseline SHA는 BC422363C3B491B5E9F6618763CE52C3D544ED494189A7870530842A31F8C34F, 새 SHA는 {{FINAL_TORSO_SHA256}}다. report와 보호 manifest는 `Metadata/PlayerParts_20261008/LeftShoulderCloth`에 있다.\n\n정확한 재개: Router→Player physics 정본 이번 절→TemporaryTuning.ini/BeforeManifest/ProfileAudit/최신 {{FINAL_VERIFICATION_FILE}}를 읽는다. 기존 isolated Work를 사용하고 최신 Main identity/world/PIE/dirty·보호SHA부터 확인한다. `Khazan.PlayerParts.LeftShoulderSpring` Apply=false로8실제 stiffness/default profile 상태를 먼저 읽고 baseline 또는 단일 adjusted 상태를 판정한다. adjusted 상태에 Apply=true를 다시 실행하지 않는다. 적용이 필요하고 전8관절 baseline과 정확히 일치할 때만 Apply=true를1회 실행한다. 필요한 saved/fixed30/normal-delta/표면·화면/stock 검사와 SHA binding을 갱신한 뒤 root의 선택 Main handoff/read-only ready 절차를 따른다. 현재 baseline 또는 다른 PA가 바뀌었으면 기존 예상값을 임의 갱신하지 말고 차이를 먼저 기록한다.\n\n전체 prepare/ClothAuthor/CollisionAuthor/HairAuthor를 재실행하거나 Main Source/DLL/기존 geometry·solver를 복원하지 않는다. ClothAuthor는 이번8spring override를 덮어쓴다. Main 종료/PIE/SaveAll을 자동 재개 단계로 추가하지 않는다. 검증/선택 반영 전이면 완료로 표시하지 않으며 실제 Main 증거를 얻은 뒤 최종 append를 작성한다.\n"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "utc": "2026-10-08T06:53:34.824117+00:00",
+  "required_tests": {
+    "player_attack_collision_pie": true,
+    "guard_pie": true,
+    "heal_pie": true,
+    "combo_regression_pie": true
+  },
+  "source": {
+    "Source/Khazan/Ability/Combo/KZComboActionAbility.h": "c40c7c4dff1467f8880fc35eecde49b83e4adb4041c88a60b1b96668788bbec7",
+    "Source/Khazan/Ability/Combo/KZComboActionAbility.cpp": "7d29d7a4b790422557805958e81331cccb554bb769c7e3c30c74dec68c119782",
+    "Source/Khazan/Ability/Combo/KZComboDefinitionData.h": "88f33c70932c18a1ef8dcf879dbce498721347a339b0f375883b91a6e2bca961",
+    "Source/Khazan/Tests/KZPlayerAttackCollisionPIETest.cpp": "346f3e13a81fb1c31422be81d431cbbb78499a802aa26231c9a760dc28ae9ba6"
+  },
+  "assets": {
+    "Content/Data/ComboCommand/DA_Player_Combo_Definition.uasset": "0ea30c0dda465ff6594036cff1c48151e44c721f0ceffda08c6956c4c429188b",
+    "Content/Bluprints/AbilitySystem/Effects/Attack/GE_ComboAttack_Damage.uasset": "d7669c02cd868e37cbc9829a17ef71b2a4acd236297fcadd420c02eb6e65c0d8"
+  },
+  "build_log": "Build_FinalMatchedMainSource.log",
+  "test_logs": {
+    "player_attack_collision_pie": "FrozenFinalPlayerCollisionPIE.log",
+    "guard_pie": "FrozenRegressionPIE.log",
+    "heal_pie": "FrozenRegressionPIE.log",
+    "combo_regression_pie": "ComboRegression/SuiteState.json"
+  },
+  "scope": "13 native cases; six real-input positive transitions and one independently verified pre-InputOpen rejection; separate native Guard/Heal success. Authored multi-hit count used enlarged target; normal capsule shape/range cases."
+}
