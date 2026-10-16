@@ -1,0 +1,97 @@
+{
+  "title": "KHAZAN | 전투와 설원 구현",
+  "language": "ko-KR",
+  "format": "Google Slides",
+  "status": "content_and_design_preparation",
+  "canvas": {"width": 1280, "height": 720},
+  "theme": {"background":"#130C20","purple":"#B49AFF","red":"#F14B63","white":"#F5F0F8","muted":"#BDB1CE","font":"Malgun Gothic"},
+  "slides": [
+    {
+      "id":"cover", "layout":"cover", "title":"전투와 설원 구현", "subtitle":"KHAZAN  ·  Unreal Engine 5.8", "image":"keyart.jpg", "caption":"게임 구현 소개",
+      "notes":"The First Berserker: Khazan을 재현하는 프로젝트의 실제 구현을 소개한다. 본 자료는 원작 게임의 내부 코드를 설명하는 공식 문서가 아니다. 표지 아트: SEGA 배포 보도자료 https://prtimes.jp/main/html/rd/p/000006227.000005397.html , © NEXON Korea Corp. & NEOPLE Inc. All Rights Reserved. 본문 스크린샷은 프로젝트에서 저장한 실제 검증 화면이다."
+    },
+    {
+      "id":"overview", "layout":"wide_image", "title":"HeinMach에서 이어지는 전투와 환경 반응", "image":"entry.png", "caption":"프로젝트 HeinMach 플레이 화면",
+      "items":[["전투","입력부터 공격, 회피, 가드, 피격까지 공통 GAS 규칙으로 제어"],["상대와 환경","몬스터 패턴과 짝 행동을 연결하고 눈 파임과 혈흔으로 결과 표현"]],
+      "notes":"전체 목표는 HeinMach/StormPass를 포함한 Khazan 전투 재현이다. 이번 자료는 현재 구현과 HeinMach 화면을 중심으로 설명한다. Sources: Docs/Engineering/CHARACTER_GAMEPLAY_ARCHITECTURE.md 최신 v2 및 후속 native 최소 구현 절. Metadata/NotionProgress_20261015/CaptureHeinMain01/Entry.png. 전체 게임 완성 또는 원작 pixel parity를 의미하지 않는다."
+    },
+    {
+      "id":"controls", "layout":"controls", "title":"플레이어 조작", "subtitle":"현재 프로젝트의 게임패드 바인딩",
+      "columns":[{"heading":"이동과 방어","rows":[["L 스틱","이동"],["R 스틱","카메라 회전"],["L3 / R3","달리기 / 록온"],["A","방향 회피"],["LB","가드, 시작 타이밍에 패링"]]},{"heading":"공격과 회복","rows":[["X","약공격, 상황별 연계 공격"],["Y","강공격 / 차지"],["B","브루탈 공격"],["RB","스킬 입력"],["십자키 아래","회복"]]}],
+      "footnote":"입력의 시작·해제·취소를 구분해 차지와 연계 동작의 수명을 관리합니다.",
+      "notes":"Sources: Source/Khazan/Player/KZPlayerController.cpp SetupInputComponent 및 Input_* 함수. Metadata/BrutalInputDevMap_20261010/FreshSavedVerification02.json mappings/inputs/grants. 물리 키는 프로젝트 바인딩이며 원작 기본 조작 전체와 같다는 주장이 아니다. Input.Action.Move/Turn/Sprint/LockOn/X/Y/A/Guard/B/RB/Heal을 구분한다. IA_Jump의 잔존 mapping을 실제 점프 기능으로 소개하지 않는다. RB는 RouteAttackInput으로 현재 능력/연계에 전달된다."
+    },
+    {
+      "id":"gas", "layout":"roles", "title":"GAS를 중심으로 한 플레이어 제어", "subtitle":"ASC가 캐릭터의 상태와 능력을 연결합니다.",
+      "items":[["Ability","공격·회피·가드·피격 실행\n시작 조건과 비용 확인\n정상 종료와 취소 처리"],["Gameplay Effect","피해·회복·자원 비용 적용\n지속 상태와 태그 부여\n해당 실행의 효과만 회수"],["Attribute Set","HP와 MaxHP\nStamina와 MaxStamina\n수치 범위 보정"]],
+      "footnote":"Gameplay Tag로 상태를 공유하고, 이동은 Locomotion·CMC가 실행하며 UI와 애니메이션이 결과를 읽습니다.",
+      "notes":"Sources: Source/Khazan/Ability/KZAbilitySystemComponent.h/.cpp, Attribute/KZAttributeSet.h/.cpp, Docs/Engineering/CHARACTER_GAMEPLAY_ARCHITECTURE.md 최신 v2 계약. ASC=Ability System Component. 모든 이동 연산이 GAS 내부에만 있다는 설명이 아니다. Controller는 입력 의도, Ability/Task는 액션 수명, Effect/Attribute는 상태·수치, LocomotionComponent/CMC는 실제 이동, AnimInstance와 UI는 표현을 맡는다. 별도 CharacterStateMachine이나 복제 HP bool 구조로 설명하지 않는다."
+    },
+    {
+      "id":"lifecycle", "layout":"sequence", "title":"한 번의 입력을 끝까지 관리하는 실행 흐름",
+      "items":[["01  요청","Enhanced Input이 시작·해제·취소를 전달"],["02  승인","ASC와 Ability가 태그, 실행 조건, 비용을 확인"],["03  실행","Ability와 Task가 몽타주·이동·판정 구간을 진행"],["04  정리","종료·취소 시 효과, 이동 제한, 타이머를 회수"]],
+      "footnote":"액션을 중단해도 다른 원인이 건 제한은 유지합니다.",
+      "notes":"Sources: Player/KZPlayerController.cpp, Ability/KZAbilitySystemComponent.cpp, Ability/Combo/KZComboActionAbility.cpp, Character/Component/KZLocomotionComponent.cpp, Ability/MonsterAbility/KZMonsterPatternAbility.cpp EndAbility/ReleaseCapture. 실행 소유자가 만든 GE/constraint/receipt만 정리하며 Notify End에만 의존하지 않는다. 공통 제어 사실과 실행 내부 bookkeeping을 구분한다."
+    },
+    {
+      "id":"combat", "layout":"table", "title":"공격 판정과 자원 변화", "subtitle":"적중 결과에 따라 체력, 스태미나, 반응을 결정합니다.",
+      "headers":["상황","게임플레이 처리","플레이어가 받는 피드백"],
+      "rows":[["일반 적중","유효 타깃·중복 적중 확인 후 피해 적용","HP 감소, 피격 모션과 혈액"],["가드","방어 가능 여부와 방향을 판정","스태미나 변화와 방어 반응"],["패링","가드 시작 창에서 전방 공격 판정","성공 반응, 효과음과 충격 표현"],["회피","회피 실행과 피격 회피 조건 처리","방향 이동과 성공 피드백"]],
+      "footnote":"화면 효과와 HUD는 확정된 결과를 표현합니다.",
+      "notes":"Sources: Source/Khazan/Ability/Combo/KZComboActionAbility.cpp, Ability/PlayerAbility/KZGuardAbility.cpp, KZDodgeAbility.cpp, Attribute/KZAttributeSet.cpp. Docs/Engineering/PARRY_IMPLEMENTATION_20261012.md 최종 Main 완료 절, PLAYER_ATTACK_COLLISION_CURRENT_IMPLEMENTATION.md, COMBAT_REACTION_RUNTIME_20261008.md. 패링은 모든 공격에 성공하는 기능이 아니며 전방 blockable 공격 및 실행 창 조건을 따른다. 수치/원작 완전 일치를 여기서 새로 주장하지 않는다."
+    },
+    {
+      "id":"ai", "layout":"roles", "title":"몬스터의 판단과 행동 실행", "subtitle":"AI는 행동을 선택하고, GAS는 선택한 액션을 실행합니다.",
+      "items":[["AI Controller","전투 대상과 거리 파악\n패턴 쿨다운 관리\n행동 선택에 필요한 정보 제공"],["StateTree","대기·순찰·경계\n추적·대치·공격 선택\n실행 결과에 따른 다음 행동"],["Ability","원본 기반 패턴 데이터 소비\n몽타주와 공격 판정 실행\n피격·사망·취소에 대응"]],
+      "footnote":"일반 병사부터 Apes와 Yetuga까지 캐릭터별 데이터와 공통 실행 구조를 함께 사용합니다.",
+      "notes":"Sources: Source/Khazan/AI/KZMonsterAIController.cpp, KZMonsterStateTreeNodes.cpp, Character/KZMonster.cpp, Ability/MonsterAbility/KZMonsterPatternAbility.cpp. 실제 6종: Swordsman, SwordShield, HeavySwordsman, HalberdElite, ApesStoneHandElite, Yetuga. StateTree 선택과 Ability 수명을 중복 구현하지 않는다. 원작의 독점 AI 실행 코드를 그대로 보유한다는 주장이 아니다."
+    },
+    {
+      "id":"pattern", "layout":"table", "title":"KZMonsterPatternAbility의 패턴 분기", "subtitle":"몽타주 구간과 이벤트를 데이터로 연결합니다.",
+      "headers":["이벤트","분기 조건","실행 결과"],
+      "rows":[["애니메이션 Notify","현재 노드와 유효 구간","다음 패턴 구간 진입"],["확정 적중 / 잡기 성공","실제 적중과 대상 상태","후속 타격 또는 잡기 연계"],["벽 충돌","막는 충돌, 지면 제외","대응 패턴 분기"],["Tick / 단계 종료","거리·조건·쿨다운·확률","후속 노드 선택 또는 종료"]],
+      "footnote":"종료 시 패턴 이동, 잡기, 타이머와 소유 오브젝트를 정리합니다.",
+      "notes":"Source: Source/Khazan/Ability/MonsterAbility/KZMonsterPatternAbility.cpp ResolveEvent/EnterPatternNode/ProcessMontageNotify/RunActions/TickPattern/EndAbility/HandleWorldCollision. Branch는 Event, Notify, ActiveWindows, Conditions, bRequireConfirmedHit, bCheckCooldown, Probability, Weight와 destination을 검사한다. bDeferUntilStepEnd는 단계 종료까지 분기를 보류한다. Collision 설명은 Yetuga ChargeTackle의 기존 wall branch를 근거로 한다."
+    },
+    {
+      "id":"capture", "layout":"sequence", "title":"Yetuga 잡기 공격의 제어 수명",
+      "items":[["01  성공 확인","확정 적중으로 플레이어 잡기 시작"],["02  붙잡기","Capture Effect, 소켓 정렬, 이동 제한\n플레이어 록온 해제"],["03  연계 진행","몬스터와 피해자 모션을 맞추고 후속 공격 실행"],["04  해제와 복귀","부착·효과·충돌 예외 정리\n유효한 Yetuga에 자동 록온"]],
+      "footnote":"잡기 중 새 록온을 막고, 사망하거나 사라진 대상에는 다시 록온하지 않습니다.",
+      "notes":"Sources: Source/Khazan/Ability/MonsterAbility/KZMonsterPatternAbility.cpp BeginCapture/ReleaseCapture, Character/Component/KZLockOnComponent.cpp StartLockOn. Metadata/LockOnRumble_20261015/FinalVerification.json. Yetuga CharacterDefinition ID로 구분한다. 성공한 capture만 local controller receipt를 보관하며 정상 종료와 취소 cleanup 뒤 같은 controller/pawn인지 확인한다. Miss에는 해제/복원 영수증이 생기지 않는다. 잠금을 복원할 때 양쪽 생존/유효성은 LockOn owner가 확인한다."
+    },
+    {
+      "id":"targeting", "layout":"split", "title":"록온과 브루탈 상호작용", "image":"brutal.png", "caption":"실제 브루탈 실행 조건을 반영하는 B 표시",
+      "items":[["록온","살아 있는 대상을 선택하고 추적\n대상 HP가 0이 되는 즉시 해제"],["브루탈","소진 상태와 거리·방향 등 조건 확인\n적격 대상에 B 표시 후 짝 공격 실행"]],
+      "notes":"Sources: Source/Khazan/Character/Component/KZLockOnComponent.cpp, Ability/PlayerAbility/KZBrutalAttackAbility.cpp, UI/KZCombatHUDWidget.cpp, Docs/Engineering/COMBAT_UI_RUNTIME_20261011.md 최신 절. Metadata/UIQuality_20261014/ImprovedPIE01/04_BrutalAvailable_B.png 는 DevMap의 실제 UI 검증 화면이다. UI는 실제 CanActivateAbility/FindBrutalTarget 결과를 사용한다. 게이지나 표시용 보간이 피해 수치를 결정하지 않는다."
+    },
+    {
+      "id":"portal", "layout":"split", "title":"HeinMach의 보스 전장 진입", "image":"portal_rgb.png", "imageCrop":{"left":174,"top":146,"width":592,"height":352}, "caption":"Yetuga 전장 입구의 포탈",
+      "items":[["진입","플레이어 캡슐의 영역 진입을 감지\n입력을 제한하고 화면 암전"],["이동과 복구","같은 월드의 전장 위치로 이동\n화면·입력 복구 후 전투 이어가기"]],
+      "footnote":"실제 전장 이동이 성공하면 Yetuga 전투 BGM을 시작합니다.",
+      "notes":"Sources: Source/Khazan/Environment/KZBossPortal.cpp OnEntry/Tick/FinishTravel, Docs/Engineering/HEINMACH_YETUGA_PORTAL_20261015.md, Metadata/HeinMachPortal_20261015/RHI06/Entry.png. 포탈은 일반 상호작용 키나 별도 맵 로딩이 아닌 capsule overlap과 same-world TeleportTo를 사용한다. 자기 input/ASC contribution만 정리한다. 최신 사용자 정책상 BGM은 보스 사망/처치/전장 이탈로 중지하지 않는다."
+    },
+    {
+      "id":"snow_visual", "layout":"comparison", "title":"충돌 접촉으로 파이는 눈", "subtitle":"쌓인 눈의 접촉 흔적을 표면 높이 변화로 표현합니다.",
+      "images":[{"path":"snow_before.png","label":"접촉 전의 눈층"},{"path":"snow_after.png","label":"무기 접촉으로 눌린 눈"}],
+      "footnote":"발과 캡슐, 몸, 공격 중인 무기의 접촉을 구분해 기록합니다.",
+      "notes":"Sources: Source/Khazan/Environment/KZSnowDeformation.h/.cpp; Docs/Engineering/HEINMACH_SNOW_IMPLEMENTATION_20261006.md 최신 2026-10-11 절; Docs/Art/HEINMACH_SNOW_DEFORMATION_2026-10-06.md. Images: Metadata/CombatPresentationFix_20261011/MainSnowResume03/NativeSnowQA/Snow_Untouched.png 및 Snow_Weapon_Contact.png. 두 그림은 실제 RHI에서 접촉을 격리한 검증 화면이며 자연 공격 전체 애니메이션의 같은 시점 비교라는 뜻이 아니다. 현재 높이와 brush는 프로젝트 사용자/임시 튜닝이며 원작 실행 수치 직접 확인값으로 제시하지 않는다."
+    },
+    {
+      "id":"snow_system", "layout":"sequence", "title":"눈 변형 필드의 처리 구조",
+      "items":[["01  접촉 계산","지면 트레이스와 현재 눈 높이로 접촉 범위 계산"],["02  압축 기록","브러시를 이동 경로에 누적하고 가장 큰 압축 유지"],["03  필드 전송","플레이어 주변 텍스처와 변경된 타일만 갱신"],["04  표면 표현","Nanite 변위, 높이 기반 법선, 압축 색과 거칠기 반영"]],
+      "footnote":"기존 이동 충돌과 NavMesh를 유지하며, 제한된 타일 캐시로 눈의 이력을 보관합니다.",
+      "notes":"Source: Source/Khazan/Environment/KZSnowDeformation.cpp ObserveCharacter/StampSnow/GetSnowSurfaceHeight/FollowPlayer/UploadTiles/EndPlay. Finalized pose 관측은 GT PostUpdateWork. Player는 capsule와 local snow surface 교차, Monster는 실제 발·몸 bone 접촉, weapon은 active Attack Spec와 surface contact를 확인한다. FieldTexture는 transient UTexture2D이며 SceneCapture RenderTarget 방식으로 소개하지 않는다. max compression과 rim을 누적하고 dirty tile을 업로드한다. bounded cache 밖의 오래된 먼 타일은 제거한다. 높이 변위는 실제 렌더 지형 높이를 바꾸지만 physics collision/NavMesh를 매 프레임 재조각하지 않는다. 원작 VHM writer/HLSL 전체를 복원했다고 표현하지 않는다."
+    },
+    {
+      "id":"blood", "layout":"split", "title":"변형된 눈 위의 혈흔 데칼", "image":"blood_rgb.png", "caption":"피격 혈액과 눈 표면에 남는 바닥 혈흔",
+      "items":[["표면에 맞춘 투영","지면 법선에 맞춰 데칼 방향 설정\n현재 눈 높이만큼 투영 위치 보정"],["흔적의 수명","눈층을 덮도록 투영 깊이 확장\n월드에 남긴 뒤 자체 시간으로 페이드"]],
+      "footnote":"피격 혈액 파티클과 바닥 혈흔은 역할과 수명을 나누어 처리합니다.",
+      "notes":"Source: Source/Khazan/Character/KZMonster.cpp PlayHitBlood. 확정 피격 경로의 blood spawn은 capsule 표면에서 공격자 방향으로 분사한다. 바닥 trace에서 walkable normal을 확인하고 MakeFromXZ로 투영을 정렬한다. AKZSnowDeformation::GetSnowSurfaceHeight 결과로 ProjectionPoint를 올리고 profile depth/rim까지 ProjectionSize.X를 확장한다. world decal의 SetFadeOut으로 independent lifetime을 둔다. material은 BloodMaskChannel과 BloodWalkableFloorZ를 소비한다. Image: Metadata/HeinMachColourVFX_20261015/MainHitsHein01/Blood_Yetuga_02.png. Blood normal/roughness/shader의 원작 pixel parity를 의미하지 않는다."
+    },
+    {
+      "id":"closing", "layout":"wide_image", "title":"전투 상태에서 설원의 흔적까지", "image":"sky.png", "caption":"프로젝트 HeinMach 환경",
+      "items":[["일관된 제어","GAS 상태와 자원을 기준으로 플레이어와 몬스터의 실행을 관리"],["연결된 표현","공격 결과와 접촉 정보를 모션, UI, 눈 파임과 혈흔으로 전달"]],
+      "notes":"발표 마무리와 시연 안내: 이동으로 눈 눌림, 공격으로 피격과 혈흔, 가드/패링과 브루탈, Yetuga 잡기 종료 후 록온 복귀 순서로 시연할 수 있다. 실제 구현 근거는 앞 슬라이드의 Source와 metadata를 따른다. Image: Metadata/NotionProgress_20261015/CaptureHeinMain01/OpenSky.png. 이번 자료 작성에서 새로운 게임 빌드나 플레이 테스트를 실행한 것은 아니다."
+    }
+  ]
+}

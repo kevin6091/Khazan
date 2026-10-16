@@ -1,0 +1,32 @@
+[
+  {
+    "Type": "xxSpellFunc_HealOverTime",
+    "Name": "xxSpellFunc_HealOverTime_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSpellFunc_HealOverTime'",
+    "Outer": {
+      "ObjectName": "xxSpellInfo'SP_Kazan_Recovery'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/Common/Recovery/SP_Kazan_Recovery.1"
+    },
+    "Properties": {
+      "TotalHealAmount": 3000,
+      "TotalHealRate": 6000,
+      "ActionTime": 50
+    }
+  },
+  {
+    "Type": "xxSpellInfo",
+    "Name": "SP_Kazan_Recovery",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSpellInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Kazan/Skill/Common/Recovery/SP_Kazan_Recovery",
+    "Properties": {
+      "SpellFunctions": [
+        {
+          "ObjectName": "xxSpellFunc_HealOverTime'SP_Kazan_Recovery:xxSpellFunc_HealOverTime_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/Common/Recovery/SP_Kazan_Recovery.0"
+        }
+      ]
+    }
+  }
+]

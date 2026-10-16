@@ -1,0 +1,94 @@
+{
+  "schema": "Khazan.CombatReaction.DebuggerShieldBack.v1",
+  "date": "2026-10-08",
+  "local_time_context": "approximately 22:20 KST; exact pause timestamp was not supplied",
+  "scope": "Root-owned isolated Work PID29476, focused SwordShield back Brutal pair3",
+  "project": "C:/Users/user/Desktop/GitProject/Khazan_MonsterWork_20261006/Khazan",
+  "process_id": 29476,
+  "debugger": "LLDB",
+  "evidence_producer": "Root's direct LLDB observations relayed to the documentation agent; no new debugger/editor operation by this writer",
+  "paused": {
+    "file": "C:/Users/user/Desktop/GitProject/Khazan_MonsterWork_20261006/Khazan/Source/Khazan/Ability/PlayerAbility/KZBrutalAttackAbility.cpp",
+    "line": 163,
+    "function": "UKZBrutalAttackAbility::UpdateAlignment",
+    "thread": "GameThread",
+    "entry_context": "TimerManager next-tick delegate calls UpdateAlignment",
+    "source_at_line": "if (Hit.IsValidBlockingHit()) { HandleMontageAborted(); return; }",
+    "preceding_operation": "Player CharacterMovementComponent::SafeMoveUpdatedComponent, sweep=true"
+  },
+  "direct_values": {
+    "Hit.Distance": {
+      "raw_value": 0.0760849342,
+      "unit": "Unreal world centimetres",
+      "meaning": "HitResult travel distance reported by this alignment sweep"
+    },
+    "Hit.Time": {
+      "raw_value": 0,
+      "unit": "dimensionless sweep fraction; not seconds"
+    },
+    "Hit.HitObjectHandle.ReferenceObject": {
+      "pointer": "0x000001f61f320000",
+      "resolved_actor": "BP_Monster_SwordShield1"
+    },
+    "AlignmentTarget": {
+      "pointer": "0x000001f61f320000",
+      "same_as_hit_reference_object": true
+    }
+  },
+  "unavailable_accessor": {
+    "expression": "Hit.GetActor()",
+    "reason": "optimized native accessor was unavailable to LLDB",
+    "replacement_evidence": "Direct HitObjectHandle.ReferenceObject value was resolved to BP_Monster_SwordShield1 and matched AlignmentTarget exactly"
+  },
+  "confirmed_finding": "The alignment sweep hit object is the claimed pair victim itself. This is pair-partner collision evidence, rather than proof of an external wall blocker.",
+  "source_supported_consequence": "At the observed source line, a valid blocking hit invokes the existing montage-abort/pair-cancel path. The original wall-stop policy must remain; do not teleport or disable world collision to evade this case.",
+  "evidence_limits": [
+    "Exact numeric Hit.Component pointer, bStartPenetrating and separate IsValidBlockingHit return value were not supplied in this record.",
+    "Hit actor identity is directly established by the handle; no successful GetActor accessor call is claimed.",
+    "This focused debugger observation is not uninterrupted full PIE success, a shipping build result, or Main delivery proof.",
+    "No claim that original NoAir/NoBlow giant fallback references imply immunity."
+  ],
+  "planned_fix": {
+    "status": "planned/pending validation at this diagnosis checkpoint; application is not asserted here",
+    "owner": "Existing UKZExhaustionAbility pair lifetime",
+    "work_files": [
+      "Source/Khazan/Ability/MonsterAbility/KZExhaustionAbility.h",
+      "Source/Khazan/Ability/MonsterAbility/KZExhaustionAbility.cpp"
+    ],
+    "contract": "At successful pair claim, use each live capsule's IgnoreActorWhenMoving for the reciprocal partner only. Inspect original GetMoveIgnoreActors membership and add only absent entries. Preserve weak original attacker/victim owners and two added-entry flags. On complete/cancel/death/End cleanup remove only this execution's added entries, resetting receipt members before external Abort/Super calls to protect reentry.",
+    "preserve": [
+      "Existing external world/wall collision and valid blocking-hit cancellation",
+      "Existing pre-pair ignore entries, even when only one direction was already ignored",
+      "Brutal range, capsule-derived spacing, source montage timing, damage50 and dual completion/alive recovery",
+      "Authored sequences/montages and existing HitReaction RMS task ownership"
+    ],
+    "new_runtime_classes_or_files_for_this_fix": 0,
+    "expected_total_delivery_runtime_files": 16,
+    "runtime_file_composition": "2 new HitReaction files + 14 existing files, including these 2 Exhaustion files",
+    "required_validation": [
+      "Native public GetMoveIgnoreActors reads show reciprocal membership during actual paired tasks",
+      "Natural completion/cancel/death restores only added membership; preexisting one-way membership survives",
+      "Focused SwordShield back pair3 then full reaction/pair/collision PIE and existing regressions",
+      "Fresh stock Work and Main saved readback, loaded module/hash guards, selective CAS delivery"
+    ],
+    "build_pie_main_delivery_verified": false
+  },
+  "prior_saved_readback": {
+    "file": "Metadata/CombatReaction_20261008/WorkSavedReadback_PrePIE02.json",
+    "sha256": "aa3702f0ade9e0dcd318ce916c48a7a859cbf97aaee923463d8dc178e5df3e517",
+    "process_id": 23920,
+    "success": true,
+    "checks": 654552,
+    "failures": 0,
+    "unavailable_required": 0,
+    "scope": "Saved pools/grants7, Brutal50x6, montage63/plan65, Loop crop16, raw-equal Player copies24, sources245, Guard3/9, Collision36/113windows/1498keys and Monster kinds109/2/2. This predates the planned pair collision fix."
+  },
+  "cleanup_reported_by_root": {
+    "user_breakpoint_baseline_count": 8,
+    "user_breakpoints_untouched": true,
+    "agent_owned_breakpoints_removed": true,
+    "debugger_detached": true,
+    "owned_process_quit": true,
+    "user_editor_controlled": false
+  }
+}

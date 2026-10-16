@@ -1,0 +1,72 @@
+{
+  "status": "failed",
+  "saved": [
+    "/Game/HealVFX/Source/FT_Trail",
+    "/Game/HealVFX/Source/FS_Sphere",
+    "/Game/HealVFX/Source/FS_SmallRing_01",
+    "/Game/HealVFX/Source/FS_BloodRing_01",
+    "/Game/HealVFX/Materials/M_Heal_SoftGlow",
+    "/Game/HealVFX/Materials/M_Heal_OriginalTrail",
+    "/Game/HealVFX/Materials/M_Heal_CoreFresnel"
+  ],
+  "original_events": [],
+  "adapters": [],
+  "temporary_tuning": {},
+  "shaders": [
+    {
+      "path": "/Game/HealVFX/Materials/M_Heal_SoftGlow.M_Heal_SoftGlow",
+      "compile_errors": "[]"
+    },
+    {
+      "path": "/Game/HealVFX/Materials/M_Heal_OriginalTrail.M_Heal_OriginalTrail",
+      "compile_errors": "[]"
+    },
+    {
+      "path": "/Game/HealVFX/Materials/M_Heal_CoreFresnel.M_Heal_CoreFresnel",
+      "compile_errors": "[]"
+    }
+  ],
+  "curve_sources": [
+    {
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\HealVFX_20261013\\Original\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Particle\\PC\\Recovery\\FP_DrainCore.json",
+      "sha256": "cfeca88fd57138b926064d4a68fb8122d409246cf85eb3adcba36b3cf61f2fc6",
+      "export_index": 1,
+      "field": "Properties.ShaderLUT",
+      "samples": 53,
+      "normalized_age_adapter": "Samples assumed uniformly normalized over particle lifetime; original VM topology unavailable"
+    },
+    {
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\HealVFX_20261013\\Original\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Particle\\PC\\Recovery\\FP_DrainCore_Explo1.json",
+      "sha256": "2dc72e1098713504471916f47925653bf40b4273284d5686fb309d1966a314d8",
+      "export_index": 0,
+      "field": "Properties.ShaderLUT",
+      "samples": 79,
+      "normalized_age_adapter": "Samples assumed uniformly normalized over particle lifetime; original VM topology unavailable"
+    },
+    {
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\HealVFX_20261013\\Original\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Particle\\PC\\Recovery\\FP_KazanGhostHand_Init.json",
+      "sha256": "a27154fed6afffeb4b46b9f79ebaf1f5adc4995201fd3141464ab16b9031cec1",
+      "export_index": 0,
+      "field": "Properties.ShaderLUT",
+      "samples": 53,
+      "normalized_age_adapter": "Samples assumed uniformly normalized over particle lifetime; original VM topology unavailable"
+    },
+    {
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\HealVFX_20261013\\Original\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Particle\\PC\\Recovery\\FP_KazanGhostHand_A_Finger_init.json",
+      "sha256": "5a15e4ad096a098f9b3a444d13323763d4a74670444350dd4d368db1d0040101",
+      "export_index": 0,
+      "field": "Properties.ShaderLUT",
+      "samples": 91,
+      "normalized_age_adapter": "Samples assumed uniformly normalized over particle lifetime; original VM topology unavailable"
+    },
+    {
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\HealVFX_20261013\\Original\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Particle\\PC\\Recovery\\FP_DrainCore_Explo1.json",
+      "sha256": "2dc72e1098713504471916f47925653bf40b4273284d5686fb309d1966a314d8",
+      "export_index": 4,
+      "field": "Properties.ShaderLUT",
+      "samples": 102,
+      "normalized_age_adapter": "Samples assumed uniformly normalized over particle lifetime; original VM topology unavailable"
+    }
+  ],
+  "error": "Traceback (most recent call last):\n  File \"C:/Users/user/Desktop/GitProject/Khazan/Khazan/Scripts/Art/author_heal_vfx_20261013.py\", line 218, in <module>\n    montage(core.build(),burst.build(),arm.build(),finger.build(),flash.build())\n            ^^^^^^^^^^^^\n  File \"C:/Users/user/Desktop/GitProject/Khazan/Khazan/Scripts/Art/author_heal_vfx_20261013.py\", line 148, in build\n    ps=H['cascade'](row);EAL.set_metadata_tag(ps,'KZHealOriginalSystem',self.source)\n       ^^^^^^^^^^^^^^^^^\n  File \"<existing cascade definitions>\", line 186, in cascade\n  File \"<existing cascade definitions>\", line 177, in create\nTypeError: new_object: Outer '/Game/HealVFX/Particles/PS_Heal_DrainCore.PS_Heal_DrainCore:O1.O2' was of type 'ParticleLODLevel' but must be of type 'ParticleSystem'\n"
+}

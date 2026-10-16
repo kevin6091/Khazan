@@ -1,0 +1,209 @@
+[
+  {
+    "Type": "xxSkillInfo",
+    "Name": "SI_Yetuga_PartGroggy_StaminaRecover",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/21_StaminaRecover/SI_Yetuga_PartGroggy_StaminaRecover",
+    "Properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "부위 파괴 후 괴력 충전 포효",
+        "LocalizedString": "부위 파괴 후 괴력 충전 포효"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/21_StaminaRecover/SB_Yetuga_StaminaRecover.SB_Yetuga_StaminaRecover_C",
+        "SubPathString": ""
+      },
+      "bEnableParringSkill": false,
+      "SkillInputCondition": {
+        "ObjectName": "xxStateInputConditionSelfStatus'SI_Yetuga_PartGroggy_StaminaRecover:xxStateInputConditionSelfStatus_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/21_StaminaRecover/SI_Yetuga_PartGroggy_StaminaRecover.1"
+      },
+      "SpellConditionToUseSkill": {
+        "ExcludeSpells": [
+          {
+            "ObjectName": "xxSpellInfo'SP_Yetuga_PartGroggy_Stun'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Stun.1"
+          }
+        ]
+      },
+      "StatusChangeInfoList": [
+        {
+          "bUseParticle": false,
+          "StatusToChangeInfos": [
+            {
+              "StatusToChange": "EDynamicStatusToChange::Stamina",
+              "Operator": "EStatusOper::Rate",
+              "Value": 100000,
+              "bDieHard": false
+            }
+          ],
+          "bChangeImmediate": true,
+          "bNotChangeWhenShort": false,
+          "bCheckCanChange": true,
+          "ParticleInfo": {
+            "ParticleMode": "ParticleSystem",
+            "Particle": null,
+            "BPOverrideParticle": null,
+            "NiagaraParticle": null,
+            "EffectData": null,
+            "ShowUpType": "EEffectShowUp::ShowAll",
+            "bSyncData": false,
+            "Scale": 1.0,
+            "ScaleRandRange": 0.0,
+            "RotationRandRange": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            },
+            "Scale3D": {
+              "X": 1.0,
+              "Y": 1.0,
+              "Z": 1.0
+            },
+            "RelativeLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "RelativeRotation": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            },
+            "bAttached": false,
+            "AttachSocketName": "None",
+            "bApplyBaseScale": true,
+            "bSpawnOnFloor": false,
+            "HeightFromFloor": 0.0,
+            "FloorAroundBlendRange": 0.0,
+            "bRotateInDirOfFloor": false,
+            "RotateInDirOfFloorAroundBlendRange": 50.0,
+            "CustomTimeDilation": 1.0,
+            "bReceivesDecals": false,
+            "bAbsoluteRotation": true,
+            "bAbsoluteRotationWorld": false,
+            "bIgnoreAttachedVisibility": false,
+            "TranslucencySortPriority": 0,
+            "bCastParticleShadow": false,
+            "bUseParticleParametersAsset": false,
+            "ParticleFloatParams": [],
+            "ParticleVectorParams": [],
+            "ParticlePhysicalVectorParams": [],
+            "ParticlePhysicalFloatParams": [],
+            "ParticleParametersAsset": null,
+            "ParticleVectorParam": "None",
+            "ParticleVectorParam2": "None",
+            "bParticleVectorParamApplyEveryTick": false,
+            "bUseEndPoint": false,
+            "EndPointVectorParam": "None",
+            "bUseEnvVolumeDependent": false,
+            "EnvVolumeBundleAsset": null
+          },
+          "bUseDecal": false,
+          "DecalData": {
+            "DecalMode": "DecalMode_MaterialInstance",
+            "DecalMaterial": null,
+            "MaterialEffect": null,
+            "RandomDecalScale": {
+              "BasedVector": {
+                "X": 50.0,
+                "Y": 256.0,
+                "Z": 256.0
+              },
+              "MinVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MaxVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "bFixedRatio": true
+            },
+            "SpawnLocationBoneName": "None",
+            "RandomPosition": {
+              "BasedVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MinVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MaxVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "bFixedRatio": true
+            },
+            "RandomRotator": {
+              "BasedRotator": {
+                "Pitch": -90.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              },
+              "MinRotator": {
+                "Pitch": 0.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              },
+              "MaxRotator": {
+                "Pitch": 0.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              }
+            },
+            "LifeSpan": 0.0,
+            "bOwnerYawRotOnly": false,
+            "IsSpawnFloor": true,
+            "bRotateInDirOfTerrain": false,
+            "RotateInDirOfTerrainAroundBlendRange": 50.0,
+            "bCheckStretchOnWall": false,
+            "bScaleUpStretchedDecal": false,
+            "StretchedDecalScale": {
+              "X": 2.25,
+              "Y": 0.75,
+              "Z": 0.75
+            },
+            "OpacityCurve": null,
+            "OpacityParamName": "FadeOut",
+            "RandomScalarParams": [],
+            "bApplyBaseScale": true,
+            "LimitAngleOnAttackSuccessed": 0.0
+          },
+          "bUseSound": false,
+          "SoundEvent": null
+        }
+      ],
+      "CancelGroups": [
+        "ESkillCancelGroup::ForceCancel"
+      ],
+      "SelfCancelGroups": []
+    }
+  },
+  {
+    "Type": "xxStateInputConditionSelfStatus",
+    "Name": "xxStateInputConditionSelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxStateInputConditionSelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSkillInfo'SI_Yetuga_PartGroggy_StaminaRecover'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/21_StaminaRecover/SI_Yetuga_PartGroggy_StaminaRecover.0"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::Stamina",
+        "CompareOperator": "ECompareOperator::LessThanOrEqualTo"
+      },
+      "bKeepOpResult": true
+    }
+  }
+]

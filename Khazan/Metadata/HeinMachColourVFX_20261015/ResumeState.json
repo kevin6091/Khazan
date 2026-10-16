@@ -1,0 +1,26 @@
+﻿{
+    "status":  "isolated_candidates_saved_validation_in_progress",
+    "date":  "2026-10-15",
+    "main":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan",
+    "work":  "C:/Users/user/Desktop/GitProject/Khazan_HeinColourVFXWork_20261015/Khazan",
+    "baseline":  "BaselineAudit02/Usage.json",
+    "preparation":  "Preparation.json",
+    "author":  "CandidateAuthor01/Author.json",
+    "latest_scene_candidate":  "CandidateRetune04/Retune.json",
+    "scene_views":  [
+                        "BaselineHein01",
+                        "CandidateHein02"
+                    ],
+    "main_assets_delivered":  0,
+    "main_runtime_source_changed":  "Source/Khazan/Character/KZCharacter.cpp: accepted-hit capsule-surface placement only",
+    "runtime_stage":  "RuntimeStage01.json",
+    "build_scope":  "Own MainBuild01/02/03 failed on concurrent DEV/header edits; shared CombatFeel Build02 succeeded and its DLL copied to Work. Stable final Main build still required.",
+    "last_failure":  "ProbeSmokeDev01 used unexposed Python LevelEditorPlaySettings class before callbacks; own PID9060 stopped. Removed unsupported setup and added runner startup-error watchdog.",
+    "resume":  [
+                   "Run work_probe ProbeSmokeDev02 with KZ_HM_COLOUR_LEVEL=DevMap, KZ_HM_COLOUR_FIXED=1, KZ_HM_COLOUR_PROBE_LIMIT=5, Scripts/Art/probe_heinmach_vfx_colours_20261015.py",
+                   "Render CandidateHein03 from latest cold lights/fog and visually compare original saved references",
+                   "Run full 321-system colour probes in DevMap and HeinMach, analyse foreground hue and invalid/context-dependent cases",
+                   "Use existing Parry/MonsterRepair/CombatEffect PIE through Scripts/Engineering/heinmach_colour_hit_driver_20261015.py to verify accepted Player/Monster blood and ground decals",
+                   "Select final assets; SHA compare Main against Preparation. Merge only owned fields if parallel CharacterDefinitions/materials changed. Preserve other tasks. Main saved readback, stable build and real Main RHI, dated domain records."
+               ]
+}

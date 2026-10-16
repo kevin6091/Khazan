@@ -1,0 +1,405 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_Yetuga_TurnBackRun_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun",
+    "SuperStruct": {
+      "ObjectName": "Class'xxCommonSimpleSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_Yetuga_TurnBackRun_C'Default__SB_Yetuga_TurnBackRun_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.1"
+    }
+  },
+  {
+    "Type": "SB_Yetuga_TurnBackRun_C",
+    "Name": "Default__SB_Yetuga_TurnBackRun_C",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.SB_Yetuga_TurnBackRun_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun",
+    "Properties": {
+      "SubStateInfos": [
+        {
+          "Key": "ESubStateStepByActiveInput::Step1",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step2",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnBackRun_Back'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/AC_Yetuga_TurnBackRun_Back.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.3,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_TurnBackRun_C:xxSimpleSkillEventTag_3'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.8"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_Yetuga_TurnBackRun_C:xxChangeNextStepFunc_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.2"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step2",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnBackRun'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/AC_Yetuga_TurnBackRun.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.15,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_TurnBackRun_C:xxSimpleSkillEventTag_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.6"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSkillEventFunc_NextSkillEnable'Default__SB_Yetuga_TurnBackRun_C:xxSimpleSkillEventFunc_NextSkillEnable_4'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.5"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index3",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_TurnBackRun_C:xxSimpleSkillEventTag_5'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.9"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSkillEventFunc_NextSkillEnable'Default__SB_Yetuga_TurnBackRun_C:xxSimpleSkillEventFunc_NextSkillEnable_3'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.4"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index4",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_TurnBackRun_C:xxSimpleSkillEventTag_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.7"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSkillEventFunc_NextSkillEnable'Default__SB_Yetuga_TurnBackRun_C:xxSimpleSkillEventFunc_NextSkillEnable_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.3"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_TurnBackRun_C'Default__SB_Yetuga_TurnBackRun_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step2"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventFunc_NextSkillEnable",
+    "Name": "xxSimpleSkillEventFunc_NextSkillEnable_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventFunc_NextSkillEnable'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_TurnBackRun_C'Default__SB_Yetuga_TurnBackRun_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.1"
+    },
+    "Properties": {
+      "ChangeNextSkillCustomInfo": {
+        "ChangeNextSkillCustomType": "EChangeNextSkillCustomType::NowNextSkill",
+        "NextSkillInfo": {
+          "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/22_Social/SI_Yetuga_Social.SI_Yetuga_Social",
+          "SubPathString": ""
+        },
+        "bUseCoolTime": false,
+        "bUseForceCancel": true
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventFunc_NextSkillEnable",
+    "Name": "xxSimpleSkillEventFunc_NextSkillEnable_3",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventFunc_NextSkillEnable'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_TurnBackRun_C'Default__SB_Yetuga_TurnBackRun_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.1"
+    },
+    "Properties": {
+      "ChangeNextSkillCustomInfo": {
+        "ChangeNextSkillCustomType": "EChangeNextSkillCustomType::NowNextSkill",
+        "NextSkillInfo": {
+          "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/22_Social/SI_Yetuga_Social.SI_Yetuga_Social",
+          "SubPathString": ""
+        },
+        "bUseForceCancel": true
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventFunc_NextSkillEnable",
+    "Name": "xxSimpleSkillEventFunc_NextSkillEnable_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventFunc_NextSkillEnable'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_TurnBackRun_C'Default__SB_Yetuga_TurnBackRun_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.1"
+    },
+    "Properties": {
+      "ChangeNextSkillCustomInfo": {
+        "ChangeNextSkillCustomType": "EChangeNextSkillCustomType::NowNextSkill",
+        "NextSkillInfo": {
+          "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SI_Yetuga_RushGrab.SI_Yetuga_RushGrab",
+          "SubPathString": ""
+        },
+        "bUseSubStateStep": true,
+        "CustomSubStateStep": "ESubStateStepByActiveInput::Step1",
+        "bUseForceCancel": true
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_TurnBackRun_C'Default__SB_Yetuga_TurnBackRun_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_TurnBackRun_C'Default__SB_Yetuga_TurnBackRun_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::EndSubState"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_3",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_TurnBackRun_C'Default__SB_Yetuga_TurnBackRun_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::StartSubState",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_Yetuga_TurnBackRun_C:xxSimpleSkillEventTag_3.xxSimpleSkillTagCondition_TargetCondition_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.12"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_5",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_TurnBackRun_C'Default__SB_Yetuga_TurnBackRun_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStartEnd",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_FindTarget'Default__SB_Yetuga_TurnBackRun_C:xxSimpleSkillEventTag_5.xxSimpleSkillTagCondition_FindTarget_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.10"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_Random'Default__SB_Yetuga_TurnBackRun_C:xxSimpleSkillEventTag_5.xxSimpleSkillTagCondition_Random_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.11"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_FindTarget",
+    "Name": "xxSimpleSkillTagCondition_FindTarget_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_FindTarget'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_TurnBackRun_C:xxSimpleSkillEventTag_5'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.9"
+    },
+    "Properties": {
+      "CheckStateInfo": {
+        "bInstantTarget": true,
+        "InstantTargetTraceInfo": {
+          "ActorType": "ETraceActorType::AITarget",
+          "bUseCircleTraceInfo": true,
+          "CircleTraceInfo": {
+            "RangeMax": 5000.0,
+            "RangeMin": 1500.0
+          },
+          "bCheckScreenInSide": false
+        },
+        "bIDLE": false
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_Random",
+    "Name": "xxSimpleSkillTagCondition_Random_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_Random'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_TurnBackRun_C:xxSimpleSkillEventTag_5'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.9"
+    },
+    "Properties": {
+      "RandomRate": 0.4
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_TargetCondition",
+    "Name": "xxSimpleSkillTagCondition_TargetCondition_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_TargetCondition'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_TurnBackRun_C:xxSimpleSkillEventTag_3'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.8"
+    },
+    "Properties": {
+      "TargetSelectionTypes": [
+        "ETargetSelectionTypeByCondition::LockOnTarget"
+      ],
+      "bCheckBaseDirection": true,
+      "FrontBaseAngle": 90.0,
+      "CheckHitDirections": [
+        "EBaseDirection::Back"
+      ]
+    }
+  }
+]

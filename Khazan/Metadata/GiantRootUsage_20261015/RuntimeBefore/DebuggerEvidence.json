@@ -1,0 +1,130 @@
+{
+  "status": "diagnostic_only_interrupted",
+  "paused_location": "Source/Khazan/Ability/MonsterAbility/KZMonsterPatternAbility.cpp:307 -> 308",
+  "call_path": [
+    "UKZMonsterPatternAbility::UpdatePatternMovement",
+    "UKZComboActionAbility::HandleMontageNotifyBegin:758"
+  ],
+  "breakpoint_baseline": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"breakpoints\":[{\"id\":\"exception||-1\",\"type\":\"exception\",\"enabled\":false,\"owner\":\"user\",\"isLogMessage\":false,\"isLogStack\":false,\"temporary\":false,\"suspendPolicy\":\"all\",\"hitCount\":0},{\"id\":\"exception||-1\",\"type\":\"exception\",\"enabled\":false,\"owner\":\"user\",\"isLogMessage\":false,\"isLogStack\":false,\"temporary\":false,\"suspendPolicy\":\"all\",\"hitCount\":0},{\"id\":\"exception||-1\",\"type\":\"exception\",\"enabled\":true,\"owner\":\"user\",\"isLogMessage\":false,\"isLogStack\":false,\"temporary\":false,\"suspendPolicy\":\"all\",\"hitCount\":0},{\"id\":\"exception||-1\",\"type\":\"exception\",\"enabled\":true,\"owner\":\"user\",\"isLogMessage\":false,\"isLogStack\":false,\"temporary\":false,\"suspendPolicy\":\"all\",\"hitCount\":0},{\"id\":\"exception||-1\",\"type\":\"exception\",\"enabled\":false,\"owner\":\"user\",\"isLogMessage\":false,\"isLogStack\":false,\"temporary\":false,\"suspendPolicy\":\"all\",\"hitCount\":0},{\"id\":\"exception||-1\",\"type\":\"exception\",\"enabled\":true,\"owner\":\"user\",\"isLogMessage\":false,\"isLogStack\":false,\"temporary\":false,\"suspendPolicy\":\"all\",\"hitCount\":0},{\"id\":\"exception||-1\",\"type\":\"exception\",\"enabled\":true,\"owner\":\"user\",\"isLogMessage\":false,\"isLogStack\":false,\"temporary\":false,\"suspendPolicy\":\"all\",\"hitCount\":0},{\"id\":\"exception||-1\",\"type\":\"exception\",\"enabled\":true,\"owner\":\"user\",\"isLogMessage\":false,\"isLogStack\":false,\"temporary\":false,\"suspendPolicy\":\"all\",\"hitCount\":0}],\"totalCount\":8,\"enabledCount\":5}"
+      }
+    ],
+    "isError": false
+  },
+  "before": [
+    {
+      "expression": "M->Mesh->AnimScriptInstance->RootMotionMode",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "M->Mesh->AnimScriptInstance->RootMotionMode = RootMotionFromMontagesOnly {TEnumAsByte<enum ERootMotionMode::Type>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "expression": "this->PreviousRootMotionMode",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "this->PreviousRootMotionMode = 0 \"'\\0'\" {unsigned char}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "expression": "this->bOwnsRootMotionMode",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "this->bOwnsRootMotionMode = false {bool}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  ],
+  "after": [
+    {
+      "expression": "Anim->RootMotionMode",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Anim->RootMotionMode = IgnoreRootMotion {TEnumAsByte<enum ERootMotionMode::Type>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "expression": "this->PreviousRootMotionMode",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "this->PreviousRootMotionMode = 3 \"'\\x3'\" {unsigned char}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "expression": "this->bOwnsRootMotionMode",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "this->bOwnsRootMotionMode = true {bool}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "expression": "Anim->RootMotionMontageInstance->DisableRootMotionCount",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Anim->RootMotionMontageInstance->DisableRootMotionCount = 0 {int}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "expression": "Anim->RootMotionMontageInstance->Montage",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Anim->RootMotionMontageInstance->Montage =  // 0x00000203dc8fdc80 (Name=\"AM_OriginalPatterns_ApesStoneHandElite\", InternalFlags=ReachabilityFlag1) {TObjectPtr<UAnimMontage>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "expression": "M->CharacterMovement->MovementMode",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "M->CharacterMovement->MovementMode = MOVE_Walking {TEnumAsByte<enum EMovementMode>}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  ],
+  "conclusion": "Authored RMS captures MontagesOnly=3, applies IgnoreRootMotion while replacing movement through CMC, active montage DisableRootMotionCount=0. This run later crashed after native debugger evaluations and is not a full test pass. No runtime/asset edits were made. Need non-debug reproduction to distinguish crash cause."
+}

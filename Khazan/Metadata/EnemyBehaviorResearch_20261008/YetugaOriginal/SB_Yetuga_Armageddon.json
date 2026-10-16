@@ -1,0 +1,1264 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_Yetuga_Armageddon_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon",
+    "SuperStruct": {
+      "ObjectName": "Class'xxCommonSimpleSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    }
+  },
+  {
+    "Type": "SB_Yetuga_Armageddon_C",
+    "Name": "Default__SB_Yetuga_Armageddon_C",
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.SB_Yetuga_Armageddon_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon",
+    "Properties": {
+      "SubStateInfos": [
+        {
+          "Key": "ESubStateStepByActiveInput::Step1",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step2",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_Armageddon_Start'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/AC_Yetuga_Armageddon_Start.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.2,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_4'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.18"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_Yetuga_Armageddon_C:xxChangeNextStepFunc_5'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.7"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_6'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.20"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_Yetuga_Armageddon_C:xxChangeNextStepFunc_6'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.8"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index3",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_22'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.15"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSpellFunc'Default__SB_Yetuga_Armageddon_C:xxSimpleSpellFunc_6'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.34"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step2",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step3",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_Armageddon_Jump_Start'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/AC_Yetuga_Armageddon_Jump_Start.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index5",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.12"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_Yetuga_Armageddon_C:xxChangeNextStepFunc_3'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.5"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_7'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.21"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_Yetuga_Armageddon_C:xxChangeNextStepFunc_7'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.9"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step3",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step5",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_Armageddon_Jump_End'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/AC_Yetuga_Armageddon_Jump_End.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.125,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.13"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_Yetuga_Armageddon_C:xxChangeNextStepFunc_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.3"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step4",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step5",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_Armageddon_Jump_End_Close'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/AC_Yetuga_Armageddon_Jump_End_Close.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.125,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTagEndMoveToByStopCondition'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTagEndMoveToByStopCondition_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.23"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_Yetuga_Armageddon_C:xxChangeNextStepFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.2"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Yetuga_Armageddon_C:xxSimpeEvnetTagOnAttack_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.10"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_Yetuga_Armageddon_C:xxChangeNextStepFunc_2'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.4"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step5",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_Armageddon_End'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/AC_Yetuga_Armageddon_End.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.5,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_36'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.17"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSpellFunc'Default__SB_Yetuga_Armageddon_C:xxSimpleSpellFunc_15'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.33"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step6",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_Armageddon_End'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/AC_Yetuga_Armageddon_End.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_3'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.16"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSkillEventFunc_NextSkillEnable'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventFunc_NextSkillEnable_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.11"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_8'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.22"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSpellFunc'Default__SB_Yetuga_Armageddon_C:xxSimpleSpellFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.32"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step7",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step8",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_DempseyRoll_Back'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/AC_Yetuga_DempseyRoll_Back.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step8",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step2",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_Armageddon_Start'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/AC_Yetuga_Armageddon_Start.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.2,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_5'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.19"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_Yetuga_Armageddon_C:xxChangeNextStepFunc_4'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.6"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step9",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_DamageParry_F'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/AC_Yetuga_DamageParry_F.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.0,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_2'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.14"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSkillEventFunc_SelfStaminaExhaustion'Default__SB_Yetuga_Armageddon_C:xxSkillEventFunc_SelfStaminaExhaustion_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.35"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step5"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step6"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step6"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_3",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step4"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step9"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_5",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step7"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_6",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step9"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_7",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step9"
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnAttack",
+    "Name": "xxSimpeEvnetTagOnAttack_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnAttack'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventFunc_NextSkillEnable",
+    "Name": "xxSimpleSkillEventFunc_NextSkillEnable_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventFunc_NextSkillEnable'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "ChangeNextSkillCustomInfo": {
+        "ChangeNextSkillCustomType": "EChangeNextSkillCustomType::NowNextSkill",
+        "NextSkillInfo": {
+          "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SI_Yetuga_RushGrab.SI_Yetuga_RushGrab",
+          "SubPathString": ""
+        },
+        "bUseSubStateStep": true,
+        "CustomSubStateStep": "ESubStateStepByActiveInput::Step5",
+        "bUseCoolTime": false,
+        "bUseForceCancel": true
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::EndSubState",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_FindTarget'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_0.xxSimpleSkillTagCondition_FindTarget_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.25"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_AttackSuccess'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_AttackSuccess_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.24"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_TargetCondition_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.29"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_22",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::StartSubState"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_3",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_3.xxSimpleSkillTagCondition_TargetCondition_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.30"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_36",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::StartSubState"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_4.xxSimpleSkillTagCondition_TargetCondition_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.31"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_5",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::EndSubState",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_5.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.26"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_6",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::EndSubState",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_6.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.27"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_7",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyTick",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_7.xxSimpleSkillTagCondition_SelfStatus_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.28"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_8",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::StartSubState"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTagEndMoveToByStopCondition",
+    "Name": "xxSimpleSkillEventTagEndMoveToByStopCondition_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTagEndMoveToByStopCondition'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "StopReasons": [
+        "EMoveToEndReason::MoveOnFloor"
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_AttackSuccess",
+    "Name": "xxSimpleSkillTagCondition_AttackSuccess_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_AttackSuccess'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.13"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_FindTarget",
+    "Name": "xxSimpleSkillTagCondition_FindTarget_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_FindTarget'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.12"
+    },
+    "Properties": {
+      "CheckStateInfo": {
+        "bInstantTarget": true,
+        "InstantTargetTraceInfo": {
+          "ActorType": "ETraceActorType::AITarget",
+          "bUseCircleTraceInfo": true,
+          "CircleTraceInfo": {
+            "Yaw": 360.0,
+            "RangeMax": 2000.0
+          },
+          "bCheckScreenInSide": false,
+          "HeightMin": -1000.0,
+          "HeightMax": 1000.0
+        },
+        "bIDLE": false
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_5'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.19"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::Stamina",
+        "CompareOperator": "ECompareOperator::LessThanOrEqualTo"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_6'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.20"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::Stamina",
+        "CompareOperator": "ECompareOperator::LessThanOrEqualTo"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_SelfStatus",
+    "Name": "xxSimpleSkillTagCondition_SelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_SelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_7'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.21"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::Stamina",
+        "CompareOperator": "ECompareOperator::LessThanOrEqualTo"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_TargetCondition",
+    "Name": "xxSimpleSkillTagCondition_TargetCondition_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_TargetCondition'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.13"
+    },
+    "Properties": {
+      "TargetSelectionTypes": [
+        "ETargetSelectionTypeByCondition::UseSkillTarget",
+        "ETargetSelectionTypeByCondition::LockOnTarget"
+      ],
+      "bCheckBaseDirection": true,
+      "FrontBaseAngle": 70.0,
+      "CheckHitDirections": [
+        "EBaseDirection::Front"
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_TargetCondition",
+    "Name": "xxSimpleSkillTagCondition_TargetCondition_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_TargetCondition'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_3'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.16"
+    },
+    "Properties": {
+      "TargetSelectionTypes": [
+        "ETargetSelectionTypeByCondition::UseSkillTarget",
+        "ETargetSelectionTypeByCondition::LockOnTarget"
+      ],
+      "bCheckDistance": true,
+      "MaxDistance": 1500.0,
+      "bCheckBaseDirection": true,
+      "FrontBaseAngle": 70.0,
+      "CheckHitDirections": [
+        "EBaseDirection::Front"
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_TargetCondition",
+    "Name": "xxSimpleSkillTagCondition_TargetCondition_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_TargetCondition'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_Armageddon_C:xxSimpleSkillEventTag_4'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.18"
+    },
+    "Properties": {
+      "TargetSelectionTypes": [
+        "ETargetSelectionTypeByCondition::LockOnTarget",
+        "ETargetSelectionTypeByCondition::LockOnTarget"
+      ],
+      "bCheckBaseDirection": true,
+      "FrontBaseAngle": 80.0,
+      "CheckHitDirections": [
+        "EBaseDirection::Front"
+      ],
+      "CheckType": "ECheckSuccessType::Fail"
+    }
+  },
+  {
+    "Type": "xxSimpleSpellFunc",
+    "Name": "xxSimpleSpellFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSpellFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "SimpleSpellInfo": {
+        "SpellInfoIndex": 1
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSpellFunc",
+    "Name": "xxSimpleSpellFunc_15",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSpellFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "SimpleSpellInfo": {
+        "SpellInfoIndex": 1
+      },
+      "bUseRandomRate": true
+    }
+  },
+  {
+    "Type": "xxSimpleSpellFunc",
+    "Name": "xxSimpleSpellFunc_6",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSpellFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    },
+    "Properties": {
+      "SimpleSpellInfo": {
+        "SpellInfoIndex": 0
+      },
+      "bUseRandomRate": true
+    }
+  },
+  {
+    "Type": "xxSkillEventFunc_SelfStaminaExhaustion",
+    "Name": "xxSkillEventFunc_SelfStaminaExhaustion_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillEventFunc_SelfStaminaExhaustion'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_Armageddon_C'Default__SB_Yetuga_Armageddon_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.1"
+    }
+  }
+]

@@ -1,0 +1,77 @@
+[
+  {
+    "Type": "xxDamageInfo",
+    "Name": "SD_Yetuga_CloseGrab_Release",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SD_Yetuga_CloseGrab_Release",
+    "Properties": {
+      "AttackInfo": {
+        "AttackType": "ECharacterAttackType::HoldReleaseAuto",
+        "SkillPowerInfo": {
+          "SkillPowerBonus": 5000
+        },
+        "GuardDamageInfo": {
+          "bDontGuard": true
+        },
+        "AttackableFlags": [
+          "ECharacterAttackableFlag::EnableAttackableDownState"
+        ]
+      },
+      "AttackerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "DamageTimeDelayComputType": "EDamageInfoDelayComputeType::None",
+        "IsRestDelay": true
+      },
+      "DamagerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "DamageTimeDelayComputType": "EDamageInfoDelayComputeType::None",
+        "IsRestDelay": true
+      },
+      "DamagerKnockData": {
+        "KnockBackType": "EKnockbackType::Air",
+        "KnockBackMoveType": "EKnockbackMoveType::Velocity",
+        "KnockCurveVector": {
+          "ObjectName": "CurveVector'CV_common_knockback_deaccel'",
+          "ObjectPath": "BBQ/Content/_Common/MoveCurve/CV_common_knockback_deaccel.0"
+        },
+        "KnockCurveScale": {
+          "X": 100.0,
+          "Y": 1.0,
+          "Z": 1000.0
+        },
+        "KnockbackDistanceTime": 10.0,
+        "KnockbackHeight": 850.0,
+        "KnockbackForce": 500.0,
+        "KonckbackDownAcceleration": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 150.0
+        },
+        "KnockbackGravityScale": 1.0,
+        "KnockbackDownGravityScale": 0.5,
+        "DownEnemyPushRate": 0.6
+      },
+      "SpecialDamageAniminfo": {
+        "SpecialDamageAnimType": "ESpecialDamageAniType::GroggyStrong3",
+        "CommonAnimationTag": "ECommonAnimationTag::None"
+      },
+      "DamagerRotatorInfo": {
+        "RotatorDir": "ERotatorDir::Back"
+      },
+      "AttackerHitEffect": {
+        "ParticleInfo": {
+          "bSyncData": true
+        }
+      },
+      "DamageSounds": [
+        {
+          "ObjectName": "AkAudioEvent'Play_Monster_Blunt_L_MaterialSwitch'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/Monster_Common/Monster_Hit_MaterialSwitch/Play_Monster_Blunt_L_MaterialSwitch.0"
+        }
+      ],
+      "AttackMaterial": "EBattleDirecting_AttackMaterial::AttackMaterial_04",
+      "AttackStrength": "EBattleDirecting_AttackStrength::AttackStrength_02"
+    }
+  }
+]

@@ -1,0 +1,22 @@
+--- delivered
++++ final
+@@ -268,8 +268,17 @@
+     CapsuleCenter=Player->GetActorLocation();
+     FHitResult CenterHit,NearHit,OutsideHit;
+     const double NearRadius=Radius/1.4-Snow->TexelSizeCm*2;
+-    if(!SurfaceHit(CapsuleCenter,CenterHit) || !SurfaceHit(CapsuleCenter+FVector(NearRadius,0,0),NearHit) ||
+-       !SurfaceHit(CapsuleCenter+FVector(Radius+Snow->TexelSizeCm*2,0,0),OutsideHit))
++    // The enlarged footprint can reach a rock on the old single +X probe.
++    // Its circle is symmetric; retain all assertions on an exposed radial axis.
++    bool bExposed=SurfaceHit(CapsuleCenter,CenterHit);
++    if(bExposed)
++    {
++     bExposed=false;
++     for(const FVector Direction:{FVector::ForwardVector,FVector::BackwardVector,FVector::RightVector,FVector::LeftVector})
++      if(SurfaceHit(CapsuleCenter+Direction*NearRadius,NearHit) &&
++         SurfaceHit(CapsuleCenter+Direction*(Radius+Snow->TexelSizeCm*2),OutsideHit)) {bExposed=true;break;}
++    }
++    if(!bExposed)
+     { Test->AddError(TEXT("Capsule footprint probes require exposed snow substrate"));Cleanup();return true; }
+     CapsuleCenterGround=CenterHit.ImpactPoint;
+     const float Center=Snow->GetCompressionAtLocation(CapsuleCenterGround);

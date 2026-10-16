@@ -1,0 +1,107 @@
+[
+  {
+    "Type": "AnimComposite",
+    "Name": "AC_Yetuga_FastBall_OBJ_Straght_Idle",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimComposite'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/11_FastBall/FastBall_OBJ/AC_Yetuga_FastBall_OBJ_Straght_Idle",
+    "Properties": {
+      "AnimationTrack": {
+        "AnimSegments": [
+          {
+            "AnimReference": {
+              "ObjectName": "AnimSequence'Missile_Idle'",
+              "ObjectPath": "BBQ/Content/_Common/Missile_Idle.0"
+            },
+            "StartPos": 0.0,
+            "AnimStartTime": 0.0,
+            "AnimEndTime": 2.0,
+            "AnimPlayRate": 1.0,
+            "LoopingCount": 1
+          }
+        ]
+      },
+      "bConfirmedByArtist": true,
+      "Notifies": [
+        {
+          "TriggerTimeOffset": 0.0001,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "Xx Anim Notify State Particle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_Yetuga_FastBall_OBJ_Straght_Idle:xxAnimNotifyState_Particle_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/11_FastBall/FastBall_OBJ/AC_Yetuga_FastBall_OBJ_Straght_Idle.1"
+          },
+          "Duration": 2.0,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 2.0,
+            "LinkValue": 2.0,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_FastBall_OBJ_Straght_Idle'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/11_FastBall/FastBall_OBJ/AC_Yetuga_FastBall_OBJ_Straght_Idle.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 2.0,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_FastBall_OBJ_Straght_Idle'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/11_FastBall/FastBall_OBJ/AC_Yetuga_FastBall_OBJ_Straght_Idle.0"
+          }
+        }
+      ],
+      "SequenceLength": 2.0,
+      "Skeleton": {
+        "ObjectName": "Skeleton'Missile_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Common/Missile_Skeleton.0"
+      }
+    },
+    "SkeletonGuid": "C3303285-44CA4EE0-5D0771A4-5786A09A"
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_FastBall_OBJ_Straght_Idle'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/11_FastBall/FastBall_OBJ/AC_Yetuga_FastBall_OBJ_Straght_Idle.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_RockIdle_Ice'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Common/BBQ_Common/FP_RockIdle_Ice.10"
+        },
+        "Scale": 1.25,
+        "bAttached": true,
+        "AttachSocketName": "Root",
+        "bAbsoluteRotation": false
+      },
+      "bDestroyOnAnimEnd": true,
+      "bPreventDuplication": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  }
+]

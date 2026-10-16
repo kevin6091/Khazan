@@ -1,0 +1,66 @@
+[
+  {
+    "Type": "xxDamageInfo",
+    "Name": "SD_Yetuga_SideMove",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/18_SideMove/SD_Yetuga_SideMove",
+    "Properties": {
+      "AttackInfo": {
+        "SkillPowerInfo": {
+          "SkillPowerBonus": 7000
+        },
+        "StaminaAttackInfo": {
+          "StaminaAttackRate": 6000
+        },
+        "AttackableFlags": [
+          "ECharacterAttackableFlag::EnableAttackableDownState"
+        ]
+      },
+      "AttackerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true
+      },
+      "DamagerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true
+      },
+      "DamagerKnockData": {
+        "KnockBackMoveType": "EKnockbackMoveType::UseCurve",
+        "KnockbackDistance": {
+          "X": 100.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "KnockCurveVector": {
+          "ObjectName": "CurveVector'CV_common_knockback_deaccel'",
+          "ObjectPath": "BBQ/Content/_Common/MoveCurve/CV_common_knockback_deaccel.0"
+        },
+        "KnockCurveScale": {
+          "X": 50.0,
+          "Y": 100.0,
+          "Z": 1.0
+        },
+        "KnockbackDistanceTime": 1.0,
+        "KnockbackHeight": 100.0,
+        "KnockbackForce": 100.0
+      },
+      "SpecialDamageAniminfo": {
+        "DamageStrength": "EDamageTypeByStrength::DamageStrong",
+        "CommonAnimationTag": "ECommonAnimationTag::DamageL"
+      },
+      "AttackerHitEffect": {
+        "ParticleInfo": {
+          "bSyncData": true
+        }
+      },
+      "DamageSounds": [
+        {
+          "ObjectName": "AkAudioEvent'Play_Monster_PunchMaterialSwitch'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/Monster_Common/Monster_Hit_MaterialSwitch/Play_Monster_PunchMaterialSwitch.0"
+        }
+      ],
+      "AttackStrength": "EBattleDirecting_AttackStrength::AttackStrength_02"
+    }
+  }
+]

@@ -1,0 +1,67 @@
+[
+  {
+    "Type": "xxDamageInfo",
+    "Name": "SD_Yetuga_CloseGrab_Grab",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SD_Yetuga_CloseGrab_Grab",
+    "Properties": {
+      "AttackInfo": {
+        "AttackType": "ECharacterAttackType::HoldAttackAuto",
+        "SkillPowerInfo": {
+          "SkillPowerBonus": 0
+        },
+        "GuardDamageInfo": {
+          "bDontGuard": true
+        },
+        "AttackableFlags": [
+          "ECharacterAttackableFlag::EnableAttackableDownState"
+        ]
+      },
+      "AttackerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "TimeSectionDelayData": {
+          "DelayRate": 0.0
+        }
+      },
+      "DamagerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "TimeSectionDelayData": {
+          "DelayRate": 0.0,
+          "LoopTime": 0.2
+        }
+      },
+      "DamagerKnockData": {
+        "KnockbackDistanceTime": 1.0,
+        "KnockbackHeight": 100.0,
+        "KnockbackForce": 100.0
+      },
+      "SpecialDamageAniminfo": {
+        "bUseCommonAnimType": false,
+        "SpecialDamageAnimType": "ESpecialDamageAniType::Hold1",
+        "CommonAnimationTag": "ECommonAnimationTag::None"
+      },
+      "DamageFrontlimitAngle": 90.0,
+      "DamagerHitEffect": {
+        "bSyncData": true,
+        "bUseParticle": false,
+        "bUseDecal": false
+      },
+      "AttackerHitEffect": {
+        "bUseParticle": false,
+        "ParticleInfo": {
+          "bSyncData": true
+        },
+        "bUseDecal": false
+      },
+      "DamageSounds": [
+        {
+          "ObjectName": "AkAudioEvent'efx_yetuga_close_grab_start_hit'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/yetuga_renewal/efx/efx_yetuga_close_grab_start_hit.0"
+        }
+      ],
+      "AttackStrength": "EBattleDirecting_AttackStrength::AttackStrength_02",
+      "bUseOldEffect": true
+    }
+  }
+]

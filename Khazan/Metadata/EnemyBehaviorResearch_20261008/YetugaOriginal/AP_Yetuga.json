@@ -1,0 +1,582 @@
+[
+  {
+    "Type": "xxAnimationProfile",
+    "Name": "AP_Yetuga",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimationProfile'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/AP_Yetuga",
+    "Properties": {
+      "Idle": {
+        "ObjectName": "AnimSequence'CA_M_Yetuga_Stand_F'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Ani/CA_M_Yetuga_Stand_F.0"
+      },
+      "NoAirDamage": {
+        "ObjectName": "AnimComposite'AC_Yetuga_DamageGrapple_Atk_02'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageGrapple_Atk_02.0"
+      },
+      "NoBlowDamage": {
+        "ObjectName": "AnimComposite'AC_Yetuga_DamageGrapple_Atk_02'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageGrapple_Atk_02.0"
+      },
+      "StaminaExhaustionAnimSetMap": [
+        {
+          "Key": "EStaminaExhaustionAnimationIndex::Index1",
+          "Value": {
+            "StartAnim": {
+              "ObjectName": "AnimComposite'AC_Yetuga_GroggyStr_F_Start_New'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_GroggyStr_F_Start_New.0"
+            },
+            "StartAnimBlendTime": 0.2,
+            "LoopAnim": {
+              "ObjectName": "AnimComposite'AC_Yetuga_GroggyStr_F_Loop_New'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_GroggyStr_F_Loop_New.0"
+            },
+            "LoopAnimBlendTime": 0.2,
+            "EndAnim": {
+              "ObjectName": "AnimComposite'AC_Yetuga_GroggyStr_F_End_New'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_GroggyStr_F_End_New.0"
+            },
+            "EndAnimBlendTime": 0.2
+          }
+        }
+      ],
+      "DamageDirectionSet": [
+        {
+          "Key": "EDamageTypeByStrength::DamageNormal",
+          "Value": {
+            "DirectionDamageAnims": [
+              {
+                "Key": "ECommonAnimationTag::DamageL",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Yetuga_DamageNormal_L_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_L_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageR",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Yetuga_DamageNormal_R_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_R_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageD",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Yetuga_DamageNormal_D_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_D_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageU",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Yetuga_DamageNormal_U_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_U_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Key": "EDamageTypeByStrength::DamageStrong",
+          "Value": {
+            "DirectionDamageAnims": [
+              {
+                "Key": "ECommonAnimationTag::DamageL",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Yetuga_DamageStrong_L_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_L_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageR",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Yetuga_DamageStrong_R_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_R_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageD",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Yetuga_DamageStrong_D_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_D_F.0"
+                  },
+                  "RandomDamageAnimations": [
+                    {
+                      "ObjectName": "AnimComposite'AC_Yetuga_DamageStrong_D_F'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_D_F.0"
+                    },
+                    {
+                      "ObjectName": "AnimComposite'AC_Yetuga_DamageStrong_D2_F'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_D2_F.0"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageU",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Yetuga_DamageStrong_U_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_U_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Key": "EDamageTypeByStrength::DamageWeak",
+          "Value": {
+            "DirectionDamageAnims": [
+              {
+                "Key": "ECommonAnimationTag::DamageL",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Yetuga_DamageWeak_L_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageWeak_L_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageR",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Yetuga_DamageWeak_R_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageWeak_R_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageD",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Yetuga_DamageWeak_D_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageWeak_D_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              },
+              {
+                "Key": "ECommonAnimationTag::DamageU",
+                "Value": {
+                  "DamageDefault": {
+                    "ObjectName": "AnimComposite'AC_Yetuga_DamageWeak_U_F'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageWeak_U_F.0"
+                  },
+                  "RandomDamageAnimations": []
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "BackDamageDirectionSet": {
+        "DirectionDamageAnims": [
+          {
+            "Key": "ECommonAnimationTag::DamageD",
+            "Value": {
+              "DamageDefault": {
+                "ObjectName": "AnimComposite'AC_Yetuga_DamageNormal_D_B'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_D_B.0"
+              },
+              "RandomDamageAnimations": []
+            }
+          },
+          {
+            "Key": "ECommonAnimationTag::DamageU",
+            "Value": {
+              "DamageDefault": {
+                "ObjectName": "AnimComposite'AC_Yetuga_DamageNormal_U_B'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_U_B.0"
+              },
+              "RandomDamageAnimations": []
+            }
+          }
+        ]
+      },
+      "DieList": [
+        {
+          "Key": "ECharacterDieState::GroundDie",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_Die_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_Die_F.0"
+          }
+        },
+        {
+          "Key": "ECharacterDieState::DownDie",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_Die_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_Die_F.0"
+          }
+        },
+        {
+          "Key": "ECharacterDieState::BackDownDie",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_Die_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_Die_F.0"
+          }
+        }
+      ],
+      "SpecialDamageAnimList": [
+        {
+          "Key": "ESpecialDamageAniType::Grapple1",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageGrapple_Atk_01'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageGrapple_Atk_01.0"
+          }
+        },
+        {
+          "Key": "ESpecialDamageAniType::Grapple2",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageGrapple_Atk_02'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageGrapple_Atk_02.0"
+          }
+        },
+        {
+          "Key": "ESpecialDamageAniType::Grapple_Back1",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageGrapple_Atk_01_B'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageGrapple_Atk_01_B.0"
+          }
+        },
+        {
+          "Key": "ESpecialDamageAniType::Grapple_Back2",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageGrapple_Atk_02_B'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageGrapple_Atk_02_B.0"
+          }
+        }
+      ],
+      "ParringBlockDamageAnimations": [
+        {
+          "Key": "EParringBlockDamageAnimType::TypeA",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageParry_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageParry_F.0"
+          }
+        }
+      ],
+      "AdditiveAnimations": [
+        {
+          "Key": "ECharAdditiveAnimationType::Damage1",
+          "Value": {
+            "ObjectName": "AnimSequence'CA_M_Yetuga_AddWeak_Head'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Ani/CA_M_Yetuga_AddWeak_Head.0"
+          }
+        }
+      ],
+      "AnimMapIDToAsset": [
+        {
+          "Key": "0",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageGrapple_Atk_01'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageGrapple_Atk_01.0"
+          }
+        },
+        {
+          "Key": "1",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageGrapple_Atk_01_B'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageGrapple_Atk_01_B.0"
+          }
+        },
+        {
+          "Key": "2",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageGrapple_Atk_02'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageGrapple_Atk_02.0"
+          }
+        },
+        {
+          "Key": "3",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageGrapple_Atk_02_B'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageGrapple_Atk_02_B.0"
+          }
+        },
+        {
+          "Key": "4",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageNormal_D_B'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_D_B.0"
+          }
+        },
+        {
+          "Key": "5",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageNormal_D_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_D_F.0"
+          }
+        },
+        {
+          "Key": "6",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageNormal_L_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_L_F.0"
+          }
+        },
+        {
+          "Key": "7",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageNormal_R_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_R_F.0"
+          }
+        },
+        {
+          "Key": "8",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageNormal_U_B'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_U_B.0"
+          }
+        },
+        {
+          "Key": "9",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageNormal_U_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_U_F.0"
+          }
+        },
+        {
+          "Key": "10",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageParry_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageParry_F.0"
+          }
+        },
+        {
+          "Key": "11",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageStrong_D2_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_D2_F.0"
+          }
+        },
+        {
+          "Key": "12",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageStrong_D_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_D_F.0"
+          }
+        },
+        {
+          "Key": "13",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageStrong_L_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_L_F.0"
+          }
+        },
+        {
+          "Key": "14",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageStrong_R_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_R_F.0"
+          }
+        },
+        {
+          "Key": "15",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageStrong_U_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_U_F.0"
+          }
+        },
+        {
+          "Key": "16",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageWeak_D_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageWeak_D_F.0"
+          }
+        },
+        {
+          "Key": "17",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageWeak_L_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageWeak_L_F.0"
+          }
+        },
+        {
+          "Key": "18",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageWeak_R_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageWeak_R_F.0"
+          }
+        },
+        {
+          "Key": "19",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_DamageWeak_U_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageWeak_U_F.0"
+          }
+        },
+        {
+          "Key": "20",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_Die_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_Die_F.0"
+          }
+        },
+        {
+          "Key": "21",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_GroggyStr_F_End_New'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_GroggyStr_F_End_New.0"
+          }
+        },
+        {
+          "Key": "22",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_GroggyStr_F_Loop_New'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_GroggyStr_F_Loop_New.0"
+          }
+        },
+        {
+          "Key": "23",
+          "Value": {
+            "ObjectName": "AnimComposite'AC_Yetuga_GroggyStr_F_Start_New'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_GroggyStr_F_Start_New.0"
+          }
+        },
+        {
+          "Key": "24",
+          "Value": {
+            "ObjectName": "AnimSequence'CA_M_Yetuga_AddWeak_Head'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Ani/CA_M_Yetuga_AddWeak_Head.0"
+          }
+        },
+        {
+          "Key": "25",
+          "Value": {
+            "ObjectName": "AnimSequence'CA_M_Yetuga_Stand_F'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Ani/CA_M_Yetuga_Stand_F.0"
+          }
+        }
+      ],
+      "AnimMapAssetToID": [
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageGrapple_Atk_01.AC_Yetuga_DamageGrapple_Atk_01'",
+          "Value": 0
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageGrapple_Atk_01_B.AC_Yetuga_DamageGrapple_Atk_01_B'",
+          "Value": 1
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageGrapple_Atk_02.AC_Yetuga_DamageGrapple_Atk_02'",
+          "Value": 2
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageGrapple_Atk_02_B.AC_Yetuga_DamageGrapple_Atk_02_B'",
+          "Value": 3
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_D_B.AC_Yetuga_DamageNormal_D_B'",
+          "Value": 4
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_D_F.AC_Yetuga_DamageNormal_D_F'",
+          "Value": 5
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_L_F.AC_Yetuga_DamageNormal_L_F'",
+          "Value": 6
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_R_F.AC_Yetuga_DamageNormal_R_F'",
+          "Value": 7
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_U_B.AC_Yetuga_DamageNormal_U_B'",
+          "Value": 8
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageNormal_U_F.AC_Yetuga_DamageNormal_U_F'",
+          "Value": 9
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageParry_F.AC_Yetuga_DamageParry_F'",
+          "Value": 10
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_D2_F.AC_Yetuga_DamageStrong_D2_F'",
+          "Value": 11
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_D_F.AC_Yetuga_DamageStrong_D_F'",
+          "Value": 12
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_L_F.AC_Yetuga_DamageStrong_L_F'",
+          "Value": 13
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_R_F.AC_Yetuga_DamageStrong_R_F'",
+          "Value": 14
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageStrong_U_F.AC_Yetuga_DamageStrong_U_F'",
+          "Value": 15
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageWeak_D_F.AC_Yetuga_DamageWeak_D_F'",
+          "Value": 16
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageWeak_L_F.AC_Yetuga_DamageWeak_L_F'",
+          "Value": 17
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageWeak_R_F.AC_Yetuga_DamageWeak_R_F'",
+          "Value": 18
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageWeak_U_F.AC_Yetuga_DamageWeak_U_F'",
+          "Value": 19
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_Die_F.AC_Yetuga_Die_F'",
+          "Value": 20
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_GroggyStr_F_End_New.AC_Yetuga_GroggyStr_F_End_New'",
+          "Value": 21
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_GroggyStr_F_Loop_New.AC_Yetuga_GroggyStr_F_Loop_New'",
+          "Value": 22
+        },
+        {
+          "Key": "AnimComposite'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_GroggyStr_F_Start_New.AC_Yetuga_GroggyStr_F_Start_New'",
+          "Value": 23
+        },
+        {
+          "Key": "AnimSequence'BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Ani/CA_M_Yetuga_AddWeak_Head.CA_M_Yetuga_AddWeak_Head'",
+          "Value": 24
+        },
+        {
+          "Key": "AnimSequence'BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Ani/CA_M_Yetuga_Stand_F.CA_M_Yetuga_Stand_F'",
+          "Value": 25
+        }
+      ]
+    }
+  }
+]

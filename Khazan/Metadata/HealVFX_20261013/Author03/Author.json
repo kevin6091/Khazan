@@ -1,0 +1,544 @@
+{
+  "status": "passed",
+  "saved": [
+    "/Game/HealVFX/Source/FT_Trail",
+    "/Game/HealVFX/Source/FS_Sphere",
+    "/Game/HealVFX/Source/FS_SmallRing_01",
+    "/Game/HealVFX/Source/FS_BloodRing_01",
+    "/Game/HealVFX/Particles/PS_Heal_DrainCore",
+    "/Game/HealVFX/Particles/PS_Heal_DrainCore",
+    "/Game/HealVFX/Particles/PS_Heal_DrainBurst",
+    "/Game/HealVFX/Particles/PS_Heal_DrainBurst",
+    "/Game/HealVFX/Particles/PS_Heal_GhostArm",
+    "/Game/HealVFX/Particles/PS_Heal_GhostArm",
+    "/Game/HealVFX/Particles/PS_Heal_GhostFinger",
+    "/Game/HealVFX/Particles/PS_Heal_GhostFinger",
+    "/Game/HealVFX/Particles/PS_Heal_LightFlash",
+    "/Game/HealVFX/Particles/PS_Heal_LightFlash",
+    "/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal"
+  ],
+  "original_events": [],
+  "adapters": [
+    "Cooked Niagara graph unavailable: source five event roles rebuilt with native Cascade factory.",
+    "Root-attached source skeletal-mesh DI filtered bones rendered as independently bone-attached source ring particles.",
+    "Source LUT sample RGBA retained; LUT time assumed normalized particle age. Shader rewritten locally with original FT_Trail G channel.",
+    "Original custom xxPointLight burst represented by finite soft glow; no light/shadow changes."
+  ],
+  "temporary_tuning": {
+    "source_vm_unavailable": true,
+    "shader": {
+      "edge_uv": 0.04,
+      "edge_min_pixels": 1.25,
+      "depth_fade_cm": 8,
+      "emissive_gain": 8,
+      "trail_pan_cycles_sec": 0.3,
+      "tint": [
+        1,
+        0.03,
+        0.008
+      ]
+    },
+    "core": {
+      "sprite_size_cm": 1.2,
+      "spawn_burst": 12,
+      "rate_per_sec": 40,
+      "spread_cm": 9,
+      "point_strength": 65,
+      "range_cm": 40,
+      "sphere_scale": 0.12
+    },
+    "burst": {
+      "count": 42,
+      "sprite_cm": 1.8,
+      "lifetime_s": 0.6,
+      "spread_cm": 3,
+      "velocity_cm_sec": 32,
+      "glow_cm": 22
+    },
+    "arm_motes": {
+      "count": 10,
+      "spread_cm": 5,
+      "velocity_cm_sec": 5
+    },
+    "flash": {
+      "size_cm": 16,
+      "lifetime_s": 0.4
+    }
+  },
+  "shaders": [],
+  "curve_sources": [
+    {
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\HealVFX_20261013\\Original\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Particle\\PC\\Recovery\\FP_DrainCore.json",
+      "sha256": "cfeca88fd57138b926064d4a68fb8122d409246cf85eb3adcba36b3cf61f2fc6",
+      "export_index": 1,
+      "field": "Properties.ShaderLUT",
+      "samples": 53,
+      "normalized_age_adapter": "Samples assumed uniformly normalized over particle lifetime; original VM topology unavailable"
+    },
+    {
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\HealVFX_20261013\\Original\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Particle\\PC\\Recovery\\FP_DrainCore_Explo1.json",
+      "sha256": "2dc72e1098713504471916f47925653bf40b4273284d5686fb309d1966a314d8",
+      "export_index": 0,
+      "field": "Properties.ShaderLUT",
+      "samples": 79,
+      "normalized_age_adapter": "Samples assumed uniformly normalized over particle lifetime; original VM topology unavailable"
+    },
+    {
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\HealVFX_20261013\\Original\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Particle\\PC\\Recovery\\FP_KazanGhostHand_Init.json",
+      "sha256": "a27154fed6afffeb4b46b9f79ebaf1f5adc4995201fd3141464ab16b9031cec1",
+      "export_index": 0,
+      "field": "Properties.ShaderLUT",
+      "samples": 53,
+      "normalized_age_adapter": "Samples assumed uniformly normalized over particle lifetime; original VM topology unavailable"
+    },
+    {
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\HealVFX_20261013\\Original\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Particle\\PC\\Recovery\\FP_KazanGhostHand_A_Finger_init.json",
+      "sha256": "5a15e4ad096a098f9b3a444d13323763d4a74670444350dd4d368db1d0040101",
+      "export_index": 0,
+      "field": "Properties.ShaderLUT",
+      "samples": 91,
+      "normalized_age_adapter": "Samples assumed uniformly normalized over particle lifetime; original VM topology unavailable"
+    },
+    {
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\HealVFX_20261013\\Original\\BBQ\\Content\\_Kazan_\\Art\\VFX\\VFX_Particle\\PC\\Recovery\\FP_DrainCore_Explo1.json",
+      "sha256": "2dc72e1098713504471916f47925653bf40b4273284d5686fb309d1966a314d8",
+      "export_index": 4,
+      "field": "Properties.ShaderLUT",
+      "samples": 102,
+      "normalized_age_adapter": "Samples assumed uniformly normalized over particle lifetime; original VM topology unavailable"
+    }
+  ],
+  "montage": {
+    "path": "/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal",
+    "offset": 1.0,
+    "rate": 1.0,
+    "before": [
+      "(TriggerTimeOffset=0.000000,EndTriggerTimeOffset=0.000000,TriggerWeightThreshold=0.000010,NotifyName=\"WeaponStow\",Notify=\"/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal:WeaponStow'\",NotifyStateClass=None,Duration=0.000000,EndLink=(LinkedMontage=None,SlotIndex=0,SegmentIndex=-1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=0.000000,LinkValue=0.000000,LinkedSequence=None),bConvertedFromBranchingPoint=False,MontageTickType=BranchingPoint,NotifyTriggerChance=1.000000,NotifyFilterType=NoFiltering,NotifyFilterLOD=0,bCanBeFilteredViaRequest=True,bTriggerOnDedicatedServer=True,bTriggerOnFollower=False,NotifyColor=(B=0,G=0,R=0,A=255),Guid=470742E7438DC64D404CF7926D8B95A2,TrackIndex=0,LinkedMontage=\"/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal'\",SlotIndex=0,SegmentIndex=0,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=1.000000,LinkValue=0.500000,LinkedSequence=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Equip/CA_P_Kazan_DualAxeSword_UnArmed.CA_P_Kazan_DualAxeSword_UnArmed'\")",
+      "(TriggerTimeOffset=0.000000,EndTriggerTimeOffset=0.000000,TriggerWeightThreshold=0.000010,NotifyName=\"HealStart\",Notify=\"/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal:HealStart'\",NotifyStateClass=None,Duration=0.000000,EndLink=(LinkedMontage=None,SlotIndex=0,SegmentIndex=-1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=0.000000,LinkValue=0.000000,LinkedSequence=None),bConvertedFromBranchingPoint=False,MontageTickType=BranchingPoint,NotifyTriggerChance=1.000000,NotifyFilterType=NoFiltering,NotifyFilterLOD=0,bCanBeFilteredViaRequest=True,bTriggerOnDedicatedServer=True,bTriggerOnFollower=False,NotifyColor=(B=0,G=0,R=0,A=255),Guid=787495E844C6DF919224FAA87F8E247B,TrackIndex=0,LinkedMontage=\"/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal'\",SlotIndex=0,SegmentIndex=1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=1.000000,SegmentLength=1.466667,LinkValue=1.000000,LinkedSequence=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Heal/CA_P_Kazan_DualAxeSword_Heal_01.CA_P_Kazan_DualAxeSword_Heal_01'\")",
+      "(TriggerTimeOffset=0.000000,EndTriggerTimeOffset=0.000000,TriggerWeightThreshold=0.000010,NotifyName=\"Heal\",Notify=\"/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal:Heal'\",NotifyStateClass=None,Duration=0.000000,EndLink=(LinkedMontage=None,SlotIndex=0,SegmentIndex=-1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=0.000000,LinkValue=0.000000,LinkedSequence=None),bConvertedFromBranchingPoint=False,MontageTickType=BranchingPoint,NotifyTriggerChance=1.000000,NotifyFilterType=NoFiltering,NotifyFilterLOD=0,bCanBeFilteredViaRequest=True,bTriggerOnDedicatedServer=True,bTriggerOnFollower=False,NotifyColor=(B=0,G=0,R=0,A=255),Guid=E7D9968641E6F523E91E9A84ADED85E5,TrackIndex=0,LinkedMontage=\"/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal'\",SlotIndex=0,SegmentIndex=1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=1.000000,SegmentLength=1.466667,LinkValue=1.733333,LinkedSequence=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Heal/CA_P_Kazan_DualAxeSword_Heal_01.CA_P_Kazan_DualAxeSword_Heal_01'\")"
+    ],
+    "after": [
+      "(TriggerTimeOffset=0.000000,EndTriggerTimeOffset=0.000000,TriggerWeightThreshold=0.000010,NotifyName=\"WeaponStow\",Notify=\"/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal:WeaponStow'\",NotifyStateClass=None,Duration=0.000000,EndLink=(LinkedMontage=None,SlotIndex=0,SegmentIndex=-1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=0.000000,LinkValue=0.000000,LinkedSequence=None),bConvertedFromBranchingPoint=False,MontageTickType=BranchingPoint,NotifyTriggerChance=1.000000,NotifyFilterType=NoFiltering,NotifyFilterLOD=0,bCanBeFilteredViaRequest=True,bTriggerOnDedicatedServer=True,bTriggerOnFollower=False,NotifyColor=(B=0,G=0,R=0,A=255),Guid=470742E7438DC64D404CF7926D8B95A2,TrackIndex=0,LinkedMontage=\"/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal'\",SlotIndex=0,SegmentIndex=0,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=1.000000,LinkValue=0.500000,LinkedSequence=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Equip/CA_P_Kazan_DualAxeSword_UnArmed.CA_P_Kazan_DualAxeSword_UnArmed'\")",
+      "(TriggerTimeOffset=0.000000,EndTriggerTimeOffset=0.000000,TriggerWeightThreshold=0.000010,NotifyName=\"HealStart\",Notify=\"/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal:HealStart'\",NotifyStateClass=None,Duration=0.000000,EndLink=(LinkedMontage=None,SlotIndex=0,SegmentIndex=-1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=0.000000,LinkValue=0.000000,LinkedSequence=None),bConvertedFromBranchingPoint=False,MontageTickType=BranchingPoint,NotifyTriggerChance=1.000000,NotifyFilterType=NoFiltering,NotifyFilterLOD=0,bCanBeFilteredViaRequest=True,bTriggerOnDedicatedServer=True,bTriggerOnFollower=False,NotifyColor=(B=0,G=0,R=0,A=255),Guid=787495E844C6DF919224FAA87F8E247B,TrackIndex=0,LinkedMontage=\"/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal'\",SlotIndex=0,SegmentIndex=1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=1.000000,SegmentLength=1.466667,LinkValue=1.000000,LinkedSequence=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Heal/CA_P_Kazan_DualAxeSword_Heal_01.CA_P_Kazan_DualAxeSword_Heal_01'\")",
+      "(TriggerTimeOffset=0.000000,EndTriggerTimeOffset=0.000000,TriggerWeightThreshold=0.000010,NotifyName=\"KZCombatEffect\",Notify=\"/Script/Khazan.KZAnimNotify_CombatEffect'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal:KZAnimNotify_CombatEffect_0'\",NotifyStateClass=None,Duration=0.000000,EndLink=(LinkedMontage=None,SlotIndex=0,SegmentIndex=-1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=0.000000,LinkValue=0.000000,LinkedSequence=None),bConvertedFromBranchingPoint=False,MontageTickType=Queued,NotifyTriggerChance=1.000000,NotifyFilterType=NoFiltering,NotifyFilterLOD=0,bCanBeFilteredViaRequest=True,bTriggerOnDedicatedServer=True,bTriggerOnFollower=False,NotifyColor=(B=0,G=0,R=0,A=255),Guid=6891778E48A2F9C2CCB4758F93518FB5,TrackIndex=1,LinkedMontage=\"/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal'\",SlotIndex=0,SegmentIndex=1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=1.000000,SegmentLength=1.466667,LinkValue=1.098107,LinkedSequence=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Heal/CA_P_Kazan_DualAxeSword_Heal_01.CA_P_Kazan_DualAxeSword_Heal_01'\")",
+      "(TriggerTimeOffset=0.000000,EndTriggerTimeOffset=0.000000,TriggerWeightThreshold=0.000010,NotifyName=\"Heal\",Notify=\"/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal:Heal'\",NotifyStateClass=None,Duration=0.000000,EndLink=(LinkedMontage=None,SlotIndex=0,SegmentIndex=-1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=0.000000,LinkValue=0.000000,LinkedSequence=None),bConvertedFromBranchingPoint=False,MontageTickType=BranchingPoint,NotifyTriggerChance=1.000000,NotifyFilterType=NoFiltering,NotifyFilterLOD=0,bCanBeFilteredViaRequest=True,bTriggerOnDedicatedServer=True,bTriggerOnFollower=False,NotifyColor=(B=0,G=0,R=0,A=255),Guid=E7D9968641E6F523E91E9A84ADED85E5,TrackIndex=0,LinkedMontage=\"/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal'\",SlotIndex=0,SegmentIndex=1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=1.000000,SegmentLength=1.466667,LinkValue=1.733333,LinkedSequence=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Heal/CA_P_Kazan_DualAxeSword_Heal_01.CA_P_Kazan_DualAxeSword_Heal_01'\")",
+      "(TriggerTimeOffset=0.000000,EndTriggerTimeOffset=0.000000,TriggerWeightThreshold=0.000010,NotifyName=\"KZCombatEffect\",Notify=\"/Script/Khazan.KZAnimNotify_CombatEffect'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal:KZAnimNotify_CombatEffect_1'\",NotifyStateClass=None,Duration=0.000000,EndLink=(LinkedMontage=None,SlotIndex=0,SegmentIndex=-1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=0.000000,LinkValue=0.000000,LinkedSequence=None),bConvertedFromBranchingPoint=False,MontageTickType=Queued,NotifyTriggerChance=1.000000,NotifyFilterType=NoFiltering,NotifyFilterLOD=0,bCanBeFilteredViaRequest=True,bTriggerOnDedicatedServer=True,bTriggerOnFollower=False,NotifyColor=(B=0,G=0,R=0,A=255),Guid=6B4242A046CEAC3DE51FBC969439C0CE,TrackIndex=1,LinkedMontage=\"/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal'\",SlotIndex=0,SegmentIndex=1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=1.000000,SegmentLength=1.466667,LinkValue=1.789754,LinkedSequence=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Heal/CA_P_Kazan_DualAxeSword_Heal_01.CA_P_Kazan_DualAxeSword_Heal_01'\")",
+      "(TriggerTimeOffset=0.000000,EndTriggerTimeOffset=0.000000,TriggerWeightThreshold=0.000010,NotifyName=\"KZCombatEffect\",Notify=\"/Script/Khazan.KZAnimNotify_CombatEffect'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal:KZAnimNotify_CombatEffect_2'\",NotifyStateClass=None,Duration=0.000000,EndLink=(LinkedMontage=None,SlotIndex=0,SegmentIndex=-1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=0.000000,LinkValue=0.000000,LinkedSequence=None),bConvertedFromBranchingPoint=False,MontageTickType=Queued,NotifyTriggerChance=1.000000,NotifyFilterType=NoFiltering,NotifyFilterLOD=0,bCanBeFilteredViaRequest=True,bTriggerOnDedicatedServer=True,bTriggerOnFollower=False,NotifyColor=(B=0,G=0,R=0,A=255),Guid=A90619E842FEAE5B734DA0BDDE65A792,TrackIndex=1,LinkedMontage=\"/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal'\",SlotIndex=0,SegmentIndex=1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=1.000000,SegmentLength=1.466667,LinkValue=1.840501,LinkedSequence=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Heal/CA_P_Kazan_DualAxeSword_Heal_01.CA_P_Kazan_DualAxeSword_Heal_01'\")",
+      "(TriggerTimeOffset=0.000000,EndTriggerTimeOffset=0.000000,TriggerWeightThreshold=0.000010,NotifyName=\"KZCombatEffect\",Notify=\"/Script/Khazan.KZAnimNotify_CombatEffect'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal:KZAnimNotify_CombatEffect_3'\",NotifyStateClass=None,Duration=0.000000,EndLink=(LinkedMontage=None,SlotIndex=0,SegmentIndex=-1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=0.000000,LinkValue=0.000000,LinkedSequence=None),bConvertedFromBranchingPoint=False,MontageTickType=Queued,NotifyTriggerChance=1.000000,NotifyFilterType=NoFiltering,NotifyFilterLOD=0,bCanBeFilteredViaRequest=True,bTriggerOnDedicatedServer=True,bTriggerOnFollower=False,NotifyColor=(B=0,G=0,R=0,A=255),Guid=24921FC945E844F305CBC297ED6E434E,TrackIndex=1,LinkedMontage=\"/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal'\",SlotIndex=0,SegmentIndex=1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=1.000000,SegmentLength=1.466667,LinkValue=1.842957,LinkedSequence=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Heal/CA_P_Kazan_DualAxeSword_Heal_01.CA_P_Kazan_DualAxeSword_Heal_01'\")",
+      "(TriggerTimeOffset=0.000000,EndTriggerTimeOffset=0.000000,TriggerWeightThreshold=0.000010,NotifyName=\"KZCombatEffect\",Notify=\"/Script/Khazan.KZAnimNotify_CombatEffect'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal:KZAnimNotify_CombatEffect_4'\",NotifyStateClass=None,Duration=0.000000,EndLink=(LinkedMontage=None,SlotIndex=0,SegmentIndex=-1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=0.000000,LinkValue=0.000000,LinkedSequence=None),bConvertedFromBranchingPoint=False,MontageTickType=Queued,NotifyTriggerChance=1.000000,NotifyFilterType=NoFiltering,NotifyFilterLOD=0,bCanBeFilteredViaRequest=True,bTriggerOnDedicatedServer=True,bTriggerOnFollower=False,NotifyColor=(B=0,G=0,R=0,A=255),Guid=FE56AFDA4502B10F761354872BA0975B,TrackIndex=1,LinkedMontage=\"/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal'\",SlotIndex=0,SegmentIndex=1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=1.000000,SegmentLength=1.466667,LinkValue=1.848982,LinkedSequence=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Heal/CA_P_Kazan_DualAxeSword_Heal_01.CA_P_Kazan_DualAxeSword_Heal_01'\")",
+      "(TriggerTimeOffset=0.000000,EndTriggerTimeOffset=0.000000,TriggerWeightThreshold=0.000010,NotifyName=\"KZCombatEffect\",Notify=\"/Script/Khazan.KZAnimNotify_CombatEffect'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal:KZAnimNotify_CombatEffect_5'\",NotifyStateClass=None,Duration=0.000000,EndLink=(LinkedMontage=None,SlotIndex=0,SegmentIndex=-1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=0.000000,LinkValue=0.000000,LinkedSequence=None),bConvertedFromBranchingPoint=False,MontageTickType=Queued,NotifyTriggerChance=1.000000,NotifyFilterType=NoFiltering,NotifyFilterLOD=0,bCanBeFilteredViaRequest=True,bTriggerOnDedicatedServer=True,bTriggerOnFollower=False,NotifyColor=(B=0,G=0,R=0,A=255),Guid=B35599394FD54CEF440F3592EA41171E,TrackIndex=1,LinkedMontage=\"/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal'\",SlotIndex=0,SegmentIndex=1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=1.000000,SegmentLength=1.466667,LinkValue=1.860931,LinkedSequence=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Heal/CA_P_Kazan_DualAxeSword_Heal_01.CA_P_Kazan_DualAxeSword_Heal_01'\")",
+      "(TriggerTimeOffset=-0.000100,EndTriggerTimeOffset=0.000000,TriggerWeightThreshold=0.000010,NotifyName=\"KZCombatEffect\",Notify=\"/Script/Khazan.KZAnimNotify_CombatEffect'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal:KZAnimNotify_CombatEffect_7'\",NotifyStateClass=None,Duration=0.000000,EndLink=(LinkedMontage=None,SlotIndex=0,SegmentIndex=-1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=0.000000,LinkValue=0.000000,LinkedSequence=None),bConvertedFromBranchingPoint=False,MontageTickType=Queued,NotifyTriggerChance=1.000000,NotifyFilterType=NoFiltering,NotifyFilterLOD=0,bCanBeFilteredViaRequest=True,bTriggerOnDedicatedServer=True,bTriggerOnFollower=False,NotifyColor=(B=0,G=0,R=0,A=255),Guid=077A681147956A77203071A295C34596,TrackIndex=1,LinkedMontage=\"/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal'\",SlotIndex=0,SegmentIndex=1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=1.000000,SegmentLength=1.466667,LinkValue=2.466667,LinkedSequence=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Heal/CA_P_Kazan_DualAxeSword_Heal_01.CA_P_Kazan_DualAxeSword_Heal_01'\")",
+      "(TriggerTimeOffset=0.000000,EndTriggerTimeOffset=0.000000,TriggerWeightThreshold=0.000010,NotifyName=\"KZCombatEffect\",Notify=\"/Script/Khazan.KZAnimNotify_CombatEffect'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal:KZAnimNotify_CombatEffect_6'\",NotifyStateClass=None,Duration=0.000000,EndLink=(LinkedMontage=None,SlotIndex=0,SegmentIndex=-1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=0.000000,SegmentLength=0.000000,LinkValue=0.000000,LinkedSequence=None),bConvertedFromBranchingPoint=False,MontageTickType=Queued,NotifyTriggerChance=1.000000,NotifyFilterType=NoFiltering,NotifyFilterLOD=0,bCanBeFilteredViaRequest=True,bTriggerOnDedicatedServer=True,bTriggerOnFollower=False,NotifyColor=(B=0,G=0,R=0,A=255),Guid=B2467CD14DAAC797A4652E9BE46A6FE7,TrackIndex=1,LinkedMontage=\"/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal'\",SlotIndex=0,SegmentIndex=1,LinkMethod=Absolute,CachedLinkMethod=Absolute,SegmentBeginTime=1.000000,SegmentLength=1.466667,LinkValue=2.466666,LinkedSequence=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Heal/CA_P_Kazan_DualAxeSword_Heal_01.CA_P_Kazan_DualAxeSword_Heal_01'\")"
+    ],
+    "plans": [
+      {
+        "id": "KZHeal_2_0",
+        "start": 1.098107,
+        "end": 1.848982,
+        "particle": "/Game/HealVFX/Particles/PS_Heal_DrainCore.PS_Heal_DrainCore",
+        "socket": "Bip001-L-Hand",
+        "original": {
+          "index": 2,
+          "time": 0.098107,
+          "duration": 0.750875,
+          "object": "xxAnimNotifyState_Particle_5",
+          "properties": {
+            "bConvert_bWorldOwner": true,
+            "ParticleInfo": {
+              "ParticleMode": "Niagara",
+              "NiagaraParticle": {
+                "ObjectName": "NiagaraSystem'FP_DrainCore'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_DrainCore.74"
+              },
+              "RelativeLocation": {
+                "X": 9.125063,
+                "Y": -6.3773155,
+                "Z": -1.9570816
+              },
+              "bAttached": true,
+              "AttachSocketName": "Bip001-L-Hand",
+              "bAbsoluteRotation": false,
+              "bAbsoluteRotationWorld": true
+            },
+            "bDestroyOnNotifyEnd": true,
+            "bDestroyOnAnimEnd": true,
+            "AffectedDilation": 0,
+            "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+          }
+        },
+        "location": {
+          "X": 9.125063,
+          "Y": -6.3773155,
+          "Z": -1.9570816
+        }
+      },
+      {
+        "id": "KZHeal_5_0",
+        "start": 1.7897539999999998,
+        "end": 2.466666,
+        "particle": "/Game/HealVFX/Particles/PS_Heal_DrainBurst.PS_Heal_DrainBurst",
+        "socket": "FX-L-Finger32",
+        "original": {
+          "index": 5,
+          "time": 0.789754,
+          "duration": 0.676912,
+          "object": "xxAnimNotifyState_Particle_8",
+          "properties": {
+            "bConvert_bWorldOwner": true,
+            "ParticleInfo": {
+              "ParticleMode": "Niagara",
+              "NiagaraParticle": {
+                "ObjectName": "NiagaraSystem'FP_DrainCore_Explo1'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_DrainCore_Explo1.105"
+              },
+              "bAttached": true,
+              "AttachSocketName": "FX-L-Finger32",
+              "bAbsoluteRotation": false
+            },
+            "bDestroyOnAnimEnd": true,
+            "bDestroyOnAnimEndDeactivated": true,
+            "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+          }
+        },
+        "location": null
+      },
+      {
+        "id": "KZHeal_6_0",
+        "start": 1.8405010000000002,
+        "end": 2.4666667,
+        "particle": "/Game/HealVFX/Particles/PS_Heal_GhostArm.PS_Heal_GhostArm",
+        "socket": "Bip001-L-UpperArm",
+        "original": {
+          "index": 6,
+          "time": 0.840501,
+          "duration": 0.6261657,
+          "object": "xxAnimNotifyState_Particle_3",
+          "properties": {
+            "bConvert_bWorldOwner": true,
+            "ParticleInfo": {
+              "ParticleMode": "Niagara",
+              "NiagaraParticle": {
+                "ObjectName": "NiagaraSystem'FP_KazanGhostHand_Init'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_KazanGhostHand_Init.188"
+              },
+              "bAttached": true,
+              "AttachSocketName": "Root",
+              "bAbsoluteRotation": false,
+              "ParticleFloatParams": [
+                {
+                  "bUseOverrideParam": true,
+                  "ParameterName": "User.EmitterDuration",
+                  "ValueMin": 0.626166,
+                  "ValueMax": 0.626166
+                }
+              ]
+            },
+            "AffectedDilation": 0,
+            "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+          }
+        },
+        "location": null
+      },
+      {
+        "id": "KZHeal_6_1",
+        "start": 1.8405010000000002,
+        "end": 2.4666667,
+        "particle": "/Game/HealVFX/Particles/PS_Heal_GhostArm.PS_Heal_GhostArm",
+        "socket": "Bip001-L-Forearm",
+        "original": {
+          "index": 6,
+          "time": 0.840501,
+          "duration": 0.6261657,
+          "object": "xxAnimNotifyState_Particle_3",
+          "properties": {
+            "bConvert_bWorldOwner": true,
+            "ParticleInfo": {
+              "ParticleMode": "Niagara",
+              "NiagaraParticle": {
+                "ObjectName": "NiagaraSystem'FP_KazanGhostHand_Init'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_KazanGhostHand_Init.188"
+              },
+              "bAttached": true,
+              "AttachSocketName": "Root",
+              "bAbsoluteRotation": false,
+              "ParticleFloatParams": [
+                {
+                  "bUseOverrideParam": true,
+                  "ParameterName": "User.EmitterDuration",
+                  "ValueMin": 0.626166,
+                  "ValueMax": 0.626166
+                }
+              ]
+            },
+            "AffectedDilation": 0,
+            "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+          }
+        },
+        "location": null
+      },
+      {
+        "id": "KZHeal_6_2",
+        "start": 1.8405010000000002,
+        "end": 2.4666667,
+        "particle": "/Game/HealVFX/Particles/PS_Heal_GhostArm.PS_Heal_GhostArm",
+        "socket": "Bip001-L-Hand",
+        "original": {
+          "index": 6,
+          "time": 0.840501,
+          "duration": 0.6261657,
+          "object": "xxAnimNotifyState_Particle_3",
+          "properties": {
+            "bConvert_bWorldOwner": true,
+            "ParticleInfo": {
+              "ParticleMode": "Niagara",
+              "NiagaraParticle": {
+                "ObjectName": "NiagaraSystem'FP_KazanGhostHand_Init'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_KazanGhostHand_Init.188"
+              },
+              "bAttached": true,
+              "AttachSocketName": "Root",
+              "bAbsoluteRotation": false,
+              "ParticleFloatParams": [
+                {
+                  "bUseOverrideParam": true,
+                  "ParameterName": "User.EmitterDuration",
+                  "ValueMin": 0.626166,
+                  "ValueMax": 0.626166
+                }
+              ]
+            },
+            "AffectedDilation": 0,
+            "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+          }
+        },
+        "location": null
+      },
+      {
+        "id": "KZHeal_7_0",
+        "start": 1.842957,
+        "end": 2.4666667,
+        "particle": "/Game/HealVFX/Particles/PS_Heal_GhostFinger.PS_Heal_GhostFinger",
+        "socket": "Bip001-L-Finger01",
+        "original": {
+          "index": 7,
+          "time": 0.842957,
+          "duration": 0.6237097,
+          "object": "xxAnimNotifyState_Particle_6",
+          "properties": {
+            "bConvert_bWorldOwner": true,
+            "ParticleInfo": {
+              "ParticleMode": "Niagara",
+              "NiagaraParticle": {
+                "ObjectName": "NiagaraSystem'FP_KazanGhostHand_A_Finger_init'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_KazanGhostHand_A_Finger_init.341"
+              },
+              "bAttached": true,
+              "AttachSocketName": "Root",
+              "bAbsoluteRotation": false,
+              "ParticleFloatParams": [
+                {
+                  "bUseOverrideParam": true,
+                  "ParameterName": "User.EmitterDuration",
+                  "ValueMin": 0.626166,
+                  "ValueMax": 0.626166
+                }
+              ]
+            },
+            "AffectedDilation": 0,
+            "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+          }
+        },
+        "location": null
+      },
+      {
+        "id": "KZHeal_7_1",
+        "start": 1.842957,
+        "end": 2.4666667,
+        "particle": "/Game/HealVFX/Particles/PS_Heal_GhostFinger.PS_Heal_GhostFinger",
+        "socket": "Bip001-L-Finger1",
+        "original": {
+          "index": 7,
+          "time": 0.842957,
+          "duration": 0.6237097,
+          "object": "xxAnimNotifyState_Particle_6",
+          "properties": {
+            "bConvert_bWorldOwner": true,
+            "ParticleInfo": {
+              "ParticleMode": "Niagara",
+              "NiagaraParticle": {
+                "ObjectName": "NiagaraSystem'FP_KazanGhostHand_A_Finger_init'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_KazanGhostHand_A_Finger_init.341"
+              },
+              "bAttached": true,
+              "AttachSocketName": "Root",
+              "bAbsoluteRotation": false,
+              "ParticleFloatParams": [
+                {
+                  "bUseOverrideParam": true,
+                  "ParameterName": "User.EmitterDuration",
+                  "ValueMin": 0.626166,
+                  "ValueMax": 0.626166
+                }
+              ]
+            },
+            "AffectedDilation": 0,
+            "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+          }
+        },
+        "location": null
+      },
+      {
+        "id": "KZHeal_7_2",
+        "start": 1.842957,
+        "end": 2.4666667,
+        "particle": "/Game/HealVFX/Particles/PS_Heal_GhostFinger.PS_Heal_GhostFinger",
+        "socket": "Bip001-L-Finger2",
+        "original": {
+          "index": 7,
+          "time": 0.842957,
+          "duration": 0.6237097,
+          "object": "xxAnimNotifyState_Particle_6",
+          "properties": {
+            "bConvert_bWorldOwner": true,
+            "ParticleInfo": {
+              "ParticleMode": "Niagara",
+              "NiagaraParticle": {
+                "ObjectName": "NiagaraSystem'FP_KazanGhostHand_A_Finger_init'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_KazanGhostHand_A_Finger_init.341"
+              },
+              "bAttached": true,
+              "AttachSocketName": "Root",
+              "bAbsoluteRotation": false,
+              "ParticleFloatParams": [
+                {
+                  "bUseOverrideParam": true,
+                  "ParameterName": "User.EmitterDuration",
+                  "ValueMin": 0.626166,
+                  "ValueMax": 0.626166
+                }
+              ]
+            },
+            "AffectedDilation": 0,
+            "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+          }
+        },
+        "location": null
+      },
+      {
+        "id": "KZHeal_7_3",
+        "start": 1.842957,
+        "end": 2.4666667,
+        "particle": "/Game/HealVFX/Particles/PS_Heal_GhostFinger.PS_Heal_GhostFinger",
+        "socket": "Bip001-L-Finger3",
+        "original": {
+          "index": 7,
+          "time": 0.842957,
+          "duration": 0.6237097,
+          "object": "xxAnimNotifyState_Particle_6",
+          "properties": {
+            "bConvert_bWorldOwner": true,
+            "ParticleInfo": {
+              "ParticleMode": "Niagara",
+              "NiagaraParticle": {
+                "ObjectName": "NiagaraSystem'FP_KazanGhostHand_A_Finger_init'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_KazanGhostHand_A_Finger_init.341"
+              },
+              "bAttached": true,
+              "AttachSocketName": "Root",
+              "bAbsoluteRotation": false,
+              "ParticleFloatParams": [
+                {
+                  "bUseOverrideParam": true,
+                  "ParameterName": "User.EmitterDuration",
+                  "ValueMin": 0.626166,
+                  "ValueMax": 0.626166
+                }
+              ]
+            },
+            "AffectedDilation": 0,
+            "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+          }
+        },
+        "location": null
+      },
+      {
+        "id": "KZHeal_7_4",
+        "start": 1.842957,
+        "end": 2.4666667,
+        "particle": "/Game/HealVFX/Particles/PS_Heal_GhostFinger.PS_Heal_GhostFinger",
+        "socket": "Bip001-L-Finger4",
+        "original": {
+          "index": 7,
+          "time": 0.842957,
+          "duration": 0.6237097,
+          "object": "xxAnimNotifyState_Particle_6",
+          "properties": {
+            "bConvert_bWorldOwner": true,
+            "ParticleInfo": {
+              "ParticleMode": "Niagara",
+              "NiagaraParticle": {
+                "ObjectName": "NiagaraSystem'FP_KazanGhostHand_A_Finger_init'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_KazanGhostHand_A_Finger_init.341"
+              },
+              "bAttached": true,
+              "AttachSocketName": "Root",
+              "bAbsoluteRotation": false,
+              "ParticleFloatParams": [
+                {
+                  "bUseOverrideParam": true,
+                  "ParameterName": "User.EmitterDuration",
+                  "ValueMin": 0.626166,
+                  "ValueMax": 0.626166
+                }
+              ]
+            },
+            "AffectedDilation": 0,
+            "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+          }
+        },
+        "location": null
+      },
+      {
+        "id": "KZHeal_10_0",
+        "start": 1.860931,
+        "end": 2.4666667,
+        "particle": "/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash",
+        "socket": "Bip001-L-Hand",
+        "original": {
+          "index": 10,
+          "time": 0.860931,
+          "duration": 0.6057357,
+          "object": "xxAnimNotifyState_Particle_0",
+          "properties": {
+            "bConvert_bWorldOwner": true,
+            "ParticleInfo": {
+              "ParticleMode": "Niagara",
+              "NiagaraParticle": {
+                "ObjectName": "NiagaraSystem'FP_DrainCore_Explo'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_DrainCore_Explo.10"
+              },
+              "RelativeLocation": {
+                "X": 9.125063,
+                "Y": -6.3773155,
+                "Z": -1.9570816
+              },
+              "bAttached": true,
+              "AttachSocketName": "Bip001-L-Hand",
+              "bAbsoluteRotation": false,
+              "bAbsoluteRotationWorld": true
+            },
+            "bDestroyOnNotifyEndDeactived": true,
+            "bDestroyOnAnimEndDeactivated": true,
+            "AffectedDilation": 0,
+            "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+          }
+        },
+        "location": {
+          "X": 9.125063,
+          "Y": -6.3773155,
+          "Z": -1.9570816
+        }
+      }
+    ]
+  }
+}

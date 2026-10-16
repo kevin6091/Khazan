@@ -1,0 +1,110 @@
+[
+  {
+    "Type": "xxStatusProfile",
+    "Name": "CS_EmpireHalberd_E_Early",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxStatusProfile'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Base_Setting/CS_EmpireHalberd_E_Early",
+    "Properties": {
+      "StaminaStatus": [
+        {
+          "Key": "EStateBattleStance::Battle",
+          "Value": {
+            "RecoveryPerSecond": 45,
+            "DamageStateRecoveryPerSecond": [
+              {
+                "Key": "ECharacterDamageStateForStamina::StaminaExhaustion",
+                "Value": 100.0
+              }
+            ],
+            "bImmediatelyStaninaRecoveryBeginStaminaExhaution": true,
+            "SprintStaminaConsumePerSecond": 200,
+            "bNoneBattleStateSprintStaminaConsume": false,
+            "NoneBattleStateSprintStaminaConsumePerSecond": 0,
+            "bCanSprintRecoveryStamina": true,
+            "bUseDamageReaction": false,
+            "bUseSuperArmourStamina": false,
+            "StaminaExhaustionInfo": {
+              "StaminaExhaustionTerm": 5.0,
+              "StaminaExhaustionDamageRate": 0.0,
+              "EndStaminaExhaustionRecoveryOperator": "EStatusOper::Add",
+              "EndStaminaExhaustionRecoveryStamina": 0,
+              "bKeepBurstAttackHoldReleaseAnim": false
+            },
+            "GuardStaminaConsumeRate": 2.0,
+            "GuardStaminaRecoveryRate": 2.0,
+            "GuardStaminaRecoveryRateBySubState": []
+          }
+        }
+      ],
+      "MonsterGradeType": "EActorGradeType::GRADE_3",
+      "GutsSpecialInfo": {
+        "bOnlyGroundDamage": true
+      },
+      "GetUpInvincibleTimeRate": 0.2,
+      "DownStateLoopTimeMax": 0.25,
+      "DamageInDecreaseByPart": [
+        {
+          "Key": "EGrDefenseGroup::Group1",
+          "Value": {
+            "CustomSkillPowerBonusAdd": 0,
+            "CustomSkillPowerBonusRate": 1500,
+            "CustomSkillStaminaAttackPowerAdd": 0,
+            "CustomSkillStaminaAttackPowerRate": 0
+          }
+        }
+      ],
+      "ExecutionInfo": {
+        "bEnableExecution": true
+      },
+      "SprintRunSpeed": 1000,
+      "RunSpeed": 600,
+      "LockOnBackwardSpeed": 150,
+      "LockOnStrafeSpeed": 150,
+      "LockOnDiagonalForwardSpeed": 200,
+      "LockOnDiagonalBackwardSpeed": 200,
+      "bUseAinmationStateSpeed": true,
+      "AnimationStateSpeeds": [
+        {
+          "Key": "EAnimationState::Peace",
+          "Value": {
+            "SprintRunSpeed": 100,
+            "RunSpeed": 600,
+            "WalkSpeed": 125
+          }
+        }
+      ],
+      "ParringStaminaDamageTableSelect": {
+        "ParringStaminaDamageTag": {
+          "DataTable": {
+            "ObjectName": "DataTable'ParringStaminaDamageDataTable'",
+            "ObjectPath": "BBQ/Content/_Common/Constants/ParringStaminaDamageDataTable.0"
+          },
+          "RowName": "02_정예_상_2"
+        }
+      },
+      "SpearDamageIncreaseInfos": [
+        {
+          "bBattleState": true,
+          "BattleState": "EBattleState::Peace",
+          "bWeakState": false,
+          "bWeakDamageBox": false,
+          "bParts": false,
+          "PartsGroup": "EGrDefenseGroup::None",
+          "DamageIncreaseInfo": {
+            "CustomSkillPowerBonusAdd": 0,
+            "CustomSkillPowerBonusRate": 20000,
+            "CustomSkillStaminaAttackPowerAdd": 0,
+            "CustomSkillStaminaAttackPowerRate": 0
+          },
+          "AttackerReactionTableSelect": {
+            "AttackerReactionTag": {
+              "DataTable": null,
+              "RowName": "None"
+            }
+          }
+        }
+      ]
+    }
+  }
+]

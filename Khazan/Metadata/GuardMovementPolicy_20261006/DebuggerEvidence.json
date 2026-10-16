@@ -1,0 +1,84 @@
+{
+  "scope": "Dev-only observer investigation, no further gameplay changes",
+  "failure": "Moving release reaches actual base locomotion output",
+  "pause": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"status\":\"paused\",\"newPosition\":{\"filePath\":\"file://C:/Users/user/Desktop/GitProject/Khazan/Khazan/Source/Khazan/Tests/KZGuardAbilityPIETest.cpp\",\"line\":215},\"frameValues\":\"├─ + this =  // 0x00000272f4d55a10 {Test= // 0x00000271b4ea61a0 {UnrealEditor-Khazan.dll!FKZGuardPIETestAutomationTestInstance} {...}, Player= // 0x000002710386a000 (Label=L\\\"BP_Player0\\\",Name=\\\"BP_Player_C\\\"_0), ASC= // 0x000002731b2d3c00 (Name = \\\"AbilitySystemComponent\\\", ...} {FGuardPIECommand *}\\n├─ + Anim =  // 0x000002731b2f4000 (Name=\\\"ABP_Player_C\\\"_0, InternalFlags=ReachabilityFlag1) {UKZAnimInstance *}\\n├─ Now = 10.657729092985392 {const double}\\n├─ Constraint = <error: Variable is not available>\\n├─ HitCost = <error: Variable is not available>\\n├─ Section = <error: Variable is not available>\\n├─ Before = <error: Variable is not available>\\n└─ Controller = <error: Variable is not available>\\n\",\"breakpointErrorsTail\":[{\"type\":\"BREAKPOINT_ERROR\",\"timestampMs\":1791249967149,\"timestampIso\":\"2026-10-06T01:26:07.149Z\",\"sessionId\":\"UnrealEditor (22576)\",\"message\":\"현재 중단점에 도달할 수 없습니다. 이 줄과 관련된 실행 코드가 없습니다.\",\"breakpointId\":\"line|file://C:/Users/user/Desktop/GitProject/Khazan/Khazan/Source/Khazan/Tests/KZGuardAbilityPIETest.cpp|214\",\"filePath\":\"file://C:/Users/user/Desktop/GitProject/Khazan/Khazan/Source/Khazan/Tests/KZGuardAbilityPIETest.cpp\",\"line\":215}]}"
+      }
+    ],
+    "isError": false
+  },
+  "stack": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"frames\":[{\"presentation\":\"FGuardPIECommand::Update() KZGuardAbilityPIETest.cpp:215\",\"index\":0,\"file\":\"file://C:/Users/user/Desktop/GitProject/Khazan/Khazan/Source/Khazan/Tests/KZGuardAbilityPIETest.cpp\",\"line\":215,\"isCurrent\":true}],\"threadId\":\"Thread-1-[GameThread] (21304)\",\"totalFrames\":1}"
+      }
+    ],
+    "isError": false
+  },
+  "guardFlag": {
+    "content": [
+      {
+        "type": "text",
+        "text": "((UKZAnimInstance*)Anim)->bIsGuarding = false {bool}"
+      }
+    ],
+    "isError": false
+  },
+  "animFields": {
+    "content": [
+      {
+        "type": "text",
+        "text": "*(UKZAnimInstance*)Anim = (Name=\"ABP_Player_C\"_0, InternalFlags=ReachabilityFlag1) {UKZAnimInstance}\n  ├─ + UAnimInstance = (Name=\"ABP_Player_C\"_0, InternalFlags=ReachabilityFlag1) {UAnimInstance}\n  ├─ + LocomotionComponent =  // 0x000002723e8f1000 (Name = \"LocomotionComponent\", Owner =  // 0x000002710386a000 (Label=L\"BP_Player0\",Name=\"BP_Player_C\"_0)) {TObjectPtr<UKZLocomotionComponent>}\n  ├─ + GameThreadData = {bValid=true, ActorRotation={Pitch=0, Yaw=89.999999999999985, Roll=-0}, VelocityWorld={X=0 Y=0 Z=0}, ...} {FKZAnimGameThreadData}\n  ├─ + Character =  // 0x000002710386a000 (Label=L\"BP_Player0\",Name=\"BP_Player_C\"_0) {TObjectPtr<AKZCharacter>}\n  ├─ + MovementComponent =  // 0x000002731b2d1400 (Name = \"CharMoveComp\", Owner =  // 0x000002710386a000 (Label=L\"BP_Player0\",Name=\"BP_Player_C\"_0)) {TObjectPtr<UCharacterMovementComponent>}\n  ├─ + VelocityWorld = {X=0 Y=0 Z=0} {UE::Math::TVector<double>}\n  ├─ + VelocityLocal = {X=0 Y=0 Z=0} {UE::Math::TVector<double>}\n  ├─ + AccelerationWorld = {X=0 Y=0 Z=0} {UE::Math::TVector<double>}\n  ├─ GroundSpeed = 0 {float}\n  ├─ MovementDirectionAngle = 0 {float}\n  ├─ bIsGuarding = false {bool}\n  ├─ GuardMovementDirectionAngle = 0 {float}\n  ├─ InputAmount = 1 {float}\n  ├─ bIsGrounded = true {bool}\n  ├─ bHasMovementInput = true {bool}\n  ├─ bIsMoving = false {bool}\n  ├─ bIsStopping = false {bool}\n  ├─ bIsFalling = false {bool}\n  ├─ bShouldWalkRun = true {bool}\n  ├─ bShouldSprint = false {bool}\n  ├─ ResolvedGait = Run {EKZGait}\n  ├─ RotationMode = VelocityDirection {EKZRotationMode}\n  ├─ LocomotionGait = Walk {EKZGait}\n  ├─ bShouldBeIdle = false {bool}\n  ├─ bShouldPlayStart = false {bool}\n  ├─ StopGait = Walk {EKZGait}\n  ├─ StopEntryFoot = None {EKZFoot}\n  ├─ StopEntrySpeed = 0 {float}\n  ├─ bShouldEnterStop = false {bool}\n  ├─ RunEnterSpeed = 220 {float}\n  ├─ RunExitSpeed = 190 {float}\n  ├─ bHasPreviousKinematicFrame = true {bool}\n  ├─ bWasMoving = false {bool}\n  ├─ bHadGroundedMovementInput = true {bool}\n  ├─ PreviousGroundSpeed = 0 {float}\n  └─ PreviousLocomotionGait = Walk {EKZGait}"
+      }
+    ],
+    "isError": false
+  },
+  "fixture": {
+    "content": [
+      {
+        "type": "text",
+        "text": "*this = {Test= // 0x00000271b4ea61a0 {UnrealEditor-Khazan.dll!FKZGuardPIETestAutomationTestInstance} {...}, Player= // 0x000002710386a000 (Label=L\"BP_Player0\",Name=\"BP_Player_C\"_0), ASC= // 0x000002731b2d3c00 (Name = \"AbilitySystemComponent\", Owner =  // 0x000002710386a000 , ...} {FGuardPIECommand}\n  ├─ + IAutomationLatentCommand = {StartTime=16781906.171071898} {IAutomationLatentCommand}\n  ├─ + Test =  // 0x00000271b4ea61a0 {UnrealEditor-Khazan.dll!FKZGuardPIETestAutomationTestInstance} {...} {FKZGuardPIETest *}\n  ├─ + Player =  // 0x000002710386a000 (Label=L\"BP_Player0\",Name=\"BP_Player_C\"_0) {TWeakObjectPtr<AKZPlayer, FWeakObjectPtr>}\n  ├─ + ASC =  // 0x000002731b2d3c00 (Name = \"AbilitySystemComponent\", Owner =  // 0x000002710386a000 (Label=L\"BP_Player0\",Name=\"BP_Player_C\"_0)) {TWeakObjectPtr<UKZAbilitySystemComponent, FWeakObjectPtr>}\n  ├─ + Guard =  // 0x00000272f38fb400 (Name=\"GA_Player_Guard_C\"_0, InternalFlags=ReachabilityFlag1) {TWeakObjectPtr<UKZGuardAbility, FWeakObjectPtr>}\n  ├─ + TestGuardMontage =  // 0x000002733fc9f500 (Name=\"AM_DAS_Player_Guard\", InternalFlags=ReachabilityFlag1) {TWeakObjectPtr<UAnimMontage, FWeakObjectPtr>}\n  ├─ + GuardHandle = {Handle=32} {FGameplayAbilitySpecHandle}\n  ├─ + RotationHandle = {Owner=nullptr, Id={00000000-0000-0000-0000-000000000000}} {FKZMovementConstraintHandle}\n  ├─ + MovePayload = {EventTag={TagName=\"None\"}, Instigator=nullptr, Target=nullptr, ...} {FGameplayEventData}\n  ├─ + SavedRotation = {Pitch=0, Yaw=0, Roll=0} {UE::Math::TRotator<double>}\n  ├─ + SavedControlRotation = {Pitch=0, Yaw=0, Roll=0} {UE::Math::TRotator<double>}\n  ├─ SavedStamina = 100 {float}\n  ├─ Baseline = 100 {float}\n  ├─ Deadline = 16781936.1710697 {double}\n  ├─ NextTime = 10.657691892236471 {double}\n  ├─ Stage = 14 {int}\n  └─ DirectionIndex = 0 {int}"
+      }
+    ],
+    "isError": false
+  },
+  "engineSymbolLimits": [
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Anim->GetUngroupedActivePlayersRead() = <error: Identifier 'GetUngroupedActivePlayersRead' is not available in 'UAnimInstance', possibly due to compiler optimizations>"
+        }
+      ],
+      "isError": false
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Anim->GetSyncGroupMapRead() = <error: Identifier 'GetSyncGroupMapRead' is not available in 'UAnimInstance', possibly due to compiler optimizations>"
+        }
+      ],
+      "isError": false
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "Anim->AnimInstanceProxy->Sync = <error: Identifier 'Sync' is not available in 'FAnimInstanceProxy', possibly due to compiler optimizations>"
+        }
+      ],
+      "isError": false
+    }
+  ],
+  "notes": [
+    "Gameplay already cleared guard. Runtime bIsGuarding=false, InputAmount=1, bHasMovementInput=true, bShouldWalkRun=true.",
+    "Existing current locomotion document and engine public API distinguish Locomotion Sync Group from ungrouped Guard players.",
+    "Test-only observer updated to read synchronized players. Actual clip and weight confirmation still awaits final native PIE rerun.",
+    "One agent breakpoint removed, 8 user exception breakpoints unchanged, attached session stopped."
+  ]
+}

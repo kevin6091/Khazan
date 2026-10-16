@@ -1,0 +1,2943 @@
+[
+  {
+    "Type": "Function",
+    "Name": "ExecuteUbergraph_W_OverheadGauge",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'W_OverheadGauge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.10"
+    },
+    "ChildProperties": [
+      {
+        "Type": "IntProperty",
+        "Name": "EntryPoint",
+        "Flags": "RF_Public",
+        "ElementSize": 4,
+        "PropertyFlags": "BlueprintVisible | BlueprintReadOnly | Parm"
+      },
+      {
+        "Type": "EnumProperty",
+        "Name": "K2Node_CustomEvent_state",
+        "Flags": "RF_Public",
+        "ElementSize": 1,
+        "Enum": {
+          "ObjectName": "Enum'EDownUIState'",
+          "ObjectPath": "/Script/BBQ"
+        },
+        "UnderlyingProp": {
+          "Type": "ByteProperty",
+          "Name": "UnderlyingType",
+          "Flags": "RF_Public",
+          "ElementSize": 1,
+          "Enum": null
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "K2Node_CustomEvent_Target",
+        "Flags": "RF_Public",
+        "ElementSize": 8,
+        "PropertyClass": {
+          "ObjectName": "Class'xxActor'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "BoolProperty",
+        "Name": "CallFunc_IsStrongEnemy_ReturnValue",
+        "Flags": "RF_Public",
+        "ElementSize": 1,
+        "FieldSize": 1,
+        "ByteOffset": 0,
+        "ByteMask": 1,
+        "FieldMask": 255,
+        "BoolSize": 1,
+        "bIsNativeBool": true
+      },
+      {
+        "Type": "BoolProperty",
+        "Name": "CallFunc_IsEnableUseStaminRecoveryMonster_ReturnValue",
+        "Flags": "RF_Public",
+        "ElementSize": 1,
+        "FieldSize": 1,
+        "ByteOffset": 0,
+        "ByteMask": 1,
+        "FieldMask": 255,
+        "BoolSize": 1,
+        "bIsNativeBool": true
+      },
+      {
+        "Type": "BoolProperty",
+        "Name": "CallFunc_IsValid_ReturnValue",
+        "Flags": "RF_Public",
+        "ElementSize": 1,
+        "FieldSize": 1,
+        "ByteOffset": 0,
+        "ByteMask": 1,
+        "FieldMask": 255,
+        "BoolSize": 1,
+        "bIsNativeBool": true
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "CallFunc_PlayAnimation_ReturnValue",
+        "Flags": "RF_Public",
+        "ElementSize": 8,
+        "PropertyClass": {
+          "ObjectName": "Class'UMGSequencePlayer'",
+          "ObjectPath": "/Script/UMG"
+        }
+      },
+      {
+        "Type": "StructProperty",
+        "Name": "K2Node_CustomEvent_UIPos",
+        "Flags": "RF_Public",
+        "ElementSize": 8,
+        "Struct": {
+          "ObjectName": "ScriptStruct'Vector2D'",
+          "ObjectPath": "/Script/CoreUObject"
+        }
+      },
+      {
+        "Type": "BoolProperty",
+        "Name": "K2Node_CustomEvent_bStrong",
+        "Flags": "RF_Public",
+        "ElementSize": 1,
+        "FieldSize": 1,
+        "ByteOffset": 0,
+        "ByteMask": 1,
+        "FieldMask": 255,
+        "BoolSize": 1,
+        "bIsNativeBool": true
+      },
+      {
+        "Type": "BoolProperty",
+        "Name": "CallFunc_IsOdyssey3DEnabled_ReturnValue",
+        "Flags": "RF_Public",
+        "ElementSize": 1,
+        "FieldSize": 1,
+        "ByteOffset": 0,
+        "ByteMask": 1,
+        "FieldMask": 255,
+        "BoolSize": 1,
+        "bIsNativeBool": true
+      }
+    ],
+    "FunctionFlags": "FUNC_Final | FUNC_UbergraphFunction"
+  },
+  {
+    "Type": "Function",
+    "Name": "OnInitialized",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'W_OverheadGauge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.10"
+    },
+    "SuperStruct": {
+      "ObjectName": "Function'UserWidget:OnInitialized'",
+      "ObjectPath": "/Script/UMG"
+    },
+    "FunctionFlags": "FUNC_BlueprintCosmetic | FUNC_Event | FUNC_Public | FUNC_BlueprintEvent"
+  },
+  {
+    "Type": "Function",
+    "Name": "OnPlayRmapageAnim",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'W_OverheadGauge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.10"
+    },
+    "FunctionFlags": "FUNC_BlueprintCallable | FUNC_BlueprintEvent"
+  },
+  {
+    "Type": "Function",
+    "Name": "IsElite",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'W_OverheadGauge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.10"
+    },
+    "ChildProperties": [
+      {
+        "Type": "BoolProperty",
+        "Name": "bStrong",
+        "Flags": "RF_Public",
+        "ElementSize": 1,
+        "PropertyFlags": "BlueprintVisible | BlueprintReadOnly | Parm",
+        "FieldSize": 1,
+        "ByteOffset": 0,
+        "ByteMask": 1,
+        "FieldMask": 255,
+        "BoolSize": 1,
+        "bIsNativeBool": true
+      }
+    ],
+    "FunctionFlags": "FUNC_BlueprintCallable | FUNC_BlueprintEvent"
+  },
+  {
+    "Type": "Function",
+    "Name": "OnupdateUIPos",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'W_OverheadGauge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.10"
+    },
+    "ChildProperties": [
+      {
+        "Type": "StructProperty",
+        "Name": "UIPos",
+        "Flags": "RF_Public",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | BlueprintReadOnly | Parm",
+        "Struct": {
+          "ObjectName": "ScriptStruct'Vector2D'",
+          "ObjectPath": "/Script/CoreUObject"
+        }
+      }
+    ],
+    "FunctionFlags": "FUNC_BlueprintCallable | FUNC_BlueprintEvent"
+  },
+  {
+    "Type": "Function",
+    "Name": "OnEndRampage",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'W_OverheadGauge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.10"
+    },
+    "FunctionFlags": "FUNC_BlueprintCallable | FUNC_BlueprintEvent"
+  },
+  {
+    "Type": "Function",
+    "Name": "OnStartRampage",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'W_OverheadGauge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.10"
+    },
+    "FunctionFlags": "FUNC_BlueprintCallable | FUNC_BlueprintEvent"
+  },
+  {
+    "Type": "Function",
+    "Name": "OnsetupTarget",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'W_OverheadGauge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.10"
+    },
+    "ChildProperties": [
+      {
+        "Type": "ObjectProperty",
+        "Name": "Target",
+        "Flags": "RF_Public",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | BlueprintReadOnly | Parm",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActor'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      }
+    ],
+    "FunctionFlags": "FUNC_BlueprintCallable | FUNC_BlueprintEvent"
+  },
+  {
+    "Type": "Function",
+    "Name": "OnchangeDownUIState",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'W_OverheadGauge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.10"
+    },
+    "ChildProperties": [
+      {
+        "Type": "EnumProperty",
+        "Name": "state",
+        "Flags": "RF_Public",
+        "ElementSize": 1,
+        "PropertyFlags": "BlueprintVisible | BlueprintReadOnly | Parm",
+        "Enum": {
+          "ObjectName": "Enum'EDownUIState'",
+          "ObjectPath": "/Script/BBQ"
+        },
+        "UnderlyingProp": {
+          "Type": "ByteProperty",
+          "Name": "UnderlyingType",
+          "Flags": "RF_Public",
+          "ElementSize": 1,
+          "Enum": null
+        }
+      }
+    ],
+    "FunctionFlags": "FUNC_BlueprintCallable | FUNC_BlueprintEvent"
+  },
+  {
+    "Type": "Function",
+    "Name": "UpdateDamageState",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'W_OverheadGauge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.10"
+    },
+    "ChildProperties": [
+      {
+        "Type": "EnumProperty",
+        "Name": "state",
+        "Flags": "RF_Public",
+        "ElementSize": 1,
+        "PropertyFlags": "BlueprintVisible | BlueprintReadOnly | Parm",
+        "Enum": {
+          "ObjectName": "Enum'EDownUIState'",
+          "ObjectPath": "/Script/BBQ"
+        },
+        "UnderlyingProp": {
+          "Type": "ByteProperty",
+          "Name": "UnderlyingType",
+          "Flags": "RF_Public",
+          "ElementSize": 1,
+          "Enum": null
+        }
+      },
+      {
+        "Type": "BoolProperty",
+        "Name": "K2Node_SwitchEnum_CmpSuccess",
+        "Flags": "RF_Public",
+        "ElementSize": 1,
+        "FieldSize": 1,
+        "ByteOffset": 0,
+        "ByteMask": 1,
+        "FieldMask": 255,
+        "BoolSize": 1,
+        "bIsNativeBool": true
+      }
+    ],
+    "FunctionFlags": "FUNC_Public | FUNC_BlueprintCallable | FUNC_BlueprintEvent"
+  },
+  {
+    "Type": "WidgetBlueprintGeneratedClass",
+    "Name": "W_OverheadGauge_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'WidgetBlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge",
+    "Properties": {
+      "WidgetTree": {
+        "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+      },
+      "bClassRequiresNativeTick": true,
+      "Animations": [
+        {
+          "ObjectName": "WidgetAnimation'W_OverheadGauge_C:Anim_RampageFx_INST'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.59"
+        }
+      ],
+      "UberGraphFunction": {
+        "ObjectName": "Function'W_OverheadGauge_C:ExecuteUbergraph_W_OverheadGauge'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.0"
+      }
+    },
+    "SuperStruct": {
+      "ObjectName": "Class'xxUserWidget'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "Children": [
+      {
+        "ObjectName": "Function'W_OverheadGauge_C:UpdateDamageState'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.9"
+      },
+      {
+        "ObjectName": "Function'W_OverheadGauge_C:OnchangeDownUIState'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.8"
+      },
+      {
+        "ObjectName": "Function'W_OverheadGauge_C:OnsetupTarget'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.7"
+      },
+      {
+        "ObjectName": "Function'W_OverheadGauge_C:OnStartRampage'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.6"
+      },
+      {
+        "ObjectName": "Function'W_OverheadGauge_C:OnEndRampage'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.5"
+      },
+      {
+        "ObjectName": "Function'W_OverheadGauge_C:OnupdateUIPos'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.4"
+      },
+      {
+        "ObjectName": "Function'W_OverheadGauge_C:IsElite'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.3"
+      },
+      {
+        "ObjectName": "Function'W_OverheadGauge_C:OnPlayRmapageAnim'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.2"
+      },
+      {
+        "ObjectName": "Function'W_OverheadGauge_C:OnInitialized'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.1"
+      },
+      {
+        "ObjectName": "Function'W_OverheadGauge_C:ExecuteUbergraph_W_OverheadGauge'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.0"
+      }
+    ],
+    "ChildProperties": [
+      {
+        "Type": "StructProperty",
+        "Name": "UberGraphFrame",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 16,
+        "PropertyFlags": "Transient | DuplicateTransient",
+        "Struct": {
+          "ObjectName": "ScriptStruct'PointerToUberGraphFrame'",
+          "ObjectPath": "/Script/Engine"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "Anim_RampageFx",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | BlueprintReadOnly | Transient | RepSkip",
+        "PropertyClass": {
+          "ObjectName": "Class'WidgetAnimation'",
+          "ObjectPath": "/Script/UMG"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "Gauges",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "WidgetBlueprintGeneratedClass'W_GaugePackage_Monster_C'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/StatusGauge/W_GaugePackage_Monster.6"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "Img_Groggy",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxImage'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "Size_Rampage",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxSizeBox'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "Switcher_MonsterType",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxWidgetSwitcher'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "W_Hud_Status_BuffCollector",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "WidgetBlueprintGeneratedClass'W_Hud_Status_BuffCollector_C'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/W_Hud_Status_BuffCollector.4"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "xxImage_1",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxImage'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "xxImage_58",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxImage'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "BoolProperty",
+        "Name": "PostDownFinished",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 1,
+        "PropertyFlags": "Edit | BlueprintVisible | DisableEditOnInstance",
+        "FieldSize": 1,
+        "ByteOffset": 0,
+        "ByteMask": 1,
+        "FieldMask": 255,
+        "BoolSize": 1,
+        "bIsNativeBool": true
+      }
+    ],
+    "FuncMap": {
+      "ExecuteUbergraph_W_OverheadGauge": {
+        "ObjectName": "Function'W_OverheadGauge_C:ExecuteUbergraph_W_OverheadGauge'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.0"
+      },
+      "OnInitialized": {
+        "ObjectName": "Function'W_OverheadGauge_C:OnInitialized'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.1"
+      },
+      "OnPlayRmapageAnim": {
+        "ObjectName": "Function'W_OverheadGauge_C:OnPlayRmapageAnim'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.2"
+      },
+      "IsElite": {
+        "ObjectName": "Function'W_OverheadGauge_C:IsElite'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.3"
+      },
+      "OnupdateUIPos": {
+        "ObjectName": "Function'W_OverheadGauge_C:OnupdateUIPos'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.4"
+      },
+      "OnEndRampage": {
+        "ObjectName": "Function'W_OverheadGauge_C:OnEndRampage'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.5"
+      },
+      "OnStartRampage": {
+        "ObjectName": "Function'W_OverheadGauge_C:OnStartRampage'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.6"
+      },
+      "OnsetupTarget": {
+        "ObjectName": "Function'W_OverheadGauge_C:OnsetupTarget'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.7"
+      },
+      "OnchangeDownUIState": {
+        "ObjectName": "Function'W_OverheadGauge_C:OnchangeDownUIState'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.8"
+      },
+      "UpdateDamageState": {
+        "ObjectName": "Function'W_OverheadGauge_C:UpdateDamageState'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.9"
+      }
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_EditInlineNew | CLASS_CompiledFromBlueprint | CLASS_DefaultToInstanced | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "W_OverheadGauge_C'Default__W_OverheadGauge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.11"
+    }
+  },
+  {
+    "Type": "W_OverheadGauge_C",
+    "Name": "Default__W_OverheadGauge_C",
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "WidgetBlueprintGeneratedClass'BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.W_OverheadGauge_C'",
+    "Package": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge",
+    "Properties": {
+      "UberGraphFrame": {},
+      "bHasScriptImplementedTick": false,
+      "bHasScriptImplementedPaint": false,
+      "bIsVolatile": true
+    }
+  },
+  {
+    "Type": "CanvasPanel",
+    "Name": "Canvas_Collapsed",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'CanvasPanel'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "Slots": [
+        {
+          "ObjectName": "CanvasPanelSlot'W_OverheadGauge_C:WidgetTree.Canvas_Collapsed.CanvasPanelSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.13"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_1.GridSlot_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.22"
+      },
+      "Visibility": "ESlateVisibility::HitTestInvisible"
+    }
+  },
+  {
+    "Type": "CanvasPanelSlot",
+    "Name": "CanvasPanelSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'CanvasPanelSlot'",
+    "Outer": {
+      "ObjectName": "CanvasPanel'W_OverheadGauge_C:WidgetTree.Canvas_Collapsed'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.12"
+    },
+    "Properties": {
+      "Parent": {
+        "ObjectName": "CanvasPanel'W_OverheadGauge_C:WidgetTree.Canvas_Collapsed'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.12"
+      },
+      "Content": {
+        "ObjectName": "CommonVisualAttachment'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_45'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.17"
+      }
+    }
+  },
+  {
+    "Type": "CommonVisualAttachment",
+    "Name": "CommonVisualAttachment_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'CommonVisualAttachment'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "ContentAnchor": {
+        "X": 1.0,
+        "Y": 0.0
+      },
+      "Slots": [
+        {
+          "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_0.SizeBoxSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.49"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_0.GridSlot_2'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.20"
+      }
+    }
+  },
+  {
+    "Type": "CommonVisualAttachment",
+    "Name": "CommonVisualAttachment_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'CommonVisualAttachment'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "ContentAnchor": {
+        "X": 0.5,
+        "Y": 0.5
+      },
+      "WidthOverride": 116.0,
+      "HeightOverride": 26.0,
+      "bOverride_WidthOverride": true,
+      "bOverride_HeightOverride": true,
+      "Slots": [
+        {
+          "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_1.SizeBoxSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.50"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_5.GridSlot_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.30"
+      }
+    }
+  },
+  {
+    "Type": "CommonVisualAttachment",
+    "Name": "CommonVisualAttachment_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'CommonVisualAttachment'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "ContentAnchor": {
+        "X": 0.5,
+        "Y": 0.5
+      },
+      "Slots": [
+        {
+          "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_2.SizeBoxSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.51"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_0.GridSlot_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.19"
+      }
+    }
+  },
+  {
+    "Type": "CommonVisualAttachment",
+    "Name": "CommonVisualAttachment_45",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'CommonVisualAttachment'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "ContentAnchor": {
+        "X": 0.5,
+        "Y": 0.5
+      },
+      "Slots": [
+        {
+          "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_45.SizeBoxSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.52"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "CanvasPanelSlot'W_OverheadGauge_C:WidgetTree.Canvas_Collapsed.CanvasPanelSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.13"
+      },
+      "Visibility": "ESlateVisibility::Collapsed"
+    }
+  },
+  {
+    "Type": "GridSlot",
+    "Name": "GridSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'GridSlot'",
+    "Outer": {
+      "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.63"
+    },
+    "Properties": {
+      "Parent": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.63"
+      },
+      "Content": {
+        "ObjectName": "xxWidgetSwitcher'W_OverheadGauge_C:WidgetTree.Switcher_MonsterType'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.84"
+      }
+    }
+  },
+  {
+    "Type": "GridSlot",
+    "Name": "GridSlot_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'GridSlot'",
+    "Outer": {
+      "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.63"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Center",
+      "VerticalAlignment": "VAlign_Center",
+      "Parent": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.63"
+      },
+      "Content": {
+        "ObjectName": "CommonVisualAttachment'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_2'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.16"
+      }
+    }
+  },
+  {
+    "Type": "GridSlot",
+    "Name": "GridSlot_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'GridSlot'",
+    "Outer": {
+      "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.63"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Right",
+      "VerticalAlignment": "VAlign_Bottom",
+      "Parent": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.63"
+      },
+      "Content": {
+        "ObjectName": "CommonVisualAttachment'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.14"
+      }
+    }
+  },
+  {
+    "Type": "GridSlot",
+    "Name": "GridSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'GridSlot'",
+    "Outer": {
+      "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.64"
+    },
+    "Properties": {
+      "Parent": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.64"
+      },
+      "Content": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.63"
+      }
+    }
+  },
+  {
+    "Type": "GridSlot",
+    "Name": "GridSlot_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'GridSlot'",
+    "Outer": {
+      "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.64"
+    },
+    "Properties": {
+      "Padding": {
+        "Bottom": 8.0
+      },
+      "HorizontalAlignment": "HAlign_Center",
+      "VerticalAlignment": "VAlign_Bottom",
+      "Parent": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.64"
+      },
+      "Content": {
+        "ObjectName": "CanvasPanel'W_OverheadGauge_C:WidgetTree.Canvas_Collapsed'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.12"
+      }
+    }
+  },
+  {
+    "Type": "GridSlot",
+    "Name": "GridSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'GridSlot'",
+    "Outer": {
+      "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.65"
+    },
+    "Properties": {
+      "Padding": {
+        "Top": -60.0,
+        "Bottom": -60.0
+      },
+      "VerticalAlignment": "VAlign_Center",
+      "Parent": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_2'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.65"
+      },
+      "Content": {
+        "ObjectName": "xxImage'W_OverheadGauge_C:WidgetTree.xxImage_58'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.76"
+      }
+    }
+  },
+  {
+    "Type": "GridSlot",
+    "Name": "GridSlot_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'GridSlot'",
+    "Outer": {
+      "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.65"
+    },
+    "Properties": {
+      "Parent": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_2'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.65"
+      },
+      "Content": {
+        "ObjectName": "xxImage'W_OverheadGauge_C:WidgetTree.xxImage_270'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.75"
+      }
+    }
+  },
+  {
+    "Type": "GridSlot",
+    "Name": "GridSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'GridSlot'",
+    "Outer": {
+      "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_3'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.66"
+    },
+    "Properties": {
+      "Padding": {
+        "Right": 1.0
+      },
+      "HorizontalAlignment": "HAlign_Center",
+      "Parent": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_3'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.66"
+      },
+      "Content": {
+        "ObjectName": "W_GaugePackage_Monster_C'W_OverheadGauge_C:WidgetTree.Gauges'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.57"
+      }
+    }
+  },
+  {
+    "Type": "GridSlot",
+    "Name": "GridSlot_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'GridSlot'",
+    "Outer": {
+      "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_3'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.66"
+    },
+    "Properties": {
+      "Padding": {
+        "Left": -25.0,
+        "Right": -25.0
+      },
+      "VerticalAlignment": "VAlign_Bottom",
+      "Layer": 1,
+      "Parent": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_3'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.66"
+      },
+      "Content": {
+        "ObjectName": "xxSizeBox'W_OverheadGauge_C:WidgetTree.Size_Rampage'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.80"
+      }
+    }
+  },
+  {
+    "Type": "GridSlot",
+    "Name": "GridSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'GridSlot'",
+    "Outer": {
+      "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_4'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.67"
+    },
+    "Properties": {
+      "Parent": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_4'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.67"
+      },
+      "Content": {
+        "ObjectName": "xxImage'W_OverheadGauge_C:WidgetTree.xxImage_156'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.74"
+      }
+    }
+  },
+  {
+    "Type": "GridSlot",
+    "Name": "GridSlot_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'GridSlot'",
+    "Outer": {
+      "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_4'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.67"
+    },
+    "Properties": {
+      "Padding": {
+        "Left": -4.0,
+        "Top": 3.0,
+        "Right": -4.0,
+        "Bottom": -4.0
+      },
+      "Parent": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_4'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.67"
+      },
+      "Content": {
+        "ObjectName": "xxImage'W_OverheadGauge_C:WidgetTree.xxImage_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.72"
+      }
+    }
+  },
+  {
+    "Type": "GridSlot",
+    "Name": "GridSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'GridSlot'",
+    "Outer": {
+      "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_5'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.68"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Center",
+      "VerticalAlignment": "VAlign_Center",
+      "Parent": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_5'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.68"
+      },
+      "Content": {
+        "ObjectName": "xxHorizontalBox'W_OverheadGauge_C:WidgetTree.xxHorizontalBox_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.69"
+      }
+    }
+  },
+  {
+    "Type": "GridSlot",
+    "Name": "GridSlot_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'GridSlot'",
+    "Outer": {
+      "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_5'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.68"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Center",
+      "VerticalAlignment": "VAlign_Center",
+      "Parent": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_5'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.68"
+      },
+      "Content": {
+        "ObjectName": "CommonVisualAttachment'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.15"
+      }
+    }
+  },
+  {
+    "Type": "HorizontalBoxSlot",
+    "Name": "HorizontalBoxSlot_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'HorizontalBoxSlot'",
+    "Outer": {
+      "ObjectName": "xxHorizontalBox'W_OverheadGauge_C:WidgetTree.xxHorizontalBox_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.69"
+    },
+    "Properties": {
+      "Parent": {
+        "ObjectName": "xxHorizontalBox'W_OverheadGauge_C:WidgetTree.xxHorizontalBox_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.69"
+      },
+      "Content": {
+        "ObjectName": "xxImage'W_OverheadGauge_C:WidgetTree.xxImage_111'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.73"
+      }
+    }
+  },
+  {
+    "Type": "HorizontalBoxSlot",
+    "Name": "HorizontalBoxSlot_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'HorizontalBoxSlot'",
+    "Outer": {
+      "ObjectName": "xxHorizontalBox'W_OverheadGauge_C:WidgetTree.xxHorizontalBox_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.69"
+    },
+    "Properties": {
+      "Parent": {
+        "ObjectName": "xxHorizontalBox'W_OverheadGauge_C:WidgetTree.xxHorizontalBox_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.69"
+      },
+      "Content": {
+        "ObjectName": "xxImage'W_OverheadGauge_C:WidgetTree.xxImage'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.71"
+      }
+    }
+  },
+  {
+    "Type": "HorizontalBoxSlot",
+    "Name": "HorizontalBoxSlot_3",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'HorizontalBoxSlot'",
+    "Outer": {
+      "ObjectName": "xxHorizontalBox'W_OverheadGauge_C:WidgetTree.xxHorizontalBox_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.69"
+    },
+    "Properties": {
+      "Parent": {
+        "ObjectName": "xxHorizontalBox'W_OverheadGauge_C:WidgetTree.xxHorizontalBox_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.69"
+      },
+      "Content": {
+        "ObjectName": "xxImage'W_OverheadGauge_C:WidgetTree.xxImage_80'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.77"
+      }
+    }
+  },
+  {
+    "Type": "MovieScene",
+    "Name": "Anim_RampageFx",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MovieScene'",
+    "Outer": {
+      "ObjectName": "WidgetAnimation'W_OverheadGauge_C:Anim_RampageFx_INST'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.59"
+    },
+    "Properties": {
+      "Possessables": [
+        {
+          "Tags": [],
+          "Guid": "B634EC5D-4C1AE6DE-23E30C87-45303AB5",
+          "Name": "Size_Rampage",
+          "PossessedObjectClass": {
+            "ObjectName": "Class'xxSizeBox'",
+            "ObjectPath": "/Script/BBQ"
+          },
+          "ParentGuid": "00000000-00000000-00000000-00000000"
+        },
+        {
+          "Tags": [],
+          "Guid": "122E47CB-4B743AAF-F4CFB5A5-714D4220",
+          "Name": "xxImage_270",
+          "PossessedObjectClass": {
+            "ObjectName": "Class'xxImage'",
+            "ObjectPath": "/Script/BBQ"
+          },
+          "ParentGuid": "00000000-00000000-00000000-00000000"
+        },
+        {
+          "Tags": [],
+          "Guid": "78BA7A66-4B2335CE-99CD4393-53073DE7",
+          "Name": "xxImage_58",
+          "PossessedObjectClass": {
+            "ObjectName": "Class'xxImage'",
+            "ObjectPath": "/Script/BBQ"
+          },
+          "ParentGuid": "00000000-00000000-00000000-00000000"
+        }
+      ],
+      "ObjectBindings": [
+        {
+          "ObjectGuid": "B634EC5D-4C1AE6DE-23E30C87-45303AB5",
+          "BindingName": "xxSizeBox_72",
+          "Tracks": [
+            {
+              "ObjectName": "MovieSceneByteTrack'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneByteTrack_0'",
+              "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.42"
+            }
+          ]
+        },
+        {
+          "ObjectGuid": "122E47CB-4B743AAF-F4CFB5A5-714D4220",
+          "BindingName": "xxImage_270",
+          "Tracks": [
+            {
+              "ObjectName": "MovieSceneFloatTrack'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_2'",
+              "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.47"
+            }
+          ]
+        },
+        {
+          "ObjectGuid": "78BA7A66-4B2335CE-99CD4393-53073DE7",
+          "BindingName": "xxImage_58",
+          "Tracks": [
+            {
+              "ObjectName": "MovieSceneFloatTrack'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_1'",
+              "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.46"
+            }
+          ]
+        }
+      ],
+      "PlaybackRange": {
+        "Value": {
+          "LowerBound": {
+            "Type": 1,
+            "Value": {
+              "Value": -1
+            }
+          },
+          "UpperBound": {
+            "Type": 0,
+            "Value": {
+              "Value": 69000
+            }
+          }
+        }
+      },
+      "DisplayRate": {
+        "Numerator": 20
+      },
+      "Signature": "5E91B2D4-43FDD258-B91694B4-B03B9005"
+    }
+  },
+  {
+    "Type": "MovieSceneBuiltInEasingFunction",
+    "Name": "EaseInFunction",
+    "Flags": "RF_Public | RF_Transactional | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MovieSceneBuiltInEasingFunction'",
+    "Outer": {
+      "ObjectName": "MovieSceneByteSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneByteTrack_0.MovieSceneByteSection_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.41"
+    }
+  },
+  {
+    "Type": "MovieSceneBuiltInEasingFunction",
+    "Name": "EaseOutFunction",
+    "Flags": "RF_Public | RF_Transactional | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MovieSceneBuiltInEasingFunction'",
+    "Outer": {
+      "ObjectName": "MovieSceneByteSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneByteTrack_0.MovieSceneByteSection_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.41"
+    }
+  },
+  {
+    "Type": "MovieSceneBuiltInEasingFunction",
+    "Name": "EaseInFunction",
+    "Flags": "RF_Public | RF_Transactional | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MovieSceneBuiltInEasingFunction'",
+    "Outer": {
+      "ObjectName": "MovieSceneFloatSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_1.MovieSceneFloatSection_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.44"
+    }
+  },
+  {
+    "Type": "MovieSceneBuiltInEasingFunction",
+    "Name": "EaseOutFunction",
+    "Flags": "RF_Public | RF_Transactional | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MovieSceneBuiltInEasingFunction'",
+    "Outer": {
+      "ObjectName": "MovieSceneFloatSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_1.MovieSceneFloatSection_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.44"
+    }
+  },
+  {
+    "Type": "MovieSceneBuiltInEasingFunction",
+    "Name": "EaseInFunction",
+    "Flags": "RF_Public | RF_Transactional | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MovieSceneBuiltInEasingFunction'",
+    "Outer": {
+      "ObjectName": "MovieSceneFloatSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_2.MovieSceneFloatSection_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.45"
+    }
+  },
+  {
+    "Type": "MovieSceneBuiltInEasingFunction",
+    "Name": "EaseOutFunction",
+    "Flags": "RF_Public | RF_Transactional | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MovieSceneBuiltInEasingFunction'",
+    "Outer": {
+      "ObjectName": "MovieSceneFloatSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_2.MovieSceneFloatSection_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.45"
+    }
+  },
+  {
+    "Type": "MovieSceneByteSection",
+    "Name": "MovieSceneByteSection_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MovieSceneByteSection'",
+    "Outer": {
+      "ObjectName": "MovieSceneByteTrack'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneByteTrack_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.42"
+    },
+    "Properties": {
+      "ByteCurve": {
+        "Times": [
+          {
+            "Value": 0
+          },
+          {
+            "Value": 66000
+          },
+          {
+            "Value": 69000
+          }
+        ],
+        "Values": [
+          3,
+          1,
+          1
+        ],
+        "Enum": {
+          "ObjectName": "Enum'ESlateVisibility'",
+          "ObjectPath": "/Script/UMG"
+        }
+      },
+      "Easing": {
+        "EaseIn": {
+          "ObjectName": "MovieSceneBuiltInEasingFunction'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneByteTrack_0.MovieSceneByteSection_0.EaseInFunction'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.35"
+        },
+        "EaseOut": {
+          "ObjectName": "MovieSceneBuiltInEasingFunction'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneByteTrack_0.MovieSceneByteSection_0.EaseOutFunction'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.36"
+        }
+      },
+      "SectionRange": {
+        "Value": {
+          "LowerBound": {
+            "Type": 1,
+            "Value": {
+              "Value": 0
+            }
+          },
+          "UpperBound": {
+            "Type": 0,
+            "Value": {
+              "Value": 69000
+            }
+          }
+        }
+      },
+      "Signature": "6DB96C02-428EDABF-AC2BE09D-B8E49949"
+    }
+  },
+  {
+    "Type": "MovieSceneByteTrack",
+    "Name": "MovieSceneByteTrack_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MovieSceneByteTrack'",
+    "Outer": {
+      "ObjectName": "MovieScene'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.34"
+    },
+    "Properties": {
+      "Enum": {
+        "ObjectName": "Enum'ESlateVisibility'",
+        "ObjectPath": "/Script/UMG"
+      },
+      "PropertyBinding": {
+        "PropertyName": "Visibility",
+        "PropertyPath": "Visibility",
+        "bCanUseClassLookup": true
+      },
+      "Sections": [
+        {
+          "ObjectName": "MovieSceneByteSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneByteTrack_0.MovieSceneByteSection_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.41"
+        }
+      ],
+      "EvaluationFieldGuid": "D1FD298D-4ED43D1F-06E7C7B0-4E2B17E0",
+      "EvaluationField": {
+        "Entries": [
+          {
+            "Section": {
+              "ObjectName": "MovieSceneByteSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneByteTrack_0.MovieSceneByteSection_0'",
+              "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.41"
+            },
+            "Range": {
+              "LowerBound": {
+                "Type": "ERangeBoundTypes::Inclusive",
+                "Value": {
+                  "Value": 0
+                }
+              },
+              "UpperBound": {
+                "Type": "ERangeBoundTypes::Exclusive",
+                "Value": {
+                  "Value": 69000
+                }
+              }
+            },
+            "ForcedTime": {
+              "Value": -2147483648
+            },
+            "Flags": "ESectionEvaluationFlags::None",
+            "LegacySortOrder": 0
+          }
+        ]
+      },
+      "Signature": "D1FD298D-4ED43D1F-06E7C7B0-4E2B17E0"
+    }
+  },
+  {
+    "Type": "MovieSceneCompiledData",
+    "Name": "CompiledData",
+    "Flags": "RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MovieSceneCompiledData'",
+    "Outer": {
+      "ObjectName": "WidgetAnimation'W_OverheadGauge_C:Anim_RampageFx_INST'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.59"
+    },
+    "Properties": {
+      "EntityComponentField": {
+        "PersistentEntityTree": {
+          "SerializedData": {
+            "Data": {
+              "Entries": [
+                {
+                  "StartIndex": 0,
+                  "Size": 3,
+                  "Capacity": 3
+                },
+                {
+                  "StartIndex": 3,
+                  "Size": 1,
+                  "Capacity": 1
+                }
+              ],
+              "Items": [
+                {
+                  "EntityIndex": 0,
+                  "MetaDataIndex": -1
+                },
+                {
+                  "EntityIndex": 1,
+                  "MetaDataIndex": -1
+                },
+                {
+                  "EntityIndex": 2,
+                  "MetaDataIndex": -1
+                },
+                {
+                  "EntityIndex": 1,
+                  "MetaDataIndex": -1
+                }
+              ]
+            },
+            "RootNode": {
+              "Range": {
+                "LowerBound": {
+                  "Type": 2,
+                  "Value": {
+                    "Value": 0
+                  }
+                },
+                "UpperBound": {
+                  "Type": 2,
+                  "Value": {
+                    "Value": 0
+                  }
+                }
+              },
+              "Parent": {
+                "ChildrenHandle": {
+                  "EntryIndex": -1
+                },
+                "Index": -1
+              },
+              "ChildrenID": {
+                "EntryIndex": 0
+              },
+              "DataID": {
+                "EntryIndex": -1
+              }
+            },
+            "ChildNodes": {
+              "Entries": [
+                {
+                  "StartIndex": 0,
+                  "Size": 2,
+                  "Capacity": 2
+                }
+              ],
+              "Items": [
+                {
+                  "Range": {
+                    "LowerBound": {
+                      "Type": 1,
+                      "Value": {
+                        "Value": -1
+                      }
+                    },
+                    "UpperBound": {
+                      "Type": 0,
+                      "Value": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "Parent": {
+                    "ChildrenHandle": {
+                      "EntryIndex": -1
+                    },
+                    "Index": 0
+                  },
+                  "ChildrenID": {
+                    "EntryIndex": -1
+                  },
+                  "DataID": {
+                    "EntryIndex": 1
+                  }
+                },
+                {
+                  "Range": {
+                    "LowerBound": {
+                      "Type": 1,
+                      "Value": {
+                        "Value": 0
+                      }
+                    },
+                    "UpperBound": {
+                      "Type": 0,
+                      "Value": {
+                        "Value": 69000
+                      }
+                    }
+                  },
+                  "Parent": {
+                    "ChildrenHandle": {
+                      "EntryIndex": -1
+                    },
+                    "Index": 0
+                  },
+                  "ChildrenID": {
+                    "EntryIndex": -1
+                  },
+                  "DataID": {
+                    "EntryIndex": 0
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "Entities": [
+          {
+            "Key": {
+              "EntityOwner": {
+                "ObjectName": "MovieSceneByteSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneByteTrack_0.MovieSceneByteSection_0'",
+                "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.41"
+              },
+              "EntityID": 0
+            },
+            "SharedMetaDataIndex": 0
+          },
+          {
+            "Key": {
+              "EntityOwner": {
+                "ObjectName": "MovieSceneFloatSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_2.MovieSceneFloatSection_0'",
+                "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.45"
+              },
+              "EntityID": 0
+            },
+            "SharedMetaDataIndex": 1
+          },
+          {
+            "Key": {
+              "EntityOwner": {
+                "ObjectName": "MovieSceneFloatSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_1.MovieSceneFloatSection_0'",
+                "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.44"
+              },
+              "EntityID": 0
+            },
+            "SharedMetaDataIndex": 2
+          }
+        ],
+        "SharedMetaData": [
+          {
+            "ObjectBindingID": "B634EC5D-4C1AE6DE-23E30C87-45303AB5"
+          },
+          {
+            "ObjectBindingID": "122E47CB-4B743AAF-F4CFB5A5-714D4220"
+          },
+          {
+            "ObjectBindingID": "78BA7A66-4B2335CE-99CD4393-53073DE7"
+          }
+        ]
+      },
+      "DeterminismFences": [
+        {
+          "FrameNumber": {
+            "Value": 69000
+          },
+          "SubFrame": 0.0
+        }
+      ],
+      "CompiledSignature": "6ACE74F0-41F70EA6-E43AE688-468A3F16",
+      "CompilerVersion": "7D4B9809-2FAC4A6B-964ECF72-D8279EF8",
+      "AccumulatedMask": {
+        "bEntityComponentField": true
+      },
+      "AllocatedMask": {
+        "bEntityComponentField": true
+      }
+    }
+  },
+  {
+    "Type": "MovieSceneFloatSection",
+    "Name": "MovieSceneFloatSection_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MovieSceneFloatSection'",
+    "Outer": {
+      "ObjectName": "MovieSceneFloatTrack'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.46"
+    },
+    "Properties": {
+      "FloatCurve": {
+        "PreInfinityExtrap": "RCCE_Constant",
+        "PostInfinityExtrap": "RCCE_Constant",
+        "Times": [
+          {
+            "Value": 0
+          },
+          {
+            "Value": 66000
+          },
+          {
+            "Value": 69000
+          }
+        ],
+        "Values": [
+          {
+            "Value": 1.0,
+            "Tangent": {
+              "ArriveTangent": 0.0,
+              "LeaveTangent": 0.0,
+              "ArriveTangentWeight": 0.0,
+              "LeaveTangentWeight": 0.0,
+              "TangentWeightMode": 0
+            },
+            "InterpMode": 2,
+            "TangentMode": 0
+          },
+          {
+            "Value": 0.0,
+            "Tangent": {
+              "ArriveTangent": 0.0,
+              "LeaveTangent": 0.0,
+              "ArriveTangentWeight": 0.0,
+              "LeaveTangentWeight": 0.0,
+              "TangentWeightMode": 0
+            },
+            "InterpMode": 2,
+            "TangentMode": 0
+          },
+          {
+            "Value": 0.0,
+            "Tangent": {
+              "ArriveTangent": 0.0,
+              "LeaveTangent": 0.0,
+              "ArriveTangentWeight": 0.0,
+              "LeaveTangentWeight": 0.0,
+              "TangentWeightMode": 0
+            },
+            "InterpMode": 2,
+            "TangentMode": 0
+          }
+        ],
+        "DefaultValue": 0.0,
+        "bHasDefaultValue": false,
+        "TickResolution": {
+          "Numerator": 60000,
+          "Denominator": 1
+        },
+        "bShowCurve": false,
+        "StructFallback": null
+      },
+      "Easing": {
+        "EaseIn": {
+          "ObjectName": "MovieSceneBuiltInEasingFunction'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_1.MovieSceneFloatSection_0.EaseInFunction'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.37"
+        },
+        "EaseOut": {
+          "ObjectName": "MovieSceneBuiltInEasingFunction'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_1.MovieSceneFloatSection_0.EaseOutFunction'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.38"
+        }
+      },
+      "SectionRange": {
+        "Value": {
+          "LowerBound": {
+            "Type": 1,
+            "Value": {
+              "Value": 0
+            }
+          },
+          "UpperBound": {
+            "Type": 0,
+            "Value": {
+              "Value": 69000
+            }
+          }
+        }
+      },
+      "Signature": "8447B5E7-4D7853E2-C4F191A3-D720559C"
+    }
+  },
+  {
+    "Type": "MovieSceneFloatSection",
+    "Name": "MovieSceneFloatSection_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MovieSceneFloatSection'",
+    "Outer": {
+      "ObjectName": "MovieSceneFloatTrack'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.47"
+    },
+    "Properties": {
+      "FloatCurve": {
+        "PreInfinityExtrap": "RCCE_Constant",
+        "PostInfinityExtrap": "RCCE_Constant",
+        "Times": [
+          {
+            "Value": 0
+          },
+          {
+            "Value": 59999
+          },
+          {
+            "Value": 69000
+          }
+        ],
+        "Values": [
+          {
+            "Value": 0.5,
+            "Tangent": {
+              "ArriveTangent": 0.0,
+              "LeaveTangent": 0.0,
+              "ArriveTangentWeight": 0.0,
+              "LeaveTangentWeight": 0.0,
+              "TangentWeightMode": 0
+            },
+            "InterpMode": 2,
+            "TangentMode": 0
+          },
+          {
+            "Value": 0.0,
+            "Tangent": {
+              "ArriveTangent": 0.0,
+              "LeaveTangent": 0.0,
+              "ArriveTangentWeight": 0.0,
+              "LeaveTangentWeight": 0.0,
+              "TangentWeightMode": 0
+            },
+            "InterpMode": 2,
+            "TangentMode": 0
+          },
+          {
+            "Value": 0.0,
+            "Tangent": {
+              "ArriveTangent": 0.0,
+              "LeaveTangent": 0.0,
+              "ArriveTangentWeight": 0.0,
+              "LeaveTangentWeight": 0.0,
+              "TangentWeightMode": 0
+            },
+            "InterpMode": 2,
+            "TangentMode": 0
+          }
+        ],
+        "DefaultValue": 0.0,
+        "bHasDefaultValue": false,
+        "TickResolution": {
+          "Numerator": 60000,
+          "Denominator": 1
+        },
+        "bShowCurve": false,
+        "StructFallback": null
+      },
+      "Easing": {
+        "EaseIn": {
+          "ObjectName": "MovieSceneBuiltInEasingFunction'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_2.MovieSceneFloatSection_0.EaseInFunction'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.39"
+        },
+        "EaseOut": {
+          "ObjectName": "MovieSceneBuiltInEasingFunction'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_2.MovieSceneFloatSection_0.EaseOutFunction'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.40"
+        }
+      },
+      "SectionRange": {
+        "Value": {
+          "LowerBound": {
+            "Type": 1,
+            "Value": {
+              "Value": -1
+            }
+          },
+          "UpperBound": {
+            "Type": 0,
+            "Value": {
+              "Value": 69000
+            }
+          }
+        }
+      },
+      "Signature": "EE9888B0-44F70D3F-2EBE85BC-38EE363C"
+    }
+  },
+  {
+    "Type": "MovieSceneFloatTrack",
+    "Name": "MovieSceneFloatTrack_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MovieSceneFloatTrack'",
+    "Outer": {
+      "ObjectName": "MovieScene'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.34"
+    },
+    "Properties": {
+      "PropertyBinding": {
+        "PropertyName": "RenderOpacity",
+        "PropertyPath": "RenderOpacity",
+        "bCanUseClassLookup": true
+      },
+      "Sections": [
+        {
+          "ObjectName": "MovieSceneFloatSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_1.MovieSceneFloatSection_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.44"
+        }
+      ],
+      "EvaluationFieldGuid": "5070C1A7-4BA8E010-4C2E1BAD-6F5058D4",
+      "EvaluationField": {
+        "Entries": [
+          {
+            "Section": {
+              "ObjectName": "MovieSceneFloatSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_1.MovieSceneFloatSection_0'",
+              "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.44"
+            },
+            "Range": {
+              "LowerBound": {
+                "Type": "ERangeBoundTypes::Inclusive",
+                "Value": {
+                  "Value": 0
+                }
+              },
+              "UpperBound": {
+                "Type": "ERangeBoundTypes::Exclusive",
+                "Value": {
+                  "Value": 69000
+                }
+              }
+            },
+            "ForcedTime": {
+              "Value": -2147483648
+            },
+            "Flags": "ESectionEvaluationFlags::None",
+            "LegacySortOrder": 0
+          }
+        ]
+      },
+      "Signature": "5070C1A7-4BA8E010-4C2E1BAD-6F5058D4"
+    }
+  },
+  {
+    "Type": "MovieSceneFloatTrack",
+    "Name": "MovieSceneFloatTrack_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MovieSceneFloatTrack'",
+    "Outer": {
+      "ObjectName": "MovieScene'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.34"
+    },
+    "Properties": {
+      "PropertyBinding": {
+        "PropertyName": "RenderOpacity",
+        "PropertyPath": "RenderOpacity",
+        "bCanUseClassLookup": true
+      },
+      "Sections": [
+        {
+          "ObjectName": "MovieSceneFloatSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_2.MovieSceneFloatSection_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.45"
+        }
+      ],
+      "EvaluationFieldGuid": "E6E3DF1F-4B39AFDA-758EA99C-A426B795",
+      "EvaluationField": {
+        "Entries": [
+          {
+            "Section": {
+              "ObjectName": "MovieSceneFloatSection'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx.MovieSceneFloatTrack_2.MovieSceneFloatSection_0'",
+              "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.45"
+            },
+            "Range": {
+              "LowerBound": {
+                "Type": "ERangeBoundTypes::Inclusive",
+                "Value": {
+                  "Value": -1
+                }
+              },
+              "UpperBound": {
+                "Type": "ERangeBoundTypes::Exclusive",
+                "Value": {
+                  "Value": 69000
+                }
+              }
+            },
+            "ForcedTime": {
+              "Value": -2147483648
+            },
+            "Flags": "ESectionEvaluationFlags::None",
+            "LegacySortOrder": 0
+          }
+        ]
+      },
+      "Signature": "E6E3DF1F-4B39AFDA-758EA99C-A426B795"
+    }
+  },
+  {
+    "Type": "ScaleBoxSlot",
+    "Name": "ScaleBoxSlot_3",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ScaleBoxSlot'",
+    "Outer": {
+      "ObjectName": "xxScaleBox'W_OverheadGauge_C:WidgetTree.xxScaleBox_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.79"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Right",
+      "Parent": {
+        "ObjectName": "xxScaleBox'W_OverheadGauge_C:WidgetTree.xxScaleBox_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.79"
+      },
+      "Content": {
+        "ObjectName": "W_Hud_Status_BuffCollector_C'W_OverheadGauge_C:WidgetTree.W_Hud_Status_BuffCollector'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.58"
+      }
+    }
+  },
+  {
+    "Type": "SizeBoxSlot",
+    "Name": "SizeBoxSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SizeBoxSlot'",
+    "Outer": {
+      "ObjectName": "CommonVisualAttachment'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.14"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Right",
+      "Parent": {
+        "ObjectName": "CommonVisualAttachment'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.14"
+      },
+      "Content": {
+        "ObjectName": "xxSizeBox'W_OverheadGauge_C:WidgetTree.xxSizeBox_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.82"
+      }
+    }
+  },
+  {
+    "Type": "SizeBoxSlot",
+    "Name": "SizeBoxSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SizeBoxSlot'",
+    "Outer": {
+      "ObjectName": "CommonVisualAttachment'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.15"
+    },
+    "Properties": {
+      "Parent": {
+        "ObjectName": "CommonVisualAttachment'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.15"
+      },
+      "Content": {
+        "ObjectName": "xxImage'W_OverheadGauge_C:WidgetTree.xxImage_85'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.78"
+      }
+    }
+  },
+  {
+    "Type": "SizeBoxSlot",
+    "Name": "SizeBoxSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SizeBoxSlot'",
+    "Outer": {
+      "ObjectName": "CommonVisualAttachment'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.16"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Center",
+      "Parent": {
+        "ObjectName": "CommonVisualAttachment'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_2'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.16"
+      },
+      "Content": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_3'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.66"
+      }
+    }
+  },
+  {
+    "Type": "SizeBoxSlot",
+    "Name": "SizeBoxSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SizeBoxSlot'",
+    "Outer": {
+      "ObjectName": "CommonVisualAttachment'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_45'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.17"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Center",
+      "VerticalAlignment": "VAlign_Center",
+      "Parent": {
+        "ObjectName": "CommonVisualAttachment'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_45'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.17"
+      },
+      "Content": {
+        "ObjectName": "xxSizeBox'W_OverheadGauge_C:WidgetTree.xxSizeBox_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.81"
+      }
+    }
+  },
+  {
+    "Type": "SizeBoxSlot",
+    "Name": "SizeBoxSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SizeBoxSlot'",
+    "Outer": {
+      "ObjectName": "xxSizeBox'W_OverheadGauge_C:WidgetTree.Size_Rampage'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.80"
+    },
+    "Properties": {
+      "Parent": {
+        "ObjectName": "xxSizeBox'W_OverheadGauge_C:WidgetTree.Size_Rampage'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.80"
+      },
+      "Content": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_2'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.65"
+      }
+    }
+  },
+  {
+    "Type": "SizeBoxSlot",
+    "Name": "SizeBoxSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SizeBoxSlot'",
+    "Outer": {
+      "ObjectName": "xxSizeBox'W_OverheadGauge_C:WidgetTree.xxSizeBox_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.81"
+    },
+    "Properties": {
+      "Parent": {
+        "ObjectName": "xxSizeBox'W_OverheadGauge_C:WidgetTree.xxSizeBox_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.81"
+      },
+      "Content": {
+        "ObjectName": "xxImage'W_OverheadGauge_C:WidgetTree.Img_Groggy'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.70"
+      }
+    }
+  },
+  {
+    "Type": "SizeBoxSlot",
+    "Name": "SizeBoxSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SizeBoxSlot'",
+    "Outer": {
+      "ObjectName": "xxSizeBox'W_OverheadGauge_C:WidgetTree.xxSizeBox_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.82"
+    },
+    "Properties": {
+      "Parent": {
+        "ObjectName": "xxSizeBox'W_OverheadGauge_C:WidgetTree.xxSizeBox_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.82"
+      },
+      "Content": {
+        "ObjectName": "xxScaleBox'W_OverheadGauge_C:WidgetTree.xxScaleBox_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.79"
+      }
+    }
+  },
+  {
+    "Type": "SizeBoxSlot",
+    "Name": "SizeBoxSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'SizeBoxSlot'",
+    "Outer": {
+      "ObjectName": "xxSizeBox'W_OverheadGauge_C:WidgetTree.xxSizeBox_4'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.83"
+    },
+    "Properties": {
+      "Padding": {
+        "Left": -2.0
+      },
+      "Parent": {
+        "ObjectName": "xxSizeBox'W_OverheadGauge_C:WidgetTree.xxSizeBox_4'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.83"
+      },
+      "Content": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_4'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.67"
+      }
+    }
+  },
+  {
+    "Type": "W_GaugePackage_Monster_C",
+    "Name": "Gauges",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "WidgetBlueprintGeneratedClass'BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/StatusGauge/W_GaugePackage_Monster.W_GaugePackage_Monster_C'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Template": {
+      "ObjectName": "W_GaugePackage_Monster_C'Default__W_GaugePackage_Monster_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/StatusGauge/W_GaugePackage_Monster.7"
+    },
+    "Properties": {
+      "Gauge_BgStyle": {
+        "R": 0.521569,
+        "G": 0.05098,
+        "B": 0.05098,
+        "A": 1.0,
+        "Hex": "BF4040"
+      },
+      "Stamina CurBarStyle": {
+        "R": 0.364706,
+        "G": 0.156863,
+        "B": 0.729412,
+        "A": 1.0,
+        "Hex": "A36EDE"
+      },
+      "Stamina BgStyle": {
+        "R": 0.311007,
+        "G": 0.12,
+        "B": 0.65,
+        "A": 1.0,
+        "Hex": "9761D3"
+      },
+      "Stamina RegainBarStyle_Recovery": {
+        "R": 0.318547,
+        "G": 0.318547,
+        "B": 0.318547,
+        "A": 0.45,
+        "Hex": "73999999"
+      },
+      "Stamina BgStyle_Recovery": {
+        "R": 1.0,
+        "G": 1.0,
+        "B": 1.0,
+        "A": 0.6,
+        "Hex": "99FFFFFF"
+      },
+      "Rampage CurBarStyle": {
+        "R": 0.883681,
+        "G": 0.035732,
+        "B": 0.076769,
+        "A": 1.0,
+        "Hex": "F2354E"
+      },
+      "ChildViewModel": {
+        "ViewModel": {
+          "ObjectName": "Class'xxOverheadGaugeVM'",
+          "ObjectPath": "/Script/BBQ"
+        },
+        "ChildViewModelName": "GaugesVM"
+      },
+      "Slot": {
+        "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_3.GridSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.25"
+      }
+    }
+  },
+  {
+    "Type": "W_Hud_Status_BuffCollector_C",
+    "Name": "W_Hud_Status_BuffCollector",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "WidgetBlueprintGeneratedClass'BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/W_Hud_Status_BuffCollector.W_Hud_Status_BuffCollector_C'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Template": {
+      "ObjectName": "W_Hud_Status_BuffCollector_C'Default__W_Hud_Status_BuffCollector_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/W_Hud_Status_BuffCollector.5"
+    },
+    "Properties": {
+      "Slot": {
+        "ObjectName": "ScaleBoxSlot'W_OverheadGauge_C:WidgetTree.xxScaleBox_0.ScaleBoxSlot_3'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.48"
+      }
+    }
+  },
+  {
+    "Type": "WidgetAnimation",
+    "Name": "Anim_RampageFx_INST",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'WidgetAnimation'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'W_OverheadGauge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.10"
+    },
+    "Properties": {
+      "MovieScene": {
+        "ObjectName": "MovieScene'W_OverheadGauge_C:Anim_RampageFx_INST.Anim_RampageFx'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.34"
+      },
+      "AnimationBindings": [
+        {
+          "WidgetName": "Size_Rampage",
+          "SlotWidgetName": "None",
+          "AnimationGuid": "B634EC5D-4C1AE6DE-23E30C87-45303AB5",
+          "bIsRootWidget": false
+        },
+        {
+          "WidgetName": "xxImage_270",
+          "SlotWidgetName": "None",
+          "AnimationGuid": "122E47CB-4B743AAF-F4CFB5A5-714D4220",
+          "bIsRootWidget": false
+        },
+        {
+          "WidgetName": "xxImage_58",
+          "SlotWidgetName": "None",
+          "AnimationGuid": "78BA7A66-4B2335CE-99CD4393-53073DE7",
+          "bIsRootWidget": false
+        }
+      ],
+      "DisplayLabel": "Anim_RampageFx",
+      "CompiledData": {
+        "ObjectName": "MovieSceneCompiledData'W_OverheadGauge_C:Anim_RampageFx_INST.CompiledData'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.43"
+      },
+      "Signature": "6ACE74F0-41F70EA6-E43AE688-468A3F16"
+    }
+  },
+  {
+    "Type": "WidgetSwitcherSlot",
+    "Name": "WidgetSwitcherSlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'WidgetSwitcherSlot'",
+    "Outer": {
+      "ObjectName": "xxWidgetSwitcher'W_OverheadGauge_C:WidgetTree.Switcher_MonsterType'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.84"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Center",
+      "VerticalAlignment": "VAlign_Center",
+      "Parent": {
+        "ObjectName": "xxWidgetSwitcher'W_OverheadGauge_C:WidgetTree.Switcher_MonsterType'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.84"
+      },
+      "Content": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_5'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.68"
+      }
+    }
+  },
+  {
+    "Type": "WidgetSwitcherSlot",
+    "Name": "WidgetSwitcherSlot_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'WidgetSwitcherSlot'",
+    "Outer": {
+      "ObjectName": "xxWidgetSwitcher'W_OverheadGauge_C:WidgetTree.Switcher_MonsterType'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.84"
+    },
+    "Properties": {
+      "Padding": {
+        "Top": -10.0,
+        "Bottom": -6.0
+      },
+      "HorizontalAlignment": "HAlign_Center",
+      "VerticalAlignment": "VAlign_Center",
+      "Parent": {
+        "ObjectName": "xxWidgetSwitcher'W_OverheadGauge_C:WidgetTree.Switcher_MonsterType'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.84"
+      },
+      "Content": {
+        "ObjectName": "xxSizeBox'W_OverheadGauge_C:WidgetTree.xxSizeBox_4'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.83"
+      }
+    }
+  },
+  {
+    "Type": "WidgetTree",
+    "Name": "WidgetTree",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'WidgetTree'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'W_OverheadGauge_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.10"
+    },
+    "Properties": {
+      "RootWidget": {
+        "ObjectName": "xxGridPanel'W_OverheadGauge_C:WidgetTree.xxGridPanel_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.64"
+      }
+    }
+  },
+  {
+    "Type": "xxGridPanel",
+    "Name": "xxGridPanel_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxGridPanel'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "ColumnFill": [
+        1.0
+      ],
+      "RowFill": [
+        1.0
+      ],
+      "Slots": [
+        {
+          "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_0.GridSlot_2'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.20"
+        },
+        {
+          "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_0.GridSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.18"
+        },
+        {
+          "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_0.GridSlot_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.19"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_1.GridSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.21"
+      }
+    }
+  },
+  {
+    "Type": "xxGridPanel",
+    "Name": "xxGridPanel_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxGridPanel'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "ColumnFill": [
+        1.0
+      ],
+      "RowFill": [
+        1.0
+      ],
+      "Slots": [
+        {
+          "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_1.GridSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.21"
+        },
+        {
+          "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_1.GridSlot_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.22"
+        }
+      ],
+      "Clipping": "EWidgetClipping::OnDemand"
+    }
+  },
+  {
+    "Type": "xxGridPanel",
+    "Name": "xxGridPanel_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxGridPanel'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "ColumnFill": [
+        1.0
+      ],
+      "RowFill": [
+        1.0
+      ],
+      "Slots": [
+        {
+          "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_2.GridSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.23"
+        },
+        {
+          "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_2.GridSlot_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.24"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.Size_Rampage.SizeBoxSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.53"
+      }
+    }
+  },
+  {
+    "Type": "xxGridPanel",
+    "Name": "xxGridPanel_3",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxGridPanel'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "ColumnFill": [
+        1.0
+      ],
+      "RowFill": [
+        1.0
+      ],
+      "Slots": [
+        {
+          "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_3.GridSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.25"
+        },
+        {
+          "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_3.GridSlot_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.26"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_2.SizeBoxSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.51"
+      }
+    }
+  },
+  {
+    "Type": "xxGridPanel",
+    "Name": "xxGridPanel_4",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxGridPanel'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "ColumnFill": [
+        1.0
+      ],
+      "RowFill": [
+        1.0
+      ],
+      "Slots": [
+        {
+          "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_4.GridSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.27"
+        },
+        {
+          "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_4.GridSlot_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.28"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.xxSizeBox_4.SizeBoxSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.56"
+      }
+    }
+  },
+  {
+    "Type": "xxGridPanel",
+    "Name": "xxGridPanel_5",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxGridPanel'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "ColumnFill": [
+        1.0
+      ],
+      "RowFill": [
+        1.0
+      ],
+      "Slots": [
+        {
+          "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_5.GridSlot_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.30"
+        },
+        {
+          "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_5.GridSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.29"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "WidgetSwitcherSlot'W_OverheadGauge_C:WidgetTree.Switcher_MonsterType.WidgetSwitcherSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.60"
+      }
+    }
+  },
+  {
+    "Type": "xxHorizontalBox",
+    "Name": "xxHorizontalBox_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxHorizontalBox'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "Slots": [
+        {
+          "ObjectName": "HorizontalBoxSlot'W_OverheadGauge_C:WidgetTree.xxHorizontalBox_0.HorizontalBoxSlot_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.31"
+        },
+        {
+          "ObjectName": "HorizontalBoxSlot'W_OverheadGauge_C:WidgetTree.xxHorizontalBox_0.HorizontalBoxSlot_3'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.33"
+        },
+        {
+          "ObjectName": "HorizontalBoxSlot'W_OverheadGauge_C:WidgetTree.xxHorizontalBox_0.HorizontalBoxSlot_2'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.32"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_5.GridSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.29"
+      },
+      "RenderOpacity": 0.6
+    }
+  },
+  {
+    "Type": "xxImage",
+    "Name": "Img_Groggy",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxImage'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "Brush": {
+        "ImageSize": {
+          "X": 30.0,
+          "Y": 30.0
+        },
+        "Margin": {
+          "Left": 0.5,
+          "Top": 0.5,
+          "Right": 0.5,
+          "Bottom": 0.5
+        },
+        "TintColor": {
+          "SpecifiedColor": {
+            "R": 0.783538,
+            "G": 0.046665,
+            "B": 0.035601,
+            "A": 1.0,
+            "Hex": "E53D35"
+          }
+        },
+        "ResourceObject": {
+          "ObjectName": "Texture2D'T_Hud_Overhead_Groggy'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UITexture/_Hud/_Common/T_Hud_Overhead_Groggy.0"
+        },
+        "DrawAs": "ESlateBrushDrawType::Box"
+      },
+      "Slot": {
+        "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.xxSizeBox_0.SizeBoxSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.54"
+      },
+      "Visibility": "ESlateVisibility::Collapsed"
+    }
+  },
+  {
+    "Type": "xxImage",
+    "Name": "xxImage",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxImage'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "Brush": {
+        "ImageSize": {
+          "X": 4.0,
+          "Y": 14.0
+        },
+        "ResourceObject": {
+          "ObjectName": "Texture2D'T_Hud_Gauge_HP_BG_04'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UITexture/_Hud/_Common/T_Hud_Gauge_HP_BG_04.0"
+        }
+      },
+      "Slot": {
+        "ObjectName": "HorizontalBoxSlot'W_OverheadGauge_C:WidgetTree.xxHorizontalBox_0.HorizontalBoxSlot_2'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.32"
+      },
+      "bIsVariable": false,
+      "Visibility": "ESlateVisibility::SelfHitTestInvisible"
+    }
+  },
+  {
+    "Type": "xxImage",
+    "Name": "xxImage_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxImage'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "Brush": {
+        "ImageSize": {
+          "X": 16.0,
+          "Y": 16.0
+        },
+        "Margin": {
+          "Left": 0.5,
+          "Top": 0.5,
+          "Right": 0.5,
+          "Bottom": 0.5
+        },
+        "TintColor": {
+          "SpecifiedColor": {
+            "R": 0.002428,
+            "G": 0.002428,
+            "B": 0.002428,
+            "A": 0.6,
+            "Hex": "99080808"
+          }
+        },
+        "ResourceObject": {
+          "ObjectName": "MaterialInstanceConstant'MI_CircleShadow_Overhead'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UITexture/Mat/Instance/MI_CircleShadow_Overhead.0"
+        },
+        "DrawAs": "ESlateBrushDrawType::Box"
+      },
+      "Slot": {
+        "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_4.GridSlot_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.28"
+      },
+      "Visibility": "ESlateVisibility::SelfHitTestInvisible"
+    }
+  },
+  {
+    "Type": "xxImage",
+    "Name": "xxImage_111",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxImage'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "Brush": {
+        "ImageSize": {
+          "X": 3.0,
+          "Y": 12.0
+        },
+        "ResourceObject": {
+          "ObjectName": "Texture2D'T_Hud_Gauge_HP_BG_03'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UITexture/_Hud/_Common/T_Hud_Gauge_HP_BG_03.0"
+        }
+      },
+      "Slot": {
+        "ObjectName": "HorizontalBoxSlot'W_OverheadGauge_C:WidgetTree.xxHorizontalBox_0.HorizontalBoxSlot_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.31"
+      },
+      "bIsVariable": false,
+      "Visibility": "ESlateVisibility::SelfHitTestInvisible"
+    }
+  },
+  {
+    "Type": "xxImage",
+    "Name": "xxImage_156",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxImage'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "Brush": {
+        "ImageSize": {
+          "X": 180.0,
+          "Y": 32.0
+        },
+        "ResourceObject": {
+          "ObjectName": "Texture2D'T_Hud_Gauge_HP_BG_Elite'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UITexture/_Hud/_Common/T_Hud_Gauge_HP_BG_Elite.0"
+        }
+      },
+      "Slot": {
+        "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_4.GridSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.27"
+      },
+      "bIsVariable": false,
+      "Visibility": "ESlateVisibility::HitTestInvisible",
+      "RenderOpacity": 0.8
+    }
+  },
+  {
+    "Type": "xxImage",
+    "Name": "xxImage_270",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxImage'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "Brush": {
+        "TintColor": {
+          "SpecifiedColor": {
+            "R": 1.0,
+            "G": 0.039546,
+            "B": 0.0865,
+            "A": 1.0,
+            "Hex": "FF3853"
+          }
+        },
+        "ResourceObject": {
+          "ObjectName": "MaterialInstanceConstant'MI_Fx_Gradient_Cen'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UITexture/Mat/Instance/MI_Fx_Gradient_Cen.0"
+        }
+      },
+      "Slot": {
+        "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_2.GridSlot_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.24"
+      },
+      "bIsVariable": false,
+      "Visibility": "ESlateVisibility::SelfHitTestInvisible",
+      "RenderOpacity": 0.0
+    }
+  },
+  {
+    "Type": "xxImage",
+    "Name": "xxImage_58",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxImage'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "Brush": {
+        "ImageSize": {
+          "X": 110.0,
+          "Y": 70.0
+        },
+        "TintColor": {
+          "SpecifiedColor": {
+            "R": 1.0,
+            "G": 0.0,
+            "B": 0.052861,
+            "A": 1.0,
+            "Hex": "FF0041"
+          }
+        },
+        "ResourceObject": {
+          "ObjectName": "MaterialInstanceConstant'T_SlotHover_Material_Inst'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UITexture/Material/Wave_Center/Instance/T_SlotHover_Material_Inst.0"
+        }
+      },
+      "Slot": {
+        "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_2.GridSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.23"
+      },
+      "Visibility": "ESlateVisibility::SelfHitTestInvisible"
+    }
+  },
+  {
+    "Type": "xxImage",
+    "Name": "xxImage_80",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxImage'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "Brush": {
+        "ImageSize": {
+          "X": 102.0,
+          "Y": 18.0
+        },
+        "ResourceObject": {
+          "ObjectName": "Texture2D'T_Hud_Gauge_HP_BG_00'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UITexture/_Hud/_Common/T_Hud_Gauge_HP_BG_00.0"
+        }
+      },
+      "Slot": {
+        "ObjectName": "HorizontalBoxSlot'W_OverheadGauge_C:WidgetTree.xxHorizontalBox_0.HorizontalBoxSlot_3'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.33"
+      },
+      "bIsVariable": false
+    }
+  },
+  {
+    "Type": "xxImage",
+    "Name": "xxImage_85",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxImage'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "Brush": {
+        "ImageSize": {
+          "X": 16.0,
+          "Y": 16.0
+        },
+        "Margin": {
+          "Left": 0.5,
+          "Top": 0.5,
+          "Right": 0.5,
+          "Bottom": 0.5
+        },
+        "TintColor": {
+          "SpecifiedColor": {
+            "R": 0.002428,
+            "G": 0.002428,
+            "B": 0.002428,
+            "A": 0.6,
+            "Hex": "99080808"
+          }
+        },
+        "ResourceObject": {
+          "ObjectName": "MaterialInstanceConstant'MI_CircleShadow_Overhead'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UITexture/Mat/Instance/MI_CircleShadow_Overhead.0"
+        },
+        "DrawAs": "ESlateBrushDrawType::Box"
+      },
+      "Slot": {
+        "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_1.SizeBoxSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.50"
+      },
+      "bIsVariable": false,
+      "Visibility": "ESlateVisibility::SelfHitTestInvisible"
+    }
+  },
+  {
+    "Type": "xxScaleBox",
+    "Name": "xxScaleBox_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxScaleBox'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "Stretch": "EStretch::ScaleToFitY",
+      "Slots": [
+        {
+          "ObjectName": "ScaleBoxSlot'W_OverheadGauge_C:WidgetTree.xxScaleBox_0.ScaleBoxSlot_3'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.48"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.xxSizeBox_1.SizeBoxSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.55"
+      }
+    }
+  },
+  {
+    "Type": "xxSizeBox",
+    "Name": "Size_Rampage",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSizeBox'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "WidthOverride": 240.0,
+      "HeightOverride": 4.0,
+      "bOverride_HeightOverride": true,
+      "Slots": [
+        {
+          "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.Size_Rampage.SizeBoxSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.53"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_3.GridSlot_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.26"
+      },
+      "bIsVariable": true,
+      "Clipping": "EWidgetClipping::ClipToBounds",
+      "Visibility": "ESlateVisibility::Collapsed"
+    }
+  },
+  {
+    "Type": "xxSizeBox",
+    "Name": "xxSizeBox_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSizeBox'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "WidthOverride": 132.0,
+      "HeightOverride": 32.0,
+      "bOverride_WidthOverride": true,
+      "bOverride_HeightOverride": true,
+      "Slots": [
+        {
+          "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.xxSizeBox_0.SizeBoxSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.54"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_45.SizeBoxSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.52"
+      }
+    }
+  },
+  {
+    "Type": "xxSizeBox",
+    "Name": "xxSizeBox_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSizeBox'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "WidthOverride": 104.0,
+      "HeightOverride": 28.0,
+      "bOverride_WidthOverride": true,
+      "bOverride_HeightOverride": true,
+      "Slots": [
+        {
+          "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.xxSizeBox_1.SizeBoxSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.55"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.CommonVisualAttachment_0.SizeBoxSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.49"
+      },
+      "Visibility": "ESlateVisibility::HitTestInvisible"
+    }
+  },
+  {
+    "Type": "xxSizeBox",
+    "Name": "xxSizeBox_4",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSizeBox'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "WidthOverride": 180.0,
+      "HeightOverride": 32.0,
+      "bOverride_WidthOverride": true,
+      "bOverride_HeightOverride": true,
+      "Slots": [
+        {
+          "ObjectName": "SizeBoxSlot'W_OverheadGauge_C:WidgetTree.xxSizeBox_4.SizeBoxSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.56"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "WidgetSwitcherSlot'W_OverheadGauge_C:WidgetTree.Switcher_MonsterType.WidgetSwitcherSlot_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.61"
+      }
+    }
+  },
+  {
+    "Type": "xxWidgetSwitcher",
+    "Name": "Switcher_MonsterType",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxWidgetSwitcher'",
+    "Outer": {
+      "ObjectName": "WidgetTree'W_OverheadGauge_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.62"
+    },
+    "Properties": {
+      "Slots": [
+        {
+          "ObjectName": "WidgetSwitcherSlot'W_OverheadGauge_C:WidgetTree.Switcher_MonsterType.WidgetSwitcherSlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.60"
+        },
+        {
+          "ObjectName": "WidgetSwitcherSlot'W_OverheadGauge_C:WidgetTree.Switcher_MonsterType.WidgetSwitcherSlot_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.61"
+        }
+      ],
+      "Slot": {
+        "ObjectName": "GridSlot'W_OverheadGauge_C:WidgetTree.xxGridPanel_0.GridSlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/OverheadGauge/W_OverheadGauge.18"
+      }
+    }
+  }
+]

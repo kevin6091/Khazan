@@ -1,0 +1,14 @@
+{
+  "status": "failed",
+  "saved": [
+    "/Game/HealVFX/Source/FT_Trail",
+    "/Game/HealVFX/Source/FS_Sphere",
+    "/Game/HealVFX/Source/FS_SmallRing_01",
+    "/Game/HealVFX/Source/FS_BloodRing_01"
+  ],
+  "original_events": [],
+  "adapters": [],
+  "temporary_tuning": {},
+  "shaders": [],
+  "error": "Traceback (most recent call last):\n  File \"C:/Users/user/Desktop/GitProject/Khazan/Khazan/Scripts/Art/author_heal_vfx_20261013.py\", line 194, in <module>\n    GLOW=material('M_Heal_SoftGlow');FLOW=material('M_Heal_OriginalTrail',trail=True);FRES=material('M_Heal_CoreFresnel',sphere=True)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:/Users/user/Desktop/GitProject/Khazan/Khazan/Scripts/Art/author_heal_vfx_20261013.py\", line 64, in material\n    edge=custom(m,['UV','Width'], 'float w=max(Width,1.25*max(length(ddx(UV)),length(ddy(UV)))); return smoothstep(0,w,UV.y)*smoothstep(0,w,1-UV.y);' if trail else 'float r=length((UV-float2(.5,.5))*2); return 1-smoothstep(.15,1,r);')\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:/Users/user/Desktop/GitProject/Khazan/Khazan/Scripts/Art/author_heal_vfx_20261013.py\", line 55, in custom\n    a.set_editor_property('inputs',[u.CustomInput(input_name=n) for n in inputs]);return a\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:/Users/user/Desktop/GitProject/Khazan/Khazan/Scripts/Art/author_heal_vfx_20261013.py\", line 55, in <listcomp>\n    a.set_editor_property('inputs',[u.CustomInput(input_name=n) for n in inputs]);return a\n                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: call() takes at most 0 arguments (1 given)\n"
+}

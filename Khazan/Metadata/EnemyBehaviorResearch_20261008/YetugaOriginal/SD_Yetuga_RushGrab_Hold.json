@@ -1,0 +1,53 @@
+[
+  {
+    "Type": "xxDamageInfo",
+    "Name": "SD_Yetuga_RushGrab_Hold",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SD_Yetuga_RushGrab_Hold",
+    "Properties": {
+      "AttackInfo": {
+        "AttackType": "ECharacterAttackType::HoldAttackAuto",
+        "SkillPowerInfo": {
+          "SkillPowerBonus": 0
+        },
+        "StaminaAttackInfo": {
+          "StaminaAttackRate": 10000
+        },
+        "GuardDamageInfo": {
+          "bDontGuard": true
+        },
+        "AttackableFlags": [
+          "ECharacterAttackableFlag::EnableAttackableDownState"
+        ]
+      },
+      "AttackerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true
+      },
+      "DamagerDelayInfo": {
+        "IsRestDelay": true
+      },
+      "AttackerKnockData": {
+        "TimeSyncType": "ETimeSyncType::SyncAnimation"
+      },
+      "SpecialDamageAniminfo": {
+        "bUseCommonAnimType": false,
+        "SpecialDamageAnimType": "ESpecialDamageAniType::Hold8",
+        "CommonAnimationTag": "ECommonAnimationTag::None"
+      },
+      "AttackerHitEffect": {
+        "ParticleInfo": {
+          "bSyncData": true
+        }
+      },
+      "DamageSounds": [
+        {
+          "ObjectName": "AkAudioEvent'efx_yetuga_grab_hit'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/yetuga_renewal/efx/efx_yetuga_grab_hit.0"
+        }
+      ],
+      "AttackStrength": "EBattleDirecting_AttackStrength::AttackStrength_02"
+    }
+  }
+]

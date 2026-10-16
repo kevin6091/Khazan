@@ -1,0 +1,31 @@
+--- task-before/Source/Khazan/Character/KZCharacter.cpp
++++ main/Source/Khazan/Character/KZCharacter.cpp
+@@ -13,6 +13,7 @@
+ #include "Character/KZMonster.h"
+ #include "System/KZAssetManager.h"
+ #include "Components/SkeletalMeshComponent.h"
++#include "Components/CapsuleComponent.h"
+ #include "Kismet/GameplayStatics.h"
+ #include "Particles/ParticleSystem.h"
+ #include "Particles/ParticleSystemComponent.h"
+@@ -196,9 +197,18 @@
+ 	if (HasAuthority() && GetNetMode() != NM_DedicatedServer && IsValid(Attacker) && CharacterDefinition)
+ 		if (UParticleSystem* Impact = CharacterDefinition->GetHitReactionSettings().ImpactEffect)
+ 		{
+-			const FVector Contact = GetMesh()->DoesSocketExist(TEXT("Bip001-Spine2"))
++			const FVector BodyContact = GetMesh()->DoesSocketExist(TEXT("Bip001-Spine2"))
+ 				? GetMesh()->GetSocketLocation(TEXT("Bip001-Spine2")) : GetActorLocation();
+-			const FVector Outward = (Attacker->GetActorLocation() - Contact).GetSafeNormal2D();
++			FVector Outward = (Attacker->GetActorLocation() - BodyContact).GetSafeNormal2D();
++			if (Outward.IsNearlyZero()) Outward = GetActorForwardVector();
++			// Use the existing receiver capsule surface so the shared Brutal blood
++			// burst is visible outside player and monster bodies at an approved hit.
++			const UCapsuleComponent* Capsule = GetCapsuleComponent();
++			const float Radius = Capsule->GetScaledCapsuleRadius();
++			const FVector Axis = Capsule->GetUpVector() * (Capsule->GetScaledCapsuleHalfHeight() - Radius);
++			const FVector Centre = FMath::ClosestPointOnSegment(BodyContact,
++				Capsule->GetComponentLocation() - Axis, Capsule->GetComponentLocation() + Axis);
++			const FVector Contact = Centre + Outward * Radius;
+ 			if (UParticleSystemComponent* FX = UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), Impact,
+ 				Contact, Outward.Rotation(), FVector::OneVector, true))
+ 				FX->ComponentTags.Add(TEXT("KZReceivedHitImpact"));

@@ -1,0 +1,193 @@
+[
+  {
+    "Type": "xxSkillInfo",
+    "Name": "SI_Kazan_Com_FinalBlow",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Kazan/Skill/Common/FinalBlow/SI_Kazan_Com_FinalBlow",
+    "Properties": {
+      "SkillName": {
+        "Namespace": "Skill",
+        "Key": "SI_Kazan_Com_FinalBlow_Name",
+        "SourceString": "브루탈 어택 : 처형",
+        "LocalizedString": "브루탈 어택 : 처형"
+      },
+      "SkillDescription": {
+        "Namespace": "Skill",
+        "Key": "SI_Kazan_Com_FinalBlow_Desc",
+        "SourceString": "처형 가능한 적에게 {Key_B}\r\n\r\n브루탈 어택으로 적을 처치 가능할 때 브루탈 어택 : 처형이 발동된다.\r\n\r\n브루탈 어택 : 처형으로 적을 처치하면 투지를 1칸 획득한다.\r\n<ChangeText>처형 가능한 적에게 {Key_B}\r\n\r\n브루탈 어택으로 적을 처치 가능할 때 브루탈 어택 : 처형이 발동된다.\r\n\r\n브루탈 어택 : 처형으로 적을 처치하면 분노를 1칸 획득한다.</ChangeText>",
+        "LocalizedString": "처형 가능한 적에게 {Key_B}\r\n\r\n브루탈 어택으로 적을 처치 가능할 때 브루탈 어택 : 처형이 발동된다.\r\n\r\n브루탈 어택 : 처형으로 적을 처치하면 투지를 1칸 획득한다.\r\n<ChangeText>처형 가능한 적에게 {Key_B}\r\n\r\n브루탈 어택으로 적을 처치 가능할 때 브루탈 어택 : 처형이 발동된다.\r\n\r\n브루탈 어택 : 처형으로 적을 처치하면 분노를 1칸 획득한다.</ChangeText>"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Common/State/PlayerCommon/SB_Player_FinalBlow_Base.SB_Player_FinalBlow_Base_C",
+        "SubPathString": ""
+      },
+      "SkillStateSubType": "ESkillStateSubType::Execution",
+      "StatusChangeInfoList": [
+        {
+          "bUseParticle": false,
+          "StatusToChangeInfos": [
+            {
+              "StatusToChange": "EDynamicStatusToChange::BattleResoruce1",
+              "Operator": "EStatusOper::Add",
+              "Value": 1000,
+              "bDieHard": false
+            },
+            {
+              "StatusToChange": "EDynamicStatusToChange::Stamina",
+              "Operator": "EStatusOper::Add",
+              "Value": 10000,
+              "bDieHard": false
+            }
+          ],
+          "bChangeImmediate": true,
+          "bNotChangeWhenShort": false,
+          "bCheckCanChange": true,
+          "ParticleInfo": {
+            "ParticleMode": "ParticleSystem",
+            "Particle": null,
+            "BPOverrideParticle": null,
+            "NiagaraParticle": null,
+            "EffectData": null,
+            "ShowUpType": "EEffectShowUp::ShowAll",
+            "bSyncData": false,
+            "Scale": 1.0,
+            "ScaleRandRange": 0.0,
+            "RotationRandRange": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            },
+            "Scale3D": {
+              "X": 1.0,
+              "Y": 1.0,
+              "Z": 1.0
+            },
+            "RelativeLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "RelativeRotation": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            },
+            "bAttached": false,
+            "AttachSocketName": "None",
+            "bApplyBaseScale": true,
+            "bSpawnOnFloor": false,
+            "HeightFromFloor": 0.0,
+            "FloorAroundBlendRange": 0.0,
+            "bRotateInDirOfFloor": false,
+            "RotateInDirOfFloorAroundBlendRange": 50.0,
+            "CustomTimeDilation": 1.0,
+            "bReceivesDecals": false,
+            "bAbsoluteRotation": true,
+            "bAbsoluteRotationWorld": false,
+            "bIgnoreAttachedVisibility": false,
+            "TranslucencySortPriority": 0,
+            "bCastParticleShadow": false,
+            "bUseParticleParametersAsset": false,
+            "ParticleFloatParams": [],
+            "ParticleVectorParams": [],
+            "ParticlePhysicalVectorParams": [],
+            "ParticlePhysicalFloatParams": [],
+            "ParticleParametersAsset": null,
+            "ParticleVectorParam": "None",
+            "ParticleVectorParam2": "None",
+            "bParticleVectorParamApplyEveryTick": false,
+            "bUseEndPoint": false,
+            "EndPointVectorParam": "None",
+            "bUseEnvVolumeDependent": false,
+            "EnvVolumeBundleAsset": null
+          },
+          "bUseDecal": false,
+          "DecalData": {
+            "DecalMode": "DecalMode_MaterialInstance",
+            "DecalMaterial": null,
+            "MaterialEffect": null,
+            "RandomDecalScale": {
+              "BasedVector": {
+                "X": 50.0,
+                "Y": 256.0,
+                "Z": 256.0
+              },
+              "MinVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MaxVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "bFixedRatio": true
+            },
+            "SpawnLocationBoneName": "None",
+            "RandomPosition": {
+              "BasedVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MinVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MaxVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "bFixedRatio": true
+            },
+            "RandomRotator": {
+              "BasedRotator": {
+                "Pitch": -90.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              },
+              "MinRotator": {
+                "Pitch": 0.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              },
+              "MaxRotator": {
+                "Pitch": 0.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              }
+            },
+            "LifeSpan": 0.0,
+            "bOwnerYawRotOnly": false,
+            "IsSpawnFloor": true,
+            "bRotateInDirOfTerrain": false,
+            "RotateInDirOfTerrainAroundBlendRange": 50.0,
+            "bCheckStretchOnWall": false,
+            "bScaleUpStretchedDecal": false,
+            "StretchedDecalScale": {
+              "X": 2.25,
+              "Y": 0.75,
+              "Z": 0.75
+            },
+            "OpacityCurve": null,
+            "OpacityParamName": "FadeOut",
+            "RandomScalarParams": [],
+            "bApplyBaseScale": true,
+            "LimitAngleOnAttackSuccessed": 0.0
+          },
+          "bUseSound": false,
+          "SoundEvent": null
+        }
+      ],
+      "SkillTexture2": {
+        "AssetPathName": "/Game/_Kazan_/UserInterface/UITexture/Icons/SkillV2/CommonV2/T_Icon_Skill_Common_C01_UI.T_Icon_Skill_Common_C01_UI",
+        "SubPathString": ""
+      },
+      "bDisableCancelEffect": true
+    }
+  }
+]

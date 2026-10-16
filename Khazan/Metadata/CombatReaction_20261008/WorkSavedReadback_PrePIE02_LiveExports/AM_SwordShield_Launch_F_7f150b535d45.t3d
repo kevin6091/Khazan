@@ -1,0 +1,30 @@
+Begin Object Class=/Script/Engine.AnimMontage Name="AM_SwordShield_Launch_F" ExportPath="/Script/Engine.AnimMontage'/Game/Monsters/SwordShield/Animations/Reaction/Montages/AM_SwordShield_Launch_F.AM_SwordShield_Launch_F'"
+   Begin Object Class=/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify Name="HitLand" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/Monsters/SwordShield/Animations/Reaction/Montages/AM_SwordShield_Launch_F.AM_SwordShield_Launch_F:HitLand'"
+   End Object
+   Begin Object Class=/Script/Engine.AnimDataModel Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/Monsters/SwordShield/Animations/Reaction/Montages/AM_SwordShield_Launch_F.AM_SwordShield_Launch_F:AnimDataModel'"
+   End Object
+   Begin Object Name="HitLand" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/Monsters/SwordShield/Animations/Reaction/Montages/AM_SwordShield_Launch_F.AM_SwordShield_Launch_F:HitLand'"
+      NotifyName="HitLand"
+   End Object
+   Begin Object Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/Monsters/SwordShield/Animations/Reaction/Montages/AM_SwordShield_Launch_F.AM_SwordShield_Launch_F:AnimDataModel'"
+      FrameRate=(Numerator=5000,Denominator=167)
+      NumberOfFrames=99
+      NumberOfKeys=100
+   End Object
+   BlendIn=(BlendTime=0.100000)
+   BlendOut=(BlendTime=0.200000)
+   CompositeSections(0)=(SectionName="Up",NextSectionName="Peak",LinkedMontage="/Script/Engine.AnimMontage'AM_SwordShield_Launch_F'",SegmentIndex=0,SegmentLength=0.167000,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Air_F_Up.Damage_Air_F_Up'")
+   CompositeSections(1)=(SectionName="Peak",NextSectionName="Down",LinkedMontage="/Script/Engine.AnimMontage'AM_SwordShield_Launch_F'",SegmentIndex=1,SegmentBeginTime=0.167000,SegmentLength=0.100000,LinkValue=0.167000,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Air_F_Peak.Damage_Air_F_Peak'")
+   CompositeSections(2)=(SectionName="Down",NextSectionName="Land",LinkedMontage="/Script/Engine.AnimMontage'AM_SwordShield_Launch_F'",SegmentIndex=2,SegmentBeginTime=0.267000,SegmentLength=0.167000,LinkValue=0.267000,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Air_F_Down.Damage_Air_F_Down'")
+   CompositeSections(3)=(SectionName="Land",NextSectionName="Loop",LinkedMontage="/Script/Engine.AnimMontage'AM_SwordShield_Launch_F'",SegmentIndex=3,SegmentBeginTime=0.434000,SegmentLength=0.899033,LinkValue=0.434000,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Air_F_Land.Damage_Air_F_Land'")
+   CompositeSections(4)=(SectionName="Loop",NextSectionName="Getup",LinkedMontage="/Script/Engine.AnimMontage'AM_SwordShield_Launch_F'",SegmentIndex=4,SegmentBeginTime=1.333033,SegmentLength=0.300000,LinkValue=1.333033,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Down_Loop_F.Damage_Down_Loop_F'")
+   CompositeSections(5)=(SectionName="Getup",LinkedMontage="/Script/Engine.AnimMontage'AM_SwordShield_Launch_F'",SegmentIndex=5,SegmentBeginTime=1.633033,SegmentLength=1.666667,LinkValue=1.633033,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Getup_F.Damage_Getup_F'")
+   SlotAnimTracks(0)=(AnimTrack=(AnimSegments=((CachedPlayLength=0.167000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Air_F_Up.Damage_Air_F_Up'",AnimEndTime=0.167000),(CachedPlayLength=0.100000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Air_F_Peak.Damage_Air_F_Peak'",StartPos=0.167000,AnimEndTime=0.100000),(CachedPlayLength=0.167000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Air_F_Down.Damage_Air_F_Down'",StartPos=0.267000,AnimEndTime=0.167000),(CachedPlayLength=0.899033,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Air_F_Land.Damage_Air_F_Land'",StartPos=0.434000,AnimEndTime=0.899033),(CachedPlayLength=1.600000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Down_Loop_F.Damage_Down_Loop_F'",StartPos=1.333033,AnimEndTime=0.300000),(CachedPlayLength=1.666667,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Getup_F.Damage_Getup_F'",StartPos=1.633033,AnimEndTime=1.666667))))
+   BranchingPointMarkers(0)=(NotifyIndex=0,TriggerTime=0.434000)
+   CommonTargetFrameRate=(Numerator=0,Denominator=0)
+   Notifies(0)=(NotifyName="HitLand",Notify="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'HitLand'",MontageTickType=BranchingPoint,Guid=E25C04E14C6BEF753013A7B9429E43F7,LinkedMontage="/Script/Engine.AnimMontage'AM_SwordShield_Launch_F'",SegmentIndex=3,SegmentBeginTime=0.434000,SegmentLength=0.899033,LinkValue=0.434000,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Air_F_Land.Damage_Air_F_Land'")
+   SequenceLength=3.306600
+   AnimNotifyTracks(0)=(TrackName="1")
+   DataModelInterface=AnimDataModel'AM_SwordShield_Launch_F:AnimDataModel'
+   Skeleton="/Script/Engine.Skeleton'/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman'"
+End Object

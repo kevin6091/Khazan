@@ -1,0 +1,128 @@
+[
+  {
+    "Type": "xxDamageInfo",
+    "Name": "SD_Yetuga_Proto_Armageddon_02",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SD_Yetuga_Proto_Armageddon_02",
+    "Properties": {
+      "AttackInfo": {
+        "SkillPowerInfo": {
+          "SkillPowerBonus": 3000
+        },
+        "StaminaAttackInfo": {
+          "StaminaAttackRate": 20000
+        },
+        "AttackerReactionTableSelect": {
+          "AttackerReactionTag": {
+            "DataTable": {
+              "ObjectName": "DataTable'AttackerReaction_Common'",
+              "ObjectPath": "BBQ/Content/_Common/Constants/AttackerReaction/AttackerReaction_Common.0"
+            },
+            "RowName": "충격량100등급+"
+          }
+        },
+        "GuardDamageInfo": {
+          "bDontJustGuard": true
+        },
+        "AttackableFlags": [
+          "ECharacterAttackableFlag::EnableAttackableDownState"
+        ],
+        "StatusEffectData": {
+          "CumulativeValueRate": 20000,
+          "AttributeDamageRate": 30000
+        }
+      },
+      "SkillFuncInfoMap": [
+        {
+          "Key": "EDamageInfoSkillFuncIndex::Index1",
+          "Value": {
+            "SkillTag": {
+              "ObjectName": "xxDamageInfoTag_BeforeProcessHit'SD_Yetuga_Proto_Armageddon_02:xxDamageInfoTag_BeforeProcessHit_0'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SD_Yetuga_Proto_Armageddon_02.1"
+            },
+            "Funcs": [
+              {
+                "ObjectName": "xxDmgInfoFuncAddStatusEffect'SD_Yetuga_Proto_Armageddon_02:xxDmgInfoFuncAddStatusEffect_0'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SD_Yetuga_Proto_Armageddon_02.2"
+              }
+            ]
+          }
+        }
+      ],
+      "AttackerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true,
+        "TimeSectionDelayData": {
+          "LoopTime": 0.125
+        }
+      },
+      "DamagerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true
+      },
+      "DamagerKnockData": {
+        "KnockBackType": "EKnockbackType::Air",
+        "KnockBackDirection": "EKnockbackDirection::Radial",
+        "KnockBackMoveType": "EKnockbackMoveType::Velocity",
+        "KnockbackDistance": {
+          "X": 100.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "KnockCurveVector": {
+          "ObjectName": "CurveVector'CV_common_knockback_deaccel'",
+          "ObjectPath": "BBQ/Content/_Common/MoveCurve/CV_common_knockback_deaccel.0"
+        },
+        "KnockCurveScale": {
+          "X": 400.0,
+          "Y": 1.0,
+          "Z": 1.0
+        },
+        "KnockbackDistanceTime": 0.2,
+        "KnockbackHeight": 800.0,
+        "KnockbackForce": 1000.0
+      },
+      "SpecialDamageAniminfo": {
+        "DamageStrength": "EDamageTypeByStrength::DamageStrong",
+        "CommonAnimationTag": "ECommonAnimationTag::DamageU"
+      },
+      "AttackerHitEffect": {
+        "ParticleInfo": {
+          "bSyncData": true
+        }
+      },
+      "DamageSounds": [
+        {
+          "ObjectName": "AkAudioEvent'Play_Monster_IceMaterialSwitch'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/Monster_Common/Monster_Hit_MaterialSwitch/Play_Monster_IceMaterialSwitch.0"
+        }
+      ],
+      "AttackStrength": "EBattleDirecting_AttackStrength::AttackStrength_02"
+    }
+  },
+  {
+    "Type": "xxDamageInfoTag_BeforeProcessHit",
+    "Name": "xxDamageInfoTag_BeforeProcessHit_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfoTag_BeforeProcessHit'",
+    "Outer": {
+      "ObjectName": "xxDamageInfo'SD_Yetuga_Proto_Armageddon_02'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SD_Yetuga_Proto_Armageddon_02.0"
+    }
+  },
+  {
+    "Type": "xxDmgInfoFuncAddStatusEffect",
+    "Name": "xxDmgInfoFuncAddStatusEffect_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDmgInfoFuncAddStatusEffect'",
+    "Outer": {
+      "ObjectName": "xxDamageInfo'SD_Yetuga_Proto_Armageddon_02'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SD_Yetuga_Proto_Armageddon_02.0"
+    },
+    "Properties": {
+      "AttributeType": "EStatusEffectAttributeType::Buff_Attribute",
+      "Attribute": "EStatusEffectAttribute::Water"
+    }
+  }
+]

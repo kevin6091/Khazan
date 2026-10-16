@@ -1,0 +1,4625 @@
+{
+  "status": "passed",
+  "project": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan",
+  "families": {
+    "ApesStoneHandElite": {
+      "definition": "/Game/Monsters/ApesStoneHandElite/Data/DA_Character_ApesStoneHandElite.DA_Character_ApesStoneHandElite",
+      "combo": "/Game/Monsters/ApesStoneHandElite/Data/DA_OriginalPatterns_ApesStoneHandElite.DA_OriginalPatterns_ApesStoneHandElite",
+      "settings": {
+        "b_enabled": null,
+        "exhaustion_seconds": 5.0,
+        "exhaustion_montage": "/Game/Monsters/ApesStoneHandElite/Animations/AM_Exhaustion.AM_Exhaustion",
+        "damage_effect": "/Game/Bluprints/AbilitySystem/Effects/Attack/GE_ComboAttack_Damage.GE_ComboAttack_Damage_C"
+      },
+      "nodes": [
+        {
+          "id": "DempseyRoll_Step1",
+          "skill": "DempseyRoll",
+          "next": "DempseyRoll_Step2",
+          "section": "DempseyRoll_Step1",
+          "montage": "/Game/Monsters/ApesStoneHandElite/Animations/AM_OriginalPatterns_ApesStoneHandElite.AM_OriginalPatterns_ApesStoneHandElite",
+          "branches": [],
+          "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DempseyRoll_Step1.Attack_DempseyRoll_Step1"
+        },
+        {
+          "id": "DempseyRoll_Step2",
+          "skill": "DempseyRoll",
+          "next": "None",
+          "section": "DempseyRoll_Step2",
+          "montage": "/Game/Monsters/ApesStoneHandElite/Animations/AM_OriginalPatterns_ApesStoneHandElite.AM_OriginalPatterns_ApesStoneHandElite",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.PARRIED: 3>",
+              "target": "DempseyRoll_Reaction",
+              "notify": "Pattern_DempseyRoll_Step2_Index2",
+              "windows": [
+                "<Struct 'Vector2D' (0x000002524B9C26E0) {x: 0.569643, y: 0.862859}>"
+              ],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/05_DempseyRoll/SB_ApesStoneHand_E_DempseyRoll"
+            }
+          ],
+          "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DempseyRoll_Step2.Attack_DempseyRoll_Step2"
+        },
+        {
+          "id": "Groggy_Step1",
+          "skill": "Groggy",
+          "next": "Groggy_Step2",
+          "section": "Groggy_Step1",
+          "montage": "/Game/Monsters/ApesStoneHandElite/Animations/AM_OriginalPatterns_ApesStoneHandElite.AM_OriginalPatterns_ApesStoneHandElite",
+          "branches": [],
+          "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_GroggyStr_F_Loop_Composite_Variant02.Damage_GroggyStr_F_Loop_Composite_Variant02"
+        },
+        {
+          "id": "Groggy_Step2",
+          "skill": "Groggy",
+          "next": "None",
+          "section": "Groggy_Step2",
+          "montage": "/Game/Monsters/ApesStoneHandElite/Animations/AM_OriginalPatterns_ApesStoneHandElite.AM_OriginalPatterns_ApesStoneHandElite",
+          "branches": [],
+          "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_GroggyStr_F_End_Composite_Variant02.Damage_GroggyStr_F_End_Composite_Variant02"
+        },
+        {
+          "id": "DempseyRoll_Reaction",
+          "skill": "DempseyRoll",
+          "next": "None",
+          "section": "DempseyRoll_Reaction",
+          "montage": "/Game/Monsters/ApesStoneHandElite/Animations/AM_OriginalPatterns_ApesStoneHandElite.AM_OriginalPatterns_ApesStoneHandElite",
+          "branches": [],
+          "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_JustGuardReaction.Damage_JustGuardReaction"
+        }
+      ],
+      "clips": {
+        "Damage/Damage_GroggyStr_F_Start": {
+          "path": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_GroggyStr_F_Start.Damage_GroggyStr_F_Start",
+          "length": 1.2000000476837158,
+          "notifies": [
+            {
+              "time": 1.1999,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.017499,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_apesstonehand2_dmg_l.SC_vo_apesstonehand2_dmg_l",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.284542,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_GroggyStr_F_Start.Damage_GroggyStr_F_Start:KZAnimNotifyState_MonsterVisual_0.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.340373,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_GroggyStr_F_Start.Damage_GroggyStr_F_Start:KZAnimNotifyState_MonsterVisual_1.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.639272,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_GroggyStr_F_Start.Damage_GroggyStr_F_Start:KZAnimNotifyState_MonsterVisual_2.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.668005,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_GroggyStr_F_Start.Damage_GroggyStr_F_Start:KZAnimNotifyState_MonsterVisual_3.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.571031,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand_foley_land.SC_efx_apesstonehand_foley_land",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        },
+        "Damage/Damage_PartGroggy_Start": {
+          "path": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start",
+          "length": 2.0,
+          "notifies": [
+            {
+              "time": 1.9999,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.774078,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.078672,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_ui_groggy_slow_apeshand.SC_ui_groggy_slow_apeshand",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.139568,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_apesstonehand2_partgroggy_dmg.SC_vo_apesstonehand2_partgroggy_dmg",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 1.605787,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_1.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/Monsters/Shared/VFX/FP_PartGroggy_Blood_UnitFixed.FP_PartGroggy_Blood_UnitFixed",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.442236,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_2.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.497745,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_3.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.017938,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_4.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.076459,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_5.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.334982,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand_bodyfall_switch.SC_efx_apesstonehand_bodyfall_switch",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 1.753989,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_6.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.900218,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 1.773994,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_8.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            }
+          ]
+        },
+        "Damage/Damage_PartGroggy_Loop": {
+          "path": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_Loop.Damage_PartGroggy_Loop",
+          "length": 2.0,
+          "notifies": [
+            {
+              "time": 0.025025,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_apesstonehand2_partgroggy_pain.SC_vo_apesstonehand2_partgroggy_pain",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.031958,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand_foley_groggy.SC_efx_apesstonehand_foley_groggy",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        },
+        "Damage/Damage_PartGroggy_End": {
+          "path": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End",
+          "length": 2.0333333015441895,
+          "notifies": [
+            {
+              "time": 2.033233,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.176986,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_apesstonehand_breath_s.SC_vo_apesstonehand_breath_s",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.419685,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand2_partgroggy_end.SC_efx_apesstonehand2_partgroggy_end",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.649789,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End:KZAnimNotifyState_MonsterVisual_0.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.376094,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End:KZAnimNotifyState_MonsterVisual_1.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.249174,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand2_footstep_walk.SC_efx_apesstonehand2_footstep_walk",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        },
+        "Damage/Damage_JustGuardReaction": {
+          "path": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_JustGuardReaction.Damage_JustGuardReaction",
+          "length": 1.5666667222976685,
+          "notifies": [
+            {
+              "time": 1.566567,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.018278,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_ui_groggy_slow_apeshand.SC_ui_groggy_slow_apeshand",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.026536,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_apesstonehand2_dmg_l.SC_vo_apesstonehand2_dmg_l",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.252691,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand_foley_turn.SC_efx_apesstonehand_foley_turn",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.530543,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_JustGuardReaction.Damage_JustGuardReaction:KZAnimNotifyState_MonsterVisual_0.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.810813,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_JustGuardReaction.Damage_JustGuardReaction:KZAnimNotifyState_MonsterVisual_1.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            }
+          ]
+        },
+        "Attack/Attack_DempseyRoll_Step2": {
+          "path": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DempseyRoll_Step2.Attack_DempseyRoll_Step2",
+          "length": 2.2666666507720947,
+          "notifies": [
+            {
+              "time": 2.266566,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.034498,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand_foley_cast.SC_efx_apesstonehand_foley_cast",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.191568,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DempseyRoll_Step2.Attack_DempseyRoll_Step2:KZAnimNotifyState_MonsterVisual_0.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.253726,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DempseyRoll_Step2.Attack_DempseyRoll_Step2:KZAnimNotifyState_MonsterVisual_1.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.462593,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand_swish_d.SC_efx_apesstonehand_swish_d",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.612415,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DempseyRoll_Step2.Attack_DempseyRoll_Step2:KZAnimNotifyState_MonsterVisual_2.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.499013,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand2_swish_a_c.SC_efx_apesstonehand2_swish_a_c",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.524146,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand2_foley_swish_a_c.SC_efx_apesstonehand2_foley_swish_a_c",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.678528,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DempseyRoll_Step2.Attack_DempseyRoll_Step2:KZAnimNotifyState_MonsterVisual_3.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.940102,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DempseyRoll_Step2.Attack_DempseyRoll_Step2:KZAnimNotifyState_MonsterVisual_4.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.06557,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand2_fastball_end.SC_efx_apesstonehand2_fastball_end",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 1.268074,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DempseyRoll_Step2.Attack_DempseyRoll_Step2:KZAnimNotifyState_MonsterVisual_5.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.388077,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DempseyRoll_Step2.Attack_DempseyRoll_Step2:KZAnimNotifyState_MonsterVisual_6.KZAnimNotify_CombatEffect_0",
+              "visual_particle": null,
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.250719,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_apesstonehand2_idle_breath_s.SC_vo_apesstonehand2_idle_breath_s",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        }
+      },
+      "montages": {
+        "AM_Exhaustion": {
+          "path": "/Game/Monsters/ApesStoneHandElite/Animations/AM_Exhaustion.AM_Exhaustion",
+          "sections": [
+            {
+              "name": "Start",
+              "clip": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_GroggyStr_F_Start.Damage_GroggyStr_F_Start"
+            },
+            {
+              "name": "Loop",
+              "clip": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_GroggyStr_F_Loop_Composite_Variant01.Damage_GroggyStr_F_Loop_Composite_Variant01"
+            },
+            {
+              "name": "End",
+              "clip": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_GroggyStr_F_End_Composite_Variant01.Damage_GroggyStr_F_End_Composite_Variant01"
+            }
+          ],
+          "notifies": []
+        },
+        "AM_OriginalPatterns_ApesStoneHandElite": {
+          "path": "/Game/Monsters/ApesStoneHandElite/Animations/AM_OriginalPatterns_ApesStoneHandElite.AM_OriginalPatterns_ApesStoneHandElite",
+          "sections": [
+            {
+              "name": "NormalAtk01_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_NormalAtk01_01.Attack_NormalAtk01_01"
+            },
+            {
+              "name": "NormalAtk01_Step2",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_NormalAtk01_02.Attack_NormalAtk01_02"
+            },
+            {
+              "name": "NormalAtk01_Step3",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_NormalAtk01_03.Attack_NormalAtk01_03"
+            },
+            {
+              "name": "NormalAtk02_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_NormalAtk02_01.Attack_NormalAtk02_01"
+            },
+            {
+              "name": "NormalAtk02_Step2",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_NormalAtk02_02.Attack_NormalAtk02_02"
+            },
+            {
+              "name": "TurnAtk_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_TurnAtk_1.Attack_TurnAtk_1"
+            },
+            {
+              "name": "CounterAtk_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_CounterAtk.Attack_CounterAtk"
+            },
+            {
+              "name": "DempseyRoll_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DempseyRoll_Step1.Attack_DempseyRoll_Step1"
+            },
+            {
+              "name": "DempseyRoll_Step2",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DempseyRoll_Step2.Attack_DempseyRoll_Step2"
+            },
+            {
+              "name": "DashAtk_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DashAtk.Attack_DashAtk"
+            },
+            {
+              "name": "Level_DashAtk_New_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DashAtk_IDLE.Attack_DashAtk_IDLE"
+            },
+            {
+              "name": "Level_DashAtk_New_Step3",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DashAtk_IDLE.Attack_DashAtk_IDLE"
+            },
+            {
+              "name": "Level_DashAtk_New_Step4",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Alert/Alert_Roar_Composite_Variant01.Alert_Roar_Composite_Variant01"
+            },
+            {
+              "name": "Level_DashAtk_New_Step5",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DashAtk_Level_H_Short.Attack_DashAtk_Level_H_Short"
+            },
+            {
+              "name": "Level_DashAtk_New_Step7",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_Run_Loop_Composite_Variant01.Locomotion_Run_Loop_Composite_Variant01"
+            },
+            {
+              "name": "Level_DashAtk_New_Step8",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_CloseGrab_Start.Attack_CloseGrab_Start"
+            },
+            {
+              "name": "Level_DashAtk_New_Step9",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_CloseGrab_Fail.Attack_CloseGrab_Fail"
+            },
+            {
+              "name": "Level_DashAtk_New_Step10",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_CloseGrab_Success_01_Turn.Attack_CloseGrab_Success_01_Turn"
+            },
+            {
+              "name": "Level_DashAtk_New_Step11",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_CloseGrab_Success_02.Attack_CloseGrab_Success_02"
+            },
+            {
+              "name": "Level_DashAtk_New_Step12",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_CloseGrab_Start2_Stone.Attack_CloseGrab_Start2_Stone"
+            },
+            {
+              "name": "FastBall_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_FastBall_Start.Attack_FastBall_Start"
+            },
+            {
+              "name": "FastBall_Step2",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_FastBall_Shoot.Attack_FastBall_Shoot"
+            },
+            {
+              "name": "FastBall_Step3",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_FastBall_End.Attack_FastBall_End"
+            },
+            {
+              "name": "Dodge_A_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_Dodge.Locomotion_Dodge"
+            },
+            {
+              "name": "Dodge_A_Step7",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_Run_Loop_Stone.Locomotion_Run_Loop_Stone"
+            },
+            {
+              "name": "Dodge_A_Step8",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_CloseGrab_Start_Stone.Attack_CloseGrab_Start_Stone"
+            },
+            {
+              "name": "Dodge_A_Step9",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_CloseGrab_Fail_Stone.Attack_CloseGrab_Fail_Stone"
+            },
+            {
+              "name": "Dodge_A_Step10",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_CloseGrab_Success_01_Turn_Stone.Attack_CloseGrab_Success_01_Turn_Stone"
+            },
+            {
+              "name": "Dodge_A_Step11",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_CloseGrab_Success_Stone.Attack_CloseGrab_Success_Stone"
+            },
+            {
+              "name": "Dodge_A_Step12",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_CloseGrab_Start2_Stone.Attack_CloseGrab_Start2_Stone"
+            },
+            {
+              "name": "Dodge_B_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_Dodge.Locomotion_Dodge"
+            },
+            {
+              "name": "Dodge_B_Step2",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_Run_Loop_Composite_Variant02.Locomotion_Run_Loop_Composite_Variant02"
+            },
+            {
+              "name": "BackMoving_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_BackMoving_01.Locomotion_BackMoving_01"
+            },
+            {
+              "name": "BackMoving_Step2",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_BackMoving_02.Locomotion_BackMoving_02"
+            },
+            {
+              "name": "FastMove_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_FastMove.Locomotion_FastMove"
+            },
+            {
+              "name": "SideMove_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_SideMove_L_Step1.Locomotion_SideMove_L_Step1"
+            },
+            {
+              "name": "SideMove_Step2",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_SideMove_R_Step1.Locomotion_SideMove_R_Step1"
+            },
+            {
+              "name": "SideMove_Step3",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_SideMove_L_Step2.Locomotion_SideMove_L_Step2"
+            },
+            {
+              "name": "SideMove_Step4",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_SideMove_R_Step2.Locomotion_SideMove_R_Step2"
+            },
+            {
+              "name": "TurnBackRun_Short_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_TurnBackRun_Short_01.Locomotion_TurnBackRun_Short_01"
+            },
+            {
+              "name": "TurnBackRun_Short_Step2",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_TurnBackRun_Short_02.Locomotion_TurnBackRun_Short_02"
+            },
+            {
+              "name": "StaminaRecover_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Recovery/Recovery_StaminaRecover.Recovery_StaminaRecover"
+            },
+            {
+              "name": "Social_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Idle/Idle_Social.Idle_Social"
+            },
+            {
+              "name": "Roar_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Alert/Alert_Roar_Composite_Variant02.Alert_Roar_Composite_Variant02"
+            },
+            {
+              "name": "StartSkill_Step3",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Alert/Alert_StartRoar.Alert_StartRoar"
+            },
+            {
+              "name": "Groggy_Step1",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_GroggyStr_F_Loop_Composite_Variant02.Damage_GroggyStr_F_Loop_Composite_Variant02"
+            },
+            {
+              "name": "Groggy_Step2",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_GroggyStr_F_End_Composite_Variant02.Damage_GroggyStr_F_End_Composite_Variant02"
+            },
+            {
+              "name": "DempseyRoll_Reaction",
+              "clip": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_JustGuardReaction.Damage_JustGuardReaction"
+            }
+          ],
+          "notifies": [
+            {
+              "time": 1.5,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk01_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 4.2,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk01_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 10.047049,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk01_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 12.298507,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_NormalAtk02_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 12.977105,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk02_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 15.477104,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk02_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 18.601696,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnAtk_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 22.50701,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_CounterAtk_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 25.10701,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 27.35701,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 33.2556,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_DashAtk_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 33.925381,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DashAtk_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 45.094601,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 56.263821,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 58.703335,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 60.681057,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Level_DashAtk_New_Step5_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 61.77475,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 63.974747,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step7",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 64.865303,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step8",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 65.580414,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step9",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 67.233604,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Level_DashAtk_New_Step10_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 67.596596,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step10",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 68.962692,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step11",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 69.921127,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step12",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 70.618034,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_FastBall_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 70.717224,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastBall_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 71.492287,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_FastBall_Step2_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 71.683891,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastBall_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 72.767357,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastBall_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 73.742889,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_A_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 73.767281,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Dodge_A_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 75.942886,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_A_Step7",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 76.877724,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_A_Step8",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 77.592834,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_A_Step9",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 79.246025,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Dodge_A_Step10_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 79.609016,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_A_Step10",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 80.975113,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_A_Step11",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 81.933548,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_A_Step12",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 82.909081,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_B_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 84.009079,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_B_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 85.032928,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_BackMoving_Step1_Index2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 85.089256,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_BackMoving_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 85.424171,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_BackMoving_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 86.946556,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_BackMoving_Step2_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 87.129562,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_BackMoving_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 89.661774,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastMove_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 90.396919,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step1_Index2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 90.414139,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step1_Index3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 90.497879,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 91.233025,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step2_Index2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 91.250244,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step2_Index3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 91.333984,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 93.19519,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 95.056396,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 95.776009,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_TurnBackRun_Short_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 96.192848,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnBackRun_Short_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 97.692993,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_TurnBackRun_Short_Step2_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 97.880913,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnBackRun_Short_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 99.698067,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_StaminaRecover_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 103.128067,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Social_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 105.855118,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Roar_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 108.270447,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_StartSkill_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 110.437111,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Groggy_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 112.737114,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Groggy_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 114.333336,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Reaction",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        }
+      }
+    },
+    "Yetuga": {
+      "definition": "/Game/Monsters/Yetuga/Data/DA_Character_Yetuga.DA_Character_Yetuga",
+      "combo": "/Game/Monsters/Yetuga/Data/DA_OriginalPatterns_Yetuga.DA_OriginalPatterns_Yetuga",
+      "settings": {
+        "b_enabled": null,
+        "exhaustion_seconds": 8.0,
+        "exhaustion_montage": "/Game/Monsters/Yetuga/Animations/AM_Exhaustion.AM_Exhaustion",
+        "damage_effect": "/Game/Bluprints/AbilitySystem/Effects/Attack/GE_ComboAttack_Damage.GE_ComboAttack_Damage_C"
+      },
+      "nodes": [
+        {
+          "id": "DempseyRoll_Step1",
+          "skill": "DempseyRoll",
+          "next": "DempseyRoll_Step3",
+          "section": "DempseyRoll_Step1",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.STEP_START: 6>",
+              "target": "DempseyRoll_Step3",
+              "notify": "Pattern_DempseyRoll_Step1_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SB_Yetuga_DempseyRoll"
+            }
+          ],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DempseyRoll_Back.Attack_DempseyRoll_Back"
+        },
+        {
+          "id": "DempseyRoll_Step2",
+          "skill": "DempseyRoll",
+          "next": "None",
+          "section": "DempseyRoll_Step2",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.ANIMATION: 0>",
+              "target": "CloseGrab_Step1",
+              "notify": "Pattern_DempseyRoll_Step2_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SB_Yetuga_DempseyRoll"
+            },
+            {
+              "event": "<KZPatternEvent.PARRIED: 3>",
+              "target": "DempseyRoll_Reaction",
+              "notify": "Pattern_DempseyRoll_Step2_Index2",
+              "windows": [
+                "<Struct 'Vector2D' (0x000002524B9E8520) {x: 5.328741, y: 5.684516}>"
+              ],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SB_Yetuga_DempseyRoll"
+            }
+          ],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DempseyRoll.Attack_DempseyRoll"
+        },
+        {
+          "id": "DempseyRoll_Step3",
+          "skill": "DempseyRoll",
+          "next": "DempseyRoll_Step2",
+          "section": "DempseyRoll_Step3",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.STEP_START: 6>",
+              "target": "PatternFinish",
+              "notify": "Pattern_DempseyRoll_Step3_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SB_Yetuga_DempseyRoll"
+            }
+          ],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DempseyRoll_BackMoving.Attack_DempseyRoll_BackMoving"
+        },
+        {
+          "id": "DempseyRoll_Step4",
+          "skill": "DempseyRoll",
+          "next": "DempseyRoll_Step2",
+          "section": "DempseyRoll_Step4",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.STEP_START: 6>",
+              "target": "DempseyRoll_Step2",
+              "notify": "Pattern_DempseyRoll_Step4_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SB_Yetuga_DempseyRoll"
+            }
+          ],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DempseyRoll_SideL.Attack_DempseyRoll_SideL"
+        },
+        {
+          "id": "DempseyRoll_Step5",
+          "skill": "DempseyRoll",
+          "next": "DempseyRoll_Step2",
+          "section": "DempseyRoll_Step5",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.STEP_START: 6>",
+              "target": "DempseyRoll_Step2",
+              "notify": "Pattern_DempseyRoll_Step5_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SB_Yetuga_DempseyRoll"
+            }
+          ],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DempseyRoll_SideR.Attack_DempseyRoll_SideR"
+        },
+        {
+          "id": "ChargeTackle_Step1",
+          "skill": "ChargeTackle",
+          "next": "ChargeTackle_Step2",
+          "section": "ChargeTackle_Step1",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.TICK: 1>",
+              "target": "ChargeTackle_Step4",
+              "notify": "Pattern_ChargeTackle_Step1_Index1",
+              "windows": [
+                "<Struct 'Vector2D' (0x000002524B9E88A0) {x: 1.250306, y: 1.283639}>"
+              ],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle"
+            },
+            {
+              "event": "<KZPatternEvent.TICK: 1>",
+              "target": "ChargeTackle_Step4",
+              "notify": "Pattern_ChargeTackle_Step1_Index2",
+              "windows": [
+                "<Struct 'Vector2D' (0x000002524B9E88E0) {x: 1.250306, y: 1.283639}>"
+              ],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle"
+            }
+          ],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Start.Attack_ChargeTackle_Start"
+        },
+        {
+          "id": "ChargeTackle_Step2",
+          "skill": "ChargeTackle",
+          "next": "ChargeTackle_Step3",
+          "section": "ChargeTackle_Step2",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.COLLISION: 5>",
+              "target": "ChargeTackle_Step7",
+              "notify": "Pattern_ChargeTackle_Step2_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle"
+            }
+          ],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Run.Attack_ChargeTackle_Run"
+        },
+        {
+          "id": "ChargeTackle_Step3",
+          "skill": "ChargeTackle",
+          "next": "ChargeTackle_Step4",
+          "section": "ChargeTackle_Step3",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.COLLISION: 5>",
+              "target": "ChargeTackle_Step7",
+              "notify": "Pattern_ChargeTackle_Step3_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle"
+            }
+          ],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Run_Loop.Attack_ChargeTackle_Run_Loop"
+        },
+        {
+          "id": "ChargeTackle_Step4",
+          "skill": "ChargeTackle",
+          "next": "ChargeTackle_Step9",
+          "section": "ChargeTackle_Step4",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Run_End.Attack_ChargeTackle_Run_End"
+        },
+        {
+          "id": "ChargeTackle_Step5",
+          "skill": "ChargeTackle",
+          "next": "ChargeTackle_Step2",
+          "section": "ChargeTackle_Step5",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.TICK: 1>",
+              "target": "ChargeTackle_Step4",
+              "notify": "Pattern_ChargeTackle_Step5_Index1",
+              "windows": [
+                "<Struct 'Vector2D' (0x000002524B9E8B60) {x: 1.250306, y: 1.283639}>"
+              ],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle"
+            },
+            {
+              "event": "<KZPatternEvent.TICK: 1>",
+              "target": "ChargeTackle_Step4",
+              "notify": "Pattern_ChargeTackle_Step5_Index2",
+              "windows": [
+                "<Struct 'Vector2D' (0x000002524B9E8BA0) {x: 1.250306, y: 1.283639}>"
+              ],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle"
+            }
+          ],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Start.Attack_ChargeTackle_Start"
+        },
+        {
+          "id": "ChargeTackle_Step6",
+          "skill": "ChargeTackle",
+          "next": "ChargeTackle_Step3",
+          "section": "ChargeTackle_Step6",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.COLLISION: 5>",
+              "target": "ChargeTackle_Step7",
+              "notify": "Pattern_ChargeTackle_Step6_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle"
+            }
+          ],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Run_Blend.Attack_ChargeTackle_Run_Blend"
+        },
+        {
+          "id": "ChargeTackle_Step7",
+          "skill": "ChargeTackle",
+          "next": "ChargeTackle_Step8",
+          "section": "ChargeTackle_Step7",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun"
+        },
+        {
+          "id": "ChargeTackle_Step8",
+          "skill": "ChargeTackle",
+          "next": "None",
+          "section": "ChargeTackle_Step8",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun_End.Attack_ChargeTackle_Stun_End"
+        },
+        {
+          "id": "ChargeTackle_Step9",
+          "skill": "ChargeTackle",
+          "next": "None",
+          "section": "ChargeTackle_Step9",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_End.Attack_ChargeTackle_End"
+        },
+        {
+          "id": "Groggy_Step1",
+          "skill": "Groggy",
+          "next": "Groggy_Step2",
+          "section": "Groggy_Step1",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_Groggy_Loop.Damage_Groggy_Loop"
+        },
+        {
+          "id": "Groggy_Step2",
+          "skill": "Groggy",
+          "next": "None",
+          "section": "Groggy_Step2",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_Groggy.Damage_Groggy"
+        },
+        {
+          "id": "DempseyRoll_Reaction",
+          "skill": "DempseyRoll",
+          "next": "None",
+          "section": "DempseyRoll_Reaction",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [],
+          "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_JustGuardReaction.Damage_JustGuardReaction"
+        }
+      ],
+      "clips": {
+        "Damage/Damage_GroggyStr_F_Start_New": {
+          "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_GroggyStr_F_Start_New.Damage_GroggyStr_F_Start_New",
+          "length": 0.9666666388511658,
+          "notifies": [
+            {
+              "time": 0.263251,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_GroggyStr_F_Start_New.Damage_GroggyStr_F_Start_New:KZAnimNotifyState_MonsterVisual_0.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_Rock_Idle_01.FP_Boss_Yetuga_Rock_Idle_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.966567,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.249668,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_GroggyStr_F_Start_New.Damage_GroggyStr_F_Start_New:KZAnimNotifyState_MonsterVisual_1.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_BackPress_Smash_01.FP_Boss_Yetuga_BackPress_Smash_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.275099,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_GroggyStr_F_Start_New.Damage_GroggyStr_F_Start_New:KZAnimNotifyState_MonsterVisual_2.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_breath_01.FP_Boss_Yetuga_breath_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.077051,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_yetuga_gro_strong_start.SC_vo_yetuga_gro_strong_start",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.080602,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_gro_strong_start_foley.SC_efx_yetuga_gro_strong_start_foley",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.143998,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_run_foot.SC_efx_yetuga_run_foot",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.200478,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_common_whoosh_snow.SC_efx_yetuga_common_whoosh_snow",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.91959,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_GroggyStr_F_Start_New.Damage_GroggyStr_F_Start_New:KZAnimNotifyState_MonsterVisual_3.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_breath_01.FP_Boss_Yetuga_breath_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            }
+          ]
+        },
+        "Damage/Damage_PartGroggy_Start": {
+          "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start",
+          "length": 2.0,
+          "notifies": [
+            {
+              "time": 0.263251,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_0.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_Rock_Idle_01.FP_Boss_Yetuga_Rock_Idle_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.9999,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.031388,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_ui_groggy_slow_yetuga.SC_ui_groggy_slow_yetuga",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.053148,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_part_gro_start.SC_efx_yetuga_part_gro_start",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.081255,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_yetuga_part_gro_start.SC_vo_yetuga_part_gro_start",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 1.444024,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_1.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_BodyDust_01.FP_Boss_Yetuga_BodyDust_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.509967,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_2.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_Footstep_Normal_01.FP_Boss_Yetuga_Footstep_Normal_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.812936,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_3.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_PartGroggy_horn_01.FP_Boss_Yetuga_PartGroggy_horn_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.605787,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_4.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/Monsters/Shared/VFX/FP_PartGroggy_Blood_UnitFixed.FP_PartGroggy_Blood_UnitFixed",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.84681,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_5.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_PartGroggy_horn_01.FP_Boss_Yetuga_PartGroggy_horn_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.599605,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_6.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/Monsters/Shared/VFX/FP_PartGroggy_Blood_UnitFixed.FP_PartGroggy_Blood_UnitFixed",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.864391,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_7.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_PartGroggy_horn_01.FP_Boss_Yetuga_PartGroggy_horn_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.910073,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 1.602696,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_9.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/Monsters/Shared/VFX/FP_PartGroggy_Blood_UnitFixed.FP_PartGroggy_Blood_UnitFixed",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.592747,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_10.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_breath_01.FP_Boss_Yetuga_breath_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.910281,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_11.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_PartGroggy_horn_01.FP_Boss_Yetuga_PartGroggy_horn_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.963622,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.841124,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_13.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_Footstep_Strong_01.FP_Boss_Yetuga_Footstep_Strong_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.13114,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_14.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_Footstep_Normal_01.FP_Boss_Yetuga_Footstep_Normal_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.128008,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_common_whoosh_middle.SC_efx_yetuga_common_whoosh_middle",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 1.246225,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_common_whoosh_snow.SC_efx_yetuga_common_whoosh_snow",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 1.30593,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_part_gro_start_bodyfall.SC_efx_yetuga_part_gro_start_bodyfall",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 1.810283,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start:KZAnimNotifyState_MonsterVisual_15.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_BackPress_Smash_01.FP_Boss_Yetuga_BackPress_Smash_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.9999,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 1.9999,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 1.972572,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        },
+        "Damage/Damage_PartGroggy_Loop": {
+          "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Loop.Damage_PartGroggy_Loop",
+          "length": 2.0,
+          "notifies": [
+            {
+              "time": 1.9999,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 1.953894,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Loop.Damage_PartGroggy_Loop:KZAnimNotifyState_MonsterVisual_0.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_Groggy_HandDust_loop_01.FP_Boss_Yetuga_Groggy_HandDust_loop_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.958886,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Loop.Damage_PartGroggy_Loop:KZAnimNotifyState_MonsterVisual_1.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_Groggy_HandDust_loop_01.FP_Boss_Yetuga_Groggy_HandDust_loop_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.958886,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Loop.Damage_PartGroggy_Loop:KZAnimNotifyState_MonsterVisual_2.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_Groggy_HandDust_loop_01.FP_Boss_Yetuga_Groggy_HandDust_loop_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.943911,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Loop.Damage_PartGroggy_Loop:KZAnimNotifyState_MonsterVisual_3.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_Groggy_HandDust_loop_01.FP_Boss_Yetuga_Groggy_HandDust_loop_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.948903,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Loop.Damage_PartGroggy_Loop:KZAnimNotifyState_MonsterVisual_4.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_Groggy_BodyDust_loop_01.FP_Boss_Yetuga_Groggy_BodyDust_loop_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.09468,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_part_gro_loop.SC_efx_yetuga_part_gro_loop",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.333622,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Loop.Damage_PartGroggy_Loop:KZAnimNotifyState_MonsterVisual_5.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_breath_01.FP_Boss_Yetuga_breath_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.305384,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_yetuga_part_gro_loop.SC_vo_yetuga_part_gro_loop",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 1.514248,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Loop.Damage_PartGroggy_Loop:KZAnimNotifyState_MonsterVisual_6.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_breath_01.FP_Boss_Yetuga_breath_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            }
+          ]
+        },
+        "Damage/Damage_PartGroggy_End": {
+          "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End",
+          "length": 2.0333333015441895,
+          "notifies": [
+            {
+              "time": 2.033233,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.238697,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End:KZAnimNotifyState_MonsterVisual_0.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_breath_01.FP_Boss_Yetuga_breath_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.955438,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End:KZAnimNotifyState_MonsterVisual_1.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_HandDust_01.FP_Boss_Yetuga_HandDust_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.1205,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End:KZAnimNotifyState_MonsterVisual_2.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_BodyDust_01.FP_Boss_Yetuga_BodyDust_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.018099,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End:KZAnimNotifyState_MonsterVisual_3.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_BodyDust_01.FP_Boss_Yetuga_BodyDust_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.171423,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_part_gro_end.SC_efx_yetuga_part_gro_end",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.615961,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_yetuga_part_gro_end.SC_vo_yetuga_part_gro_end",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 2.033233,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End:KZAnimNotifyState_MonsterVisual_4.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_HandDust_01.FP_Boss_Yetuga_HandDust_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.159968,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End:KZAnimNotifyState_MonsterVisual_5.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/FP_Boss_Yetuga_breath_01.FP_Boss_Yetuga_breath_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.908175,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End:KZAnimNotifyState_MonsterVisual_6.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_BodyDust_01.FP_Boss_Yetuga_BodyDust_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.908732,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End:KZAnimNotifyState_MonsterVisual_7.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_BodyDust_01.FP_Boss_Yetuga_BodyDust_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 2.033233,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End:KZAnimNotifyState_MonsterVisual_8.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Movement/Monsters/Boss_Yetuga/FP_Boss_Yetuga_HandDust_01.FP_Boss_Yetuga_HandDust_01",
+              "visual_niagara": null,
+              "visual_decal": null
+            }
+          ]
+        },
+        "Attack/Attack_ChargeTackle_Stun": {
+          "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun",
+          "length": 1.7666666507720947,
+          "notifies": [
+            {
+              "time": 1.766567,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.233503,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun:KZAnimNotifyState_MonsterVisual_0.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_ChargeTackle_Smash_01_3f23df59.KZ_FP_Boss_Yetuga_ChargeTackle_Smash_01_3f23df59",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.032199,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_charge_tackle_stun.SC_efx_yetuga_charge_tackle_stun",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.272617,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun:KZAnimNotifyState_MonsterVisual_1.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_Footstep_dash_weak_03_de08eb40.KZ_FP_Boss_Yetuga_Footstep_dash_weak_03_de08eb40",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.66472,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun:KZAnimNotifyState_MonsterVisual_2.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_BodyDust_01_5a30e6b3.KZ_FP_Boss_Yetuga_BodyDust_01_5a30e6b3",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.121815,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_yetuga_charge_tackle_stun.SC_vo_yetuga_charge_tackle_stun",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.412809,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun:KZAnimNotifyState_MonsterVisual_3.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_Footstep_dash_weak_03_de08eb40.KZ_FP_Boss_Yetuga_Footstep_dash_weak_03_de08eb40",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.559947,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun:KZAnimNotifyState_MonsterVisual_4.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_ChargeTackle_Wall_Dropdust_01_4adb2999.KZ_FP_Boss_Yetuga_ChargeTackle_Wall_Dropdust_01_4adb2999",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.646431,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun:KZAnimNotifyState_MonsterVisual_5.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_Footstep_dash_weak_03_de08eb40.KZ_FP_Boss_Yetuga_Footstep_dash_weak_03_de08eb40",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.155058,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun:KZAnimNotifyState_MonsterVisual_6.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_HandDust_01_16fd6402.KZ_FP_Boss_Yetuga_HandDust_01_16fd6402",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.126196,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun:KZAnimNotifyState_MonsterVisual_7.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_Footstep_Strong_01_ea1e8823.KZ_FP_Boss_Yetuga_Footstep_Strong_01_ea1e8823",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.13148,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun:KZAnimNotifyState_MonsterVisual_8.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_BodyDust_01_5a30e6b3.KZ_FP_Boss_Yetuga_BodyDust_01_5a30e6b3",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.447036,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun:KZAnimNotifyState_MonsterVisual_9.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_Footstep_Strong_01_ea1e8823.KZ_FP_Boss_Yetuga_Footstep_Strong_01_ea1e8823",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.404126,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun:KZAnimNotifyState_MonsterVisual_10.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_BodyDust_01_5a30e6b3.KZ_FP_Boss_Yetuga_BodyDust_01_5a30e6b3",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.320519,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun:KZAnimNotifyState_MonsterVisual_11.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_Counteratk_Smash_02_d22bd4a2.KZ_FP_Boss_Yetuga_Counteratk_Smash_02_d22bd4a2",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.756027,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun:KZAnimNotifyState_MonsterVisual_12.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_HandDust_01_16fd6402.KZ_FP_Boss_Yetuga_HandDust_01_16fd6402",
+              "visual_niagara": null,
+              "visual_decal": null
+            }
+          ]
+        },
+        "Attack/Attack_ChargeTackle_Stun_End": {
+          "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun_End.Attack_ChargeTackle_Stun_End",
+          "length": 2.1666667461395264,
+          "notifies": [
+            {
+              "time": 2.166567,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.893007,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun_End.Attack_ChargeTackle_Stun_End:KZAnimNotifyState_MonsterVisual_0.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_HandDust_01_16fd6402.KZ_FP_Boss_Yetuga_HandDust_01_16fd6402",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.133261,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_charge_tackle_stun_end.SC_efx_yetuga_charge_tackle_stun_end",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.459219,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun_End.Attack_ChargeTackle_Stun_End:KZAnimNotifyState_MonsterVisual_1.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_breath_01_0884e995.KZ_FP_Boss_Yetuga_breath_01_0884e995",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.268381,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_yetuga_gro_strong_end.SC_vo_yetuga_gro_strong_end",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 0.723327,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun_End.Attack_ChargeTackle_Stun_End:KZAnimNotifyState_MonsterVisual_2.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_breath_01_0884e995.KZ_FP_Boss_Yetuga_breath_01_0884e995",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 0.833415,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun_End.Attack_ChargeTackle_Stun_End:KZAnimNotifyState_MonsterVisual_3.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_Footstep_Normal_01_5ea8b977.KZ_FP_Boss_Yetuga_Footstep_Normal_01_5ea8b977",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 1.145234,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun_End.Attack_ChargeTackle_Stun_End:KZAnimNotifyState_MonsterVisual_4.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_breath_01_0884e995.KZ_FP_Boss_Yetuga_breath_01_0884e995",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 2.163431,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun_End.Attack_ChargeTackle_Stun_End:KZAnimNotifyState_MonsterVisual_5.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_HandDust_01_16fd6402.KZ_FP_Boss_Yetuga_HandDust_01_16fd6402",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 2.166566,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun_End.Attack_ChargeTackle_Stun_End:KZAnimNotifyState_MonsterVisual_6.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_HandDust_01_16fd6402.KZ_FP_Boss_Yetuga_HandDust_01_16fd6402",
+              "visual_niagara": null,
+              "visual_decal": null
+            },
+            {
+              "time": 2.166566,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null,
+              "visual_effect": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun_End.Attack_ChargeTackle_Stun_End:KZAnimNotifyState_MonsterVisual_7.KZAnimNotify_CombatEffect_0",
+              "visual_particle": "/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Particles/KZ_FP_Boss_Yetuga_HandDust_01_16fd6402.KZ_FP_Boss_Yetuga_HandDust_01_16fd6402",
+              "visual_niagara": null,
+              "visual_decal": null
+            }
+          ]
+        }
+      },
+      "montages": {
+        "AM_Exhaustion": {
+          "path": "/Game/Monsters/Yetuga/Animations/AM_Exhaustion.AM_Exhaustion",
+          "sections": [
+            {
+              "name": "Start",
+              "clip": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_GroggyStr_F_Start_New.Damage_GroggyStr_F_Start_New"
+            },
+            {
+              "name": "Loop",
+              "clip": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_GroggyStr_F_Loop_New.Damage_GroggyStr_F_Loop_New"
+            },
+            {
+              "name": "End",
+              "clip": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_GroggyStr_F_End_New.Damage_GroggyStr_F_End_New"
+            }
+          ],
+          "notifies": []
+        },
+        "AM_OriginalPatterns_Yetuga": {
+          "path": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "sections": [
+            {
+              "name": "NormalAtk01_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_NormalAtk01_01.Attack_NormalAtk01_01"
+            },
+            {
+              "name": "NormalAtk01_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_NormalAtk01_02.Attack_NormalAtk01_02"
+            },
+            {
+              "name": "NormalAtk01_Step3",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_NormalAtk01_03.Attack_NormalAtk01_03"
+            },
+            {
+              "name": "NormalAtk02_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_NormalAtk02_01.Attack_NormalAtk02_01"
+            },
+            {
+              "name": "NormalAtk02_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_NormalAtk02_02.Attack_NormalAtk02_02"
+            },
+            {
+              "name": "TurnAtk_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_TurnAtk.Attack_TurnAtk"
+            },
+            {
+              "name": "CounterAtk_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_CounterAtk.Attack_CounterAtk"
+            },
+            {
+              "name": "DempseyRoll_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DempseyRoll_Back.Attack_DempseyRoll_Back"
+            },
+            {
+              "name": "DempseyRoll_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DempseyRoll.Attack_DempseyRoll"
+            },
+            {
+              "name": "DempseyRoll_Step3",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DempseyRoll_BackMoving.Attack_DempseyRoll_BackMoving"
+            },
+            {
+              "name": "DempseyRoll_Step4",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DempseyRoll_SideL.Attack_DempseyRoll_SideL"
+            },
+            {
+              "name": "DempseyRoll_Step5",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DempseyRoll_SideR.Attack_DempseyRoll_SideR"
+            },
+            {
+              "name": "CloseGrab_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_CloseGrab_Start.Attack_CloseGrab_Start"
+            },
+            {
+              "name": "CloseGrab_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_CloseGrab_Fail.Attack_CloseGrab_Fail"
+            },
+            {
+              "name": "CloseGrab_Step3",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_CloseGrab_Success_01.Attack_CloseGrab_Success_01"
+            },
+            {
+              "name": "CloseGrab_Step4",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_CloseGrab_Success_02.Attack_CloseGrab_Success_02"
+            },
+            {
+              "name": "CloseGrab_Step5",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_CloseGrab_Success_01_Turn.Attack_CloseGrab_Success_01_Turn"
+            },
+            {
+              "name": "RushGrab_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_RushGrab_Back.Attack_RushGrab_Back"
+            },
+            {
+              "name": "RushGrab_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_RushGrab_Success.Attack_RushGrab_Success"
+            },
+            {
+              "name": "RushGrab_Step3",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_RushGrab_Slow.Attack_RushGrab_Slow"
+            },
+            {
+              "name": "RushGrab_Step4",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_RushGrab_End.Attack_RushGrab_End"
+            },
+            {
+              "name": "RushGrab_Step5",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_RushGrab.Attack_RushGrab"
+            },
+            {
+              "name": "RushGrab_Step6",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_RushGrab_Back.Attack_RushGrab_Back"
+            },
+            {
+              "name": "RushGrab_Step7",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_RushGrab_Dash.Attack_RushGrab_Dash"
+            },
+            {
+              "name": "DashAtk_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DashAtk_Back.Attack_DashAtk_Back"
+            },
+            {
+              "name": "DashAtk_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DashAtk_Dash.Attack_DashAtk_Dash"
+            },
+            {
+              "name": "DashAtk_Step3",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DashAtk_Fast.Attack_DashAtk_Fast"
+            },
+            {
+              "name": "DashAtk_Step4",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DashAtk.Attack_DashAtk"
+            },
+            {
+              "name": "JumpBackPress_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_JumpBackPress.Locomotion_JumpBackPress"
+            },
+            {
+              "name": "JumpBackPress_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_JumpBackPress_End.Locomotion_JumpBackPress_End"
+            },
+            {
+              "name": "ChargeTackle_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Start.Attack_ChargeTackle_Start"
+            },
+            {
+              "name": "ChargeTackle_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Run.Attack_ChargeTackle_Run"
+            },
+            {
+              "name": "ChargeTackle_Step3",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Run_Loop.Attack_ChargeTackle_Run_Loop"
+            },
+            {
+              "name": "ChargeTackle_Step4",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Run_End.Attack_ChargeTackle_Run_End"
+            },
+            {
+              "name": "ChargeTackle_Step5",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Start.Attack_ChargeTackle_Start"
+            },
+            {
+              "name": "ChargeTackle_Step6",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Run_Blend.Attack_ChargeTackle_Run_Blend"
+            },
+            {
+              "name": "ChargeTackle_Step7",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun"
+            },
+            {
+              "name": "ChargeTackle_Step8",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun_End.Attack_ChargeTackle_Stun_End"
+            },
+            {
+              "name": "ChargeTackle_Step9",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_End.Attack_ChargeTackle_End"
+            },
+            {
+              "name": "FastBall_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_FastBall_Start.Attack_FastBall_Start"
+            },
+            {
+              "name": "FastBall_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_FastBall_Shoot.Attack_FastBall_Shoot"
+            },
+            {
+              "name": "FastBall_Step3",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_FastBall_End.Attack_FastBall_End"
+            },
+            {
+              "name": "FastBall_Step4",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_FastBall_End_02.Attack_FastBall_End_02"
+            },
+            {
+              "name": "IceBreath_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_IceBreath_Back.Attack_IceBreath_Back"
+            },
+            {
+              "name": "IceBreath_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_IceBreath_01.Attack_IceBreath_01"
+            },
+            {
+              "name": "IceBreath_Step3",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_IceBreath_02.Attack_IceBreath_02"
+            },
+            {
+              "name": "IceBreath_Step4",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_IceBreath_End.Attack_IceBreath_End"
+            },
+            {
+              "name": "IceBreath_Step5",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_IceBreath_BackJump.Attack_IceBreath_BackJump"
+            },
+            {
+              "name": "Armageddon_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_Armageddon_Start.Attack_Armageddon_Start"
+            },
+            {
+              "name": "Armageddon_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_Armageddon_Jump_Start.Attack_Armageddon_Jump_Start"
+            },
+            {
+              "name": "Armageddon_Step3",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_Armageddon_Jump_End.Attack_Armageddon_Jump_End"
+            },
+            {
+              "name": "Armageddon_Step4",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_Armageddon_Jump_End_Close.Attack_Armageddon_Jump_End_Close"
+            },
+            {
+              "name": "Armageddon_Step5",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_Armageddon_End.Attack_Armageddon_End"
+            },
+            {
+              "name": "Armageddon_Step6",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_Armageddon_End.Attack_Armageddon_End"
+            },
+            {
+              "name": "Armageddon_Step7",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_DempseyRoll_Back.Attack_DempseyRoll_Back"
+            },
+            {
+              "name": "Armageddon_Step8",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_Armageddon_Start.Attack_Armageddon_Start"
+            },
+            {
+              "name": "Armageddon_Step9",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_Parry_F_Composite_Variant02.Damage_Parry_F_Composite_Variant02"
+            },
+            {
+              "name": "Dodge_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_Dodge.Locomotion_Dodge"
+            },
+            {
+              "name": "Dodge_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_Dodge_02.Locomotion_Dodge_02"
+            },
+            {
+              "name": "BackJump_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_BackJump.Locomotion_BackJump"
+            },
+            {
+              "name": "BackMoving_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_BackMoving_01.Locomotion_BackMoving_01"
+            },
+            {
+              "name": "BackMoving_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_BackMoving_02.Locomotion_BackMoving_02"
+            },
+            {
+              "name": "FastMove_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_FastMove.Locomotion_FastMove"
+            },
+            {
+              "name": "FastMove_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_FastMove.Locomotion_FastMove"
+            },
+            {
+              "name": "FastMove_Step3",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_FastMove_End.Locomotion_FastMove_End"
+            },
+            {
+              "name": "SideMove_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_SideMove_L_Short.Locomotion_SideMove_L_Short"
+            },
+            {
+              "name": "SideMove_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_SideMove_R_Short.Locomotion_SideMove_R_Short"
+            },
+            {
+              "name": "SideMove_Step3",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_SideMove_L_Long.Locomotion_SideMove_L_Long"
+            },
+            {
+              "name": "SideMove_Step4",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_SideMove_R_Long.Locomotion_SideMove_R_Long"
+            },
+            {
+              "name": "SideMove_Step5",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_SideMove_L_Short.Locomotion_SideMove_L_Short"
+            },
+            {
+              "name": "SideMove_Step6",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_SideMove_R_Short.Locomotion_SideMove_R_Short"
+            },
+            {
+              "name": "TurnBackRun_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_TurnBackRun_Back.Locomotion_TurnBackRun_Back"
+            },
+            {
+              "name": "TurnBackRun_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_TurnBackRun.Locomotion_TurnBackRun"
+            },
+            {
+              "name": "TurnBackRun_Short_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_TurnBackRun_Short_01.Locomotion_TurnBackRun_Short_01"
+            },
+            {
+              "name": "TurnBackRun_Short_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_TurnBackRun_Short_02.Locomotion_TurnBackRun_Short_02"
+            },
+            {
+              "name": "StaminaRecover_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Recovery/Recovery_StaminaRecover.Recovery_StaminaRecover"
+            },
+            {
+              "name": "Social_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Idle/Idle_Social.Idle_Social"
+            },
+            {
+              "name": "Roar_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Alert/Alert_Roar.Alert_Roar"
+            },
+            {
+              "name": "Groggy_Step1",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_Groggy_Loop.Damage_Groggy_Loop"
+            },
+            {
+              "name": "Groggy_Step2",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_Groggy.Damage_Groggy"
+            },
+            {
+              "name": "DempseyRoll_Reaction",
+              "clip": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_JustGuardReaction.Damage_JustGuardReaction"
+            }
+          ],
+          "notifies": [
+            {
+              "time": 1.5,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk01_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 4.2,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk01_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 7.719914,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_NormalAtk01_Step3_Index4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 9.340094,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_NormalAtk01_Step3_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 9.435394,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_NormalAtk01_Step3_Index4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 10.218159,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk01_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 12.358113,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_NormalAtk02_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 13.296053,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk02_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 15.627444,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk02_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 18.78653,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnAtk_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 23.339384,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_CounterAtk_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 24.320778,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 31.66464,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_DempseyRoll_Step2_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 31.87575,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 32.755749,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 34.558525,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 36.841858,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 38.497417,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_CloseGrab_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 39.212532,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_CloseGrab_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 40.632042,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_CloseGrab_Step3_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 40.812531,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_CloseGrab_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 41.306858,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_CloseGrab_Step4_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 43.23296,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_CloseGrab_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 44.88615,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_CloseGrab_Step5_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 45.249146,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_CloseGrab_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 46.749146,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_RushGrab_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 51.449146,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_RushGrab_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 54.228764,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_RushGrab_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 54.655434,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_RushGrab_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 57.332294,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_RushGrab_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 58.832298,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_RushGrab_Step6",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 65.498962,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_RushGrab_Step7",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 67.29129,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DashAtk_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 77.957947,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DashAtk_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 83.680321,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DashAtk_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 89.583282,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DashAtk_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 93.763481,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_JumpBackPress_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 94.992584,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_JumpBackPress_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 96.659248,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 100.325912,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 103.325912,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 104.325912,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 105.992577,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 109.705986,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step6",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 111.475983,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step7",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 113.635979,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step8",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 115.502647,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step9",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 116.19902,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_FastBall_Step1_NativeUse12",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 116.298744,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastBall_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 117.01252,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_FastBall_Step2_NativeUse9",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 117.174744,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastBall_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 118.31324,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastBall_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 119.179909,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastBall_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 120.905029,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_IceBreath_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 123.446075,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_IceBreath_Step2_Index2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 124.42276,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_IceBreath_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 126.178787,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_IceBreath_Step3_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 127.178352,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_IceBreath_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 129.062469,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_IceBreath_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 130.851547,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_IceBreath_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 130.884888,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Armageddon_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 135.055008,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 137.212891,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 138.416168,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Armageddon_Step3_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 139.242783,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 141.272675,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 144.088089,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 145.628128,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Armageddon_Step6_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 146.903503,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step6",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 147.884903,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step7",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 152.088364,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step8",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 153.659821,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step9",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 154.618408,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Dodge_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 154.68132,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Dodge_Step1_Index2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 154.991379,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 156.858047,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 159.409698,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_BackJump_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 160.489883,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_BackMoving_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 160.824799,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_BackMoving_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 162.549927,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_BackMoving_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 175.883255,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastMove_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 189.216583,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastMove_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 189.616577,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastMove_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 190.197311,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 190.452682,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 191.033417,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step2_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 191.288788,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 193.091568,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 195.374908,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 195.955643,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step5_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 196.211014,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 196.791748,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step6_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 197.047119,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step6",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 198.047119,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnBackRun_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 200.162552,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_TurnBackRun_Step2_Index2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 201.035843,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnBackRun_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 201.76767,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_TurnBackRun_Short_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 202.265839,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnBackRun_Short_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 204.065842,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnBackRun_Short_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 206.445755,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_StaminaRecover_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 209.640686,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Social_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 212.515427,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Roar_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 214.682098,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Groggy_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 216.982101,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Groggy_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": 218.199997,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Reaction",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        }
+      }
+    }
+  }
+}

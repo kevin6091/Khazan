@@ -1,0 +1,165 @@
+{
+	"success": false,
+	"test": "Khazan.Combat.ReactionPIE",
+	"utc": "2026-10-08T12:40:36.790Z",
+	"process_id": 19144,
+	"authored_assets_modified": false,
+	"private_completion_mutated": false,
+	"completed_reaction_cases": 0,
+	"completed_pair_cases": 0,
+	"observed_reaction_variants": 0,
+	"pair_only_index": 5,
+	"partial_scope": true,
+	"completed_collision_cases": 0,
+	"native_rhi_screenshots_enabled": false,
+	"native_rhi_screenshots_requested": 0,
+	"checks": [
+		{
+			"check": "Case0 Pair0 Player transient Definition fixture can replace only the PIE actor pointer",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair0 Player saved Definition grants native hit reaction, Guard and Brutal",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair0 Saved Definition has a non-null short pool and native hit grant",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair0 Player .01 mesh scale contract is preserved",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair0 Optional pair-only QA index is in the existing fifteen-pair fixture",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Saved family BP and Definition load",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Actual family ASC/controller/Definition/AnimInstance initialize",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Family data changes are confined to a transient Definition",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Transient fixture exposes existing monster policy",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Saved Definition has a non-null short pool and native hit grant",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Living family fixture has positive HP/stamina and movement permission",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Saved user Brutal damage50 and original approach-duration setting are present",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Fixture Brutal range can contain the actual capsule center height difference",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Fixture leaves positive approach travel inside the unchanged 3D target range",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Fixture positive Brutal target is grounded, available and inside the actual 3D range",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Fixture leaves clear target visibility and a capsule-clear final alignment location",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Actual Brutal activation claims the selected exhausted victim",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Brutal activation preserves initial location instead of teleporting",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Front/back selects the actual saved attacker montage",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair5 Normal pair retains its victim claim until its real endpoints",
+			"passed": false
+		}
+	],
+	"definition_audits": [
+		{
+			"family": "Player",
+			"definition": "/Game/Data/Character/DA_CharacterDefinition_Player.DA_CharacterDefinition_Player",
+			"short": 14,
+			"knockback": 2,
+			"launch": 2,
+			"shield": 0,
+			"native_grant": true
+		},
+		{
+			"family": "HeavySwordsman",
+			"definition": "/Game/Monsters/HeavySwordsman/Data/DA_Character_HeavySwordsman.DA_Character_HeavySwordsman",
+			"short": 4,
+			"knockback": 2,
+			"launch": 0,
+			"shield": 0,
+			"native_grant": true
+		}
+	],
+	"evidence": [
+		{
+			"event": "pair_fixture_before_activation",
+			"pair": 5,
+			"distance_3d_cm": 178.33370519528953,
+			"range_cm": 180,
+			"player_location": "X=0.000 Y=0.000 Z=89.650",
+			"victim_location": "X=174.765 Y=0.000 Z=125.150",
+			"player_capsule_half_height_cm": 88,
+			"victim_capsule_half_height_cm": 123.5,
+			"grounded": true,
+			"victim_available": true,
+			"visibility_blocked": false,
+			"destination_blocked": false,
+			"visibility_blocking_actor": "",
+			"activation_accepted": true,
+			"attacker_active_after_activation": true,
+			"victim_claimed_after_activation": true
+		},
+		{
+			"event": "unexpected_pair_abort",
+			"stage": 10,
+			"case": 0,
+			"pair": 5,
+			"collision_case": 0,
+			"stage_elapsed_game_seconds": 4.9494150094687939,
+			"brutal_active": false,
+			"hp_drops": 1,
+			"positive_refills": 0,
+			"saw_damage1": true,
+			"saw_damage2": true,
+			"saw_recovery_end": true,
+			"exhaustion_active": true,
+			"victim_claimed": false,
+			"player_montage": "None",
+			"player_position": 0,
+			"player_section": "",
+			"player_location": "X=245.851 Y=-86.029 Z=89.650",
+			"player_movement_mode": 1,
+			"victim_montage": "/Game/Monsters/HeavySwordsman/Animations/AM_Exhaustion.AM_Exhaustion",
+			"victim_position": 3.8333334922790527,
+			"victim_section": "End",
+			"victim_location": "X=576.735 Y=-486.464 Z=125.150",
+			"victim_movement_mode": 1
+		}
+	],
+	"limits": "Public native gameplay entries in isolated PIE; no physical input or visual contact-quality claim. Synthetic public processed perception establishes positive shield BattleTarget, not real Sight acquisition. Original definitions are untouched; only transient copies have indefinite exhaustion/null fallback/wall-range QA settings. Current engine-extracted world path plus capsule geometry is a conservative root-scale regression bound, not original animation-source numerical equality. Guard RNG trials are QA sampling, not a gameplay probability guarantee."
+}

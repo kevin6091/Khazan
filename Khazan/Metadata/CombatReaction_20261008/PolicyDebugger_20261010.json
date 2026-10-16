@@ -1,0 +1,49 @@
+{
+  "utc": "2026-10-10T10:48:31Z",
+  "process_id": 23912,
+  "project": "C:/Users/user/Desktop/GitProject/Khazan_MonsterWork_20261006/Khazan",
+  "debugger": "LLDB",
+  "paused_file": "Source/Khazan/Tests/KZMonsterAIPIETest.cpp",
+  "paused_line": 752,
+  "thread": "GameThread (17832)",
+  "observed_stage": "Actual HeavySwordsman Attack selected before fixture retreat",
+  "observed_montage": "Attack_SwordSwing_02_Single",
+  "observed_state": "StateTree Running / Root / Attack",
+  "result": "All four CombatPolicyPIE actors subsequently completed; engine Test Completed Result Success",
+  "production_source_changes": 0,
+  "prior_timeout": "2026-10-08 failure not reproduced; exact original runtime cause remains unconfirmed",
+  "breakpoint_cleanup": "Agent breakpoints 3 removed; user baseline 8 unchanged; own process detached",
+  "limits": [
+    "Optimized line685 breakpoint caught Stage4 transition, not an actual error; no failure conclusion drawn from it.",
+    "Paused debug run is a reproduction observation; undebugged regression run is separate."
+  ],
+  "raw": {
+    "stack": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"frames\":[{\"presentation\":\"FMonsterCombatPolicyPIE::Observe(UWorld *, ELevelTick, float) KZMonsterAIPIETest.cpp:752\",\"index\":0,\"file\":\"file://C:/Users/user/Desktop/GitProject/Khazan_MonsterWork_20261006/Khazan/Source/Khazan/Tests/KZMonsterAIPIETest.cpp\",\"line\":752,\"isCurrent\":true},{\"presentation\":\"[인라인화] Invoke(void (FMonsterCombatPolicyPIE::*)(UWorld *, ELevelTick, float), FMonsterCombatPolicyPIE *&, UWorld *&&, ELevelTick &&, float &&) Invoke.h:65\",\"index\":1,\"file\":\"file://C:/Program Files/Epic Games/UE_5.8/Engine/Source/Runtime/Core/Public/Templates/Invoke.h\",\"line\":65,\"isCurrent\":false},{\"presentation\":\"[인라인화] UE::Core::Private::Tuple::TTupleBase::ApplyAfter(void (FMonsterCombatPolicyPIE::*&)(UWorld *, ELevelTick, float), FMonsterCombatPolicyPIE *&, UWorld *&&, ELevelTick &&, float &&) Tuple.h:264\",\"index\":2,\"file\":\"file://C:/Program Files/Epic Games/UE_5.8/Engine/Source/Runtime/Core/Public/Templates/Tuple.h\",\"line\":264,\"isCurrent\":false},{\"presentation\":\"TBaseRawMethodDelegateInstance::ExecuteIfSafe(UWorld *, ELevelTick, float) DelegateInstancesImpl.h:495\",\"index\":3,\"file\":\"file://C:/Program Files/Epic Games/UE_5.8/Engine/Source/Runtime/Core/Public/Delegates/DelegateInstancesImpl.h\",\"line\":495,\"isCurrent\":false}],\"threadId\":\"Thread-1-[GameThread] (17832)\",\"totalFrames\":4}"
+        }
+      ],
+      "isError": false
+    },
+    "montage": {
+      "content": [
+        {
+          "type": "text",
+          "text": "ASC->LocalAnimMontageInfo = {AnimMontage= // 0x000001d45534fc00 (Name=\"Attack_SwordSwing_02_Single\", InternalFlags=ReachabilityFlag1), PlayInstanceId=3 \"'\\x3'\", PredictionKey={Current=0, Base=0, bIsServerInitiated=false, ...}, ...} {FGameplayAbilityLocalAnimMontage}"
+        }
+      ],
+      "isError": false
+    },
+    "state": {
+      "content": [
+        {
+          "type": "text",
+          "text": "State = L\"StateTree (asset: 'StateTree /Game/Monsters/AI/ST_Monster.ST_Monster')Status: Running\nCurrent State:\n\nEvaluators\n  [ Name                           | Bindings | Output Bindings |     Data Handle ]\n\nGlobal Tasks\n[Root]\n[Attack]\n\nTasks:\n[Khazan Monster Actio...\" {FString}\n  ├─ [0] = 83 L\"'S'\" {wchar_t}\n  ├─ [1] = 116 L\"'t'\" {wchar_t}\n  ├─ [2] = 97 L\"'a'\" {wchar_t}\n  ├─ [3] = 116 L\"'t'\" {wchar_t}\n  ├─ [4] = 101 L\"'e'\" {wchar_t}\n  ├─ [5] = 84 L\"'T'\" {wchar_t}\n  ├─ [6] = 114 L\"'r'\" {wchar_t}\n  ├─ [7] = 101 L\"'e'\" {wchar_t}\n  ├─ [8] = 101 L\"'e'\" {wchar_t}\n  ├─ [9] = 32 L\"' '\" {wchar_t}\n  ├─ [10] = 40 L\"'('\" {wchar_t}\n  ├─ [11] = 97 L\"'a'\" {wchar_t}\n  ├─ [12] = 115 L\"'s'\" {wchar_t}\n  ├─ [13] = 115 L\"'s'\" {wchar_t}\n  ├─ [14] = 101 L\"'e'\" {wchar_t}\n  ├─ [15] = 116 L\"'t'\" {wchar_t}\n  ├─ [16] = 58 L\"':'\" {wchar_t}\n  ├─ [17] = 32 L\"' '\" {wchar_t}\n  ├─ [18] = 39 L\"'''\" {wchar_t}\n  ├─ [19] = 83 L\"'S'\" {wchar_t}\n  ├─ [20] = 116 L\"'t'\" {wchar_t}\n  ├─ [21] = 97 L\"'a'\" {wchar_t}\n  ├─ [22] = 116 L\"'t'\" {wchar_t}\n  ├─ [23] = 101 L\"'e'\" {wchar_t}\n  ├─ [24] = 84 L\"'T'\" {wchar_t}\n  ├─ [25] = 114 L\"'r'\" {wchar_t}\n  ├─ [26] = 101 L\"'e'\" {wchar_t}\n  ├─ [27] = 101 L\"'e'\" {wchar_t}\n  ├─ [28] = 32 L\"' '\" {wchar_t}\n  ├─ [29] = 47 L\"'/'\" {wchar_t}\n  ├─ [30] = 71 L\"'G'\" {wchar_t}\n  ├─ [31] = 97 L\"'a'\" {wchar_t}\n  ├─ [32] = 109 L\"'m'\" {wchar_t}\n  ├─ [33] = 101 L\"'e'\" {wchar_t}\n  ├─ [34] = 47 L\"'/'\" {wchar_t}\n  ├─ [35] = 77 L\"'M'\" {wchar_t}\n  ├─ [36] = 111 L\"'o'\" {wchar_t}\n  ├─ [37] = 110 L\"'n'\" {wchar_t}\n  ├─ [38] = 115 L\"'s'\" {wchar_t}\n  ├─ [39] = 116 L\"'t'\" {wchar_t}\n  ├─ [40] = 101 L\"'e'\" {wchar_t}\n  ├─ [41] = 114 L\"'r'\" {wchar_t}\n  ├─ [42] = 115 L\"'s'\" {wchar_t}\n  ├─ [43] = 47 L\"'/'\" {wchar_t}\n  ├─ [44] = 65 L\"'A'\" {wchar_t}\n  ├─ [45] = 73 L\"'I'\" {wchar_t}\n  ├─ [46] = 47 L\"'/'\" {wchar_t}\n  ├─ [47] = 83 L\"'S'\" {wchar_t}\n  ├─ [48] = 84 L\"'T'\" {wchar_t}\n  └─ [49] = 95 L\"'_'\" {wchar_t}"
+        }
+      ],
+      "isError": false
+    }
+  }
+}

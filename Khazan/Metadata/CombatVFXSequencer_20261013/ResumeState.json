@@ -1,0 +1,13 @@
+﻿{
+    "status":  "complete for WeakAttack02 visual editor workflow",
+    "objective":  "Visual Sequencer editing of Niagara alongside attack animation, including transform/scale/timing, applied to existing gameplay effects",
+    "last_verified":  "RuntimeBuildFinal01 passed. EditorToAttack02 temporary edit passed actual PIE with 27 active sequencer Niagara frames. MainApply01 saved unadjusted WeakAttack02 data into current Main montage SHA256 c6187baa705f6807fffc9f933bd8de87f20cce7e283d5c14f457b47ec34c7c66; original 116 notify GUIDs/settings preserved, only two target boundaries added. FreshSavedPIE01 actual attack passed with 35 active frames matching editor curves within 0.00013 cm and 0.00086 deg. EditorAutoVisual18 renders red Slash during sequence playback. EditorScrubFinal20 renders red Slash at paused frame before/after an unsaved 50 cm additive edit and confirms exact 50 cm actor movement; process exited 0.",
+    "remaining":  [
+
+                  ],
+    "limitations":  [
+                        "Other selected attacks start from current static Niagara notify placement unless an imported motion seed exists; review each before applying.",
+                        "Long multi-effect editor preview performance was not measured."
+                    ],
+    "resume":  "Use Tools \u003e Khazan VFX \u003e WeakAttack02 VFX in the Main UE editor. For future attacks, inspect the actual selected montage segment/notify and author visual curves before Apply. Do not restore old Weak02 hardcoded offsets or write the QA +20 cm/+7 deg/+0.1 scale/+50 cm edits. Evidence index is Metadata/CombatVFXSequencer_20261013/FinalVerification.json."
+}

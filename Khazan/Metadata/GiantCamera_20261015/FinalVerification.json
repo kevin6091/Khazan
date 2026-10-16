@@ -1,0 +1,68 @@
+﻿{
+    "schema":  "Khazan.GiantCamera.MainIntegrationRecheck.v1",
+    "checked_at":  "2026-10-15T03:31:08.3836522+09:00",
+    "status":  "passed_main_applied",
+    "project":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan",
+    "previous_receipt":  "Metadata/GiantCamera_20261014/FinalVerification.json",
+    "pending_main_delivery":  0,
+    "runtime_or_asset_changes_this_turn":  0,
+    "current_module":  "UnrealEditor-Khazan.dll",
+    "current_module_sha256":  "6f1c6bfe41382cb6f6308130e403ce568b6b76f560e2b154707f4f9810b2d25e",
+    "build":  "MainBuild.log: Succeeded / Target is up to date",
+    "saved_readback":  "MainSavedReadback.json: 48 animations / 86 camera events / Guard distortion reference passed",
+    "guard_asset_sha256":  "db0d2a1183ad6c5b159f80f57eb1b4f9f7cbd043a012b21897e0fe710d3b57ae",
+    "asset_hash_mismatches":  [
+
+                              ],
+    "source_files":  [
+                         {
+                             "path":  "Source/Khazan/Camera/KZCombatCameraModifier.h",
+                             "sha256":  "b84162d9aee7e00d64ceb0ab3c4bf7b4e8692d7d6c1afc2c1c6557937bd09444"
+                         },
+                         {
+                             "path":  "Source/Khazan/Camera/KZCombatCameraModifier.cpp",
+                             "sha256":  "51960ccea74e9318fe3bc5ac676581d7fe3f9e1ee96b7c31b18e083db20037a8"
+                         },
+                         {
+                             "path":  "Source/Khazan/Animation/Notifies/KZAnimNotifyState_MonsterVisual.h",
+                             "sha256":  "88efaccaa5770a6e70a09381e1c4dd7c409ffbf0ce25c9827e800d4ff2868e35"
+                         },
+                         {
+                             "path":  "Source/Khazan/Animation/Notifies/KZAnimNotifyState_MonsterVisual.cpp",
+                             "sha256":  "d80ccba37ef1540a44d5a97e13b3316088178a6ec1f124c0e19a36976b1fa534"
+                         },
+                         {
+                             "path":  "Source/Khazan/Ability/PlayerAbility/KZGuardAbility.h",
+                             "sha256":  "a54f6dca81fdfca43eedb0ef125650557133dc25dee832ca92dac863a982905a"
+                         },
+                         {
+                             "path":  "Source/Khazan/Ability/PlayerAbility/KZGuardAbility.cpp",
+                             "sha256":  "459aea0397f30d74ce13d40926a22d37fd26c439d8cd8e9665314cac1e7ed078"
+                         }
+                     ],
+    "runtime_tests":  [
+                          {
+                              "test":  "Khazan.GiantCamera.PIE",
+                              "passed":  true,
+                              "completion":  "[2026.10.14-18.29.44:536][671]LogAutomationController: Display: Test Completed. Result={Success} Name={PIE} Path={Khazan.GiantCamera.PIE}"
+                          },
+                          {
+                              "test":  "Khazan.Parry.PIE",
+                              "passed":  true,
+                              "completion":  "[2026.10.14-18.30.16:113][228]LogAutomationController: Display: Test Completed. Result={Success} Name={PIE} Path={Khazan.Parry.PIE}"
+                          }
+                      ],
+    "monster_runtime_cases":  4,
+    "parry_runtime_cases":  17,
+    "saved_packages":  0,
+    "source_parity_limits":  [
+                                 "Original native xxCameraMod modifier implementation is unavailable; adapter output cannot be certified frame-identical.",
+                                 "Two source package aliases have no current animation sequence; no fabricated mapping was authored.",
+                                 "Amplitude variation, cross-axis motion, output caps, missing-scale fallbacks, parry gain and Niagara display placement are assistant TEMP values.",
+                                 "RHI presentation checks validate this test view, not original cooked shader or full-game visual parity."
+                             ],
+    "unsupported_source_packages":  [
+                                        "AC_ApesStoneHand_E_CloseGrab_Success_01",
+                                        "AC_Yetuga_RushGrab in Apes/08_DashAtk"
+                                    ]
+}

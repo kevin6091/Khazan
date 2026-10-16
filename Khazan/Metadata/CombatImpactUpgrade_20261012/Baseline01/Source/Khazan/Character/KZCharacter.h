@@ -1,0 +1,77 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/Character.h"
+#include "AbilitySystemInterface.h"
+#include "GameplayTagContainer.h"
+#include "KZCharacter.generated.h"
+
+class UKZLocomotionComponent;
+class UAbilitySystemComponent;
+class UKZCharacterDefinitionData;
+class UKZAttributeSet;
+enum class EKZHitReactionType : uint8;
+
+UCLASS()
+class KHAZAN_API AKZCharacter : public ACharacter, public IAbilitySystemInterface
+{
+	GENERATED_BODY()
+
+public:
+	AKZCharacter();
+	// Called only after an accepted damage result; direction is selected by the Ability's pool.
+	void PlayHitReaction(EKZHitReactionType Type, AActor* Attacker);
+
+	UFUNCTION(BlueprintPure, Category = "Character|Locomotion")
+	UKZLocomotionComponent* GetLocomotionComponent() const
+	{
+		return LocomotionComponent;
+	}
+
+	const UKZCharacterDefinitionData* GetCharacterDefinition() const
+	{
+		return CharacterDefinition;
+	}
+
+protected:
+	virtual void BeginPlay() override;
+
+public:
+	virtual void Tick(float DeltaTime) override;
+
+	// For ASC
+protected:
+	// ASC Init
+	virtual void PostInitializeComponents() override;
+
+	// ASC와 Actor수명 연결
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+public:
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+	// Controller가 Pawn을 소유할 때 호출/ Controller가 바꼈을때
+	virtual void PossessedBy(AController* NewController) override;
+
+	// Controller의 소유가 해제될 때 호출. Pawn 빙의 해제
+	virtual void UnPossessed() override;
+
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Character|AbilitySystem", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent = nullptr;
+	
+private:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Character|Locomotion", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UKZLocomotionComponent> LocomotionComponent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character|Definition", meta = (AllowPrivateAccess = "true"))
+	FGameplayTag CharacterDefinitionAssetName;
+
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadOnly, Category = "Character|Definition", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UKZCharacterDefinitionData> CharacterDefinition = nullptr;
+	
+	UPROPERTY(VisibleAnywhere, Category = "KZ|Ability", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UKZAttributeSet> AttributeSet;
+};

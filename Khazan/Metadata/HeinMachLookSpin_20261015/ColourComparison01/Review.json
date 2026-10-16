@@ -1,0 +1,26 @@
+{
+  "status": "review_complete",
+  "unresolved": [],
+  "canonical_comparison": "ColourFinal03/Comparison.json",
+  "captures": ["VFXDevFinal03/Probe.json", "VFXHeinFinal03/Probe.json"],
+  "reviewed_images": ["ColourFinal03/Review_00.jpg", "ColourFinal03/Review_01.jpg", "ColourFinal03/Representative_0.jpg"],
+  "paired_systems": 322,
+  "visible_in_both_at_sample": 280,
+  "other_context_or_time_required": 42,
+  "heuristic_flags": 14,
+  "classifications": [
+    {"indices": [6], "reason": "Existing shared KZ_Slash mixes red and white randomized particles; shape/brightness mixture differs in the independent samples. Shared asset unchanged, Spin reference count is zero. This is not a proof of deterministic pixel equality."},
+    {"indices": [65, 98], "reason": "World-lit stone/ice changes under the deliberately blue scene lights. DefaultLit ice material was verified in FlaggedAudit01. No screen grade or exposure filter was introduced. Physical lighting response remains and is explicitly outside an assertion of universal VFX lighting bypass."},
+    {"indices": [23, 44, 63, 70, 87, 99, 100, 116, 118, 145, 253], "reason": "Independent random emission/support/size and mixed debris change summed image energy. Color-signature angle remains below the QA heuristic threshold. Reviewed images show the same source hue families, with variable plume/arc/particle coverage. No source reauthoring based only on summed-energy ratios."}
+  ],
+  "new_spinning_accent": {"index": 321, "signature_angle_deg": 0.0, "energy_ratio": 1.03663446, "review_flag": false},
+  "retained_policy": "No new full-screen blendable, LUT or color grade. Existing emissive inverse-exposure and fog isolation remain. Shared 321 source particle packages are protected by SHA-256.",
+  "capture_correction": "Disable QA screen messages, pause at the sampling age and wait for render-buffer updates before native ReadPixels. Earlier immediate readback and red memory-warning-overlay captures are superseded, retained only as diagnostics.",
+  "limitations": [
+    "42 systems need a different age, parameters or native interaction context; the raw fixed-age probe does not verify those appearances.",
+    "Independent random particles and physically lit fragments do not establish exact cross-map pixel parity.",
+    "This review does not establish original-game shader parity or all-frame presentation coverage.",
+    "Review completion closes delivery blockers for this scene-exposure and Spinning change; it does not mark the stated limits as verified."
+  ],
+  "asset_saves": 0
+}

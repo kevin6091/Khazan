@@ -1,0 +1,727 @@
+[
+  {
+    "Type": "NiagaraScript",
+    "Name": "GPUComputeScript",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'NiagaraScript'",
+    "Outer": {
+      "ObjectName": "NiagaraEmitter'FP_DrainCore:Empty001'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_DrainCore.55"
+    },
+    "Properties": {
+      "Usage": "ENiagaraScriptUsage::ParticleGPUComputeScript",
+      "RapidIterationParameters": {},
+      "ScriptExecutionParamStore": {
+        "ParameterSize": 12,
+        "PaddedParameterSize": 16,
+        "PaddingInfo": [
+          {
+            "SrcOffset": 0,
+            "DestOffset": 0,
+            "SrcSize": 12,
+            "DestSize": 12
+          }
+        ],
+        "SortedParameterOffsets": [
+          {
+            "Offset": 2,
+            "Name": "__INTERNAL__.Empty001.FloatFromCurve.FloatCurve",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 1
+            }
+          },
+          {
+            "Offset": 1,
+            "Name": "__INTERNAL__.Empty001.FloatFromCurve001.FloatCurve",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 1
+            }
+          },
+          {
+            "Offset": 0,
+            "Name": "__INTERNAL__.Empty001.FloatFromCurve003.FloatCurve",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 1
+            }
+          },
+          {
+            "Offset": 3,
+            "Name": "__INTERNAL__.Empty001.FloatFromCurve004.FloatCurve",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 1
+            }
+          },
+          {
+            "Offset": 4,
+            "Name": "__INTERNAL__.Empty001.ScaleSpriteSize.Uniform Curve Sprite Scale",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 1
+            }
+          },
+          {
+            "Offset": 8,
+            "Name": "Empty001.AlphaScale",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'NiagaraFloat'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "Offset": 0,
+            "Name": "Empty001.DistanceTraveled",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'NiagaraFloat'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "Offset": 4,
+            "Name": "Empty001.NormalizedLoopAge",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'NiagaraFloat'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 2
+            }
+          }
+        ],
+        "ParameterData": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          128,
+          63
+        ],
+        "DataInterfaces": [
+          {
+            "ObjectName": "NiagaraDataInterfaceCurve'FP_DrainCore:Empty001.GPUComputeScript.NiagaraDataInterfaceCurve_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_DrainCore.5"
+          },
+          {
+            "ObjectName": "NiagaraDataInterfaceCurve'FP_DrainCore:Empty001.GPUComputeScript.NiagaraDataInterfaceCurve_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_DrainCore.6"
+          },
+          {
+            "ObjectName": "NiagaraDataInterfaceCurve'FP_DrainCore:Empty001.GPUComputeScript.NiagaraDataInterfaceCurve_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_DrainCore.12"
+          },
+          {
+            "ObjectName": "NiagaraDataInterfaceCurve'FP_DrainCore:Empty001.GPUComputeScript.NiagaraDataInterfaceCurve_3'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_DrainCore.13"
+          },
+          {
+            "ObjectName": "NiagaraDataInterfaceCurve'FP_DrainCore:Empty001.GPUComputeScript.NiagaraDataInterfaceCurve_4'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_DrainCore.14"
+          }
+        ]
+      },
+      "CachedScriptVMId": {
+        "CompilerVersionID": "375F6E63-7F2144F2-AD4EC387-0AB6472D",
+        "ScriptUsageType": "ENiagaraScriptUsage::ParticleGPUComputeScript",
+        "bUsesRapidIterationParams": false,
+        "bRequiresPersistentIDs": true,
+        "BaseScriptCompileHash": {
+          "DataHash": [
+            43,
+            85,
+            114,
+            138,
+            34,
+            26,
+            173,
+            248,
+            108,
+            14,
+            110,
+            137,
+            96,
+            97,
+            162,
+            32,
+            234,
+            228,
+            75,
+            81
+          ]
+        }
+      },
+      "CachedScriptVM": {
+        "CompileTags": [
+          {
+            "Variable": {
+              "VarData": "AAAAAA==",
+              "Name": "bIsInfinitelyLived",
+              "TypeDef": {
+                "ClassStructOrEnum": {
+                  "ObjectName": "ScriptStruct'NiagaraBool'",
+                  "ObjectPath": "/Script/Niagara"
+                },
+                "UnderlyingType": 2
+              }
+            },
+            "StringValue": ""
+          },
+          {
+            "Variable": {
+              "VarData": "/////w==",
+              "Name": "bCanDieWhenEmitterDeactivates",
+              "TypeDef": {
+                "ClassStructOrEnum": {
+                  "ObjectName": "ScriptStruct'NiagaraBool'",
+                  "ObjectPath": "/Script/Niagara"
+                },
+                "UnderlyingType": 2
+              }
+            },
+            "StringValue": ""
+          },
+          {
+            "Variable": {
+              "VarData": "",
+              "Name": "Particles.Presolve.Velocity",
+              "TypeDef": {
+                "ClassStructOrEnum": {
+                  "ObjectName": "ScriptStruct'Vector'",
+                  "ObjectPath": "/Script/CoreUObject"
+                },
+                "UnderlyingType": 2
+              }
+            },
+            "StringValue": "Trimmed"
+          },
+          {
+            "Variable": {
+              "VarData": "",
+              "Name": "Particles.Presolve.Position",
+              "TypeDef": {
+                "ClassStructOrEnum": {
+                  "ObjectName": "ScriptStruct'Vector'",
+                  "ObjectPath": "/Script/CoreUObject"
+                },
+                "UnderlyingType": 2
+              }
+            },
+            "StringValue": "Trimmed"
+          },
+          {
+            "Variable": {
+              "VarData": "",
+              "Name": "Particles.Presolve.PhysicsForce",
+              "TypeDef": {
+                "ClassStructOrEnum": {
+                  "ObjectName": "ScriptStruct'Vector'",
+                  "ObjectPath": "/Script/CoreUObject"
+                },
+                "UnderlyingType": 2
+              }
+            },
+            "StringValue": "Trimmed"
+          },
+          {
+            "Variable": {
+              "VarData": "",
+              "Name": "Particles.DistanceTraveled",
+              "TypeDef": {
+                "ClassStructOrEnum": {
+                  "ObjectName": "ScriptStruct'NiagaraFloat'",
+                  "ObjectPath": "/Script/Niagara"
+                },
+                "UnderlyingType": 2
+              }
+            },
+            "StringValue": "Trimmed"
+          },
+          {
+            "Variable": {
+              "VarData": "AAAAAA==",
+              "Name": "Particles.RibbonUVDistance",
+              "TypeDef": {
+                "ClassStructOrEnum": {
+                  "ObjectName": "ScriptStruct'NiagaraFloat'",
+                  "ObjectPath": "/Script/Niagara"
+                },
+                "UnderlyingType": 2
+              }
+            },
+            "StringValue": "Trimmed"
+          }
+        ],
+        "Attributes": [
+          {
+            "VarData": "",
+            "Name": "Age",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'NiagaraFloat'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "VarData": "",
+            "Name": "Color",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'LinearColor'",
+                "ObjectPath": "/Script/CoreUObject"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "VarData": "",
+            "Name": "ID",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'NiagaraID'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "VarData": "",
+            "Name": "Initial.SpriteSize",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'Vector2D'",
+                "ObjectPath": "/Script/CoreUObject"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "VarData": "AAAAAA==",
+            "Name": "Lifetime",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'NiagaraFloat'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "VarData": "AAAAAA==",
+            "Name": "Mass",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'NiagaraFloat'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "VarData": "",
+            "Name": "MaterialRandom",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'NiagaraFloat'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "VarData": "",
+            "Name": "NormalizedAge",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'NiagaraFloat'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "VarData": "",
+            "Name": "Position",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'Vector'",
+                "ObjectPath": "/Script/CoreUObject"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "VarData": "AAAAAAAAAAAAAAAA",
+            "Name": "Previous.Position",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'Vector'",
+                "ObjectPath": "/Script/CoreUObject"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "VarData": "",
+            "Name": "Previous.SpriteSize",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'Vector2D'",
+                "ObjectPath": "/Script/CoreUObject"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "VarData": "AAAAAAAAAAAAAAAA",
+            "Name": "Previous.Velocity",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'Vector'",
+                "ObjectPath": "/Script/CoreUObject"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "VarData": "",
+            "Name": "SpriteSize",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'Vector2D'",
+                "ObjectPath": "/Script/CoreUObject"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "VarData": "AAAAAA==",
+            "Name": "UniqueID",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'NiagaraInt32'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 2
+            }
+          },
+          {
+            "VarData": "",
+            "Name": "Velocity",
+            "TypeDef": {
+              "ClassStructOrEnum": {
+                "ObjectName": "ScriptStruct'Vector'",
+                "ObjectPath": "/Script/CoreUObject"
+              },
+              "UnderlyingType": 2
+            }
+          }
+        ],
+        "DataInterfaceInfo": [
+          {
+            "Name": "Emitter.FloatFromCurve003.FloatCurve",
+            "UserPtrIdx": -1,
+            "Type": {
+              "ClassStructOrEnum": {
+                "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 1
+            },
+            "RegisteredParameterMapRead": "None",
+            "RegisteredParameterMapWrite": "None",
+            "bIsPlaceholder": false
+          },
+          {
+            "Name": "Emitter.FloatFromCurve001.FloatCurve",
+            "UserPtrIdx": -1,
+            "Type": {
+              "ClassStructOrEnum": {
+                "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 1
+            },
+            "RegisteredParameterMapRead": "None",
+            "RegisteredParameterMapWrite": "None",
+            "bIsPlaceholder": false
+          },
+          {
+            "Name": "Emitter.FloatFromCurve.FloatCurve",
+            "UserPtrIdx": -1,
+            "Type": {
+              "ClassStructOrEnum": {
+                "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 1
+            },
+            "RegisteredParameterMapRead": "None",
+            "RegisteredParameterMapWrite": "None",
+            "bIsPlaceholder": false
+          },
+          {
+            "Name": "Emitter.FloatFromCurve004.FloatCurve",
+            "UserPtrIdx": -1,
+            "Type": {
+              "ClassStructOrEnum": {
+                "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 1
+            },
+            "RegisteredParameterMapRead": "None",
+            "RegisteredParameterMapWrite": "None",
+            "bIsPlaceholder": false
+          },
+          {
+            "Name": "Emitter.ScaleSpriteSize.Uniform Curve Sprite Scale",
+            "UserPtrIdx": -1,
+            "Type": {
+              "ClassStructOrEnum": {
+                "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+                "ObjectPath": "/Script/Niagara"
+              },
+              "UnderlyingType": 1
+            },
+            "RegisteredParameterMapRead": "None",
+            "RegisteredParameterMapWrite": "None",
+            "bIsPlaceholder": false
+          }
+        ],
+        "StatScopes": [
+          {
+            "FullName": "GPUComputeScript",
+            "FriendlyName": "GPUComputeScript"
+          },
+          {
+            "FullName": "InitializeParticle_Emitter_Func_",
+            "FriendlyName": "InitializeParticle_Emitter"
+          },
+          {
+            "FullName": "SphereLocation_Emitter_Func_",
+            "FriendlyName": "SphereLocation_Emitter"
+          },
+          {
+            "FullName": "SetVariables_DA33D23447C65C299A0E8DAF02FC2C1E_Emitter_Func_",
+            "FriendlyName": "SetVariables_DA33D23447C65C299A0E8DAF02FC2C1E_Emitter"
+          },
+          {
+            "FullName": "AddVelocityFromPoint_Emitter_Func_",
+            "FriendlyName": "AddVelocityFromPoint_Emitter"
+          },
+          {
+            "FullName": "ParticleState_Emitter_Func_",
+            "FriendlyName": "ParticleState_Emitter"
+          },
+          {
+            "FullName": "SolveForcesAndVelocity_Emitter_Func_",
+            "FriendlyName": "SolveForcesAndVelocity_Emitter"
+          },
+          {
+            "FullName": "SetVariables_045DF1024BAC2D6B98461D99A1A2BD41_Emitter_Func_",
+            "FriendlyName": "SetVariables_045DF1024BAC2D6B98461D99A1A2BD41_Emitter"
+          },
+          {
+            "FullName": "Color_Emitter_Func_",
+            "FriendlyName": "Color_Emitter"
+          },
+          {
+            "FullName": "ScaleSpriteSize_Emitter_Func_",
+            "FriendlyName": "ScaleSpriteSize_Emitter"
+          }
+        ],
+        "DIParamInfo": [
+          {
+            "DataInterfaceHLSLSymbol": "Emitter_FloatFromCurve003_FloatCurve",
+            "DIClassName": "NiagaraDataInterfaceCurve",
+            "GeneratedFunctions": [
+              {
+                "DefinitionName": "SampleCurve",
+                "InstanceName": "SampleCurve_Emitter_FloatFromCurve003_FloatCurve",
+                "Specifiers": [],
+                "VariadicInputs": null,
+                "VariadicOutputs": null,
+                "MiscUsageBitMask": 0
+              }
+            ]
+          },
+          {
+            "DataInterfaceHLSLSymbol": "Emitter_FloatFromCurve001_FloatCurve",
+            "DIClassName": "NiagaraDataInterfaceCurve",
+            "GeneratedFunctions": [
+              {
+                "DefinitionName": "SampleCurve",
+                "InstanceName": "SampleCurve_Emitter_FloatFromCurve001_FloatCurve",
+                "Specifiers": [],
+                "VariadicInputs": null,
+                "VariadicOutputs": null,
+                "MiscUsageBitMask": 0
+              }
+            ]
+          },
+          {
+            "DataInterfaceHLSLSymbol": "Emitter_FloatFromCurve_FloatCurve",
+            "DIClassName": "NiagaraDataInterfaceCurve",
+            "GeneratedFunctions": [
+              {
+                "DefinitionName": "SampleCurve",
+                "InstanceName": "SampleCurve_Emitter_FloatFromCurve_FloatCurve",
+                "Specifiers": [],
+                "VariadicInputs": null,
+                "VariadicOutputs": null,
+                "MiscUsageBitMask": 0
+              }
+            ]
+          },
+          {
+            "DataInterfaceHLSLSymbol": "Emitter_FloatFromCurve004_FloatCurve",
+            "DIClassName": "NiagaraDataInterfaceCurve",
+            "GeneratedFunctions": [
+              {
+                "DefinitionName": "SampleCurve",
+                "InstanceName": "SampleCurve_Emitter_FloatFromCurve004_FloatCurve",
+                "Specifiers": [],
+                "VariadicInputs": null,
+                "VariadicOutputs": null,
+                "MiscUsageBitMask": 0
+              }
+            ]
+          },
+          {
+            "DataInterfaceHLSLSymbol": "Emitter_ScaleSpriteSize_UniformCurveSpriteScale",
+            "DIClassName": "NiagaraDataInterfaceCurve",
+            "GeneratedFunctions": [
+              {
+                "DefinitionName": "SampleCurve",
+                "InstanceName": "SampleCurve_Emitter_ScaleSpriteSize_UniformCurveSpriteScale",
+                "Specifiers": [],
+                "VariadicInputs": null,
+                "VariadicOutputs": null,
+                "MiscUsageBitMask": 0
+              }
+            ]
+          }
+        ],
+        "LastCompileStatus": "ENiagaraScriptCompileStatus::NCS_UpToDate"
+      },
+      "CachedDefaultDataInterfaces": [
+        {
+          "DataInterface": {
+            "ObjectName": "NiagaraDataInterfaceCurve'FP_DrainCore:Empty001.GPUComputeScript.NiagaraDataInterfaceCurve_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_DrainCore.5"
+          },
+          "Name": "Empty001.FloatFromCurve003.FloatCurve",
+          "UserPtrIdx": -1,
+          "Type": {
+            "ClassStructOrEnum": {
+              "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+              "ObjectPath": "/Script/Niagara"
+            },
+            "UnderlyingType": 1
+          },
+          "RegisteredParameterMapRead": "None",
+          "RegisteredParameterMapWrite": "None"
+        },
+        {
+          "DataInterface": {
+            "ObjectName": "NiagaraDataInterfaceCurve'FP_DrainCore:Empty001.GPUComputeScript.NiagaraDataInterfaceCurve_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_DrainCore.6"
+          },
+          "Name": "Empty001.FloatFromCurve001.FloatCurve",
+          "UserPtrIdx": -1,
+          "Type": {
+            "ClassStructOrEnum": {
+              "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+              "ObjectPath": "/Script/Niagara"
+            },
+            "UnderlyingType": 1
+          },
+          "RegisteredParameterMapRead": "None",
+          "RegisteredParameterMapWrite": "None"
+        },
+        {
+          "DataInterface": {
+            "ObjectName": "NiagaraDataInterfaceCurve'FP_DrainCore:Empty001.GPUComputeScript.NiagaraDataInterfaceCurve_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_DrainCore.12"
+          },
+          "Name": "Empty001.FloatFromCurve.FloatCurve",
+          "UserPtrIdx": -1,
+          "Type": {
+            "ClassStructOrEnum": {
+              "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+              "ObjectPath": "/Script/Niagara"
+            },
+            "UnderlyingType": 1
+          },
+          "RegisteredParameterMapRead": "None",
+          "RegisteredParameterMapWrite": "None"
+        },
+        {
+          "DataInterface": {
+            "ObjectName": "NiagaraDataInterfaceCurve'FP_DrainCore:Empty001.GPUComputeScript.NiagaraDataInterfaceCurve_3'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_DrainCore.13"
+          },
+          "Name": "Empty001.FloatFromCurve004.FloatCurve",
+          "UserPtrIdx": -1,
+          "Type": {
+            "ClassStructOrEnum": {
+              "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+              "ObjectPath": "/Script/Niagara"
+            },
+            "UnderlyingType": 1
+          },
+          "RegisteredParameterMapRead": "None",
+          "RegisteredParameterMapWrite": "None"
+        },
+        {
+          "DataInterface": {
+            "ObjectName": "NiagaraDataInterfaceCurve'FP_DrainCore:Empty001.GPUComputeScript.NiagaraDataInterfaceCurve_4'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/PC/Recovery/FP_DrainCore.14"
+          },
+          "Name": "Empty001.ScaleSpriteSize.Uniform Curve Sprite Scale",
+          "UserPtrIdx": -1,
+          "Type": {
+            "ClassStructOrEnum": {
+              "ObjectName": "Class'NiagaraDataInterfaceCurve'",
+              "ObjectPath": "/Script/Niagara"
+            },
+            "UnderlyingType": 1
+          },
+          "RegisteredParameterMapRead": "None",
+          "RegisteredParameterMapWrite": "None"
+        }
+      ]
+    }
+  }
+]

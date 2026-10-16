@@ -1,0 +1,106 @@
+{
+  "date": "2026-10-06",
+  "request": "Holding Guard during other actions automatically activates at first existing GAS permission update.",
+  "engine": "UE5.8.2-56702186+++UE5+Release-5.8",
+  "editor_pid": 26692,
+  "build": {
+    "result": "Succeeded",
+    "log": "ColdBuild.log",
+    "resolved_initial_issue": "LNK1104 while normal editor shutdown still held DLL; successful relink after process exit.",
+    "initial_log": "Build_DLLLocked.log"
+  },
+  "test": {
+    "name": "Khazan.Guard.PIE",
+    "result": "Success",
+    "started_line": "[2026.10.06-03.02.17:808][167]LogAutomationController: Display: Test Started. Name={PIE} Path={Khazan.Guard.PIE}",
+    "completed_line": "[2026.10.06-03.02.36:401][355]LogAutomationController: Display: Test Completed. Result={Success} Name={PIE} Path={Khazan.Guard.PIE}",
+    "unexpected_automation_errors": [],
+    "held_assertion_labels": [
+      "Controller dispatches held Guard while another action blocks it",
+      "Held Guard automatically activates when WeakAttack permits transition",
+      "Continuous Triggered does not restart held Guard after InputEnd",
+      "Attack can replace held Guard and block its immediate return",
+      "Same held input restores Guard after an intervening attack",
+      "Controller Completed releases Guard",
+      "Guard remains blocked before early release",
+      "Controller receives release before recovery window",
+      "Released input does not activate Guard later",
+      "Guard remains blocked before early cancel",
+      "Controller receives cancel before recovery window",
+      "Canceled input does not activate Guard later",
+      "Controller cannot activate Guard before Dodge window",
+      "Held Guard automatically activates after Dodge permits transition",
+      "Held Guard after Dodge settles without repeated Start",
+      "Controller Canceled clears active held Guard"
+    ],
+    "held_evidence": [
+      "[2026.10.06-03.02.36:403][355]LogAutomationController: GuardHeldInput: Controller Triggered retries after WeakAttack window, without a second press.",
+      "[2026.10.06-03.02.36:403][355]LogAutomationController: GuardHeldInput: intervening attack return, early release and early cancel checked.",
+      "[2026.10.06-03.02.36:403][355]LogAutomationController: GuardHeldInput: native Controller callback hold/retry/no-restart and cleanup checked."
+    ],
+    "previous_guard_movement_regression_assertions": 18,
+    "guard_pose_checkpoints": 14,
+    "guard_bones_per_checkpoint": 227,
+    "base_output": "[2026.10.06-03.02.36:402][355]LogAutomationController: GuardMovementPolicy BaseOutput: group=Locomotion clip=DAS_Player_Walk_Loop nodeWeight=1.000000",
+    "fixture_expected_errors": "Only four pre-existing TEST_Monster actors with missing CharacterDefinition, two exact expected messages each."
+  },
+  "runtime_changed_files": [
+    "Source/Khazan/Player/KZPlayerController.cpp"
+  ],
+  "runtime_changed_functions": [
+    "Input_GuardPressed"
+  ],
+  "new_runtime_files": 0,
+  "new_runtime_state": 0,
+  "dev_test": "Source/Khazan/Tests/KZGuardAbilityPIETest.cpp",
+  "binding_at_start": "Source already Triggered; preserved. Previously loaded DLL binding was not inspected.",
+  "key_mapping_decision": {
+    "action": "/Game/Input/IA_Guard",
+    "mapping_context": "/Game/Input/IMC_Default",
+    "actual_keys": [
+      "LeftShift",
+      "Gamepad_LeftShoulder"
+    ],
+    "changed": false,
+    "reason": "Optional key-change clarification sent because user wrote RB; no response received. Existing LB mapping preserved."
+  },
+  "verification_limits": [
+    "Native public Enhanced Input binding Execute invokes real private Controller callbacks. Physical device trigger evaluation not simulated.",
+    "Fixture repeats Triggered while held. Per-frame hardware Enhanced Input/CMC travel and continuous visual QA not validated.",
+    "WeakAttack/Dodge and intervening WeakAttack were tested; all skills, hit states and death/targeting integration were not exhaustively tested."
+  ],
+  "gameplay_numeric_changes": [],
+  "temporary_editor_setting": {
+    "property": "bThrottleCPUWhenNotForeground",
+    "before": true,
+    "during": false,
+    "restored": true,
+    "notify": "NEVER",
+    "save_config": false
+  },
+  "setup_timeout": {
+    "log": "PIE_SetupTimeout.log",
+    "gameplay_test_started": false,
+    "reason": "PIE start request followed the preparation watchdog too late; rerun linked Test Started and PIE request in one orchestration."
+  },
+  "final_editor_state": {
+    "observed_utc": "2026-10-06T03:03:47.447678+00:00",
+    "game_world": null,
+    "editor_world": "/Game/Maps/DevMap.DevMap",
+    "dirty_content": [],
+    "dirty_maps": [],
+    "background_throttle_restored": true,
+    "guard_action": "/Game/Input/IA_Guard.IA_Guard",
+    "guard_action_triggers": [],
+    "guard_mappings": [
+      {
+        "key": "LeftShift",
+        "triggers": []
+      },
+      {
+        "key": "Gamepad_LeftShoulder",
+        "triggers": []
+      }
+    ]
+  }
+}

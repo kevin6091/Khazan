@@ -1,0 +1,29 @@
+Begin Object Class=/Script/Engine.AnimMontage Name="AM_HalberdElite_Launch_B" ExportPath="/Script/Engine.AnimMontage'/Game/Monsters/HalberdElite/Animations/Reaction/Montages/AM_HalberdElite_Launch_B.AM_HalberdElite_Launch_B'"
+   Begin Object Class=/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify Name="HitLand" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/Monsters/HalberdElite/Animations/Reaction/Montages/AM_HalberdElite_Launch_B.AM_HalberdElite_Launch_B:HitLand'"
+   End Object
+   Begin Object Class=/Script/Engine.AnimDataModel Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/Monsters/HalberdElite/Animations/Reaction/Montages/AM_HalberdElite_Launch_B.AM_HalberdElite_Launch_B:AnimDataModel'"
+   End Object
+   Begin Object Name="HitLand" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/Monsters/HalberdElite/Animations/Reaction/Montages/AM_HalberdElite_Launch_B.AM_HalberdElite_Launch_B:HitLand'"
+      NotifyName="HitLand"
+   End Object
+   Begin Object Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/Monsters/HalberdElite/Animations/Reaction/Montages/AM_HalberdElite_Launch_B.AM_HalberdElite_Launch_B:AnimDataModel'"
+      FrameRate=(Numerator=5000,Denominator=167)
+      NumberOfFrames=88
+      NumberOfKeys=89
+   End Object
+   BlendIn=(BlendTime=0.100000)
+   BlendOut=(BlendTime=0.200000)
+   CompositeSections(0)=(SectionName="Up",NextSectionName="Peak",LinkedMontage="/Script/Engine.AnimMontage'AM_HalberdElite_Launch_B'",SegmentIndex=0,SegmentLength=0.167000,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Air_B_Up.Damage_Air_B_Up'")
+   CompositeSections(1)=(SectionName="Peak",NextSectionName="Down",LinkedMontage="/Script/Engine.AnimMontage'AM_HalberdElite_Launch_B'",SegmentIndex=1,SegmentBeginTime=0.167000,SegmentLength=0.100000,LinkValue=0.167000,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Air_B_Peak.Damage_Air_B_Peak'")
+   CompositeSections(2)=(SectionName="Down",NextSectionName="Land",LinkedMontage="/Script/Engine.AnimMontage'AM_HalberdElite_Launch_B'",SegmentIndex=2,SegmentBeginTime=0.267000,SegmentLength=0.167000,LinkValue=0.267000,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Air_B_Down.Damage_Air_B_Down'")
+   CompositeSections(3)=(SectionName="Land",NextSectionName="Getup",LinkedMontage="/Script/Engine.AnimMontage'AM_HalberdElite_Launch_B'",SegmentIndex=3,SegmentBeginTime=0.434000,SegmentLength=0.899033,LinkValue=0.434000,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Air_B_Land.Damage_Air_B_Land'")
+   CompositeSections(4)=(SectionName="Getup",LinkedMontage="/Script/Engine.AnimMontage'AM_HalberdElite_Launch_B'",SegmentIndex=4,SegmentBeginTime=1.333033,SegmentLength=1.600000,LinkValue=1.333033,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Getup_B.Damage_Getup_B'")
+   SlotAnimTracks(0)=(AnimTrack=(AnimSegments=((CachedPlayLength=0.167000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Air_B_Up.Damage_Air_B_Up'",AnimEndTime=0.167000),(CachedPlayLength=0.100000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Air_B_Peak.Damage_Air_B_Peak'",StartPos=0.167000,AnimEndTime=0.100000),(CachedPlayLength=0.167000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Air_B_Down.Damage_Air_B_Down'",StartPos=0.267000,AnimEndTime=0.167000),(CachedPlayLength=0.899033,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Air_B_Land.Damage_Air_B_Land'",StartPos=0.434000,AnimEndTime=0.899033),(CachedPlayLength=1.600000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Getup_B.Damage_Getup_B'",StartPos=1.333033,AnimEndTime=1.600000))))
+   BranchingPointMarkers(0)=(NotifyIndex=0,TriggerTime=0.434000)
+   CommonTargetFrameRate=(Numerator=0,Denominator=0)
+   Notifies(0)=(NotifyName="HitLand",Notify="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'HitLand'",MontageTickType=BranchingPoint,Guid=FEC903A541C6AD8D91DC5DB95433AB01,LinkedMontage="/Script/Engine.AnimMontage'AM_HalberdElite_Launch_B'",SegmentIndex=3,SegmentBeginTime=0.434000,SegmentLength=0.899033,LinkValue=0.434000,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Air_B_Land.Damage_Air_B_Land'")
+   SequenceLength=2.939200
+   AnimNotifyTracks(0)=(TrackName="1")
+   DataModelInterface=AnimDataModel'AM_HalberdElite_Launch_B:AnimDataModel'
+   Skeleton="/Script/Engine.Skeleton'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Skeletons/SKEL_EN_C_M_HalberdV2.SKEL_EN_C_M_HalberdV2'"
+End Object

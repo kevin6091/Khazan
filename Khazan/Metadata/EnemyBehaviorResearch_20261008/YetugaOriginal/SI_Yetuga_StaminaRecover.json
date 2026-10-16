@@ -1,0 +1,52 @@
+[
+  {
+    "Type": "xxSkillInfo",
+    "Name": "SI_Yetuga_StaminaRecover",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/21_StaminaRecover/SI_Yetuga_StaminaRecover",
+    "Properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "D3DA961E4F9B42A93BCA8C9F5E1BB370",
+        "SourceString": "괴력 충전 포효",
+        "LocalizedString": "괴력 충전 포효"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/21_StaminaRecover/SB_Yetuga_StaminaRecover.SB_Yetuga_StaminaRecover_C",
+        "SubPathString": ""
+      },
+      "bEnableParringSkill": false,
+      "SkillInputCondition": {
+        "ObjectName": "xxStateInputConditionSelfStatus'SI_Yetuga_StaminaRecover:xxStateInputConditionSelfStatus_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/21_StaminaRecover/SI_Yetuga_StaminaRecover.1"
+      },
+      "SpellConditionToUseSkill": {
+        "ExcludeSpells": [
+          {
+            "ObjectName": "xxSpellInfo'SP_Yetuga_PartGroggy_Stun'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Stun.1"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Type": "xxStateInputConditionSelfStatus",
+    "Name": "xxStateInputConditionSelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxStateInputConditionSelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSkillInfo'SI_Yetuga_StaminaRecover'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/21_StaminaRecover/SI_Yetuga_StaminaRecover.0"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::Stamina",
+        "CompareOperator": "ECompareOperator::LessThanOrEqualTo"
+      },
+      "AfterTime": 6.4,
+      "bKeepOpResult": true
+    }
+  }
+]

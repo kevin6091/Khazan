@@ -1,0 +1,71 @@
+﻿diff --git a/Saved/GuardMovementPolicy_20261006/Before/Source/Khazan/Ability/PlayerAbility/KZGuardAbility.cpp b/Source/Khazan/Ability/PlayerAbility/KZGuardAbility.cpp
+index a364122..4687c45 100644
+--- a/Saved/GuardMovementPolicy_20261006/Before/Source/Khazan/Ability/PlayerAbility/KZGuardAbility.cpp
++++ b/Source/Khazan/Ability/PlayerAbility/KZGuardAbility.cpp
+@@ -110,8 +110,9 @@ bool UKZGuardAbility::IsGuardInputHeld() const
+ void UKZGuardAbility::InputReleased(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
+ 	FGameplayAbilityActivationInfo ActivationInfo)
+ {
+-	// 물리 Release 즉시 방어/Walk 제약을 해제한다. 아직 InputEnd 전이면 Spec의 false 상태로 End를 예약한다.
++	// 물리 Release 즉시 방어/Walk 제약을 해제한다. 정지 상태의 InputEnd 전이면 End를 예약한다.
+ 	ReleaseGuardState();
++	HandleMoveInput(FGameplayEventData()); // 이동 입력이 남아 있으면 InputEnd/End를 기다리지 않고 복귀한다.
+ 	if (IsActive() && (HasInputEnded() || !ActiveMontageTask))
+ 	{
+ 		PlaySection(KZGuard::End);
+@@ -161,6 +162,15 @@ bool UKZGuardAbility::PlaySection(FName Section)
+ 	{
+ 		return false;
+ 	}
++	if (Section == KZGuard::Start || Section == KZGuard::End)
++	{
++		CurrentSection = Section;
++		HandleMoveInput(FGameplayEventData());
++		if (!IsActive() || CurrentSection != Section)
++		{
++			return IsActive(); // Start 생략은 held 수명 유지, End 생략은 Ability 종료다.
++		}
++	}
+ 	// 이전 task만 정리해 늦은 Completed/Interrupted를 끊는다. 새 task가 같은 Slot의 이전 재생을 blend out한다.
+ 	if (ActiveMontageTask)
+ 	{
+@@ -236,7 +246,7 @@ void UKZGuardAbility::HandleMontageAborted()
+ 
+ void UKZGuardAbility::HandleMoveInput(FGameplayEventData Payload)
+ {
+-	if (!IsActive() || CurrentSection != KZGuard::End || !HasInputEnded())
++	if (!IsActive() || (CurrentSection != KZGuard::Start && CurrentSection != KZGuard::End && IsGuardInputHeld()))
+ 	{
+ 		return;
+ 	}
+@@ -246,12 +256,28 @@ void UKZGuardAbility::HandleMoveInput(FGameplayEventData Payload)
+ 	{
+ 		return;
+ 	}
+-	if (UAnimInstance* Anim = BoundAnimInstance.Get())
++	const bool bContinueGuard = CurrentSection == KZGuard::Start && IsGuardInputHeld();
++	if (ActiveMontageTask)
++	{
++		// Stop보다 먼저 task를 끝내야 Interrupted가 유지 중인 Guard까지 종료하지 않는다.
++		ActiveMontageTask->EndTask();
++		ActiveMontageTask = nullptr;
++	}
++	CurrentSection = NAME_None;
++	ActiveMontageInstanceId = INDEX_NONE;
++	if (UAnimInstance* Anim = BoundAnimInstance.Get(); Anim && Anim->GetActiveInstanceForMontage(GuardMontage))
+ 	{
+ 		Anim->RequestMontageInertialization(GuardMontage, LocomotionExitInertializationDuration, nullptr);
+ 		Anim->Montage_Stop(0.f, GuardMontage);
+ 	}
+-	FinishAbility(true);
++	if (bContinueGuard)
++	{
++		SetInputEnded(); // Start를 건너뛰고 기존 ABP의 GuardLocomotion을 사용한다.
++	}
++	else
++	{
++		FinishAbility(true);
++	}
+ }
+ 
+ void UKZGuardAbility::ReleaseGuardState()

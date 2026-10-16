@@ -1,0 +1,378 @@
+{
+  "root_cause": "SetAbsolute(false,false,true) was called after KeepWorldTransform attachment. SpawnEmitterAtLocation had absolute translation, so its world-relative location became local and parent translation was added a second time.",
+  "process": 2200,
+  "observations": [
+    {
+      "label": "first_pause",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"status\":\"paused\",\"newPosition\":{\"filePath\":\"file://C:/Users/user/Desktop/GitProject/Khazan_GiantVFXWork_20261013/Khazan/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.cpp\",\"line\":245},\"frameValues\":\"├─ + this =  // 0x0000022b1197a000 (Label=L\\\"KZMonsterSkillObject0\\\",Name=\\\"KZMonsterSkillObject\\\"_0) {AKZMonsterSkillObject *}\\n├─ DeltaSeconds = <error: Variable is not available>\\n├─ + Types = {ObjectTypesToQuery64=140724244521411, ObjectTypesToQuery=1306803376, IgnoreMask=40 \\\"'('\\\"} {FCollisionObjectQueryParams}\\n├─ + Shape = {={={ShapeType=-2008894464, Box={HalfExtentX=0.00000000000000000000000000000000000000000077491805, HalfExtentY=0.00000000000000000000000000000000000000000000560519386, HalfExtentZ=0}}, ={Sphere={Radius=0.00000000000000000000000000000000000000000077491805}}, ...}} {FCollisionShape}\\n├─ + Contacts = Num=7143533, Max=7209057 {TArray<FHitResult, TSizedDefaultAllocator<32>>}\\n├─ + Params = {TraceTag=\\\"None\\\"_32763, OwnerTag=\\\"None\\\"_13245, bTraceComplex=true, ...} {FCollisionQueryParams}\\n├─ + Previous = {X=1.1304221976847721E-320 Y=1.9762625833649862E-323 Z=1.9762625833649862E-323} {UE::Math::TVector<double>}\\n├─ + Next = {X=8.9009812733263139E-307 Y=5.2846989559265415E-308 Z=6.9527019534919943E-310} {UE::Math::TVector<double>}\\n├─ Alpha = <error: Variable is not available>\\n├─ Local = <error: Variable is not available>\\n├─ <begin>$L0 = <error: Variable is not available>\\n└─ <end>$L0 = <error: Variable is not available>\\n\",\"breakpointErrorsTail\":[{\"type\":\"BREAKPOINT_ERROR\",\"timestampMs\":1791832428647,\"timestampIso\":\"2026-10-12T19:13:48.647Z\",\"sessionId\":\"UnrealEditor (2200)\",\"message\":\"현재 중단점에 도달할 수 없습니다. 이 줄과 관련된 실행 코드가 없습니다.\",\"breakpointId\":\"line|file://C:/Users/user/Desktop/GitProject/Khazan_GiantVFXWork_20261013/Khazan/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.cpp|244\",\"filePath\":\"file://C:/Users/user/Desktop/GitProject/Khazan_GiantVFXWork_20261013/Khazan/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.cpp\",\"line\":245}]}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_get_stack --sessionId \"UnrealEditor (2200)\" --limit 7",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"frames\":[{\"presentation\":\"AKZMonsterSkillObject::Tick(float) KZMonsterSkillObject.cpp:245\",\"index\":0,\"file\":\"file://C:/Users/user/Desktop/GitProject/Khazan_GiantVFXWork_20261013/Khazan/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.cpp\",\"line\":245,\"isCurrent\":true}],\"threadId\":\"Thread-1-[GameThread] (23156)\",\"totalFrames\":1}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"Age\" --depth 0",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Age = 0.0166666675 {float}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect\" --depth 2",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect =  // 0x0000022a1a563200 (Name = \"ParticleSystemComponent\"_0, Owner =  // 0x0000022995b78200 (Label=L\"WorldSettings1\",Name=\"WorldSettings\"_1)) {TWeakObjectPtr<UParticleSystemComponent, FWeakObjectPtr>}\n  ├─ + UFXSystemComponent = (Name = \"ParticleSystemComponent\"_0, Owner =  // 0x0000022995b78200 (Label=L\"WorldSettings1\",Name=\"WorldSettings\"_1)) {UFXSystemComponent}\n  │  ├─ + UPrimitiveComponent = (Name = \"ParticleSystemComponent\"_0, Owner =  // 0x0000022995b78200 (Label=L\"WorldSettings1\",Name=\"WorldSettings\"_1)) {UPrimitiveComponent}\n  │  ├─ ParticlePerfStats = NULL {FParticlePerfStats *}\n  │  └─ bPSOPrecacheCalled = 0 \"'\\0'\" {unsigned char:1}\n  ├─ + Template =  // 0x00000229b939b400 (Name=\"FP_Boss_Yetuga_IceBreath_explosion_01\", InternalFlags=ReachabilityFlag1) {TObjectPtr<UParticleSystem>}\n  │  ├─ + UFXSystemAsset = (Name=\"FP_Boss_Yetuga_IceBreath_explosion_01\", InternalFlags=ReachabilityFlag1) {UFXSystemAsset}\n  │  ├─ UpdateTime_FPS = 60 {float}\n  │  ├─ UpdateTime_Delta = 0.0166666675 {float}\n  │  ├─ WarmupTime = 0 {float}\n  │  ├─ WarmupTickRate = 0 {float}\n  │  ├─ + Emitters = Num=12, Max=12 {TArray<TObjectPtr<UParticleEmitter>, TSizedDefaultAllocator<32>>}\n  │  ├─ + PreviewComponent = nullptr {TObjectPtr<UParticleSystemComponent>}\n  │  ├─ + ThumbnailAngle = {Pitch=0, Yaw=0, Roll=0} {UE::Math::TRotator<double>}\n  │  ├─ ThumbnailDistance = 200 {float}\n  │  ├─ ThumbnailWarmup = 1 {float}\n  │  ├─ + CurveEdSetup = nullptr {TObjectPtr<UInterpCurveEdSetup>}\n  │  ├─ LODDistanceCheckTime = 0.25 {float}\n  │  ├─ MacroUVRadius = 200 {float}\n  │  ├─ + LODDistances = Num=1, Max=1 {TArray<float, TSizedDefaultAllocator<32>>}\n  │  ├─ EditorLODSetting = 0 {int}\n  │  ├─ + LODSettings = Num=1, Max=1 {TArray<FParticleSystemLOD, TSizedDefaultAllocator<32>>}\n  │  ├─ + FixedRelativeBoundingBox = {Min={X=-5000 Y=-5000 Z=-5000}, Max={X=5000 Y=5000 Z=5000}, IsValid=1 \"'\\x1'\", ...} {UE::Math::TBox<double>}\n  │  ├─ SecondsBeforeInactive = 0 {float}\n  │  ├─ + FloorMesh = L\"/Engine/EditorMeshes/AnimTreeEd_PreviewFloor.AnimTreeEd_PreviewFloor\" {FString}\n  │  ├─ + FloorPosition = {X=0 Y=0 Z=0} {UE::Math::TVector<double>}\n  │  ├─ + FloorRotation = {Pitch=0, Yaw=0, Roll=0} {UE::Math::TRotator<double>}\n  │  ├─ FloorScale = 1 {float}\n  │  ├─ + FloorScale3D = {X=1 Y=1 Z=1} {UE::Math::TVector<double>}\n  │  ├─ + BackgroundColor = {={={B=0 \"'\\0'\", G=0 \"'\\0'\", R=0 \"'\\0'\", ...}, Bits=0}} {FColor}\n  │  ├─ Delay = 0 {float}\n  │  ├─ DelayLow = 0 {float}\n  │  ├─ bOrientZAxisTowardCamera = 0 \"'\\0'\" {unsigned char:1}\n  │  ├─ bUseFixedRelativeBoundingBox = 0 \"'\\0'\" {unsigned char:1}\n  │  ├─ bShouldResetPeakCounts = 1 \"'\\x1'\" {unsigned char:1}\n  │  ├─ bHasPhysics = 0 \"'\\0'\" {unsigned char:1}\n  │  ├─ bUseRealtimeThumbnail = 0 \"'\\0'\" {unsigned char:1}\n  │  ├─ ThumbnailImageOutOfDate = 1 \"'\\x1'\" {unsigned char:1}\n  │  ├─ bIsElligibleForAsyncTick = 1 \"'\\x1'\" {unsigned char:1}\n  │  ├─ bIsElligibleForAsyncTickComputed = 1 \"'\\x1'\" {unsigned char:1}\n  │  ├─ + ThumbnailImage = nullptr {TObjectPtr<UTexture2D>}\n  │  ├─ bUseDelayRange = 0 \"'\\0'\" {unsigned char:1}\n  │  ├─ bAllowManagedTicking = 1 \"'\\x1'\" {unsigned char:1}\n  │  ├─ bAutoDeactivate = 1 \"'\\x1'\" {unsigned char:1}\n  │  ├─ bRegenerateLODDuplicate = 0 \"'\\0'\" {unsigned char:1}\n  │  ├─ + SystemUpdateMode = EPSUM_RealTime {TEnumAsByte<enum EParticleSystemUpdateMode>}\n  │  ├─ + LODMethod = PARTICLESYSTEMLODMETHOD_Automatic {TEnumAsByte<enum ParticleSystemLODMethod>}\n  │  ├─ InsignificantReaction = Auto {EParticleSystemInsignificanceReaction}\n  │  ├─ + OcclusionBoundsMethod = EPSOBM_ParticleBounds {TEnumAsByte<enum EParticleSystemOcclusionBoundsMethod>}\n  │  ├─ bAnyEmitterLoopsForever = 0 \"'\\0'\" {unsigned char:1}\n  │  ├─ MaxSignificanceLevel = Critical {EParticleSignificanceLevel}\n  │  ├─ MinTimeBetweenTicks = 0 {unsigned int}\n  │  ├─ InsignificanceDelay = 0 {float}\n  │  ├─ + MacroUVPosition = {X=0 Y=0 Z=0} {UE::Math::TVector<double>}\n  │  ├─ + CustomOcclusionBounds = {Min={X=0 Y=0 Z=0}, Max={X=0 Y=0 Z=0}, IsValid=0 \"'\\0'\", ...} {UE::Math::TBox<double>}\n  │  └─ + SoloTracking = Num=12, Max=12 {TArray<FLODSoloTrack, TSizedDefaultAllocator<32>>}\n  ├─ + EmitterMaterials = Empty {TArray<TObjectPtr<UMaterialInterface>, TSizedDefaultAllocator<32>>}\n  │  └─ + Raw View = {AllocatorInstance={TSizedAllocatorBase<32,TSizedHeapAllocator<32,FMemory> >::ForAnyElementType={Data= // 0x0000000000000000 {...}}}, ArrayNum=0, ArrayMax=0} {TArray<TObjectPtr<UMaterialInterface>, TSizedDefaultAllocator<32>>}\n  ├─ + SkelMeshComponents = Empty {TArray<TObjectPtr<USkeletalMeshComponent>, TSizedDefaultAllocator<32>>}\n  │  └─ + Raw View = {AllocatorInstance={TSizedAllocatorBase<32,TSizedHeapAllocator<32,FMemory> >::ForAnyElementType={Data= // 0x0000000000000000 {...}}}, ArrayNum=0, ArrayMax=0} {TArray<TObjectPtr<USkeletalMeshComponent>, TSizedDefaultAllocator<32>>}\n  ├─ bWasCompleted = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bSuppressSpawning = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bIsElligibleForAsyncTick = 1 \"'\\x1'\" {unsigned char:1}\n  ├─ bIsElligibleForAsyncTickComputed = 1 \"'\\x1'\" {unsigned char:1}\n  ├─ bWasDeactivated = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bWasActive = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bResetTriggered = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bDeactivateTriggered = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bResetOnDetach = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bUpdateOnDedicatedServer = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bJustRegistered = 1 \"'\\x1'\" {unsigned char:1}\n  ├─ bHasBeenActivated = 1 \"'\\x1'\" {unsigned char:1}\n  ├─ bAllowRecycling = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bAutoManageAttachment = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bAutoAttachWeldSimulatedBodies = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bIsManagingSignificance = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bWasManagingSignificance = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bIsDuringRegister = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bWarmingUp = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bOverrideLODMethod = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bSkipUpdateDynamicDataDuringTick = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bForcedInActive = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bForceLODUpdateFromRenderer = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bIsViewRelevanceDirty = 1 \"'\\x1'\" {unsigned char:1}\n  ├─ bAutoDestroy = 1 \"'\\x1'\" {unsigned char:1}\n  ├─ bIsTransformDirty = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bDidAutoAttach = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bAsyncDataCopyIsValid = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bParallelRenderThreadUpdate = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bNeedsFinalize = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bAsyncWorkOutstanding = false {volatile bool}\n  ├─ ManagerHandle = 0 {int:30}\n  ├─ bPendingManagerAdd = 0 {int:1}\n  ├─ bPendingManagerRemove = 0 {int:1}\n  ├─ PoolingMethod = None {EPSCPoolMethod}\n  ├─ + LODMethod = PARTICLESYSTEMLODMETHOD_Automatic {TEnumAsByte<enum ParticleSystemLODMethod>}\n  │  └─ Value = 0 \"'\\0'\" {unsigned char}\n  ├─ RequiredSignificance = Low {EParticleSignificanceLevel}\n  ├─ + ReplayState = PRS_Disabled {TEnumAsByte<enum ParticleReplayState>}\n  │  └─ Value = 0 \"'\\0'\" {unsigned char}\n  ├─ + InstanceParameters = Empty {TArray<FParticleSysParam, TSizedDefaultAllocator<32>>}\n  │  └─ + Raw View = {AllocatorInstance={TSizedAllocatorBase<32,TSizedHeapAllocator<32,FMemory> >::ForAnyElementType={Data= // 0x0000000000000000 {...}}}, ArrayNum=0, ArrayMax=0} {TArray<FParticleSysParam, TSizedDefaultAllocator<32>>}\n  ├─ + OnParticleSpawn =  {FParticleSpawnSignature}\n  │  └─ + TDynamicMulticastDelegate<void __cdecl(FName,float,UE::Math::TVector<double>,UE::Math::TVector<double>),FNotThreadSafeDelegateMode> =  {TDynamicMulticastDelegate<void __cdecl(FName, float, UE::Math::TVector<double>, UE::Math::TVector<double>), FNotThreadSafeDelegateMode>}\n  ├─ + OnParticleBurst =  {FParticleBurstSignature}\n  │  └─ + TDynamicMulticastDelegate<void __cdecl(FName,float,int),FNotThreadSafeDelegateMode> =  {TDynamicMulticastDelegate<void __cdecl(FName, float, int), FNotThreadSafeDelegateMode>}\n  ├─ + OnParticleDeath =  {FParticleDeathSignature}\n  │  └─ + TDynamicMulticastDelegate<void __cdecl(FName,float,int,UE::Math::TVector<double>,UE::Math::TVector<double>,UE::Math::TVector<double>),FNotThreadSafeDelegateMode> =  {TDynamicMulticastDelegate<void __cdecl(FName, float, int, UE::Math::TVector<double>, UE::Math::TVector<double>, UE::Math::TVector<double>), FNotThreadSafeDelegateMode>}\n  ├─ + OnParticleCollide =  {FParticleCollisionSignature}\n  │  └─ + TDynamicMulticastDelegate<void __cdecl(FName,float,int,UE::Math::TVector<double>,UE::Math::TVector<double>,UE::Math::TVector<double>,UE::Math::TVector<double>,FName,UPhysicalMaterial *),FNotThreadSafeDelegateMode> =  {TDynamicMulticastDelegate<void __cdecl(FName, float, int, UE::Math::TVector<double>, UE::Math::TVector<double>, UE::Math::TVector<double>, UE::Math::TVector<double>, FName, UPhysicalMaterial *), FNotThreadSafeDelegateMode>}\n  ├─ bOldPositionValid = false {bool}\n  ├─ + OldPosition = {X=0 Y=0 Z=0} {UE::Math::TVector<double>}\n  │  ├─ X = 0 {double}\n  │  ├─ Y = 0 {double}\n  │  ├─ Z = 0 {double}\n  │  ├─ ||V||² = 0 {double}\n  │  └─ + Raw View = {={={X=0, Y=0, Z=0}, XYZ= // 0x0000022a1a563910 {0, 0, 0}}} {UE::Math::TVector<double>}\n  └─ + PartSysVelocity = {X=0 Y=0 Z=0} {UE::Math::TVector<double>}\n     ├─ X = 0 {double}\n     ├─ Y = 0 {double}\n     ├─ Z = 0 {double}\n     ├─ ||V||² = 0 {double}\n     └─ + Raw View = {={={X=0, Y=0, Z=0}, XYZ= // 0x0000022a1a563928 {0, 0, 0}}} {UE::Math::TVector<double>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"Data.bField\" --depth 0",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Data.bField = true {bool}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"Age > 0.5f\" --depth 0",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Age > 0.5f = false {bool}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_set_breakpoint --breakpointId \"line|file://C:/Users/user/Desktop/GitProject/Khazan_GiantVFXWork_20261013/Khazan/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.cpp|244\" --condition \"Age > 0.5f\" --suspendPolicy ALL --temporary true",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"breakpointId\":\"line|file://C:/Users/user/Desktop/GitProject/Khazan_GiantVFXWork_20261013/Khazan/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.cpp|244\",\"added\":{\"id\":\"line|file://C:/Users/user/Desktop/GitProject/Khazan_GiantVFXWork_20261013/Khazan/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.cpp|244\",\"type\":\"line\",\"file\":\"file://C:/Users/user/Desktop/GitProject/Khazan_GiantVFXWork_20261013/Khazan/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.cpp\",\"line\":245,\"enabled\":true,\"owner\":\"agent\",\"condition\":\"Age > 0.5f\",\"isLogMessage\":false,\"isLogStack\":false,\"temporary\":true,\"suspendPolicy\":\"all\",\"hitCount\":0},\"totalBreakpoints\":9,\"lineText\":\"if(Data.LifeSeconds>0.f && Age>=Data.LifeSeconds){TriggerDestruction();return;}\"}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_control_session --sessionId \"UnrealEditor (2200)\" --action RESUME",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"status\":\"paused\",\"newPosition\":{\"filePath\":\"file://C:/Users/user/Desktop/GitProject/Khazan_GiantVFXWork_20261013/Khazan/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.cpp\",\"line\":245},\"frameValues\":\"├─ + this =  // 0x0000022b1197a000 (Label=L\\\"KZMonsterSkillObject0\\\",Name=\\\"KZMonsterSkillObject\\\"_0) {AKZMonsterSkillObject *}\\n├─ DeltaSeconds = <error: Variable is not available>\\n├─ + Types = {ObjectTypesToQuery64=140724760094124, ObjectTypesToQuery=980943616, IgnoreMask=42 \\\"'*'\\\"} {FCollisionObjectQueryParams}\\n├─ + Shape = {={={ShapeType=-2008894464, Box={HalfExtentX=0.00000000000000000000000000000000000000000077491805, HalfExtentY=0.00000000000000000000000000000000000000000000280259693, HalfExtentZ=0.0000000000000000000000000000000000000000459009325}}, ={Sphere={Radius=0.00000000000000000000000000000000000000000077491805}}, ...}} {FCollisionShape}\\n├─ + Contacts = Invalid {TArray<FHitResult, TSizedDefaultAllocator<32>>}\\n├─ + Params = {TraceTag=\\\"None\\\"_32763, OwnerTag=\\\"None\\\"_13245, bTraceComplex=true, ...} {FCollisionQueryParams}\\n├─ + Previous = {X=6.9527046783154139E-310 Y=1.1757645504760022E-311 Z=1.174508222280812E-311} {UE::Math::TVector<double>}\\n├─ + Next = {X=1.1165883596012172E-321 Y=1.1748263487747016E-311 Z=0} {UE::Math::TVector<double>}\\n├─ Alpha = <error: Variable is not available>\\n├─ Local = <error: Variable is not available>\\n├─ <begin>$L0 = <error: Variable is not available>\\n└─ <end>$L0 = <error: Variable is not available>\\n\",\"breakpointErrorsTail\":[]}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_control_session --sessionId \"UnrealEditor (2200)\" --action WAIT_FOR_PAUSE --timeout 20000",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"status\":\"paused\",\"newPosition\":{\"filePath\":\"file://C:/Users/user/Desktop/GitProject/Khazan_GiantVFXWork_20261013/Khazan/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.cpp\",\"line\":245},\"frameValues\":\"├─ + this =  // 0x0000022b1197a000 (Label=L\\\"KZMonsterSkillObject0\\\",Name=\\\"KZMonsterSkillObject\\\"_0) {AKZMonsterSkillObject *}\\n├─ DeltaSeconds = <error: Variable is not available>\\n├─ + Types = {ObjectTypesToQuery64=140724760094124, ObjectTypesToQuery=980943616, IgnoreMask=42 \\\"'*'\\\"} {FCollisionObjectQueryParams}\\n├─ + Shape = {={={ShapeType=-2008894464, Box={HalfExtentX=0.00000000000000000000000000000000000000000077491805, HalfExtentY=0.00000000000000000000000000000000000000000000280259693, HalfExtentZ=0.0000000000000000000000000000000000000000459009325}}, ={Sphere={Radius=0.00000000000000000000000000000000000000000077491805}}, ...}} {FCollisionShape}\\n├─ + Contacts = Invalid {TArray<FHitResult, TSizedDefaultAllocator<32>>}\\n├─ + Params = {TraceTag=\\\"None\\\"_32763, OwnerTag=\\\"None\\\"_13245, bTraceComplex=true, ...} {FCollisionQueryParams}\\n├─ + Previous = {X=6.9527046783154139E-310 Y=1.1757645504760022E-311 Z=1.174508222280812E-311} {UE::Math::TVector<double>}\\n├─ + Next = {X=1.1165883596012172E-321 Y=1.1748263487747016E-311 Z=0} {UE::Math::TVector<double>}\\n├─ Alpha = <error: Variable is not available>\\n├─ Local = <error: Variable is not available>\\n├─ <begin>$L0 = <error: Variable is not available>\\n└─ <end>$L0 = <error: Variable is not available>\\n\",\"message\":\"Session 'UnrealEditor (2200)' is already paused.\",\"breakpointErrorsTail\":[]}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_get_stack --sessionId \"UnrealEditor (2200)\" --limit 5",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"frames\":[{\"presentation\":\"AKZMonsterSkillObject::Tick(float) KZMonsterSkillObject.cpp:245\",\"index\":0,\"file\":\"file://C:/Users/user/Desktop/GitProject/Khazan_GiantVFXWork_20261013/Khazan/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.cpp\",\"line\":245,\"isCurrent\":true}],\"threadId\":\"Thread-1-[GameThread] (23156)\",\"totalFrames\":1}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->EmitterInstances\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->EmitterInstances = Num=12, Max=12 {TArray<FParticleEmitterInstance *, TSizedDefaultAllocator<32>>}\n  ├─ [0] = NULL {FParticleEmitterInstance *}\n  ├─ [1] = NULL {FParticleEmitterInstance *}\n  ├─ + [2] =  // 0x0000022a287e9d80 {Component=, CurrentLODLevel= // 0x00000229b5abf540 (Name=\"ParticleLODLevel\"_0, InternalFlags=ReachabilityFlag1), CurrentLODLevelIndex=0, ...} {FParticleEmitterInstance *}\n  ├─ + [3] =  // 0x0000022b11ee6900 {Component=, CurrentLODLevel= // 0x00000229b5abf300 (Name=\"ParticleLODLevel\"_0, InternalFlags=ReachabilityFlag1), CurrentLODLevelIndex=0, ...} {FParticleEmitterInstance *}\n  ├─ [4] = NULL {FParticleEmitterInstance *}\n  ├─ + [5] =  // 0x0000022b11ee6600 {Component=, CurrentLODLevel= // 0x00000229b5abf000 (Name=\"ParticleLODLevel\"_2, InternalFlags=ReachabilityFlag1), CurrentLODLevelIndex=0, ...} {FParticleEmitterInstance *}\n  ├─ + [6] =  // 0x0000022ac7ca6600 {Component=, CurrentLODLevel= // 0x00000229b5abf0c0 (Name=\"ParticleLODLevel\"_0, InternalFlags=ReachabilityFlag1), CurrentLODLevelIndex=0, ...} {FParticleEmitterInstance *}\n  ├─ [7] = NULL {FParticleEmitterInstance *}\n  ├─ [8] = NULL {FParticleEmitterInstance *}\n  ├─ [9] = NULL {FParticleEmitterInstance *}\n  ├─ [10] = NULL {FParticleEmitterInstance *}\n  ├─ [11] = NULL {FParticleEmitterInstance *}\n  └─ + Raw View = {AllocatorInstance={TSizedAllocatorBase<32,TSizedHeapAllocator<32,FMemory> >::ForAnyElementType={Data= // 0x0000022b11fec780 {...}}}, ArrayNum=12, ArrayMax=12} {TArray<FParticleEmitterInstance *, TSizedDefaultAllocator<32>>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"Age\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Age = 0.500000179 {float}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->EmitterInstances[5]->ActiveParticles\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->EmitterInstances[5]->ActiveParticles = 3 {int}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->EmitterInstances[5]->CurrentLODLevel->TypeDataModule\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->EmitterInstances[5]->CurrentLODLevel->TypeDataModule =  // 0x00000229b5abdec0 {TObjectPtr<UParticleModuleTypeDataBase>}\n  └─ + Raw View = {={ObjectPtr= // 0x00000229b5abdec0 (Name=\"ParticleModuleTypeDataMesh\"_2, InternalFlags=ReachabilityFlag1), DebugPtr= // 0x00000229b5abdec0 }} {TObjectPtr<UParticleModuleTypeDataBase>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->EmitterInstances[5]->GetParticle(0)->Size\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->EmitterInstances[5]->GetParticle(0)->Size = <error: Expression failed to parse, suggested fix: StateEffect.EmitterInstances[5]->GetParticle(0)->Size>"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->EmitterInstances[5]->GetParticle(0)->Location\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->EmitterInstances[5]->GetParticle(0)->Location = <error: Expression failed to parse, suggested fix: StateEffect.EmitterInstances[5]->GetParticle(0)->Location>"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->RelativeLocation\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->RelativeLocation = {X=400 Y=0 Z=10010} {UE::Math::TVector<double>}\n  ├─ X = 400 {double}\n  ├─ Y = 0 {double}\n  ├─ Z = 10010 {double}\n  ├─ ||V||² = 100360100 {double}\n  └─ + Raw View = {={={X=400, Y=0, Z=10010}, XYZ= // 0x0000022a1a563380 {400, 0, 10010}}} {UE::Math::TVector<double>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"((FBaseParticle*)(StateEffect->EmitterInstances[5]->ParticleData + StateEffect->EmitterInstances[5]->ParticleIndices[0] * StateEffect->EmitterInstances[5]->ParticleStride))->Size\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "((FBaseParticle*)(StateEffect->EmitterInstances[5]->ParticleData + StateEffect->EmitterInstances[5]->ParticleIndices[0] * StateEffect->EmitterInstances[5]->ParticleStride))->Size = {X=0.601673067 Y=0.643976271 Z=0.663447678} {UE::Math::TVector<float>}\n  ├─ X = 0.601673067 {float}\n  ├─ Y = 0.643976271 {float}\n  ├─ Z = 0.663447678 {float}\n  ├─ ||V||² = 1.21687865 {float}\n  └─ + Raw View = {={={X=0.601673067, Y=0.643976271, Z=0.663447678}, XYZ= // 0x0000022b06b02a60 {0.601673067, 0.643976271, 0.663447678}}} {UE::Math::TVector<float>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"((FBaseParticle*)(StateEffect->EmitterInstances[5]->ParticleData + StateEffect->EmitterInstances[5]->ParticleIndices[0] * StateEffect->EmitterInstances[5]->ParticleStride))->Location\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "((FBaseParticle*)(StateEffect->EmitterInstances[5]->ParticleData + StateEffect->EmitterInstances[5]->ParticleIndices[0] * StateEffect->EmitterInstances[5]->ParticleStride))->Location = {X=-335.80454634748139 Y=74.004530649188197 Z=-200.47861659526825} {UE::Math::TVector<double>}\n  ├─ X = -335.80454634748139 {double}\n  ├─ Y = 74.004530649188197 {double}\n  ├─ Z = -200.47861659526825 {double}\n  ├─ ||V||² = 158433.03961619697 {double}\n  └─ + Raw View = {={={X=-335.80454634748139, Y=74.004530649188197, Z=-200.47861659526825}, XYZ= // 0x0000022b06b02a18 {-335.80454634748139, 74.004530649188197, -200.47861659526825}}} {UE::Math::TVector<double>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"((FMeshEmitterInstance*)StateEffect->EmitterInstances[5])->MeshTypeData->Mesh\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "((FMeshEmitterInstance*)StateEffect->EmitterInstances[5])->MeshTypeData->Mesh = <error: error: use of undeclared identifier 'FMeshEmitterInstance'\nerror: expected expression\n>"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->EmitterInstances[5]->CurrentLODLevel->Modules\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->EmitterInstances[5]->CurrentLODLevel->Modules = Num=13, Max=13 {TArray<TObjectPtr<UParticleModule>, TSizedDefaultAllocator<32>>}\n  ├─ + [0] =  {TObjectPtr<UParticleModule>}\n  ├─ + [1] =  {TObjectPtr<UParticleModule>}\n  ├─ + [2] =  {TObjectPtr<UParticleModule>}\n  ├─ + [3] =  {TObjectPtr<UParticleModule>}\n  ├─ + [4] =  {TObjectPtr<UParticleModule>}\n  ├─ + [5] =  {TObjectPtr<UParticleModule>}\n  ├─ + [6] =  {TObjectPtr<UParticleModule>}\n  ├─ + [7] =  {TObjectPtr<UParticleModule>}\n  ├─ + [8] =  {TObjectPtr<UParticleModule>}\n  ├─ + [9] =  {TObjectPtr<UParticleModule>}\n  ├─ + [10] =  {TObjectPtr<UParticleModule>}\n  ├─ + [11] =  {TObjectPtr<UParticleModule>}\n  ├─ + [12] =  {TObjectPtr<UParticleModule>}\n  └─ + Raw View = {AllocatorInstance={TSizedAllocatorBase<32,TSizedHeapAllocator<32,FMemory> >::ForAnyElementType={Data= // 0x00000229b78474d0 {...}}}, ArrayNum=13, ArrayMax=13} {TArray<TObjectPtr<UParticleModule>, TSizedDefaultAllocator<32>>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->EmitterInstances[5]->CurrentLODLevel->RequiredModule->bKillOnCompleted\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->EmitterInstances[5]->CurrentLODLevel->RequiredModule->bKillOnCompleted = 1 \"'\\x1'\" {unsigned char}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->ComponentToWorld\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->ComponentToWorld = {Translation={X=800 Y=0 Z=20120} Rotation={X=0 Y=0 Z=0 W=1}} {UE::Math::TTransform<double>}\n  ├─ + Translation = {X=800 Y=0 Z=20120} {void *}\n  ├─ + Rotation = {X=0 Y=0 Z=0 W=1} {void *}\n  ├─ + Scale3D = {X=1 Y=1 Z=1} {void *}\n  └─ + Raw View = {Rotation={XY={m128d_f64= // 0x0000022a1a563430 {0, 0}}, ZW={m128d_f64= // 0x0000022a1a563440 {0, 1}}}, Translation={XY={m128d_f64= // 0x0000022a1a563450 {800, 0}}, ZW={m128d_f64= // 0x0000022a1a563460 {20120, 0}}}, Scale3D={XY={m128d_f64= // 0x0000022a1a563470 {1, 1}}, ZW={m128d_f64=...}}} {UE::Math::TTransform<double>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->EmitterInstances[5]->ParticleStride\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->EmitterInstances[5]->ParticleStride = 272 {int}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->EmitterInstances[5]->TypeDataOffset\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->EmitterInstances[5]->TypeDataOffset = 0 {int}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->EmitterInstances[5]->bEnabled\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->EmitterInstances[5]->bEnabled = 1 \"'\\x1'\" {unsigned char}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"((FBaseParticle*)(StateEffect->EmitterInstances[5]->ParticleData + StateEffect->EmitterInstances[5]->ParticleIndices[0] * StateEffect->EmitterInstances[5]->ParticleStride))->Color\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "((FBaseParticle*)(StateEffect->EmitterInstances[5]->ParticleData + StateEffect->EmitterInstances[5]->ParticleIndices[0] * StateEffect->EmitterInstances[5]->ParticleStride))->Color = {={={R=0.352043986, G=0.408235997, B=0.506944001, ...}, RGBA= // 0x0000022b06b02a70 {0.352043986, 0.408235997, 0.506944001, 1}}} {FLinearColor}\n  └─ +  = {={R=0.352043986, G=0.408235997, B=0.506944001, ...}, RGBA= // 0x0000022b06b02a70 {0.352043986, 0.408235997, 0.506944001, 1}} {FLinearColor::(anonymous union)}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"Scene->ComponentToWorld\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Scene->ComponentToWorld = {Translation={X=400 Y=0 Z=10110} Rotation={X=0 Y=0 Z=0 W=1}} {UE::Math::TTransform<double>}\n  ├─ + Translation = {X=400 Y=0 Z=10110} {void *}\n  ├─ + Rotation = {X=0 Y=0 Z=0 W=1} {void *}\n  ├─ + Scale3D = {X=1 Y=1 Z=1} {void *}\n  └─ + Raw View = {Rotation={XY={m128d_f64= // 0x0000022a50fbda30 {0, 0}}, ZW={m128d_f64= // 0x0000022a50fbda40 {0, 1}}}, Translation={XY={m128d_f64= // 0x0000022a50fbda50 {400, 0}}, ZW={m128d_f64= // 0x0000022a50fbda60 {10110, 0}}}, Scale3D={XY={m128d_f64= // 0x0000022a50fbda70 {1, 1}}, ZW={m128d_f64=...}}} {UE::Math::TTransform<double>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->AttachParent\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->AttachParent =  // 0x0000022a50fbd800 (Name = \"Root\", Owner =  // 0x0000022b1197a000 (Label=L\"KZMonsterSkillObject0\",Name=\"KZMonsterSkillObject\"_0)) {TObjectPtr<USceneComponent>}\n  ├─ + UActorComponent = (Name = \"Root\", Owner =  // 0x0000022b1197a000 (Label=L\"KZMonsterSkillObject0\",Name=\"KZMonsterSkillObject\"_0)) {UActorComponent}\n  ├─ + CachedLevelCollection =  // 0x0000022ae05c6500 {CollectionType=DynamicSourceLevels, bIsVisible=true, GameState= // 0x0000022af90ce600 (Label=L\"GameStateBase0\",Name=\"GameStateBase\"_0), ...} {const FLevelCollection *}\n  ├─ + PhysicsVolume = nullptr {TWeakObjectPtr<APhysicsVolume, FWeakObjectPtr>}\n  ├─ + AttachParent = nullptr {TObjectPtr<USceneComponent>}\n  ├─ + AttachSocketName = \"None\" {FName}\n  ├─ + NetOldAttachSocketName = \"None\" {FName}\n  ├─ + AttachChildren = Num=3, Max=4 {TArray<TObjectPtr<USceneComponent>, TSizedDefaultAllocator<32>>}\n  ├─ + ClientAttachedChildren = Empty {TArray<TObjectPtr<USceneComponent>, TSizedDefaultAllocator<32>>}\n  ├─ NetOldAttachParent = NULL {USceneComponent *}\n  ├─ + Bounds = {Origin={X=400 Y=0 Z=10110}, BoxExtent={X=0 Y=0 Z=0}, SphereRadius=0} {UE::Math::TBoxSphereBounds<double, double>}\n  ├─ + RelativeLocation = {X=400 Y=0 Z=10110} {UE::Math::TVector<double>}\n  ├─ + RelativeRotation = {Pitch=0, Yaw=0, Roll=0} {UE::Math::TRotator<double>}\n  ├─ + RelativeScale3D = {X=1 Y=1 Z=1} {UE::Math::TVector<double>}\n  ├─ + ComponentVelocity = {X=0 Y=0 Z=0} {UE::Math::TVector<double>}\n  ├─ bComponentToWorldUpdated = 1 \"'\\x1'\" {unsigned char:1}\n  ├─ bSkipUpdateOverlaps = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bAbsoluteLocation = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bAbsoluteRotation = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bAbsoluteScale = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bVisible = 1 \"'\\x1'\" {unsigned char:1}\n  ├─ bShouldBeAttached = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bShouldSnapLocationWhenAttached = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bShouldSnapRotationWhenAttached = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bShouldSnapScaleWhenAttached = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bHiddenEdTemporary = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bShouldUpdatePhysicsVolume = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bHiddenInGame = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bBoundsChangeTriggersStreamingDataRebuild = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bUseAttachParentBound = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bComputeFastLocalBounds = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bComputeBoundsOnceForGame = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bComputedBoundsOnceForGame = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bIsNotRenderAttachmentRoot = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bDisableDetachmentUpdateOverlaps = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bWantsOnUpdateTransform = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bHasGroupedMoveThisFrame = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bNetUpdateTransform = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bNetUpdateAttachment = 0 \"'\\0'\" {unsigned char:1}\n  ├─ bVisualizeComponent = 0 \"'\\0'\" {unsigned char:1}\n  ├─ + Mobility = Movable {TEnumAsByte<enum EComponentMobility::Type>}\n  ├─ + DetailMode = DM_Low {TEnumAsByte<enum EDetailMode>}\n  ├─ + PhysicsVolumeChangedDelegate =  {FPhysicsVolumeChanged}\n  ├─ + IsRootComponentChanged =  {FIsRootComponentChanged}\n  ├─ + SpriteComponent = nullptr {TObjectPtr<UBillboardComponent>}\n  ├─ + TransformUpdated = Empty {FTransformUpdated}\n  ├─ + ScopedMovementStack = Empty {TArray<FScopedMovementUpdate *, TSizedDefaultAllocator<32>>}\n  ├─ + WorldRotationCache = {PayloadPtr=nullptr} {FRotationConversionCache}\n  ├─ + RelativeRotationCache = {PayloadPtr=Ptr= // 0x000002290f3dad80 {CachedQuat={X=0 Y=0 Z=0 W=1}, CachedRotator={Pitch=0, Yaw=0, Roll=0}}} {FRotationConversionCache}\n  ├─ + ComponentToWorld = {Translation={X=400 Y=0 Z=10110} Rotation={X=0 Y=0 Z=0 W=1}} {UE::Math::TTransform<double>}\n  └─ + Raw View = {={ObjectPtr= // 0x0000022a50fbd800 (Name=\"Root\", InternalFlags=ReachabilityFlag1), DebugPtr= // 0x0000022a50fbd800 (Name = \"Root\", Owner =  // 0x0000022b1197a000 (Label=L\"KZMonsterSkillObject0\",Name=\"KZMonsterSkillObject\"_0))}} {TObjectPtr<USceneComponent>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->bAbsoluteLocation\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->bAbsoluteLocation = 0 \"'\\0'\" {unsigned char}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (2200)\" --frameIndex 0 --expression \"StateEffect->RelativeLocation\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "StateEffect->RelativeLocation = {X=400 Y=0 Z=10010} {UE::Math::TVector<double>}\n  ├─ X = 400 {double}\n  ├─ Y = 0 {double}\n  ├─ Z = 10010 {double}\n  ├─ ||V||² = 100360100 {double}\n  └─ + Raw View = {={={X=400, Y=0, Z=10010}, XYZ= // 0x0000022a1a563380 {400, 0, 10010}}} {UE::Math::TVector<double>}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  ]
+}

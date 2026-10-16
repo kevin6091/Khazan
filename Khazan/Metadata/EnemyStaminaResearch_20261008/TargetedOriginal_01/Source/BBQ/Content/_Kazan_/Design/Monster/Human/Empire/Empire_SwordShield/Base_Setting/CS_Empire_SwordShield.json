@@ -1,0 +1,112 @@
+[
+  {
+    "Type": "xxStatusProfile",
+    "Name": "CS_Empire_SwordShield",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxStatusProfile'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/CS_Empire_SwordShield",
+    "Properties": {
+      "StaminaStatus": [
+        {
+          "Key": "EStateBattleStance::Battle",
+          "Value": {
+            "RecoveryPerSecond": 80,
+            "DamageStateRecoveryPerSecond": [
+              {
+                "Key": "ECharacterDamageStateForStamina::StaminaExhaustion",
+                "Value": 100.0
+              }
+            ],
+            "bImmediatelyStaninaRecoveryBeginStaminaExhaution": true,
+            "SprintStaminaConsumePerSecond": 200,
+            "bNoneBattleStateSprintStaminaConsume": false,
+            "NoneBattleStateSprintStaminaConsumePerSecond": 0,
+            "bCanSprintRecoveryStamina": true,
+            "bUseDamageReaction": false,
+            "bUseSuperArmourStamina": false,
+            "StaminaExhaustionInfo": {
+              "StaminaExhaustionTerm": 5.0,
+              "StaminaExhaustionDamageRate": 0.0,
+              "EndStaminaExhaustionRecoveryOperator": "EStatusOper::Add",
+              "EndStaminaExhaustionRecoveryStamina": 0,
+              "bKeepBurstAttackHoldReleaseAnim": false
+            },
+            "GuardStaminaConsumeRate": 1.8,
+            "GuardStaminaRecoveryRate": 0.0,
+            "GuardStaminaRecoveryRateBySubState": [
+              {
+                "Key": "EGuardSubState::GuardStanding",
+                "Value": 1.0
+              },
+              {
+                "Key": "EGuardSubState::GuardSuccess",
+                "Value": 0.4
+              }
+            ]
+          }
+        }
+      ],
+      "MonsterGradeType": "EActorGradeType::GRADE_2",
+      "GutsSpecialInfo": {
+        "bOnlyGroundDamage": true
+      },
+      "GetUpInvincibleTimeRate": 0.0,
+      "DownStateLoopTimeMax": 2.0,
+      "DownStateLoopTimeReduceRate": 1.0,
+      "DamageInDecreaseByPart": [
+        {
+          "Key": "EGrDefenseGroup::Group1",
+          "Value": {
+            "CustomSkillPowerBonusAdd": 0,
+            "CustomSkillPowerBonusRate": 1500,
+            "CustomSkillStaminaAttackPowerAdd": 0,
+            "CustomSkillStaminaAttackPowerRate": 0
+          }
+        }
+      ],
+      "ExecutionInfo": {
+        "bEnableExecution": true
+      },
+      "bIgnoreDamagerDelayWhenStartStaminaExhuation": true,
+      "SprintRunSpeed": 1000,
+      "RunSpeed": 450,
+      "WalkSpeed": 216,
+      "LockOnForwardSpeed": 222,
+      "LockOnBackwardSpeed": 222,
+      "LockOnStrafeSpeed": 222,
+      "LockOnDiagonalForwardSpeed": 140,
+      "LockOnDiagonalBackwardSpeed": 140,
+      "ParringStaminaDamageTableSelect": {
+        "ParringStaminaDamageTag": {
+          "DataTable": {
+            "ObjectName": "DataTable'ParringStaminaDamageDataTable'",
+            "ObjectPath": "BBQ/Content/_Common/Constants/ParringStaminaDamageDataTable.0"
+          },
+          "RowName": "01_일반_1"
+        }
+      },
+      "SpearDamageIncreaseInfos": [
+        {
+          "bBattleState": true,
+          "BattleState": "EBattleState::Peace",
+          "bWeakState": false,
+          "bWeakDamageBox": false,
+          "bParts": false,
+          "PartsGroup": "EGrDefenseGroup::None",
+          "DamageIncreaseInfo": {
+            "CustomSkillPowerBonusAdd": 0,
+            "CustomSkillPowerBonusRate": 20000,
+            "CustomSkillStaminaAttackPowerAdd": 0,
+            "CustomSkillStaminaAttackPowerRate": 0
+          },
+          "AttackerReactionTableSelect": {
+            "AttackerReactionTag": {
+              "DataTable": null,
+              "RowName": "None"
+            }
+          }
+        }
+      ]
+    }
+  }
+]

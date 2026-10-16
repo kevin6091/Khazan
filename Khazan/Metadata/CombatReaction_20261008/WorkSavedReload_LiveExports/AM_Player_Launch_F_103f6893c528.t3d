@@ -1,0 +1,27 @@
+Begin Object Class=/Script/Engine.AnimMontage Name="AM_Player_Launch_F" ExportPath="/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Reaction/Montages/AM_Player_Launch_F.AM_Player_Launch_F'"
+   Begin Object Class=/Script/Engine.AnimDataModel Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/_Art/Player/Animation/InGame/DAS/Reaction/Montages/AM_Player_Launch_F.AM_Player_Launch_F:AnimDataModel'"
+   End Object
+   Begin Object Class=/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify Name="HitLand" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/Reaction/Montages/AM_Player_Launch_F.AM_Player_Launch_F:HitLand'"
+   End Object
+   Begin Object Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/_Art/Player/Animation/InGame/DAS/Reaction/Montages/AM_Player_Launch_F.AM_Player_Launch_F:AnimDataModel'"
+      FrameRate=(Numerator=30)
+      NumberOfFrames=88
+      NumberOfKeys=89
+   End Object
+   Begin Object Name="HitLand" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/Reaction/Montages/AM_Player_Launch_F.AM_Player_Launch_F:HitLand'"
+      NotifyName="HitLand"
+   End Object
+   BlendIn=(BlendTime=0.100000)
+   BlendOut=(BlendTime=0.200000)
+   CompositeSections(0)=(SectionName="Up",NextSectionName="Loop",LinkedMontage="/Script/Engine.AnimMontage'AM_Player_Launch_F'",SegmentIndex=0,SegmentLength=1.333333,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Reaction/Clips/CA_P_Kazan_DualAxeSword_Off_DamageAir_F.CA_P_Kazan_DualAxeSword_Off_DamageAir_F'")
+   CompositeSections(1)=(SectionName="Loop",NextSectionName="Getup",LinkedMontage="/Script/Engine.AnimMontage'AM_Player_Launch_F'",SegmentIndex=1,SegmentBeginTime=1.333333,SegmentLength=0.300000,LinkValue=1.333333,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Reaction/Clips/CA_P_Kazan_DualAxeSword_Off_Down_Loop_F.CA_P_Kazan_DualAxeSword_Off_Down_Loop_F'")
+   CompositeSections(2)=(SectionName="Getup",LinkedMontage="/Script/Engine.AnimMontage'AM_Player_Launch_F'",SegmentIndex=2,SegmentBeginTime=1.633333,SegmentLength=1.300000,LinkValue=1.633333,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Reaction/Clips/CA_P_Kazan_DualAxeSword_Off_Getup_F.CA_P_Kazan_DualAxeSword_Off_Getup_F'")
+   SlotAnimTracks(0)=(AnimTrack=(AnimSegments=((CachedPlayLength=1.333333,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Reaction/Clips/CA_P_Kazan_DualAxeSword_Off_DamageAir_F.CA_P_Kazan_DualAxeSword_Off_DamageAir_F'",AnimEndTime=1.333333),(CachedPlayLength=1.600000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Reaction/Clips/CA_P_Kazan_DualAxeSword_Off_Down_Loop_F.CA_P_Kazan_DualAxeSword_Off_Down_Loop_F'",StartPos=1.333333,AnimEndTime=0.300000),(CachedPlayLength=1.300000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Reaction/Clips/CA_P_Kazan_DualAxeSword_Off_Getup_F.CA_P_Kazan_DualAxeSword_Off_Getup_F'",StartPos=1.633333,AnimEndTime=1.300000))))
+   BranchingPointMarkers(0)=(NotifyIndex=0,TriggerTime=1.333333)
+   CommonTargetFrameRate=(Numerator=30)
+   Notifies(0)=(NotifyName="HitLand",Notify="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'HitLand'",MontageTickType=BranchingPoint,Guid=74CC52674F9D3E32F03A1BBFFB84A421,LinkedMontage="/Script/Engine.AnimMontage'AM_Player_Launch_F'",SegmentIndex=1,SegmentBeginTime=1.333333,SegmentLength=0.300000,LinkValue=1.333333,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Reaction/Clips/CA_P_Kazan_DualAxeSword_Off_Down_Loop_F.CA_P_Kazan_DualAxeSword_Off_Down_Loop_F'")
+   SequenceLength=2.933333
+   AnimNotifyTracks(0)=(TrackName="1")
+   DataModelInterface=AnimDataModel'AM_Player_Launch_F:AnimDataModel'
+   Skeleton="/Script/Engine.Skeleton'/Game/_Art/Player/Character/Meshs/SK_Player.SK_Player'"
+End Object

@@ -1,0 +1,1130 @@
+[
+  {
+    "Type": "ParticleSystem",
+    "Name": "PS_Heal_GhostArm",
+    "Properties": {
+      "Emitters": [
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_GhostArm.1"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_GhostArm.11"
+        }
+      ],
+      "bUseFixedRelativeBoundingBox": false
+    }
+  },
+  {
+    "Type": "ParticleSpriteEmitter",
+    "Name": "O1",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "EmitterName": "Heal_1",
+      "DetailModeBitmask": 15,
+      "LODLevels": [
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_GhostArm.2"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "ParticleLODLevel",
+    "Name": "O2",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.1"
+    },
+    "Properties": {
+      "Level": 0,
+      "bEnabled": true,
+      "Modules": [
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_GhostArm.5"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_GhostArm.6"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_GhostArm.7"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_GhostArm.8"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_GhostArm.9"
+        }
+      ],
+      "RequiredModule": {
+        "ObjectPath": "KZHealNative/PS_Heal_GhostArm.3"
+      },
+      "SpawnModule": {
+        "ObjectPath": "KZHealNative/PS_Heal_GhostArm.4"
+      },
+      "TypeDataModule": {
+        "ObjectPath": "KZHealNative/PS_Heal_GhostArm.10"
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleRequired",
+    "Name": "O3",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "Material": {
+        "ObjectPath": "/Game/HealVFX/Materials/M_Heal_OriginalTrail.M_Heal_OriginalTrail"
+      },
+      "bUseLocalSpace": true,
+      "EmitterDuration": 0.626166,
+      "EmitterLoops": 1,
+      "bKillOnDeactivate": false,
+      "bKillOnCompleted": false,
+      "bDurationRecalcEachLoop": false
+    }
+  },
+  {
+    "Type": "ParticleModuleSpawn",
+    "Name": "O4",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "Rate": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1,
+          "SubEntryStride": 0,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0
+          ]
+        }
+      },
+      "BurstList": [
+        {
+          "Count": 1,
+          "CountLow": -1,
+          "Time": 0.0
+        }
+      ]
+    }
+  },
+  {
+    "Type": "ParticleModuleLifetime",
+    "Name": "O5",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "LifeTime": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1,
+          "SubEntryStride": 0,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0.626166
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleSize",
+    "Name": "O6",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "StartSize": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 3,
+          "SubEntryStride": 0,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            4,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleLocation",
+    "Name": "O7",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "StartLocation": {
+        "Distribution": null,
+        "Table": {
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 6,
+          "SubEntryStride": 3,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleVelocity",
+    "Name": "O8",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "StartVelocity": {
+        "Distribution": null,
+        "Table": {
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 6,
+          "SubEntryStride": 3,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleColorOverLife",
+    "Name": "O9",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "ColorOverLife": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 53,
+          "EntryStride": 3,
+          "SubEntryStride": 0,
+          "TimeScale": 52.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05
+          ]
+        }
+      },
+      "AlphaOverLife": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 53,
+          "EntryStride": 1,
+          "SubEntryStride": 0,
+          "TimeScale": 52.0,
+          "TimeBias": 0.0,
+          "Values": [
+            1.0,
+            0.99890476,
+            0.9956759,
+            0.9903988,
+            0.9831588,
+            0.9740413,
+            0.96313155,
+            0.9505149,
+            0.93627673,
+            0.92050236,
+            0.90327716,
+            0.8846865,
+            0.8648156,
+            0.84375,
+            0.82157487,
+            0.7983756,
+            0.7742376,
+            0.7492461,
+            0.72348654,
+            0.69704425,
+            0.67000455,
+            0.6424527,
+            0.6144743,
+            0.58615434,
+            0.55757844,
+            0.5288319,
+            0.5,
+            0.4711681,
+            0.44242144,
+            0.41384548,
+            0.3855257,
+            0.35754722,
+            0.32999533,
+            0.3029557,
+            0.2765134,
+            0.25075382,
+            0.22576243,
+            0.2016244,
+            0.17842513,
+            0.15625,
+            0.13518435,
+            0.11531341,
+            0.09672272,
+            0.079497576,
+            0.063723266,
+            0.049485028,
+            0.036868393,
+            0.025958776,
+            0.016841114,
+            0.009601116,
+            0.0043240786,
+            0.001095295,
+            0.0
+          ]
+        }
+      },
+      "bClampAlpha": true
+    }
+  },
+  {
+    "Type": "ParticleModuleTypeDataMesh",
+    "Name": "O10",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "Mesh": {
+        "ObjectPath": "/Game/HealVFX/Source/FS_SmallRing_01.FS_SmallRing_01"
+      },
+      "bOverrideMaterial": true,
+      "MeshAlignment": "PSMA_MeshFaceCameraWithLockedAxis"
+    }
+  },
+  {
+    "Type": "ParticleSpriteEmitter",
+    "Name": "O11",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "EmitterName": "Heal_11",
+      "DetailModeBitmask": 15,
+      "LODLevels": [
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_GhostArm.12"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "ParticleLODLevel",
+    "Name": "O12",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.11"
+    },
+    "Properties": {
+      "Level": 0,
+      "bEnabled": true,
+      "Modules": [
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_GhostArm.15"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_GhostArm.16"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_GhostArm.17"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_GhostArm.18"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_GhostArm.19"
+        }
+      ],
+      "RequiredModule": {
+        "ObjectPath": "KZHealNative/PS_Heal_GhostArm.13"
+      },
+      "SpawnModule": {
+        "ObjectPath": "KZHealNative/PS_Heal_GhostArm.14"
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleRequired",
+    "Name": "O13",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "Material": {
+        "ObjectPath": "/Game/HealVFX/Materials/M_Heal_SoftGlow.M_Heal_SoftGlow"
+      },
+      "bUseLocalSpace": true,
+      "EmitterDuration": 0.55,
+      "EmitterLoops": 1,
+      "bKillOnDeactivate": false,
+      "bKillOnCompleted": false,
+      "bDurationRecalcEachLoop": false
+    }
+  },
+  {
+    "Type": "ParticleModuleSpawn",
+    "Name": "O14",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "Rate": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1,
+          "SubEntryStride": 0,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0
+          ]
+        }
+      },
+      "BurstList": [
+        {
+          "Count": 10,
+          "CountLow": -1,
+          "Time": 0.0
+        }
+      ]
+    }
+  },
+  {
+    "Type": "ParticleModuleLifetime",
+    "Name": "O15",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "LifeTime": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1,
+          "SubEntryStride": 0,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0.55
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleSize",
+    "Name": "O16",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "StartSize": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 3,
+          "SubEntryStride": 0,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0.8,
+            0.8,
+            0.8
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleLocation",
+    "Name": "O17",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "StartLocation": {
+        "Distribution": null,
+        "Table": {
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 6,
+          "SubEntryStride": 3,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            -5,
+            -5,
+            -5,
+            5,
+            5,
+            5
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleVelocity",
+    "Name": "O18",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "StartVelocity": {
+        "Distribution": null,
+        "Table": {
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 6,
+          "SubEntryStride": 3,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            -5,
+            -5,
+            -5,
+            5,
+            5,
+            5
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleColorOverLife",
+    "Name": "O19",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_GhostArm.0"
+    },
+    "Properties": {
+      "ColorOverLife": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 102,
+          "EntryStride": 3,
+          "SubEntryStride": 0,
+          "TimeScale": 101.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "AlphaOverLife": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 102,
+          "EntryStride": 1,
+          "SubEntryStride": 0,
+          "TimeScale": 101.0,
+          "TimeBias": 0.0,
+          "Values": [
+            5.0,
+            4.9504952,
+            4.90099,
+            4.8514853,
+            4.80198,
+            4.7524753,
+            4.7029705,
+            4.6534653,
+            4.6039605,
+            4.5544553,
+            4.5049505,
+            4.4554453,
+            4.4059405,
+            4.356436,
+            4.3069305,
+            4.257426,
+            4.207921,
+            4.158416,
+            4.108911,
+            4.059406,
+            4.009901,
+            3.960396,
+            3.910891,
+            3.8613863,
+            3.811881,
+            3.7623763,
+            3.7128713,
+            3.6633663,
+            3.6138613,
+            3.5643563,
+            3.5148516,
+            3.4653466,
+            3.4158416,
+            3.3663368,
+            3.3168316,
+            3.2673268,
+            3.2178218,
+            3.1683168,
+            3.1188118,
+            3.0693069,
+            3.019802,
+            2.970297,
+            2.920792,
+            2.871287,
+            2.821782,
+            2.7722774,
+            2.7227724,
+            2.6732674,
+            2.6237626,
+            2.5742574,
+            2.5247524,
+            2.4752476,
+            2.4257426,
+            2.3762379,
+            2.3267326,
+            2.2772276,
+            2.2277226,
+            2.178218,
+            2.128713,
+            2.079208,
+            2.029703,
+            1.9801979,
+            1.9306931,
+            1.8811882,
+            1.8316832,
+            1.7821784,
+            1.7326734,
+            1.6831684,
+            1.6336634,
+            1.5841584,
+            1.5346537,
+            1.4851487,
+            1.4356437,
+            1.3861389,
+            1.3366339,
+            1.2871287,
+            1.2376237,
+            1.1881187,
+            1.1386137,
+            1.089109,
+            1.039604,
+            0.99009895,
+            0.9405942,
+            0.89108896,
+            0.8415842,
+            0.79207945,
+            0.7425742,
+            0.69306946,
+            0.6435642,
+            0.59405947,
+            0.5445547,
+            0.49504948,
+            0.44554472,
+            0.39603996,
+            0.34653473,
+            0.29702997,
+            0.24752522,
+            0.19801998,
+            0.14851475,
+            0.09900999,
+            0.049504757,
+            0.0
+          ]
+        }
+      },
+      "bClampAlpha": true
+    }
+  }
+]

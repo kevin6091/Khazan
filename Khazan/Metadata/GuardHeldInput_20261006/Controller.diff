@@ -1,0 +1,24 @@
+﻿diff --git a/Saved/GuardHeldInput_20261006/Before/Source/Khazan/Player/KZPlayerController.cpp b/Source/Khazan/Player/KZPlayerController.cpp
+index 847af5d..924072d 100644
+--- a/Saved/GuardHeldInput_20261006/Before/Source/Khazan/Player/KZPlayerController.cpp
++++ b/Source/Khazan/Player/KZPlayerController.cpp
+@@ -210,10 +210,15 @@ void AKZPlayerController::Input_DodgeCanceled(const FInputActionValue&)
+ 	AbilityInputTagCanceled(KZGameplayTags::Input_Action_A);
+ }
+ 
+-void AKZPlayerController::Input_GuardPressed(const FInputActionValue&)
+-{
+-	AbilityInputTagPressed(KZGameplayTags::Input_Action_Guard);
+-}
++void AKZPlayerController::Input_GuardPressed(const FInputActionValue&)
++{
++	// Triggered는 held 중 매 입력 update 호출된다. 활성화가 막혔으면 재시도하되 유지 중 Guard를 재시작하지 않는다.
++	UKZAbilitySystemComponent* ASC = GetKZAbilitySystemComponent();
++	if (IsValid(ASC) && !ASC->HasMatchingGameplayTag(KZGameplayTags::State_Guarding))
++	{
++		ASC->AbilityInputTagPressed(KZGameplayTags::Input_Action_Guard);
++	}
++}
+ 
+ void AKZPlayerController::Input_GuardCompleted(const FInputActionValue&)
+ {

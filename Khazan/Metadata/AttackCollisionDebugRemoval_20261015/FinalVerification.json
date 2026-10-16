@@ -1,0 +1,19 @@
+{
+  "time_kst": "2026-10-15T13:29:47+09:00",
+  "status": "main_source_applied_build_succeeded",
+  "request": "Remove green debug-only collider rendering while preserving actual hit detection.",
+  "source": "Source/Khazan/Ability/Combo/KZComboActionAbility.cpp",
+  "before_sha256": "43bd1ff1802c502d9f69c046d585eb118b083456b3de06cb968a7b84118b3e10",
+  "after_sha256": "2db536cc5c8619977edacc9eab7905530851e0ad7f9e3fa5cbe0b1a5047cd799",
+  "backup": "Before/KZComboActionAbility.cpp",
+  "diff": "10 lines removed: DrawDebugHelpers include and the conditional Cylinder/Sphere/Box rendering block only.",
+  "coverage": "Player ComboAction and inherited MonsterPatternAbility use this same collision-query path.",
+  "production_draw_debug_references_remaining": 0,
+  "collision_query_damage_and_assets_changed": false,
+  "serialized_draw_flag": "Retained for existing asset/schema compatibility; no production draw consumer remains.",
+  "build": "Build.log: Target is up to date / Succeeded, exit 0 after waiting for the foreign build mutex.",
+  "main_module": "Binaries/Win64/UnrealEditor-Khazan.dll",
+  "main_module_sha256": "a8df6850908f08e84b6c8cc8a555c92d46b5c34ba75b136f9eac1b841a325069",
+  "new_pie_or_device_test": false,
+  "remaining_delivery_actions": []
+}

@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-06",
+  "request": "Skip Guard Start/End with allowed ongoing movement intent",
+  "editor_pid": 24736,
+  "engine": "UE5.8.2-56702186+++UE5+Release-5.8",
+  "build": {
+    "initial": "Succeeded",
+    "final": "Succeeded",
+    "logs": [
+      "ColdBuild.log",
+      "FinalColdBuild.log"
+    ]
+  },
+  "test": {
+    "name": "Khazan.Guard.PIE",
+    "result": "Success",
+    "started_line": "[2026.10.06-01.31.55:038][255]LogAutomationController: Display: Test Started. Name={PIE} Path={Khazan.Guard.PIE}",
+    "completed_line": "[2026.10.06-01.32.08:870][824]LogAutomationController: Display: Test Completed. Result={Success} Name={PIE} Path={Khazan.Guard.PIE}",
+    "unexpected_automation_errors": [],
+    "new_movement_policy_assertions": [
+      "Moving press skips Start and opens action window",
+      "Moving press preserves free Guard and Walk limit",
+      "Moving release skips End and clears own handles immediately",
+      "Moving release reaches actual base locomotion output",
+      "Moving tap plays neither Start nor End",
+      "Stationary press still starts Start before InputEnd",
+      "Movement before Start InputEnd stops montage but preserves held Guard",
+      "Stationary release still plays End before InputEnd",
+      "Movement before End InputEnd finishes immediately",
+      "Stopped End callbacks cannot restore Guard",
+      "Moving held Guard still accepts success reaction",
+      "Moving success preserves attack-owned cost",
+      "Held movement does not skip success reaction",
+      "Moving release during success skips End without restoring defense",
+      "Success callbacks and regen delay clean up after moving release",
+      "Stationary tap still waits at Start",
+      "Movement after early stationary release skips queued End",
+      "Skipped sections leave no late state or Guard movement limit"
+    ],
+    "base_output": "[2026.10.06-01.32.08:871][824]LogAutomationController: GuardMovementPolicy BaseOutput: group=Locomotion clip=DAS_Player_Walk_Loop nodeWeight=1.000000",
+    "guard_pose_checkpoint_count": 14,
+    "bones_per_checkpoint": 227,
+    "max_guard_local_position_error": 0,
+    "max_guard_angle_error_degrees": 0.000002415,
+    "max_guard_scale_error": 0,
+    "policy_evidence": [
+      "[2026.10.06-01.32.08:871][824]LogAutomationController: GuardMovementPolicy: moving press -> held Guard, no Start montage.",
+      "[2026.10.06-01.32.08:871][824]LogAutomationController: GuardMovementPolicy BaseOutput: group=Locomotion clip=DAS_Player_Walk_Loop nodeWeight=1.000000",
+      "[2026.10.06-01.32.08:871][824]LogAutomationController: GuardMovementPolicy: moving release -> base output; moving tap skips both; early Start movement preserves Guard.",
+      "[2026.10.06-01.32.08:871][824]LogAutomationController: GuardMovementPolicy: stationary End interrupted by movement before InputEnd.",
+      "[2026.10.06-01.32.08:871][824]LogAutomationController: GuardMovementPolicy: held Suc survives movement; moving release exits without End.",
+      "[2026.10.06-01.32.08:871][824]LogAutomationController: GuardMovementPolicy: all movement transitions and late-callback cleanup checked."
+    ],
+    "fixture_expected_errors": "Only 4 existing TEST_Monster CharacterDefinition None actors, 2 exact messages each."
+  },
+  "changed_runtime_files": [
+    "Source/Khazan/Ability/PlayerAbility/KZGuardAbility.cpp"
+  ],
+  "changed_runtime_functions": [
+    "InputReleased",
+    "PlaySection",
+    "HandleMoveInput"
+  ],
+  "changed_dev_test": "Source/Khazan/Tests/KZGuardAbilityPIETest.cpp",
+  "new_runtime_files": 0,
+  "preserved_header_sha256": "9AC689817272DC9923B003D65FF795AA02767B41343BB2B59B742E1CC6FD1C6D",
+  "first_failure": {
+    "log": "PIE_FirstRun.log",
+    "reason": "Test checked ungrouped players only; normal Locomotion Sync Group was excluded.",
+    "gameplay_changed_after_debug": false
+  },
+  "debugger": {
+    "evidence": "DebuggerEvidence.json",
+    "attached_session_stopped": true,
+    "agent_breakpoints_removed": 1,
+    "user_exception_breakpoints_preserved": 8,
+    "note": "Engine proxy methods/fields unavailable in debugger symbols; actual grouped clip subsequently verified by native C++ public read API."
+  },
+  "temporary_editor_setting": {
+    "class": "/Script/UnrealEd.EditorPerformanceSettings",
+    "property": "bThrottleCPUWhenNotForeground",
+    "before": true,
+    "during": false,
+    "restored": true,
+    "notify_mode": "NEVER",
+    "save_config_called": false
+  },
+  "verification_limits": [
+    "Native C++ gameplay input entry points; physical LShift/LB and per-frame Enhanced Input/CMC travel not validated.",
+    "Guard full mesh checkpoint comparisons; base locomotion observed through group output record/weight, not whole base mesh comparison.",
+    "Continuous visual blending/foot sliding and real enemy hit/HP integration not validated."
+  ],
+  "gameplay_numeric_changes": [],
+  "existing_exit_inertia_source_status": "Existing 0.24s temporary presentation setting reused, not original game metadata confirmation.",
+  "final_editor_state": {
+    "observed_utc": "2026-10-06T01:32:42.411668+00:00",
+    "game_world": null,
+    "editor_world": "/Game/Maps/DevMap.DevMap",
+    "dirty_content": [],
+    "dirty_maps": [],
+    "background_throttle_restored": true,
+    "abp_status": "<BlueprintStatus.BS_UP_TO_DATE: 3>"
+  }
+}

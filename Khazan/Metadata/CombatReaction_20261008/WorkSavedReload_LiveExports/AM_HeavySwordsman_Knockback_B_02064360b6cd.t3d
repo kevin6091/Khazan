@@ -1,0 +1,27 @@
+Begin Object Class=/Script/Engine.AnimMontage Name="AM_HeavySwordsman_Knockback_B" ExportPath="/Script/Engine.AnimMontage'/Game/Monsters/HeavySwordsman/Animations/Reaction/Montages/AM_HeavySwordsman_Knockback_B.AM_HeavySwordsman_Knockback_B'"
+   Begin Object Class=/Script/Engine.AnimDataModel Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/Monsters/HeavySwordsman/Animations/Reaction/Montages/AM_HeavySwordsman_Knockback_B.AM_HeavySwordsman_Knockback_B:AnimDataModel'"
+   End Object
+   Begin Object Class=/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify Name="HitLand" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/Monsters/HeavySwordsman/Animations/Reaction/Montages/AM_HeavySwordsman_Knockback_B.AM_HeavySwordsman_Knockback_B:HitLand'"
+   End Object
+   Begin Object Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/Monsters/HeavySwordsman/Animations/Reaction/Montages/AM_HeavySwordsman_Knockback_B.AM_HeavySwordsman_Knockback_B:AnimDataModel'"
+      FrameRate=(Numerator=30)
+      NumberOfFrames=86
+      NumberOfKeys=87
+   End Object
+   Begin Object Name="HitLand" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/Monsters/HeavySwordsman/Animations/Reaction/Montages/AM_HeavySwordsman_Knockback_B.AM_HeavySwordsman_Knockback_B:HitLand'"
+      NotifyName="HitLand"
+   End Object
+   BlendIn=(BlendTime=0.100000)
+   BlendOut=(BlendTime=0.200000)
+   CompositeSections(0)=(SectionName="Down",NextSectionName="Loop",LinkedMontage="/Script/Engine.AnimMontage'AM_HeavySwordsman_Knockback_B'",SegmentIndex=0,SegmentLength=0.700000,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_Down_B.Damage_Down_B'")
+   CompositeSections(1)=(SectionName="Loop",NextSectionName="Getup",LinkedMontage="/Script/Engine.AnimMontage'AM_HeavySwordsman_Knockback_B'",SegmentIndex=1,SegmentBeginTime=0.700000,SegmentLength=0.300000,LinkValue=0.700000,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_Down_B_Loop.Damage_Down_B_Loop'")
+   CompositeSections(2)=(SectionName="Getup",LinkedMontage="/Script/Engine.AnimMontage'AM_HeavySwordsman_Knockback_B'",SegmentIndex=2,SegmentBeginTime=1.000000,SegmentLength=1.866667,LinkValue=1.000000,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_Getup_B.Damage_Getup_B'")
+   SlotAnimTracks(0)=(AnimTrack=(AnimSegments=((CachedPlayLength=0.700000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_Down_B.Damage_Down_B'",AnimEndTime=0.700000),(CachedPlayLength=1.600000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_Down_B_Loop.Damage_Down_B_Loop'",StartPos=0.700000,AnimEndTime=0.300000),(CachedPlayLength=1.866667,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_Getup_B.Damage_Getup_B'",StartPos=1.000000,AnimEndTime=1.866667))))
+   BranchingPointMarkers(0)=(NotifyIndex=0,TriggerTime=0.700000)
+   CommonTargetFrameRate=(Numerator=30)
+   Notifies(0)=(NotifyName="HitLand",Notify="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'HitLand'",MontageTickType=BranchingPoint,Guid=B0240E644018FFF0B9616186FD57BAAC,LinkedMontage="/Script/Engine.AnimMontage'AM_HeavySwordsman_Knockback_B'",SegmentIndex=1,SegmentBeginTime=0.700000,SegmentLength=0.300000,LinkValue=0.700000,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_Down_B_Loop.Damage_Down_B_Loop'")
+   SequenceLength=2.866667
+   AnimNotifyTracks(0)=(TrackName="1")
+   DataModelInterface=AnimDataModel'AM_HeavySwordsman_Knockback_B:AnimDataModel'
+   Skeleton="/Script/Engine.Skeleton'/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton'"
+End Object

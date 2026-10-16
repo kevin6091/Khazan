@@ -1,0 +1,37 @@
+[
+  {
+    "Type": "xxSpellFunc_ReleaseOnEndState",
+    "Name": "xxSpellFunc_ReleaseOnEndState_1",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSpellFunc_ReleaseOnEndState'",
+    "Outer": {
+      "ObjectName": "xxSpellInfo'SP_Yetuga_PartGroggy_Stun'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Stun.1"
+    },
+    "Properties": {
+      "EndSkillInfos": [
+        {
+          "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SI_Yetuga_PartGroggy.SI_Yetuga_PartGroggy",
+          "SubPathString": ""
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSpellInfo",
+    "Name": "SP_Yetuga_PartGroggy_Stun",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSpellInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Stun",
+    "Properties": {
+      "TargetPolicy": 2,
+      "OverlapLimitPolicy": "EGrSpellOverlapLimitPolicy::NoLimit",
+      "SpellFunctions": [
+        {
+          "ObjectName": "xxSpellFunc_ReleaseOnEndState'SP_Yetuga_PartGroggy_Stun:xxSpellFunc_ReleaseOnEndState_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Stun.0"
+        }
+      ]
+    }
+  }
+]

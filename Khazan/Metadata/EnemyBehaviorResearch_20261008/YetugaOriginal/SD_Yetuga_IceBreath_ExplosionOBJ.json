@@ -1,0 +1,112 @@
+[
+  {
+    "Type": "xxDamageInfo",
+    "Name": "SD_Yetuga_IceBreath_ExplosionOBJ",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/SD_Yetuga_IceBreath_ExplosionOBJ",
+    "Properties": {
+      "AttackInfo": {
+        "SkillPowerInfo": {
+          "SkillPowerBonus": 1000
+        },
+        "StaminaAttackInfo": {
+          "StaminaAttackRate": 25000
+        },
+        "AttackableFlags": [
+          "ECharacterAttackableFlag::EnableAttackableDownState"
+        ],
+        "StatusEffectData": {
+          "CumulativeValueRate": 8000,
+          "AttributeDamageRate": -2500
+        }
+      },
+      "SkillFuncInfoMap": [
+        {
+          "Key": "EDamageInfoSkillFuncIndex::Index1",
+          "Value": {
+            "SkillTag": {
+              "ObjectName": "xxDamageInfoTag_BeforeProcessHit'SD_Yetuga_IceBreath_ExplosionOBJ:xxDamageInfoTag_BeforeProcessHit_0'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/SD_Yetuga_IceBreath_ExplosionOBJ.1"
+            },
+            "Funcs": [
+              {
+                "ObjectName": "xxDmgInfoFuncAddStatusEffect'SD_Yetuga_IceBreath_ExplosionOBJ:xxDmgInfoFuncAddStatusEffect_0'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/SD_Yetuga_IceBreath_ExplosionOBJ.2"
+              }
+            ]
+          }
+        }
+      ],
+      "AttackerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true
+      },
+      "DamagerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true
+      },
+      "DamagerKnockData": {
+        "KnockBackDirection": "EKnockbackDirection::Radial",
+        "KnockBackMoveType": "EKnockbackMoveType::UseCurve",
+        "KnockbackDistance": {
+          "X": 500.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "KnockCurveVector": {
+          "ObjectName": "CurveVector'CV_common_knockback_deaccel'",
+          "ObjectPath": "BBQ/Content/_Common/MoveCurve/CV_common_knockback_deaccel.0"
+        },
+        "KnockCurveScale": {
+          "X": 300.0,
+          "Y": 1.0,
+          "Z": 1.0
+        },
+        "KnockbackDistanceTime": 1.0,
+        "KnockbackHeight": 500.0,
+        "KnockbackForce": 1500.0
+      },
+      "SpecialDamageAniminfo": {
+        "DamageStrength": "EDamageTypeByStrength::DamageStrong",
+        "CommonAnimationTag": "ECommonAnimationTag::DamageU"
+      },
+      "AttackerHitEffect": {
+        "ParticleInfo": {
+          "bSyncData": true
+        }
+      },
+      "DamageSounds": [
+        {
+          "ObjectName": "AkAudioEvent'Play_Monster_IceMaterialSwitch'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/Monster_Common/Monster_Hit_MaterialSwitch/Play_Monster_IceMaterialSwitch.0"
+        }
+      ],
+      "AttackStrength": "EBattleDirecting_AttackStrength::AttackStrength_02"
+    }
+  },
+  {
+    "Type": "xxDamageInfoTag_BeforeProcessHit",
+    "Name": "xxDamageInfoTag_BeforeProcessHit_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfoTag_BeforeProcessHit'",
+    "Outer": {
+      "ObjectName": "xxDamageInfo'SD_Yetuga_IceBreath_ExplosionOBJ'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/SD_Yetuga_IceBreath_ExplosionOBJ.0"
+    }
+  },
+  {
+    "Type": "xxDmgInfoFuncAddStatusEffect",
+    "Name": "xxDmgInfoFuncAddStatusEffect_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDmgInfoFuncAddStatusEffect'",
+    "Outer": {
+      "ObjectName": "xxDamageInfo'SD_Yetuga_IceBreath_ExplosionOBJ'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/SD_Yetuga_IceBreath_ExplosionOBJ.0"
+    },
+    "Properties": {
+      "AttributeType": "EStatusEffectAttributeType::Buff_Attribute",
+      "Attribute": "EStatusEffectAttribute::Water"
+    }
+  }
+]

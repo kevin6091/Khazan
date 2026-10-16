@@ -1,0 +1,31 @@
+--- task-before/Source/Khazan/Tests/KZMonsterPresentationRepairPIETest.cpp
++++ main/Source/Khazan/Tests/KZMonsterPresentationRepairPIETest.cpp
+@@ -3,6 +3,7 @@
+ #include "Misc/AutomationTest.h"
+ #include "Misc/FileHelper.h"
+ #include "Misc/Paths.h"
++#include "HAL/IConsoleManager.h"
+ #include "Serialization/JsonSerializer.h"
+ #include "Character/KZMonster.h"
+ #include "Character/KZPlayer.h"
+@@ -53,6 +54,20 @@
+ #include "Perception/AISense_Sight.h"
+ namespace KZMonsterRepairQA
+ {
++// Development QA only. A global Shot can be consumed by an editor viewport
++// while PIE is paused, so read the actual game viewport synchronously.
++static FAutoConsoleCommandWithWorldAndArgs ColourShot(
++ TEXT("KZ.QA.ColourShot"), TEXT("Capture the current PIE game viewport to the supplied PNG path."),
++ FConsoleCommandWithWorldAndArgsDelegate::CreateLambda([](const TArray<FString>& Args,UWorld* World)
++ {
++  FViewport* Viewport=GEngine&&GEngine->GameViewport?GEngine->GameViewport->Viewport:nullptr;
++  TArray<FColor> Pixels;
++  if(!World||World->WorldType!=EWorldType::PIE||Args.Num()!=1||!Viewport||!Viewport->ReadPixels(Pixels))
++  {UE_LOG(LogTemp,Error,TEXT("ColourShot requires one path and an active PIE viewport"));return;}
++  const FIntPoint Size=Viewport->GetSizeXY();TArray64<uint8> PNG;
++  FImageUtils::PNGCompressImageArray(Size.X,Size.Y,Pixels,PNG);
++  if(!FFileHelper::SaveArrayToFile(PNG,*Args[0]))UE_LOG(LogTemp,Error,TEXT("ColourShot could not save %s"),*Args[0]);
++ }));
+ const TCHAR* Families[]={TEXT("Swordsman"),TEXT("SwordShield"),TEXT("HeavySwordsman"),TEXT("HalberdElite"),TEXT("ApesStoneHandElite"),TEXT("Yetuga")};
+ struct FCase {FString Asset,Family;};
+ class FRun:public IAutomationLatentCommand

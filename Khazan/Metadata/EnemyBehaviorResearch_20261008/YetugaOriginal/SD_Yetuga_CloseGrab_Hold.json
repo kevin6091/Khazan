@@ -1,0 +1,57 @@
+[
+  {
+    "Type": "xxDamageInfo",
+    "Name": "SD_Yetuga_CloseGrab_Hold",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SD_Yetuga_CloseGrab_Hold",
+    "Properties": {
+      "AttackInfo": {
+        "SkillPowerInfo": {
+          "SkillPowerBonus": 0
+        },
+        "GuardDamageInfo": {
+          "bDontGuard": true
+        },
+        "AttackableFlags": [
+          "ECharacterAttackableFlag::EnableAttackableDownState"
+        ]
+      },
+      "AttackerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "TimeSectionDelayData": {
+          "DelayRate": 0.0
+        }
+      },
+      "DamagerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "TimeSectionDelayData": {
+          "DelayRate": 0.0,
+          "LoopTime": 0.2
+        }
+      },
+      "DamagerKnockData": {
+        "KnockbackDistanceTime": 1.0,
+        "KnockbackHeight": 100.0,
+        "KnockbackForce": 100.0
+      },
+      "SpecialDamageAniminfo": {
+        "CommonAnimationTag": "ECommonAnimationTag::None"
+      },
+      "DamageFrontlimitAngle": 90.0,
+      "AttackerHitEffect": {
+        "ParticleInfo": {
+          "bSyncData": true
+        }
+      },
+      "DamageSounds": [
+        {
+          "ObjectName": "AkAudioEvent'Play_Monster_Blank_MaterialSwitch'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/Monster_Common/Monster_Hit_MaterialSwitch/Play_Monster_Blank_MaterialSwitch.0"
+        }
+      ],
+      "AttackStrength": "EBattleDirecting_AttackStrength::AttackStrength_02",
+      "bUseOldEffect": true
+    }
+  }
+]

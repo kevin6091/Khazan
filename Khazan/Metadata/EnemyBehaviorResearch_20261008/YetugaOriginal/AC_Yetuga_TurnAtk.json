@@ -1,0 +1,4725 @@
+[
+  {
+    "Type": "AnimComposite",
+    "Name": "AC_Yetuga_TurnAtk",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimComposite'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk",
+    "Properties": {
+      "AnimationTrack": {
+        "AnimSegments": [
+          {
+            "AnimReference": {
+              "ObjectName": "AnimSequence'CA_M_Yetuga_TurnAttack'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Ani/CA_M_Yetuga_TurnAttack.0"
+            },
+            "StartPos": 0.0,
+            "AnimStartTime": 0.0,
+            "AnimEndTime": 3.4333334,
+            "AnimPlayRate": 1.0,
+            "LoopingCount": 1
+          }
+        ]
+      },
+      "Notifies": [
+        {
+          "TriggerTimeOffset": -0.0001,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxDamagerReaction",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_DamagerReaction'AC_Yetuga_TurnAtk:xxAnimNotifyState_DamagerReaction_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.9"
+          },
+          "Duration": 1.511471,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 1.511471,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": -0.0001,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxCounterWeak",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_CounterWeak'AC_Yetuga_TurnAtk:xxAnimNotifyState_CounterWeak_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.8"
+          },
+          "Duration": 1.5114709,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 1.5114709,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 1,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0001,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxLookAt",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_LookAt'AC_Yetuga_TurnAtk:xxAnimNotifyState_LookAt_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.11"
+          },
+          "Duration": 0.300488,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 0.300488,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 5,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxAkEvent",
+          "Notify": {
+            "ObjectName": "xxAnimNotify_AkEvent'AC_Yetuga_TurnAtk:xxAnimNotify_AkEvent_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.2"
+          },
+          "NotifyStateClass": null,
+          "Duration": 0.0,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": -1,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.0,
+            "LinkValue": 0.09079703,
+            "LinkedSequence": null
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 3,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 0.09079703,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_Yetuga_TurnAtk:xxAnimNotifyState_Particle_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.15"
+          },
+          "Duration": 0.230277,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 0.6287854,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 15,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 0.39850837,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxMoveTo",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_MoveTo'AC_Yetuga_TurnAtk:xxAnimNotifyState_MoveTo_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.12"
+          },
+          "Duration": 0.8875319,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 1.4196936,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 8,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 0.5321617,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_Yetuga_TurnAtk:xxAnimNotifyState_Particle_4'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.23"
+          },
+          "Duration": 0.15005273,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 0.7399354,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 19,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 0.5898827,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_Yetuga_TurnAtk:xxAnimNotifyState_Particle_6'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.25"
+          },
+          "Duration": 0.108429015,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 0.83759904,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 18,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 0.72917,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_Yetuga_TurnAtk:xxAnimNotifyState_Particle_7'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.26"
+          },
+          "Duration": 0.108428955,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 1.2867801,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 18,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.1783512,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_Yetuga_TurnAtk:xxAnimNotifyState_Particle_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.16"
+          },
+          "Duration": 0.15005302,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 1.4190294,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 19,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.2689763,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxMoveTo",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_MoveTo'AC_Yetuga_TurnAtk:xxAnimNotifyState_MoveTo_4'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.14"
+          },
+          "Duration": 0.21450198,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 1.5643309,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 7,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.349829,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_Yetuga_TurnAtk:xxAnimNotifyState_Particle_20'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.21"
+          },
+          "Duration": 0.544719,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 1.9057262,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 17,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.3610072,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_Yetuga_TurnAtk:xxAnimNotifyState_Particle_17'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.19"
+          },
+          "Duration": 0.15543294,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 1.570307,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 18,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.4148741,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxMoveTo",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_MoveTo'AC_Yetuga_TurnAtk:xxAnimNotifyState_MoveTo_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.13"
+          },
+          "Duration": 0.7502998,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 2.1678119,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 9,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.417512,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_Yetuga_TurnAtk:xxAnimNotifyState_Particle_10'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.17"
+          },
+          "Duration": 0.62992346,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 2.0548747,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 20,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.4249512,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_Yetuga_TurnAtk:xxAnimNotifyState_Particle_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.20"
+          },
+          "Duration": 0.15543294,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 1.591603,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 19,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.4361701,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxSurfaceTrailDeepSnow",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_SurfaceTrailDeepSnow'AC_Yetuga_TurnAtk:xxAnimNotifyState_SurfaceTrailDeepSnow_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.29"
+          },
+          "Duration": 0.17635274,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 1.6435059,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 14,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.4671532,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxAttack",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Attack'AC_Yetuga_TurnAtk:xxAnimNotifyState_Attack_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.5"
+          },
+          "Duration": 0.051380992,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 1.5266826,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::BranchingPoint",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 4,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.4753016,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxAttack",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Attack'AC_Yetuga_TurnAtk:xxAnimNotifyState_Attack_3'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.6"
+          },
+          "Duration": 0.051381,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 1.526683,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::BranchingPoint",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 5,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.475302,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxAttack",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Attack'AC_Yetuga_TurnAtk:xxAnimNotifyState_Attack_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.4"
+          },
+          "Duration": 0.033333335,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 1.5086639,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::BranchingPoint",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 6,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.4753306,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxCameraMod",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_CameraMod'AC_Yetuga_TurnAtk:xxAnimNotifyState_CameraMod_3'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.7"
+          },
+          "Duration": 0.627792,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 2.1460962,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 11,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.5183042,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_Yetuga_TurnAtk:xxAnimNotifyState_Particle_12'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.18"
+          },
+          "Duration": 1.9034235,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 3.4333334,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 16,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.5299098,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_Yetuga_TurnAtk:xxAnimNotifyState_Particle_5'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.24"
+          },
+          "Duration": 0.23027706,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 1.7763941,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 15,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.5461171,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxAkEvent",
+          "Notify": {
+            "ObjectName": "xxAnimNotify_AkEvent'AC_Yetuga_TurnAtk:xxAnimNotify_AkEvent_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.1"
+          },
+          "NotifyStateClass": null,
+          "Duration": 0.0,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": -1,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.0,
+            "LinkValue": 1.5854845,
+            "LinkedSequence": null
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 2,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.5854845,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxAkEvent",
+          "Notify": {
+            "ObjectName": "xxAnimNotify_AkEvent'AC_Yetuga_TurnAtk:xxAnimNotify_AkEvent_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.3"
+          },
+          "NotifyStateClass": null,
+          "Duration": 0.0,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": -1,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.0,
+            "LinkValue": 1.8560802,
+            "LinkedSequence": null
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 3,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.8560802,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_Yetuga_TurnAtk:xxAnimNotifyState_Particle_9'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.27"
+          },
+          "Duration": 0.108429074,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 2.0696058,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 18,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 1.9611768,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxLookAt",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_LookAt'AC_Yetuga_TurnAtk:xxAnimNotifyState_LookAt_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.10"
+          },
+          "Duration": 1.4245391,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 3.4333334,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 13,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 2.0087943,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxParticle",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_Particle'AC_Yetuga_TurnAtk:xxAnimNotifyState_Particle_3'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.22"
+          },
+          "Duration": 0.15005302,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 2.8502262,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 19,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 2.7001731,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxSkillEventTag",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_SkillEventTag'AC_Yetuga_TurnAtk:xxAnimNotifyState_SkillEventTag_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.28"
+          },
+          "Duration": 0.46951962,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 3.4333334,
+            "LinkValue": 3.303893,
+            "LinkedSequence": {
+              "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 1,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 3.4333334,
+          "LinkValue": 2.8343735,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+          }
+        }
+      ],
+      "SequenceLength": 3.4333334,
+      "RawCurveData": {
+        "FloatCurves": [
+          {
+            "FloatCurve": {
+              "Keys": [
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.0,
+                  "Value": 0.0,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.11858813,
+                  "Value": 0.0,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 1.2265959,
+                  "Value": 0.5,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 1.2832943,
+                  "Value": -1.25,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 1.3543665,
+                  "Value": -1.25,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 1.3922676,
+                  "Value": 0.2,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 1.7098165,
+                  "Value": 0.2,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 1.9849428,
+                  "Value": -1.5085067E-08,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 3.0675223,
+                  "Value": 0.0,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                },
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 3.416896,
+                  "Value": 1.0,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                }
+              ],
+              "DefaultValue": 3.4028235E+38,
+              "PreInfinityExtrap": "RCCE_Constant",
+              "PostInfinityExtrap": "RCCE_Constant"
+            },
+            "Name": {
+              "DisplayName": "Dilation"
+            },
+            "CurveTypeFlags": 4
+          }
+        ]
+      },
+      "DilationCurve": {
+        "TimePerFrame": 0.016666668,
+        "DilationSequenceLength": 3.1590855,
+        "DilationAnimPositions": [
+          {
+            "T_Original": 0.0,
+            "T_Dilation": 0.0
+          },
+          {
+            "T_Original": 0.016666668,
+            "T_Dilation": 0.016666668
+          },
+          {
+            "T_Original": 0.033333335,
+            "T_Dilation": 0.033333335
+          },
+          {
+            "T_Original": 0.050000004,
+            "T_Dilation": 0.050000004
+          },
+          {
+            "T_Original": 0.06666667,
+            "T_Dilation": 0.06666667
+          },
+          {
+            "T_Original": 0.083333336,
+            "T_Dilation": 0.083333336
+          },
+          {
+            "T_Original": 0.10000001,
+            "T_Dilation": 0.1
+          },
+          {
+            "T_Original": 0.116666675,
+            "T_Dilation": 0.11666667
+          },
+          {
+            "T_Original": 0.13333334,
+            "T_Dilation": 0.13327807
+          },
+          {
+            "T_Original": 0.15,
+            "T_Dilation": 0.14977296
+          },
+          {
+            "T_Original": 0.16666667,
+            "T_Dilation": 0.16614597
+          },
+          {
+            "T_Original": 0.18333334,
+            "T_Dilation": 0.18239889
+          },
+          {
+            "T_Original": 0.20000002,
+            "T_Dilation": 0.19853348
+          },
+          {
+            "T_Original": 0.21666668,
+            "T_Dilation": 0.21455143
+          },
+          {
+            "T_Original": 0.23333335,
+            "T_Dilation": 0.23045444
+          },
+          {
+            "T_Original": 0.25,
+            "T_Dilation": 0.24624415
+          },
+          {
+            "T_Original": 0.26666668,
+            "T_Dilation": 0.26192215
+          },
+          {
+            "T_Original": 0.28333336,
+            "T_Dilation": 0.27749
+          },
+          {
+            "T_Original": 0.3,
+            "T_Dilation": 0.29294923
+          },
+          {
+            "T_Original": 0.3166667,
+            "T_Dilation": 0.3083014
+          },
+          {
+            "T_Original": 0.33333334,
+            "T_Dilation": 0.3235479
+          },
+          {
+            "T_Original": 0.35000002,
+            "T_Dilation": 0.33869025
+          },
+          {
+            "T_Original": 0.36666667,
+            "T_Dilation": 0.3537298
+          },
+          {
+            "T_Original": 0.38333336,
+            "T_Dilation": 0.36866802
+          },
+          {
+            "T_Original": 0.40000004,
+            "T_Dilation": 0.38350618
+          },
+          {
+            "T_Original": 0.4166667,
+            "T_Dilation": 0.39824566
+          },
+          {
+            "T_Original": 0.43333337,
+            "T_Dilation": 0.41288775
+          },
+          {
+            "T_Original": 0.45000002,
+            "T_Dilation": 0.42743373
+          },
+          {
+            "T_Original": 0.4666667,
+            "T_Dilation": 0.44188485
+          },
+          {
+            "T_Original": 0.48333335,
+            "T_Dilation": 0.45624232
+          },
+          {
+            "T_Original": 0.5,
+            "T_Dilation": 0.47050738
+          },
+          {
+            "T_Original": 0.5166667,
+            "T_Dilation": 0.48468122
+          },
+          {
+            "T_Original": 0.53333336,
+            "T_Dilation": 0.49876496
+          },
+          {
+            "T_Original": 0.55,
+            "T_Dilation": 0.51275975
+          },
+          {
+            "T_Original": 0.5666667,
+            "T_Dilation": 0.5266667
+          },
+          {
+            "T_Original": 0.5833334,
+            "T_Dilation": 0.54048693
+          },
+          {
+            "T_Original": 0.6,
+            "T_Dilation": 0.5542215
+          },
+          {
+            "T_Original": 0.6166667,
+            "T_Dilation": 0.5678715
+          },
+          {
+            "T_Original": 0.6333334,
+            "T_Dilation": 0.58143795
+          },
+          {
+            "T_Original": 0.65000004,
+            "T_Dilation": 0.5949218
+          },
+          {
+            "T_Original": 0.6666667,
+            "T_Dilation": 0.60832417
+          },
+          {
+            "T_Original": 0.6833334,
+            "T_Dilation": 0.6216459
+          },
+          {
+            "T_Original": 0.70000005,
+            "T_Dilation": 0.63488805
+          },
+          {
+            "T_Original": 0.7166667,
+            "T_Dilation": 0.64805156
+          },
+          {
+            "T_Original": 0.73333335,
+            "T_Dilation": 0.66113734
+          },
+          {
+            "T_Original": 0.75000006,
+            "T_Dilation": 0.6741463
+          },
+          {
+            "T_Original": 0.7666667,
+            "T_Dilation": 0.6870793
+          },
+          {
+            "T_Original": 0.78333336,
+            "T_Dilation": 0.6999373
+          },
+          {
+            "T_Original": 0.8000001,
+            "T_Dilation": 0.7127211
+          },
+          {
+            "T_Original": 0.8166667,
+            "T_Dilation": 0.72543156
+          },
+          {
+            "T_Original": 0.8333334,
+            "T_Dilation": 0.73806953
+          },
+          {
+            "T_Original": 0.85,
+            "T_Dilation": 0.75063586
+          },
+          {
+            "T_Original": 0.86666673,
+            "T_Dilation": 0.7631313
+          },
+          {
+            "T_Original": 0.8833334,
+            "T_Dilation": 0.77555674
+          },
+          {
+            "T_Original": 0.90000004,
+            "T_Dilation": 0.78791285
+          },
+          {
+            "T_Original": 0.9166667,
+            "T_Dilation": 0.80020046
+          },
+          {
+            "T_Original": 0.9333334,
+            "T_Dilation": 0.8124203
+          },
+          {
+            "T_Original": 0.95000005,
+            "T_Dilation": 0.82457316
+          },
+          {
+            "T_Original": 0.9666667,
+            "T_Dilation": 0.8366597
+          },
+          {
+            "T_Original": 0.9833334,
+            "T_Dilation": 0.84868073
+          },
+          {
+            "T_Original": 1.0,
+            "T_Dilation": 0.86063683
+          },
+          {
+            "T_Original": 1.0166668,
+            "T_Dilation": 0.8725288
+          },
+          {
+            "T_Original": 1.0333334,
+            "T_Dilation": 0.8843573
+          },
+          {
+            "T_Original": 1.0500001,
+            "T_Dilation": 0.89612293
+          },
+          {
+            "T_Original": 1.0666667,
+            "T_Dilation": 0.9078265
+          },
+          {
+            "T_Original": 1.0833334,
+            "T_Dilation": 0.9194685
+          },
+          {
+            "T_Original": 1.1,
+            "T_Dilation": 0.93104976
+          },
+          {
+            "T_Original": 1.1166667,
+            "T_Dilation": 0.94257075
+          },
+          {
+            "T_Original": 1.1333334,
+            "T_Dilation": 0.9540322
+          },
+          {
+            "T_Original": 1.1500001,
+            "T_Dilation": 0.9654346
+          },
+          {
+            "T_Original": 1.1666667,
+            "T_Dilation": 0.9767787
+          },
+          {
+            "T_Original": 1.1833334,
+            "T_Dilation": 0.988065
+          },
+          {
+            "T_Original": 1.2,
+            "T_Dilation": 0.9992941
+          },
+          {
+            "T_Original": 1.2166667,
+            "T_Dilation": 1.0104666
+          },
+          {
+            "T_Original": 1.2333333,
+            "T_Dilation": 1.0224245
+          },
+          {
+            "T_Original": 1.2500001,
+            "T_Dilation": 1.0382212
+          },
+          {
+            "T_Original": 1.2666668,
+            "T_Dilation": 1.0621357
+          },
+          {
+            "T_Original": 1.2833334,
+            "T_Dilation": 1.0948085
+          },
+          {
+            "T_Original": 1.3000001,
+            "T_Dilation": 1.1323085
+          },
+          {
+            "T_Original": 1.3166667,
+            "T_Dilation": 1.1698085
+          },
+          {
+            "T_Original": 1.3333334,
+            "T_Dilation": 1.2073085
+          },
+          {
+            "T_Original": 1.35,
+            "T_Dilation": 1.2448086
+          },
+          {
+            "T_Original": 1.3666668,
+            "T_Dilation": 1.2779291
+          },
+          {
+            "T_Original": 1.3833334,
+            "T_Dilation": 1.3011128
+          },
+          {
+            "T_Original": 1.4000001,
+            "T_Dilation": 1.3171707
+          },
+          {
+            "T_Original": 1.4166667,
+            "T_Dilation": 1.3310596
+          },
+          {
+            "T_Original": 1.4333334,
+            "T_Dilation": 1.3449484
+          },
+          {
+            "T_Original": 1.45,
+            "T_Dilation": 1.3588372
+          },
+          {
+            "T_Original": 1.4666667,
+            "T_Dilation": 1.3727261
+          },
+          {
+            "T_Original": 1.4833335,
+            "T_Dilation": 1.3866149
+          },
+          {
+            "T_Original": 1.5000001,
+            "T_Dilation": 1.4005038
+          },
+          {
+            "T_Original": 1.5166668,
+            "T_Dilation": 1.4143926
+          },
+          {
+            "T_Original": 1.5333334,
+            "T_Dilation": 1.4282814
+          },
+          {
+            "T_Original": 1.5500001,
+            "T_Dilation": 1.4421703
+          },
+          {
+            "T_Original": 1.5666667,
+            "T_Dilation": 1.4560591
+          },
+          {
+            "T_Original": 1.5833334,
+            "T_Dilation": 1.4699479
+          },
+          {
+            "T_Original": 1.6000001,
+            "T_Dilation": 1.4838368
+          },
+          {
+            "T_Original": 1.6166668,
+            "T_Dilation": 1.4977256
+          },
+          {
+            "T_Original": 1.6333334,
+            "T_Dilation": 1.5116144
+          },
+          {
+            "T_Original": 1.6500001,
+            "T_Dilation": 1.5255033
+          },
+          {
+            "T_Original": 1.6666667,
+            "T_Dilation": 1.5393921
+          },
+          {
+            "T_Original": 1.6833334,
+            "T_Dilation": 1.553281
+          },
+          {
+            "T_Original": 1.7,
+            "T_Dilation": 1.5671698
+          },
+          {
+            "T_Original": 1.7166667,
+            "T_Dilation": 1.5810876
+          },
+          {
+            "T_Original": 1.7333335,
+            "T_Dilation": 1.5951054
+          },
+          {
+            "T_Original": 1.7500001,
+            "T_Dilation": 1.6092676
+          },
+          {
+            "T_Original": 1.7666668,
+            "T_Dilation": 1.623577
+          },
+          {
+            "T_Original": 1.7833334,
+            "T_Dilation": 1.6380368
+          },
+          {
+            "T_Original": 1.8000001,
+            "T_Dilation": 1.6526504
+          },
+          {
+            "T_Original": 1.8166667,
+            "T_Dilation": 1.6674207
+          },
+          {
+            "T_Original": 1.8333334,
+            "T_Dilation": 1.6823515
+          },
+          {
+            "T_Original": 1.8500001,
+            "T_Dilation": 1.697446
+          },
+          {
+            "T_Original": 1.8666668,
+            "T_Dilation": 1.712708
+          },
+          {
+            "T_Original": 1.8833334,
+            "T_Dilation": 1.7281412
+          },
+          {
+            "T_Original": 1.9000001,
+            "T_Dilation": 1.7437495
+          },
+          {
+            "T_Original": 1.9166667,
+            "T_Dilation": 1.759537
+          },
+          {
+            "T_Original": 1.9333334,
+            "T_Dilation": 1.7755077
+          },
+          {
+            "T_Original": 1.95,
+            "T_Dilation": 1.791666
+          },
+          {
+            "T_Original": 1.9666668,
+            "T_Dilation": 1.8080164
+          },
+          {
+            "T_Original": 1.9833335,
+            "T_Dilation": 1.8245635
+          },
+          {
+            "T_Original": 2.0,
+            "T_Dilation": 1.8412204
+          },
+          {
+            "T_Original": 2.016667,
+            "T_Dilation": 1.857887
+          },
+          {
+            "T_Original": 2.0333335,
+            "T_Dilation": 1.8745537
+          },
+          {
+            "T_Original": 2.0500002,
+            "T_Dilation": 1.8912203
+          },
+          {
+            "T_Original": 2.0666668,
+            "T_Dilation": 1.907887
+          },
+          {
+            "T_Original": 2.0833335,
+            "T_Dilation": 1.9245536
+          },
+          {
+            "T_Original": 2.1000001,
+            "T_Dilation": 1.9412203
+          },
+          {
+            "T_Original": 2.1166668,
+            "T_Dilation": 1.9578869
+          },
+          {
+            "T_Original": 2.1333334,
+            "T_Dilation": 1.9745536
+          },
+          {
+            "T_Original": 2.15,
+            "T_Dilation": 1.9912202
+          },
+          {
+            "T_Original": 2.1666667,
+            "T_Dilation": 2.007887
+          },
+          {
+            "T_Original": 2.1833334,
+            "T_Dilation": 2.0245535
+          },
+          {
+            "T_Original": 2.2,
+            "T_Dilation": 2.0412202
+          },
+          {
+            "T_Original": 2.2166667,
+            "T_Dilation": 2.0578868
+          },
+          {
+            "T_Original": 2.2333333,
+            "T_Dilation": 2.0745535
+          },
+          {
+            "T_Original": 2.25,
+            "T_Dilation": 2.0912201
+          },
+          {
+            "T_Original": 2.266667,
+            "T_Dilation": 2.1078868
+          },
+          {
+            "T_Original": 2.2833335,
+            "T_Dilation": 2.1245534
+          },
+          {
+            "T_Original": 2.3000002,
+            "T_Dilation": 2.14122
+          },
+          {
+            "T_Original": 2.3166668,
+            "T_Dilation": 2.1578867
+          },
+          {
+            "T_Original": 2.3333335,
+            "T_Dilation": 2.1745534
+          },
+          {
+            "T_Original": 2.3500001,
+            "T_Dilation": 2.19122
+          },
+          {
+            "T_Original": 2.3666668,
+            "T_Dilation": 2.2078867
+          },
+          {
+            "T_Original": 2.3833334,
+            "T_Dilation": 2.2245533
+          },
+          {
+            "T_Original": 2.4,
+            "T_Dilation": 2.24122
+          },
+          {
+            "T_Original": 2.4166667,
+            "T_Dilation": 2.2578866
+          },
+          {
+            "T_Original": 2.4333334,
+            "T_Dilation": 2.2745533
+          },
+          {
+            "T_Original": 2.45,
+            "T_Dilation": 2.29122
+          },
+          {
+            "T_Original": 2.4666667,
+            "T_Dilation": 2.3078866
+          },
+          {
+            "T_Original": 2.4833333,
+            "T_Dilation": 2.3245533
+          },
+          {
+            "T_Original": 2.5000002,
+            "T_Dilation": 2.34122
+          },
+          {
+            "T_Original": 2.516667,
+            "T_Dilation": 2.3578866
+          },
+          {
+            "T_Original": 2.5333335,
+            "T_Dilation": 2.3745532
+          },
+          {
+            "T_Original": 2.5500002,
+            "T_Dilation": 2.3912199
+          },
+          {
+            "T_Original": 2.5666668,
+            "T_Dilation": 2.4078865
+          },
+          {
+            "T_Original": 2.5833335,
+            "T_Dilation": 2.4245532
+          },
+          {
+            "T_Original": 2.6000001,
+            "T_Dilation": 2.4412198
+          },
+          {
+            "T_Original": 2.6166668,
+            "T_Dilation": 2.4578865
+          },
+          {
+            "T_Original": 2.6333334,
+            "T_Dilation": 2.474553
+          },
+          {
+            "T_Original": 2.65,
+            "T_Dilation": 2.4912198
+          },
+          {
+            "T_Original": 2.6666667,
+            "T_Dilation": 2.5078864
+          },
+          {
+            "T_Original": 2.6833334,
+            "T_Dilation": 2.524553
+          },
+          {
+            "T_Original": 2.7,
+            "T_Dilation": 2.5412197
+          },
+          {
+            "T_Original": 2.7166667,
+            "T_Dilation": 2.5578864
+          },
+          {
+            "T_Original": 2.7333336,
+            "T_Dilation": 2.574553
+          },
+          {
+            "T_Original": 2.7500002,
+            "T_Dilation": 2.5912197
+          },
+          {
+            "T_Original": 2.766667,
+            "T_Dilation": 2.6078863
+          },
+          {
+            "T_Original": 2.7833335,
+            "T_Dilation": 2.624553
+          },
+          {
+            "T_Original": 2.8000002,
+            "T_Dilation": 2.6412196
+          },
+          {
+            "T_Original": 2.8166668,
+            "T_Dilation": 2.6578863
+          },
+          {
+            "T_Original": 2.8333335,
+            "T_Dilation": 2.674553
+          },
+          {
+            "T_Original": 2.8500001,
+            "T_Dilation": 2.6912196
+          },
+          {
+            "T_Original": 2.8666668,
+            "T_Dilation": 2.7078862
+          },
+          {
+            "T_Original": 2.8833334,
+            "T_Dilation": 2.7245529
+          },
+          {
+            "T_Original": 2.9,
+            "T_Dilation": 2.7412195
+          },
+          {
+            "T_Original": 2.9166667,
+            "T_Dilation": 2.7578862
+          },
+          {
+            "T_Original": 2.9333334,
+            "T_Dilation": 2.7745528
+          },
+          {
+            "T_Original": 2.95,
+            "T_Dilation": 2.7912195
+          },
+          {
+            "T_Original": 2.966667,
+            "T_Dilation": 2.8078861
+          },
+          {
+            "T_Original": 2.9833336,
+            "T_Dilation": 2.8245528
+          },
+          {
+            "T_Original": 3.0000002,
+            "T_Dilation": 2.8412194
+          },
+          {
+            "T_Original": 3.016667,
+            "T_Dilation": 2.857886
+          },
+          {
+            "T_Original": 3.0333335,
+            "T_Dilation": 2.8745527
+          },
+          {
+            "T_Original": 3.0500002,
+            "T_Dilation": 2.8912194
+          },
+          {
+            "T_Original": 3.0666668,
+            "T_Dilation": 2.907886
+          },
+          {
+            "T_Original": 3.0833335,
+            "T_Dilation": 2.9241838
+          },
+          {
+            "T_Original": 3.1000001,
+            "T_Dilation": 2.939773
+          },
+          {
+            "T_Original": 3.1166668,
+            "T_Dilation": 2.9546964
+          },
+          {
+            "T_Original": 3.1333334,
+            "T_Dilation": 2.9690084
+          },
+          {
+            "T_Original": 3.15,
+            "T_Dilation": 2.9827573
+          },
+          {
+            "T_Original": 3.1666667,
+            "T_Dilation": 2.9959857
+          },
+          {
+            "T_Original": 3.1833334,
+            "T_Dilation": 3.0087314
+          },
+          {
+            "T_Original": 3.2000003,
+            "T_Dilation": 3.0210285
+          },
+          {
+            "T_Original": 3.216667,
+            "T_Dilation": 3.0329075
+          },
+          {
+            "T_Original": 3.2333336,
+            "T_Dilation": 3.044396
+          },
+          {
+            "T_Original": 3.2500002,
+            "T_Dilation": 3.0555186
+          },
+          {
+            "T_Original": 3.266667,
+            "T_Dilation": 3.066298
+          },
+          {
+            "T_Original": 3.2833335,
+            "T_Dilation": 3.0767548
+          },
+          {
+            "T_Original": 3.3000002,
+            "T_Dilation": 3.0869079
+          },
+          {
+            "T_Original": 3.3166668,
+            "T_Dilation": 3.096774
+          },
+          {
+            "T_Original": 3.3333335,
+            "T_Dilation": 3.1063693
+          },
+          {
+            "T_Original": 3.3500001,
+            "T_Dilation": 3.115708
+          },
+          {
+            "T_Original": 3.3666668,
+            "T_Dilation": 3.1248038
+          },
+          {
+            "T_Original": 3.3833334,
+            "T_Dilation": 3.1336687
+          },
+          {
+            "T_Original": 3.4,
+            "T_Dilation": 3.1423142
+          },
+          {
+            "T_Original": 3.4166667,
+            "T_Dilation": 3.1507509
+          },
+          {
+            "T_Original": 3.4333334,
+            "T_Dilation": 3.1590855
+          }
+        ],
+        "BakedDilationCurveName": "Dilation"
+      },
+      "Skeleton": {
+        "ObjectName": "Skeleton'C_M_Yetuga_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Model/C_M_Yetuga_Skeleton.7"
+      }
+    },
+    "SkeletonGuid": "A4BE9BCB-4F6B7AE0-01901AB1-6B539327"
+  },
+  {
+    "Type": "xxAnimNotify_AkEvent",
+    "Name": "xxAnimNotify_AkEvent_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotify_AkEvent'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "AttachOnMeshComponent": true,
+      "AttachName": "Bip001-R-Hand",
+      "Event": {
+        "ObjectName": "AkAudioEvent'efx_yetuga_turn_atk_whoosh'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/yetuga_renewal/efx/efx_yetuga_turn_atk_whoosh.0"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotify_AkEvent",
+    "Name": "xxAnimNotify_AkEvent_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotify_AkEvent'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "Event": {
+        "ObjectName": "AkAudioEvent'efx_yetuga_turn_atk'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/yetuga_renewal/efx/efx_yetuga_turn_atk.0"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotify_AkEvent",
+    "Name": "xxAnimNotify_AkEvent_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotify_AkEvent'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "AttachOnMeshComponent": true,
+      "AttachName": "Bip001-Head",
+      "Event": {
+        "ObjectName": "AkAudioEvent'vo_yetuga_turn_atk'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/yetuga_renewal/vo/vo_yetuga_turn_atk.0"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Attack",
+    "Name": "xxAnimNotifyState_Attack_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Attack'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "AttackBoxComponentGroup": "EAttackBoxGroup::Group2",
+      "Size": {
+        "X": 115.88629,
+        "Y": 100.0,
+        "Z": 100.0
+      },
+      "CylinderShapeInfo": {
+        "EndRadius": 330.0,
+        "SliceAngle": 110.0,
+        "SliceRotZ": 320.0
+      },
+      "BoneName": "Root",
+      "AbsoluteOffset": {
+        "X": 168.65732,
+        "Y": -7.2212677,
+        "Z": 0.0
+      },
+      "AlignX": "EAttackShapeAlign::Center",
+      "Group": "EAttackNotifyGroup::Group1",
+      "bEditGroupInterval": true,
+      "AttackIntervalDesc": "그룹1, 1회 공격",
+      "bBakingAttackComponent": true,
+      "PostCleaningAttackInfo": {
+        "AttackBoxList": [
+          {
+            "Key": "1.4753306",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "LocalRotator": {
+                "Pitch": 0.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              }
+            }
+          },
+          {
+            "Key": "1.5086639",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "LocalRotator": {
+                "Pitch": 0.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              }
+            }
+          }
+        ]
+      },
+      "BakingAttackDirections": {
+        "AttackDirections": [
+          {
+            "Key": "1.4753306",
+            "Value": {
+              "CenterPosition": {
+                "X": 130.30902,
+                "Y": -35.638412,
+                "Z": 261.73184
+              },
+              "Position": {
+                "X": 130.30902,
+                "Y": -35.638412,
+                "Z": 261.73184
+              },
+              "Direction": {
+                "X": 0.11826523,
+                "Y": 0.9564541,
+                "Z": 0.1572371
+              }
+            }
+          },
+          {
+            "Key": "1.485331",
+            "Value": {
+              "CenterPosition": {
+                "X": 135.67831,
+                "Y": -19.913857,
+                "Z": 262.60547
+              },
+              "Position": {
+                "X": 135.67831,
+                "Y": -19.913857,
+                "Z": 262.60547
+              },
+              "Direction": {
+                "X": 0.11826523,
+                "Y": 0.9564541,
+                "Z": 0.1572371
+              }
+            }
+          },
+          {
+            "Key": "1.4943315",
+            "Value": {
+              "CenterPosition": {
+                "X": 137.89,
+                "Y": -4.4841614,
+                "Z": 264.99765
+              },
+              "Position": {
+                "X": 137.89,
+                "Y": -4.4841614,
+                "Z": 264.99765
+              },
+              "Direction": {
+                "X": 0.11826523,
+                "Y": 0.9564541,
+                "Z": 0.1572371
+              }
+            }
+          },
+          {
+            "Key": "1.504332",
+            "Value": {
+              "CenterPosition": {
+                "X": 137.32285,
+                "Y": 11.42746,
+                "Z": 268.88654
+              },
+              "Position": {
+                "X": 137.32285,
+                "Y": 11.42746,
+                "Z": 268.88654
+              },
+              "Direction": {
+                "X": 0.11826523,
+                "Y": 0.9564541,
+                "Z": 0.1572371
+              }
+            }
+          },
+          {
+            "Key": "1.5086639",
+            "Value": {
+              "CenterPosition": {
+                "X": 136.31725,
+                "Y": 17.364655,
+                "Z": 270.72644
+              },
+              "Position": {
+                "X": 136.31725,
+                "Y": 17.364655,
+                "Z": 270.72644
+              },
+              "Direction": {
+                "X": 0.11826523,
+                "Y": 0.9564541,
+                "Z": 0.1572371
+              }
+            }
+          }
+        ],
+        "BoneName": "Bip001-R-Clavicle"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Attack",
+    "Name": "xxAnimNotifyState_Attack_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Attack'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "Shape": "EAttackShape::AttackBoxComponent",
+      "bUseAttackBoxComponent": true,
+      "Size": {
+        "X": 60.0,
+        "Y": 80.0,
+        "Z": 50.0
+      },
+      "BoneName": "Bip001-R-Hand",
+      "RelativeOffset": {
+        "X": 56.35041,
+        "Y": -15.531476,
+        "Z": 0.0
+      },
+      "RelativeRotatoion": {
+        "Pitch": 0.0,
+        "Yaw": 90.0,
+        "Roll": 0.0
+      },
+      "Group": "EAttackNotifyGroup::Group1",
+      "bEditGroupInterval": true,
+      "AttackIntervalDesc": "그룹1+컴포넌트, 1회 공격",
+      "bBakingAttackComponent": true,
+      "PostCleaningAttackInfo": {
+        "AttackBoxList": [
+          {
+            "Key": "1.4753016",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 201.7291,
+                "Y": -229.78094,
+                "Z": 46.84784
+              },
+              "LocalRotator": {
+                "Pitch": -25.618652,
+                "Yaw": -127.488556,
+                "Roll": 35.951397
+              }
+            }
+          },
+          {
+            "Key": "1.482302",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 265.1235,
+                "Y": -195.74135,
+                "Z": 42.86499
+              },
+              "LocalRotator": {
+                "Pitch": -34.21573,
+                "Yaw": -107.22595,
+                "Roll": 35.834522
+              }
+            }
+          },
+          {
+            "Key": "1.4893023",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 319.42578,
+                "Y": -147.96658,
+                "Z": 44.84739
+              },
+              "LocalRotator": {
+                "Pitch": -41.639862,
+                "Yaw": -85.13254,
+                "Roll": 32.833252
+              }
+            }
+          },
+          {
+            "Key": "1.4963026",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 361.24423,
+                "Y": -90.135284,
+                "Z": 52.41787
+              },
+              "LocalRotator": {
+                "Pitch": -47.14441,
+                "Yaw": -60.912476,
+                "Roll": 26.989391
+              }
+            }
+          },
+          {
+            "Key": "1.5033029",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 377.57028,
+                "Y": -17.8945,
+                "Z": 50.898438
+              },
+              "LocalRotator": {
+                "Pitch": -50.87677,
+                "Yaw": -38.07309,
+                "Roll": 20.349703
+              }
+            }
+          },
+          {
+            "Key": "1.5103033",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 365.20078,
+                "Y": 66.18378,
+                "Z": 42.541496
+              },
+              "LocalRotator": {
+                "Pitch": -53.220734,
+                "Yaw": -15.759399,
+                "Roll": 11.776475
+              }
+            }
+          },
+          {
+            "Key": "1.5173036",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 336.03156,
+                "Y": 147.74414,
+                "Z": 44.766747
+              },
+              "LocalRotator": {
+                "Pitch": -52.7175,
+                "Yaw": 8.4885435,
+                "Roll": 0.7634604
+              }
+            }
+          },
+          {
+            "Key": "1.5243039",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 291.09314,
+                "Y": 221.6113,
+                "Z": 57.266518
+              },
+              "LocalRotator": {
+                "Pitch": -48.96573,
+                "Yaw": 31.754152,
+                "Roll": -9.609131
+              }
+            }
+          },
+          {
+            "Key": "1.5266826",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 272.60345,
+                "Y": 244.09778,
+                "Z": 63.67531
+              },
+              "LocalRotator": {
+                "Pitch": -47.025787,
+                "Yaw": 39.019207,
+                "Roll": -12.535065
+              }
+            }
+          }
+        ],
+        "Bounds": {
+          "Min": {
+            "X": 54.077217,
+            "Y": -372.03903,
+            "Z": -101.40864
+          },
+          "Max": {
+            "X": 500.91895,
+            "Y": 354.8379,
+            "Z": 133.5551
+          },
+          "IsValid": 1
+        }
+      },
+      "BakingAttackDirections": {
+        "AttackDirections": [
+          {
+            "Key": "1.4753016",
+            "Value": {
+              "CenterPosition": {
+                "X": 158.42969,
+                "Y": -265.5744,
+                "Z": 30.705168
+              },
+              "Position": {
+                "X": 171.071,
+                "Y": -297.32642,
+                "Z": 67.20183
+              },
+              "Direction": {
+                "X": 0.9609202,
+                "Y": 0.20387697,
+                "Z": -0.18326865
+              }
+            }
+          },
+          {
+            "Key": "1.4773017",
+            "Value": {
+              "CenterPosition": {
+                "X": 181.37015,
+                "Y": -260.89832,
+                "Z": 26.607615
+              },
+              "Position": {
+                "X": 196.4085,
+                "Y": -292.64874,
+                "Z": 62.185112
+              },
+              "Direction": {
+                "X": 0.9609202,
+                "Y": 0.20387697,
+                "Z": -0.18326865
+              }
+            }
+          },
+          {
+            "Key": "1.4793018",
+            "Value": {
+              "CenterPosition": {
+                "X": 204.18257,
+                "Y": -254.4237,
+                "Z": 23.02975
+              },
+              "Position": {
+                "X": 221.67706,
+                "Y": -285.87604,
+                "Z": 57.738453
+              },
+              "Direction": {
+                "X": 0.9609202,
+                "Y": 0.20387697,
+                "Z": -0.18326865
+              }
+            }
+          },
+          {
+            "Key": "1.4813019",
+            "Value": {
+              "CenterPosition": {
+                "X": 226.69287,
+                "Y": -246.17798,
+                "Z": 20.000105
+              },
+              "Position": {
+                "X": 246.66586,
+                "Y": -277.0308,
+                "Z": 53.89971
+              },
+              "Direction": {
+                "X": 0.90567994,
+                "Y": 0.40174314,
+                "Z": -0.11848065
+              }
+            }
+          },
+          {
+            "Key": "1.483302",
+            "Value": {
+              "CenterPosition": {
+                "X": 248.73582,
+                "Y": -236.2042,
+                "Z": 17.539818
+              },
+              "Position": {
+                "X": 271.173,
+                "Y": -266.15616,
+                "Z": 50.697823
+              },
+              "Direction": {
+                "X": 0.90567994,
+                "Y": 0.40174314,
+                "Z": -0.11848065
+              }
+            }
+          },
+          {
+            "Key": "1.4853021",
+            "Value": {
+              "CenterPosition": {
+                "X": 270.1468,
+                "Y": -224.56482,
+                "Z": 15.664604
+              },
+              "Position": {
+                "X": 294.9968,
+                "Y": -253.31961,
+                "Z": 48.155205
+              },
+              "Direction": {
+                "X": 0.90567994,
+                "Y": 0.40174314,
+                "Z": -0.11848065
+              }
+            }
+          },
+          {
+            "Key": "1.4873022",
+            "Value": {
+              "CenterPosition": {
+                "X": 290.77283,
+                "Y": -211.33661,
+                "Z": 14.383465
+              },
+              "Position": {
+                "X": 317.94867,
+                "Y": -238.60748,
+                "Z": 46.286026
+              },
+              "Direction": {
+                "X": 0.79669225,
+                "Y": 0.59938455,
+                "Z": -0.043444823
+              }
+            }
+          },
+          {
+            "Key": "1.4893023",
+            "Value": {
+              "CenterPosition": {
+                "X": 310.47055,
+                "Y": -196.60991,
+                "Z": 13.698956
+              },
+              "Position": {
+                "X": 339.8512,
+                "Y": -222.12408,
+                "Z": 45.09649
+              },
+              "Direction": {
+                "X": 0.79669225,
+                "Y": 0.59938455,
+                "Z": -0.043444823
+              }
+            }
+          },
+          {
+            "Key": "1.4913024",
+            "Value": {
+              "CenterPosition": {
+                "X": 329.10516,
+                "Y": -180.49039,
+                "Z": 13.607544
+              },
+              "Position": {
+                "X": 360.53738,
+                "Y": -203.99338,
+                "Z": 44.585358
+              },
+              "Direction": {
+                "X": 0.79669225,
+                "Y": 0.59938455,
+                "Z": -0.043444823
+              }
+            }
+          },
+          {
+            "Key": "1.4933025",
+            "Value": {
+              "CenterPosition": {
+                "X": 346.55786,
+                "Y": -163.0925,
+                "Z": 14.100403
+              },
+              "Position": {
+                "X": 379.85938,
+                "Y": -184.35141,
+                "Z": 44.74462
+              },
+              "Direction": {
+                "X": 0.6456549,
+                "Y": 0.76048446,
+                "Z": 0.029339861
+              }
+            }
+          },
+          {
+            "Key": "1.4953026",
+            "Value": {
+              "CenterPosition": {
+                "X": 362.72394,
+                "Y": -144.5394,
+                "Z": 15.163578
+              },
+              "Position": {
+                "X": 397.6865,
+                "Y": -163.34598,
+                "Z": 45.559822
+              },
+              "Direction": {
+                "X": 0.6456549,
+                "Y": 0.76048446,
+                "Z": 0.029339861
+              }
+            }
+          },
+          {
+            "Key": "1.4973027",
+            "Value": {
+              "CenterPosition": {
+                "X": 377.51068,
+                "Y": -124.96438,
+                "Z": 16.777855
+              },
+              "Position": {
+                "X": 413.9034,
+                "Y": -141.13803,
+                "Z": 47.010002
+              },
+              "Direction": {
+                "X": 0.6456549,
+                "Y": 0.76048446,
+                "Z": 0.029339861
+              }
+            }
+          },
+          {
+            "Key": "1.4993027",
+            "Value": {
+              "CenterPosition": {
+                "X": 390.84494,
+                "Y": -104.50122,
+                "Z": 18.921032
+              },
+              "Position": {
+                "X": 428.4184,
+                "Y": -117.89029,
+                "Z": 49.070137
+              },
+              "Direction": {
+                "X": 0.30335385,
+                "Y": 0.9253615,
+                "Z": -0.07799933
+              }
+            }
+          },
+          {
+            "Key": "1.5013028",
+            "Value": {
+              "CenterPosition": {
+                "X": 397.4915,
+                "Y": -80.29725,
+                "Z": 15.881073
+              },
+              "Position": {
+                "X": 436.0465,
+                "Y": -91.26402,
+                "Z": 45.76818
+              },
+              "Direction": {
+                "X": 0.30335385,
+                "Y": 0.9253615,
+                "Z": -0.07799933
+              }
+            }
+          },
+          {
+            "Key": "1.5033029",
+            "Value": {
+              "CenterPosition": {
+                "X": 399.87985,
+                "Y": -53.86858,
+                "Z": 10.590321
+              },
+              "Position": {
+                "X": 439.23236,
+                "Y": -62.60803,
+                "Z": 40.170753
+              },
+              "Direction": {
+                "X": 0.30335385,
+                "Y": 0.9253615,
+                "Z": -0.07799933
+              }
+            }
+          },
+          {
+            "Key": "1.505303",
+            "Value": {
+              "CenterPosition": {
+                "X": 400.74466,
+                "Y": -26.93842,
+                "Z": 6.190254
+              },
+              "Position": {
+                "X": 440.68515,
+                "Y": -33.416348,
+                "Z": 35.563614
+              },
+              "Direction": {
+                "X": -0.010903802,
+                "Y": 0.9910711,
+                "Z": -0.119955316
+              }
+            }
+          },
+          {
+            "Key": "1.5073031",
+            "Value": {
+              "CenterPosition": {
+                "X": 400.04327,
+                "Y": 0.35912132,
+                "Z": 2.716648
+              },
+              "Position": {
+                "X": 440.36267,
+                "Y": -3.8464384,
+                "Z": 31.985367
+              },
+              "Direction": {
+                "X": -0.010903802,
+                "Y": 0.9910711,
+                "Z": -0.119955316
+              }
+            }
+          },
+          {
+            "Key": "1.5093032",
+            "Value": {
+              "CenterPosition": {
+                "X": 397.74307,
+                "Y": 27.889042,
+                "Z": 0.19878006
+              },
+              "Position": {
+                "X": 438.2351,
+                "Y": 25.943748,
+                "Z": 29.466707
+              },
+              "Direction": {
+                "X": -0.010903802,
+                "Y": 0.9910711,
+                "Z": -0.119955316
+              }
+            }
+          },
+          {
+            "Key": "1.5103033",
+            "Value": {
+              "CenterPosition": {
+                "X": 395.98538,
+                "Y": 41.69776,
+                "Z": -0.69433975
+              },
+              "Position": {
+                "X": 436.48773,
+                "Y": 40.871006,
+                "Z": 28.612219
+              },
+              "Direction": {
+                "X": -0.17577864,
+                "Y": 0.98295546,
+                "Z": -0.020259492
+              }
+            }
+          },
+          {
+            "Key": "1.5113033",
+            "Value": {
+              "CenterPosition": {
+                "X": 393.82028,
+                "Y": 55.511208,
+                "Z": -1.3400002
+              },
+              "Position": {
+                "X": 434.28336,
+                "Y": 55.79148,
+                "Z": 28.031075
+              },
+              "Direction": {
+                "X": -0.17577864,
+                "Y": 0.98295546,
+                "Z": -0.020259492
+              }
+            }
+          },
+          {
+            "Key": "1.5123034",
+            "Value": {
+              "CenterPosition": {
+                "X": 391.2462,
+                "Y": 69.31079,
+                "Z": -1.7366524
+              },
+              "Position": {
+                "X": 431.62128,
+                "Y": 70.68381,
+                "Z": 27.72461
+              },
+              "Direction": {
+                "X": -0.17577864,
+                "Y": 0.98295546,
+                "Z": -0.020259492
+              }
+            }
+          },
+          {
+            "Key": "1.5133034",
+            "Value": {
+              "CenterPosition": {
+                "X": 388.26303,
+                "Y": 83.0764,
+                "Z": -1.8825684
+              },
+              "Position": {
+                "X": 428.5025,
+                "Y": 85.52512,
+                "Z": 27.69427
+              },
+              "Direction": {
+                "X": -0.17577864,
+                "Y": 0.98295546,
+                "Z": -0.020259492
+              }
+            }
+          },
+          {
+            "Key": "1.5143034",
+            "Value": {
+              "CenterPosition": {
+                "X": 384.8701,
+                "Y": 96.7927,
+                "Z": -1.7765808
+              },
+              "Position": {
+                "X": 424.9274,
+                "Y": 100.29764,
+                "Z": 27.940872
+              },
+              "Direction": {
+                "X": -0.17577864,
+                "Y": 0.98295546,
+                "Z": -0.020259492
+              }
+            }
+          },
+          {
+            "Key": "1.5153035",
+            "Value": {
+              "CenterPosition": {
+                "X": 381.0686,
+                "Y": 110.4396,
+                "Z": -1.4181442
+              },
+              "Position": {
+                "X": 420.89853,
+                "Y": 114.97859,
+                "Z": 28.464516
+              },
+              "Direction": {
+                "X": -0.32191476,
+                "Y": 0.9428255,
+                "Z": 0.07025536
+              }
+            }
+          },
+          {
+            "Key": "1.5163035",
+            "Value": {
+              "CenterPosition": {
+                "X": 376.86047,
+                "Y": 123.99606,
+                "Z": -0.8071823
+              },
+              "Position": {
+                "X": 416.41925,
+                "Y": 129.54443,
+                "Z": 29.264688
+              },
+              "Direction": {
+                "X": -0.32191476,
+                "Y": 0.9428255,
+                "Z": 0.07025536
+              }
+            }
+          },
+          {
+            "Key": "1.5173036",
+            "Value": {
+              "CenterPosition": {
+                "X": 372.2469,
+                "Y": 137.44704,
+                "Z": 0.056419373
+              },
+              "Position": {
+                "X": 411.4922,
+                "Y": 143.97786,
+                "Z": 30.340992
+              },
+              "Direction": {
+                "X": -0.32191476,
+                "Y": 0.9428255,
+                "Z": 0.07025536
+              }
+            }
+          },
+          {
+            "Key": "1.5183036",
+            "Value": {
+              "CenterPosition": {
+                "X": 367.2313,
+                "Y": 150.77182,
+                "Z": 1.1717834
+              },
+              "Position": {
+                "X": 406.12238,
+                "Y": 158.25583,
+                "Z": 31.691822
+              },
+              "Direction": {
+                "X": -0.32191476,
+                "Y": 0.9428255,
+                "Z": 0.07025536
+              }
+            }
+          },
+          {
+            "Key": "1.5193037",
+            "Value": {
+              "CenterPosition": {
+                "X": 361.81784,
+                "Y": 163.95018,
+                "Z": 2.537674
+              },
+              "Position": {
+                "X": 400.3158,
+                "Y": 172.35576,
+                "Z": 33.31517
+              },
+              "Direction": {
+                "X": -0.32191476,
+                "Y": 0.9428255,
+                "Z": 0.07025536
+              }
+            }
+          },
+          {
+            "Key": "1.5203037",
+            "Value": {
+              "CenterPosition": {
+                "X": 356.0098,
+                "Y": 176.96675,
+                "Z": 4.1530113
+              },
+              "Position": {
+                "X": 394.0773,
+                "Y": 186.26048,
+                "Z": 35.209255
+              },
+              "Direction": {
+                "X": -0.45945427,
+                "Y": 0.8727072,
+                "Z": 0.15732862
+              }
+            }
+          },
+          {
+            "Key": "1.5213038",
+            "Value": {
+              "CenterPosition": {
+                "X": 349.81235,
+                "Y": 189.80144,
+                "Z": 6.015373
+              },
+              "Position": {
+                "X": 387.41412,
+                "Y": 199.94783,
+                "Z": 37.37068
+              },
+              "Direction": {
+                "X": -0.45945427,
+                "Y": 0.8727072,
+                "Z": 0.15732862
+              }
+            }
+          },
+          {
+            "Key": "1.5223038",
+            "Value": {
+              "CenterPosition": {
+                "X": 343.2323,
+                "Y": 202.43408,
+                "Z": 8.122055
+              },
+              "Position": {
+                "X": 380.33508,
+                "Y": 213.39569,
+                "Z": 39.795807
+              },
+              "Direction": {
+                "X": -0.45945427,
+                "Y": 0.8727072,
+                "Z": 0.15732862
+              }
+            }
+          },
+          {
+            "Key": "1.5233039",
+            "Value": {
+              "CenterPosition": {
+                "X": 336.2744,
+                "Y": 214.8501,
+                "Z": 10.470921
+              },
+              "Position": {
+                "X": 372.8468,
+                "Y": 226.58798,
+                "Z": 42.48157
+              },
+              "Direction": {
+                "X": -0.45945427,
+                "Y": 0.8727072,
+                "Z": 0.15732862
+              }
+            }
+          },
+          {
+            "Key": "1.5243039",
+            "Value": {
+              "CenterPosition": {
+                "X": 328.9464,
+                "Y": 227.0301,
+                "Z": 13.058365
+              },
+              "Position": {
+                "X": 364.95923,
+                "Y": 239.50359,
+                "Z": 45.42331
+              },
+              "Direction": {
+                "X": -0.45945427,
+                "Y": 0.8727072,
+                "Z": 0.15732862
+              }
+            }
+          },
+          {
+            "Key": "1.525304",
+            "Value": {
+              "CenterPosition": {
+                "X": 321.25708,
+                "Y": 238.95486,
+                "Z": 15.88018
+              },
+              "Position": {
+                "X": 356.68332,
+                "Y": 252.12184,
+                "Z": 48.615677
+              },
+              "Direction": {
+                "X": -0.55821776,
+                "Y": 0.79931086,
+                "Z": 0.22109675
+              }
+            }
+          },
+          {
+            "Key": "1.526304",
+            "Value": {
+              "CenterPosition": {
+                "X": 313.21283,
+                "Y": 250.6103,
+                "Z": 18.932953
+              },
+              "Position": {
+                "X": 348.0276,
+                "Y": 264.42752,
+                "Z": 52.05419
+              },
+              "Direction": {
+                "X": -0.55821776,
+                "Y": 0.79931086,
+                "Z": 0.22109675
+              }
+            }
+          },
+          {
+            "Key": "1.5266826",
+            "Value": {
+              "CenterPosition": {
+                "X": 310.07635,
+                "Y": 254.94937,
+                "Z": 20.14809
+              },
+              "Position": {
+                "X": 344.6536,
+                "Y": 269.0012,
+                "Z": 53.4191
+              },
+              "Direction": {
+                "X": -0.55821776,
+                "Y": 0.79931086,
+                "Z": 0.22109675
+              }
+            }
+          }
+        ],
+        "BoneName": "Bip001-R-Hand"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Attack",
+    "Name": "xxAnimNotifyState_Attack_3",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Attack'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "Shape": "EAttackShape::AttackBoxComponent",
+      "bUseAttackBoxComponent": true,
+      "AttackBoxComponentGroup": "EAttackBoxGroup::Group2",
+      "Size": {
+        "X": 200.0,
+        "Y": 100.0,
+        "Z": 50.0
+      },
+      "BoneName": "Bip001-R-Forearm",
+      "RelativeOffset": {
+        "X": 0.0,
+        "Y": 41.648937,
+        "Z": 0.0
+      },
+      "RelativeRotatoion": {
+        "Pitch": 0.0,
+        "Yaw": -9.813408,
+        "Roll": 0.0
+      },
+      "Group": "EAttackNotifyGroup::Group1",
+      "bEditGroupInterval": true,
+      "AttackIntervalDesc": "그룹1+컴포넌트, 1회 공격",
+      "bBakingAttackComponent": true,
+      "PostCleaningAttackInfo": {
+        "AttackBoxList": [
+          {
+            "Key": "1.475302",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 204.72757,
+                "Y": -124.562775,
+                "Z": 117.43782
+              },
+              "LocalRotator": {
+                "Pitch": -33.847168,
+                "Yaw": -91.6304,
+                "Roll": -139.96304
+              }
+            }
+          },
+          {
+            "Key": "1.4833024",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 239.4095,
+                "Y": -96.113266,
+                "Z": 121.16471
+              },
+              "LocalRotator": {
+                "Pitch": -38.202026,
+                "Yaw": -69.9624,
+                "Roll": -146.86296
+              }
+            }
+          },
+          {
+            "Key": "1.4913027",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 267.65793,
+                "Y": -61.136383,
+                "Z": 128.70004
+              },
+              "LocalRotator": {
+                "Pitch": -40.45227,
+                "Yaw": -47.541138,
+                "Roll": -154.87851
+              }
+            }
+          },
+          {
+            "Key": "1.4993031",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 288.00073,
+                "Y": -21.892181,
+                "Z": 139.6865
+              },
+              "LocalRotator": {
+                "Pitch": -40.619812,
+                "Yaw": -25.500305,
+                "Roll": -162.75188
+              }
+            }
+          },
+          {
+            "Key": "1.5073035",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 283.51505,
+                "Y": 37.498077,
+                "Z": 134.71294
+              },
+              "LocalRotator": {
+                "Pitch": -45.1644,
+                "Yaw": -4.7115784,
+                "Roll": -170.92361
+              }
+            }
+          },
+          {
+            "Key": "1.5143038",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 267.48587,
+                "Y": 90.476074,
+                "Z": 135.44427
+              },
+              "LocalRotator": {
+                "Pitch": -47.15674,
+                "Yaw": 15.453326,
+                "Roll": 179.85434
+              }
+            }
+          },
+          {
+            "Key": "1.5213041",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 241.59839,
+                "Y": 139.80186,
+                "Z": 142.57314
+              },
+              "LocalRotator": {
+                "Pitch": -46.45697,
+                "Yaw": 36.07874,
+                "Roll": 170.35684
+              }
+            }
+          },
+          {
+            "Key": "1.526683",
+            "Value": {
+              "LocalCenterPos": {
+                "X": 215.65497,
+                "Y": 173.38087,
+                "Z": 152.09782
+              },
+              "LocalRotator": {
+                "Pitch": -44.24063,
+                "Yaw": 51.157402,
+                "Roll": 164.05469
+              }
+            }
+          }
+        ],
+        "Bounds": {
+          "Min": {
+            "X": 39.47525,
+            "Y": -360.2372,
+            "Z": -63.23372
+          },
+          "Max": {
+            "X": 472.73907,
+            "Y": 359.7905,
+            "Z": 342.61224
+          },
+          "IsValid": 1
+        }
+      },
+      "BakingAttackDirections": {
+        "AttackDirections": [
+          {
+            "Key": "1.475302",
+            "Value": {
+              "CenterPosition": {
+                "X": 172.42825,
+                "Y": -138.57205,
+                "Z": 139.68927
+              },
+              "Position": {
+                "X": 140.88385,
+                "Y": -116.34356,
+                "Z": 107.8955
+              },
+              "Direction": {
+                "X": 0.9511078,
+                "Y": 0.29110998,
+                "Z": -0.036069535
+              }
+            }
+          },
+          {
+            "Key": "1.4793022",
+            "Value": {
+              "CenterPosition": {
+                "X": 192.1326,
+                "Y": -131.10094,
+                "Z": 138.92845
+              },
+              "Position": {
+                "X": 158.83217,
+                "Y": -112.420746,
+                "Z": 106.64642
+              },
+              "Direction": {
+                "X": 0.9511078,
+                "Y": 0.29110998,
+                "Z": -0.036069535
+              }
+            }
+          },
+          {
+            "Key": "1.4833024",
+            "Value": {
+              "CenterPosition": {
+                "X": 211.4695,
+                "Y": -121.29054,
+                "Z": 139.05588
+              },
+              "Position": {
+                "X": 176.91998,
+                "Y": -106.33,
+                "Z": 106.15433
+              },
+              "Direction": {
+                "X": 0.9511078,
+                "Y": 0.29110998,
+                "Z": -0.036069535
+              }
+            }
+          },
+          {
+            "Key": "1.4873025",
+            "Value": {
+              "CenterPosition": {
+                "X": 230.06943,
+                "Y": -109.22583,
+                "Z": 140.12367
+              },
+              "Position": {
+                "X": 194.79149,
+                "Y": -98.07288,
+                "Z": 106.492195
+              },
+              "Direction": {
+                "X": 0.9511078,
+                "Y": 0.29110998,
+                "Z": -0.036069535
+              }
+            }
+          },
+          {
+            "Key": "1.4903027",
+            "Value": {
+              "CenterPosition": {
+                "X": 243.32349,
+                "Y": -98.78569,
+                "Z": 141.55652
+              },
+              "Position": {
+                "X": 207.83986,
+                "Y": -90.4962,
+                "Z": 107.31918
+              },
+              "Direction": {
+                "X": 0.6811842,
+                "Y": 0.66769063,
+                "Z": 0.051770855
+              }
+            }
+          },
+          {
+            "Key": "1.4933028",
+            "Value": {
+              "CenterPosition": {
+                "X": 255.82993,
+                "Y": -87.24347,
+                "Z": 143.53085
+              },
+              "Position": {
+                "X": 220.42532,
+                "Y": -81.78699,
+                "Z": 108.64907
+              },
+              "Direction": {
+                "X": 0.6811842,
+                "Y": 0.66769063,
+                "Z": 0.051770855
+              }
+            }
+          },
+          {
+            "Key": "1.496303",
+            "Value": {
+              "CenterPosition": {
+                "X": 267.468,
+                "Y": -74.69681,
+                "Z": 146.0376
+              },
+              "Position": {
+                "X": 232.41562,
+                "Y": -72.01198,
+                "Z": 110.483086
+              },
+              "Direction": {
+                "X": 0.6811842,
+                "Y": 0.66769063,
+                "Z": 0.051770855
+              }
+            }
+          },
+          {
+            "Key": "1.4993031",
+            "Value": {
+              "CenterPosition": {
+                "X": 278.13318,
+                "Y": -61.254566,
+                "Z": 149.0602
+              },
+              "Position": {
+                "X": 243.69109,
+                "Y": -61.251904,
+                "Z": 112.81465
+              },
+              "Direction": {
+                "X": 0.6811842,
+                "Y": 0.66769063,
+                "Z": 0.051770855
+              }
+            }
+          },
+          {
+            "Key": "1.5023032",
+            "Value": {
+              "CenterPosition": {
+                "X": 282.96506,
+                "Y": -41.396275,
+                "Z": 145.87494
+              },
+              "Position": {
+                "X": 248.14342,
+                "Y": -43.29825,
+                "Z": 110.0443
+              },
+              "Direction": {
+                "X": 0.6811842,
+                "Y": 0.66769063,
+                "Z": 0.051770855
+              }
+            }
+          },
+          {
+            "Key": "1.5053034",
+            "Value": {
+              "CenterPosition": {
+                "X": 284.66516,
+                "Y": -19.076725,
+                "Z": 141.60452
+              },
+              "Position": {
+                "X": 249.32884,
+                "Y": -22.791533,
+                "Z": 106.42579
+              },
+              "Direction": {
+                "X": -0.057742685,
+                "Y": 0.98791575,
+                "Z": -0.10273357
+              }
+            }
+          },
+          {
+            "Key": "1.5083035",
+            "Value": {
+              "CenterPosition": {
+                "X": 284.52478,
+                "Y": 3.8017693,
+                "Z": 138.39824
+              },
+              "Position": {
+                "X": 248.92163,
+                "Y": -1.8327546,
+                "Z": 103.74763
+              },
+              "Direction": {
+                "X": -0.057742685,
+                "Y": 0.98791575,
+                "Z": -0.10273357
+              }
+            }
+          },
+          {
+            "Key": "1.5113037",
+            "Value": {
+              "CenterPosition": {
+                "X": 282.48453,
+                "Y": 27.011356,
+                "Z": 136.30821
+              },
+              "Position": {
+                "X": 246.86946,
+                "Y": 19.387154,
+                "Z": 102.05275
+              },
+              "Direction": {
+                "X": -0.057742685,
+                "Y": 0.98791575,
+                "Z": -0.10273357
+              }
+            }
+          },
+          {
+            "Key": "1.5143038",
+            "Value": {
+              "CenterPosition": {
+                "X": 278.50848,
+                "Y": 50.312283,
+                "Z": 135.37227
+              },
+              "Position": {
+                "X": 243.13925,
+                "Y": 40.666443,
+                "Z": 101.372635
+              },
+              "Direction": {
+                "X": -0.057742685,
+                "Y": 0.98791575,
+                "Z": -0.10273357
+              }
+            }
+          },
+          {
+            "Key": "1.517304",
+            "Value": {
+              "CenterPosition": {
+                "X": 272.58588,
+                "Y": 73.45676,
+                "Z": 135.61206
+              },
+              "Position": {
+                "X": 237.71867,
+                "Y": 61.795696,
+                "Z": 101.72554
+              },
+              "Direction": {
+                "X": -0.35790595,
+                "Y": 0.9241842,
+                "Z": 0.08560869
+              }
+            }
+          },
+          {
+            "Key": "1.5203041",
+            "Value": {
+              "CenterPosition": {
+                "X": 264.7321,
+                "Y": 96.19371,
+                "Z": 137.0327
+              },
+              "Position": {
+                "X": 230.61716,
+                "Y": 82.56184,
+                "Z": 103.11601
+              },
+              "Direction": {
+                "X": -0.35790595,
+                "Y": 0.9241842,
+                "Z": 0.08560869
+              }
+            }
+          },
+          {
+            "Key": "1.5233042",
+            "Value": {
+              "CenterPosition": {
+                "X": 254.98863,
+                "Y": 118.273544,
+                "Z": 139.62213
+              },
+              "Position": {
+                "X": 221.86609,
+                "Y": 102.751884,
+                "Z": 105.53439
+              },
+              "Direction": {
+                "X": -0.35790595,
+                "Y": 0.9241842,
+                "Z": 0.08560869
+              }
+            }
+          },
+          {
+            "Key": "1.5263044",
+            "Value": {
+              "CenterPosition": {
+                "X": 243.42368,
+                "Y": 139.45088,
+                "Z": 143.35133
+              },
+              "Position": {
+                "X": 211.51953,
+                "Y": 122.15526,
+                "Z": 108.95678
+              },
+              "Direction": {
+                "X": -0.35790595,
+                "Y": 0.9241842,
+                "Z": 0.08560869
+              }
+            }
+          },
+          {
+            "Key": "1.526683",
+            "Value": {
+              "CenterPosition": {
+                "X": 241.83948,
+                "Y": 142.047,
+                "Z": 143.90077
+              },
+              "Position": {
+                "X": 210.10426,
+                "Y": 124.53742,
+                "Z": 109.45822
+              },
+              "Direction": {
+                "X": -0.5026039,
+                "Y": 0.84597754,
+                "Z": 0.178077
+              }
+            }
+          }
+        ],
+        "BoneName": "Bip001-R-Clavicle"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_CameraMod",
+    "Name": "xxAnimNotifyState_CameraMod_3",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_CameraMod'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "Modifier": {
+        "ObjectName": "xxCameraMod_Shake'AC_Yetuga_TurnAtk:xxAnimNotifyState_CameraMod_3.xxCameraMod_Shake_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.30"
+      },
+      "ShowUpType": "EEffectShowUp::ShowAll",
+      "ShowRange": {
+        "ScaleMaxRadius": 1000.0,
+        "ScaleMinRadius": 5000.0
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_CounterWeak",
+    "Name": "xxAnimNotifyState_CounterWeak_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_CounterWeak'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "bUseActiveMonsterVariationTypes": true,
+      "ActiveMonsterVariationTypes": [
+        "EMonsterVariationType::Variation1"
+      ]
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_DamagerReaction",
+    "Name": "xxAnimNotifyState_DamagerReaction_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_DamagerReaction'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "DamagerReactionTableSelect": {
+        "DamagerReactionTag": {
+          "DataTable": {
+            "ObjectName": "DataTable'DamagerReaction_Common'",
+            "ObjectPath": "BBQ/Content/_Common/Constants/DamagerReaction/DamagerReaction_Common.0"
+          },
+          "RowName": "강인도100등급+"
+        }
+      },
+      "bUseActiveMonsterVariationTypes": true,
+      "ActiveMonsterVariationTypes": [
+        "EMonsterVariationType::Variation1"
+      ]
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_LookAt",
+    "Name": "xxAnimNotifyState_LookAt_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_LookAt'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "BeginLookAt": "ELookAtNotifyOpt::UnlookAt",
+      "EndLookAt": "ELookAtNotifyOpt::LookAt"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_LookAt",
+    "Name": "xxAnimNotifyState_LookAt_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_LookAt'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_MoveTo",
+    "Name": "xxAnimNotifyState_MoveTo_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_MoveTo'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "MoveToType": "EAMoveToType::OnlyRotation",
+      "TotalSelectTargetTraceInfo": {
+        "bUseSelect": true,
+        "TargetSelectionTypes": [
+          "ETargetSelectionType::UseSkillTarget",
+          "ETargetSelectionType::LockOnTarget"
+        ],
+        "FindLocationInfo": {
+          "FindRandomLocationInfo": {
+            "bUseEqualSpaceDegreeAndRand": true
+          }
+        }
+      },
+      "RotatorInfo": {
+        "CustomRotatorMethod": "ECustomMoveRotatorMethod::LookAtTraceTarget",
+        "LootAtTraceTarget": {
+          "AnglePerSecond": 5.0,
+          "CustomTraceMaxAngle": 180,
+          "CustomTraceMinAngle": -180,
+          "CustomMaxAngle": 50,
+          "CustomMinAngle": -50
+        }
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_MoveTo",
+    "Name": "xxAnimNotifyState_MoveTo_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_MoveTo'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "MoveToType": "EAMoveToType::OnlyRotation",
+      "TotalSelectTargetTraceInfo": {
+        "bUseSelect": true,
+        "TargetSelectionTypes": [
+          "ETargetSelectionType::UseSkillTarget",
+          "ETargetSelectionType::LockOnTarget"
+        ],
+        "FindLocationInfo": {
+          "FindRandomLocationInfo": {
+            "bUseEqualSpaceDegreeAndRand": true
+          }
+        }
+      },
+      "RotatorInfo": {
+        "CustomRotatorMethod": "ECustomMoveRotatorMethod::LookAtTraceTarget",
+        "LootAtTraceTarget": {
+          "AnglePerSecond": 10.0,
+          "CustomTraceMaxAngle": 180,
+          "CustomTraceMinAngle": -180,
+          "CustomMaxAngle": 90,
+          "CustomMinAngle": -90
+        }
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_MoveTo",
+    "Name": "xxAnimNotifyState_MoveTo_4",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_MoveTo'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "TotalSelectTargetTraceInfo": {
+        "bUseSelect": true,
+        "TargetSelectionTypes": [
+          "ETargetSelectionType::LockOnTarget",
+          "ETargetSelectionType::UseSkillTarget"
+        ],
+        "FindLocationInfo": {
+          "FindRandomLocationInfo": {
+            "bUseEqualSpaceDegreeAndRand": true
+          }
+        }
+      },
+      "PositionInfo": {
+        "UsePositionData": {
+          "DestPosition": {
+            "X": 500.0,
+            "Y": 0.0,
+            "Z": 0.0
+          }
+        },
+        "ToralTargetTraceMoveData": {
+          "TargetTraceMaxLimitVec": {
+            "X": 600.0,
+            "Y": 0.0,
+            "Z": 0.0
+          },
+          "TargetTraceMoveOffestVec": {
+            "X": 250.0,
+            "Y": 0.0,
+            "Z": 0.0
+          },
+          "bUseRadius": false,
+          "bUseTargetRotator": true
+        },
+        "bApplyCurrentRotatorOnMoveDir": true
+      },
+      "RotatorInfo": {
+        "CustomRotatorMethod": "ECustomMoveRotatorMethod::LookAtTraceTarget",
+        "bShortestPath": true,
+        "LootAtTraceTarget": {
+          "AnglePerSecond": 15.0,
+          "CustomTraceMaxAngle": 360,
+          "CustomTraceMinAngle": -360
+        }
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Boss_Yetuga_breath_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Yetuga/FP_Boss_Yetuga_breath_01.16"
+        },
+        "RelativeLocation": {
+          "X": 14.485176,
+          "Y": -2.6518764,
+          "Z": -0.7388173
+        },
+        "RelativeRotation": {
+          "Pitch": 0.0,
+          "Yaw": -4.2688671E-07,
+          "Roll": 0.0
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bone_Jaw_01",
+        "TranslucencySortPriority": 1
+      },
+      "bOnlyStartAttach": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Boss_Yetuga_Footstep_Strong_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Yetuga/FP_Boss_Yetuga_Footstep_Strong_01.82"
+        },
+        "RelativeRotation": {
+          "Pitch": -1.6694279,
+          "Yaw": -5.756721,
+          "Roll": 2.7126148
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-R-Toe1",
+        "TranslucencySortPriority": 1
+      },
+      "bOnlyStartAttach": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_10",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Boss_Yetuga_HandDust_Drag_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Yetuga/FP_Boss_Yetuga_HandDust_Drag_01.163"
+        },
+        "RelativeLocation": {
+          "X": -49.079494,
+          "Y": 47.420685,
+          "Z": -0.79929745
+        },
+        "RelativeRotation": {
+          "Pitch": 8.396836,
+          "Yaw": -171.39757,
+          "Roll": 90.143295
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-L-Toe1",
+        "TranslucencySortPriority": 1
+      },
+      "bDestroyOnNotifyEnd": true,
+      "bDestroyOnNotifyEndDeactived": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_12",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Boss_Yetuga_HandDust_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Yetuga/FP_Boss_Yetuga_HandDust_01.83"
+        },
+        "RelativeLocation": {
+          "X": 44.557865,
+          "Y": 0.0006523133,
+          "Z": -0.000110626235
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-R-Hand",
+        "bAbsoluteRotation": false,
+        "TranslucencySortPriority": 1
+      },
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_17",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Boss_Yetuga_Footstep_dash_weak_02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Yetuga/FP_Boss_Yetuga_Footstep_dash_weak_02.134"
+        },
+        "RelativeLocation": {
+          "X": -11.772556,
+          "Y": -6.184701,
+          "Z": 0.27981952
+        },
+        "RelativeRotation": {
+          "Pitch": -79.777885,
+          "Yaw": -3.203253,
+          "Roll": -88.51595
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-L-Toe0",
+        "TranslucencySortPriority": 1
+      },
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Boss_Yetuga_Footstep_dash_weak_02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Yetuga/FP_Boss_Yetuga_Footstep_dash_weak_02.134"
+        },
+        "RelativeLocation": {
+          "X": -11.706497,
+          "Y": -5.9797544,
+          "Z": -17.007214
+        },
+        "RelativeRotation": {
+          "Pitch": 59.393192,
+          "Yaw": 10.960109,
+          "Roll": -84.962524
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-R-Toe0",
+        "TranslucencySortPriority": 1
+      },
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_20",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Boss_Yetuga_Slashdust_HalfCircle_Right_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Yetuga/FP_Boss_Yetuga_Slashdust_HalfCircle_Right_01.268"
+        },
+        "RelativeLocation": {
+          "X": 182.72427,
+          "Y": -6.3110886,
+          "Z": 0.00018310547
+        },
+        "RelativeRotation": {
+          "Pitch": 0.0,
+          "Yaw": 21.111797,
+          "Roll": 0.0
+        },
+        "bSpawnOnFloor": true,
+        "TranslucencySortPriority": 1
+      },
+      "bOnlyStartAttach": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_3",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Boss_Yetuga_Footstep_Normal_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Yetuga/FP_Boss_Yetuga_Footstep_Normal_01.82"
+        },
+        "RelativeRotation": {
+          "Pitch": -1.6694279,
+          "Yaw": -5.7567196,
+          "Roll": 2.7125773
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-R-Toe1",
+        "TranslucencySortPriority": 1
+      },
+      "bOnlyStartAttach": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_4",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Boss_Yetuga_Footstep_Normal_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Yetuga/FP_Boss_Yetuga_Footstep_Normal_01.82"
+        },
+        "RelativeLocation": {
+          "X": -46.042942,
+          "Y": 28.990162,
+          "Z": 2.8537445
+        },
+        "RelativeRotation": {
+          "Pitch": -1.6694348,
+          "Yaw": -5.7567177,
+          "Roll": 2.7125812
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-R-Toe1",
+        "TranslucencySortPriority": 1
+      },
+      "bOnlyStartAttach": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_5",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Boss_Yetuga_breath_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Yetuga/FP_Boss_Yetuga_breath_01.16"
+        },
+        "RelativeLocation": {
+          "X": 14.485176,
+          "Y": -2.6518764,
+          "Z": -0.7388173
+        },
+        "RelativeRotation": {
+          "Pitch": 0.0,
+          "Yaw": -4.2688671E-07,
+          "Roll": 0.0
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bone_Jaw_01",
+        "TranslucencySortPriority": 1
+      },
+      "bOnlyStartAttach": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_6",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Boss_Yetuga_Footstep_Strong_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Yetuga/FP_Boss_Yetuga_Footstep_Strong_01.82"
+        },
+        "RelativeRotation": {
+          "Pitch": 1.3458489,
+          "Yaw": -0.2926941,
+          "Roll": 1.7032905
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-L-Toe1",
+        "TranslucencySortPriority": 1
+      },
+      "bOnlyStartAttach": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_7",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Boss_Yetuga_Footstep_Strong_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Yetuga/FP_Boss_Yetuga_Footstep_Strong_01.82"
+        },
+        "RelativeRotation": {
+          "Pitch": 2.1381822,
+          "Yaw": -106.00575,
+          "Roll": 1.6934568
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-L-Toe1",
+        "TranslucencySortPriority": 1
+      },
+      "bOnlyStartAttach": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_Particle",
+    "Name": "xxAnimNotifyState_Particle_9",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_Particle'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "bConvert_bWorldOwner": true,
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'FP_Boss_Yetuga_Footstep_Strong_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Yetuga/FP_Boss_Yetuga_Footstep_Strong_01.82"
+        },
+        "RelativeLocation": {
+          "X": -12.032822,
+          "Y": 0.030944824,
+          "Z": -8.207906
+        },
+        "RelativeRotation": {
+          "Pitch": -2.2450562,
+          "Yaw": 26.392744,
+          "Roll": 1.5487086
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-L-Toe1",
+        "TranslucencySortPriority": 1
+      },
+      "bOnlyStartAttach": true,
+      "Version": "AnimNotifyStateParticleVersion::ParticleMode"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_SkillEventTag",
+    "Name": "xxAnimNotifyState_SkillEventTag_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_SkillEventTag'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "Index": "ESimpleSkillEventIndex::Index1",
+      "bUseActiveMonsterVariationTypes": true,
+      "ActiveMonsterVariationTypes": [
+        "EMonsterVariationType::Variation1"
+      ]
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_SurfaceTrailDeepSnow",
+    "Name": "xxAnimNotifyState_SurfaceTrailDeepSnow_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_SurfaceTrailDeepSnow'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Yetuga_TurnAtk'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.0"
+    },
+    "Properties": {
+      "OverrideTrailMaterial": {
+        "AssetPathName": "/Game/BaseMaterials/VT_SnowField/M_WriteSnow/MI/MI_WriteSnowField_03_01.MI_WriteSnowField_03_01",
+        "SubPathString": ""
+      },
+      "CreateCount": 6,
+      "Intensity": 1.0,
+      "AttachSocketName": "Root",
+      "RelativeLocation": {
+        "X": 286.69247,
+        "Y": 40.5487,
+        "Z": -0.0026855469
+      },
+      "RelativeRotation": {
+        "Pitch": 0.0,
+        "Yaw": 58.10152,
+        "Roll": 0.0
+      },
+      "Scale": {
+        "X": 1.8,
+        "Y": 1.8,
+        "Z": 1.8
+      },
+      "AttachSocketTransform": {
+        "Rotation": {
+          "X": -3.0616165E-17,
+          "Y": 0.0,
+          "Z": 0.0,
+          "W": 0.99999976,
+          "IsNormalized": true,
+          "Size": 0.99999976,
+          "SizeSquared": 0.9999995
+        }
+      }
+    }
+  },
+  {
+    "Type": "xxCameraMod_Shake",
+    "Name": "xxCameraMod_Shake_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxCameraMod_Shake'",
+    "Outer": {
+      "ObjectName": "xxAnimNotifyState_CameraMod'AC_Yetuga_TurnAtk:xxAnimNotifyState_CameraMod_3'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/AC_Yetuga_TurnAtk.7"
+    },
+    "Properties": {
+      "CameraShakeScale": 0.0,
+      "LocOscillation": {
+        "X": {
+          "Amplitude": 0.0
+        },
+        "Y": {
+          "Amplitude": 300.0,
+          "Frequency": 12.0,
+          "InitialOffset": "EOO_OffsetZero"
+        },
+        "Z": {
+          "Amplitude": 0.0,
+          "Frequency": 18.0,
+          "InitialOffset": "EOO_OffsetZero"
+        }
+      },
+      "FinalScale": 0.1,
+      "bDivideInHalf": false,
+      "FadeIn": {
+        "BlendTime": 0.0
+      },
+      "FadeOut": {
+        "CustomCurve": {
+          "ObjectName": "CurveFloat'FadeInOut'",
+          "ObjectPath": "BBQ/Content/_Common/Camera/Curve/FadeInOut.0"
+        },
+        "BlendTime": 0.3,
+        "BlendOption": "EAlphaBlendOption::QuadraticInOut"
+      }
+    }
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "Type": "xxSkillInfo",
+    "Name": "SI_Yetuga_Armageddon",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SI_Yetuga_Armageddon",
+    "Properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "007F2646461BF7B74A67ED86FCDA5DA3",
+        "SourceString": "예투가 아마겟돈",
+        "LocalizedString": "예투가 아마겟돈"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.SB_Yetuga_Armageddon_C",
+        "SubPathString": ""
+      },
+      "SkillInputCondition": {
+        "ObjectName": "xxStateInputConditionSelfStatus'SI_Yetuga_Armageddon:xxStateInputConditionSelfStatus_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SI_Yetuga_Armageddon.1"
+      },
+      "EndCooltime": 240.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_Proto_Armageddon_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SD_Yetuga_Proto_Armageddon_01.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_Proto_Armageddon_02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SD_Yetuga_Proto_Armageddon_02.0"
+        }
+      ],
+      "SpellInfoList": [
+        {
+          "SpellInfo": {
+            "ObjectName": "xxSpellInfo'SP_Yetuga_Armageddon_PartOff'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SP_Yetuga_Armageddon_PartOff.2"
+          },
+          "DurationMS": 30000
+        },
+        {
+          "SpellInfo": {
+            "ObjectName": "xxSpellInfo'SP_Yetuga_Armageddon_PartOn'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SP_Yetuga_Armageddon_PartOn.1"
+          },
+          "DurationMS": 3000
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxStateInputConditionSelfStatus",
+    "Name": "xxStateInputConditionSelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxStateInputConditionSelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSkillInfo'SI_Yetuga_Armageddon'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SI_Yetuga_Armageddon.0"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::Stamina",
+        "CompareOperator": "ECompareOperator::GreaterThanOrEqualTo",
+        "RatioValue": 0.5,
+        "Value": 1
+      }
+    }
+  }
+]

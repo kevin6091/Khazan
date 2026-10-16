@@ -1,0 +1,67 @@
+[
+  {
+    "Type": "xxSpellFunc_MaterialParam",
+    "Name": "xxSpellFunc_MaterialParam_1",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSpellFunc_MaterialParam'",
+    "Outer": {
+      "ObjectName": "xxSpellInfo'SP_Yetuga_PartGroggy_Injuried'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Injuried.2"
+    },
+    "Properties": {
+      "ScalarParamName": "EMaterialParameterNames::PartsDisolve1",
+      "BlendInTime": 1.5
+    }
+  },
+  {
+    "Type": "xxSpellFunc_Particle",
+    "Name": "xxSpellFunc_Particle_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSpellFunc_Particle'",
+    "Outer": {
+      "ObjectName": "xxSpellInfo'SP_Yetuga_PartGroggy_Injuried'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Injuried.2"
+    },
+    "Properties": {
+      "ParticleInfo": {
+        "Particle": {
+          "ObjectName": "ParticleSystem'PP_Bleed_Loop'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Status/PP_Bleed_Loop.36"
+        },
+        "RelativeLocation": {
+          "X": 15.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "RelativeRotation": {
+          "Pitch": -90.0,
+          "Yaw": 0.0,
+          "Roll": 0.0
+        },
+        "bAttached": true,
+        "AttachSocketName": "Bip001-Spine2"
+      }
+    }
+  },
+  {
+    "Type": "xxSpellInfo",
+    "Name": "SP_Yetuga_PartGroggy_Injuried",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSpellInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Injuried",
+    "Properties": {
+      "TargetPolicy": 2,
+      "OverlapLimitPolicy": "EGrSpellOverlapLimitPolicy::NoLimit",
+      "SpellFunctions": [
+        {
+          "ObjectName": "xxSpellFunc_Particle'SP_Yetuga_PartGroggy_Injuried:xxSpellFunc_Particle_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Injuried.1"
+        },
+        {
+          "ObjectName": "xxSpellFunc_MaterialParam'SP_Yetuga_PartGroggy_Injuried:xxSpellFunc_MaterialParam_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Injuried.0"
+        }
+      ]
+    }
+  }
+]

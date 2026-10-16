@@ -1,0 +1,602 @@
+[
+  {
+    "path": "Source/Khazan/Tests/KZCombatEffectPIETest.cpp",
+    "baseline": "daf20550902f229b1ca252b56eba6dc06cb5a67d23ec5cc33c1c2562efebef78",
+    "main_sha256": "338a12507ee0738ee932283effac4e1921d870a3f7bf66b322a503f5855cb636"
+  },
+  {
+    "path": "Source/Khazan/Data/KZCharacterDefinitionData.h",
+    "baseline": "be04a9e2c36564a41e9a383c8aca11316b54f4b58a3449333f3a013f9b9909ed",
+    "main_sha256": "8b3a75d7d3f93360557613a4b3061d8f2e0bcc2e38ebeaeadbf2d40e1d754f6c"
+  },
+  {
+    "path": "Source/Khazan/Character/KZMonster.h",
+    "baseline": "55fc4dae8442e7d1d896eaf930ff55bc58f1492d721754e1e84db48e8cbf38ff",
+    "main_sha256": "376f1e514f9945a0241aa2a940256c5314128c3eb65bc23a7d3a4c481cba6415"
+  },
+  {
+    "path": "Source/Khazan/Character/KZMonster.cpp",
+    "baseline": "69d93c8b8ce45f042557cfa6d9d87ab4e5e6805496f07c7cf7f5b57cdd786e9e",
+    "main_sha256": "12457608951eca7a1cc9d25a91ab95657c13ace41c0af8705e014863c5d22cb7"
+  },
+  {
+    "path": "Source/Khazan/Animation/Notifies/KZAnimNotify_CombatEffect.h",
+    "baseline": "8a959043d7d901d667c6783932fa92cc6dde1fe108768baef62755f7f95b0140",
+    "main_sha256": "7df28f635f2f56ec5d4c9e196aae3fa95ebfc4095ee14df3c8eaec33ca5ec131"
+  },
+  {
+    "path": "Source/Khazan/Animation/Notifies/KZAnimNotify_CombatEffect.cpp",
+    "baseline": "572168b925277a378b165ca712e3393eecff65a636367f53b994b31a3cb8a117",
+    "main_sha256": "de2d3877cca5ab85088a181d668a49981b7c4fd2c531e70865fd082322f9ef2e"
+  },
+  {
+    "path": "Source/Khazan/Ability/KZActionAbility.cpp",
+    "baseline": "966932accffa5c896e01ad9ab7d62b807ebf3c1e4e0e1d33476c800bcc1ad480",
+    "main_sha256": "ef2ecb42a150804ed2494302c5cd8d573ab17ff6ff90722b6bb60648c403275b"
+  },
+  {
+    "path": "Source/Khazan/Ability/MonsterAbility/KZExhaustionAbility.cpp",
+    "baseline": "79b350dc7efba2789680a611559d7c7e2da114ba769958368a9ab09c650ede3c",
+    "main_sha256": "e51b9e16cd2f481e9e176f536d7d93ce43d86f593a6eb80fff3f3d162e9e8c86"
+  },
+  {
+    "path": "Content/Monsters/Yetuga/Data/DA_Character_Yetuga.uasset",
+    "baseline": "fa296ace18196cf34be5b016a9c004798d570b2955c575c3eeff2e0cc841a4d0",
+    "main_sha256": "0adc54c22fabef5ab4dcdca411d45e62995646c8e2232c449f910c2124a34fa2"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Data/DA_Character_HeavySwordsman.uasset",
+    "baseline": "003be084518e75a2e51b4c95f78d36ea3e977aa923959cfceee2eca3fda8f356",
+    "main_sha256": "4a69f44a091f99e6bcbadaeb0252bbe48c0462873372be20bcd0bcb42444e4c6"
+  },
+  {
+    "path": "Content/Monsters/ApesStoneHandElite/Data/DA_Character_ApesStoneHandElite.uasset",
+    "baseline": "4660c7e5e847deeeddb539128b13a78f5ba16479939ff4f46289d8e70bf060d3",
+    "main_sha256": "a3f37131ba7ff2ba9cce7a1071bdbc1f3983b0fbccb3fc76629e21bf8dd1c5d6"
+  },
+  {
+    "path": "Content/Monsters/Yetuga/Animations/InGame/Idle/Locomotion_Stand_F.uasset",
+    "baseline": "cec9cffbb1642de4ea8152d92bfaf9493e11fd2aef9c401da09438d89cad7298",
+    "main_sha256": "a7b261728213bf69d29b3aec5d427702ff6272734c2bff58c619bab79e313b96"
+  },
+  {
+    "path": "Content/Monsters/ApesStoneHandElite/Animations/InGame/Idle/Locomotion_Stand_F_Original_Variant02.uasset",
+    "baseline": "4313f156a7f23843d575519e17aab7c3f1eaf3e951c045749286475a5178b626",
+    "main_sha256": "bb517848cc4396057f3cb3d4e3c38e157abff0af2312ee256bf926a9c46fd903"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Data/DA_Character_Swordsman.uasset",
+    "baseline": "ca389886c0b3e217f7672b32b334ded752853456da29f2b696b11e24cdfadf79",
+    "main_sha256": "2ea1a75dbdc850a539432e30e8292d8fe134ad63799bdf0894bbcd39b5f21d3b"
+  },
+  {
+    "path": "Content/Monsters/SwordShield/Data/DA_Character_SwordShield.uasset",
+    "baseline": "3b616d6d96c5ca7e9c45215863e56aa53330c40ac8690b78ceb0d6b130fc25f3",
+    "main_sha256": "b3d6dbd005239c2e45858881fbb885dfbaf0e14b5b98f0470763ae4d31d441a6"
+  },
+  {
+    "path": "Content/Monsters/Yetuga/Animations/InGame/Damage/Damage_GroggyStr_F_Start_New.uasset",
+    "baseline": "3d05eb0a8ed3e54eda1147a4f3aca9bdf808d94819345fae81682b1ff8f86396",
+    "main_sha256": "2a02842c561eb2f1cc9f125c74e4b70052d93a6a2a8d5a7871ea8efa9e891cfa"
+  },
+  {
+    "path": "Content/Monsters/Yetuga/Animations/InGame/Damage/Damage_GroggyStr_F_Loop_New.uasset",
+    "baseline": "44789f50f9ee73ba07a4a9acc6d26c2d9502e2ec1b45cede2eb2c2b897a1c4db",
+    "main_sha256": "19b3694127f5daaa729c2a949a14db8c4a95b7e6b3cec2c097c49b27e5bb577f"
+  },
+  {
+    "path": "Content/Monsters/Yetuga/Animations/InGame/Damage/Damage_GroggyStr_F_End_New.uasset",
+    "baseline": "913e79fdefe0094f2369bbccbe8a54533a66c9b0b3e553534e06d8e359e45df9",
+    "main_sha256": "fb03aab9315f9585d9f80ae495c72171b07deecc070ff0627ca652a04ffb88d1"
+  },
+  {
+    "path": "Content/Monsters/Yetuga/Animations/InGame/Damage/Damage_Grapple_Atk_02_B.uasset",
+    "baseline": "e2a53d3c7b8f7f3ce6313fefaab09da67050ea3be2720005dcc324cbada0a360",
+    "main_sha256": "91f530680a819b6966c8b75c502d5a622bdc94ddded083854e8550d171580e8b"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Data/DA_Character_HalberdElite.uasset",
+    "baseline": "7d50d24921d0b2a91adc75ef4d97958cbca8bbd5e8dc918fba0f32f0ebbb2a18",
+    "main_sha256": "a83dadda93bc3c69f59eb710bf39af5ccbcec882bdd74836c2e9e74e9d9d9145"
+  },
+  {
+    "path": "Content/Monsters/Yetuga/Animations/InGame/Damage/Damage_Grapple_Atk_02.uasset",
+    "baseline": "7622a4668b7690cca16d059e97fc36ff6f69ff37ad47208dadca522298447451",
+    "main_sha256": "4a016c12510a83a6414b0ba5a318158a95b13826fd78df7c95e98817073727a2"
+  },
+  {
+    "path": "Content/Monsters/Yetuga/Animations/InGame/Damage/Damage_Grapple_Atk_01_B.uasset",
+    "baseline": "b7151dec081dedfb8dc1ace9c9e63cd79a62732969125a67fad4bf785fddf65b",
+    "main_sha256": "7ac419e963ee58de4221638af32f36f7e80daf082c7b60426946abe5dfe88ea4"
+  },
+  {
+    "path": "Content/Monsters/Yetuga/Animations/InGame/Damage/Damage_Grapple_Atk_01.uasset",
+    "baseline": "61447955fc4cecf16e8ef9d85c37048975f74f7c9be1fa7fdda8bebca4c2cd85",
+    "main_sha256": "a0da18cb93c0df0495fab4122627665f41ea906e65a94ceb9f779fc1bf568bf0"
+  },
+  {
+    "path": "Content/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_GroggyStr_F_Start.uasset",
+    "baseline": "d1db761c0294b762394c7f17b2fa3b875e343c25ce762afbfdf4c47d6d93f001",
+    "main_sha256": "1e1402ede82a3d35206e7f7c220a25399f2d5a29369b38234842ec983a464a21"
+  },
+  {
+    "path": "Content/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_Grapple_Atk_B_02.uasset",
+    "baseline": "1ed418e4b20a36aab9f746998b58817b05f21439abe5693c254276befe16bd68",
+    "main_sha256": "5652417b951a3d4e94b1a0ff51a2509a60aabd6a963741e68fc12689840694c0"
+  },
+  {
+    "path": "Content/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_Grapple_Atk_B_01.uasset",
+    "baseline": "cf04f0302f0c3cdc731b2220c3f1bafaf350632320bbfb14cfc9abb5ccf0ec34",
+    "main_sha256": "38ebb4b8aa49d306eaf8aed28a9705a4f030a049168011e59891f53b1057dd6e"
+  },
+  {
+    "path": "Content/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_Grapple_Atk_02.uasset",
+    "baseline": "9cd2a94c760aa6289c6932e32d9672c338556d7123706e10cdf760cc4ef0562c",
+    "main_sha256": "2e448c9cdf7c859dcd2b66f6c75204d497113f72e20bd9fc49cf9c1ebee1f8ae"
+  },
+  {
+    "path": "Content/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_Grapple_Atk_01.uasset",
+    "baseline": "d748a5fff6ad41ad0602f875a0e312cccb70de66a88515a85f8005a03ef92724",
+    "main_sha256": "2aa49b52b82b737bbd17a3980abe5953f297cac1ac0e0c59cb18b0a68481c57f"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Animations/InGame/Attack/Attack_SwordSwing_Turn_R.uasset",
+    "baseline": "cd72aee4d4237cc445c74e7373f845abf18402bf4f9109338108ae5a53dcfc26",
+    "main_sha256": "6e278bd534eb8c68538fdc2aa4114c5f725527f746780168e60ed3dc2a75445c"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Animations/InGame/Attack/Attack_SwordSwing_Turn_L.uasset",
+    "baseline": "b021759044c32e2088a89589e55fa7c27c580e2267450186f1c5d84a4b508ddd",
+    "main_sha256": "9c2b1d23e3f1a2f76e98e288c24495055b594126a7c6b628e7b1cc7f1130af40"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Animations/InGame/Attack/Attack_SwordSwing_03_Step3.uasset",
+    "baseline": "29f06447e8979edf4f8126061ea7b61b84afc4b5ad76227e84bd80d9d712e6ff",
+    "main_sha256": "59364d17574357f8faeb2c9d94edff4a94d029892e8a4b4b787a579d07f7af77"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Animations/InGame/Attack/Attack_SwordSwing_03_Step2.uasset",
+    "baseline": "b0a473303f3a1e232400d8fc8a76d442b4b485f68cfcdb12b36d22dc44936f36",
+    "main_sha256": "c77855739b1f962d505a340d70574a2d9114a1dd26a872667754f0911747bb27"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Animations/InGame/Attack/Attack_SwordSwing_03_Step1.uasset",
+    "baseline": "a4e00907c2969677d3439343efe214802a2f6924080ae17dd2e06bee1b26ca34",
+    "main_sha256": "8cdc05505e62236c30e93e62d47044ea6c4c9e0eec047bfd900c4608b000f0a9"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Animations/InGame/Attack/Attack_SwordSwing_02_Step2.uasset",
+    "baseline": "07fb35bc1bc301e0ee20ea25327c5f8d4c03ab4a330a2d552a45f9687911b642",
+    "main_sha256": "036c20c7c9b33287ca08b92788222bdc79c3321ad6b03a64a07862cfff4c5fa1"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Animations/InGame/Attack/Attack_SwordSwing_02_Step1.uasset",
+    "baseline": "9e0d6980ff2d06a1e20f9086974f2bedf326e0d2fadaaa76a76a268e93d489d9",
+    "main_sha256": "e2bcd7600152f537abc363e9f153bbe944617f2d32e8e7ffdef3a6bc741912ec"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Animations/InGame/Attack/Attack_SwordSwing_01_Step4.uasset",
+    "baseline": "5ea9185941849762680deb9c07e5565f2ca787b5c657cd7e04b2920f86f0d3c1",
+    "main_sha256": "34e5f34066407307bb4b012a4842af7912d26a0fa4198a0fd27f0af2f35aada8"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Animations/InGame/Attack/Attack_SwordSwing_01_Step3.uasset",
+    "baseline": "ce61e4908e837e550ec0245e5512d22ef895980ac3b98fdbc8c6d9217688709d",
+    "main_sha256": "f4694d4de939bb84887b8abed2f1ed3758166fcfe02bd9b68f5e0be6e8dc141a"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Animations/InGame/Attack/Attack_SwordSwing_01_Step2.uasset",
+    "baseline": "17b7c07c04c0345331a828e2ee21c2152f77bc57c28f0ea54ee4920d24fdcb52",
+    "main_sha256": "51efae7a4f91b8c3931f22f277f1b5638b578b964c694cb60e824d2d312a8030"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Animations/InGame/Attack/Attack_SwordSwing_01_Step1.uasset",
+    "baseline": "f312face5df8944058f9f79705857d4811c9c7bb573cd8600dfb289215d0e6ea",
+    "main_sha256": "48f15842c219a36fed0756bbbe56a2489992050a1a0f192eb2177b5830476c7e"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Animations/InGame/Attack/Attack_SwordSting_Step3.uasset",
+    "baseline": "af36be75c7957d583ced380a32c79559dd7887174c84daa2c1f05c9af29c9c81",
+    "main_sha256": "02b3d65624664294cb463a738de1d2f438b60543a9f28e91cd50a61baecbec2d"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Animations/InGame/Attack/Attack_SwordSting_Step2.uasset",
+    "baseline": "0d7e85af55ab36d77852e5ca7aa887807fc6719f86b1ee02607a4805403ed90c",
+    "main_sha256": "f3c64937ac537f5f0af50729fca405a583b4b8f274928b1a806ff8cb4192ab6c"
+  },
+  {
+    "path": "Content/Monsters/HeavySwordsman/Animations/InGame/Attack/Attack_SwordSting_Step1.uasset",
+    "baseline": "9d516799dda7e228a9bf249195bb5873ced4187b5e7985d02a6d0c3cba6c71ec",
+    "main_sha256": "26f3259d47739a14ef84b0932820c7766f04ff1e4d63de72e0a1c864b7cbbddc"
+  },
+  {
+    "path": "Content/Monsters/SwordShield/Animations/InGame/Locomotion/Locomotion_Stand_F_Composite.uasset",
+    "baseline": "5efadd70790da8e2749342f7cec30fce4b3a107a147445a362b0b7a6cf4bd8c5",
+    "main_sha256": "b78f0e815f9e98aa3856e9fc928f0aa58365a80b450bde64a5a929ec04f530fb"
+  },
+  {
+    "path": "Content/Monsters/SwordShield/Animations/InGame/Attack/Attack_SwordCombo_02.uasset",
+    "baseline": "017df9e10b23449bb59f0bd2ead8336ab70374f98b3c2c8e2c7b7900efad42ca",
+    "main_sha256": "d90e20e107e14ce71f1683e36ea866c0663e4918fae213538b66206930592463"
+  },
+  {
+    "path": "Content/Monsters/SwordShield/Animations/InGame/Attack/Attack_SwordCombo_01.uasset",
+    "baseline": "902335fc317c688efa543581fd34d9b3475d3eb4247603482cc3b067da8a6376",
+    "main_sha256": "a2775c918562adbb8d56da564bbc0273b4b96411ea33c6730cef13cb45d6fde4"
+  },
+  {
+    "path": "Content/Monsters/SwordShield/Animations/InGame/Attack/Attack_ShieldCrash.uasset",
+    "baseline": "3a9308abe233a310b4af54298f0e069cd046da30d259dbf95a6c93f48c5e5b0a",
+    "main_sha256": "4e36b603844d8ce47466a99577e652806a021da18687c2719ca2648fbdf7f34b"
+  },
+  {
+    "path": "Content/Monsters/SwordShield/Animations/InGame/Attack/Attack_Pierce.uasset",
+    "baseline": "150bc43d8006e9476fdf793ab535461d509a39bb0af29eb3f10b436b96e1f726",
+    "main_sha256": "47308c0c285446d9a9dfb827bcc811041c13416a2c50220ba31a5e53eac78b7a"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Locomotion/Locomotion_Walk_Peace_F_Composite.uasset",
+    "baseline": "204013801d05f8a02a467bd728812a890dbd201635b0398ba20ff3a860f296c5",
+    "main_sha256": "b21e6e91e00e8e2f62ced3ba499ffbafedf5602ab6822c253cf74e64fe7ad558"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Locomotion/Locomotion_Stand_F_Composite_Variant01.uasset",
+    "baseline": "42a5e73e839c88bc37819fdce8e226b8ad5bc8989747cc5d795edcc78ea2207b",
+    "main_sha256": "2bf92ea92f05a77f5c9c2190220f01a970988346eff18df1524e06f61503498b"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Locomotion/Locomotion_Run_F_Composite.uasset",
+    "baseline": "538da928b4fdb2ca6d4290ec7f971a2e3828b897898f5293634885d71754bd51",
+    "main_sha256": "4a2d5918cabd53588d41b92af64bfc759b3e3968c80103a88be81df0584d4260"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Locomotion/Locomotion_LockOnWalk_R_Composite.uasset",
+    "baseline": "4e0ed313d1bd73ea35c7f276aacbb342c01e0ada94e32f4d9a7b4b66eaeebb04",
+    "main_sha256": "380e29f56aab53df515166c92ccc6c51a2a1f486abdf11e5d8a844dc1e98fc2f"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Locomotion/Locomotion_LockOnWalk_L_Composite.uasset",
+    "baseline": "fc07cda6306e4bfa62b8a12f16c4a54899f33d33f70c82252f325312ac71e08d",
+    "main_sha256": "324133a9187804fda9ae4fc853681915196d42d17f3ccb2e25055911014b7d0b"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Locomotion/Locomotion_LockOnWalk_F_Composite.uasset",
+    "baseline": "404632e274882eda87c19540dd595c89be4be477393c7d6d5551eb5747343345",
+    "main_sha256": "cf15c3bb6fc0e532011688961a8a7026ae3fbd1ccab0da591b0d64ad5cc23c72"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Locomotion/Locomotion_LockOnWalk_B_Composite.uasset",
+    "baseline": "9c627fa757e7ede816af749f1724221dec8ad48a1256ea18528b2d291a508bfb",
+    "main_sha256": "e8055bb389e382ca41abf0e9b4180b395adcb6d50229063b5a9cfe95556e8872"
+  },
+  {
+    "path": "Content/Monsters/SwordShield/Animations/InGame/Damage/Damage_Grapple_Atk_01.uasset",
+    "baseline": "f166fea748e087fae6f4153952724b0a27251be7356569d3645adf1b1bd71827",
+    "main_sha256": "a69557065eeb6d72a63e01c9559003ba323bd89f8aab530795da206f0de7d342"
+  },
+  {
+    "path": "Content/Monsters/SwordShield/Animations/InGame/Damage/Damage_Grapple_Atk_02.uasset",
+    "baseline": "a261307affed4d8939fa6421e2f91da49bf7db07ef363fe1dc39483942d2bf4d",
+    "main_sha256": "bab1a242076713ff62d6c93e885898e7d0060793db26e1fb56ca767b5543cb7c"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Locomotion/Locomotion_Walk_Peace_F.uasset",
+    "baseline": "7145462f6317c23a2080cc7748b77f2cf229789343bd1f82e05b73d90c605f73",
+    "main_sha256": "e596d1b799c62da8e7e2762aa6a1307e0ad5bd5b1e4a8ddad9441ccbf8867caf"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Locomotion/Locomotion_LockOnWalk_R.uasset",
+    "baseline": "16aeb4312ab250887b46bf72d735cdc43da1297c8718926b790c9e6ac9b9bd6e",
+    "main_sha256": "c3c92e4a66b322deb2f412f5ff0b65de592218bdeb9e89e3b0e8e67af31d983f"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Locomotion/Locomotion_LockOnWalk_L.uasset",
+    "baseline": "e8bd7c0a4db2f9b1dda283c97a8683a2099c421f2d67b548b3120ee2726eff63",
+    "main_sha256": "c361467164437f9eefcb7511c81e9c4f12789a36e19efe682d5a71d0fd20fffa"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Locomotion/Locomotion_LockOnWalk_F.uasset",
+    "baseline": "cf696a291f362aa3dca9ef72d444d16179e5e1c852eda81c9d90c9cb1a6f6034",
+    "main_sha256": "3c416db83282e337eb1b12eae5f8a01470f03c458d494ea94a41d350e763113b"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Locomotion/Locomotion_LockOnWalk_B.uasset",
+    "baseline": "2426d49ae6c7f57ddd1d039701b81392046145028a5062f38909db7554a12759",
+    "main_sha256": "caa2ace70f375b1935e2f51618df999eb9548bfaa8897bbfc8969e919e64f0a7"
+  },
+  {
+    "path": "Content/Monsters/SwordShield/Animations/InGame/Damage/Damage_Grapple_Atk_B_01.uasset",
+    "baseline": "39818f23abab5d838dd7197bfac944164ec14da8c3cccc20f824488d3ac6d081",
+    "main_sha256": "2aa66a94ddfe4fc880c84aae0282862cecc3512c2d3984b44bfea04f175fb562"
+  },
+  {
+    "path": "Content/Monsters/SwordShield/Animations/InGame/Damage/Damage_Grapple_Atk_B_02.uasset",
+    "baseline": "1323ad378b1b8de52bf8e5f6af66b468fa925934218adc14299754b9c13d0d31",
+    "main_sha256": "591d92f06b51de7425561f625809bc504f80b8d2e4571b0052b678020b3e228d"
+  },
+  {
+    "path": "Content/Monsters/SwordShield/Animations/InGame/Damage/Damage_Groggy_Start.uasset",
+    "baseline": "62c7fd18463d31f8c58bd20fb5b5a98a6f270a1bdab9b11edc42e6633ffb4a24",
+    "main_sha256": "35d999186a1a628f2b1194a05c6b99ca52fd6284a096ecac6c78115a99acc2c9"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_BackDashCounter_Atk.uasset",
+    "baseline": "bd1bdd58a6e8eefbbdbab9d33d4bc2fd2b44b34df2fe7e8b0d0708d759787b9a",
+    "main_sha256": "ed9a4236a8e5cb5a2f514a9066aa00d15d99593e5ca883cbd8fe862fd5c21686"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_BackDashCounter_Start.uasset",
+    "baseline": "9d092bdd5421291d5add5b9fdbb494ec8db6d69df3d751df3457137b5ed58880",
+    "main_sha256": "09618ed7f620e52ba9fc57a768f55e1bbc2f9915cff3f8e1650c33ee78f028e8"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_ChargeAttack_End.uasset",
+    "baseline": "5d3b88baec00195433ca3a2f4bb5940e37102ac74241073a70b9106f71c196c1",
+    "main_sha256": "9890c120df6144d39c31a5a02292447d55018d29cc20214f3362a70d3a4169a0"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_ChargeAttack_Loop.uasset",
+    "baseline": "04b813e5b18ccd73edc82abe556102691ecad41cf670f085ce27c5a2f02957ac",
+    "main_sha256": "f952dccbfa1e57a0f024104127a1cb37f8f4a44e66c0f9992e9cc2ea9c7be8ed"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_ChargeAttack_End_New.uasset",
+    "baseline": "576ed0bbd2273a3c4a616289b4b016b37787d936eec4b42ced8acb7acc0bc5f0",
+    "main_sha256": "87b2b31781fe2846a587d871e05dd18c293f4508fd2718b2acb2e0ee27011657"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_DownUpperSlash_01.uasset",
+    "baseline": "b675b8e8380b3661b837cc465efc50d425ab188663bb583e29267051e2a670d6",
+    "main_sha256": "68a7870285fb2d2c9ffb4ef151e74f9c8a562141f4702781d843e7cbe44fd3ca"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Groggy_F_Start.uasset",
+    "baseline": "696fa795140d5d62e1577492972752bed2c861c2a193bf581a9704c937ab428a",
+    "main_sha256": "224e1126f11c2ca9067f98dcbf3066d4ef81766f518d88797ae63641f3401cc6"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Groggy_F_End.uasset",
+    "baseline": "a4e17b844cff5fcae3bb2f90d5e487016c4c7fea2d49cef03c93afc238f90f89",
+    "main_sha256": "9f1e32f7580a2699fff21400db4d576565f81e584d399cda1cce2c8b56d4b871"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Grapple_Atk_B_02.uasset",
+    "baseline": "1caa3d4409afc4cd85995b587d8757804890f185ee10837704c6acbd793140cb",
+    "main_sha256": "e069dbd9e5bbf1a029e1fd00b59120e3fba8d21d9c4c2bd8c6b0b8b456b4b0bd"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Grapple_Atk_B_01.uasset",
+    "baseline": "ba5caed501e501591d2495e47ab455118d22cb9cd22f07d64f86a2bbdbf2f05d",
+    "main_sha256": "a1ee36ad80df41f0903999d3d8c7a66293b66027685cfeb4c892796fc1943a5e"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Grapple_Atk_02.uasset",
+    "baseline": "a43d392950dd07162e22f8b990eb3e56aa22903b8aa0334bbaf73c63146c73d5",
+    "main_sha256": "d9cd5c353f4d8eac44d15e634588e3587d602fe3d6f9e3e77c5d6c6d4902e89f"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Grapple_Atk_01.uasset",
+    "baseline": "1b2741a085f863dd4727a621b2985c02803505adb435a9d28d61e799a81d5053",
+    "main_sha256": "8ada160b4c3e89f7779a811ef99f291a7a45b292e6efb4a3ac00cb807470836c"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Early_Push_01.uasset",
+    "baseline": "06658991cbc0acd93aca54f95a099ab4d98c491a8fe0ac934b2069691acf9892",
+    "main_sha256": "3a4018eeff1f090982dbb0797cf5c817ef06f1380e607e29f187a94b0c3890c2"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Early_Pierce_02.uasset",
+    "baseline": "1fbdb57497a3ffc8638f926c901ab6c8ba6f757322b1b65c5003e12eeb8586ca",
+    "main_sha256": "c73efaa6166cf6a17ba90f2338ae19f098cc381a461d22aa8e59e76f125c6aaa"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Early_Pierce_01.uasset",
+    "baseline": "6ed007ab4b5bb901e7f930a4c87d52767bc2d88a9ed40b256e58fc2f4e16df84",
+    "main_sha256": "7cfb077e3fc705cd2b48d2ec62e6d66090aef5edd38423ca45b704d4abff7165"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_DownUpperSlash_02.uasset",
+    "baseline": "2215758090d6e5155901f0339da94aa921eddc6a092572e2f358efb31d54d19a",
+    "main_sha256": "cde1bf1d1f2f28962954e92b649cbc86bfbcc7662c9a0a1adc39f91f53ed02ef"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Early_SprintSwing_End.uasset",
+    "baseline": "8dc3fe42b3229c60b2df23bef94bae604073aed7f600b900219f524f5170981a",
+    "main_sha256": "20eb0e772f05edd78c310fdc97e5319a30729cad12fa6f69d2a34c20c25d50f0"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Early_Push_02.uasset",
+    "baseline": "45613b4a1bf177bbbd1b0bf7c44389f44645b7212f945c20a9fd6ef10edb2010",
+    "main_sha256": "f4c3d53e1c80a74b791533529e728a27958626280556905f79e14a0564e7ffa0"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Early_Swing_01.uasset",
+    "baseline": "3d56ba1ad1f40f13c0c80cb8f3fc76a0565be01fd05029fc033409b80e4ce510",
+    "main_sha256": "a6a4ed7f405a9a232a34a41990e2463736be2a03c476400158a952b7b3aca0b2"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Early_Swing_02.uasset",
+    "baseline": "1434530e18597ba4361d894162a20c64cbc2c095548ff278ab7c3e586737ab4b",
+    "main_sha256": "b7a64215b8c912218bb503367201a13b648d4850f3f56040e8f9be727ecea995"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Damage/Damage_Grapple_Atk_01.uasset",
+    "baseline": "80733408a25358bf83706d5776f1926d95d4320d6db7d290cfe3bca854f43ef1",
+    "main_sha256": "0fa6ead6dd578a5761ef73ba8f57151be63aa38e30a5a69666df00e3b1b9f096"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Attack/Attack_Pierce_Step1.uasset",
+    "baseline": "f8185e16b8457e4a412d380ad935e14adb15d797ca4612957181cd245514f1ce",
+    "main_sha256": "ce49715b521f15c1130176d3cd8dce0721752815e06599493f734c329c328b86"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Attack/Attack_Pierce_Step2.uasset",
+    "baseline": "c4ccbccd2d6064f0c218c0ba1c5874d4a007daad173c2a9ab22e65c5a0727913",
+    "main_sha256": "12759a5ba416554ea065b7bb3e22f8ad1e71edf534a370d81d464aadc286c663"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_GuardCounter_Down.uasset",
+    "baseline": "e4a7d5dd8784f827888d6a841f79eeddd4e5213757b41da4e55db0f53e4cc51c",
+    "main_sha256": "26434827155209ac532da82aa1aeb8165fcafd9e53a26c503cfada74452efe62"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Early_Swing_03.uasset",
+    "baseline": "ca0aefa7d8d8adce3f9f7022c4118d55b95354ae7831dd7d417cf40b2cd596f5",
+    "main_sha256": "2ff75ca037e417ca8ef1fa396dbbe8b08a4ea7e991edd6070929dd64800e2045"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Damage/Damage_Grapple_Atk_02.uasset",
+    "baseline": "92462c14b2c1eef367a71508fa44b64f3198120fb4dec1c10d4f022283d4ad9b",
+    "main_sha256": "a0b2a825d741b83a82dcdf07ef52fd90d257ee6319e658b5aacda7985cadbd27"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_GuardCounter_Start.uasset",
+    "baseline": "b6672a152bfd0c6fe3f779e2712aed52d94ba2767a8bb17e54dfd3bb5d5b47a8",
+    "main_sha256": "2a88f927dbdfbace8e4f08e4e7447d7316c4182d9d78fea8bf40fe29fefff6d9"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Attack/Attack_Push_Kick.uasset",
+    "baseline": "1ba372729adad9772f3bbb9ad47015dcbcb1f131c2179f622320f73edb6ead16",
+    "main_sha256": "c162f23ce35b23edf2707db183f9330e35abcc7c67e68bb265b00b0f57c43526"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Attack/Attack_Push_Kick_Loop.uasset",
+    "baseline": "f6c01331fc6e4475c6dfe01c6c6bfe0a70e4e8b545b6d5b32ea7556b3c5730b2",
+    "main_sha256": "46283aa3c006c0552415edbc1bcddde3f2006483030f813c571ff6a2fce9fffa"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_GuardCounter_Upper.uasset",
+    "baseline": "c0775648dca2ab1efe6121814ea600550acb5d7f48a667794f5b61d274cd64a7",
+    "main_sha256": "9b0e60e022136bad70bbfe6c1a50e5b6f7c5c94f6c0d376936acd44fa6372248"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Pierce_01.uasset",
+    "baseline": "064ef4d570302e15bd2577607020882fd5cc4784bb9483d223692b374253b43e",
+    "main_sha256": "2799e03832b4334ccb6d7f1c491390e3318e03eb8f39b484dd3803865831bdbd"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Pierce_02.uasset",
+    "baseline": "80241163a92bd61bf22ad8378dbc4ded3313add8aa1491db453d9a7fe160e6a2",
+    "main_sha256": "7b04789c2a57bb34b6944561dae31c5abbcf62f76df35d6d82db4f4170055ab9"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Damage/Damage_Grapple_Atk_B_01.uasset",
+    "baseline": "f7a1187132fec465d35fd9dd27a878c336564e749b4218bb8d5f20dfca9121b5",
+    "main_sha256": "2f88523501c158137f2e0a4f2efa57895ba9b087eb4335149f2939fde406e060"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Damage/Damage_Grapple_Atk_B_02.uasset",
+    "baseline": "0f4e9621fcedeb2d8196275540f0fd5735cc54552d92f6ab6f5ac9783ed634cd",
+    "main_sha256": "124cc4a8fbef40f90df947865443a131403dfef56656d9f2de19156678cf105a"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Attack/Attack_Push_Kick_Ready.uasset",
+    "baseline": "c2786b570a017782a8add588581ef0e61fcde3bd30796c2d0073f7d347e3631b",
+    "main_sha256": "98fc3ffbcdd8945141ed21a4abc8c8ec7849ce1dec34d3fe6755d9ec7f2e5bff"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Damage/Damage_Groggy_Start.uasset",
+    "baseline": "6712e31b4a046d1a72513d0cd5d15bd18850a47c295c05f8b830252b8bc74b03",
+    "main_sha256": "3d99f16886aafd7686fbdfec5b7d2f78d8e7eadccd54c1982392bc12f8a39a2b"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Attack/Attack_RushAttack_Hit.uasset",
+    "baseline": "c743d2c301d6ea653747e79ec6573cf076d00eb03066661eb8e3602d44a1f1cf",
+    "main_sha256": "f2bc038b24f806216851cdd06d1b3968d2d522292e878ca177b37d3f864473b4"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Attack/Attack_RushAttack_End.uasset",
+    "baseline": "e65988448219311b236d38f6e4dea52e33eb57ffc2f4ac90d196ac87c3c3ba05",
+    "main_sha256": "e96596cecf4e02928a81fd02fb73d24a2595f8cdc3dd4413d80807f2ea51c111"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Attack/Attack_RushAttack_Loop.uasset",
+    "baseline": "ee755b246062f7ed3b4697bef483a94878dc25f4983efa3c346e5e7aa882b608",
+    "main_sha256": "5e65ddaa3e951432a640b4046008e5980c9ccef683ddfc511329d8aa3d207e01"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Push_02.uasset",
+    "baseline": "eee64eb1627dc5924ada08b203ea7621f735058b6bf497f0c6d3340571e92056",
+    "main_sha256": "5f24cfcb860afb2d138a8dad10dc99b5f6cfee42a69554822f06870ef94a2a9d"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Push_01.uasset",
+    "baseline": "8f90f83163f7589bf18d6cb34688cf74ff158558f4a7dff34e841ddbcfcd5ee2",
+    "main_sha256": "d48eef0992c87253b19eec5fb3421a273449f448c3af42073923928691866ed1"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_RoundAttack.uasset",
+    "baseline": "a74c8034eba8addd2fea0e1f6d5a45199220bff3df409c1361c301253ef033ba",
+    "main_sha256": "65b08c68b4a3951055a6157f8e7e4dee11766c55fab15ab3c002d82c5e793281"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Attack/Attack_Smash.uasset",
+    "baseline": "290e8dc8148dbbd539e5e3af7f358b3aef51cc6f112f3fddf9313c14d11eb1e4",
+    "main_sha256": "8087d7512b85aea7286d2ae34abb58446392a299848cf3bb9e738f802890bee3"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Attack/Attack_Slash_Step2.uasset",
+    "baseline": "6b7da883b8fdc8e0b6b5eb700999690ef36dc40843095c0e16167bf1586528a7",
+    "main_sha256": "0b485a6def6a9ad328fe13249ac53ba0628868acd822fcf670f5cfcd6e894186"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Attack/Attack_Slash_Step1.uasset",
+    "baseline": "8b70500f80e80f6c86dd37b62d7b186e666cd2a17b9f69c03c7f59de58c082de",
+    "main_sha256": "0b4e3a386343fb70126e47672e326b76bff9941bfc402b0e3f0b4c7fb86e85a6"
+  },
+  {
+    "path": "Content/Monsters/Swordsman/Animations/InGame/Attack/Attack_RushAttack_Start.uasset",
+    "baseline": "4fdd1671c64d5304e53fa8496c66a9c6d9ccd19e99da9547bb9e900442a30124",
+    "main_sha256": "5423fff7c75e3db4152ffd37d6cd382b547f69d9c4d11ef7f412645124c95e1d"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Smash_Start.uasset",
+    "baseline": "a16dbd547ce6858ff18b874eccf13ad8b72823345f893e6f135b0a672eeb03fd",
+    "main_sha256": "2b1fa564c9ed54e18df9ac55791d025325856199b74ccc6d83d9e263e5d58a15"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Smash_End_New.uasset",
+    "baseline": "0a8a886b32413ecae22733f3fb14e9da0b23b91b67a8b64926a4e35bdf1790d2",
+    "main_sha256": "549695d27708b5dc2d32bae670e5305fa2294cfe12e43b8ac1ce1351d99dcac3"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_SprintSwing_End.uasset",
+    "baseline": "f09f47cd030a3552a8ab9a2873dfa3611a0fe0dd4b1cc83e020ef716106c6b62",
+    "main_sha256": "004da063464b81af2a8ce4f7cdb84c717aa6096ae2657d33865ecf4b526b68fa"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_SprintSwing_Loop.uasset",
+    "baseline": "9f79d97b2637349907b16ae8643ff512dcd3a57a2fe0cc79fabff200c2466c1a",
+    "main_sha256": "22bc039efe6aebde3fb1941fa778fba0bff5b0811032549b96fa83285cf4b0c0"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_TurnAttack_Fast.uasset",
+    "baseline": "6fe4949cf75830c44d5595f3ebad621c751d108de111216150fe3be52023a86b",
+    "main_sha256": "cdebad7accafeae5713a61bfc0b6dcab3409640825b8dee33c72a20ff346f1bc"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_TurnAttack.uasset",
+    "baseline": "b88ba4b43b48217ae1ee3e7bcd953289e6131c124e9cc0d5274442c51a1ad878",
+    "main_sha256": "311bb3084bcda87d4fd3903cf21c8dc44351ee2712055a6a1c5bfbc096c6952e"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Swing_03_New.uasset",
+    "baseline": "84b62eaccd5f74107bf6770f9ef634f2d67f2dcb7096ca8b467f8a34624d3cbf",
+    "main_sha256": "36100c28b7f81d229f462ec571d5e531d58cbc7a3b53de3b987a1594cb3585d7"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Swing_02_New.uasset",
+    "baseline": "69df11f969e63e0ca81a31d274cd5fced9b45e011c2e2cb6e3faee6b1690d8a6",
+    "main_sha256": "12c4d7c0141d9818d0772fcda4396968673192731d8cfbebdebb61dc952b97a7"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_Swing_01_New.uasset",
+    "baseline": "8cf8d1c8ab5cfcefc5c654f771384eca38a2755da687d319bad17a61aaf0258e",
+    "main_sha256": "0c75c1ec3551d672ad53b9282f6a0b5bc885f9606e6df29b4737e3c1edddd4d5"
+  },
+  {
+    "path": "Content/Monsters/HalberdElite/Animations/InGame/Attack/Attack_SprintSwing_Start.uasset",
+    "baseline": "9fadcef5de996d5300c10c0c61bb358e0ea1f181f8fe0df500e0b1ba11e97e04",
+    "main_sha256": "ceffc60b43a039ab326885d867c95dc51e0a37037fc2b013eebb73fce5dae186"
+  }
+]

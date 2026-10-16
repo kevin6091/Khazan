@@ -1,0 +1,963 @@
+{
+  "Apes": {
+    "zip": "Content/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Metadata/Extraction_20260915/SourceMetadata.zip",
+    "sources": [
+      {
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/AP_ApesStoneHand_E.json",
+        "sha256": "6fa5844ea5060e0dbefd45c917327b1d9cc9637851afbe791c3838942894ee79"
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json",
+        "sha256": "fafd4578c9db2acbe617e8977427bc948853f223cca7a95728e1ce81b84cac77"
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/00_PartGroggy/SB_ApesStoneHand_E_PartGroggy.json",
+        "sha256": "93b1ea9baf8b0d0b76e76ea8848eb9aa25bb8616f87574adde0dd9cbe72470e5"
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/00_PartGroggy/SI_ApesStoneHand_E_PartGroggy.json",
+        "sha256": "b38d55a5b23ffb06832eab020312662bf018d123b39009aa3dfcb01cf75e3fc1"
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/00_PartGroggy/SP_ApesStoneHand_E_PartGroggy_Injuried.json",
+        "sha256": "4c427e0ae2b2464822f3a29d3c73974b350621037eb72b43961997b4edce30c2"
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/25_Groggy/SB_ApesStoneHand_E_Groggy.json",
+        "sha256": "b4060cb7012eec32d667c289695ddf9cfc872dbe036ad422f41377f7b2fa3d53"
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/25_Groggy/SI_ApesStoneHand_E_Groggy.json",
+        "sha256": "a50b5cc032eb3c98f631432edce9c0c422bcc8cb22dbe27f60c70ee37f7c137a"
+      }
+    ],
+    "condition_fields": [
+      {
+        "field": "exports[0].Properties.StaminaExhaustionAnimSetMap",
+        "value": [
+          {
+            "Key": "EStaminaExhaustionAnimationIndex::Index1",
+            "Value": {
+              "StartAnim": {
+                "ObjectName": "AnimComposite'AC_ApesStoneHand_E_GroggyStr_F_Start'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Moving/Reaction/AC_ApesStoneHand_E_GroggyStr_F_Start.0"
+              },
+              "StartAnimBlendTime": 0.2,
+              "LoopAnim": {
+                "ObjectName": "AnimComposite'AC_ApesStoneHand_E_GroggyStr_F_Loop'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Moving/Reaction/AC_ApesStoneHand_E_GroggyStr_F_Loop.0"
+              },
+              "LoopAnimBlendTime": 0.2,
+              "EndAnim": {
+                "ObjectName": "AnimComposite'AC_ApesStoneHand_E_GroggyStr_F_End'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Moving/Reaction/AC_ApesStoneHand_E_GroggyStr_F_End.0"
+              },
+              "EndAnimBlendTime": 0.2
+            }
+          }
+        ],
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/AP_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.ParringBlockDamageAnimations",
+        "value": [
+          {
+            "Key": "EParringBlockDamageAnimType::TypeA",
+            "Value": {
+              "ObjectName": "AnimComposite'AC_ApesStoneHand_E_DamageParry_F'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Moving/Reaction/AC_ApesStoneHand_E_DamageParry_F.0"
+            }
+          }
+        ],
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/AP_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.StaminaStatus[0].Value.bUseDamageReaction",
+        "value": false,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.StaminaStatus[0].Value.bUseSuperArmourStamina",
+        "value": true,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.StaminaStatus[0].Value.StaminaExhaustionInfo",
+        "value": {
+          "StaminaExhaustionTerm": 5.0,
+          "StaminaExhaustionDamageRate": 0.0,
+          "EndStaminaExhaustionRecoveryOperator": "EStatusOper::Add",
+          "EndStaminaExhaustionRecoveryStamina": 0,
+          "bKeepBurstAttackHoldReleaseAnim": false
+        },
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.StaminaStatus[0].Value.StaminaExhaustionInfo.StaminaExhaustionTerm",
+        "value": 5.0,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.StaminaStatus[0].Value.StaminaExhaustionInfo.StaminaExhaustionDamageRate",
+        "value": 0.0,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.StaminaStatus[0].Value.StaminaExhaustionInfo.EndStaminaExhaustionRecoveryOperator",
+        "value": "EStatusOper::Add",
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.StaminaStatus[0].Value.StaminaExhaustionInfo.EndStaminaExhaustionRecoveryStamina",
+        "value": 0,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.PartDestruction[0].Value.AfterNormalGroggyTime",
+        "value": 0,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.PartDestruction[0].Value.bDoNotAccumDuringNormalGroggy",
+        "value": false,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.PartDestruction[0].Value.NormalGroggySkill",
+        "value": null,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.PartDestruction[0].Value.bNoChangeNormalGroggyOnlyAddSpell",
+        "value": false,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.PartDestruction[0].Value.BigGroggySkill",
+        "value": {
+          "ObjectName": "xxSkillInfo'SI_ApesStoneHand_E_PartGroggy'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/00_PartGroggy/SI_ApesStoneHand_E_PartGroggy.0"
+        },
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.PartDestruction[0].Value.bNoChangeBigGroggyOnlyAddSpell",
+        "value": false,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.ParringStaminaDamageTableSelect",
+        "value": {
+          "ParringStaminaDamageTag": {
+            "DataTable": {
+              "ObjectName": "DataTable'ParringStaminaDamageDataTable'",
+              "ObjectPath": "BBQ/Content/_Common/Constants/ParringStaminaDamageDataTable.0"
+            },
+            "RowName": "06_보스_중_2"
+          }
+        },
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[0].Properties.ParringStaminaDamageTableSelect.ParringStaminaDamageTag",
+        "value": {
+          "DataTable": {
+            "ObjectName": "DataTable'ParringStaminaDamageDataTable'",
+            "ObjectPath": "BBQ/Content/_Common/Constants/ParringStaminaDamageDataTable.0"
+          },
+          "RowName": "06_보스_중_2"
+        },
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/CS_ApesStoneHand_E.json"
+      },
+      {
+        "field": "exports[1].Properties.SubStateInfos[0].Value.bUseEnableParringStep",
+        "value": false,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/25_Groggy/SB_ApesStoneHand_E_Groggy.json"
+      },
+      {
+        "field": "exports[1].Properties.SubStateInfos[0].Value.bEnableParringStep",
+        "value": true,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/25_Groggy/SB_ApesStoneHand_E_Groggy.json"
+      },
+      {
+        "field": "exports[1].Properties.SubStateInfos[1].Value.bUseEnableParringStep",
+        "value": false,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/25_Groggy/SB_ApesStoneHand_E_Groggy.json"
+      },
+      {
+        "field": "exports[1].Properties.SubStateInfos[1].Value.bEnableParringStep",
+        "value": true,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/25_Groggy/SB_ApesStoneHand_E_Groggy.json"
+      }
+    ],
+    "skill_metadata": [],
+    "normal_hits": [
+      {
+        "entry": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/ApesStoneHandElite/Animation/CA_M_ApesStoneHandElite_DamageNormal_D_B.json",
+        "sequences": [
+          {
+            "name": "CA_M_ApesStoneHandElite_DamageNormal_D_B",
+            "properties": {
+              "NumFrames": 22,
+              "bEnableRootMotion": true,
+              "SequenceLength": 0.7
+            }
+          }
+        ]
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/ApesStoneHandElite/Animation/CA_M_ApesStoneHandElite_DamageNormal_D_F.json",
+        "sequences": [
+          {
+            "name": "CA_M_ApesStoneHandElite_DamageNormal_D_F",
+            "properties": {
+              "NumFrames": 23,
+              "bEnableRootMotion": true,
+              "SequenceLength": 0.73333335
+            }
+          }
+        ]
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/ApesStoneHandElite/Animation/CA_M_ApesStoneHandElite_DamageNormal_L_F.json",
+        "sequences": [
+          {
+            "name": "CA_M_ApesStoneHandElite_DamageNormal_L_F",
+            "properties": {
+              "NumFrames": 22,
+              "bEnableRootMotion": true,
+              "SequenceLength": 0.7
+            }
+          }
+        ]
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/ApesStoneHandElite/Animation/CA_M_ApesStoneHandElite_DamageNormal_R_F.json",
+        "sequences": [
+          {
+            "name": "CA_M_ApesStoneHandElite_DamageNormal_R_F",
+            "properties": {
+              "NumFrames": 22,
+              "bEnableRootMotion": true,
+              "SequenceLength": 0.7
+            }
+          }
+        ]
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/ApesStoneHandElite/Animation/CA_M_ApesStoneHandElite_DamageNormal_U_B.json",
+        "sequences": [
+          {
+            "name": "CA_M_ApesStoneHandElite_DamageNormal_U_B",
+            "properties": {
+              "NumFrames": 22,
+              "bEnableRootMotion": true,
+              "SequenceLength": 0.7
+            }
+          }
+        ]
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/ApesStoneHandElite/Animation/CA_M_ApesStoneHandElite_DamageNormal_U_F.json",
+        "sequences": [
+          {
+            "name": "CA_M_ApesStoneHandElite_DamageNormal_U_F",
+            "properties": {
+              "NumFrames": 22,
+              "bEnableRootMotion": true,
+              "SequenceLength": 0.7
+            }
+          }
+        ]
+      }
+    ],
+    "original_additive_graph": {
+      "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/AB_ApesStoneHand_E.json",
+      "sha256": "e3245e14ebbfe64dd4c2a1de8fe5c5a1034ac6195b5f3484ee9d1bc9db327e8a",
+      "nodes": [
+        {
+          "entry": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Base_Setting/AB_ApesStoneHand_E.json",
+          "export_index": 3,
+          "export_name": "Default__AB_ApesStoneHand_E_C",
+          "field": "Properties.xxAnimGraphNode_AdditiveBlend",
+          "value": {
+            "ActiveChildIndex": 0,
+            "BlendPose": [
+              {
+                "LinkID": 8
+              },
+              {
+                "LinkID": 6
+              }
+            ],
+            "BlendTime": [
+              0.1,
+              0.1
+            ],
+            "BlendType": "EAlphaBlendOption::Linear",
+            "CustomBlendCurve": null,
+            "BlendProfile": null,
+            "AdditiveAnimSequence": null,
+            "ResetAnimSequence": false
+          }
+        }
+      ]
+    },
+    "part_destruction": [
+      {
+        "Key": "EGrDefenseGroup::Group1",
+        "Value": {
+          "bCanDestruction": true,
+          "bShowBattleDirecting": false,
+          "Durability": 1,
+          "SecondDurability": 200,
+          "MaxDestructionNum": 1,
+          "BattleTIme": 0,
+          "AfterNormalGroggyTime": 0,
+          "bCheckHPOver": false,
+          "HPRatioOver": 0,
+          "bCheckHPBelow": false,
+          "HPRatioBelow": 0,
+          "bDoNotAccumDuringNormalGroggy": false,
+          "StartAccumValueDecreaseTime": 0,
+          "AccumValueDecreaseValuePerSecond": 0,
+          "NormalGroggySkill": null,
+          "bNoChangeNormalGroggyOnlyAddSpell": false,
+          "BigGroggySkill": {
+            "ObjectName": "xxSkillInfo'SI_ApesStoneHand_E_PartGroggy'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/00_PartGroggy/SI_ApesStoneHand_E_PartGroggy.0"
+          },
+          "bNoChangeBigGroggyOnlyAddSpell": false,
+          "bApplyCompleteDestroyedDamageInfo": true,
+          "CompleteDestroyedDamageInfo": {
+            "CustomSkillPowerBonusAdd": 0,
+            "CustomSkillPowerBonusRate": 5000,
+            "CustomSkillStaminaAttackPowerAdd": 0,
+            "CustomSkillStaminaAttackPowerRate": 0
+          }
+        }
+      }
+    ]
+  },
+  "Yetuga": {
+    "zip": "Content/_Art/Enemies/HeinMach/Bosses/Yetuga/Metadata/Extraction_20260911/SourceMetadata.zip",
+    "sources": [
+      {
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/AP_Yetuga.json",
+        "sha256": "d3dc826d70f9d0f8dfde2db6caf0633499d2033c9b79a03d00bbfd52e8d7821e"
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json",
+        "sha256": "0a597b5598466b7644b9475be6fec2a9ea528b90c2ffc977ff7ff47740fded72"
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SB_Yetuga_PartGroggy.json",
+        "sha256": "24b8d31172ab884d5d66a8c8275f1ef6f2813f2b3fe292c2987c5f35df93131c"
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SI_Yetuga_PartGroggy.json",
+        "sha256": "d56ea4c03d5cd1e7f485293d03ed276b08dcf03f6c4ce8d841be9a5b34e415d2"
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Injuried.json",
+        "sha256": "c697a3078229c71037c6639e400f6e7ee449a58eb814b469f7695e711e550a7b"
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Stun.json",
+        "sha256": "170440a5446f09b024043a298d8d62c2b11bf4ba5a75e2a63eb861d9ebe0ccb1"
+      }
+    ],
+    "condition_fields": [
+      {
+        "field": "exports[0].Properties.StaminaExhaustionAnimSetMap",
+        "value": [
+          {
+            "Key": "EStaminaExhaustionAnimationIndex::Index1",
+            "Value": {
+              "StartAnim": {
+                "ObjectName": "AnimComposite'AC_Yetuga_GroggyStr_F_Start_New'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_GroggyStr_F_Start_New.0"
+              },
+              "StartAnimBlendTime": 0.2,
+              "LoopAnim": {
+                "ObjectName": "AnimComposite'AC_Yetuga_GroggyStr_F_Loop_New'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_GroggyStr_F_Loop_New.0"
+              },
+              "LoopAnimBlendTime": 0.2,
+              "EndAnim": {
+                "ObjectName": "AnimComposite'AC_Yetuga_GroggyStr_F_End_New'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_GroggyStr_F_End_New.0"
+              },
+              "EndAnimBlendTime": 0.2
+            }
+          }
+        ],
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/AP_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.ParringBlockDamageAnimations",
+        "value": [
+          {
+            "Key": "EParringBlockDamageAnimType::TypeA",
+            "Value": {
+              "ObjectName": "AnimComposite'AC_Yetuga_DamageParry_F'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Moving/Reaction/AC_Yetuga_DamageParry_F.0"
+            }
+          }
+        ],
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/AP_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.StaminaStatus[0].Value.bUseDamageReaction",
+        "value": true,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.StaminaStatus[0].Value.bUseSuperArmourStamina",
+        "value": true,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.StaminaStatus[0].Value.StaminaExhaustionInfo",
+        "value": {
+          "StaminaExhaustionTerm": 8.0,
+          "StaminaExhaustionDamageRate": 0.0,
+          "EndStaminaExhaustionRecoveryOperator": "EStatusOper::Add",
+          "EndStaminaExhaustionRecoveryStamina": 0,
+          "bKeepBurstAttackHoldReleaseAnim": false
+        },
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.StaminaStatus[0].Value.StaminaExhaustionInfo.StaminaExhaustionTerm",
+        "value": 8.0,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.StaminaStatus[0].Value.StaminaExhaustionInfo.StaminaExhaustionDamageRate",
+        "value": 0.0,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.StaminaStatus[0].Value.StaminaExhaustionInfo.EndStaminaExhaustionRecoveryOperator",
+        "value": "EStatusOper::Add",
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.StaminaStatus[0].Value.StaminaExhaustionInfo.EndStaminaExhaustionRecoveryStamina",
+        "value": 0,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.PartDestruction[0].Value.AfterNormalGroggyTime",
+        "value": 0,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.PartDestruction[0].Value.bDoNotAccumDuringNormalGroggy",
+        "value": false,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.PartDestruction[0].Value.NormalGroggySkill",
+        "value": null,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.PartDestruction[0].Value.bNoChangeNormalGroggyOnlyAddSpell",
+        "value": false,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.PartDestruction[0].Value.BigGroggySkill",
+        "value": {
+          "ObjectName": "xxSkillInfo'SI_Yetuga_PartGroggy'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SI_Yetuga_PartGroggy.0"
+        },
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.PartDestruction[0].Value.bNoChangeBigGroggyOnlyAddSpell",
+        "value": false,
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.ParringStaminaDamageTableSelect",
+        "value": {
+          "ParringStaminaDamageTag": {
+            "DataTable": {
+              "ObjectName": "DataTable'ParringStaminaDamageDataTable'",
+              "ObjectPath": "BBQ/Content/_Common/Constants/ParringStaminaDamageDataTable.0"
+            },
+            "RowName": "06_보스_중_2"
+          }
+        },
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      },
+      {
+        "field": "exports[0].Properties.ParringStaminaDamageTableSelect.ParringStaminaDamageTag",
+        "value": {
+          "DataTable": {
+            "ObjectName": "DataTable'ParringStaminaDamageDataTable'",
+            "ObjectPath": "BBQ/Content/_Common/Constants/ParringStaminaDamageDataTable.0"
+          },
+          "RowName": "06_보스_중_2"
+        },
+        "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga.json"
+      }
+    ],
+    "skill_metadata": [
+      "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SD_Yetuga_ChargeTackle_L.json",
+      "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SD_Yetuga_ChargeTackle_R.json"
+    ],
+    "normal_hits": [
+      {
+        "entry": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Ani/CA_M_Yetuga_DamageNormal_D_B.json",
+        "sequences": [
+          {
+            "name": "CA_M_Yetuga_DamageNormal_D_B",
+            "properties": {
+              "NumFrames": 22,
+              "bEnableRootMotion": true,
+              "SequenceLength": 0.7
+            }
+          }
+        ]
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Ani/CA_M_Yetuga_DamageNormal_D_F.json",
+        "sequences": [
+          {
+            "name": "CA_M_Yetuga_DamageNormal_D_F",
+            "properties": {
+              "NumFrames": 23,
+              "bEnableRootMotion": true,
+              "SequenceLength": 0.73333335
+            }
+          }
+        ]
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Ani/CA_M_Yetuga_DamageNormal_L_F.json",
+        "sequences": [
+          {
+            "name": "CA_M_Yetuga_DamageNormal_L_F",
+            "properties": {
+              "NumFrames": 22,
+              "bEnableRootMotion": true,
+              "SequenceLength": 0.7
+            }
+          }
+        ]
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Ani/CA_M_Yetuga_DamageNormal_R_F.json",
+        "sequences": [
+          {
+            "name": "CA_M_Yetuga_DamageNormal_R_F",
+            "properties": {
+              "NumFrames": 22,
+              "bEnableRootMotion": true,
+              "SequenceLength": 0.7
+            }
+          }
+        ]
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Ani/CA_M_Yetuga_DamageNormal_U_B.json",
+        "sequences": [
+          {
+            "name": "CA_M_Yetuga_DamageNormal_U_B",
+            "properties": {
+              "NumFrames": 22,
+              "bEnableRootMotion": true,
+              "SequenceLength": 0.7
+            }
+          }
+        ]
+      },
+      {
+        "entry": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Ani/CA_M_Yetuga_DamageNormal_U_F.json",
+        "sequences": [
+          {
+            "name": "CA_M_Yetuga_DamageNormal_U_F",
+            "properties": {
+              "NumFrames": 22,
+              "bEnableRootMotion": true,
+              "SequenceLength": 0.7
+            }
+          }
+        ]
+      }
+    ],
+    "original_additive_graph": {
+      "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/AB_Yetuga.json",
+      "sha256": "f114b3f5f33386369e97ba44c9b98c3cd25c37b713b1ce8a4b7b423f5698d013",
+      "nodes": [
+        {
+          "entry": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/AB_Yetuga.json",
+          "export_index": 3,
+          "export_name": "Default__AB_Yetuga_C",
+          "field": "Properties.xxAnimGraphNode_AdditiveBlend",
+          "value": {
+            "ActiveChildIndex": 0,
+            "BlendPose": [
+              {
+                "LinkID": 8
+              },
+              {
+                "LinkID": 6
+              }
+            ],
+            "BlendTime": [
+              0.1,
+              0.1
+            ],
+            "BlendType": "EAlphaBlendOption::Linear",
+            "CustomBlendCurve": null,
+            "BlendProfile": null,
+            "AdditiveAnimSequence": null,
+            "ResetAnimSequence": false
+          }
+        }
+      ]
+    },
+    "part_destruction": [
+      {
+        "Key": "EGrDefenseGroup::Group1",
+        "Value": {
+          "bCanDestruction": true,
+          "bShowBattleDirecting": true,
+          "Durability": 350,
+          "SecondDurability": 350,
+          "MaxDestructionNum": 1,
+          "BattleTIme": 0,
+          "AfterNormalGroggyTime": 0,
+          "bCheckHPOver": false,
+          "HPRatioOver": 0,
+          "bCheckHPBelow": false,
+          "HPRatioBelow": 0,
+          "bDoNotAccumDuringNormalGroggy": false,
+          "StartAccumValueDecreaseTime": 0,
+          "AccumValueDecreaseValuePerSecond": 0,
+          "NormalGroggySkill": null,
+          "bNoChangeNormalGroggyOnlyAddSpell": false,
+          "BigGroggySkill": {
+            "ObjectName": "xxSkillInfo'SI_Yetuga_PartGroggy'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SI_Yetuga_PartGroggy.0"
+          },
+          "bNoChangeBigGroggyOnlyAddSpell": false,
+          "bApplyCompleteDestroyedDamageInfo": false,
+          "CompleteDestroyedDamageInfo": {
+            "CustomSkillPowerBonusAdd": 0,
+            "CustomSkillPowerBonusRate": 0,
+            "CustomSkillStaminaAttackPowerAdd": 0,
+            "CustomSkillStaminaAttackPowerRate": 0
+          }
+        }
+      }
+    ]
+  },
+  "specific_apes_parry": [
+    {
+      "skill_package": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/05_DempseyRoll/SB_ApesStoneHand_E_DempseyRoll",
+      "cdo_export_index": 1,
+      "cdo_export_name": "Default__SB_ApesStoneHand_E_DempseyRoll_C",
+      "step_array_index": 1,
+      "step_key": "ESubStateStepByActiveInput::Step2",
+      "step_field": "Properties.SubStateInfos[1].Value",
+      "event_array_index": 0,
+      "event_index_key": "ESimpleSkillEventIndex::Index2",
+      "event_field": "Properties.SubStateInfos[1].Value.SkillEventMap[0]",
+      "skill_event_tag": {
+        "package": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/05_DempseyRoll/SB_ApesStoneHand_E_DempseyRoll",
+        "export_index": 4,
+        "export_name": "xxSimpeEvnetTagAttackerDamagerSkillReaction_0",
+        "export_type": "xxSimpeEvnetTagAttackerDamagerSkillReaction",
+        "field": "Properties",
+        "raw_properties": {
+          "Results": [
+            "EDamagerSkillReactionType::ParryingReaction",
+            "EDamagerSkillReactionType::JustGuardReaction"
+          ],
+          "SkillTagCondition": [
+            {
+              "ObjectName": "xxSimpleSkillTagCondition_NotifyEnable'Default__SB_ApesStoneHand_E_DempseyRoll_C:xxSimpeEvnetTagAttackerDamagerSkillReaction_0.xxSimpleSkillTagCondition_NotifyEnable_0'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/05_DempseyRoll/SB_ApesStoneHand_E_DempseyRoll.5"
+            }
+          ]
+        },
+        "properties_field_omitted": false
+      },
+      "conditions": [
+        {
+          "package": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/05_DempseyRoll/SB_ApesStoneHand_E_DempseyRoll",
+          "export_index": 5,
+          "export_name": "xxSimpleSkillTagCondition_NotifyEnable_0",
+          "export_type": "xxSimpleSkillTagCondition_NotifyEnable",
+          "field": "Properties",
+          "raw_properties": {},
+          "properties_field_omitted": true
+        }
+      ],
+      "functions": [
+        {
+          "package": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/05_DempseyRoll/SB_ApesStoneHand_E_DempseyRoll",
+          "export_index": 3,
+          "export_name": "xxPlayAnimatiomFunc_0",
+          "export_type": "xxPlayAnimatiomFunc",
+          "field": "Properties",
+          "raw_properties": {
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_ApesStoneHand_E_JustGuardReaction'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Moving/Reaction/AC_ApesStoneHand_E_JustGuardReaction.0"
+            },
+            "AnimBlendAlpha": 0.3
+          },
+          "properties_field_omitted": false,
+          "referenced_subobjects": []
+        },
+        {
+          "package": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/05_DempseyRoll/SB_ApesStoneHand_E_DempseyRoll",
+          "export_index": 2,
+          "export_name": "xxConsumeStaminaRegainFunc_2",
+          "export_type": "xxConsumeStaminaRegainFunc",
+          "field": "Properties",
+          "raw_properties": {
+            "StaminaConsumeRegainInfo": {
+              "StaminaOperator": "EStatusOper::Rate",
+              "StaminaConsumeValue": 500
+            }
+          },
+          "properties_field_omitted": false,
+          "referenced_subobjects": []
+        }
+      ],
+      "animation_package": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/05_DempseyRoll/AC_ApesStoneHand_E_DempseyRoll_Step2",
+      "matching_animation_notify_records": [
+        {
+          "notify": {
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/05_DempseyRoll/AC_ApesStoneHand_E_DempseyRoll_Step2",
+            "export_index": 22,
+            "export_name": "xxAnimNotifyState_SkillEventTag_0",
+            "export_type": "xxAnimNotifyState_SkillEventTag",
+            "field": "Properties",
+            "raw_properties": {
+              "Index": "ESimpleSkillEventIndex::Index2"
+            },
+            "properties_field_omitted": false
+          },
+          "timing": {
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/05_DempseyRoll/AC_ApesStoneHand_E_DempseyRoll_Step2",
+            "export_name": "AC_ApesStoneHand_E_DempseyRoll_Step2",
+            "notify_index": 14,
+            "field": "Properties.Notifies[14]",
+            "raw_link_value": 0.5696434,
+            "raw_duration": 0.2932154,
+            "raw_end_link_value": 0.8628588,
+            "saved_playback_event": {
+              "source_package": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/05_DempseyRoll/AC_ApesStoneHand_E_DempseyRoll_Step2",
+              "playback_asset": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Playback/A_EN_PLAY_AC_ApesStoneHand_E_DempseyRoll_Step2",
+              "notify_index": 14,
+              "name": "xxSkillEventTag",
+              "original_start_seconds": 0.5696434,
+              "original_end_seconds": 0.8628588,
+              "playback_start_seconds": 0.5696434,
+              "playback_end_seconds": 0.8628588,
+              "original_trigger_offset": 0.0,
+              "original_end_trigger_offset": 0.0,
+              "source_type": {
+                "ObjectName": "xxAnimNotifyState_SkillEventTag'AC_ApesStoneHand_E_DempseyRoll_Step2:xxAnimNotifyState_SkillEventTag_0'",
+                "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/05_DempseyRoll/AC_ApesStoneHand_E_DempseyRoll_Step2.22"
+              },
+              "mapping": "Original absolute event time mapped through the saved source dilation table; proprietary event behavior remains metadata only."
+            }
+          }
+        }
+      ],
+      "event_tag_field_present": false
+    }
+  ],
+  "specific_yetuga_charge_wall": {
+    "source_file": "Metadata/EnemyBehaviorResearch_20261008/YetugaOriginalDefenseRecovery.json",
+    "source_sha256": "62245dfced04e96d163eff2041dafd09ccb98509f2aec88659db55e87613d71c",
+    "steps": [
+      {
+        "step": "ESubStateStepByActiveInput::Step1",
+        "next_step": "ESubStateStepByActiveInput::Step2",
+        "animation": {
+          "ObjectName": "AnimComposite'AC_Yetuga_ChargeTackle_Start'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/AC_Yetuga_ChargeTackle_Start.0"
+        }
+      },
+      {
+        "step": "ESubStateStepByActiveInput::Step2",
+        "next_step": "ESubStateStepByActiveInput::Step3",
+        "animation": {
+          "ObjectName": "AnimComposite'AC_Yetuga_ChargeTackle_Run'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/AC_Yetuga_ChargeTackle_Run.0"
+        }
+      },
+      {
+        "step": "ESubStateStepByActiveInput::Step3",
+        "next_step": "ESubStateStepByActiveInput::Step4",
+        "animation": {
+          "ObjectName": "AnimComposite'AC_Yetuga_ChargeTackle_Run_Loop'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/AC_Yetuga_ChargeTackle_Run_Loop.0"
+        }
+      },
+      {
+        "step": "ESubStateStepByActiveInput::Step4",
+        "next_step": "ESubStateStepByActiveInput::Step9",
+        "animation": {
+          "ObjectName": "AnimComposite'AC_Yetuga_ChargeTackle_Run_End'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/AC_Yetuga_ChargeTackle_Run_End.0"
+        }
+      },
+      {
+        "step": "ESubStateStepByActiveInput::Step5",
+        "next_step": "ESubStateStepByActiveInput::Step2",
+        "animation": {
+          "ObjectName": "AnimComposite'AC_Yetuga_ChargeTackle_Start'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/AC_Yetuga_ChargeTackle_Start.0"
+        }
+      },
+      {
+        "step": "ESubStateStepByActiveInput::Step6",
+        "next_step": "ESubStateStepByActiveInput::Step3",
+        "animation": {
+          "ObjectName": "AnimComposite'AC_Yetuga_ChargeTackle_Run_Blend'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/AC_Yetuga_ChargeTackle_Run_Blend.0"
+        }
+      },
+      {
+        "step": "ESubStateStepByActiveInput::Step7",
+        "next_step": "ESubStateStepByActiveInput::Step8",
+        "animation": {
+          "ObjectName": "AnimComposite'AC_Yetuga_ChargeTackle_Stun'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/AC_Yetuga_ChargeTackle_Stun.0"
+        }
+      },
+      {
+        "step": "ESubStateStepByActiveInput::Step8",
+        "next_step": "ESubStateStepByActiveInput::None",
+        "animation": {
+          "ObjectName": "AnimComposite'AC_Yetuga_ChargeTackle_Stun_End'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/AC_Yetuga_ChargeTackle_Stun_End.0"
+        }
+      },
+      {
+        "step": "ESubStateStepByActiveInput::Step9",
+        "next_step": "ESubStateStepByActiveInput::None",
+        "animation": {
+          "ObjectName": "AnimComposite'AC_Yetuga_ChargeTackle_End'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/AC_Yetuga_ChargeTackle_End.0"
+        }
+      }
+    ],
+    "branches": [
+      {
+        "step": "ESubStateStepByActiveInput::Step2",
+        "event_key": "ESimpleSkillEventIndex::Index1",
+        "raw_event": {
+          "SkillTag": {
+            "ObjectName": "xxSimpeEvnetTagOnCollisionWall'Default__SB_Yetuga_ChargeTackle_C:xxSimpeEvnetTagOnCollisionWall_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle.10"
+          },
+          "Funcs": [
+            {
+              "ObjectName": "xxChangeNextStepFunc'Default__SB_Yetuga_ChargeTackle_C:xxChangeNextStepFunc_6'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle.7"
+            }
+          ]
+        },
+        "resolved": [
+          {
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle",
+            "export_index": 10,
+            "export_name": "xxSimpeEvnetTagOnCollisionWall_2",
+            "export_type": "xxSimpeEvnetTagOnCollisionWall",
+            "properties": {}
+          },
+          {
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle",
+            "export_index": 7,
+            "export_name": "xxChangeNextStepFunc_6",
+            "export_type": "xxChangeNextStepFunc",
+            "properties": {
+              "NextSubStateStep": "ESubStateStepByActiveInput::Step7"
+            }
+          }
+        ]
+      },
+      {
+        "step": "ESubStateStepByActiveInput::Step3",
+        "event_key": "ESimpleSkillEventIndex::Index1",
+        "raw_event": {
+          "SkillTag": {
+            "ObjectName": "xxSimpeEvnetTagOnCollisionWall'Default__SB_Yetuga_ChargeTackle_C:xxSimpeEvnetTagOnCollisionWall_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle.9"
+          },
+          "Funcs": [
+            {
+              "ObjectName": "xxChangeNextStepFunc'Default__SB_Yetuga_ChargeTackle_C:xxChangeNextStepFunc_1'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle.3"
+            }
+          ]
+        },
+        "resolved": [
+          {
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle",
+            "export_index": 9,
+            "export_name": "xxSimpeEvnetTagOnCollisionWall_1",
+            "export_type": "xxSimpeEvnetTagOnCollisionWall",
+            "properties": {}
+          },
+          {
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle",
+            "export_index": 3,
+            "export_name": "xxChangeNextStepFunc_1",
+            "export_type": "xxChangeNextStepFunc",
+            "properties": {
+              "NextSubStateStep": "ESubStateStepByActiveInput::Step7"
+            }
+          }
+        ]
+      },
+      {
+        "step": "ESubStateStepByActiveInput::Step6",
+        "event_key": "ESimpleSkillEventIndex::Index1",
+        "raw_event": {
+          "SkillTag": {
+            "ObjectName": "xxSimpeEvnetTagOnCollisionWall'Default__SB_Yetuga_ChargeTackle_C:xxSimpeEvnetTagOnCollisionWall_3'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle.11"
+          },
+          "Funcs": [
+            {
+              "ObjectName": "xxChangeNextStepFunc'Default__SB_Yetuga_ChargeTackle_C:xxChangeNextStepFunc_7'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle.8"
+            }
+          ]
+        },
+        "resolved": [
+          {
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle",
+            "export_index": 11,
+            "export_name": "xxSimpeEvnetTagOnCollisionWall_3",
+            "export_type": "xxSimpeEvnetTagOnCollisionWall",
+            "properties": {}
+          },
+          {
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle",
+            "export_index": 8,
+            "export_name": "xxChangeNextStepFunc_7",
+            "export_type": "xxChangeNextStepFunc",
+            "properties": {
+              "NextSubStateStep": "ESubStateStepByActiveInput::Step7"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

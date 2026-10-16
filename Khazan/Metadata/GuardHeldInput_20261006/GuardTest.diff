@@ -1,0 +1,169 @@
+﻿diff --git a/Saved/GuardHeldInput_20261006/Before/Source/Khazan/Tests/KZGuardAbilityPIETest.cpp b/Source/Khazan/Tests/KZGuardAbilityPIETest.cpp
+index 5cc239a..6a5c8c9 100644
+--- a/Saved/GuardHeldInput_20261006/Before/Source/Khazan/Tests/KZGuardAbilityPIETest.cpp
++++ b/Source/Khazan/Tests/KZGuardAbilityPIETest.cpp
+@@ -5,6 +5,7 @@
+ 
+ #include "Misc/AutomationTest.h"
+ #include "Ability/KZAbilitySystemComponent.h"
++#include "Ability/KZActionAbility.h"
+ #include "Ability/PlayerAbility/KZGuardAbility.h"
+ #include "Animation/AnimInstance.h"
+ #include "Animation/AnimMontage.h"
+@@ -16,6 +17,10 @@
+ #include "Components/SkeletalMeshComponent.h"
+ #include "Engine/Engine.h"
+ #include "EngineUtils.h"
++#include "EnhancedInputComponent.h"
++#include "InputAction.h"
++#include "Data/KZInputData.h"
++#include "System/KZAssetManager.h"
+ #include "GameFramework/Controller.h"
+ #include "GameFramework/CharacterMovementComponent.h"
+ #include "KZGameplayTags.h"
+@@ -55,6 +60,16 @@ public:
+ 			return true;
+ 		}
+ 		const double Now = Player->GetWorld()->GetTimeSeconds();
++		if (bDispatchHeldGuard)
++		{
++			bObservedPrecedingWindow |= PrecedingAction.IsValid() && (!PrecedingAction->IsActive() || PrecedingAction->HasInputEnded());
++			if (!DispatchInput(KZGameplayTags::Input_Action_Guard, ETriggerEvent::Triggered))
++			{
++				Test->AddError(TEXT("Guard has no native Controller Triggered binding."));
++				Cleanup();
++				return true;
++			}
++		}
+ 		if (Now < NextTime)
+ 		{
+ 			return false;
+@@ -281,6 +296,65 @@ public:
+ 		case 18:
+ 			Check(TEXT("Skipped sections leave no late state or Guard movement limit"), !Guard->IsActive() && !Guarding() && Player->GetLocomotionComponent()->GetResolvedMovementPolicy().MaxAllowedGait != EKZGait::Walk);
+ 			Test->AddInfo(TEXT("GuardMovementPolicy: all movement transitions and late-callback cleanup checked."));
++			Player->HandleInputMoveReleased();
++			NextTime = Now + 0.25;
++			break;
++		case 19:
++			if (!BeginPrecedingAction(KZGameplayTags::Input_Action_X)) { Cleanup(); return true; }
++			bDispatchHeldGuard = true;
++			Check(TEXT("Controller dispatches held Guard while another action blocks it"), DispatchInput(KZGameplayTags::Input_Action_Guard, ETriggerEvent::Triggered) && !Guard->IsActive() && !Guarding() && PrecedingAction->IsActive());
++			break;
++		case 20:
++			if (!Guard->IsActive()) { --Stage; break; }
++			Check(TEXT("Held Guard automatically activates when WeakAttack permits transition"), Guarding() && bObservedPrecedingWindow && !PrecedingAction->IsActive() && ASC->FindAbilitySpecFromHandle(GuardHandle)->InputPressed);
++			Test->AddInfo(TEXT("GuardHeldInput: Controller Triggered retries after WeakAttack window, without a second press."));
++			NextTime = Now + 0.5;
++			break;
++		case 21:
++			Check(TEXT("Continuous Triggered does not restart held Guard after InputEnd"), Guard->IsActive() && Guarding() && Guard->HasInputEnded() && !Anim->GetActiveInstanceForMontage(TestGuardMontage.Get()));
++			if (!BeginPrecedingAction(KZGameplayTags::Input_Action_X)) { Cleanup(); return true; }
++			Check(TEXT("Attack can replace held Guard and block its immediate return"), !Guard->IsActive() && !Guarding() && DispatchInput(KZGameplayTags::Input_Action_Guard, ETriggerEvent::Triggered) && !Guard->IsActive());
++			break;
++		case 22:
++			if (!Guard->IsActive()) { --Stage; break; }
++			Check(TEXT("Same held input restores Guard after an intervening attack"), Guarding() && bObservedPrecedingWindow && !PrecedingAction->IsActive());
++			NextTime = Now + 0.5;
++			break;
++		case 23:
++			bDispatchHeldGuard = false;
++			Check(TEXT("Controller Completed releases Guard"), DispatchInput(KZGameplayTags::Input_Action_Guard, ETriggerEvent::Completed) && !Guarding());
++			CancelActions();
++			if (!BeginPrecedingAction(KZGameplayTags::Input_Action_X)) { Cleanup(); return true; }
++			Check(TEXT("Guard remains blocked before early release"), DispatchInput(KZGameplayTags::Input_Action_Guard, ETriggerEvent::Triggered) && !Guard->IsActive());
++			Check(TEXT("Controller receives release before recovery window"), DispatchInput(KZGameplayTags::Input_Action_Guard, ETriggerEvent::Completed));
++			break;
++		case 24:
++			if (PrecedingAction->IsActive() && !PrecedingAction->HasInputEnded()) { --Stage; break; }
++			Check(TEXT("Released input does not activate Guard later"), !Guard->IsActive() && !Guarding() && !ASC->FindAbilitySpecFromHandle(GuardHandle)->InputPressed);
++			CancelActions();
++			if (!BeginPrecedingAction(KZGameplayTags::Input_Action_X)) { Cleanup(); return true; }
++			Check(TEXT("Guard remains blocked before early cancel"), DispatchInput(KZGameplayTags::Input_Action_Guard, ETriggerEvent::Triggered) && !Guard->IsActive());
++			Check(TEXT("Controller receives cancel before recovery window"), DispatchInput(KZGameplayTags::Input_Action_Guard, ETriggerEvent::Canceled));
++			break;
++		case 25:
++			if (PrecedingAction->IsActive() && !PrecedingAction->HasInputEnded()) { --Stage; break; }
++			Check(TEXT("Canceled input does not activate Guard later"), !Guard->IsActive() && !Guarding() && !ASC->FindAbilitySpecFromHandle(GuardHandle)->InputPressed);
++			CancelActions();
++			if (!BeginPrecedingAction(KZGameplayTags::Input_Action_A)) { Cleanup(); return true; }
++			bDispatchHeldGuard = true;
++			Check(TEXT("Controller cannot activate Guard before Dodge window"), DispatchInput(KZGameplayTags::Input_Action_Guard, ETriggerEvent::Triggered) && !Guard->IsActive());
++			Test->AddInfo(TEXT("GuardHeldInput: intervening attack return, early release and early cancel checked."));
++			break;
++		case 26:
++			if (!Guard->IsActive()) { --Stage; break; }
++			Check(TEXT("Held Guard automatically activates after Dodge permits transition"), Guarding() && bObservedPrecedingWindow && !PrecedingAction->IsActive());
++			NextTime = Now + 0.5;
++			break;
++		case 27:
++			Check(TEXT("Held Guard after Dodge settles without repeated Start"), Guard->IsActive() && Guarding() && Guard->HasInputEnded() && !Anim->GetActiveInstanceForMontage(TestGuardMontage.Get()));
++			bDispatchHeldGuard = false;
++			Check(TEXT("Controller Canceled clears active held Guard"), DispatchInput(KZGameplayTags::Input_Action_Guard, ETriggerEvent::Canceled) && !Guard->IsActive() && !Guarding());
++			Test->AddInfo(TEXT("GuardHeldInput: native Controller callback hold/retry/no-restart and cleanup checked."));
+ 			Cleanup();
+ 			return true;
+ 		}
+@@ -288,6 +362,38 @@ public:
+ 	}
+ 
+ private:
++	bool DispatchInput(const FGameplayTag& InputTag, ETriggerEvent Event)
++	{
++		const UKZInputData* Data = UKZAssetManager::GetAssetByName<UKZInputData>(KZGameplayTags::AssetData_InputData);
++		const UInputAction* Action = Data ? Data->FindInputActionByTag(InputTag) : nullptr;
++		const UEnhancedInputComponent* Input = Player->GetController() ? Cast<UEnhancedInputComponent>(Player->GetController()->InputComponent) : nullptr;
++		if (!Action || !Input) return false;
++		for (const TUniquePtr<FEnhancedInputActionEventBinding>& Binding : Input->GetActionEventBindings())
++		{
++			if (Binding->GetAction() == Action && Binding->GetTriggerEvent() == Event)
++			{
++				// Invoke the real bound private Controller callback through the public engine binding API.
++				Binding->Execute(FInputActionInstance(Action));
++				return true;
++			}
++		}
++		return false;
++	}
++	bool BeginPrecedingAction(const FGameplayTag& InputTag)
++	{
++		PrecedingAction.Reset();
++		bObservedPrecedingWindow = false;
++		if (!DispatchInput(InputTag, ETriggerEvent::Started) || !DispatchInput(InputTag, ETriggerEvent::Completed)) return Test->TestTrue(TEXT("Preceding action Controller bindings exist"), false);
++		for (const FGameplayAbilitySpec& Spec : ASC->GetActivatableAbilities())
++		{
++			if (Spec.IsActive() && Spec.GetDynamicSpecSourceTags().HasTagExact(InputTag))
++			{
++				PrecedingAction = Cast<UKZActionAbility>(Spec.GetPrimaryInstance());
++				break;
++			}
++		}
++		return Test->TestTrue(TEXT("Preceding action starts before its InputEnd"), PrecedingAction.IsValid() && !PrecedingAction->HasInputEnded());
++	}
+ 	bool Guarding() const { return ASC->HasMatchingGameplayTag(KZGameplayTags::State_Guarding); }
+ 	bool AnimBool(FName Name) const { const UAnimInstance* Anim = Player->GetMesh()->GetAnimInstance(); const FBoolProperty* P = FindFProperty<FBoolProperty>(Anim->GetClass(),Name); return P && P->GetPropertyValue_InContainer(Anim); }
+ 	float AnimFloat(FName Name) const { const UAnimInstance* Anim = Player->GetMesh()->GetAnimInstance(); const FFloatProperty* P = FindFProperty<FFloatProperty>(Anim->GetClass(),Name); return P ? P->GetPropertyValue_InContainer(Anim) : MAX_flt; }
+@@ -373,6 +479,7 @@ private:
+ 	void CancelActions() { FGameplayTagContainer Tags(KZGameplayTags::Ability_Action); ASC->CancelAbilities(&Tags); ASC->ClearComboCommands(); }
+ 	void Cleanup()
+ 	{
++		bDispatchHeldGuard = false;
+ 		if (ASC.IsValid()) { CancelActions(); ASC->SetNumericAttributeBase(UKZAttributeSet::GetStaminaAttribute(),SavedStamina); }
+ 		if (Player.IsValid()) { Player->HandleInputMoveReleased(); Player->GetLocomotionComponent()->ReleaseMovementConstraint(RotationHandle); Player->SetActorRotation(SavedRotation); if (Player->GetController()) Player->GetController()->SetControlRotation(SavedControlRotation); }
+ 	}
+@@ -380,6 +487,7 @@ private:
+ 	TWeakObjectPtr<AKZPlayer> Player;
+ 	TWeakObjectPtr<UKZAbilitySystemComponent> ASC;
+ 	TWeakObjectPtr<UKZGuardAbility> Guard;
++	TWeakObjectPtr<UKZActionAbility> PrecedingAction;
+ 	TWeakObjectPtr<UAnimMontage> TestGuardMontage;
+ 	FGameplayAbilitySpecHandle GuardHandle;
+ 	FKZMovementConstraintHandle RotationHandle;
+@@ -388,6 +496,7 @@ private:
+ 	float SavedStamina = 0.f, Baseline = 0.f;
+ 	double Deadline = 0.0, NextTime = 0.0;
+ 	int32 Stage = 0, DirectionIndex = 0;
++	bool bDispatchHeldGuard = false, bObservedPrecedingWindow = false;
+ };
+ 
+ class FWaitForGuardPIE : public IAutomationLatentCommand

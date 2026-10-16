@@ -1,0 +1,68 @@
+{
+  "ApesStoneHandElite": {
+    "definition": {
+      "path": "/Game/Monsters/ApesStoneHandElite/Data/DA_Character_ApesStoneHandElite",
+      "class": "KZCharacterDefinitionData",
+      "hit_reactions": "<Struct 'KZHitReactionSettings' (0x000002BEA60B1CB8) {}>",
+      "monster_stamina": "<Struct 'KZMonsterStaminaSettings' (0x000002BEA60B1D30) {}>"
+    },
+    "abp": {
+      "path": "/Game/Monsters/ApesStoneHandElite/Animations/ABP_ApesStoneHandElite",
+      "class": "AnimBlueprint",
+      "target_skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "parent_class": "AnimBlueprint: Failed to find property 'parent_class' for attribute 'parent_class' on 'AnimBlueprint'"
+    },
+    "clip": {
+      "path": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_Normal_D_F",
+      "class": "AnimSequence",
+      "skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "additive_anim_type": "<AdditiveAnimationType.AAT_NONE: 0>",
+      "ref_pose_type": "<AdditiveBasePoseType.ABPT_NONE: 0>",
+      "ref_frame_index": "0",
+      "ref_pose_seq": "None",
+      "enable_root_motion": "True",
+      "force_root_lock": "True",
+      "rate_scale": "1.0"
+    },
+    "montage": {
+      "path": "/Game/Monsters/ApesStoneHandElite/Animations/Reaction/Montages/AM_ApesStoneHandElite_Hit_Damage_Normal_D_F",
+      "class": "AnimMontage",
+      "blend_in": "<Struct 'AlphaBlend' (0x000002BE91A91A80) {}>",
+      "blend_out": "<Struct 'AlphaBlend' (0x000002BE91A91AB8) {}>",
+      "slot_anim_tracks": "[{slot_name: \"DefaultSlot\", anim_track: {anim_segments: ((CachedPlayLength=0.733333,AnimReference=\"/Script/Engine.AnimSequence'/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_Normal_D_F.Damage_Normal_D_F'\",AnimEndTime=0.733333))}}]"
+    }
+  },
+  "Yetuga": {
+    "definition": {
+      "path": "/Game/Monsters/Yetuga/Data/DA_Character_Yetuga",
+      "class": "KZCharacterDefinitionData",
+      "hit_reactions": "<Struct 'KZHitReactionSettings' (0x000002BECC462BB8) {}>",
+      "monster_stamina": "<Struct 'KZMonsterStaminaSettings' (0x000002BECC462C30) {}>"
+    },
+    "abp": {
+      "path": "/Game/Monsters/Yetuga/Animations/ABP_Yetuga",
+      "class": "AnimBlueprint",
+      "target_skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "parent_class": "AnimBlueprint: Failed to find property 'parent_class' for attribute 'parent_class' on 'AnimBlueprint'"
+    },
+    "clip": {
+      "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_Normal_D_F",
+      "class": "AnimSequence",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "additive_anim_type": "<AdditiveAnimationType.AAT_NONE: 0>",
+      "ref_pose_type": "<AdditiveBasePoseType.ABPT_NONE: 0>",
+      "ref_frame_index": "0",
+      "ref_pose_seq": "None",
+      "enable_root_motion": "True",
+      "force_root_lock": "True",
+      "rate_scale": "1.0"
+    },
+    "montage": {
+      "path": "/Game/Monsters/Yetuga/Animations/Reaction/Montages/AM_Yetuga_Hit_Damage_Normal_D_F",
+      "class": "AnimMontage",
+      "blend_in": "<Struct 'AlphaBlend' (0x000002BEB81AD080) {}>",
+      "blend_out": "<Struct 'AlphaBlend' (0x000002BEB81AD0B8) {}>",
+      "slot_anim_tracks": "[{slot_name: \"DefaultSlot\", anim_track: {anim_segments: ((CachedPlayLength=0.733333,AnimReference=\"/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_Normal_D_F.Damage_Normal_D_F'\",AnimEndTime=0.733333))}}]"
+    }
+  }
+}

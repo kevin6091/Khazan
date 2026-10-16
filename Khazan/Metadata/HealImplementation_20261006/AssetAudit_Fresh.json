@@ -1,0 +1,100 @@
+{
+  "/Game/Bluprints/AbilitySystem/Effects/GE_Init_PlayerHealth": {
+    "class_path": "/Game/Bluprints/AbilitySystem/Effects/GE_Init_PlayerHealth.GE_Init_PlayerHealth_C",
+    "duration_policy": "<GameplayEffectDurationType.INSTANT: 0>",
+    "modifiers": [
+      "(Attribute=(AttributeName=\"MaxHP\",Attribute=/Script/Khazan.KZAttributeSet:MaxHP,AttributeOwner=\"/Script/CoreUObject.Class'/Script/Khazan.KZAttributeSet'\"),ModifierOp=Override,ModifierMagnitude=(MagnitudeCalculationType=ScalableFloat,ScalableFloatMagnitude=(Value=200.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),AttributeBasedMagnitude=(Coefficient=(Value=1.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PreMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PostMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),BackingAttribute=(AttributeToCapture=(AttributeName=\"\",Attribute=,AttributeOwner=None),AttributeSource=Source,bSnapshot=False),AttributeCurve=(CurveTable=None,RowName=\"\"),AttributeCalculationType=AttributeMagnitude,FinalChannel=Channel0,SourceTagFilter=(GameplayTags=),TargetTagFilter=(GameplayTags=)),CustomMagnitude=(CalculationClassMagnitude=None,Coefficient=(Value=1.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PreMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PostMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),FinalLookupCurve=(CurveTable=None,RowName=\"\")),SetByCallerMagnitude=(DataName=\"\",DataTag=(TagName=\"\"))),EvaluationChannelSettings=(Channel=Channel0),SourceTags=(RequireTags=(GameplayTags=),IgnoreTags=(GameplayTags=),TagQuery=(TokenStreamVersion=0,TagDictionary=,QueryTokenStream=,UserDescription=\"\",AutoDescription=\"\")),TargetTags=(RequireTags=(GameplayTags=),IgnoreTags=(GameplayTags=),TagQuery=(TokenStreamVersion=0,TagDictionary=,QueryTokenStream=,UserDescription=\"\",AutoDescription=\"\")))",
+      "(Attribute=(AttributeName=\"HP\",Attribute=/Script/Khazan.KZAttributeSet:HP,AttributeOwner=\"/Script/CoreUObject.Class'/Script/Khazan.KZAttributeSet'\"),ModifierOp=Override,ModifierMagnitude=(MagnitudeCalculationType=ScalableFloat,ScalableFloatMagnitude=(Value=200.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),AttributeBasedMagnitude=(Coefficient=(Value=1.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PreMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PostMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),BackingAttribute=(AttributeToCapture=(AttributeName=\"\",Attribute=,AttributeOwner=None),AttributeSource=Source,bSnapshot=False),AttributeCurve=(CurveTable=None,RowName=\"\"),AttributeCalculationType=AttributeMagnitude,FinalChannel=Channel0,SourceTagFilter=(GameplayTags=),TargetTagFilter=(GameplayTags=)),CustomMagnitude=(CalculationClassMagnitude=None,Coefficient=(Value=1.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PreMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PostMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),FinalLookupCurve=(CurveTable=None,RowName=\"\")),SetByCallerMagnitude=(DataName=\"\",DataTag=(TagName=\"\"))),EvaluationChannelSettings=(Channel=Channel0),SourceTags=(RequireTags=(GameplayTags=),IgnoreTags=(GameplayTags=),TagQuery=(TokenStreamVersion=0,TagDictionary=,QueryTokenStream=,UserDescription=\"\",AutoDescription=\"\")),TargetTags=(RequireTags=(GameplayTags=),IgnoreTags=(GameplayTags=),TagQuery=(TokenStreamVersion=0,TagDictionary=,QueryTokenStream=,UserDescription=\"\",AutoDescription=\"\")))"
+    ]
+  },
+  "/Game/Bluprints/AbilitySystem/Effects/GE_Player_Heal": {
+    "class_path": "/Game/Bluprints/AbilitySystem/Effects/GE_Player_Heal.GE_Player_Heal_C",
+    "duration_policy": "<GameplayEffectDurationType.INSTANT: 0>",
+    "modifiers": [
+      "(Attribute=(AttributeName=\"HP\",Attribute=/Script/Khazan.KZAttributeSet:HP,AttributeOwner=\"/Script/CoreUObject.Class'/Script/Khazan.KZAttributeSet'\"),ModifierOp=AddBase,ModifierMagnitude=(MagnitudeCalculationType=ScalableFloat,ScalableFloatMagnitude=(Value=100.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),AttributeBasedMagnitude=(Coefficient=(Value=1.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PreMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PostMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),BackingAttribute=(AttributeToCapture=(AttributeName=\"\",Attribute=,AttributeOwner=None),AttributeSource=Source,bSnapshot=False),AttributeCurve=(CurveTable=None,RowName=\"\"),AttributeCalculationType=AttributeMagnitude,FinalChannel=Channel0,SourceTagFilter=(GameplayTags=),TargetTagFilter=(GameplayTags=)),CustomMagnitude=(CalculationClassMagnitude=None,Coefficient=(Value=1.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PreMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),PostMultiplyAdditiveValue=(Value=0.000000,Curve=(CurveTable=None,RowName=\"\"),RegistryType=\"None\"),FinalLookupCurve=(CurveTable=None,RowName=\"\")),SetByCallerMagnitude=(DataName=\"\",DataTag=(TagName=\"\"))),EvaluationChannelSettings=(Channel=Channel0),SourceTags=(RequireTags=(GameplayTags=),IgnoreTags=(GameplayTags=),TagQuery=(TokenStreamVersion=0,TagDictionary=,QueryTokenStream=,UserDescription=\"\",AutoDescription=\"\")),TargetTags=(RequireTags=(GameplayTags=),IgnoreTags=(GameplayTags=),TagQuery=(TokenStreamVersion=0,TagDictionary=,QueryTokenStream=,UserDescription=\"\",AutoDescription=\"\")))"
+    ]
+  },
+  "/Game/Bluprints/AbilitySystem/Abilities/Player/Heal/GA_Player_Heal": {
+    "class_path": "/Game/Bluprints/AbilitySystem/Abilities/Player/Heal/GA_Player_Heal.GA_Player_Heal_C",
+    "montage": "/Game/_Art/Player/Animation/InGame/DAS/Heal/AM_DAS_Player_Heal.AM_DAS_Player_Heal",
+    "effect": "/Game/Bluprints/AbilitySystem/Effects/GE_Player_Heal.GE_Player_Heal_C",
+    "cost": "None",
+    "cooldown": "None"
+  },
+  "clip": {
+    "rate_scale": 1.0,
+    "enable_root_motion": false
+  },
+  "montage": {
+    "slots": [
+      "(SlotName=\"UpperBody\",AnimTrack=(AnimSegments=((CachedPlayLength=1.466667,AnimReference=\"/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Heal/CA_P_Kazan_DualAxeSword_Heal_01.CA_P_Kazan_DualAxeSword_Heal_01'\",AnimEndTime=1.466667))))"
+    ],
+    "sections": [
+      "Heal"
+    ],
+    "blend_in": "(CustomCurve=None,BlendTime=0.100000,BlendOption=HermiteCubic)",
+    "blend_out": "(CustomCurve=None,BlendTime=0.100000,BlendOption=HermiteCubic)"
+  },
+  "notify_validation": "Heal/InputEnd delivery and once/cancel semantics were validated by native Khazan.Heal.PIE; protected Notifies property is not read by Python.",
+  "abp_status": "<BlueprintStatus.BS_UP_TO_DATE: 3>",
+  "input_rows": [
+    "(InputTag=(TagName=\"Input.Action.Move\"),InputAction=\"/Script/EnhancedInput.InputAction'/Game/Input/Locomotion/IA_Move.IA_Move'\")",
+    "(InputTag=(TagName=\"Input.Action.Turn\"),InputAction=\"/Script/EnhancedInput.InputAction'/Game/Input/Locomotion/IA_Turn.IA_Turn'\")",
+    "(InputTag=(TagName=\"Input.Action.X\"),InputAction=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_WeakAttack.IA_WeakAttack'\")",
+    "(InputTag=(TagName=\"Input.Action.Y\"),InputAction=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_StrongAttack.IA_StrongAttack'\")",
+    "(InputTag=(TagName=\"Input.Action.Sprint\"),InputAction=\"/Script/EnhancedInput.InputAction'/Game/Input/Locomotion/IA_Sprint.IA_Sprint'\")",
+    "(InputTag=(TagName=\"Input.Action.LockOn\"),InputAction=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_LockOn.IA_LockOn'\")",
+    "(InputTag=(TagName=\"Input.Action.A\"),InputAction=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_Dodge.IA_Dodge'\")",
+    "(InputTag=(TagName=\"Input.Action.Guard\"),InputAction=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_Guard.IA_Guard'\")",
+    "(InputTag=(TagName=\"Input.Action.Heal\"),InputAction=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_Heal.IA_Heal'\")"
+  ],
+  "input_mappings": [
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/Locomotion/IA_Turn.IA_Turn'\",Key=Gamepad_Right2D,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/Locomotion/IA_Jump.IA_Jump'\",Key=Gamepad_FaceButton_Bottom,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_WeakAttack.IA_WeakAttack'\",Key=Gamepad_FaceButton_Left,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_StrongAttack.IA_StrongAttack'\",Key=Gamepad_FaceButton_Top,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=(\"/Script/EnhancedInput.InputModifierSwizzleAxis'/Game/Input/IMC_Default.IMC_Default:InputModifierSwizzleAxis_0'\"),Action=\"/Script/EnhancedInput.InputAction'/Game/Input/Locomotion/IA_Move.IA_Move'\",Key=Gamepad_Left2D,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/Locomotion/IA_Sprint.IA_Sprint'\",Key=Gamepad_LeftThumbstick,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_WeakAttack.IA_WeakAttack'\",Key=LeftMouseButton,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_StrongAttack.IA_StrongAttack'\",Key=RightMouseButton,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_LockOn.IA_LockOn'\",Key=Gamepad_RightThumbstick,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_Dodge.IA_Dodge'\",Key=Gamepad_FaceButton_Bottom,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_Guard.IA_Guard'\",Key=LeftShift,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_Guard.IA_Guard'\",Key=Gamepad_LeftShoulder,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_Dodge.IA_Dodge'\",Key=SpaceBar,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_LockOn.IA_LockOn'\",Key=MiddleMouseButton,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/Locomotion/IA_Turn.IA_Turn'\",Key=Mouse2D,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)",
+    "(Triggers=,Modifiers=,Action=\"/Script/EnhancedInput.InputAction'/Game/Input/IA_Heal.IA_Heal'\",Key=Gamepad_DPad_Down,SettingBehavior=InheritSettingsFromAction,PlayerMappableKeySettings=None)"
+  ],
+  "initial_grants": [
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/BasicAttack/GA_Player_WeakAttack.GA_Player_WeakAttack_C'\",InputTag=(TagName=\"Input.Action.X\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/BasicAttack/GA_Player_StrongCharge.GA_Player_StrongCharge_C'\",InputTag=(TagName=\"Input.Action.Y\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/BasicAttack/GA_Player_StrongAttack.GA_Player_StrongAttack_C'\",InputTag=(TagName=\"\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_F.GA_Player_DodgeAbility_F_C'\",InputTag=(TagName=\"Input.Action.A\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_RF.GA_Player_DodgeAbility_RF_C'\",InputTag=(TagName=\"Input.Action.A\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_R.GA_Player_DodgeAbility_R_C'\",InputTag=(TagName=\"Input.Action.A\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_RB.GA_Player_DodgeAbility_RB_C'\",InputTag=(TagName=\"Input.Action.A\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_B.GA_Player_DodgeAbility_B_C'\",InputTag=(TagName=\"Input.Action.A\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_LB.GA_Player_DodgeAbility_LB_C'\",InputTag=(TagName=\"Input.Action.A\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_L.GA_Player_DodgeAbility_L_C'\",InputTag=(TagName=\"Input.Action.A\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_LF.GA_Player_DodgeAbility_LF_C'\",InputTag=(TagName=\"Input.Action.A\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/DodgeAttack/GA_Player_DodgeAttack_B.GA_Player_DodgeAttack_B_C'\",InputTag=(TagName=\"\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/DodgeAttack/GA_Player_DodgeAttack_F.GA_Player_DodgeAttack_F_C'\",InputTag=(TagName=\"\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/DodgeAttack/GA_Player_DodgeAttack_L.GA_Player_DodgeAttack_L_C'\",InputTag=(TagName=\"\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/DodgeAttack/GA_Player_DodgeAttack_R.GA_Player_DodgeAttack_R_C'\",InputTag=(TagName=\"\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/Guard/GA_Player_Guard.GA_Player_Guard_C'\",InputTag=(TagName=\"Input.Action.Guard\"))",
+    "(AbilityClass=\"/Script/Engine.BlueprintGeneratedClass'/Game/Bluprints/AbilitySystem/Abilities/Player/Heal/GA_Player_Heal.GA_Player_Heal_C'\",InputTag=(TagName=\"Input.Action.Heal\"))"
+  ],
+  "initial_effects": [
+    "/Game/Bluprints/AbilitySystem/Effects/GE_Init_PlayerStamina.GE_Init_PlayerStamina_C",
+    "/Game/Bluprints/AbilitySystem/Effects/GE_Player_StaminaRegen.GE_Player_StaminaRegen_C",
+    "/Game/Bluprints/AbilitySystem/Effects/GE_Init_PlayerHealth.GE_Init_PlayerHealth_C"
+  ],
+  "locomotion_config": "(WalkSpeed=170.000000,RunSpeed=470.000000,SprintSpeed=600.000000,MinAnalogWalkSpeed=15.000000,MaxAcceleration=4000.000000,BrakingDecelerationWalking=1800.000000,RotationRate=(Pitch=0.000000,Yaw=720.000000,Roll=0.000000),DefaultRequestedGait=Walk,DefaultMaxAllowedGait=Sprint,DefaultRequestedRotationMode=VelocityDirection)",
+  "worlds": {
+    "editor": "/Game/Maps/DevMap.DevMap",
+    "game": null
+  },
+  "dirty_content": [],
+  "dirty_maps": []
+}

@@ -1,0 +1,88 @@
+[
+  {
+    "Type": "xxAIData",
+    "Name": "AI_Yetuga",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAIData'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/AI_Yetuga",
+    "Properties": {
+      "SetupType": "EAISetupType::Custom",
+      "ActorClass": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CB_Yetuga.CB_Yetuga_C",
+        "SubPathString": ""
+      },
+      "CombatPreset": {
+        "bCanEditStaminaVariable": true
+      },
+      "RecognitionValue": {
+        "SightRange": 6500.0,
+        "SightYaw": 360.0
+      },
+      "TargetSelectType": "ETargetSelectType::Random",
+      "TargetUpdateConditions": [
+        {
+          "ObjectName": "xxTargetUpdateCond_Time'AI_Yetuga:xxTargetUpdateCond_Time_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/AI_Yetuga.3"
+        }
+      ],
+      "CombatTrigger": {
+        "ObjectName": "xxAITrigger_Combat'AI_Yetuga:CombatTrigger'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/AI_Yetuga.1"
+      },
+      "PeaceTrigger": {
+        "ObjectName": "xxAITrigger_Peace'AI_Yetuga:PeaceTrigger'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/AI_Yetuga.2"
+      },
+      "BattleRetreatSetting": {
+        "BattleRange": 20000.0
+      }
+    }
+  },
+  {
+    "Type": "xxAITrigger_Combat",
+    "Name": "CombatTrigger",
+    "Flags": "RF_Public | RF_Transactional | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAITrigger_Combat'",
+    "Outer": {
+      "ObjectName": "xxAIData'AI_Yetuga'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/AI_Yetuga.0"
+    },
+    "Properties": {
+      "TriggerName": "CombatTrigger",
+      "BehaviorTree": {
+        "ObjectName": "xxNBehaviorTree'BT_Yetuga'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/BT_Yetuga.0"
+      }
+    }
+  },
+  {
+    "Type": "xxAITrigger_Peace",
+    "Name": "PeaceTrigger",
+    "Flags": "RF_Public | RF_Transactional | RF_DefaultSubObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAITrigger_Peace'",
+    "Outer": {
+      "ObjectName": "xxAIData'AI_Yetuga'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/AI_Yetuga.0"
+    },
+    "Properties": {
+      "TriggerName": "PeaceTrigger",
+      "BehaviorTree": {
+        "ObjectName": "xxNBehaviorTree'BT_PeacePreset'",
+        "ObjectPath": "BBQ/Content/_Common/AI/BT_PeacePreset.0"
+      }
+    }
+  },
+  {
+    "Type": "xxTargetUpdateCond_Time",
+    "Name": "xxTargetUpdateCond_Time_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxTargetUpdateCond_Time'",
+    "Outer": {
+      "ObjectName": "xxAIData'AI_Yetuga'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/AI_Yetuga.0"
+    },
+    "Properties": {
+      "TImeSeconds": 6
+    }
+  }
+]

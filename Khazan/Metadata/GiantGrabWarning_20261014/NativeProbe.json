@@ -1,0 +1,238 @@
+{
+  "status": "passed",
+  "monsters": [
+    {
+      "family": "ApesStoneHandElite",
+      "mesh": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Meshes/SK_EN_ApesStoneHandElite.SK_EN_ApesStoneHandElite",
+      "ui_chest": true,
+      "spine2": true,
+      "head": true,
+      "scale": "<Struct 'Vector' (0x000001E7B2A93DB0) {x: 1.000000, y: 1.000000, z: 1.000000}>"
+    },
+    {
+      "family": "Yetuga",
+      "mesh": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Meshes/SK_EN_Yetuga.SK_EN_Yetuga",
+      "ui_chest": true,
+      "spine2": true,
+      "head": true,
+      "scale": "<Struct 'Vector' (0x000001E7CF3D79B0) {x: 1.000000, y: 1.000000, z: 1.000000}>"
+    }
+  ],
+  "particle": {
+    "path": "/Game/_Art/Effects/Combat/GrabWarning/FP_UI_BurstAttact_Grab.FP_UI_BurstAttact_Grab",
+    "emitters": 9,
+    "names": [
+      "Particle Emitter",
+      "Particle Emitter",
+      "Particle Emitter",
+      "1_blur",
+      "1",
+      "2_Blur",
+      "2",
+      "3_blur",
+      "3"
+    ],
+    "required_materials": [
+      "/Game/_Art/Effects/Shared/Materials/Fluid/MI/FMI_fluid_A_15.FMI_fluid_A_15",
+      "/Game/_Art/Effects/Shared/Materials/Fluid/MI/FMI_fluid_A_14.FMI_fluid_A_14",
+      "/Game/_Art/Effects/Combat/GrabWarning/Materials/FM_BurstAttack_BG.FM_BurstAttack_BG",
+      "/Game/_Art/Effects/Combat/GrabWarning/Materials/FMI_calligraphie.FMI_calligraphie",
+      "/Game/_Art/Effects/Combat/GrabWarning/Materials/FM_calligraphie.FM_calligraphie",
+      "/Game/_Art/Effects/Combat/GrabWarning/Materials/FMI_calligraphie.FMI_calligraphie",
+      "/Game/_Art/Effects/Combat/GrabWarning/Materials/FM_calligraphie.FM_calligraphie",
+      "/Game/_Art/Effects/Combat/GrabWarning/Materials/FMI_calligraphie.FMI_calligraphie",
+      "/Game/_Art/Effects/Combat/GrabWarning/Materials/FM_calligraphie.FM_calligraphie"
+    ],
+    "emitter_details": [
+      {
+        "name": "Particle Emitter",
+        "type_data": null,
+        "mesh_material_overrides": [],
+        "colors": [
+          {
+            "color": "<Struct 'InterpCurveVector' (0x000001E7AD0F31C0) {points: ((OutVal=(X=2.000000,Y=1.000000,Z=0.000000)),(InVal=0.066667,OutVal=(X=2.166666,Y=1.500000,Z=0.000000)),(InVal=0.133333,OutVal=(X=2.333334,Y=2.000000,Z=0.000000)),(InVal=0.200000,OutVal=(X=2.489370,Y=2.479921,Z=0.000000)),(InVal=0.266667,OutVal=(X=2.291667,Y=2.291667,Z=0.000000)),(InVal=0.333333,OutVal=(X=2.083333,Y=2.083333,Z=0.000000)),(InVal=0.400000,OutVal=(X=1.875000,Y=1.875000,Z=0.000000)),(InVal=0.466667,OutVal=(X=1.666667,Y=1.666667,Z=0.000000)),(InVal=0.533333,OutVal=(X=1.458333,Y=1.458333,Z=0.000000)),(InVal=0.600000,OutVal=(X=1.250000,Y=1.250000,Z=0.000000)),(InVal=0.666667,",
+            "alpha_class": "DistributionFloatConstantCurve"
+          }
+        ]
+      },
+      {
+        "name": "Particle Emitter",
+        "type_data": null,
+        "mesh_material_overrides": [],
+        "colors": [
+          {
+            "color": "<Struct 'InterpCurveVector' (0x000001E7AD0F3220) {points: ((OutVal=(X=10.000000,Y=5.000000,Z=0.000000)),(InVal=0.250000,OutVal=(X=1.000000,Y=0.500000,Z=0.000000))), is_looped: False, loop_key_offset: 0.000000}>",
+            "alpha_class": "DistributionFloatConstantCurve"
+          }
+        ]
+      },
+      {
+        "name": "Particle Emitter",
+        "type_data": null,
+        "mesh_material_overrides": [],
+        "colors": [
+          {
+            "color": "<Struct 'InterpCurveVector' (0x000001E7AD0F2F20) {points: ((OutVal=(X=0.500000,Y=0.250000,Z=0.000000)),(InVal=1.000000,OutVal=(X=0.100000,Y=0.050000,Z=0.000000))), is_looped: False, loop_key_offset: 0.000000}>",
+            "alpha_class": "DistributionFloatConstant"
+          }
+        ]
+      },
+      {
+        "name": "1_blur",
+        "type_data": {
+          "mesh": "/Game/_Art/Effects/Combat/GrabWarning/Meshes/FS_BurstA_001.FS_BurstA_001",
+          "override_material": true
+        },
+        "mesh_material_overrides": [],
+        "colors": [
+          {
+            "color": "<Struct 'InterpCurveVector' (0x000001E7AD0F30A0) {points: ((OutVal=(X=5.000000,Y=2.500000,Z=0.000000)),(InVal=1.000000,OutVal=(X=0.100000,Y=0.000000,Z=0.000000))), is_looped: False, loop_key_offset: 0.000000}>",
+            "alpha_class": "DistributionFloatConstant"
+          }
+        ]
+      },
+      {
+        "name": "1",
+        "type_data": {
+          "mesh": "/Game/_Art/Effects/Combat/GrabWarning/Meshes/FS_BurstA_001.FS_BurstA_001",
+          "override_material": true
+        },
+        "mesh_material_overrides": [],
+        "colors": [
+          {
+            "color": "<Struct 'InterpCurveVector' (0x000001E7AD0F2F80) {points: ((OutVal=(X=5.000000,Y=2.500000,Z=0.000000)),(InVal=0.250000,OutVal=(X=0.100000,Y=0.000000,Z=0.000000))), is_looped: False, loop_key_offset: 0.000000}>",
+            "alpha_class": "DistributionFloatConstantCurve"
+          }
+        ]
+      },
+      {
+        "name": "2_Blur",
+        "type_data": {
+          "mesh": "/Game/_Art/Effects/Combat/GrabWarning/Meshes/FS_BurstA_002.FS_BurstA_002",
+          "override_material": true
+        },
+        "mesh_material_overrides": [],
+        "colors": [
+          {
+            "color": "<Struct 'InterpCurveVector' (0x000001E7AD0F3100) {points: ((OutVal=(X=5.000000,Y=2.500000,Z=0.000000)),(InVal=1.000000,OutVal=(X=0.100000,Y=0.000000,Z=0.000000))), is_looped: False, loop_key_offset: 0.000000}>",
+            "alpha_class": "DistributionFloatConstant"
+          }
+        ]
+      },
+      {
+        "name": "2",
+        "type_data": {
+          "mesh": "/Game/_Art/Effects/Combat/GrabWarning/Meshes/FS_BurstA_002.FS_BurstA_002",
+          "override_material": true
+        },
+        "mesh_material_overrides": [],
+        "colors": [
+          {
+            "color": "<Struct 'InterpCurveVector' (0x000001E7AD0F2FE0) {points: ((OutVal=(X=5.000000,Y=2.500000,Z=0.000000)),(InVal=0.200000,OutVal=(X=0.100000,Y=0.000000,Z=0.000000))), is_looped: False, loop_key_offset: 0.000000}>",
+            "alpha_class": "DistributionFloatConstantCurve"
+          }
+        ]
+      },
+      {
+        "name": "3_blur",
+        "type_data": {
+          "mesh": "/Game/_Art/Effects/Combat/GrabWarning/Meshes/FS_BurstA_003.FS_BurstA_003",
+          "override_material": true
+        },
+        "mesh_material_overrides": [],
+        "colors": [
+          {
+            "color": "<Struct 'InterpCurveVector' (0x000001E7AD0F3160) {points: ((OutVal=(X=5.000000,Y=2.500000,Z=0.000000)),(InVal=1.000000,OutVal=(X=0.100000,Y=0.000000,Z=0.000000))), is_looped: False, loop_key_offset: 0.000000}>",
+            "alpha_class": "DistributionFloatConstant"
+          }
+        ]
+      },
+      {
+        "name": "3",
+        "type_data": {
+          "mesh": "/Game/_Art/Effects/Combat/GrabWarning/Meshes/FS_BurstA_003.FS_BurstA_003",
+          "override_material": true
+        },
+        "mesh_material_overrides": [],
+        "colors": [
+          {
+            "color": "<Struct 'InterpCurveVector' (0x000001E7AD0F3040) {points: ((OutVal=(X=5.000000,Y=2.500000,Z=0.000000)),(InVal=0.100000,OutVal=(X=0.100000,Y=0.000000,Z=0.000000))), is_looped: False, loop_key_offset: 0.000000}>",
+            "alpha_class": "DistributionFloatConstant"
+          }
+        ]
+      }
+    ]
+  },
+  "errors": [],
+  "fx_methods": [
+    "get_cascade_emitter_lod_level",
+    "get_lod_level_is_enabled",
+    "get_lod_level_modules",
+    "get_lod_level_required_module",
+    "get_lod_level_spawn_module",
+    "get_lod_level_type_data_module",
+    "get_particle_module_acceleration_drag_props",
+    "get_particle_module_acceleration_drag_scale_over_life_props",
+    "get_particle_module_acceleration_over_lifetime_props",
+    "get_particle_module_acceleration_props",
+    "get_particle_module_attractor_line_props",
+    "get_particle_module_attractor_particle_props",
+    "get_particle_module_attractor_point_props",
+    "get_particle_module_beam_noise_props",
+    "get_particle_module_beam_source_props",
+    "get_particle_module_beam_target_props",
+    "get_particle_module_camera_offset_props",
+    "get_particle_module_collision_props",
+    "get_particle_module_color_over_life_props",
+    "get_particle_module_color_props",
+    "get_particle_module_color_scale_over_life_props",
+    "get_particle_module_constant_acceleration_props",
+    "get_particle_module_is_enabled",
+    "get_particle_module_kill_box_props",
+    "get_particle_module_lifetime_props",
+    "get_particle_module_light_props",
+    "get_particle_module_location_bone_socket_props",
+    "get_particle_module_location_direct_props",
+    "get_particle_module_location_primitive_cylinder_props",
+    "get_particle_module_location_primitive_sphere_props",
+    "get_particle_module_location_props",
+    "get_particle_module_location_skel_vert_surface_props",
+    "get_particle_module_location_world_offset_props",
+    "get_particle_module_mesh_material_props",
+    "get_particle_module_mesh_rotation_props",
+    "get_particle_module_mesh_rotation_rate_multiply_life_props",
+    "get_particle_module_mesh_rotation_rate_over_life_props",
+    "get_particle_module_mesh_rotation_rate_props",
+    "get_particle_module_orbit_props",
+    "get_particle_module_orientation_axis_lock_props",
+    "get_particle_module_parameter_dynamic_props",
+    "get_particle_module_pivot_offset_props",
+    "get_particle_module_required_per_emitter_props",
+    "get_particle_module_required_per_module_props",
+    "get_particle_module_required_per_renderer_props",
+    "get_particle_module_rotation_over_lifetime_props",
+    "get_particle_module_rotation_props",
+    "get_particle_module_rotation_rate_multiply_life_props",
+    "get_particle_module_rotation_rate_props",
+    "get_particle_module_size_multiply_life_props",
+    "get_particle_module_size_props",
+    "get_particle_module_size_scale_by_speed_props",
+    "get_particle_module_size_scale_props",
+    "get_particle_module_spawn_per_unit_props",
+    "get_particle_module_spawn_props",
+    "get_particle_module_sub_uv_movie_props",
+    "get_particle_module_sub_uv_props",
+    "get_particle_module_trail_source_props",
+    "get_particle_module_type_data_beam2_props",
+    "get_particle_module_type_data_gpu_props",
+    "get_particle_module_type_data_mesh_props",
+    "get_particle_module_type_data_ribbon_class",
+    "get_particle_module_type_data_ribbon_props",
+    "get_particle_module_vector_field_local_props",
+    "get_particle_module_vector_field_rotation_rate_props",
+    "get_particle_module_velocity_cone_props",
+    "get_particle_module_velocity_inherit_parent_props",
+    "get_particle_module_velocity_over_lifetime_props",
+    "get_particle_module_velocity_props"
+  ]
+}

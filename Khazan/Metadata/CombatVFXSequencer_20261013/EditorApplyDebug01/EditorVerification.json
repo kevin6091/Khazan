@@ -1,0 +1,86 @@
+{
+  "status": "failed",
+  "mode": "apply_probe",
+  "asset": "/Game/Tools/CombatVFX/LS_DAS_Player_WeakAttack02_VFX.LS_DAS_Player_WeakAttack02_VFX",
+  "manifest": {
+    "version": 2,
+    "montage": "/Game/_Art/Player/Animation/InGame/DAS/WeakAttack/AM_DAS_WeakAttackCombo.AM_DAS_WeakAttackCombo",
+    "animation": "/Game/_Art/Player/Animation/InGame/DAS/WeakAttack/DAS_Player_WeakAttack02.DAS_Player_WeakAttack02",
+    "origin": 2.0,
+    "duration": 1.899999976158142,
+    "trim": 0.0,
+    "play_rate": 1.0,
+    "bindings": {
+      "128CB7BD41C436D4D1234FAA95D84806": {
+        "id": "KZWeaponSlash_KZFX_7b29e7a3260186fbb7016da5",
+        "weapon": true
+      }
+    },
+    "managed_ids": [
+      "KZWeaponSlash_KZFX_7b29e7a3260186fbb7016da5"
+    ],
+    "body_binding": "0273F8D843F2C2D6ADD8B4A8E0EC7E0B"
+  },
+  "bindings": [
+    {
+      "name": "Player | DAS_Player_WeakAttack02",
+      "id": "<Struct 'Guid' (0x0000024E3236AE50) {}>",
+      "tracks": [
+        "MovieSceneSpawnTrack",
+        "MovieScene3DTransformTrack",
+        "MovieSceneSkeletalAnimationTrack"
+      ]
+    },
+    {
+      "name": "VFX | KZWeaponSlash_KZFX_7b29e7a3260186fbb7016da5",
+      "id": "<Struct 'Guid' (0x0000024E3236AD30) {}>",
+      "tracks": [
+        "MovieSceneSpawnTrack",
+        "MovieScene3DTransformTrack",
+        "MovieScene3DAttachTrack"
+      ]
+    },
+    {
+      "name": "NiagaraComponent0",
+      "id": "<Struct 'Guid' (0x0000024E3236AB90) {}>",
+      "tracks": [
+        "MovieSceneNiagaraSystemTrack"
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "name": "CharacterMesh0",
+      "mesh": "<Object '/Game/_Art/Player/Character/Meshs/SKM_Player.SKM_Player' (0x0000024D2E4CAA00) Class 'SkeletalMesh'>"
+    },
+    {
+      "name": "DualAxeSword_Imperial_L",
+      "mesh": "<Object '/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_L.DualAxeSword_Imperial_L' (0x0000024D2E4CB400) Class 'SkeletalMesh'>"
+    },
+    {
+      "name": "DualAxeSword_Imperial_R",
+      "mesh": "<Object '/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_R.DualAxeSword_Imperial_R' (0x0000024D2E4CBE00) Class 'SkeletalMesh'>"
+    },
+    {
+      "name": "Arm",
+      "mesh": "<Object '/Game/_Art/Player/Character/Meshs/Arm/Player_Original_Arm.Player_Original_Arm' (0x0000024D2E4C7800) Class 'SkeletalMesh'>"
+    },
+    {
+      "name": "Hair",
+      "mesh": "<Object '/Game/_Art/Player/Character/Meshs/Hair/Player_Original_Hair.Player_Original_Hair' (0x0000024D2E4C8200) Class 'SkeletalMesh'>"
+    },
+    {
+      "name": "Leg",
+      "mesh": "<Object '/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg.Player_Original_Leg' (0x0000024D2E4C9600) Class 'SkeletalMesh'>"
+    },
+    {
+      "name": "Shoes",
+      "mesh": "<Object '/Game/_Art/Player/Character/Meshs/Shoes/Player_Original_Shoes.Player_Original_Shoes' (0x0000024D2E4CA000) Class 'SkeletalMesh'>"
+    },
+    {
+      "name": "Torso",
+      "mesh": "<Object '/Game/_Art/Player/Character/Meshs/Torso/Player_Original_Torso.Player_Original_Torso' (0x0000024D2E4C8C00) Class 'SkeletalMesh'>"
+    }
+  ],
+  "error": "Traceback (most recent call last):\n  File \"C:/Users/user/Desktop/GitProject/Khazan/Khazan/Scripts/Engineering/combat_vfx_sequencer_editor_verify_20261013.py\", line 27, in run_verification\n    manifest, edits = tool.collect_edits(sequence)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users/user/Desktop/GitProject/Khazan/Khazan/Content/Python\\kz_combat_vfx_sequencer.py\", line 309, in collect_edits\n    p, r, s = local.translation, local.rotation.rotator().euler(), local.scale3d\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'Rotator' object has no attribute 'euler'\n"
+}

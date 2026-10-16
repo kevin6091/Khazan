@@ -1,0 +1,59 @@
+{
+  "test": "Khazan.Guard.PIE",
+  "result": "passed",
+  "editor_process_id": 33588,
+  "engine": "UE 5.8.2",
+  "mode": "native Automation test in actual DevMap PIE; no Python movement injection",
+  "started_utc": "2026-10-02 10:39:05",
+  "completed_utc": "2026-10-02 10:39:21",
+  "assertion_labels": [
+    "Press activates Guard and state tag",
+    "Activation is free",
+    "Start blocks actions before InputEnd",
+    "Guard caps gait at Walk",
+    "Invalid/too expensive hits are rejected",
+    "Held Guard survives Start completion",
+    "Holding Guard is free",
+    "Anim snapshot sees Guard",
+    "LockOn Guard direction uses current movement input",
+    "Non-LockOn Guard selects F",
+    "Held Guard accepts a hit including repeated success reaction",
+    "Success deducts exactly attack-provided stamina damage",
+    "Success selects F/L/R",
+    "Success blocks stamina regeneration temporarily",
+    "Release immediately removes defense",
+    "Release during success advances to End with early InputEnd",
+    "Release clears guard pose and Walk limit",
+    "Movement cancels End recovery after InputEnd",
+    "Attack can replace held Guard after InputEnd",
+    "Tap immediately clears defense",
+    "Tap queues End at Start InputEnd",
+    "Input Cancel cleans Guard without End",
+    "Late callbacks do not restore state; delay expires",
+    "End naturally completes without movement",
+    "Guard reactivates after natural End",
+    "UnPossess cancels Guard and clears its movement handle"
+  ],
+  "random_sections_final_run": [
+    "Suc_F",
+    "Suc_F",
+    "Suc_R"
+  ],
+  "known_fixture_errors": {
+    "exact_missing_asset_message": "Cant find Asset Path from Asset Name [None].",
+    "test_monster_missing_character_definition": 4,
+    "expected_occurrences_per_message": 4
+  },
+  "physical_keyboard_gamepad_tested": false,
+  "visual_blend_quality_tested": false,
+  "enemy_hit_hp_routing_tested": false,
+  "guard_break_implemented": false,
+  "cleanup": {
+    "agent_breakpoints": 0,
+    "user_exception_breakpoints_preserved": 8,
+    "debugger_detached": true,
+    "pie": "Idle",
+    "editor_map": "/Game/Maps/L_StormPass_Environment",
+    "dirty_packages": 0
+  }
+}

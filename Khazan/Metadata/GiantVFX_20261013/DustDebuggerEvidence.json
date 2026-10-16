@@ -1,0 +1,102 @@
+{
+  "root_cause": "Runtime uses LOD2; later snow palette/atlas passes changed only LOD0. All LOD materials must be updated while preserving per-LOD module density and timing.",
+  "process": 25056,
+  "observations": [
+    {
+      "command": "xdebug_get_stack --sessionId \"UnrealEditor (25056)\" --limit 6",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"frames\":[{\"presentation\":\"KZGiantVFXQA::FReview::Update() KZMonsterPresentationRepairPIETest.cpp:437\",\"index\":0,\"file\":\"file://C:/Users/user/Desktop/GitProject/Khazan_GiantVFXWork_20261013/Khazan/Source/Khazan/Tests/KZMonsterPresentationRepairPIETest.cpp\",\"line\":437,\"isCurrent\":true}],\"threadId\":\"Thread-1-[GameThread] (31360)\",\"totalFrames\":1}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (25056)\" --frameIndex 0 --expression \"Solo->EmitterInstances\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Solo->EmitterInstances = Num=8, Max=8 {TArray<FParticleEmitterInstance *, TSizedDefaultAllocator<32>>}\n  ├─ + [0] =  // 0x000001a7c2303600 {Component=, CurrentLODLevel= // 0x000001a7b8fd5880 (Name=\"ParticleLODLevel\"_2, InternalFlags=ReachabilityFlag1), CurrentLODLevelIndex=2, ...} {FParticleEmitterInstance *}\n  ├─ + [1] =  // 0x000001a7c2303900 {Component=, CurrentLODLevel= // 0x000001a7b8fd4b00 (Name=\"ParticleLODLevel\"_2, InternalFlags=ReachabilityFlag1), CurrentLODLevelIndex=2, ...} {FParticleEmitterInstance *}\n  ├─ + [2] =  // 0x000001a7c2303c00 {Component=, CurrentLODLevel= // 0x000001a7b8fd4d40 (Name=\"ParticleLODLevel\"_2, InternalFlags=ReachabilityFlag1), CurrentLODLevelIndex=2, ...} {FParticleEmitterInstance *}\n  ├─ + [3] =  // 0x000001a7c2303f00 {Component=, CurrentLODLevel= // 0x000001a7b8fd51c0 (Name=\"ParticleLODLevel\"_2, InternalFlags=ReachabilityFlag1), CurrentLODLevelIndex=2, ...} {FParticleEmitterInstance *}\n  ├─ + [4] =  // 0x000001a7c2304200 {Component=, CurrentLODLevel= // 0x000001a7b8fd4f80 (Name=\"ParticleLODLevel\"_2, InternalFlags=ReachabilityFlag1), CurrentLODLevelIndex=2, ...} {FParticleEmitterInstance *}\n  ├─ + [5] =  // 0x000001a7c2304500 {Component=, CurrentLODLevel= // 0x000001a7b8fd5400 (Name=\"ParticleLODLevel\"_2, InternalFlags=ReachabilityFlag1), CurrentLODLevelIndex=2, ...} {FParticleEmitterInstance *}\n  ├─ + [6] =  // 0x000001a7c2304800 {Component=, CurrentLODLevel= // 0x000001a7b8fd5640 (Name=\"ParticleLODLevel\"_2, InternalFlags=ReachabilityFlag1), CurrentLODLevelIndex=2, ...} {FParticleEmitterInstance *}\n  ├─ + [7] =  // 0x000001a7c2304b00 {Component=, CurrentLODLevel= // 0x000001a7b8fd4800 (Name=\"ParticleLODLevel\"_2, InternalFlags=ReachabilityFlag1), CurrentLODLevelIndex=2, ...} {FParticleEmitterInstance *}\n  └─ + Raw View = {AllocatorInstance={TSizedAllocatorBase<32,TSizedHeapAllocator<32,FMemory> >::ForAnyElementType={Data= // 0x000001a7c22fdc80 {...}}}, ArrayNum=8, ArrayMax=8} {TArray<FParticleEmitterInstance *, TSizedDefaultAllocator<32>>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (25056)\" --frameIndex 0 --expression \"Solo->Template\" --depth 0",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Solo->Template =  // 0x000001a7b8b54b00 (Name=\"KZ_FP_Boss_Yetuga_Slashdust_HalfCircle_Left_01_68f90e0b\", InternalFlags=ReachabilityFlag1) {TObjectPtr<UParticleSystem>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (25056)\" --frameIndex 0 --expression \"Solo->EmitterInstances[1]->CurrentLODLevelIndex\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Solo->EmitterInstances[1]->CurrentLODLevelIndex = 2 {int}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (25056)\" --frameIndex 0 --expression \"Solo->EmitterInstances[1]->CurrentMaterial\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Solo->EmitterInstances[1]->CurrentMaterial =  // 0x000001a7ac74a800 (Name=\"MI_Atlas_MI_KZGiant_Snow_FMI_World_SubUV_color_A_04_1x1\", InternalFlags=ReachabilityFlag1) {UMaterialInterface *}\n  ├─ + UObject = (Name=\"MI_Atlas_MI_KZGiant_Snow_FMI_World_SubUV_color_A_04_1x1\", InternalFlags=ReachabilityFlag1) {UObject}\n  ├─ + EditorOnlyData =  // 0x000001a7aca13e00 (Name=\"MI_Atlas_MI_KZGiant_Snow_FMI_World_SubUV_color_A_04_1x1EditorOnlyData\", InternalFlags=ReachabilityFlag1) {TObjectPtr<UMaterialInterfaceEditorOnlyData>}\n  ├─ + SubsurfaceProfile = nullptr {TObjectPtr<USubsurfaceProfile>}\n  ├─ + SubsurfaceProfiles = Empty {TArray<TObjectPtr<USubsurfaceProfile>, TSizedDefaultAllocator<32>>}\n  ├─ + SpecularProfiles = Empty {TArray<TObjectPtr<USpecularProfile>, TSizedDefaultAllocator<32>>}\n  ├─ + ToonProfiles = Empty {TArray<TObjectPtr<UToonProfile>, TSizedDefaultAllocator<32>>}\n  ├─ + NeuralProfile = nullptr {TObjectPtr<UNeuralProfile>}\n  ├─ + OnBaseMaterialSetEvent = Empty {TMulticastDelegate<void __cdecl(UMaterialInterface *), FDefaultDelegateUserPolicy>}\n  ├─ + ParentRefFence = {CompletionTask={empty}} {FRenderCommandFence}\n  ├─ + LightmassSettings = {EmissiveBoost=1, DiffuseBoost=1, ExportResolutionScale=1, ...} {FLightmassMaterialInterfaceSettings}\n  ├─ bTextureStreamingDataSorted = false {bool}\n  ├─ TextureStreamingDataVersion = 0 {int}\n  ├─ + TextureStreamingData = Empty {TArray<FMaterialTextureInfo, TSizedDefaultAllocator<32>>}\n  ├─ + ReferencedDefaultTextures = Empty {TArray<TObjectPtr<UObject>, TSizedDefaultAllocator<32>>}\n  ├─ + AssetUserData = Empty {TArray<TObjectPtr<UAssetUserData>, TSizedDefaultAllocator<32>>}\n  ├─ + CachedTexturesSamplingInfo = nullptr {TSharedPtr<FMaterialCachedTexturesSamplingInfo, 1>}\n  ├─ + CachedTexturesSamplingInfoLock = {Lock=Unset} {UMaterialInterface::FCacheRWLock}\n  ├─ FeatureLevelsToForceCompile = 0 {unsigned int}\n  ├─ + TextureStreamingDataMutex = {State=0, ThreadId=0} {UE::FRecursiveMutex}\n  ├─ bIncludedInBaseGame = 0 \"'\\0'\" {unsigned char:1}\n  ├─ + TextureStreamingDataMissingEntries = Empty {TArray<FMaterialTextureInfo, TSizedDefaultAllocator<32>>}\n  ├─ + PreviewMesh = {AssetPath={PackageName=\"None\", AssetName=\"None\"}, SubPathString=Empty} {FSoftObjectPath}\n  ├─ + ThumbnailInfo = nullptr {TObjectPtr<UThumbnailInfo>}\n  ├─ + LayerParameterExpansion = Empty {TMap<FString, bool, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FString, bool, 0>>}\n  ├─ + ParameterOverviewExpansion = Empty {TMap<FString, bool, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FString, bool, 0>>}\n  ├─ + AssetImportData = nullptr {TObjectPtr<UAssetImportData>}\n  ├─ + CachedMaterialResourcesForCooking = Empty {TMap<const ITargetPlatform *, TArray<FMaterialResourceForCooking, TSizedDefaultAllocator<32>>, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<const ITargetPlatform *, TArray<FMaterialResourceForCooking, TSizedDefaultAllocator<32>>, 0>>}\n  ├─ + LightingGuid = {7C017408-437B-A4D6-EA9A-489057152162} {FGuid}\n  ├─ + MaterialInsight = nullptr {TUniquePtr<FMaterialInsights, TDefaultDelete<FMaterialInsights>>}\n  ├─ bLoadedCachedExpressionData = false {bool}\n  ├─ + CachedExpressionData = nullptr {TUniquePtr<FMaterialCachedExpressionData, TDefaultDelete<FMaterialCachedExpressionData>>}\n  ├─ UsageFlagWarnings = 0 {unsigned int}\n  ├─ + UsageFlagCacheMiss = 0 {std::atomic<unsigned int>}\n  ├─ + CachedStaticParameterValues = Unset {TOptional<FStaticParameterSet>}\n  ├─ AllowCachingStaticParameterValuesCounter = 0 \"'\\0'\" {unsigned char}\n  └─ bShouldForcePlanePreview = false {bool}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (25056)\" --frameIndex 0 --expression \"Solo->EmitterInstances[1]->CurrentLODLevel->RequiredModule->Material\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Solo->EmitterInstances[1]->CurrentLODLevel->RequiredModule->Material =  // 0x000001a7ac74a800 (Name=\"MI_Atlas_MI_KZGiant_Snow_FMI_World_SubUV_color_A_04_1x1\", InternalFlags=ReachabilityFlag1) {TObjectPtr<UMaterialInterface>}\n  ├─ + UObject = (Name=\"MI_Atlas_MI_KZGiant_Snow_FMI_World_SubUV_color_A_04_1x1\", InternalFlags=ReachabilityFlag1) {UObject}\n  ├─ + EditorOnlyData =  // 0x000001a7aca13e00 (Name=\"MI_Atlas_MI_KZGiant_Snow_FMI_World_SubUV_color_A_04_1x1EditorOnlyData\", InternalFlags=ReachabilityFlag1) {TObjectPtr<UMaterialInterfaceEditorOnlyData>}\n  ├─ + SubsurfaceProfile = nullptr {TObjectPtr<USubsurfaceProfile>}\n  ├─ + SubsurfaceProfiles = Empty {TArray<TObjectPtr<USubsurfaceProfile>, TSizedDefaultAllocator<32>>}\n  ├─ + SpecularProfiles = Empty {TArray<TObjectPtr<USpecularProfile>, TSizedDefaultAllocator<32>>}\n  ├─ + ToonProfiles = Empty {TArray<TObjectPtr<UToonProfile>, TSizedDefaultAllocator<32>>}\n  ├─ + NeuralProfile = nullptr {TObjectPtr<UNeuralProfile>}\n  ├─ + OnBaseMaterialSetEvent = Empty {TMulticastDelegate<void __cdecl(UMaterialInterface *), FDefaultDelegateUserPolicy>}\n  ├─ + ParentRefFence = {CompletionTask={empty}} {FRenderCommandFence}\n  ├─ + LightmassSettings = {EmissiveBoost=1, DiffuseBoost=1, ExportResolutionScale=1, ...} {FLightmassMaterialInterfaceSettings}\n  ├─ bTextureStreamingDataSorted = false {bool}\n  ├─ TextureStreamingDataVersion = 0 {int}\n  ├─ + TextureStreamingData = Empty {TArray<FMaterialTextureInfo, TSizedDefaultAllocator<32>>}\n  ├─ + ReferencedDefaultTextures = Empty {TArray<TObjectPtr<UObject>, TSizedDefaultAllocator<32>>}\n  ├─ + AssetUserData = Empty {TArray<TObjectPtr<UAssetUserData>, TSizedDefaultAllocator<32>>}\n  ├─ + CachedTexturesSamplingInfo = nullptr {TSharedPtr<FMaterialCachedTexturesSamplingInfo, 1>}\n  ├─ + CachedTexturesSamplingInfoLock = {Lock=Unset} {UMaterialInterface::FCacheRWLock}\n  ├─ FeatureLevelsToForceCompile = 0 {unsigned int}\n  ├─ + TextureStreamingDataMutex = {State=0, ThreadId=0} {UE::FRecursiveMutex}\n  ├─ bIncludedInBaseGame = 0 \"'\\0'\" {unsigned char:1}\n  ├─ + TextureStreamingDataMissingEntries = Empty {TArray<FMaterialTextureInfo, TSizedDefaultAllocator<32>>}\n  ├─ + PreviewMesh = {AssetPath={PackageName=\"None\", AssetName=\"None\"}, SubPathString=Empty} {FSoftObjectPath}\n  ├─ + ThumbnailInfo = nullptr {TObjectPtr<UThumbnailInfo>}\n  ├─ + LayerParameterExpansion = Empty {TMap<FString, bool, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FString, bool, 0>>}\n  ├─ + ParameterOverviewExpansion = Empty {TMap<FString, bool, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FString, bool, 0>>}\n  ├─ + AssetImportData = nullptr {TObjectPtr<UAssetImportData>}\n  ├─ + CachedMaterialResourcesForCooking = Empty {TMap<const ITargetPlatform *, TArray<FMaterialResourceForCooking, TSizedDefaultAllocator<32>>, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<const ITargetPlatform *, TArray<FMaterialResourceForCooking, TSizedDefaultAllocator<32>>, 0>>}\n  ├─ + LightingGuid = {7C017408-437B-A4D6-EA9A-489057152162} {FGuid}\n  ├─ + MaterialInsight = nullptr {TUniquePtr<FMaterialInsights, TDefaultDelete<FMaterialInsights>>}\n  ├─ bLoadedCachedExpressionData = false {bool}\n  ├─ + CachedExpressionData = nullptr {TUniquePtr<FMaterialCachedExpressionData, TDefaultDelete<FMaterialCachedExpressionData>>}\n  ├─ UsageFlagWarnings = 0 {unsigned int}\n  ├─ + UsageFlagCacheMiss = 0 {std::atomic<unsigned int>}\n  ├─ + CachedStaticParameterValues = Unset {TOptional<FStaticParameterSet>}\n  ├─ AllowCachingStaticParameterValuesCounter = 0 \"'\\0'\" {unsigned char}\n  ├─ bShouldForcePlanePreview = false {bool}\n  └─ + Raw View = {={ObjectPtr= // 0x000001a7ac74a800 (Name=\"MI_Atlas_MI_KZGiant_Snow_FMI_World_SubUV_color_A_04_1x1\", InternalFlags=ReachabilityFlag1), DebugPtr= // 0x000001a7ac74a800 (Name=\"MI_Atlas_MI_KZGiant_Snow_FMI_World_SubUV_color_A_04_1x1\", InternalFlags=ReachabilityFlag1}} {TObjectPtr<UMaterialInterface>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (25056)\" --frameIndex 0 --expression \"Solo->Template->LODDistances\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Solo->Template->LODDistances = Num=3, Max=3 {TArray<float, TSizedDefaultAllocator<32>>}\n  ├─ [0] = 0 {float}\n  ├─ [1] = 2500 {float}\n  ├─ [2] = 5000 {float}\n  └─ + Raw View = {AllocatorInstance={TSizedAllocatorBase<32,TSizedHeapAllocator<32,FMemory> >::ForAnyElementType={Data= // 0x000001a7bcd74050 {...}}}, ArrayNum=3, ArrayMax=3} {TArray<float, TSizedDefaultAllocator<32>>}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (25056)\" --frameIndex 0 --expression \"Solo->Template->Emitters[1]->LODLevels\" --depth 1",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Solo->Template->Emitters[1]->LODLevels = Num=3, Max=3 {TArray<TObjectPtr<UParticleLODLevel>, TSizedDefaultAllocator<32>>}\n  ├─ + [0] =  // 0x000001a7b8fd4980 (Name=\"ParticleLODLevel\"_0, InternalFlags=ReachabilityFlag1) {TObjectPtr<UParticleLODLevel>}\n  ├─ + [1] =  // 0x000001a7b8fd4a40 (Name=\"ParticleLODLevel\"_1, InternalFlags=ReachabilityFlag1) {TObjectPtr<UParticleLODLevel>}\n  ├─ + [2] =  // 0x000001a7b8fd4b00 (Name=\"ParticleLODLevel\"_2, InternalFlags=ReachabilityFlag1) {TObjectPtr<UParticleLODLevel>}\n  └─ + Raw View = {AllocatorInstance={TSizedAllocatorBase<32,TSizedHeapAllocator<32,FMemory> >::ForAnyElementType={Data= // 0x000001a613c52400 {...}}}, ArrayNum=3, ArrayMax=3} {TArray<TObjectPtr<UParticleLODLevel>, TSizedDefaultAllocator<32>>}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  ]
+}

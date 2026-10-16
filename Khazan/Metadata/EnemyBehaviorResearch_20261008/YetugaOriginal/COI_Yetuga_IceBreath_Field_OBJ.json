@@ -1,0 +1,106 @@
+[
+  {
+    "Type": "xxBaseCustomObjectInfo",
+    "Name": "COI_Yetuga_IceBreath_Field_OBJ",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxBaseCustomObjectInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/COI_Yetuga_IceBreath_Field_OBJ",
+    "Properties": {
+      "SkillSetupInfo": {
+        "ObjectName": "xxProjectileSkillSetupInfoV2'COI_Yetuga_IceBreath_Field_OBJ:xxProjectileSkillSetupInfoV2_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/COI_Yetuga_IceBreath_Field_OBJ.1"
+      },
+      "SkillObjectCallFromTopCharacterList": [
+        "ESkillObjectCallFromTopCharacter::RemoveSpell"
+      ],
+      "bShareHitInfo": true,
+      "SyncSpawnInfo": {
+        "ObjectName": "xxSkillObjectSpawnInfoForSync'COI_Yetuga_IceBreath_Field_OBJ:xxSkillObjectSpawnInfoForSync_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/COI_Yetuga_IceBreath_Field_OBJ.4"
+      }
+    }
+  },
+  {
+    "Type": "xxProjectileSkillSetupInfoV2",
+    "Name": "xxProjectileSkillSetupInfoV2_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxProjectileSkillSetupInfoV2'",
+    "Outer": {
+      "ObjectName": "xxBaseCustomObjectInfo'COI_Yetuga_IceBreath_Field_OBJ'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/COI_Yetuga_IceBreath_Field_OBJ.0"
+    },
+    "Properties": {
+      "ProjectileInfo": {
+        "Option": {
+          "IsThroughTarget": true,
+          "IsExplosionCollisionToWorld": false,
+          "DoNotExplosionCollisionToDownCharacter": true,
+          "MoveLifeTime": 10.0
+        },
+        "IdleStep": {
+          "ObjectName": "xxProjectileSkillStep_Idle'COI_Yetuga_IceBreath_Field_OBJ:xxProjectileSkillSetupInfoV2_0.xxProjectileSkillStep_Idle_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/COI_Yetuga_IceBreath_Field_OBJ.3"
+        },
+        "DestructionStep": {
+          "ObjectName": "xxProjectileSkillStep_Destruction'COI_Yetuga_IceBreath_Field_OBJ:xxProjectileSkillSetupInfoV2_0.xxProjectileSkillStep_Destruction_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/COI_Yetuga_IceBreath_Field_OBJ.2"
+        },
+        "DamageInfos": [
+          {
+            "ObjectName": "xxDamageInfo'SD_Yetuga_IceBreath_OBJ'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/SD_Yetuga_IceBreath_OBJ.0"
+          },
+          {
+            "ObjectName": "xxDamageInfo'SD_Yetuga_IceBreath_ExplosionOBJ'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/SD_Yetuga_IceBreath_ExplosionOBJ.0"
+          }
+        ]
+      },
+      "bUseLifeTime": true,
+      "LifeTime": 10.0
+    }
+  },
+  {
+    "Type": "xxProjectileSkillStep_Destruction",
+    "Name": "xxProjectileSkillStep_Destruction_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxProjectileSkillStep_Destruction'",
+    "Outer": {
+      "ObjectName": "xxProjectileSkillSetupInfoV2'COI_Yetuga_IceBreath_Field_OBJ:xxProjectileSkillSetupInfoV2_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/COI_Yetuga_IceBreath_Field_OBJ.1"
+    },
+    "Properties": {
+      "Animation": {
+        "ObjectName": "AnimComposite'AC_Yetuga_IceBreath_OBJ_Straght_Expolsion'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/AC_Yetuga_IceBreath_OBJ_Straght_Expolsion.0"
+      }
+    }
+  },
+  {
+    "Type": "xxProjectileSkillStep_Idle",
+    "Name": "xxProjectileSkillStep_Idle_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxProjectileSkillStep_Idle'",
+    "Outer": {
+      "ObjectName": "xxProjectileSkillSetupInfoV2'COI_Yetuga_IceBreath_Field_OBJ:xxProjectileSkillSetupInfoV2_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/COI_Yetuga_IceBreath_Field_OBJ.1"
+    },
+    "Properties": {
+      "AutoChangeDestructionState": true,
+      "Animation": {
+        "ObjectName": "AnimComposite'AC_Yetuga_IceBreath_OBJ_Straght_Idle'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/AC_Yetuga_IceBreath_OBJ_Straght_Idle.0"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillObjectSpawnInfoForSync",
+    "Name": "xxSkillObjectSpawnInfoForSync_0",
+    "Flags": "RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillObjectSpawnInfoForSync'",
+    "Outer": {
+      "ObjectName": "xxBaseCustomObjectInfo'COI_Yetuga_IceBreath_Field_OBJ'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/IceBreath_OBJ/COI_Yetuga_IceBreath_Field_OBJ.0"
+    }
+  }
+]

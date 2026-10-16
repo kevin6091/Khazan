@@ -1,0 +1,63 @@
+[
+  {
+    "Type": "xxDamageInfo",
+    "Name": "SD_Kazan_DualSwordAxe_Com_Grapple_Back_01",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SD_Kazan_DualSwordAxe_Com_Grapple_Back_01",
+    "Properties": {
+      "AttackInfo": {
+        "AttackType": "ECharacterAttackType::HoldAttackAuto_DamagerReaction",
+        "DamageInfoApplyRule": "EDamageInfoApplyRule::DieHard",
+        "SkillPowerInfo": {
+          "SkillPowerBonus": 400000
+        },
+        "StaminaAttackInfo": {
+          "StaminaAttackRate": 1
+        },
+        "AttackableFlags": [
+          "ECharacterAttackableFlag::StaminaExhaustionSkillTarget"
+        ]
+      },
+      "AttackerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true,
+        "TimeSectionDelayData": {
+          "LoopTime": 0.15
+        }
+      },
+      "DamagerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "TimeSectionDelayData": {
+          "StartTime": 0.02,
+          "LoopTime": 0.15
+        }
+      },
+      "DamagerKnockData": {
+        "KnockBackType": "EKnockbackType::None"
+      },
+      "SpecialDamageAniminfo": {
+        "bUseCommonAnimType": false,
+        "SpecialDamageAnimType": "ESpecialDamageAniType::Grapple_Back1"
+      },
+      "DamagerRotatorInfo": {
+        "RotatorDir": "ERotatorDir::Front",
+        "RotatorDirTime": 0.0
+      },
+      "AttackerHitEffect": {
+        "ParticleInfo": {
+          "bSyncData": true
+        }
+      },
+      "DamageSounds": [
+        {
+          "ObjectName": "AkAudioEvent'efx_dualaxesword_grappleatk_hit'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/skill/dualaxesword/common/efx_dualaxesword_grappleatk_hit.0"
+        }
+      ],
+      "bCustomDamageSound": true,
+      "CustomDamageSound": "ECustomDamageSoundKey::Key1",
+      "AttackStrength": "EBattleDirecting_AttackStrength::AttackStrength_04"
+    }
+  }
+]

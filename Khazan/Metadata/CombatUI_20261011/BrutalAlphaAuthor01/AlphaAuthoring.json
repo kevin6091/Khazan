@@ -1,0 +1,34 @@
+{
+  "status": "failed",
+  "project": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan",
+  "asset": "/Game/UI/Combat/Materials/M_UI_BrutalRing",
+  "sha256": "4e039a608be9764cd0628a95ed179b34cf0f4ead96169ae5d9fb8c7715190450",
+  "blend_mode": "<BlendMode.BLEND_TRANSLUCENT: 2>",
+  "material_domain": "<MaterialDomain.MD_UI: 5>",
+  "custom_code": "float d=length(UV-float2(.5,.5)); float aa=max(fwidth(d),.0001); float a=(1-smoothstep(.49-aa,.49+aa,d))*smoothstep(.38-aa,.38+aa,d); return float4(.859375,.02238,.02238,a);",
+  "masks": [
+    {
+      "path": "/Game/UI/Combat/Materials/M_UI_BrutalRing.M_UI_BrutalRing:MaterialExpressionComponentMask_0",
+      "r": true,
+      "g": true,
+      "b": true,
+      "a": false
+    },
+    {
+      "path": "/Game/UI/Combat/Materials/M_UI_BrutalRing.M_UI_BrutalRing:MaterialExpressionComponentMask_1",
+      "r": true,
+      "g": true,
+      "b": false,
+      "a": true
+    }
+  ],
+  "texture": {
+    "filter": "<TextureFilter.TF_DEFAULT: 3>",
+    "compression_settings": "<TextureCompressionSettings.TC_EDITOR_ICON: 7>",
+    "compression_no_alpha": "False",
+    "address_x": "<TextureAddress.TA_WRAP: 0>",
+    "address_y": "<TextureAddress.TA_WRAP: 0>",
+    "srgb": "True"
+  },
+  "error": "Traceback (most recent call last):\n  File \"C:/Users/user/Desktop/GitProject/Khazan/Khazan/Scripts/Art/soften_combat_ui_brutal_alpha_20261011.py\", line 84, in <module>\n    assert unreal.EditorAssetLibrary.save_loaded_asset(mat, only_if_is_dirty=False), 'Material save failed'\nAssertionError: Material save failed\n"
+}

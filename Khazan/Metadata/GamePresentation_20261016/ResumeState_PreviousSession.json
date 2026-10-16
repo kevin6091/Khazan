@@ -1,0 +1,37 @@
+{
+  "date_kst":"2026-10-16",
+  "status":"google_drive_installed_awaiting_fresh_session_tools",
+  "last_connection_check_utc":"2026-10-15T15:50:52Z",
+  "user_reported_google_account_connected":true,
+  "google_drive_installed_verified":true,
+  "google_drive_tools_available_in_current_session":false,
+  "connection_receipt":"ConnectionCheck02.json",
+  "requested_output":"editable Google Slides",
+  "google_slides_created":false,
+  "google_slides_url":null,
+  "pptx_created":false,
+  "prepared_slide_count":15,
+  "content":"deck.json",
+  "preview":"preview/index.html",
+  "preview_generator":"build/prepare_preview.mjs",
+  "assets":"assets",
+  "source_asset_manifest":"AssetManifest.json",
+  "visual_review":{"rendered_slides":15,"individually_reviewed_slides":15,"format":"private HTML preview at 1280x720","native_google_slides_reviewed":false},
+  "blockers":[
+    "Google Drive installation is now verified (installed=true) and the user reports account connection. This existing session exposes no Google Drive/Slides/import tools and no tool discovery loader. Do not ask the user to reconnect or reinstall. Resume in a fresh supported ChatGPT desktop session that loads the installed plugin.",
+    "The current session still has no load_workspace_dependencies tool and a fresh import of @oai/artifact-tool failed with Module not found. Verify the presentation runtime in the new session before authoring. No substitute PPTX library was installed."
+  ],
+  "pending_user_question":null,
+  "next_user_action":"Start a new ChatGPT desktop Codex chat in the same Khazan project with Google Drive enabled and continue from this receipt. Account reconnection is not requested.",
+  "image_encoding_note":"portal.png has all-zero alpha; blood.png also has mostly unusable framebuffer alpha. System.Drawing format conversion made *_rgb.png without changing any stored RGB pixel. PIL read-only ImageChops comparisons found no RGB differences. Originals are preserved. Portal slide crops the image to focus on the player and portal.",
+  "source_modifications":0,
+  "game_asset_modifications":0,
+  "new_game_builds_or_tests":0,
+  "resume_steps":[
+    "Read 0_DOCUMENT_ROUTER.md, this receipt, and the appended Engineering/Art continuity sections. Do not redo source research or gameplay changes.",
+    "Google Drive installed=true is verified and the user reports connection. Find the newly loaded Google Drive/Slides import tools in the fresh supported session. Do not repeat the earlier install/connect request.",
+    "Read the connected Google Slides skill/import schema. The normal presentation skill route is a locally checked PPTX imported with upload_mode=native_google_slides. Resolve the missing authoring runtime, or use a different creation method if the user requests it.",
+    "Use deck.json for all 15 slide titles, copy, tables, source notes and image paths. Use the reviewed HTML/PNG layouts as the design reference. Keep text/tables native and editable.",
+    "Create the actual Google Slides deck, inspect all converted slides and slide count, repair any conversion issue, then deliver its verified URL. Do not claim the HTML preview is native Google Slides."
+  ]
+}

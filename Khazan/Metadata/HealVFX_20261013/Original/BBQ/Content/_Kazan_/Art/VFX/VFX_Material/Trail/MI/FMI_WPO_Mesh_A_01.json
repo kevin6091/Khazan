@@ -1,0 +1,79 @@
+[
+  {
+    "Type": "MaterialInstanceConstant",
+    "Name": "FMI_WPO_Mesh_A_01",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MaterialInstanceConstant'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/Trail/MI/FMI_WPO_Mesh_A_01",
+    "Properties": {
+      "Parent": {
+        "ObjectName": "Material'FM_WPO_Mesh_A'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/Trail/FM_WPO_Mesh_A.0"
+      },
+      "bHasStaticPermutationResource": true,
+      "ScalarParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "RefractionDepthBias",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.0,
+          "ExpressionGUID": "00000000-00000000-00000000-00000000"
+        }
+      ],
+      "BasePropertyOverrides": {
+        "TwoSided": true,
+        "BlendMode": "BLEND_Masked",
+        "ShadingModel": "MSM_BBQCartoon",
+        "OpacityMaskClipValue": 0.3333
+      },
+      "StaticParameters": {
+        "StaticSwitchParameters": [
+          {
+            "Value": true,
+            "ParameterInfo": {
+              "Name": "UseDissolveTex",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            "bOverride": true,
+            "ExpressionGUID": "5A8F7D17-41CA2364-665387BB-F7FF2E13"
+          }
+        ]
+      },
+      "CachedReferencedTextures": [
+        {
+          "ObjectName": "Texture2D'FT_Fire_ribbon_04'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Ribbon/FT_Fire_ribbon_04.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_Cloud_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Cloud_01.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_Noise_007'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_007.0"
+        }
+      ],
+      "TextureStreamingData": [
+        {
+          "SamplingScale": 0.5,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Cloud_01"
+        },
+        {
+          "SamplingScale": 0.203125,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Fire_ribbon_04"
+        },
+        {
+          "SamplingScale": 1.0,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Noise_007"
+        }
+      ]
+    },
+    "LoadedMaterialResources": []
+  }
+]

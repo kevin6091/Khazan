@@ -1,0 +1,142 @@
+{
+  "status": "current_main_binding_repaired_and_targeted_runtime_passed",
+  "date_kst": "2026-10-13",
+  "scope": {
+    "giant_families": [
+      "ApesStoneHandElite",
+      "Yetuga"
+    ],
+    "source_events": 701,
+    "source_sequences": 212,
+    "attack_windows_with_guard_sound": 294,
+    "pattern_objects_with_guard_sound": 4,
+    "fastball_flight_sounds": 2,
+    "recipient_impact_definitions": 2
+  },
+  "changes": {
+    "main_packages": [
+      {
+        "asset": "/Game/Monsters/ApesStoneHandElite/Data/DA_OriginalPatterns_ApesStoneHandElite",
+        "before_sha256": "4588e6f36dc02e955a7154bcfedc591b0ef0729a833c328457423b544578602c",
+        "after_sha256": "82eb21b94475d5fa70e1c0377f9ad335218fc93d45a425065a6059e4e3af6589",
+        "backup": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\GiantSFX_20261013\\MainGiantAudioRepair01\\Before\\Content\\Monsters\\ApesStoneHandElite\\Data\\DA_OriginalPatterns_ApesStoneHandElite.uasset",
+        "windows_changed": 42,
+        "objects_changed": 1,
+        "projectiles_changed": 1,
+        "non_audio_struct_fields_equal": true
+      },
+      {
+        "asset": "/Game/Monsters/Yetuga/Data/DA_OriginalPatterns_Yetuga",
+        "before_sha256": "39699acacbc17cf006372efca5cf0f982ea9e45de530d9f1f16bcfa72c3740d7",
+        "after_sha256": "2974f09902c87f07ea10d3bc20c0fa60984e6b59fbfbaa1619b086d8b7738dd6",
+        "backup": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\GiantSFX_20261013\\MainGiantAudioRepair01\\Before\\Content\\Monsters\\Yetuga\\Data\\DA_OriginalPatterns_Yetuga.uasset",
+        "windows_changed": 252,
+        "objects_changed": 3,
+        "projectiles_changed": 1,
+        "non_audio_struct_fields_equal": true
+      }
+    ],
+    "runtime_gameplay_code_changed": false,
+    "qa_change": "Existing Khazan.Audio.PIE sample plan may select a saved montage and section.",
+    "numeric_provenance": "Source cue bindings; no new gameplay timing/gain values. Existing source retime under one 60 Hz frame preserved."
+  },
+  "verification": {
+    "saved_audit": "MainGiantSavedAuditFinal/GiantSFXAudit.json",
+    "saved_packages_written_by_audit": 0,
+    "families": {
+      "ApesStoneHandElite": {
+        "source_events": 253,
+        "source_clips": 87,
+        "matched_events": 253,
+        "missing_events": 0,
+        "extra_events": 0,
+        "null_sounds": 0,
+        "wrong_cues": 0,
+        "time_shifts": 0,
+        "retimed_under_one_60hz_frame": 54,
+        "intentional_stop_only": 6,
+        "only_local_or_locked": 0
+      },
+      "Yetuga": {
+        "source_events": 448,
+        "source_clips": 125,
+        "matched_events": 448,
+        "missing_events": 0,
+        "extra_events": 0,
+        "null_sounds": 0,
+        "wrong_cues": 0,
+        "time_shifts": 0,
+        "retimed_under_one_60hz_frame": 96,
+        "intentional_stop_only": 1,
+        "only_local_or_locked": 0
+      }
+    },
+    "combos": [
+      {
+        "asset": "/Game/Monsters/ApesStoneHandElite/Data/DA_OriginalPatterns_ApesStoneHandElite",
+        "expected_windows": 42,
+        "expected_objects": 1,
+        "windows": 42,
+        "guards": 42,
+        "objects": 1,
+        "object_guards": 1,
+        "projectile_sounds": 1,
+        "issues": [],
+        "new_current_windows": 0
+      },
+      {
+        "asset": "/Game/Monsters/Yetuga/Data/DA_OriginalPatterns_Yetuga",
+        "expected_windows": 250,
+        "expected_objects": 3,
+        "windows": 252,
+        "guards": 252,
+        "objects": 3,
+        "object_guards": 3,
+        "projectile_sounds": 1,
+        "issues": [],
+        "new_current_windows": 2
+      }
+    ],
+    "recipient_impact": [
+      {
+        "asset": "/Game/Monsters/ApesStoneHandElite/Data/DA_Character_ApesStoneHandElite",
+        "expected_sound": "/Game/Audio/Original/Events/SC_efx_pc_enemy_hit_rock.SC_efx_pc_enemy_hit_rock",
+        "current_sound": "/Game/Audio/Original/Events/SC_efx_pc_enemy_hit_rock.SC_efx_pc_enemy_hit_rock",
+        "issue": null
+      },
+      {
+        "asset": "/Game/Monsters/Yetuga/Data/DA_Character_Yetuga",
+        "expected_sound": "/Game/Audio/Original/Events/SC_efx_pc_enemy_hit_yetuga.SC_efx_pc_enemy_hit_yetuga",
+        "current_sound": "/Game/Audio/Original/Events/SC_efx_pc_enemy_hit_yetuga.SC_efx_pc_enemy_hit_yetuga",
+        "issue": null
+      }
+    ],
+    "runtime": "FinalMainAudioRHI01/Driver.json",
+    "runtime_samples": 26,
+    "runtime_giant_samples": 22,
+    "runtime_player_samples": 4,
+    "runtime_cancel_samples": 2,
+    "runtime_projectile_samples": 2,
+    "runtime_mixed_peak": 0.528594970703125,
+    "runtime_mixed_clipped_samples": 0,
+    "ballista_animation_audio": "BallistaInteractionRHI01/Driver.json",
+    "ballista_clip_peak": 0.10968017578125,
+    "main_module": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Binaries\\Win64\\UnrealEditor-Khazan.dll",
+    "main_module_sha256": "13216031f522edb520d84e6efbc2600634af9fad3f2a6ce6bb10a0a45f19d83a",
+    "loaded_module_log": "[2026.10.13-14.16.29:462][  0]LogModuleManager: InternalLoadLibrary: 'Khazan' ('C:/Users/user/Desktop/GitProject/Khazan/Khazan/Binaries/Win64/UnrealEditor-Khazan.dll')",
+    "native_completion": "[2026.10.13-14.18.21:768][ 43]LogAutomationController: Display: Test Completed. Result={Success} Name={PIE} Path={Khazan.Audio.PIE}"
+  },
+  "source_content_exception": {
+    "asset": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Idle/Locomotion_Stand_F_Original_Variant02",
+    "finding": "Apes idle uses the original shared Yetuga Stand_F sequence and its Yetuga foley/voice events.",
+    "source_proof": "Saved/ImportReports/GameplayAudio_20261011/AudioAuthoringPlan01.json; source_package BBQ/Content/_Kazan_/Art/Character/CHA_Model/Monster/Yetuga/Ani/CA_M_Yetuga_Stand_F",
+    "changed": false
+  },
+  "limits": [
+    "Readback covers all 701 planned giant events, but RHI directly samples 22 giant cases rather than every action and transition.",
+    "A synthetic dynamic-montage fixture can skip audio inside its first update; current saved giant pattern montages passed the same early dodge, turn and guard-reaction cues. Do not generalize dynamic-montage failures to the saved pattern path.",
+    "The Ballista animation cue is authored and was manually played in PIE; no world Ballista interaction owner/call path was found in current Source, so actual object use is not verified.",
+    "Original Wwise DSP, global RTPC, simultaneous voice budget and all frame-by-frame perceptual parity are not established."
+  ],
+  "previous_humanoid_player_scope": "Metadata/HumanoidSFX_20261013/FinalVerification.json"
+}

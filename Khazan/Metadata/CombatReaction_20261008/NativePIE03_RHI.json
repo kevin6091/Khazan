@@ -1,0 +1,51 @@
+{
+	"success": false,
+	"test": "Khazan.Combat.ReactionPIE",
+	"utc": "2026-10-08T12:46:57.875Z",
+	"process_id": 11016,
+	"authored_assets_modified": false,
+	"private_completion_mutated": false,
+	"completed_reaction_cases": 0,
+	"completed_pair_cases": 0,
+	"observed_reaction_variants": 0,
+	"pair_only_index": -1,
+	"partial_scope": false,
+	"completed_collision_cases": 0,
+	"native_rhi_screenshots_enabled": true,
+	"native_rhi_screenshots_requested": 0,
+	"checks": [
+		{
+			"check": "Case0 Pair0 Player transient Definition fixture can replace only the PIE actor pointer",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair0 Player saved Definition grants native hit reaction, Guard and Brutal",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair0 Saved Definition has a non-null short pool and native hit grant",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair0 Player .01 mesh scale contract is preserved",
+			"passed": true
+		},
+		{
+			"check": "Case0 Pair0 Optional pair-only QA index is in the existing fifteen-pair fixture",
+			"passed": false
+		}
+	],
+	"definition_audits": [
+		{
+			"family": "Player",
+			"definition": "/Game/Data/Character/DA_CharacterDefinition_Player.DA_CharacterDefinition_Player",
+			"short": 14,
+			"knockback": 2,
+			"launch": 2,
+			"shield": 0,
+			"native_grant": true
+		}
+	],
+	"evidence": [],
+	"limits": "Public native gameplay entries in isolated PIE; no physical input or visual contact-quality claim. Synthetic public processed perception establishes positive shield BattleTarget, not real Sight acquisition. Original definitions are untouched; only transient copies have indefinite exhaustion/null fallback/wall-range QA settings. Current engine-extracted world path plus capsule geometry is a conservative root-scale regression bound, not original animation-source numerical equality. Guard RNG trials are QA sampling, not a gameplay probability guarantee."
+}

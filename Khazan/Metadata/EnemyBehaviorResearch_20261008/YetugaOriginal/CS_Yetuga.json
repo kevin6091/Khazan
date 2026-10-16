@@ -1,0 +1,96 @@
+[
+  {
+    "Type": "xxStatusProfile",
+    "Name": "CS_Yetuga",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxStatusProfile'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Base_Setting/CS_Yetuga",
+    "Properties": {
+      "StaminaStatus": [
+        {
+          "Key": "EStateBattleStance::Battle",
+          "Value": {
+            "RecoveryPerSecond": 0,
+            "DamageStateRecoveryPerSecond": [],
+            "bImmediatelyStaninaRecoveryBeginStaminaExhaution": false,
+            "SprintStaminaConsumePerSecond": 0,
+            "bNoneBattleStateSprintStaminaConsume": false,
+            "NoneBattleStateSprintStaminaConsumePerSecond": 0,
+            "bCanSprintRecoveryStamina": true,
+            "bUseDamageReaction": true,
+            "bUseSuperArmourStamina": true,
+            "StaminaExhaustionInfo": {
+              "StaminaExhaustionTerm": 8.0,
+              "StaminaExhaustionDamageRate": 0.0,
+              "EndStaminaExhaustionRecoveryOperator": "EStatusOper::Add",
+              "EndStaminaExhaustionRecoveryStamina": 0,
+              "bKeepBurstAttackHoldReleaseAnim": false
+            },
+            "GuardStaminaConsumeRate": -1.0,
+            "GuardStaminaRecoveryRate": 1.0,
+            "GuardStaminaRecoveryRateBySubState": []
+          }
+        }
+      ],
+      "MonsterGradeType": "EActorGradeType::GRADE_5",
+      "GutsSpecialInfo": {
+        "bOnlyGroundDamage": true,
+        "bNonAerial": true
+      },
+      "GetUpInvincibleTimeRate": 0.2,
+      "DownStateLoopTimeMax": 0.25,
+      "PartDestruction": [
+        {
+          "Key": "EGrDefenseGroup::Group1",
+          "Value": {
+            "bCanDestruction": true,
+            "bShowBattleDirecting": true,
+            "Durability": 350,
+            "SecondDurability": 350,
+            "MaxDestructionNum": 1,
+            "BattleTIme": 0,
+            "AfterNormalGroggyTime": 0,
+            "bCheckHPOver": false,
+            "HPRatioOver": 0,
+            "bCheckHPBelow": false,
+            "HPRatioBelow": 0,
+            "bDoNotAccumDuringNormalGroggy": false,
+            "StartAccumValueDecreaseTime": 0,
+            "AccumValueDecreaseValuePerSecond": 0,
+            "NormalGroggySkill": null,
+            "bNoChangeNormalGroggyOnlyAddSpell": false,
+            "BigGroggySkill": {
+              "ObjectName": "xxSkillInfo'SI_Yetuga_PartGroggy'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SI_Yetuga_PartGroggy.0"
+            },
+            "bNoChangeBigGroggyOnlyAddSpell": false,
+            "bApplyCompleteDestroyedDamageInfo": false,
+            "CompleteDestroyedDamageInfo": {
+              "CustomSkillPowerBonusAdd": 0,
+              "CustomSkillPowerBonusRate": 0,
+              "CustomSkillStaminaAttackPowerAdd": 0,
+              "CustomSkillStaminaAttackPowerRate": 0
+            }
+          }
+        }
+      ],
+      "SprintRunSpeed": 1000,
+      "RunSpeed": 950,
+      "WalkSpeed": 300,
+      "LockOnForwardSpeed": 240,
+      "LockOnBackwardSpeed": 240,
+      "LockOnStrafeSpeed": 240,
+      "LockOnDiagonalForwardSpeed": 240,
+      "LockOnDiagonalBackwardSpeed": 240,
+      "ParringStaminaDamageTableSelect": {
+        "ParringStaminaDamageTag": {
+          "DataTable": {
+            "ObjectName": "DataTable'ParringStaminaDamageDataTable'",
+            "ObjectPath": "BBQ/Content/_Common/Constants/ParringStaminaDamageDataTable.0"
+          },
+          "RowName": "06_보스_중_2"
+        }
+      }
+    }
+  }
+]

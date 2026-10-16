@@ -1,0 +1,801 @@
+{
+  "pid": 9316,
+  "success": true,
+  "input_data": {
+    "asset": "/Game/Data/DA_InputData.DA_InputData",
+    "mapping": "/Game/Input/IMC_Default.IMC_Default",
+    "input_actions": [
+      {
+        "tag": "<Struct 'GameplayTag' (0x000001E524DDD7A0) {}>",
+        "action": "/Game/Input/Locomotion/IA_Move.IA_Move"
+      },
+      {
+        "tag": "<Struct 'GameplayTag' (0x000001E524DD3C00) {}>",
+        "action": "/Game/Input/Locomotion/IA_Turn.IA_Turn"
+      },
+      {
+        "tag": "<Struct 'GameplayTag' (0x000001E524DD6990) {}>",
+        "action": "/Game/Input/IA_WeakAttack.IA_WeakAttack"
+      },
+      {
+        "tag": "<Struct 'GameplayTag' (0x000001E524DD8DC0) {}>",
+        "action": "/Game/Input/IA_StrongAttack.IA_StrongAttack"
+      },
+      {
+        "tag": "<Struct 'GameplayTag' (0x000001E524DDC840) {}>",
+        "action": "/Game/Input/Locomotion/IA_Sprint.IA_Sprint"
+      },
+      {
+        "tag": "<Struct 'GameplayTag' (0x000001E524DDC660) {}>",
+        "action": "/Game/Input/IA_LockOn.IA_LockOn"
+      },
+      {
+        "tag": "<Struct 'GameplayTag' (0x000001E524DDDC50) {}>",
+        "action": "/Game/Input/IA_Dodge.IA_Dodge"
+      },
+      {
+        "tag": "<Struct 'GameplayTag' (0x000001E524DDB640) {}>",
+        "action": "/Game/Input/IA_Guard.IA_Guard"
+      },
+      {
+        "tag": "<Struct 'GameplayTag' (0x000001E524DDDD10) {}>",
+        "action": "/Game/Input/IA_Heal.IA_Heal"
+      },
+      {
+        "tag": "<Struct 'GameplayTag' (0x000001E524DD8160) {}>",
+        "action": "/Game/Input/IA_RB.IA_RB"
+      }
+    ],
+    "mappings": []
+  },
+  "grants": [
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/BasicAttack/GA_Player_WeakAttack.GA_Player_WeakAttack_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524E79C48) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/BasicAttack/GA_Player_StrongCharge.GA_Player_StrongCharge_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DD6B48) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/BasicAttack/GA_Player_StrongAttack.GA_Player_StrongAttack_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DD90C8) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_F.GA_Player_DodgeAbility_F_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DDD688) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_RF.GA_Player_DodgeAbility_RF_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DDD568) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_R.GA_Player_DodgeAbility_R_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DDD928) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_RB.GA_Player_DodgeAbility_RB_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DDDA18) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_B.GA_Player_DodgeAbility_B_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DD3818) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_LB.GA_Player_DodgeAbility_LB_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524E79C48) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_L.GA_Player_DodgeAbility_L_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DD8198) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_LF.GA_Player_DodgeAbility_LF_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DDDBF8) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/DodgeAttack/GA_Player_DodgeAttack_B.GA_Player_DodgeAttack_B_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DDB918) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/DodgeAttack/GA_Player_DodgeAttack_F.GA_Player_DodgeAttack_F_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DD5948) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/DodgeAttack/GA_Player_DodgeAttack_L.GA_Player_DodgeAttack_L_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DDDC88) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/DodgeAttack/GA_Player_DodgeAttack_R.GA_Player_DodgeAttack_R_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DD8078) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Guard/GA_Player_Guard.GA_Player_Guard_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DD8168) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Heal/GA_Player_Heal.GA_Player_Heal_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DD6FC8) {}>"
+    },
+    {
+      "ability": "/Script/Khazan.KZBrutalAttackAbility",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DDC5D8) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Skill/GA_Player_SpinningAttack.GA_Player_SpinningAttack_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DD2E88) {}>"
+    },
+    {
+      "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Skill/GA_Player_OverFuryAttack.GA_Player_OverFuryAttack_C",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DDD5C8) {}>"
+    },
+    {
+      "ability": "/Script/Khazan.KZHitReactionAbility",
+      "tag": "<Struct 'GameplayTag' (0x000001E524DDD598) {}>"
+    }
+  ],
+  "actors": [
+    {
+      "name": "DirectionalLight_0",
+      "label": "DirectionalLight",
+      "class_path": "/Script/Engine.DirectionalLight",
+      "location": [
+        0.0,
+        0.0,
+        400.0
+      ],
+      "scale": [
+        1.0,
+        1.0000000149011612,
+        1.0000000149011612
+      ],
+      "bounds": {
+        "origin": [
+          76.6489601394946,
+          -13.941363104074597,
+          308.7280146795606
+        ],
+        "extent": [
+          146.9951510832307,
+          110.74776690838567,
+          159.06327615981024
+        ]
+      }
+    },
+    {
+      "name": "SkyAtmosphere_0",
+      "label": "SkyAtmosphere",
+      "class_path": "/Script/Engine.SkyAtmosphere",
+      "location": [
+        0.0,
+        0.0,
+        -6000.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          120.0,
+          0.0,
+          -6000.0
+        ],
+        "extent": [
+          120.0,
+          80.0,
+          80.0
+        ]
+      }
+    },
+    {
+      "name": "SkyLight_0",
+      "label": "SkyLight",
+      "class_path": "/Script/Engine.SkyLight",
+      "location": [
+        0.0,
+        0.0,
+        600.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          0.0,
+          0.0,
+          299.5
+        ],
+        "extent": [
+          1.0,
+          1.0,
+          300.5
+        ]
+      }
+    },
+    {
+      "name": "ExponentialHeightFog_0",
+      "label": "ExponentialHeightFog",
+      "class_path": "/Script/Engine.ExponentialHeightFog",
+      "location": [
+        -5600.0,
+        -50.0,
+        -6850.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          -5600.0,
+          -50.0,
+          -6850.0
+        ],
+        "extent": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "name": "VolumetricCloud_0",
+      "label": "VolumetricCloud",
+      "class_path": "/Script/Engine.VolumetricCloud",
+      "location": [
+        0.0,
+        0.0,
+        700.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          0.0,
+          0.0,
+          700.0
+        ],
+        "extent": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "name": "PlayerStart_0",
+      "label": "PlayerStart",
+      "class_path": "/Script/Engine.PlayerStart",
+      "location": [
+        0.0,
+        0.0,
+        92.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          100.0,
+          0.0,
+          92.0
+        ],
+        "extent": [
+          140.0,
+          80.0,
+          92.0
+        ]
+      }
+    },
+    {
+      "name": "StaticMeshActor_0",
+      "label": "SM_SkySphere",
+      "class_path": "/Script/Engine.StaticMeshActor",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        400.0,
+        400.0,
+        400.0
+      ],
+      "bounds": {
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extent": [
+          1638400.0,
+          1638400.0,
+          1638400.0
+        ]
+      },
+      "mesh": "/Engine/EngineSky/SM_SkySphere.SM_SkySphere",
+      "collision": "<CollisionEnabled.NO_COLLISION: 0>"
+    },
+    {
+      "name": "Floor_0",
+      "label": "Floor",
+      "class_path": "/Script/Engine.StaticMeshActor",
+      "location": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "scale": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "bounds": {
+        "origin": [
+          -0.0009765625,
+          0.00048828125,
+          -200.5001220703125
+        ],
+        "extent": [
+          4000.00146484375,
+          4000.0,
+          200.0001220703125
+        ]
+      },
+      "mesh": "/Engine/MapTemplates/SM_Template_Map_Floor.SM_Template_Map_Floor",
+      "collision": "<CollisionEnabled.QUERY_AND_PHYSICS: 3>"
+    },
+    {
+      "name": "StaticMeshActor_5",
+      "label": "Cube",
+      "class_path": "/Script/Engine.StaticMeshActor",
+      "location": [
+        1040.0,
+        830.0,
+        137.00010844726057
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        2.75
+      ],
+      "bounds": {
+        "origin": [
+          1040.0,
+          830.0,
+          137.00010844726057
+        ],
+        "extent": [
+          50.0,
+          50.0,
+          137.5
+        ]
+      },
+      "mesh": "/Engine/BasicShapes/Cube.Cube",
+      "collision": "<CollisionEnabled.QUERY_AND_PHYSICS: 3>"
+    },
+    {
+      "name": "RecastNavMesh-Default",
+      "label": "RecastNavMesh-Default",
+      "class_path": "/Script/NavigationSystem.RecastNavMesh",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extent": [
+          3952.0,
+          3952.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "name": "NavMeshBoundsVolume_0",
+      "label": "DevAI_Navigation",
+      "class_path": "/Script/NavigationSystem.NavMeshBoundsVolume",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extent": [
+          3900.0,
+          3900.0,
+          300.0
+        ]
+      },
+      "boxes": []
+    },
+    {
+      "name": "BP_Monster_Swordsman_C_6",
+      "label": "DevIdle_Patrol",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_Swordsman.BP_Monster_Swordsman_C",
+      "location": [
+        3000.0,
+        2600.0,
+        102.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          3100.7999992370605,
+          2600.0,
+          116.16871032714843
+        ],
+        "extent": [
+          139.20000076293945,
+          80.0,
+          116.17301330566406
+        ]
+      }
+    },
+    {
+      "name": "BP_Monster_Swordsman_C_0",
+      "label": "DevAI_Swordsman",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_Swordsman.BP_Monster_Swordsman_C",
+      "location": [
+        1900.0,
+        -1300.0,
+        102.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          2000.7999992370605,
+          -1300.0,
+          116.16871032714843
+        ],
+        "extent": [
+          139.20000076293945,
+          80.0,
+          116.17301330566406
+        ]
+      }
+    },
+    {
+      "name": "BP_Monster_Swordsman_C_1",
+      "label": "DevIdle_Basic",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_Swordsman.BP_Monster_Swordsman_C",
+      "location": [
+        -3100.0,
+        -1600.0,
+        102.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          -2999.2000007629395,
+          -1600.0,
+          116.16871032714843
+        ],
+        "extent": [
+          139.20000076293945,
+          80.0,
+          116.17301330566406
+        ]
+      }
+    },
+    {
+      "name": "BP_Monster_Swordsman_C_2",
+      "label": "DevIdle_Search",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_Swordsman.BP_Monster_Swordsman_C",
+      "location": [
+        -3100.0,
+        0.0,
+        102.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          -2999.2000007629395,
+          0.0,
+          116.16871032714843
+        ],
+        "extent": [
+          139.20000076293945,
+          80.0,
+          116.17301330566406
+        ]
+      }
+    },
+    {
+      "name": "BP_Monster_Swordsman_C_3",
+      "label": "DevIdle_Sit",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_Swordsman.BP_Monster_Swordsman_C",
+      "location": [
+        -3100.0,
+        1600.0,
+        102.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          -2999.2000007629395,
+          1600.0,
+          116.16871032714843
+        ],
+        "extent": [
+          139.20000076293945,
+          80.0,
+          116.17301330566406
+        ]
+      }
+    },
+    {
+      "name": "BP_Monster_Swordsman_C_4",
+      "label": "DevIdle_Talk01",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_Swordsman.BP_Monster_Swordsman_C",
+      "location": [
+        3000.0,
+        -500.0,
+        102.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          3000.0,
+          -399.20000076293945,
+          116.16871032714843
+        ],
+        "extent": [
+          80.0,
+          139.20000076293948,
+          116.17301330566406
+        ]
+      }
+    },
+    {
+      "name": "BP_Monster_Swordsman_C_5",
+      "label": "DevIdle_Talk02",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_Swordsman.BP_Monster_Swordsman_C",
+      "location": [
+        3000.0,
+        -250.0,
+        102.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          3000.0,
+          -350.79999923706055,
+          116.16871032714843
+        ],
+        "extent": [
+          80.0,
+          139.20000076293948,
+          116.17301330566406
+        ]
+      }
+    },
+    {
+      "name": "BP_Monster_SwordShield_C_0",
+      "label": "DevAI_SwordShield",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_SwordShield.BP_Monster_SwordShield_C",
+      "location": [
+        1900.0,
+        1300.0,
+        102.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          1998.7890170140536,
+          1311.7581182741492,
+          120.00899963378906
+        ],
+        "extent": [
+          141.21098298594632,
+          91.75811827414918,
+          120.01330261230468
+        ]
+      }
+    },
+    {
+      "name": "BP_Monster_HeavySwordsman_C_0",
+      "label": "DevAI_HeavySwordsman",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_HeavySwordsman.BP_Monster_HeavySwordsman_C",
+      "location": [
+        -1900.0,
+        1300.0,
+        123.5
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          -1798.4599990844727,
+          1300.0,
+          142.72246856689452
+        ],
+        "extent": [
+          138.45999908447266,
+          80.0,
+          142.77609634399414
+        ]
+      }
+    },
+    {
+      "name": "BP_Monster_HalberdElite_C_0",
+      "label": "DevAI_HalberdElite",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_HalberdElite.BP_Monster_HalberdElite_C",
+      "location": [
+        -1900.0,
+        -1300.0,
+        140.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bounds": {
+        "origin": [
+          -1829.0917930603027,
+          -1300.0000305175781,
+          244.341730181881
+        ],
+        "extent": [
+          169.09179306030273,
+          110.77470397949219,
+          252.20228187616192
+        ]
+      }
+    }
+  ],
+  "monsters": [
+    {
+      "family": "Swordsman",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_Swordsman.BP_Monster_Swordsman_C",
+      "capsule_radius": 38.400001525878906,
+      "capsule_half_height": 102.0,
+      "mesh": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/SK_EN_Swordsman_U01_L01.SK_EN_Swordsman_U01_L01",
+      "anim_class": "/Game/Monsters/Swordsman/Animations/ABP_Swordsman.ABP_Swordsman_C",
+      "mesh_location": [
+        0.0,
+        0.0,
+        -102.0
+      ],
+      "definition_tag": "<Struct 'GameplayTag' (0x000001E4DD403A70) {}>"
+    },
+    {
+      "family": "SwordShield",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_SwordShield.BP_Monster_SwordShield_C",
+      "capsule_radius": 33.599998474121094,
+      "capsule_half_height": 102.0,
+      "mesh": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/SK_EN_SwordShield_U01_L01.SK_EN_SwordShield_U01_L01",
+      "anim_class": "/Game/Monsters/SwordShield/Animations/ABP_SwordShield.ABP_SwordShield_C",
+      "mesh_location": [
+        0.0,
+        0.0,
+        -102.0
+      ],
+      "definition_tag": "<Struct 'GameplayTag' (0x000001E4DD401270) {}>"
+    },
+    {
+      "family": "HeavySwordsman",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_HeavySwordsman.BP_Monster_HeavySwordsman_C",
+      "capsule_radius": 36.91999816894531,
+      "capsule_half_height": 123.5,
+      "mesh": "/Game/_Art/Enemies/HeinMach/Shared/PoseCarriers/SK_EN_C_M_Human_Elite_M_EmptyMesh.SK_EN_C_M_Human_Elite_M_EmptyMesh",
+      "anim_class": "/Game/Monsters/HeavySwordsman/Animations/ABP_HeavySwordsman.ABP_HeavySwordsman_C",
+      "mesh_location": [
+        0.0,
+        0.0,
+        -123.5
+      ],
+      "definition_tag": "<Struct 'GameplayTag' (0x000001E4DC4BB270) {}>"
+    },
+    {
+      "family": "HalberdElite",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_HalberdElite.BP_Monster_HalberdElite_C",
+      "capsule_radius": 70.0,
+      "capsule_half_height": 140.0,
+      "mesh": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/SK_EN_C_M_HalberdV2.SK_EN_C_M_HalberdV2",
+      "anim_class": "/Game/Monsters/HalberdElite/Animations/ABP_HalberdElite.ABP_HalberdElite_C",
+      "mesh_location": [
+        0.0,
+        0.0,
+        -140.0
+      ],
+      "definition_tag": "<Struct 'GameplayTag' (0x000001E4DC4B8070) {}>"
+    },
+    {
+      "family": "ApesStoneHandElite",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_ApesStoneHandElite.BP_Monster_ApesStoneHandElite_C",
+      "capsule_radius": 99.0,
+      "capsule_half_height": 240.0,
+      "mesh": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Meshes/SK_EN_ApesStoneHandElite.SK_EN_ApesStoneHandElite",
+      "anim_class": "/Game/Monsters/ApesStoneHandElite/Animations/ABP_ApesStoneHandElite.ABP_ApesStoneHandElite_C",
+      "mesh_location": [
+        -50.0,
+        0.0,
+        -240.0
+      ],
+      "definition_tag": "<Struct 'GameplayTag' (0x000001E5168B7670) {}>"
+    },
+    {
+      "family": "Yetuga",
+      "class_path": "/Game/Bluprints/Monsters/BP_Monster_Yetuga.BP_Monster_Yetuga_C",
+      "capsule_radius": 150.0,
+      "capsule_half_height": 265.0,
+      "mesh": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Meshes/SK_EN_Yetuga.SK_EN_Yetuga",
+      "anim_class": "/Game/Monsters/Yetuga/Animations/ABP_Yetuga.ABP_Yetuga_C",
+      "mesh_location": [
+        0.0,
+        3.1e-05,
+        -265.0
+      ],
+      "definition_tag": "<Struct 'GameplayTag' (0x000001E4D0736270) {}>"
+    }
+  ],
+  "dirty_content": [],
+  "dirty_maps": []
+}

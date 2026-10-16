@@ -1,0 +1,843 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_Yetuga_CloseGrab_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab",
+    "SuperStruct": {
+      "ObjectName": "Class'xxCommonSimpleSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    }
+  },
+  {
+    "Type": "SB_Yetuga_CloseGrab_C",
+    "Name": "Default__SB_Yetuga_CloseGrab_C",
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.SB_Yetuga_CloseGrab_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab",
+    "Properties": {
+      "SubStateInfos": [
+        {
+          "Key": "ESubStateStepByActiveInput::Step1",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step2",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_CloseGrab_Start'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/AC_Yetuga_CloseGrab_Start.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Yetuga_CloseGrab_C:xxSimpeEvnetTagOnAttack_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.7"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_Yetuga_CloseGrab_C:xxChangeNextStepFunc_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.2"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTagHoldingSucess'Default__SB_Yetuga_CloseGrab_C:xxSimpleSkillEventTagHoldingSucess_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.17"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxHoldingStartFunc'Default__SB_Yetuga_CloseGrab_C:xxHoldingStartFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.4"
+                    },
+                    {
+                      "ObjectName": "xxLockOnCameraSimpleSkillFunc'Default__SB_Yetuga_CloseGrab_C:xxLockOnCameraSimpleSkillFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.5"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index3",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_CloseGrab_C:xxSimpleSkillEventTag_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.12"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSkillEventFuncSkillCoolTime'Default__SB_Yetuga_CloseGrab_C:xxSimpleSkillEventFuncSkillCoolTime_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.10"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index4",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_CloseGrab_C:xxSimpleSkillEventTag_5'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.14"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxChangeNextStepFunc'Default__SB_Yetuga_CloseGrab_C:xxChangeNextStepFunc_2'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.3"
+                    },
+                    {
+                      "ObjectName": "xxLockOnCameraSimpleSkillFunc'Default__SB_Yetuga_CloseGrab_C:xxLockOnCameraSimpleSkillFunc_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.6"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step2",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_CloseGrab_Fail'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/AC_Yetuga_CloseGrab_Fail.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.0,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step3",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step4",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_CloseGrab_Success_01'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/AC_Yetuga_CloseGrab_Success_01.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.0,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_CloseGrab_C:xxSimpleSkillEventTag_6'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.15"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxTargetDirectAttack'Default__SB_Yetuga_CloseGrab_C:xxTargetDirectAttack_3'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.25"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index3",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnTimerLoop'Default__SB_Yetuga_CloseGrab_C:xxSimpeEvnetTagOnTimerLoop_2'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.9"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxTargetDirectAttack'Default__SB_Yetuga_CloseGrab_C:xxTargetDirectAttack_5'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.27"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step4",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_CloseGrab_Success_02'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/AC_Yetuga_CloseGrab_Success_02.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_CloseGrab_C:xxSimpleSkillEventTag_2'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.13"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxTargetDirectAttack'Default__SB_Yetuga_CloseGrab_C:xxTargetDirectAttack_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.24"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step5",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step4",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Yetuga_CloseGrab_Success_01_Turn'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/AC_Yetuga_CloseGrab_Success_01_Turn.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.0,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_CloseGrab_C:xxSimpleSkillEventTag_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.11"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxTargetDirectAttack'Default__SB_Yetuga_CloseGrab_C:xxTargetDirectAttack_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.23"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnTimerLoop'Default__SB_Yetuga_CloseGrab_C:xxSimpeEvnetTagOnTimerLoop_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.8"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxTargetDirectAttack'Default__SB_Yetuga_CloseGrab_C:xxTargetDirectAttack_4'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.26"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index3",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_CloseGrab_C:xxSimpleSkillEventTag_7'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.16"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSSEventFunc_SetLocTargetPoint'Default__SB_Yetuga_CloseGrab_C:xxSSEventFunc_SetLocTargetPoint_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.22"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "StepAction": "EStatusConsumeResultAction::DoChangeStepAtAnimationEnd",
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step3"
+    }
+  },
+  {
+    "Type": "xxChangeNextStepFunc",
+    "Name": "xxChangeNextStepFunc_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxChangeNextStepFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "StepAction": "EStatusConsumeResultAction::DoChangeStepAtAnimationEnd",
+      "NextSubStateStep": "ESubStateStepByActiveInput::Step5"
+    }
+  },
+  {
+    "Type": "xxHoldingStartFunc",
+    "Name": "xxHoldingStartFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxHoldingStartFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "HoldStartLocation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 200.0
+      },
+      "bUseHoldAttachComponenet": true,
+      "HoldAttachInfo": {
+        "bUseAttachBone": true,
+        "AttachSocketName": "Weapon_L",
+        "TargetSocketName": "Hold_Spine",
+        "RagdollInfo": {
+          "PhyAssetType": "ECommonPhysicsAsset::FallDown",
+          "RagdollBoneName": "Bip001",
+          "PhysicsBlendWeight": 0.5
+        }
+      }
+    }
+  },
+  {
+    "Type": "xxLockOnCameraSimpleSkillFunc",
+    "Name": "xxLockOnCameraSimpleSkillFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxLockOnCameraSimpleSkillFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "bRelease": true
+    }
+  },
+  {
+    "Type": "xxLockOnCameraSimpleSkillFunc",
+    "Name": "xxLockOnCameraSimpleSkillFunc_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxLockOnCameraSimpleSkillFunc'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "bRelease": true
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnAttack",
+    "Name": "xxSimpeEvnetTagOnAttack_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnAttack'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnTimerLoop",
+    "Name": "xxSimpeEvnetTagOnTimerLoop_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnTimerLoop'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "Time": 0.5,
+      "MaxCount": 5,
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_NotifyEnable'Default__SB_Yetuga_CloseGrab_C:xxSimpeEvnetTagOnTimerLoop_1.xxSimpleSkillTagCondition_NotifyEnable_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.19"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnTimerLoop",
+    "Name": "xxSimpeEvnetTagOnTimerLoop_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnTimerLoop'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "Time": 0.5,
+      "MaxCount": 5,
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_NotifyEnable'Default__SB_Yetuga_CloseGrab_C:xxSimpeEvnetTagOnTimerLoop_2.xxSimpleSkillTagCondition_NotifyEnable_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.20"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventFuncSkillCoolTime",
+    "Name": "xxSimpleSkillEventFuncSkillCoolTime_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventFuncSkillCoolTime'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "AddValue": 15.0,
+      "bUseSelectSkill": true,
+      "SelectSkill": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SI_Yetuga_RushGrab.SI_Yetuga_RushGrab",
+        "SubPathString": ""
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::StartSubState"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_5",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyTick",
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_WallCheck'Default__SB_Yetuga_CloseGrab_C:xxSimpleSkillEventTag_5.xxSimpleSkillTagCondition_WallCheck_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.21"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_HoldingSuccess'Default__SB_Yetuga_CloseGrab_C:xxSimpleSkillEventTag_5.xxSimpleSkillTagCondition_HoldingSuccess_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.18"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_6",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTag",
+    "Name": "xxSimpleSkillEventTag_7",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTag'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "EventTag": "ESimpleSkillEventTag::StartSubState"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventTagHoldingSucess",
+    "Name": "xxSimpleSkillEventTagHoldingSucess_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventTagHoldingSucess'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_HoldingSuccess",
+    "Name": "xxSimpleSkillTagCondition_HoldingSuccess_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_HoldingSuccess'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_CloseGrab_C:xxSimpleSkillEventTag_5'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.14"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_NotifyEnable",
+    "Name": "xxSimpleSkillTagCondition_NotifyEnable_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_NotifyEnable'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnTimerLoop'Default__SB_Yetuga_CloseGrab_C:xxSimpeEvnetTagOnTimerLoop_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.8"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_NotifyEnable",
+    "Name": "xxSimpleSkillTagCondition_NotifyEnable_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_NotifyEnable'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnTimerLoop'Default__SB_Yetuga_CloseGrab_C:xxSimpeEvnetTagOnTimerLoop_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.9"
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_WallCheck",
+    "Name": "xxSimpleSkillTagCondition_WallCheck_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_WallCheck'",
+    "Outer": {
+      "ObjectName": "xxSimpleSkillEventTag'Default__SB_Yetuga_CloseGrab_C:xxSimpleSkillEventTag_5'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.14"
+    },
+    "Properties": {
+      "bUseMainTargetLoc": false,
+      "Directions": [
+        {
+          "Key": "EBaseDirection::Front",
+          "Value": "ECheckSuccessType::Success"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSSEventFunc_SetLocTargetPoint",
+    "Name": "xxSSEventFunc_SetLocTargetPoint_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSSEventFunc_SetLocTargetPoint'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "TargetPointTag": "grab",
+      "bUseSetTargetPoint": true
+    }
+  },
+  {
+    "Type": "xxTargetDirectAttack",
+    "Name": "xxTargetDirectAttack_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxTargetDirectAttack'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "AttackTargetType": "ETargetSelectionType::HoldingAttachTarget",
+      "DamageInfoIndex": 1
+    }
+  },
+  {
+    "Type": "xxTargetDirectAttack",
+    "Name": "xxTargetDirectAttack_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxTargetDirectAttack'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "AttackTargetType": "ETargetSelectionType::LastSelfAttackTarget",
+      "DamageInfoIndex": 2
+    }
+  },
+  {
+    "Type": "xxTargetDirectAttack",
+    "Name": "xxTargetDirectAttack_3",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxTargetDirectAttack'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "AttackTargetType": "ETargetSelectionType::HoldingAttachTarget",
+      "DamageInfoIndex": 1
+    }
+  },
+  {
+    "Type": "xxTargetDirectAttack",
+    "Name": "xxTargetDirectAttack_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxTargetDirectAttack'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "AttackTargetType": "ETargetSelectionType::HoldingAttachTarget",
+      "DamageInfoIndex": 3
+    }
+  },
+  {
+    "Type": "xxTargetDirectAttack",
+    "Name": "xxTargetDirectAttack_5",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxTargetDirectAttack'",
+    "Outer": {
+      "ObjectName": "SB_Yetuga_CloseGrab_C'Default__SB_Yetuga_CloseGrab_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.1"
+    },
+    "Properties": {
+      "AttackTargetType": "ETargetSelectionType::HoldingAttachTarget",
+      "DamageInfoIndex": 3
+    }
+  }
+]

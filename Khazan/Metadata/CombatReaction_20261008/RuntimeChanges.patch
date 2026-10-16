@@ -1,0 +1,1031 @@
+--- a/Source/Khazan/Ability/Combo/KZComboActionAbility.cpp
++++ b/Source/Khazan/Ability/Combo/KZComboActionAbility.cpp
+@@ -27,6 +27,7 @@
+ #include "Character/Component/KZLocomotionComponent.h"
+ #include "Character/Locomotion/KZLocomotionType.h"
+ #include "Character/KZMonster.h"
++#include "Character/KZPlayer.h"
+ #include "Attribute/KZAttributeSet.h"
+ #include "Components/CapsuleComponent.h"
+ #include "Engine/World.h"
+@@ -91,6 +92,21 @@
+ 			At >= Position && At < SectionEnd && (At - Position) / PlayRate <= LeadSeconds) return true;
+ 	}
+ 	return false;
++}
++
++bool UKZComboActionAbility::IsInSystemGuardWindow() const
++{
++	const FKZComboNode* Node = ComboDefinition ? ComboDefinition->FindNode(CurrentNodeId) : nullptr;
++	const UAnimInstance* Anim = BoundAnimInstance.Get();
++	if (!IsActive() || !Node || !Node->Montage || !Anim || Anim->GetCurrentActiveMontage() != Node->Montage ||
++		Anim->Montage_GetCurrentSection(Node->Montage) != Node->SectionName) return false;
++	const int32 Section = Node->Montage->GetSectionIndex(Node->SectionName);
++	if (Section == INDEX_NONE) return false;
++	const float Time = Anim->Montage_GetPosition(Node->Montage) - Node->Montage->GetAnimCompositeSection(Section).GetTime();
++	return Node->SystemGuardWindows.ContainsByPredicate([Time](const FVector2D& Window)
++	{
++		return Time >= Window.X && Time <= Window.Y;
++	});
+ }
+ 
+ bool UKZComboActionAbility::CanActivateAbility(
+@@ -1267,12 +1283,15 @@
+ 	}
+ 	for (const TWeakObjectPtr<AActor>& Candidate : Candidates)
+ 	{
+-		AKZMonster* Monster = Cast<AKZMonster>(Candidate.Get());
+-		if (!IsValid(Monster) || Monster == Avatar || AttackHitTargets.FindOrAdd(HitId).Contains(Monster)) continue;
++		AKZCharacter* Recipient = Cast<AKZCharacter>(Candidate.Get());
++		// Two current factions: Player hits Monster, Monster hits Player. No friendly fire.
++		if (!IsValid(Recipient) || Recipient == Avatar || AttackHitTargets.FindOrAdd(HitId).Contains(Recipient) ||
++			!(Avatar->IsA<AKZPlayer>() && Recipient->IsA<AKZMonster>() ||
++			  Avatar->IsA<AKZMonster>() && Recipient->IsA<AKZPlayer>())) continue;
+ 		if (Window.Shape == EKZAttackCollisionShape::Cylinder)
+ 		{
+ 			// UE query has no cylinder. Bounding box broadphase + finite-cylinder/capsule narrowphase.
+-			const UCapsuleComponent* Capsule = Monster->GetCapsuleComponent();
++			const UCapsuleComponent* Capsule = Recipient->GetCapsuleComponent();
+ 			float HalfHeight, CapsuleRadius;
+ 			Capsule->GetScaledCapsuleSize(CapsuleRadius, HalfHeight);
+ 			const FVector Segment = Capsule->GetUpVector() * FMath::Max(HalfHeight - CapsuleRadius, 0.f);
+@@ -1297,19 +1316,22 @@
+ 			const float Vertical = FMath::Max(FMath::Abs(P.Z) - Extent.Z, 0.f);
+ 			if (Radial * Radial + Vertical * Vertical > CapsuleRadius * CapsuleRadius + UE_KINDA_SMALL_NUMBER) continue;
+ 		}
+-		UKZAbilitySystemComponent* TargetASC = Cast<UKZAbilitySystemComponent>(Monster->GetAbilitySystemComponent());
++		UKZAbilitySystemComponent* TargetASC = Cast<UKZAbilitySystemComponent>(Recipient->GetAbilitySystemComponent());
+ 		const UKZAttributeSet* Attributes = TargetASC ? TargetASC->GetSet<UKZAttributeSet>() : nullptr;
+ 		if (!Attributes || Attributes->GetMaxHP() <= 0.f || Attributes->GetHP() <= 0.f ||
+ 			!ComboDefinition->GetAttackDamageEffect() || !FMath::IsFinite(Window.HPDamage) ||
+ 			!FMath::IsFinite(Window.StaminaDamage) || Window.HPDamage < 0.f || Window.StaminaDamage < 0.f) continue;
+ 		// Consume before callbacks; attribute/Guard callbacks may reenter or end this execution.
+-		AttackHitTargets.FindOrAdd(HitId).Add(Monster);
+-		const bool bGuarded = Window.bBlockable && FVector::DotProduct(Monster->GetActorForwardVector(),
+-			Avatar->GetActorLocation() - Monster->GetActorLocation()) >= 0.f && TargetASC->TryGuardHit(Window.StaminaDamage, Avatar);
+-		if (!IsActive() || Execution != AttackExecution || !IsValid(Monster)) return false;
++		AttackHitTargets.FindOrAdd(HitId).Add(Recipient);
++		AKZMonster* ShieldMonster = Cast<AKZMonster>(Recipient);
++		const bool bGuarded = Window.bBlockable && (ShieldMonster ? ShieldMonster->TrySystemGuard(Window.StaminaDamage, Avatar) :
++			(FVector::DotProduct(Recipient->GetActorForwardVector(), Avatar->GetActorLocation() - Recipient->GetActorLocation()) >= 0.f &&
++			 TargetASC->TryGuardHit(Window.StaminaDamage, Avatar)));
++		if (!IsActive() || Execution != AttackExecution || !IsValid(Recipient)) return false;
+ 		if (!bGuarded)
+ 		{
+ 			UAbilitySystemComponent* SourceASC = GetAbilitySystemComponentFromActorInfo();
++			if (!IsValid(SourceASC)) return false;
+ 			FGameplayEffectContextHandle Context = SourceASC->MakeEffectContext();
+ 			Context.AddSourceObject(this);
+ 			const FGameplayEffectSpecHandle Spec = SourceASC->MakeOutgoingSpec(ComboDefinition->GetAttackDamageEffect(), GetAbilityLevel(), Context);
+@@ -1329,8 +1351,11 @@
+ 				Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackExecution")), float(Execution));
+ 				const FActiveGameplayEffectHandle Result = SourceASC->ApplyGameplayEffectSpecToTarget(*Spec.Data, TargetASC);
+ 				UE_LOG(LogAbility, Log, TEXT("ComboHit %s node=%s window=%d group=%s target=%s HPDamage=%g StaminaDamage=%g applied=%d"),
+-					*GetNameSafe(Avatar), *CurrentNodeId.ToString(), HitId, *Window.HitGroup.ToString(), *GetNameSafe(Monster),
++					*GetNameSafe(Avatar), *CurrentNodeId.ToString(), HitId, *Window.HitGroup.ToString(), *GetNameSafe(Recipient),
+ 					Window.HPDamage, Window.StaminaDamage, Result.WasSuccessfullyApplied());
++				// ApplyGE may synchronously invalidate either actor. Exhaustion/death overrides ordinary presentation.
++				if (Result.WasSuccessfullyApplied() && IsValid(Recipient))
++					Recipient->PlayHitReaction(Window.HitReaction, Avatar);
+ 			}
+ 		}
+ 		if (!IsActive() || Execution != AttackExecution) return false;
+--- a/Source/Khazan/Ability/Combo/KZComboActionAbility.h
++++ b/Source/Khazan/Ability/Combo/KZComboActionAbility.h
+@@ -54,6 +54,7 @@
+ 	FName GetCurrentNodeId() const { return CurrentNodeId; }
+ 	// Game-thread observation of an authored, held InputEnd edge. No extra execution state/timer.
+ 	bool IsApproachingComboTransition(float LeadSeconds) const;
++	bool IsInSystemGuardWindow() const;
+ 	
+ protected:
+     // GAS gate에 더해, 이전 Action을 취소하기 전에 필수 entry 데이터를 검사한다.
+--- a/Source/Khazan/Ability/Combo/KZComboDefinitionData.h
++++ b/Source/Khazan/Ability/Combo/KZComboDefinitionData.h
+@@ -6,6 +6,7 @@
+ #include "Ability/Combo/KZComboTypes.h"
+ #include "Engine/DataAsset.h"
+ #include "GameplayEffectTypes.h"
++#include "Data/KZCharacterDefinitionData.h"
+ #include "KZComboDefinitionData.generated.h"
+ 
+ class UAnimMontage;
+@@ -53,6 +54,8 @@
+ 	float HPDamage = 0.f;
+ 	UPROPERTY(EditAnywhere, Category = "Attack", meta = (ClampMin = "0"))
+ 	float StaminaDamage = 0.f;
++	UPROPERTY(EditAnywhere, Category = "Attack")
++	EKZHitReactionType HitReaction = EKZHitReactionType::Short;
+ 	UPROPERTY(EditAnywhere, Category = "Attack")
+ 	bool bBlockable = false;
+ 	UPROPERTY(EditAnywhere, Category = "Attack", meta = (TitleProperty = "Time"))
+@@ -124,8 +127,11 @@
+ 	// Maps the original baked ground/model frame to actor-local cm; no mesh .01 rescaling.
+ 	UPROPERTY(EditAnywhere, Category = "Attack")
+ 	FTransform CollisionToActor = FTransform::Identity;
+-	UPROPERTY(EditAnywhere, Category = "Attack", meta = (TitleProperty = "{StartTime} - {EndTime} | {HitGroup}"))
++	UPROPERTY(EditAnywhere, Category = "Attack", meta = (TitleProperty = "{StartTime} - {EndTime} | {HitGroup} | {HitReaction}"))
+ 	TArray<FKZAttackCollisionWindow> AttackWindows;
++	// Original DamageType=SystemGuard notify intervals, mapped to this node's playback seconds.
++	UPROPERTY(EditAnywhere, Category = "Shield", meta = (ToolTip = "Node-local playback seconds: X=start, Y=end."))
++	TArray<FVector2D> SystemGuardWindows;
+ };
+ 
+ 
+--- a/Source/Khazan/Ability/MonsterAbility/KZExhaustionAbility.cpp
++++ b/Source/Khazan/Ability/MonsterAbility/KZExhaustionAbility.cpp
+@@ -7,8 +7,10 @@
+ #include "Animation/AnimMontage.h"
+ #include "Attribute/KZAttributeSet.h"
+ #include "Character/KZMonster.h"
++#include "Components/CapsuleComponent.h"
+ #include "Data/KZCharacterDefinitionData.h"
+ #include "Engine/World.h"
++#include "GameFramework/Character.h"
+ #include "KZGameplayTags.h"
+ 
+ namespace KZExhaustion
+@@ -76,6 +78,7 @@
+ void UKZExhaustionAbility::ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
+ 	FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
+ {
++	ReleaseBrutalMovementIgnore();
+ 	BrutalPartner.Reset();
+ 	bFromBack = bAttackerCompleted = bVictimCompleted = bEnding = false;
+ 	CurrentPhase = EPhase::None;
+@@ -126,7 +129,19 @@
+ 	UAnimMontage* Montage = Settings ? (bAttackFromBack ? Settings->BrutalBackVictimMontage.Get() : Settings->BrutalFrontVictimMontage.Get()) : nullptr;
+ 	if (!Montage || Montage->GetSectionIndex(KZExhaustion::Damage1) == INDEX_NONE ||
+ 		Montage->GetSectionIndex(KZExhaustion::Damage2) == INDEX_NONE) return false;
++	ACharacter* AttackerPawn = Cast<ACharacter>(Attacker->GetAvatarActorFromActorInfo());
++	AKZMonster* VictimPawn = GetMonster();
++	UCapsuleComponent* AttackerCapsule = AttackerPawn ? AttackerPawn->GetCapsuleComponent() : nullptr;
++	UCapsuleComponent* VictimCapsule = VictimPawn ? VictimPawn->GetCapsuleComponent() : nullptr;
++	if (!IsValid(AttackerCapsule) || !IsValid(VictimCapsule) || AttackerPawn == VictimPawn) return false;
+ 	BrutalPartner = Attacker;
++	BrutalAttackerPawn = AttackerPawn;
++	BrutalVictimPawn = VictimPawn;
++	// Component sweep ignores are directional. Preserve entries owned by other callers.
++	bAddedAttackerMoveIgnore = !AttackerCapsule->GetMoveIgnoreActors().Contains(VictimPawn);
++	bAddedVictimMoveIgnore = !VictimCapsule->GetMoveIgnoreActors().Contains(AttackerPawn);
++	if (bAddedAttackerMoveIgnore) AttackerCapsule->IgnoreActorWhenMoving(VictimPawn, true);
++	if (bAddedVictimMoveIgnore) VictimCapsule->IgnoreActorWhenMoving(AttackerPawn, true);
+ 	bFromBack = bAttackFromBack;
+ 	bAttackerCompleted = bVictimCompleted = false;
+ 	GetWorld()->GetTimerManager().PauseTimer(RecoveryTimer);
+@@ -230,6 +245,7 @@
+ {
+ 	if (!IsActive() || bEnding || !bAttackerCompleted || !bVictimCompleted) return;
+ 	BrutalPartner.Reset();
++	ReleaseBrutalMovementIgnore();
+ 	if (!IsAlive()) { FinishDeath(false); return; }
+ 	BeginRecovery();
+ }
+@@ -238,6 +254,7 @@
+ {
+ 	UKZBrutalAttackAbility* Attacker = BrutalPartner.Get();
+ 	BrutalPartner.Reset(); // Break the notification cycle before invoking the other owner.
++	ReleaseBrutalMovementIgnore();
+ 	bAttackerCompleted = bVictimCompleted = false;
+ 	if (bAbortAttacker && Attacker) Attacker->AbortFromVictim(this);
+ 	if (!IsActive() || bEnding) return;
+@@ -245,6 +262,26 @@
+ 	const FKZMonsterStaminaSettings* Settings = GetSettings();
+ 	if (PlaySection(Settings ? Settings->ExhaustionMontage.Get() : nullptr, KZExhaustion::Loop, EPhase::Loop))
+ 		GetWorld()->GetTimerManager().UnPauseTimer(RecoveryTimer); // Resume the remaining authored time.
++}
++
++void UKZExhaustionAbility::ReleaseBrutalMovementIgnore()
++{
++	const TWeakObjectPtr<ACharacter> AttackerPawn = BrutalAttackerPawn;
++	const TWeakObjectPtr<AKZMonster> VictimPawn = BrutalVictimPawn;
++	const bool bRemoveAttackerIgnore = bAddedAttackerMoveIgnore;
++	const bool bRemoveVictimIgnore = bAddedVictimMoveIgnore;
++	BrutalAttackerPawn.Reset();
++	BrutalVictimPawn.Reset();
++	bAddedAttackerMoveIgnore = bAddedVictimMoveIgnore = false;
++	// Pending-destroy pawns may still have a registered capsule during EndPlay.
++	// Serial-checked weak lookup permits removing only our old pair entry, never a new avatar's.
++	ACharacter* OriginalAttacker = AttackerPawn.Get(true);
++	AKZMonster* OriginalVictim = VictimPawn.Get(true);
++	if (!OriginalAttacker || !OriginalVictim) return;
++	if (bRemoveAttackerIgnore)
++		if (UCapsuleComponent* Capsule = OriginalAttacker->GetCapsuleComponent()) Capsule->IgnoreActorWhenMoving(OriginalVictim, false);
++	if (bRemoveVictimIgnore)
++		if (UCapsuleComponent* Capsule = OriginalVictim->GetCapsuleComponent()) Capsule->IgnoreActorWhenMoving(OriginalAttacker, false);
+ }
+ 
+ void UKZExhaustionAbility::HandleMontageAborted()
+@@ -289,6 +326,7 @@
+ 	TWeakObjectPtr<AKZMonster> Monster = GetMonster();
+ 	UKZBrutalAttackAbility* Attacker = BrutalPartner.Get();
+ 	BrutalPartner.Reset();
++	ReleaseBrutalMovementIgnore();
+ 	if (Attacker) Attacker->AbortFromVictim(this);
+ 	if (UWorld* World = GetWorld()) World->GetTimerManager().ClearTimer(RecoveryTimer);
+ 	ClearMontageTask(true);
+--- a/Source/Khazan/Ability/MonsterAbility/KZExhaustionAbility.h
++++ b/Source/Khazan/Ability/MonsterAbility/KZExhaustionAbility.h
+@@ -7,6 +7,7 @@
+ #include "KZExhaustionAbility.generated.h"
+ 
+ class AKZMonster;
++class ACharacter;
+ class UKZBrutalAttackAbility;
+ class UAbilityTask_PlayMontageAndWait;
+ class UAnimInstance;
+@@ -46,6 +47,7 @@
+ 	void BeginRecovery();
+ 	void CompleteBrutalPair();
+ 	void CancelBrutalPair(bool bAbortAttacker);
++	void ReleaseBrutalMovementIgnore();
+ 	void FinishAbility(bool bWasCancelled);
+ 	void FinishDeath(bool bWasCancelled);
+ 	UFUNCTION() void HandleMontageCompleted();
+@@ -56,6 +58,11 @@
+ 	UPROPERTY(Transient) TObjectPtr<UAnimMontage> PlayingMontage;
+ 	TWeakObjectPtr<UAnimInstance> BoundAnimInstance;
+ 	TWeakObjectPtr<UKZBrutalAttackAbility> BrutalPartner;
++	// Original pawns and added entries belong to this pair, not the current ActorInfo.
++	TWeakObjectPtr<ACharacter> BrutalAttackerPawn;
++	TWeakObjectPtr<AKZMonster> BrutalVictimPawn;
++	bool bAddedAttackerMoveIgnore = false;
++	bool bAddedVictimMoveIgnore = false;
+ 	FKZMovementConstraintHandle MovementHandle;
+ 	FTimerHandle RecoveryTimer;
+ 	EPhase CurrentPhase = EPhase::None;
+--- a/Source/Khazan/Ability/PlayerAbility/KZBrutalAttackAbility.cpp
++++ b/Source/Khazan/Ability/PlayerAbility/KZBrutalAttackAbility.cpp
+@@ -16,6 +16,7 @@
+ #include "GameFramework/CharacterMovementComponent.h"
+ #include "GameplayEffect.h"
+ #include "KZGameplayTags.h"
++#include "TimerManager.h"
+ 
+ UKZBrutalAttackAbility::UKZBrutalAttackAbility()
+ {
+@@ -108,7 +109,11 @@
+ 	}
+ 	if (!MovementHandle.IsValid()) { HandleMontageAborted(); return; }
+ 	Player->GetCharacterMovement()->StopMovementImmediately();
+-	Player->SetActorLocationAndRotation(StartLocation, (bFromBack ? TargetForward : -TargetForward).Rotation(), false, nullptr, ETeleportType::TeleportPhysics);
++	AlignmentStart = Player->GetActorLocation();
++	AlignmentDestination = StartLocation;
++	AlignmentStartRotation = Player->GetActorQuat();
++	AlignmentDestinationRotation = (bFromBack ? TargetForward : -TargetForward).Rotation().Quaternion();
++	AlignmentSeconds = FMath::IsFinite(Settings.BrutalAlignmentSeconds) ? FMath::Max(Settings.BrutalAlignmentSeconds, 0.f) : 0.f;
+ 	PlayingMontage = Montage;
+ 	BoundAnimInstance = Anim;
+ 	Anim->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &ThisClass::HandleMontageNotify);
+@@ -122,7 +127,43 @@
+ 	MontageTask->OnCancelled.AddDynamic(this, &ThisClass::HandleMontageAborted);
+ 	MontageTask->ReadyForActivation();
+ 	if (IsActive())
++	{
+ 		if (const FAnimMontageInstance* Instance = Anim->GetActiveInstanceForMontage(Montage)) MontageInstanceId = Instance->GetInstanceID();
++		AlignmentTimer = GetWorld()->GetTimerManager().SetTimerForNextTick(this, &ThisClass::UpdateAlignment);
++	}
++}
++
++void UKZBrutalAttackAbility::UpdateAlignment()
++{
++	AKZPlayer* Player = Cast<AKZPlayer>(GetAvatarActorFromActorInfo());
++	AKZMonster* Monster = Target.Get();
++	UAnimInstance* Anim = BoundAnimInstance.Get();
++	const FAnimMontageInstance* Instance = Anim && PlayingMontage ? Anim->GetActiveInstanceForMontage(PlayingMontage) : nullptr;
++	if (!IsActive() || !Player || !Monster || !Instance || Instance->GetInstanceID() != MontageInstanceId ||
++		!VictimAbility.IsValid() || !VictimAbility->IsActive()) { HandleMontageAborted(); return; }
++	// Original Grapple_Start MoveTo_4 Notify[6].LinkValue=.03356, BlendOption=CubicInOut.
++	// Start has dilation1, so this marker is already current montage seconds, not mesh-scaled time.
++	const float Time = Anim->Montage_GetPosition(PlayingMontage) - .03356f;
++	if (Time < 0.f)
++	{
++		AlignmentTimer = GetWorld()->GetTimerManager().SetTimerForNextTick(this, &ThisClass::UpdateAlignment);
++		return;
++	}
++	const float Alpha = AlignmentSeconds > 0.f ? FMath::Clamp(Time / AlignmentSeconds, 0.f, 1.f) : 1.f;
++	const float Ease = FMath::InterpEaseInOut(0.f, 1.f, Alpha, 3.f); // Cubic exponent is a mathematical constant.
++	const FVector Position = FMath::Lerp(AlignmentStart, AlignmentDestination, Ease);
++	UCharacterMovementComponent* Movement = Player->GetCharacterMovement();
++	const int32 AlignmentInstance = MontageInstanceId;
++	const TWeakObjectPtr<AKZMonster> AlignmentTarget = Target;
++	FHitResult Hit;
++	Movement->SafeMoveUpdatedComponent(Position - Player->GetActorLocation(),
++		FQuat::Slerp(AlignmentStartRotation, AlignmentDestinationRotation, Ease), true, Hit);
++	if (!IsActive() || MontageInstanceId != AlignmentInstance || Target != AlignmentTarget) return;
++	// Original bStopMoveOnBlocking=true. No teleport through a wall or forced sweep fallback.
++	if (Hit.IsValidBlockingHit()) { HandleMontageAborted(); return; }
++	if (Alpha < 1.f)
++		AlignmentTimer = GetWorld()->GetTimerManager().SetTimerForNextTick(this, &ThisClass::UpdateAlignment);
++	else AlignmentTimer.Invalidate();
+ }
+ 
+ void UKZBrutalAttackAbility::HandleMontageNotify(FName Name, const FBranchingPointNotifyPayload& Payload)
+@@ -260,6 +301,7 @@
+ {
+ 	if (!IsActive()) return;
+ 	const bool bPairWasCancelled = bCancelled || !bMontageCompleted;
++	if (GetWorld()) GetWorld()->GetTimerManager().ClearTimer(AlignmentTimer);
+ 	TWeakObjectPtr<UKZExhaustionAbility> Exhaustion = VictimAbility;
+ 	VictimAbility.Reset();
+ 	ClearCombatEffects(!bPairWasCancelled);
+--- a/Source/Khazan/Ability/PlayerAbility/KZBrutalAttackAbility.h
++++ b/Source/Khazan/Ability/PlayerAbility/KZBrutalAttackAbility.h
+@@ -31,6 +31,13 @@
+ 	UFUNCTION() void HandleMontageCompleted();
+ 	UFUNCTION() void HandleMontageAborted();
+ 	UFUNCTION() void HandleMontageNotify(FName Name, const FBranchingPointNotifyPayload& Payload);
++	void UpdateAlignment();
++	FTimerHandle AlignmentTimer;
++	FVector AlignmentStart = FVector::ZeroVector;
++	FVector AlignmentDestination = FVector::ZeroVector;
++	FQuat AlignmentStartRotation = FQuat::Identity;
++	FQuat AlignmentDestinationRotation = FQuat::Identity;
++	float AlignmentSeconds = 0.f;
+ 	void StartBrutalCombatEffect(const UKZAnimNotify_CombatEffect& Effect,
+ 		const FBranchingPointNotifyPayload& Payload, float RecoveredWindowDuration = 0.f);
+ 	// Confirmed negative-HP observation and feedback dedup belong to this montage.
+--- a/Source/Khazan/Character/KZCharacter.cpp
++++ b/Source/Khazan/Character/KZCharacter.cpp
+@@ -8,6 +8,7 @@
+ #include "LogChannels.h"
+ #include "Engine/World.h"
+ #include "KZGameplayTags.h"
++#include "Character/KZMonster.h"
+ #include "System/KZAssetManager.h"
+ 
+ // Sets default values
+@@ -145,6 +146,7 @@
+ 	{
+ 		FGameplayTagContainer ActionTags;
+ 		ActionTags.AddTag(KZGameplayTags::Ability_Action);
++		ActionTags.AddTag(KZGameplayTags::Ability_Reaction_Hit);
+ 
+ 		ASC->CancelAbilities(&ActionTags);
+ 		ASC->ClearComboCommands();
+@@ -164,4 +166,19 @@
+ 	AbilitySystemComponent->DestroyActiveState();
+ 
+ 	Super::EndPlay(EndPlayReason);
+-}+}
++
++void AKZCharacter::PlayHitReaction(const EKZHitReactionType Type, AActor* Attacker)
++{
++	if (!HasAuthority() || Type == EKZHitReactionType::None || !IsValid(Attacker) ||
++		!AbilitySystemComponent || AbilitySystemComponent->GetNumericAttribute(UKZAttributeSet::GetHPAttribute()) <= 0.f ||
++		AbilitySystemComponent->HasMatchingGameplayTag(KZGameplayTags::State_Dead) ||
++		AbilitySystemComponent->HasMatchingGameplayTag(KZGameplayTags::State_Exhausted) ||
++		(IsA<AKZMonster>() && AbilitySystemComponent->GetNumericAttribute(UKZAttributeSet::GetStaminaAttribute()) <= 0.f)) return;
++	FGameplayEventData Event;
++	Event.Instigator = Attacker;
++	Event.Target = this;
++	Event.EventTag = Type == EKZHitReactionType::Launch ? KZGameplayTags::Event_Combat_Hit_Launch :
++		(Type == EKZHitReactionType::Knockback ? KZGameplayTags::Event_Combat_Hit_Knockback : KZGameplayTags::Event_Combat_Hit_Short);
++	AbilitySystemComponent->HandleGameplayEvent(Event.EventTag, &Event);
++}
+--- a/Source/Khazan/Character/KZCharacter.h
++++ b/Source/Khazan/Character/KZCharacter.h
+@@ -12,6 +12,7 @@
+ class UAbilitySystemComponent;
+ class UKZCharacterDefinitionData;
+ class UKZAttributeSet;
++enum class EKZHitReactionType : uint8;
+ 
+ UCLASS()
+ class KHAZAN_API AKZCharacter : public ACharacter, public IAbilitySystemInterface
+@@ -20,6 +21,8 @@
+ 
+ public:
+ 	AKZCharacter();
++	// Called only after an accepted damage result; direction is selected by the Ability's pool.
++	void PlayHitReaction(EKZHitReactionType Type, AActor* Attacker);
+ 
+ 	UFUNCTION(BlueprintPure, Category = "Character|Locomotion")
+ 	UKZLocomotionComponent* GetLocomotionComponent() const
+--- a/Source/Khazan/Character/KZMonster.cpp
++++ b/Source/Khazan/Character/KZMonster.cpp
+@@ -13,6 +13,7 @@
+ #include "Ability/Combo/KZComboActionAbility.h"
+ #include "AbilitySystemComponent.h"
+ #include "Ability/MonsterAbility/KZExhaustionAbility.h"
++#include "Ability/KZHitReactionAbility.h"
+ #include "Attribute/KZAttributeSet.h"
+ #include "GameplayEffect.h"
+ #include "KZGameplayTags.h"
+@@ -125,6 +126,7 @@
+ 	const UAbilitySystemComponent* ASC = GetAbilitySystemComponent();
+ 	return ASC && GetCharacterDefinition() && GetCharacterDefinition()->GetMonsterStaminaSettings().bEnabled &&
+ 		(ASC->HasMatchingGameplayTag(KZGameplayTags::State_Dead) || ASC->HasMatchingGameplayTag(KZGameplayTags::State_Exhausted) ||
++		 ASC->HasMatchingGameplayTag(KZGameplayTags::State_HitReacting) ||
+ 		 ASC->GetNumericAttribute(UKZAttributeSet::GetHPAttribute()) <= 0.f ||
+ 		 ASC->GetNumericAttribute(UKZAttributeSet::GetStaminaAttribute()) <= 0.f);
+ }
+@@ -138,6 +140,9 @@
+ 	UKZExhaustionAbility* Exhaustion = GetActiveExhaustionAbility();
+ 	if (ASC->GetNumericAttribute(UKZAttributeSet::GetHPAttribute()) <= 0.f)
+ 	{
++		FGameplayTagContainer Hits;
++		Hits.AddTag(KZGameplayTags::Ability_Reaction_Hit);
++		ASC->CancelAbilities(&Hits);
+ 		if (!DeadStateHandle.IsValid() && Settings.DeadStateEffect)
+ 		{
+ 			const FGameplayEffectSpecHandle Spec = ASC->MakeOutgoingSpec(Settings.DeadStateEffect, 1.f, ASC->MakeEffectContext());
+@@ -163,6 +168,9 @@
+ 		return;
+ 	}
+ 	if (ASC->GetNumericAttribute(UKZAttributeSet::GetStaminaAttribute()) > 0.f || Exhaustion) return;
++	FGameplayTagContainer Hits;
++	Hits.AddTag(KZGameplayTags::Ability_Reaction_Hit);
++	ASC->CancelAbilities(&Hits);
+ 	FScopedAbilityListLock Lock(*ASC);
+ 	for (const FGameplayAbilitySpec& Spec : ASC->GetActivatableAbilities())
+ 		if (Spec.Ability && Spec.Ability->IsA<UKZExhaustionAbility>())
+@@ -192,6 +200,64 @@
+ 	Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackHPDamage")), 0.f);
+ 	Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackStaminaDamage")), -Settings.ParryStaminaDamage);
+ 	return ASC->ApplyGameplayEffectSpecToSelf(*Spec.Data.Get()).WasSuccessfullyApplied();
++}
++
++bool AKZMonster::TrySystemGuard(const float StaminaDamage, AActor* Attacker)
++{
++	UAbilitySystemComponent* ASC = GetAbilitySystemComponent();
++	if (!HasAuthority() || !IsValid(Attacker) || !ASC || !GetCharacterDefinition() ||
++		!FMath::IsFinite(StaminaDamage) || StaminaDamage < 0.f || (IsCombatIncapacitated() &&
++		!ASC->HasMatchingGameplayTag(KZGameplayTags::State_HitReacting))) return false;
++	const FKZHitReactionSettings& Reaction = GetCharacterDefinition()->GetHitReactionSettings();
++	const FKZMonsterStaminaSettings& Stamina = GetCharacterDefinition()->GetMonsterStaminaSettings();
++	if (!Reaction.bSystemGuardOnLockOn || !Stamina.DamageEffect ||
++		ASC->GetNumericAttribute(UKZAttributeSet::GetHPAttribute()) <= 0.f ||
++		ASC->GetNumericAttribute(UKZAttributeSet::GetStaminaAttribute()) <= 0.f ||
++		ASC->HasMatchingGameplayTag(KZGameplayTags::State_Dead) ||
++		ASC->HasMatchingGameplayTag(KZGameplayTags::State_Exhausted)) return false;
++	const FVector ToAttacker = (Attacker->GetActorLocation() - GetActorLocation()).GetSafeNormal2D();
++	const float HalfAngle = FMath::Clamp(Reaction.SystemGuardFrontAngle, 0.f, 360.f) * .5f;
++	if (ToAttacker.IsNearlyZero() || !FMath::IsFinite(HalfAngle) ||
++		FVector::DotProduct(GetActorForwardVector().GetSafeNormal2D(), ToAttacker) + UE_KINDA_SMALL_NUMBER <
++		FMath::Cos(FMath::DegreesToRadians(HalfAngle))) return false;
++	bool bShieldReaction = false, bAction = false, bAttackGuard = false;
++	{
++		FScopedAbilityListLock Lock(*ASC);
++		for (const FGameplayAbilitySpec& Spec : ASC->GetActivatableAbilities())
++		{
++			if (!Spec.IsActive()) continue;
++			if (const UKZHitReactionAbility* Hit = Cast<UKZHitReactionAbility>(Spec.GetPrimaryInstance()))
++				bShieldReaction |= Hit->IsShieldReaction();
++			if (Spec.Ability && Spec.Ability->GetAssetTags().HasTag(KZGameplayTags::Ability_Action))
++			{
++				bAction = true;
++				if (const UKZComboActionAbility* Combo = Cast<UKZComboActionAbility>(Spec.GetPrimaryInstance()))
++					bAttackGuard |= Combo->IsInSystemGuardWindow();
++			}
++		}
++	}
++	const AKZMonsterAIController* AI = Cast<AKZMonsterAIController>(GetController());
++	// Ordinary pre-detection movement is Normal in the source. Attack guard is only its authored window.
++	if (!bShieldReaction && !(bAction ? bAttackGuard : (AI && IsValid(AI->GetBattleTarget())))) return false;
++	if (ASC->HasMatchingGameplayTag(KZGameplayTags::State_HitReacting) && !bShieldReaction) return false;
++	FGameplayEffectContextHandle Context = ASC->MakeEffectContext();
++	Context.AddInstigator(Attacker, Attacker);
++	const FGameplayEffectSpecHandle Spec = ASC->MakeOutgoingSpec(Stamina.DamageEffect, 1.f, Context);
++	if (!Spec.IsValid()) return false;
++	Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackHPDamage")), 0.f);
++	Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackStaminaDamage")), -StaminaDamage);
++	if (!ASC->ApplyGameplayEffectSpecToSelf(*Spec.Data.Get()).WasSuccessfullyApplied()) return false;
++	if (ASC->GetNumericAttribute(UKZAttributeSet::GetHPAttribute()) > 0.f &&
++		ASC->GetNumericAttribute(UKZAttributeSet::GetStaminaAttribute()) > 0.f)
++	{
++		FGameplayEventData Event;
++		Event.EventTag = KZGameplayTags::Event_Combat_ShieldBlock;
++		Event.Instigator = Attacker;
++		Event.Target = this;
++		ASC->HandleGameplayEvent(Event.EventTag, &Event);
++	}
++	RequestCombatStateRefresh();
++	return true;
+ }
+ 
+ void AKZMonster::Tick(float DeltaSeconds)
+--- a/Source/Khazan/Character/KZMonster.h
++++ b/Source/Khazan/Character/KZMonster.h
+@@ -88,6 +88,7 @@
+ 	virtual void UnPossessed() override;
+ 	UFUNCTION(BlueprintCallable, Category = "Monster|Stamina")
+ 	bool ReportAttackParried(AActor* Defender);
++	bool TrySystemGuard(float StaminaDamage, AActor* Attacker);
+ 	bool IsCombatIncapacitated() const;
+ 	UKZExhaustionAbility* GetActiveExhaustionAbility() const;
+ 	void RequestCombatStateRefresh();
+--- a/Source/Khazan/Data/KZCharacterDefinitionData.h
++++ b/Source/Khazan/Data/KZCharacterDefinitionData.h
+@@ -37,6 +37,43 @@
+ 	TSubclassOf<class UGameplayAbility> AbilityClass;
+ };
+ 
++UENUM(BlueprintType)
++enum class EKZHitReactionType : uint8
++{
++	None,
++	Short,
++	Knockback,
++	Launch
++};
++
++/** Presentation pools. Direction comes from a random variant, never the incoming attack angle. */
++USTRUCT(BlueprintType)
++struct FKZHitReactionSettings
++{
++	GENERATED_BODY()
++	UPROPERTY(EditAnywhere, Category = "Reaction")
++	TArray<TObjectPtr<class UAnimMontage>> ShortHits;
++	UPROPERTY(EditAnywhere, Category = "Reaction")
++	TArray<TObjectPtr<UAnimMontage>> Knockbacks;
++	UPROPERTY(EditAnywhere, Category = "Reaction")
++	TArray<TObjectPtr<UAnimMontage>> Launches;
++	// Temporary project tuning for authored in-place hit clips; not original metadata distances.
++	// The engine RootMotionSource uses world cm. Duration comes from the authored reaction section chain.
++	UPROPERTY(EditAnywhere, Category = "Reaction|Movement", meta = (ClampMin = "0", Units = "cm"))
++	float KnockbackDistance = 250.f;
++	UPROPERTY(EditAnywhere, Category = "Reaction|Movement", meta = (ClampMin = "0", Units = "cm"))
++	float LaunchDistance = 120.f;
++	UPROPERTY(EditAnywhere, Category = "Reaction|Movement", meta = (ClampMin = "0", Units = "cm"))
++	float LaunchHeight = 150.f;
++	UPROPERTY(EditAnywhere, Category = "Shield")
++	TArray<TObjectPtr<UAnimMontage>> ShieldBlocks;
++	UPROPERTY(EditAnywhere, Category = "Shield")
++	bool bSystemGuardOnLockOn = false;
++	// Original LockOnMoveInfoMap[Battle].SystemGuardFrontAngle=180; consumed here as a full cone.
++	UPROPERTY(EditAnywhere, Category = "Shield", meta = (ClampMin = "0", ClampMax = "360", Units = "deg"))
++	float SystemGuardFrontAngle = 180.f;
++};
++
+ /** Monster-only policy. Resources remain on the ASC; these are editable data, not runtime state. */
+ USTRUCT(BlueprintType)
+ struct FKZMonsterStaminaSettings
+@@ -61,6 +98,9 @@
+ 	// Zero derives the minimum non-overlapping distance from the two live capsule radii.
+ 	UPROPERTY(EditAnywhere, Category = "Brutal Attack", meta = (ClampMin = "0", Units = "cm"))
+ 	float BrutalAlignmentDistance = 0.f;
++	// Original Grapple Start MoveTo duration .433283 s, CubicInOut; existing capsule spacing remains the target.
++	UPROPERTY(EditAnywhere, Category = "Brutal Attack", meta = (ClampMin = "0", Units = "s"))
++	float BrutalAlignmentSeconds = 0.433283f;
+ 	UPROPERTY(EditAnywhere, Category = "Brutal Attack")
+ 	TObjectPtr<UAnimMontage> BrutalFrontPlayerMontage;
+ 	UPROPERTY(EditAnywhere, Category = "Brutal Attack")
+@@ -87,8 +127,12 @@
+ 	const TArray<FKZInitialAbilityGrant>& GetInitialAbilityGrants() const;
+ 	const TArray<TSubclassOf<class UGameplayEffect>>& GetInitialEffects() const;
+ 	const FKZMonsterStaminaSettings& GetMonsterStaminaSettings() const { return MonsterStamina; }
++	const FKZHitReactionSettings& GetHitReactionSettings() const { return HitReactions; }
+ 	
+ private:
++	UPROPERTY(EditAnywhere, Category = "Character|Hit Reactions")
++	FKZHitReactionSettings HitReactions;
++
+ 	UPROPERTY(EditAnywhere, Category = "Character|Monster Stamina")
+ 	FKZMonsterStaminaSettings MonsterStamina;
+ 
+--- a/Source/Khazan/KZGameplayTags.cpp
++++ b/Source/Khazan/KZGameplayTags.cpp
+@@ -51,6 +51,12 @@
+ 	UE_DEFINE_GAMEPLAY_TAG(Ability_Action_BrutalAttack, "Ability.Action.BrutalAttack");
+ 	UE_DEFINE_GAMEPLAY_TAG(State_Exhausted, "State.Exhausted");
+ 	UE_DEFINE_GAMEPLAY_TAG(State_Dead, "State.Dead");
++	UE_DEFINE_GAMEPLAY_TAG(Ability_Reaction_Hit, "Ability.Reaction.Hit");
++	UE_DEFINE_GAMEPLAY_TAG(State_HitReacting, "State.HitReacting");
++	UE_DEFINE_GAMEPLAY_TAG(Event_Combat_Hit_Short, "Event.Combat.Hit.Short");
++	UE_DEFINE_GAMEPLAY_TAG(Event_Combat_Hit_Knockback, "Event.Combat.Hit.Knockback");
++	UE_DEFINE_GAMEPLAY_TAG(Event_Combat_Hit_Launch, "Event.Combat.Hit.Launch");
++	UE_DEFINE_GAMEPLAY_TAG(Event_Combat_ShieldBlock, "Event.Combat.ShieldBlock");
+ 
+ #pragma endregion
+ 
+--- a/Source/Khazan/KZGameplayTags.h
++++ b/Source/Khazan/KZGameplayTags.h
+@@ -55,6 +55,12 @@
+ 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Action_BrutalAttack);
+ 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(State_Exhausted);
+ 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(State_Dead);
++	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Reaction_Hit);
++	UE_DECLARE_GAMEPLAY_TAG_EXTERN(State_HitReacting);
++	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Event_Combat_Hit_Short);
++	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Event_Combat_Hit_Knockback);
++	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Event_Combat_Hit_Launch);
++	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Event_Combat_ShieldBlock);
+ 
+ #pragma endregion
+ 
+--- a/Source/Khazan/Ability/KZHitReactionAbility.h
++++ b/Source/Khazan/Ability/KZHitReactionAbility.h
+@@ -0,0 +1,68 @@
++#pragma once
++
++#include "CoreMinimal.h"
++#include "Ability/KZGameplayAbility.h"
++#include "Animation/AnimNotifies/AnimNotify.h"
++#include "Animation/AnimEnums.h"
++#include "Character/Component/KZLocomotionComponent.h"
++#include "Engine/EngineTypes.h"
++#include "KZHitReactionAbility.generated.h"
++
++class AKZCharacter;
++class UAbilityTask_PlayMontageAndWait;
++class UAbilityTask_ApplyRootMotionJumpForce;
++class UAnimInstance;
++class UAnimMontage;
++class UCharacterMovementComponent;
++
++/** Owns one forced hit/shield reaction and its authored montage chain. */
++UCLASS()
++class KHAZAN_API UKZHitReactionAbility : public UKZGameplayAbility
++{
++	GENERATED_BODY()
++
++public:
++	UKZHitReactionAbility();
++	bool IsShieldReaction() const;
++
++protected:
++	virtual bool CanActivateAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
++		const FGameplayTagContainer* SourceTags = nullptr, const FGameplayTagContainer* TargetTags = nullptr,
++		FGameplayTagContainer* OptionalRelevantTags = nullptr) const override;
++	virtual bool ShouldAbilityRespondToEvent(const FGameplayAbilityActorInfo* ActorInfo,
++		const FGameplayEventData* Payload) const override;
++	virtual void ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
++		FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
++	virtual void EndAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
++		FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled) override;
++
++private:
++	UAnimMontage* SelectMontage(const FGameplayAbilityActorInfo* ActorInfo, FGameplayTag Event, bool bRandom) const;
++	void RestoreMovementMode();
++	void RestoreRootMotionMode();
++	void ClearMotionTask();
++	void ClearMontageTask();
++	void FinishAbility(bool bWasCancelled);
++	UFUNCTION() void HandleMontageCompleted();
++	UFUNCTION() void HandleMontageAborted();
++	UFUNCTION() void HandleMotionFinished();
++	UFUNCTION() void HandleMontageNotify(FName NotifyName, const FBranchingPointNotifyPayload& Payload);
++
++	UPROPERTY(Transient) TObjectPtr<UAbilityTask_PlayMontageAndWait> MontageTask;
++	UPROPERTY(Transient) TObjectPtr<UAbilityTask_ApplyRootMotionJumpForce> MotionTask;
++	UPROPERTY(Transient) TObjectPtr<UAnimMontage> PlayingMontage;
++	TWeakObjectPtr<AKZCharacter> BoundCharacter;
++	TWeakObjectPtr<UAnimInstance> BoundAnimInstance;
++	TWeakObjectPtr<UCharacterMovementComponent> BoundMovement;
++	FKZMovementConstraintHandle MovementHandle;
++	FGameplayTag CurrentEvent;
++	int32 MontageInstanceId = INDEX_NONE;
++	// Invalidates setup returning from synchronous cancellation/retrigger callbacks.
++	uint32 ExecutionSerial = 0;
++	EMovementMode PreviousMovementMode = MOVE_None;
++	uint8 PreviousCustomMovementMode = 0;
++	bool bOwnsFlyingMode = false;
++	ERootMotionMode::Type PreviousRootMotionMode = ERootMotionMode::NoRootMotionExtraction;
++	bool bOwnsRootMotionMode = false;
++	bool bEnding = false;
++};
+--- a/Source/Khazan/Ability/KZHitReactionAbility.cpp
++++ b/Source/Khazan/Ability/KZHitReactionAbility.cpp
+@@ -0,0 +1,341 @@
++#include "Ability/KZHitReactionAbility.h"
++
++#include "Abilities/GameplayAbilityTriggerType.h"
++#include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
++#include "Abilities/Tasks/AbilityTask_ApplyRootMotionJumpForce.h"
++#include "AbilitySystemComponent.h"
++#include "Animation/AnimInstance.h"
++#include "Animation/AnimMontage.h"
++#include "Attribute/KZAttributeSet.h"
++#include "Character/KZCharacter.h"
++#include "Character/KZMonster.h"
++#include "Data/KZCharacterDefinitionData.h"
++#include "GameFramework/CharacterMovementComponent.h"
++#include "GameFramework/RootMotionSource.h"
++#include "KZGameplayTags.h"
++
++UKZHitReactionAbility::UKZHitReactionAbility()
++{
++	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
++	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalOnly;
++	bRetriggerInstancedAbility = true;
++	FGameplayTagContainer Tags;
++	Tags.AddTag(KZGameplayTags::Ability_Reaction_Hit);
++	SetAssetTags(Tags);
++	ActivationOwnedTags.AddTag(KZGameplayTags::State_HitReacting);
++	ActivationOwnedTags.AddTag(KZGameplayTags::Block_Movement_Input);
++	ActivationOwnedTags.AddTag(KZGameplayTags::Block_StaminaRegen);
++	BlockAbilitiesWithTag.AddTag(KZGameplayTags::Ability_Action);
++	CancelAbilitiesWithTag.AddTag(KZGameplayTags::Ability_Action);
++	ActivationBlockedTags.AddTag(KZGameplayTags::State_Dead);
++	ActivationBlockedTags.AddTag(KZGameplayTags::State_Exhausted);
++	const FGameplayTag Events[] = {KZGameplayTags::Event_Combat_Hit_Short,
++		KZGameplayTags::Event_Combat_Hit_Knockback, KZGameplayTags::Event_Combat_Hit_Launch,
++		KZGameplayTags::Event_Combat_ShieldBlock};
++	for (const FGameplayTag Event : Events)
++	{
++		FAbilityTriggerData Trigger;
++		Trigger.TriggerTag = Event;
++		Trigger.TriggerSource = EGameplayAbilityTriggerSource::GameplayEvent;
++		AbilityTriggers.Add(Trigger);
++	}
++}
++
++bool UKZHitReactionAbility::IsShieldReaction() const
++{
++	return IsActive() && !bEnding && CurrentEvent == KZGameplayTags::Event_Combat_ShieldBlock;
++}
++
++UAnimMontage* UKZHitReactionAbility::SelectMontage(const FGameplayAbilityActorInfo* ActorInfo,
++	const FGameplayTag Event, const bool bRandom) const
++{
++	const AKZCharacter* Character = ActorInfo ? Cast<AKZCharacter>(ActorInfo->AvatarActor.Get()) : nullptr;
++	const UKZCharacterDefinitionData* Definition = Character ? Character->GetCharacterDefinition() : nullptr;
++	if (!Definition) return nullptr;
++	const FKZHitReactionSettings& Settings = Definition->GetHitReactionSettings();
++	const TArray<TObjectPtr<UAnimMontage>>* Pool = nullptr;
++	if (Event == KZGameplayTags::Event_Combat_Hit_Short) Pool = &Settings.ShortHits;
++	else if (Event == KZGameplayTags::Event_Combat_Hit_Knockback) Pool = &Settings.Knockbacks;
++	else if (Event == KZGameplayTags::Event_Combat_Hit_Launch) Pool = &Settings.Launches;
++	else if (Event == KZGameplayTags::Event_Combat_ShieldBlock) Pool = &Settings.ShieldBlocks;
++	if (!Pool) return nullptr;
++	int32 Count = 0;
++	for (const TObjectPtr<UAnimMontage>& Montage : *Pool) if (IsValid(Montage.Get())) ++Count;
++	if (Count == 0 && Pool != &Settings.ShortHits)
++	{
++		Pool = &Settings.ShortHits;
++		for (const TObjectPtr<UAnimMontage>& Montage : *Pool) if (IsValid(Montage.Get())) ++Count;
++	}
++	if (Count == 0) return nullptr;
++	int32 Index = bRandom ? FMath::RandHelper(Count) : 0;
++	for (const TObjectPtr<UAnimMontage>& Montage : *Pool)
++		if (IsValid(Montage.Get()) && Index-- == 0) return Montage.Get();
++	return nullptr;
++}
++
++bool UKZHitReactionAbility::ShouldAbilityRespondToEvent(const FGameplayAbilityActorInfo* ActorInfo,
++	const FGameplayEventData* Payload) const
++{
++	return Payload && !bEnding && Super::ShouldAbilityRespondToEvent(ActorInfo, Payload) &&
++		SelectMontage(ActorInfo, Payload->EventTag, false);
++}
++
++bool UKZHitReactionAbility::CanActivateAbility(FGameplayAbilitySpecHandle Handle,
++	const FGameplayAbilityActorInfo* ActorInfo, const FGameplayTagContainer* SourceTags,
++	const FGameplayTagContainer* TargetTags, FGameplayTagContainer* OptionalRelevantTags) const
++{
++	if (bEnding || !Super::CanActivateAbility(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags) || !ActorInfo)
++		return false;
++	const AKZCharacter* Character = Cast<AKZCharacter>(ActorInfo->AvatarActor.Get());
++	const UAbilitySystemComponent* ASC = ActorInfo->AbilitySystemComponent.Get();
++	const UKZAttributeSet* Attributes = ASC ? ASC->GetSet<UKZAttributeSet>() : nullptr;
++	if (!Character || !Character->GetCharacterDefinition() || !Character->GetLocomotionComponent() ||
++		!Character->GetCharacterMovement() || !ActorInfo->GetAnimInstance() || !Attributes ||
++		!FMath::IsFinite(Attributes->GetHP()) || Attributes->GetHP() <= 0.f ||
++		ASC->HasMatchingGameplayTag(KZGameplayTags::State_Dead) ||
++		ASC->HasMatchingGameplayTag(KZGameplayTags::State_Exhausted)) return false;
++	if (Cast<AKZMonster>(Character) &&
++		(!FMath::IsFinite(Attributes->GetStamina()) || Attributes->GetStamina() <= 0.f)) return false;
++	return SelectMontage(ActorInfo, KZGameplayTags::Event_Combat_Hit_Short, false) ||
++		SelectMontage(ActorInfo, KZGameplayTags::Event_Combat_Hit_Knockback, false) ||
++		SelectMontage(ActorInfo, KZGameplayTags::Event_Combat_Hit_Launch, false) ||
++		SelectMontage(ActorInfo, KZGameplayTags::Event_Combat_ShieldBlock, false);
++}
++
++void UKZHitReactionAbility::ActivateAbility(FGameplayAbilitySpecHandle Handle,
++	const FGameplayAbilityActorInfo* ActorInfo, FGameplayAbilityActivationInfo ActivationInfo,
++	const FGameplayEventData* TriggerEventData)
++{
++	const uint32 Serial = ++ExecutionSerial;
++	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
++	if (!IsActive() || ExecutionSerial != Serial) return;
++	AKZCharacter* Character = ActorInfo ? Cast<AKZCharacter>(ActorInfo->AvatarActor.Get()) : nullptr;
++	CurrentEvent = TriggerEventData ? TriggerEventData->EventTag : FGameplayTag();
++	PlayingMontage = SelectMontage(ActorInfo, CurrentEvent, true);
++	BoundCharacter = Character;
++	BoundAnimInstance = ActorInfo ? ActorInfo->GetAnimInstance() : nullptr;
++	BoundMovement = Character ? Character->GetCharacterMovement() : nullptr;
++	MontageInstanceId = INDEX_NONE;
++	if (!Character || !PlayingMontage || !BoundAnimInstance.IsValid() || !BoundMovement.IsValid() ||
++		!Character->GetLocomotionComponent())
++	{
++		FinishAbility(true);
++		return;
++	}
++	const bool bCommitted = CommitAbility(Handle, ActorInfo, ActivationInfo);
++	if (!IsActive() || ExecutionSerial != Serial) return;
++	if (!bCommitted) { FinishAbility(true); return; }
++	FKZMovementConstraint Constraint;
++	Constraint.bOverrideRotationMode = true;
++	Constraint.RotationModeOverride = EKZRotationMode::VelocityDirection;
++	Constraint.DebugName = TEXT("HitReaction");
++	FKZMovementConstraintHandle AcquiredHandle = Character->GetLocomotionComponent()->AcquireMovementConstraint(this, Constraint);
++	if (!IsActive() || ExecutionSerial != Serial)
++	{
++		Character->GetLocomotionComponent()->ReleaseMovementConstraint(AcquiredHandle);
++		return;
++	}
++	MovementHandle = AcquiredHandle;
++	if (!MovementHandle.IsValid()) { FinishAbility(true); return; }
++	BoundMovement->StopMovementImmediately();
++	if (!IsActive() || ExecutionSerial != Serial) return;
++	const bool bLaunch = CurrentEvent == KZGameplayTags::Event_Combat_Hit_Launch;
++	const bool bForcedChain = (bLaunch || CurrentEvent == KZGameplayTags::Event_Combat_Hit_Knockback) &&
++		(PlayingMontage->GetSectionIndex(TEXT("Up")) != INDEX_NONE || PlayingMontage->GetSectionIndex(TEXT("Air")) != INDEX_NONE ||
++		 PlayingMontage->GetSectionIndex(TEXT("Down")) != INDEX_NONE);
++	// A body's unsupported Launch selects a Short/Hit montage, without acquiring a physics task/mode.
++	const bool bCanOwnFlying = BoundMovement->MovementMode == MOVE_Walking || BoundMovement->MovementMode == MOVE_NavWalking ||
++		BoundMovement->MovementMode == MOVE_Falling;
++	if (bForcedChain && bLaunch && PlayingMontage->GetSectionIndex(TEXT("Up")) != INDEX_NONE && bCanOwnFlying)
++	{
++		PreviousMovementMode = BoundMovement->MovementMode;
++		PreviousCustomMovementMode = BoundMovement->CustomMovementMode;
++		bOwnsFlyingMode = true;
++		BoundMovement->SetMovementMode(MOVE_Flying);
++		if (!IsActive() || ExecutionSerial != Serial) return;
++	}
++	UAnimInstance* Anim = BoundAnimInstance.Get();
++	Anim->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &ThisClass::HandleMontageNotify);
++	Anim->RequestMontageInertialization(PlayingMontage, PlayingMontage->BlendIn.GetBlendTime(), nullptr);
++	UAbilityTask_PlayMontageAndWait* Task = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(
++		this, TEXT("HitReaction"), PlayingMontage, 1.f, NAME_None, true, 1.f, 0.f, true);
++	if (!Task) { FinishAbility(true); return; }
++	MontageTask = Task;
++	Task->OnCompleted.AddDynamic(this, &ThisClass::HandleMontageCompleted);
++	Task->OnInterrupted.AddDynamic(this, &ThisClass::HandleMontageAborted);
++	Task->OnCancelled.AddDynamic(this, &ThisClass::HandleMontageAborted);
++	Task->ReadyForActivation();
++	if (!IsActive() || ExecutionSerial != Serial || MontageTask != Task) return;
++	const FAnimMontageInstance* Instance = Anim->GetActiveInstanceForMontage(PlayingMontage);
++	if (!Instance) { FinishAbility(true); return; }
++	MontageInstanceId = Instance->GetInstanceID();
++	if (bForcedChain)
++	{
++		const FKZHitReactionSettings& Settings = Character->GetCharacterDefinition()->GetHitReactionSettings();
++		const float Distance = bLaunch ? Settings.LaunchDistance : Settings.KnockbackDistance;
++		const float Height = bLaunch ? Settings.LaunchHeight : 0.f;
++		const float Start = Instance->GetPosition(), Rate = Instance->GetPlayRate() * PlayingMontage->RateScale;
++		float End = 0.f;
++		for (const FAnimNotifyEvent& Notify : PlayingMontage->Notifies)
++			if (Notify.NotifyName == TEXT("HitLand") && Notify.GetTime() > Start && (End <= Start || Notify.GetTime() < End)) End = Notify.GetTime();
++		if (End <= Start)
++		{
++			const int32 Getup = PlayingMontage->GetSectionIndex(TEXT("Getup"));
++			if (Getup != INDEX_NONE) End = PlayingMontage->GetAnimCompositeSection(Getup).GetTime();
++		}
++		if (!FMath::IsFinite(Distance) || Distance < 0.f || !FMath::IsFinite(Height) || Height < 0.f ||
++			!FMath::IsFinite(Start) || !FMath::IsFinite(End) || !FMath::IsFinite(Rate) || Rate <= 0.f || End <= Start) { FinishAbility(true); return; }
++		// These authored Air poses are in-place. Settings are explicitly temporary world-cm tuning;
++		// only the current montage's time to HitLand/Getup supplies the duration, never DownLoop hold time.
++		const float Duration = (End - Start) / Rate;
++		if (!FMath::IsFinite(Duration) || Duration <= 0.f) { FinishAbility(true); return; }
++		FVector Direction = -Character->GetActorForwardVector();
++		if (TriggerEventData && IsValid(TriggerEventData->Instigator.Get()))
++		{
++			const FVector Away = (Character->GetActorLocation() - TriggerEventData->Instigator->GetActorLocation()).GetSafeNormal2D();
++			if (!Away.IsNearlyZero()) Direction = Away;
++		}
++		Direction.Z = 0.f;
++		// Physical push direction is independent of the random pose variant. No mesh .01 scaling.
++		PreviousRootMotionMode = Anim->RootMotionMode;
++		if (PreviousRootMotionMode != ERootMotionMode::IgnoreRootMotion)
++		{
++			bOwnsRootMotionMode = true;
++			Anim->SetRootMotionMode(ERootMotionMode::IgnoreRootMotion);
++			if (!IsActive() || ExecutionSerial != Serial) return;
++		}
++		UAbilityTask_ApplyRootMotionJumpForce* Force = UAbilityTask_ApplyRootMotionJumpForce::ApplyRootMotionJumpForce(
++			this, TEXT("HitReactionMotion"), Direction.Rotation(), Distance, Height, Duration, 0.f, false,
++			ERootMotionFinishVelocityMode::SetVelocity, FVector::ZeroVector, 0.f, nullptr, nullptr);
++		// The engine factory applies its RootMotionSource synchronously, before ReadyForActivation.
++		if (!IsActive() || ExecutionSerial != Serial) { if (Force) Force->EndTask(); return; }
++		if (!Force) { FinishAbility(true); return; }
++		MotionTask = Force;
++		Force->OnFinish.AddDynamic(this, &ThisClass::HandleMotionFinished);
++		Force->ReadyForActivation();
++		if (!IsActive() || ExecutionSerial != Serial || MotionTask != Force) return;
++	}
++	if (AKZMonster* Monster = Cast<AKZMonster>(Character)) Monster->RequestCombatStateRefresh();
++}
++
++void UKZHitReactionAbility::ClearMotionTask()
++{
++	UAbilityTask_ApplyRootMotionJumpForce* Task = MotionTask;
++	MotionTask = nullptr;
++	if (Task)
++	{
++		Task->OnFinish.RemoveDynamic(this, &ThisClass::HandleMotionFinished);
++		Task->EndTask(); // Engine OnDestroy removes only this task's source ID and Landed delegate.
++	}
++}
++
++void UKZHitReactionAbility::RestoreRootMotionMode()
++{
++	if (!bOwnsRootMotionMode) return;
++	bOwnsRootMotionMode = false;
++	if (UAnimInstance* Anim = BoundAnimInstance.Get(); Anim && Anim->RootMotionMode == ERootMotionMode::IgnoreRootMotion)
++		Anim->SetRootMotionMode(PreviousRootMotionMode);
++}
++
++void UKZHitReactionAbility::HandleMotionFinished()
++{
++	if (!IsActive() || bEnding || !MotionTask) return;
++	const uint32 Serial = ExecutionSerial;
++	ClearMotionTask();
++	if (!IsActive() || ExecutionSerial != Serial) return;
++	RestoreRootMotionMode();
++	if (!IsActive() || ExecutionSerial != Serial) return;
++	RestoreMovementMode();
++	// The complete recovery montage task still owns Ability completion.
++}
++
++void UKZHitReactionAbility::RestoreMovementMode()
++{
++	if (!bOwnsFlyingMode) return;
++	bOwnsFlyingMode = false; // Clear ownership before the synchronous movement-mode callback.
++	UCharacterMovementComponent* Movement = BoundMovement.Get();
++	AKZCharacter* Character = BoundCharacter.Get();
++	if (!Movement || !Character || Movement->MovementMode != MOVE_Flying) return;
++	FFindFloorResult Floor;
++	Movement->FindFloor(Character->GetActorLocation(), Floor, false);
++	const bool bPriorGroundMode = PreviousMovementMode == MOVE_Walking || PreviousMovementMode == MOVE_NavWalking;
++	if (bPriorGroundMode && Floor.IsWalkableFloor() && Floor.GetDistanceToFloor() <= UCharacterMovementComponent::MAX_FLOOR_DIST)
++		Movement->SetMovementMode(PreviousMovementMode, PreviousCustomMovementMode);
++	else
++		Movement->SetMovementMode(MOVE_Falling);
++}
++
++void UKZHitReactionAbility::HandleMontageNotify(FName NotifyName, const FBranchingPointNotifyPayload& Payload)
++{
++	if (!IsActive() || bEnding || NotifyName != TEXT("HitLand") ||
++		Payload.MontageInstanceID != MontageInstanceId || Payload.SequenceAsset != PlayingMontage.Get()) return;
++	const FGameplayAbilityActorInfo* Info = GetCurrentActorInfo();
++	UAbilitySystemComponent* ASC = GetAbilitySystemComponentFromActorInfo();
++	UAnimInstance* Anim = BoundAnimInstance.Get();
++	if (!Info || !Anim || Info->AvatarActor.Get() != BoundCharacter.Get() || Info->GetAnimInstance() != Anim ||
++		Payload.SkelMeshComponent != (Anim ? Anim->GetSkelMeshComponent() : nullptr) ||
++		!ASC || !ASC->IsAnimatingAbility(this) || GetCurrentMontage() != PlayingMontage.Get()) return;
++	const FAnimMontageInstance* Instance = Anim->GetActiveInstanceForMontage(PlayingMontage);
++	if (!Instance || Instance->GetInstanceID() != MontageInstanceId) return;
++	const uint32 Serial = ExecutionSerial;
++	ClearMotionTask();
++	if (!IsActive() || ExecutionSerial != Serial) return;
++	RestoreRootMotionMode();
++	if (!IsActive() || ExecutionSerial != Serial) return;
++	RestoreMovementMode();
++}
++
++void UKZHitReactionAbility::ClearMontageTask()
++{
++	UAbilityTask_PlayMontageAndWait* Task = MontageTask;
++	MontageTask = nullptr;
++	if (Task)
++	{
++		Task->OnCompleted.RemoveDynamic(this, &ThisClass::HandleMontageCompleted);
++		Task->OnInterrupted.RemoveDynamic(this, &ThisClass::HandleMontageAborted);
++		Task->OnCancelled.RemoveDynamic(this, &ThisClass::HandleMontageAborted);
++		Task->EndTask();
++	}
++	UAbilitySystemComponent* ASC = GetAbilitySystemComponentFromActorInfo();
++	if (ASC && ASC->IsAnimatingAbility(this) && GetCurrentMontage() == PlayingMontage.Get()) ASC->CurrentMontageStop();
++	PlayingMontage = nullptr;
++}
++
++void UKZHitReactionAbility::HandleMontageCompleted() { FinishAbility(false); }
++void UKZHitReactionAbility::HandleMontageAborted() { FinishAbility(true); }
++
++void UKZHitReactionAbility::FinishAbility(const bool bWasCancelled)
++{
++	if (IsActive() && !bEnding)
++		EndAbility(GetCurrentAbilitySpecHandle(), GetCurrentActorInfo(), GetCurrentActivationInfo(), false, bWasCancelled);
++}
++
++void UKZHitReactionAbility::EndAbility(FGameplayAbilitySpecHandle Handle,
++	const FGameplayAbilityActorInfo* ActorInfo, FGameplayAbilityActivationInfo ActivationInfo,
++	bool bReplicateEndAbility, bool bWasCancelled)
++{
++	if (!IsActive() || bEnding) return;
++	bEnding = true;
++	++ExecutionSerial;
++	TWeakObjectPtr<AKZMonster> Monster = Cast<AKZMonster>(BoundCharacter.Get());
++	if (BoundAnimInstance.IsValid())
++		BoundAnimInstance->OnPlayMontageNotifyBegin.RemoveDynamic(this, &ThisClass::HandleMontageNotify);
++	ClearMontageTask();
++	ClearMotionTask();
++	RestoreRootMotionMode();
++	RestoreMovementMode();
++	if (BoundCharacter.IsValid() && BoundCharacter->GetLocomotionComponent())
++		BoundCharacter->GetLocomotionComponent()->ReleaseMovementConstraint(MovementHandle);
++	MovementHandle.Reset();
++	BoundCharacter.Reset();
++	BoundAnimInstance.Reset();
++	BoundMovement.Reset();
++	CurrentEvent = FGameplayTag();
++	MontageInstanceId = INDEX_NONE;
++	PreviousMovementMode = MOVE_None;
++	PreviousCustomMovementMode = 0;
++	PreviousRootMotionMode = ERootMotionMode::NoRootMotionExtraction;
++	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
++	bEnding = false;
++	if (Monster.IsValid()) Monster->RequestCombatStateRefresh();
++}

@@ -1,0 +1,113 @@
+Begin Object Class=/Script/Engine.Material Name="M_Monster_HitBloodGround" ExportPath="/Script/Engine.Material'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround'"
+   Begin Object Class=/Script/Engine.MaterialEditorOnlyData Name="M_Monster_HitBloodGroundEditorOnlyData" ExportPath="/Script/Engine.MaterialEditorOnlyData'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:M_Monster_HitBloodGroundEditorOnlyData'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionCustom Name="MaterialExpressionCustom_0" ExportPath="/Script/Engine.MaterialExpressionCustom'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionCustom_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionDecalLifetimeOpacity Name="MaterialExpressionDecalLifetimeOpacity_0" ExportPath="/Script/Engine.MaterialExpressionDecalLifetimeOpacity'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionDecalLifetimeOpacity_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionScalarParameter Name="MaterialExpressionScalarParameter_0" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionScalarParameter_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionScalarParameter Name="MaterialExpressionScalarParameter_1" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionScalarParameter_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionScalarParameter Name="MaterialExpressionScalarParameter_2" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionScalarParameter_2'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionScalarParameter Name="MaterialExpressionScalarParameter_3" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionScalarParameter_3'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionScalarParameter Name="MaterialExpressionScalarParameter_4" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionScalarParameter_4'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionScalarParameter Name="MaterialExpressionScalarParameter_5" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionScalarParameter_5'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTextureSampleParameter2D Name="MaterialExpressionTextureSampleParameter2D_0" ExportPath="/Script/Engine.MaterialExpressionTextureSampleParameter2D'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionTextureSampleParameter2D_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionVectorParameter Name="MaterialExpressionVectorParameter_0" ExportPath="/Script/Engine.MaterialExpressionVectorParameter'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionVectorParameter_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionWorldPosition Name="MaterialExpressionWorldPosition_0" ExportPath="/Script/Engine.MaterialExpressionWorldPosition'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionWorldPosition_0'"
+   End Object
+   Begin Object Name="M_Monster_HitBloodGroundEditorOnlyData" ExportPath="/Script/Engine.MaterialEditorOnlyData'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:M_Monster_HitBloodGroundEditorOnlyData'"
+      BaseColor=(Expression="/Script/Engine.MaterialExpressionVectorParameter'M_Monster_HitBloodGround:MaterialExpressionVectorParameter_0'",Mask=1,MaskR=1,MaskG=1,MaskB=1)
+      Opacity=(Expression="/Script/Engine.MaterialExpressionCustom'M_Monster_HitBloodGround:MaterialExpressionCustom_0'")
+      ExpressionCollection=(Expressions=("/Script/Engine.MaterialExpressionTextureSampleParameter2D'M_Monster_HitBloodGround:MaterialExpressionTextureSampleParameter2D_0'","/Script/Engine.MaterialExpressionCustom'M_Monster_HitBloodGround:MaterialExpressionCustom_0'","/Script/Engine.MaterialExpressionScalarParameter'M_Monster_HitBloodGround:MaterialExpressionScalarParameter_0'","/Script/Engine.MaterialExpressionScalarParameter'M_Monster_HitBloodGround:MaterialExpressionScalarParameter_1'","/Script/Engine.MaterialExpressionScalarParameter'M_Monster_HitBloodGround:MaterialExpressionScalarParameter_2'","/Script/Engine.MaterialExpressionDecalLifetimeOpacity'M_Monster_HitBloodGround:MaterialExpressionDecalLifetimeOpacity_0'","/Script/Engine.MaterialExpressionVectorParameter'M_Monster_HitBloodGround:MaterialExpressionVectorParameter_0'","/Script/Engine.MaterialExpressionScalarParameter'M_Monster_HitBloodGround:MaterialExpressionScalarParameter_3'","/Script/Engine.MaterialExpressionScalarParameter'M_Monster_HitBloodGround:MaterialExpressionScalarParameter_4'","/Script/Engine.MaterialExpressionWorldPosition'M_Monster_HitBloodGround:MaterialExpressionWorldPosition_0'","/Script/Engine.MaterialExpressionScalarParameter'M_Monster_HitBloodGround:MaterialExpressionScalarParameter_5'"))
+   End Object
+   Begin Object Name="MaterialExpressionCustom_0" ExportPath="/Script/Engine.MaterialExpressionCustom'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionCustom_0'"
+      Code="float a=Channel<.5?Mask.r:(Channel<1.5?Mask.g:Mask.b);float3 n=normalize(cross(ddx(Position),ddy(Position)));return saturate(pow(saturate(a),Power)*Density)*Fade*step(Walkable,abs(n.z));"
+      OutputType=CMOT_Float1
+      Inputs(0)=(InputName="Mask",Input=(Expression="/Script/Engine.MaterialExpressionTextureSampleParameter2D'M_Monster_HitBloodGround:MaterialExpressionTextureSampleParameter2D_0'",Mask=1,MaskR=1,MaskG=1,MaskB=1))
+      Inputs(1)=(InputName="Channel",Input=(Expression="/Script/Engine.MaterialExpressionScalarParameter'M_Monster_HitBloodGround:MaterialExpressionScalarParameter_0'"))
+      Inputs(2)=(InputName="Power",Input=(Expression="/Script/Engine.MaterialExpressionScalarParameter'M_Monster_HitBloodGround:MaterialExpressionScalarParameter_1'"))
+      Inputs(3)=(InputName="Density",Input=(Expression="/Script/Engine.MaterialExpressionScalarParameter'M_Monster_HitBloodGround:MaterialExpressionScalarParameter_2'"))
+      Inputs(4)=(InputName="Fade",Input=(Expression="/Script/Engine.MaterialExpressionDecalLifetimeOpacity'M_Monster_HitBloodGround:MaterialExpressionDecalLifetimeOpacity_0'"))
+      Inputs(5)=(InputName="Position",Input=(Expression="/Script/Engine.MaterialExpressionWorldPosition'M_Monster_HitBloodGround:MaterialExpressionWorldPosition_0'",Mask=1,MaskR=1,MaskG=1,MaskB=1))
+      Inputs(6)=(InputName="Walkable",Input=(Expression="/Script/Engine.MaterialExpressionScalarParameter'M_Monster_HitBloodGround:MaterialExpressionScalarParameter_5'"))
+      MaterialExpressionGuid=A83A5C224A67666FE6F9C987D8CA0061
+      Material="/Script/Engine.Material'M_Monster_HitBloodGround'"
+   End Object
+   Begin Object Name="MaterialExpressionDecalLifetimeOpacity_0" ExportPath="/Script/Engine.MaterialExpressionDecalLifetimeOpacity'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionDecalLifetimeOpacity_0'"
+      MaterialExpressionGuid=AA8948204596EC7D9387E68D0EA9DC10
+      Material="/Script/Engine.Material'M_Monster_HitBloodGround'"
+   End Object
+   Begin Object Name="MaterialExpressionScalarParameter_0" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionScalarParameter_0'"
+      ParameterName="BloodMaskChannel"
+      ExpressionGUID=AC10F5E64D0079845B48BDA96D69B229
+      MaterialExpressionGuid=E7CDF648443A4B45ED322FBAFFA1FEC1
+      Material="/Script/Engine.Material'M_Monster_HitBloodGround'"
+   End Object
+   Begin Object Name="MaterialExpressionScalarParameter_1" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionScalarParameter_1'"
+      DefaultValue=0.400000
+      ParameterName="BloodMaskPower"
+      ExpressionGUID=B767F0BE43B2475830859E8BBA23041E
+      MaterialExpressionGuid=3E6B86BB44625FD46992BD837BB3D5A3
+      Material="/Script/Engine.Material'M_Monster_HitBloodGround'"
+   End Object
+   Begin Object Name="MaterialExpressionScalarParameter_2" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionScalarParameter_2'"
+      DefaultValue=6.000000
+      ParameterName="BloodMaskDensity"
+      ExpressionGUID=05B81CC84E06A045EA9C50A2CA7662DF
+      MaterialExpressionGuid=22D97C77489A11478D2735A49277B99B
+      Material="/Script/Engine.Material'M_Monster_HitBloodGround'"
+   End Object
+   Begin Object Name="MaterialExpressionScalarParameter_3" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionScalarParameter_3'"
+      DefaultValue=0.120000
+      ParameterName="BloodRoughness"
+      ExpressionGUID=810DA83847A4AD9F91F572BCB1755873
+      MaterialExpressionGuid=B28C17944541A2CC14CECE8A5B88E2D4
+      Material="/Script/Engine.Material'M_Monster_HitBloodGround'"
+   End Object
+   Begin Object Name="MaterialExpressionScalarParameter_4" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionScalarParameter_4'"
+      DefaultValue=0.250000
+      ParameterName="BloodMetallic"
+      ExpressionGUID=10FB1065441F48F64AF33B8C53C53A36
+      MaterialExpressionGuid=2DAE9CC7440CFE040B694DA3DE1E7C3D
+      Material="/Script/Engine.Material'M_Monster_HitBloodGround'"
+   End Object
+   Begin Object Name="MaterialExpressionScalarParameter_5" ExportPath="/Script/Engine.MaterialExpressionScalarParameter'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionScalarParameter_5'"
+      ParameterName="BloodWalkableFloorZ"
+      ExpressionGUID=57587ADF4034BD31149A968085BB2F6A
+      MaterialExpressionGuid=067EE8804BC128EA254DB998EEFA7BF3
+      Material="/Script/Engine.Material'M_Monster_HitBloodGround'"
+   End Object
+   Begin Object Name="MaterialExpressionTextureSampleParameter2D_0" ExportPath="/Script/Engine.MaterialExpressionTextureSampleParameter2D'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionTextureSampleParameter2D_0'"
+      ParameterName="BloodMask"
+      ExpressionGUID=75E2151048EC228DC3F0F18C642984FC
+      Texture="/Script/Engine.Texture2D'/Game/_Art/Effects/Combat/Blood/FT_Monster_HitBloodGroundMask.FT_Monster_HitBloodGroundMask'"
+      SamplerType=SAMPLERTYPE_LinearColor
+      MaterialExpressionGuid=1BABE0184399B6BB9356AF87C1FC9C0C
+      Material="/Script/Engine.Material'M_Monster_HitBloodGround'"
+   End Object
+   Begin Object Name="MaterialExpressionVectorParameter_0" ExportPath="/Script/Engine.MaterialExpressionVectorParameter'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionVectorParameter_0'"
+      DefaultValue=(R=0.012000,G=0.000250,B=0.000750,A=1.000000)
+      ParameterName="BloodColor"
+      ExpressionGUID=3C4D8A7349B81E32E87A1F9F4C78D70B
+      MaterialExpressionGuid=FC82CCB740331AC1737326A1F1804472
+      Material="/Script/Engine.Material'M_Monster_HitBloodGround'"
+   End Object
+   Begin Object Name="MaterialExpressionWorldPosition_0" ExportPath="/Script/Engine.MaterialExpressionWorldPosition'/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround:MaterialExpressionWorldPosition_0'"
+      MaterialExpressionGuid=87004B674C2C87CA4A0DEBA6F9B53905
+      Material="/Script/Engine.Material'M_Monster_HitBloodGround'"
+   End Object
+   MaterialDomain=MD_DeferredDecal
+   BlendMode=BLEND_Translucent
+   StateId=8C02AB89410C54BBB866ACAA1B8059BF
+   EditorOnlyData="/Script/Engine.MaterialEditorOnlyData'M_Monster_HitBloodGroundEditorOnlyData'"
+   ReferencedDefaultTextures(0)="/Script/Engine.Texture2D'/Game/_Art/Effects/Combat/Blood/FT_Monster_HitBloodGroundMask.FT_Monster_HitBloodGroundMask'"
+   LightingGuid=6F4E01E44B1B96FAD211A0A45DD8873A
+End Object

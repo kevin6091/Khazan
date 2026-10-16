@@ -1,0 +1,118 @@
+{
+  "schema": "Khazan.CombatReaction.IndependentFinalAudit.v1",
+  "utc": "2026-10-08T13:34:34.374311+00:00",
+  "scope": "Read-only independent review of existing receipts and scoped source; no editor/build/PIE/source/asset writes by reviewer. Only this report is new.",
+  "status": "No confirmed new runtime semantic blocker found in target cleanup/faction/Shield review. Final stock build, regressions, delivery and fresh Main reload belong to root.",
+  "inputs": {
+    "StageBaseline.json": "b0035fad43fef20405b400a7322b4b2430f442dd67a2f497918089dd57aac1f1",
+    "BeforeAuthor.json": "5abded5fb44ff9feb8aeca5f8d0452ee87d3e61825bfacf8017333b81b084228",
+    "Authoring_Final.json": "b679264bfac56289a283c620e04dd89ca063d3c3a2a9a6038e49aa2230a74426",
+    "CollisionAuthoring_Final.json": "c1031279bc68e1d489a58edf3657e80098364ad10ee553cde44e2580e562f660",
+    "NativePIE_Final.json": "730f9e500c4637613210a7525cc497d84604c02df1c6b0f589e12c324abd83cb",
+    "MonsterAttackCollisionPlan.json": "6283aec54f56756d02451dcd486169d05c904b81a7a9d70090e77031426aa180"
+  },
+  "main_cas_snapshot": {
+    "tracked_files": 709,
+    "tracked_conflicts": [],
+    "existing_authored_assets": 43,
+    "existing_asset_conflicts": [],
+    "new_asset_paths": 87,
+    "new_paths_already_on_main": []
+  },
+  "candidate_scope": {
+    "runtime_files": 16,
+    "runtime_relative_paths": [
+      "Source/Khazan/Ability/Combo/KZComboActionAbility.cpp",
+      "Source/Khazan/Ability/Combo/KZComboActionAbility.h",
+      "Source/Khazan/Ability/Combo/KZComboDefinitionData.h",
+      "Source/Khazan/Ability/MonsterAbility/KZExhaustionAbility.cpp",
+      "Source/Khazan/Ability/MonsterAbility/KZExhaustionAbility.h",
+      "Source/Khazan/Ability/PlayerAbility/KZBrutalAttackAbility.cpp",
+      "Source/Khazan/Ability/PlayerAbility/KZBrutalAttackAbility.h",
+      "Source/Khazan/Character/KZCharacter.cpp",
+      "Source/Khazan/Character/KZCharacter.h",
+      "Source/Khazan/Character/KZMonster.cpp",
+      "Source/Khazan/Character/KZMonster.h",
+      "Source/Khazan/Data/KZCharacterDefinitionData.h",
+      "Source/Khazan/KZGameplayTags.cpp",
+      "Source/Khazan/KZGameplayTags.h",
+      "Source/Khazan/Ability/KZHitReactionAbility.h",
+      "Source/Khazan/Ability/KZHitReactionAbility.cpp"
+    ],
+    "asset_packages": 130,
+    "existing_packages": 43,
+    "new_packages": 87,
+    "package_kinds": {
+      "CharacterDefinition": 7,
+      "ComboDefinition": 36,
+      "PlayerReactionClone": 24,
+      "ReactionMontage": 63
+    },
+    "author_saved_packages": 97,
+    "collision_assets": 36,
+    "shared_guard_combos": 3,
+    "stock_build_cs_restored_at_snapshot": false,
+    "editor_helpers_must_be_excluded": [
+      "Tests/CombatReactionAuthorEditor.cpp",
+      "Tests/CombatReactionCollisionAuthorEditor.cpp"
+    ]
+  },
+  "player_amount_correction": {
+    "saved_amounts": "Existing saved HP10/Stamina5 for all60 windows, not source struct defaults0. No new damage tuning applied by this reaction author.",
+    "before_main_work_sha256": "0ea30c0dda465ff6594036cff1c48151e44c721f0ceffda08c6956c4c429188b",
+    "prior_author_after_sha256": "0ea30c0dda465ff6594036cff1c48151e44c721f0ceffda08c6956c4c429188b",
+    "current_main_sha256": "0ea30c0dda465ff6594036cff1c48151e44c721f0ceffda08c6956c4c429188b",
+    "prior_fresh_main_readback_file": "Metadata/PlayerAttackCollision_20261008/MainFreshSavedReadback.json",
+    "prior_readback_pid": 2512,
+    "prior_readback_utc": "2026-10-08T06:55:14.270737+00:00",
+    "prior_readback_success": true,
+    "prior_windows": 60,
+    "prior_keys": 553,
+    "final_author_amount_counts": [
+      {
+        "hp_damage": 10,
+        "stamina_damage": 5,
+        "windows": 60
+      }
+    ],
+    "author_proof": "CombatReactionCollisionAuthorEditor.cpp183 copies current AttackWindows;197 changes HitReaction only;198-199 append provenance. Geometry/time/group/amounts preserved."
+  },
+  "monster_collision": {
+    "actual_windows": 113,
+    "actual_key_occurrences": 1498,
+    "actual_reaction_enum_counts": {
+      "1": 109,
+      "2": 2,
+      "3": 2
+    },
+    "enum_meaning": {
+      "1": "Short",
+      "2": "Knockback",
+      "3": "Launch"
+    },
+    "four_nonshort_occurrences": "Assistant temporary project mapping, not confirmed original SD strength.",
+    "unsupported_original_unique_windows": 8,
+    "unsupported_current_occurrences": 11,
+    "limit": "100 source Box windows are bounds-reconstructed; 8 unique Cylinder/shape-absent producer windows are excluded. Three tested producers do not prove all35 patterns collision/contact fidelity."
+  },
+  "native_existing_receipt": {
+    "success": true,
+    "pid": 8952,
+    "utc": "2026-10-08T13:29:02.423Z",
+    "reaction_cases": 32,
+    "pair_cases": 15,
+    "collision_cases": 3,
+    "partial_scope": false,
+    "visual_contact_quality_or_physical_input_claim": false
+  },
+  "runtime_review": {
+    "reciprocal_ignore": "Full pair Exhaustion ownership, original pawn weakrefs and two added flags; previous entries preserved; cleanup before external callbacks.",
+    "factions": "Only Player-to-Monster and Monster-to-Player; self/same-faction rejected. Hit-group dedup consumed before callbacks.",
+    "priority": "Dead/exhausted/monster stamina0 reject ordinary reactions; accepted zero-HP GE may still react; negative HP only confirms damage VFX.",
+    "shield": "Current Shield reaction or valid battle idle/authored guard window required; facing cone checked; blocks HP and consumes stamina; depletion prefers Exhaustion.",
+    "heavy_knockback_land_boundary": "Current plan and Final author input both mark Loop for F/B; earlier missing marker resolved.",
+    "existing_player_vfx_source_preserved": true
+  },
+  "delivery_actionable_note": "publish_delivery.py should require current Work DLL/PDB hashes to equal PreparedDelivery.dll_sha256/pdb_sha256 before any publish and verify alias hashes before manifest selection. At review, Source/asset CAS and canonical preservation are present; stock Build.cs/helper exclusion remain required.",
+  "editor_control": "None"
+}

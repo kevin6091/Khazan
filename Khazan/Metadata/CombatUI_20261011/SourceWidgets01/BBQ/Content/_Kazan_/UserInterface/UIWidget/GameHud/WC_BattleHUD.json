@@ -1,0 +1,32 @@
+[
+  {
+    "Type": "xxWidgetCondFunc_LevelSequencePlaying",
+    "Name": "xxWidgetCondFunc_LevelSequencePlaying_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxWidgetCondFunc_LevelSequencePlaying'",
+    "Outer": {
+      "ObjectName": "xxWidgetCondition'WC_BattleHUD'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/WC_BattleHUD.1"
+    },
+    "Properties": {
+      "TargetLevelSequence": "ELevelSequenceType::CutScene"
+    }
+  },
+  {
+    "Type": "xxWidgetCondition",
+    "Name": "WC_BattleHUD",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxWidgetCondition'",
+    "Package": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/WC_BattleHUD",
+    "Properties": {
+      "Name": "베틀HUD 오픈조건",
+      "Desc": "베틀HUD 오픈 조건입니다",
+      "ConditionFunctions": [
+        {
+          "ObjectName": "xxWidgetCondFunc_LevelSequencePlaying'WC_BattleHUD:xxWidgetCondFunc_LevelSequencePlaying_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/WC_BattleHUD.0"
+        }
+      ]
+    }
+  }
+]

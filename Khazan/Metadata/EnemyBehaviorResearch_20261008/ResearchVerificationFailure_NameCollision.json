@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-08",
+  "check": "Distinct basenames in root Yetuga original analysis cache",
+  "result": "Failed",
+  "cause": "AC_Yetuga_DamageParry_F occurs under both Moving/Reaction and Skill/13_Armageddon with different SHA256 values.",
+  "impact": "Flattened file name was ambiguous. Original SourceMetadata.zip was unchanged. Skill and defense reports verified package SHA separately.",
+  "resolution": "Preserve both exact source copies by package suffix under YetugaOriginal/PackageCopies and bind Index.local_path. Preserve existing flat copy for historical compatibility; do not use its basename as a unique package locator.",
+  "game_files_modified": false
+}

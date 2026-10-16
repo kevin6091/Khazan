@@ -1,0 +1,82 @@
+Begin Object Class=/Script/Engine.Material Name="M_KZGiant_SoftPowder" ExportPath="/Script/Engine.Material'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder'"
+   Begin Object Class=/Script/Engine.MaterialEditorOnlyData Name="M_KZGiant_SoftPowderEditorOnlyData" ExportPath="/Script/Engine.MaterialEditorOnlyData'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:M_KZGiant_SoftPowderEditorOnlyData'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionConstant Name="MaterialExpressionConstant_0" ExportPath="/Script/Engine.MaterialExpressionConstant'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionConstant_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionCustom Name="MaterialExpressionCustom_0" ExportPath="/Script/Engine.MaterialExpressionCustom'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionCustom_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionDepthFade Name="MaterialExpressionDepthFade_0" ExportPath="/Script/Engine.MaterialExpressionDepthFade'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionDepthFade_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionMultiply Name="MaterialExpressionMultiply_0" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionMultiply_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionParticleColor Name="MaterialExpressionParticleColor_0" ExportPath="/Script/Engine.MaterialExpressionParticleColor'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionParticleColor_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTextureCoordinate Name="MaterialExpressionTextureCoordinate_0" ExportPath="/Script/Engine.MaterialExpressionTextureCoordinate'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionTextureCoordinate_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTextureSample Name="MaterialExpressionTextureSample_0" ExportPath="/Script/Engine.MaterialExpressionTextureSample'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionTextureSample_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionVectorParameter Name="MaterialExpressionVectorParameter_0" ExportPath="/Script/Engine.MaterialExpressionVectorParameter'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionVectorParameter_0'"
+   End Object
+   Begin Object Name="M_KZGiant_SoftPowderEditorOnlyData" ExportPath="/Script/Engine.MaterialEditorOnlyData'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:M_KZGiant_SoftPowderEditorOnlyData'"
+      EmissiveColor=(Expression="/Script/Engine.MaterialExpressionVectorParameter'M_KZGiant_SoftPowder:MaterialExpressionVectorParameter_0'",Mask=1,MaskR=1,MaskG=1,MaskB=1)
+      Opacity=(Expression="/Script/Engine.MaterialExpressionDepthFade'M_KZGiant_SoftPowder:MaterialExpressionDepthFade_0'")
+      ExpressionCollection=(Expressions=("/Script/Engine.MaterialExpressionTextureCoordinate'M_KZGiant_SoftPowder:MaterialExpressionTextureCoordinate_0'","/Script/Engine.MaterialExpressionParticleColor'M_KZGiant_SoftPowder:MaterialExpressionParticleColor_0'","/Script/Engine.MaterialExpressionMultiply'M_KZGiant_SoftPowder:MaterialExpressionMultiply_0'","/Script/Engine.MaterialExpressionConstant'M_KZGiant_SoftPowder:MaterialExpressionConstant_0'","/Script/Engine.MaterialExpressionTextureSample'M_KZGiant_SoftPowder:MaterialExpressionTextureSample_0'","/Script/Engine.MaterialExpressionCustom'M_KZGiant_SoftPowder:MaterialExpressionCustom_0'","/Script/Engine.MaterialExpressionDepthFade'M_KZGiant_SoftPowder:MaterialExpressionDepthFade_0'","/Script/Engine.MaterialExpressionVectorParameter'M_KZGiant_SoftPowder:MaterialExpressionVectorParameter_0'"))
+   End Object
+   Begin Object Name="MaterialExpressionConstant_0" ExportPath="/Script/Engine.MaterialExpressionConstant'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionConstant_0'"
+      R=0.111111
+      MaterialExpressionGuid=A3D8AA9C4A3A004CB87F68A9D3351F88
+      Material="/Script/Engine.Material'M_KZGiant_SoftPowder'"
+   End Object
+   Begin Object Name="MaterialExpressionCustom_0" ExportPath="/Script/Engine.MaterialExpressionCustom'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionCustom_0'"
+      Code="float2 p=UV*2.0-1.0; return pow(saturate(1.0-dot(p,p)),2.0)*saturate(Density)*saturate(Alpha);"
+      OutputType=CMOT_Float1
+      Inputs(0)=(InputName="UV",Input=(Expression="/Script/Engine.MaterialExpressionTextureCoordinate'M_KZGiant_SoftPowder:MaterialExpressionTextureCoordinate_0'"))
+      Inputs(1)=(InputName="Density",Input=(Expression="/Script/Engine.MaterialExpressionTextureSample'M_KZGiant_SoftPowder:MaterialExpressionTextureSample_0'",OutputIndex=1,Mask=1,MaskR=1))
+      Inputs(2)=(InputName="Alpha",Input=(Expression="/Script/Engine.MaterialExpressionParticleColor'M_KZGiant_SoftPowder:MaterialExpressionParticleColor_0'",OutputIndex=4,Mask=1,MaskA=1))
+      MaterialExpressionGuid=AA511BEF41EA7767AAFDD1AA76FBD2AB
+      Material="/Script/Engine.Material'M_KZGiant_SoftPowder'"
+   End Object
+   Begin Object Name="MaterialExpressionDepthFade_0" ExportPath="/Script/Engine.MaterialExpressionDepthFade'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionDepthFade_0'"
+      InOpacity=(Expression="/Script/Engine.MaterialExpressionCustom'M_KZGiant_SoftPowder:MaterialExpressionCustom_0'")
+      FadeDistanceDefault=12.000000
+      MaterialExpressionGuid=BCAE690740C87769E248A0AF6179131F
+      Material="/Script/Engine.Material'M_KZGiant_SoftPowder'"
+   End Object
+   Begin Object Name="MaterialExpressionMultiply_0" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionMultiply_0'"
+      A=(Expression="/Script/Engine.MaterialExpressionTextureCoordinate'M_KZGiant_SoftPowder:MaterialExpressionTextureCoordinate_0'")
+      B=(Expression="/Script/Engine.MaterialExpressionConstant'M_KZGiant_SoftPowder:MaterialExpressionConstant_0'")
+      MaterialExpressionGuid=1849284D4C9BE41298463FA616CE3DAC
+      Material="/Script/Engine.Material'M_KZGiant_SoftPowder'"
+   End Object
+   Begin Object Name="MaterialExpressionParticleColor_0" ExportPath="/Script/Engine.MaterialExpressionParticleColor'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionParticleColor_0'"
+      MaterialExpressionGuid=9EA8BB9C49CF449C58B62F8256B34A11
+      Material="/Script/Engine.Material'M_KZGiant_SoftPowder'"
+   End Object
+   Begin Object Name="MaterialExpressionTextureCoordinate_0" ExportPath="/Script/Engine.MaterialExpressionTextureCoordinate'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionTextureCoordinate_0'"
+      MaterialExpressionGuid=C19DF4F8437194987FF5DB909DBC2B4E
+      Material="/Script/Engine.Material'M_KZGiant_SoftPowder'"
+   End Object
+   Begin Object Name="MaterialExpressionTextureSample_0" ExportPath="/Script/Engine.MaterialExpressionTextureSample'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionTextureSample_0'"
+      Coordinates=(Expression="/Script/Engine.MaterialExpressionMultiply'M_KZGiant_SoftPowder:MaterialExpressionMultiply_0'")
+      Texture="/Script/Engine.Texture2D'/Game/_Art/Effects/Shared/Textures/BBQ_Texture/SubUV/T_Smoke03_SubUV_9x9.T_Smoke03_SubUV_9x9'"
+      MaterialExpressionGuid=10CF620F47191966727787AFCB3CEB20
+      Material="/Script/Engine.Material'M_KZGiant_SoftPowder'"
+   End Object
+   Begin Object Name="MaterialExpressionVectorParameter_0" ExportPath="/Script/Engine.MaterialExpressionVectorParameter'/Game/_Art/Effects/Monsters/ApesYetuga/GiantPolish/Materials/M_KZGiant_SoftPowder.M_KZGiant_SoftPowder:MaterialExpressionVectorParameter_0'"
+      DefaultValue=(R=0.680000,G=0.740000,B=0.800000,A=1.000000)
+      ParameterName="SnowTint"
+      ExpressionGUID=1D9FA11C4BC9C93D6F916C97BEA2887A
+      MaterialExpressionGuid=CF61E4834F533E4305962AB64B01581F
+      Material="/Script/Engine.Material'M_KZGiant_SoftPowder'"
+   End Object
+   BlendMode=BLEND_Translucent
+   ShadingModel=MSM_Unlit
+   ShadingModels=(ShadingModelField=1)
+   TwoSided=True
+   bUsedWithParticleSprites=True
+   bUsedWithMeshParticles=True
+   StateId=D402B90F41FBE74BE871889BA73782DC
+   EditorOnlyData="/Script/Engine.MaterialEditorOnlyData'M_KZGiant_SoftPowderEditorOnlyData'"
+   ReferencedDefaultTextures(0)="/Script/Engine.Texture2D'/Game/_Art/Effects/Shared/Textures/BBQ_Texture/SubUV/T_Smoke03_SubUV_9x9.T_Smoke03_SubUV_9x9'"
+   LightingGuid=E527F09C4300C77AE12F389BE2D1003F
+End Object

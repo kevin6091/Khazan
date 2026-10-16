@@ -1,0 +1,27 @@
+Begin Object Class=/Script/Engine.AnimMontage Name="AM_HalberdElite_Knockback_B" ExportPath="/Script/Engine.AnimMontage'/Game/Monsters/HalberdElite/Animations/Reaction/Montages/AM_HalberdElite_Knockback_B.AM_HalberdElite_Knockback_B'"
+   Begin Object Class=/Script/Engine.AnimDataModel Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/Monsters/HalberdElite/Animations/Reaction/Montages/AM_HalberdElite_Knockback_B.AM_HalberdElite_Knockback_B:AnimDataModel'"
+   End Object
+   Begin Object Class=/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify Name="HitLand" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/Monsters/HalberdElite/Animations/Reaction/Montages/AM_HalberdElite_Knockback_B.AM_HalberdElite_Knockback_B:HitLand'"
+   End Object
+   Begin Object Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/Monsters/HalberdElite/Animations/Reaction/Montages/AM_HalberdElite_Knockback_B.AM_HalberdElite_Knockback_B:AnimDataModel'"
+      FrameRate=(Numerator=2534333,Denominator=84387)
+      NumberOfFrames=84
+      NumberOfKeys=85
+   End Object
+   Begin Object Name="HitLand" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/Monsters/HalberdElite/Animations/Reaction/Montages/AM_HalberdElite_Knockback_B.AM_HalberdElite_Knockback_B:HitLand'"
+      NotifyName="HitLand"
+   End Object
+   BlendIn=(BlendTime=0.100000)
+   BlendOut=(BlendTime=0.200000)
+   CompositeSections(0)=(SectionName="Down",NextSectionName="Loop",LinkedMontage="/Script/Engine.AnimMontage'AM_HalberdElite_Knockback_B'",SegmentIndex=0,SegmentLength=0.899033,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Air_B_Land.Damage_Air_B_Land'")
+   CompositeSections(1)=(SectionName="Loop",NextSectionName="Getup",LinkedMontage="/Script/Engine.AnimMontage'AM_HalberdElite_Knockback_B'",SegmentIndex=1,SegmentBeginTime=0.899033,SegmentLength=0.300000,LinkValue=0.899033,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Down_B_Loop.Damage_Down_B_Loop'")
+   CompositeSections(2)=(SectionName="Getup",LinkedMontage="/Script/Engine.AnimMontage'AM_HalberdElite_Knockback_B'",SegmentIndex=2,SegmentBeginTime=1.199033,SegmentLength=1.600000,LinkValue=1.199033,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Getup_B.Damage_Getup_B'")
+   SlotAnimTracks(0)=(AnimTrack=(AnimSegments=((CachedPlayLength=0.899033,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Air_B_Land.Damage_Air_B_Land'",AnimEndTime=0.899033),(CachedPlayLength=6.000000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Down_B_Loop.Damage_Down_B_Loop'",StartPos=0.899033,AnimEndTime=0.300000),(CachedPlayLength=1.600000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Getup_B.Damage_Getup_B'",StartPos=1.199033,AnimEndTime=1.600000))))
+   BranchingPointMarkers(0)=(NotifyIndex=0,TriggerTime=0.899033)
+   CommonTargetFrameRate=(Numerator=0,Denominator=0)
+   Notifies(0)=(NotifyName="HitLand",Notify="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'HitLand'",MontageTickType=BranchingPoint,Guid=31A63C9645391063D94E97B052ACD785,LinkedMontage="/Script/Engine.AnimMontage'AM_HalberdElite_Knockback_B'",SegmentIndex=1,SegmentBeginTime=0.899033,SegmentLength=0.300000,LinkValue=0.899033,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Down_B_Loop.Damage_Down_B_Loop'")
+   SequenceLength=2.796992
+   AnimNotifyTracks(0)=(TrackName="1")
+   DataModelInterface=AnimDataModel'AM_HalberdElite_Knockback_B:AnimDataModel'
+   Skeleton="/Script/Engine.Skeleton'/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Skeletons/SKEL_EN_C_M_HalberdV2.SKEL_EN_C_M_HalberdV2'"
+End Object

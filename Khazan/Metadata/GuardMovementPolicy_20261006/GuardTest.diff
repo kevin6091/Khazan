@@ -1,0 +1,124 @@
+﻿diff --git a/Saved/GuardMovementPolicy_20261006/Before/Source/Khazan/Tests/KZGuardAbilityPIETest.cpp b/Source/Khazan/Tests/KZGuardAbilityPIETest.cpp
+index 7545fc0..5cc239a 100644
+--- a/Saved/GuardMovementPolicy_20261006/Before/Source/Khazan/Tests/KZGuardAbilityPIETest.cpp
++++ b/Source/Khazan/Tests/KZGuardAbilityPIETest.cpp
+@@ -60,6 +60,7 @@ public:
+ 			return false;
+ 		}
+ 		auto Check = [this](const TCHAR* Label, bool Value) { Test->TestTrue(Label, Value); };
++		UAnimInstance* Anim = Player->GetMesh()->GetAnimInstance();
+ 		switch (Stage++)
+ 		{
+ 		case 0:
+@@ -80,6 +81,7 @@ public:
+ 				return true;
+ 			}
+ 			Check(TEXT("Activation is free"), ASC->GetNumericAttribute(UKZAttributeSet::GetStaminaAttribute()) == Baseline);
++			TestGuardMontage = Guard->GetCurrentMontage();
+ 			Check(TEXT("Start blocks actions before InputEnd"), Guard.IsValid() && !Guard->HasInputEnded());
+ 			Check(TEXT("Guard caps gait at Walk"), Player->GetLocomotionComponent()->GetResolvedMovementPolicy().MaxAllowedGait == EKZGait::Walk);
+ 			Check(TEXT("Invalid/too expensive hits are rejected"), !ASC->TryGuardHit(0.f) && !ASC->TryGuardHit(-1.f) && !ASC->TryGuardHit(Baseline * 2.f));
+@@ -190,6 +192,95 @@ public:
+ 				Check(TEXT("UnPossess cancels Guard and clears its movement handle"), !Guard->IsActive() && !Guarding() && Player->GetLocomotionComponent()->GetResolvedMovementPolicy().MaxAllowedGait != EKZGait::Walk);
+ 				Controller->Possess(Player.Get());
+ 			}
++			NextTime = Now + 0.25;
++			break;
++		case 11:
++			ASC->AbilityInputTagReleased(KZGameplayTags::Input_Action_Guard);
++			Player->HandleInputMove(FVector2D(1.f, 0.f), Player->GetController()->GetControlRotation());
++			Baseline = ASC->GetNumericAttribute(UKZAttributeSet::GetStaminaAttribute());
++			ASC->AbilityInputTagPressed(KZGameplayTags::Input_Action_Guard);
++			Check(TEXT("Moving press skips Start and opens action window"), Guard->IsActive() && Guarding() && Guard->HasInputEnded() && !Anim->GetActiveInstanceForMontage(TestGuardMontage.Get()));
++			Check(TEXT("Moving press preserves free Guard and Walk limit"), ASC->GetNumericAttribute(UKZAttributeSet::GetStaminaAttribute()) == Baseline && Player->GetLocomotionComponent()->GetResolvedMovementPolicy().MaxAllowedGait == EKZGait::Walk);
++			DirectionIndex = 0;
++			Test->AddInfo(TEXT("GuardMovementPolicy: moving press -> held Guard, no Start montage."));
++			NextTime = Now + 0.25;
++			break;
++		case 12:
++			CheckGuardMotion(TEXT("F"));
++			ASC->AbilityInputTagReleased(KZGameplayTags::Input_Action_Guard);
++			Check(TEXT("Moving release skips End and clears own handles immediately"), !Guard->IsActive() && !Guarding() && !Anim->GetActiveInstanceForMontage(TestGuardMontage.Get()) && Player->GetLocomotionComponent()->GetResolvedMovementPolicy().MaxAllowedGait != EKZGait::Walk);
++			NextTime = Now + 0.25;
++			break;
++		case 13:
++			{
++				// Normal Walk/Run/Sprint players belong to the existing Locomotion Sync Group.
++				Anim->GetUngroupedActivePlayersRead(); // Wait for parallel animation work before reading both lists.
++				const FAnimGroupInstance* Group = Anim->GetSyncGroupMapRead().Find(TEXT("Locomotion"));
++				const FAnimTickRecord* Base = Group ? Group->ActivePlayers.FindByPredicate([](const FAnimTickRecord& Record)
++				{
++					return Record.SourceAsset && !Record.SourceAsset->GetName().Contains(TEXT("Guard")) && Record.EffectiveBlendWeight > 0.99f;
++				}) : nullptr;
++				Check(TEXT("Moving release reaches actual base locomotion output"), !AnimBool(TEXT("bIsGuarding")) && Base);
++				if (Base) Test->AddInfo(FString::Printf(TEXT("GuardMovementPolicy BaseOutput: group=Locomotion clip=%s nodeWeight=%.6f"), *GetNameSafe(Base->SourceAsset), Base->EffectiveBlendWeight));
++			}
++			ASC->AbilityInputTagPressed(KZGameplayTags::Input_Action_Guard);
++			ASC->AbilityInputTagReleased(KZGameplayTags::Input_Action_Guard);
++			Check(TEXT("Moving tap plays neither Start nor End"), !Guard->IsActive() && !Guarding() && !Anim->GetActiveInstanceForMontage(TestGuardMontage.Get()));
++			Player->HandleInputMoveReleased();
++			ASC->AbilityInputTagPressed(KZGameplayTags::Input_Action_Guard);
++			Check(TEXT("Stationary press still starts Start before InputEnd"), Guard->IsActive() && !Guard->HasInputEnded() && Anim->Montage_GetCurrentSection(TestGuardMontage.Get()) == TEXT("Start"));
++			Player->HandleInputMove(FVector2D(1.f, 0.f), Player->GetController()->GetControlRotation());
++			ASC->HandleGameplayEvent(KZGameplayTags::Input_Action_Move, &MovePayload);
++			Check(TEXT("Movement before Start InputEnd stops montage but preserves held Guard"), Guard->IsActive() && Guarding() && Guard->HasInputEnded() && !Anim->GetActiveInstanceForMontage(TestGuardMontage.Get()));
++			Test->AddInfo(TEXT("GuardMovementPolicy: moving release -> base output; moving tap skips both; early Start movement preserves Guard."));
++			NextTime = Now + 0.25;
++			break;
++		case 14:
++			CheckGuardMotion(TEXT("F"));
++			ASC->AbilityInputTagReleased(KZGameplayTags::Input_Action_Guard);
++			Player->HandleInputMoveReleased();
++			ASC->AbilityInputTagPressed(KZGameplayTags::Input_Action_Guard);
++			NextTime = Now + 0.5;
++			break;
++		case 15:
++			ASC->AbilityInputTagReleased(KZGameplayTags::Input_Action_Guard);
++			Check(TEXT("Stationary release still plays End before InputEnd"), Guard->IsActive() && !Guard->HasInputEnded() && Anim->Montage_GetCurrentSection(TestGuardMontage.Get()) == TEXT("End"));
++			Player->HandleInputMove(FVector2D(1.f, 0.f), Player->GetController()->GetControlRotation());
++			ASC->HandleGameplayEvent(KZGameplayTags::Input_Action_Move, &MovePayload);
++			Check(TEXT("Movement before End InputEnd finishes immediately"), !Guard->IsActive() && !Guarding() && !Anim->GetActiveInstanceForMontage(TestGuardMontage.Get()));
++			Test->AddInfo(TEXT("GuardMovementPolicy: stationary End interrupted by movement before InputEnd."));
++			NextTime = Now + 0.25;
++			break;
++		case 16:
++			Check(TEXT("Stopped End callbacks cannot restore Guard"), !Guard->IsActive() && !Guarding());
++			ASC->AbilityInputTagPressed(KZGameplayTags::Input_Action_Guard);
++			{
++				const float Before = ASC->GetNumericAttribute(UKZAttributeSet::GetStaminaAttribute());
++				const float HitCost = Baseline / 16.f;
++				Check(TEXT("Moving held Guard still accepts success reaction"), ASC->TryGuardHit(HitCost));
++				Check(TEXT("Moving success preserves attack-owned cost"), FMath::IsNearlyEqual(ASC->GetNumericAttribute(UKZAttributeSet::GetStaminaAttribute()), Before - HitCost));
++			}
++			ASC->HandleGameplayEvent(KZGameplayTags::Input_Action_Move, &MovePayload);
++			Check(TEXT("Held movement does not skip success reaction"), Guard->IsActive() && Guarding() && Anim->GetActiveInstanceForMontage(TestGuardMontage.Get()) && Anim->Montage_GetCurrentSection(TestGuardMontage.Get()).ToString().StartsWith(TEXT("Suc_")));
++			ASC->AbilityInputTagReleased(KZGameplayTags::Input_Action_Guard);
++			Check(TEXT("Moving release during success skips End without restoring defense"), !Guard->IsActive() && !Guarding() && !Anim->GetActiveInstanceForMontage(TestGuardMontage.Get()));
++			Test->AddInfo(TEXT("GuardMovementPolicy: held Suc survives movement; moving release exits without End."));
++			NextTime = Now + 0.6;
++			break;
++		case 17:
++			Check(TEXT("Success callbacks and regen delay clean up after moving release"), !Guard->IsActive() && !Guarding() && !ASC->HasMatchingGameplayTag(KZGameplayTags::Delay_StaminaRegen));
++			Player->HandleInputMoveReleased();
++			ASC->AbilityInputTagPressed(KZGameplayTags::Input_Action_Guard);
++			ASC->AbilityInputTagReleased(KZGameplayTags::Input_Action_Guard);
++			Check(TEXT("Stationary tap still waits at Start"), Guard->IsActive() && !Guard->HasInputEnded());
++			Player->HandleInputMove(FVector2D(1.f, 0.f), Player->GetController()->GetControlRotation());
++			ASC->HandleGameplayEvent(KZGameplayTags::Input_Action_Move, &MovePayload);
++			Check(TEXT("Movement after early stationary release skips queued End"), !Guard->IsActive() && !Guarding() && !Anim->GetActiveInstanceForMontage(TestGuardMontage.Get()));
++			NextTime = Now + 0.25;
++			break;
++		case 18:
++			Check(TEXT("Skipped sections leave no late state or Guard movement limit"), !Guard->IsActive() && !Guarding() && Player->GetLocomotionComponent()->GetResolvedMovementPolicy().MaxAllowedGait != EKZGait::Walk);
++			Test->AddInfo(TEXT("GuardMovementPolicy: all movement transitions and late-callback cleanup checked."));
+ 			Cleanup();
+ 			return true;
+ 		}
+@@ -289,6 +380,7 @@ private:
+ 	TWeakObjectPtr<AKZPlayer> Player;
+ 	TWeakObjectPtr<UKZAbilitySystemComponent> ASC;
+ 	TWeakObjectPtr<UKZGuardAbility> Guard;
++	TWeakObjectPtr<UAnimMontage> TestGuardMontage;
+ 	FGameplayAbilitySpecHandle GuardHandle;
+ 	FKZMovementConstraintHandle RotationHandle;
+ 	FGameplayEventData MovePayload;

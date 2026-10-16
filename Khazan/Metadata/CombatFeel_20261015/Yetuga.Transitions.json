@@ -1,0 +1,242 @@
+[
+    {
+        "node_id":  "NormalAtk01_Step1",
+        "pattern_blend_seconds":  0.30000001192092896,
+        "automatic_next_node":  "NormalAtk01_Step2",
+        "pattern_moves":  [
+
+                          ],
+        "pattern_branches":  [
+
+                             ]
+    },
+    {
+        "node_id":  "NormalAtk01_Step2",
+        "pattern_blend_seconds":  0.0,
+        "automatic_next_node":  "NormalAtk01_Step3",
+        "pattern_moves":  [
+
+                          ],
+        "pattern_branches":  [
+
+                             ]
+    },
+    {
+        "node_id":  "NormalAtk01_Step3",
+        "pattern_blend_seconds":  0.0,
+        "automatic_next_node":  "None",
+        "pattern_moves":  [
+
+                          ],
+        "pattern_branches":  [
+                                 "(Notify=\"Pattern_NormalAtk01_Step3_Index1\",Event=Animation,Conditions=((MaxDistance=600.000000,BaseYaw=180.000000,LeftYaw=45.000000,RightYaw=45.000000),(WallCheckDistance=1500.000000)),TargetNode=\"TurnBackRun_Short_Step1\",bDeferUntilStepEnd=False,bCheckCooldown=False,Weight=1.000000,Probability=0.500000,ActiveWindows=,bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/01_NormalAtk01/SB_Yetuga_NormalAtk01\")",
+                                 "(Notify=\"Pattern_NormalAtk01_Step3_Index2\",Event=Tick,Conditions=((WallCheckYaw=-90.000000,WallCheckDistance=800.000000),(MaxDistance=800.000000)),TargetNode=\"SideMove_Step5\",bDeferUntilStepEnd=False,bCheckCooldown=False,Weight=0.500000,Probability=1.000000,ActiveWindows=((X=5.167848,Y=5.211414)),bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/01_NormalAtk01/SB_Yetuga_NormalAtk01\")",
+                                 "(Notify=\"Pattern_NormalAtk01_Step3_Index3\",Event=Tick,Conditions=((WallCheckYaw=90.000000,WallCheckDistance=800.000000),(MaxDistance=800.000000)),TargetNode=\"SideMove_Step6\",bDeferUntilStepEnd=False,bCheckCooldown=False,Weight=0.500000,Probability=1.000000,ActiveWindows=((X=5.178231,Y=5.221734)),bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/01_NormalAtk01/SB_Yetuga_NormalAtk01\")",
+                                 "(Notify=\"Pattern_NormalAtk01_Step3_Index4\",Event=Animation,Conditions=((MaxHP=0.700000,bHPIsRatio=True),(MaxDistance=300.000000)),TargetNode=\"RushGrab_Step1\",bDeferUntilStepEnd=False,bCheckCooldown=False,Weight=1.000000,Probability=1.000000,ActiveWindows=,bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/01_NormalAtk01/SB_Yetuga_NormalAtk01\")"
+                             ]
+    },
+    {
+        "node_id":  "NormalAtk02_Step1",
+        "pattern_blend_seconds":  0.30000001192092896,
+        "automatic_next_node":  "None",
+        "pattern_moves":  [
+                              "(Window=(X=0.892826,Y=1.521607),Destination=(X=400.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=400.000000,TargetOffset=75.000000,StopDistance=0.000000,TimeCurve=\"/Script/Engine.CurveFloat\u0027/Game/Monsters/Yetuga/Data/CV_Move_NormalAtk02_Step10_Time.CV_Move_NormalAtk02_Step10_Time\u0027\",OffsetCurve=\"/Script/Engine.CurveVector\u0027/Game/Monsters/Yetuga/Data/CV_Move_NormalAtk02_Step10_Offset.CV_Move_NormalAtk02_Step10_Offset\u0027\",Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/02_NormalAtk02/AC_Yetuga_NormalAtk02_01.Notifies[7]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")",
+                              "(Window=(X=1.504451,Y=1.833788),Destination=(X=300.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=300.000000,TargetOffset=150.000000,StopDistance=0.000000,TimeCurve=\"/Script/Engine.CurveFloat\u0027/Game/Monsters/Yetuga/Data/CV_Move_NormalAtk02_Step11_Time.CV_Move_NormalAtk02_Step11_Time\u0027\",OffsetCurve=\"/Script/Engine.CurveVector\u0027/Game/Monsters/Yetuga/Data/CV_Move_NormalAtk02_Step11_Offset.CV_Move_NormalAtk02_Step11_Offset\u0027\",Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/02_NormalAtk02/AC_Yetuga_NormalAtk02_01.Notifies[13]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")"
+                          ],
+        "pattern_branches":  [
+                                 "(Notify=\"Pattern_NormalAtk02_Step1_Index1\",Event=Animation,Conditions=((MaxDistance=800.000000)),TargetNode=\"NormalAtk02_Step2\",bDeferUntilStepEnd=True,bCheckCooldown=False,Weight=1.000000,Probability=1.000000,ActiveWindows=,bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/02_NormalAtk02/SB_Yetuga_NormalAtk02\")"
+                             ]
+    },
+    {
+        "node_id":  "NormalAtk02_Step2",
+        "pattern_blend_seconds":  0.0,
+        "automatic_next_node":  "None",
+        "pattern_moves":  [
+                              "(Window=(X=0.000000,Y=0.714042),Destination=(X=400.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=400.000000,TargetOffset=200.000000,StopDistance=0.000000,TimeCurve=\"/Script/Engine.CurveFloat\u0027/Game/Monsters/Yetuga/Data/CV_Move_NormalAtk02_Step20_Time.CV_Move_NormalAtk02_Step20_Time\u0027\",OffsetCurve=\"/Script/Engine.CurveVector\u0027/Game/Monsters/Yetuga/Data/CV_Move_NormalAtk02_Step20_Offset.CV_Move_NormalAtk02_Step20_Offset\u0027\",Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/02_NormalAtk02/AC_Yetuga_NormalAtk02_02.Notifies[0]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")",
+                              "(Window=(X=1.001927,Y=1.208809),Destination=(X=450.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=600.000000,TargetOffset=250.000000,StopDistance=0.000000,TimeCurve=None,OffsetCurve=None,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/02_NormalAtk02/AC_Yetuga_NormalAtk02_02.Notifies[13]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")"
+                          ],
+        "pattern_branches":  [
+
+                             ]
+    },
+    {
+        "node_id":  "CloseGrab_Step1",
+        "pattern_blend_seconds":  0.10000000149011612,
+        "automatic_next_node":  "CloseGrab_Step2",
+        "pattern_moves":  [
+                              "(Window=(X=0.946942,Y=1.276392),Destination=(X=400.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=400.000000,TargetOffset=100.000000,StopDistance=0.000000,TimeCurve=\"/Script/Engine.CurveFloat\u0027/Game/Monsters/Yetuga/Data/CV_Move_CloseGrab_Step10_Time.CV_Move_CloseGrab_Step10_Time\u0027\",OffsetCurve=\"/Script/Engine.CurveVector\u0027/Game/Monsters/Yetuga/Data/CV_Move_CloseGrab_Step10_Offset.CV_Move_CloseGrab_Step10_Offset\u0027\",Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/AC_Yetuga_CloseGrab_Start.Notifies[12]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")"
+                          ],
+        "pattern_branches":  [
+                                 "(Notify=\"Pattern_CloseGrab_Step1_Index1\",Event=ConfirmedHit,Conditions=,TargetNode=\"CloseGrab_Step3\",bDeferUntilStepEnd=True,bCheckCooldown=False,Weight=1.000000,Probability=1.000000,ActiveWindows=,bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab\")",
+                                 "(Notify=\"Pattern_CloseGrab_Step1_Index4\",Event=HoldingSuccess,Conditions=((WallCheckDistance=-1.000000,bRequireClearWall=False)),TargetNode=\"CloseGrab_Step5\",bDeferUntilStepEnd=True,bCheckCooldown=False,Weight=1.000000,Probability=1.000000,ActiveWindows=((X=1.603689,Y=1.655462)),bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab; provisional omitted native wall distance: current capsule diameter\")"
+                             ]
+    },
+    {
+        "node_id":  "CloseGrab_Step2",
+        "pattern_blend_seconds":  0.0,
+        "automatic_next_node":  "None",
+        "pattern_moves":  [
+
+                          ],
+        "pattern_branches":  [
+
+                             ]
+    },
+    {
+        "node_id":  "CloseGrab_Step3",
+        "pattern_blend_seconds":  0.0,
+        "automatic_next_node":  "CloseGrab_Step4",
+        "pattern_moves":  [
+
+                          ],
+        "pattern_branches":  [
+
+                             ]
+    },
+    {
+        "node_id":  "CloseGrab_Step4",
+        "pattern_blend_seconds":  0.10000000149011612,
+        "automatic_next_node":  "None",
+        "pattern_moves":  [
+
+                          ],
+        "pattern_branches":  [
+
+                             ]
+    },
+    {
+        "node_id":  "CloseGrab_Step5",
+        "pattern_blend_seconds":  0.0,
+        "automatic_next_node":  "CloseGrab_Step4",
+        "pattern_moves":  [
+
+                          ],
+        "pattern_branches":  [
+
+                             ]
+    },
+    {
+        "node_id":  "RushGrab_Step1",
+        "pattern_blend_seconds":  0.30000001192092896,
+        "automatic_next_node":  "RushGrab_Step6",
+        "pattern_moves":  [
+
+                          ],
+        "pattern_branches":  [
+                                 "(Notify=\"Pattern_RushGrab_Step1_Index1\",Event=StepStart,Conditions=((MaxDistance=1000.000000)),TargetNode=\"RushGrab_Step6\",bDeferUntilStepEnd=True,bCheckCooldown=False,Weight=1.000000,Probability=1.000000,ActiveWindows=,bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SB_Yetuga_RushGrab\")"
+                             ]
+    },
+    {
+        "node_id":  "RushGrab_Step2",
+        "pattern_blend_seconds":  0.10000000149011612,
+        "automatic_next_node":  "RushGrab_Step4",
+        "pattern_moves":  [
+                              "(Window=(X=2.849952,Y=3.157461),Destination=(X=1000.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=600.000000,TargetOffset=75.000000,StopDistance=0.000000,TimeCurve=\"/Script/Engine.CurveFloat\u0027/Game/Monsters/Yetuga/Data/CV_Move_RushGrab_Step20_Time.CV_Move_RushGrab_Step20_Time\u0027\",OffsetCurve=\"/Script/Engine.CurveVector\u0027/Game/Monsters/Yetuga/Data/CV_Move_RushGrab_Step20_Offset.CV_Move_RushGrab_Step20_Offset\u0027\",Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/AC_Yetuga_RushGrab_Success.Notifies[16]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")",
+                              "(Window=(X=4.105149,Y=4.700000),Destination=(X=1000.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=600.000000,TargetOffset=75.000000,StopDistance=0.000000,TimeCurve=\"/Script/Engine.CurveFloat\u0027/Game/Monsters/Yetuga/Data/CV_Move_RushGrab_Step21_Time.CV_Move_RushGrab_Step21_Time\u0027\",OffsetCurve=\"/Script/Engine.CurveVector\u0027/Game/Monsters/Yetuga/Data/CV_Move_RushGrab_Step21_Offset.CV_Move_RushGrab_Step21_Offset\u0027\",Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/AC_Yetuga_RushGrab_Success.Notifies[25]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")"
+                          ],
+        "pattern_branches":  [
+                                 "(Notify=\"Pattern_EndSubState\",Event=Animation,Conditions=,TargetNode=\"Social_Step1\",bDeferUntilStepEnd=False,bCheckCooldown=False,Weight=1.000000,Probability=1.000000,ActiveWindows=,bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SB_Yetuga_RushGrab\")"
+                             ]
+    },
+    {
+        "node_id":  "RushGrab_Step3",
+        "pattern_blend_seconds":  0.30000001192092896,
+        "automatic_next_node":  "None",
+        "pattern_moves":  [
+                              "(Window=(X=0.610468,Y=1.053448),Destination=(X=1000.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=500.000000,TargetOffset=0.000000,StopDistance=0.000000,TimeCurve=\"/Script/Engine.CurveFloat\u0027/Game/Monsters/Yetuga/Data/CV_Move_RushGrab_Step30_Time.CV_Move_RushGrab_Step30_Time\u0027\",OffsetCurve=\"/Script/Engine.CurveVector\u0027/Game/Monsters/Yetuga/Data/CV_Move_RushGrab_Step30_Offset.CV_Move_RushGrab_Step30_Offset\u0027\",Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/AC_Yetuga_RushGrab_Slow.Notifies[6]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")",
+                              "(Window=(X=1.052882,Y=1.215171),Destination=(X=1000.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=500.000000,TargetOffset=0.000000,StopDistance=0.000000,TimeCurve=\"/Script/Engine.CurveFloat\u0027/Game/Monsters/Yetuga/Data/CV_Move_RushGrab_Step31_Time.CV_Move_RushGrab_Step31_Time\u0027\",OffsetCurve=\"/Script/Engine.CurveVector\u0027/Game/Monsters/Yetuga/Data/CV_Move_RushGrab_Step31_Offset.CV_Move_RushGrab_Step31_Offset\u0027\",Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/AC_Yetuga_RushGrab_Slow.Notifies[14]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")"
+                          ],
+        "pattern_branches":  [
+                                 "(Notify=\"Pattern_RushGrab_Step3_Index1\",Event=HoldingSuccess,Conditions=,TargetNode=\"RushGrab_Step2\",bDeferUntilStepEnd=True,bCheckCooldown=False,Weight=1.000000,Probability=1.000000,ActiveWindows=,bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SB_Yetuga_RushGrab\")"
+                             ]
+    },
+    {
+        "node_id":  "RushGrab_Step4",
+        "pattern_blend_seconds":  0.5,
+        "automatic_next_node":  "None",
+        "pattern_moves":  [
+
+                          ],
+        "pattern_branches":  [
+
+                             ]
+    },
+    {
+        "node_id":  "RushGrab_Step5",
+        "pattern_blend_seconds":  0.30000001192092896,
+        "automatic_next_node":  "None",
+        "pattern_moves":  [
+                              "(Window=(X=0.507712,Y=0.950692),Destination=(X=1000.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=500.000000,TargetOffset=0.000000,StopDistance=0.000000,TimeCurve=\"/Script/Engine.CurveFloat\u0027/Game/Monsters/Yetuga/Data/CV_Move_RushGrab_Step50_Time.CV_Move_RushGrab_Step50_Time\u0027\",OffsetCurve=\"/Script/Engine.CurveVector\u0027/Game/Monsters/Yetuga/Data/CV_Move_RushGrab_Step50_Offset.CV_Move_RushGrab_Step50_Offset\u0027\",Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/AC_Yetuga_RushGrab.Notifies[6]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")",
+                              "(Window=(X=0.950126,Y=1.112415),Destination=(X=1000.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=500.000000,TargetOffset=0.000000,StopDistance=0.000000,TimeCurve=\"/Script/Engine.CurveFloat\u0027/Game/Monsters/Yetuga/Data/CV_Move_RushGrab_Step51_Time.CV_Move_RushGrab_Step51_Time\u0027\",OffsetCurve=\"/Script/Engine.CurveVector\u0027/Game/Monsters/Yetuga/Data/CV_Move_RushGrab_Step51_Offset.CV_Move_RushGrab_Step51_Offset\u0027\",Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/AC_Yetuga_RushGrab.Notifies[14]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")"
+                          ],
+        "pattern_branches":  [
+                                 "(Notify=\"Pattern_RushGrab_Step5_Index1\",Event=HoldingSuccess,Conditions=,TargetNode=\"RushGrab_Step2\",bDeferUntilStepEnd=True,bCheckCooldown=False,Weight=1.000000,Probability=1.000000,ActiveWindows=,bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SB_Yetuga_RushGrab\")"
+                             ]
+    },
+    {
+        "node_id":  "RushGrab_Step6",
+        "pattern_blend_seconds":  0.30000001192092896,
+        "automatic_next_node":  "RushGrab_Step7",
+        "pattern_moves":  [
+
+                          ],
+        "pattern_branches":  [
+                                 "(Notify=\"Pattern_RushGrab_Step6_Index1\",Event=StepStart,Conditions=((MaxDistance=1000000000.000000,LeftYaw=20.000000,RightYaw=20.000000)),TargetNode=\"RushGrab_Step7\",bDeferUntilStepEnd=True,bCheckCooldown=False,Weight=1.000000,Probability=1.000000,ActiveWindows=,bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SB_Yetuga_RushGrab\")"
+                             ]
+    },
+    {
+        "node_id":  "RushGrab_Step7",
+        "pattern_blend_seconds":  0.15000000596046448,
+        "automatic_next_node":  "RushGrab_Step5",
+        "pattern_moves":  [
+                              "(Window=(X=0.000100,Y=1.333333),Destination=(X=1500.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=900.000000,TargetOffset=50.000000,StopDistance=1200.000000,TimeCurve=None,OffsetCurve=None,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/AC_Yetuga_RushGrab_Dash.Notifies[2]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")"
+                          ],
+        "pattern_branches":  [
+                                 "(Notify=\"Pattern_RushGrab_Step7_Index1\",Event=StepStart,Conditions=((MaxDistance=1800.000000)),TargetNode=\"RushGrab_Step3\",bDeferUntilStepEnd=True,bCheckCooldown=False,Weight=1.000000,Probability=1.000000,ActiveWindows=,bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SB_Yetuga_RushGrab\")"
+                             ]
+    },
+    {
+        "node_id":  "DashAtk_Step1",
+        "pattern_blend_seconds":  0.15000000596046448,
+        "automatic_next_node":  "DashAtk_Step2",
+        "pattern_moves":  [
+
+                          ],
+        "pattern_branches":  [
+                                 "(Notify=\"Pattern_DashAtk_Step1_Index1\",Event=StepStart,Conditions=((MaxDistance=500.000000)),TargetNode=\"DashAtk_Step2\",bDeferUntilStepEnd=True,bCheckCooldown=False,Weight=1.000000,Probability=1.000000,ActiveWindows=,bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/08_DashAtk/SB_Yetuga_DashAtk\")"
+                             ]
+    },
+    {
+        "node_id":  "DashAtk_Step2",
+        "pattern_blend_seconds":  0.30000001192092896,
+        "automatic_next_node":  "DashAtk_Step3",
+        "pattern_moves":  [
+                              "(Window=(X=0.000080,Y=1.066666),Destination=(X=1500.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=900.000000,TargetOffset=50.000000,StopDistance=800.000000,TimeCurve=None,OffsetCurve=None,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/08_DashAtk/AC_Yetuga_DashAtk_Dash.Notifies[2]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")"
+                          ],
+        "pattern_branches":  [
+                                 "(Notify=\"Pattern_DashAtk_Step2_Index1\",Event=StepStart,Conditions=((MaxDistance=1500.000000)),TargetNode=\"DashAtk_Step4\",bDeferUntilStepEnd=True,bCheckCooldown=False,Weight=1.000000,Probability=1.000000,ActiveWindows=,bRequireConfirmedHit=False,Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/08_DashAtk/SB_Yetuga_DashAtk\")"
+                             ]
+    },
+    {
+        "node_id":  "DashAtk_Step3",
+        "pattern_blend_seconds":  0.15000000596046448,
+        "automatic_next_node":  "None",
+        "pattern_moves":  [
+                              "(Window=(X=0.219224,Y=0.951660),Destination=(X=1000.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=1000.000000,TargetOffset=150.000000,StopDistance=0.000000,TimeCurve=\"/Script/Engine.CurveFloat\u0027/Game/Monsters/Yetuga/Data/CV_Move_DashAtk_Step30_Time.CV_Move_DashAtk_Step30_Time\u0027\",OffsetCurve=\"/Script/Engine.CurveVector\u0027/Game/Monsters/Yetuga/Data/CV_Move_DashAtk_Step30_Offset.CV_Move_DashAtk_Step30_Offset\u0027\",Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/08_DashAtk/AC_Yetuga_DashAtk_Fast.Notifies[9]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")"
+                          ],
+        "pattern_branches":  [
+
+                             ]
+    },
+    {
+        "node_id":  "DashAtk_Step4",
+        "pattern_blend_seconds":  0.20000000298023224,
+        "automatic_next_node":  "None",
+        "pattern_moves":  [
+                              "(Window=(X=0.392821,Y=1.161249),Destination=(X=1000.000000,Y=0.000000,Z=0.000000),bTraceTarget=True,TargetMin=0.000000,TargetMax=1000.000000,TargetOffset=150.000000,StopDistance=0.000000,TimeCurve=\"/Script/Engine.CurveFloat\u0027/Game/Monsters/Yetuga/Data/CV_Move_DashAtk_Step40_Time.CV_Move_DashAtk_Step40_Time\u0027\",OffsetCurve=\"/Script/Engine.CurveVector\u0027/Game/Monsters/Yetuga/Data/CV_Move_DashAtk_Step40_Offset.CV_Move_DashAtk_Step40_Offset\u0027\",Source=\"BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/08_DashAtk/AC_Yetuga_DashAtk.Notifies[9]; Serialized cm/time inputs; target clamp/offset and curve axes use documented CMC adapter; native MoveTo operator is unavailable\")"
+                          ],
+        "pattern_branches":  [
+
+                             ]
+    }
+]

@@ -1,0 +1,64 @@
+[
+  {
+    "Type": "xxDamageInfo",
+    "Name": "SD_Yetuga_RushGrab_Release",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SD_Yetuga_RushGrab_Release",
+    "Properties": {
+      "AttackInfo": {
+        "AttackType": "ECharacterAttackType::HoldReleaseAuto",
+        "SkillPowerInfo": {
+          "SkillPowerBonus": 0
+        },
+        "AttackableFlags": [
+          "ECharacterAttackableFlag::EnableAttackableDownState",
+          "ECharacterAttackableFlag::OnlyHoldingTarget"
+        ]
+      },
+      "AttackerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "TimeSectionDelayData": {
+          "DelayRate": 0.0
+        }
+      },
+      "DamagerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "TimeSectionDelayData": {
+          "LoopTime": 5.0
+        }
+      },
+      "DamagerKnockData": {
+        "KnockBackType": "EKnockbackType::Air",
+        "KnockBackMoveType": "EKnockbackMoveType::Velocity",
+        "KnockbackDistance": {
+          "X": -500.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "KnockCurveVector": {
+          "ObjectName": "CurveVector'CV_common_knockback_deaccel'",
+          "ObjectPath": "BBQ/Content/_Common/MoveCurve/CV_common_knockback_deaccel.0"
+        },
+        "KnockbackDistanceTime": 1.0,
+        "KnockbackHeight": 75.0,
+        "KnockbackForce": 100.0
+      },
+      "DamagerRotatorInfo": {
+        "RotatorDir": "ERotatorDir::Back"
+      },
+      "AttackerHitEffect": {
+        "ParticleInfo": {
+          "bSyncData": true
+        }
+      },
+      "DamageSounds": [
+        {
+          "ObjectName": "AkAudioEvent'Play_Monster_Blank_MaterialSwitch'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/Monster_Common/Monster_Hit_MaterialSwitch/Play_Monster_Blank_MaterialSwitch.0"
+        }
+      ],
+      "AttackStrength": "EBattleDirecting_AttackStrength::AttackStrength_02"
+    }
+  }
+]

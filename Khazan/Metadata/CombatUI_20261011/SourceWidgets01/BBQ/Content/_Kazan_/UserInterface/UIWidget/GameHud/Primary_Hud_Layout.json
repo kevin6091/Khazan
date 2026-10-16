@@ -1,0 +1,1273 @@
+[
+  {
+    "Type": "Function",
+    "Name": "ExecuteUbergraph_Primary_Hud_Layout",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'Primary_Hud_Layout_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.2"
+    },
+    "ChildProperties": [
+      {
+        "Type": "IntProperty",
+        "Name": "EntryPoint",
+        "Flags": "RF_Public",
+        "ElementSize": 4,
+        "PropertyFlags": "BlueprintVisible | BlueprintReadOnly | Parm"
+      }
+    ],
+    "FunctionFlags": "FUNC_Final | FUNC_UbergraphFunction"
+  },
+  {
+    "Type": "Function",
+    "Name": "OnInitialized",
+    "Flags": "RF_Public | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Function'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'Primary_Hud_Layout_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.2"
+    },
+    "SuperStruct": {
+      "ObjectName": "Function'UserWidget:OnInitialized'",
+      "ObjectPath": "/Script/UMG"
+    },
+    "FunctionFlags": "FUNC_BlueprintCosmetic | FUNC_Event | FUNC_Public | FUNC_BlueprintEvent"
+  },
+  {
+    "Type": "WidgetBlueprintGeneratedClass",
+    "Name": "Primary_Hud_Layout_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'WidgetBlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout",
+    "Properties": {
+      "WidgetTree": {
+        "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+      },
+      "bClassRequiresNativeTick": true,
+      "UberGraphFunction": {
+        "ObjectName": "Function'Primary_Hud_Layout_C:ExecuteUbergraph_Primary_Hud_Layout'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.0"
+      }
+    },
+    "SuperStruct": {
+      "ObjectName": "Class'xxPrimaryGameLayout'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "Children": [
+      {
+        "ObjectName": "Function'Primary_Hud_Layout_C:OnInitialized'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.1"
+      },
+      {
+        "ObjectName": "Function'Primary_Hud_Layout_C:ExecuteUbergraph_Primary_Hud_Layout'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.0"
+      }
+    ],
+    "ChildProperties": [
+      {
+        "Type": "StructProperty",
+        "Name": "UberGraphFrame",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 16,
+        "PropertyFlags": "Transient | DuplicateTransient",
+        "Struct": {
+          "ObjectName": "ScriptStruct'PointerToUberGraphFrame'",
+          "ObjectPath": "/Script/Engine"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "AlwaysOnTopLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "AreaNoticeLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "BlockingInputLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "ContentsLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "DmgFloaterLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "FirstZoneNoticeLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "GameHUDLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "InteractionBackGroundLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "InteractionButtonLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "ItemLogLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "LacrimaRegainLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "LoadingLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "NoticeLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "OverHeadGaugeLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "PopupLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "PresentationLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "SavingLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "SequenceFadeLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "TestWidgetLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      },
+      {
+        "Type": "ObjectProperty",
+        "Name": "ZoneNoticeLayer_Stack",
+        "Flags": "RF_Public | RF_LoadCompleted",
+        "ElementSize": 8,
+        "PropertyFlags": "BlueprintVisible | ExportObject | InstancedReference | RepSkip | PersistentInstance",
+        "PropertyClass": {
+          "ObjectName": "Class'xxActivatableWidgetStack'",
+          "ObjectPath": "/Script/BBQ"
+        }
+      }
+    ],
+    "FuncMap": {
+      "ExecuteUbergraph_Primary_Hud_Layout": {
+        "ObjectName": "Function'Primary_Hud_Layout_C:ExecuteUbergraph_Primary_Hud_Layout'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.0"
+      },
+      "OnInitialized": {
+        "ObjectName": "Function'Primary_Hud_Layout_C:OnInitialized'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.1"
+      }
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_EditInlineNew | CLASS_CompiledFromBlueprint | CLASS_DefaultToInstanced | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "Primary_Hud_Layout_C'Default__Primary_Hud_Layout_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.3"
+    }
+  },
+  {
+    "Type": "Primary_Hud_Layout_C",
+    "Name": "Default__Primary_Hud_Layout_C",
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "WidgetBlueprintGeneratedClass'BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.Primary_Hud_Layout_C'",
+    "Package": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout",
+    "Properties": {
+      "UberGraphFrame": {},
+      "EscapeActions": [
+        {
+          "DataTable": {
+            "ObjectName": "DataTable'InputActionData'",
+            "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/DataAsset/InputactionData.0"
+          },
+          "RowName": "UI_ToggleMainMenu"
+        },
+        {
+          "DataTable": {
+            "ObjectName": "DataTable'InputActionData'",
+            "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/DataAsset/InputactionData.0"
+          },
+          "RowName": "UI_ESC"
+        }
+      ],
+      "EquipmentShortcutAction": {
+        "DataTable": {
+          "ObjectName": "DataTable'InputActionData'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/DataAsset/InputactionData.0"
+        },
+        "RowName": "UI_EquipmentShortcut"
+      },
+      "CollectiableDetailShortcutAction": {
+        "DataTable": {
+          "ObjectName": "DataTable'InputActionData'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/DataAsset/InputactionData.0"
+        },
+        "RowName": "UI_Detail"
+      },
+      "CameraModeHideAction": {
+        "DataTable": {
+          "ObjectName": "DataTable'InputActionData'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/DataAsset/InputactionData.0"
+        },
+        "RowName": "UI_CameraModeHide"
+      },
+      "CommandHubAction": {
+        "DataTable": {
+          "ObjectName": "DataTable'TestActionData'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/DataAsset/TestActionData.0"
+        },
+        "RowName": "CommandViwer"
+      },
+      "bAutoActivate": true,
+      "bHasScriptImplementedTick": false,
+      "bHasScriptImplementedPaint": false
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.InteractionButtonLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.33"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.OverHeadGaugeLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.38"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_10",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.GameHUDLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.31"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_11",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.AlwaysOnTopLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.25"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_12",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.SavingLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.41"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_13",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.LoadingLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.36"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_14",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.BlockingInputLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.27"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_16",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.FirstZoneNoticeLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.30"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_17",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.AreaNoticeLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.26"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_18",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.ItemLogLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.34"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_19",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.LacrimaRegainLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.35"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.DmgFloaterLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.29"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_20",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.InteractionBackGroundLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.32"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_21",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.TestWidgetLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.43"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_22",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.ZoneNoticeLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.44"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_24",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.SequenceFadeLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.42"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_3",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.PopupLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.39"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_5",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.ContentsLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.28"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_8",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.NoticeLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.37"
+      }
+    }
+  },
+  {
+    "Type": "OverlaySlot",
+    "Name": "OverlaySlot_9",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'OverlaySlot'",
+    "Outer": {
+      "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+    },
+    "Properties": {
+      "HorizontalAlignment": "HAlign_Fill",
+      "VerticalAlignment": "VAlign_Fill",
+      "Parent": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      },
+      "Content": {
+        "ObjectName": "xxActivatableWidgetStack'Primary_Hud_Layout_C:WidgetTree.PresentationLayer_Stack'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.40"
+      }
+    }
+  },
+  {
+    "Type": "WidgetTree",
+    "Name": "WidgetTree",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'WidgetTree'",
+    "Outer": {
+      "ObjectName": "WidgetBlueprintGeneratedClass'Primary_Hud_Layout_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.2"
+    },
+    "Properties": {
+      "RootWidget": {
+        "ObjectName": "xxOverlay'Primary_Hud_Layout_C:WidgetTree.MainOverlay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.45"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "AlwaysOnTopLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "bActivateInputGuard": false,
+      "TransitionDuration": 0.0,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_11'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.7"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "AreaNoticeLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "bActivateInputGuard": false,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_17'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.12"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "BlockingInputLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "TransitionDuration": 0.0,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_14'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.10"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "ContentsLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "TransitionDuration": 0.2,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_5'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.21"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "DmgFloaterLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "bActivateInputGuard": false,
+      "TransitionDuration": 0.0,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_2'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.15"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "FirstZoneNoticeLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "bActivateInputGuard": false,
+      "TransitionDuration": 0.0,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_16'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.11"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "GameHUDLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "bActivateInputGuard": false,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_10'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.6"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "InteractionBackGroundLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "bActivateInputGuard": false,
+      "TransitionDuration": 0.0,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_20'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.16"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "InteractionButtonLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "bActivateInputGuard": false,
+      "TransitionDuration": 0.0,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.4"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "ItemLogLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "bActivateInputGuard": false,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_18'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.13"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "LacrimaRegainLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "bActivateInputGuard": false,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_19'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.14"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "LoadingLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_13'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.9"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "NoticeLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "bActivateInputGuard": false,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_8'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.22"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "OverHeadGaugeLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "bActivateInputGuard": false,
+      "TransitionDuration": 0.0,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.5"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "PopupLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "bActivateInputGuard": false,
+      "TransitionDuration": 0.0,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_3'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.20"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "PresentationLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_9'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.23"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "SavingLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "bActivateInputGuard": false,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_12'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.8"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "SequenceFadeLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "TransitionDuration": 0.0,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_24'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.19"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "TestWidgetLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_21'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.17"
+      }
+    }
+  },
+  {
+    "Type": "xxActivatableWidgetStack",
+    "Name": "ZoneNoticeLayer_Stack",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxActivatableWidgetStack'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "bActivateInputGuard": false,
+      "TransitionDuration": 0.0,
+      "Slot": {
+        "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_22'",
+        "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.18"
+      }
+    }
+  },
+  {
+    "Type": "xxOverlay",
+    "Name": "MainOverlay",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxOverlay'",
+    "Outer": {
+      "ObjectName": "WidgetTree'Primary_Hud_Layout_C:WidgetTree'",
+      "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.24"
+    },
+    "Properties": {
+      "Slots": [
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_10'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.6"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.5"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_2'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.15"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.4"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_20'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.16"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_22'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.18"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_16'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.11"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_5'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.21"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_8'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.22"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_24'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.19"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_9'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.23"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_3'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.20"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_11'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.7"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_12'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.8"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_13'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.9"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_18'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.13"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_14'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.10"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_17'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.12"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_19'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.14"
+        },
+        {
+          "ObjectName": "OverlaySlot'Primary_Hud_Layout_C:WidgetTree.MainOverlay.OverlaySlot_21'",
+          "ObjectPath": "BBQ/Content/_Kazan_/UserInterface/UIWidget/GameHud/Primary_Hud_Layout.17"
+        }
+      ]
+    }
+  }
+]

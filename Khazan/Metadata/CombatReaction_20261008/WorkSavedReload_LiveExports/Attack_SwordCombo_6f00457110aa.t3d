@@ -1,0 +1,27 @@
+Begin Object Class=/Script/Engine.AnimMontage Name="Attack_SwordCombo" ExportPath="/Script/Engine.AnimMontage'/Game/Monsters/SwordShield/Animations/Attack/Montages/Attack_SwordCombo.Attack_SwordCombo'"
+   Begin Object Class=/Script/Engine.AnimDataModel Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/Monsters/SwordShield/Animations/Attack/Montages/Attack_SwordCombo.Attack_SwordCombo:AnimDataModel'"
+   End Object
+   Begin Object Class=/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify Name="AnimNotify_PlayMontageNotify_0" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/Monsters/SwordShield/Animations/Attack/Montages/Attack_SwordCombo.Attack_SwordCombo:AnimNotify_PlayMontageNotify_0'"
+   End Object
+   Begin Object Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/Monsters/SwordShield/Animations/Attack/Montages/Attack_SwordCombo.Attack_SwordCombo:AnimDataModel'"
+      FrameRate=(Numerator=30)
+      NumberOfFrames=107
+      NumberOfKeys=108
+   End Object
+   Begin Object Name="AnimNotify_PlayMontageNotify_0" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/Monsters/SwordShield/Animations/Attack/Montages/Attack_SwordCombo.Attack_SwordCombo:AnimNotify_PlayMontageNotify_0'"
+      NotifyName="InputEnd"
+   End Object
+   BlendIn=(BlendTime=0.100000)
+   BlendOut=(BlendTime=0.200000)
+   BlendOutTriggerTime=0.000000
+   CompositeSections(0)=(SectionName="Step1",LinkedMontage="/Script/Engine.AnimMontage'Attack_SwordCombo'",SegmentIndex=0,SegmentLength=2.190963,LinkedSequence="/Script/Engine.AnimSequence'/Game/Monsters/SwordShield/Animations/InGame/Attack/Attack_SwordCombo_01.Attack_SwordCombo_01'")
+   CompositeSections(1)=(SectionName="Step2",LinkedMontage="/Script/Engine.AnimMontage'Attack_SwordCombo'",SegmentIndex=1,SegmentBeginTime=2.190963,SegmentLength=1.385487,LinkValue=2.190963,LinkedSequence="/Script/Engine.AnimSequence'/Game/Monsters/SwordShield/Animations/InGame/Attack/Attack_SwordCombo_02.Attack_SwordCombo_02'")
+   SlotAnimTracks(0)=(AnimTrack=(AnimSegments=((CachedPlayLength=2.190963,AnimReference="/Script/Engine.AnimSequence'/Game/Monsters/SwordShield/Animations/InGame/Attack/Attack_SwordCombo_01.Attack_SwordCombo_01'",AnimEndTime=2.190963),(CachedPlayLength=1.385487,AnimReference="/Script/Engine.AnimSequence'/Game/Monsters/SwordShield/Animations/InGame/Attack/Attack_SwordCombo_02.Attack_SwordCombo_02'",StartPos=2.190963,AnimEndTime=1.385487))))
+   BranchingPointMarkers(0)=(NotifyIndex=0,TriggerTime=0.777430)
+   CommonTargetFrameRate=(Numerator=0,Denominator=0)
+   Notifies(0)=(NotifyName="InputEnd",Notify="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'AnimNotify_PlayMontageNotify_0'",MontageTickType=BranchingPoint,Guid=3A8592054836FAC38640A8879C0033EF,LinkedMontage="/Script/Engine.AnimMontage'Attack_SwordCombo'",SegmentIndex=0,SegmentLength=2.190963,LinkValue=0.777430,LinkedSequence="/Script/Engine.AnimSequence'/Game/Monsters/SwordShield/Animations/InGame/Attack/Attack_SwordCombo_01.Attack_SwordCombo_01'")
+   SequenceLength=3.566667
+   AnimNotifyTracks(0)=(TrackName="1")
+   DataModelInterface=AnimDataModel'Attack_SwordCombo:AnimDataModel'
+   Skeleton="/Script/Engine.Skeleton'/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman'"
+End Object

@@ -1,0 +1,92 @@
+{
+  "verification_date": "2026-10-08",
+  "timeline_convention": "Absolute seconds from original uploads; sheet labels are nominal samples, not gameplay frame measurements.",
+  "primary_video1": {
+    "source_id": "fjZsbwldgTw",
+    "full_uploaded_timeline": true,
+    "coarse_filter": "fps=1/2,scale=480:-1",
+    "coarse_label_uncertainty_seconds_max": 1.0,
+    "fine_offsets_seconds": [
+      10,
+      20,
+      30,
+      40
+    ],
+    "fine_filter": "fps=2,scale=480:-1",
+    "fine_label_uncertainty_seconds_max": 0.25
+  },
+  "primary_video2": {
+    "source_id": "XkAaFFcRdBY",
+    "discarded_method": "Initial stream-copy cut 47..171 retained keyframe-boundary timing differences; its training sheets are not archived.",
+    "discarded_artifacts": [
+      "GraniteJockoTraining_XkAaFFcRdBY_clip47_171.mp4",
+      "TrainingSheet1.png",
+      "TrainingSheet2.png",
+      "TrainingSheet3.png"
+    ],
+    "corrected_HD_cut": {
+      "original_start_seconds": 127,
+      "original_end_seconds": 151,
+      "method": "yt-dlp --download-sections *127-151 --force-keyframes-at-cuts; format 299; re-encoded derived clip",
+      "file": "videos/GraniteJockoTraining_XkAaFFcRdBY_HD_127_151.mp4",
+      "readback": {
+        "duration_line": "Duration: 00:00:24.00, start: 0.000000, bitrate: 2634 kb/s",
+        "video_line": "Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p, 1920x804 [SAR 1:1 DAR 160:67], 2628 kb/s, 60 fps, 60 tbr, 15360 tbn, 120 tbc (default)",
+        "audio_lines": []
+      }
+    },
+    "manual_timeline_cross_check": {
+      "absolute_seconds": 146,
+      "HD_relative_seconds": 19,
+      "full_360p_frame": "frames/TimingCheck_Full360p_FangSpider_02_26_0.png",
+      "HD_frame": "frames/TimingCheck_HD_FangSpider_02_26_0.png",
+      "matching_content": "Fang Spider selected in Daphrona's Codex; adjacent two Granite Jocko entries.",
+      "verification_type": "Direct visual comparison of independently extracted full-source and corrected-HD-cut frames; not pixel identity"
+    },
+    "verified_frames": [
+      {
+        "path": "frames/Training_Reaction_02_13_4.png",
+        "absolute_seconds": 133.4,
+        "HD_relative_seconds": 6.4,
+        "observation": "Upper-body reaction during strong player attack; full live knockdown/recovery cycle not visible"
+      },
+      {
+        "path": "frames/Training_Completed_02_14_4.png",
+        "absolute_seconds": 134.4,
+        "HD_relative_seconds": 7.4,
+        "observation": "Bonus training completion for Granite Jocko while killed"
+      },
+      {
+        "path": "frames/Training_Codex_02_28_0.png",
+        "absolute_seconds": 148.0,
+        "HD_relative_seconds": 21.0,
+        "observation": "Beast/Granite Jocko codex; staggered-kill 1/1; second same-name entry"
+      }
+    ],
+    "direct_HD_frame_time_quantization_seconds_max": 0.016666666666666666,
+    "sheet_nominal_start_seconds": 127,
+    "sheet_filter": "fps=2,scale=480:-1",
+    "sheet_label_uncertainty_seconds_max": 0.25
+  },
+  "audio_mux_video_stream_verification": [
+    {
+      "original_inspected_video_only_file": "GraniteJocko_fjZsbwldgTw.mp4",
+      "preserved_full_audio_video": "videos/GraniteJocko_20250328_fjZsbwldgTw_full360pAV.mp4",
+      "encoded_video_packet_sha256_original": "SHA256=a924319e9079562019037722184b59c58f1d85d7dd5146cac4799c374ce420b2",
+      "encoded_video_packet_sha256_preserved": "SHA256=a924319e9079562019037722184b59c58f1d85d7dd5146cac4799c374ce420b2",
+      "identical": true
+    },
+    {
+      "original_inspected_video_only_file": "TrainingFull_360p.mp4",
+      "preserved_full_audio_video": "videos/GraniteJockoTraining_20250404_XkAaFFcRdBY_full360pAV.mp4",
+      "encoded_video_packet_sha256_original": "SHA256=ff1afa0543e25c593786b83ee1dda4531aa851090caa287712245cbc79d73c42",
+      "encoded_video_packet_sha256_preserved": "SHA256=ff1afa0543e25c593786b83ee1dda4531aa851090caa287712245cbc79d73c42",
+      "identical": true
+    }
+  ],
+  "limits": [
+    "Visual sample review, not independent hitbox/damage/time-constant measurement",
+    "Public name does not establish exact Standard/Early asset identity",
+    "Original gameplay data takes precedence over creator wording"
+  ]
+}

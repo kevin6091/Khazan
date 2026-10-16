@@ -1,0 +1,1587 @@
+--- a/Source/Khazan/Ability/KZAbilitySystemComponent.cpp
++++ b/Source/Khazan/Ability/KZAbilitySystemComponent.cpp
+@@ -7,6 +7,9 @@
+ #include "Combo/KZComboDefinitionData.h"
+ #include "Ability/PlayerAbility/KZGuardAbility.h"
+ #include "Ability/PlayerAbility/KZBrutalAttackAbility.h"
++#include "Ability/PlayerAbility/KZFallAbility.h"
++#include "GameFramework/Character.h"
++#include "GameFramework/CharacterMovementComponent.h"
+ #include "KZGameplayTags.h"
+ 
+ bool UKZAbilitySystemComponent::TryGuardHit(float StaminaDamage, AActor* Attacker)
+@@ -127,6 +130,22 @@
+ 		// Explicit Spec requests keep their existing meaning; ordinary attacks remain the fallback.
+ 		if (!RequestedHandle.IsValid())
+ 		{
++			// The airborne X Ability gets first refusal through the same spec/input lifetime.
++			for (FGameplayAbilitySpec& Spec : GetActivatableAbilities())
++			{
++				const UKZFallAbility* Fall = Cast<UKZFallAbility>(Spec.Ability);
++				if (!Fall || !Fall->IsPlungeAttack() || !Spec.GetDynamicSpecSourceTags().HasTagExact(InputTag)) continue;
++				const ACharacter* Character=AbilityActorInfo.IsValid()?Cast<ACharacter>(AbilityActorInfo->AvatarActor.Get()):nullptr;
++				if (!Character || !Character->GetCharacterMovement()->IsFalling()) continue;
++				if (Spec.IsActive()) { Spec.InputPressed=true; AbilitySpecInputPressed(Spec); return; }
++				if (!Spec.IsActive() && AbilityActorInfo.IsValid() && Fall->CanActivateAbility(Spec.Handle, AbilityActorInfo.Get()))
++				{
++					Spec.InputPressed = true;
++					if (TryActivateAbility(Spec.Handle)) return;
++					Spec.InputPressed = false;
++				}
++				return; // blocked airborne X must not activate a ground-only attack
++			}
+ 			for (FGameplayAbilitySpec& Spec : GetActivatableAbilities())
+ 			{
+ 				if (!Spec.IsActive() && Cast<UKZBrutalAttackAbility>(Spec.Ability) &&
+--- a/Source/Khazan/Ability/Combo/KZComboActionAbility.h
++++ b/Source/Khazan/Ability/Combo/KZComboActionAbility.h
+@@ -82,6 +82,10 @@
+ 
+ 	// 검증된 현재 Combo Montage에서 발생한 Notify를 처리한다.
+ 	virtual void ProcessMontageNotify(FName NotifyName);
++	// Accepted HP effect, already validated against this montage execution. Children
++	// may record a result here; transitions must wait until the collision query returns.
++	virtual void RecordAcceptedAttackHit(AActor* Target, float MontageTime) {}
++	virtual float GetNodeTransitionBlendSeconds(const FKZComboNode& Target) const { return ComboTransitionInertializationDuration; }
+ 	
+ 	// 같은 몽타주의 다른 공격 섹션으로 이동한다.
+ 	bool TransitionToNode(FName TargetNodeId);
+--- a/Source/Khazan/Ability/Combo/KZComboActionAbility.cpp
++++ b/Source/Khazan/Ability/Combo/KZComboActionAbility.cpp
+@@ -656,11 +656,12 @@
+     bHoldCommitted = false;
+     ResetInputEnd();
+ 
+-    if (ComboTransitionInertializationDuration > 0.0f)
++    const float TransitionBlend=GetNodeTransitionBlendSeconds(*TargetNode);
++    if (TransitionBlend > 0.0f)
+     {
+         AnimInstance->RequestMontageInertialization(
+             CurrentNode->Montage.Get(),
+-            ComboTransitionInertializationDuration,
++            TransitionBlend,
+             nullptr);
+     }
+ 
+@@ -855,6 +856,7 @@
+ 	if (!bConfirmedEffectHitObserved) FirstConfirmedEffectHitTime = SampleTime;
+ 	else FirstConfirmedEffectHitTime = FMath::Min(FirstConfirmedEffectHitTime, SampleTime);
+ 	bConfirmedEffectHitObserved = true;
++	RecordAcceptedAttackHit(TargetASC->GetAvatarActor(), SampleTime);
+ 	const float PresentationTime = bFinalFlush ? Montage->GetPlayLength() : AnimInstance->Montage_GetPosition(Montage);
+ 	// Authored window data survives a Begin+End crossed by one slow frame. It is
+ 	// read at the actual producer's sampled time; no expired live-window cache.
+--- a/Source/Khazan/Ability/Combo/KZComboDefinitionData.h
++++ b/Source/Khazan/Ability/Combo/KZComboDefinitionData.h
+@@ -58,6 +58,7 @@
+ 	EKZHitReactionType HitReaction = EKZHitReactionType::Short;
+ 	UPROPERTY(EditAnywhere, Category = "Attack")
+ 	bool bBlockable = false;
++	UPROPERTY(EditAnywhere, Category = "Attack") bool bBeginsCapture = false;
+ 	UPROPERTY(EditAnywhere, Category = "Attack", meta = (TitleProperty = "Time"))
+ 	TArray<FKZAttackCollisionKey> Keys;
+ 	// Exact source/field/unit/conversion and any provisional interpretation/tuning.
+@@ -101,6 +102,101 @@
+ 	FName TargetNodeId = NAME_None;
+ };
+ 
++UENUM(BlueprintType)
++enum class EKZPatternEvent : uint8 { Animation, Tick, ConfirmedHit, Parried, HoldingSuccess, Collision, StepStart, Landed };
++
++/** An original SB event, not an additional Character behaviour state. */
++USTRUCT(BlueprintType)
++struct FKZMonsterPatternBranch
++{
++	GENERATED_BODY()
++	UPROPERTY(EditAnywhere) FName Notify = NAME_None;
++	UPROPERTY(EditAnywhere) EKZPatternEvent Event = EKZPatternEvent::Animation;
++	UPROPERTY(EditAnywhere) TArray<FKZCombatPatternCondition> Conditions;
++	UPROPERTY(EditAnywhere) FName TargetNode = NAME_None;
++	UPROPERTY(EditAnywhere) bool bDeferUntilStepEnd = false;
++	UPROPERTY(EditAnywhere) bool bCheckCooldown = false;
++	UPROPERTY(EditAnywhere) float Weight = 1.f;
++	UPROPERTY(EditAnywhere) float Probability = 1.f;
++	// Node-local montage seconds; empty means the event itself owns the boundary.
++	UPROPERTY(EditAnywhere) TArray<FVector2D> ActiveWindows;
++	UPROPERTY(EditAnywhere) bool bRequireConfirmedHit = false;
++	UPROPERTY(EditAnywhere) FString Source;
++};
++
++USTRUCT(BlueprintType)
++struct FKZMonsterPatternObject
++{
++	GENERATED_BODY()
++	UPROPERTY(EditAnywhere) FName Id;
++	UPROPERTY(EditAnywhere) TObjectPtr<class USkeletalMesh> Mesh;
++	UPROPERTY(EditAnywhere) TObjectPtr<class UStaticMesh> StaticMesh;
++	UPROPERTY(EditAnywhere) TMap<FName,TObjectPtr<class UAnimSequence>> Animations;
++	UPROPERTY(EditAnywhere) TObjectPtr<class UCurveVector> MovementCurve;
++	UPROPERTY(EditAnywhere) FVector CurveScale = FVector::OneVector;
++	UPROPERTY(EditAnywhere) float MovementSeconds = 0.f;
++	UPROPERTY(EditAnywhere) float LinearSpeed = 0.f;
++	UPROPERTY(EditAnywhere) bool bKeepEndVelocity = false;
++	UPROPERTY(EditAnywhere) FVector FieldExtent = FVector::ZeroVector;
++	UPROPERTY(EditAnywhere) float Radius = 0.f;
++	UPROPERTY(EditAnywhere) float DestructionRadius = 0.f;
++	UPROPERTY(EditAnywhere) float Scale = 1.f;
++	UPROPERTY(EditAnywhere) float LifeSeconds = 0.f;
++	UPROPERTY(EditAnywhere) float HPDamage = 0.f;
++	UPROPERTY(EditAnywhere) float StaminaDamage = 0.f;
++	UPROPERTY(EditAnywhere) bool bField = false;
++	UPROPERTY(EditAnywhere) FName TrailObjectId;
++	UPROPERTY(EditAnywhere) float TrailInterval = 0.f;
++	UPROPERTY(EditAnywhere) int32 TrailMaxCount = 0;
++	UPROPERTY(EditAnywhere) bool bDestroyOnAbilityEnd = false;
++	UPROPERTY(EditAnywhere) FString Source;
++};
++
++UENUM()
++enum class EKZPatternAction : uint8 { SpawnObject, ShootObject, Capture, DirectDamage, AddCooldown, DestroyObjects };
++
++USTRUCT()
++struct FKZMonsterPatternAction
++{
++	GENERATED_BODY()
++	UPROPERTY(EditAnywhere) FName Notify;
++	UPROPERTY(EditAnywhere) EKZPatternAction Action = EKZPatternAction::SpawnObject;
++	UPROPERTY(EditAnywhere) EKZPatternEvent Event = EKZPatternEvent::Animation;
++	UPROPERTY(EditAnywhere) FName ObjectId;
++	UPROPERTY(EditAnywhere) FName TargetSkill;
++	UPROPERTY(EditAnywhere) float CooldownSeconds = 0.f;
++	UPROPERTY(EditAnywhere) FName Socket;
++	UPROPERTY(EditAnywhere) FName CaptureTargetSocket = TEXT("Bip001-Spine");
++	UPROPERTY(EditAnywhere) FName RagdollBone;
++	UPROPERTY(EditAnywhere) float PhysicsBlendWeight = 0.f;
++	UPROPERTY(EditAnywhere) FVector Offset = FVector::ZeroVector;
++	UPROPERTY(EditAnywhere) bool bSpawnOnFloor = false;
++	UPROPERTY(EditAnywhere) bool bFlatAim = false;
++	UPROPERTY(EditAnywhere) TArray<FVector2D> ActiveWindows;
++	UPROPERTY(EditAnywhere) TArray<float> Times;
++	UPROPERTY(EditAnywhere) float Interval = 0.f;
++	UPROPERTY(EditAnywhere) int32 MaxCount = 1;
++	UPROPERTY(EditAnywhere) FString Source;
++	UPROPERTY(EditAnywhere) float HPDamage = 0.f;
++	UPROPERTY(EditAnywhere) float StaminaDamage = 0.f;
++};
++
++USTRUCT()
++struct FKZMonsterPatternMove
++{
++	GENERATED_BODY()
++	UPROPERTY(EditAnywhere) FVector2D Window = FVector2D::ZeroVector;
++	UPROPERTY(EditAnywhere) FVector Destination = FVector::ZeroVector;
++	UPROPERTY(EditAnywhere) bool bTraceTarget = false;
++	UPROPERTY(EditAnywhere) float TargetMin = 0.f;
++	UPROPERTY(EditAnywhere) float TargetMax = 0.f;
++	UPROPERTY(EditAnywhere) float TargetOffset = 0.f;
++	UPROPERTY(EditAnywhere) float StopDistance = 0.f;
++	UPROPERTY(EditAnywhere) TObjectPtr<class UCurveFloat> TimeCurve;
++	UPROPERTY(EditAnywhere) TObjectPtr<class UCurveVector> OffsetCurve;
++	UPROPERTY(EditAnywhere) FString Source;
++};
++
+ // 콤보 한 타의 몽타주 위치와 다음 공격 규칙을 묶은 데이터다.
+ USTRUCT(BlueprintType)
+ struct KHAZAN_API FKZComboNode
+@@ -118,6 +214,14 @@
+ 	// 몽타주에서 이 공격이 시작되는 섹션이다.
+ 	UPROPERTY(EditAnywhere, Category = "Combo")
+ 	FName SectionName = NAME_None;
++	// Used only by the original monster pattern Ability. Existing player/human command edges are unchanged.
++	UPROPERTY(EditAnywhere, Category = "Monster Pattern") FName PatternSkill = NAME_None;
++	UPROPERTY(EditAnywhere, Category = "Monster Pattern") FName AutomaticNextNode = NAME_None;
++	UPROPERTY(EditAnywhere, Category = "Monster Pattern") TArray<FKZMonsterPatternAction> PatternActions;
++	UPROPERTY(EditAnywhere, Category = "Monster Pattern") TArray<FKZMonsterPatternMove> PatternMoves;
++	UPROPERTY(EditAnywhere, Category = "Monster Pattern") float PatternBlendSeconds = -1.f;
++	UPROPERTY(EditAnywhere, Category = "Monster Pattern", meta = (TitleProperty = "{Notify} -> {TargetNode}"))
++	TArray<FKZMonsterPatternBranch> PatternBranches;
+ 
+ 	// 이 공격 다음에 갈 수 있는 모든 전환 규칙이다.
+ 	UPROPERTY(EditAnywhere, Category = "Combo",
+@@ -145,12 +249,15 @@
+ 	// 이름이 같은 노드를 찾고, 없으면 nullptr를 돌려준다.
+ 	const FKZComboNode* FindNode(FName NodeId) const;
+ 	TSubclassOf<UGameplayEffect> GetAttackDamageEffect() const { return AttackDamageEffect; }
++	const TArray<FKZMonsterPatternObject>& GetPatternObjects() const { return PatternObjects; }
+ 	bool ShouldDrawAttackCollision() const { return bDrawAttackCollision; }
+ 
+ private:
+ 	// 이 콤보에 들어 있는 모든 공격 노드다.
+ 	UPROPERTY(EditAnywhere, Category = "Combo", meta = (TitleProperty = "NodeId"))
+ 	TArray<FKZComboNode> Nodes;
++	UPROPERTY(EditAnywhere, Category="Monster Pattern", meta=(TitleProperty="Id"))
++	TArray<FKZMonsterPatternObject> PatternObjects;
+ 	UPROPERTY(EditAnywhere, Category = "Attack")
+ 	TSubclassOf<UGameplayEffect> AttackDamageEffect;
+ 	UPROPERTY(EditAnywhere, Category = "Attack")
+--- a/Source/Khazan/Data/KZCharacterDefinitionData.h
++++ b/Source/Khazan/Data/KZCharacterDefinitionData.h
+@@ -44,6 +44,29 @@
+ 	Short,
+ 	Knockback,
+ 	Launch
++};
++
++/** Serialized original target/status gates. Evaluated on GT by AI/Ability only. */
++USTRUCT(BlueprintType)
++struct FKZCombatPatternCondition
++{
++	GENERATED_BODY()
++	UPROPERTY(EditAnywhere) float MinDistance = 0.f;
++	UPROPERTY(EditAnywhere) float MaxDistance = 0.f; // zero: no distance limit
++	UPROPERTY(EditAnywhere) float BaseYaw = 0.f;
++	UPROPERTY(EditAnywhere) float LeftYaw = 180.f;
++	UPROPERTY(EditAnywhere) float RightYaw = 180.f;
++	UPROPERTY(EditAnywhere) float MinHeight = -1.e9f;
++	UPROPERTY(EditAnywhere) float MaxHeight = 1.e9f;
++	UPROPERTY(EditAnywhere) float MaxHP = -1.f; // negative: no HP gate
++	UPROPERTY(EditAnywhere) bool bHPIsRatio = false;
++	UPROPERTY(EditAnywhere) float MinStamina = 0.f;
++	UPROPERTY(EditAnywhere) float MaxStamina = -1.f; // negative: no upper gate
++	UPROPERTY(EditAnywhere) float WallCheckYaw = 0.f;
++	UPROPERTY(EditAnywhere) float WallCheckDistance = 0.f;
++	UPROPERTY(EditAnywhere) bool bRequireClearWall = true;
++	UPROPERTY(EditAnywhere) bool bInvertTarget = false;
++	bool Matches(const class AKZCharacter* Owner, const AActor* Target) const;
+ };
+ 
+ /** Presentation pools. Direction comes from a random variant, never the incoming attack angle. */
+--- a/Source/Khazan/Data/KZCharacterDefinitionData.cpp
++++ b/Source/Khazan/Data/KZCharacterDefinitionData.cpp
+@@ -1,4 +1,38 @@
+ #include "Data/KZCharacterDefinitionData.h"
++
++#include "Character/KZCharacter.h"
++#include "AbilitySystemComponent.h"
++#include "Attribute/KZAttributeSet.h"
++#include "Engine/World.h"
++#include "Components/CapsuleComponent.h"
++
++bool FKZCombatPatternCondition::Matches(const AKZCharacter* Owner, const AActor* Target) const
++{
++	if (!Owner || !Target) return false;
++	const FVector Delta = Target->GetActorLocation() - Owner->GetActorLocation();
++	const float Distance = Delta.Size2D();
++	const float Yaw = FMath::FindDeltaAngleDegrees(Owner->GetActorRotation().Yaw + BaseYaw, Delta.Rotation().Yaw);
++	const bool bTargetMatches = Distance >= MinDistance && (MaxDistance <= 0.f || Distance <= MaxDistance) &&
++		Yaw >= -LeftYaw && Yaw <= RightYaw && Delta.Z >= MinHeight && Delta.Z <= MaxHeight;
++	if (bTargetMatches == bInvertTarget) return false;
++	const UAbilitySystemComponent* ASC = Owner->GetAbilitySystemComponent();
++	if (!ASC) return false;
++	float HP = ASC->GetNumericAttribute(UKZAttributeSet::GetHPAttribute());
++	if (bHPIsRatio) HP /= FMath::Max(ASC->GetNumericAttribute(UKZAttributeSet::GetMaxHPAttribute()), UE_SMALL_NUMBER);
++	const float Stamina=ASC->GetNumericAttribute(UKZAttributeSet::GetStaminaAttribute());
++	if ((MaxHP >= 0.f && HP > MaxHP) || Stamina < MinStamina || (MaxStamina>=0.f && Stamina>MaxStamina)) return false;
++	if (WallCheckDistance != 0.f)
++	{
++		FCollisionQueryParams Query(SCENE_QUERY_STAT(KZPatternWall), false, Owner);
++		Query.AddIgnoredActor(Target);
++		// Missing native WallCheck distance: explicitly provisional capsule-diameter probe.
++		const float ProbeDistance=WallCheckDistance>0.f?WallCheckDistance:Owner->GetCapsuleComponent()->GetScaledCapsuleRadius()*2.f;
++		const FVector End = Owner->GetActorLocation() + FRotator(0.f, Owner->GetActorRotation().Yaw + WallCheckYaw, 0.f).Vector() * ProbeDistance;
++		const bool bWall = Owner->GetWorld()->LineTraceTestByChannel(Owner->GetActorLocation(), End, ECC_Visibility, Query);
++		if (bWall == bRequireClearWall) return false;
++	}
++	return true;
++}
+ 
+ const FKZLocomotionConfig& UKZCharacterDefinitionData::GetLocomotionConfig() const
+ {
+--- a/Source/Khazan/AI/KZMonsterAIController.h
++++ b/Source/Khazan/AI/KZMonsterAIController.h
+@@ -24,6 +24,9 @@
+ 	UFUNCTION(BlueprintPure, Category = "Monster|AI")
+ 	AActor* GetBattleTarget() const { return BattleTarget.Get(); }
+ 	UStateTreeAIComponent* GetStateTreeComponent() const { return StateTreeComponent; }
++	bool IsPatternReady(FName Skill) const;
++	void RecordPatternFinished(FName Skill);
++	void AddPatternCooldown(FName Skill,float Seconds);
+ 
+ protected:
+ 	virtual void BeginPlay() override;
+@@ -42,6 +45,7 @@
+ 	float GetTargetDistance() const;
+ 	bool NeedsAlert() const;
+ 	bool CanChooseAttack() const;
++	const struct FKZMonsterSkillChoice* SelectCombatPattern(bool bChoose) const;
+ 	void HandleMovementPermissionChanged(bool bAllowed);
+ 	UFUNCTION()
+ 	void HandleTargetPerception(AActor* Actor, FAIStimulus Stimulus);
+@@ -60,6 +64,8 @@
+ 	FDelegateHandle MovementPermissionHandle;
+ 	FVector HomeLocation = FVector::ZeroVector;
+ 	float NextAttackAt = 0.f;
++	TMap<FName, float> PatternReadyAt;
++	float EncounterStartedAt = -1.f;
+ 	// Ownership of our StateTree pause request, not a copy of the ASC incapacitation state.
+ 	bool bPausedForCombatReaction = false;
+ };
+--- a/Source/Khazan/AI/KZMonsterAIController.cpp
++++ b/Source/Khazan/AI/KZMonsterAIController.cpp
+@@ -128,6 +128,8 @@
+ 	AlertedTarget.Reset();
+ 	LastAttackClass.Reset();
+ 	NextAttackAt = 0.f;
++	PatternReadyAt.Reset();
++	EncounterStartedAt = -1.f;
+ 	ClearFocus(EAIFocusPriority::Gameplay);
+ }
+ 
+@@ -152,6 +154,7 @@
+ 		if (!BattleTarget.IsValid() || BattleTarget == Actor)
+ 		{
+ 			BattleTarget = Actor;
++			if (EncounterStartedAt < 0.f) EncounterStartedAt = GetWorld()->GetTimeSeconds();
+ 			SetFocus(Actor, EAIFocusPriority::Gameplay);
+ 			if (AKZMonster* Partner = GetMonster()->GetTalkPartner(); Partner && GetMonster()->HasActiveTalkLoop() && Partner->HasActiveTalkLoop())
+ 			{
+@@ -211,6 +214,7 @@
+ 	if (!Monster || !BattleTarget.IsValid() || NeedsAlert() || GetWorld()->GetTimeSeconds() < NextAttackAt) return false;
+ 	const FKZMonsterAISettings& Settings = Monster->GetAISettings();
+ 	const FVector Direction = (BattleTarget->GetActorLocation() - Monster->GetActorLocation()).GetSafeNormal2D();
++	if (!Monster->GetCombatPatterns().IsEmpty()) return SelectCombatPattern(false) != nullptr;
+ 	return GetTargetDistance() <= Settings.AttackDistance &&
+ 		FVector::DotProduct(Monster->GetActorForwardVector(), Direction) >= FMath::Cos(FMath::DegreesToRadians(Settings.AttackFacingHalfAngle));
+ }
+@@ -222,6 +226,48 @@
+ 		Locomotion->SetRequestedGait(IntentHandle, Gait);
+ 		Locomotion->SetRequestedRotationMode(IntentHandle, Mode);
+ 	}
++}
++
++bool AKZMonsterAIController::IsPatternReady(FName Skill) const
++{
++	const AKZMonster* Monster = GetMonster();
++	if (!Monster || EncounterStartedAt < 0.f) return false;
++	const FKZMonsterSkillChoice* Row = Monster->GetCombatPatterns().FindByPredicate([Skill](const auto& R) { return R.Skill == Skill; });
++	const float Now = GetWorld()->GetTimeSeconds();
++	const float* Ready = PatternReadyAt.Find(Skill);
++	return Row && Now >= EncounterStartedAt + Row->BattleStartCooldown && (!Ready || Now >= *Ready);
++}
++
++void AKZMonsterAIController::RecordPatternFinished(FName Skill)
++{
++	const AKZMonster* Monster = GetMonster();
++	if (!Monster) return;
++	const FKZMonsterSkillChoice* Row = Monster->GetCombatPatterns().FindByPredicate([Skill](const auto& R) { return R.Skill == Skill; });
++	if (Row) PatternReadyAt.Add(Skill, GetWorld()->GetTimeSeconds() + Row->EndCooldown);
++}
++
++void AKZMonsterAIController::AddPatternCooldown(FName Skill,float Seconds)
++{
++	float& Ready=PatternReadyAt.FindOrAdd(Skill);
++	Ready=FMath::Max(Ready,GetWorld()->GetTimeSeconds())+Seconds;
++}
++
++const FKZMonsterSkillChoice* AKZMonsterAIController::SelectCombatPattern(bool bChoose) const
++{
++	const AKZMonster* Monster = GetMonster();
++	if (!Monster || !BattleTarget.IsValid() || Monster->IsCombatIncapacitated()) return nullptr;
++	TArray<const FKZMonsterSkillChoice*> Eligible;
++	float TotalWeight = 0.f;
++	for (const FKZMonsterSkillChoice& Row : Monster->GetCombatPatterns())
++	{
++		if (!Row.Ability || Row.Weight <= 0.f || !IsPatternReady(Row.Skill) || !Row.Condition.Matches(Monster, BattleTarget.Get())) continue;
++		if (!bChoose || Monster->UsesOrderedPatterns()) return &Row;
++		Eligible.Add(&Row); TotalWeight += Row.Weight;
++	}
++	// Apes Rate fields are weights. Native RNG normalization is not available.
++	float Draw = FMath::FRand() * TotalWeight;
++	for (const FKZMonsterSkillChoice* Row : Eligible) { Draw -= Row->Weight; if (Draw < 0.f) return Row; }
++	return Eligible.IsEmpty() ? nullptr : Eligible.Last();
+ }
+ 
+ void AKZMonsterAIController::MirrorNavigationIntent()
+--- a/Source/Khazan/AI/KZMonsterStateTreeNodes.cpp
++++ b/Source/Khazan/AI/KZMonsterStateTreeNodes.cpp
+@@ -9,6 +9,7 @@
+ #include "Navigation/PathFollowingComponent.h"
+ #include "KZGameplayTags.h"
+ #include "Engine/World.h"
++#include "GameFramework/CharacterMovementComponent.h"
+ 
+ bool FKZMonsterStateTreeCondition::TestCondition(FStateTreeExecutionContext& Context) const
+ {
+@@ -20,7 +21,8 @@
+ 	case EKZMonsterCondition::NoTarget: return !AI->GetBattleTarget();
+ 	case EKZMonsterCondition::WantsPatrol: return !AI->GetBattleTarget() && Monster->ShouldPatrolWhenUnaware();
+ 	case EKZMonsterCondition::NeedsAlert: return AI->NeedsAlert();
+-	case EKZMonsterCondition::NeedsChase: return AI->GetBattleTarget() && !AI->NeedsAlert() && AI->GetTargetDistance() > Monster->GetAISettings().EngageDistance;
++	case EKZMonsterCondition::NeedsChase: return AI->GetBattleTarget() && !AI->NeedsAlert() && AI->GetTargetDistance() > Monster->GetAISettings().EngageDistance &&
++		(Monster->GetCombatPatterns().IsEmpty() || !AI->CanChooseAttack());
+ 	case EKZMonsterCondition::CanAttack: return AI->CanChooseAttack();
+ 	case EKZMonsterCondition::HasTarget: return AI->GetBattleTarget() != nullptr;
+ 	default: return false;
+@@ -89,9 +91,19 @@
+ 	else if (Task == EKZMonsterTask::Standoff)
+ 	{
+ 		Data.TimeRemaining = FMath::FRandRange(Settings.StandoffSeconds.X, Settings.StandoffSeconds.Y);
+-		Data.StrafeSign = FMath::RandRange(-1, 1); // Left / pause / right: temporary equal choice.
++		const FVector Weights=Settings.StandoffDirectionWeights.ComponentMax(FVector::ZeroVector);
++		const float Choice=FMath::FRand()*(Weights.X+Weights.Y+Weights.Z);
++		Data.StrafeSign=Choice<Weights.X?-1:Choice<Weights.X+Weights.Y?1:Settings.bBackwardStandoff?2:0;
+ 		// Retain a valid local goal even if the player leaves before the first task tick.
+ 		Data.MoveGoal = Monster->GetActorLocation();
++		if(Settings.bBackwardStandoff && AI->GetBattleTarget())
++		{
++			const FVector Away=(Monster->GetActorLocation()-AI->GetBattleTarget()->GetActorLocation()).GetSafeNormal2D();
++			const FVector Tangent(-Away.Y,Away.X,0);
++			const FVector Direction=Data.StrafeSign==2?Away:Tangent*Data.StrafeSign;
++			// Source bUseMoveByTime: retain one chosen direction for the full MoveTime.
++			Data.MoveGoal+=Direction*Monster->GetCharacterMovement()->MaxWalkSpeed*Data.TimeRemaining;
++		}
+ 		// Resolve and request this chosen local movement before the first normal tick.
+ 		return Tick(Context, 0.f);
+ 	}
+@@ -104,10 +116,20 @@
+ 		else
+ 		{
+ 			TArray<TSubclassOf<UGameplayAbility>> Candidates = Monster->GetAttackAbilities();
++			if (!Monster->GetCombatPatterns().IsEmpty())
++			{
++				const FKZMonsterSkillChoice* Pattern = AI->SelectCombatPattern(true);
++				if (!Pattern) return EStateTreeRunStatus::Failed;
++				AbilityClass = Pattern->Ability;
++				Data.bContinueCombo = false;
++			}
++			else
++			{
+ 			if (Candidates.Num() > 1) Candidates.Remove(AI->LastAttackClass.Get());
+ 			if (Candidates.IsEmpty()) return EStateTreeRunStatus::Failed;
+ 			AbilityClass = Candidates[FMath::RandHelper(Candidates.Num())];
+ 			Data.bContinueCombo = FMath::FRand() < Settings.ContinueComboChance;
++			}
+ 		}
+ 		FGameplayAbilitySpec* Spec = AbilityClass ? ASC->FindAbilitySpecFromClass(AbilityClass) : nullptr;
+ 		if (!Spec || !ASC->TryActivateAbility(Spec->Handle))
+@@ -180,7 +202,7 @@
+ 		Data.TimeRemaining -= DeltaSeconds;
+ 		if (Data.TimeRemaining <= 0.f) return EStateTreeRunStatus::Succeeded;
+ 		// Outside the engagement band, finish the previous local goal rather than follow a moving ring.
+-		if (Now >= Data.RetryAt && AI->GetTargetDistance() <= Settings.EngageDistance)
++		if (!Settings.bBackwardStandoff && Now >= Data.RetryAt && AI->GetTargetDistance() <= Settings.EngageDistance)
+ 		{
+ 			const FVector Away = (Monster->GetActorLocation() - Target->GetActorLocation()).GetSafeNormal2D();
+ 			const bool bCorrectDistance = FMath::Abs(AI->GetTargetDistance() - Settings.PreferredDistance) > Settings.DistanceTolerance;
+@@ -192,7 +214,7 @@
+ 	}
+ 	UKZLocomotionComponent* Locomotion = Monster->GetLocomotionComponent();
+ 	if (!Locomotion->IsMovementInputAllowed()) { AI->StopRequestedMove(); return EStateTreeRunStatus::Running; }
+-	const bool bRefreshStandoff = Task == EKZMonsterTask::Standoff && Now >= Data.RetryAt && AI->GetTargetDistance() <= Settings.EngageDistance;
++	const bool bRefreshStandoff = Task == EKZMonsterTask::Standoff && !Settings.bBackwardStandoff && Now >= Data.RetryAt && AI->GetTargetDistance() <= Settings.EngageDistance;
+ 	if (Now >= Data.RetryAt && (AI->GetMoveStatus() != EPathFollowingStatus::Moving || bRefreshStandoff))
+ 	{
+ 		FAIMoveRequest Request;
+--- a/Source/Khazan/Character/KZMonster.h
++++ b/Source/Khazan/Character/KZMonster.h
+@@ -8,6 +8,7 @@
+ #include "UObject/StrongObjectPtr.h"
+ #include "Materials/MaterialInterface.h"
+ #include "Character/Component/KZLocomotionComponent.h"
++#include "Data/KZCharacterDefinitionData.h"
+ #include "KZMonster.generated.h"
+ 
+ class USceneComponent;
+@@ -23,6 +24,20 @@
+ class UMaterialInterface;
+ struct FAnimNotifyEventReference;
+ 
++/** Several Yetuga rows may select the same skill in different distance bands. */
++USTRUCT(BlueprintType)
++struct FKZMonsterSkillChoice
++{
++	GENERATED_BODY()
++	UPROPERTY(EditAnywhere) FName Skill = NAME_None;
++	UPROPERTY(EditAnywhere) TSubclassOf<UGameplayAbility> Ability;
++	UPROPERTY(EditAnywhere) FKZCombatPatternCondition Condition;
++	UPROPERTY(EditAnywhere) float Weight = 0.f;
++	UPROPERTY(EditAnywhere, meta = (Units = "s")) float EndCooldown = 0.f;
++	UPROPERTY(EditAnywhere, meta = (Units = "s")) float BattleStartCooldown = 0.f;
++	UPROPERTY(EditAnywhere) FString Source;
++};
++
+ /** Original AIData is not available. These are temporary, editable cm/s/degree settings. */
+ USTRUCT(BlueprintType)
+ struct FKZMonsterAISettings
+@@ -64,6 +79,11 @@
+ 	FVector2D StandoffSeconds = FVector2D(1.f, 2.5f);
+ 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ClampMin = "0"))
+ 	float StrafeStepDistance = 160.f;
++	// Left/right/third choice. Human monsters retain their left/right/pause policy.
++	UPROPERTY(EditAnywhere, Category = "Combat")
++	FVector StandoffDirectionWeights = FVector::OneVector;
++	UPROPERTY(EditAnywhere, Category = "Combat")
++	bool bBackwardStandoff = false;
+ 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ClampMin = "0", ClampMax = "1"))
+ 	float ContinueComboChance = 0.85f; // Temporary tuning: +10 percentage points of combo continuation.
+ 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ClampMin = "0"))
+@@ -118,6 +138,8 @@
+ 	UStateTree* GetAIStateTree() const { return AIStateTree; }
+ 	TSubclassOf<UGameplayAbility> GetAlertAbility() const { return AlertAbility; }
+ 	const TArray<TSubclassOf<UGameplayAbility>>& GetAttackAbilities() const { return AttackAbilities; }
++	const TArray<FKZMonsterSkillChoice>& GetCombatPatterns() const { return CombatPatterns; }
++	bool UsesOrderedPatterns() const { return bOrderedCombatPatterns; }
+ 	const FKZUnawareRoutine* ResolveUnawareRoutine(bool bAllowTalk = true) const;
+ 	AKZMonster* GetTalkPartner() const;
+ 	bool HasActiveTalkLoop() const;
+@@ -204,6 +226,10 @@
+ 	TSubclassOf<UGameplayAbility> AlertAbility;
+ 	UPROPERTY(EditDefaultsOnly, Category = "Monster|AI")
+ 	TArray<TSubclassOf<UGameplayAbility>> AttackAbilities;
++	UPROPERTY(EditDefaultsOnly, Category = "Monster|AI|Original Patterns", meta = (TitleProperty = "{Skill} [{Source}]"))
++	TArray<FKZMonsterSkillChoice> CombatPatterns;
++	UPROPERTY(EditDefaultsOnly, Category = "Monster|AI|Original Patterns")
++	bool bOrderedCombatPatterns = false;
+ 	// 이 몬스터를 LockOn할 때 카메라가 바라볼 안정적인 기준점이다.
+ 	// 실제 상대 위치는 몬스터별 Gameplay Blueprint에서 작성한다.
+ 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "LockOn", meta = (AllowPrivateAccess = "true"))
+--- a/Source/Khazan/Character/KZMonster.cpp
++++ b/Source/Khazan/Character/KZMonster.cpp
+@@ -14,6 +14,7 @@
+ #include "AbilitySystemComponent.h"
+ #include "Ability/MonsterAbility/KZExhaustionAbility.h"
+ #include "Ability/KZHitReactionAbility.h"
++#include "Ability/MonsterAbility/KZMonsterPatternAbility.h"
+ #include "Attribute/KZAttributeSet.h"
+ #include "GameplayEffect.h"
+ #include "KZGameplayTags.h"
+@@ -305,7 +306,10 @@
+ 	if (!Spec.IsValid()) return false;
+ 	Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackHPDamage")), 0.f);
+ 	Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackStaminaDamage")), -Settings.ParryStaminaDamage);
+-	return ASC->ApplyGameplayEffectSpecToSelf(*Spec.Data.Get()).WasSuccessfullyApplied();
++	const bool bApplied=ASC->ApplyGameplayEffectSpecToSelf(*Spec.Data.Get()).WasSuccessfullyApplied();
++	if (bApplied)
++		if (auto* Pattern=Cast<UKZMonsterPatternAbility>(ASC->GetAnimatingAbility())) Pattern->ReportPatternEvent(EKZPatternEvent::Parried);
++	return bApplied;
+ }
+ 
+ bool AKZMonster::TrySystemGuard(const float StaminaDamage, AActor* Attacker)
+--- a/Source/Khazan/Character/KZPlayer.h
++++ b/Source/Khazan/Character/KZPlayer.h
+@@ -22,6 +22,7 @@
+ public:
+ 	virtual void PossessedBy(AController* NewController) override;
+ 	virtual void UnPossessed() override;
++	virtual void OnMovementModeChanged(EMovementMode PrevMovementMode, uint8 PreviousCustomMode = 0) override;
+ 
+ public:
+ 	// PlayerController가 전달한 장치 입력을 현재 Controller의 raw 이동 Intent로 변환한다.
+@@ -54,6 +55,7 @@
+ 	void RefreshRequestedGait();
+ 
+ protected:
++	virtual bool CanJumpInternal_Implementation() const override { return false; }
+ 	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly)
+ 	TObjectPtr<class USpringArmComponent> SpringArm;
+ 
+--- a/Source/Khazan/Character/KZPlayer.cpp
++++ b/Source/Khazan/Character/KZPlayer.cpp
+@@ -10,6 +10,30 @@
+ #include "Kismet/KismetMathLibrary.h"
+ #include "Character/Component/KZLockOnComponent.h"
+ #include "Ability/PlayerAbility/KZDodgeAbility.h"
++#include "Ability/PlayerAbility/KZFallAbility.h"
++#include "GameFramework/CharacterMovementComponent.h"
++
++void AKZPlayer::OnMovementModeChanged(EMovementMode PrevMode, uint8 PreviousCustomMode)
++{
++	Super::OnMovementModeChanged(PrevMode, PreviousCustomMode);
++	UAbilitySystemComponent* ASC = GetAbilitySystemComponent();
++	if (!ASC || !HasActorBegunPlay()) return;
++	FScopedAbilityListLock Lock(*ASC);
++	for (const FGameplayAbilitySpec& Spec : ASC->GetActivatableAbilities())
++	{
++		const UKZFallAbility* Fall = Cast<UKZFallAbility>(Spec.Ability);
++		if (!Fall) continue;
++		if (GetCharacterMovement()->IsFalling() && !Fall->IsPlungeAttack() && !Spec.IsActive())
++			ASC->TryActivateAbility(Spec.Handle);
++		else if (Spec.IsActive() && !GetCharacterMovement()->IsFalling())
++		{
++			const UKZFallAbility* Instance=Cast<UKZFallAbility>(Spec.GetPrimaryInstance());
++			// Actual Landed already selected Land before CMC changed mode. A teleport,
++			// swimming/flying or cancelled fall has no landing montage to keep alive.
++			if (!GetCharacterMovement()->IsMovingOnGround() || !Instance || Instance->GetCurrentNodeId()!=TEXT("Land")) ASC->CancelAbilityHandle(Spec.Handle);
++		}
++	}
++}
+ 
+ AKZPlayer::AKZPlayer()
+ {
+--- a/Source/Khazan/Ability/MonsterAbility/KZMonsterPatternAbility.h
++++ b/Source/Khazan/Ability/MonsterAbility/KZMonsterPatternAbility.h
+@@ -0,0 +1,62 @@
++#pragma once
++#include "CoreMinimal.h"
++#include "Ability/Combo/KZComboActionAbility.h"
++#include "Ability/Combo/KZComboDefinitionData.h"
++#include "KZMonsterPatternAbility.generated.h"
++
++/** Owns original SB conditional steps while the existing StateTree waits for this GAS execution. */
++UCLASS(Blueprintable)
++class KHAZAN_API UKZMonsterPatternAbility : public UKZComboActionAbility
++{
++	GENERATED_BODY()
++public:
++	UKZMonsterPatternAbility();
++	// Existing combat-result producer calls this only after an accepted result.
++	void ReportPatternEvent(EKZPatternEvent Event);
++	uint32 GetPatternRun() const { return PatternRun; }
++	void RegisterSkillObject(class AKZMonsterSkillObject* Object,uint32 Run);
++protected:
++	virtual void ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
++		FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
++	virtual void EndAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
++		FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled) override;
++	virtual void ProcessMontageNotify(FName NotifyName) override;
++	virtual void RecordAcceptedAttackHit(AActor* Target, float MontageTime) override;
++	virtual float GetNodeTransitionBlendSeconds(const FKZComboNode& Target) const override;
++private:
++	bool ResolveEvent(EKZPatternEvent Event, FName Notify = NAME_None);
++	bool EnterPatternNode(FName Node);
++	void TickPattern();
++	float NodeTime() const;
++	void RunActions(EKZPatternEvent Event, FName Notify=NAME_None);
++	bool BeginCapture(class AKZCharacter* Victim,FName Socket);
++	void ReleaseCapture();
++	void UpdatePatternMovement();
++	void ClearPatternMovement();
++	UFUNCTION() void HandleWorldCollision(AActor* Self, AActor* Other, FVector Impulse, const FHitResult& Hit);
++	FTimerHandle PatternTimer;
++	FName PendingNextNode = NAME_None;
++	FName ExecutingSkill = NAME_None;
++	TWeakObjectPtr<class AKZMonster> BoundMonster;
++	bool bNodeHitObserved = false;
++	bool bPendingHitEvent = false;
++	bool bPendingStepStart = true;
++	TWeakObjectPtr<class AKZCharacter> PendingCapture;
++	TWeakObjectPtr<class AKZCharacter> CapturedTarget;
++	FActiveGameplayEffectHandle CaptureEffectHandle;
++	uint8 CapturedMovementMode = 0;
++	bool bAddedVictimIgnore=false,bAddedCasterIgnore=false;
++	TWeakObjectPtr<class USceneComponent> CaptureOriginalParent;
++	FName CaptureOriginalSocket;
++	UPROPERTY(Transient) TObjectPtr<class UPhysicsHandleComponent> CapturePhysics;
++	FName CapturedRagdollBone;
++	FTransform CaptureMeshRelativeTransform;
++	TMap<int32,int32> ActionCounts;
++	TArray<TWeakObjectPtr<class AKZMonsterSkillObject>> SkillObjects;
++	uint32 PatternRun=0; // Resource ownership only: old launched objects never join a later activation.
++	UPROPERTY(EditDefaultsOnly,Category="Monster Pattern") TSubclassOf<class UGameplayEffect> CaptureEffect;
++	uint16 MovementSourceId=0;
++	int32 MovementWindow=INDEX_NONE,MovementLoop=INDEX_NONE;
++	uint8 PreviousRootMotionMode=0;
++	bool bOwnsRootMotionMode=false;
++};
+--- a/Source/Khazan/Ability/MonsterAbility/KZMonsterPatternAbility.cpp
++++ b/Source/Khazan/Ability/MonsterAbility/KZMonsterPatternAbility.cpp
+@@ -0,0 +1,343 @@
++#include "Ability/MonsterAbility/KZMonsterPatternAbility.h"
++#include "AI/KZMonsterAIController.h"
++#include "Character/KZMonster.h"
++#include "KZGameplayTags.h"
++#include "Engine/World.h"
++#include "TimerManager.h"
++#include "Animation/AnimInstance.h"
++#include "Animation/AnimMontage.h"
++#include "Ability/MonsterAbility/KZMonsterSkillObject.h"
++#include "Character/KZCharacter.h"
++#include "Components/CapsuleComponent.h"
++#include "Components/SkeletalMeshComponent.h"
++#include "GameFramework/CharacterMovementComponent.h"
++#include "GameplayEffect.h"
++#include "AbilitySystemComponent.h"
++#include "GameFramework/RootMotionSource.h"
++#include "PhysicsEngine/PhysicsHandleComponent.h"
++#include "LogChannels.h"
++
++UKZMonsterPatternAbility::UKZMonsterPatternAbility()
++{
++	FGameplayTagContainer Tags; Tags.AddTag(KZGameplayTags::Ability_Action_Attack); SetAssetTags(Tags);
++}
++
++void UKZMonsterPatternAbility::ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
++	FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
++{
++	PendingNextNode = NAME_None;
++	++PatternRun;
++	bNodeHitObserved = bPendingHitEvent = false; bPendingStepStart = true;
++	ActionCounts.Reset();PendingCapture.Reset();
++	const FKZComboNode* Entry = GetComboDefinition() ? GetComboDefinition()->FindNode(GetEntryNodeId()) : nullptr;
++	ExecutingSkill = Entry ? Entry->PatternSkill : NAME_None;
++	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
++	if (!IsActive()) return;
++	BoundMonster = Cast<AKZMonster>(GetAvatarActorFromActorInfo());
++	if (AKZMonster* Monster = BoundMonster.Get()) Monster->OnActorHit.AddUniqueDynamic(this, &ThisClass::HandleWorldCollision);
++	PatternTimer = GetWorld()->GetTimerManager().SetTimerForNextTick(this, &ThisClass::TickPattern);
++}
++
++void UKZMonsterPatternAbility::EndAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
++	FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled)
++{
++	if (UWorld* World = GetWorld()) World->GetTimerManager().ClearTimer(PatternTimer);
++	ClearPatternMovement();
++	ReleaseCapture();PendingCapture.Reset();ActionCounts.Reset();
++	for(auto Object:SkillObjects)if(Object.IsValid() && (bWasCancelled || Object->ShouldEndWithAbility()))Object->Destroy();
++	SkillObjects.Reset();
++	if (AKZMonster* Monster = BoundMonster.Get())
++	{
++		Monster->OnActorHit.RemoveDynamic(this, &ThisClass::HandleWorldCollision);
++		if (AKZMonsterAIController* AI = Cast<AKZMonsterAIController>(Monster->GetController()))
++			if (!ExecutingSkill.IsNone()) AI->RecordPatternFinished(ExecutingSkill);
++	}
++	BoundMonster.Reset(); PendingNextNode = NAME_None; ExecutingSkill = NAME_None;
++	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
++}
++
++bool UKZMonsterPatternAbility::EnterPatternNode(FName NodeId)
++{
++	if (NodeId == TEXT("PatternFinish")) { FinishAbility(false); return true; }
++	const FKZComboNode* Node = GetComboDefinition()->FindNode(NodeId);
++	if (!Node) return false;
++	ClearPatternMovement();
++	if (!TransitionToNode(NodeId)) return false;
++	if (ExecutingSkill != Node->PatternSkill)
++	{
++		ReleaseCapture();
++		if (AKZMonster* Monster = BoundMonster.Get())
++			if (AKZMonsterAIController* AI = Cast<AKZMonsterAIController>(Monster->GetController())) AI->RecordPatternFinished(ExecutingSkill);
++		ExecutingSkill = Node->PatternSkill;
++	}
++	PendingNextNode = NAME_None;
++	bNodeHitObserved = bPendingHitEvent = false; bPendingStepStart = true;
++	ActionCounts.Reset();
++	if(Node->PatternSkill==TEXT("RushGrab") && NodeId==TEXT("RushGrab_Step2"))ReleaseCapture();
++	return true;
++}
++
++bool UKZMonsterPatternAbility::ResolveEvent(EKZPatternEvent Event, FName Notify)
++{
++	AKZMonster* Monster = BoundMonster.Get();
++	AKZMonsterAIController* AI = Monster ? Cast<AKZMonsterAIController>(Monster->GetController()) : nullptr;
++	const FKZComboNode* Node = GetComboDefinition() ? GetComboDefinition()->FindNode(GetCurrentNodeId()) : nullptr;
++	if (!IsActive() || !Node || !AI) return false;
++	TArray<const FKZMonsterPatternBranch*> Candidates;
++	float Total = 0.f;
++	const float Time = NodeTime();
++	for (const FKZMonsterPatternBranch& Branch : Node->PatternBranches)
++	{
++		if (Branch.Event != Event || (Event == EKZPatternEvent::Animation && Branch.Notify != Notify) ||
++			Branch.Weight <= 0.f || (Branch.bRequireConfirmedHit && !bNodeHitObserved) ||
++			(!Branch.ActiveWindows.IsEmpty() && !Branch.ActiveWindows.ContainsByPredicate([Time](const FVector2D& W){return Time>=W.X && Time<=W.Y;})) ||
++			Branch.Conditions.ContainsByPredicate([Monster, AI](const auto& Condition) { return !Condition.Matches(Monster, AI->GetBattleTarget()); })) continue;
++		const FKZComboNode* Destination = GetComboDefinition()->FindNode(Branch.TargetNode);
++		if ((!Destination && Branch.TargetNode!=TEXT("PatternFinish")) || (Branch.bCheckCooldown && Destination && !AI->IsPatternReady(Destination->PatternSkill))) continue;
++		if (Branch.Probability<1.f && FMath::FRand()>=Branch.Probability) continue;
++		Candidates.Add(&Branch); Total += Branch.Weight;
++	}
++	if (Candidates.IsEmpty()) return false;
++	float Draw = FMath::FRand() * Total;
++	const FKZMonsterPatternBranch* Selected = Candidates.Last();
++	for (const auto* Branch : Candidates) { Draw -= Branch->Weight; if (Draw < 0.f) { Selected = Branch; break; } }
++	if (Selected->bDeferUntilStepEnd) { PendingNextNode = Selected->TargetNode; return true; }
++	return EnterPatternNode(Selected->TargetNode);
++}
++
++void UKZMonsterPatternAbility::ProcessMontageNotify(FName Notify)
++{
++	const FString Prefix=TEXT("Pattern_")+GetCurrentNodeId().ToString()+TEXT("_");
++	if (Notify == *FString(TEXT("PatternNext_")+GetCurrentNodeId().ToString()))
++	{
++		const FName Previous=GetCurrentNodeId();
++		ResolveEvent(EKZPatternEvent::Animation, TEXT("Pattern_EndSubState"));
++		if(!IsActive() || GetCurrentNodeId()!=Previous)return;
++		const FKZComboNode* Node = GetComboDefinition()->FindNode(GetCurrentNodeId());
++		const FName Next = PendingNextNode.IsNone() && Node ? Node->AutomaticNextNode : PendingNextNode;
++		if (!Next.IsNone()) EnterPatternNode(Next);
++		else FinishAbility(false);
++		return;
++	}
++	if (Notify.ToString().StartsWith(Prefix)) { RunActions(EKZPatternEvent::Animation,Notify); ResolveEvent(EKZPatternEvent::Animation, Notify); return; }
++	if (Notify.ToString().StartsWith(TEXT("Pattern"))) return; // stale marker crossed by a section jump
++	Super::ProcessMontageNotify(Notify);
++}
++
++void UKZMonsterPatternAbility::ReportPatternEvent(EKZPatternEvent Event) { if(IsActive()) ResolveEvent(Event); }
++
++void UKZMonsterPatternAbility::RegisterSkillObject(AKZMonsterSkillObject* Object,uint32 Run)
++{
++	if(IsActive() && Run==PatternRun && Object)SkillObjects.AddUnique(Object);
++}
++
++float UKZMonsterPatternAbility::NodeTime() const
++{
++	const FKZComboNode* Node=GetComboDefinition()?GetComboDefinition()->FindNode(GetCurrentNodeId()):nullptr;
++	UAnimInstance* Anim=GetCurrentActorInfo()?GetCurrentActorInfo()->GetAnimInstance():nullptr;
++	if(!Node || !Node->Montage || !Anim) return -1.f;
++	const int32 Section=Node->Montage->GetSectionIndex(Node->SectionName);
++	return Section==INDEX_NONE?-1.f:Anim->Montage_GetPosition(Node->Montage)-Node->Montage->CompositeSections[Section].GetTime();
++}
++
++void UKZMonsterPatternAbility::RecordAcceptedAttackHit(AActor* Target,float MontageTime)
++{
++	AKZMonster* Monster=BoundMonster.Get();auto* AI=Monster?Cast<AKZMonsterAIController>(Monster->GetController()):nullptr;
++	if(AI && Target==AI->GetBattleTarget())
++	{
++		bNodeHitObserved=true;bPendingHitEvent=true;
++		const FKZComboNode* N=GetComboDefinition()->FindNode(GetCurrentNodeId());
++		const float T=MontageTime-N->Montage->CompositeSections[N->Montage->GetSectionIndex(N->SectionName)].GetTime();
++		if(N->AttackWindows.ContainsByPredicate([T](const auto& W){return W.bBeginsCapture && T>=W.StartTime && T<=W.EndTime;}))PendingCapture=Cast<AKZCharacter>(Target);
++	}
++}
++
++void UKZMonsterPatternAbility::TickPattern()
++{
++	if (!IsActive()) return;
++	if(PendingCapture.IsValid()){BeginCapture(PendingCapture.Get(),TEXT("Weapon_L"));PendingCapture.Reset();}
++	if(bPendingStepStart){bPendingStepStart=false;RunActions(EKZPatternEvent::StepStart);ResolveEvent(EKZPatternEvent::StepStart);}
++	if(bPendingHitEvent){bPendingHitEvent=false;RunActions(EKZPatternEvent::ConfirmedHit);ResolveEvent(EKZPatternEvent::ConfirmedHit);}
++	if(CapturedTarget.IsValid())
++	{
++		if(CapturePhysics && BoundMonster.IsValid())CapturePhysics->SetTargetLocationAndRotation(BoundMonster->GetMesh()->GetSocketLocation(TEXT("Weapon_L")),BoundMonster->GetMesh()->GetSocketRotation(TEXT("Weapon_L")));
++		ResolveEvent(EKZPatternEvent::HoldingSuccess);
++	}
++	RunActions(EKZPatternEvent::Tick);
++	ResolveEvent(EKZPatternEvent::Tick);
++	if(IsActive())UpdatePatternMovement();
++	if (IsActive()) PatternTimer = GetWorld()->GetTimerManager().SetTimerForNextTick(this, &ThisClass::TickPattern);
++}
++
++void UKZMonsterPatternAbility::RunActions(EKZPatternEvent Event,FName Notify)
++{
++	AKZMonster* Monster=BoundMonster.Get();auto* AI=Monster?Cast<AKZMonsterAIController>(Monster->GetController()):nullptr;
++	const FKZComboNode* Node=GetComboDefinition()?GetComboDefinition()->FindNode(GetCurrentNodeId()):nullptr;
++	if(!IsActive() || !Node || !AI || !AI->GetBattleTarget())return;
++	const FName NodeId=GetCurrentNodeId();
++	for(int32 Index=0;Index<Node->PatternActions.Num() && IsActive() && GetCurrentNodeId()==NodeId;++Index)
++	{
++		const auto& A=Node->PatternActions[Index];int32& Count=ActionCounts.FindOrAdd(Index);
++		if(A.Event!=Event || Count>=A.MaxCount || (Event==EKZPatternEvent::Animation && A.Notify!=Notify))continue;
++		const float Time=NodeTime();
++		const FVector2D* ActiveWindow=A.ActiveWindows.FindByPredicate([Time](const auto& W){return Time>=W.X && Time<=W.Y;});
++		// A matching montage marker already supplies the exact start event. Subtracting
++		// a late section's float start can round just below its local window boundary.
++		if(Event!=EKZPatternEvent::Animation && !A.ActiveWindows.IsEmpty() && !ActiveWindow)continue;
++		if(Event==EKZPatternEvent::Tick && (A.Interval<=0.f || Time<(ActiveWindow?ActiveWindow->X:0.f)+(Count+1)*A.Interval))continue;
++		++Count;
++		UE_LOG(LogAbility,Verbose,TEXT("PatternAction owner=%s node=%s notify=%s action=%d time=%g objects=%d"),*Monster->GetName(),*NodeId.ToString(),*Notify.ToString(),int32(A.Action),Time,SkillObjects.Num());
++		if(A.Action==EKZPatternAction::AddCooldown){AI->AddPatternCooldown(A.TargetSkill,A.CooldownSeconds);continue;}
++		if(A.Action==EKZPatternAction::DestroyObjects){const auto Objects=SkillObjects;for(auto Object:Objects)if(Object.IsValid())Object->TriggerDestruction();continue;}
++		if(A.Action==EKZPatternAction::Capture){if(bNodeHitObserved)BeginCapture(Cast<AKZCharacter>(AI->GetBattleTarget()),A.Socket);continue;}
++		if(A.Action==EKZPatternAction::DirectDamage)
++		{
++			AKZCharacter* Victim=CapturedTarget.Get();if(!Victim)continue;
++			FGameplayEffectContextHandle Context=GetAbilitySystemComponentFromActorInfo()->MakeEffectContext();Context.AddSourceObject(this);
++			const auto Spec=GetAbilitySystemComponentFromActorInfo()->MakeOutgoingSpec(GetComboDefinition()->GetAttackDamageEffect(),1.f,Context);
++			if(Spec.IsValid()){Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackHPDamage")),-A.HPDamage);Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackStaminaDamage")),-A.StaminaDamage);GetAbilitySystemComponentFromActorInfo()->ApplyGameplayEffectSpecToTarget(*Spec.Data.Get(),Victim->GetAbilitySystemComponent());}
++			continue;
++		}
++		const auto* Definition=GetComboDefinition()->GetPatternObjects().FindByPredicate([&A](const auto& O){return O.Id==A.ObjectId;});
++		if(!Definition)continue;
++		if(A.Action==EKZPatternAction::ShootObject)
++		{
++			for(auto Object:SkillObjects)if(Object.IsValid() && Object->GetObjectId()==A.ObjectId && !Object->HasLaunched())Object->Shoot(AI->GetBattleTarget(),A.bFlatAim);
++			continue;
++		}
++		const FName Socket=!A.Socket.IsNone() && !Monster->GetMesh()->DoesSocketExist(A.Socket)?FName(TEXT("Bip001-L-Hand")):A.Socket;
++		FTransform Spawn=Monster->GetMesh()->GetSocketTransform(Socket);
++		Spawn.AddToTranslation(Spawn.GetRotation().RotateVector(A.Offset));
++		if(A.bSpawnOnFloor)
++		{
++			FHitResult Floor;FCollisionQueryParams Query(SCENE_QUERY_STAT(KZGiantSpawnFloor),false,Monster);
++			const FVector Position=Spawn.GetLocation();
++			const float Depth=FMath::Max(Monster->GetCapsuleComponent()->GetScaledCapsuleHalfHeight()*2,Monster->GetAISettings().SightRadius);
++			const FVector TraceStart(Position.X,Position.Y,Monster->GetActorLocation().Z+Monster->GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
++			if(GetWorld()->LineTraceSingleByChannel(Floor,TraceStart,TraceStart-FVector(0,0,Depth*2),ECC_Visibility,Query))
++				Spawn.SetLocation(Floor.ImpactPoint+FVector(0,0,Definition->bField?Definition->FieldExtent.Z*Definition->Scale:Definition->Radius*Definition->Scale+UE_KINDA_SMALL_NUMBER));
++		}
++		FActorSpawnParameters Parameters;Parameters.Owner=Monster;Parameters.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
++		auto* Object=GetWorld()->SpawnActor<AKZMonsterSkillObject>(AKZMonsterSkillObject::StaticClass(),Spawn,Parameters);
++		if(!Object)continue;
++		const auto* Trail=GetComboDefinition()->GetPatternObjects().FindByPredicate([Definition](const auto& O){return O.Id==Definition->TrailObjectId;});
++		Object->Initialize(*Definition,GetComboDefinition()->GetAttackDamageEffect(),Monster,this,Trail);
++		if(!Definition->bField && Socket!=NAME_None && !Definition->bDestroyOnAbilityEnd)Object->AttachToComponent(Monster->GetMesh(),FAttachmentTransformRules::KeepWorldTransform,Socket);
++		else Object->Shoot(AI->GetBattleTarget(),A.bFlatAim);
++	}
++}
++
++float UKZMonsterPatternAbility::GetNodeTransitionBlendSeconds(const FKZComboNode& Target) const
++{
++	return Target.PatternBlendSeconds>=0.f?Target.PatternBlendSeconds:Super::GetNodeTransitionBlendSeconds(Target);
++}
++
++void UKZMonsterPatternAbility::ClearPatternMovement()
++{
++	if(AKZMonster* M=BoundMonster.Get())
++	{
++		if(MovementSourceId)M->GetCharacterMovement()->RemoveRootMotionSourceByID(MovementSourceId);
++		if(bOwnsRootMotionMode && M->GetMesh()->GetAnimInstance() && M->GetMesh()->GetAnimInstance()->RootMotionMode==ERootMotionMode::IgnoreRootMotion)
++			M->GetMesh()->GetAnimInstance()->SetRootMotionMode(ERootMotionMode::Type(PreviousRootMotionMode));
++	}
++	MovementSourceId=0;MovementWindow=MovementLoop=INDEX_NONE;bOwnsRootMotionMode=false;
++}
++
++void UKZMonsterPatternAbility::UpdatePatternMovement()
++{
++	AKZMonster* M=BoundMonster.Get();auto* AI=M?Cast<AKZMonsterAIController>(M->GetController()):nullptr;
++	const FKZComboNode* N=GetComboDefinition()->FindNode(GetCurrentNodeId());if(!M || !AI || !N || !AI->GetBattleTarget())return;
++	const int32 Section=N->Montage->GetSectionIndex(N->SectionName);const FAnimSegment& Segment=N->Montage->SlotAnimTracks[0].AnimTrack.AnimSegments[Section];
++	const float Cycle=Segment.GetLength()/FMath::Max(Segment.LoopingCount,1);const float Time=NodeTime();const int32 Loop=FMath::FloorToInt(Time/Cycle);const float LocalTime=FMath::Fmod(Time,Cycle);
++	int32 Index=N->PatternMoves.IndexOfByPredicate([LocalTime](const auto& Move){return LocalTime>=Move.Window.X && LocalTime<Move.Window.Y;});
++	if(Index==INDEX_NONE){ClearPatternMovement();return;}
++	const auto& Move=N->PatternMoves[Index];
++	if(Move.StopDistance>0.f && FVector::Dist2D(M->GetActorLocation(),AI->GetBattleTarget()->GetActorLocation())<=Move.StopDistance)
++	{const FName Next=N->AutomaticNextNode;ClearPatternMovement();if(!Next.IsNone())EnterPatternNode(Next);return;}
++	if(MovementWindow==Index && MovementLoop==Loop)return;
++	ClearPatternMovement();MovementWindow=Index;MovementLoop=Loop;
++	FVector Local=Move.Destination;
++	if(Move.bTraceTarget && Move.TargetMax>0.f)Local.X=FMath::Sign(Local.X)*FMath::Clamp(float(FVector::Dist2D(M->GetActorLocation(),AI->GetBattleTarget()->GetActorLocation()))-Move.TargetOffset,Move.TargetMin,Move.TargetMax);
++	const FRotator Rotation=Move.bTraceTarget?(AI->GetBattleTarget()->GetActorLocation()-M->GetActorLocation()).Rotation():M->GetActorRotation();
++	TSharedPtr<FRootMotionSource_MoveToDynamicForce> Source=MakeShared<FRootMotionSource_MoveToDynamicForce>();
++	Source->InstanceName=TEXT("OriginalPatternMoveTo");Source->Priority=1000; // Engine AbilityTask root-motion priority, not original tuning.
++	Source->AccumulateMode=ERootMotionAccumulateMode::Override;Source->StartLocation=M->GetActorLocation();Source->TargetLocation=Source->StartLocation+FRotator(0,Rotation.Yaw,0).RotateVector(Local);
++	Source->InitialTargetLocation=Source->TargetLocation;Source->Duration=Move.Window.Y-LocalTime;Source->TimeMappingCurve=Move.TimeCurve;Source->PathOffsetCurve=Move.OffsetCurve;
++	Source->FinishVelocityParams.Mode=ERootMotionFinishVelocityMode::SetVelocity;Source->FinishVelocityParams.SetVelocity=FVector::ZeroVector;
++	if(auto* Anim=M->GetMesh()->GetAnimInstance()){PreviousRootMotionMode=Anim->RootMotionMode;bOwnsRootMotionMode=true;Anim->SetRootMotionMode(ERootMotionMode::IgnoreRootMotion);}
++	MovementSourceId=M->GetCharacterMovement()->ApplyRootMotionSource(Source);
++}
++
++bool UKZMonsterPatternAbility::BeginCapture(AKZCharacter* Victim,FName Socket)
++{
++	AKZMonster* Monster=BoundMonster.Get();
++	if(CapturedTarget.IsValid())return CapturedTarget==Victim;
++	if(!IsActive() || !Monster || !Victim || !CaptureEffect || !Victim->GetAbilitySystemComponent())return false;
++	UAbilitySystemComponent* ASC=Victim->GetAbilitySystemComponent();
++	if(ASC->HasMatchingGameplayTag(KZGameplayTags::State_Dead) || ASC->HasMatchingGameplayTag(KZGameplayTags::State_Exhausted))return false;
++	FGameplayTagContainer CancelTags;CancelTags.AddTag(KZGameplayTags::Ability_Action);CancelTags.AddTag(KZGameplayTags::Ability_Reaction_Hit);
++	ASC->CancelAbilities(&CancelTags);
++	FGameplayEffectContextHandle Context=GetAbilitySystemComponentFromActorInfo()->MakeEffectContext();Context.AddSourceObject(this);
++	const FGameplayEffectSpecHandle Spec=GetAbilitySystemComponentFromActorInfo()->MakeOutgoingSpec(CaptureEffect,1.f,Context);
++	if(!Spec.IsValid())return false;
++	CaptureEffectHandle=ASC->ApplyGameplayEffectSpecToSelf(*Spec.Data.Get());
++	if(!CaptureEffectHandle.IsValid())return false;
++	CapturedTarget=Victim;CapturedMovementMode=Victim->GetCharacterMovement()->MovementMode;Victim->GetCharacterMovement()->DisableMovement();
++	if(!Monster->GetMesh()->DoesSocketExist(Socket))Socket=TEXT("Bip001-L-Hand");
++	bAddedVictimIgnore=!Victim->GetCapsuleComponent()->GetMoveIgnoreActors().Contains(Monster);
++	bAddedCasterIgnore=!Monster->GetCapsuleComponent()->GetMoveIgnoreActors().Contains(Victim);
++	if(bAddedVictimIgnore)Victim->GetCapsuleComponent()->IgnoreActorWhenMoving(Monster,true);
++	if(bAddedCasterIgnore)Monster->GetCapsuleComponent()->IgnoreActorWhenMoving(Victim,true);
++	CaptureOriginalParent=Victim->GetRootComponent()->GetAttachParent();CaptureOriginalSocket=Victim->GetRootComponent()->GetAttachSocketName();
++	const FKZComboNode* Node=GetComboDefinition()->FindNode(GetCurrentNodeId());
++	const auto* Capture=Node?Node->PatternActions.FindByPredicate([](const auto& Action){return Action.Action==EKZPatternAction::Capture;}):nullptr;
++	const FName TargetSocket=Capture && Victim->GetMesh()->DoesSocketExist(Capture->CaptureTargetSocket)?Capture->CaptureTargetSocket:FName(TEXT("Bip001-Spine"));
++	const FVector SpineOffset=Victim->GetMesh()->DoesSocketExist(TargetSocket)?Victim->GetMesh()->GetSocketLocation(TargetSocket)-Victim->GetActorLocation():FVector::ZeroVector;
++	Victim->AttachToComponent(Monster->GetMesh(),FAttachmentTransformRules::SnapToTargetNotIncludingScale,Socket);
++	Victim->AddActorWorldOffset(-SpineOffset);
++	if(Capture && !Capture->RagdollBone.IsNone() && Victim->GetMesh()->GetPhysicsAsset() && !Victim->GetMesh()->IsAnySimulatingPhysics())
++	{
++		// Engine physics-handle adapter for original HoldAttachInfo.RagdollInfo.
++		// Keep the current imported physics asset; the original FallDown asset is not mapped.
++		CaptureMeshRelativeTransform=Victim->GetMesh()->GetRelativeTransform();CapturedRagdollBone=Capture->RagdollBone;
++		Victim->GetMesh()->SetAllBodiesBelowSimulatePhysics(CapturedRagdollBone,true,true);
++		Victim->GetMesh()->SetAllBodiesBelowPhysicsBlendWeight(CapturedRagdollBone,Capture->PhysicsBlendWeight,false,true);
++		const FName BodyBone=Victim->GetMesh()->GetSocketBoneName(TargetSocket);
++		if(Victim->GetMesh()->IsSimulatingPhysics(BodyBone))
++		{
++			CapturePhysics=NewObject<UPhysicsHandleComponent>(Monster);CapturePhysics->RegisterComponent();
++			CapturePhysics->GrabComponentAtLocationWithRotation(Victim->GetMesh(),BodyBone,Monster->GetMesh()->GetSocketLocation(Socket),Monster->GetMesh()->GetSocketRotation(Socket));
++		}
++	}
++	ResolveEvent(EKZPatternEvent::HoldingSuccess);return true;
++}
++
++void UKZMonsterPatternAbility::ReleaseCapture()
++{
++	AKZCharacter* Victim=CapturedTarget.Get();AKZMonster* Monster=BoundMonster.Get();CapturedTarget.Reset();
++	if(CapturePhysics){CapturePhysics->ReleaseComponent();CapturePhysics->DestroyComponent();CapturePhysics=nullptr;}
++	if(!Victim)return;
++	if(!CapturedRagdollBone.IsNone())
++	{
++		Victim->GetMesh()->SetAllBodiesBelowSimulatePhysics(CapturedRagdollBone,false,true);
++		Victim->GetMesh()->SetAllBodiesBelowPhysicsBlendWeight(CapturedRagdollBone,0.f,false,true);
++		Victim->GetMesh()->SetRelativeTransform(CaptureMeshRelativeTransform);CapturedRagdollBone=NAME_None;
++	}
++	Victim->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
++	if(CaptureOriginalParent.IsValid())Victim->AttachToComponent(CaptureOriginalParent.Get(),FAttachmentTransformRules::KeepWorldTransform,CaptureOriginalSocket);
++	CaptureOriginalParent.Reset();CaptureOriginalSocket=NAME_None;
++	if(auto* ASC=Victim->GetAbilitySystemComponent())
++	{
++		ASC->RemoveActiveGameplayEffect(CaptureEffectHandle);
++		if(!ASC->HasMatchingGameplayTag(KZGameplayTags::State_Dead) && Victim->GetCharacterMovement()->MovementMode==MOVE_None)
++			Victim->GetCharacterMovement()->SetMovementMode(EMovementMode(CapturedMovementMode));
++	}
++	CaptureEffectHandle.Invalidate();
++	if(Monster){if(bAddedVictimIgnore)Victim->GetCapsuleComponent()->IgnoreActorWhenMoving(Monster,false);if(bAddedCasterIgnore)Monster->GetCapsuleComponent()->IgnoreActorWhenMoving(Victim,false);}
++	bAddedVictimIgnore=bAddedCasterIgnore=false;
++}
++
++void UKZMonsterPatternAbility::HandleWorldCollision(AActor* Self, AActor* Other, FVector Impulse, const FHitResult& Hit)
++{
++	if (Other && !Other->IsA<APawn>()) ResolveEvent(EKZPatternEvent::Collision);
++}
+--- a/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.h
++++ b/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.h
+@@ -0,0 +1,42 @@
++#pragma once
++#include "CoreMinimal.h"
++#include "GameFramework/Actor.h"
++#include "Ability/Combo/KZComboDefinitionData.h"
++#include "KZMonsterSkillObject.generated.h"
++
++/** A launched rock/ice field outlives its caster montage. No second character AI/FSM. */
++UCLASS()
++class KHAZAN_API AKZMonsterSkillObject : public AActor
++{
++	GENERATED_BODY()
++public:
++	AKZMonsterSkillObject();
++	void Initialize(const FKZMonsterPatternObject& Definition, TSubclassOf<class UGameplayEffect> DamageEffect,
++		class AKZMonster* Caster, UObject* Source, const FKZMonsterPatternObject* TrailDefinition = nullptr,uint32 SourceRun = 0);
++	void Shoot(AActor* Target, bool bFlatAim = false);
++	void TriggerDestruction();
++	bool HasLaunched() const { return bLaunched; }
++	FName GetObjectId() const { return Data.Id; }
++	bool ShouldEndWithAbility() const { return Data.bDestroyOnAbilityEnd || !bLaunched; }
++	virtual void Tick(float DeltaSeconds) override;
++private:
++	void Impact(bool bWorld, bool bExpired = false);
++	void SpawnTrail();
++	bool ApplyHit(AActor* Actor);
++	void PlayState(FName State);
++	UPROPERTY() FKZMonsterPatternObject Data;
++	UPROPERTY() FKZMonsterPatternObject TrailData;
++	UPROPERTY() TSubclassOf<UGameplayEffect> DamageEffect;
++	UPROPERTY() TObjectPtr<class USceneComponent> Scene;
++	UPROPERTY() TObjectPtr<class UStaticMeshComponent> Visual;
++	UPROPERTY() TObjectPtr<class USkeletalMeshComponent> AnimatedVisual;
++	TWeakObjectPtr<class AKZMonster> Caster;
++	TWeakObjectPtr<UObject> Source;
++	TSet<TWeakObjectPtr<AActor>> Hits;
++	FVector ShotOrigin=FVector::ZeroVector;
++	FRotator ShotRotation=FRotator::ZeroRotator;
++	float Age=0.f, FlightAge=0.f, RemainingImpact=0.f;
++	int32 TrailCount=0;
++	uint32 SourceRun=0;
++	bool bLaunched=false, bImpact=false;
++};
+--- a/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.cpp
++++ b/Source/Khazan/Ability/MonsterAbility/KZMonsterSkillObject.cpp
+@@ -0,0 +1,141 @@
++#include "Ability/MonsterAbility/KZMonsterSkillObject.h"
++#include "Ability/KZAbilitySystemComponent.h"
++#include "Character/KZMonster.h"
++#include "Character/KZCharacter.h"
++#include "Components/StaticMeshComponent.h"
++#include "Components/SkeletalMeshComponent.h"
++#include "Curves/CurveVector.h"
++#include "Animation/AnimSequence.h"
++#include "GameplayEffect.h"
++#include "Engine/World.h"
++#include "Engine/OverlapResult.h"
++#include "Ability/MonsterAbility/KZMonsterPatternAbility.h"
++#include "LogChannels.h"
++
++AKZMonsterSkillObject::AKZMonsterSkillObject()
++{
++	PrimaryActorTick.bCanEverTick=true;
++	Scene=CreateDefaultSubobject<USceneComponent>(TEXT("Root"));SetRootComponent(Scene);
++	Visual=CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticVisual"));Visual->SetupAttachment(Scene);Visual->SetCollisionEnabled(ECollisionEnabled::NoCollision);
++	AnimatedVisual=CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("AnimatedVisual"));AnimatedVisual->SetupAttachment(Scene);AnimatedVisual->SetCollisionEnabled(ECollisionEnabled::NoCollision);
++}
++
++void AKZMonsterSkillObject::Initialize(const FKZMonsterPatternObject& Definition,TSubclassOf<UGameplayEffect> Effect,AKZMonster* OwnerMonster,UObject* Ability,const FKZMonsterPatternObject* TrailDefinition,uint32 Run)
++{
++	Data=Definition;DamageEffect=Effect;Caster=OwnerMonster;Source=Ability;SetOwner(OwnerMonster);Age=FlightAge=0.f;
++	UE_LOG(LogAbility,Verbose,TEXT("PatternObject spawn=%s owner=%s object=%s location=%s"),*GetName(),*OwnerMonster->GetName(),*Data.Id.ToString(),*GetActorLocation().ToString());
++	if(TrailDefinition)TrailData=*TrailDefinition;
++	bLaunched=Data.bField;
++	if(auto* Pattern=Cast<UKZMonsterPatternAbility>(Ability)){SourceRun=Run?Run:Pattern->GetPatternRun();Pattern->RegisterSkillObject(this,SourceRun);}
++	SetActorScale3D(FVector(Data.Scale));
++	Visual->SetStaticMesh(Data.StaticMesh);Visual->SetVisibility(Data.StaticMesh!=nullptr);
++	// Engine sphere radius=50 cm. Only the missing Apes projectile model uses this explicit visual fallback.
++	if(Data.StaticMesh)Visual->SetRelativeScale3D(FVector(Data.Radius/50.f));
++	AnimatedVisual->SetSkeletalMeshAsset(Data.Mesh);AnimatedVisual->SetVisibility(Data.Mesh!=nullptr);
++	PlayState(TEXT("Idle"));
++}
++
++void AKZMonsterSkillObject::PlayState(FName State)
++{
++	const auto* Found=Data.Animations.Find(State);
++	UAnimSequence* Clip=Found?Found->Get():nullptr;
++	if(Clip && Data.Mesh && Clip->GetSkeleton()==Data.Mesh->GetSkeleton())AnimatedVisual->PlayAnimation(Clip,State==TEXT("Idle") || State==TEXT("Move"));
++}
++
++void AKZMonsterSkillObject::Shoot(AActor* Target,bool bFlatAim)
++{
++	if(bLaunched || !IsValid(Target))return;
++	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
++	ShotOrigin=GetActorLocation();ShotRotation=(Target->GetActorLocation()-ShotOrigin).Rotation();
++	if(bFlatAim)ShotRotation.Pitch=0.f;
++	SetActorRotation(ShotRotation);bLaunched=true;FlightAge=0.f;PlayState(TEXT("Move"));
++	UE_LOG(LogAbility,Verbose,TEXT("PatternObject launched=%s object=%s origin=%s rotation=%s"),*GetName(),*Data.Id.ToString(),*ShotOrigin.ToString(),*ShotRotation.ToString());
++}
++
++bool AKZMonsterSkillObject::ApplyHit(AActor* Actor)
++{
++	AKZCharacter* Victim=Cast<AKZCharacter>(Actor);AKZMonster* OwnerMonster=Caster.Get();
++	if(!Victim || !OwnerMonster || Victim==OwnerMonster || !Victim->IsPlayerControlled() || Hits.Contains(Victim) || !DamageEffect)return false;
++	UAbilitySystemComponent* ASC=OwnerMonster->GetAbilitySystemComponent();auto* TargetASC=Cast<UKZAbilitySystemComponent>(Victim->GetAbilitySystemComponent());
++	if(!ASC || !TargetASC)return false;
++	Hits.Add(Victim); // consume before potentially reentrant Guard/HP callbacks
++	if(TargetASC->TryGuardHit(Data.StaminaDamage,OwnerMonster))return true;
++	FGameplayEffectContextHandle Context=ASC->MakeEffectContext();Context.AddInstigator(OwnerMonster,this);Context.AddSourceObject(Source.Get());
++	FGameplayEffectSpecHandle Spec=ASC->MakeOutgoingSpec(DamageEffect,1.f,Context);
++	if(!Spec.IsValid())return false;
++	Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackHPDamage")),-Data.HPDamage);
++	Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackStaminaDamage")),-Data.StaminaDamage);
++	const bool bApplied=ASC->ApplyGameplayEffectSpecToTarget(*Spec.Data.Get(),TargetASC).WasSuccessfullyApplied();
++	if(bApplied)Victim->PlayHitReaction(EKZHitReactionType::Short,OwnerMonster);
++	return bApplied;
++}
++
++void AKZMonsterSkillObject::Impact(bool bWorld,bool bExpired)
++{
++	if(bImpact)return;
++	UE_LOG(LogAbility,Verbose,TEXT("PatternObject impact=%s world=%d expired=%d age=%g flight=%g location=%s"),*GetName(),bWorld,bExpired,Age,FlightAge,*GetActorLocation().ToString());
++	const FName State=bExpired?TEXT("Expire"):bWorld?TEXT("World"):TEXT("Impact");
++	bImpact=true;PlayState(State);
++	const auto* Clip=Data.Animations.Find(State);
++	RemainingImpact=Clip && Clip->Get()?Clip->Get()->GetPlayLength():0.f;
++	if(RemainingImpact<=0.f)Destroy();
++}
++
++void AKZMonsterSkillObject::SpawnTrail()
++{
++	if(TrailData.Id.IsNone())return;
++	FVector Location=GetActorLocation();FHitResult Floor;
++	FCollisionQueryParams Params(SCENE_QUERY_STAT(KZGiantFieldFloor),false,this);Params.AddIgnoredActor(Caster.Get());
++	if(GetWorld()->LineTraceSingleByChannel(Floor,Location,Location-FVector(0,0,Data.LinearSpeed*Data.LifeSeconds),ECC_Visibility,Params))
++		Location=Floor.ImpactPoint+FVector(0,0,TrailData.FieldExtent.Z*TrailData.Scale);
++	FActorSpawnParameters Parameters;Parameters.Owner=Caster.Get();Parameters.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
++	if(auto* Field=GetWorld()->SpawnActor<AKZMonsterSkillObject>(StaticClass(),Location,GetActorRotation(),Parameters))
++		Field->Initialize(TrailData,DamageEffect,Caster.Get(),Source.Get(),nullptr,SourceRun);
++}
++
++void AKZMonsterSkillObject::TriggerDestruction()
++{
++	if(bImpact)return;
++	if(Data.DestructionRadius>0.f)
++	{
++		Hits.Reset();TArray<FOverlapResult> Contacts;
++		FCollisionQueryParams Params(SCENE_QUERY_STAT(KZGiantFieldDestruction),false,this);Params.AddIgnoredActor(Caster.Get());
++		GetWorld()->OverlapMultiByObjectType(Contacts,GetActorLocation(),FQuat::Identity,FCollisionObjectQueryParams(ECC_Pawn),FCollisionShape::MakeSphere(Data.DestructionRadius*Data.Scale),Params);
++		for(const auto& Contact:Contacts)ApplyHit(Contact.GetActor());
++	}
++	Impact(true,true);
++}
++
++void AKZMonsterSkillObject::Tick(float DeltaSeconds)
++{
++	Super::Tick(DeltaSeconds);
++	if(!Caster.IsValid()){Destroy();return;}
++	Age+=DeltaSeconds;
++	if(bImpact){RemainingImpact-=DeltaSeconds;if(RemainingImpact<=0.f)Destroy();return;}
++	if(Data.LifeSeconds>0.f && Age>=Data.LifeSeconds){TriggerDestruction();return;}
++	if(!bLaunched && !Data.bField)return;
++	if(bLaunched && Data.TrailInterval>0.f && TrailCount<Data.TrailMaxCount && FlightAge>=(TrailCount+1)*Data.TrailInterval)
++	{++TrailCount;SpawnTrail();}
++	FCollisionObjectQueryParams Types;Types.AddObjectTypesToQuery(ECC_Pawn);Types.AddObjectTypesToQuery(ECC_WorldStatic);Types.AddObjectTypesToQuery(ECC_WorldDynamic);
++	FCollisionQueryParams Params(SCENE_QUERY_STAT(KZGiantObject),false,this);Params.AddIgnoredActor(Caster.Get());
++	const FVector Previous=GetActorLocation();FVector Next=Previous;
++	if(!Data.bField && Data.MovementCurve && Data.MovementSeconds>0.f)
++	{
++		FlightAge+=DeltaSeconds;
++		const float Alpha=FlightAge/Data.MovementSeconds;
++		FVector Local=(Data.MovementCurve->GetVectorValue(Alpha)-Data.MovementCurve->GetVectorValue(0.f))*Data.CurveScale;
++		if(Alpha>1.f && Data.bKeepEndVelocity)
++			for(int32 Axis=0;Axis<3;++Axis)if(Data.MovementCurve->FloatCurves[Axis].GetNumKeys()>0)Local[Axis]+=(Alpha-1.f)*Data.MovementCurve->FloatCurves[Axis].GetLastKey().LeaveTangent*Data.CurveScale[Axis];
++		Next=ShotOrigin+ShotRotation.RotateVector(Local);
++	}
++	else if(!Data.bField && Data.LinearSpeed>0.f){FlightAge+=DeltaSeconds;Next=Previous+ShotRotation.Vector()*Data.LinearSpeed*DeltaSeconds;}
++	TArray<FHitResult> Contacts;
++	const FCollisionShape Shape=Data.bField && !Data.FieldExtent.IsNearlyZero()?FCollisionShape::MakeBox(Data.FieldExtent*Data.Scale):FCollisionShape::MakeSphere(Data.Radius*Data.Scale);
++	GetWorld()->SweepMultiByObjectType(Contacts,Previous,Next,GetActorQuat(),Types,Shape,Params);
++	for(const FHitResult& Hit:Contacts)
++	{
++		if(ApplyHit(Hit.GetActor())){if(!Data.bField){SetActorLocation(Hit.Location);Impact(false);return;}}
++		else if(!Data.bField && Hit.bBlockingHit && !Cast<APawn>(Hit.GetActor())){SetActorLocation(Hit.Location);Impact(true);return;}
++	}
++	SetActorLocation(Next);
++}
+--- a/Source/Khazan/Ability/PlayerAbility/KZFallAbility.h
++++ b/Source/Khazan/Ability/PlayerAbility/KZFallAbility.h
+@@ -0,0 +1,29 @@
++#pragma once
++#include "CoreMinimal.h"
++#include "Ability/Combo/KZComboActionAbility.h"
++#include "KZFallAbility.generated.h"
++
++/** Fall presentation and airborne X use the existing Combo execution and actual CMC Landed event. */
++UCLASS(Blueprintable)
++class KHAZAN_API UKZFallAbility : public UKZComboActionAbility
++{
++	GENERATED_BODY()
++public:
++	UKZFallAbility();
++	bool IsPlungeAttack() const { return bPlungeAttack; }
++	virtual bool CanActivateAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
++		const FGameplayTagContainer* SourceTags = nullptr, const FGameplayTagContainer* TargetTags = nullptr,
++		FGameplayTagContainer* OptionalRelevantTags = nullptr) const override;
++protected:
++	virtual void ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
++		FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
++	virtual void EndAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
++		FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled) override;
++	virtual void ProcessMontageNotify(FName NotifyName) override;
++private:
++	UFUNCTION() void HandleLanded(const FHitResult& Hit);
++	UPROPERTY(EditDefaultsOnly, Category = "Fall") bool bPlungeAttack = false;
++	UPROPERTY(EditDefaultsOnly, Category = "Fall") FName LoopNode = TEXT("Loop");
++	UPROPERTY(EditDefaultsOnly, Category = "Fall") FName LandingNode = TEXT("Land");
++	TWeakObjectPtr<class ACharacter> BoundCharacter;
++};
+--- a/Source/Khazan/Ability/PlayerAbility/KZFallAbility.cpp
++++ b/Source/Khazan/Ability/PlayerAbility/KZFallAbility.cpp
+@@ -0,0 +1,50 @@
++#include "Ability/PlayerAbility/KZFallAbility.h"
++#include "AbilitySystemComponent.h"
++#include "GameFramework/Character.h"
++#include "GameFramework/CharacterMovementComponent.h"
++#include "KZGameplayTags.h"
++
++UKZFallAbility::UKZFallAbility()
++{
++	// Ordinary falling is presentation, so it owns neither movement nor combat blocking.
++	ActivationOwnedTags.Reset(); BlockAbilitiesWithTag.Reset(); CancelAbilitiesWithTag.Reset();
++}
++
++bool UKZFallAbility::CanActivateAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
++	const FGameplayTagContainer* SourceTags, const FGameplayTagContainer* TargetTags, FGameplayTagContainer* OptionalRelevantTags) const
++{
++	const ACharacter* Character = ActorInfo ? Cast<ACharacter>(ActorInfo->AvatarActor.Get()) : nullptr;
++	if (!Character || !Character->GetCharacterMovement()->IsFalling()) return false;
++	if (!bPlungeAttack && ActorInfo->AbilitySystemComponent->GetAnimatingAbility()) return false;
++	return Super::CanActivateAbility(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags);
++}
++
++void UKZFallAbility::ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
++	FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
++{
++	BoundCharacter = ActorInfo ? Cast<ACharacter>(ActorInfo->AvatarActor.Get()) : nullptr;
++	if (ACharacter* Character = BoundCharacter.Get()) Character->LandedDelegate.AddUniqueDynamic(this, &ThisClass::HandleLanded);
++	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
++}
++
++void UKZFallAbility::HandleLanded(const FHitResult& Hit)
++{
++	// Landed broadcasts during CMC Falling, before it selects Walking; no timer or estimated ground height.
++	if (IsActive() && GetCurrentNodeId() != LandingNode && !TransitionToNode(LandingNode)) FinishAbility(true);
++}
++
++void UKZFallAbility::ProcessMontageNotify(FName Notify)
++{
++	if (Notify == TEXT("FallLoop")) { if (!LoopNode.IsNone()) TransitionToNode(LoopNode); return; }
++	// Airborne X cannot turn a pre-impact notify into ordinary ground combo/cancel permission.
++	if (bPlungeAttack && GetCurrentNodeId() != LandingNode) return;
++	Super::ProcessMontageNotify(Notify);
++}
++
++void UKZFallAbility::EndAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
++	FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled)
++{
++	if (ACharacter* Character = BoundCharacter.Get()) Character->LandedDelegate.RemoveDynamic(this, &ThisClass::HandleLanded);
++	BoundCharacter.Reset();
++	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
++}
+--- a/Source/Khazan/Tests/KZGiantFallPIETest.cpp
++++ b/Source/Khazan/Tests/KZGiantFallPIETest.cpp
+@@ -0,0 +1,279 @@
++#if WITH_EDITOR && WITH_DEV_AUTOMATION_TESTS
++#include "Misc/AutomationTest.h"
++#include "Ability/PlayerAbility/KZFallAbility.h"
++#include "Ability/MonsterAbility/KZMonsterPatternAbility.h"
++#include "Ability/MonsterAbility/KZMonsterSkillObject.h"
++#include "Ability/PlayerAbility/KZBrutalAttackAbility.h"
++#include "Ability/KZAbilitySystemComponent.h"
++#include "AI/KZMonsterAIController.h"
++#include "Character/KZPlayer.h"
++#include "Character/KZMonster.h"
++#include "Attribute/KZAttributeSet.h"
++#include "Animation/AnimInstance.h"
++#include "Animation/AnimMontage.h"
++#include "Components/SkeletalMeshComponent.h"
++#include "Components/CapsuleComponent.h"
++#include "Components/StateTreeAIComponent.h"
++#include "GameFramework/CharacterMovementComponent.h"
++#include "GameFramework/PlayerController.h"
++#include "EnhancedPlayerInput.h"
++#include "KZGameplayTags.h"
++#include "Engine/Engine.h"
++#include "EngineUtils.h"
++#include "Misc/FileHelper.h"
++#include "Misc/Paths.h"
++#include "Dom/JsonObject.h"
++#include "Serialization/JsonSerializer.h"
++#include "UnrealClient.h"
++#include "Camera/CameraActor.h"
++#include "UObject/UnrealType.h"
++
++namespace
++{
++class FGiantFallCommand : public IAutomationLatentCommand
++{
++public:
++	FGiantFallCommand(FAutomationTestBase* T,AKZPlayer* P):Test(T),Player(P),Deadline(FPlatformTime::Seconds()+300.){}
++	bool Update() override
++	{
++		if(!Player.IsValid()||FPlatformTime::Seconds()>Deadline){Test->AddError(TEXT("Owned DevMap GiantFall test timed out"));return Finish();}
++		AKZPlayer* P=Player.Get();UWorld* W=P->GetWorld();const float Now=W->GetTimeSeconds();
++		auto* ASC=CastChecked<UKZAbilitySystemComponent>(P->GetAbilitySystemComponent());
++		if(ReviewCamera.IsValid())
++		{
++			const FVector Location=P->GetActorLocation()+FVector(-600,-300,300); // Test-only review camera; no saved player-camera settings changed.
++			ReviewCamera->SetActorLocation(Location);ReviewCamera->SetActorRotation((P->GetActorLocation()-Location).Rotation());
++		}
++		UKZFallAbility* ActiveFall=nullptr;
++		for(const FGameplayAbilitySpec& Spec:ASC->GetActivatableAbilities())if(Spec.IsActive())if(auto* F=Cast<UKZFallAbility>(Spec.GetPrimaryInstance()))ActiveFall=F;
++		if(ActiveFall)
++		{
++			const FString Evidence=FString::Printf(TEXT("round=%d plunge=%d node=%s mode=%d z=%.2f"),Round,ActiveFall->IsPlungeAttack(),*ActiveFall->GetCurrentNodeId().ToString(),int32(P->GetCharacterMovement()->MovementMode),P->GetActorLocation().Z);
++			if(!Seen.Contains(Evidence.Left(Evidence.Find(TEXT(" mode=")))))
++			{Seen.Add(Evidence.Left(Evidence.Find(TEXT(" mode="))));Test->AddInfo(Evidence);FScreenshotRequest::RequestScreenshot(FPaths::ProjectDir()+FString::Printf(TEXT("Metadata/GiantCombatFall_20261011/Fall_%d_%d_%s.png"),Round,ActiveFall->IsPlungeAttack(),*ActiveFall->GetCurrentNodeId().ToString()),false,false);}
++			if(ActiveFall->IsPlungeAttack()) { SawPlunge=true;SawPlungeLand|=ActiveFall->GetCurrentNodeId()==TEXT("Land"); }
++			else { SawFall=true;SawNormalLand|=ActiveFall->GetCurrentNodeId()==TEXT("Land"); }
++		}
++		if(Stage==0)
++		{
++			if(!P->GetCharacterMovement()->IsMovingOnGround())return false;
++			Test->TestTrue(TEXT("Player starts on elevated saved DevMap platform"),P->GetActorLocation().Z>1200.f);
++			for(TActorIterator<AKZMonster> It(W);It;++It)if(auto* AI=Cast<AKZMonsterAIController>(It->GetController())){Paused.Add(AI);AI->GetStateTreeComponent()->StopLogic(TEXT("Owned falling fixture isolation"));}
++			Start=Now;Stage=1;Round=0;
++			ReviewCamera=W->SpawnActor<ACameraActor>();P->GetController<APlayerController>()->SetViewTarget(ReviewCamera.Get());
++		}
++		if(Stage==1)
++		{
++			// Native input adapter drives actual CMC physics off the saved platform. No Python movement.
++			P->HandleInputMove(FVector2D(1,0),FRotator::ZeroRotator);
++			if(P->GetCharacterMovement()->IsFalling())
++			{
++				P->HandleInputMoveReleased();Start=Now;Stage=2;
++				if(Round==1)
++				{
++					// Real EnhancedInput gamepad-X key, through the current PlayerController binding.
++					P->GetController<APlayerController>()->InputKey(FInputKeyParams(EKeys::Gamepad_FaceButton_Left,IE_Pressed,1.0,true));
++				}
++			}
++			return false;
++		}
++		if(Stage==2)
++		{
++			if(Round==1 && !ReleasedX && Now-Start>.1f)
++			{P->GetController<APlayerController>()->InputKey(FInputKeyParams(EKeys::Gamepad_FaceButton_Left,IE_Released,0.0,true));ReleasedX=true;}
++			if(!P->GetCharacterMovement()->IsMovingOnGround()||ActiveFall)return false;
++			if(Round==0)
++			{
++				Test->TestTrue(TEXT("Natural falling pose and actual CMC landing observed"),SawFall&&SawNormalLand);
++				P->SetActorLocation(FVector(-350,0,1292),false,nullptr,ETeleportType::TeleportPhysics);
++				P->GetCharacterMovement()->Velocity=FVector::ZeroVector;P->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
++				Round=1;Stage=1;Start=Now;return false;
++			}
++			Test->TestTrue(TEXT("Physical gamepad X routed to plunge and stayed active through landing after release"),SawPlunge&&SawPlungeLand&&ReleasedX);
++			bool B=false;for(const FGameplayAbilitySpec& S:ASC->GetActivatableAbilities())if(Cast<UKZBrutalAttackAbility>(S.Ability))B|=S.GetDynamicSpecSourceTags().HasTagExact(KZGameplayTags::Input_Action_B);
++			Test->TestTrue(TEXT("Brutal input remains B"),B);
++			ASC->AbilityInputTagPressed(KZGameplayTags::Input_Action_X);Stage=3;Start=Now;return false;
++		}
++		if(Stage==3)
++		{
++			const UGameplayAbility* Action=ASC->GetAnimatingAbility();
++			Test->TestTrue(TEXT("Ground X resumes existing ordinary attack"),Action && !Cast<UKZFallAbility>(Action));
++			if(Action) ASC->CancelAbilityHandle(Action->GetCurrentAbilitySpecHandle());
++			int32 Count=0;for(TActorIterator<AKZMonster> It(W);It;++It)if(!It->GetCombatPatterns().IsEmpty())++Count;
++			Test->TestEqual(TEXT("Both saved DevMap giants have original StateTree pattern rows"),Count,2);
++			Stage=4;Start=Now;return false;
++		}
++		if(Stage==4)
++		{
++			if(GiantIndex>=2){Stage=5;Start=Now;return false;}
++			if(!Placed)
++			{
++				const FString Family=GiantIndex==0?TEXT("ApesStoneHandElite"):TEXT("Yetuga");
++				UClass* Class=LoadClass<AKZMonster>(nullptr,*(TEXT("/Game/Bluprints/Monsters/BP_Monster_")+Family+TEXT(".BP_Monster_")+Family+TEXT("_C")));
++				FActorSpawnParameters Parameters;Parameters.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
++				Giants.Add(W->SpawnActor<AKZMonster>(Class,FVector(-8000,GiantIndex==0?-8000:8000,GiantIndex==0?240:265),FRotator(0,180,0),Parameters));
++			}
++			AKZMonster* M=Giants[GiantIndex].Get();if(!M){Test->AddError(TEXT("Missing giant"));return Finish();}
++			if(!Placed)
++			{
++				// Fixture placement only, native GT. The monster acquires the real player via Sight.
++				P->SetActorLocation(M->GetActorLocation()+FVector(-300,0,92-M->GetActorLocation().Z),false,nullptr,ETeleportType::TeleportPhysics);
++				P->GetCharacterMovement()->Velocity=FVector::ZeroVector;P->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
++				P->GetAbilitySystemComponent()->SetNumericAttributeBase(UKZAttributeSet::GetHPAttribute(),200.f);
++				Start=Now;Placed=true;
++			}
++			auto* AI=Cast<AKZMonsterAIController>(M->GetController());
++			if(AI && AI->GetBattleTarget()==P)SawSight=true;
++			auto* Action=Cast<UKZMonsterPatternAbility>(M->GetAbilitySystemComponent()->GetAnimatingAbility());
++			if(Action && Action->GetCurrentNodeId().ToString().StartsWith(TEXT("Roar")))SawRoar=true;
++			if(Action && !Action->GetCurrentNodeId().ToString().StartsWith(TEXT("Roar")))
++			{
++				Test->TestTrue(TEXT("Original giant alert then autonomous StateTree attack"),SawSight&&SawRoar);
++				Test->AddInfo(FString::Printf(TEXT("Giant %s state=%s node=%s"),*M->GetName(),*AI->GetStateTreeComponent()->GetDebugInfoString(),*Action->GetCurrentNodeId().ToString()));
++				M->Destroy();
++				++GiantIndex;Placed=false;SawSight=false;SawRoar=false;return false;
++			}
++			if(Now-Start>30.f){Test->AddError(FString::Printf(TEXT("Giant never attacked after original alert: %s"),*M->GetName()));++GiantIndex;Placed=false;}
++			return false;
++		}
++		if(Stage==5)return UpdatePatterns(P,Now);
++		return false;
++	}
++private:
++	bool UpdatePatterns(AKZPlayer* P,float Now)
++	{
++		struct FCase{const TCHAR* Family;const TCHAR* Skill;const TCHAR* Entry;float Distance;int32 Kind;};
++		// Distances/times below are isolated test stimuli, not gameplay defaults.
++		static const FCase Cases[]={
++			{TEXT("ApesStoneHandElite"),TEXT("NormalAtk02"),TEXT("NormalAtk02_Step1"),300,0},
++			{TEXT("ApesStoneHandElite"),TEXT("NormalAtk02"),TEXT("NormalAtk02_Step1"),1200,1},
++			{TEXT("Yetuga"),TEXT("DempseyRoll"),TEXT("DempseyRoll_Step2"),1200,2},
++			{TEXT("ApesStoneHandElite"),TEXT("FastMove"),TEXT("FastMove_Step1"),1100,3},
++			{TEXT("ApesStoneHandElite"),TEXT("FastBall"),TEXT("FastBall_Step1"),1500,4},
++			{TEXT("Yetuga"),TEXT("FastBall"),TEXT("FastBall_Step1"),1500,4},
++			{TEXT("Yetuga"),TEXT("IceBreath"),TEXT("IceBreath_Step2"),1500,5},
++			{TEXT("Yetuga"),TEXT("CloseGrab"),TEXT("CloseGrab_Step1"),300,6}
++		};
++		if(PatternCase>=UE_ARRAY_COUNT(Cases))return Finish();
++		const auto& C=Cases[PatternCase];UWorld* W=P->GetWorld();
++		if(PatternCleanup)
++		{
++			// CMC removes a source marked for removal during its following movement tick.
++			Test->TestFalse(TEXT("Owned RootMotionSource removed on the next CMC tick"),PatternMonster->GetCharacterMovement()->HasRootMotionSources());
++			PatternMonster->Destroy();PatternMonster.Reset();Pattern.Reset();++PatternCase;PatternCleanup=false;return false;
++		}
++		if(!PatternMonster.IsValid())
++		{
++			UClass* Class=LoadClass<AKZMonster>(nullptr,*(FString(TEXT("/Game/Bluprints/Monsters/BP_Monster_"))+C.Family+TEXT(".BP_Monster_")+C.Family+TEXT("_C")));
++			FActorSpawnParameters Params;Params.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
++			PatternMonster=W->SpawnActor<AKZMonster>(Class,FVector(-8000,-8000,FCString::Strcmp(C.Family,TEXT("Yetuga"))==0?265:240),FRotator(0,180,0),Params);
++			if(!PatternMonster.IsValid()){Test->AddError(TEXT("Pattern fixture spawn failed"));return Finish();}
++			auto* AI=CastChecked<AKZMonsterAIController>(PatternMonster->GetController());AI->GetStateTreeComponent()->StopLogic(TEXT("Owned single-pattern fixture"));
++			P->GetCharacterMovement()->SetMovementMode(MOVE_Walking);Start=Now;PatternStarted=false;
++			ObservedStep2=EarlyParry=LateParry=ObservedProjectile=ProjectileMoved=ObservedTrail=ObservedCapture=false;LaunchedObject.Reset();
++		}
++		AKZMonster* M=PatternMonster.Get();auto* AI=CastChecked<AKZMonsterAIController>(M->GetController());
++		auto* ASC=CastChecked<UKZAbilitySystemComponent>(M->GetAbilitySystemComponent());
++		P->GetAbilitySystemComponent()->SetNumericAttributeBase(UKZAttributeSet::GetHPAttribute(),200.f);
++		if(!ObservedCapture && C.Kind!=3)
++		{
++			const float Distance=PatternStarted?C.Distance:FMath::Min(C.Distance,M->GetAISettings().SightRadius*.5f);
++			P->SetActorLocation(M->GetActorLocation()+FVector(-Distance,0,92-M->GetActorLocation().Z),false,nullptr,ETeleportType::TeleportPhysics);
++			P->GetCharacterMovement()->Velocity=FVector::ZeroVector;
++		}
++		if(!PatternStarted)
++		{
++			if(C.Kind==3)P->SetActorLocation(M->GetActorLocation()+FVector(-FMath::Min(C.Distance,M->GetAISettings().SightRadius*.5f),0,92-M->GetActorLocation().Z),false,nullptr,ETeleportType::TeleportPhysics);
++			if(AI->GetBattleTarget()!=P){if(Now-Start>10.f){Test->AddError(TEXT("Fixture real-player Sight acquisition failed"));return Finish();}return false;}
++			P->SetActorLocation(M->GetActorLocation()+FVector(-C.Distance,0,92-M->GetActorLocation().Z),false,nullptr,ETeleportType::TeleportPhysics);
++			UClass* Class=LoadClass<UKZMonsterPatternAbility>(nullptr,*(FString(TEXT("/Game/Monsters/"))+C.Family+TEXT("/Abilities/GA_Original_")+C.Skill+TEXT(".GA_Original_")+C.Skill+TEXT("_C")));
++			FGameplayAbilitySpec* Spec=ASC->FindAbilitySpecFromClass(Class);
++			if(!Spec){Test->AddError(TEXT("Source pattern grant missing"));return Finish();}
++			Pattern=Cast<UKZMonsterPatternAbility>(Spec->GetPrimaryInstance());
++			FindFProperty<FNameProperty>(UKZComboActionAbility::StaticClass(),TEXT("EntryNodeId"))->SetPropertyValue_InContainer(Pattern.Get(),FName(C.Entry));
++			AI->GetStateTreeComponent()->StopLogic(TEXT("Owned source branch fixture"));
++			if(!ASC->TryActivateAbility(Spec->Handle)){Test->AddError(TEXT("Granted source pattern failed to activate"));return Finish();}
++			InitialMonsterLocation=M->GetActorLocation();Start=Now;PatternStarted=true;
++			Test->AddInfo(FString::Printf(TEXT("Pattern fixture %d %s %s"),PatternCase,C.Family,C.Entry));
++		}
++		UKZMonsterPatternAbility* A=Pattern.Get();const FName Node=A?A->GetCurrentNodeId():NAME_None;
++		ObservedStep2|=Node==TEXT("NormalAtk02_Step2");
++		if(C.Kind==2 && A && A->IsActive() && Node==C.Entry)
++		{
++			const FKZComboNode* N=A->GetComboDefinition()->FindNode(Node);UAnimInstance* Anim=M->GetMesh()->GetAnimInstance();
++			const float Time=Anim->Montage_GetPosition(N->Montage)-N->Montage->CompositeSections[N->Montage->GetSectionIndex(N->SectionName)].GetTime();
++			const auto* Gate=N->PatternBranches.FindByPredicate([](const auto& B){return B.Event==EKZPatternEvent::Parried;});
++			if(!EarlyParry && Time>.1f)
++			{EarlyParry=true;const float Before=ASC->GetNumericAttribute(UKZAttributeSet::GetStaminaAttribute());Test->TestTrue(TEXT("Accepted parry outside final window"),M->ReportAttackParried(P));Test->TestEqual(TEXT("Parry decreases monster stamina by user 5"),ASC->GetNumericAttribute(UKZAttributeSet::GetStaminaAttribute()),Before-5);Test->TestEqual(TEXT("Early parry keeps the original node"),A->GetCurrentNodeId(),FName(C.Entry));}
++			if(!LateParry && Gate && !Gate->ActiveWindows.IsEmpty() && Time>=Gate->ActiveWindows[0].X)
++			{LateParry=true;M->ReportAttackParried(P);Test->TestEqual(TEXT("Final-window parry enters original reaction"),A->GetCurrentNodeId(),Gate->TargetNode);}
++		}
++		for(TActorIterator<AKZMonsterSkillObject> I(W);I;++I)if(I->GetOwner()==M)
++		{
++			if(I->HasLaunched() && !ObservedProjectile){ObservedProjectile=true;LaunchedObject=*I;LaunchLocation=I->GetActorLocation();}
++			if(I->GetObjectId()==TEXT("COI_Yetuga_IceBreath_Field_OBJ")){ObservedTrail=true;Test->TestTrue(TEXT("Ice field placed above fixture floor"),I->GetActorLocation().Z>=0.f);}
++		}
++		if(LaunchedObject.IsValid())ProjectileMoved|=!LaunchedObject->GetActorLocation().Equals(LaunchLocation);
++		if(C.Kind==6 && A && A->IsActive() && !ObservedCapture)
++		{
++			const FKZComboNode* N=A->GetComboDefinition()->FindNode(Node);
++			if(N && !N->AttackWindows.IsEmpty())
++			{
++				const auto& Window=N->AttackWindows[0];
++				const FTransform Collision=N->CollisionToActor*M->GetActorTransform();
++				const FVector Point=Collision.TransformPosition(Window.Keys[0].Center);
++				P->SetActorLocation(FVector(Point.X,Point.Y,92),false,nullptr,ETeleportType::TeleportPhysics);
++			}
++			ObservedCapture=P->GetAttachParentActor()==M;
++		}
++		const bool Done=C.Kind==2?LateParry:C.Kind==3?(Node!=C.Entry || !A->IsActive()):C.Kind==4?ProjectileMoved:C.Kind==5?ObservedTrail:C.Kind==6?ObservedCapture:!A->IsActive();
++		if(!Done && Now-Start<=16.f)return false;
++		if(!Done)Test->AddError(FString::Printf(TEXT("Pattern fixture timed out: %d %s %s node=%s"),PatternCase,C.Family,C.Skill,*Node.ToString()));
++		if(C.Kind==0)Test->TestTrue(TEXT("Near original condition continues NormalAtk02 Step2"),ObservedStep2);
++		if(C.Kind==1)Test->TestFalse(TEXT("Far original condition omits NormalAtk02 Step2"),ObservedStep2);
++		if(C.Kind==3)Test->TestTrue(TEXT("Source MoveTo physically advances character"),FVector::Dist2D(InitialMonsterLocation,M->GetActorLocation())>M->GetCapsuleComponent()->GetScaledCapsuleRadius());
++		if(C.Kind==4)Test->TestTrue(TEXT("Original held rock releases and physically travels"),ObservedProjectile&&ProjectileMoved);
++		if(C.Kind==6)Test->TestTrue(TEXT("Accepted native collision establishes captured target"),ObservedCapture);
++		if(A && A->IsActive())ASC->CancelAbilityHandle(A->GetCurrentAbilitySpecHandle());
++		Test->TestTrue(TEXT("Cancel releases own capture attachment"),P->GetAttachParentActor()!=M);
++		Test->TestFalse(TEXT("Cancel removes capture gameplay restriction"),P->GetAbilitySystemComponent()->HasMatchingGameplayTag(KZGameplayTags::State_HitReacting));
++		PatternCleanup=true;return false;
++	}
++	bool Finish()
++	{
++		if(Player.IsValid())Player->HandleInputMoveReleased();
++		for(auto Actor:Giants)if(Actor.IsValid())Actor->Destroy();
++		if(PatternMonster.IsValid())PatternMonster->Destroy();
++		if(ReviewCamera.IsValid()){if(Player.IsValid())Player->GetController<APlayerController>()->SetViewTarget(Player.Get());ReviewCamera->Destroy();}
++		for(auto AI:Paused)if(AI.IsValid())AI->GetStateTreeComponent()->RestartLogic();
++		auto R=MakeShared<FJsonObject>();R->SetBoolField(TEXT("fall"),SawFall);R->SetBoolField(TEXT("normal_landing"),SawNormalLand);
++		R->SetBoolField(TEXT("plunge"),SawPlunge);R->SetBoolField(TEXT("plunge_landing"),SawPlungeLand);R->SetNumberField(TEXT("giant_count"),Giants.Num());R->SetBoolField(TEXT("passed"),!Test->HasAnyErrors());
++		R->SetNumberField(TEXT("pattern_cases"),PatternCase);
++		FString Out;FJsonSerializer::Serialize(R,TJsonWriterFactory<>::Create(&Out));FFileHelper::SaveStringToFile(Out,*(FPaths::ProjectDir()+TEXT("Metadata/GiantCombatFall_20261011/PIEResult.json")));return true;
++	}
++	FAutomationTestBase* Test;TWeakObjectPtr<AKZPlayer> Player;TArray<TWeakObjectPtr<AKZMonster>> Giants;TSet<FString> Seen;
++	TArray<TWeakObjectPtr<AKZMonsterAIController>> Paused;
++	double Deadline;float Start=0;int32 Stage=0,Round=0,GiantIndex=0;
++	bool SawFall=false,SawNormalLand=false,SawPlunge=false,SawPlungeLand=false,ReleasedX=false,Placed=false,SawSight=false,SawRoar=false;
++	TWeakObjectPtr<ACameraActor> ReviewCamera;
++	TWeakObjectPtr<AKZMonster> PatternMonster;TWeakObjectPtr<UKZMonsterPatternAbility> Pattern;
++	FVector InitialMonsterLocation;int32 PatternCase=0;
++	TWeakObjectPtr<AKZMonsterSkillObject> LaunchedObject;FVector LaunchLocation;
++	bool PatternStarted=false,PatternCleanup=false,ObservedStep2=false,EarlyParry=false,LateParry=false,ObservedProjectile=false,ProjectileMoved=false,ObservedTrail=false,ObservedCapture=false;
++};
++class FWaitGiantFallPIE:public IAutomationLatentCommand
++{
++public:FWaitGiantFallPIE(FAutomationTestBase* T):Test(T),Deadline(FPlatformTime::Seconds()+60.){}
++	bool Update()override
++	{
++		for(const FWorldContext& C:GEngine->GetWorldContexts())if(C.WorldType==EWorldType::PIE && C.World() && C.World()->HasBegunPlay())
++			for(TActorIterator<AKZPlayer> It(C.World());It;++It)if(It->IsPlayerControlled()&&It->GetMesh()->GetAnimInstance())
++			{FAutomationTestFramework::Get().EnqueueLatentCommand(MakeShared<FGiantFallCommand>(Test,*It));return true;}
++		if(FPlatformTime::Seconds()>Deadline){Test->AddError(TEXT("Start owned DevMap PIE for GiantFall test"));return true;}return false;
++	}
++private:FAutomationTestBase* Test;double Deadline;
++};
++}
++IMPLEMENT_SIMPLE_AUTOMATION_TEST(FKZGiantFallPIETest,"Khazan.GiantFall.PIE",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
++bool FKZGiantFallPIETest::RunTest(const FString&){FAutomationTestFramework::Get().EnqueueLatentCommand(MakeShared<FWaitGiantFallPIE>(this));return true;}
++#endif
+--- a/Source/Khazan/Khazan.Build.cs
++++ b/Source/Khazan/Khazan.Build.cs
+@@ -24,6 +24,7 @@
+         });
+ 
+ 		PrivateDependencyModuleNames.AddRange(new string[] {  "RHI" });
++		if (Target.bBuildEditor) PrivateDependencyModuleNames.Add("Json"); // Native PIE report serialization only.
+ 
+ 		// Uncomment if you are using Slate UI
+ 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

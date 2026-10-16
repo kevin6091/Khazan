@@ -1,0 +1,28 @@
+Begin Object Class=/Script/Engine.AnimMontage Name="AM_DAS_Fall" ExportPath="/Script/Engine.AnimMontage'/Game/_Art/Player/Animation/InGame/DAS/Fall/AM_DAS_Fall.AM_DAS_Fall'"
+   Begin Object Class=/Script/Engine.AnimDataModel Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/_Art/Player/Animation/InGame/DAS/Fall/AM_DAS_Fall.AM_DAS_Fall:AnimDataModel'"
+   End Object
+   Begin Object Class=/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify Name="AnimNotify_PlayMontageNotify_1" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/Fall/AM_DAS_Fall.AM_DAS_Fall:AnimNotify_PlayMontageNotify_1'"
+   End Object
+   Begin Object Name="AnimDataModel" ExportPath="/Script/Engine.AnimDataModel'/Game/_Art/Player/Animation/InGame/DAS/Fall/AM_DAS_Fall.AM_DAS_Fall:AnimDataModel'"
+      FrameRate=(Numerator=30)
+      NumberOfFrames=110
+      NumberOfKeys=111
+   End Object
+   Begin Object Name="AnimNotify_PlayMontageNotify_1" ExportPath="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'/Game/_Art/Player/Animation/InGame/DAS/Fall/AM_DAS_Fall.AM_DAS_Fall:AnimNotify_PlayMontageNotify_1'"
+      NotifyName="FallLoop"
+   End Object
+   BlendIn=(BlendTime=0.200000)
+   BlendOut=(BlendTime=0.200000)
+   BlendOutTriggerTime=0.000000
+   CompositeSections(0)=(SectionName="Start",NextSectionName="Loop",LinkedMontage="/Script/Engine.AnimMontage'AM_DAS_Fall'",SegmentIndex=0,SegmentLength=0.566667,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Fall/CA_P_Kazan_DualAxeSword_Fall_Start.CA_P_Kazan_DualAxeSword_Fall_Start'")
+   CompositeSections(1)=(SectionName="Loop",NextSectionName="Loop",LinkedMontage="/Script/Engine.AnimMontage'AM_DAS_Fall'",SegmentIndex=1,SegmentBeginTime=0.566667,SegmentLength=2.400000,LinkValue=0.566667,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Fall/CA_P_Kazan_DualAxeSword_Fall_Loop.CA_P_Kazan_DualAxeSword_Fall_Loop'")
+   CompositeSections(2)=(SectionName="Land",LinkedMontage="/Script/Engine.AnimMontage'AM_DAS_Fall'",SegmentIndex=2,SegmentBeginTime=2.966667,SegmentLength=0.700000,LinkValue=2.966667,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Fall/CA_P_Kazan_DualAxeSword_Fall_End.CA_P_Kazan_DualAxeSword_Fall_End'")
+   SlotAnimTracks(0)=(AnimTrack=(AnimSegments=((CachedPlayLength=0.566667,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Fall/CA_P_Kazan_DualAxeSword_Fall_Start.CA_P_Kazan_DualAxeSword_Fall_Start'",AnimEndTime=0.566667),(CachedPlayLength=2.400000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Fall/CA_P_Kazan_DualAxeSword_Fall_Loop.CA_P_Kazan_DualAxeSword_Fall_Loop'",StartPos=0.566667,AnimEndTime=2.400000),(CachedPlayLength=0.700000,AnimReference="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Fall/CA_P_Kazan_DualAxeSword_Fall_End.CA_P_Kazan_DualAxeSword_Fall_End'",StartPos=2.966667,AnimEndTime=0.700000))))
+   BranchingPointMarkers(0)=(NotifyIndex=0,TriggerTime=0.533333)
+   CommonTargetFrameRate=(Numerator=30)
+   Notifies(0)=(NotifyName="FallLoop",Notify="/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify'AnimNotify_PlayMontageNotify_1'",EndLink=(LinkValue=0.533333),MontageTickType=BranchingPoint,Guid=C5E3B73F4CB98251B474D7B713689D49,LinkedMontage="/Script/Engine.AnimMontage'AM_DAS_Fall'",SegmentIndex=0,SegmentLength=0.566667,LinkValue=0.533333,LinkedSequence="/Script/Engine.AnimSequence'/Game/_Art/Player/Animation/InGame/DAS/Fall/CA_P_Kazan_DualAxeSword_Fall_Start.CA_P_Kazan_DualAxeSword_Fall_Start'")
+   SequenceLength=3.666667
+   AnimNotifyTracks(0)=(TrackName="1")
+   DataModelInterface=AnimDataModel'AM_DAS_Fall:AnimDataModel'
+   Skeleton="/Script/Engine.Skeleton'/Game/_Art/Player/Character/Meshs/SK_Player.SK_Player'"
+End Object

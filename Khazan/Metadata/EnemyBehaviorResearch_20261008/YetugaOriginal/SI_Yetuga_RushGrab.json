@@ -1,0 +1,59 @@
+[
+  {
+    "Type": "xxSkillInfo",
+    "Name": "SI_Yetuga_RushGrab",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SI_Yetuga_RushGrab",
+    "Properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "예투가 프레스",
+        "LocalizedString": "예투가 프레스"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SB_Yetuga_RushGrab.SB_Yetuga_RushGrab_C",
+        "SubPathString": ""
+      },
+      "bEnableParringSkill": false,
+      "SkillInputCondition": {
+        "ObjectName": "xxStateInputConditionSelfStatus'SI_Yetuga_RushGrab:xxStateInputConditionSelfStatus_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SI_Yetuga_RushGrab.1"
+      },
+      "EndCooltime": 30.0,
+      "BattleStartCooltime": 45.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_RushGrab_Hold'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SD_Yetuga_RushGrab_Hold.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_RushGrab_Damage'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SD_Yetuga_RushGrab_Damage.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_RushGrab_Release'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SD_Yetuga_RushGrab_Release.0"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxStateInputConditionSelfStatus",
+    "Name": "xxStateInputConditionSelfStatus_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxStateInputConditionSelfStatus'",
+    "Outer": {
+      "ObjectName": "xxSkillInfo'SI_Yetuga_RushGrab'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SI_Yetuga_RushGrab.0"
+    },
+    "Properties": {
+      "CheckDynamicStatus": {
+        "DynamicStatus": "EGrDynamicStatus::HealthPoint",
+        "CompareOperator": "ECompareOperator::LessThanOrEqualTo",
+        "bUseRatio": true
+      }
+    }
+  }
+]

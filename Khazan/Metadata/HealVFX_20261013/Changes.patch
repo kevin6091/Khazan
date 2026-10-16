@@ -1,0 +1,151 @@
+--- before/Source/Khazan/Ability/PlayerAbility/KZHealAbility.cpp
++++ after/Source/Khazan/Ability/PlayerAbility/KZHealAbility.cpp
+@@ -3,6 +3,7 @@
+ #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
+ #include "Animation/AnimInstance.h"
+ #include "Animation/AnimMontage.h"
++#include "Animation/Notifies/KZAnimNotify_CombatEffect.h"
+ #include "Attribute/KZAttributeSet.h"
+ #include "Character/KZCharacter.h"
+ #include "Components/SkeletalMeshComponent.h"
+@@ -88,6 +89,24 @@
+ 	{
+ 		return;
+ 	}
++	// Reuse Action's execution-owned feedback receipts. Equal-time data children
++	// share one branching marker without replacing the existing HP callback.
++	if (const UKZAnimNotify_CombatEffect* Effect = Payload.NotifyEvent
++		? Cast<UKZAnimNotify_CombatEffect>(Payload.NotifyEvent->Notify.Get()) : nullptr)
++	{
++		for (const bool bEnding : {true, false})
++		{
++			const auto Process = [this, &Payload, bEnding](const UKZAnimNotify_CombatEffect* Entry)
++			{
++				if (!IsActive() || !IsValid(Entry) || Entry->EventId.IsNone() || Entry->bEndEvent != bEnding) return;
++				if (bEnding) StopCombatEffect(Entry->EventId, Payload.MontageInstanceID);
++				else StartCombatEffect(*Entry, Payload);
++			};
++			Process(Effect);
++			for (const UKZAnimNotify_CombatEffect* Child : Effect->BatchedEffects) Process(Child);
++		}
++	}
++	if (!IsActive()) return;
+ 	if (NotifyName == TEXT("WeaponStow"))
+ 	{
+ 		if (!StoreWeapons()) HandleMontageAborted();
+--- before/Source/Khazan/Tests/KZHealAbilityPIETest.cpp
++++ after/Source/Khazan/Tests/KZHealAbilityPIETest.cpp
+@@ -26,6 +26,14 @@
+ #include "EngineUtils.h"
+ #include "UnrealClient.h"
+ #include "Misc/Paths.h"
++#include "Animation/Notifies/KZAnimNotify_CombatEffect.h"
++#include "Camera/CameraActor.h"
++#include "Camera/CameraComponent.h"
++#include "Particles/ParticleSystemComponent.h"
++#include "Particles/ParticleSystem.h"
++#include "ParticleEmitterInstances.h"
++#include "UObject/UObjectIterator.h"
++#include "Misc/FileHelper.h"
+ 
+ namespace
+ {
+@@ -46,6 +54,18 @@
+ 		for (USceneComponent* Child : InPlayer->GetMesh()->GetAttachChildren())
+ 			if (Child && (Child->GetAttachSocketName() == TEXT("Weapon_L") || Child->GetAttachSocketName() == TEXT("Weapon_R")))
+ 				Weapons.Add({Child, Child->GetAttachSocketName(), Child->GetRelativeTransform()});
++		VFXOutput = FPlatformMisc::GetEnvironmentVariable(TEXT("KZ_HEAL_VFX_OUT"));
++		if (!VFXOutput.IsEmpty())
++		{
++			if (APlayerController* PC = InPlayer->GetController<APlayerController>())
++			{
++				OldView = PC->GetViewTarget();
++				FActorSpawnParameters Params; Params.ObjectFlags |= RF_Transient;
++				VFXCamera = InPlayer->GetWorld()->SpawnActor<ACameraActor>(Params);
++				VFXCamera->GetCameraComponent()->SetFieldOfView(45.f);
++				PC->SetViewTarget(VFXCamera.Get());
++			}
++		}
+ 	}
+ 	virtual bool Update() override
+ 	{
+@@ -56,6 +76,7 @@
+ 			return true;
+ 		}
+ 		if (bMove) Player->HandleInputMove(FVector2D(0.5f, 0.f), FRotator::ZeroRotator);
++		ObserveRecoveryVFX();
+ 		if (Stage == 4 && !bDrawCaptured && Heal.IsValid() && Heal->HasInputEnded())
+ 		{
+ 			const FAnimMontageInstance* Draw = Player->GetMesh()->GetAnimInstance()->GetActiveInstanceForMontage(Heal->GetCurrentMontage());
+@@ -386,6 +407,60 @@
+ 	{
+ 		if (ASC.IsValid()) { CancelActions(); ASC->SetNumericAttributeBase(UKZAttributeSet::GetMaxHPAttribute(), SavedMax); HP(SavedHP); ASC->SetNumericAttributeBase(UKZAttributeSet::GetStaminaAttribute(), SavedStamina); }
+ 		if (Player.IsValid()) { Player->HandleInputMoveReleased(); Player->GetCharacterMovement()->StopMovementImmediately(); Player->SetActorLocationAndRotation(SavedLocation, SavedRotation); }
++		if (!VFXOutput.IsEmpty())
++		{
++			Test->TestEqual(TEXT("All original recovery roles / filtered-bone adapters actually emit"), SeenVFX.Num(), 11);
++			int32 Remaining = 0;
++			for (TObjectIterator<UParticleSystemComponent> It; It; ++It)
++				if (IsValid(*It) && Player.IsValid() && It->GetWorld() == Player->GetWorld())
++					for (const FName Tag : It->ComponentTags) if (Tag.ToString().StartsWith(TEXT("KZHeal_"))) { ++Remaining; break; }
++			Test->TestEqual(TEXT("Cancel removes all recovery components and pose callbacks"), Remaining, 0);
++			FFileHelper::SaveStringToFile(VFXObservations, *(VFXOutput / TEXT("Runtime.ndjson")));
++			if (Player.IsValid()) if (APlayerController* PC = Player->GetController<APlayerController>(); PC && OldView.IsValid()) PC->SetViewTarget(OldView.Get());
++			if (VFXCamera.IsValid()) VFXCamera->Destroy();
++		}
++	}
++	void ObserveRecoveryVFX()
++	{
++		if (VFXOutput.IsEmpty() || !Player.IsValid()) return;
++		if (VFXCamera.IsValid())
++		{
++			// Preview camera only; these centimetres never enter gameplay/asset tuning.
++			const FVector Aim = Player->GetActorLocation() + FVector(0,0,50);
++			const FVector Eye = Aim + Player->GetActorQuat().RotateVector(FVector(180,-150,60));
++			VFXCamera->SetActorLocationAndRotation(Eye,(Aim-Eye).Rotation());
++		}
++		for (TObjectIterator<UParticleSystemComponent> It; It; ++It)
++		{
++			UParticleSystemComponent* P = *It;
++			if (!IsValid(P) || P->GetWorld() != Player->GetWorld() || P->GetNumActiveParticles() <= 0) continue;
++			for (const FName Tag : P->ComponentTags)
++			{
++				if (!Tag.ToString().StartsWith(TEXT("KZHeal_"))) continue;
++				Test->TestTrue(TEXT("Recovery follows actual player skeleton"), P->GetAttachParent() == Player->GetMesh() && Player->GetMesh()->DoesSocketExist(P->GetAttachSocketName()));
++				Test->TestTrue(TEXT("Recovery transform remains finite"), !P->GetComponentTransform().ContainsNaN());
++				const float Clock = Heal.IsValid() && Heal->GetCurrentMontage() ? Player->GetMesh()->GetAnimInstance()->Montage_GetPosition(Heal->GetCurrentMontage()) : 0.f;
++				if (!SeenVFX.Contains(Tag))
++				{
++					SeenVFX.Add(Tag);
++					VFXObservations += FString::Printf(TEXT("{\"id\":\"%s\",\"clock\":%.9g,\"particles\":%d,\"socket\":\"%s\",\"resource\":\"%s\"}\n"), *Tag.ToString(), Clock, P->GetNumActiveParticles(), *P->GetAttachSocketName().ToString(), *P->Template->GetPathName());
++					for (auto* E : P->EmitterInstances)
++						if (E && E->ActiveParticles > 0)
++							if (const FBaseParticle* Particle = E->GetParticle(0))
++								VFXObservations += FString::Printf(TEXT("{\"particle_probe\":\"%s\",\"size\":[%.9g,%.9g,%.9g],\"rgba\":[%.9g,%.9g,%.9g,%.9g],\"location\":[%.9g,%.9g,%.9g],\"component_scale\":[%.9g,%.9g,%.9g],\"relative_age\":%.9g}\n"),*Tag.ToString(),Particle->Size.X,Particle->Size.Y,Particle->Size.Z,Particle->Color.R,Particle->Color.G,Particle->Color.B,Particle->Color.A,Particle->Location.X,Particle->Location.Y,Particle->Location.Z,P->GetComponentScale().X,P->GetComponentScale().Y,P->GetComponentScale().Z,Particle->RelativeTime);
++				}
++				const float CaptureAt = Tag == FName(TEXT("KZHeal_2_0")) ? 1.35f : 1.95f;
++				if (Clock > CaptureAt && Clock < 2.3f && !CapturedVFX.Contains(Tag))
++				{
++					const FVector W=P->GetComponentLocation(), B=Player->GetMesh()->GetSocketLocation(P->GetAttachSocketName());
++					VFXObservations+=FString::Printf(TEXT("{\"late_probe\":\"%s\",\"clock\":%.9g,\"world\":[%.9g,%.9g,%.9g],\"bone\":[%.9g,%.9g,%.9g],\"radius\":%.9g,\"particles_flag\":%d,\"translucency_flag\":%d,\"visible\":%d}\n"),*Tag.ToString(),Clock,W.X,W.Y,W.Z,B.X,B.Y,B.Z,P->Bounds.SphereRadius,GEngine->GameViewport->EngineShowFlags.Particles,GEngine->GameViewport->EngineShowFlags.Translucency,P->IsVisible());
++					for(auto* E:P->EmitterInstances)if(E && E->ActiveParticles>0)if(const FBaseParticle* Q=E->GetParticle(0))VFXObservations+=FString::Printf(TEXT("{\"late_particle\":\"%s\",\"size\":[%.9g,%.9g,%.9g],\"rgba\":[%.9g,%.9g,%.9g,%.9g],\"age\":%.9g}\n"),*Tag.ToString(),Q->Size.X,Q->Size.Y,Q->Size.Z,Q->Color.R,Q->Color.G,Q->Color.B,Q->Color.A,Q->RelativeTime);
++					FScreenshotRequest::RequestScreenshot(VFXOutput / (Tag.ToString()+TEXT(".png")), false, false);
++					CapturedVFX.Add(Tag);
++				}
++				break;
++			}
++		}
+ 	}
+ 	FAutomationTestBase* Test;
+ 	struct FWeapon { TWeakObjectPtr<USceneComponent> Component; FName Socket; FTransform Relative; };
+@@ -404,6 +479,10 @@
+ 	int32 OldDrawId = INDEX_NONE;
+ 	bool bMove = false;
+ 	bool bDrawCaptured = false;
++	FString VFXOutput, VFXObservations;
++	TSet<FName> SeenVFX, CapturedVFX;
++	TWeakObjectPtr<ACameraActor> VFXCamera;
++	TWeakObjectPtr<AActor> OldView;
+ };
+ 
+ class FWaitForHealPIE : public IAutomationLatentCommand

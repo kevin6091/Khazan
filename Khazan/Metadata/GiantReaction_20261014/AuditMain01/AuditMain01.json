@@ -1,0 +1,3751 @@
+{
+  "status": "passed",
+  "project": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan",
+  "families": {
+    "ApesStoneHandElite": {
+      "definition": "/Game/Monsters/ApesStoneHandElite/Data/DA_Character_ApesStoneHandElite.DA_Character_ApesStoneHandElite",
+      "combo": "/Game/Monsters/ApesStoneHandElite/Data/DA_OriginalPatterns_ApesStoneHandElite.DA_OriginalPatterns_ApesStoneHandElite",
+      "settings": {
+        "b_enabled": null,
+        "exhaustion_seconds": null,
+        "exhaustion_montage": null,
+        "damage_effect": null
+      },
+      "nodes": [
+        {
+          "id": "DempseyRoll_Step1",
+          "skill": "DempseyRoll",
+          "next": "DempseyRoll_Step2",
+          "section": "DempseyRoll_Step1",
+          "montage": "/Game/Monsters/ApesStoneHandElite/Animations/AM_OriginalPatterns_ApesStoneHandElite.AM_OriginalPatterns_ApesStoneHandElite",
+          "branches": []
+        },
+        {
+          "id": "DempseyRoll_Step2",
+          "skill": "DempseyRoll",
+          "next": "None",
+          "section": "DempseyRoll_Step2",
+          "montage": "/Game/Monsters/ApesStoneHandElite/Animations/AM_OriginalPatterns_ApesStoneHandElite.AM_OriginalPatterns_ApesStoneHandElite",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.PARRIED: 3>",
+              "target": "DempseyRoll_Reaction",
+              "notify": "Pattern_DempseyRoll_Step2_Index2",
+              "windows": [
+                "<Struct 'Vector2D' (0x0000015DB5384E20) {x: 0.569643, y: 0.862859}>"
+              ],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Apes/ApesStoneHand_E/Skill/05_DempseyRoll/SB_ApesStoneHand_E_DempseyRoll"
+            }
+          ]
+        },
+        {
+          "id": "Groggy_Step1",
+          "skill": "Groggy",
+          "next": "Groggy_Step2",
+          "section": "Groggy_Step1",
+          "montage": "/Game/Monsters/ApesStoneHandElite/Animations/AM_OriginalPatterns_ApesStoneHandElite.AM_OriginalPatterns_ApesStoneHandElite",
+          "branches": []
+        },
+        {
+          "id": "Groggy_Step2",
+          "skill": "Groggy",
+          "next": "None",
+          "section": "Groggy_Step2",
+          "montage": "/Game/Monsters/ApesStoneHandElite/Animations/AM_OriginalPatterns_ApesStoneHandElite.AM_OriginalPatterns_ApesStoneHandElite",
+          "branches": []
+        },
+        {
+          "id": "DempseyRoll_Reaction",
+          "skill": "DempseyRoll",
+          "next": "None",
+          "section": "DempseyRoll_Reaction",
+          "montage": "/Game/Monsters/ApesStoneHandElite/Animations/AM_OriginalPatterns_ApesStoneHandElite.AM_OriginalPatterns_ApesStoneHandElite",
+          "branches": []
+        }
+      ],
+      "clips": {
+        "Damage/Damage_GroggyStr_F_Start": {
+          "path": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_GroggyStr_F_Start.Damage_GroggyStr_F_Start",
+          "length": 1.2000000476837158,
+          "notifies": [
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_apesstonehand2_dmg_l.SC_vo_apesstonehand2_dmg_l",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand_foley_land.SC_efx_apesstonehand_foley_land",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        },
+        "Damage/Damage_PartGroggy_Start": {
+          "path": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start",
+          "length": 2.0,
+          "notifies": [
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_ui_groggy_slow_apeshand.SC_ui_groggy_slow_apeshand",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_apesstonehand2_partgroggy_dmg.SC_vo_apesstonehand2_partgroggy_dmg",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand_bodyfall_switch.SC_efx_apesstonehand_bodyfall_switch",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        },
+        "Damage/Damage_PartGroggy_Loop": {
+          "path": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_Loop.Damage_PartGroggy_Loop",
+          "length": 2.0,
+          "notifies": [
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_apesstonehand2_partgroggy_pain.SC_vo_apesstonehand2_partgroggy_pain",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand_foley_groggy.SC_efx_apesstonehand_foley_groggy",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        },
+        "Damage/Damage_PartGroggy_End": {
+          "path": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End",
+          "length": 2.0333333015441895,
+          "notifies": [
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_apesstonehand_breath_s.SC_vo_apesstonehand_breath_s",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand2_partgroggy_end.SC_efx_apesstonehand2_partgroggy_end",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand2_footstep_walk.SC_efx_apesstonehand2_footstep_walk",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        },
+        "Damage/Damage_JustGuardReaction": {
+          "path": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_JustGuardReaction.Damage_JustGuardReaction",
+          "length": 1.5666667222976685,
+          "notifies": [
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_ui_groggy_slow_apeshand.SC_ui_groggy_slow_apeshand",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_apesstonehand2_dmg_l.SC_vo_apesstonehand2_dmg_l",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand_foley_turn.SC_efx_apesstonehand_foley_turn",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        },
+        "Attack/Attack_DempseyRoll_Step2": {
+          "path": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Attack/Attack_DempseyRoll_Step2.Attack_DempseyRoll_Step2",
+          "length": 2.2666666507720947,
+          "notifies": [
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand_foley_cast.SC_efx_apesstonehand_foley_cast",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand_swish_d.SC_efx_apesstonehand_swish_d",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand2_swish_a_c.SC_efx_apesstonehand2_swish_a_c",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand2_foley_swish_a_c.SC_efx_apesstonehand2_foley_swish_a_c",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_apesstonehand2_fastball_end.SC_efx_apesstonehand2_fastball_end",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_apesstonehand2_idle_breath_s.SC_vo_apesstonehand2_idle_breath_s",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        }
+      },
+      "montages": {
+        "AM_Exhaustion": {
+          "path": "/Game/Monsters/ApesStoneHandElite/Animations/AM_Exhaustion.AM_Exhaustion",
+          "sections": [],
+          "notifies": []
+        },
+        "AM_OriginalPatterns_ApesStoneHandElite": {
+          "path": "/Game/Monsters/ApesStoneHandElite/Animations/AM_OriginalPatterns_ApesStoneHandElite.AM_OriginalPatterns_ApesStoneHandElite",
+          "sections": [],
+          "notifies": [
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk01_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk01_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk01_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_NormalAtk02_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk02_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk02_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnAtk_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_CounterAtk_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_DashAtk_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DashAtk_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Level_DashAtk_New_Step5_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step7",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step8",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step9",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Level_DashAtk_New_Step10_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step10",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step11",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Level_DashAtk_New_Step12",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_FastBall_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastBall_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_FastBall_Step2_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastBall_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastBall_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_A_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Dodge_A_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_A_Step7",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_A_Step8",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_A_Step9",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Dodge_A_Step10_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_A_Step10",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_A_Step11",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_A_Step12",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_B_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_B_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_BackMoving_Step1_Index2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_BackMoving_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_BackMoving_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_BackMoving_Step2_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_BackMoving_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastMove_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step1_Index2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step1_Index3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step2_Index2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step2_Index3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_TurnBackRun_Short_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnBackRun_Short_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_TurnBackRun_Short_Step2_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnBackRun_Short_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_StaminaRecover_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Social_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Roar_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_StartSkill_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Groggy_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Groggy_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Reaction",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        }
+      }
+    },
+    "Yetuga": {
+      "definition": "/Game/Monsters/Yetuga/Data/DA_Character_Yetuga.DA_Character_Yetuga",
+      "combo": "/Game/Monsters/Yetuga/Data/DA_OriginalPatterns_Yetuga.DA_OriginalPatterns_Yetuga",
+      "settings": {
+        "b_enabled": null,
+        "exhaustion_seconds": null,
+        "exhaustion_montage": null,
+        "damage_effect": null
+      },
+      "nodes": [
+        {
+          "id": "DempseyRoll_Step1",
+          "skill": "DempseyRoll",
+          "next": "DempseyRoll_Step3",
+          "section": "DempseyRoll_Step1",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.STEP_START: 6>",
+              "target": "DempseyRoll_Step3",
+              "notify": "Pattern_DempseyRoll_Step1_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SB_Yetuga_DempseyRoll"
+            }
+          ]
+        },
+        {
+          "id": "DempseyRoll_Step2",
+          "skill": "DempseyRoll",
+          "next": "None",
+          "section": "DempseyRoll_Step2",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.ANIMATION: 0>",
+              "target": "CloseGrab_Step1",
+              "notify": "Pattern_DempseyRoll_Step2_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SB_Yetuga_DempseyRoll"
+            },
+            {
+              "event": "<KZPatternEvent.PARRIED: 3>",
+              "target": "DempseyRoll_Reaction",
+              "notify": "Pattern_DempseyRoll_Step2_Index2",
+              "windows": [
+                "<Struct 'Vector2D' (0x0000015DB5390D60) {x: 5.328741, y: 5.684516}>"
+              ],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SB_Yetuga_DempseyRoll"
+            }
+          ]
+        },
+        {
+          "id": "DempseyRoll_Step3",
+          "skill": "DempseyRoll",
+          "next": "DempseyRoll_Step2",
+          "section": "DempseyRoll_Step3",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.STEP_START: 6>",
+              "target": "PatternFinish",
+              "notify": "Pattern_DempseyRoll_Step3_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SB_Yetuga_DempseyRoll"
+            }
+          ]
+        },
+        {
+          "id": "DempseyRoll_Step4",
+          "skill": "DempseyRoll",
+          "next": "DempseyRoll_Step2",
+          "section": "DempseyRoll_Step4",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.STEP_START: 6>",
+              "target": "DempseyRoll_Step2",
+              "notify": "Pattern_DempseyRoll_Step4_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SB_Yetuga_DempseyRoll"
+            }
+          ]
+        },
+        {
+          "id": "DempseyRoll_Step5",
+          "skill": "DempseyRoll",
+          "next": "DempseyRoll_Step2",
+          "section": "DempseyRoll_Step5",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.STEP_START: 6>",
+              "target": "DempseyRoll_Step2",
+              "notify": "Pattern_DempseyRoll_Step5_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SB_Yetuga_DempseyRoll"
+            }
+          ]
+        },
+        {
+          "id": "ChargeTackle_Step1",
+          "skill": "ChargeTackle",
+          "next": "ChargeTackle_Step2",
+          "section": "ChargeTackle_Step1",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.TICK: 1>",
+              "target": "ChargeTackle_Step4",
+              "notify": "Pattern_ChargeTackle_Step1_Index1",
+              "windows": [
+                "<Struct 'Vector2D' (0x0000015DB53910E0) {x: 1.250306, y: 1.283639}>"
+              ],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle"
+            },
+            {
+              "event": "<KZPatternEvent.TICK: 1>",
+              "target": "ChargeTackle_Step4",
+              "notify": "Pattern_ChargeTackle_Step1_Index2",
+              "windows": [
+                "<Struct 'Vector2D' (0x0000015DB5391120) {x: 1.250306, y: 1.283639}>"
+              ],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle"
+            }
+          ]
+        },
+        {
+          "id": "ChargeTackle_Step2",
+          "skill": "ChargeTackle",
+          "next": "ChargeTackle_Step3",
+          "section": "ChargeTackle_Step2",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.COLLISION: 5>",
+              "target": "ChargeTackle_Step7",
+              "notify": "Pattern_ChargeTackle_Step2_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle"
+            }
+          ]
+        },
+        {
+          "id": "ChargeTackle_Step3",
+          "skill": "ChargeTackle",
+          "next": "ChargeTackle_Step4",
+          "section": "ChargeTackle_Step3",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.COLLISION: 5>",
+              "target": "ChargeTackle_Step7",
+              "notify": "Pattern_ChargeTackle_Step3_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle"
+            }
+          ]
+        },
+        {
+          "id": "ChargeTackle_Step4",
+          "skill": "ChargeTackle",
+          "next": "ChargeTackle_Step9",
+          "section": "ChargeTackle_Step4",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": []
+        },
+        {
+          "id": "ChargeTackle_Step5",
+          "skill": "ChargeTackle",
+          "next": "ChargeTackle_Step2",
+          "section": "ChargeTackle_Step5",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.TICK: 1>",
+              "target": "ChargeTackle_Step4",
+              "notify": "Pattern_ChargeTackle_Step5_Index1",
+              "windows": [
+                "<Struct 'Vector2D' (0x0000015DB53913A0) {x: 1.250306, y: 1.283639}>"
+              ],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle"
+            },
+            {
+              "event": "<KZPatternEvent.TICK: 1>",
+              "target": "ChargeTackle_Step4",
+              "notify": "Pattern_ChargeTackle_Step5_Index2",
+              "windows": [
+                "<Struct 'Vector2D' (0x0000015DB53913E0) {x: 1.250306, y: 1.283639}>"
+              ],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle"
+            }
+          ]
+        },
+        {
+          "id": "ChargeTackle_Step6",
+          "skill": "ChargeTackle",
+          "next": "ChargeTackle_Step3",
+          "section": "ChargeTackle_Step6",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": [
+            {
+              "event": "<KZPatternEvent.COLLISION: 5>",
+              "target": "ChargeTackle_Step7",
+              "notify": "Pattern_ChargeTackle_Step6_Index1",
+              "windows": [],
+              "source": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle"
+            }
+          ]
+        },
+        {
+          "id": "ChargeTackle_Step7",
+          "skill": "ChargeTackle",
+          "next": "ChargeTackle_Step8",
+          "section": "ChargeTackle_Step7",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": []
+        },
+        {
+          "id": "ChargeTackle_Step8",
+          "skill": "ChargeTackle",
+          "next": "None",
+          "section": "ChargeTackle_Step8",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": []
+        },
+        {
+          "id": "ChargeTackle_Step9",
+          "skill": "ChargeTackle",
+          "next": "None",
+          "section": "ChargeTackle_Step9",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": []
+        },
+        {
+          "id": "Groggy_Step1",
+          "skill": "Groggy",
+          "next": "Groggy_Step2",
+          "section": "Groggy_Step1",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": []
+        },
+        {
+          "id": "Groggy_Step2",
+          "skill": "Groggy",
+          "next": "None",
+          "section": "Groggy_Step2",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": []
+        },
+        {
+          "id": "DempseyRoll_Reaction",
+          "skill": "DempseyRoll",
+          "next": "None",
+          "section": "DempseyRoll_Reaction",
+          "montage": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "branches": []
+        }
+      ],
+      "clips": {
+        "Damage/Damage_GroggyStr_F_Start_New": {
+          "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_GroggyStr_F_Start_New.Damage_GroggyStr_F_Start_New",
+          "length": 0.9666666388511658,
+          "notifies": [
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_yetuga_gro_strong_start.SC_vo_yetuga_gro_strong_start",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_gro_strong_start_foley.SC_efx_yetuga_gro_strong_start_foley",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_run_foot.SC_efx_yetuga_run_foot",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_common_whoosh_snow.SC_efx_yetuga_common_whoosh_snow",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        },
+        "Damage/Damage_PartGroggy_Start": {
+          "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.Damage_PartGroggy_Start",
+          "length": 2.0,
+          "notifies": [
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_ui_groggy_slow_yetuga.SC_ui_groggy_slow_yetuga",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_part_gro_start.SC_efx_yetuga_part_gro_start",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_yetuga_part_gro_start.SC_vo_yetuga_part_gro_start",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_common_whoosh_middle.SC_efx_yetuga_common_whoosh_middle",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_common_whoosh_snow.SC_efx_yetuga_common_whoosh_snow",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_part_gro_start_bodyfall.SC_efx_yetuga_part_gro_start_bodyfall",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        },
+        "Damage/Damage_PartGroggy_Loop": {
+          "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Loop.Damage_PartGroggy_Loop",
+          "length": 2.0,
+          "notifies": [
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_part_gro_loop.SC_efx_yetuga_part_gro_loop",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_yetuga_part_gro_loop.SC_vo_yetuga_part_gro_loop",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        },
+        "Damage/Damage_PartGroggy_End": {
+          "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_End.Damage_PartGroggy_End",
+          "length": 2.0333333015441895,
+          "notifies": [
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_part_gro_end.SC_efx_yetuga_part_gro_end",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_yetuga_part_gro_end.SC_vo_yetuga_part_gro_end",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        },
+        "Attack/Attack_ChargeTackle_Stun": {
+          "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun.Attack_ChargeTackle_Stun",
+          "length": 1.7666666507720947,
+          "notifies": [
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_charge_tackle_stun.SC_efx_yetuga_charge_tackle_stun",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_yetuga_charge_tackle_stun.SC_vo_yetuga_charge_tackle_stun",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        },
+        "Attack/Attack_ChargeTackle_Stun_End": {
+          "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Attack/Attack_ChargeTackle_Stun_End.Attack_ChargeTackle_Stun_End",
+          "length": 2.1666667461395264,
+          "notifies": [
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_efx_yetuga_charge_tackle_stun_end.SC_efx_yetuga_charge_tackle_stun_end",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotify_PlayAudio",
+              "name": "None",
+              "sound": "/Game/Audio/Original/Events/SC_vo_yetuga_gro_strong_end.SC_vo_yetuga_gro_strong_end",
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "KZAnimNotifyState_MonsterVisual",
+              "name": "KZMonsterVisual",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        }
+      },
+      "montages": {
+        "AM_Exhaustion": {
+          "path": "/Game/Monsters/Yetuga/Animations/AM_Exhaustion.AM_Exhaustion",
+          "sections": [],
+          "notifies": []
+        },
+        "AM_OriginalPatterns_Yetuga": {
+          "path": "/Game/Monsters/Yetuga/Animations/AM_OriginalPatterns_Yetuga.AM_OriginalPatterns_Yetuga",
+          "sections": [],
+          "notifies": [
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk01_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk01_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_NormalAtk01_Step3_Index4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_NormalAtk01_Step3_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_NormalAtk01_Step3_Index4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk01_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_NormalAtk02_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk02_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_NormalAtk02_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnAtk_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_CounterAtk_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_DempseyRoll_Step2_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_CloseGrab_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_CloseGrab_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_CloseGrab_Step3_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_CloseGrab_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_CloseGrab_Step4_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_CloseGrab_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_CloseGrab_Step5_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_CloseGrab_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_RushGrab_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_RushGrab_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_RushGrab_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_RushGrab_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_RushGrab_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_RushGrab_Step6",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_RushGrab_Step7",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DashAtk_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DashAtk_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DashAtk_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DashAtk_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_JumpBackPress_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_JumpBackPress_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step6",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step7",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step8",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_ChargeTackle_Step9",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_FastBall_Step1_NativeUse12",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastBall_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_FastBall_Step2_NativeUse9",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastBall_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastBall_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastBall_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_IceBreath_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_IceBreath_Step2_Index2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_IceBreath_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_IceBreath_Step3_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_IceBreath_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_IceBreath_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_IceBreath_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Armageddon_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Armageddon_Step3_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Armageddon_Step6_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step6",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step7",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step8",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Armageddon_Step9",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Dodge_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_Dodge_Step1_Index2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Dodge_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_BackJump_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_BackMoving_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_BackMoving_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_BackMoving_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastMove_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastMove_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_FastMove_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step2_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step3",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step4",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step5_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step5",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_SideMove_Step6_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_SideMove_Step6",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnBackRun_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_TurnBackRun_Step2_Index2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnBackRun_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "Pattern_TurnBackRun_Short_Step1_Index1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnBackRun_Short_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_TurnBackRun_Short_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_StaminaRecover_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Social_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Roar_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Groggy_Step1",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_Groggy_Step2",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            },
+            {
+              "time": null,
+              "duration": null,
+              "class": "AnimNotify_PlayMontageNotify",
+              "name": "PatternNext_DempseyRoll_Reaction",
+              "sound": null,
+              "end_sound": null,
+              "particle": null,
+              "niagara": null,
+              "decal": null
+            }
+          ]
+        }
+      }
+    }
+  }
+}

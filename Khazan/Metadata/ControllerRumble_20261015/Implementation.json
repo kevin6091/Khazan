@@ -1,0 +1,75 @@
+{
+  "status": "source_applied_unverified_user_requested",
+  "date": "2026-10-15",
+  "project": "C:/Users/user/Desktop/GitProject/Khazan/Khazan",
+  "request": "Controller rumble: short weak WeakAttack; short strong StrongAttack/Spinning/OverFury/approved parry; weaker/stronger Yetuga/Apes/Elite actions. User explicitly requested no verification.",
+  "changed_runtime_files": [
+    "Source/Khazan/Player/KZPlayerController.h",
+    "Source/Khazan/Player/KZPlayerController.cpp",
+    "Source/Khazan/Ability/Combo/KZComboActionAbility.h",
+    "Source/Khazan/Ability/Combo/KZComboActionAbility.cpp",
+    "Source/Khazan/Ability/PlayerAbility/KZGuardAbility.cpp",
+    "Source/Khazan/Animation/Notifies/KZAnimNotifyState_MonsterVisual.cpp",
+    "Source/Khazan/Animation/Notifies/KZAnimNotify_PlayAudio.cpp"
+  ],
+  "new_runtime_files": 0,
+  "new_runtime_classes": 0,
+  "new_game_assets": 0,
+  "entry_point": "AKZPlayerController::PlayCombatRumble(const AActor* Source, bool bStrong)",
+  "tuning": {
+    "provenance": "Assistant TEMP; original rumble metadata unconfirmed; not device-tested",
+    "owner": "AKZPlayerController Class Defaults / KZ|Feedback|Temporary",
+    "pulse_components": {
+      "X": "normalized engine intensity [0,1], dimensionless",
+      "Y": "duration seconds"
+    },
+    "weak_attack": {
+      "intensity": 0.22,
+      "seconds": 0.06
+    },
+    "strong_attack_spinning_overfury_parry": {
+      "intensity": 0.9,
+      "seconds": 0.1
+    },
+    "monster_weak": {
+      "intensity": 0.14,
+      "seconds": 0.045
+    },
+    "monster_strong": {
+      "intensity": 0.65,
+      "seconds": 0.12
+    },
+    "monster_distance": {
+      "full_strength_cm": 400,
+      "max_cm": 3000,
+      "formula": "clamp((far-distance)/(far-near),0,1) between full and max; no pulse at/outside max",
+      "source": "Current source actor location to each local player's possessed Pawn; TEMP radii"
+    }
+  },
+  "producers": {
+    "player_attack": "Existing UKZComboActionAbility::UpdateAttackCollision: once per entered authored HitGroup, WeakAttack-prefixed current nodes are weak; other current player attack nodes strong; excludes natural end flush",
+    "monster_node": "Existing ComboAction::StartAttackCollision emits weak windup/node-entry pulse; MonsterPatternAbility inherits the same implementation (its file unchanged)",
+    "monster_attack": "Existing authored attack window emits strong per HitGroup",
+    "parry": "Existing KZGuardAbility accepted bParried block, independent of camera gain/resource availability",
+    "monster_impact": "Existing MonsterVisual source camera notify begin with nonzero source amplitudes and positive source scales emits strong pulse (impact/landing/roar timings)",
+    "monster_footstep": "Existing PlayAudio's ground-material/footstep source emits weak pulse; existing local/locked sound gating retained"
+  },
+  "lifetime": "GT local PlayerController uses UE PlayDynamicForceFeedback, all four motor channels. Positive finite durations expire in engine-owned dynamic feedback. No custom tick/timer/loop, no shared mutable Notify state, no global stop. RumbledAttackGroups resets in existing ResetAttackCollision.",
+  "verification": {
+    "performed": false,
+    "user_requested_skip": true,
+    "build": "not run",
+    "PIE": "not run",
+    "automated_tests": "not run",
+    "static_validation_or_diff_review": "not run",
+    "controller_hardware": "not tested",
+    "asset_reload_or_editor_control": "none"
+  },
+  "binary_delivery": "Source only. Existing running editor/DLL not rebuilt or hot-reloaded. Compile and normal editor restart required to execute new C++.",
+  "limitations": [
+    "Controller model/driver/Steam Input motor mapping and subjective feel were not tested.",
+    "Native bForceFeedbackEnabled and new bCombatRumbleEnabled are respected.",
+    "Camera/audio timing reuse is a project feedback adapter, not original rumble metadata."
+  ],
+  "next_when_user_requests_verification": "Build current Main source and restart editor, then check the controller's UE Force Feedback mapping, exact requested actions, repetition/cancel/HitGroup behavior and distance falloff. Do not run this now."
+}

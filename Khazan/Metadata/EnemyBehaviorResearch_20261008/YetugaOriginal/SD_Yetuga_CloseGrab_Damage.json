@@ -1,0 +1,88 @@
+[
+  {
+    "Type": "xxDamageInfo",
+    "Name": "SD_Yetuga_CloseGrab_Damage",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDamageInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SD_Yetuga_CloseGrab_Damage",
+    "Properties": {
+      "AttackInfo": {
+        "SkillPowerInfo": {
+          "SkillPowerBonus": 8000
+        },
+        "GuardDamageInfo": {
+          "bDontGuard": true
+        },
+        "AttackableFlags": [
+          "ECharacterAttackableFlag::EnableAttackableDownState"
+        ]
+      },
+      "AttackerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true,
+        "TimeSectionDelayData": {
+          "LoopTime": 0.3
+        }
+      },
+      "DamagerDelayInfo": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true
+      },
+      "bUseInAerialDelay": true,
+      "DamagerDelayInfoInAerial": {
+        "DelayApplyType": "ETimeDelayApplyType::CharacterDelay",
+        "IsRestDelay": true,
+        "TimeSectionDelayData": {
+          "LoopTime": 0.3,
+          "EndTime": 0.2
+        }
+      },
+      "DamagerKnockData": {
+        "KnockBackType": "EKnockbackType::Air",
+        "KnockBackMoveType": "EKnockbackMoveType::Velocity",
+        "KnockbackDistance": {
+          "X": 100.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "KnockCurveVector": {
+          "ObjectName": "CurveVector'CV_common_knockback_deaccel'",
+          "ObjectPath": "BBQ/Content/_Common/MoveCurve/CV_common_knockback_deaccel.0"
+        },
+        "KnockCurveScale": {
+          "X": 500.0,
+          "Y": 1.0,
+          "Z": 1.0
+        },
+        "KnockbackDistanceTime": 1.0,
+        "KnockbackForce": 1250.0,
+        "KonckbackAcceleration": {
+          "X": 1000.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "bEnableBounce": true
+      },
+      "SpecialDamageAniminfo": {
+        "EnableDamageStates": [
+          "ECharacterDamageState::BlowDamage"
+        ],
+        "DamageStrength": "EDamageTypeByStrength::DamageStrong",
+        "CommonAnimationTag": "ECommonAnimationTag::None"
+      },
+      "AttackerHitEffect": {
+        "ParticleInfo": {
+          "bSyncData": true
+        }
+      },
+      "DamageSounds": [
+        {
+          "ObjectName": "AkAudioEvent'efx_yetuga_close_grab_success2_hit'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/yetuga_renewal/efx/efx_yetuga_close_grab_success2_hit.0"
+        }
+      ],
+      "AttackMaterial": "EBattleDirecting_AttackMaterial::AttackMaterial_04",
+      "AttackStrength": "EBattleDirecting_AttackStrength::AttackStrength_02"
+    }
+  }
+]

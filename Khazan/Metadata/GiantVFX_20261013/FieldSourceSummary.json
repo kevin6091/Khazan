@@ -1,0 +1,2553 @@
+[
+  {
+    "package": "FP_Boss_Yetuga_IceBreath_explosion_01",
+    "emitter": "ParticleSpriteEmitter_2",
+    "lod": "ParticleLODLevel_2",
+    "modules": [
+      {
+        "type": "ParticleModuleTypeDataMesh",
+        "name": "ParticleModuleTypeDataMesh_2",
+        "properties": {
+          "Mesh": {
+            "ObjectName": "StaticMesh'FS_Ice_Spear_002'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BBQ_Mesh/FS_Ice_Spear_002.2"
+          },
+          "bOverrideMaterial": true,
+          "RollPitchYawRange": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 3
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSpawn",
+        "name": "ParticleModuleSpawn_3",
+        "properties": {
+          "Rate": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "RateScale": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "BurstList": [
+            {
+              "Count": 3,
+              "CountLow": -1,
+              "Time": 0.0
+            }
+          ],
+          "BurstScale": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleLifetime",
+        "name": "ParticleModuleLifetime_2",
+        "properties": {
+          "Lifetime": {
+            "MinValue": 7.0,
+            "MaxValue": 7.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                7.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSize",
+        "name": "ParticleModuleSize_2",
+        "properties": {
+          "StartSize": {
+            "MinValue": 0.7,
+            "MaxValue": 0.63,
+            "MinValueVec": {
+              "X": 0.9,
+              "Y": 0.9,
+              "Z": 0.7
+            },
+            "MaxValueVec": {
+              "X": 0.6,
+              "Y": 0.6,
+              "Z": 0.63
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.9,
+                0.9,
+                0.7,
+                0.6,
+                0.6,
+                0.63
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 6,
+              "SubEntryStride": 3
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSizeMultiplyLife",
+        "name": "ParticleModuleSizeMultiplyLife_0",
+        "properties": {
+          "LifeMultiplier": {
+            "MaxValue": 1.0,
+            "MaxValueVec": {
+              "X": 1.0,
+              "Y": 1.0,
+              "Z": 1.0
+            },
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 127.0,
+              "Values": [
+                0.0,
+                0.0,
+                0.0,
+                0.3367496,
+                0.3367496,
+                0.3367496,
+                "remaining 378"
+              ],
+              "Op": 1,
+              "EntryCount": 128,
+              "EntryStride": 3
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleParameterDynamic",
+        "name": "ParticleModuleParameterDynamic_4",
+        "properties": {
+          "DynamicParams": [
+            {
+              "ParamName": "Dist_Str",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 1.0,
+                "MaxValue": 1.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    1.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Opa_dissolve",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 0.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Refrac_str",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 0.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Dist_Offset",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": true,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 1.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0,
+                    1.0
+                  ],
+                  "Op": 2,
+                  "EntryCount": 1,
+                  "EntryStride": 2,
+                  "SubEntryStride": 1,
+                  "LockFlag": 0
+                }
+              }
+            }
+          ],
+          "UpdateFlags": 7,
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleVelocity",
+        "name": "ParticleModuleVelocity_7",
+        "properties": {
+          "StartVelocity": {
+            "MinValue": -10.0,
+            "MaxValue": 40.0,
+            "MinValueVec": {
+              "X": 30.0,
+              "Y": 0.0,
+              "Z": -10.0
+            },
+            "MaxValueVec": {
+              "X": 40.0,
+              "Y": 0.0,
+              "Z": -20.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                30.0,
+                0.0,
+                -10.0,
+                40.0,
+                0.0,
+                -20.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 6,
+              "SubEntryStride": 3
+            }
+          },
+          "StartVelocityRadial": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "bEnabled": false,
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleLocation",
+        "name": "ParticleModuleLocation_0",
+        "properties": {
+          "StartLocation": {
+            "MinValue": -150.0,
+            "MinValueVec": {
+              "X": -150.0,
+              "Y": 0.0,
+              "Z": -150.0
+            },
+            "MaxValueVec": {
+              "X": -150.0,
+              "Y": 0.0,
+              "Z": -150.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                -150.0,
+                0.0,
+                -150.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 3
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleLocation",
+        "name": "ParticleModuleLocation_1",
+        "properties": {
+          "StartLocation": {
+            "MinValue": -250.0,
+            "MaxValue": 250.0,
+            "MinValueVec": {
+              "X": -250.0,
+              "Y": -150.0,
+              "Z": -10.0
+            },
+            "MaxValueVec": {
+              "X": 250.0,
+              "Y": 150.0,
+              "Z": 10.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                -250.0,
+                -150.0,
+                -10.0,
+                250.0,
+                150.0,
+                10.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 6,
+              "SubEntryStride": 3
+            }
+          },
+          "bEnabled": false,
+          "LODValidity": 1
+        }
+      }
+    ]
+  },
+  {
+    "package": "FP_Boss_Yetuga_IceBreath_explosion_01",
+    "emitter": "ParticleSpriteEmitter_3",
+    "lod": "ParticleLODLevel_0",
+    "modules": [
+      {
+        "type": "ParticleModuleTypeDataMesh",
+        "name": "ParticleModuleTypeDataMesh_0",
+        "properties": {
+          "Mesh": {
+            "ObjectName": "StaticMesh'FS_Yetuga_horn_01'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/FS_Yetuga_horn_01.2"
+          },
+          "bOverrideMaterial": true,
+          "RollPitchYawRange": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 3
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSpawn",
+        "name": "ParticleModuleSpawn_1",
+        "properties": {
+          "Rate": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "RateScale": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "BurstList": [
+            {
+              "Count": 2,
+              "CountLow": -1,
+              "Time": 0.0
+            }
+          ],
+          "BurstScale": {
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0,
+                1.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 2,
+              "SubEntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleLifetime",
+        "name": "ParticleModuleLifetime_1",
+        "properties": {
+          "Lifetime": {
+            "MinValue": 3.0,
+            "MaxValue": 3.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                3.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSize",
+        "name": "ParticleModuleSize_1",
+        "properties": {
+          "StartSize": {
+            "MinValue": 1.4,
+            "MaxValue": 1.0,
+            "MinValueVec": {
+              "X": 1.4,
+              "Y": 1.4,
+              "Z": 1.4
+            },
+            "MaxValueVec": {
+              "X": 1.0,
+              "Y": 1.0,
+              "Z": 1.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.4,
+                1.4,
+                1.4,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 6,
+              "SubEntryStride": 3,
+              "LockFlag": 4
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleVelocity",
+        "name": "ParticleModuleVelocity_0",
+        "properties": {
+          "StartVelocity": {
+            "MinValue": -200.0,
+            "MaxValue": 600.0,
+            "MinValueVec": {
+              "X": 300.0,
+              "Y": -200.0,
+              "Z": 900.0
+            },
+            "MaxValueVec": {
+              "X": 200.0,
+              "Y": 200.0,
+              "Z": 600.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                300.0,
+                -200.0,
+                900.0,
+                200.0,
+                200.0,
+                600.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 6,
+              "SubEntryStride": 3
+            }
+          },
+          "StartVelocityRadial": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleParameterDynamic",
+        "name": "ParticleModuleParameterDynamic_2",
+        "properties": {
+          "DynamicParams": [
+            {
+              "ParamName": "Dist_Str",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 1.0,
+                "MaxValue": 1.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    1.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Opa_dissolve",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 0.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Refrac_str",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 0.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Dist_Offset",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": true,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 1.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0,
+                    1.0
+                  ],
+                  "Op": 2,
+                  "EntryCount": 1,
+                  "EntryStride": 2,
+                  "SubEntryStride": 1,
+                  "LockFlag": 0
+                }
+              }
+            }
+          ],
+          "UpdateFlags": 7,
+          "LODValidity": 1
+        }
+      }
+    ]
+  },
+  {
+    "package": "FP_Boss_Yetuga_IceBreath_explosion_01",
+    "emitter": "ParticleSpriteEmitter_6",
+    "lod": "ParticleLODLevel_0",
+    "modules": [
+      {
+        "type": "ParticleModuleSpawn",
+        "name": "ParticleModuleSpawn_62",
+        "properties": {
+          "Rate": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "RateScale": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "BurstList": [
+            {
+              "Count": 1,
+              "CountLow": -1,
+              "Time": 0.0
+            }
+          ],
+          "BurstScale": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleLifetime",
+        "name": "ParticleModuleLifetime_62",
+        "properties": {
+          "Lifetime": {
+            "MinValue": 2.0,
+            "MaxValue": 2.3,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                2.0,
+                2.3
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 2,
+              "SubEntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSize",
+        "name": "ParticleModuleSize_9",
+        "properties": {
+          "StartSize": {
+            "MinValue": 25.0,
+            "MaxValue": 700.0,
+            "MinValueVec": {
+              "X": 600.0,
+              "Y": 25.0,
+              "Z": 25.0
+            },
+            "MaxValueVec": {
+              "X": 700.0,
+              "Y": 25.0,
+              "Z": 25.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                600.0,
+                25.0,
+                25.0,
+                700.0,
+                25.0,
+                25.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 6,
+              "SubEntryStride": 3
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleVelocity",
+        "name": "ParticleModuleVelocity_52",
+        "properties": {
+          "StartVelocity": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 3
+            }
+          },
+          "StartVelocityRadial": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleParameterDynamic",
+        "name": "ParticleModuleParameterDynamic_56",
+        "properties": {
+          "DynamicParams": [
+            {
+              "ParamName": "SubUV_frame",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 1.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 1.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0,
+                    1.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 2,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Dist_Str",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 0.05,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Opa_dissolve",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 0.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Param4",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 1.0,
+                "MaxValue": 1.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    1.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            }
+          ],
+          "UpdateFlags": 15,
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleColorScaleOverLife",
+        "name": "ParticleModuleColorScaleOverLife_56",
+        "properties": {
+          "ColorScaleOverLife": {
+            "MinValue": 0.676281,
+            "MaxValue": 2.0,
+            "MinValueVec": {
+              "X": 0.676281,
+              "Y": 0.704861,
+              "Z": 0.704861
+            },
+            "MaxValueVec": {
+              "X": 1.35795,
+              "Y": 1.452687,
+              "Z": 2.0
+            },
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 31.95876,
+              "TimeBias": 0.03,
+              "Values": [
+                1.35795,
+                1.452687,
+                2.0,
+                1.180203,
+                1.2848529,
+                1.7392473,
+                "remaining 90"
+              ],
+              "Op": 1,
+              "EntryCount": 32,
+              "EntryStride": 3
+            }
+          },
+          "AlphaScaleOverLife": {
+            "MaxValue": 9.396373,
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 127.0,
+              "Values": [
+                0.0,
+                0.48152953,
+                1.5361925,
+                2.975935,
+                4.612703,
+                6.258441,
+                "remaining 122"
+              ],
+              "Op": 1,
+              "EntryCount": 128,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSizeMultiplyLife",
+        "name": "ParticleModuleSizeMultiplyLife_10",
+        "properties": {
+          "LifeMultiplier": {
+            "MinValue": 1.0633597,
+            "MaxValue": 3.3466089,
+            "MinValueVec": {
+              "X": 1.0633597,
+              "Y": 1.0633597,
+              "Z": 1.0633597
+            },
+            "MaxValueVec": {
+              "X": 3.3466089,
+              "Y": 3.3466089,
+              "Z": 3.3466089
+            },
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 127.0,
+              "Values": [
+                1.0633597,
+                1.0633597,
+                1.0633597,
+                1.5320833,
+                1.5320833,
+                1.5320833,
+                "remaining 378"
+              ],
+              "Op": 1,
+              "EntryCount": 128,
+              "EntryStride": 3
+            }
+          },
+          "LODValidity": 1
+        }
+      }
+    ]
+  },
+  {
+    "package": "FP_Boss_Yetuga_IceBreath_explosion_01",
+    "emitter": "ParticleSpriteEmitter_9",
+    "lod": "ParticleLODLevel_0",
+    "modules": [
+      {
+        "type": "ParticleModuleSpawn",
+        "name": "ParticleModuleSpawn_8",
+        "properties": {
+          "Rate": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "RateScale": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "BurstList": [
+            {
+              "Count": 30,
+              "CountLow": -1,
+              "Time": 0.1
+            }
+          ],
+          "BurstScale": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSize",
+        "name": "ParticleModuleSize_5",
+        "properties": {
+          "StartSize": {
+            "MinValue": 12.0,
+            "MaxValue": 7.0,
+            "MinValueVec": {
+              "X": 12.0,
+              "Y": 0.5,
+              "Z": 0.0
+            },
+            "MaxValueVec": {
+              "X": 7.0,
+              "Y": 1.0,
+              "Z": 0.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                12.0,
+                12.0,
+                12.0,
+                7.0,
+                7.0,
+                7.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 6,
+              "SubEntryStride": 3,
+              "LockFlag": 4
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleVelocity",
+        "name": "ParticleModuleVelocity_8",
+        "properties": {
+          "StartVelocity": {
+            "MaxValue": 300.0,
+            "MinValueVec": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 900.0
+            },
+            "MaxValueVec": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 300.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0,
+                0.0,
+                900.0,
+                0.0,
+                0.0,
+                300.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 6,
+              "SubEntryStride": 3
+            }
+          },
+          "StartVelocityRadial": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleLifetime",
+        "name": "ParticleModuleLifetime_5",
+        "properties": {
+          "Lifetime": {
+            "MinValue": 4.0,
+            "MaxValue": 8.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                4.0,
+                8.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 2,
+              "SubEntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSizeMultiplyLife",
+        "name": "ParticleModuleSizeMultiplyLife_2",
+        "properties": {
+          "LifeMultiplier": {
+            "MaxValue": 2.1760983,
+            "MaxValueVec": {
+              "X": 0.70354897,
+              "Y": 2.1760983,
+              "Z": 1.0220885
+            },
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 127.0,
+              "Values": [
+                0.0,
+                0.0,
+                1.0,
+                0.024821684,
+                0.6961347,
+                1.0,
+                "remaining 378"
+              ],
+              "Op": 1,
+              "EntryCount": 128,
+              "EntryStride": 3
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleColorScaleOverLife",
+        "name": "ParticleModuleColorScaleOverLife_1",
+        "properties": {
+          "ColorScaleOverLife": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "MinValueVec": {
+              "X": 1.0,
+              "Y": 1.0,
+              "Z": 1.0
+            },
+            "MaxValueVec": {
+              "X": 1.0,
+              "Y": 1.0,
+              "Z": 1.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 3
+            }
+          },
+          "AlphaScaleOverLife": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      }
+    ]
+  },
+  {
+    "package": "FP_Boss_Yetuga_IceBreath_Smash_04",
+    "emitter": "ParticleSpriteEmitter_0",
+    "lod": "ParticleLODLevel_0",
+    "modules": [
+      {
+        "type": "ParticleModuleSpawn",
+        "name": "ParticleModuleSpawn_0",
+        "properties": {
+          "Rate": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "RateScale": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "BurstList": [
+            {
+              "Count": 10,
+              "CountLow": -1,
+              "Time": 0.0
+            }
+          ],
+          "BurstScale": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleLifetime",
+        "name": "ParticleModuleLifetime_0",
+        "properties": {
+          "Lifetime": {
+            "MinValue": 4.0,
+            "MaxValue": 3.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                4.0,
+                3.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 2,
+              "SubEntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSize",
+        "name": "ParticleModuleSize_0",
+        "properties": {
+          "StartSize": {
+            "MinValue": 3.0,
+            "MaxValue": 5.0,
+            "MinValueVec": {
+              "X": 3.0,
+              "Y": 7.0,
+              "Z": 0.0
+            },
+            "MaxValueVec": {
+              "X": 5.0,
+              "Y": 10.0,
+              "Z": 0.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                3.0,
+                3.0,
+                3.0,
+                5.0,
+                5.0,
+                5.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 6,
+              "SubEntryStride": 3,
+              "LockFlag": 4
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleVelocity",
+        "name": "ParticleModuleVelocity_0",
+        "properties": {
+          "StartVelocity": {
+            "MaxValue": 500.0,
+            "MinValueVec": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 500.0
+            },
+            "MaxValueVec": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 500.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0,
+                0.0,
+                500.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 3
+            }
+          },
+          "StartVelocityRadial": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleColorScaleOverLife",
+        "name": "ParticleModuleColorScaleOverLife_0",
+        "properties": {
+          "ColorScaleOverLife": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "MinValueVec": {
+              "X": 1.0,
+              "Y": 1.0,
+              "Z": 1.0
+            },
+            "MaxValueVec": {
+              "X": 1.0,
+              "Y": 1.0,
+              "Z": 1.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 3
+            }
+          },
+          "AlphaScaleOverLife": {
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 127.0,
+              "Values": [
+                0.0,
+                0.06658911,
+                0.23511228,
+                0.45870322,
+                0.69049585,
+                0.8836238,
+                "remaining 122"
+              ],
+              "Op": 1,
+              "EntryCount": 128,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSizeMultiplyLife",
+        "name": "ParticleModuleSizeMultiplyLife_2",
+        "properties": {
+          "LifeMultiplier": {
+            "MaxValue": 9.019953,
+            "MinValueVec": {
+              "X": 0.0,
+              "Y": 1.0,
+              "Z": 0.0
+            },
+            "MaxValueVec": {
+              "X": 8.458555,
+              "Y": 9.019953,
+              "Z": 2.6760538
+            },
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 127.0,
+              "Values": [
+                0.0,
+                1.0,
+                0.0,
+                0.025930045,
+                1.1250674,
+                0.043525744,
+                "remaining 378"
+              ],
+              "Op": 1,
+              "EntryCount": 128,
+              "EntryStride": 3
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSizeMultiplyLife",
+        "name": "ParticleModuleSizeMultiplyLife_3",
+        "properties": {
+          "LifeMultiplier": {
+            "MaxValue": 9.019953,
+            "MinValueVec": {
+              "X": 0.0,
+              "Y": 1.0,
+              "Z": 0.0
+            },
+            "MaxValueVec": {
+              "X": 8.458555,
+              "Y": 9.019953,
+              "Z": 2.6760538
+            },
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 127.0,
+              "Values": [
+                0.0,
+                1.0,
+                0.0,
+                0.025930045,
+                1.1250674,
+                0.043525744,
+                "remaining 378"
+              ],
+              "Op": 1,
+              "EntryCount": 128,
+              "EntryStride": 3
+            }
+          },
+          "bEnabled": false,
+          "LODValidity": 1
+        }
+      }
+    ]
+  },
+  {
+    "package": "FP_Boss_Yetuga_IceBreath_Smash_04",
+    "emitter": "ParticleSpriteEmitter_2",
+    "lod": "ParticleLODLevel_0",
+    "modules": [
+      {
+        "type": "ParticleModuleTypeDataMesh",
+        "name": "ParticleModuleTypeDataMesh_2",
+        "properties": {
+          "Mesh": {
+            "ObjectName": "StaticMesh'FS_Rock_01'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/FS_Rock_01.2"
+          },
+          "bOverrideMaterial": true,
+          "RollPitchYawRange": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 3
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSpawn",
+        "name": "ParticleModuleSpawn_2",
+        "properties": {
+          "Rate": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "RateScale": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "BurstList": [
+            {
+              "Count": 10,
+              "CountLow": -1,
+              "Time": 0.0
+            }
+          ],
+          "BurstScale": {
+            "MinValue": 0.3,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.3,
+                1.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 2,
+              "SubEntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleLifetime",
+        "name": "ParticleModuleLifetime_2",
+        "properties": {
+          "Lifetime": {
+            "MinValue": 3.0,
+            "MaxValue": 3.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                3.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSize",
+        "name": "ParticleModuleSize_2",
+        "properties": {
+          "StartSize": {
+            "MinValue": 7.0,
+            "MaxValue": 4.0,
+            "MinValueVec": {
+              "X": 7.0,
+              "Y": 1.5,
+              "Z": 1.5
+            },
+            "MaxValueVec": {
+              "X": 4.0,
+              "Y": 3.5,
+              "Z": 3.5
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                7.0,
+                7.0,
+                7.0,
+                4.0,
+                4.0,
+                4.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 6,
+              "SubEntryStride": 3,
+              "LockFlag": 4
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleVelocity",
+        "name": "ParticleModuleVelocity_3",
+        "properties": {
+          "StartVelocity": {
+            "MaxValue": 400.0,
+            "MinValueVec": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 1200.0
+            },
+            "MaxValueVec": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 400.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0,
+                0.0,
+                1200.0,
+                0.0,
+                0.0,
+                400.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 6,
+              "SubEntryStride": 3
+            }
+          },
+          "StartVelocityRadial": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleParameterDynamic",
+        "name": "ParticleModuleParameterDynamic_2",
+        "properties": {
+          "DynamicParams": [
+            {
+              "ParamName": "Dist_Str",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.3,
+                "MaxValue": 0.3,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.3
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Opa_dissolve",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 0.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Refrac_str",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.01,
+                "MaxValue": 0.01,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.01
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Dist_Offset",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 0.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            }
+          ],
+          "UpdateFlags": 15,
+          "LODValidity": 1
+        }
+      }
+    ]
+  },
+  {
+    "package": "FP_Boss_Yetuga_IceBreath_Smash_04",
+    "emitter": "ParticleSpriteEmitter_63",
+    "lod": "ParticleLODLevel_0",
+    "modules": [
+      {
+        "type": "ParticleModuleSpawn",
+        "name": "ParticleModuleSpawn_63",
+        "properties": {
+          "Rate": {
+            "MinValue": 300.0,
+            "MaxValue": 300.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                300.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "RateScale": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "BurstScale": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleLifetime",
+        "name": "ParticleModuleLifetime_63",
+        "properties": {
+          "Lifetime": {
+            "MinValue": 3.0,
+            "MaxValue": 4.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                3.0,
+                4.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 2,
+              "SubEntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSize",
+        "name": "ParticleModuleSize_56",
+        "properties": {
+          "StartSize": {
+            "MinValue": 25.0,
+            "MaxValue": 50.0,
+            "MinValueVec": {
+              "X": 90.0,
+              "Y": 25.0,
+              "Z": 25.0
+            },
+            "MaxValueVec": {
+              "X": 50.0,
+              "Y": 25.0,
+              "Z": 25.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                90.0,
+                25.0,
+                25.0,
+                50.0,
+                25.0,
+                25.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 6,
+              "SubEntryStride": 3
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleVelocity",
+        "name": "ParticleModuleVelocity_53",
+        "properties": {
+          "StartVelocity": {
+            "MaxValue": 50.0,
+            "MinValueVec": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 180.0
+            },
+            "MaxValueVec": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 50.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0,
+                0.0,
+                180.0,
+                0.0,
+                0.0,
+                50.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 6,
+              "SubEntryStride": 3
+            }
+          },
+          "StartVelocityRadial": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleColorScaleOverLife",
+        "name": "ParticleModuleColorScaleOverLife_57",
+        "properties": {
+          "ColorScaleOverLife": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "MinValueVec": {
+              "X": 1.0,
+              "Y": 1.0,
+              "Z": 1.0
+            },
+            "MaxValueVec": {
+              "X": 1.0,
+              "Y": 1.0,
+              "Z": 1.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 3
+            }
+          },
+          "AlphaScaleOverLife": {
+            "MaxValue": 2.2761347,
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 127.0,
+              "Values": [
+                0.0,
+                2.275429,
+                2.2761028,
+                2.2747307,
+                2.2713957,
+                2.2661803,
+                "remaining 122"
+              ],
+              "Op": 1,
+              "EntryCount": 128,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSizeMultiplyLife",
+        "name": "ParticleModuleSizeMultiplyLife_53",
+        "properties": {
+          "LifeMultiplier": {
+            "MinValue": 1.0633597,
+            "MaxValue": 2.6701179,
+            "MinValueVec": {
+              "X": 1.0633597,
+              "Y": 1.0633597,
+              "Z": 1.0633597
+            },
+            "MaxValueVec": {
+              "X": 2.6701179,
+              "Y": 2.6701179,
+              "Z": 2.6701179
+            },
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 62.999996,
+              "Values": [
+                1.0633597,
+                1.0633597,
+                1.0633597,
+                1.3495756,
+                1.3495756,
+                1.3495756,
+                "remaining 186"
+              ],
+              "Op": 1,
+              "EntryCount": 64,
+              "EntryStride": 3
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleParameterDynamic",
+        "name": "ParticleModuleParameterDynamic_57",
+        "properties": {
+          "DynamicParams": [
+            {
+              "ParamName": "Dist_Str",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 1.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 1.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0,
+                    1.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 2,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Opa_dissolve",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 0.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Refrac_str",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 0.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Dist_Offset",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 0.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            }
+          ],
+          "UpdateFlags": 15,
+          "LODValidity": 1
+        }
+      }
+    ]
+  },
+  {
+    "package": "FP_Boss_Yetuga_IceBreath_Smash_04",
+    "emitter": "ParticleSpriteEmitter_8",
+    "lod": "ParticleLODLevel_0",
+    "modules": [
+      {
+        "type": "ParticleModuleSpawn",
+        "name": "ParticleModuleSpawn_7",
+        "properties": {
+          "Rate": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "RateScale": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "BurstList": [
+            {
+              "Count": 1,
+              "CountLow": -1,
+              "Time": 0.0
+            }
+          ],
+          "BurstScale": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleLifetime",
+        "name": "ParticleModuleLifetime_7",
+        "properties": {
+          "Lifetime": {
+            "MinValue": 2.0,
+            "MaxValue": 2.5,
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                2.0,
+                2.5
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 2,
+              "SubEntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSize",
+        "name": "ParticleModuleSize_7",
+        "properties": {
+          "StartSize": {
+            "MinValue": 25.0,
+            "MaxValue": 400.0,
+            "MinValueVec": {
+              "X": 600.0,
+              "Y": 25.0,
+              "Z": 25.0
+            },
+            "MaxValueVec": {
+              "X": 400.0,
+              "Y": 25.0,
+              "Z": 25.0
+            },
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                600.0,
+                25.0,
+                25.0,
+                400.0,
+                25.0,
+                25.0
+              ],
+              "Op": 2,
+              "EntryCount": 1,
+              "EntryStride": 6,
+              "SubEntryStride": 3
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleVelocity",
+        "name": "ParticleModuleVelocity_7",
+        "properties": {
+          "StartVelocity": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 3
+            }
+          },
+          "StartVelocityRadial": {
+            "Distribution": null,
+            "Table": {
+              "Values": [
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleParameterDynamic",
+        "name": "ParticleModuleParameterDynamic_4",
+        "properties": {
+          "DynamicParams": [
+            {
+              "ParamName": "SubUV_frame",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.09041012,
+                "MaxValue": 1.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 1.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.09041012,
+                    1.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 2,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Dist_Str",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 0.05,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Opa_dissolve",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 0.0,
+                "MaxValue": 0.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    0.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            },
+            {
+              "ParamName": "Param4",
+              "bUseEmitterTime": false,
+              "bSpawnTimeOnly": false,
+              "ValueMethod": "EDPV_UserSet",
+              "bScaleVelocityByParamValue": false,
+              "ParamValue": {
+                "MinValue": 1.0,
+                "MaxValue": 1.0,
+                "Distribution": null,
+                "Table": {
+                  "TimeScale": 0.0,
+                  "TimeBias": 0.0,
+                  "Values": [
+                    1.0
+                  ],
+                  "Op": 1,
+                  "EntryCount": 1,
+                  "EntryStride": 1,
+                  "SubEntryStride": 0,
+                  "LockFlag": 0
+                }
+              }
+            }
+          ],
+          "UpdateFlags": 15,
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleColorScaleOverLife",
+        "name": "ParticleModuleColorScaleOverLife_1",
+        "properties": {
+          "ColorScaleOverLife": {
+            "MinValue": 0.704861,
+            "MaxValue": 2.5,
+            "MinValueVec": {
+              "X": 0.704861,
+              "Y": 0.704861,
+              "Z": 0.704861
+            },
+            "MaxValueVec": {
+              "X": 1.918404,
+              "Y": 2.258989,
+              "Z": 2.5
+            },
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 62.999996,
+              "Values": [
+                1.918404,
+                2.258989,
+                2.5,
+                1.6630391,
+                1.9769622,
+                2.2354498,
+                "remaining 186"
+              ],
+              "Op": 1,
+              "EntryCount": 64,
+              "EntryStride": 3
+            }
+          },
+          "AlphaScaleOverLife": {
+            "MaxValue": 12.403569,
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 127.0,
+              "Values": [
+                0.0,
+                3.4340851,
+                9.52919,
+                12.403468,
+                12.389851,
+                12.34515,
+                "remaining 122"
+              ],
+              "Op": 1,
+              "EntryCount": 128,
+              "EntryStride": 1
+            }
+          },
+          "LODValidity": 1
+        }
+      },
+      {
+        "type": "ParticleModuleSizeMultiplyLife",
+        "name": "ParticleModuleSizeMultiplyLife_1",
+        "properties": {
+          "LifeMultiplier": {
+            "MinValue": 1.7563219,
+            "MaxValue": 3.3466089,
+            "MinValueVec": {
+              "X": 1.7563219,
+              "Y": 1.7563219,
+              "Z": 1.7563219
+            },
+            "MaxValueVec": {
+              "X": 3.3466089,
+              "Y": 3.3466089,
+              "Z": 3.3466089
+            },
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 127.0,
+              "Values": [
+                1.7563219,
+                1.7563219,
+                1.7563219,
+                2.0683827,
+                2.0683827,
+                2.0683827,
+                "remaining 378"
+              ],
+              "Op": 1,
+              "EntryCount": 128,
+              "EntryStride": 3
+            }
+          },
+          "LODValidity": 1
+        }
+      }
+    ]
+  }
+]

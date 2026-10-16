@@ -1,0 +1,1217 @@
+[
+  {
+    "Type": "ParticleSystem",
+    "Name": "PS_Heal_DrainBurst",
+    "Properties": {
+      "Emitters": [
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.1"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.10"
+        }
+      ],
+      "bUseFixedRelativeBoundingBox": false
+    }
+  },
+  {
+    "Type": "ParticleSpriteEmitter",
+    "Name": "O1",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "EmitterName": "Heal_1",
+      "DetailModeBitmask": 15,
+      "LODLevels": [
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.2"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "ParticleLODLevel",
+    "Name": "O2",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.1"
+    },
+    "Properties": {
+      "Level": 0,
+      "bEnabled": true,
+      "Modules": [
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.5"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.6"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.7"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.8"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.9"
+        }
+      ],
+      "RequiredModule": {
+        "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.3"
+      },
+      "SpawnModule": {
+        "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.4"
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleRequired",
+    "Name": "O3",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "Material": {
+        "ObjectPath": "/Game/HealVFX/Materials/M_Heal_SoftGlow.M_Heal_SoftGlow"
+      },
+      "bUseLocalSpace": true,
+      "EmitterDuration": 0.6,
+      "EmitterLoops": 1,
+      "bKillOnDeactivate": false,
+      "bKillOnCompleted": false,
+      "bDurationRecalcEachLoop": false
+    }
+  },
+  {
+    "Type": "ParticleModuleSpawn",
+    "Name": "O4",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "Rate": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1,
+          "SubEntryStride": 0,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0
+          ]
+        }
+      },
+      "BurstList": [
+        {
+          "Count": 42,
+          "CountLow": -1,
+          "Time": 0.0
+        }
+      ]
+    }
+  },
+  {
+    "Type": "ParticleModuleLifetime",
+    "Name": "O5",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "LifeTime": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1,
+          "SubEntryStride": 0,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0.6
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleSize",
+    "Name": "O6",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "StartSize": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 3,
+          "SubEntryStride": 0,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            1.8,
+            1.8,
+            1.8
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleLocation",
+    "Name": "O7",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "StartLocation": {
+        "Distribution": null,
+        "Table": {
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 6,
+          "SubEntryStride": 3,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            -3,
+            -3,
+            -3,
+            3,
+            3,
+            3
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleVelocity",
+    "Name": "O8",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "StartVelocity": {
+        "Distribution": null,
+        "Table": {
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 6,
+          "SubEntryStride": 3,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            -32,
+            -32,
+            -32,
+            32,
+            32,
+            32
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleColorOverLife",
+    "Name": "O9",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "ColorOverLife": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 79,
+          "EntryStride": 3,
+          "SubEntryStride": 0,
+          "TimeScale": 78.0,
+          "TimeBias": 0.0,
+          "Values": [
+            2.0,
+            2.0,
+            2.0,
+            1.9743589,
+            1.9743589,
+            1.9743589,
+            1.948718,
+            1.948718,
+            1.948718,
+            1.9230769,
+            1.9230769,
+            1.9230769,
+            1.8974359,
+            1.8974359,
+            1.8974359,
+            1.8717948,
+            1.8717948,
+            1.8717948,
+            1.8461539,
+            1.8461539,
+            1.8461539,
+            1.8205128,
+            1.8205128,
+            1.8205128,
+            1.7948718,
+            1.7948718,
+            1.7948718,
+            1.7692307,
+            1.7692307,
+            1.7692307,
+            1.7435896,
+            1.7435896,
+            1.7435896,
+            1.7179487,
+            1.7179487,
+            1.7179487,
+            1.6923077,
+            1.6923077,
+            1.6923077,
+            1.6666666,
+            1.6666666,
+            1.6666666,
+            1.6410255,
+            1.6410255,
+            1.6410255,
+            1.6153846,
+            1.6153846,
+            1.6153846,
+            1.5897435,
+            1.5897435,
+            1.5897435,
+            1.5641025,
+            1.5641025,
+            1.5641025,
+            1.5384614,
+            1.5384614,
+            1.5384614,
+            1.5128205,
+            1.5128205,
+            1.5128205,
+            1.4871795,
+            1.4871795,
+            1.4871795,
+            1.4615384,
+            1.4615384,
+            1.4615384,
+            1.4358974,
+            1.4358974,
+            1.4358974,
+            1.4102564,
+            1.4102564,
+            1.4102564,
+            1.3846154,
+            1.3846154,
+            1.3846154,
+            1.3589743,
+            1.3589743,
+            1.3589743,
+            1.3333333,
+            1.3333333,
+            1.3333333,
+            1.3076923,
+            1.3076923,
+            1.3076923,
+            1.2820513,
+            1.2820513,
+            1.2820513,
+            1.2564102,
+            1.2564102,
+            1.2564102,
+            1.2307692,
+            1.2307692,
+            1.2307692,
+            1.2051282,
+            1.2051282,
+            1.2051282,
+            1.1794872,
+            1.1794872,
+            1.1794872,
+            1.1538461,
+            1.1538461,
+            1.1538461,
+            1.1282051,
+            1.1282051,
+            1.1282051,
+            1.1025641,
+            1.1025641,
+            1.1025641,
+            1.0769231,
+            1.0769231,
+            1.0769231,
+            1.051282,
+            1.051282,
+            1.051282,
+            1.025641,
+            1.025641,
+            1.025641,
+            1.0,
+            1.0,
+            1.0,
+            0.9743589,
+            0.9743589,
+            0.9743589,
+            0.94871795,
+            0.94871795,
+            0.94871795,
+            0.92307687,
+            0.92307687,
+            0.92307687,
+            0.8974359,
+            0.8974359,
+            0.8974359,
+            0.8717948,
+            0.8717948,
+            0.8717948,
+            0.84615386,
+            0.84615386,
+            0.84615386,
+            0.8205128,
+            0.8205128,
+            0.8205128,
+            0.7948718,
+            0.7948718,
+            0.7948718,
+            0.7692307,
+            0.7692307,
+            0.7692307,
+            0.74358976,
+            0.74358976,
+            0.74358976,
+            0.7179487,
+            0.7179487,
+            0.7179487,
+            0.6923077,
+            0.6923077,
+            0.6923077,
+            0.6666666,
+            0.6666666,
+            0.6666666,
+            0.64102566,
+            0.64102566,
+            0.64102566,
+            0.6153846,
+            0.6153846,
+            0.6153846,
+            0.5897436,
+            0.5897436,
+            0.5897436,
+            0.56410253,
+            0.56410253,
+            0.56410253,
+            0.53846157,
+            0.53846157,
+            0.53846157,
+            0.5128205,
+            0.5128205,
+            0.5128205,
+            0.48717952,
+            0.48717952,
+            0.48717952,
+            0.46153843,
+            0.46153843,
+            0.46153843,
+            0.43589747,
+            0.43589747,
+            0.43589747,
+            0.4102564,
+            0.4102564,
+            0.4102564,
+            0.38461542,
+            0.38461542,
+            0.38461542,
+            0.35897434,
+            0.35897434,
+            0.35897434,
+            0.33333325,
+            0.33333325,
+            0.33333325,
+            0.3076923,
+            0.3076923,
+            0.3076923,
+            0.2820512,
+            0.2820512,
+            0.2820512,
+            0.25641024,
+            0.25641024,
+            0.25641024,
+            0.23076916,
+            0.23076916,
+            0.23076916,
+            0.2051282,
+            0.2051282,
+            0.2051282,
+            0.17948711,
+            0.17948711,
+            0.17948711,
+            0.15384614,
+            0.15384614,
+            0.15384614,
+            0.12820506,
+            0.12820506,
+            0.12820506,
+            0.1025641,
+            0.1025641,
+            0.1025641,
+            0.07692301,
+            0.07692301,
+            0.07692301,
+            0.05128205,
+            0.05128205,
+            0.05128205,
+            0.025640965,
+            0.025640965,
+            0.025640965,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "AlphaOverLife": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 79,
+          "EntryStride": 1,
+          "SubEntryStride": 0,
+          "TimeScale": 78.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0.0,
+            0.060781803,
+            0.121563606,
+            0.1823454,
+            0.24312721,
+            0.30390903,
+            0.3646908,
+            0.42547262,
+            0.48625442,
+            0.49987766,
+            0.4993619,
+            0.49845096,
+            0.49715373,
+            0.495479,
+            0.4934356,
+            0.4910324,
+            0.4882782,
+            0.48518187,
+            0.4817522,
+            0.47799802,
+            0.47392818,
+            0.46955153,
+            0.4648769,
+            0.45991305,
+            0.45466888,
+            0.4491532,
+            0.44337487,
+            0.4373427,
+            0.4310655,
+            0.42455214,
+            0.41781145,
+            0.41085222,
+            0.40368333,
+            0.39631355,
+            0.38875178,
+            0.38100684,
+            0.37308753,
+            0.3650027,
+            0.35676116,
+            0.34837174,
+            0.33984333,
+            0.33118472,
+            0.32240468,
+            0.3135122,
+            0.30451596,
+            0.29542488,
+            0.28624773,
+            0.27699345,
+            0.26767072,
+            0.2582885,
+            0.24885547,
+            0.23938066,
+            0.22987276,
+            0.22034067,
+            0.21079311,
+            0.20123911,
+            0.19168735,
+            0.1821467,
+            0.17262593,
+            0.16313398,
+            0.15367967,
+            0.14427182,
+            0.13491908,
+            0.12563056,
+            0.116414994,
+            0.10728103,
+            0.09823784,
+            0.089294046,
+            0.08045852,
+            0.07173997,
+            0.063147396,
+            0.054689646,
+            0.046375453,
+            0.03821361,
+            0.030213058,
+            0.022382587,
+            0.014731079,
+            0.0072672665,
+            0.0
+          ]
+        }
+      },
+      "bClampAlpha": true
+    }
+  },
+  {
+    "Type": "ParticleSpriteEmitter",
+    "Name": "O10",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "EmitterName": "Heal_10",
+      "DetailModeBitmask": 15,
+      "LODLevels": [
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.11"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "ParticleLODLevel",
+    "Name": "O11",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.10"
+    },
+    "Properties": {
+      "Level": 0,
+      "bEnabled": true,
+      "Modules": [
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.14"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.15"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.16"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.17"
+        },
+        {
+          "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.18"
+        }
+      ],
+      "RequiredModule": {
+        "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.12"
+      },
+      "SpawnModule": {
+        "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.13"
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleRequired",
+    "Name": "O12",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "Material": {
+        "ObjectPath": "/Game/HealVFX/Materials/M_Heal_SoftGlow.M_Heal_SoftGlow"
+      },
+      "bUseLocalSpace": true,
+      "EmitterDuration": 0.5,
+      "EmitterLoops": 1,
+      "bKillOnDeactivate": false,
+      "bKillOnCompleted": false,
+      "bDurationRecalcEachLoop": false
+    }
+  },
+  {
+    "Type": "ParticleModuleSpawn",
+    "Name": "O13",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "Rate": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1,
+          "SubEntryStride": 0,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0
+          ]
+        }
+      },
+      "BurstList": [
+        {
+          "Count": 1,
+          "CountLow": -1,
+          "Time": 0.0
+        }
+      ]
+    }
+  },
+  {
+    "Type": "ParticleModuleLifetime",
+    "Name": "O14",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "LifeTime": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1,
+          "SubEntryStride": 0,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0.5
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleSize",
+    "Name": "O15",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "StartSize": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 3,
+          "SubEntryStride": 0,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            22,
+            22,
+            22
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleLocation",
+    "Name": "O16",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "StartLocation": {
+        "Distribution": null,
+        "Table": {
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 6,
+          "SubEntryStride": 3,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleVelocity",
+    "Name": "O17",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "StartVelocity": {
+        "Distribution": null,
+        "Table": {
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 6,
+          "SubEntryStride": 3,
+          "TimeScale": 0.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Type": "ParticleModuleColorOverLife",
+    "Name": "O18",
+    "Outer": {
+      "ObjectPath": "KZHealNative/PS_Heal_DrainBurst.0"
+    },
+    "Properties": {
+      "ColorOverLife": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 102,
+          "EntryStride": 3,
+          "SubEntryStride": 0,
+          "TimeScale": 101.0,
+          "TimeBias": 0.0,
+          "Values": [
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "AlphaOverLife": {
+        "Distribution": null,
+        "Table": {
+          "Op": 1,
+          "EntryCount": 102,
+          "EntryStride": 1,
+          "SubEntryStride": 0,
+          "TimeScale": 101.0,
+          "TimeBias": 0.0,
+          "Values": [
+            5.0,
+            4.9504952,
+            4.90099,
+            4.8514853,
+            4.80198,
+            4.7524753,
+            4.7029705,
+            4.6534653,
+            4.6039605,
+            4.5544553,
+            4.5049505,
+            4.4554453,
+            4.4059405,
+            4.356436,
+            4.3069305,
+            4.257426,
+            4.207921,
+            4.158416,
+            4.108911,
+            4.059406,
+            4.009901,
+            3.960396,
+            3.910891,
+            3.8613863,
+            3.811881,
+            3.7623763,
+            3.7128713,
+            3.6633663,
+            3.6138613,
+            3.5643563,
+            3.5148516,
+            3.4653466,
+            3.4158416,
+            3.3663368,
+            3.3168316,
+            3.2673268,
+            3.2178218,
+            3.1683168,
+            3.1188118,
+            3.0693069,
+            3.019802,
+            2.970297,
+            2.920792,
+            2.871287,
+            2.821782,
+            2.7722774,
+            2.7227724,
+            2.6732674,
+            2.6237626,
+            2.5742574,
+            2.5247524,
+            2.4752476,
+            2.4257426,
+            2.3762379,
+            2.3267326,
+            2.2772276,
+            2.2277226,
+            2.178218,
+            2.128713,
+            2.079208,
+            2.029703,
+            1.9801979,
+            1.9306931,
+            1.8811882,
+            1.8316832,
+            1.7821784,
+            1.7326734,
+            1.6831684,
+            1.6336634,
+            1.5841584,
+            1.5346537,
+            1.4851487,
+            1.4356437,
+            1.3861389,
+            1.3366339,
+            1.2871287,
+            1.2376237,
+            1.1881187,
+            1.1386137,
+            1.089109,
+            1.039604,
+            0.99009895,
+            0.9405942,
+            0.89108896,
+            0.8415842,
+            0.79207945,
+            0.7425742,
+            0.69306946,
+            0.6435642,
+            0.59405947,
+            0.5445547,
+            0.49504948,
+            0.44554472,
+            0.39603996,
+            0.34653473,
+            0.29702997,
+            0.24752522,
+            0.19801998,
+            0.14851475,
+            0.09900999,
+            0.049504757,
+            0.0
+          ]
+        }
+      },
+      "bClampAlpha": true
+    }
+  }
+]

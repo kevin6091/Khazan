@@ -1,0 +1,126 @@
+Begin Object Class=/Script/Engine.ParticleSystem Name="PS_Heal_LightFlash" ExportPath="/Script/Engine.ParticleSystem'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash'"
+   Begin Object Class=/Script/Engine.ParticleModuleRequired Name="O3" ExportPath="/Script/Engine.ParticleModuleRequired'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O3'"
+      Begin Object Class=/Script/Engine.DistributionFloatConstant Name="RequiredDistributionSpawnRate" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O3.RequiredDistributionSpawnRate'"
+      End Object
+   End Object
+   Begin Object Class=/Script/Engine.ParticleModuleSpawn Name="O4" ExportPath="/Script/Engine.ParticleModuleSpawn'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O4'"
+      Begin Object Class=/Script/Engine.DistributionFloatConstant Name="BurstScaleDistribution" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O4.BurstScaleDistribution'"
+      End Object
+      Begin Object Class=/Script/Engine.DistributionFloatConstant Name="D0" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O4.D0'"
+      End Object
+      Begin Object Class=/Script/Engine.DistributionFloatConstant Name="RequiredDistributionSpawnRateScale" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O4.RequiredDistributionSpawnRateScale'"
+      End Object
+   End Object
+   Begin Object Class=/Script/Engine.ParticleModuleLifetime Name="O5" ExportPath="/Script/Engine.ParticleModuleLifetime'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O5'"
+      Begin Object Class=/Script/Engine.DistributionFloatConstant Name="D1" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O5.D1'"
+      End Object
+   End Object
+   Begin Object Class=/Script/Engine.ParticleModuleColorOverLife Name="O9" ExportPath="/Script/Engine.ParticleModuleColorOverLife'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O9'"
+      Begin Object Class=/Script/Engine.DistributionFloatConstantCurve Name="D6" ExportPath="/Script/Engine.DistributionFloatConstantCurve'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O9.D6'"
+      End Object
+      Begin Object Class=/Script/Engine.DistributionVectorConstantCurve Name="D5" ExportPath="/Script/Engine.DistributionVectorConstantCurve'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O9.D5'"
+      End Object
+   End Object
+   Begin Object Class=/Script/Engine.ParticleModuleVelocity Name="O8" ExportPath="/Script/Engine.ParticleModuleVelocity'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O8'"
+      Begin Object Class=/Script/Engine.DistributionFloatUniform Name="DistributionStartVelocityRadial" ExportPath="/Script/Engine.DistributionFloatUniform'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O8.DistributionStartVelocityRadial'"
+      End Object
+      Begin Object Class=/Script/Engine.DistributionVectorUniform Name="D4" ExportPath="/Script/Engine.DistributionVectorUniform'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O8.D4'"
+      End Object
+   End Object
+   Begin Object Class=/Script/Engine.ParticleModuleSize Name="O6" ExportPath="/Script/Engine.ParticleModuleSize'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O6'"
+      Begin Object Class=/Script/Engine.DistributionVectorConstant Name="D2" ExportPath="/Script/Engine.DistributionVectorConstant'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O6.D2'"
+      End Object
+   End Object
+   Begin Object Class=/Script/Engine.ParticleModuleLocation Name="O7" ExportPath="/Script/Engine.ParticleModuleLocation'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O7'"
+      Begin Object Class=/Script/Engine.DistributionVectorUniform Name="D3" ExportPath="/Script/Engine.DistributionVectorUniform'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O7.D3'"
+      End Object
+   End Object
+   Begin Object Class=/Script/Engine.ParticleSpriteEmitter Name="O1" ExportPath="/Script/Engine.ParticleSpriteEmitter'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O1'"
+      Begin Object Class=/Script/Engine.ParticleLODLevel Name="O2" ExportPath="/Script/Engine.ParticleLODLevel'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O1.O2'"
+      End Object
+   End Object
+   Begin Object Name="O3" ExportPath="/Script/Engine.ParticleModuleRequired'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O3'"
+      Begin Object Name="RequiredDistributionSpawnRate" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O3.RequiredDistributionSpawnRate'"
+      End Object
+      Material="/Script/Engine.Material'/Game/HealVFX/Materials/M_Heal_SoftGlow.M_Heal_SoftGlow'"
+      bUseLocalSpace=True
+      EmitterDuration=0.400000
+      SpawnRate=(Distribution="/Script/Engine.DistributionFloatConstant'RequiredDistributionSpawnRate'")
+      EmitterLoops=1
+   End Object
+   Begin Object Name="O4" ExportPath="/Script/Engine.ParticleModuleSpawn'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O4'"
+      Begin Object Name="BurstScaleDistribution" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O4.BurstScaleDistribution'"
+         Constant=1.000000
+      End Object
+      Begin Object Name="D0" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O4.D0'"
+         bBakedDataSuccesfully=True
+      End Object
+      Begin Object Name="RequiredDistributionSpawnRateScale" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O4.RequiredDistributionSpawnRateScale'"
+         Constant=1.000000
+      End Object
+      Rate=(Distribution="/Script/Engine.DistributionFloatConstant'D0'",Table=(Values=(0.000000),Op=1,EntryCount=1,EntryStride=1))
+      RateScale=(Distribution="/Script/Engine.DistributionFloatConstant'RequiredDistributionSpawnRateScale'")
+      BurstList(0)=(Count=1)
+      BurstScale=(Distribution="/Script/Engine.DistributionFloatConstant'BurstScaleDistribution'")
+   End Object
+   Begin Object Name="O5" ExportPath="/Script/Engine.ParticleModuleLifetime'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O5'"
+      Begin Object Name="D1" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O5.D1'"
+         Constant=0.400000
+         bBakedDataSuccesfully=True
+      End Object
+      Lifetime=(Distribution="/Script/Engine.DistributionFloatConstant'D1'",Table=(Values=(0.400000),Op=1,EntryCount=1,EntryStride=1))
+   End Object
+   Begin Object Name="O9" ExportPath="/Script/Engine.ParticleModuleColorOverLife'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O9'"
+      Begin Object Name="D6" ExportPath="/Script/Engine.DistributionFloatConstantCurve'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O9.D6'"
+         ConstantCurve=(Points=((OutVal=5.000000),(InVal=0.009901,OutVal=4.950495),(InVal=0.019802,OutVal=4.900990),(InVal=0.029703,OutVal=4.851485),(InVal=0.039604,OutVal=4.801980),(InVal=0.049505,OutVal=4.752475),(InVal=0.059406,OutVal=4.702971),(InVal=0.069307,OutVal=4.653465),(InVal=0.079208,OutVal=4.603961),(InVal=0.089109,OutVal=4.554455),(InVal=0.099010,OutVal=4.504951),(InVal=0.108911,OutVal=4.455445),(InVal=0.118812,OutVal=4.405941),(InVal=0.128713,OutVal=4.356436),(InVal=0.138614,OutVal=4.306931),(InVal=0.148515,OutVal=4.257426),(InVal=0.158416,OutVal=4.207921),(InVal=0.168317,OutVal=4.158416),(InVal=0.178218,OutVal=4.108911),(InVal=0.188119,OutVal=4.059406),(InVal=0.198020,OutVal=4.009901),(InVal=0.207921,OutVal=3.960396),(InVal=0.217822,OutVal=3.910891),(InVal=0.227723,OutVal=3.861386),(InVal=0.237624,OutVal=3.811881),(InVal=0.247525,OutVal=3.762376),(InVal=0.257426,OutVal=3.712871),(InVal=0.267327,OutVal=3.663366),(InVal=0.277228,OutVal=3.613861),(InVal=0.287129,OutVal=3.564356),(InVal=0.297030,OutVal=3.514852),(InVal=0.306931,OutVal=3.465347),(InVal=0.316832,OutVal=3.415842),(InVal=0.326733,OutVal=3.366337),(InVal=0.336634,OutVal=3.316832),(InVal=0.346535,OutVal=3.267327),(InVal=0.356436,OutVal=3.217822),(InVal=0.366337,OutVal=3.168317),(InVal=0.376238,OutVal=3.118812),(InVal=0.386139,OutVal=3.069307),(InVal=0.396040,OutVal=3.019802),(InVal=0.405941,OutVal=2.970297),(InVal=0.415842,OutVal=2.920792),(InVal=0.425743,OutVal=2.871287),(InVal=0.435644,OutVal=2.821782),(InVal=0.445545,OutVal=2.772277),(InVal=0.455446,OutVal=2.722772),(InVal=0.465347,OutVal=2.673267),(InVal=0.475248,OutVal=2.623763),(InVal=0.485149,OutVal=2.574257),(InVal=0.495050,OutVal=2.524752),(InVal=0.504951,OutVal=2.475248),(InVal=0.514852,OutVal=2.425743),(InVal=0.524752,OutVal=2.376238),(InVal=0.534653,OutVal=2.326733),(InVal=0.544554,OutVal=2.277228),(InVal=0.554455,OutVal=2.227723),(InVal=0.564356,OutVal=2.178218),(InVal=0.574257,OutVal=2.128713),(InVal=0.584158,OutVal=2.079208),(InVal=0.594059,OutVal=2.029703),(InVal=0.603960,OutVal=1.980198),(InVal=0.613861,OutVal=1.930693),(InVal=0.623762,OutVal=1.881188),(InVal=0.633663,OutVal=1.831683),(InVal=0.643564,OutVal=1.782178),(InVal=0.653465,OutVal=1.732673),(InVal=0.663366,OutVal=1.683168),(InVal=0.673267,OutVal=1.633663),(InVal=0.683168,OutVal=1.584158),(InVal=0.693069,OutVal=1.534654),(InVal=0.702970,OutVal=1.485149),(InVal=0.712871,OutVal=1.435644),(InVal=0.722772,OutVal=1.386139),(InVal=0.732673,OutVal=1.336634),(InVal=0.742574,OutVal=1.287129),(InVal=0.752475,OutVal=1.237624),(InVal=0.762376,OutVal=1.188119),(InVal=0.772277,OutVal=1.138614),(InVal=0.782178,OutVal=1.089109),(InVal=0.792079,OutVal=1.039604),(InVal=0.801980,OutVal=0.990099),(InVal=0.811881,OutVal=0.940594),(InVal=0.821782,OutVal=0.891089),(InVal=0.831683,OutVal=0.841584),(InVal=0.841584,OutVal=0.792079),(InVal=0.851485,OutVal=0.742574),(InVal=0.861386,OutVal=0.693069),(InVal=0.871287,OutVal=0.643564),(InVal=0.881188,OutVal=0.594059),(InVal=0.891089,OutVal=0.544555),(InVal=0.900990,OutVal=0.495049),(InVal=0.910891,OutVal=0.445545),(InVal=0.920792,OutVal=0.396040),(InVal=0.930693,OutVal=0.346535),(InVal=0.940594,OutVal=0.297030),(InVal=0.950495,OutVal=0.247525),(InVal=0.960396,OutVal=0.198020),(InVal=0.970297,OutVal=0.148515),(InVal=0.980198,OutVal=0.099010),(InVal=0.990099,OutVal=0.049505),(InVal=1.000000)))
+         bBakedDataSuccesfully=True
+      End Object
+      Begin Object Name="D5" ExportPath="/Script/Engine.DistributionVectorConstantCurve'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O9.D5'"
+         ConstantCurve=(Points=((OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.009901,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.019802,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.029703,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.039604,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.049505,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.059406,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.069307,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.079208,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.089109,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.099010,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.108911,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.118812,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.128713,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.138614,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.148515,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.158416,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.168317,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.178218,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.188119,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.198020,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.207921,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.217822,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.227723,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.237624,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.247525,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.257426,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.267327,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.277228,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.287129,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.297030,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.306931,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.316832,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.326733,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.336634,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.346535,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.356436,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.366337,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.376238,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.386139,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.396040,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.405941,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.415842,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.425743,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.435644,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.445545,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.455446,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.465347,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.475248,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.485149,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.495050,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.504951,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.514852,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.524752,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.534653,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.544554,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.554455,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.564356,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.574257,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.584158,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.594059,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.603960,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.613861,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.623762,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.633663,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.643564,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.653465,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.663366,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.673267,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.683168,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.693069,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.702970,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.712871,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.722772,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.732673,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.742574,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.752475,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.762376,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.772277,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.782178,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.792079,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.801980,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.811881,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.821782,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.831683,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.841584,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.851485,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.861386,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.871287,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.881188,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.891089,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.900990,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.910891,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.920792,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.930693,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.940594,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.950495,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.960396,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.970297,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.980198,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=0.990099,OutVal=(X=0.500000,Y=0.000000,Z=0.000000)),(InVal=1.000000,OutVal=(X=0.500000,Y=0.000000,Z=0.000000))))
+         bIsDirty=False
+         bBakedDataSuccesfully=True
+      End Object
+      ColorOverLife=(Distribution="/Script/Engine.DistributionVectorConstantCurve'D5'",Table=(TimeScale=101.000000,Values=(0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000,0.500000,0.000000,0.000000),Op=1,EntryCount=102,EntryStride=3))
+      AlphaOverLife=(Distribution="/Script/Engine.DistributionFloatConstantCurve'D6'",Table=(TimeScale=101.000000,Values=(5.000000,4.950495,4.900990,4.851485,4.801980,4.752475,4.702971,4.653465,4.603961,4.554455,4.504951,4.455445,4.405941,4.356436,4.306931,4.257426,4.207921,4.158416,4.108911,4.059406,4.009901,3.960396,3.910891,3.861386,3.811881,3.762376,3.712871,3.663366,3.613861,3.564356,3.514852,3.465347,3.415842,3.366337,3.316832,3.267327,3.217822,3.168317,3.118812,3.069307,3.019802,2.970297,2.920792,2.871287,2.821782,2.772277,2.722772,2.673267,2.623763,2.574257,2.524752,2.475248,2.425743,2.376238,2.326733,2.277228,2.227723,2.178218,2.128713,2.079208,2.029703,1.980198,1.930693,1.881188,1.831683,1.782178,1.732673,1.683168,1.633663,1.584158,1.534654,1.485149,1.435644,1.386139,1.336634,1.287129,1.237624,1.188119,1.138614,1.089109,1.039604,0.990099,0.940594,0.891089,0.841584,0.792079,0.742574,0.693069,0.643564,0.594059,0.544555,0.495049,0.445545,0.396040,0.346535,0.297030,0.247525,0.198020,0.148515,0.099010,0.049505,0.000000),Op=1,EntryCount=102,EntryStride=1))
+   End Object
+   Begin Object Name="O8" ExportPath="/Script/Engine.ParticleModuleVelocity'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O8'"
+      Begin Object Name="DistributionStartVelocityRadial" ExportPath="/Script/Engine.DistributionFloatUniform'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O8.DistributionStartVelocityRadial'"
+      End Object
+      Begin Object Name="D4" ExportPath="/Script/Engine.DistributionVectorUniform'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O8.D4'"
+         bBakedDataSuccesfully=True
+      End Object
+      StartVelocity=(Distribution="/Script/Engine.DistributionVectorUniform'D4'",Table=(Values=(0.000000,0.000000,0.000000,0.000000,0.000000,0.000000),Op=2,EntryCount=1,EntryStride=6,SubEntryStride=3))
+      StartVelocityRadial=(Distribution="/Script/Engine.DistributionFloatUniform'DistributionStartVelocityRadial'")
+   End Object
+   Begin Object Name="O6" ExportPath="/Script/Engine.ParticleModuleSize'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O6'"
+      Begin Object Name="D2" ExportPath="/Script/Engine.DistributionVectorConstant'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O6.D2'"
+         Constant=(X=16.000000,Y=16.000000,Z=16.000000)
+         bIsDirty=False
+         bBakedDataSuccesfully=True
+      End Object
+      StartSize=(Distribution="/Script/Engine.DistributionVectorConstant'D2'",Table=(Values=(16.000000,16.000000,16.000000),Op=1,EntryCount=1,EntryStride=3))
+   End Object
+   Begin Object Name="O7" ExportPath="/Script/Engine.ParticleModuleLocation'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O7'"
+      Begin Object Name="D3" ExportPath="/Script/Engine.DistributionVectorUniform'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O7.D3'"
+         bBakedDataSuccesfully=True
+      End Object
+      StartLocation=(Distribution="/Script/Engine.DistributionVectorUniform'D3'",Table=(Values=(0.000000,0.000000,0.000000,0.000000,0.000000,0.000000),Op=2,EntryCount=1,EntryStride=6,SubEntryStride=3))
+   End Object
+   Begin Object Name="O1" ExportPath="/Script/Engine.ParticleSpriteEmitter'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O1'"
+      Begin Object Name="O2" ExportPath="/Script/Engine.ParticleLODLevel'/Game/HealVFX/Particles/PS_Heal_LightFlash.PS_Heal_LightFlash:O1.O2'"
+         RequiredModule="/Script/Engine.ParticleModuleRequired'PS_Heal_LightFlash:O3'"
+         Modules(0)="/Script/Engine.ParticleModuleLifetime'PS_Heal_LightFlash:O5'"
+         Modules(1)="/Script/Engine.ParticleModuleSize'PS_Heal_LightFlash:O6'"
+         Modules(2)="/Script/Engine.ParticleModuleLocation'PS_Heal_LightFlash:O7'"
+         Modules(3)="/Script/Engine.ParticleModuleVelocity'PS_Heal_LightFlash:O8'"
+         Modules(4)="/Script/Engine.ParticleModuleColorOverLife'PS_Heal_LightFlash:O9'"
+         SpawnModule="/Script/Engine.ParticleModuleSpawn'PS_Heal_LightFlash:O4'"
+      End Object
+      EmitterName="Heal_1"
+      LODLevels(0)="/Script/Engine.ParticleLODLevel'O2'"
+      DetailModeBitmask=15
+   End Object
+   Emitters(0)="/Script/Engine.ParticleSpriteEmitter'O1'"
+   LODDistances(0)=0.000000
+   LODSettings(0)=()
+End Object

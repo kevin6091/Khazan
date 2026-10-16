@@ -1,0 +1,1420 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Package": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02",
+    "SuperStruct": {
+      "ObjectName": "Class'xxSimplePlayerGrappleSkill'",
+      "ObjectPath": "/Script/BBQ"
+    },
+    "ClassFlags": "CLASS_Optional | CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    }
+  },
+  {
+    "Type": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C",
+    "Name": "Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C",
+    "Flags": "RF_Public | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "BlueprintGeneratedClass'BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+    "Package": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02",
+    "Properties": {
+      "GrappleInfo": {
+        "BackGrappleStep": "ESubStateStepByActiveInput::Step4",
+        "FinalBlowDamagePreivewInfos": [
+          {
+            "DamageInfoIndex": 0,
+            "DamageCount": 1
+          },
+          {
+            "DamageInfoIndex": 1,
+            "DamageCount": 1
+          }
+        ],
+        "FinalBlowSkillInfo": {
+          "ObjectName": "xxSkillInfo'SI_Kazan_Com_FinalBlow'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/Common/FinalBlow/SI_Kazan_Com_FinalBlow.0"
+        }
+      },
+      "SubStateInfos": [
+        {
+          "Key": "ESubStateStepByActiveInput::Step1",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step2",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Kazan_DualSwordAxe_Com_Grapple_Start'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/AC_Kazan_DualSwordAxe_Com_Grapple_Start.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step2",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step3",
+            "bUseSpecialSubStateInfo": true,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Kazan_DualAxeSword_Com_Grapple_Atk_01'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/AC_Kazan_DualAxeSword_Com_Grapple_Atk_01.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_1'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.15"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxDynamicStatusChangeInstFunc'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxDynamicStatusChangeInstFunc_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.3"
+                    },
+                    {
+                      "ObjectName": "xxDynamicStatusChangeInstFunc'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxDynamicStatusChangeInstFunc_2'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.6"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_8'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.22"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxDynamicStatusChangeInstFunc'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxDynamicStatusChangeInstFunc_8'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.12"
+                    },
+                    {
+                      "ObjectName": "xxDynamicStatusChangeInstFunc'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxDynamicStatusChangeInstFunc_9'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.13"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index3",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_9'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.23"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxDynamicStatusChangeInstFunc'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxDynamicStatusChangeInstFunc_10'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.4"
+                    },
+                    {
+                      "ObjectName": "xxDynamicStatusChangeInstFunc'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxDynamicStatusChangeInstFunc_11'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.5"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step3",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Kazan_DualAxeSword_Com_Grapple_Atk_02'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/AC_Kazan_DualAxeSword_Com_Grapple_Atk_02.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_6'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.20"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxDynamicStatusChangeInstFunc'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxDynamicStatusChangeInstFunc_5'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.9"
+                    },
+                    {
+                      "ObjectName": "xxDynamicStatusChangeInstFunc'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxDynamicStatusChangeInstFunc_6'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.10"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_2'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.16"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxDynamicStatusChangeInstFunc'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxDynamicStatusChangeInstFunc_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.2"
+                    },
+                    {
+                      "ObjectName": "xxDynamicStatusChangeInstFunc'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxDynamicStatusChangeInstFunc_4'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.8"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index3",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_7'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.21"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxDynamicStatusChangeInstFunc'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxDynamicStatusChangeInstFunc_3'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.7"
+                    },
+                    {
+                      "ObjectName": "xxDynamicStatusChangeInstFunc'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxDynamicStatusChangeInstFunc_7'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.11"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step4",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step5",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Kazan_DualSwordAxe_Com_Grapple_Start'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/AC_Kazan_DualSwordAxe_Com_Grapple_Start.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step5",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::Step6",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_01'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_01.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_0'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.14"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSkillEventFuncUseBattleResource'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpleSkillEventFuncUseBattleResource_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.24"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_5'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.19"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSkillEventFuncUseBattleResource'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpleSkillEventFuncUseBattleResource_4'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.27"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        },
+        {
+          "Key": "ESubStateStepByActiveInput::Step6",
+          "Value": {
+            "NextSubStateStep": "ESubStateStepByActiveInput::None",
+            "bUseSpecialSubStateInfo": false,
+            "SpecialSubStateInfo": {
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bRemoveSpell": false,
+              "bConsumedBattleResource": false,
+              "SpecialSubStateTag": "ESubStateStepByActiveInput::None",
+              "bUseConsumeDynamicStatusInfos": false,
+              "SpcialSubStateDynamicStautsInfos": []
+            },
+            "SkillAnimation": {
+              "ObjectName": "AnimComposite'AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_02'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_02.0"
+            },
+            "bUseSpecialAnimation": false,
+            "SpecialSkillAnimInfo": {
+              "bUseBattleStance": false,
+              "BattleStanceAnimation": [],
+              "bUseSpecialAnimation": false,
+              "SpecialAnimType": "ECommonSpecialAnimation::None",
+              "bUseArmedAnimation": false,
+              "ArmedAnimType": "EWeaponArmedState::None",
+              "bActiveSpell": false,
+              "ActiveSpell": null,
+              "bConsumedBattleResource": false,
+              "SpecialSkillAnimation": null
+            },
+            "AddSkillCooltime": 0.0,
+            "AnimBlendAlpha": 0.1,
+            "AnimPlayRate": 1.0,
+            "AnimLoopCount": 1,
+            "bAnimEndAtLanding": false,
+            "bEnableLandingDamage": false,
+            "bApplyAttackSpeed": true,
+            "bUseEnableParringStep": false,
+            "bEnableParringStep": true,
+            "bUseSkillObjectSpawn": false,
+            "SpawnSkillObjectInfo": {
+              "SkillObejctInfo": null,
+              "SpawnType": null,
+              "bUseAttackSuccess": false
+            },
+            "bUseSkillObjectDestory": false,
+            "DestorySkillObjectInfos": [],
+            "bNoAbleGrappleAndFallAtkDuringStep": false,
+            "SkillEventMap": [
+              {
+                "Key": "ESimpleSkillEventIndex::Index1",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_4'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.18"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSkillEventFuncUseBattleResource'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpleSkillEventFuncUseBattleResource_2'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.25"
+                    }
+                  ]
+                }
+              },
+              {
+                "Key": "ESimpleSkillEventIndex::Index2",
+                "Value": {
+                  "SkillTag": {
+                    "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_3'",
+                    "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.17"
+                  },
+                  "Funcs": [
+                    {
+                      "ObjectName": "xxSimpleSkillEventFuncUseBattleResource'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpleSkillEventFuncUseBattleResource_3'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.26"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bContinueStepWithNoAnim": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDynamicStatusChangeInstFunc",
+    "Name": "xxDynamicStatusChangeInstFunc_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDynamicStatusChangeInstFunc'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "StatusChangeInfoList": [
+        {
+          "FuncChangeDynamicStatus": "EFuncChangeDynamicStatus::HP",
+          "Operator": "EStatusOper::Rate",
+          "Value": 1000
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDynamicStatusChangeInstFunc",
+    "Name": "xxDynamicStatusChangeInstFunc_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDynamicStatusChangeInstFunc'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "StatusChangeInfoList": [
+        {
+          "FuncChangeDynamicStatus": "EFuncChangeDynamicStatus::HP",
+          "Operator": "EStatusOper::Rate",
+          "Value": 500
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDynamicStatusChangeInstFunc",
+    "Name": "xxDynamicStatusChangeInstFunc_10",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDynamicStatusChangeInstFunc'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "StatusChangeInfoList": [
+        {
+          "FuncChangeDynamicStatus": "EFuncChangeDynamicStatus::HP",
+          "Operator": "EStatusOper::Rate",
+          "Value": 1500
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDynamicStatusChangeInstFunc",
+    "Name": "xxDynamicStatusChangeInstFunc_11",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDynamicStatusChangeInstFunc'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "StatusChangeInfoList": [
+        {
+          "FuncChangeDynamicStatus": "EFuncChangeDynamicStatus::HP",
+          "Operator": "EStatusOper::Add",
+          "Value": 100
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDynamicStatusChangeInstFunc",
+    "Name": "xxDynamicStatusChangeInstFunc_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDynamicStatusChangeInstFunc'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "StatusChangeInfoList": [
+        {
+          "FuncChangeDynamicStatus": "EFuncChangeDynamicStatus::HP",
+          "Operator": "EStatusOper::Add",
+          "Value": 25
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDynamicStatusChangeInstFunc",
+    "Name": "xxDynamicStatusChangeInstFunc_3",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDynamicStatusChangeInstFunc'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "StatusChangeInfoList": [
+        {
+          "FuncChangeDynamicStatus": "EFuncChangeDynamicStatus::HP",
+          "Operator": "EStatusOper::Rate",
+          "Value": 1500
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDynamicStatusChangeInstFunc",
+    "Name": "xxDynamicStatusChangeInstFunc_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDynamicStatusChangeInstFunc'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "StatusChangeInfoList": [
+        {
+          "FuncChangeDynamicStatus": "EFuncChangeDynamicStatus::HP",
+          "Operator": "EStatusOper::Add",
+          "Value": 50
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDynamicStatusChangeInstFunc",
+    "Name": "xxDynamicStatusChangeInstFunc_5",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDynamicStatusChangeInstFunc'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "StatusChangeInfoList": [
+        {
+          "FuncChangeDynamicStatus": "EFuncChangeDynamicStatus::HP",
+          "Operator": "EStatusOper::Rate",
+          "Value": 500
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDynamicStatusChangeInstFunc",
+    "Name": "xxDynamicStatusChangeInstFunc_6",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDynamicStatusChangeInstFunc'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "StatusChangeInfoList": [
+        {
+          "FuncChangeDynamicStatus": "EFuncChangeDynamicStatus::HP",
+          "Operator": "EStatusOper::Add",
+          "Value": 25
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDynamicStatusChangeInstFunc",
+    "Name": "xxDynamicStatusChangeInstFunc_7",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDynamicStatusChangeInstFunc'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "StatusChangeInfoList": [
+        {
+          "FuncChangeDynamicStatus": "EFuncChangeDynamicStatus::HP",
+          "Operator": "EStatusOper::Add",
+          "Value": 100
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDynamicStatusChangeInstFunc",
+    "Name": "xxDynamicStatusChangeInstFunc_8",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDynamicStatusChangeInstFunc'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "StatusChangeInfoList": [
+        {
+          "FuncChangeDynamicStatus": "EFuncChangeDynamicStatus::HP",
+          "Operator": "EStatusOper::Rate",
+          "Value": 1000
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxDynamicStatusChangeInstFunc",
+    "Name": "xxDynamicStatusChangeInstFunc_9",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxDynamicStatusChangeInstFunc'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "StatusChangeInfoList": [
+        {
+          "FuncChangeDynamicStatus": "EFuncChangeDynamicStatus::HP",
+          "Operator": "EStatusOper::Add",
+          "Value": 50
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnAttack",
+    "Name": "xxSimpeEvnetTagOnAttack_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnAttack'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSkillTagCondition_CheckDamageInfo'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_0.xxSkillTagCondition_CheckDamageInfo_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.46"
+        },
+        {
+          "ObjectName": "xxSkillTagCondition_CheckAttakcSkillStateSubType'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_0.xxSkillTagCondition_CheckAttakcSkillStateSubType_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.36"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnAttack",
+    "Name": "xxSimpeEvnetTagOnAttack_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnAttack'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSkillTagCondition_CheckAttakcSkillStateSubType'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_1.xxSkillTagCondition_CheckAttakcSkillStateSubType_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.37"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_CheckSpell'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_1.xxSimpleSkillTagCondition_CheckSpell_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.28"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnAttack",
+    "Name": "xxSimpeEvnetTagOnAttack_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnAttack'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSkillTagCondition_CheckAttakcSkillStateSubType'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_2.xxSkillTagCondition_CheckAttakcSkillStateSubType_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.38"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_CheckSpell'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_2.xxSimpleSkillTagCondition_CheckSpell_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.29"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnAttack",
+    "Name": "xxSimpeEvnetTagOnAttack_3",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnAttack'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSkillTagCondition_CheckDamageInfo'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_3.xxSkillTagCondition_CheckDamageInfo_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.47"
+        },
+        {
+          "ObjectName": "xxSkillTagCondition_CheckAttakcSkillStateSubType'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_3.xxSkillTagCondition_CheckAttakcSkillStateSubType_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.39"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_CheckSpell'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_3.xxSimpleSkillTagCondition_CheckSpell_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.30"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnAttack",
+    "Name": "xxSimpeEvnetTagOnAttack_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnAttack'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSkillTagCondition_CheckDamageInfo'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_4.xxSkillTagCondition_CheckDamageInfo_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.48"
+        },
+        {
+          "ObjectName": "xxSkillTagCondition_CheckAttakcSkillStateSubType'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_4.xxSkillTagCondition_CheckAttakcSkillStateSubType_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.40"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnAttack",
+    "Name": "xxSimpeEvnetTagOnAttack_5",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnAttack'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSkillTagCondition_CheckDamageInfo'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_5.xxSkillTagCondition_CheckDamageInfo_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.49"
+        },
+        {
+          "ObjectName": "xxSkillTagCondition_CheckAttakcSkillStateSubType'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_5.xxSkillTagCondition_CheckAttakcSkillStateSubType_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.41"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_CheckSpell'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_5.xxSimpleSkillTagCondition_CheckSpell_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.31"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnAttack",
+    "Name": "xxSimpeEvnetTagOnAttack_6",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnAttack'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSkillTagCondition_CheckAttakcSkillStateSubType'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_6.xxSkillTagCondition_CheckAttakcSkillStateSubType_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.42"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_CheckSpell'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_6.xxSimpleSkillTagCondition_CheckSpell_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.32"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnAttack",
+    "Name": "xxSimpeEvnetTagOnAttack_7",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnAttack'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSkillTagCondition_CheckAttakcSkillStateSubType'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_7.xxSkillTagCondition_CheckAttakcSkillStateSubType_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.43"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_CheckSpell'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_7.xxSimpleSkillTagCondition_CheckSpell_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.33"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnAttack",
+    "Name": "xxSimpeEvnetTagOnAttack_8",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnAttack'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSkillTagCondition_CheckAttakcSkillStateSubType'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_8.xxSkillTagCondition_CheckAttakcSkillStateSubType_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.44"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_CheckSpell'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_8.xxSimpleSkillTagCondition_CheckSpell_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.34"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpeEvnetTagOnAttack",
+    "Name": "xxSimpeEvnetTagOnAttack_9",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpeEvnetTagOnAttack'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "SkillTagCondition": [
+        {
+          "ObjectName": "xxSkillTagCondition_CheckAttakcSkillStateSubType'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_9.xxSkillTagCondition_CheckAttakcSkillStateSubType_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.45"
+        },
+        {
+          "ObjectName": "xxSimpleSkillTagCondition_CheckSpell'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_9.xxSimpleSkillTagCondition_CheckSpell_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.35"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventFuncUseBattleResource",
+    "Name": "xxSimpleSkillEventFuncUseBattleResource_1",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventFuncUseBattleResource'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "KazanBattleResourceValueInfo": {
+        "BattleResourceType": {
+          "KazanWeaponType": "EKazanWeaponType::DualAxeSword"
+        },
+        "StatusOper": "EStatusOper::Rate"
+      },
+      "bApplySkillLevel": true
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventFuncUseBattleResource",
+    "Name": "xxSimpleSkillEventFuncUseBattleResource_2",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventFuncUseBattleResource'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "KazanBattleResourceValueInfo": {
+        "BattleResourceType": {
+          "KazanWeaponType": "EKazanWeaponType::DualAxeSword"
+        },
+        "StatusOper": "EStatusOper::Rate"
+      },
+      "bApplySkillLevel": true
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventFuncUseBattleResource",
+    "Name": "xxSimpleSkillEventFuncUseBattleResource_3",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventFuncUseBattleResource'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "KazanBattleResourceValueInfo": {
+        "BattleResourceType": {
+          "KazanWeaponType": "EKazanWeaponType::DualAxeSword"
+        },
+        "StatusValue": 500
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillEventFuncUseBattleResource",
+    "Name": "xxSimpleSkillEventFuncUseBattleResource_4",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillEventFuncUseBattleResource'",
+    "Outer": {
+      "ObjectName": "SB_Kazan_DualSwordAxe_Com_Grapple_02_C'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.1"
+    },
+    "Properties": {
+      "KazanBattleResourceValueInfo": {
+        "BattleResourceType": {
+          "KazanWeaponType": "EKazanWeaponType::DualAxeSword"
+        },
+        "StatusValue": 500
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_CheckSpell",
+    "Name": "xxSimpleSkillTagCondition_CheckSpell_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_CheckSpell'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.15"
+    },
+    "Properties": {
+      "SpellInfo": {
+        "ObjectName": "xxSpellInfo'SP_Kazan_Com_GrappleRecovery_Lv1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/Common/CommonPassive/GrapplePassive/GrappleRecovery/SP_Kazan_Com_GrappleRecovery_Lv1.0"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_CheckSpell",
+    "Name": "xxSimpleSkillTagCondition_CheckSpell_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_CheckSpell'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.16"
+    },
+    "Properties": {
+      "SpellInfo": {
+        "ObjectName": "xxSpellInfo'SP_Kazan_Com_GrappleRecovery_Lv2'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/Common/CommonPassive/GrapplePassive/GrappleRecovery/SP_Kazan_Com_GrappleRecovery_Lv2.0"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_CheckSpell",
+    "Name": "xxSimpleSkillTagCondition_CheckSpell_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_CheckSpell'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_3'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.17"
+    },
+    "Properties": {
+      "SpellInfo": {
+        "ObjectName": "xxSpellInfo'SI_Kazan_Com_GrappleCombatSpirit_Lv1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/Common/CommonPassive/GrapplePassive/GrappleCombatSpirit/SI_Kazan_Com_GrappleCombatSpirit_Lv1.0"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_CheckSpell",
+    "Name": "xxSimpleSkillTagCondition_CheckSpell_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_CheckSpell'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_5'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.19"
+    },
+    "Properties": {
+      "SpellInfo": {
+        "ObjectName": "xxSpellInfo'SI_Kazan_Com_GrappleCombatSpirit_Lv1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/Common/CommonPassive/GrapplePassive/GrappleCombatSpirit/SI_Kazan_Com_GrappleCombatSpirit_Lv1.0"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_CheckSpell",
+    "Name": "xxSimpleSkillTagCondition_CheckSpell_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_CheckSpell'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_6'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.20"
+    },
+    "Properties": {
+      "SpellInfo": {
+        "ObjectName": "xxSpellInfo'SP_Kazan_Com_GrappleRecovery_Lv1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/Common/CommonPassive/GrapplePassive/GrappleRecovery/SP_Kazan_Com_GrappleRecovery_Lv1.0"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_CheckSpell",
+    "Name": "xxSimpleSkillTagCondition_CheckSpell_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_CheckSpell'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_7'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.21"
+    },
+    "Properties": {
+      "SpellInfo": {
+        "ObjectName": "xxSpellInfo'SP_Kazan_Com_GrappleRecovery_Lv3'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/Common/CommonPassive/GrapplePassive/GrappleRecovery/SP_Kazan_Com_GrappleRecovery_Lv3.0"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_CheckSpell",
+    "Name": "xxSimpleSkillTagCondition_CheckSpell_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_CheckSpell'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_8'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.22"
+    },
+    "Properties": {
+      "SpellInfo": {
+        "ObjectName": "xxSpellInfo'SP_Kazan_Com_GrappleRecovery_Lv2'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/Common/CommonPassive/GrapplePassive/GrappleRecovery/SP_Kazan_Com_GrappleRecovery_Lv2.0"
+      }
+    }
+  },
+  {
+    "Type": "xxSimpleSkillTagCondition_CheckSpell",
+    "Name": "xxSimpleSkillTagCondition_CheckSpell_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSimpleSkillTagCondition_CheckSpell'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_9'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.23"
+    },
+    "Properties": {
+      "SpellInfo": {
+        "ObjectName": "xxSpellInfo'SP_Kazan_Com_GrappleRecovery_Lv3'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/Common/CommonPassive/GrapplePassive/GrappleRecovery/SP_Kazan_Com_GrappleRecovery_Lv3.0"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillTagCondition_CheckAttakcSkillStateSubType",
+    "Name": "xxSkillTagCondition_CheckAttakcSkillStateSubType_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillTagCondition_CheckAttakcSkillStateSubType'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.14"
+    },
+    "Properties": {
+      "CheckSkillStateSubType": [
+        "ESkillStateSubType::StaminaExhaustionSkill"
+      ]
+    }
+  },
+  {
+    "Type": "xxSkillTagCondition_CheckAttakcSkillStateSubType",
+    "Name": "xxSkillTagCondition_CheckAttakcSkillStateSubType_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillTagCondition_CheckAttakcSkillStateSubType'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.15"
+    },
+    "Properties": {
+      "CheckSkillStateSubType": [
+        "ESkillStateSubType::StaminaExhaustionSkill"
+      ]
+    }
+  },
+  {
+    "Type": "xxSkillTagCondition_CheckAttakcSkillStateSubType",
+    "Name": "xxSkillTagCondition_CheckAttakcSkillStateSubType_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillTagCondition_CheckAttakcSkillStateSubType'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.16"
+    },
+    "Properties": {
+      "CheckSkillStateSubType": [
+        "ESkillStateSubType::StaminaExhaustionSkill"
+      ]
+    }
+  },
+  {
+    "Type": "xxSkillTagCondition_CheckAttakcSkillStateSubType",
+    "Name": "xxSkillTagCondition_CheckAttakcSkillStateSubType_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillTagCondition_CheckAttakcSkillStateSubType'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_3'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.17"
+    },
+    "Properties": {
+      "CheckSkillStateSubType": [
+        "ESkillStateSubType::StaminaExhaustionSkill"
+      ]
+    }
+  },
+  {
+    "Type": "xxSkillTagCondition_CheckAttakcSkillStateSubType",
+    "Name": "xxSkillTagCondition_CheckAttakcSkillStateSubType_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillTagCondition_CheckAttakcSkillStateSubType'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_4'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.18"
+    },
+    "Properties": {
+      "CheckSkillStateSubType": [
+        "ESkillStateSubType::StaminaExhaustionSkill"
+      ]
+    }
+  },
+  {
+    "Type": "xxSkillTagCondition_CheckAttakcSkillStateSubType",
+    "Name": "xxSkillTagCondition_CheckAttakcSkillStateSubType_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillTagCondition_CheckAttakcSkillStateSubType'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_5'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.19"
+    },
+    "Properties": {
+      "CheckSkillStateSubType": [
+        "ESkillStateSubType::StaminaExhaustionSkill"
+      ]
+    }
+  },
+  {
+    "Type": "xxSkillTagCondition_CheckAttakcSkillStateSubType",
+    "Name": "xxSkillTagCondition_CheckAttakcSkillStateSubType_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillTagCondition_CheckAttakcSkillStateSubType'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_6'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.20"
+    },
+    "Properties": {
+      "CheckSkillStateSubType": [
+        "ESkillStateSubType::StaminaExhaustionSkill"
+      ]
+    }
+  },
+  {
+    "Type": "xxSkillTagCondition_CheckAttakcSkillStateSubType",
+    "Name": "xxSkillTagCondition_CheckAttakcSkillStateSubType_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillTagCondition_CheckAttakcSkillStateSubType'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_7'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.21"
+    },
+    "Properties": {
+      "CheckSkillStateSubType": [
+        "ESkillStateSubType::StaminaExhaustionSkill"
+      ]
+    }
+  },
+  {
+    "Type": "xxSkillTagCondition_CheckAttakcSkillStateSubType",
+    "Name": "xxSkillTagCondition_CheckAttakcSkillStateSubType_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillTagCondition_CheckAttakcSkillStateSubType'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_8'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.22"
+    },
+    "Properties": {
+      "CheckSkillStateSubType": [
+        "ESkillStateSubType::StaminaExhaustionSkill"
+      ]
+    }
+  },
+  {
+    "Type": "xxSkillTagCondition_CheckAttakcSkillStateSubType",
+    "Name": "xxSkillTagCondition_CheckAttakcSkillStateSubType_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillTagCondition_CheckAttakcSkillStateSubType'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_9'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.23"
+    },
+    "Properties": {
+      "CheckSkillStateSubType": [
+        "ESkillStateSubType::StaminaExhaustionSkill"
+      ]
+    }
+  },
+  {
+    "Type": "xxSkillTagCondition_CheckDamageInfo",
+    "Name": "xxSkillTagCondition_CheckDamageInfo_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillTagCondition_CheckDamageInfo'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.14"
+    },
+    "Properties": {
+      "DamageInfo": {
+        "ObjectName": "xxDamageInfo'SD_Kazan_DualSwordAxe_Com_Grapple_Back_01'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SD_Kazan_DualSwordAxe_Com_Grapple_Back_01.0"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillTagCondition_CheckDamageInfo",
+    "Name": "xxSkillTagCondition_CheckDamageInfo_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillTagCondition_CheckDamageInfo'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_3'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.17"
+    },
+    "Properties": {
+      "DamageInfo": {
+        "ObjectName": "xxDamageInfo'SD_Kazan_DualSwordAxe_Com_Grapple_Back_02'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SD_Kazan_DualSwordAxe_Com_Grapple_Back_02.0"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillTagCondition_CheckDamageInfo",
+    "Name": "xxSkillTagCondition_CheckDamageInfo_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillTagCondition_CheckDamageInfo'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_4'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.18"
+    },
+    "Properties": {
+      "DamageInfo": {
+        "ObjectName": "xxDamageInfo'SD_Kazan_DualSwordAxe_Com_Grapple_Back_02'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SD_Kazan_DualSwordAxe_Com_Grapple_Back_02.0"
+      }
+    }
+  },
+  {
+    "Type": "xxSkillTagCondition_CheckDamageInfo",
+    "Name": "xxSkillTagCondition_CheckDamageInfo_0",
+    "Flags": "RF_Public | RF_Transactional | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSkillTagCondition_CheckDamageInfo'",
+    "Outer": {
+      "ObjectName": "xxSimpeEvnetTagOnAttack'Default__SB_Kazan_DualSwordAxe_Com_Grapple_02_C:xxSimpeEvnetTagOnAttack_5'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SB_Kazan_DualSwordAxe_Com_Grapple_02.19"
+    },
+    "Properties": {
+      "DamageInfo": {
+        "ObjectName": "xxDamageInfo'SD_Kazan_DualSwordAxe_Com_Grapple_Back_01'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/Grapple/SD_Kazan_DualSwordAxe_Com_Grapple_Back_01.0"
+      }
+    }
+  }
+]

@@ -1,0 +1,1150 @@
+[
+  {
+    "skill_info": "SI_Yetuga_Armageddon",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "007F2646461BF7B74A67ED86FCDA5DA3",
+        "SourceString": "예투가 아마겟돈",
+        "LocalizedString": "예투가 아마겟돈"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SB_Yetuga_Armageddon.SB_Yetuga_Armageddon_C",
+        "SubPathString": ""
+      },
+      "SkillInputCondition": {
+        "ObjectName": "xxStateInputConditionSelfStatus'SI_Yetuga_Armageddon:xxStateInputConditionSelfStatus_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SI_Yetuga_Armageddon.1"
+      },
+      "EndCooltime": 240.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_Proto_Armageddon_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SD_Yetuga_Proto_Armageddon_01.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_Proto_Armageddon_02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SD_Yetuga_Proto_Armageddon_02.0"
+        }
+      ],
+      "SpellInfoList": [
+        {
+          "SpellInfo": {
+            "ObjectName": "xxSpellInfo'SP_Yetuga_Armageddon_PartOff'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SP_Yetuga_Armageddon_PartOff.2"
+          },
+          "DurationMS": 30000
+        },
+        {
+          "SpellInfo": {
+            "ObjectName": "xxSpellInfo'SP_Yetuga_Armageddon_PartOn'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SP_Yetuga_Armageddon_PartOn.1"
+          },
+          "DurationMS": 3000
+        }
+      ]
+    },
+    "conditions": [
+      {
+        "Type": "xxStateInputConditionSelfStatus",
+        "Name": "xxStateInputConditionSelfStatus_0",
+        "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+        "Class": "UScriptClass'xxStateInputConditionSelfStatus'",
+        "Outer": {
+          "ObjectName": "xxSkillInfo'SI_Yetuga_Armageddon'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SI_Yetuga_Armageddon.0"
+        },
+        "Properties": {
+          "CheckDynamicStatus": {
+            "DynamicStatus": "EGrDynamicStatus::Stamina",
+            "CompareOperator": "ECompareOperator::GreaterThanOrEqualTo",
+            "RatioValue": 0.5,
+            "Value": 1
+          }
+        }
+      }
+    ]
+  },
+  {
+    "skill_info": "SI_Yetuga_BackJump",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "후방 점프",
+        "LocalizedString": "후방 점프"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/15_BackJump/SB_Yetuga_BackJump.SB_Yetuga_BackJump_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 60.0
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_BackMoving",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "뒷걸음질",
+        "LocalizedString": "뒷걸음질"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/16_BackMoving/SB_Yetuga_BackMoving.SB_Yetuga_BackMoving_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 15.0
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_ChargeTackle",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "19C5DE2148D93DF6D081B0B0A44EFBB2",
+        "SourceString": "돌진 달리기",
+        "LocalizedString": "돌진 달리기"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle.SB_Yetuga_ChargeTackle_C",
+        "SubPathString": ""
+      },
+      "bEnableParringSkill": false,
+      "bDisableParringSkillAndForceAttack": true,
+      "EndCooltime": 100.0,
+      "BattleStartCooltime": 30.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_ChargeTackle_L'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SD_Yetuga_ChargeTackle_L.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_ChargeTackle_R'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SD_Yetuga_ChargeTackle_R.0"
+        }
+      ]
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_ChargeTackle_Intro",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "인트로 돌진 달리기",
+        "LocalizedString": "인트로 돌진 달리기"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SB_Yetuga_ChargeTackle.SB_Yetuga_ChargeTackle_C",
+        "SubPathString": ""
+      },
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_ChargeTackle_L'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SD_Yetuga_ChargeTackle_L.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_ChargeTackle_R'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/10_ChargeTackle/SD_Yetuga_ChargeTackle_R.0"
+        }
+      ]
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_CloseGrab",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "360C0FD14B1B98530861FB9C6180C45D",
+        "SourceString": "예투가 스매쉬",
+        "LocalizedString": "예투가 스매쉬"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SB_Yetuga_CloseGrab.SB_Yetuga_CloseGrab_C",
+        "SubPathString": ""
+      },
+      "bEnableParringSkill": false,
+      "SkillInputCondition": {
+        "ObjectName": "xxStateInputConditionSelfStatus'SI_Yetuga_CloseGrab:xxStateInputConditionSelfStatus_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SI_Yetuga_CloseGrab.1"
+      },
+      "EndCooltime": 50.0,
+      "BattleStartCooltime": 20.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_CloseGrab_Grab'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SD_Yetuga_CloseGrab_Grab.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_CloseGrab_Release'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SD_Yetuga_CloseGrab_Release.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_CloseGrab_Damage'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SD_Yetuga_CloseGrab_Damage.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_CloseGrab_Hold'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SD_Yetuga_CloseGrab_Hold.0"
+        }
+      ]
+    },
+    "conditions": [
+      {
+        "Type": "xxStateInputConditionSelfStatus",
+        "Name": "xxStateInputConditionSelfStatus_0",
+        "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+        "Class": "UScriptClass'xxStateInputConditionSelfStatus'",
+        "Outer": {
+          "ObjectName": "xxSkillInfo'SI_Yetuga_CloseGrab'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/06_CloseGrab/SI_Yetuga_CloseGrab.0"
+        },
+        "Properties": {
+          "CheckDynamicStatus": {
+            "DynamicStatus": "EGrDynamicStatus::HealthPoint",
+            "CompareOperator": "ECompareOperator::LessThanOrEqualTo",
+            "bUseRatio": true
+          }
+        }
+      }
+    ]
+  },
+  {
+    "skill_info": "SI_Yetuga_CounterAtk",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "양손 모아 찍기",
+        "LocalizedString": "양손 모아 찍기"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/04_CounterAtk/SB_Yetuga_CounterAtk.SB_Yetuga_CounterAtk_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 30.0,
+      "BattleStartCooltime": 20.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_CounterAtk'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/04_CounterAtk/SD_Yetuga_CounterAtk.0"
+        }
+      ]
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_DashAtk",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "도약 주먹 찍기",
+        "LocalizedString": "도약 주먹 찍기"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/08_DashAtk/SB_Yetuga_DashAtk.SB_Yetuga_DashAtk_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 60.0,
+      "BattleStartCooltime": 20.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_DashAtk'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/08_DashAtk/SD_Yetuga_DashAtk.0"
+        }
+      ]
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_DempseyRoll",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "C489508B4E30689D4A45F48E2AFA0EBF",
+        "SourceString": "전진 주먹 연속 휘두르기",
+        "LocalizedString": "전진 주먹 연속 휘두르기"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SB_Yetuga_DempseyRoll.SB_Yetuga_DempseyRoll_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 25.0,
+      "BattleStartCooltime": 10.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_DempseyRoll_L'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SD_Yetuga_DempseyRoll_L.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_DempseyRoll_R'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SD_Yetuga_DempseyRoll_R.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_DempseyRoll_Strong'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SD_Yetuga_DempseyRoll_Strong.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_DempseyRoll_SideR'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/05_DempseyRoll/SD_Yetuga_DempseyRoll_SideR.0"
+        }
+      ]
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_Dodge",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "회피",
+        "LocalizedString": "회피"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/14_Dodge/SB_Yetuga_Dodge.SB_Yetuga_Dodge_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 20.0
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_FastBall",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "강하게 돌 던지기",
+        "LocalizedString": "강하게 돌 던지기"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/11_FastBall/SB_Yetuga_FastBall.SB_Yetuga_FastBall_C",
+        "SubPathString": ""
+      },
+      "bEnableParringSkill": false,
+      "EndCooltime": 20.0,
+      "BattleStartCooltime": 30.0
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_FastMove",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "빠른 추격",
+        "LocalizedString": "빠른 추격"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/17_FastMove/SB_Yetuga_FastMove.SB_Yetuga_FastMove_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 20.0,
+      "BattleStartCooltime": 10.0
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_Groggy",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "18A9E9F24C1CCBE37BB5199822932D11",
+        "SourceString": "직가 리액션 그로기",
+        "LocalizedString": "직가 리액션 그로기"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/24_Groggy/SB_Yetuga_Groggy.SB_Yetuga_Groggy_C",
+        "SubPathString": ""
+      }
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_IceBreath",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "아이스 브레쓰",
+        "LocalizedString": "아이스 브레쓰"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/SB_Yetuga_IceBreath.SB_Yetuga_IceBreath_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 90.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_IceBreath'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/SD_Yetuga_IceBreath.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_IceBreath_DOT'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/12_IceBreath/SD_Yetuga_IceBreath_DOT.0"
+        }
+      ]
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_JumpBackPress",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "등으로 찍기",
+        "LocalizedString": "등으로 찍기"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/09_JumpBackPress/SB_Yetuga_JumpBackPress.SB_Yetuga_JumpBackPress_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 30.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_JumpBackPress_Back'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/09_JumpBackPress/SD_Yetuga_JumpBackPress_Back.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_JumpBackPress_Front'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/09_JumpBackPress/SD_Yetuga_JumpBackPress_Front.0"
+        }
+      ]
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_NormalAtk01",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "1_손바닥4연타",
+        "LocalizedString": "1_손바닥4연타"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/01_NormalAtk01/SB_Yetuga_NormalAtk01.SB_Yetuga_NormalAtk01_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 40.0,
+      "BattleStartCooltime": 20.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_NormalAtk01_R'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/01_NormalAtk01/SD_Yetuga_NormalAtk01_R.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_NormalAtk01_L'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/01_NormalAtk01/SD_Yetuga_NormalAtk01_L.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_NormalAtk01_R_02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/01_NormalAtk01/SD_Yetuga_NormalAtk01_R_02.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_NormalAtk01_L_02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/01_NormalAtk01/SD_Yetuga_NormalAtk01_L_02.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_NormalAtk01_Strong'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/01_NormalAtk01/SD_Yetuga_NormalAtk01_Strong.0"
+        }
+      ]
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_NormalAtk02",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "02_내려찍고올려치기",
+        "LocalizedString": "02_내려찍고올려치기"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/02_NormalAtk02/SB_Yetuga_NormalAtk02.SB_Yetuga_NormalAtk02_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 10.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_NormalAtk02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/02_NormalAtk02/SD_Yetuga_NormalAtk02.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_NormalAtk02_02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/02_NormalAtk02/SD_Yetuga_NormalAtk02_02.0"
+        }
+      ]
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_NormalAtk02_NoCoolTime",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "02_(노쿨)내려찍고올려치기",
+        "LocalizedString": "02_(노쿨)내려찍고올려치기"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/02_NormalAtk02/SB_Yetuga_NormalAtk02.SB_Yetuga_NormalAtk02_C",
+        "SubPathString": ""
+      },
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_NormalAtk02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/02_NormalAtk02/SD_Yetuga_NormalAtk02.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_NormalAtk02_02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/02_NormalAtk02/SD_Yetuga_NormalAtk02_02.0"
+        }
+      ]
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_PartGroggy",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "부위 파괴 그로기",
+        "LocalizedString": "부위 파괴 그로기"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SB_Yetuga_PartGroggy.SB_Yetuga_PartGroggy_C",
+        "SubPathString": ""
+      },
+      "SkillStateSubType": "ESkillStateSubType::PartDestructionGroggy",
+      "StatusChangeInfoList": [
+        {
+          "bUseParticle": false,
+          "StatusToChangeInfos": [
+            {
+              "StatusToChange": "EDynamicStatusToChange::HP",
+              "Operator": "EStatusOper::Rate",
+              "Value": -1000,
+              "bDieHard": true
+            }
+          ],
+          "bChangeImmediate": true,
+          "bNotChangeWhenShort": false,
+          "bCheckCanChange": true,
+          "ParticleInfo": {
+            "ParticleMode": "ParticleSystem",
+            "Particle": null,
+            "BPOverrideParticle": null,
+            "NiagaraParticle": null,
+            "EffectData": null,
+            "ShowUpType": "EEffectShowUp::ShowAll",
+            "bSyncData": false,
+            "Scale": 1.0,
+            "ScaleRandRange": 0.0,
+            "RotationRandRange": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            },
+            "Scale3D": {
+              "X": 1.0,
+              "Y": 1.0,
+              "Z": 1.0
+            },
+            "RelativeLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "RelativeRotation": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            },
+            "bAttached": false,
+            "AttachSocketName": "None",
+            "bApplyBaseScale": true,
+            "bSpawnOnFloor": false,
+            "HeightFromFloor": 0.0,
+            "FloorAroundBlendRange": 0.0,
+            "bRotateInDirOfFloor": false,
+            "RotateInDirOfFloorAroundBlendRange": 50.0,
+            "CustomTimeDilation": 1.0,
+            "bReceivesDecals": false,
+            "bAbsoluteRotation": true,
+            "bAbsoluteRotationWorld": false,
+            "bIgnoreAttachedVisibility": false,
+            "TranslucencySortPriority": 0,
+            "bCastParticleShadow": false,
+            "bUseParticleParametersAsset": false,
+            "ParticleFloatParams": [],
+            "ParticleVectorParams": [],
+            "ParticlePhysicalVectorParams": [],
+            "ParticlePhysicalFloatParams": [],
+            "ParticleParametersAsset": null,
+            "ParticleVectorParam": "None",
+            "ParticleVectorParam2": "None",
+            "bParticleVectorParamApplyEveryTick": false,
+            "bUseEndPoint": false,
+            "EndPointVectorParam": "None",
+            "bUseEnvVolumeDependent": false,
+            "EnvVolumeBundleAsset": null
+          },
+          "bUseDecal": false,
+          "DecalData": {
+            "DecalMode": "DecalMode_MaterialInstance",
+            "DecalMaterial": null,
+            "MaterialEffect": null,
+            "RandomDecalScale": {
+              "BasedVector": {
+                "X": 50.0,
+                "Y": 256.0,
+                "Z": 256.0
+              },
+              "MinVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MaxVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "bFixedRatio": true
+            },
+            "SpawnLocationBoneName": "None",
+            "RandomPosition": {
+              "BasedVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MinVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MaxVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "bFixedRatio": true
+            },
+            "RandomRotator": {
+              "BasedRotator": {
+                "Pitch": -90.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              },
+              "MinRotator": {
+                "Pitch": 0.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              },
+              "MaxRotator": {
+                "Pitch": 0.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              }
+            },
+            "LifeSpan": 0.0,
+            "bOwnerYawRotOnly": false,
+            "IsSpawnFloor": true,
+            "bRotateInDirOfTerrain": false,
+            "RotateInDirOfTerrainAroundBlendRange": 50.0,
+            "bCheckStretchOnWall": false,
+            "bScaleUpStretchedDecal": false,
+            "StretchedDecalScale": {
+              "X": 2.25,
+              "Y": 0.75,
+              "Z": 0.75
+            },
+            "OpacityCurve": null,
+            "OpacityParamName": "FadeOut",
+            "RandomScalarParams": [],
+            "bApplyBaseScale": true,
+            "LimitAngleOnAttackSuccessed": 0.0
+          },
+          "bUseSound": false,
+          "SoundEvent": null
+        }
+      ],
+      "SelfCancelGroups": [],
+      "SpellInfoList": [
+        {
+          "SpellInfo": {
+            "ObjectName": "xxSpellInfo'SP_Yetuga_PartGroggy_Injuried'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Injuried.2"
+          },
+          "DurationMS": 0
+        },
+        {
+          "SpellInfo": {
+            "ObjectName": "xxSpellInfo'SP_Yetuga_PartGroggy_Stun'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Stun.1"
+          },
+          "DurationMS": 0
+        }
+      ]
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_PartGroggy_StaminaRecover",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "부위 파괴 후 괴력 충전 포효",
+        "LocalizedString": "부위 파괴 후 괴력 충전 포효"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/21_StaminaRecover/SB_Yetuga_StaminaRecover.SB_Yetuga_StaminaRecover_C",
+        "SubPathString": ""
+      },
+      "bEnableParringSkill": false,
+      "SkillInputCondition": {
+        "ObjectName": "xxStateInputConditionSelfStatus'SI_Yetuga_PartGroggy_StaminaRecover:xxStateInputConditionSelfStatus_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/21_StaminaRecover/SI_Yetuga_PartGroggy_StaminaRecover.1"
+      },
+      "SpellConditionToUseSkill": {
+        "ExcludeSpells": [
+          {
+            "ObjectName": "xxSpellInfo'SP_Yetuga_PartGroggy_Stun'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Stun.1"
+          }
+        ]
+      },
+      "StatusChangeInfoList": [
+        {
+          "bUseParticle": false,
+          "StatusToChangeInfos": [
+            {
+              "StatusToChange": "EDynamicStatusToChange::Stamina",
+              "Operator": "EStatusOper::Rate",
+              "Value": 100000,
+              "bDieHard": false
+            }
+          ],
+          "bChangeImmediate": true,
+          "bNotChangeWhenShort": false,
+          "bCheckCanChange": true,
+          "ParticleInfo": {
+            "ParticleMode": "ParticleSystem",
+            "Particle": null,
+            "BPOverrideParticle": null,
+            "NiagaraParticle": null,
+            "EffectData": null,
+            "ShowUpType": "EEffectShowUp::ShowAll",
+            "bSyncData": false,
+            "Scale": 1.0,
+            "ScaleRandRange": 0.0,
+            "RotationRandRange": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            },
+            "Scale3D": {
+              "X": 1.0,
+              "Y": 1.0,
+              "Z": 1.0
+            },
+            "RelativeLocation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "RelativeRotation": {
+              "Pitch": 0.0,
+              "Yaw": 0.0,
+              "Roll": 0.0
+            },
+            "bAttached": false,
+            "AttachSocketName": "None",
+            "bApplyBaseScale": true,
+            "bSpawnOnFloor": false,
+            "HeightFromFloor": 0.0,
+            "FloorAroundBlendRange": 0.0,
+            "bRotateInDirOfFloor": false,
+            "RotateInDirOfFloorAroundBlendRange": 50.0,
+            "CustomTimeDilation": 1.0,
+            "bReceivesDecals": false,
+            "bAbsoluteRotation": true,
+            "bAbsoluteRotationWorld": false,
+            "bIgnoreAttachedVisibility": false,
+            "TranslucencySortPriority": 0,
+            "bCastParticleShadow": false,
+            "bUseParticleParametersAsset": false,
+            "ParticleFloatParams": [],
+            "ParticleVectorParams": [],
+            "ParticlePhysicalVectorParams": [],
+            "ParticlePhysicalFloatParams": [],
+            "ParticleParametersAsset": null,
+            "ParticleVectorParam": "None",
+            "ParticleVectorParam2": "None",
+            "bParticleVectorParamApplyEveryTick": false,
+            "bUseEndPoint": false,
+            "EndPointVectorParam": "None",
+            "bUseEnvVolumeDependent": false,
+            "EnvVolumeBundleAsset": null
+          },
+          "bUseDecal": false,
+          "DecalData": {
+            "DecalMode": "DecalMode_MaterialInstance",
+            "DecalMaterial": null,
+            "MaterialEffect": null,
+            "RandomDecalScale": {
+              "BasedVector": {
+                "X": 50.0,
+                "Y": 256.0,
+                "Z": 256.0
+              },
+              "MinVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MaxVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "bFixedRatio": true
+            },
+            "SpawnLocationBoneName": "None",
+            "RandomPosition": {
+              "BasedVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MinVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "MaxVector": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "bFixedRatio": true
+            },
+            "RandomRotator": {
+              "BasedRotator": {
+                "Pitch": -90.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              },
+              "MinRotator": {
+                "Pitch": 0.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              },
+              "MaxRotator": {
+                "Pitch": 0.0,
+                "Yaw": 0.0,
+                "Roll": 0.0
+              }
+            },
+            "LifeSpan": 0.0,
+            "bOwnerYawRotOnly": false,
+            "IsSpawnFloor": true,
+            "bRotateInDirOfTerrain": false,
+            "RotateInDirOfTerrainAroundBlendRange": 50.0,
+            "bCheckStretchOnWall": false,
+            "bScaleUpStretchedDecal": false,
+            "StretchedDecalScale": {
+              "X": 2.25,
+              "Y": 0.75,
+              "Z": 0.75
+            },
+            "OpacityCurve": null,
+            "OpacityParamName": "FadeOut",
+            "RandomScalarParams": [],
+            "bApplyBaseScale": true,
+            "LimitAngleOnAttackSuccessed": 0.0
+          },
+          "bUseSound": false,
+          "SoundEvent": null
+        }
+      ],
+      "CancelGroups": [
+        "ESkillCancelGroup::ForceCancel"
+      ],
+      "SelfCancelGroups": []
+    },
+    "conditions": [
+      {
+        "Type": "xxStateInputConditionSelfStatus",
+        "Name": "xxStateInputConditionSelfStatus_0",
+        "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+        "Class": "UScriptClass'xxStateInputConditionSelfStatus'",
+        "Outer": {
+          "ObjectName": "xxSkillInfo'SI_Yetuga_PartGroggy_StaminaRecover'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/21_StaminaRecover/SI_Yetuga_PartGroggy_StaminaRecover.0"
+        },
+        "Properties": {
+          "CheckDynamicStatus": {
+            "DynamicStatus": "EGrDynamicStatus::Stamina",
+            "CompareOperator": "ECompareOperator::LessThanOrEqualTo"
+          },
+          "bKeepOpResult": true
+        }
+      }
+    ]
+  },
+  {
+    "skill_info": "SI_Yetuga_Roar",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "인트로 포효",
+        "LocalizedString": "인트로 포효"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/23_Roar/SB_Yetuga_Roar.SB_Yetuga_Roar_C",
+        "SubPathString": ""
+      }
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_RushGrab",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "예투가 프레스",
+        "LocalizedString": "예투가 프레스"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SB_Yetuga_RushGrab.SB_Yetuga_RushGrab_C",
+        "SubPathString": ""
+      },
+      "bEnableParringSkill": false,
+      "SkillInputCondition": {
+        "ObjectName": "xxStateInputConditionSelfStatus'SI_Yetuga_RushGrab:xxStateInputConditionSelfStatus_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SI_Yetuga_RushGrab.1"
+      },
+      "EndCooltime": 30.0,
+      "BattleStartCooltime": 45.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_RushGrab_Hold'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SD_Yetuga_RushGrab_Hold.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_RushGrab_Damage'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SD_Yetuga_RushGrab_Damage.0"
+        },
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_RushGrab_Release'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SD_Yetuga_RushGrab_Release.0"
+        }
+      ]
+    },
+    "conditions": [
+      {
+        "Type": "xxStateInputConditionSelfStatus",
+        "Name": "xxStateInputConditionSelfStatus_0",
+        "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+        "Class": "UScriptClass'xxStateInputConditionSelfStatus'",
+        "Outer": {
+          "ObjectName": "xxSkillInfo'SI_Yetuga_RushGrab'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/07_RushGrab/SI_Yetuga_RushGrab.0"
+        },
+        "Properties": {
+          "CheckDynamicStatus": {
+            "DynamicStatus": "EGrDynamicStatus::HealthPoint",
+            "CompareOperator": "ECompareOperator::LessThanOrEqualTo",
+            "bUseRatio": true
+          }
+        }
+      }
+    ]
+  },
+  {
+    "skill_info": "SI_Yetuga_SideMove",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "옆걸음치기",
+        "LocalizedString": "옆걸음치기"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/18_SideMove/SB_Yetuga_SideMove.SB_Yetuga_SideMove_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 10.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_SideMove'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/18_SideMove/SD_Yetuga_SideMove.0"
+        }
+      ]
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_Social",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "전투 소셜 모션",
+        "LocalizedString": "전투 소셜 모션"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/22_Social/SB_Yetuga_Social.SB_Yetuga_Social_C",
+        "SubPathString": ""
+      },
+      "Cooltime": 180.0,
+      "BattleStartCooltime": 60.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_Social'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/22_Social/SD_Yetuga_Social.0"
+        }
+      ]
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_StaminaRecover",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "D3DA961E4F9B42A93BCA8C9F5E1BB370",
+        "SourceString": "괴력 충전 포효",
+        "LocalizedString": "괴력 충전 포효"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/21_StaminaRecover/SB_Yetuga_StaminaRecover.SB_Yetuga_StaminaRecover_C",
+        "SubPathString": ""
+      },
+      "bEnableParringSkill": false,
+      "SkillInputCondition": {
+        "ObjectName": "xxStateInputConditionSelfStatus'SI_Yetuga_StaminaRecover:xxStateInputConditionSelfStatus_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/21_StaminaRecover/SI_Yetuga_StaminaRecover.1"
+      },
+      "SpellConditionToUseSkill": {
+        "ExcludeSpells": [
+          {
+            "ObjectName": "xxSpellInfo'SP_Yetuga_PartGroggy_Stun'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/00_PartGroggy/SP_Yetuga_PartGroggy_Stun.1"
+          }
+        ]
+      }
+    },
+    "conditions": [
+      {
+        "Type": "xxStateInputConditionSelfStatus",
+        "Name": "xxStateInputConditionSelfStatus_0",
+        "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+        "Class": "UScriptClass'xxStateInputConditionSelfStatus'",
+        "Outer": {
+          "ObjectName": "xxSkillInfo'SI_Yetuga_StaminaRecover'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/21_StaminaRecover/SI_Yetuga_StaminaRecover.0"
+        },
+        "Properties": {
+          "CheckDynamicStatus": {
+            "DynamicStatus": "EGrDynamicStatus::Stamina",
+            "CompareOperator": "ECompareOperator::LessThanOrEqualTo"
+          },
+          "AfterTime": 6.4,
+          "bKeepOpResult": true
+        }
+      }
+    ]
+  },
+  {
+    "skill_info": "SI_Yetuga_TurnAtk",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "휘두르기",
+        "LocalizedString": "휘두르기"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/SB_Yetuga_TurnAtk.SB_Yetuga_TurnAtk_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 10.0,
+      "DamageInfos": [
+        {
+          "ObjectName": "xxDamageInfo'SD_Yetuga_TurnAtk'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/03_TurnAtk/SD_Yetuga_TurnAtk.0"
+        }
+      ]
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_TurnBackRun",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "긴 선회 이동",
+        "LocalizedString": "긴 선회 이동"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/19_TurnBackRun/SB_Yetuga_TurnBackRun.SB_Yetuga_TurnBackRun_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 90.0
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_TurnBackRun_Short",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "짧은 선회 이동",
+        "LocalizedString": "짧은 선회 이동"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/20_TurnBackRun_Short/SB_Yetuga_TurnBackRun_Short.SB_Yetuga_TurnBackRun_Short_C",
+        "SubPathString": ""
+      },
+      "EndCooltime": 30.0
+    },
+    "conditions": []
+  },
+  {
+    "skill_info": "SI_Yetuga_TurnBackRun_Short_Nocool",
+    "properties": {
+      "SkillName": {
+        "Namespace": "",
+        "Key": "",
+        "SourceString": "짧은 선회 이동_쿨타임없음",
+        "LocalizedString": "짧은 선회 이동_쿨타임없음"
+      },
+      "SkillStatePtr": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/20_TurnBackRun_Short/SB_Yetuga_TurnBackRun_Short.SB_Yetuga_TurnBackRun_Short_C",
+        "SubPathString": ""
+      }
+    },
+    "conditions": []
+  }
+]

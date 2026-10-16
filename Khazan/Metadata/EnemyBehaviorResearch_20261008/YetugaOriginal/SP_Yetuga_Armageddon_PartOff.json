@@ -1,0 +1,62 @@
+[
+  {
+    "Type": "xxSpellFunc_ActivePartDestruct",
+    "Name": "xxSpellFunc_ActivePartDestruct_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSpellFunc_ActivePartDestruct'",
+    "Outer": {
+      "ObjectName": "xxSpellInfo'SP_Yetuga_Armageddon_PartOff'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SP_Yetuga_Armageddon_PartOff.2"
+    },
+    "Properties": {
+      "Group": "EGrDefenseGroup::Group1",
+      "bActive": false,
+      "bRevertActiveAtRemove": true
+    }
+  },
+  {
+    "Type": "xxSpellFunc_ReleaseOnEndState",
+    "Name": "xxSpellFunc_ReleaseOnEndState_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSpellFunc_ReleaseOnEndState'",
+    "Outer": {
+      "ObjectName": "xxSpellInfo'SP_Yetuga_Armageddon_PartOff'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SP_Yetuga_Armageddon_PartOff.2"
+    },
+    "Properties": {
+      "EndSkillInfos": [
+        {
+          "AssetPathName": "/Game/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SI_Yetuga_Armageddon.SI_Yetuga_Armageddon",
+          "SubPathString": ""
+        },
+        {
+          "AssetPathName": "/Game/_Kazan_/Design/Monster/SubMission/Yetuga/Skill/13_Armageddon/SI_Yetuga_S09_1_Armageddon.SI_Yetuga_S09_1_Armageddon",
+          "SubPathString": ""
+        }
+      ]
+    }
+  },
+  {
+    "Type": "xxSpellInfo",
+    "Name": "SP_Yetuga_Armageddon_PartOff",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSpellInfo'",
+    "Package": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SP_Yetuga_Armageddon_PartOff",
+    "Properties": {
+      "TargetPolicy": 2,
+      "SpellFunctions": [
+        {
+          "ObjectName": "xxSpellFunc_ActivePartDestruct'SP_Yetuga_Armageddon_PartOff:xxSpellFunc_ActivePartDestruct_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SP_Yetuga_Armageddon_PartOff.0"
+        },
+        {
+          "ObjectName": "xxSpellFunc_ReleaseOnEndState'SP_Yetuga_Armageddon_PartOff:xxSpellFunc_ReleaseOnEndState_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Boss/01_Yetuga/Skill/13_Armageddon/SP_Yetuga_Armageddon_PartOff.1"
+        }
+      ],
+      "SpellGroup": "EGrSpellGroup::Buff",
+      "RemoveOnRebirth": false,
+      "bShowIcon": false
+    }
+  }
+]

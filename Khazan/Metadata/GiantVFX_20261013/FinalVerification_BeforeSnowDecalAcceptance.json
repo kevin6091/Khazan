@@ -1,0 +1,114 @@
+{
+  "completed": "2026-10-13T10:31:05.541856+09:00",
+  "passed": false,
+  "main_applied": true,
+  "source_files": 8,
+  "changed_assets": 86,
+  "new_assets": 102,
+  "new_runtime_files": 0,
+  "new_runtime_classes": 0,
+  "new_runtime_managers": 0,
+  "module_sha256": "e77f905abbd07bb3042a1be571ca19de246741706321526325a146862cccae4a",
+  "initial_main_build_sha256": "fc9666dcfc3c0d2df446294d3098ced1a0b90b10ea9fbba1ef85b12249107a41",
+  "delivery_mismatches": [],
+  "protected_source_changes": [],
+  "preserved_independent_changes": [
+    {
+      "path": "Source/Khazan/Ability/PlayerAbility/KZHealAbility.cpp",
+      "before": "3e68380218dbfe6c1b349c37d36cffeb11930e73f015b673de6b1120cbf9c5d5",
+      "current": "c732be6f021884e09cc9b111ae932b70919ab580d65127031238ada1eb71aed3",
+      "source": "Completed Heal task receipt"
+    },
+    {
+      "path": "Source/Khazan/Tests/KZHealAbilityPIETest.cpp",
+      "before": "cfc8686969f79a485b4cb70bebed3dfb53de3dacb58b623782a442e4f2b9b241",
+      "current": "95f866ad1b60b4fed319476a91319377c878bf2150551b3e2e630789d31d30ad",
+      "source": "Completed Heal task receipt"
+    },
+    {
+      "path": "Source/Khazan/Tests/KZParryPIETest.cpp",
+      "before": "63bfa924eb5e9d4d03556c1af19f74d21a662c83ecde6613216e741fe749af95",
+      "current": "8e8fa5e04fbc18e9aefdfd318fd142ed5e2c7e5240f4814925c327566b6ddea6",
+      "source": "Independent DEV test change; not written by Giant task"
+    }
+  ],
+  "tests": {
+    "MainAll01": {
+      "test": "Khazan.GiantVFX.ReviewPIE",
+      "completion": "[2026.10.13-00.29.55:660][342]LogAutomationController: Display: Test Completed. Result={Success} Name={ReviewPIE} Path={Khazan.GiantVFX.ReviewPIE}",
+      "module_sha256": "fc9666dcfc3c0d2df446294d3098ced1a0b90b10ea9fbba1ef85b12249107a41",
+      "case_count": 155,
+      "kinds": {
+        "animation": 103,
+        "field": 1,
+        "object": 2,
+        "particle": 49
+      },
+      "viewport_pngs": 465
+    },
+    "MainGrabFixed01": {
+      "test": "Khazan.GiantVFX.ReviewPIE",
+      "completion": "[2026.10.13-01.08.28:136][ 10]LogAutomationController: Display: Test Completed. Result={Success} Name={ReviewPIE} Path={Khazan.GiantVFX.ReviewPIE}",
+      "module_sha256": "3f0ef023d75715c065404b25668851d81f61d7854a1600aaa99c234f26c03c63",
+      "case_count": 2,
+      "kinds": {
+        "animation": 1,
+        "particle": 1
+      },
+      "viewport_pngs": 6
+    },
+    "MainRefractionFixed01": {
+      "test": "Khazan.GiantVFX.ReviewPIE",
+      "completion": "[2026.10.13-01.27.08:621][246]LogAutomationController: Display: Test Completed. Result={Success} Name={ReviewPIE} Path={Khazan.GiantVFX.ReviewPIE}",
+      "module_sha256": "e77f905abbd07bb3042a1be571ca19de246741706321526325a146862cccae4a",
+      "case_count": 23,
+      "kinds": {
+        "animation": 15,
+        "particle": 8
+      },
+      "viewport_pngs": 69
+    },
+    "MainPatterns02": {
+      "test": "Khazan.GiantVFX.ReviewPIE",
+      "completion": "[2026.10.13-01.12.16:450][335]LogAutomationController: Display: Test Completed. Result={Success} Name={ReviewPIE} Path={Khazan.GiantVFX.ReviewPIE}",
+      "module_sha256": "3f0ef023d75715c065404b25668851d81f61d7854a1600aaa99c234f26c03c63",
+      "case_count": 11,
+      "kinds": {
+        "field": 1,
+        "object": 2,
+        "pattern": 8
+      },
+      "viewport_pngs": 33
+    },
+    "MainCollision01": {
+      "test": "Khazan.Combat.PlayerAttackCollision.PIE",
+      "completion": "[2026.10.13-01.15.11:070][782]LogAutomationController: Display: Test Completed. Result={Success} Name={PIE} Path={Khazan.Combat.PlayerAttackCollision.PIE}",
+      "module_sha256": "3f0ef023d75715c065404b25668851d81f61d7854a1600aaa99c234f26c03c63"
+    }
+  },
+  "saved_audit": {
+    "status": "passed",
+    "before": "MainBeforeAudit01",
+    "after": "MainSaved02",
+    "sequence_count": 84,
+    "differences": [],
+    "null_render_bindings": []
+  },
+  "limits": [
+    "Original cooked shader topology and exact pixels are not recovered; explicit temporary colour, roughness, feather, depth fade and volume density are documented in Art",
+    "Three quarter-time captures can miss short footstep/impact peaks; runtime particle peak counts and actual attack patterns are separate evidence",
+    "Original virtual AnimationObject full timeline/offset contract remains incomplete; field floor anchor is the existing object geometry adapter",
+    "Blood VAT shader remains unrecovered. A TEMP .01 mesh-unit adapter on four grab blood mesh emitters prevents the oversized camera-covering mesh; source animation/events and particle count/lifetime remain unchanged.",
+    "Original refraction shader is unrecovered. Three owned shock-wave instances use the bounded source smoke/spherical support to avoid the white FS_bill quad; this is a TEMP frost-pulse presentation, not original distortion parity."
+  ],
+  "evidence_contract": "MainAll01 verifies all155 on initial canonical build. MainGrabFixed01 replaces affected animation52/particle127 results after one PS unit patch. MainRefractionFixed01 covers all23 stored-metadata affected animation/particle cases after three MI changes. Latest Main patterns/collision cover preserved independent Heal runtime and Parry DEV changes; Giant runtime Source8 hashes are unchanged.",
+  "preserved": "Latest Main secondary physics initialization, all unrelated Main Source, original animation/root/FPS/notify timing and original object gameplay values; no private binary/config/map copying",
+  "remaining_required": [
+    "Identify and remove actual Armageddon opaque white plane in Main, then targeted visual verification",
+    "Append final Art and Engineering records after visual acceptance"
+  ],
+  "technical_passed": true,
+  "visual_status": "pending_armageddon_white_plane",
+  "status_corrected_at": "2026-10-13T12:57:55.018345+09:00",
+  "visual_evidence": "MainRefractionFixed01/013_Attack_Armageddon_Jump_End_01.png; three refraction material reparenting did not resolve the Main image"
+}
