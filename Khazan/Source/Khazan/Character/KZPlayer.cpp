@@ -10,6 +10,30 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Character/Component/KZLockOnComponent.h"
 #include "Ability/PlayerAbility/KZDodgeAbility.h"
+#include "Ability/PlayerAbility/KZFallAbility.h"
+#include "GameFramework/CharacterMovementComponent.h"
+
+void AKZPlayer::OnMovementModeChanged(EMovementMode PrevMode, uint8 PreviousCustomMode)
+{
+	Super::OnMovementModeChanged(PrevMode, PreviousCustomMode);
+	UAbilitySystemComponent* ASC = GetAbilitySystemComponent();
+	if (!ASC || !HasActorBegunPlay()) return;
+	FScopedAbilityListLock Lock(*ASC);
+	for (const FGameplayAbilitySpec& Spec : ASC->GetActivatableAbilities())
+	{
+		const UKZFallAbility* Fall = Cast<UKZFallAbility>(Spec.Ability);
+		if (!Fall) continue;
+		if (GetCharacterMovement()->IsFalling() && !Fall->IsPlungeAttack() && !Spec.IsActive())
+			ASC->TryActivateAbility(Spec.Handle);
+		else if (Spec.IsActive() && !GetCharacterMovement()->IsFalling())
+		{
+			const UKZFallAbility* Instance=Cast<UKZFallAbility>(Spec.GetPrimaryInstance());
+			// Actual Landed already selected Land before CMC changed mode. A teleport,
+			// swimming/flying or cancelled fall has no landing montage to keep alive.
+			if (!GetCharacterMovement()->IsMovingOnGround() || !Instance || Instance->GetCurrentNodeId()!=TEXT("Land")) ASC->CancelAbilityHandle(Spec.Handle);
+		}
+	}
+}
 
 AKZPlayer::AKZPlayer()
 {

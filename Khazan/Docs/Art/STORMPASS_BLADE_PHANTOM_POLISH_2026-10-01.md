@@ -221,3 +221,11 @@ Phase2 landscape parent를 `.../Reconstructed/BladePhantomPolish/Landscape/M_SP_
 `LayoutAppliedAudit`, `SideBySide_*Applied/Reloaded`, `ReloadVerification`은 분리만 적용한 단계의 보고서다. 최종 지원 바닥까지 포함한 결과는 `GroundSupportApplied/Reloaded`와 `ReloadVerificationWithCollision`이다. 기존 Art 스크립트 3개의 Python syntax도 통과했다. 단일 Rider viewport screenshot은 `FSlateApplication::TakeScreenshot failed for viewport`로 저장되지 않았으므로 새 overview 이미지 검수 완료를 주장하지 않는다. 시점 계산만 `OverviewCamera.json`에 기록했다.
 
 백업 `Saved/ArtBackups/StormPass_SideBySide_20261002`와 `BackupManifest.json`은 이번 배치 전 맵/metadata/도구를 보존한다. 게임 C++/Blueprint/전투 기능, HeinMach, 사용자 PlayerStart/삭제 메시를 이 작업에서 수정하지 않았다. 게임 빌드는 실행하지 않았다. source/native 자료와 최종 파일 hash는 `SideBySideSourceManifest.json`에 기록한다. 이전 map 백업을 통째로 덮어 사용자 변경을 되돌리지 않는다.
+
+
+## 2026-10-02 두 레벨 source 룩 복원 — 저장·검증 결과
+
+- 후속 사용자 요청의 보스-only 정리/Phase2 source 룩 및 두 레벨 shader 보정 정본은 [LEVEL_LOOK_RESTORATION_2026-10-02.md](LEVEL_LOOK_RESTORATION_2026-10-02.md)다. 이전 14,525 actor / P1 전역 sky 공유 기록은 이전 단계의 사실로 보존한다.
+- 현재 StormPass는 actor 2,547개, P1/P2 마커와 분리 배치 그대로, Phase2 terrain/mountain 및 필요한 Main background 4개를 유지했다. 불필요한 source actor 11,980개 제거와 Start의 P1 source entry 이동은 이번 사용자 보스-only 요청에 따른 변경이다.
+- 현행 global sky/fog/skylight는 P2 source DeepNight 기준이며 양쪽 태양은 위치 mask로 Pawn channel 0을 지원한다. P2 covering/glow/pollution·blue haze·native toon 및 stock PP 보정이 추가됐다. 최종 native 수치를 원작 값으로 인용하지 않는다.
+- saved/reloaded/fresh-process 계약은 통과했으나 최종 viewport 외형 검수와 gameplay 전환은 미완료다. `show_side_by_side/view`는 승인된 삭제 목록의 missing actor를 허용하며 두 전장을 표시한다. 옛 단독 variant actor 전수 기준/전체 rebuild를 다시 적용하지 않는다.

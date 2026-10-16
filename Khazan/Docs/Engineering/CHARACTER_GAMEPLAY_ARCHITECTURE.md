@@ -3128,3 +3128,833 @@ LockOn 중 수동 `Input_TurnCamera`는 camera target 출력과 충돌하므로 
 - [gait 제안] 지상 유효 입력의 LockOn 포즈는 기존 LocomotionComponent가 확정한 `ResolvedGait`를 사용한다. 스틱 세기/요청/상한으로 이미 Walk/Run을 판정하므로 새 임계값을 추가하지 않는다. 비LockOn의 현재 실제 속도 hysteresis와 기존 Sprint 결과는 유지한다. 가속/감속 중에도 의도된 gait를 즉시 표시한다는 표현 정책 변경이며 발 미끄러짐/일반 방향 변경을 후속 QA한다.
 - [작성자/소비자/스레드] Player 입력 어댑터→LocomotionComponent가 기존 의도를 쓰고, GameThread가 기존 FKZAnimGameThreadData에 복사한다. AnyThread 함수는 const snapshot만 읽어 현재 프레임의 포즈 각도/gait를 작성한다. 실제 소비자는 현재 LockOn Walk/Run Blend Space 및 ABP gait 선택이다. worker에서 Actor/ASC를 새로 읽지 않는다. 지역 `const FVector InputLocal`은 함수 호출 안에서만 살고 Reset이 없다. 기존 관측 초기화/입력 해제·차단/Stop 이력/취소 수명을 재사용한다. 새로운 Player 전용 데이터나 미래 AI helper를 만들지 않는다.
 - [수치/검증] 새 gameplay tuning literal이 없다. 기존 atan2의 기하학 각도와 기존 ResolvedGait만 쓴다. 수정안은 `Examples/LockOnRecoveryPose_20261001.patch`(기존 1파일 +12/-3)다. 실제 Git 루트의 `Khazan/Source/...` 경로로 문맥 검사와 변경 건수 확인이 통과했다. Source 적용/수정안 build/수정 후 PIE는 아직 없다. 방향 hunk→gait hunk 순서로 확인한 뒤 시각적 튐의 잔존 여부를 판정한다.
+
+## 2026-10-02 — ARCH-74 Guard 직접 구현 계약
+
+- 사용자 직접 구현 요청에 따른 착수 계약이다. 기존 `UKZActionAbility`의 InputEnd/block/cancel, ASC exact input Spec, LocomotionComponent constraint, GameThread snapshot, DefaultSlot/Inertialization을 재사용한다. 유지·해제·연속 피격은 Combo edge 수명과 달라 `UKZGuardAbility` 한 실행 소유자만 추가한다. Guard Manager, CombatComponent, 새 Task/입력 parser는 만들지 않는다.
+- Guard 활성화/유지 Cost는 없다. GuardState GE의 `State.Guarding`과 Walk 상한 constraint는 held 수명에만 적용하고 Release/Cancel/실패/EndPlay에 해당 handle만 해제한다. release 뒤 Guard_End 회복 중에는 방어하지 않는다. InputEnd부터 다른 Action이나 종료 중 이동에 즉시 양보한다.
+- 공유 방어 사실의 작성자는 Ability가 적용한 GE, 소비자는 GT Anim snapshot과 ASC의 `TryGuardHit`다. AnimInstance bool은 읽기 전용 표현 복사이며 worker가 ASC를 읽지 않는다. LockOn Guard 방향은 기존 입력 기반 각도, 비LockOn은 F를 사용한다. 이동 제약은 기존 Walk 설정을 사용한다.
+- 미래 공격 판정은 방어 가능 공격/공격 방향 등을 먼저 검증한 뒤 피격자의 `TryGuardHit(StaminaDamage, Attacker)`를 호출한다. true면 해당 HP 피해를 적용하지 않는다. 소모량은 공격 데이터 작성자의 값이며 고정 가드 Cost로 추정하지 않는다. 부족한 스태미너/비활성/해제/잘못된 피해량은 false다. GuardBreak·HP·적 hit trace는 이번 runtime 범위가 아니다.
+- 일반 Guard 원작 `SB_Kazan_DualAxeSword_Com_Guard_Normal_New.json`, `GuardSkillInfo.GuardStaminaRecoveryDelayTime=0.5 s`를 성공 지연으로 사용한다. 원작 cancel timing을 기존 PlaybackPlan 역매핑으로 변환한 InputEnd는 프로젝트 계약 대응값이며 원작 엔진 내부 판정과 동일하다고 단정하지 않는다. 새 블렌드는 명시된 임시 표현 튜닝으로 관리한다. 에셋의 현행 재생률·Root·0.01 mesh scale을 유지한다.
+- 이 절 작성 시점은 구현 전이다. 실제 변경/빌드/런타임 결과는 완료 절에 별도로 추가한다. 시작 스냅샷은 `Saved/GuardImplementation_20261002/Before/Manifest.json`이다.
+
+
+## 2026-10-02 — ARCH-74 Guard 적용·검증 완료
+
+- 앞선 착수 계약을 실제 Source/BP에 적용했다. 독립 held·release·반복 성공 수명은 UKZGuardAbility 하나, 공유 방어 상태는 GE State.Guarding, 입력 held 사실은 기존 Spec.InputPressed, 이동 상한은 기존 constraint handle, 표현은 GT snapshot이다. 미래 피해 callback에 제공하는 ASC.TryGuardHit만 추가했으며 공격별 StaminaDamage 작성 책임은 호출자에게 남겼다.
+- Start/성공/End는 하나의 Montage/기존 PlayMontageAndWait를 사용하고 매 섹션 Task/instance ID를 갱신한다. Release 즉시 자기 GE/Walk handle을 제거하고 InputEnd에서 End 전환/회복 중단을 처리한다. 전체 17 sequence의 marker와 실제 Montage branching event의 차이는 [Guard 현행 문서](GUARD_IMPLEMENTATION_20261002.md)에 명시했다.
+- 실제 검증은 cold build, 새 프로세스 asset/pose audit 및 실제 DevMap PIE의 held/8방향/Cost/연속 성공/release/공격·이동 취소/자연 종료/UnPossess다. Success 결과를 Metadata/GuardImplementation_20261002/RuntimeResult.json에 보존했다. 적 hit/HP/방어 각도/GuardBreak·JustGuard/멀티플레이/화면 QA를 구현 완료로 확장하지 않는다.
+- 원작 직접 확인 regen 지연 0.5초, 원작 기반 시간축 변환 InputEnd, 명시된 임시 Montage/ABP 0.1초와 기존 복귀 0.24초를 구분했다. 기존 스케일/재생 보정·Dodge/콤보 코드를 유지한다.
+
+
+## 2026-10-06 — ARCH-74 검증 범위 정정 및 Guard 표현 에셋 수리
+
+- ARCH-74의 실행/공유 상태/입력/이동/스레드 책임은 유지한다. 10월 2일 “8방향 통과”는 AnimInstance 각도와 SampleData 배치 검사였으며 실제 Blend Space cache/mesh pose 검사 완료를 뜻하지 않는다.
+- 실제 PIE에서 Guard BS의 복제된 파생 segment index와 교체한 SampleData 순서 불일치를 확인했다. 0도 실제 cache index2/L/weight1 디버거 증거를 확보한 뒤 해당 Guard BS의 UBlendSpace::ResampleData만 적용했다. 실행 구조·snapshot·source pose·재생률·스케일을 바꾸지 않았다.
+- 기존 개발 전용 test 확장/cold build/saved asset reload 뒤 8방향 실제 clip 및 12 checkpoint×227본 mesh pose, 뒤 경계/상대 yaw/nonLock F/Loop와 기존 Guard gameplay 검사가 통과했다. runtime class/공통 helper/미사용 관측 상태를 추가하지 않았다.
+- 실제 적용/검증과 물리 입력·연속 화면·적 hit/HP의 미검증 구분은 [Guard 현행 문서의 2026-10-06 절](GUARD_IMPLEMENTATION_20261002.md) 및 Metadata/GuardLocomotion_20261006/RuntimeResult.json이 최신이다.
+
+## 2026-10-06 — ARCH-74 이동 입력 중 Guard Start/End 생략 계약 (적용 전)
+
+- 사용자 직접 수정 요청: 유효한 이동 입력을 유지한 Guard press는 Start 없이 GuardLocomotion, release는 End 없이 기본 로코모션으로 전환한다. 정지 상태에서 시작한 Start/End 중 이동 입력이 들어와도 해당 모션을 빠져나온다. 앞선 InputEnd까지 이동 복귀를 기다리는 정책은 이 Start/End 이동 전환 범위에서 대체한다.
+- 이동 여부는 기존 LocomotionComponent의 허용된 InputAmount로 판단한다. 속도, 새 deadzone, 새 held/moving 상태 사본을 추가하지 않는다. Start 중 이동은 montage task만 정리하고 Guard GE/Walk constraint/Ability 수명은 유지한다. release/End 중 이동은 기존 소유 handle과 Ability를 정리한다.
+- Guard 성공 반응은 held 상태에서 이동하더라도 계속 재생한다. 이동 중 release에는 방어와 Walk 제한을 즉시 해제하고 End 없이 복귀하며 이미 적용한 성공 비용은 되돌리지 않는다. InputEnd marker/정지 시 Start·End 절차/기존 관성화 설정은 재사용한다.
+- 변경 대상은 기존 Guard cpp와 개발 전용 PIE test다. 새로운 runtime 파일·클래스·공통 helper·BP·애니메이션 에셋은 필요하지 않다. 현재는 계약 기록이며 실제 적용/build/PIE 결과는 후속 절에 구분한다. 시작 백업: `Saved/GuardMovementPolicy_20261006/Before/Manifest.json`.
+
+
+## 2026-10-06 — ARCH-74 이동 Start/End 생략 적용·검증 완료
+
+위 이동 입력 정책을 기존 Guard cpp 3함수에 적용했고 cold build/최종 DevMap PIE Khazan.Guard.PIE Success(01:32:08.870 UTC)를 확인했다. 새 상태 소유자/runtime 파일은 없고 GE/Spec/constraint/Task/snapshot/ABP 책임을 유지한다. Start 생략은 held 수명을 유지하며 release/End 이동은 자기 수명을 정리한다. 정지 절차와 held 성공 반응/비용은 유지한다. 상세 데이터 계약·Task 중단 순서·개발 test 관측 범위 수정·실제 증거·미검증은 [Guard 정본의 이동 Start/End 절](GUARD_IMPLEMENTATION_20261002.md) 및 Metadata/GuardMovementPolicy_20261006/RuntimeResult.json이다.
+
+## 2026-10-06 — ARCH-74 다른 동작 중 held Guard 자동 활성화 계약 (적용 전)
+
+- 사용자 직접 수정 요청: 다른 동작 중부터 가드 입력을 유지하면 기존 Action InputEnd 또는 자연 종료로 활성화가 허용되는 첫 입력 update에서 Guard를 실행한다. 불허 상태를 무시해 이전 동작을 강제로 중단하지 않는다. 입력을 먼저 release/cancel하면 이후 자동 실행하지 않는다.
+- 실제 디스크 Source의 Guard binding은 이미 Triggered이며 IA/IMC trigger 목록은 비어 있다. 이를 유지하고 기존 Input_GuardPressed에서 State.Guarding이면 일반 press 전달을 생략한다. 방어 중이 아니면 기존 ASC press를 재시도한다. 일반 press의 InputEnd 동일 Spec restart를 지속 입력의 Guard 유지에 반복 적용하지 않게 한다.
+- 별도 held bool/queue/timer/ASC API/Ability 변경은 추가하지 않는다. Enhanced Input 현재 Triggered가 held 의도의 작성자, 기존 ASC activation/block/cancel이 소비·실행 허가, Guard GE가 방어 사실의 소유자다. Controller는 현 Pawn ASC를 매번 조회한다. 기존 Completed/Canceled/UnPossess cleanup을 유지한다.
+- 코드 변경 대상은 기존 Controller cpp 콜백 1개와 개발 전용 test다. 현재 실제 키는 LeftShift/Gamepad_LeftShoulder(LB)이고 사용자 표현 RB와 다르므로 키 변경 선호만 비동기로 확인 중이다. 핵심 held 동작 수정은 키와 독립적으로 진행한다. 백업: Saved/GuardHeldInput_20261006/Before/Manifest.json. 현재는 적용 전 계약이며 build/PIE는 후속 기록으로 구분한다.
+
+
+## 2026-10-06 — ARCH-74 held Guard 자동 실행 적용·검증 완료
+
+위 계약을 Controller Input_GuardPressed 한 콜백에 적용했다. 현재 Triggered binding과 Guard GE의 State.Guarding을 재사용해 불허 중 재시도/방어 중 재시작 방지를 구분한다. 새 입력 상태 사본·queue·timer·ASC API는 없다. 기존 InputEnd 허가/Guard 비용/취소·handle 소유 책임을 유지한다. cold build 후 실제 Controller binding callback을 쓰는 DevMap PIE Khazan.Guard.PIE가 03:02:36.401 UTC Success였다. 상세 함수·키·실제 검증 범위는 [Guard 정본의 held 입력 절](GUARD_IMPLEMENTATION_20261002.md) 및 Metadata/GuardHeldInput_20261006/RuntimeResult.json이다. 실제 키는 기존 LShift/LB이며 키 변경 선택에 별도 응답이 없어 IMC를 보존했다.
+
+## 2026-10-06 — ARCH-75 Heal 직접 구현 착수 계약
+
+사용자 직접 구현 요청이다. HP/MaxHP는 기존 KZAttributeSet에 추가하고 CharacterDefinition.InitialEffects의 instant GE로 MaxHP→HP=200을 초기화한다. 200과 Heal HP +100은 사용자 지정 임시 게임 설정이며 원작 검증 수치가 아니다. Player/Controller/AnimInstance에 체력 사본을 만들지 않는다. 무제한 물약으로 Cost/Cooldown/수량 상태가 없다.
+
+Heal의 유한 실행·Notify 회복·InputEnd·취소는 UKZActionAbility 파생 UKZHealAbility 하나가 소유한다. 기존 GAS block/cancel, PlayMontageAndWait, exact Spec 입력, UnPossess/EndPlay cleanup을 재사용한다. 기존 LocomotionComponent Walk 상한 handle 하나를 실행 중 보유해 이동은 허용하고 종료/실패/취소에 해당 handle만 해제한다. Actor/worker/Ability에서 이동 정책을 중복 작성하지 않는다.
+
+상체 전용 UpperBody Slot과 기존 포즈 cached source/LayeredBoneBlend를 ABP에 연결한다. Main AnimInstance의 새 Heal bool/태그 snapshot/helper는 없다. 기존 DefaultSlot/Guard/Locomotion/Stop/최종 Inertialization은 유지한다. 실제 하체/상체·CMC 이동은 개발 PIE에서 검증한다. 새 runtime 파일은 Heal h/cpp 2개이며 별도 Task/Manager/Component는 없다.
+
+사용자 기존 에디터 PID9596 및 다른 프로젝트 작업 PID13632를 조작하지 않는다. 별도 C:/Users/user/Desktop/GitProject/Khazan_HealWork_20261006/Khazan snapshot에서 cold build/숨김 에디터 authoring/검증을 수행한다. 저장 에셋은 작업 시작 hash와 메인 경로가 여전히 일치할 때만 적용한다. 실행 중 메인 DLL 교체/LiveCoding은 하지 않는다. 현재는 착수 계약이며 적용/build/PIE 완료는 후속 기록으로 구분한다.
+
+## 2026-10-06 — ARCH-75 Heal Source 적용·격리 검증, 메인 반영 대기
+
+실행자는 UKZHealAbility 한 클래스(h/cpp 2파일)이며 기존 Action/ASC/InputTag Spec/Definition/LocomotionComponent/엔진 Montage task를 재사용했다. 공유 HP/MaxHP는 AttributeSet, 초기·회복량은 GE, 회복 1회·instance ID·자기 Walk 제약 수명은 Ability가 소유한다. Main AnimInstance/helper/FSM/수량·HP 사본은 추가하지 않았다. 무제한·무비용 물약은 full HP에서도 모션을 실행하고 HP0에서는 실행하지 않는 현 프로젝트 정책이다.
+
+UpperBody Slot/LayeredBoneBlend/cached action base를 작업 ABP에 연결했다. 기존 DefaultSlot/Guard/Locomotion/Stop/최종 Inertialization은 보존했다. 200/100은 사용자 지정, Notify/Blend는 명시된 임시 authoring 값이다. 메인 Source 적용, 기존 Build.cs의 격리 cold build, Heal PIE Success(05:19:29.000 UTC)/Guard 회귀 Success(05:20:57.182 UTC)/새 saved reload를 확인했다.
+
+메인 Content는 열린 editor의 SK_Player 파일 잠금으로 아직 시작 hash이며 검증 파일 10개를 별도 준비했다. 숨김 helper가 메인 editor exit 후 Source/asset 충돌 재확인→선택 적용→메인 build한다. 최신 실제 단계는 Metadata/HealImplementation_20261006/ApplyStatus.json이며 Complete 전에는 메인 적용 완료가 아니다. 상세 Source·변수·cleanup·에셋·출처·검증은 [Heal 정본](HEAL_IMPLEMENTATION_20261006.md)이다.
+
+## 2026-10-06 — ARCH-75 메인 실제 적용·직접 테스트 준비 완료
+
+사용자 후속 메인 반영 지시로 clean/PIE 없음 상태의 메인 editor를 정상 종료하고 검증된 10개 에셋을 선택 적용했다. 메인 cold build Succeeded/ApplyStatus Complete(05:48:35.668 UTC), 새 PID27568 DevMap에서 native Heal/GA·GE/input·grant/ABP UP_TO_DATE의 저장 reload를 확인했다. Source·원본 clip·기존 책임 계약은 유지했다. 앞선 pending은 역사적 시점이며 현재 메인 적용은 완료다. gameplay 자동 테스트는 계속 격리에서 수행한 범위, 물리 입력·연속 화면은 사용자 직접 QA로 구분한다. 정본·증거는 [Heal 문서](HEAL_IMPLEMENTATION_20261006.md)의 메인 완료 절과 Metadata/HealImplementation_20261006/MainAppliedResult.json이다.
+ 
+## 2026-10-06 — ARCH-76 Heal 무기 수납·발도 착수 계약
+
+사용자 직접 구현 요청. ARCH-75의 Heal Ability/HP GE/Walk constraint/ASC 입력·Action 취소를 재사용한다. 기존 BP Player 무기 컴포넌트와 Skeleton BackPack 부착점을 사용하며 별도 Equipment Component/State/Ability는 생성하지 않는다. Heal 실행이 변경 전 부착 parent/socket/relative transform을 저장하고 정상·취소·실패·UnPossess에 자기 변경만 복구한다. 공유 장비 상태 bool을 선행 추가하지 않는다.
+
+기존 UpperBody Montage에 UnArmed→Heal을 연결하고 Arms Slot Montage Armed를 이어 재생한다. 상체와 양팔의 실제 마스크가 다르므로 발도 Montage 1개·Arms 합성 노드만 추가한다. 한 Heal Ability가 기존 PlayMontageAndWait를 단계별로 사용한다. 발도 시작에 기존 SetInputEnded로 Action 차단을 풀어 Dodge/Attack/Guard에 양보한다. 취소 종료 후 이전 montage instance ID만 즉시 정리해 새 액션을 멈추지 않는다. 미래 피격 실행자는 기존 Action cancel 또는 ASC cancel 경로를 써야 하며 이번에는 미구현 피해 시스템을 만들지 않는다.
+
+클립은 기존 Armed/UnArmed를 InGame/DAS/Equip으로 UE rename한다. source pose·재생률·Player 0.01/무기 0.009는 보존한다. 부착 타이밍은 실제 손·등 궤적 확인 후 Montage notify로 소유하며 원작 직접 timing을 못 찾으면 명시된 임시 표현값으로 기록한다. 작업·PIE는 별도 Khazan_HealWeaponWork_20261006에서 수행한다. 이 절은 구현 전이며 결과는 후속 실제 검증 절로 구분한다.
+
+## 2026-10-06 — ARCH-76 Heal 수납·발도 실제 적용·검증
+
+ARCH-76 착수 계약을 기존 Heal h/cpp에 적용했다. 두 무기 attachment snapshot은 Heal 실행만 소유하고 HP/장비 공유 bool/AnimInstance 상태 사본은 추가하지 않았다. 첫 Montage 완료에 Arms Montage를 같은 Ability/엔진 Task로 시작하고 Walk handle 반환·InputEnd unblock, 취소에 원래 attachment와 이전 montage instance만 정리한다. 새 runtime 파일/클래스0이다. Animation graph는 기존 상체 cache 뒤 Arms cache/Slot/Layer5노드, Armed/UnArmed는 InGame/DAS/Equip으로 실제 이동(기존 참조0/old file2개 제거)했다.
+
+격리 stock cold build/실제 Heal PIE(06:29:18.543 UTC)·Guard 회귀(06:31:27.946 UTC)/saved reload, 메인 선택 package7개+old paths2개 제거/hash/cold build(06:35:05 UTC)를 확인했다. 물약 중 Walk/발도 일반 gait, 하체·몸통·목·머리의 base pose·Armed 양손, X/Y/Dodge/Guard·forced cancel/회복·attachment/UnPossess cleanup을 검사했다. 실제 적 hit는 아직 실행자가 없고 기반 취소 경로만 검증했다. 현행 상세·수치·제한·메인 reload는 [Heal 수납·발도 정본](HEAL_WEAPON_PRESENTATION_20261006.md)과 Metadata/HealWeapon_20261006을 따른다. 기존 Architecture 계층/ASC 입력·태그 계약을 변경하지 않았다.
+## 2026-10-06 — ARCH-77 첫 몬스터 StateTree/기존 ComboAction 수직 구현 계약
+
+- 사용자 직접 구현 요청의 범위는 DevMap의 Swordsman/SwordShield/HeavySwordsman/HalberdElite 감지·배회·전투 진입·접근·대치/횡이동·단일/연속 공격 애니메이션이다. 피해/피격/적 Guard 성공/적 HP 소비는 연결하지 않는다. 이번 절은 구현 착수 계약이며 build/PIE 완료 기록이 아니다.
+- ARCH-43/v3의 첫 Monster StateTree 기본안을 유지한다. 신규 runtime 파일은 AIController h/cpp와 StateTree task/condition h/cpp 네 개로 시작한다. StateTree가 Idle/Alert/Chase/Standoff/Attack을 선택하며 별도 FSM·Manager·행동 enum 멤버의 두 번째 상태 원본을 만들지 않는다. 노드의 enum은 편집 시 작업 종류 선택이며 현재 gameplay 상태 사본이 아니다.
+- AIController는 엔진 Sight perception·focus·navigation과 기존 Locomotion intent token의 작성 권한을 소유한다. 이동 태그 차단은 기존 permission event로 navigation을 즉시 멈추며 허용 시 현재 StateTree 작업이 재요청한다. 원본 move 의도는 active path의 다음 점에서 관측해 기존 Locomotion snapshot으로 전달한다. CMC가 실제 navigation 이동/회전을 담당한다.
+- StateTree task instance는 자기 대기 시간·nav 목표·선택한 Ability Spec handle만 보관한다. 기존 Character ASC/grants와 UKZComboActionAbility/PlayMontageAndWait가 공격 수명·Montage·콤보 전이·취소를 소유한다. AI는 기존 ASC SubmitComboCommand로 연속 공격 의도만 제출하고 montage frame/section jump를 직접 제어하지 않는다. 종료/실패/UnPossess/EndPlay에서 자기 nav/command/spec/intent 권한을 정리한다.
+- AKZMonster의 기존 class defaults에 네 병종의 실제 소비 설정과 Ability 후보만 추가한다. 새 MonsterDefinition/AttackAbility/AnimInstance/공통 helper는 선행 생성하지 않는다. 기존 CharacterDefinition/AssetData registry를 재사용하고 새 Animation BP는 UKZAnimInstance의 GT snapshot/rotation mode/velocity를 읽는다.
+- 원작 조사 결과는 Metadata/MonsterAI_20261006/OriginalSkillAudit.json이다. SubStateInfos.SkillAnimation/AnimPlayRate/AnimBlendAlpha와 SkillEventMap→xxChangeNextStepFunc→AC notify index 및 저장 PlaybackEventTimes의 dilation 변환 시각을 기록한다. 조건부 콤보의 가능한 단계 순서를 사용하되 원작 AI의 선택 확률·피해/상태 조건 전체를 재현했다고 하지 않는다.
+- 원작 AIDataAsset의 참조는 CB에서 확인되지만 해당 원본 AI 데이터/실행 코드는 현재 표적 자료에 없다. 감지/기억/공격 거리/대치 주기/배회 반경/행동 비율 및 이동 가감속·회전 설정은 임시 튜닝값으로 owner 설정에 모으고 이유·단위·검증 기준을 후속 정본에 기록한다. Player 0.01 scale을 Enemy에 적용하지 않고 기존 Enemy assembly scale/rig을 보존한다.
+- 새 격리 프로젝트 Khazan_MonsterWork_20261006에서 asset authoring/build/PIE를 수행한다. 메인 사용자 에디터에는 자동 gameplay 입력을 주지 않는다. 선택 asset/hash 검증·정상 재시작 후 메인 DevMap 전달을 별도 완료 기록으로 남긴다.
+
+## 2026-10-06 — ARCH-77 첫 4종 몬스터 실제 완료
+
+ARCH-77의 StateTree 선택/AIController perception-focus-nav/공통 Locomotion intent/기존 ComboAction 실행 경계를 실제 적용했다. 새 runtime4파일, 기존 Monster 설정/armor leader pose, definition tags4/registry·데이터를 사용한다. Blueprint 애니메이션은 기존 Main AnimInstance의 GT snapshot을 소비하며 전투 수명 사본/Monster AttackAbility를 생성하지 않았다. task 자기 nav/command/spec·controller delegate/intent/target cleanup을 실제 PIE로 검사했다. 첫 공격 정책은 저장 원작 패턴·event 시간과 명시된 임시 AI 설정을 구분한다.
+
+격리 제품 build/Monster·Heal·Guard PIE 및 메인 선택137package/hash/cold build·PID11000/DevMap saved reload가 완료됐다. 후속 현행 정본은 [MONSTER_AI_IMPLEMENTATION_20261006.md](MONSTER_AI_IMPLEMENTATION_20261006.md) 최신 완료 절과 Metadata/MonsterAI_20261006이다. Damage/CombatResponse/Guard hit producer/death·원작 AI 전체 복원이 완료된 것으로 해석하지 않는다.
+
+## 2026-10-07 — ARCH-78 발견 전 대기 루틴·대화 짝·실제 이동 포즈 보완 착수
+
+사용자 직접 수정 요청이다. ARCH-77의 IdlePatrol에서 정지/배회를 합친 정책을 대체한다. Idle은 정지한 원작 Basic Loop 대기와 발견 시 대응 End의 유한 완료이고 Patrol은 별도 이동 작업이다. Swordsman은 사용자 지정 Guard/Basic03/Search/Sit01 및 Talk01/02 쌍을 정확히 사용한다. 다른 병종은 자기 skeleton의 저장 자료에서 Loop/End가 모두 존재하는 루틴만 구성한다.
+
+신규 runtime 파일/Ability/AnimInstance/Manager 없이 기존 CharacterDefinition에 실제 소비되는 루틴 설정을 작게 추가하고 기존 초기 grant/ComboDefinition/ComboAction/엔진 Montage Task를 사용한다. Loop의 Montage section은 자기 반복, 발견 명령은 기존 combo command Release edge로 같은 Montage의 End에 진입한다. AI가 직접 MontageJump/pose frame을 구동하지 않는다. Idle task는 자기 spec과 End 요청 여부만 보유하며 End 완료 후 Root를 재선택한다. 이미 End로 준비한 경우 기존 공통 Alert를 중복 실행하지 않는다. 정상/취소/대상 상실/UnPossess/EndPlay cleanup은 기존 spec/nav/command 경로를 따른다.
+
+대화는 level의 상호 partner 참조·상반 역할01/02가 모두 유효하고 두 definition에 해당 역할이 있을 때만 선택한다. pair 중 한쪽 발견은 둘의 전투 진입을 알리고 각자 대응 End를 끝낸다. 파트너 상실/UnPossess는 남은 쪽이 End 후 solo로 복귀한다. 별도 그룹 Manager/전역 대화 상태/두 번째 AI FSM은 없다. instance의 Patrol 선택은 배치 설정이고 현재 행동 사본이 아니다.
+
+이동 증상은 native 실제 속도·AnimInstance 갱신·BlendSpace 입력/sample/time/mesh pose를 분리 검증한다. 10월6일 CMC 이동/상태 통과를 걷기 클립·발 고정 검증으로 확대하지 않는다. 원작 clips/루틴 순서/재생률 근거와 FK 발 접지 궤적에서 계산한 속도, 임시 표현 설정을 구분한다. CMC·기존 Locomotion snapshot/worker 경계를 유지하고 Player .01/기존 gameplay·원본 Art clip을 변경하지 않는다. 작업/검사는 기존 별도 MonsterWork에서 하고 메인 PID7220/다른 SnowWork를 조작하지 않는다. SourceBaseline/DebuggerEvidence는 Metadata/MonsterIdle_20261007이며 이 절은 적용 전 계약이다.
+
+## 2026-10-07 — ARCH-78 실제 보행 검증 후 접지 처리 보완 계약
+
+추가 검증에서 cardinal 걷기는 보폭/phase 보정으로 개선됐으나 대각선의 비선형 관절 블렌딩에는 실제 접지 발의 수평 잔차가 남았다. 재생률만으로 발 접지를 보장하지 못하므로 기존 엔진 AnimationWarping의 Foot Placement → Leg IK를 네 몬스터 ABP의 Walk branch에만 적용한다. 새 runtime class/component/task는 생성하지 않는다. 기존 세 Skeleton에는 실제 FK 발을 위한 Virtual Bone target 두 개씩만 추가하며 기존 bone/slot/socket/Art clip은 보존한다. InGame walk의 저장 FK 궤적에서 계산한 접지 구간을 contact curve로 기록한다. 이 구간과 엔진의 plant/trace/spring 설정은 원작 확인값이 아닌 계산/임시 표현 설정이다.
+
+ARCH worker 경계를 지키기 위해 바닥/owner를 읽는 엔진 Foot Placement를 사용한 NPC ABP만 GameThread에서 update/evaluate한다. Main AnimInstance에 전투 상태를 넣지 않고 engine CanRunParallelWork의 실제 소비 설정 bRequiresGameThreadPoseEvaluation 하나만 둔다(초기 false; NPC author가 true, 엔진 스케줄러가 const로 읽음; gameplay reset 수명 없음). Player의 snapshot/parallel 경로는 유지한다. Walk 이후 Run/Stand 선택과 DefaultSlot을 두어 공격의 authored pose에는 접지 보정을 적용하지 않는다. 이 절은 추가 검증을 위한 계약이며 성공/메인 적용을 의미하지 않는다.
+
+## 2026-10-07 — ARCH-78 실제 적용·메인 최종 완료
+
+Idle 정지 Loop/대응 End, 선택적인 상호 Talk01/02, 별도 Patrol 및 combat Stand/실제 이동 포즈를 적용했다. 기존 Definition/grants/ComboAction/StateTree/nav/Locomotion/CMC/snapshot을 재사용하고 새 C++ runtime 파일·Ability subclass·Component·Manager는 없다. 기존 ComboAction을 설정한 data-only GA Blueprint16개/ComboDefinition16/Montage16은 실제 루틴 데이터로 작성했다. 추가 enum/struct는 Definition의 Role·Name·실행 class를 담으며 gameplay 상태 사본이 아니다. task가 자기 실행 handle/End 요청/weak partner, Controller가 target/focus/nav, Ability가 Loop/End 수명을 소유한다. NPC만 Foot Placement의 floor 읽기를 GT로 제한하고 Player scheduling=false를 실제 saved reload에서 확인했다.
+
+PostPlacedNewNode 누락 원인과 최종32방향 asset-player/mesh/contact 및12FPS Halberd8 재검사, 자연 감지/대치/13공격/cleanup, Waiting/SourceAudit/Heal/Guard가 성공했다. scoped129package/원본32 hash 보존/Main cold build5action/Succeeded/Main26644 DevMap saved reload/dirty0/PIE없음, own 정상 종료를 확인했다. 메인 자동 PIE·원작 전체 AI/피해/네트워크 완료를 의미하지 않는다. 접지의 측정 scope와 임시 표현 설정은 [현행 정본](MONSTER_UNAWARE_LOCOMOTION_20261007.md)의 최종 완료 절/RuntimeResult.json을 따른다. 이전 M 전체 완료로 확대하지 않는다.
+
+
+## 2026-10-07 ? ARCH-78 ??: ?? ????? ?? ????? ?? ?? ??
+
+??? ?? ?? ??. HeavySwordsman? Basic03 Loop?End, HalberdElite? Basic02 Loop?End? ????. ?? CharacterDefinition UnawareRoutines? ? Basic ??? ???? ?? GA/Combo/Montage? ?????. Halberd02? ?? Playback?? InGame ????? ??? segment/End ??? ????. ?? sequence pose/FPS/RateScale? ?? ???Talk ??? ????.
+
+?? Sight ?? ??? Talk partner ???? ??? Controller BattleTarget? ?? Player Actor? ??? ?? ??/leash/?? ??? ??? ???. ?? bEverSeen/?? ?? ??/??? strong ??? ??? ???. ??? ???UnPossess?EndPlay cleanup? ????. TargetMemorySeconds? ?? Sight sensory record? MaxAge? ???? PursuitLeashRadius? ?? ??? ?? ???? ?? ?? ??? ? ?? ???? ???. Home? ??? Patrol ???? ???.
+
+Standoff? ??? ?/??/?? Enter? ?? TimeRemaining? ?? ? Root? ?????. ?? ??? ?? ?? ???? ?? ???? ???. ??? ????? ?? ring ??? ?? ??? ?? ??? local nav ??? ????. Attack? ?? Spec ?? ?? ??? ????. ? chase cooldown?timer??? ???? gameplay ?? ?? ?? ?? ??/Task/Ability/Locomotion ??? ????. ? runtime ??0??.
+
+? ?? ?? ????. ?? ?? Khazan_MonsterWork_20261006?? ?? main Source/config? ??? ???? ?? ????, native ?? StateTree/Sight/End/?? ??/?? ??/?? ??/cleanup ??? ? scoped main ???cold build?? saved reload? ????. ???? Main PIE? ?? ???? ???. ?? ??/?? ??? Metadata/MonsterCombatPolicy_20261007? Engineering Continuity? ?? ???.
+
+## 2026-10-07 — ARCH-78 후속: 고정 대기·전투 타깃 유지·선택 행동 완료 실제 완료
+
+직전 같은 주제의 착수 문단은 저장 인코딩 문제로 한글이 물음표로 기록됐다. 해당 이력은 보존하며 이 절을 읽을 수 있는 계약 및 실제 완료 기록으로 사용한다. 사용자 직접 수정 요청에 따라 HeavySwordsman은 Basic_Loop_03→Basic_End_03, HalberdElite는 Basic_Loop_02→Basic_End_02로 고정했다. 기존 CharacterDefinition.UnawareRoutines를 Basic 한 항목으로 좁히고 기존 GA/ComboDefinition/Montage를 재사용했다. Halberd02 두 시퀀스만 기존 Playback에서 gameplay InGame으로 복제했으며 원본 pose/FPS/RateScale은 재작성하지 않았다. 신규 runtime C++ 파일/Ability/Component/Manager는 0이다.
+
+BattleTarget의 작성자는 기존 Controller Sight 성공 콜백과 활성 Talk 파트너 공유이고 소비자는 기존 StateTree 조건/Task·Focus·Locomotion이다. weak Player Actor가 유효한 동안 시야 상실·기억 시간·거리에 의해 전투 타깃을 해제하지 않는다. 별도 bEverSeen/전투 bool/strong 참조/두 번째 FSM은 없다. SightLostAt과 거리·시간 기반 타깃 해제 분기만 제거했다. TargetMemorySeconds는 Sight sensory record의 MaxAge로만 남고 PursuitLeashRadius는 직렬화 설정을 보존하되 타깃 포기에 사용하지 않는다. Actor 무효화/UnPossess/EndPlay의 기존 자기 handle·task·intent·focus cleanup을 유지하고 실제 PIE에서 검사했다.
+
+Standoff Task는 Enter에서 선택한 기존 TimeRemaining/StrafeSign 및 local MoveGoal의 수명을 소유한다. 첫 Tick(0)으로 목표를 확정하고, 플레이어가 EngageDistance 밖으로 나가면 마지막 local goal을 유지하며 선택한 구간을 완료한다. 거리 증가/공격 가능에 따른 즉시 Succeeded를 제거했다. 완료 후 기존 OnStateCompleted→Root가 Chase/Attack 등을 재선택한다. Attack은 기존 Spec 활성 수명(선택된 콤보 포함)이 끝나야 완료한다. 새 Chase 지연 타이머나 조정값은 추가하지 않았다. 여기서 한 행동은 locomotion clip 한 바퀴가 아니라 선택된 Standoff 구간 또는 Ability 실행 수명이다.
+
+격리 stock CombatPolicyPIE 4종 및 기존 WaitingPIE 회귀, 메인 선택 9파일(hash 일치)·cold build·새 DevMap saved reload를 완료했다. 미관련 Source/Config/uproject/DevMap/Player BP·ABP 등 89파일은 전달 직전 대비 보존됐다. 검증 당시 Main PID29556/PIE 없음/dirty0이다. 상세 계약·수치 출처·실패 이력은 [Monster 현행 정본](MONSTER_UNAWARE_LOCOMOTION_20261007.md)의 같은 날짜 후속 완료 절과 Metadata/MonsterCombatPolicy_20261007/MainAppliedResult.json을 따른다. 원작 AIData 완전 복원·피해/피격·전체 M단계 완료로 확대하지 않는다.
+
+## 2026-10-07 — ARCH-79 Enemy 전체 애니메이션 정리·Root Motion·공격 다양성/재추격 반응 착수
+
+사용자 직접 수정 요청이다. Art 범위는 HeinMach Humanoids의 Archer 제외4병종, Yetuga, ApesStoneHandElite의 현재 재생 시퀀스676개이다. Engineering은 현재4종 gameplay 복사본93개 및 기존 StateTree/Controller/Definition/ComboAction을 재사용한다. 용도 폴더/의미 이름 변경은 UE asset rename 및 참조 수정으로 수행하고 old→new/source provenance를 보존한다. Archer/원본 archive/스켈레톤 topology/Player scale는 대상이 아니다.
+
+Root Motion 활성화는 실제 skeleton index0/track/extraction audit 후 수행한다. 걷기까지 Root Motion으로 바꿀지 사용자 선택을 비동기로 요청했다. 답변 전에는 기존 Nav/CMC 보행과 RootMotionFromMontagesOnly를 유지하고 모든 대상 Sequence의 Root Motion을 활성화해 공격 Montage 이동에 소비하는 기준으로 진행한다. 단순 static-root/움직이는 pelvis를 wrapper 실패로 간주해 전이하지 않는다. 공용 Skeleton을 변형하거나 scale로 이동량을 보정하지 않는다. 확인된 native Root track은 보존한다.
+
+공격 패턴은 저장 SB step/event timing과 현재 clip library에서 원작 순서의 가능한 유한 animation 경로를 기존 GA/Combo/Montage 데이터로 추가한다. 히트·특수 상황 producer가 없는 조건부 경로는 animation-only 선택이라는 출처를 명시하며 피해 처리는 추가하지 않는다. 별도 Attack Ability/Manager/FSM은 없다. 사용자 약10% 상향은 기존 ContinueComboChance .75→.85와 현재 임시 AttackIntervalSeconds를1.1로 나눈 값으로 분리 기록한다. 실제 전체 공격 빈도는 공격 길이/거리/대치에 영향을 받으므로 정확한10% runtime 증가를 보장하지 않는다.
+
+사용자는 기존 행동 완료 대기만으로 재추격이 여전히 빠르다고 보고했다. 기존 Standoff/Attack 완료 정책을 유지하고 기존 Task instance TimeRemaining에 Chase 진입의 짧은 반응 대기만 추가한다. owner AISettings.ChaseReactionSeconds .4초는 어시스턴트 임시 튜닝값이며 기존 goal refresh .35초와 유사한 짧은 반응 구간이다. 첫 Chase 진입에도 동일하게 적용한다. Timer delegate/추가 gameplay 상태 사본은 없고 Task Enter에서 설정/Tick에서 소비/Exit와 재진입에서 재설정한다. 원인별 취소/Target 무효화/UnPossess cleanup은 유지한다. 변경 전 baseline은 Metadata/EnemyAnimationOrganization_20261007이며 실제 build/PIE/Main 전달은 후속 완료 기록과 구분한다.
+
+
+## 2026-10-07 18:43 KST — Enemy 정리·공격·Root Motion Main 완료
+
+ARCH-79 Main 완료.
+
+ARCH-79 실제 완료다. 기존 StateTree/AISettings/CharacterDefinition grants/ComboAction/ComboDefinition/Montage를 재사용했다. runtime 새 파일·class·component·manager는0, 실제 gameplay Source는 KZMonster.h와 KZMonsterStateTreeNodes.cpp 두 파일이며 기존 development KZMonsterAIPIETest.cpp를 보완했다. Player/ASC/ComboAction 실행 코드를 재작성하지 않았다.
+
+공격은13→35(Swordsman5, SwordShield3, Heavy7, Halberd20)이며 해당4종 Attack68클립을 모두 연결했다. finite 준비/loop/타격/회복은 같은 Action 안에서 필수 순서를 유지하고 실제 combo만 기존 held X/InputEnd로 잇는다. 신규 combo6개의 끝 경계 InputEnd 실패는 montage data에서 마지막 sample 이전으로 보완했다. 정확한 시간식과 원작 SB/file/field는 MONSTER_ATTACK_ROOT_MOTION_20261007.md 및 AttackExpansionPlan.json/AllSavedSkillAudit.json을 따른다. 원작 hit/guard 조건 producer나 피해/피격을 새로 구현한 것은 아니다.
+
+현재 공격 선택에는 독립 RNG probability가 없고 거리/각도/cooldown gate를 쓴다. 기존 임시 interval2..4초를1.1로 나눠1.8181818..3.6363636초로, combo continuation .75→.85(+10percentage points)로 설정했다. 전체 공격 빈도의 정확한10%를 보장하는 통계 수치가 아니다. ChaseReactionSeconds .4초는 assistant 임시 tuning이며4BP AISettings에 저장했다. 선택 Standoff/Attack을 끝낸 뒤 Chase에 진입하고 기존 task TimeRemaining을 Enter에서 설정/Tick에서 감소시켜 nav 요청을 잠시 보류한다. 첫 Chase에도 적용한다. 타깃 유지/기존 cleanup을 보존한다.
+
+stock SourceAnimationAudit813/18,958,755 raw transforms·곡선/선택 metadata 동일 Success; compressed root QA .01cm/normalized angular1e-4rad는 기술 허용 오차다. raw tolerance1e-6와 구분하며 실제 최대 압축 positional 차이.0060654cm였다. AttackPatternsPIE 최종35개/모든 section/actual root travel/HP 불변·취소 cleanup·네 종 실제 rechase Success. CombatPolicyPIE 네 종 선택 행동 완료/시야 밖 target 유지/.4초 nav hold/후속 물리 추격 Success, Waiting/Heal/Guard PIE Success. 최초 full Monster.PIE의32 방향보행/contact sample min11·median0cm/s는 통과했으며 montage notify만 보완한 뒤 중복 walk 검사는 반복하지 않았다. retreat fixture는 Root lunge로700cm를 따라잡는 문제와 nav 밖5000cm 배치 문제를 각각 보존하고, 최종8후보 projection+complete path 및 Chase 진입 이후 physical advance로 검사했다.
+
+Main 선택 전달은 파일981개(기존69/신규경로912), 이름 변경 옛 파일802개를 정확한 path/hash guard 뒤 제거했다. backup Before와 실패 로그를 보존한다. 미관련 Source/Config86 및 Archer177개 hash를 보존했다. Main stock cold build Succeeded, fresh Main PID3528 /DevMap/4BP·ABP UP_TO_DATE/813 options·35 grants·68 clips/저장값 재확인/PIE없음/dirty0이다. 자동 Main PIE는 실행하지 않았다. Main에 사용자 직접 Play용 DevMap이 열려 있다. 최종 manifest와 증거는 Metadata/EnemyAnimationOrganization_20261007/FinalVerification.json, DeliveredManifest.json, MainReadyAudit.json을 따른다.
+
+Main 최초 read-only 검사에서 DevAI_ label 접두사에 Navigation volume까지 포함해 actor수5로 실패했다. 4 BP/ABP·813 options 검사는 이미 통과한 상태였고, exact4family actor label로 QA 식을 고친 뒤 같은 fresh editor에서 전체 read-only 검사를 다시 통과했다. 실패 JSON/MainReload log를 보존했고 이 과정에서 게임 코드·map·asset save/PIE는 수행하지 않았다. raw tolerance의 정확한 값은1e-6이며 이전 Art 본문의 최초 .001cm 언급은 엄격한 compressed probe와 혼동한 설명이다. 최종 compressed .01cm와 raw 검사를 구분한다.
+
+## 2026-10-08 — ARCH-80: NPC4 이동 보간과 공격 추적 회전 (구현 계약)
+
+- 사용자 직접 수정 요청: 기존 NPC4 이동 모션 보간, 대치 중 타깃 상실처럼 보이는 동작, 공격 중 완만한 LookAt 및 다음 콤보 공격 전 재정렬을 개선한다. 새 runtime 파일/class/component/상태 사본을 만들지 않는다.
+- 기존 BattleTarget/Gameplay Focus와 StateTree 행동 완료 정책은 유지한다. 타깃의 실재 상실과 Root Motion 동안 몸 회전 중단을 구분한다. Rider LLDB 별도 Work PIE의 DevAI_Swordsman/Attack_Kick에서 타깃 BP_Player0 유지, CMC bUseControllerDesiredRotation=1, bAllowPhysicsRotationDuringAnimRootMotion=0, 실제 RootMotionMontageInstance를 확인했다. 증거: Metadata/MonsterMotion_20261008/DebuggerBaseline.json.
+- AIController는 기존 GetDesiredRotation 엔진 계약으로 최신 타깃의 평면 방향을 제공한다. 공격 실행 여부는 ASC의 현재 AnimatingAbility/IsActive 및 기존 AttackAbilities 목록에서 파생한다. CMC가 실제 capsule 회전을 수행하며 원본 montage root yaw/translation은 그대로 합성한다. Player 및 일반 이동 policy/RotationRate를 직접 덮어쓰지 않는다.
+- ComboActionAbility에는 기존 node/held edge/몽타주 InputEnd notify로 다음 전환이 임박했는지 읽는 const 조회만 추가한다. 타이머/회전 상태/다음 node 사본을 저장하지 않는다. InputEnd 직전과 다음 section 준비 구간의 조준 속도를 높인다. 실패 edge/비활성/종료/취소/다른 액션에서는 파생 조회가 false가 되어 공격 회전 제한이 자동 소멸한다. 모두 Game Thread 조회다.
+- 몬스터 기존 AISettings에 AttackTrackingYawRate=60 deg/s, ComboReaimYawRate=180 deg/s, AttackPreparationSeconds=0.15 s를 모아둔다. 원작 AI 회전 수치는 미확인이며 어시스턴트 임시 튜닝값이다. 느린 일반 공격 추적, 더 빠른 다음 공격 준비, 짧은 선행 재정렬을 위해 선정했다. 플레이어가 옆으로 움직이는 PIE에서 연속 yaw/오차 감소와 원본 Turn root yaw 보존을 확인해 조정한다. 순간 SetActorRotation 보정은 사용하지 않는다.
+- 대치 Combat BlendSpace 4개의 TargetWeightInterpolationSpeedPerSec는 원작 BS_*_LockOnMove의 직접값(6/10/10/5)을 사용한다. 원작 normalized XY+Stand와 현행 angle/speed 표본 배치는 다르므로 원작 게임과 동일 시각 결과라는 주장은 하지 않는다. 정확한 원본 package/export/field/SHA 및 에셋 변경 전후는 표적 script report에 기록한다. 기존 ABP 관성화 노드/발 처리/GT 평가를 재사용한다.
+- 별도 MonsterWork에서 구현/build/PIE 후 이번 소유 변경만 Main으로 전달한다. 현재 사용자 Main editor 및 Snow 작업을 덮어쓰거나 조작하지 않는다. 검증 완료 상태는 아래 후속 기록과 해당 작업 문서에서 구분한다.
+
+## 2026-10-08 — ARCH-80 최종 검증 보충 / Main 미반영
+
+ARCH-80의 구현은 현재 MonsterWork에만 적용됐다. CMC가 회전/원본 root 합성을 소유하고 Controller는 현재 BattleTarget으로 desired yaw만 반환한다. Ability const 조회는 실제 montage InputEnd와 현재 held edge/조건의 준비 가능성만 읽는다. 미래 비용 변경/commit 성공을 예측하거나 실패 전환을 강제하지 않는다. 첫 ARCH-80의 실패 edge false 표현은 현재 조건 불일치/비활성/montage mismatch 범위로 한정한다.
+
+새 runtime 상태 사본/Manager/파일 없이 기존6개 runtimeSource를 보완했으며 공격 종료·취소·타깃 무효·UnPossess는 기존 수명/조회 원본으로 처리한다. 원작 sample 보간과 임시 공격 회전값의 출처를 구분했다. 정확 구현/검증은 MONSTER_FACING_SMOOTHING_20261008.md 마지막 절이다. Source8 중2개는 개발용test이며 Player 제품 기능 확장이 아니다. Main13700 파일 잠금으로 실제 Main 전달·fresh native 검증은 남아 있다.
+
+
+## 2026-10-08 — ARCH-81 플레이어 Combo 공격 판정·수치 피해 직접 구현 착수
+
+사용자 직접 요청으로 기존 FKZComboNode/UKZComboActionAbility에 공격별 duration window, 원작 baked/현재 pose 파생 geometry key, group별 recipient hit set, 초록 debug draw를 연결한다. 새 gameplay class/component/manager/task/tag는 만들지 않는다. Data 작성자는 기존 DA_Player_Combo_Definition, 실행·timer·dedup·cleanup 소유자는 활성 ComboAction, query/피해 승인 작성자는 authority GT이며, 공통 instant GE와 기존 몬스터 ASC/AttributeSet이 HP·Stamina 결과를 소유한다. Actor/AnimInstance/AI의 전투 상태 사본은 추가하지 않는다.
+
+원작 출처는 Metadata/PlayerAttackCollision_20261008/Original/SourceAttackWindows.json 및 BoxSemantics.json이다. 원작 duration/1회 공격/group 기록에서 recipient당 window/shared group 1회 정책을 추론한다. separate window는 별도 타격이다. Box half extent는 원작 Bounds와116창의 모서리 계산으로 확인했다. 원작 trace channel/팀/장애물/최종 damage formula/native cylinder 소비는 확인되지 않았으며 프로젝트 정책·파생/임시값을 구분한다. 절대 HP10/Stamina5는 각 window의 편집 가능한 어시스턴트 임시값이며 원작 raw multiplier의 환산으로 표현하지 않는다.
+
+다음 틱의 UE timer가 CMC 갱신 후 montage clock의 모든 통과 key를 소비하고, 정상 combo 전환/완료에는 현재 구간을 flush한다. 외부 cancel/실패/UnPossess/EndPlay는 판정·timer·자기 hit set을 즉시 정리한다. 자동 NextSection chain의 clock은 첫 section 길이로 자르지 않는다. 신규 target reaction/death/GuardBreak/무적을 이번 numerical damage 완료와 혼동하지 않는다. 현재는 격리 ComboWork의3개 product 파일 적용·첫 cold build만 완료했고 Main 반영·실제 PIE 검증은 아직 전이다.
+
+
+## 2026-10-08 15:52 KST — MonsterStamina 작업 중 및 이전 stats 기록 가독성 보충
+
+
+이번 ARCH-82는 기존 ASC/AttributeSet/CharacterDefinition·Instant 피해 GE·MontageTask·Locomotion constraint·StateTree를 재사용한다. AKZMonster가 attribute 결과를 coalesce해 death/exhaustion을 선택한다. 공유 상태는 ASC State.Exhausted/State.Dead이며 내부 montage phase는 Ability 실행 상태로 한정한다. 다른 Actor/AI/AnimInstance에 독립 exhaustion bool을 중복 저장하지 않는다.
+
+추가 runtime 클래스2는 몬스터 Exhaustion(피격·timer·회복)과 Player BrutalAttack(입력·타깃·notify)의 서로 다른 실행 수명 때문에 필요하다. 새 manager/component/FSM/shared helper는 없다. 피격량은 ARCH-81의 기존 window·damage GE가 소유하고 이번 구현은 수치 결과를 소비한다. 두 작업의 ComboAction Source/data 소유권을 섞지 않는다. 패링은 성공 결과 생산자의 ReportAttackParried hook이며 정상 Guard 성공을 패링으로 대체하지 않는다.
+
+각 Ability가 자기 task/timer/notify/constraint handle을 정상·실패·취소·UnPossessed·EndPlay에서 정리한다. 양쪽 정상 완료와 생존 검사가 있어야 현재 MaxStamina 충전하며 OnEndEffect/NotifyEnd 하나에 회복을 맡기지 않는다. 정책 숫자/타이밍/입력 제안과 원작 직접 확인은 MONSTER_STAMINA_EXHAUSTION_20261008.md로 구분한다. 현재 Work 구현 진행 중이며 Main·PIE 완료를 뜻하지 않는다.
+
+
+## 2026-10-08 — ARCH-81 실제 적용·검증 결과
+
+- 공격 collision의 window/pose key/shape/extent/HitGroup/HP·Stamina damage는 기존 ComboDefinition node가, timer/query/대상별 중복 적중/전환·취소·종료 cleanup은 기존 ComboActionAbility가 소유하도록 실제 적용했다. 기존 ASC/AttributeSet와 instant SetByCaller GE를 재사용하며 새 runtime manager/component/state/tag/task는 추가하지 않았다.
+- 원작 duration·baked geometry를 사용하되 recipient dedup/channel/Guard/절대 피해 환산은 원작 native 검증과 구분한다. 확인되지 않은 해석/임시값을 editor Source와 현행 구현 문서에 표시한다.
+- Main 선택 전달, 최신 Source compile/link, 충돌13case와 실제 입력·Guard·Heal 검사, 별도 새 Main의 저장 schema readback이 완료됐다. 실행 중 Main 강제 reload/restart는 하지 않았다. 구 editor는 정상 재시작 후 해당 DA를 저장한다. 계약·검증·수치 정본은 `PLAYER_ATTACK_COLLISION_CURRENT_IMPLEMENTATION.md`와 task receipt를 따른다.
+
+
+<!-- MonsterStaminaMainComplete_20261008 -->
+## 2026-10-08 17:29 KST — 몬스터 소진·브루탈 어택 Main 완료
+
+ARCH-82를 실제 Main에 적용했다. 기존 ASC/AttributeSet/CharacterDefinition/Instant damage GE/몽타주 Task/Locomotion handle/StateTree를 재사용하고, 별도 수명인 Exhaustion과 BrutalAttack Ability 두 클래스(새 runtime4파일)만 추가했다. State.Exhausted/State.Dead의 공유 상태는 ASC가 소유하며 Ability의 내부 phase/completion은 자기 실행 순서다. HP/Stamina 결과는 다음 tick에 묶어 death 우선으로 소비한다. 플레이어·피해자 양쪽 실제 Task 완료가 모인 뒤 생존자의 End 완료에서 현재 MaxStamina를 한 번 설정한다.
+
+AI의 bPausedForCombatReaction은 게임 상태 사본이 아니라 이 반응이 StateTree Pause를 취득했는지 나타내는 cleanup 소유권이다. 다른 이유로 멈춘 Tree를 임의 Resume하지 않으며 target 기억을 유지한다. pending ARCH-80의 추가 회전은 실제 active Monster Attack과 일치할 때만 CMC에 적용하고 소진 제약 중 제외한다. 기존 ComboAction의 충돌/사용자 Jump·Down/입력 계약을 보존했다. 개발용 최초 Sight 격리·Heal observer 보완의 과거 Work 변경은 이번에 전체 파일로 덮어쓰지 않았다.
+
+Main 선택 전달 runtime15/dev1/assets89, stock Build.cs 유지·임시 editor cpp3 제외, Work native453/0실패 및 Facing/CombatPolicy/Guard/Heal/PlayerAttackCollision 회귀5종 Success, 새 Main 실제 DLL·저장 참조·BS4/CDO·dirty0 검증이 완료됐다. 정확 근거는 Metadata/MonsterStamina_20261008/FinalVerification.json이며 물리적 패링 생산자·별도 cinematic Execution·Apes/Yetuga 자율 AI는 후속 범위다.
+
+## 2026-10-08 18:32 KST — ARCH-83 공격 VFX 실행 소유권·브루탈 추가 범위
+
+사용자의 현재 모든 공격 이펙트 직접 구현 요청을 따른다. 최초 ComboDefinition18node 분석 뒤 ARCH-82의 Front/Back BrutalAttack이 Main에 전달돼 실제 두 번째 소비자가 생겼다. 기존 ComboAction의 Start/Stop/ClearCombatEffect와 weak resource record를 기존 부모 UKZActionAbility의 protected 구현으로 옮겨 공유한다. 새 manager/component/공유 helper class/전역 timer는 만들지 않는다. 새 runtime 파일은 data-only UKZAnimNotify_CombatEffect h/cpp 두 개뿐이다.
+
+기존 Ability 실행이 자원·원본 종료 정책·component-bound timer를 소유한다. Combo의 현재 node/실제 HP hit/몽타주 instance·execution/dedup 계약은 Combo에 남기고, Brutal의 타깃·paired reaction·피해·입력·movement constraint는 기존 BrutalAbility에 남긴다. 이펙트는 피해를 다시 적용하거나 gameplay 상태를 결정하지 않는다. 원본 bOnAttackSuccessed는 확정된 현재 실행의 적중 결과로만 허용하며, 현재 BrutalHPDamage0 설정은 이 작업에서 임의 변경하지 않는다. 원작 native BattleEffectIndex·opacity shader topology는 미복원 상태의 adapter와 구분한다.
+
+현재 private에 최신 Main Source93개와 새 Brutal DAS7개를 guarded intake했고 Combo2는 exact three-way 병합했다. Main Source/Content에는 아직 VFX 후보를 전달하지 않았다. 원본5개 Grapple composite의 새54Particle/Decal occurrence와 기존347개를 분리 분석·작성하고, 실제 취소/정상 완료/캐릭터 격리 및 저장 재로드를 검사한 뒤 선택 전달한다. 적용·build·PIE 완료는 후속 실제 증거로만 기록한다.
+
+<!-- PlayerAttackVFXMainComplete_20261008_1911 -->
+## 2026-10-08 19:11 KST — ARCH-83 실제 Main 완료
+
+ARCH-83의 기존 ActionAbility protected Start/Stop/ClearCombatEffect 공유를 Main에 적용했다. Combo의 실제 hit/node/execution/delegate 관측과 Brutal의 paired target/피해/입력/제약 수명은 기존 실행 소유자에 남는다. Notify는 data-only이며 Pawn/실행 상태를 저장하지 않는다. 신규 runtime class1/파일2는 기존 branching-point Notify의 데이터 확장뿐이고 새 manager/component/전역 Tick은 없다. 확정된 피해 결과만 표현에 사용하며 VFX가 gameplay 피해를 생산하지 않는다. 동기 GE 후와 재생 entry마다 현재 소유권을 검증하고 source 종료 flag·정상/취소·잔여 decal 수명을 구분한다.
+
+최신 Main 독립 변경을 병합·보존한 전체 build Success,11Source(runtime10/dev1)+8몽타주+15Art 선택 전달, fresh Main 실제 alias의18 Combo+Brutal5case RHI Success 및8몽타주401paired ID/8,308field saved readback을 확인했다. 현재 BrutalHPDamage0에서는 조건부 blood0이 올바른 정책이며 양성6.25피해는 transient 개발 fixture만 사용했다. 원작 native BattleEffectIndex/첫 적중·CDO default·shader topology·픽셀 일치와 멀티플레이는 확인되지 않았다. 원작 원시값과 adapter를 혼동하지 않는다.
+
+현재 실행 정본과 검증 한계는 [PLAYER_ATTACK_VFX_RUNTIME_20261008.md](PLAYER_ATTACK_VFX_RUNTIME_20261008.md)의19:11 완료 절, 증거는 [FinalVerification](../../Saved/ImportReports/PlayerAttackVFX_20261008/FinalVerification.json)이다. 사용자16572의 구 모듈은 조작/reload하지 않았으므로 정상 재시작 후 새 schema를 사용한다. 전체 M단계나 원작 완전 일치 완료를 의미하지 않는다.
+
+
+## 2026-10-08 — ARCH-84 피격·SystemGuard·브루탈 접근 계약 (구현 중)
+
+사용자의 직접 구현 요청이다. 기존 Combo 충돌→공통 피해 GE→확정된 결과의 표현 순서를 유지한다. 공격 window의 반응 종류(None/Short/Knockback/Launch)는 공격자 데이터가 지정하고 CharacterDefinition의 종류별 몽타주 pool에서 방향 변형을 랜덤 선택한다. 입사 방향으로 일반 피격 모션을 선택하지 않는다. 공유 ASC 이벤트와 단일 UKZHitReactionAbility만 추가하며 새 combat manager/component/FSM은 만들지 않는다. HP0/몬스터 Stamina0/Dead/Exhausted와 기존 paired Brutal 반응은 일반 피격보다 우선한다. Ability가 취소/완료/실패의 몽타주·제약·공중 movement mode를 정리한다.
+
+SwordShield는 원본 Battle LockOnMove의 SystemGuard180과 attack DamageType notify 구간을 구분한다. 기존 노드에 방어 시간 구간을 추가하며 현재 몽타주 시간으로 소비한다. Passive shield block에는 Active Guard FrontAngle60/GuardStaminaConsumeRate1.8을 임의 혼용하지 않는다. 180을 full cone으로 해석하는 것은 native 소비자 미확인 프로젝트 adapter다. 방패 반응 Hit→End의 재차 피격도 방어하도록 기존 피격 Ability가 자기 shield 실행 여부를 제공한다. 실제 방어는 HP 피해를 막고 공격 window의 사용자 조정 StaminaDamage를 소모하며 소진이면 기존 Exhaustion이 우선한다.
+
+이미 있는 UKZBrutalAttackAbility/UKZExhaustionAbility와 전후 paired montage를 재사용한다. 즉시 TeleportPhysics 정렬을 원본 Grapple Start MoveTo의 .03356 trigger/.433283초 CubicInOut을 참고한 swept 접근으로 바꾼다. 최종 spacing은 기존 live capsule 정책이며 원본350을 최종 간격으로 단정하지 않는다. .01 mesh scale은 actor 정렬에 재적용하지 않는다. 기존 사용자 BrutalHPDamage50 및 lethal Hit2 이후 양쪽 반응 완료를 보존한다. 원본 조사/분류는 Art 별도 문서, 런타임 검증/임시값은 Engineering에 기록한다. 아직 Main 전달/빌드/PIE 완료가 아니다.
+
+## 2026-10-08 20:20 KST — ARCH-84 몬스터6 행동·공격 VFX 직접 구현 계약
+
+사용자 직접 요청으로 Swordsman/SwordShield/HeavySwordsman/HalberdElite/ApesStoneHandElite/Yetuga의 기존 애니메이션·행동·공격·소진에 원작 시각 이벤트를 연결한다. ARCH-83의 Ability 실행·적중·취소 수명은 보존한다. 일반 ABP sequence와 비Action Exhaustion은 montage branching delegate만으로 표현할 수 없으므로, 구체적인 data-only MonsterVisual NotifyState 한 클래스/두 runtime 파일을 추가한다. 엔진 NoMergeOnConcurrentPlay 및 NotifyInstanceID가 서로 다른 asset-player/montage 재생을 구분하며, 공유 Notify asset에 Pawn별 상태를 저장하지 않는다.
+
+기존 CombatEffect data class에 현재 particle/decal 생성·위치·바닥·parameter 계산의 stateless factory만 공유한다. 기존 ActionAbility는 승인·실제적중·record/timer/cleanup을 그대로 소유한다. 기존 Monster는 자기 mesh의 NotifyInstanceID별 실제 component/material snapshot만 보유하며 Begin/Tick/End·취소·death freeze·EndPlay에서 자기 자원을 정리한다. gameplay 상태/AI/Ability 상속은 다시 만들지 않는다. 추가 Material bone/vector·curve와 Yetuga trail mesh는 실제 원본 notify를 소비하는 이 수명에 한정한다. worker에서 Actor/ASC/material을 갱신하지 않는다.
+
+원본 notify/시간/attach/조건은 저장 canonical clip metadata와 표적 resource closure를 재사용한다. Niagara/cooked shader/native 조건이 복원 불가하면 원본 확인값과 명시된 렌더 adapter/임시값을 구분하고 필요한 시각 재생을 작성한다. 조건부 적중을 animation만으로 성공 처리하거나 별도 몬스터 공격 피해/자율 boss AI를 이 VFX 작업으로 생성하지 않는다. 별도 MonsterVFXWork에서 구현·저장·실제RHI/cleanup/기존Player 회귀 후 소유 변경만 Main에 전달하며 기존 사용자 브루탈 HP50을 보존한다. 이 절은 계약이며 아직 구현·빌드·PIE·Main 반영 완료가 아니다.
+
+## 2026-10-08 20:36 KST — ARCH-84 사망 표현과 원본 Decal 곡선 계약 보완
+
+현재 사망 경계는 `AKZMonster::FinishDeathPresentation`의 즉시 pose freeze이므로 원본 Death 시퀀스 Notify의 실제 소비자가 없다. 이번 이펙트 직접 구현 범위에서 기존 `FKZMonsterStaminaSettings`에 선택적인 `DeathPresentationMontage`만 추가한다. ASC Dead 상태·이동 제한·Ability 취소·Brutal 피해/쌍 수명은 기존 ARCH-82가 계속 소유한다. 기존 Monster가 사망 표현 전용 montage/AnimInstance의 weak receipt와 end delegate를 소유하고 종료·중단·EndPlay 때 자신의 visual 자원과 delegate를 정리한 뒤 freeze한다. 새 Death Ability, AI, FSM, 공통 manager는 만들지 않는다. 완주한 lethal Brutal2는 마지막 paired reaction 자세를 보존하며 Death montage를 다시 재생하지 않는다. 원본 Death 방향 선택 producer가 없으므로 기본 앞 사망 클립 선택은 프로젝트 표현 adapter로 명시하고, 클립의 포즈·시간·이펙트 수치는 원본 정본을 사용한다.
+
+Apes/Yetuga의 원본 Decal 곡선은 Player의 네 곡선 인덱스와 혼동하지 않는다. 새 복원 Decal 재질은 출처가 식별된 곡선 키/보간·lifespan의 GPU age 계약을 사용하고, Notify가 끝난 후에도 원본 lifespan까지 올바르게 감쇠한다. 기존 Player native 효과·재질을 일괄 재작성하지 않는다. 위 항목은 계약/적용 예정 기록이며 build·saved reload·RHI 검증 완료를 뜻하지 않는다.
+
+
+## 2026-10-08 — In-place 피격의 실제 이동 경로 추가
+
+별도 Work commandlet에서 Player Air F/B의 true skeleton root C_P_Kazan/index0/track0과 child Root 모두 이동0을 확인했다. 순서/누락/다른 Root의 이동 전사 문제가 아니다. Swordsman Up의 Bip001 이동은 포즈이며 world root로 임의 전사하지 않는다. 근거는 Metadata/CombatReaction_20261008/PlayerSourceRootReadback.json 및 InPlaceReactionRootAudit.json이다. `unreal-root-motion-repair`는 읽기 진단에만 적용했고 root/골격을 재구성하지 않았다.
+
+이런 클립은 플레이 중 실제 날림을 별도로 구동해야 한다. 새 물리 component/helper 대신 HitReaction 실행에 엔진 UAbilityTask_ApplyRootMotionJumpForce의 RootMotionSource를 소유한다. Short/방패/미지원 Giant Short fallback은 이 이동을 만들지 않는다. 지원하는 Knockback은 수평, Launch는 수평+수직 곡선이다. duration은 실제 몽타주의 반응→Land/Getup 시각에서 가져오고 새 gameplay timer 수치를 만들지 않는다. CMC는 anim root motion을 RootMotionSource보다 먼저 적용하므로 자기 force 중에는 AnimInstance IgnoreRootMotion을 소유하고 완료/취소에 이전 mode를 복구한다. 원본 클립 옵션/track/rate는 보존하고 InGame 복제의 root 옵션만 실제 기존 template 정책으로 켠다.
+
+CharacterDefinition HitReactions의 KnockbackDistance250cm, LaunchDistance120cm, LaunchHeight150cm는 어시스턴트가 선택한 임시 튜닝값이다. 원작 absolute 거리/높이로 확인한 수치가 아니다. 캐릭터 종마다 조절할 수 있고 실제 capsule 이동·벽 sweep·착지/기상 완료·과도한 이동 여부로 검증한다. 숫자를 여러 함수에 흩어 넣지 않는다. 일반 Monster Attack Window HP10/Stamina5도 원작 절대 피해량 환산이 미확인인 임시 설정으로 기존 window 데이터에 모아 조절한다. Player 기존 피해값은 임의 변경하지 않으며 승인된 접촉의 애니메이션 반응은 피해0에서도 가능하다. 원작 raw knockback curve/힘·거리 필드와 프로젝트3종 분류는 구분한다. 아직 이 force의 build/PIE 완료가 아니다.
+
+## 2026-10-08 20:47 KST — ARCH-84 시퀀스 종료 자원과 Rim 표현 소비자
+
+원본 부분 Notify 구간이 자연 종료된 후에도 `bDestroyOnAnimEnd` 자원이 남는 경우, 부분 Notify의 End만으로 receipt를 버리면 이후 취소/사망 정리가 누락된다. 같은 MonsterVisual NotifyState에 data-only `bAnimationContextBoundary`를 두고 VFX가 있는 source clip별 full-span sentinel 하나를 저작한다. 별도 class/게임 상태/폴링 timer를 추가하지 않으며, source sequence와 엔진 montage/asset-player context identity에 속한 presentation receipt만 clip 종료·교체·취소 때 정리한다. sentinel은 프로젝트 수명 adapter이고 원본 발생 횟수와 분리 집계한다.
+
+Halberd `Damage_Disease`의 원본 Rim point notify는 source payload `Duration=1.2`, `BlendIn=0`, `BlendOut=1.2`, `CustomColor=(2,0,0,0)`를 별도 interval로 소비한다. source SequenceLength=2.4와 오래된 Notifies.SegmentLength=1.2를 dilation으로 오인하지 않는다. 원본 shader graph/지수는 미확인이다. 기존 MonsterVisual State의 선택적인 material overlay와 scalar curve 소비자를 재사용해 전용 additive Fresnel 재질을 잠시 적용하고, baseline overlay를 자기 receipt 범위에서 복원한다. RGB·타이밍은 원본 확인값, Fresnel 표현과 engine 기본 지수5 사용은 명시된 임시 렌더링 adapter다. 원본 그래프를 복원했다는 주장은 하지 않는다. Apes scalar/vector도 실제 shader consumer 유무를 확인하고, 값 write만으로 화면 검증을 대체하지 않는다.
+
+
+## 2026-10-08 — 동시 작업 ARCH 번호 식별 보충
+
+동시에 진행된 두 별도 작업이 ARCH-84를 기록했다. 기존 기록을 보존하고 이후 CombatReaction(일반 피격/SystemGuard/Brutal 접근) 계약은 ARCH-85로 식별한다. Monster VFX/사망 표현 계약은 다른 작업의 ARCH-84로 유지한다. 이 번호 보충은 게임 코드 변경이나 두 작업의 병합 완료를 의미하지 않는다. 공유 KZMonster/CharacterDefinition/ComboAction과 Definition 저장 에셋은 최신 Main을 CAS 확인하고 각 변경을 보존해 통합해야 한다.
+
+
+## 2026-10-08 21:58 KST ? ARCH-84 ?? ?????? corpse? ?? ??? ??
+
+?? Apes Execution ??? Death 1?800, FinalBlow ?0?999.9998, ExecutionO ?0?2000?? normalized0..1? ???. ?? shader topology/??? ?????? raw curve? ??? ???? ?? ??? radius ???10cm ?? ?? ??? adapter/assistant ????? ????. ?? source field/?/SHA? ? master ??? Resources/ExecutionRadiusRevision.json? ???? ?? normalized adapter ??? ????. animation curve?Gameplay ?????? MI source values? ??? ???.
+
+?? ??? BrutalHPDamage50? nonlethal Apes??? FinalBlow? ????? source execution material? ??? ???? ?? ?? ??? ???? ?? ????. ?? ?? Exhaustion? paired owner? actual HP? ??? ? ?? execution replacement material? ????. ?? animation preview? ?? ???? ?? ???? ???? ???? ???? ???. ?? ???? ?? adapter?? ?? native ?? ??? ???? ???.
+
+??HP0? ??? ??Death/pairedBrutal2 ??? ??? MID?source parameter? frozen corpse?? ???? ??. ?? Monster? material receipts? pending/terminal presentation ownership? ?? weak Ability owner? ????, ?? paired completion??? FinishAbility cleanup ?? ?? receipt? Actor ?? ????? ????. ? gameplay State/??/manager/DeathAbility/actor hide? ??????? ??? ??. ??????context replacement?UnPossess?EndPlay??? ?? baseline ??? ????. exact Mesh/Anim/NotifyID/Source/MontageInstance ??? ???? ?? ???/?? paired ?? DEV ??? ????. runtime schema/???2855source event fields? ??? ???. build/PIE/Main ??? ?? ?? ??? ????.
+
+
+## 2026-10-08 22:16 KST ? ARCH-84 NoMerge ?? ????? ?? ?? ??? ??
+
+? actualRHI?? ?? DevMap Swordsman Walk_Peace_F_Composite? ?? ???? frame?? ? NotifyID? Begin?? ??? ????. Engine AnimInstance.cpp1898?1919? NoMergeOnConcurrentPlay? ? Montage/AssetPlayer context? ??? ?? ??? ?? match?? ???. ?? BlendSpace? SingleNode? ? context? ???? ???? ??? NoMerge constructor ??? ????. ?? ????source event fields???? ????.
+
+?? Monster? singleAction/default slot? engine default matching? ???? Actor/Mesh/Anim/NotifyID? receipt? ???? source context? ?? ????. ?? avatar/?? ?? ??? ??? ????. ?? AnimInstance?? ?? asset? ?? notify? ??? ? ? ???? ?? engine default? merge? ? ??? ? ?? lifecycle?? ?? ??? ???? ???. ?? concrete consumer? ?? ? ??? ?? ?? instanceID??? frame-delay ??/manager? ??? ???. ?? ?? ? context? ???? graph/engine ?? ???? ????.
+
+? RHI test-start failure? Automation StartTestSession? ?? PIE? ???? ?????. DEV test? ?? Player test?? ?? pawn? ???? latent entry? ???? QA driver? TestStarted ?? ??? PIE? ????. ??? editor? ???? ???. ?? ??/?? ?? ??? ?? ?? ?? ?? ????. fresh saved flags? nativeRHI/???cleanup ???? ?? ??.
+
+## 2026-10-10 19:48 KST — ARCH-84 중단 재개와 Apes 현재 재질 연결 적용
+
+10월8일 PrivateMonster RHI2는 consumer6 assertion 및 light usage fallback으로 실패했고 Main 전달 전에서 중단됐다. 10월10일 정확 재개 때 Main/private Source·Config·uproject가 Build10의 입력 SHA와 동일하고 실행 중 editor가 없음을 확인했다. 기존 작업을 다시 추출/전체 저작하지 않는다.
+
+Apes의 원작 Notify는 V3 MI5를 지목하지만 현재 BP/SK 슬롯은 NON-V3 MI5다. 기존 MaterialOverrides 타입을 그대로 사용해 원작5행을 유지하고 현재 MI5에 대응하는 명시적 프로젝트 alias5행을 추가했다. 두 private Sequence의 State5만 수정하고 원본 pose/curve/time, 나머지497 author 파일, original Main-before journal 및 native schema를 보존했다. 기존 Monster AcquireBinding에서 새 slot replacement MID에 earliest baseline의 효과적인 uniform 값을 복사해 현재 Tex_D/색/비율을 유지한 뒤 원작 Execution/O·bone parameter를 갱신한다. overlay에는 이 복사를 적용하지 않는다. 원본 재질 버전의 동등성을 주장하거나 BP/mesh/원본 MI를 바꾸지 않는다.
+
+따뜻한 DevMap에서 입김2가 나오지 않은 것은 bWinterOnly 조건의 정상 결과였다. DEV fixture는 실제 recipe가 winter owner 없이 억제되는 것을 검사한 다음 기존 AKZSnowDeformation을 transient로 생성해 실제 sequence의 winter-positive 재생을 검사한다. FieldResolution128은 QA 메모리 예산이며 제품 snow 설정/원작 수치가 아니다. fixture는 clip 완료·실패·cleanup에서 자기 actor만 제거한다. 제품 환경 조건은 유지했다.
+
+Apes probe2와 표적 apply는 성공했고 Build11은37.578s/exit0, private/Main 입력 불변이다. 이후 fresh saved/RHI·Player 회귀·Main 전달과 검증은 아직 대기다. 근거는 Saved/ImportReports/MonsterVFX_20261008/Authoring/ApesCurrentMaterialBindingRevision/{Probe,Applied}.json, Build/Attempt11/Exit.json이며 Art alias 출처는 Resources/ApesCurrentMaterialBindingEvidence.json이다.
+
+
+<!-- CombatReactionMainComplete_20261010 -->
+## 2026-10-10 — ARCH-85 피격·SystemGuard·브루탈 최소 확장 Main 완료
+
+ARCH-85 계약을 Main에 실제 적용했다. 신규 runtime class는 공통 UKZHitReactionAbility1개/h·cpp2개이며 기존14개 파일의 작은 확장으로 총16개다. ASC 태그/event와 기존 AbilityTask/GE/Locomotion 제약을 공유하고, 피해 확정은 Combo collision/Effect가, 실행·취소는 HitReaction/Brutal/Exhaustion이 소유한다. 별도 상태 사본·Manager·FSM을 만들지 않았다. 짝 capsule ignore는 기존 Exhaustion full-pair 수명에서 자기 추가분만 소유하고 복구한다. world wall 충돌·50 1회·양쪽 완료를 보존한다.
+
+Main146행 전달·stock build·RHI32/15/3·stock 회귀4개·fresh Work/Main 각각654,552 saved checks가 성공했다. 현행·수치 출처·지원 fallback·검증 한계는 [피격 runtime 정본](COMBAT_REACTION_RUNTIME_20261008.md)의 2026-10-10 완료 절과 [최종 증거](../../Metadata/CombatReaction_20261008/FinalVerification.json)를 따른다. 기존 ARCH-84 MonsterVFX는 별도 작업이고 그 완료를 이번 결과로 주장하지 않는다. 후속 shared Source/Definition 변경은 새 Main alias/source/asset SHA를 받아 병합·검증해야 하며, 이전 Work baseline이나 old pending delivery를 다시 적용하지 않는다.
+
+
+<!-- MonsterVFX_ApesGrapple_Rim_PrivateCheckpoint_20261010 -->
+## 2026-10-10 20:11 KST — ARCH-84 실제 Grapple source·Rim owner와 private 검증 범위 정정
+
+앞선21:58 paired execution 계약 및 Runtime22:26의 retention 설명은 source material notify가 실제로 존재하는 경우의 소유 정책이다. 현행 Apes paired Grapple 앞/뒤01/02와 InGame 사본은 각각 원본 Particle4/material0이며, FinalBlow3+Die_F2만 execution material State를 가진다. 현재 Grapple에 FinalBlow dissolve를 붙여 재현하거나 기존 paired 경로에서 그 terminal material 유지가 검증됐다고 설명하지 않는다. producer가 없는 현행 경로의 paired Execution retention은 미검증으로 남긴다.
+
+NONV3 현재 슬롯 alias는 기존 MaterialOverrides 타입의5행 추가로 두 Sequence/State5만 수정했다. 원작 V3행·source/effect fields·schema58d4696c…6cf 및 original Main-before journal499를 보존했다. Runtime Source9+DEV2, 저장 Sequence487/State3342/Death6와 Art 후보457이 현재 범위다. 새 gameplay producer/AI/manager는 없다.
+
+RHI3의 native failure20은 paired terminal replacement/value를 기대한 QA뿐이었다. ordinary Death의 Execution800/consumer5 관측과 fresh SavedReadback4 통과를 전체 RHI 성공으로 확대하지 않는다. Build13은16.422s/exit0이고 실제 paired clip에 맞는 QA만 보완했으며 추가 게임 코드 수정은 없다. PrivateMonsterRHI4는 실행 중이다.
+
+Rim의 실제 source skeleton은 Halberd WeaponV2다. PrivateRimQA Attempt2는 실제 BP의 compatible EnemyWeapon_R에서 overlay/weight fade/baseline 복원·save0/fallback0을 확인했다. 역광 PNG로 시각 강도는 미확정이어서 추가 QA 중이다. 기존20:47의 Rim 구현 계약을 full visual pass로 읽지 않는다. 자세한 source/field·실제 DLL·시간 표본·재개 순서는 [Monster runtime 정본](MONSTER_VFX_RUNTIME_20261008.md)의 이번 절을 따른다.
+
+MonsterVFX는 Main 미전달이다. 별도 ARCH-85 CombatReaction의 Main 완료를 이번 기능의 완료로 재사용하지 않고, 이후 shared Source/Definition은 최신 Main 변경을 보존하여 CAS/병합·재검증한다.
+
+## 2026-10-11 — ARCH-86 계획: Apes·Yetuga StateTree / 플레이어 낙하
+
+- 직접 구현 요청 범위: 저장 원본 패턴 자료를 바탕으로 두 짐승의 전투를 기존 StateTree·ComboAction·Definition에 연결, 점프 없이 CMC 낙하/착지와 공중 X 낙하 공격, DevMap 높은 발판 및 발판 위 PlayerStart. 작업/테스트 에디터는 새 `Khazan_GiantFallWork_20261011/Khazan`에서만 실행한다.
+- 원본 근거: `Metadata/EnemyBehaviorResearch_20261008`의 Apes resolved branches, Yetuga package/export-index 해석 및 저장된 재생 타임라인. Apes Early를 HeinMach 기본으로, Yetuga는 거리/각도별 우선순위 선택을 보존한다. 원본 raw HP 65/60/50은 비율로 임의 변환하지 않는다.
+- 책임: StateTree는 행동 선택/기존 AIController의 재사용 시간, Ability는 조건부 단계/몬타주/취소 실행 수명, CMC는 실제 낙하/착지, AnimInstance는 기존 Falling 관측을 유지한다. 새 공용 FSM/Manager/컴포넌트 및 gameplay 상태 사본을 만들지 않는다.
+- 이 기록은 착수/설계 계획이며 아직 게임 구현·빌드·PIE 완료 기록이 아니다. 원본 native 이벤트/확률 해석이 누락된 항목은 프로젝트 어댑터 또는 미검증으로 기록한다.
+
+
+<!-- MonsterVFX_ARCH84_MainComplete_20261011 -->
+## 2026-10-11 01:41 KST — ARCH-84 몬스터 VFX 실제 Main 완료
+
+기존 ActionAbility 순수 factory·engine Notify를 재사용해 신규 data-only MonsterVisual NotifyState1개/h·cpp2와 기존 Monster receipt 경로를 적용했다. mesh/Anim/NotifyID/source-context 소유 자원이 부분 tail·clip 경계/loop/cancel·material overlap·death freeze/UnPossess/EndPlay에서 정리된다. optional Death montage는 기존 Definition/Exhaustion을 사용하며 새 gameplay State/Manager/DeathAbility/AI는 없다. runtime9(기존7+신규2파일)+DEV2=Source11이다.
+
+[FinalVerification](../../Saved/ImportReports/MonsterVFX_20261008/FinalVerification.json)의 실제 `MainDeliveredAndFreshVerified`는 최종 선택972·Sequence487/State3342/Death6·fresh Main saved/네 실제 RHI·Root 표본 검토를 결속한다. ordinary Death material 유지와 실제 Grapple material recipe0, 사용자 피해50/B 입력·ARCH-85를 보존했다. 원작 미직렬화 victim Decal43 정책·shader/NI adapter·unsupported216 및 새 ARCH-86의 독립 범위는 실행/Art 정본을 따른다.
+
+초기968/Art457은 보존하고 Main 누락 adapter4를 별도 strict supplement로 추가한 최종972 기준이다. Source/native/material graph와 private proof는 유지했으며 새 Main 최종 검증은 추가 전달 이후 결과다.
+
+## 2026-10-11 — ARCH-86 실제 Main 구현·검증 및 재현 경계
+
+ARCH-86은 현재 실제 Main Source/asset으로 반영됐다. StateTree/AI는 타깃·후보와 기존 행동 수명, MonsterPatternAbility는 조건부 단계·몽타주·자기 실행 자원, SkillObject는 발사 이후 독립 수명, FallAbility/CMC는 실제 낙하·착지의 실행을 소유한다. 기존13 runtime 파일 + 새 runtime6, DEV1, editor Json rule1이다. FSM/Manager/컴포넌트와 Main AnimInstance의 gameplay 상태 사본0이다.
+
+MainBuild02·fresh Main saved150+DevMap·실제 Main RHI 낙하/전투8사례 성공, 제품176/보호Source84/VFX Content965 해시 보존은 [최종 증거](../../Metadata/GiantCombatFall_20261011/FinalVerification.json)를 따른다. 초기 설계/Work/실패 로그를 완료 근거로 대체하지 않는다. current manifest는 UnrealEditor-Khazan-20261011.dll이다. 기존 모듈/데이터는 byte backup으로 보관했고 외부 에디터 제어0이다.
+
+실행 설명/소스 diff/원본 및 임시 값/후속은 [구현 정본 마지막 절](APES_YETUGA_FALL_IMPLEMENTATION_20261011.md)에 있다. source129노드가 데이터에 존재하는 것과 모든 native BT fallback·MoveTo/grab/Spell/camera·원작 pixel/frame 동작이 동일한 것은 별개다. 평탄화한 Yetuga 후보와 공통 Chase, missing Apes projectile sphere, Yetuga pickup Spawn 추론은 explicit 재현 경계로 유지한다.
+
+
+## 2026-10-11 ? ARCH-87 Combat UI ?? ??
+
+???? Main? ?? ?? ??? ?? UI ??? ?? ????. ? runtime ??? UKZCombatHUDWidget? h/cpp2???, ?? local PlayerController? ??/viewport/EndPlay? ????. Widget? ASC? HP/MaxHP/Stamina/MaxStamina? GT?? ?? ???? ????. Actor/ASC/Ability? gameplay ?? ??, ?? ??, ?? Manager? ???? ???. ?? LockOnComponent?? ?? ?? current-target getter? ????. ??? ??? ?? B ??? ??? ????? ?? ?? FindBrutalTarget?? ?? ?? ?? ??? ??? ?? ?? ??? ????, ? ??? ?? ??? ?? ??? ????.
+
+Monster? ?? ??? ?? UI ??(??/??? ??, ??, ?? bone/socket)? ?? Monster? ??. Yetuga BP? ?? ??? ?? ?? ?? ?? ??? viewport? ????. ?? actor ??/?? WidgetTree ?? UI? ???? ??/??/UnPossess/EndPlay?? ??? ????. B ??? ?? granted BrutalAbility? CanActivateAbility/FindBrutalTarget ??? ???? ?? ?? ?? ??? ????? ???.
+
+?? widget/image/layout/color? ??? Metadata/CombatUI_20261011? ?? Art ??? ????. ?? xxAnimatedProgressBar.InterpolationTimeMultiply=.35? ???/?? ?????? ???? ?? ?? .35?? ????? ????. ?? ?? ??, DPI, ??? ??, ?? ?? ?? ??, ???0, ?? ??, ??/B, normal/Yetuga ??? ?? Main process?? ????. ? ?? ?? ???? ?? build/PIE ??? ???.
+# 2026-10-11 — ARCH-86 후속 병합 계약 / ARCH-87 보존
+
+백그라운드 CombatPresentationFix의 미전달 변경을 이번 Main 통합 요청으로 이어서 처리한다. 기존 Brutal/Exhaustion Ability가 paired montage 동안 root travel의 임시 IgnoreRootMotion과 이전 mode 복구를 소유하고, 기존 UpdateAlignment가 실제 victim capsule 위치에서 목적지를 갱신한다. 정상·취소·실패 cleanup은 기존 EndAbility/ReleaseBrutalMovementIgnore를 사용한다. 새 runtime class·manager·상태 사본은 없다. 원본 paired pose/sequence, GAS 실행 수명과 피해 정책을 유지한다.
+
+ARCH-87의 적격 locked target 우선 선택, LockOn getter, Controller 소유 HUD, Monster 표시 설정과 UMG/Slate 의존성을 병합 때 보존한다. Private author wrapper 및 대량 editor 의존성은 Main runtime module에 전달하지 않는다. 낙하 montage/공격 창은 저장된 FallPlan의 기존 baked 시간축 변환을 한 번만 적용하며 원본 sequence를 재임포트하지 않는다. 설원은 기존 level-owned 표시 field의 작은 설정/접촉 확장이다. 실제 빌드·PIE·Main 전달 결과는 후속 날짜별 검증 절에 추가한다.
+## 2026-10-11 — ARCH-87 UTF-8 계약 보충 / 실제 Main UI
+
+앞선 ARCH-87 중간 추가 절의 인코딩 손상은 이 절과 `COMBAT_UI_RUNTIME_20261011.md`로 보충한다. 원래 기록은 삭제하지 않는다. 새 runtime 파일은 `UI/KZCombatHUDWidget.h/.cpp` 두 개이며 기존 local PlayerController가 생성·viewport 추가·EndPlay 제거를 소유한다. GT Widget tick이 현재 possessed Pawn 및 각 대상 ASC의 HP/MaxHP·Stamina/MaxStamina를 표시용으로 읽는다. 확정 gameplay 값·Ability 실행 수명·회복/피해 정책은 ASC/기존 Ability가 계속 소유한다. UI에 gameplay timer/공유 bool/새 manager를 만들지 않는다.
+
+기존 LockOnComponent의 read-only GetCurrentTarget과 각 Monster의 실제 TargetPoint를 소비한다. B 인디케이터는 granted Brutal spec의 CanActivateAbility와 FindBrutalTarget 결과를 사용하고 실행 중에는 해제한다. 실제 행동과 표식을 일치시키기 위해 모든 기존 적격 조건을 통과한 locked target을 우선하며, 없으면 최근접 적격 target을 선택한다. 대상 소멸·HP0 표시 감소 완료·UnPossess·EndPlay에서 표시를 정리한다. Monster의 boss/elite/name/head-bone 표시 설정은 Monster가 소유하고, Yetuga는 상단 HUD, 일반 적은 실제 Bip001-Head 위치에서 표시한다.
+
+원작 이미지16·UI material2·FontFace1과 layout/color/폰트 수치는 Art 원본 감사에 결속한다. 양방향 게이지 보간 `.35초`는 원작 raw `.35`의 native 단위/공식이 미확인이므로 어시스턴트 임시 표시 튜닝이며 WBP Class Defaults에서 조정한다. gameplay 값은 즉시 변화한다. source ring/fade 및 boss 선택·visibility는 명시된 프로젝트 adapter다. Main Build06/PIEEditor03 전체 통과 후 ARCH-86 후속 27파일을 병합했으며 새 Main 빌드/저장 readback은 통과했다. 후속 실제 PIE 회귀 결과는 완료 절에 추가한다.
+## 2026-10-11 — ARCH-86 후속 / ARCH-87 Main 적용·검증 종료
+
+직전 후속 계약과 UTF-8 UI 보충 절은 실제 Main Source/Content로 적용됐다. 새 gameplay runtime 파일0, UI Widget h/cpp2, 기존 Controller/LockOn/Monster/Brutal 최소 확장이다. Source8/Content19 후속 선택 전달과 UI Source10/Content27의 실제 저장·빌드·RHI를 각 최종 receipt로 확인했다. Main paired12/Snow/CombatEffect18+Brutal5/UI05/Shader fallback0, 새 readback 및 actor9861/PP0/동일 카메라3가 완료됐다. current module은 canonical UnrealEditor-Khazan.dll SHA `c908da8696b7844df39c7d476aa3ea8c10b96d206137b359c9252940d13c98bf`다. 기존 Tag–Ability 책임/locked target 우선/GAS 수치를 보존했고 문서상의 완료는 위 검증 범위로 한정한다.
+
+## 2026-10-11 — ARCH-88 사용자 직접 수정 요청: Monster VFX·피격/사망·Combat UI
+
+최신 요청으로 몬스터6종의 공격 이펙트 위치/방향을 전부 재검사하고, 바닥 혈흔 데칼 생성은 제거한다. 실제 승인된 피격에는 다량의 검붉은 분사, 사망 애니메이션/짝 실행 완료 후에는 검은 재와 dissolve 소멸을 적용한다. LockOn/B 표식은 실제 가슴 소켓에 부착해 매 프레임 투영하며, 게이지는 즉시 foreground 반응과 원작 alpha/layout을 적용한다. 원작 확인값·계산값·사용자 요청의 새 표현/임시 튜닝을 구분한다.
+
+ARCH-84/85/87의 기존 Monster/Notify/factory/Hit 결과/HUD 수명을 재사용한다. gameplay 피해·GAS 실행/취소·paired 수명은 유지한다. 새 Manager/FSM/component/공유 gameplay 상태 사본을 만들지 않는다. Corpse의 material/particle 정리는 기존 Monster presentation owner가 담당하며 UnPossess/EndPlay cleanup을 유지한다. Main에는 선택된 runtime 작은 diff와 표적 asset만 전달한다. 기존 GiantFallWork를 최신 Main에서 snapshot하고 거기서 검사/저작한다. 기존 다른 task editor는 제어하지 않고, Main 전달 직전 동시 변경의 SHA와 책임을 대조한다. 이 절은 착수 계약이며 실제 수정/빌드/PIE 완료가 아니다.
+
+## 2026-10-11 — ARCH-89 원작 사운드 재생 계약 (적용 전)
+
+현재 사운드 직접 구현 요청은 기존 GAS/Ability/Task/CMC/피해 승인 경계를 유지하는 Presentation 확장이다. 새 runtime 파일은 stateless Audio Notify/NotifyState h·cpp4개다. 데이터는 SoundCue·SoundWave·엔진 attenuation/concurrency가 소유한다. 일반 유한음은 실제 Actor의 엔진 AudioComponent가 원본 끝음까지 재생·자동 정리하며, 반복/명시적 stop 구간은 실제 Mesh와 engine notify occurrence ID의 component tag로 자기 컴포넌트만 찾아 종료한다. Notify UObject에 공유 재생 상태나 원장, 전역 manager/FSM/MainAnimInstance 상태·Tick을 추가하지 않는다. Actor 파괴는 엔진 StopWhenOwnerDestroyed, 애니메이션 교체/취소는 NotifyState End로 정리한다.
+
+원본 xxAkEvent/Footstep/PostAudioEvent/UntilAnimEnd의 시작·종료는 원본 AnimationTrack의 trim/rate/loop 및 SourceDilationCurve를 현행 baked sequence에 한 번만 변환한다. Montage와 그 child sequence에 같은 사운드를 중복 저작하지 않는다. 발소리의 실제 지면 선택은 CMC 범위 trace/PhysicalMaterial·기존 Snow owner이며 원본 physical_material switch를 native SoundCue 정수 파라미터로 선택한다. 피해/막기 소리는 기존 FKZAttackCollisionWindow의 선택적인 SoundBase2개와 실제 승인 결과만 소비한다. 공격 실패/단순 이동은 적중 소리를 만들지 않는다.
+
+Wwise bank mix의 gain/delay/layer·한국어 kz 분기와 랜덤 변형은 오프라인 복원 후 UE cue로 재생한다. 수학적 unity1 및 cm/s 단위 변환을 튜닝으로 혼동하지 않는다. 원본 수치가 없는 취소 anti-click fade·native 공간/리버브/voice budget은 조정 가능한 명시적 임시 표현 설정으로 기록하고 원작 SDK·플러그인 DSP 동일성으로 표현하지 않는다. 후처리/조명·눈/RootMotion/UI/gameplay 수치는 이번 사운드 작업으로 되돌리지 않는다. 이 절은 적용 전 계약이며 import/build/PIE 완료가 아니다.
+
+
+## 2026-10-12 ? ARCH-89 ?? ??? ??? ?? ?? ??
+
+?? Player_Hit? skin/metal/leather/rock/yetuga ???? ??? ?? ????. ?? FKZHitReactionSettings? ???? ImpactSound1?? ?? ?? ??? HP ??? Combo/SkillObject/Brutal ? ???? ?? Definition?? ?? ???? ????. Clip? ?? VO/weapon common impact? ?? ???? ???? miss/guard/stamina-only?? body hit? ??? ???. ?? runtime class/file0, ?? gameplay ??/manager/tick0??. ??? ??? ?? ???? ?? ??? ??7 Definition? ???? ??? native adapter?? ?? native caller? ???? ???? ???. Source waveform gain/??? ???? ???mapping? ?? ??? Art? ????.
+
+
+## 2026-10-12T00:17:33+09:00 — ARCH-89 최소 body hit 계약 UTF-8 보충 / checkpoint
+
+직전 Architecture의 body hit 추가 절은 PowerShell stdin 인코딩으로 일부 문자가 물음표가 되었으므로 이 UTF-8 절로 보충한다. FKZHitReactionSettings의 선택적인 ImpactSound1개는 실제 승인된 HP 피해의 Combo/SkillObject/Brutal 세 소비자가 대상 Definition에서 읽는다. miss/guard/stamina-only는 body hit을 만들지 않는다. 신규 gameplay class/file0·manager/state 사본/tick0이며 source material-name의 현행 family mapping은 native adapter다. 원본 native caller의 동일성은 미확인이다. projectile audio는 기존 SkillObject의 실제 launch/impact/Actor component 수명으로 재생·종료한다.
+
+Build13은 exit0이다. 기존 순수 Audio Notify/NotifyState 두 class/h·cpp4와 현재 owner의 작은 확장, editor-only finalizer 및 DEV PIE test를 적용했다. NativeImport05의 영구 wave 참조 수정은 위 Art checkpoint를 따른다. AudioPIE01 논리 관측 Success와 실제 녹음 peak0을 구분한다. 다음은 BindingAuthor02_Persistent 종료/새 mixer 출력·취소·실제 hit/guard 회귀와 saved 보존 검사다. exact 재개는 ResumeState03.json이며 사용자/다른 task editor 제어0이다.
+
+## 2026-10-12 — ARCH-88 Main 구현 계약
+
+직접 요청의 runtime 수정은 기존 Monster h/cpp, HUD h/cpp, Combo/Brutal accepted-hit 호출6파일이다. 새 runtime class/component/manager/FSM0이다. Source10 전달 중 나머지는 실제 PIE QA3개와 editor-only UnrealEd/Json 의존성이다. Main worker AnimInstance에 ASC/Actor 접근이나 gameplay 상태 사본을 추가하지 않았다.
+
+Monster는 notify occurrence/mesh/AnimInstance receipt를 먼저 설치하고 한 번의 bone-finalize callback으로 첫 particle spawn을 수행한다. end/cancel/EndPlay에서 자기 delegate를 해제한다. 실행 중 callback unregister가 functor를 해제할 수 있으므로 capture를 local로 복사하며, particle factory의 reentry 뒤 receipt를 ID/mesh로 다시 찾는다. 공격 resource/socket/typed offset/rotation과 기존 자료의 권한을 보존한다.
+
+Player Combo는 기존 guard 분기·hit-group/window dedup·GE 성공 뒤 monster에1회의 PlayHitBlood를 호출한다. HP0 대상/빗나감/취소 뒤에는 발생하지 않는다. Product에 HP damage literal0인 유효 공격이 있으므로 성공한 unguarded collision 자체를 blood 조건으로 쓰고 gameplay 값을 새로 채우지 않는다. Brutal은 기존 accepted positive HP producer에서만 같은 owner 함수를 호출한다. 기존 BodyImpactSound·guard/impact audio 코드와 sound notify를 보존했다. broadphase center가 몸 바깥에 있을 수 있으므로 mesh closest physics point, 실패 시 실제 chest socket을 사용한다. finite world PSC가 drain을 소유하고 decal을 만들지 않는다.
+
+Monster death는 ASC HP0을 계속 정본으로 사용한다. normal death montage/paired completion의 기존 FreezeDeathPresentation 뒤 universal dissolve로 transfer하며 완료된 source material receipt/binding을 정리한다. 실제 body/weapon mesh에 MID를 만들고 GT Tick에서 normalized progress를 갱신해3초 TEMP 종료 시 Destroy한다. 재는 actual body bones7곳에서 발생하는 finite world particle이다. 사망 수명과 표시 수명을 GAS/AI/새 enum에 이중 구현하지 않았다. EndPlay가 자기 delegates·MIDs/receipts를 정리하고 engine world PSC는 finite tail을 마친다.
+
+HUD는 player/controller의 기존 GT NativeTick에서 ASC 현재 값을 즉시 foreground에 반영하고 감소 잔상만 .35초 TEMP로 보간한다. 표시 HP/ST는 gameplay 작성자가 아니다. LockOn/B reticle의 공통 position은 actual UI_Chest(Bip001-Spine2)로 매 프레임 projection하고 기존 CanActivate/eligible lock priority/camera targeting 위치는 유지한다. Elite frame 축소 및 원작 alpha의 별도 empty track는 HUD 책임이다. ownership/UnPossess/EndPlay cleanup은 기존 경로를 사용한다. 숫자 원본/TEMP 및 resource/package 출처는 Art 정본 마지막 절에 분리 기록했다.
+
+실제 Main build/saved/Attack198·1577/death6·actual hit13cases와 UI regression은 성공한 report만 근거로 하며 최종 전수 screenshot 식별/pose framing을 보완한 MainRuntime02가 진행 중이다. original Halberd CorrectionInfos52의 native bone 계약, original shader/VM/pixel/frame parity 및 Shipping performance는 확인 범위 밖이다. 이를 현재 엔진 pose/socket 변환 검증으로 대체해 확인했다고 주장하지 않는다.
+
+## 2026-10-12 — ARCH-88 Main 구현 검증 종료
+
+직전 구현 계약은 Main에 적용됐으며 FinalVerification.json이 MainDeliveredAndFreshVerified다. Source10/asset59/새 runtime0, actual finalized pose Attack198/1577, normal/paired death6, accepted hit13 case 및 HalberdElite UI02, latest saved audit가 통과했다. 각 실제 loaded DLL/Source·asset hash와 동시 audio GUID 후속 갱신의 구분은 Engineering continuity 완료 절을 따른다. 새 Manager/FSM/AnimInstance gameplay 사본 없이 기존 Tag–Ability/GAS owner·Monster presentation/HUD·cleanup 경계를 유지했다. 필수 구현·Main 검증 잔여0이며 원작 native correction52/stripped shader/pixel/frame parity와 Shipping 성능은 별도 미확인이다.
+
+
+## 2026-10-12 — ARCH-88 사진 기준 혈액/지면 혈흔 후속 계약
+
+사용자의 첨부 Reference.png 직접 수정 요청으로 기존 floor blood 전면 억제를 이번 피격 표현에 한해 대체한다. 기존 accepted-hit producer와 AKZMonster::PlayHitBlood, 엔진 Cascade/SpawnDecalAtLocation을 재사용한다. 실제 피해 승인·dedup·취소·GAS/사망/UI/사운드는 그대로이며 새 runtime 파일/class/manager0이다. GT에서 현재 피격 지점→월드 지면 trace로 표면과 normal을 확인하고 해당 지면에만 불규칙한 원본 texture의 혈흔을 유한 수명으로 생성한다. 피 분사는 큰 sheet/덩어리와 미세 방울의 복수 층을 기존 HitBloodEffect asset에 저작한다. 설정은 현행 Monster Class Defaults/particle/material parameters에 모으고 원작 직접 값과 사진 비교 TEMP를 구분한다. Work에 최신 Main C++를 stage하되 private author/build 의존성은 Main에 전달하지 않는다. Main 사용자 editor PID19752는 제어하지 않으며 fresh own editor에서 검증한다. 이 절은 착수 계약으로 아직 적용/build/PIE 완료가 아니다. 근거·exact baseline은 Metadata/MonsterBloodReference_20261012/Baseline.json이다.
+
+
+## 2026-10-12 ? ARCH-90 ??? ?? ?? ?? ?? (?? ?)
+
+?? Guard Ability ??? ?? ?? ?? ?? JustGuard ?? ????. ? runtime class/component/manager/tag? ??? ???. ?? activation? world game time?? ??? release/End?? ???. ?? ??? Start ??? ????? ?? ???? Success/held ??? ?? ?? ?? ???. ?? hit-group/window dedup, unblockable ??? ??? GE/?? ?? cleanup? ????.
+
+Guard_Start ?? Notifies[3]? BeginJustGuard 0/Duration .292? ?? InGame Player_Guard_Start inverse_map? ? ? ?? .146?? ????. ?? Normal_Start? baked source mapping? ????? ???? adapter?? ?? Guard_Start ?? Dilation? ?? native ?? ?? ???? ???. JustGuardReduseStaminaPowerRate .5? ??? ?? ??? ???? ??? ??? ?? Definition.ParryStaminaDamage ? ReportAttackParried/Parried pattern ???? ????. ?? ??14? ???? ?? ???5? ???? ???.
+
+Guard/ASC? ?? boolean ?? ??? ???? ?? ? hit producer?? out-parried? ??? ?? GuardSound ??? ???. ?? ??? ??? Guard ???? ?? melee/skill object? ?? ????. ?? Blueprint-callable ? ?? API? ??? ????. ?/? ?? ??? ?? AC_Guard_Suc_Just_L/R ? ??? ??? Def_JustGuard_R/L? ???? source DilationAnimPositions? ? ? bake??. ?? Guard montage? section/notify? ???? ?? audio/guard notifies? ????.
+
+?? PP_Damage_Spray NewJustGuard ? PP_AtkEx_JustGuard? ?? ??? ????. finite world-space weapon flash? UV edge feather? ??? presentation adapter/TEMP?? shared ??? ?? ???? ???. ?? ???? ?? ??? ???? ???. Main editor? ???? ?? ?? Khazan_ParryWork_20261012? ?? writable copy?? author/build/PIE ? ?? Main CAS ????. ?? Source/??? ?? ???PIE ??? ?? ?? ??? ????.
+
+
+## 2026-10-12T02:04:36+09:00 — ARCH-89 사운드 runtime build·준비본 검증 / Main37 잠금
+
+Build29/current alias2026101303는 성공했고 제품 runtime 및 자체 audio editor/QA는 그 build input과 동일하다. 이후 다른 작업의 DEV2 변경은 보존하고 전체 현재 Source 일치와 구분한다. Notify2 class/새 runtime4 및 기존 owner6파일의 작은 확장으로 타이밍·확정 피해/guard·비행음·cancel/EndPlay를 연결했다. 실제 family/cancel/loop/flight 및 기존 gameplay 회귀 출력은 검증됐다. Python 배열 사본 재기록 누락의37 asset 수정본은 prepared 검증 완료·Main 잠금 대기이며 complete=false다. 상세 계약·현재/원작 미확인 범위와 exact resume는 Engineering continuity 마지막 ARCH-89 및 ResumeState05/PreparedVerification01을 따른다. 사용자/foreign editor 제어0, 무관한 Source/feature rollback0이다.
+
+
+## 2026-10-12 — ARCH-90 패링 준비본: 실제 검증 / Main 잠금
+
+기존 Guard/ASC/Combo/MonsterSkillObject 6 runtime 파일의 작은 확장으로 시작 후 0.146초 전방 blockable 적중을 패링한다. 원작 raw 0.292초를 현재 GuardStart inverse_map으로 계산했으며 비용 배율 0.5와 effect detach 0.06초는 직접 source 값이다. 기존 몬스터 Definition의 사용자 결정 ParryStaminaDamage와 Pattern Parried/고갈 정책을 재사용한다. 새 runtime class/file/태그/GE/Manager는 0개이며 새 DEV test 1개다. Source·책임·cleanup·값 구분·에디터 설정·검증은 [PARRY_IMPLEMENTATION_20261012.md](PARRY_IMPLEMENTATION_20261012.md)에 기록했다.
+
+task-owned ParryWork의 실제 melee/field 15개 상황과 6종 몬스터, 고갈/좌측 response/비용/동일 HitGroup/독립 연타/Release/Cancel/UnPossess를 확인했다. 기존 Guard와 PlayerAttackCollision도 성공했다. 기존 5개 재생 segment·notify는 fresh reload로 동일하며 Montage refresh의 Suc_R 파생 cache 차이는 따로 기록했다. 원작 normal Guard의 JustGuard 설정을 그대로 복원한 것이 아니라 사용자 요청에 따른 시작 창 adapter다.
+
+**Main 구현 반영은 미완료다.** GA_Player_Guard와 AM_DAS_Player_Guard가 기존 Main editor PID19752의 Windows 공유 잠금(error32)으로 대기한다. 대상 SHA 충돌0이며 Source·package를 부분 복사하지 않았다. 사용자/foreign editor 종료·제어0, private DLL/과거 manifest 복원0이다. 현재 잠금과 candidate SHA는 Metadata/Parry_20261012/DeliveryPreflight.json, 준비본 검증과 정확한 재개는 PreparedVerification.json/ResumeState.json을 따른다.
+
+
+
+## 2026-10-12T04:22:44+09:00 — ARCH-88 사진 기준 혈액·바닥 혈흔 Main 완료
+
+첨부 사진 후속의 runtime2(KZMonster h/cpp)/기존 DEV2/신규 유효 package5를 Main에 적용하고 검증했다. 새 runtime file/class/component/manager0이다. 이전 floor blood 제거 정책은 최신 사진 지시에 따라 accepted hit의 불규칙한 새 지면 혈흔에 한해 대체한다. 원작 notify42/mesh decal16의 제거는 유지하므로 그때 잘못 배치되던 데칼을 복구하지 않는다. 기존 accepted/dedup producer와 GAS 피해·guard·취소·사망/UI/사운드 실행 수명은 변경하지 않았다.
+
+혈액은 현행 피해 receiver capsule의 실제 scaled radius/half-height/월드 축과 Contact 높이의 최근접 축점을 사용한다. 6종 Mesh PhysicsAsset=None을 MainSnowVisual07 실제 값으로 확인해 몸 안쪽 chest pivot 대신 capsule 표면에서 공격자 쪽으로 분사한다. raw skeletal skin 표면을 복원한 것으로 표현하지 않는다. 새 위치/방향 수치를 임의로 넣지 않고 현행 capsule geometry를 계산에 사용했다. floor는 this/attacker를 제외한 static/dynamic complex trace와 CMC walkable normal로 확정한다. 분사 축을 지면 접선으로 투영하고 projector X를 -normal에 맞춘다. 기존 KZSnowDeformation.GetSnowSurfaceHeight/SurfaceContactSamples의 layer/rim을 읽어 렌더된 눈과 바닥 양쪽을 포함하며 Snow40cm·변형·맵/조명 정책을 바꾸지 않았다.
+
+GT BeginPlay는 기존 혈액 재질의 EnsureIsComplete만 호출한다. editor ODSC의 ready=1/shaderMap=1이어도 complete=0인 상태에서 첫 피격이 fallback 사각형을 그리던 문제를 실제 값과 첫 프레임 비교로 확인했다. background만 제출한 MainSnowVisual05의 첫 흐린 색도 보존했고, 완비는 hit 전에 수행한다. cooked shader 준비를 엔진 cache가 소유하며 Actor별 새로운 timer/상태/handle을 추가하지 않았다. Blood PSC와 월드 Decal은 유한 engine 수명으로 drain/fade하며 피해자 사망·EndPlay에 묶이지 않는다.
+
+MainBuild15/current module2026101254 input 동일·exit0, MainSaved11 save0/CDO6/재질·gamma, MainSnowVisual11 실제 RHI6종/24혈액·12소멸/기울어진 바닥·뜬 피격 무데칼·피해자 제거 뒤 유지·fade destroy, MainActualHits04 실제 collision13의 burst/decal/dedup/miss/cancel/HP0/lower-clamp/Spin7/OverFury19가 통과했다. 마지막 두 RHI의 loaded module/Source는 build와 같으며 QA COLD_FIRST=1로 검사 전 재질 완비 강제를 하지 않았다. 사용자 Main PID19752는 종료/reload/reset하지 않았으므로 정상 재시작으로 새 C++를 로딩해야 한다. 원작 native/pixel/frame parity, Shipping stress, multiplayer는 주장하지 않는다. 정확한 SHA·사진·수치/한계·재개는 Metadata/MonsterBloodReference_20261012/FinalVerification.json, ResumeState03.json과 Art 정본 최신 절을 따른다.
+
+
+최종 지면 마스크는 rendered-depth AbsoluteWorldPosition의 ddx/ddy 외적으로 receiver pixel normal을 계산해 abs(normal.Z)>=실제 CMC WalkableFloorZ인 면에만 적용한다. producer가 기존 CMC 값을 MID의 BloodWalkableFloorZ에 쓰며 material의 default0은 초기화 값이다. 전역 Snow 변형을 수정하지 않고 수직 옆면의 붉은 늘어짐을 제외했다.
+
+MainActualHits03의 oversized QA capsule은 Spin5/7·Fury16/19 ground를 생성했다. 기존 맵의 경사·빈 곳으로 capsule 표면이 이동한 fixture 문제여서 runtime 지면 reject를 약화시키지 않았다. DEV fixture만 실제 GeometryBound+oversized radius margin/target offset으로 범위를 계산한 전용 평면과 QA 높이10000cm/두께20cm 위에서 검사하도록 수정했다. cleanup은 평면 제거·원래 Pawn/Ability/attributes/transform 복구를 유지한다. 최종 MainActualHits04의13개 검사는 이 평면에서 actual montage/collision/HP/burst/ground를 검증하고 실제 눈 맵의 slope/void reject는 MainSnowVisual11에서 따로 검증했다.
+
+
+## 2026-10-12T08:17:34+09:00 — ARCH-90 패링 Main 적용·fresh 검증 완료
+
+이전 준비본/Main 잠금 대기는 패링 범위에서 해소됐다. Main Source7(runtime6/DEV1)/package13(기존2/신규11)을 SHA 확인·백업 후 전달했다. 현재 전체 Main Source/Config로 MainBuild02가 성공한 뒤 일반 stock build가 현재 모듈 UnrealEditor-Khazan.dll을 선택했다. 이를 과거 suffix로 되돌리지 않고 현재 모듈에서도 다시 검증했으며 actual loaded DLL과 동일한 Source/13 asset SHA가 FinalVerification.json에 결속됐다. MainBuild01은 copy2의 과거 mtime 때문에 구 UHT PROLOG13/BODY16을 재사용하여 실패했다. 두 전달 헤더의 시각만 갱신해 PROLOG15/BODY18을 생성했고 제품 코드 내용은 바꾸지 않았다. 후속 전달 도구는 현재 write time을 사용한다.
+
+새 MainPIE02의 Parry15개 상황/6종 Definition 소비·고갈·비용·연타·이동 Guard·좌측 response·release/cancel/UnPossess, 기존 Guard와 PlayerAttackCollision 회귀가 모두 성공했다. MainSavedAudit02는 저장0으로 설정/원본 5 playback segment·notify/7 section/source tag를 reload 검사했다. 실제 .13/.24초 화면에서 모션/weapon contact flash/연속 alpha를 직접 검수했다. 정상 가드 후 성공으로 창을 다시 열지 않으며 전방 blockable 공격만 패링한다. 기본 .146초는 기존 source→current inverse_map 계산, 비용 .5와 detach .06초는 source 값, 몬스터 ST 피해는 기존 Definition 사용자 결정이다.
+
+이후 혈액 작업의 KZMonster runtime2/기존 DEV2와 모든 다른 Source/Config를 보존했다. 사용자/foreign editor 제어0·private DLL 복원0·Audio Notify 수정0이다. 초기 RHI에 GPU memory budget/낮은 FPS 표시가 관측됐으며 이번 fixed-step 기능 검사로 성능을 검증했다고 주장하지 않는다. 실제 스피커 출력(-nosound), 원작 shader/pixel/impact-point 완전 일치와 Shipping/network는 미확인이다. 필수 잔여0이며 최신 결과는 Metadata/Parry_20261012/FinalVerification.json과 ResumeState.json을 따른다. 과거 전체 author/추출/옛 alias를 다시 적용하지 않는다.
+
+
+
+## 2026-10-12T09:50:12+09:00 — ARCH-91 몬스터 Root/공격 판정/이펙트 후속 검사 중
+
+사용자의 직접 수정 요청이다. 최신 Main의 6종 실제 소비자를 재조회했다: 시퀀스395/Definition57/Node220/window405/montage126. MainUsageAudit02/RootAudit는 asset save0/dirty0이며 모두 EnableRootMotion/ForceRootLock=true, true skeleton root index0/track0 정상이다. pelvis 등의 child 움직임184개를 root 이관 근거로 사용하지 않는다. 아직 런타임의 모든 root 이동이 정상이라고 주장하지 않는다.
+
+기존 ComboAction·엔진 timer/shape·GAS dedup/피해·Monster/Notify의 표시 수명을 재사용한다. private에서 닫힌 끝 경계의 재검사와 마지막 window 이후 callback 예약을 차단하고, 기존 actor 축/locked-root baked collision 좌표에 현행 mesh relative scale을 한 번 반영했다. Source339 pose 비교는 actor 축의 root-stripped anchor가 원본 baked anchor와 맞으며 mesh yaw/root travel을 다시 더하면 오차가 커짐을 확인했다. 새 gameplay 수치를 넣지 않고 실제 body transform을 사용한다. VFX는 Monster의 socket 없는 actor 기준/실제 몸 크기와 source-correction의 같은 프레임 final bone을 사용하도록 기존 owner를 보완했다. 새 runtime file/class/manager0이다. LatestSourceTime은 GT notify clock→GT bone-finalize의 실제 지연 소비값이며 End/취소/EndPlay의 기존 delegate cleanup을 사용한다. Player/audio/UI/혈액·사망 값은 보존한다.
+
+현재 Main Source/asset 수정0이다. Main을 idle GiantFallWork에 한 번 snapshot했고 baseline native late hit fixture를 보존했다. BaselineLateHit01의 paused-boundary HP7과 world-clock 기반 normal/OverFury 실패를 구분한다. QA를 실제 montage clock 기준으로 보완한 FixBuild01은 성공·input동일이고 FixedLateHit01이 실행 중이다. giant PatternMoves54의800/2000cm vertical curves와 Walking 소비의 실제 확인, six-family runtime/FX/저장 보존/CAS Main 전달·fresh build/실제 테스트가 남는다. 현재 상태/실패/정확한 다음 절차는 Metadata/MonsterRootCollisionRepair_20261012/ResumeState01.json을 따른다. 완료된 old stage/author/delivery를 반복하거나 private DLL을 Main에 전달하지 않는다.
+
+
+## 2026-10-12T10:45:24+09:00 — ARCH-91 실제 원인 확정·private 검증 / Main 미반영
+9:50의 Root 옵션·track 정상 판정은 루트 잠금 포즈 정렬의 완료 판정이 아니었다. 실제 사용395개(몸체392/별도 prop3)를 메시에서 시작·중간·끝1176포즈로 검사했다. AnimFirstFrame 잠금이 누적 시작 root 좌표를 유지했고, Yetuga ChargeTackle_End 7157.4663cm / Apes Run_Loop_Stone 5157.4663cm가 실제 몸체에서 재현됐다. 현재 imported RAW Root 첫 transform과 skeleton reference transform의 차이를 RootLockPlan.json에 고정하고, 88개 RootMotionRootLock만 RefPose로 변경했다. EnableRootMotion/ForceRootLock/normalized scale, raw channels, timing, montage/definition/window/damage/group/audio는 유지한다. 원작 신규 튜닝값이 아니라 UE FRootMotionReset의 기준 포즈 adapter이며 raw source key를 transfer/재작성하지 않았다.
+RootAssetsBefore exact SHA backup / disposable duplicate probe / fresh native RootPreservationAfter02 Success 완료다. 몸체392개 전체 DataModel(모든 track/key/curve/attribute) 및 notify event·notify object 직렬화 SHA가 변경 전과 전부 동일하다. raw 판정 .01cm/.001deg와 기존 compressed 기술 허용 .01cm/1e-4rad를 구분한다. RoundAttack의 기존 .0020149deg 압축 오차만 raw tolerance를 잘못 적용한 첫 QA 실패였으며 해당 에셋을 추가 변경하지 않았다. collider는 source actor axes/root-stripped geometry에 live mesh relative scale을 한 번 곱한다. 마지막 window End 동등 경계와 이후 timer를 닫아 paused-end late query를 차단한다. monster socket 없는 VFX는 actor rotation + mesh origin, local offset/size는 live body scale, source correction은 current finalized bone pose를 소비한다. LatestSourceTime은 기존 receipt 내부 GT notify→GT bone-finalize 전달 값이다. 새 runtime file/class/manager0이다.
+VerticalPattern.PIE는 기존 Walking/RMS 경로에서 원본800cm 곡선을 소비하며 실제 capsule +659.906cm/관측1.51555s를 확인했다. 최대 곡선 값의 정확 재현이나 전체 궤적 일치 판정이 아니며, Flying mode 전환을 제안/적용하지 않는다. 기존 이동 소스를 보존한다. common PlayerAttackCollision 실제16경로(종료·pause·cancel·Spin7/Fury19) Success다. SixFamilyContacts02는30경로중 Shield case4에 별도 Step1 HP10이 섞였다. source log로 기존 controller의 deferred StartMonsterLogic 재시작을 확인하고 검사 소유 controller tick을 끈 fixture03을 실행중이다. 게임 AI는 변경하지 않았다.
+현재 Main Source/asset 반영0. private FinalPrivateBuild04 Success/input unchanged; six contacts03 및 all198 attack assets/current-pose correction/사망 검사는 실행중이다. 재개는 Metadata/MonsterRootCollisionRepair_20261012/ResumeState02.json을 따른다. 저장된 baseline/failed 로그를 삭제하거나 stage/author를 무조건 재실행하지 않는다. Main에는 현재 전체 Source로 canonical build하며 오래된 private DLL/Config/다른 작업을 전달하지 않는다.
+
+
+## 2026-10-12T11:04:18+09:00 — ARCH-91 Root·공격 콜라이더·VFX Main 완료
+Main에 Source7(runtime4/DEV3) 및 RootMotionRootLock 옵션만 바꾼 Animation88 package를 exact SHA/CAS로 반영했다. 새 runtime file/class/manager0, 다른 baseline610파일 보존, private DLL/Config 전달0. MainBuild01은 source 오류 없이 PCH virtual-memory C3859/C1076로 실패했고, 병렬1/noXGE MainBuild02는 Succeeded/input unchanged다. 현재 canonical UnrealEditor-Khazan.dll SHA `e14ca4b34c8a8a8042c2087fca2e646196b51e617d906c1884bee4e6c29cf511`를 사용한다.
+실제 사용395 Root enabled/force lock/true-root·track0 및 Body392의1176포즈를 확인했다. 첫 프레임 누적 origin88개만 RefPose lock으로 정렬했으며 근거는 RootLockPlan의 imported RAW root first transform와 skeleton reference pose/UE FRootMotionReset이다. RootAssetBefore 및 MainBefore 백업을 보존한다. 전체 DataModel 모든 key/curve/attribute와 notify event/object SHA392개가 변경 전=private 후=Main fresh로 동일하다. source montage126/definition57/node220/window405의 geometry key·time·HP/Stamina·group·audio와 rate/나머지옵션이 fresh saved audit에서 동일하다. Props3는 다른 skeleton으로 body1176포즈에서 분리하고395 옵션/track audit에 포함했다.
+Main actual RootPoses/MonsterHits30/PlayerAttackCollision16 Success. monster30은6종별 한 window 안1회 / 종료 후접근0 / exact-end pause후접근0 / 취소후접근0 / live mesh scale와actor yaw 반영을 실제 HP GE로 확인한다. player16의 기존 Spin7/Fury19와blood13 기반행동도 보존한다. source scale/last-End 경계·timer 종료만 기존 ComboAction에 보완했다. VFX198 assets/1577 source occurrences 및Death6는 동일 delivered Source의 private 실제RHI Success, finite world transforms / deterministic uncorrected source geometry max position3.46e-13cm·angle4.83e-6deg / template identity / body size를 확인했다. 이 보고서의 active correction-curve row는0이므로 해당 branch의 per-pose 실행을 실제 데이터 검증했다고 표현하지 않는다. source 없는 VFX actor axes/mesh origin 및 body scale은 적용했으며 curve branch는 기존 receipt의 latest GT clock→finalized-bone callback으로 구조 보완했다. 원작 native shader/pixel parity·전체두레벨연속전투·network는 검증 완료 범위가 아니다.
+Main 파일·canonical build·fresh saved/actual runtime 완료. FinalVerification.json / ResumeState03.json 및 exact Delivered95를 재개 정본으로 읽는다. stage/old alias/full author/retime/reimport를 반복하지 않는다. Main editor 정상 재시작 후 직접 Play에서 green debug volume이 실제 공격 window에서만 나타나고 칼의 크기·방향/몸체 alignment를 확인할 수 있다.
+<!-- CombatFinishFollowup_20261012_contract -->
+## 2026-10-12 — ARCH-92 사망 종료 포즈·브루탈 접촉·액션 VFX 후속 계약
+
+사용자의 직접 수정 요청이다. 기존 Monster의 사망 표시 소유권, Brutal/Exhaustion의 짝 실행, Action의 효과 receipt와 Notify 데이터를 재사용한다. 새 runtime class/manager/공유 gameplay 상태는 만들지 않는다. HP/Dead·피해·공격 창·원본 이동/애니메이션 채널은 유지한다. 사망 interruption을 정상 완료로 취급해 현재 포즈를 즉시 멈추는 경로를 수정하고 실제 terminal pose를 검사한다. 브루탈 접촉 효과는 실제 두 Pawn의 접촉 공간에 배치한다. 내려찍기와 다른 액션의 효과는 기존 타이밍·수명 소비자에 연결한다. 혈흔의 방사형 확산은 Monster Class Defaults의 표시 설정에 모으며 새 숫자는 어시스턴트 임시 표현값으로 명시한다.
+
+착수 시 Main editor는 종료돼 있었고 baseline Source121과 표적 package bytes를 보존했다. Rider debugger는 KZMonster.cpp254/302에 대해 실행 코드 연결 실패, startup native frame 미해결을 반환해 사용하지 못했다. owned actual native PIE에서 ordinary death6 정상 terminal pose 오차0, 중단6은 약0.27초의 서 있는 pose를 freeze하고 모델 cm 오차167–441을 재현했다. 이는 중단 경로의 근거이며 전체 사용자 전투에서 중단 발생 빈도를 계측한 것은 아니다. 검증·정확한 재개는 Metadata/CombatFinishFollowup_20261012와 도메인 continuity에 추가한다.
+
+
+## 2026-10-12T13:16:18+09:00 — ARCH-92 메인 에디터 적용 확인 완료
+
+Rider normal Khazan Run으로 Main PID16504/DevMap을 열었다. read-only RiderLink가 실제 canonical DLL SHA a247fac8a6c457a90d336ceb9ed90a5445bca878295d941b1c5081a375977f9b와 FinalBuild05 일치, 6종 CDO scatter6/radius90–280cm, dirty content/map0를 확인했다. asset save0, PIE 미시작이며 에디터를 열어 둔다. FinalVerification.json은 MainDelivered_Built_Validated_EditorReady, ResumeState04.json은 complete/잔여0이다. 사용자 이전 Main은 착수 때 종료돼 있었고 강제 종료/HotReload/기존 session 저장0이다. 모든 실제 테스트·동일 runtime source·Art TEMP와 원작 한계는 앞선 완료 절을 유지한다.
+
+## 2026-10-12 — ARCH-93 몬스터 확정 피격 섬광으로 범위 교정 (착수 계약)
+
+최신 사용자는 ARCH-92의 모든 공격/회피/착지 색상 확장을 철회하고 실제 몬스터 타격에서만 짧은 플레임 섬광을 요구했다. 기존 Combo/Brutal/SkillObject의 확정 적중 → Monster.PlayHitBlood → world finite Cascade 경로를 재사용한다. 새로운 runtime 파일·class·manager·태그·관측 상태·피해 판정을 추가하지 않는다. 기존 피격 particle의 혈액3 emitter를 보존하고 자체 소유 섬광3 emitter를 추가하므로 공격 유형·중복 방지·취소·miss는 기존 producer 계약을 따른다. 기존 몬스터 혈액/사망/브루탈 위치/자연스러운 바닥 먼지와 source 원본 효과는 유지한다. 최근 추가 KZExtra 색상54 window의 child만 삭제하고 기존 입력/GUID/시각/section/segment를 보존한다. 광원·불꽃 궤적·streak 대신 stationary circular flash/유한 alpha를 사용하며 새로운 표시 숫자는 Art 자산 TEMP다. 정확한 baseline/진행 증거는 Metadata/HitFlashCorrection_20261012에 남긴다. 이는 아직 적용·실제 화면 검증 완료 기록이 아니다.
+
+
+## 2026-10-12T14:40:04.303632+09:00 — ARCH-94 Apes·Yetuga 원본 분기 구체화 / 짧은 피격·Dodge 무적 계약
+
+사용자의 직접 구현·정밀 테스트 요청이다. 기존 StateTree Task/Condition, AIController, MonsterPattern/Combo Ability, ASC, HitReaction, Dodge와 CharacterDefinition을 재사용한다. gameplay 상태의 원본은 ASC이며 새 FSM/Manager/Component를 만들지 않는다. Yetuga 원본 BT의 조건 true/false, selector/sequence 순서, MoveTo→UseSkill, 선택 substep 및 LockOnMove를 현재 평탄화 후보 대신 StateTree 실행 경로로 구체화한다. Apes는 HeinMach Early 원본 AI·이동/후속과 실제 피격 대응 자료를 우선한다. 원본 custom BT native 기본값/RNG/Spell·부위 상태 소비와 Level 시작 trigger의 미확인 항목을 임의로 원작 확정값이라고 부르지 않는다. 구조 일치·저장값 일치·실제 branch 실행·원작 전체 동일성을 분리한다.
+
+플레이어 피격 제어 제한은 Definition의 조정 가능한 0.1초 TEMP로 시작한다(원작값 아님). HitReaction의 자기 몽타주/RootMotionSource/이동mode/제약을 짧은 deadline에서 정리하며 몬스터와 Shield 수명은 유지한다. Dodge 0.1초는 사용자 직접 지정값이며 Dodge Ability의 자기 ASC tag 기여·시작 시각·timer가 소유하고 정상/취소/실패/재활성화/UnPossess에서 자기 기여만 회수한다. 실제 melee/projectile/field/직접 피해 producer는 Guard/HP 적용 전에 공통 ASC 승인 경로에서 이를 소비한다. 한 공격 group의 무적 접촉은 1회 소비하며 HP/ST/HitReaction/확정 적중 이벤트를 만들지 않는다. 실제 Dodge 방어 결과만 성공 SFX/VFX를 생성하고 Dodge 자체 표현은 실행 수명에 결속한다. 새 표현 숫자는 Art TEMP와 사용자/원본 값으로 분리한다.
+
+작업은 C:\Users\user\Desktop\GitProject\Khazan_BeastDodgeWork_20261012\Khazan의 Source/Config 및 소유 Content(Monsters/Data/Bluprints) 복사본에서 시작한다. 나머지 Content junction은 읽기 전용으로 다루고 저장하지 않는다. 현재 Main baseline SHA/현행 canonical을 Before/Baseline에 보존했다. 현재 사용자 에디터 PID16504를 저장·종료·PIE·LiveCoding하지 않는다. 준비·빌드·정밀 native 실행·회귀·RHI 이후 정확한 변경만 Main CAS 전달하며 동시 외부 변경과 과거 private DLL을 덮지 않는다. 아직 적용/빌드/PIE 완료가 아니다.
+
+## 2026-10-12 — ARCH-95 섬광 철회·전투 표현/판정 후속 착수
+
+최신 직접 수정 요청으로 ARCH-93의 stationary flash를 철회한다. 이전 추가54 무조건 색상 창 제거는 유지한다. 기존 확정 피해/Guard/Monster presentation/CombatEffect receipt·Combo window·CMC를 재사용한다. 새 runtime class/component/manager/tag0이다. 원작 불꽃/불똥을 승인된 적중·패링·플레이어 피격에만 연결하고, 인간형 Slash·찌르기와 Player Slash는 사용자 지정 Niagara 두 경로를 사용한다. 기존 native Niagara 확장 준비본의 작은 diff를 현 Main에 합치며 원본 이벤트/피해/공격 창/오디오/Root를 보존한다.
+
+패링 성공은 기존 L/R source clip·Guard task의 수명으로 표시하고 입력 Release가 이미 승인된 성공 포즈를 즉시 잘라 버리지 않도록 한다. Spin의 behind/lateral baked center를 actor front로 교정하며 Fury의 앞쪽 확장은 원본 gameplay 검증값이 아닌 조정 가능한 asset TEMP다. 몬스터 primitive는 stepping/walkable floor와 movement base를 허용하지 않는다. 내려찍기 피격은 기존 Knockback 응답을 재사용한다. 표시 숫자와 원본/계산값은 Art author receipt로, 충돌 TEMP와 계산식은 Engineering collision 정본으로 분리한다. 기존 Main Source/에셋·다른 작업 변경을 baseline/CAS로 보존한다. 정확한 상태는 Metadata/CombatImpactUpgrade_20261012/ResumeState.json이며 이 절은 완료 기록이 아니다.
+
+
+## 2026-10-12T18:08:30.145524+09:00 — ARCH-96 몬스터 넉백·애니메이션 시계 정규화 착수
+
+사용자의 직접 수정 요청이다. 기존 HitReaction Ability/JumpForce Task/CharacterDefinition과 원인별 root-mode·이동 제약·취소 정리를 재사용한다. 새 runtime class/file/manager/tag0이며 기존 runtime2파일에 선택적인 KnockbackTimeMappingCurve만 추가한다. 해당 정규화 곡선은 몬스터4종의 기존 수평 거리·HitLand 종료 시간 안에서 속도를 줄이는 표현 TEMP이고, Player/Launch/Giant 대체 반응은 기존 경로를 유지한다. 원작 UseCurve 및 CV_common_groundKnock_strong 참조는 확보됐지만 곡선 key/native 스케일의 직접 근거는 없다. 미확인 원작 숫자로 표현하지 않는다.
+
+시퀀스 시계 변경은 Art/Animation 작업이며 Frame-index bone keys를 재샘플링하지 않는다. 새/기존 duration 비율로 RateScale과 local notify/marker 시각, montage source trim을 같이 변환해 실제 playback 시간과 montage world event/section/공격 판정 시각을 보존한다. 데이터 모델·플랫폼 sampling rate와 실제 엔진 공통 몽타주 rate를 별도로 검사한다. 계획·백업·진행 상태는 Metadata/AnimationTimingKnockback_20261012이며 Main 반영 완료가 아니다.
+
+
+## 2026-10-12T19:30:36.993088+09:00 — ARCH-96 몬스터 넉백·전체 FPS Main 완료
+
+Main516행=기존 runtime2(KZHitReactionAbility.cpp/CharacterDefinition h)+DEV2/Build editor dependency1+asset511을 선택 적용하고 새 Main build/reload/실제 RHI를 확인했다. 기존 ASC·HitReaction/JumpForce Task·Definition과 취소/root-mode·회복 수명을 재사용했다. 새 runtime class/file/manager/tag0, private DLL·Config 전달0이다. 다른 작업의 Player0.1초 제어 제한/ground-hit 분류/원작 StateTree 추가와 최신 공격 VFX88개를 보존했다.
+
+MainBuild01 exit0, MainSaved01의461 sequence3854855 bone key/notify GUID·시각·158 montage의 actual sampling 및 재생 시간 차이0, MainKnockback01의6종11case(인간 F/B8/Giant2/벽1)·회복/재피격/cancel/root-mode 복구, 기존 실제 monster collision 회귀가 성공했다. MainInventory01의 전체2674 sequence/158 montage에서 소수 sequence/model·sampling0,100000fps fallback0이다. native loaded module/516SHA/각 evidence는 Metadata/AnimationTimingKnockback_20261012/FinalVerification.json에 결속했다.
+
+인간4종은 기존250cm와 실제 HitLand 시간을 유지하며 Definition.KnockbackTimeMappingCurve에서 normalized2u-u² TEMP 감속을 조정한다. baseline 착지 직전 약278–375cm/s의 일정속도 → 최종 약8–28cm/s로 줄어든다. RootSource 제거는 엔진의 MarkedForRemoval/다음 이동 tick 삭제를 구분해 검증했다. Apes/Yetuga는 NoAir/NoBlow 대체 clip의 짝 grapple root 이동을 해당 실행 instance만 PushDisableRootMotion으로 억제하여 baseline−278.01/−222.11cm →0cm다. source clip/raw/root 옵션 및 Short fallback·정상 Launch Task는 보존했다.
+
+필수 잔여0이다. 현재 editor는 정상 재시작으로 새 C++/asset cache를 로딩한다. 사용자/foreign editor 제어0이며 이전 pending·failed trial 기록은 이 완료로 대체한다. 원작 curve keys/전체 pose·native/network/shipping parity는 미확인이고 TEMP를 원작 수치라고 부르지 않는다. 과거 author/추출/원본 retime/root repair/옛 DLL 전달을 다시 실행하지 않는다.
+
+
+## 2026-10-12T19:50:49.391255+09:00 — ARCH-94 실제 소유 계약·Main 검증
+
+기존 ASC/Ability/Task/AIController/StateTree를 확장해 실제 Main에 반영했다. 새 runtime 파일·class·manager0, 개발 QA3다. Yetuga source121노드→compiled173상태, Apes9상태이며 Definition.OriginalPatternStateTree가 기존 배치 override보다 우선한다. 실행 task는 실제 PatternRun의 정상/취소 결과를 성공/실패로 반환하고 선택 실패를 원본 후속에 연결한다. passive는 AIController가 실제 accepted HP 피해 이력·pending을 소유하며 죽음/EndPlay/대상 변경 정리를 수행한다.
+
+착수 계약의 Definition 피격 시간 제안은 실제 `KZHitReactionAbility.PlayerControlLockSeconds` EditDefaultsOnly 소유로 정정한다. Player non-shield의 마지막 실행부터0.1초는 어시스턴트 TEMP이며 자기 montage/RMS/제약/root mode를 끝내 다음 입력을 허용한다. Dodge0.1초는 사용자 지정값이고 Dodge Ability의 실제 world-time deadline/자기 ASC 기여·timer가 소유한다. 모든 실제 피해 producer는 ASC의 승인 경로를 통해 Guard/피해 전에 이를 소비하고 성공 표현은 실행당1회다. 취소/실패/재피격·타 원인 기여 보존을 검증했다. 동시 ARCH-96 curve/자기 montage root 억제는 보존한다.
+
+MainBuild04 Exit0/runtime hash 일치, 최신 native 감사·passive·방어11·복구6·47개 기술·PlayerAttackCollision 및 Guard/Parry/GiantFall 성공의 정확 증거는 `Metadata/BeastDodge_20261012/Completion/FinalVerification.json`이다. 원작 native RNG/abort/defaults와 Group1 producer·selected float·물리 전체 동일성은 미확인/명시적 잔여다. 구조/원시 field/현재 UE 실행 성공을 원작 전체 무오차로 기록하지 않는다.
+
+<!-- BeastDodge_20261012_MainCompleted -->
+
+## 2026-10-12 — ARCH-95 최신 사용자 교정: 몬스터 원복·플레이어 추가 Slash
+
+사용자 최신 지시는 앞선 인간형 Slash/Sting 교체 및 플레이어 Slash 교체를 철회한다. 몬스터120개 occurrence의 기존 효과 설정을 복구하고 지정 Niagara 두 리소스를 몬스터에 연결하지 않는다. Player 기존50 start/stop쌍의 resource·위치·회전·소켓·수명 정책을 복구하고 별도 child의 추가 Slash만 기존 Action receipt로 재생한다. 기존 notify GUID/clock와 ARCH-96 정수 FPS·넉백, 확정 타격 불꽃·패링 포즈·Spin/Fury·plunge 복구는 유지한다. 전체 패키지의 과거 bytes를 덮어쓰지 않고 변경한 표현 field만 복구한다.
+
+추가 Slash의 위치와 각도는 actor-front 고정 offset을 사용하지 않는다. 실제 장착 무기의 현재 finalized pose와 휘두름 궤적을 확인하고 엔진 attachment/현행 receipt를 우선 사용한다. 필요할 때만 해당 receipt의 pose history와 GT finalized-bone 갱신을 작은 확장으로 추가하며 새 runtime class/component/manager/tag0을 유지한다. 정상 끝·취소·사망·EndPlay에서 기존 receipt의 delegate/FX cleanup을 사용한다. 원작/현재 무기 geometry에서 계산한 값과 표현 TEMP를 분리한다. 최신 진행·정확 재개는 Metadata/CombatImpactUpgrade_20261012의 additive amendment 기록이며 앞선 Monster Niagara33회·replace106 검증은 철회 전 상태의 기록이다.
+
+
+## 2026-10-12T21:06:38.746735+09:00 — ARCH-95 최신 추가 Slash·타격 표현 Main 완료
+
+사용자 최신 지시로 몬스터의 지정 Niagara 교체를 철회하고 원본120개 효과 occurrence를 복구했다. Player 원본50 start/stop쌍을 복구하고 별도 KZWeaponSlash child50쌍만 추가했다. immutable before package와220개 객체×21개 수정 field를 비교해 차이0이다. 원래 notify GUID/clock, ARCH-96 FPS·넉백, ARCH-94 방어/AI, SlamDistort·혈액/사망/UI/오디오를 보존했다. 과거 패키지 bytes 전체 또는 private DLL을 Main으로 덮어쓰지 않았다.
+
+추가 Slash는 기존 Action effect receipt와 finalized-bone delegate로 소유한다. 실제 Weapon_L/R 뼈에 reference cutting-edge geometry를 연결하고 successive actor-space tip pose에서 이동을 뺀 swing tangent를 계산한다. FX marker의 별도 animation track은 실제 장착 무기의 대체 pose로 사용하지 않는다. X는 실제 접선, Y는 절삭면이며 requested mesh의200cm reference span/renderer yaw180·centre를 보정한다. Niagara component의 CurveRotation0/CurveScale1·Rotation0만 neutralise하고 shared Niagara asset은 보존한다. 정상/취소/node 교체·사망/UnPossess/EndPlay cleanup은 기존 receipt가 처리한다. 새 runtime class/component/manager/tag0, 새 개발 plunge QA1이다.
+
+Native Player18+Brutal5/실제 승인 hit blood, collision16/Parry17·received-hit feedback/monster-overlap plunge ground·cancel, human33 actual attacks 및 original4-family FX·requested Niagara0이 통과했다. saved100 package에서 original monster120/player100+added player100을 확인했다. 실제 코드·에셋·loaded module 및 모든 검증은 Metadata/CombatImpactUpgrade_20261012/FinalVerification.json이다. 최신 normal Main editor를 열고 loaded module·dirty0 및 설정을 확인했다. Runtime Source가 같은 전체 suite와 DEV-only isolated4 preview를 구분한다. 이전 replace33 검증·실패 camera API·tail assertion은 최신 완료 계약의 근거로 쓰지 않는다.
+
+## 2026-10-13 — ARCH-97 StrongCombo의 인간형 정면 피격 선택 착수
+
+사용자 직접 수정 요청으로 StrongCombo 1·2·3타의 6개 AttackWindows만 VictimFront로 지정한다. ARCH-85의 기존 확정 피해→Character event→HitReaction Ability/Task 계약을 재사용한다. 기존 HitReactionType enum 끝에 VictimFront를 추가해 저장 ordinal을 보존하고, CharacterDefinition.HitReactions.VictimFront에 인간형4종의 기존 AM_BrutalVictimFront를 연결한다. 유효한 설정은 Short event의 OptionalObject로 전달하여 해당 montage를 고정 선택한다. 설정 없는 대상은 현재 StrongCombo의 Knockback으로 fallback한다. 새 runtime 파일/class/tag/manager와 변경 gameplay 수치는 없다.
+
+앞/뒤 랜덤 Knockback/Down→Loop→Getup 및 JumpForce를 이 요청의 인간형 StrongCombo에서 선택하지 않는다. 짝 브루탈 실행은 활성화하지 않으며, 일반 피격 Ability의 자기 montage instance만 root extraction을 억제해 피해자 클립의 paired 이동을 재사용하지 않는다. 기존 피해 승인/dedup/HP·ST/guard/소진·사망 우선/회복·취소 cleanup 및 다른 공격은 유지한다. 실제 Main probe는 StrongAttack01–03 모두 각2 window Knockback이며 기존 정면 피해자 montage의 Damage1·Damage2/원본 segment를 확인했다(Probe02/Probe.json). 현재는 착수 계약이며 적용/build/PIE 완료가 아니다. 변경 전8파일은 Metadata/StrongComboVictimFront_20261013/Baseline.json과 Before에 보존했다.
+
+
+## 2026-10-13T01:40:50.930443+09:00 — ARCH-97 StrongCombo 인간형 VictimFront Main 완료
+
+사용자 요청을 Main에 적용했다. StrongAttack01–03 각2개, 총6개 AttackWindow만 VictimFront로 변경하고 인간형4종(Swordsman/SwordShield/HeavySwordsman/HalberdElite)의 HitReactions.VictimFront에 기존 AM_BrutalVictimFront를 연결했다. 정면 피해자 모션 Damage1→Damage2를 기존 일반 HitReaction Ability/Task로 고정 재생하며 짝 브루탈을 시작하지 않는다. 해당 자기 montage instance의 paired root travel만 억제하고 Knockback/Launch RMS를 만들지 않는다. 설정 없는 Apes/Yetuga는 이전 Knockback pool을 유지한다. 사망·소진·guard 및 피해 승인/dedup/HP·ST/기존 효과는 기존 계약을 따른다.
+
+runtime3파일/기존 DEV1/저장5package 수정이며 새 runtime file/class/태그/manager 및 새 gameplay 수치0이다. enum을 끝에 추가하여 None/Short/Knockback/Launch의 기존 ordinal을 보존했다. Character의 Short event.OptionalObject가 명시한 montage를 Ability가 선택하며, 정상·재피격·취소의 기존 제약/tag/montage cleanup을 재사용했다. 다른 Player window/몬스터 공격·브루탈/Definition의 원래 모든 피격·이동·AI·grant·소진 설정은 fresh Saved01 readback으로 보존 확인했다. 정면 클립에 execution material notify0도 확인해 추가 사망/재질 adapter를 만들지 않았다.
+
+Build02 exit0/input동일, actual RHI ActualStrong02의4종×3타=12case/24승인 적중·어느 target facing에서도 고정 pose·자기 root-disable·RMS 없음·자연 완료/재피격/취소·다른 Short/Knockback pool·거대형 fallback과 기존 PlayerAttackCollision16 회귀가 성공했다. 실제 loaded module SHA는 `b8f1d59008558802324c3b8e7a1cdaba9a526f02efd36f852788a9fd25bbc4b5`이며 전체 Source/선택5asset·저장/실행 evidence는 Metadata/StrongComboVictimFront_20261013/FinalVerification.json과 Changes.patch다. Actor 크기/높은 평면은 격리 QA fixture이며 원작 pixel/전체 pose 일치 검증으로 표현하지 않는다.
+
+필수 잔여0이다. Probe01의 Python 미노출 property/ActualStrong01의 DEV None-group·blend-out 기대값 실패는 역사로 보존하고02의 성공으로 대체한다. CollisionRegression01은 등록명을 잘못 입력해 matched test0이며 Launch PID/CommandLine을 확인한 task-owned process만 종료했다. 정확한 등록명으로 실행한02의 성공을 근거로 한다. 제품 runtime은 첫 실제 검사 이후 추가 변경0이며 Build02는 DEV 보완이다. 기존 editor process0에서 시작했고 외부/사용자 editor 제어0이다. 이후 조정은 최신 Main Definition의 VictimFront와 Player StrongCombo의6window만 표적 확인한다. 완료한 author/과거 VFX·Root·retime/private DLL 전달을 재실행하지 않는다.
+
+
+## 2026-10-13 — 몬스터 보조 물리 착수 계약 (ARCH-06/07/10/16 유지)
+
+기존 SkeletalMeshComponent/engine RigidBody/PostProcess가 천·Hair의 포즈·시뮬레이션 수명/EndPlay cleanup을 소유한다. ASC/Ability/Task/CMC/공격·root motion 소유자는 유지한다. 본체는 animated kinematic, 모듈 파츠는 기존 CopyPose와 부모 tick prerequisite/cloth collision source를 사용한다. Gameplay bool/state/새 runtime class·component·manager·tag는 추가하지 않는다. 현재 격리 준비/품질 조사이며 Main 구현 완료가 아니다. 최신 계약과 검증은 MONSTER_SECONDARY_PHYSICS_20261013.md 및 해당 continuity를 따른다.
+<!-- MonsterSecondaryPhysics_20261013_intake -->
+
+## 2026-10-13 — ARCH-98 Yetuga/Apes VFX 표시 소유자·단위 보완 착수
+
+사용자는 두 종의 모든 VFX 부착/발걸음 눈/손 내려찍기/브레스/투석/파편·알파 품질을 직접 수정하도록 요청했다. 현행 Main을 Khazan_GiantVFXWork_20261013에 새로 snapshot하고 두 종 Content 및 ApesYetuga Effects만 쓰기 소유했다. Source baseline/237asset SHA는 Metadata/GiantVFX_20261013/Baseline.json, current consumer probe는 Probe02(137sequence/49ParticleSystem/129node)다. 별도 ParticleAlpha/보조 물리 Work와 최신 StrongCombo ARCH97를 보존한다.
+
+확인한 실행 누락: KZAnimNotifyState_MonsterVisual은 AKZMonster만 소비하므로 AKZMonsterSkillObject의 실제 Prop 시퀀스 VFX가 제외된다. IceBreath carrier/field는 현재 Mesh/StaticMesh/Animations가 모두 없고 보이는 표현도 없다. 기존 SkillObject에 source-notify receipt와 선택적 Spawn/Flight/Impact effect를 붙여 실제 객체/애니메이션/발사/충돌 수명에서만 재생한다. 최종 bone pose 후 spawn, 정상/clip 변경/충돌/취소/EndPlay에서 자기 delegate/attached loop만 정리하며 finite world impact tail은 engine이 소유한다. GAS/AI/피해/판정/속도·기간·geometry는 수정하지 않는다. 새 runtime class/file/manager/gameplay tag0이다.
+
+원본 Cascade module의 world-cm size/velocity와 현재 .01 body scale의 혼합도 조사한다. effect data에 particle world-unit 선택값을 작게 추가해 두 종의 검증된 particle만 world-cm로 소비하고, bone/model offset 및 decal/writer geometry는 별도 기존 변환을 유지한다. 기존 Monster finalize correction에서도 같은 particle-scale 계약을 사용한다. 기존 원본 notify GUID/시간·FPS/root tracks/오디오·캡슐/상태·다른 종/Player 기능을 보존한다. 원작 직접 metadata, 단위 adapter 계산, 참조 사진 기반 TEMP 저작을 보고서/Art 정본에 구분한다. 현재는 착수이며 제품 수정·build/actual RHI/Main 완료가 아니다. Art 수치/리소스·원작 그림은 새 GIANT_VFX_REFINEMENT_20261013.md, 실행 결과는 Engineering 문서에 각각 기록한다.
+
+
+## 2026-10-13T05:17:23.148600+09:00 — 몬스터 보조 물리 Main 완료 (ARCH-06/07/10/16 유지)
+
+기존 engine SkeletalMesh/RigidBody/CopyPose가 보조 포즈·수명·EndPlay를 소유한다. ASC/Ability/Task/CMC/AI 소유자는 그대로다. 새 runtime class/component/manager/tag0이다. 중검의 기존 BeginPlay만 follower 독립 평가·parent tick prerequisite·full parent cloth collision source로 보완했다. 실제99SHA/Main build/saved/RHI/gameplay 완료 정본은 MONSTER_SECONDARY_PHYSICS_20261013.md 및 Metadata/MonsterSecondaryPhysics_20261013/FinalVerification.json이다. 기존 착수/미반영/검증 대기 기록을 이 완료가 대체한다.
+<!-- MonsterSecondaryPhysics_20261013_main_complete -->
+
+
+## 2026-10-13 ? Heal ?? VFX: ?? Action ?? ?? ???
+
+ARCH-06/07/10/16 ? Action feedback receipt ??? ????. ?? UKZHealAbility.HandleMontageNotify? CombatEffect data/batched child? start/stop ??? ????. ?? active Montage/instance? ????, spawn/dedup/finalized bone?End/??/??/UnPossess cleanup? UKZActionAbility? ?? receipt? ????. ??? runtime class/file/component/manager/tag0??. HP/???/InputEnd/?? ??/??/CMC/?????/root/FPS/audio? ???? ???. ?? Heal DEV ??? ??11 effect/bone??? values?capture/cleanup ??? ????.
+
+?? ??? SB_Kazan_Recovery.UpperAnim=AC_Kazan_Recovery, source particle windows5/mesh3/FT_Trail.G/ShaderLUT??. cooked Niagara VM/editor/material graph ???? ?? native Cascade? ??? ?????? ?? source world/pixel parity? ???? ???. ?? raw Heal ?? ??? ???? source LinkValue? Stow offset? ???. source DilationCurve1.3497161s? ??????? ?? Heal1.4666667s? ????? ???. Source ?? ??/?? clock ??/?? TEMP? ?? Art ??? ????. ?? ?? ??? Main ?? ??? Metadata/HealVFX_20261013/FinalVerification.json ? ResumeState.json?? ????.
+
+## 2026-10-13 — ARCH-95 플레이어 피격 불꽃 제거 착수 (사용자 직접 요청)
+
+플레이어가 맞을 때 추가된 보라/파랑 공통 불꽃을 제거한다. 기존 CharacterDefinition.HitReactions.ImpactEffect의 선택적 수신자 표현을 사용해 Player Definition에서 PP_Combat_HitBurst 참조만 None으로 변경한다. ASC 피해 승인/Guard/Dodge/HP/ST·HitReaction Ability/짧은 제어 제한은 그대로이며 새 runtime 구조/태그/수치0이다. 공격 적중 혈액 PS와 패링 GA가 공유하는 PS 자체는 삭제/변경하지 않는다. 기존 Parry 개발 회귀의 수신자 feedback 기대값은 optional 설정에 맞춰 관측한 실제 컴포넌트 수를 검사한다. 첫 Apply01은 text exporter의 None 필드 생략 처리 때문에 저장 전에 실패했고 Main asset SHA는 그대로다. Apply02 이후 저장 재로드·실제 피격/방어 회귀를 검증하며 현재는 완료 기록이 아니다. 증거는 Metadata/PlayerReceivedHitVFXRemoval_20261013에 분리한다.
+## 2026-10-13 — ARCH-95 플레이어 피격 불꽃 제거 Main 완료
+
+앞선 착수의 Player Definition.HitReactions.ImpactEffect→None을 실제 저장·새 프로세스에서 검증했다. 기존 선택적 수신자 표현 계약을 활용해 gameplay runtime Source0/새 구조0/asset1/기존 DEV test1줄이다. ASC 승인·피격 실행/제어 제한·패링·몬스터 적중 공유 에셋은 보존했다. Main Build01 성공, fresh Native02의17사례/실제피격5 효과0/HP·ST·패링 유지가 Success/Exit0이다. 정확한 변경·실패 기록·loaded module SHA는 COMBAT_PRESENTATION_FOLLOWUP_20261011.md 최신 절과 Metadata/PlayerReceivedHitVFXRemoval_20261013/FinalVerification.json을 따른다. 프로젝트 적용과 현재 열린 사용자 editor의 cached object 갱신을 구분하며 이전 세션에 구효과가 남으면 Player Definition만 Reload한다.
+
+<!-- PlayerReceivedHitVFXRemoval_20261013_complete -->
+
+## 2026-10-13 — ARCH-95 패링 사진 기반 원작 VFX·굴절·카메라 후속 착수
+
+사용자 직접 구현 요청이다. 기존 Guard의 승인 bParried 분기와 ParryImpactEffect를 재사용하며 원작 PS/texture/curve를 표적 확인해 패링 전용 에셋으로 복원한다. 직전 Player Definition의 피격 ImpactEffect=None과 공격 적중 공유 PS는 유지한다. 기존 Guard h/cpp에 선택적 TSubclassOf<UCameraShakeBase>와 local PlayerController의 ClientStartCameraShake 호출만 추가할 계획이다. 새 runtime class/component/manager/tag0이며 finite camera shake 수명은 엔진이 소유한다. 성공 parry마다 발생하고 일반 Guard/실패/피격에서는 시작하지 않는다. 승인된 finite feedback는 input release가 바로 자르지 않는다.
+
+원작 AC_Kazan_DualAxeSword_Com_Guard_Suc_Just_L의 xxCameraMod_Shake_0에서 LocOscillation.Y amplitude−100/frequency25/offset zero, FOV amplitude3/frequency25/offset zero, FinalScale.1, FadeIn/Out.17953826s와 Notify.Duration.35907653s를 확인했다. 이것은 원작 field 직접값이고 실제 camera native 시간축/양쪽 모션의 모든 내부 parity를 확정한 것은 아니다. Engine LegacyCameraShake의 대응 field로 finite feedback를 구현하고 raw FinalScale을 amplitude에 한 번 적용한 계산값을 명시한다. Source VFX graph가 cooked에서 stripped되어 shader 재구성과 경계 feather는 원작 직접값이 아닌 표시 TEMP로 분리한다. 사진의 붉은/보라 광막, 굴절 중립 외곽과 Alpha/Depth 교차, 실제 camera 변화·종료/연속패링·Guard/피격 회귀를 모두 확인한 뒤 완료 기록한다. 근거/진행은 Metadata/ParryPhoto_20261013에 남기며 현재 완료가 아니다.
+
+## 2026-10-13 — ARCH-95 OverFury 추가 Slash 철회·나머지 무기 궤적 정렬 착수
+
+사용자 직접 수정 요청이다. OverFury의 KZWeaponSlash17 start/end쌍만 제거하고 원작 notify/효과·입력/피해/시간축은 보존한다. 나머지 추가 Slash는 공유 KZ_Slash asset을 유지하며 기존 Action receipt의 GT finalized pose/cleanup에서 실제 장착 grip/칼끝·무기 reach를 사용해 링 끝점/크기/스윙면을 검증한다. 새로운 runtime class/file/manager/tag0이다. actor-space pose가 빼던 몸통 회전과 bounding-centre 앵커의 차이를 실제 여러 프레임/시점에서 먼저 관측한다. 새 gameplay 튜닝값이 아니라 현재 Fab mesh radius100/diameter200cm·renderer yaw180 및 실제 무기 geometry의 변환/계산이다.
+
+Main source/asset 수정0, fresh 별도 Khazan_PlayerSlashWork_20261013의 source/config/binary 사본·Content hardlink 중 6target montage는 링크를 끊어 안전하게 분리했다. Probe01 saved/export은 passed. 현재 baseline DEV 계측 build와 그 뒤 before RHI 진행 단계다. 정확 재개는 Metadata/PlayerSlashAlignment_20261013/ResumeState.json. 기존 source VFX/피해/오디오/Physics/FPS/Parry·다른 작업은 보존하며 full reauthor/reimport나 외부 editor 제어를 하지 않는다.
+
+
+## 2026-10-13T12:06:39+09:00 — ARCH-89 SFX coverage·natural tail 작은 확장
+
+현재 직접 요청은 Player와 인간형4종의 모든 현행 action/interaction을 대상으로 한다. 기존 ASC/Ability/Task/피해·Guard/Dodge 승인·Animation ownership를 유지한다. 새로운 runtime class/file/component/manager/tick0이다. 기존 PlayAudio Notify의 optional VolumeMultiplier(default1)와 PreserveFiniteTailOnOwnerDestroyed(defaultfalse)를 추가했다. per-source bank gain 위에 asset-authored TEMP trim을 곱하고, 적용한 finite one-shot만 actor destroy 후 자연 drain한다. loops/명시 stop은 이전 cleanup을 유지한다. EndSound도 같은 정책/볼륨을 소비한다. defaults는 scope 밖 giant 기존 data를 보존한다. 엔진 AudioComponent::OnUnregister는 owner destruction의 one-shot에 bStopWhenOwnerDestroyed=false를 지원하고 BeginDestroy는 loop만 stop한다는 source 근거를 확인했다.
+
+임시 voice0.85/footstep0.90/weapon1은 숫자 출처를 PlaybackPlan01 profile에 모았으며 원작 gain과 구분한다. 아직 실제 믹서 조정/완료 검증이 아니다. 이후 현재5 family data에만 적용하고 peak/tails/combination/cancel/loop/death output으로 조정한다. 이전 미전달37 DataAsset bytes를 복사하지 않고 최신 Main에서 audio field만 수정하여 StrongVictimFront/Root/FPS/physics/VFX·Parry 후속을 보존한다. source3 수정·build 진행/새 asset0이며 exact resume는 Metadata/HumanoidSFX_20261013/ResumeState01.json과 Art 같은 날짜 절이다. 사용자·foreign editor 제어0이다.
+
+
+## 2026-10-13T13:16:42.496440+09:00 — ARCH-95 Slash 무기 정렬 후속 완료
+
+ARCH-95의 원래 효과 보존·기존 Action receipt 소유권은 유지한다. 이전 actor-space history/mesh bounding-centre·raw span200 정렬은 다음으로 대체한다. 실제 Weapon_L/R에 reference cutting-edge offsets를 강체 연결하며 world tip 차이에서 avatar translation만 빼 body/root yaw를 포함한다. 실제 칼끝과 grip을 절삭선에 투영한 radius로 위치·크기를 정한다. PreviousActorLocation은 이 receipt의 presentation history이며 activation별 초기화/기존 cancel·end cleanup을 따른다. ASC·GAS 판정·타깃·피해·태그/새 State 또는 Manager를 추가하지 않았다.
+
+수치 근거는 요청 Fab/current imported asset이며 원작 gameplay 직접값과 구분한다. KZ_Slash의 SM_VFX_SlashRing_01 raw radius100/diameter200cm, renderer Meshes[0].Rotation.Yaw180deg; emitter RapidIteration Constants.Slash_Additive/Slash_Translucent.InitialMeshOrientation.Rotation=(0,0,.25)turns→90deg 및 InitializeParticle의 initial XY mesh scale2가 근거다. 그래서 effective span=200×2=400cm, correction yaw=360−90−180=90deg이며 실제 effective leading endpoint는 local(+200,0,0)cm다. System.ExposedParameters.User.ScaleLerp=.15000000596, graph lerp(1−u,1+u,CurveScale1) 때문에 종전 실제 particle XYscale는2.3이었다. component User.ScaleLerp0은 modulation의 수학적 identity이며 asset의 initial2는 보존한다. User.Rotation0/CurveRotation0도 component에만 적용한다. raw asset/좌표·GPU/수식은 Metadata/PlayerSlashAlignment_20261013/NiagaraGeometryEvidence.json, 무기 reference_edges_cm은 CombatImpactUpgrade_20261012/WeaponSlashProbe04/WeaponProbe.json이다. 임의 gameplay 튜닝값을 새로 넣은 변경이 아니다.
+
+OverFury addon17 start/end쌍만 제거했고 다른5 montage의 addon33쌍은 유지했다. original1359 effects×37 properties와 모든6 montage notify clocks/GUID를 fresh Main에서 보존 확인했다. runtime3파일의 작은 수정과 기존 DEV 검수 확장/asset6만 이번 소유 범위다. 원래 effect/audio/physics/FPS·HP/ST/Ability 수명은 유지하며 병행 작업의 Source를 보존했다. 실제 Main build·18+Brutal5·GPU70 samples/17 attacks·공중 회전 재생과 native collision16(Spin7/Fury19)은 FinalVerification.json을 따른다. component-only 정렬 검증을 실제 GPU/시각 합격으로 대체하지 않는다.
+
+<!-- PlayerSlashAlignment_20261013_complete -->
+
+
+## 2026-10-13T14:14:46+09:00 — ARCH-89 current humanoid·Player SFX Main 완료
+
+실행 상태/승인은 기존 ASC/Ability/Task·attack hit group/Guard/Dodge가 소유하고 표현은 기존 PlayAudio Notify를 재사용한다. runtime Source3에 optional VolumeMultiplier(default1), finite owner-tail(defaultfalse)와 EndSound 동일 정책만 확장했다. 해당5family authored Notify만 finite tail을 보존하며 scope 밖 default/giant data는 이전 계약을 유지한다. Body impact는 수신자 Definition, 무기 impact/Guard는 현재 attack window, 회피 성공은 기존 TryAvoidHit once-per-execution이 소유한다. 같은 성공 SFX를 Suc pose에서 또 재생하지 않는다. 새 runtime class/file/component/manager/tick0이다.
+
+기존 DEV Audio Editor에 protected Python array 대신 audio class2-only clear/no-save command, Audio PIE에 sample-plan/actual cue coverage/owner destroy tail, Dodge QA에 실제 authored SuccessSound reflection만 추가했다. build01–04 성공, 현재 Main final saved1682/527/174/8/238cue, full fresh pose/root/curve/FPS/nonaudio notify/GUID 보존 및 실제78 mixer·메인 melee/Guard/Parry17/Dodge11이 passed다. Source/자산/검증 hash·실패/버전은 Metadata/HumanoidSFX_20261013/FinalVerification.json 정본이다. 실제 핵심 root/FPS/physics/VictimFront·Parry/Slash/피격 VFX 제거 변경을 유지했고 기존37prepared bytes를 덮어쓰지 않았다.
+
+유한음은 owner destroy/몬타주 취소 후 자연 drain, loops/명시 source stop만 fade하며 새 shared mutable notify state나 MainAnimInstance member/timer를 만들지 않는다. source 수치/계산과 명시 TEMP .85/.9/1/.08s 및 측정 기반 parry cue.5·미직렬화72callback first-pose adapter를 구분한다. 원작 DSP/sample/frame 전체 동일·Shipping·전 장치 청취는 별도 검증 범위다. 필수 잔여0이며 사용자 editor·foreign process 제어0, 현재 완료를 이전 pending37/locked/prepared 기록보다 우선한다.
+
+<!-- HumanoidSFX_20261013_MainComplete -->
+
+
+## 2026-10-13T14:19:12.378913+09:00 — GiantVFX/PlayerSlash Main 재개 완료 기준
+
+ARCH-98 완료 기록: 기존 Tag–Ability 7계층의 실행/확정피해/자원·취소 계약은 유지하고 presentation receipt/SkillObject와 asset reference만 사용했다. 신규 runtime class/file/manager/tag0, 이번 재개 Source추가0이다. 초기selected7runtime+DEV1/198target과 현재Main 검증은 MONSTER_VFX_RUNTIME_20261008.md 및 Metadata/GiantVFX_20261013/FinalVerification.json을 따른다. PlayerSlash ARCH-95 current source는 승인된 후속으로 함께 보존했다. GameCue 전면 마이그레이션이나 전체 원작 구조 확인으로 표현하지 않는다.
+
+## 2026-10-13 — WeakAttack01 사용자 사진 후속 방향·전방 확대 착수
+
+사용자 사진에서 첫 약공격의 두 효과 방향이 어긋나고 하나가 몸에 붙는 문제가 확인됐다. 앞선 SlashAlignment의 축/GPU 끝점 합격만으로 이 장면의 실제 밝은 궤적 방향을 합격 처리한 판단은 부족했으며 이번 시각 수정의 완료 근거로 사용하지 않는다. 기존 기록은 보존한다.
+
+현재 소유 범위는 WeakAttack01의 KZFX_bab7be8e310a56b59c0b9461 원래 PlaneSlash와 KZWeaponSlash 추가 효과의 start/end4 객체, 기존 Action receipt/Notify 설명 및 기존 DEV 검수다. 새 runtime class/file/component/manager/tag0이다. 공유 Niagara/mesh/material은 읽기만 한다. Metadata/WeakAttack01Slash_20261013/Before 및 Baseline.json에 실제 이전 파일을 보존하고 Khazan_WeakSlashWork_20261013에서 별도 editor로 작업한다. RuntimeMainApplied.json의 기존 Source3(실행1/설명1/DEV1) 작은 변경만 Main에 적용했고 asset0, 빌드 진행 중이다. 양수 scale·zero offset의 다른 공격 동작은 그대로다. 음향/패링/거대 VFX 작업과 외부 editor를 제어하지 않는다.
+
+후보는 음수 X scale로 radial UV/head를 반사하며 대응 끝점을 선택하고 기존 RelativeLocation을 avatar-local cm로 소비하는 방식이다. 첫 타격 전방35cm/평면 크기1.15배는 사용자 요청에 따른 TEMP 시각 튜닝이며 원작 직접 수치가 아니다. 이 후보는 아직 실제 시각 검증/최종 asset 반영 완료가 아니다. MeshProbe01의 두 Mesh OBJ/UV와 source PlaneSlash를 표적 조회했다. BeforeComposed01은 실제 baseline 성공이나 사진의 문제를 해소했다는 증거가 아니다. 원래 효과 단독 진단01은 생성 문자열 문법 오류,02는 TextureExporterTGA의 unsupported texture assertion으로 실패했고 제품 asset 저장0이다. 해당 own process만 종료/자연 crash 종료했으며 texture exporter는 진단에서 제거했다.
+
+정확 재개: MainBuild01 결과→새 Main module을 별도 작업본에 가져옴→original-only 재생으로 두 효과 식별→author_weak_attack01_slash_20261013.py 후보를 task-private montage에 적용→세 시점/초기·중기·후기 실제 장면과 signed GPU endpoint·forward offset 확인→최신 Main asset의 audio 등 병행 변경을 보존한 선택 반영→fresh saved/Main 실제 RHI→완료 기록. 개인 에디터를 재사용하거나 과거 montage6/full author/private DLL을 Main에 복사하지 않는다.
+
+## 2026-10-13T15:06:26.891782+09:00 — ARCH-95 Sequencer 기반 공격 Niagara 편집 계약 착수
+
+사용자 직접 구현 지시다. 코드의 수치/방향 보정을 계속 덧붙이는 대신 LevelSequence를 편집 원본으로 사용하고, editor 적용 명령이 Niagara별 Transform 곡선과 Life Cycle 창을 기존 CombatEffect notify에 저장한다. runtime은 기존 Action receipt/GT finalized pose·MontageInstance 검증/정상·취소·사망·EndPlay cleanup을 재사용한다. 사용자가 편집해 적용한 효과는 weapon-sweep 자동 계산을 우회하며 avatar-local cm / Euler degrees / dimensionless scale / montage seconds 계약을 사용한다. 원래 source 효과/오디오/피해/판정/애니메이션 포즈·Root·FPS는 보존한다. 새 runtime class/component/manager/tag는 만들지 않는다. 기존 notify에 optional editor-authored transform channels와 editor-only apply API만 추가할 계획이며, Python editor menu/LevelSequence 엔진 도구로 시각 편집을 제공한다. 불필요한 매게임 LevelSequence player/character animation override는 사용하지 않는다.
+
+WeakAttack02 수동 offset 작업은 이 편집 workflow 요청으로 대체됐다. 이전 Before02은 기존 배치의 실제 관측만 passed이며 위치 수정/후보 적용0이다. 메뉴·Sequence·데이터 apply·fresh native 비교 완료 전에는 구현 완료로 기록하지 않는다. 정확 재개/실패/프로세스는 Metadata/CombatVFXSequencer_20261013/ResumeState.json을 따른다. 새 수치가 필요한 경우 원작/현재 asset geometry/TEMP를 구분한다.
+
+## 2026-10-13 — ARCH-95 WeakAttack01 방향·전방 표현 Main 완료
+
+사용자 사진의 반대 방향 Slash를 수정했다. 월드 좌표로 재생하는 원래 PlaneSlash의 CorrectionBoneName=Weapon_L을 추가 Slash의 공격 손으로 해석한 이전 author 휴리스틱이 원인이다. 실제 첫 약공격의 0.35→0.40초 포즈에서 Weapon_L 쪽 FX tip은 위로 회수되고 Weapon_R 쪽은 우측 위에서 좌측 아래로 이동한다. 이는 현재 실제 포즈 관측이며 원작 실행 코드의 확인으로 표현하지 않는다. 정확한 데이터·근거는 Metadata/WeakAttack01Slash_20261013/CuttingHandEvidence.json과 EquippedGeometryObservation.json이다. addon SourceField의 기존 L 문구는 초기 생성 이력이며 현행 Near/Tip 설정과 이번 override를 우선한다.
+
+AM_DAS_WeakAttackCombo의 첫 KZFX_bab7be8e310a56b59c0b9461 및 KZWeaponSlash start/end4 객체만 변경했다. 추가 효과 Near/Tip을 FX_R_Sword_02/01로 바꾸어 실제 내려베는 Weapon_R을 따른다. 기존 RelativeLocation을 Action finalized-pose receipt에서 avatar-local cm로 더하는 작은 계산만 추가했다. 양수 scale/zero offset의 나머지 공격과 기존 수명/취소 cleanup은 유지한다. 새 runtime 파일/class/component/manager/tag0이며 실행 Source1/Notify 설명1/기존 DEV1/asset1이다. 중간 음수 scale 반전 후보는 시각 실패로 철회했고 관련 product 코드도 제거했다.
+
+전방35cm·평면 크기1.15배는 요청한 전방 확대를 위한 TEMP이며 원작 직접값이 아니다. 에디터에서 첫 notify child의 RelativeLocation/Scale3D로 조정한다. 최신 Main montage 사본에 선택 저작하고 전체 직렬화 diff를 검사한 뒤 SHA CAS/atomic replace로 반영했다. Main SavedMain01은 FinalAuthor01 전체 export와 완전히 동일하다. notify clock/GUID·다른 효과와 오디오/HP/ST/피해/콜라이더/Physics 및 다른 montage5는 보존한다.
+
+MainBuild04 성공, 실제 MainRHI01의18 natural node·Brutal4/실제 승인 HP110→100·두 avatar/조건부 효과·정상 종료/취소 및 실제 GPU70개·17공격은 성공했다. 세 actor-relative 시점·초기/중기/후기 장면289개를 검수했고, MainYaw90RHI01에서 actor를90도 회전시킨 첫 약공격도 성공했다. 각 프로세스의 실제 DLL df9764361d10eec695f0855e34b0dacfb98da06138303a1c8db17cbd7a1f0ed3를 결속했다. GPU 최대0.000031cm는 reference marker+명시된35cm offset에 대한 검수 오차이며 실제 메시 vertex와 완전 일치라는 뜻이 아니다. 현재 Imperial_R tip과 가상 marker의 가장 가까운 vertex 차13.147cm 및 원작 shader/pixel parity 미확인 경계를 보고서에 명시했다.
+
+정본은 Metadata/WeakAttack01Slash_20261013/FinalVerification.json, 재개는 ResumeState.json이다. 필수 잔여0, own editor0, 외부 editor 제어0이다. 실패한 TGA/NullRHI FBX export·문자열 진단·mirror 후보 및 중단한 private 전체 build는 보존한다. 이후 현재 Main Source/first4 객체에서 시작하고 stale private Source/DLL·전체6 montage author·mirror 후보를 전달하지 않는다. 앞선 SlashAlignment의 축/GPU 합격이 사용자 사진의 반대 방향을 해소했다는 판단은 이번 actual hand/시각 검증으로 대체한다.
+
+<!-- WeakAttack01Slash_20261013_complete -->
+## 2026-10-13 — ARCH-85 대형 몬스터 비중단 피격 계약 (구현 착수)
+
+사용자 직접 수정 요청에 따라 Apes/Yetuga의 일반 피격만 현재 공격·이동·AI를 유지하는 가산 표현으로 분리한다. 확정 피해/스태미너는 기존 GE/ASC, 스태미너 소진·사망은 기존 Exhaustion/Dead가 계속 소유한다. 기존 Definition의 선택적 additive montage pool과 AKZCharacter의 표현 receipt, 두 ABP의 독립 Slot Group을 사용한다. ASC montage/HitReaction Ability를 경유하면 PreActivate의 Action 취소·태그가 먼저 발생하므로 이 표현에는 직접 UAnimInstance montage를 사용한다. 공유 상태 태그·Ability·Manager를 새로 만들지 않는다. 실행 montage를 읽는 AI는 presentation의 최신 montage 대신 실제 Attack Ability montage를 참조한다. 완료·재진입은 엔진 montage 수명, 소진/사망/UnPossessed/EndPlay는 exact-instance receipt 정리를 사용한다. 아직 적용/build/PIE 완료가 아니다. 근거/원본 수치와 additive author adapter는 Metadata/GiantHitOverlay_20261013에 분리 기록한다.
+
+## 2026-10-13 — 거인 일반 피격 표현 계약 Main 적용 확인
+
+앞 절의 미적용 상태는 이 완료 기록으로 갱신한다. Main Source 6개, 에셋 22개와 동일 Main-object DLL을 반영했고, fresh Main PIE 25/25 조건 및 원본 full-pose 16개 hash 보존을 확인했다. 일반 피격은 표현 전용 Slot으로 Action을 유지하고, ST0/HP0은 기존 Exhaustion/Death 경로가 우선한다. 새 gameplay 상태 소유자·태그·Ability는 없다. 세부 구현·원작 특수 경직/그로기 근거·미구현 부위 내구도 조건은 `GIANT_NONINTERRUPTING_HIT_20261013.md`와 `Metadata/GiantHitOverlay_20261013/FinalVerification.json`을 따른다.
+
+## 2026-10-14 — ARCH-89/92 일반 적중음·브루탈 처치 표시 계약 교정
+
+ARCH-89의 승인된 HP 피해/수신자 재질별 body hit 계약은 유지한다. 이전 author가 Player 일반 Combo 60창에 동일 `SC_efx_pc_dualaxesword_com_impact`를 더해, 저장된 스윙 음향과 body hit 위에 공통의 무거운 충돌음을 매번 겹쳤다. 사용자 청취 교정에 따라 이 특정 중복 음원만 Player Combo의 기존 승인 적중 소비자에서 억제한다. 다른 ImpactSound, Monster 공격, Guard/Parry, 브루탈의 별도 grapple montage 음향은 유지한다. 저장된 Combo DataAsset을 잠근 외부 에디터 때문에 데이터 필드 삭제는 검증된 준비본까지만 완료했고 Main 파일은 변경하지 못했다. 파일 잠금이 풀리면 60창의 해당 필드만 제거한 준비본을 SHA 대조 후 반영하고 임시 exact-cue runtime 억제를 제거한다. 새 음량·시간 수치나 runtime 타입은 없다.
+
+ARCH-92의 완료된 치명 브루탈을 피해자 Damage2 마지막 포즈에서 바로 정지시키던 정책은 사용자 요청으로 대체한다. 짝 실행 두 주체가 완료되면 기존 Exhaustion Ability가 자기 몽타주/제약을 정리한 뒤 기존 Monster `FinishDeathPresentation()`의 저장된 DeathPresentationMontage를 시작한다. HP/Dead, 짝 수명과 비치명 회복, 중단 사망 경로는 기존 소유자에 둔다. 6종 정면/후면12의 실제 사망 몽타주 재생·terminal pose/캡처, 별도 일반 사망 정상/중단12가 새 모듈에서 통과했다. 정확한 실행·잠금·미반영 범위는 `Metadata/PlayerImpactSFX_20261013/FinalVerification.json`을 따른다.
+
+
+## 2026-10-14 — ARCH-99 대형 몬스터·패링 카메라 표현 계약
+
+기존 Tag–Ability 7계층의 피해/입력/상태는 변경하지 않았다. Yetuga·Apes의 원작 xxAnimNotifyState_CameraMod 데이터는 기존 UKZAnimNotifyState_MonsterVisual의 카메라 전용 분기에 보관하고, 실제 소비자는 로컬 PlayerCameraManager의 UKZCombatCameraModifier다. 86개 독립 이벤트의 원본 축/주파수/시간·거리·fade를 기존 단일 CameraShake BP로 표현할 수 없어 UCameraModifier 하위 클래스 하나만 추가했다. 새 gameplay state, ASC tag, manager, delegate는 없다. 전투·이동·피해 Ability는 카메라 피드백을 소유하지 않는다.
+
+작성은 애니메이션 notify의 게임 스레드, 소비는 로컬 카메라 갱신의 게임 스레드다. mesh와 notify instance ID로 이벤트를 구분하고 weak mesh 수명, NotifyEnd 또는 명시적 active-end에 따른 quadratic release로 정리한다. 원본 source scale 0은 재생하지 않는다. 패링은 Guard 승인 분기에서 같은 modifier에 유한 이벤트를 넣고, 기존 별도 BP CameraShake 호출은 제거했다. 로컬 플레이어별로만 적용하며 AI/원격 플레이어의 gameplay 상태를 복제하지 않는다. 파생 출력 clamp와 랜덤 축은 원작값이 아닌 조정 가능한 TEMP 표시값이다.
+
+원본88/현행 바인딩86의 출처·계산·미확인 조건은 MONSTER_VFX_RUNTIME_20261008.md 최신 절과 Metadata/GiantCamera_20261014/OriginalCameraEvents.json을 따른다. Build07은 최신 Main target up to date/Succeeded, 현재 DLL SHA와 48 asset/86 notify fresh readback, 4 monster 실제 PIE 및 parry17 실제 PIE 성공은 Metadata/GiantCamera_20261014/FinalVerification.json에 결속했다. 원작 전용 xxCameraMod 실행 코드와 source package 2개의 현행 AnimSequence가 없어 원작 프레임 완전 일치는 주장하지 않는다.
+
+
+## 2026-10-14 — ARCH-95 플레이어 KZ_Slash 바깥 배치 계약 보완
+
+기존 추가 Slash의 실행 소유자와 정상/취소 cleanup은 Action Ability effect receipt 그대로다. finalized pose에서 선택한 실제 무기의 스윙 접선(X)·절삭면(Y)으로 회전을 만들고 매 프레임 실제 tip에서 캐릭터 바깥쪽으로 `WeaponSlashOutwardOffsetCm`를 적용한다. 이 값은 Notify별 TEMP 시각 데이터이며 기본 0이다. 첫 프레임 추정 선택이 틀리던 공격은 저장 Notify의 좌·우 무기 이름으로 확정했다. 기존 원래 VFX·WeakAttack02의 Sequencer 소유권, ASC 상태·피해 경로는 유지하며 새 실행 상태나 manager는 추가하지 않는다. Main 저장·빌드·실제 PIE 근거는 `Metadata/PlayerSlashOuter_20261014/FinalVerification.json`이다.
+
+## 2026-10-15 — ARCH-88/95 HeinMach 색감·피격 VFX 후속 착수
+
+사용자 직접 수정 요청으로 이전 Player ImpactEffect=None 정책을 대체하고, 현재 브루탈에서 재생하는 PP_Dmg_Blood_Trail_Sub를 플레이어/6종 몬스터의 기존 승인 피격 표현에 연결한다. 원래 PS는 복제·증량하지 않는다. 공유 PlayHitReaction의 기존 spawn 위치만 현재 캡슐 표면으로 보완하며 ASC/피해/가드·회피 승인/Ability 수명은 변경하지 않는다. 새 runtime 클래스·파일·manager·상태는 없다. HeinMach의 장면 색은 조명과 노출 설정에서 조정하고 VFX용 역노출 보정 누락·맵별 LocalExposure 차이를 제거한다. 혈흔 빨강·거리/노출 조정은 원작 확인값이 아닌 명시된 TEMP 시각 후보다. 현재 BaselineAudit02의321 system/206 material/97 root와 저장 원작 사진을 기준으로 격리본을 준비했고 아직 candidate의 저장·시각 검증·Main 전달은 완료되지 않았다. 근거/재개는 Metadata/HeinMachColourVFX_20261015이다.
+## 2026-10-15 — ARCH-99/85/92/94 후속: 선형 카메라 힘과 거인 전투 연결
+
+사용자의 직접 구현 요청으로 기존 CameraModifier의 사인파/이차 envelope를 방향·변위 힘의 선형 상승과 선형 원점 복원으로 변경한다. 반복 힘은 독립 이벤트/반대 방향의 연속 pulse로 표현하며 Notify End/취소는 그 시점 변위를 보존해 복원한다. 원작 camera notify 원시 값과 identity는 보존하고, 최소 상승 0.08s/최소 복원 0.16s/최대 반복 4Hz는 사용자가 자연스러운 값을 선정하도록 허용한 어시스턴트 TEMP 설정이다. 새 runtime class/manager/shared gameplay state는 추가하지 않는다.
+
+Guard의 승인된 패링 경로만 KZ_Parring_Distort 및 기존 Brutal CombatEffect 데이터 사본을 소비한다. 예전 패링 PSC/바닥용 Niagara/화면 PP 생성 경로는 제거한다. 두 캐릭터 사이 흉부 높이에 contact를 배치하고 원본 camera-facing renderer를 유지한다. particle 수명은 원본 window와 엔진 auto-destroy/drain이며 Guard 종료 이후에도 해당 component의 finite timer가 소유한다.
+
+Yetuga의 원거리 Armageddon은 기존 SourceGate/SourceSkill 실행을 활용하고 에디터 AISettings의 optional skill/range/chance/cooldown으로 사용자 정책을 적용한다. chance는 실행 진입에서 한 번 평가하며 true/false gate에서 각각 RNG를 돌리지 않는다. 기존 상태 트리 노드/원작 status 데이터는 보존한다. 거인 추격의 실패한 nav query는 engine abstract direct path로 계속 시도하며 CMC collision은 유지한다. capture-bearing 이동만 기존 TargetMax보다 멀리 있는 선택 target까지 확장하고 miss/recovery/다른 공격은 보존한다.
+
+약점 파괴 root track은 read-only audit와 Rider의 실제 PartGroggy 실행에서 검증한다. 이미 올바른 true root/track order/추출을 재베이크하지 않는다. Exhaustion은 기존 montage Start→Loop→Loop를 runtime link해 locomotion 포즈로 빠지는 재시작 구간을 없애고 원래 timer/Brutal 소유권을 유지한다. source zero-blend section은 기존 ABP inertializer로 최소 0.12s TEMP 전이를 적용한다. paired victim→death는 기존 Monster death owner에 0.24s TEMP 최소 inertialization만 적용한다. 적용/빌드/PIE/화면 검수 범위는 완료 기록에서 분리한다. 재개 및 근거 디렉터리는 Metadata/CombatFeel_20261015이다.
+
+
+## 2026-10-15 — ARCH-99/85/92/94 CombatFeel 실행 계약 확정
+
+앞선 같은 날짜 계획의 'chance는 실행 진입' 및 'abstract direct path 추격' 설명은 현재 구현으로 대체한다. Armageddon chance는 source true/inverted-false gate가 같은 selection frame에 공유하는 한 RNG 결과이고 task Enter 재평가는 없다. off-nav abstract path의 실제 입력0이 관측돼 선택된 기존 이동 task의 DirectMoveGoal을 AIController가 기존 intent→Pawn/CMC 입력으로 소비한다. 정상 nav 복귀/Exit/금지/Unpossess cleanup은 StopRequestedMove 한 경로로 정리한다. 목표는 navigation resource이며 ASC gameplay 상태의 사본이 아니다. 공격/피해/자원/죽음 수명과 worker 경계는 유지한다.
+
+Runtime 신설0, 기존 camera/Guard/Pattern/Exhaustion/AI/Monster 소유자와 기존 data field만 보완했다. .12s combo floor는 source0뿐 아니라 더 짧은 source blend에도 적용하며 긴 blend는 보존한다. 실제 적용, 빌드, 각 DLL별 PIE/화면 검수 및 미확인 경계는 `Metadata/CombatFeel_20261015/FinalVerification.json`와 도메인 현행 문서에 기록했다. 앞선 실패나 계획 기록은 삭제하지 않는다.
+
+
+
+## 2026-10-15 — ARCH-88/95 HeinMach 피격 VFX 후속 완료
+
+앞선 착수 기록의 Main 미반영 상태를 완료로 대체한다. 기존 승인 피격 표현 소유자 AKZCharacter::PlayHitReaction과 CharacterDefinition.HitReactions.ImpactEffect만 재사용했다. 현재 Brutal 혈액 PS를 Player/몬스터6종에 연결하고 발생 위치만 기존 캡슐 표면으로 계산한다. 승인 피해/가드·회피/ASC 상태/Ability·몽타주 수명 계약은 동일하며 새 gameplay class·상태·태그·manager가 없다. 추가한 console capture는 기존 editor/dev automation QA 파일 안에만 있다.
+
+Main105 package SHA/readback, 표준 build와 실제 피격·가드/몬스터6종·공격 collision3 suite 및 native VFX 비교 완료는 Metadata/HeinMachColourVFX_20261015/FinalVerification.json을 따른다. source task-before diff와 모듈별 검사 범위를 보존했다. 조명/혈흔 TEMP 수치 및 원작 shader/pixel 미확인 한계는 Art 정본 HEINMACH_COLOUR_VFX_20261015.md의 책임이다. 기존 v2 7계층의 실행·상태 소유권은 바꾸지 않는다.
+
+<!-- HeinMachColourVFX_20261015_complete -->
+
+## 2026-10-15 — ARCH-05/09/11/15: HeinMach 자동 진입 포탈
+
+GateCube → Yetuga 전장 이동의 실제 독립 수명은 새 배치 Actor `AKZBossPortal` 한 개가 소유한다. 기존 포탈 소유자가 없어 GameMode/Controller에 맵 검색·좌표·timer를 더하는 대안보다 책임이 작다. runtime h/cpp2, Level의 기존 Niagara/Engine TargetPoint와 overlap·TeleportTo·PlayerCameraManager만 재사용하며 새 Manager/Subsystem/Interaction 탐색·인터페이스/Ability/태그 사본은 추가하지 않는다. 자동 통과이며 별도 입력·보상·공유 상호작용 실행을 요구하지 않는 이 범위에 한정한다.
+
+원인별 Controller ignore count·ASC action block count·무적 tag contribution은 진입 한 건에 한 번 취득하고 정상/실패/소멸/빙의 변경 시 각 한 번 회수한다. 캐릭터 실행은 기존 ASC CancelAllAbilities가 자기 cleanup으로 종료하고, 포탈은 LockOn/Player raw intent 해제 API를 사용한다. 목적지와 크기·VFX·fade 시간은 Level Details에서 편집한다. Main AnimInstance/Locomotion/MonsterPatternAbility에는 포탈 상태나 좌표를 넣지 않는다. 이 절은 구현 경계의 채택이며 실제 저장·빌드·PIE 범위는 `HEINMACH_YETUGA_PORTAL_20261015.md`의 최신 결과를 따른다.
+
+
+## 2026-10-15 — ARCH-83/95 SpinningAttack 표현 교체 착수
+
+사용자가 SpinningAttack의 KZ_Slash를 다른 효과로 교체하고 OverFury/ChargeAttack 효과를 차용하도록 직접 요청했다. 기존 montage CombatEffect의 batch/실행 receipt/정상·취소 cleanup을 재사용하고 Spinning에 한해 이전 추가 Niagara 연결을 기존 Cascade 효과로 바꾸는 Art 데이터 수정부터 진행한다. donor 공유 particle와 다른 공격은 보존하며 gameplay damage/section/Ability 수명·입력·GAS 상태를 변경하지 않는다. 현재 새 runtime class/component/manager/file 계획0이다. 실제 효과 방위·발생 위치와 조합은 원작 타격 시각을 보존한 native 재생에서 검수한다. 추가 수치/다른 공격에서 가져온 효과의 배치는 원작 Spinning 직접값이 아닌 TEMP 표현임을 Art 정본에 기록한다. 현재 Main 미반영이며 근거/재개는 Metadata/HeinMachLookSpin_20261015다.
+
+<!-- HeinMachLookSpin_20261015_intake -->
+
+
+## 2026-10-15 — ARCH-05/09/11/15 포탈 실행 검증 완료
+
+앞선 자동 진입 portal 계약을 Main runtime2/DEV1/배치2 actor로 구현했다. 독립 수명은 기존 engine Actor가 소유하고 ASC action block/tag count 및 Controller ignore count의 자기 기여만 회수한다. 실제 Player intent/CMC walking, black-before-teleport, 전장 floor/yaw와 중복/소멸 cleanup이 RHI06에서 통과했다. 새 범용 Interaction manager/Ability/태그 사본은 없다. 최신 좌표/전용 Niagara·TEMP·정확 검증은 HEINMACH_YETUGA_PORTAL_20261015.md 및 FinalVerification.json을 따른다. 이는 포탈 한 수직 절편이며 전체 Interaction/Encounter 마이그레이션 완료를 뜻하지 않는다.
+
+<!-- HeinMachPortal_20261015_complete -->
+
+## 2026-10-15 — ARCH-89/99 컨트롤러 진동 표현 계약 (사용자 직접 요청, 검증 생략)
+
+원작 진동 metadata는 미확인이다. 사용자 지시의 약공격=약하고 짧게/강공격·Spinning·OverFury·패링=강하고 짧게, Yetuga/Apes/Elite의 행동 강도 구분을 기존 표현 경로에 구현한다. 기존 AKZPlayerController가 UE PlayDynamicForceFeedback의 로컬 장치 출력과 조정값을 소유한다. 새 runtime class/file/component/manager/tag/에셋은 만들지 않는다. Source/ASC/Ability의 피해·입력·태그·StateTree 판단은 변경하지 않는다.
+
+실제 작성자는 기존 ComboAction 공격창/몬스터 노드 시작, Guard 승인 패링, MonsterVisual 원본 camera notify와 기존 monster footstep audio notify다. MonsterPatternAbility는 기존 ComboAction 상속을 통해 같은 경로를 사용한다. 공격창의 중복 억제는 해당 Combo 실행의 hit-group 집합만 사용하며 기존 ResetAttackCollision에서 함께 초기화한다. GT에서 로컬 PlayerController만 소비하고 몬스터의 출력은 현재 Pawn 거리로 감쇠한다. 진동은 유한 양수 duration의 엔진 dynamic effect이며 엔진이 종료/Controller 수명을 관리한다. Ability 종료로 다른 진동을 일괄 정지시키거나 공유 Notify에 runtime 상태를 저장하지 않는다.
+
+어시스턴트 TEMP 설정은 PlayerController의 KZ|Feedback|Temporary에 모은다. intensity(무차원0~1)/duration(s): Weak(.22,.06), Strong·Spinning·OverFury·Parry(.90,.10), Monster약(.14,.045), Monster강(.65,.12). 몬스터 full-strength400cm/max3000cm 사이는 선형 감쇠한다. 선택 이유는 짧은 타격 구분과 먼 적의 지속 진동 방지이며 원작 직접값이나 실기 검증값이 아니다. 이후 장치별 체감에 따라 이 설정만 조정한다.
+
+사용자의 “검증은 거치지 마”를 따른다. 이번 범위에서는 빌드/PIE/테스트/장치 출력 검증을 실행하지 않는다. 소스 반영과 현재 실행 중인 바이너리 반영을 구분하며 후속 결과도 임의 성공으로 기록하지 않는다.
+
+
+## 2026-10-15 — ARCH-83/95 Spinning 표현 교체 완료
+
+기존 montage data-only CombatEffect와 Action 실행/수명·적중·취소 계약으로 해결했으며 새 gameplay owner/State/태그/manager/runtime 파일을 추가하지 않았다. 원래176 효과·clock/GUID·피해/입력/오디오와 공유 donor는 유지한다. Main3 presentation asset 선택 전달, 실제 HeinMach Spinning/cleanup·충돌과 Main DevMap 두 회귀 suite 검사가 완료됐다. HeinMach broad suite의 별도 rear-Brutal fixture 실패는 통과로 확대하지 않는다. 이 요청의 Source/Config/DLL/build 변경0이다. 계약 변경 없이 Art의 TEMP donor 조합만 달라졌고 원작의 내부 구조/수치로 표현하지 않는다. Metadata/HeinMachLookSpin_20261015/FinalVerification.json과 Art HEINMACH_BLUE_SPINNING_20261015.md가 최종 근거다.
+
+<!-- HeinMachLookSpin_20261015_complete -->
+
+## 2026-10-15 — ARCH-05/89 Yetuga 전장 BGM 단방향 시작 계약
+
+사용자의 직접 구현 요청과 후속 정정에 따라 기존 AKZBossPortal의 성공한 전장 이동만 원작 Yetuga BGM의 시작 신호로 사용한다. 새 runtime 파일/class/manager/Ability/tag/tick/delegate를 추가하지 않는다. 기존 포탈에 편집 가능한 soft sound와 재생 component receipt만 보관하며 engine SpawnSound2D에 World를 전달한다. 캐릭터·보스 수명이나 거리·HP·Dead 태그를 BGM 종료 조건으로 만들지 않는다. 플레이어 사망/Yetuga 처치/전장 이탈/포탈 FinishTravel 후에도 원본 반복 구간을 계속 재생한다. 같은 포탈의 재진입은 살아 있는 재생 component를 확인해 중복/처음부터 재시작을 억제한다. 월드/PIE의 종료는 engine audio 정리 대상이다. 이 절은 앞선 진행 안내의 사망·처치·이탈 종료 계획을 명시적으로 철회한다.
+
+포탈 이동·입력/ASC counted lock·암전 cleanup은 그대로다. 원작 음악의 내용·구간·gain 출처는 Art의 YETUGA_BGM_SOURCE_20261015.md로 분리 기록한다. 음악 재현을 원작 Wwise 전역 DSP/RTPC나 native scheduler의 sample parity로 확대하지 않는다. 실제 적용/빌드/재생 범위는 아래 완료 기록과 Metadata/YetugaBGM_20261015를 따른다.
+
+### 2026-10-15 — 동일 계약 Main 적용 결과
+
+runtime2 소스와 원작 음악4asset 저장 및 Main stock DLL 빌드가 완료됐다. 새 runtime class/file·map 저장0이며 실제 PIE/청취 검증은 실행하지 않았다. module SHA8014a3c141b2951dcac0a8c5b38402639dbaa6a565d71b915df7f5cfc776c849, 기존 map SHA7b072b9bfd8c051701fa8190fb794422e33c4c1bd16c62a2370ce1831471c728 유지다. 정확한 범위/재개는 Metadata/YetugaBGM_20261015/Implementation.json과 Engineering 포탈 최신 절을 따른다. 앞선 계약 이외의 게임 상태 소유/AI/능력 구조 변경0이다.
+
+## 2026-10-15 — ARCH-09/14/89/99 진동 2배·사망/Yetuga 잡기 LockOn 계약
+
+사용자 직접 수정 및 HeinMach 재패키징 요청이다. 진동은 기존 APlayerController.ForceFeedbackScale을 2로 설정한다(사용자 지정 무차원 배율). UE 5.8 PlayerController.cpp의 최종 ForceFeedbackScale 곱셈/0..1 clamp를 재사용하므로 기존 duration·거리 감쇠는 유지하고 최대 장치 출력은1이다. 원작 진동 metadata 확인값이 아니다.
+
+LockOnComponent가 선택 대상 ASC의 기존 HP 변경 delegate를 구독해 HP<=0에서 동기 해제하고 자기 delegate/이동 constraint만 회수한다. 시작/검색/유지 시 살아 있는 ASC 대상만 허용한다. HP·Dead의 작성자는 변경하지 않는다. Yetuga의 성공한 CaptureEffect/attachment 수명은 기존 MonsterPatternAbility가 계속 소유하며, 잡힌 local Player의 잠금을 해제한다. 잡기 종료/취소 cleanup 후 같은 PlayerController/Pawn이며 양쪽 생존·유효할 때 잡았던 Yetuga를 직접 재잠금한다. 잡기 실패에는 변경이 없고, 잡힌 동안 monster attachment가 있는 Player의 신규 잠금은 차단한다. 기존 CharacterDefinitionAssetName의 읽기 getter로 Yetuga를 식별하며 이름 부분검색/새 상태 태그/manager는 추가하지 않는다.
+
+새 runtime 파일/class0. 기존 Controller cpp, Character header, LockOn h/cpp, MonsterPattern h/cpp의 작은 변경과 기존 DEV test 보완으로 진행한다. 현재는 착수 계약이며 적용/build/PIE/package 완료가 아니다. 근거·백업: Metadata/LockOnRumble_20261015. 기존 Epic Shipping/HeinMach 단일 map 설정을 재사용해 변경 후 새 build/cook를 수행한다.
+
+
+## 2026-10-15 — ARCH-09/14/89/99 LockOn/진동 계약 실제 완료
+
+앞선 착수 계약을 runtime5/Config1/DEV2로 적용했다. 진동은 config property의 Engine 기본1을 프로젝트 DefaultGame ForceFeedbackScale2로 override하며 PlayerController.cpp는 원래 SHA를 보존한다. 기존 Engine clamp와 finite pulse 수명을 재사용한다. LockOn은 직접 HP delegate/자기 constraint를, PatternAbility는 성공한 capture의 controller receipt와 기존 cleanup을 소유한다. CharacterDefinitionAssetName getter는 기존 ID의 읽기 전용 노출이다. 새 공개 gameplay 상태/manager/tag/runtime class는 없다.
+
+Editor build·두 native RHI suite·HeinMach 단일 Epic Shipping build/cook·최종 container와 config·90초 offscreen 시작을 실제 완료했다. 초기 DEV 사망 assertion 보정/각 DLL과 실물 패드·Shipping 전체 combat 미확인 범위는 Metadata/LockOnRumble_20261015/FinalVerification.json을 따른다. 앞선 계획/진행 중 기록은 이 범위에서 완료로 대체한다.
+
+<!-- LockOnRumble_20261015_complete -->

@@ -34,6 +34,7 @@ struct FKZAnimGameThreadData
 	EKZRotationMode RotationMode = EKZRotationMode::VelocityDirection;
 
 	bool bMovementAllowed = true;
+	bool bGuarding = false;
 };
 
 class UKZLocomotionComponent;
@@ -51,6 +52,10 @@ public:
 	virtual void NativeUninitializeAnimation() override;
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 	virtual void NativeThreadSafeUpdateAnimation(float DeltaSeconds) override;
+	virtual bool CanRunParallelWork() const override
+	{
+		return !bRequiresGameThreadPoseEvaluation && Super::CanRunParallelWork();
+	}
 
 private:
 	void CacheReferences_GameThread();
@@ -62,6 +67,11 @@ private:
 	EKZFoot SelectStopEntryFoot_AnyThread() const;
 
 protected:
+	// Engine Foot Placement reads CharacterMovement floor/owner during evaluation.
+	// Only ABPs using that node opt in; the player's snapshot/worker path stays parallel.
+	UPROPERTY(EditDefaultsOnly, Category = "Animation|Performance", AdvancedDisplay)
+	bool bRequiresGameThreadPoseEvaluation = false;
+
 	UPROPERTY(Transient)
 	TObjectPtr<UKZLocomotionComponent> LocomotionComponent;
 
@@ -88,6 +98,14 @@ protected:
 
 	UPROPERTY(Transient, BlueprintReadOnly, Category = "Animation|Locomotion|Movement")
 	float MovementDirectionAngle = 0.f;
+
+	// ASC State.Guarding의 GameThread 관측 복사다. gameplay 판정을 작성하지 않는다.
+	UPROPERTY(Transient, BlueprintReadOnly, Category = "Animation|Guard")
+	bool bIsGuarding = false;
+
+	// Guard Blend Space의 방향: LockOn은 기존 이동 입력 각도, 비LockOn은 F(0도).
+	UPROPERTY(Transient, BlueprintReadOnly, Category = "Animation|Guard")
+	float GuardMovementDirectionAngle = 0.f;
 
 	UPROPERTY(Transient, BlueprintReadOnly, Category = "Animation|Locomotion|Movement")
 	float InputAmount = 0.f;

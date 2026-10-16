@@ -21,11 +21,26 @@ void UKZAttributeSet::PreAttributeBaseChange(const FGameplayAttribute& Attribute
 	}
 }
 
+void UKZAttributeSet::PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue)
+{
+	Super::PostAttributeChange(Attribute, OldValue, NewValue);
+	if (Attribute == GetMaxHPAttribute())
+	{
+		SetHP(FMath::Clamp(GetHP(), 0.f, FMath::Max(0.f, NewValue)));
+	}
+}
+
 void UKZAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
 	Super::PostGameplayEffectExecute(Data);
 	
 	const FGameplayAttribute& Attribute = Data.EvaluatedData.Attribute;
+
+	if (Attribute == GetHPAttribute() || Attribute == GetMaxHPAttribute())
+	{
+		SetHP(FMath::Clamp(GetHP(), 0.f, FMath::Max(0.f, GetMaxHP())));
+		return;
+	}
 
 	if (Attribute == GetMaxStaminaAttribute())
 	{
@@ -42,6 +57,18 @@ void UKZAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallback
 
 void UKZAttributeSet::ClampValue(const FGameplayAttribute& Attribute, float& NewValue) const
 {
+	if (Attribute == GetMaxHPAttribute())
+	{
+		NewValue = FMath::Max(0.f, NewValue);
+		return;
+	}
+
+	if (Attribute == GetHPAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.f, FMath::Max(0.f, GetMaxHP()));
+		return;
+	}
+
 	if (Attribute == GetMaxStaminaAttribute())
 	{
 		NewValue = FMath::Max(0.f, NewValue);

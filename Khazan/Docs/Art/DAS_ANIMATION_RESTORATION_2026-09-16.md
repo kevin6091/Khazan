@@ -240,3 +240,10 @@ PIE 검사는 실제 UE CharacterMovement Root Motion 경로를 사용한 진단
 ### 검증 산출물
 
 fresh process audit report에는 source/destination hash, bone 0 이름과 reference scale, 적용 배율, 시작·끝·누적 root delta, frame count/rate, marker 수와 이름, Root Motion property를 각각 남긴다. PIE에서 측정한 capsule 월드 이동량은 asset-space delta와 별도 필드에 기록한다. 이번 절은 이관 계약이며 실제 asset 재임포트 완료 기록은 아니다.
+
+
+## 2026-10-02 InGame로 추가 이동한 source의 소비 배속 보정
+
+V4 공간/V5 exact 60 Hz 계약을 유지한 후속 작업이다. 사용자 범위인 InGame만 대상으로 22개 source의 기본 segment rate/저장 Dilation을 full-source 시간축에 bake하고, 18개 24 fps source는 원작 cadence에 따라 RateScale 1.25를 적용했다. 사용자 crop/미소비 prefix·tail·padding과 root 좌표를 유지했다. StrongAttack Montage 2개의 이벤트 시간도 같은 포즈 시점으로 이관했다. 원본 반복/재배치가 필요한 UltimateSlash Air/Loop는 기존 V5 완성본을 InGame에 복사했다.
+
+원본 직접 필드·계산값·60 Hz 양자화와 full-source/완성 Composite의 구분, 22/18개 변경표, 142 sequence/5 montage 새 프로세스 검사 및 재사용 자료는 [INGAME_DAS_PLAYBACK_CORRECTION_2026-10-02.md](INGAME_DAS_PLAYBACK_CORRECTION_2026-10-02.md)가 정본이다. 원래 라이브러리와 게임 Source/Skeleton/mesh를 바꾸지 않았다. RateScale=1이라는 표시만으로 아직 원본 속도라고 판단하지 말고 TimingContract/PlaybackDerivation을 함께 확인한다.

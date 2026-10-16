@@ -24,6 +24,21 @@ internal static class Program
         Directory.CreateDirectory(output);
         Log.Logger = new LoggerConfiguration().MinimumLevel.Error().WriteTo.Console().CreateLogger();
         CUE4Parse.CUE4ParseLog.UseLogger(Log.Logger);
+        if (args[0] == "audio-api")
+        {
+            foreach (var assembly in new[]{typeof(DefaultFileProvider).Assembly,typeof(ExportSession).Assembly})
+            foreach (var t in assembly.GetTypes().Where(t =>
+                t.Name.Contains("AkMedia") || t.Name.Contains("AkAudioEvent") || t.Name.Contains("AkAssetData") ||
+                t.Name.Contains("AkAudioBank") || t.Name.Contains("SoundDecoder") ||
+                t.Name == "GameFile" || t.Name == "VfsEntry" || t.Name == "FPakEntry"))
+            {
+                Console.WriteLine(t.FullName);
+                foreach (var f in t.GetFields()) Console.WriteLine(" FIELD " + f);
+                foreach (var p in t.GetProperties()) Console.WriteLine(" PROPERTY " + p);
+                foreach (var m in t.GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.DeclaredOnly)) Console.WriteLine(" METHOD " + m);
+            }
+            return 0;
+        }
         if (args[0] == "api")
         {
             var assembly = typeof(CUE4Parse_Conversion.Dto.LandscapeMeshDto).Assembly;
@@ -58,6 +73,84 @@ internal static class Program
             new VersionContainer(EGame.GAME_UE4_27, ETexturePlatform.DesktopMobile));
         provider.Initialize(); provider.SubmitKey(new FGuid(), new FAesKey(key)); provider.PostMount();
         provider.LoadVirtualPaths();
+        if (args[0] == "audio-files")
+        {
+            var paths=JsonSerializer.Deserialize<string[]>(File.ReadAllText(args[2]))!;
+            var rows=new List<object>();
+            foreach (var path in paths.Distinct(StringComparer.OrdinalIgnoreCase))
+            {
+                if (!provider.Files.TryGetValue(path,out var file))
+                { rows.Add(new{source=path,status="missing"});continue; }
+                var target=Path.GetFullPath(Path.Combine(output,path));
+                if (!target.StartsWith(output+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase)) throw new Exception("Audio output path escaped task directory");
+                Directory.CreateDirectory(Path.GetDirectoryName(target)!);
+                var bytes=file.Read();
+                await File.WriteAllBytesAsync(target,bytes);
+                rows.Add(new{source=path,status="exported",target,bytes=bytes.Length,
+                    archive=file is CUE4Parse.UE4.VirtualFileSystem.VfsEntry entry?entry.Vfs.Name:null,
+                    sha256=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(bytes)).ToLowerInvariant()});
+            }
+            await File.WriteAllTextAsync(Path.Combine(output,"AudioFileExtractionReport.json"),JsonSerializer.Serialize(rows,new JsonSerializerOptions{WriteIndented=true}));
+            Console.WriteLine($"Audio extraction {rows.Count} records");
+            return rows.Any(row=>JsonSerializer.Serialize(row).Contains("\"missing\""))?1:0;
+        }
+        if (args[0] == "audio-index")
+        {
+            var rows = provider.Files.Where(pair =>
+                pair.Key.Contains("Wwise",StringComparison.OrdinalIgnoreCase) ||
+                pair.Key.Contains("/Audio/",StringComparison.OrdinalIgnoreCase) ||
+                pair.Key.Contains("/Sound/",StringComparison.OrdinalIgnoreCase) ||
+                new[]{".wem",".bnk",".pck",".wav",".ogg"}.Any(ext => pair.Key.EndsWith(ext,StringComparison.OrdinalIgnoreCase)))
+                .OrderBy(pair=>pair.Key).Select(pair=>new{
+                    path=pair.Key, type=pair.Value.GetType().FullName,
+                    archive=pair.Value is CUE4Parse.UE4.VirtualFileSystem.VfsEntry entry ? entry.Vfs.Name : null,
+                    bytes=pair.Value.Size
+                }).ToArray();
+            await File.WriteAllTextAsync(Path.Combine(output,"AudioPackageIndex.json"),JsonSerializer.Serialize(rows,new JsonSerializerOptions{WriteIndented=true}));
+            Console.WriteLine($"Audio index {rows.Length} files");
+            return 0;
+        }
+        if (args[0] == "font-data")
+        {
+            // Cooked FontFace streaming data is a separate .ufont file, not an export's .uexp bulk.
+            var paths = JsonSerializer.Deserialize<string[]>(File.ReadAllText(args[2]))!;
+            var report = new List<object>();
+            foreach (var path in paths.Distinct())
+            {
+                var keyPath = path + ".ufont";
+                if (!provider.Files.TryGetValue(keyPath, out var file))
+                { report.Add(new {source=keyPath,status="missing"}); continue; }
+                var target = Path.Combine(output, Path.GetFileName(path) + ".ttf");
+                var bytes = file.Read();
+                await File.WriteAllBytesAsync(target, bytes);
+                report.Add(new {source=keyPath,status="exported",target,bytes=bytes.Length});
+            }
+            await File.WriteAllTextAsync(Path.Combine(output,"FontDataReport.json"),JsonSerializer.Serialize(report,new JsonSerializerOptions {WriteIndented=true}));
+            Console.WriteLine($"Targeted font data: {report.Count} records");
+            return 0;
+        }
+        if (args[0] == "brush-geometry")
+        {
+            // Targeted original BSP topology: the normal cooked JSON writer
+            // omits the vertex pool, so Model.Bounds cannot reproduce concave WEPs.
+            var paths = JsonSerializer.Deserialize<string[]>(File.ReadAllText(args[2]))!;
+            var flags = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance;
+            foreach (var path in paths.Distinct())
+            {
+                var package = path.Split('.')[0];
+                if (package.Contains("..") || Path.IsPathRooted(package) || !(provider.Files.ContainsKey(package+".uasset") || provider.Files.ContainsKey(package+".umap"))) throw new Exception("Package is not in the mounted FModel snapshot");
+                var rows = provider.LoadPackage(package).GetExports()
+                    .Where(o => o.GetType().Name.Contains("Model") && o.GetType().Name != "UModelComponent")
+                    .Select(o => new { o.Name, type=o.GetType().FullName,
+                        fields=o.GetType().GetFields(flags).Where(f => new[]{"Verts", "Vertices", "Points", "Vectors", "Nodes", "Surfs", "Bounds"}.Contains(f.Name))
+                            .ToDictionary(f => f.Name, f => f.GetValue(o)),
+                        available_fields=o.GetType().GetFields(flags).Select(f => f.Name).ToArray() }).ToArray();
+                var target = Path.Combine(output, Path.GetFileName(package)+"_BrushGeometry.json");
+                await File.WriteAllTextAsync(target, Newtonsoft.Json.JsonConvert.SerializeObject(rows, Newtonsoft.Json.Formatting.Indented));
+                Console.WriteLine($"Brush geometry {package}: {rows.Length} models");
+            }
+            return 0;
+        }
         if (args[0] == "export" || args[0] == "raw")
         {
             var paths = JsonSerializer.Deserialize<string[]>(File.ReadAllText(args[2]))!;

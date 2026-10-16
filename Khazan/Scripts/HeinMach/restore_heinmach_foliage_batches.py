@@ -850,6 +850,11 @@ def validate_main_map(actor_subsystem, mappings, sandbox_batches):
 
 
 def main():
+    # The old whole-batch transfer would undo the user's retained-route layout.
+    import heinmach_exclusions as exclusions
+    route_tombstones = os.path.join(exclusions.METADATA_ROOT, "HeinMach_RoutePruneExclusions_20261016.json")
+    if os.path.isfile(route_tombstones) and load_json(route_tombstones).get("instance_exclusions"):
+        raise RuntimeError("HeinMach foliage was intentionally pruned. Use the current route-prune manifest; do not run the legacy whole-batch restore.")
     import_report = load_json(IMPORT_REPORT_PATH)
     if import_report.get("status") not in ("imported", "skipped_existing_valid"):
         raise RuntimeError("Foliage batch import report is not valid")

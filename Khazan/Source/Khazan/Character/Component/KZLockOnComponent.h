@@ -8,6 +8,8 @@
 #include "KZLockOnComponent.generated.h"
 
 class AKZMonster;
+class UAbilitySystemComponent;
+struct FOnAttributeChangeData;
 
 UCLASS( ClassGroup=(KZ), meta=(BlueprintSpawnableComponent) )
 class KHAZAN_API UKZLockOnComponent : public UActorComponent
@@ -25,6 +27,10 @@ public:
 	
 	// Target이랑 제약Handle이 모두 유효할때만 true
 	bool IsLockedOn() const;
+	// Read-only presentation/Ability consumer; targeting and its constraint remain here.
+	AKZMonster* GetCurrentTarget() const;
+	// Explicit target after a paired action; shares normal life/ownership checks.
+	bool StartLockOn(AKZMonster* Target);
 	
 protected:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
@@ -38,8 +44,7 @@ private:
 	// 카메라와 타깃 지점 사이에 다른 blocking actor가 있는지 검사한다.
 	bool HasClearViewToTarget(const FVector& ViewLocation, const AKZMonster* Candidate, const FVector& TargetLocation) const;
 
-	// 선택이 끝난 유효한 몬스터를 잠그고 이동 제약을 취득한다.
-	bool StartLockOn(AKZMonster* Target);
+	void HandleTargetHealthChanged(const FOnAttributeChangeData& Data);
 
 	// 현재 타깃의 3차원 지점을 향해 카메라 ControlRotation을 보간한다.
 	void UpdateLockOnFacing(float DeltaTime);
@@ -58,6 +63,8 @@ private:
 	// 타깃이 파괴됐을 때 수명을 연장하지 않도록 약한 참조를 사용한다.
 	UPROPERTY(Transient)
 	TWeakObjectPtr<AKZMonster> CurrentTarget;
+	TWeakObjectPtr<UAbilitySystemComponent> TargetAbilitySystem;
+	FDelegateHandle TargetHealthChangedHandle;
 
 	// 이 TargetingComponent가 취득한 이동 제약 한 건의 해제 영수증이다.
 	FKZMovementConstraintHandle LockOnConstraintHandle;

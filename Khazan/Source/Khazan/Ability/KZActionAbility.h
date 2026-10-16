@@ -4,7 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Ability/KZGameplayAbility.h"
+#include "TimerManager.h"
 #include "KZActionAbility.generated.h"
+
+class UKZAnimNotify_CombatEffect;
+class USceneComponent;
+class USkeletalMeshComponent;
+struct FBranchingPointNotifyPayload;
 
 UCLASS(Abstract, Blueprintable)
 class KHAZAN_API UKZActionAbility : public UKZGameplayAbility
@@ -39,6 +45,40 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effects")
 	TSubclassOf<UGameplayEffect> OnEndAbilityGameplayEffect;
 	
+	// Shared presentation lifetime for Combo and Brutal. Each execution owner
+	// validates montage/instance and confirms its own gameplay hit.
+	void StartCombatEffect(const UKZAnimNotify_CombatEffect& Effect,
+		const FBranchingPointNotifyPayload& Payload, bool bConfirmedHit = false,
+		float RecoveredWindowDuration = 0.f);
+	void StopCombatEffect(FName EventId, int32 MontageInstanceId);
+	void ClearCombatEffects(bool bNaturalCompletion = false);
+
+	// Actual spawned resources belong to this Ability activation, never to the
+	// shared notify asset. An ended finite effect can keep draining naturally.
+	struct FActiveCombatEffect
+	{
+		TWeakObjectPtr<USceneComponent> Component;
+		TWeakObjectPtr<USkeletalMeshComponent> InitialPoseMesh;
+		FDelegateHandle InitialPoseHandle;
+		void UnregisterInitialPose();
+		FName EventId;
+		int32 MontageInstanceId = INDEX_NONE;
+		bool bDestroyOnNotifyEnd = false;
+		bool bDestroyOnNotifyEndDeactived = false;
+		bool bDestroyOnAnimEnd = false;
+		bool OnNotifyEndDeattach = false;
+		bool bNotifyEnded = false;
+		bool bRecoveredAfterSourceEnd = false;
+		FTimerHandle RecoveredEndTimer;
+		// Presentation-only pose history; execution/cleanup stay in this receipt.
+		// World tips minus avatar translation preserve the actual rotational sweep.
+		FVector PreviousWeaponTips[2] = {FVector::ZeroVector, FVector::ZeroVector};
+		FVector PreviousActorLocation = FVector::ZeroVector;
+		bool bHasPreviousWeaponPose = false;
+		int32 SelectedWeapon = INDEX_NONE;
+	};
+	TArray<FActiveCombatEffect> ActiveCombatEffects;
+
 private:
 	bool bInputEnded = false;
 };

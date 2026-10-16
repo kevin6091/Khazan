@@ -836,8 +836,14 @@ def show_side_by_side(focus="boss_phase_1", save=False):
     by = {a.get_actor_label(): a for a in actors()}
     layers = unreal.get_editor_subsystem(unreal.LayersSubsystem)
     groups = {v: [] for v in helper["VARIANTS"]}
+    prune_path = ROOT / "Content/_Art/Player/Environment/Rendering/Metadata/LookRestoration_20261002/StormPassPrunePlan.json"
+    authorized_removed = {r["label"] for r in read(prune_path)["remove"]} if prune_path.exists() else set()
     for row in baseline["actors"]:
-        a = by[row["label"]]
+        a = by.get(row["label"])
+        if a is None:
+            if row["label"] in authorized_removed:
+                continue
+            raise RuntimeError("Missing arena actor outside the boss-only pruning manifest: " + row["label"])
         active = row["variant"] in ("boss_phase_1", "boss_phase_2")
         groups[row["variant"]].append(a)
         a.set_actor_hidden_in_game(row["hidden_in_game"] if active else True)
@@ -852,7 +858,8 @@ def show_side_by_side(focus="boss_phase_1", save=False):
                 c.set_collision_enabled(getattr(unreal.CollisionEnabled, saved["collision"]) if active else unreal.CollisionEnabled.NO_COLLISION)
     for value, members in groups.items():
         name = "SP_SourceVariant_" + value
-        layers.add_actors_to_layer(members, name)
+        if members:
+            layers.add_actors_to_layer(members, name)
         layers.set_layer_visibility(name, value in ("boss_phase_1", "boss_phase_2"))
     marker = next(r for r in layout["markers"] if r["phase"] == (2 if focus == "boss_phase_2" else 1))
     camera_label = "SP_BP_Phase%d_ReviewCamera" % marker["phase"]

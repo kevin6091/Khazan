@@ -8,10 +8,15 @@
 
 class UAbilityTask_PlayMontageAndWait;
 class UAnimInstance;
+class UAnimMontage;
 class UKZComboDefinitionData;
+class UKZAnimNotify_CombatEffect;
+class USceneComponent;
+class USkeletalMeshComponent;
 
 struct FKZComboCommandEdge;
 struct FKZComboNode;
+struct FKZAttackCollisionWindow;
 
 // 현재 공격이 콤보 입력을 어떻게 받을지 나타낸다.
 enum class EKZComboWindowPhase : uint8
@@ -44,6 +49,12 @@ public:
 	{
 		return EntryNodeId;
 	}
+
+	// AI reads the existing execution node; no second behaviour state is stored.
+	FName GetCurrentNodeId() const { return CurrentNodeId; }
+	// Game-thread observation of an authored, held InputEnd edge. No extra execution state/timer.
+	bool IsApproachingComboTransition(float LeadSeconds) const;
+	bool IsInSystemGuardWindow() const;
 	
 protected:
     // GAS gate에 더해, 이전 Action을 취소하기 전에 필수 entry 데이터를 검사한다.
@@ -71,6 +82,10 @@ protected:
 
 	// 검증된 현재 Combo Montage에서 발생한 Notify를 처리한다.
 	virtual void ProcessMontageNotify(FName NotifyName);
+	// Accepted HP effect, already validated against this montage execution. Children
+	// may record a result here; transitions must wait until the collision query returns.
+	virtual void RecordAcceptedAttackHit(AActor* Target, float MontageTime, bool bCaptureWindow) {}
+	virtual float GetNodeTransitionBlendSeconds(const FKZComboNode& Target) const { return ComboTransitionInertializationDuration; }
 	
 	// 같은 몽타주의 다른 공격 섹션으로 이동한다.
 	bool TransitionToNode(FName TargetNodeId);
@@ -79,6 +94,31 @@ protected:
 	void FinishAbility(bool bWasCancelled);
 	
 private:
+	// Engine next-tick timer runs on GT after CMC; execution-local, no Notify asset state.
+	void StartAttackCollision();
+	void UpdateAttackCollision(bool bMontageCompleted = false);
+	void ResetAttackCollision();
+	bool QueryAttackCollision(const FKZAttackCollisionWindow& Window, int32 HitId,
+		const FTransform& Pose, const FVector& PreviousCenter, uint32 Execution, float SampleMontageTime);
+	FTimerHandle AttackCollisionTimer;
+	TMap<int32, TSet<TWeakObjectPtr<AActor>>> AttackHitTargets;
+	// Presentation-only, once per authored hit group; reset with this attack execution.
+	TSet<int32> RumbledAttackGroups;
+	FTransform PreviousAttackActorTransform = FTransform::Identity;
+	float PreviousAttackTime = 0.f;
+	uint32 AttackExecution = 0;
+	// Actual instance captured for this execution; eligible after engine removal
+	// only during the synchronous natural-completion collision flush.
+	int32 AttackMontageInstanceId = INDEX_NONE;
+	TWeakObjectPtr<UAnimMontage> AttackMontage;
+	bool bNaturalAttackCollisionFlush = false;
+	// Presentation observation, not a second gameplay damage state. The source
+	// BattleEffectIndex producer is unknown: any confirmed HP hit in this node
+	// enables its later conditional windows (explicit project adapter).
+	bool bConfirmedEffectHitObserved = false;
+	float FirstConfirmedEffectHitTime = 0.f;
+	TSet<FName> PlayedConfirmedEffects;
+
 	// 몽타주가 자연스럽게 끝났을 때 Ability를 끝낸다.
 	UFUNCTION()
 	void HandleMontageCompleted();
@@ -106,6 +146,13 @@ private:
 
 	// 현재 재생 중인 콤보 몽타주에서 온 노티파이인지 확인한다.
 	bool IsNotifyFromCurrentMontage(const FBranchingPointNotifyPayload& Payload) const;
+
+	void StartCombatEffect(const UKZAnimNotify_CombatEffect& Effect, const FBranchingPointNotifyPayload& Payload,
+		bool bConfirmedHit = false, float RecoveredWindowDuration = 0.f);
+	void BindConfirmedHitDelegate(UAbilitySystemComponent* ASC);
+	void UnbindConfirmedHitDelegate();
+	void HandleConfirmedHit(UAbilitySystemComponent* TargetASC, const FGameplayEffectSpec& Spec,
+		FActiveGameplayEffectHandle EffectHandle);
 
 	// 현재 노드에서 명령과 조건이 모두 맞는 전환을 찾는다.
 	const FKZComboCommandEdge* FindMatchingCommandEdge(const FKZComboCommand& Command) const;
@@ -173,6 +220,9 @@ private:
 
 	// 노티파이를 연결한 AnimInstance다.
 	TWeakObjectPtr<UAnimInstance> BoundAnimInstance;
+
+	TWeakObjectPtr<UAbilitySystemComponent> ConfirmedHitASC;
+	FDelegateHandle ConfirmedHitDelegateHandle;
 
 	// ASC 콤보 명령 연결을 해제할 때 사용하는 번호다.
 	FDelegateHandle ComboCommandDelegateHandle;

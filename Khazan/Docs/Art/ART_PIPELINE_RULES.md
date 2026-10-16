@@ -193,3 +193,57 @@
 - 수정 전에는 모든 대상의 dirty 상태와 topology/data model을 전수 preflight하고, `.uasset` byte backup과 SHA-256 manifest를 만든 뒤 임시 duplicate에서 수술을 증명한다. 배치는 전부 in-memory 검증 후 저장하고, 실패하면 전체를 원복한다.
 - 스킬의 `scripts/audit_root_motion.py`는 읽기 전용이다. 2026-09-18 현재 세 DAS Stop AnimSequence에서 실제 root/track 0, reference scale, 자식 `Root`, root-motion 설정과 추출 변위를 검사했으며 대상 패키지를 dirty로 만들지 않았다. 결과는 `Saved/ImportReports/RootMotionSkillAudit_20260918.json`에 있다.
 - 이번 스킬 정리 작업에서는 게임 AnimSequence, Skeleton, Blueprint, C++를 수정하거나 재임포트하지 않았다.
+
+## 2026-10-02 두 레벨 source 룩 복원 — 저장·검증 결과
+
+- UE5.8에서 Rider game-thread로 texture를 임포트할 때 `AssetImportTask.factory=unreal.TextureFactory()`를 명시한다. 이 작업에서는 implicit Interchange synchronous import가 TaskGraph recursion assert를 발생시켰고, 명시적 TextureFactory로 58개 임포트가 성공했다. 관련 보고서는 [룩 복원 정본](LEVEL_LOOK_RESTORATION_2026-10-02.md)과 날짜별 continuity다.
+- native shader consumer 조사는 현재 사용하는 map slot과 cached source report를 우선한다. parameter 이름이 존재하는 것만으로 shader 구현을 보고하지 않는다. root output에서 expression 도달성을 검사하고 source raw / 계산 / native 임시값 / 미복원 함수로 분리한다.
+- native texture sampler는 실제 compression/SRGB와 일치해야 한다. 이번 source smoke noise는 LinearGrayscale, distortion은 Masks다. material statistics=0인 실패를 단순 저장 성공으로 통과시키지 않는다.
+
+## 2026-10-06 HeinMach weather native 이관 검증 규칙
+
+- 이 요청에서는 사용자 지시가 우선하여 사용자 Rider editor와 연결하지 않고 별도 숨김 Unreal process만 사용했다. 필요한 source extraction은 기존 FModel/CUE4Parse provider와 저장 metadata에서 표적 수행한다. [날짜별 정본](HEINMACH_WEATHER_RESTORATION_2026-10-06.md) 참조.
+- source Model.Points/Bounds만으로 face를 추측하지 않는다. Nodes.iVertPool→Verts.pVertex→Points 및 Surfs를 보존해 BSP rings를 재구성하고 원본 transform/priority/radius를 검사한다. source vectors는 bulk 샘플을 사용하며 임의 noise를 원작이라고 표시하지 않는다.
+- Niagara SampleVectorField module output을 실제 vector input에 연결하고 InitializeParticle Position/SpriteSize write switches를 검증한다. GPU-only CameraDI의 PrimaryView와 player camera가 일치하는지 actual runtime evidence를 확인한다. 이미 built인 system에 emitter를 반복 append하지 않는다.
+- source translucent velocity 출력과 native SceneDepth/DepthFade가 충돌하면 compiler가 허용하는 계약을 선택하고 차이를 기록한다. scene texture 사용을 숨겨 depth read/write 충돌을 우회하지 않는다. opacity mask R/G/B/A를 모두 명시한다.
+- material statistics 양수와 명시적 `recompile_material()` error 배열을 함께 확인한다. authoring 중간 미연결 warning과 최종 저장 compile을 구분한다. process exit 0만으로 Python caught-exception 단계를 성공으로 기록하지 않는다.
+- performance CSV는 마지막 authoritative header, 늦게 추가되는 columns, 시간과 counter 단위를 구분한다. 캡처/프로파일은 main game viewport를 우선하고 해상도·hardware·build·동시 process·sample 수를 함께 기록한다. SceneCapture가 main/Substrate 경로와 다르면 그 이미지를 최종 game 룩으로 보고하지 않는다.
+
+## 2026-10-06 후속 룩 검수와 live file lock
+
+- UE5.8은 MaterialInstance의 MID parent를 거부한다(`MaterialInstance.cpp`). 순차 미술 trial은 saved MIC를 매번 parent로 사용한다. 한 trial의 MID에서 다음 MID를 파생해 생긴 default material 화면을 조정 결과로 평가하지 않는다.
+- `r.PostProcessAAQuality`는 이 UE5.8에서 지원하지 않는다. query 반환 0을 AA off로 보고하지 않는다. 실제 `r.AntiAliasingMethod/sg.AntiAliasingQuality/r.TemporalAA.Quality`와 TSR history를 확인한다. GI1 역시 Lumen IrradianceVolume 경로가 있으므로 GI 꺼짐으로 설명하지 않는다.
+- 사용자 editor가 package를 읽고 있어 background save가 Windows Error32로 실패할 수 있다. **live 전역 `DEBUG RESETLOADERS` 사용 금지**: 이번 assistant 호출 직후 interactive PID9596 access violation이 발생했다. 정상 clean-package 해제/재열람 절차를 준비하며 dirty 확인 없이 reload/종료/Save All을 하지 않는다. [사건·복구 정본](HEINMACH_LOOK_REFINEMENT_2026-10-06.md)을 참고한다.
+- PIE 중 `EditorActorSubsystem.get_all_level_actors()`가 0을 반환할 수 있다. 이를 전체 actor 삭제로 해석하지 않는다. authoring World/상태를 확인하고 fresh saved-scene 기준으로 검사한다. editor viewport pose 복구와 잃어진 PIE runtime 진행의 동일 복구를 구분한다.
+
+## 2026-10-06 — cooked VFX 이관과 텍스트 속성 검증
+
+- 원본 cooked UE4 VFX raw/JSON은 Content 밖 archive 및 Art metadata에 보존하고 native factory/import 결과와 구분한다. editor graph가 제거된 Niagara/MaterialFunction을 빈 native system/function으로 대체해 완료로 보고하지 않는다. source CachedExpressionData는 Properties 밖에도 있으므로 root export까지 표적 확인한다.
+- UE5.8 `FNumericProperty::ImportText_Internal` 기반 SET/SETNOPEC 경로에는 exponent 숫자를 전달하지 않는다. finite float를 같은 값의 일반 소수 문자열로 전달하며 값을 임의 튜닝/반올림하지 않는다. 직접 FName과 nested delimited FName의 인용 규칙도 구분한다. 객체의 exact full path·길이·작업 소유권을 검증하고 class/CDO 전역 SET을 하지 않는다.
+- native distribution은 `EntryCount>0`일 때 Values 길이=EntryCount×EntryStride인지 새 process에서 읽는다. `EntryCount=0`인 비활성 table의 남은 allocation을 활성 table 오류로 오판하지 않는다. 원본 cooked table에서 editor curve를 유도한 경우 inverse time grid·단위/lock/random 조건·원작 pre-cook keys 미확보 경계를 기록한다.
+- guarded fixed-array CurveLinearColor는 unsaved scratch T3D subobject를 사용한다. GC 전 모든 scratch curve에 strong Python 참조를 유지한다. 같은 작업이 만든 curve의 재작성도 byte backup/source tag/현재 referencer 소유권과 원본 atlas 재연결을 확인한다. 성공한 delete API 뒤 남은 byte 파일은 exact path/backup SHA가 확인된 task 파일만 처리한다.
+- asset load/reference audit, 실제 RHI shader errors/instruction 수, 대표 standalone 재생·이미지 검수를 따로 기록한다. process exit 0만으로 caught-exception report를 통과시키지 않는다. native 생성/원본 추출/원작 그래프 및 runtime 완전 복원/사용자 gameplay 적용을 각각 구분한다. [DAS 효과 정본](DUAL_AXE_SWORD_EFFECTS_EXTRACTION_2026-10-06.md) 참조.
+
+## 2026-10-06 — UE4 Cascade 화로의 UE5 품질·채널 호환
+
+- source UE4 `ParticleSpriteEmitter.DetailModeBitmask=7`을 새 UE5 package에 그대로 쓰면 Epic `r.DetailMode=3`에서 InitParticles가 차단될 수 있다. UE5.8 `ParticleEmitter.cpp::Serialize`의 AddEpicDetailMode migration을 근거로 source High bit를 Epic에도 확장한다. 이번 source17 emitters는7→15로 파생했고 실제 Epic game에서95/95 active를 확인했다. 전체 프로젝트 품질을 낮추거나 다른 VFX를 일괄 수정하는 근거로 사용하지 않는다.
+- source `ParticleModuleLifetime`의 lifetime0/OneOverMaxLifetime0는 infinite lifetime이다. inactive emitter 문제를 임의 loop/burst/lifetime 튜닝으로 숨기지 않는다. `DistributionVectorParticleParameter.ParamModes[1]/[2]`처럼 indexed text setter가 반영하지 못하는 fixed array는 full-array API로 원본 배열을 적용하고 fresh readback한다. 이번28배열 교정은 원본값 복원이다.
+- texture A가255 상수인 DXT1 smoke/packed decal을 alpha-mask로 처리하면 sprite/decal 전체 사각형이 드러난다. source payload의 RGBA extrema·채널 계약을 확인하고 native 복원식의 선택을 명시한다. 이번 smoke는 grayscale R, burn은 source RGB strength 기반이다. stripped graph 직접 복원과 구분한다. EyeAdaptationInverse API 입력 핀은 이 UE5.8에서 `LightValueInput`이며 실제 compiler/화면으로 검증한다.
+- closure manifest에서 Engine 경로만으로 stripped MaterialFunction을 복원된 native asset으로 분류하지 않는다. supported factory 결과/기존 exact-source asset/명시된 Engine fallback/source-only를 분리하고 실제 설치 파일 수를 계산한다. source closure package 수와 새 adapter package 수도 분리한다.
+- 순차 ON/OFF/ON에도 unchanged shadow/base/TSR pass의 큰 편차가 있으면 GPU cost는 미확정으로 기록한다. 동시 editor/Development 조건과 샘플 수를 함께 남기고 음수 차이로 개선 또는60FPS를 주장하지 않는다. 후속 동시 Art 작업의 map은 최신 main에 선택 적용하며 완료된 다른 작업을 포함하지 않은 옛 stage map을 덮어쓰지 않는다.
+
+## 2026-10-11 — VAT carrier와 Cascade bake 검사 보강
+
+VAT cube/triangle carrier가 그대로 보이면 emitter/mesh를 삭제하기 전에 부모의 decoder/WPO와 수동 DynamicParameter frame 소비를 확인한다. packed smoke/decal의 불투명 A를 마스크로 사용하지 않는다. source static switch=false를 부모가 실제로 소비하는지도 검증한다. RawDistributionFloat의 편집 Constant 변경과 runtime Table 갱신은 별개이므로 fresh export_text/T3D에서 파생 cache도 확인한다. public StructBase.import_text로 동일 struct의 bake를 정확하게 교정할 수 있다. 적용 증거와 임시 수치·실패 report 처리 경계는 [이번 정본](HEINMACH_CLEAN_PRESENTATION_20261011.md)을 따른다.
+
+<!-- HeinMachCleanPresentation_20261011_FinalVerified -->
+
+
+## 2026-10-16 ? HeinMach ??? ?? ?? ??? tombstone
+
+??? ?? ???? ?? PlayerStart???/Yetuga ?? ?, ?? ??? ????????? ?? ?? ??? ????. ?? exact-duplicate ?? ?? ??? ?? ?? ????? ????. ?? ?? ??/???? ?? Player metadata? User/Optimization/ManualOverrides? HeinMach_RoutePruneExclusions_20261016.json? ?? ?? ???. Actor tombstone4258?, instance9137?? ?? record? ??? ??? ????? ???. ? instance index? remove ? ????? baseline SHA+actor/component/world transform?? ????. ?? ??/?? ??? HEINMACH_ROUTE_PRUNING_20261016.md?.
+
+
+## 2026-10-16 — 사용 구간 축소의 재생성 방지 (한글 기록 정정)
+
+앞선 같은 작업의 깨진 한글 절을 정정한다. 사용자 명시 요청으로 PlayerStart→포탈/Yetuga 전장 밖에서 사용 시야·빛·그림자·음향에 영향 없는 배치를 제거했다. 기존 exact-duplicate 전용 삭제 방침은 이번 승인 범위에서만 대체한다. 복원/최적화 전 실제 Player metadata의 User/Optimization/ManualOverrides 및 HeinMach_RoutePruneExclusions_20261016.json을 모두 읽는다. Actor4258/instance9137 tombstone은 원본 record가 있다는 이유로 재생성하지 않는다. remove 후 index가 달라지므로 baseline SHA+actor/component/world transform으로 대조한다. 상세 정본 HEINMACH_ROUTE_PRUNING_20261016.md.

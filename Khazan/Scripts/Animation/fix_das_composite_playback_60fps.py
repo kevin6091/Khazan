@@ -265,7 +265,13 @@ def temp_path(path: str) -> str:
     return TEMP_ROOT + "/" + relative
 
 
-def sample_tracks(sequence, names, target_frames: int, old_duration: float):
+def sample_tracks(
+    sequence, names, target_frames: int, old_duration: float, source_times=None
+):
+    # A caller may supply a metadata-derived nonlinear source-time mapping.
+    # The original exact-60 migration keeps its normalized-time behavior.
+    if source_times is not None and len(source_times) != target_frames + 1:
+        raise RuntimeError("Source-time mapping must contain one time per output key")
     options = unreal.AnimPoseEvaluationOptions(
         evaluation_type=unreal.AnimDataEvalType.RAW,
         should_retarget=False,
@@ -284,7 +290,11 @@ def sample_tracks(sequence, names, target_frames: int, old_duration: float):
         target_frames,
     }
     for frame in range(target_frames + 1):
-        source_time = old_duration * frame / target_frames
+        source_time = (
+            source_times[frame]
+            if source_times is not None
+            else old_duration * frame / target_frames
+        )
         pose = unreal.AnimPoseExtensions.get_anim_pose_at_time(
             sequence, source_time, options
         )

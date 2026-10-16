@@ -15,6 +15,15 @@ class KHAZAN_API UKZAbilitySystemComponent : public UAbilitySystemComponent
 	GENERATED_BODY()
 
 public:
+	// Real attack overlap calls this before Guard/HP. It never guesses a hit from animation.
+	bool TryDodgeHit(AActor* Attacker, const FVector& Contact, bool bDodgeOnly = false);
+	// 방어 가능한 공격의 hit resolver가 HP 피해 전에 호출한다. true면 이 공격을 Guard했다.
+	// StaminaDamage는 공격 데이터에서 확정한 양수이며, 활성화/유지 Cost와 별개다.
+	UFUNCTION(BlueprintCallable, Category = "KZ|Combat|Guard")
+	bool TryGuardHit(float StaminaDamage, AActor* Attacker = nullptr);
+	// Accepted defense + result for the two real hit producers; Blueprint API stays intact.
+	bool TryGuardHit(float StaminaDamage, AActor* Attacker, bool& OutParried, bool bAllowParry = true);
+
 	// 다른 granted Combo Ability가 이 Definition의 EntryNode를 시작점으로 쓰는지 찾는다.
 	bool HasComboEntry(const UKZComboDefinitionData* Definition, FName EntryNodeId,	FGameplayAbilitySpecHandle IgnoreHandle);
 

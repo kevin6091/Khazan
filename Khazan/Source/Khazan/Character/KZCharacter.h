@@ -12,6 +12,9 @@ class UKZLocomotionComponent;
 class UAbilitySystemComponent;
 class UKZCharacterDefinitionData;
 class UKZAttributeSet;
+class UAnimInstance;
+class UAnimMontage;
+enum class EKZHitReactionType : uint8;
 
 UCLASS()
 class KHAZAN_API AKZCharacter : public ACharacter, public IAbilitySystemInterface
@@ -20,6 +23,8 @@ class KHAZAN_API AKZCharacter : public ACharacter, public IAbilitySystemInterfac
 
 public:
 	AKZCharacter();
+	// Called only after an accepted damage result; the Definition selects blocking/additive presentation.
+	void PlayHitReaction(EKZHitReactionType Type, AActor* Attacker);
 
 	UFUNCTION(BlueprintPure, Category = "Character|Locomotion")
 	UKZLocomotionComponent* GetLocomotionComponent() const
@@ -31,9 +36,12 @@ public:
 	{
 		return CharacterDefinition;
 	}
+	FGameplayTag GetCharacterDefinitionAssetName() const { return CharacterDefinitionAssetName; }
 
 protected:
 	virtual void BeginPlay() override;
+	// Stops only the owned additive instance; does not touch action/Exhaustion montages.
+	void StopAdditiveHitReaction();
 
 public:
 	virtual void Tick(float DeltaTime) override;
@@ -71,4 +79,8 @@ private:
 	
 	UPROPERTY(VisibleAnywhere, Category = "KZ|Ability", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UKZAttributeSet> AttributeSet;
+	// Presentation receipts, not gameplay state; finished engine instances are harmless stale IDs.
+	TWeakObjectPtr<UAnimInstance> AdditiveHitAnim;
+	TWeakObjectPtr<UAnimMontage> AdditiveHitMontage;
+	int32 AdditiveHitInstanceId = INDEX_NONE;
 };

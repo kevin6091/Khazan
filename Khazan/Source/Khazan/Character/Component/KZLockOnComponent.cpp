@@ -1,5 +1,8 @@
 #include "Character/Component/KZLockOnComponent.h"
 
+#include "AbilitySystemComponent.h"
+#include "Attribute/KZAttributeSet.h"
+#include "KZGameplayTags.h"
 #include "Character/KZMonster.h"
 #include "Character/KZPlayer.h"
 #include "CollisionQueryParams.h"
@@ -7,6 +10,22 @@
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "GameFramework/PlayerController.h"
+
+namespace
+{
+bool IsLivingLockOnCharacter(const AKZCharacter* Character)
+{
+	const UAbilitySystemComponent* ASC = IsValid(Character) && !Character->IsActorBeingDestroyed()
+		? Character->GetAbilitySystemComponent() : nullptr;
+	return ASC && ASC->GetNumericAttribute(UKZAttributeSet::GetHPAttribute()) > 0.f &&
+		!ASC->HasMatchingGameplayTag(KZGameplayTags::State_Dead);
+}
+}
+
+AKZMonster* UKZLockOnComponent::GetCurrentTarget() const
+{
+	return IsLockedOn() ? CurrentTarget.Get() : nullptr;
+}
 
 UKZLockOnComponent::UKZLockOnComponent()
 {
@@ -74,7 +93,7 @@ AKZMonster* UKZLockOnComponent::FindBestLockOnTarget() const
 	{
 		AKZMonster* CandidateMonster = *It;
 
-		if (!IsValid(CandidateMonster) || CandidateMonster->IsHidden())
+		if (!IsLivingLockOnCharacter(CandidateMonster) || CandidateMonster->IsHidden())
 		{
 			continue;
 		}
@@ -175,9 +194,10 @@ bool UKZLockOnComponent::StartLockOn(AKZMonster* Target)
 {
 	AKZPlayer* Player = Cast<AKZPlayer>(GetOwner());
 
-	if (!IsValid(Player) ||
+	if (!IsLivingLockOnCharacter(Player) ||
 		!Player->IsLocallyControlled() ||
-		!IsValid(Target) ||
+		Cast<AKZMonster>(Player->GetAttachParentActor()) ||
+		!IsLivingLockOnCharacter(Target) ||
 		Target->GetWorld() != GetWorld() ||
 		!IsValid(Target->GetLockOnTargetPoint()) ||
 		!IsValid(Cast<APlayerController>(Player->GetController())))
@@ -216,6 +236,9 @@ bool UKZLockOnComponent::StartLockOn(AKZMonster* Target)
 	// 제약 획득이 성공한 뒤에만 잠금 상태를 확정한다.
 	CurrentTarget = Target;
 	LockOnConstraintHandle = MoveTemp(NewHandle);
+	TargetAbilitySystem = Target->GetAbilitySystemComponent();
+	TargetHealthChangedHandle = TargetAbilitySystem->GetGameplayAttributeValueChangeDelegate(UKZAttributeSet::GetHPAttribute())
+		.AddUObject(this, &ThisClass::HandleTargetHealthChanged);
 
 	SetComponentTickEnabled(true);
 
@@ -224,6 +247,13 @@ bool UKZLockOnComponent::StartLockOn(AKZMonster* Target)
 
 void UKZLockOnComponent::StopLockOn()
 {
+	if (UAbilitySystemComponent* ASC = TargetAbilitySystem.Get())
+	{
+		ASC->GetGameplayAttributeValueChangeDelegate(UKZAttributeSet::GetHPAttribute()).Remove(TargetHealthChangedHandle);
+	}
+	TargetHealthChangedHandle.Reset();
+	TargetAbilitySystem.Reset();
+
 	if (LockOnConstraintHandle.IsValid())
 	{
 		if (AKZPlayer* Player = Cast<AKZPlayer>(GetOwner()))
@@ -245,9 +275,13 @@ void UKZLockOnComponent::StopLockOn()
 
 bool UKZLockOnComponent::IsLockedOn() const
 {
-	return CurrentTarget.IsValid() && LockOnConstraintHandle.IsValid();
+	return LockOnConstraintHandle.IsValid() && IsLivingLockOnCharacter(CurrentTarget.Get());
 }
 
+void UKZLockOnComponent::HandleTargetHealthChanged(const FOnAttributeChangeData& Data)
+{
+	if (Data.NewValue <= 0.f) StopLockOn();
+}
 
 void UKZLockOnComponent::UpdateLockOnFacing(float DeltaTime)
 {
@@ -260,7 +294,7 @@ void UKZLockOnComponent::UpdateLockOnFacing(float DeltaTime)
 	AKZPlayer* Player = Cast<AKZPlayer>(GetOwner());
 	AKZMonster* Target = CurrentTarget.Get();
 
-	if (!IsValid(Player) || !IsValid(Target) || !Player->IsLocallyControlled())
+	if (!IsLivingLockOnCharacter(Player) || !IsValid(Target) || !Player->IsLocallyControlled())
 	{
 		StopLockOn();
 		return;

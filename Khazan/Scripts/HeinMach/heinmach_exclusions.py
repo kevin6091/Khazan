@@ -12,7 +12,7 @@ METADATA_ROOT = os.path.join(
     PROJECT_ROOT,
     "Content",
     "_Art",
-    "Kazan",
+    "Player",
     "Environment",
     "HeinMach",
     "Metadata",
@@ -20,6 +20,7 @@ METADATA_ROOT = os.path.join(
 EXCLUSION_PATHS = (
     os.path.join(METADATA_ROOT, "HeinMach_UserExclusions.json"),
     os.path.join(METADATA_ROOT, "HeinMach_OptimizationExclusions.json"),
+    os.path.join(METADATA_ROOT, "HeinMach_RoutePruneExclusions_20261016.json"),
 )
 MANUAL_OVERRIDE_PATH = os.path.join(METADATA_ROOT, "HeinMach_ManualOverrides.json")
 

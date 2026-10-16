@@ -235,3 +235,56 @@ Architecture [v3](CHARACTER_GAMEPLAY_ARCHITECTURE.md#character-architecture-v3-n
 - 엔진 근거: 설치 UE 5.8 `Engine/Source/Editor/PropertyEditor/Private/UserInterface/PropertyEditor/SPropertyEditorArrayItem.cpp`의 `FTitleMetadataFormatter::TryParse`는 단일 이름 및 `{}` 조합을 해석하고, `GetDisplayText`는 각 property handle의 표시 값을 치환한다. `SPropertyEditorArrayItem::Construct`는 소유 배열의 `TitleProperty`를 읽는다. 일반 메타데이터 문법/Editor 범위는 [Epic 공식 문서](https://dev.epicgames.com/documentation/unreal-engine/metadata-specifiers-in-unreal-engine)를 함께 확인했다.
 - 검증: UHT 생성 파일 `Intermediate/Build/Win64/UnrealEditor/Inc/Khazan/UHT/{KZComboDefinitionData,KZCharacterDefinitionData}.gen.cpp`에서 3개 제목 문자열을 확인했다. Editor 종료 상태에서 모듈 DLL 갱신 및 `Build.bat KhazanEditor Win64 Development -Project=<Khazan.uproject> -WaitMutex -NoHotReloadFromIDE`의 exit 0/`Result: Succeeded`를 확인했다. Rider build 상태는 diagnostic 없이 false였지만 UBT 성공 기록과 직접 엔진 빌드 결과로 구분했다. Details 화면의 실제 문자열/폭은 아직 직접 검증하지 않았다.
 - 보존 확인: 이번 작업 시작/종료의 `KZAnimInstance.cpp`, `DA_Player_Combo_Definition.uasset`, `DA_CharacterDefinition_Player.uasset` SHA256이 동일하다. 새 Editor에서 아래 두 Data Asset을 열어 원소만 접는 것이 남은 화면 확인이다. 이 metadata-only 작업에 gameplay PIE는 수행하지 않았다.
+
+
+## 2026-10-02 — Guard Source/BP/입력 데이터 연결
+
+- 신규 런타임 클래스는 Source/Khazan/Ability/PlayerAbility/KZGuardAbility.{h,cpp}다. Action base의 InputEnd/block/cancel과 기존 Montage/WaitGameplayEvent Task를 재사용한다. Controller는 InputData Guard Started/Completed/Canceled를 ASC generic 입력으로 전달한다. ASC에는 BlueprintCallable TryGuardHit만 추가했다.
+- 신규 입력 태그 Input.Action.Guard, Ability Asset Tag Ability.Action.Guard, GE owned tag State.Guarding을 구분한다. InputAction=/Game/Input/IA_Guard, IMC_Default의 LeftShift/Gamepad_LeftShoulder, DA_InputData, DA_CharacterDefinition_Player의 1회 GA_Player_Guard grant를 저장했다.
+- Guard BP=/Game/Bluprints/AbilitySystem/Abilities/Player/Guard/GA_Player_Guard. Cost/Cooldown=None. GuardStateEffect=GE_State_Guard(infinite tag만), GuardHitStaminaEffect=GE_GuardHit_Stamina(instant Stamina AddBase SetByCaller DataName GuardStaminaDamage), GuardHitRecoveryDelayEffect=기존 GE_Player_StaminaRegenDelay다. 성공 Spec duration=원작 확인 0.5초이며 기존 지연 GE 에셋은 변경하지 않았다.
+- AM_DAS_Player_Guard의 Start/Suc_F/Suc_L/Suc_R/End와 Guard BS를 InGame/DAS/Guard에 생성했다. ABP_Player에 Guard Loop/BS 선택과 bIsGuarding 선택 7노드만 추가해 기존 DefaultSlot/Inertialization을 유지했다. true=BlendPose_0/false=BlendPose_1을 설치 엔진 소스와 연결 export로 확인했다.
+- 전체 참조·변수/함수·시간 출처·향후 성공 호출 계약은 [Guard 현행 문서](GUARD_IMPLEMENTATION_20261002.md), 적용 결과는 Metadata/GuardImplementation_20261002의 새 프로세스 asset audit/graph export에 있다. project Config·기존 Player/AI BP·환경 파일을 Guard 때문에 수정하지 않았다.
+
+
+<!-- HeinMachGhosting_20261008_applied -->
+## 2026-10-08 — HeinMach 이동 캐릭터 선명도·잔상 수정
+
+실제 Main 적용은 BP_Player.uasset의 Original5+weapon2 SCS render_custom_depth=True/custom_depth_stencil_value254, Config/DefaultEngine.ini 기존 SystemSettings의 r.TSR.Velocity.WeightClampingSampleCount2, Config/DefaultEditor.ini의 EditorPerformanceProjectSettings Realtime/NonRealtime mode=Manual 및 ManualScreenPercentage100이다. 새 runtime 파일·class·helper·C++ 변경·빌드는0이다. existing native mask 계약만 복구하며 body·mesh·ABP·PhysicsAsset override·CopyPose/RigidBody·tick·URO·visibility·scale·per-bone motion blur를 보존했다. count2/native100은 원작 근거 미확인의 native 튜닝이며 선정/비용/검증은 Art HEINMACH_REFERENCE_MATCH_2026-10-06.md 이번 절에 기록했다.
+
+저장은 private Parts stage에서 BP만 수행하고 fresh-process asset audit를 통과했다. Main3528에서 PIE없음·dirty content/map0·현재 HeinMach world를 확인, Main BP SHA ce037c64d7af2e85d61f8e2d7160f7ad615f3fc5be4c159f0bc1d3b585be70f5를 CAS 기준으로 전달 SHA76a65789f117d72913168e4c5f55da1a258f8ae0e6a3466595f8318467f2cfa4로 교체했다. BP package만 fully_load/reload(return True/빈 오류)한 뒤 본체 포함8template True/254와 dirty0를 readback했다. 사용자 map·actor path·선택 및 Snow h/cpp·module manifest는 보존했다. first attempt는 소유 background game이 Main BP를 junction으로 읽어 file lock이 있었으며, 해당 game만 정상 종료 후 성공했다. 전역 DEBUG RESETLOADERS나 user editor 종료/PIE/save는 사용하지 않았다.
+
+DefaultEditor는 프로젝트 전용 config다. engine 공용 AppData EditorPerformanceSettings/Scalability를 저장하지 않았다. 현행 user session은 r.ScreenPercentage/sg.ResolutionQuality100 및 count2만 즉시 적용했고 sg.AntiAliasingQuality2/history100은 유지했다. Fresh hidden NullRHI editor는 console setter 없이 새 config의 manual100·realtime/nonrealtime Manual·TSR count2와 user override 조건을 검증했다. 새 real-RHI game에서는 저장된 BP의8component254, 실제 EnhancedInput 이동/weak montage, per-bone velocity·Original5 animation class를 다시 확인했다. fresh 증거는 Saved/ImportReports/HeinMachGhosting_20261008/FreshConfigAudit.json 및 FreshRuntimeVerification.json이다. 일반 게임의 user 선택 resolution/AA 품질은 강제 고정하지 않는다. 프로젝트 전체 TSR count2의 적용 범위는 명시적으로 공통이다.
+
+이번 delivery는 canonical HeinMach map/Contact55 preview map/보호된 snow source3/QA alias manifest를 바꾸지 않았다. Contact55의 기존 canonical pending CAS 조건은 유지된다. physics 전체 관통 제거나 모든 공격 pose의 temporal artifact0 검증은 별도 미확인 범위다.
+
+
+<!-- HeinMachGhosting_20261008_viewport_readback -->
+## 2026-10-08 — 현재 에디터의 별도 해상도 driver 확인
+
+최종 현재 뷰포트 readback 보완: 에디터 전용 real-time mode1/display-resolution 및 non-real-time mode2/DPI도 현재 세션에서 Manual0으로 바꿨다. r.ScreenPercentage100만으로 에디터의 별도 resolution driver가 Manual이 됐다고 가정하지 않았다. r.Editor.Viewport.ScreenPercentageMode.RealTime0/NonRealTime0/ScreenPercentage100 및 TSR count2를 Main3528에서 확인했다. AppData 전역 사용자 config를 저장하지 않았고 dirty0/noPIE·현재 world를 유지했다. MainViewportReadback.json이 증거다. 재시작은 프로젝트 DefaultEditor로 동일하게 검증됐다.
+
+<!-- PlayerComboRepair_20261008_complete -->
+## 2026-10-08 14:39 KST — Charge03·Spinning 입력 진단과 Weak05 입력창 보완 완료
+
+현재 saved InputData/IMC/CharacterDefinition/ComboDefinition/CDO를 read-only로 대조했다. Y는 Input.Action.Y/Command.Player.Attack.Y, RB는 Input.Action.RB/Command.Player.RB다. Spinning은 input binding 없는 graph-only grant EntrySpinningAttack01이고, RB grant는 OverFury다. Weak01–05에 YBegin→SpinningAttack01 edge가 존재하며 Charge02→03은 같은 montage의 유효 section 전환이다. Source의 generic press→command 순서와 ARCH-72 최소 계약을 변경하지 않았다. Controller/ASC/Ability 또는 새 runtime class/helper/state 수정0이다. 사용자 Spinning01→02, Charge03→04 자동 section 체인과 최신 DoJump/DoDown 값/기존 notify를 보존했다.
+
+확정 결함은 WeakAttack05에 Y Begin edge가 있으나 InputOpen/InputCommit notify가 없어 그 node의 window가 계속 Closed인 것이다. private 실제 X01→02→03→04→05 후 Y가 실패했고, montage에 입력창 notify2개만 추가한 뒤 buffer와 commit 구간 모두 Spinning으로 전환했다. 기존13 notify의 export, clips/segments/sections/InputEnd 및 Spinning montage는 그대로다. 너무 이른 Y는 현행 입력창 정책대로 무시되며 이번에 Closed 입력을 일반 buffer로 확장하지 않았다.
+
+수치 출처는 Saved/Extracted/InGame_Playback_20261002/Metadata/BBQ/Content/_Kazan_/Design/Kazan/Skill/DualAxeSword/Common/WeakAtk/AC_Kazan_DualAxeSword_Com_WeakAtk05.json의 Notifies[].xxAnimNotifyState_ReserveInput_6: LinkValue.25166s, Duration.339216s, EndLink.LinkValue.590876s, source length2.6s다. active DilationFourth T_Original→T_Dilation157pair를 선형 보간하고 현재 Exact60 normalized-duration migration을 적용했다. 현재 SequenceLength2.5999999046s/RateScale1/segment rate1, local Open.2516601846/Commit.5908764951s에 Attack05 start9.6333332062s를 더해 montage9.8849933908/10.2242097013s로 작성했다. 정확 입력/table·수식·SHA는 PrivateWork/Weak05Author.json 및 author script를 따른다. 원작 reserve fields와 변환은 직접/계산 출처로 구분하고, 이를 현행 InputOpen/InputCommit/Y로 해석한 것은 프로젝트 authoring 결정이다. 원작 Spinning 버튼 의미를 직접 확인했다고 주장하지 않는다.
+
+Rider debugger own ComboWork26416에서 private ComboAction300/317의 실제 ApplyEdge를 포착했다. CurrentNodeId=WeakAttack01, Window=CommitToEnd, Command=Y Begin, Target=SpinningAttack01, bWasBlocking=true, bInputPressed=false, bActivated=true 및 stack/value를 저장했다. 이후 latest cold 실제 EnhancedInput에서 Weak01 buffer/commit→Spinning01/02, Charge02→03/04, RB→OverFury가 성공했다. 따라서 이전 live 세션의 일반 Weak01/Charge/RB 실패 원인은 확정하지 않았다. stale DLL/LiveCoding 또는 입력 시점을 확정 원인으로 표현하지 않으며, 무근거 입력 remap/ASC 순서 변경을 하지 않았다. 선택 창 이전의 입력이 무시되는 것은 실제 관측했지만 사용자의 당시 입력 시점은 미확인이다.
+
+실제 변경은 Content/_Art/Player/Animation/InGame/DAS/WeakAttack/AM_DAS_WeakAttackCombo.uasset1개다. before4f98b656f974ad54a1ca875c0be59ab09bf21970d81d39d31a2464b759f10b21 → after6f75a121e4662515a06058342ee7ab77fcf982097a50c13fb173482888966ad9. Main 최초 atomic copy는 loader file lock WinError5로 실패했다. fresh 사용자24552/DevMap/noPIE/dirty0 확인 후 기존 engine FullyLoadPackages([해당 montage])로 그 loader만 해제하고 CAS copy→ReloadPackages ASSUME_NEGATIVE를 수행했다. actor identity/selection/dirty0 및 loaded notify15를 유지했고 map save/PIE/native compile/restart/close/전역 ResetLoaders는 실행하지 않았다. 앞선 disk publisher의 editor_reload=false는 publisher 단독 단계 기록이며 전체 사용자 editor handoff 범위는 MainSelectiveHandoff.json 및 CompletionValidation.json이 정본이다.
+
+새 hidden Main7164에서 실제 loaded alias UnrealEditor-KhazanSnowPlayerCapsule20261008.dll SHAa237a02fe7d3e78f1e036d215ca773e223efb35e8b9a184046e3ce8379fa7b58를 재검증했다. 실제 EnhancedInput suite7개(Weak01 buffer/commit, Charge03/04, RB, Weak05 buffer/commit/early)가 기대 결과로 통과했다. fixture의 Weak05 unlock은 시험 조건이며 제품 grant/data 변경이 아니다. Source/owned asset192 before/after 동일, nativeSource edit0/asset save0, own PIE 종료/dirty0/throttle복원/정상quit 및 debugger agent breakpoint0/user breakpoint8 보존을 확인했다. 사용자24552는 그대로 실행 중이다. 새 capsule code 적용에는 그 running editor 정상 재시작이 필요하며 새 alias를 강제 주입하지 않았다.
+
+정본 증거는 Saved/ImportReports/PlayerComboRepair_20261008/{CompletionValidation,Delivery,DeliveryFirstAttempt,MainSelectiveHandoff}.json, PrivateWork/{VerifiedDelivery,Weak05Author,DebuggerEvidence,SuiteBaseline,SuiteAfter}.json 및 FreshMain/{MainVerification,Cleanup,Runtime_*,MainComboVerify.log}다. 실행 재현/관측 범위와 이전 live 원인 미확인을 구분한다. 후속은 현재 saved asset/alias에서 실패 시점·InputOpen/Commit/End·Begin/Release/Hold phase를 표적 확인하며 이미 성공한 전체 authoring/일반 입력 구조 변경을 반복하지 않는다.
+
+
+## 2026-10-15 — 컨트롤러 진동 엔진 배율 2 / HeinMach 패키징
+
+Config/DefaultGame.ini의 [/Script/Engine.PlayerController] ForceFeedbackScale=2.0이 기존 Engine/Config/BaseGame.ini의1.0을 덮는다. 사용자 지정 무차원 배율이며 새 wrapper/설정 field/진동 시간은 없다. 설치 UE5.8 PlayerController.cpp:4778 이후 기존 엔진이 혼합된 각 모터값에 배율을 곱하고0..1로 clamp한다. 실제 PlayerController PIE 값2와 최종 pak DefaultGame 값2를 모두 확인했다. 기존 MapsToCook=HeinMach, Epic11그룹3/ResolutionQuality100과 기타 config는 보존한다.
+
+새 runtime class/BP/맵 저장0, 최신 재배포 Windows 전체 폴더와 검증 근거는 Metadata/LockOnRumble_20261015/FinalVerification.json이다. 패드 실물 체감은 미측정이며 포화된 강한 출력이 물리적으로2배가 된다고 표현하지 않는다.
+
+<!-- LockOnRumble_20261015_complete -->

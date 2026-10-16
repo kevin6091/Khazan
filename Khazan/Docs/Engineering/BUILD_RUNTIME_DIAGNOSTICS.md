@@ -286,3 +286,43 @@ if (ResolvedGait == EKZGait::Sprint ||
 - 엔진 경로: PlayMontageAndWait::Activate → ASC::PlayMontage → UAnimInstance::Montage_Play는 **새 montage의 BlendIn/BlendModeIn/BlendProfileIn**을 사용한다. source Action의 Cancel/Ability End에서 PlayMontageAndWait::StopPlayingMontage → ASC::CurrentMontageStop()은 override가 없으므로 source montage의 BlendOut을 사용한다. 현재 task는 bStopWhenAbilityEnds=true이고 proxy에는 blend time 인자가 없다. 전달된 0.0f는 StartTimeSeconds다.
 - 두 fade는 겹쳐 진행하므로 0.25+0.25=0.5 s로 계산하지 않는다. 엔진은 새 montage 재생 시 같은 group의 이전 montage를 새 BlendInSettings로 중단할 수도 있으며 이미 중단 중이면 더 짧은 요청으로 기존 fade 시간을 줄인다. 따라서 두 값을 다르게 바꾼 뒤 source fade가 항상 source asset의 BlendOut과 독립적으로 유지된다고 단정하지 않는다. outgoing이 이미 자연 blend-out 중인지/입력 시점/기존 가중치도 실제 경과에 영향을 준다.
 - 현재 Dodge → DodgeAttack의 진입 blend를 조절할 직접 에디터 위치는 **AM_DAS_Player_DodgeAttack의 Asset Details → Blend In → Blend Time/Blend Mode In**이다. outgoing도 함께 볼 때는 AM_DAS_Player_Dodge의 Blend Out을 확인한다. ComboTransitionInertializationDuration을 바꾸는 것은 현재 Ability handoff의 시간을 바꾸지 않는다. 노드/Edge/ASC가 별도의 handoff 관성화 시간을 소유하도록 새 구조를 적용한 것은 아니다.
+
+
+## 2026-10-12T02:04:36+09:00 — ARCH-89 사운드 저장 누락 정확 재개 / 준비본 검증 완료
+
+신규 runtime는 stateless Audio Notify/NotifyState2 class/h·cpp4개이며 기존 ComboDefinition/ComboAction·CharacterDefinition/Brutal·MonsterSkillObject6 runtime 파일의 선택적 Sound/확정 HP·guard/launch·impact 수명만 확장했다. GT Actor/Mesh/engine notify instance 소유 AudioComponent와 engine AutoDestroy/StopWhenOwnerDestroyed를 재사용한다. finite tail은 자연 종료하며 loop/explicit stop만 자기 occurrence에서 정리한다. 새 Manager/Subsystem/Tick/gameplay 상태 사본0이다. 기존 ARCH-86 Fall/paired Brutal·ARCH-87/88 HUD/Monster repair·latest Source를 보존했다.
+
+중단 지점 후 fresh binding readback에서37 DataAsset의 window/object audio 참조가 None임을 발견했다. 원인은 Unreal Python 배열 iteration의 구조체 사본을 바꾼 뒤 windows[i]/nodes[i]/objects[i]에 재대입하지 않은 것이다. author helper를 수정하고 최신 Main에서 비오디오 field 동일성을 검사한 prepared package를 저장했다. SaveBindingCopy/MountBindingCopies는 기존 editor-only 도구 파일의 표적 복사·새 process 검사 기능이며 Shipping runtime 책임을 추가하지 않는다. Build29_PreparedProjectileQA/current UnrealEditor-Khazan-2026101303.dll은 exit0이며 제품 runtime 및 자체 editor/QA Source hash가 build input과 동일하다. 다른 작업의 DEV 검사2파일 후속 변경은 그대로 보존하고 PreparedVerification01의 concurrent_foreign_editor_only_changes에 분리했다. test에서 즉시 Impact로 Destroy되는 Apes weak actor를 다음 phase에서 다시 dereference하지 않도록 IsValid로 검사했다.
+
+SavedAudit06_PreparedBindings/AudioPIE07_PreparedProjectile은 fresh prepared37의 impact61/guard405/object guard4/projectile2 및 실제7 family/8 cancel sample, loop cleanup, 원본 cue를 실제 Shoot에서 재생하고 Impact에서 종료하는2 녹음이 passed/nonzero/clipping0이다. 이 검사는 prepared 바인딩을 명시적으로 mount한 DEV fixture이며 Main 바인딩 완료가 아니다. 기존 Main Animation/Body7/HeinMach source 환경음은 실제 saved/출력 검증됐다. prior CombatEffect actual18+5 paired/natural hit Success와 RegressionPIE03의 실제 PlayerAttackCollision/GiantFall/Guard Success/출력도 보존하되 새37 바인딩 반영 전 회귀임을 구분한다.
+
+남은 외부 조건은 Rider Main PID19752의 파일 잠금이다. owned author 종료 후 hash CAS 교체도37개 모두 Error32로 실패했고 conflict0이다. PreparedVerification01.json complete=false/PreparedVerified_MainBindingsLocked, ResumeState05.json에 준비본 SHA/현재 Main SHA/증거/재개 절차를 저장했다. 기존 사용자 editor/debugger/foreign private editor는 조작하지 않았다. 필요 질문은 Windows 파일 잠금 해제를 위한 저장 후 editor 종료이며 자동 승인 거절이나 skill 승인 규칙 때문이 아니다.
+
+정확한 재개: 미저장 작업을 사용자가 저장하고 Rider editor를 닫은 뒤 `apply_prepared_gameplay_audio_bindings.py BindingRepair03_Prepared Delivery02.json`을 실행한다. SHA가 달라진 package는 과거 준비본으로 덮어쓰지 말고 최신 Main에서 audio field만 새 prepared run으로 재작성한다. KZ_AUDIO_BINDING_COPIES를 해제한 fresh Main saved audit→Audio PIE→전체 CombatEffect/PlayerAttackCollision/GiantFall/Guard mixer 회귀 후 Main hash/loaded module과 실제 출력을 FinalVerification.json에 결속하고 날짜별 완료를 추가한다. 이미 성공한 전체 audio extraction/import/animation retime/환경 author와 과거 private Source·DLL 복원은 반복하지 않는다.
+
+## 2026-10-15 — Windows Shipping 최초 패키징 오류 수정
+
+Package01은 Editor 빌드에서는 노출되지 않던 두 compile 오류로 종료6이었다. KZLocomotionComponent.cpp의 미사용 InterchangeResult.h를 제거했고, KZAnimNotify_CombatEffect.cpp의 editor-only UNiagaraDataInterfaceCurve::UpdateLUT 호출을 동일한 상수 회전0/배율1의 runtime LUT 갱신으로 바꿨다. 설치 UE5.8 NiagaraDataInterfaceCurveBase.h의 UpdateLUT는 WITH_EDITORONLY_DATA, SetDefaultLUT/UpdateTimeRanges/MarkRenderDataDirty는 runtime API이며 ShaderLUT는 runtime UPROPERTY다. SetDefaultLUT가 one-sample LUT와 NumSamplesMinusOne=0을 만들고 해당 float sample만 기존 상수로 채운다. 새로운 보간·튜닝·효과 수명은 없고 새 runtime class/file0이다. 수정 후 Package02 compile26.16s 및 GameFeatures 활성화 후 Package03 compile20.63s가 Succeeded다.
+
+Package02 cook가 원작/새 gameplay 오류와 별개로 기존 Config의 redirected GameInstanceClass 및 미활성 GameFeatures 타입을 실패로 보고했다. 실제 BP 경로 /Game/Bluprints/GameSystem/BP_GameInstance로 갱신하고 기존 AssetManager의 GameFeatureData 선언에 필요한 GameFeatures plugin을 활성화했다. 소유 cook만 종료해 잘못된 설정으로 전체 cook를 계속하지 않았다. Package03에서 두 오류가 사라졌고 현재 두 맵·PDA_AssetData·실제 GameInstance·Yetuga 음악이 cooked 파일로 생성됐다. 최종 cook/stage 성공과 별개로 보고하며 상태는 Metadata/Release_20261015/Package03/{UAT.log,Exit.json}을 따른다.
+
+릴리즈 정책은 사용자 지정 시네마틱 바로 아래의 Epic3, resolution100%다. 엔진 BaseScalability의 @3/@Cine 구분과 DefaultGameUserSettings를 사용한다. 원작 품질 설정의 직접 확인으로 표현하지 않는다. 메인 map/자산을 재저장하지 않으며 build/cook cache·출력만 생성한다. raw config/source/uproject 백업은 Metadata/Release_20261015/Before에 있다.
+
+## 2026-10-15 — HeinMach Shipping 최종 성공 및 배포 확인
+
+사용자 후속으로 MapsToCook와 BuildCookRun -map은 /Game/Maps/L_HeinMach_Environment 하나다. Package03의 두 맵 cook를 자기 PID만 중단한 Exit25와 종료 직전 UAT mutex 충돌 Package04 Exit1은 재시도 이력이다. Package05는 이전 UAT 종료 후 --skipbuild/clean cook로 실행해 8,590 package, cook533.78s/0error·6warning, UAT676.52826s/BUILD SUCCESSFUL/exit0으로 완료했다. Shipping compile은 GameFeatures 활성화 후 Package03의20.63s Succeeded, 최종 main/packaged exe SHA b3e4bf1d37746a116784b56fa9be58b41fdcf04766e760bd93457662be930bbc다.
+
+최종 UnrealPak -ListContainer에서 game map1=HeinMach, StormPass0 및 Yetuga music4 package를 확인했다. Engine/Content/Maps/Entry.umap은 엔진 기본 map이다. UnrealPak -Extract -Filter=*.ini로 실제 pak의 GameDefaultMap/GameInstance 직접 경로, 모든11 quality group=3·resolution100을 확인했다. UE5.8 Scalability.h의 LandscapeQuality를 포함해 사용자 요청 Epic 등급을 명시했다. 원작 수치 재현/새 gameplay tuning이 아니다. Pak/IoStore/prerequisite/Shipping exe/부트스트랩 존재, PDB0, 총41파일2,410,104,666bytes SHA manifest를 남겼다.
+
+별도 UserDir의 task-owned offscreen Shipping exe는90.07s 동안 생존/Responding, crash context/dump0이었다. 이후 경로/PID/생성 시각을 확인해 종료했다. 실행 관측은 일반 플레이·렌더링 외관·FPS·컨트롤러·음악 청취나 자연 종료 검증을 대신하지 않는다. cook warning6은 Lumen AtlasSize 프로젝트 override, VFX SM_PortalPlane 비어 있는 convex geometry, GAS Cue 검색 경로 미지정이며 이번에는 자산/게임 규칙을 변경하지 않았다.
+
+증거: Metadata/Release_20261015/FinalVerification.json, Files.json, IoStoreContents.csv, PackagedConfig/Khazan/Config, Smoke01/Result.json, Package05/UAT.log. 배포 실행 파일: C:/Users/user/Desktop/Khazan_Release_20261015/Windows/Khazan.exe. 빌드 compile 보정2cpp와 config/uproject만 바뀌었고 Content 원본 저장0, 메인 HeinMach SHA7b072b9bfd8c051701fa8190fb794422e33c4c1bd16c62a2370ce1831471c728 유지다.
+
+
+## 2026-10-16 — 정리된 HeinMach 단일 Epic Shipping 재패키징
+
+Metadata/Release_20261016/Package01의 BuildCookRun은 Shipping target up to date/Succeeded(2.68s), cook7619/103.02s, UAT239.366s/exit0/BUILD SUCCESSFUL이다. -map과 MapsToCook 모두 HeinMach 하나다. cook0error·6warning은 기존 Lumen atlas 프로젝트 우선순위, 장식 SM_PortalPlane 빈 convex, GameplayCue 검색 fallback과 동일하며 이번 패키징에서 게임·자산 설정을 수정하지 않았다.
+
+최종 IoStoreContents.csv 및 실제 pak ini 추출로 게임 map1(Engine Entry 별도), Epic11그룹3/해상도100%, 진동2와 Yetuga 음악4개를 검증했다. Current Main/packaged Shipping SHA09f52188... 동일. map source SHA1d224b14..., cooked map9,527,965bytes이며 이전14,577,381bytes와 chunk hash가 다르다. Source/Config/uproject/map 입력 SHA 차이0. 별도 UserDir의 패키지 실행90.234초 생존/새 crash0 후 소유 PID29772만 종료했다. 자연 exit/전투·시각·FPS·오디오 검증은 별도다.
+
+출력 C:/Users/user/Desktop/Khazan_Release_20261016/Windows, 실행 Khazan.exe, 전체41파일2,111,968,044bytes. 기존 배포본 보존, 새 Runtime/게임 파일 변경0, 필수 잔여0. 최종 근거 Metadata/Release_20261016/FinalVerification.json 및 PackageReadback/ReleaseFiles/Smoke01.

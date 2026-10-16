@@ -1,0 +1,8 @@
+unreal.unregister_slate_post_tick_callback(state['handle'])
+inp.inject_input_vector_for_action(move,unreal.Vector(),[],[])
+cmd('ShowFlag.VisualizeMotionBlur 0');cmd('ShowFlag.VisualizeReprojection 0');cmd('ShowFlag.PostProcessMaterial 1')
+for m,d,s in parts:m.set_render_custom_depth(d);m.set_custom_depth_stencil_value(s)
+result=dict(done=True,error=None,cleanup_verified=True,instrumentation_repair='Excluded the delegate handle from JSON and removed the already-completed callback.',images=[str(OUT/name) for name in ['moving_velocity.png','moving_reprojection.png','moving_no_regional_pp.png','moving_with_regional_pp.png']])
+assert all(__import__('pathlib').Path(path).is_file() for path in result['images'])
+(OUT/'VelocityCapture.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
+print('Owned diagnostic callback cleaned')

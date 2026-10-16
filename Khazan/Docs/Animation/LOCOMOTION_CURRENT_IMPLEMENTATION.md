@@ -1491,3 +1491,111 @@ PIE read-only 입력 주입에서는 Run/Sprint Stop 진입과 입력 해제 뒤
 - [직접 확인한 불연속] 세 L 모두 몽타주 가중치가 0이 된 직후 Actor Yaw가 한 frame 약 +7 deg 돌아갔고 두 R은 약 -7 deg였다. 첫 L frame 183579에서 머리의 component-space 변화는 약 0.046 deg, world-space Root 변화는 약 7.013 deg다. 현재 종료 시 큰 전체 자세 변화의 작성자는 Actor/capsule 회전 경로다. Slot weight 연속성만으로 화면 전체 튐을 배제할 수 없다.
 - [Source/설정 대조] 실측 ±720 deg/s는 `DA_CharacterDefinition_Player.LocomotionConfig.RotationRate.Yaw=720 deg/s`와 일치한다. 현재 BP_Player CMC CDO는 bAllowPhysicsRotationDuringAnimRootMotion=false이며 엔진은 Root Motion 중 일반 PhysicsRotation을 건너뛴다. LockOn의 ControlRotation 갱신과 CMC desired rotation 경로는 존재한다. 측면 회피 동안 누적된 방향 차이를 종료 후 따라잡는 설명과 일치한다. 원작값/새 튜닝값/함수 중단점 hit로 표현하지 않는다.
 - [제안/검증 경계] 기존 Allow Physics Rotation During Anim Root Motion 옵션을 비교하는 것이 다음 작은 원인 검증이다. 다른 Root Motion 공격의 회전에도 적용되므로 회피뿐 아니라 WeakAttack/콤보를 함께 확인해야 한다. 현재 C++/BP/에셋을 수정하지 않았고 설정 변경 효과는 아직 미검증이다. 관성화 시간을 늘리는 작업을 이 Actor 회전 지연의 해결로 취급하지 않는다. 자세한 frame/report/후속 v4 관측은 Engineering Diagnostics와 Continuity의 같은 날짜 새 절에 있다.
+
+
+## 2026-10-02 — InGame Sprint source cadence 보정 (Art 적용)
+
+- [실제 변경] InGame/DAS/Locomotion/Sprint의 기존 24 fps·RateScale 1.0 source/Start/MovingTurn/Legacy 18개를 원작 NumFrames/SequenceLength에서 계산한 30 fps cadence에 맞춰 RateScale 1.25로 저장했다. 기존 native 키·crop/padding·marker·root 옵션을 유지했다.
+- [보존] 이미 24 fps × 1.25인 현행 locomotion 9개와 사용자 crop WeakAttack 5개는 package hash 동일. 기존 gait/방향/Stop/Start 제외 정책과 C++/ABP 연결을 이 작업에서 변경하지 않았다. unused Start의 에셋 보정이 현재 상태머신의 Start 추가를 뜻하지 않는다. Player mesh 0.01은 공간 배율이며 이 시간 보정 입력이 아니다.
+- [근거/검증] 원본 package/field/원시 값과 18개 명단, 전체 액션 retime·Montage 후속 변경은 [Art InGame 보정 정본](../Art/INGAME_DAS_PLAYBACK_CORRECTION_2026-10-02.md)에 있다. 142 sequence/5 montage 저장 파일의 새 프로세스 검사 passed. 실제 PIE 시각/원작 실행 speed attribute는 별도 검증이다.
+
+
+## 2026-10-02 — Guard 포즈를 기존 Slot source에 추가
+
+- [실제 적용] Guard 유지 수명은 UKZGuardAbility/State.Guarding GE가 소유한다. Main AnimInstance는 GT에서 태그를 FKZAnimGameThreadData.bGuarding에 복사하고 worker에서 readonly bIsGuarding을 작성한다. GuardMovementDirectionAngle은 현행 MovementDirectionAngle을 LockOn에서 재사용, 비LockOn은 0(F)이다. 새로운 방향 계산/helper나 worker의 ASC 접근은 없다.
+- [ABP 계약] bIsGuarding true면 Guard 유지 포즈를 기존 DefaultSlot Source에 공급한다. bHasMovementInput true는 Guard BS/false는 Guard Loop. false는 기존 Locomotion StateMachine이다. 기존 Slot→Inertialization→Output, Stop 이력, Start 제외 정책을 유지한다. Guard_Start는 액션 시작 모션으로, 제외된 Walk/Run/Sprint Start를 재도입한 것이 아니다.
+- [에셋] /Game/_Art/Player/Animation/InGame/DAS/Guard/AM_DAS_Player_Guard의 Start/Suc_F/L/R/End에 branching InputEnd 5개, 해당 Guard 17 sequence에 point marker를 추가했다. 유지/8방은 즉시 중단 가능한 표시, GuardBreak는 marker만 있고 미연결이다. 기존 source pose/root/playback 및 mesh 0.01을 보존했다.
+- [수치 지위] 원작 cancel Notify를 기존 bake 시간축에 역매핑한 InputEnd, 원작 0.5초 성공 regen 지연, 어시스턴트의 임시 Montage/ABP 0.1초, 기존 Combo에서 재사용한 임시 이동 복귀 0.24초를 구분했다. Guard 이동 상한은 기존 Walk policy이고 별도 원작 Guard 속도를 확정하지 않았다.
+- [검증] cold build, 새 프로세스 asset/17 pose audit, 실제 PIE의 8방향/비LockOn F/유지/성공/해제/이동·공격 교체/자연 종료/UnPossess가 통과했다. 물리 입력·화면 blend/발 미끄러짐 및 적 타격·HP 결과는 미검증이다. 자세한 실제 Source/BP 연결, 함수·변수·출처/보고서는 [GUARD_IMPLEMENTATION_20261002.md](../Engineering/GUARD_IMPLEMENTATION_20261002.md)를 따른다.
+
+
+## 2026-10-06 — GuardLocomotion 샘플 인덱스 오류 실제 수정
+
+- 10월 2일의 “8방향 통과” 범위는 AnimInstance 각도와 에셋 배치였다. 실제 재생 cache/mesh pose 검증까지 완료한 기록으로 읽지 않는다. 이번 확대 PIE에서 F→L, L→RF 등 실제 방향 클립 오선택을 발견했다.
+- Guard BS를 복제한 뒤 SampleData를 각도순으로 교체하면서 이전 BlendSpaceData.Segments의 인덱스 0,7,5,3,2,4,6,8,1이 남은 것이 원인이다. 디버거 실제 cache 입력=0도/index2/L/weight1과 저장 BS .copy로 확인했다. 입력각/ABP bool 연결은 정상이다.
+- 실제 수정은 BS_DAS_Player_Guard의 derived segments만 UBlendSpace::ResampleData로 0–1…7–8로 재생성한 것이다. 기존 authoring script에도 해당 native editor API 호출을 추가했다. KZGuardAbility/KZAnimInstance/ABP SHA256, 9 sample/원작 bake/RateScale/0.01 mesh/root/interpolation은 유지했다. 새 gameplay runtime 파일/멤버=0.
+- cold build 성공→새 PID24936에서 saved BS reload→2026-10-06 01:01:38.080 UTC Khazan.Guard.PIE Success. F/RF/R/RB/B/LB/L/LF 실제 clip weight1, ±179도 B와 인접 RB/LB 블렌드, camera/actor yaw 차이, 비LockOn F, 무입력 Guard_Loop을 확인했다. 단일 clip checkpoint 12개에서 mesh 227본이 실제 재생 시각의 압축 sequence와 일치했다. 정규화 quaternion 최대 차이 약 0.000002415도/translation·scale 차이0.
+- LockOn mode는 기존 constraint로 선택한 test fixture다. 실제 targeting/물리 키, 연속 전환 화면/발 미끄러짐 품질은 미검증이다. 기존 Guard gameplay/성공비용/InputEnd/release/공격 교체/cleanup 검사도 함께 통과했다.
+- 자료/현재 동작/수치 지위/재개는 [Guard 정본 2026-10-06 추가 절](../Engineering/GUARD_IMPLEMENTATION_20261002.md)과 Metadata/GuardLocomotion_20261006/RuntimeResult.json을 따른다. PIE Idle/DevMap/dirty0로 정리했다. 다른 locomotion/Start/Stop/Dodge 계약을 바꾸지 않았다.
+
+
+## 2026-10-06 — Guard Start/End의 이동 입력 전환 계약 적용
+
+- 사용자 직접 수정으로 허용된 기존 movement intent가 있는 Guard press는 Start 없이 기존 GuardLocomotion, release는 End 없이 기존 Locomotion SM으로 들어간다. CMC 속도와 다른 새 관측값을 만들지 않는다. 정지 중 Start/End에 이동 입력이 들어와도 InputEnd 이전에 해당 montage를 중단한다.
+- 변경 위치는 Guard Ability cpp의 기존 3함수다. Start 중단은 Guard GE/Walk handle을 유지하고 action InputEnd를 열며, release/End 이동은 종료 cleanup한다. held Suc는 이동만으로 중단하지 않는다. ABP bool/방향 계산/8방향 BS/Slot→Inertialization/Stop 이력은 기존 경로를 재사용한다.
+- cold build 후 DevMap Khazan.Guard.PIE Success(2026-10-06 01:32:08.870 UTC). 8방향 실제 clip/mesh 검사와 새 이동 press·release·Start/End 조기 중단을 통과했다. 이동 release 후 기본 output tick은 Locomotion Sync Group의 DAS_Player_Walk_Loop/weight1이다. 전체 기본 mesh/모든 전환 frame의 화면 검증으로 확장하지 않는다.
+- 기존 관성화 0.24초는 기존 임시 표현 수치이며 새 원작 검증값이 아니다. InputEnd/RateScale/root/scale 수치를 다시 설정하지 않았다. 현행 상세와 미검증·다음 QA는 [Guard 정본](../Engineering/GUARD_IMPLEMENTATION_20261002.md) 및 Metadata/GuardMovementPolicy_20261006/RuntimeResult.json이다.
+
+## 2026-10-06 — 이동 가능한 상체 Heal 합성, 격리 검증과 메인 반영 대기
+
+- KZHealAbility는 기존 LocomotionComponent Walk 상한 handle 하나를 acquire/release한다. 이동 입력/CMC/회전 소유자를 바꾸거나 Main AnimInstance에 Heal bool을 추가하지 않는다.
+- 작업 ABP 기존 DefaultSlot→SaveCachedPose(ActionBase), Use2개→LayeredBoneBlend base/UpperBody Slot source, blend→기존 Inertialization→Output이다. 추가 노드5개. AlwaysUpdateSourcePose=true, bip001-spine 가지/BlendDepth0, MeshSpaceRotationBlend=true, BlendRootMotionBasedOnRootBone=true. Guard/Locomotion/Stop/발 이력/Start 제외 정책은 유지한다.
+- 새 Montage만 DefaultGroup.UpperBody이고 Skeleton에 slot을 추가했다. InGame source 키/RateScale1/rootfalse/mesh0.01은 보존했다. Blend0.1초/Heal clip×0.5/InputEnd clip×0.75는 원작 확인값이 아닌 임시 authoring 값이다.
+- 격리 Heal PIE Success(05:19:29.000 UTC)에서 CMC/진행하는 Walk weight1과 mesh local pose를 확인했다. 동일 time 골반·좌우 thigh/calf/foot7본은 Walk/양손2본은 Heal과 translation·angle 차이0. Guard 실제 방향 clip/227본 pose/Start·End/held 회귀도 Success(05:20:57.182 UTC). 연속 화면·물리 입력·발 미끄러짐은 미검증이다.
+- 새 PID27900 saved ABP UP_TO_DATE/reload/dirty0 뒤 종료했다. 메인 Skeleton 잠금으로 메인 ABP/Skeleton은 아직 변경 전이며 exit 후 선택 반영 helper가 실행 중이다. 실제 단계는 Metadata/HealImplementation_20261006/ApplyStatus.json, 상세는 [Heal 정본](../Engineering/HEAL_IMPLEMENTATION_20261006.md)이다. Complete 전에는 메인 graph 적용 완료로 읽지 않는다.
+
+## 2026-10-06 — 상체 Heal graph 메인 적용 완료
+
+사용자 후속 메인 반영 요청으로 ABP_Player/Skeleton UpperBody slot을 포함한 검증 에셋10개를 메인에 선택 적용했다. copy 결과는 prepared SHA와 일치하고 메인 cold build Succeeded(05:48:35.668 UTC)다. 새 메인 PID27568 DevMap에서 저장 ABP UP_TO_DATE/Heal Montage 연결/dirty0을 확인했다. 앞선 graph는 이제 메인에도 실제 적용됐다. 원본 Sequence/RateScale/root/mesh0.01·기존 Locomotion/Guard/Stop 책임은 유지했다. 격리 pose/Guard 회귀 검증은 기존 결과이고 사용자의 물리 입력·연속 화면은 다음 QA다. 현재 메인 증거는 MainAppliedResult.json/MainReadyAudit.json과 [Heal 정본의 완료 절](../Engineering/HEAL_IMPLEMENTATION_20261006.md)이다.
+
+## 2026-10-06 — Heal 수납/발도의 두 포즈 범위 적용
+
+- 기존 UpperBody Layer 뒤 SaveCachedPose(HealUpperBase)/Use2개/Arms Slot/Arms Layer5노드를 추가했다. Arms 없는 경우 동일 cached base를 반환해 기존 상체 Heal/전신 액션을 유지한다. Arms Filter는 좌우 clavicle/Depth0, MeshSpaceRotationBlend=false/RootMotionBasedOnRootBone=true/AlwaysUpdateSourcePose=true. spine/neck/head/pelvis/legs는 base pose다.
+- Heal 중 기존 Walk constraint는 유지하고 발도 Task 시작에 자기 handle 반환/기존 InputEnd unblock. Main AnimInstance에 Heal/Equipped 상태·snapshot을 추가하지 않았다. Locomotion/Guard/Stop/발 이력/Start 제외/Player0.01·clip playback은 그대로다.
+- stock build/격리 Heal PIE에서 Armed가 움직이는 약0.7s checkpoint의 lower7본·torso/neck/head5본은 Walk, 손2본은 Armed와 normalized pose 오차0. Heal 단계 lower7본 Walk/양손 Heal도 확인했다. Guard8방 실제 clip·227본 회귀 Success, 두 실제 viewport frame에서 등 수납/팔 발도 관측. 전체 연속 화면/원작 match 검증과 구분한다.
+- 메인 ABP/Skeleton 등7개 package 반영/hash/cold build 완료. 이전 InputEnd=Heal75%/Walk 종료까지 계약은 발도 시작 InputEnd·gait 복원으로 해당 범위에서 대체됐다. 상세·정확한 asset/notify/숫자 provenance는 [Heal 수납·발도 정본](../Engineering/HEAL_WEAPON_PRESENTATION_20261006.md)과 Metadata/HealWeapon_20261006이다.
+## 2026-10-06 — 첫 몬스터4종의 공통 snapshot 소비 추가
+
+Engineering ARCH-77/Monster 정본에 따라 새 Monster ABP4가 기존 UKZAnimInstance의 GroundSpeed/MovementDirectionAngle/RotationMode를 읽는다. Peace/Combat BS8(F/R/B/L walk, diagonal 보간, Run_F)/DefaultSlot/하류 Inertialization 경로다. 기존 Player AnimInstance·ABP/Linked Layer·Walk/Run/Sprint 정책과 Player .01/weapon .009를 수정하지 않았다. Enemy body Human1.2/Heavy1.3/Halberd1.0과 각 skeleton/armor leader pose를 유지한다. gameplay clone60은 각 /Game/Monsters/<Family>/Animations/InGame이며 force-root-lock RefPose/in-place nav drive, Source 키/FPS/rate retime 없음.
+
+13attack+4Alert montage/ComboData는 원작 SB step/event와 저장 PlaybackEventTimes에서 authored InputEnd를 만들어 기존 ComboAction으로 재생한다. AI/Blend 임시값·원본 field 해석의 한계는 [Monster 구현 정본](../Engineering/MONSTER_AI_IMPLEMENTATION_20261006.md)에서 구분한다. 실제 stock PIE all section/대치·lateral/재추적·cleanup·HP 불변과 main saved BP/ABP UP_TO_DATE를 확인했다. 원작 AI 전체/연속 화면 보간 동일성은 미검증이다. EnemyRootPoseAudit/MainReadyAudit와 원본 clip60 SHA 보존 결과는 Metadata/MonsterAI_20261006이다.
+
+2026-10-06 증거 파일명 보충: 위 EnemyRootPoseAudit 표기는 Metadata/MonsterAI_20261006/RootPoseAudit.json을 가리킨다. MainReadyAudit.json과 함께 읽는다.
+
+## 2026-10-07 — Monster 현재 보행 입력·접지 구현 실제 완료
+
+10/6 NPC 관련 절의 BS 소비 설명을 보완한다. 현재 NPC ABP X는 기존 snapshot의 VelocityLocal XY→Yaw, Y는 기준 Walk row이고 PlayRate는 GroundSpeed/기준속도 및 대각선 stride-vector 보정이다. 멈춤은 Peace Basic Loop/전투 Stand, 이동은 Peace/Combat Walk 또는 별도 Run_F다. 무인지 대기 Loop/End·대화는 DefaultSlot의 기존 ComboAction이고 Patrol과 분리됐다. PostPlacedNewNode 누락이 exposed 입력을0으로 고정했던 원인을 고쳤다. 과거 AI/CMC 통과만으로 actual walk pose를 검증한 것으로 확대하지 않는다.
+
+기준속도는 InGame FK 발궤적/기존 mesh transform·RateScale에서 계산한 휴리스틱이고 원작 AI speed field가 아니다. InGame24시퀀스에 계산 contact curve/plant marker, 세 Skeleton에 VB KZFoot_L/R만 추가했다. Walk branch에 CopyBone→Foot Placement→Leg IK를 두며 이후 Run/Stand·DefaultSlot·Inertialization을 합성한다. 바닥/owner를 읽는 engine evaluator는 NPC ABP의 bRequiresGameThreadPoseEvaluation=true/parallel update false로 GT 실행, Player=false는 saved main에서 확인했다. Main에 전투 상태/foot 관측 사본·새 reset helper는 추가하지 않았다. Foot node가 자체 relevance/teleport/initialize 수명을 정리한다.
+
+plant/trace/pelvis/spring은 원작 미확인 임시 표현 설정이며 Halberd MaxExtensionRatio만0.5→1로 남은 chain 길이를 사용하는 범위로 보완했다. 뼈 길이 확대나 모든 상황의 완전 foot lock을 의미하지 않는다. source/raw32시퀀스879799 transforms/FPS/RateScale와 현재 main32원본 파일 hash를 보존했다. 이전60 hash 중 BasicLoop01의 main 사전 변경을 이번 수정을 통한 변경으로 단정하지 않으며 최신 원본 대조 결과를 사용한다.
+
+stock Monster32/12FPS Halberd8에서 actual sample/time·미제어 bones·GT 실행·contact interval을 검사해 Success. 각 contact ankle median 최대0.0cm/s/min sample11(별도8/min12), native full-leg 캡처4 육안 확인, Waiting/Heal/Guard 회귀 성공. 원작 연속 포즈/전체 terrain·sole vertex·transient 검증은 별도다. 메인129/hash/cold build/saved audit까지 완료, 현재26644 DevMap은 사용자의 직접 Play용이다. Player .01/기존 Linked Layer·Walk/Run/Sprint·Start 제외/Stop/Turn 정책은 이 작업으로 교체하지 않았다. 상세 provenance/실제 책임·검증은 [Monster 정본](../Engineering/MONSTER_UNAWARE_LOCOMOTION_20261007.md) 최신 완료 절과 Metadata/MonsterIdle_20261007이다.
+
+## 2026-10-07 — Enemy 고정 대기·선택 대치 완료 후 Chase 후속
+
+AI 선택 시점만 보완했다. HeavySwordsman 대기 Basic03 Loop→End, HalberdElite 대기 Basic02 Loop→End를 기존 Definition/GA/Combo/Montage로 고정했다. Halberd02는 해당 Playback→/Game/Monsters/HalberdElite/Animations/InGame 복제이고 길이·RateScale/FPS/pose를 재작성하지 않았다. nav-driven EnableRootMotion=false/ForceRootLock=true/RefPose lock은 기존 계약이다. 몬스터 Walk branch/발 위상·contact·Foot Placement/Run/Stand 및 Player snapshot·Linked Layer·.01/Start 제외/Stop/Turn 정책은 바꾸지 않았다.
+
+Standoff는 선택 구간을 끝내고 Attack은 기존 Spec 수명이 끝나야 Root가 Chase를 재선택한다. 이를 clip 한 바퀴 완료나 새 animation blend 시간으로 해석하지 않는다. 유효 Player 타깃은 발견 후 시야/거리로 해제되지 않는다. 격리 4종 CombatPolicy/Waiting PIE, Main9 hash/cold build/fresh saved readback 완료다. 기존 임시 AI 설정과 import readback 수치의 출처·정확한 책임·결과는 [Monster 현행 정본 후속 완료 절](../Engineering/MONSTER_UNAWARE_LOCOMOTION_20261007.md)과 Metadata/MonsterCombatPolicy_20261007/MainAppliedResult.json을 따른다.
+
+
+## 2026-10-07 18:43 KST — Enemy 정리·공격·Root Motion Main 완료
+
+몽타주 root 소비 후속: 모든 해당 Monster 시퀀스 RM=true/ForceRootLock=true/AnimFirstFrame으로 이전 Enemy RM=false/RefPose만 대체됐다. ABP MontagesOnly 유지, Nav CMC/방향 pose/Foot Placement/Player .01·기존 Linked Layer/Start 제외/Stop/Turn 정책은 유지했다. 공격·재추격 값과 실제 검증은 [Engineering 정본](../Engineering/MONSTER_ATTACK_ROOT_MOTION_20261007.md) 최신 Main 완료 절을 따른다. 새 montage55 참조로 이름을 갱신했고 raw/RateScale/FPS를 재작성하지 않았다.
+
+## 2026-10-08 — NPC4 Combat BS 보간·공격 CMC 조준, 현재 Work 적용
+
+NPC 실제 VelocityLocal XY→Yaw/기준 Walk row/보행 PlayRate·Foot Placement·GT evaluation/기존 상태 관성화 경로를 재사용한다. Combat BS4의 TargetWeightInterpolationSpeedPerSec만0→6/10/10/5(Swordsman/SwordShield/Heavy/Halberd)로 바꿨다. 원본 family Moving/Move LockOnMove JSON의 Properties 직접값이며 sample weight/s 단위다. 현재 Direction/Speed topology와 원본 normalized XY topology가 달라 전체 원작 pose 동일성 확인을 의미하지 않는다. 저장 ABP graph Python reflection 미노출은 미검증으로 기록했고 ABP를 재작성/저장하지 않았다.
+
+CMC root montage 중 PhysicsRotation을 NPC만 허용하고 Controller가 현재 target을 향해 추가 yaw를 제한한다. 원본 root 회전/이동을 유지하며 추가60/180deg/s 및 preparation.15s는 조정 가능한 assistant 임시값이다. source quaternion은 mesh world basis에서 검증하며 전체 body yaw 상한으로 설명하지 않는다. Player .01/Linked Layer/Start 제외/Stop/Turn 정책을 변경하지 않았다.
+
+격리32방향에서 actual sample/time·포즈/contact·nav를 검사해 Success, contact sample 최소5/보고 median slip 최대0.000cm/s다. steady calculated ankle contact 관측이며 모든 transient/terrain/sole/연속 화면의 완전 무밀림을 뜻하지 않는다. 최신 사용자 공유 CPP를 병합한 Facing35/55node도 Success다. Main BS 파일 잠금 때문에 Main 전달/새 Main saved/native 검증은 아직 전이다. 상세 actual scope와 source/수치 provenance는 ../Engineering/MONSTER_FACING_SMOOTHING_20261008.md의 최신 절을 따른다.
+## 2026-10-08 — NPC4 보간·조준 최종 Work 검증 / Main 적용 대기
+
+NPC CombatBS4의 sample weight 보간은 원작 직접값6/10/10/5이며 기존 NPC 실제 VelocityLocal 방향/보행률/Foot Placement/관성화를 재사용한다. Player 이동/ABP/재생률/Stop·Turn 정책은 수정하지 않았다. 원본 root 회전은 보존하고 추가 조준 yaw만 기존 AIController/CMC에서 제한한다. 정확 출처/코드/검증은 Engineering/MONSTER_FACING_SMOOTHING_20261008.md 마지막 절을 따른다.
+
+32방향 실제 보행과35공격 검사는 통과했다. contact 최소5/보고 medianSlip 최대0.000cm/s는 계산된 정상 보행 관측으로, 모든 transient/발바닥/지형 검증으로 확대하지 않는다. 최신35공격 Facing 추가 steering 제한 위반0/원본 root 소비도 확인했다. Main13700의 SwordsmanBS 파일 잠금으로 Main 에셋 반영과 새 Main PIE는 아직 전이며, 최종 Work 검증을 Main 적용 완료로 혼동하지 않는다.
+
+
+## 2026-10-11 — ARCH-86 낙하/착지 및 giant 로코모션 실제 반영
+
+Player OnMovementModeChanged→GAS FallAbility→CMC LandedDelegate의 Start/Loop/Land가 실제 Main에 연결됐다. 공중 X는 FallAttack, X release로 착지 전 종료되지 않으며 jump mapping 제거/CanJumpInternal=false다. Main AnimInstance의 기존 Falling 관측과 기존 이동 제약 소유자를 유지했고 Airborne placeholder의 sequence만 InGame FallLoop로 바꿨다. 기존 Walk/Run/Sprint/Stop/Turn 구현을 재설계하지 않았다.
+
+Apes/Yetuga 기존 ABP/BlendSpace를 원본 mapping의 Stand/Run/LockOnMove F/B/L/R에 연결했다. current GroundSpeed/MovementDirectionAngle 및 actor CMC·Slot/관성화를 사용한다. 보행률은 현행 imported root 모델에서 계산한 어댑터이며 원작 이동속도 직접값으로 표현하지 않는다. two giant StateTree 접근/대치/공격은 기존 몬스터 경로를 재사용한다.
+
+MainBuild02/fresh saved150+map·실제 Main RHI 낙하/전투8사례 성공의 범위는 [구현 정본 마지막 절](../Engineering/APES_YETUGA_FALL_IMPLEMENTATION_20261011.md)/FinalVerification를 따른다. 낙하/착지 포즈와 실제 이동은 확인했으나 모든 giant 방향·transient의 발밀림, 원작 native MoveTo/전체 BT·pixel/frame 동일성 검증으로 확대하지 않는다. Player scale .01와 enemy1, 원본 sequence의 기존 옵션/속도를 보존했다.
+
+
+## 2026-10-12T02:04:36+09:00 — 사운드 전용 Notify 실제 저작·검증
+
+Main645 sequence의 전용KZAudio track에 point1958/state205를 추가했다. 기존 pose·curve model GUID/RateScale/root flag·non-audio notify/Player Start 제외·Stop/Turn/Foot Placement 계약은 fresh native 저장 검사에서 동일했다. 원본 raw clock은 saved import dilation contract/표 T_Original→T_Dilation에 따라 한 번만 변환했으며3 legacy clip은 기존 saved frame-clock 배율을 사용했다. 애니메이션 pose 재임포트·rate/root 재작성0이다. SoundSource·raw/timing 계산/engine occurrence cleanup은 AudioAuthoringPlan01/PlaybackPlan과 Engineering ARCH-89를 따른다. 현재37 hit/guard/projectile 바인딩은 별개 prepared 수정본으로 Main 파일 잠금 대기이며 완료가 아니다.

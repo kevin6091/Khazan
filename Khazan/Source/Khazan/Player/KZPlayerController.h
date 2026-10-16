@@ -18,9 +18,33 @@ class KHAZAN_API AKZPlayerController : public APlayerController
 
 public:
 	AKZPlayerController(const FObjectInitializer& ObjectInitializer);
+	// Pure feedback: the source never changes damage, input or Ability state.
+	static void PlayCombatRumble(const AActor* Source, bool bStrong);
+
+	UPROPERTY(EditDefaultsOnly, Category = "KZ|Feedback")
+	bool bCombatRumbleEnabled = true;
+	// Assistant TEMP, original rumble metadata unconfirmed. X=intensity [0,1], Y=seconds.
+	UPROPERTY(EditDefaultsOnly, Category = "KZ|Feedback|Temporary", meta = (ToolTip = "X: intensity 0-1; Y: duration seconds. Assistant TEMP, not original metadata."))
+	FVector2D WeakAttackRumble = FVector2D(.22, .06);
+	UPROPERTY(EditDefaultsOnly, Category = "KZ|Feedback|Temporary", meta = (ToolTip = "Strong/Spinning/OverFury/approved Parry. X: intensity 0-1; Y: seconds. Assistant TEMP."))
+	FVector2D StrongAttackRumble = FVector2D(.90, .10);
+	UPROPERTY(EditDefaultsOnly, Category = "KZ|Feedback|Temporary", meta = (ToolTip = "Monster movement/windup/footstep. X: intensity 0-1; Y: seconds. Assistant TEMP."))
+	FVector2D MonsterWeakRumble = FVector2D(.14, .045);
+	UPROPERTY(EditDefaultsOnly, Category = "KZ|Feedback|Temporary", meta = (ToolTip = "Monster attack/landing/camera impact. X: intensity 0-1; Y: seconds. Assistant TEMP."))
+	FVector2D MonsterStrongRumble = FVector2D(.65, .12);
+	UPROPERTY(EditDefaultsOnly, Category = "KZ|Feedback|Temporary", meta = (ClampMin = "0", Units = "cm"))
+	float MonsterRumbleFullStrengthDistanceCm = 400.f;
+	UPROPERTY(EditDefaultsOnly, Category = "KZ|Feedback|Temporary", meta = (ClampMin = "0", Units = "cm"))
+	float MonsterRumbleMaxDistanceCm = 3000.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "KZ|UI")
+	TSubclassOf<class UKZCombatHUDWidget> CombatHUDClass;
+	UPROPERTY(Transient, BlueprintReadOnly, Category = "KZ|UI")
+	TObjectPtr<UKZCombatHUDWidget> CombatHUD;
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 	virtual void SetupInputComponent() override;
 
 private:
@@ -56,6 +80,22 @@ private:
 	void Input_DodgeStarted(const FInputActionValue&);
 	void Input_DodgeCompleted(const FInputActionValue&);
 	void Input_DodgeCanceled(const FInputActionValue&);
+
+	void Input_GuardPressed(const FInputActionValue&);
+	void Input_GuardCompleted(const FInputActionValue&);
+	void Input_GuardCanceled(const FInputActionValue&);
+
+	void Input_HealStarted(const FInputActionValue&);
+	void Input_HealCompleted(const FInputActionValue&);
+	void Input_HealCanceled(const FInputActionValue&);
+
+	void Input_BrutalAttackStarted(const FInputActionValue&);
+	void Input_BrutalAttackCompleted(const FInputActionValue&);
+	void Input_BrutalAttackCanceled(const FInputActionValue&);
+	
+	void Input_RBStarted(const FInputActionValue&);
+	void Input_RBCompleted(const FInputActionValue&);
+	void Input_RBCanceled(const FInputActionValue&);
 protected:
 
 };

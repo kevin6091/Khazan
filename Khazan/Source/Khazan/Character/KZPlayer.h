@@ -22,6 +22,7 @@ public:
 public:
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void UnPossessed() override;
+	virtual void OnMovementModeChanged(EMovementMode PrevMovementMode, uint8 PreviousCustomMode = 0) override;
 
 public:
 	// PlayerController가 전달한 장치 입력을 현재 Controller의 raw 이동 Intent로 변환한다.
@@ -54,6 +55,7 @@ private:
 	void RefreshRequestedGait();
 
 protected:
+	virtual bool CanJumpInternal_Implementation() const override { return false; }
 	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class USpringArmComponent> SpringArm;
 

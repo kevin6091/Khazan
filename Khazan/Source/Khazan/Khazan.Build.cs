@@ -18,11 +18,13 @@ public class Khazan : ModuleRules
 	        "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "GameplayTags", 
 	        "Cog", "CogEngine", "CogDebug", "CogImgui",
 	        "GameplayAbilities",
-	        "GameplayTasks",
-	        "NavigationSystem"
+	        "GameplayTasks", "AnimGraphRuntime", "PhysicsCore",
+	        "NavigationSystem",
+	        "AIModule", "StateTreeModule", "GameplayStateTreeModule", "UMG", "Niagara"
         });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PrivateDependencyModuleNames.AddRange(new string[] { "RHI", "Slate", "SlateCore" });
+		if (Target.bBuildEditor) PrivateDependencyModuleNames.AddRange(new string[] { "Json", "UnrealEd", "MovieScene", "AnimGraph", "BlueprintGraph", "KismetCompiler" }); // Owned native PIE QA and reports only.
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

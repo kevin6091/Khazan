@@ -1,4 +1,5 @@
 #include "Ability/Combo/KZComboActionAbility.h"
+#include "Data/KZCharacterDefinitionData.h"
 
 #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
 #include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
@@ -7,11 +8,34 @@
 #include "AbilitySystemComponent.h"
 #include "Animation/AnimInstance.h"
 #include "Animation/AnimMontage.h"
+#include "Animation/Notifies/KZAnimNotify_CombatEffect.h"
+#include "Components/CapsuleComponent.h"
+#include "Components/DecalComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Engine/World.h"
+#include "EngineUtils.h"
+#include "Environment/KZSnowDeformation.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "GameplayEffect.h"
+#include "Kismet/GameplayStatics.h"
+#include "Materials/MaterialInstanceDynamic.h"
+#include "Particles/ParticleSystem.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "PhysicalMaterials/PhysicalMaterial.h"
+#include "Sound/SoundBase.h"
 #include "KZGameplayTags.h"
 #include "LogChannels.h"
 #include "Character/KZCharacter.h"
 #include "Character/Component/KZLocomotionComponent.h"
 #include "Character/Locomotion/KZLocomotionType.h"
+#include "Character/KZMonster.h"
+#include "Character/KZPlayer.h"
+#include "Player/KZPlayerController.h"
+#include "Attribute/KZAttributeSet.h"
+#include "Components/CapsuleComponent.h"
+#include "Engine/World.h"
+#include "Engine/OverlapResult.h"
+#include "TimerManager.h"
 
 namespace KZComboAttackAbilityPrivate
 {
@@ -24,6 +48,9 @@ namespace KZComboAttackAbilityPrivate
 	
 	const FName HoldCommitNotifyName(TEXT("HoldCommit"));
 	const FName HoldEndNotifyName(TEXT("HoldEnd"));
+	
+	const FName JumpNotifyName(TEXT("DoJump"));
+	const FName DownNotifyName(TEXT("DoDown"));
 }
 
 
@@ -32,6 +59,56 @@ UKZComboActionAbility::UKZComboActionAbility()
 	// 이 Combo Action이 실행되는 동안 이동 입력과 Stamina 회복을 차단한다.
 	ActivationOwnedTags.AddTag(KZGameplayTags::Block_Movement_Input);
 	ActivationOwnedTags.AddTag(KZGameplayTags::Block_StaminaRegen);
+}
+
+bool UKZComboActionAbility::IsApproachingComboTransition(const float LeadSeconds) const
+{
+	const UKZAbilitySystemComponent* ASC = Cast<UKZAbilitySystemComponent>(GetAbilitySystemComponentFromActorInfo());
+	const UAnimInstance* Anim = BoundAnimInstance.Get();
+	const FKZComboNode* Node = ComboDefinition ? ComboDefinition->FindNode(CurrentNodeId) : nullptr;
+	if (!IsActive() || !ASC || !Anim || !Node || LeadSeconds <= 0.f) return false;
+	bool bHasContinuation = false;
+	for (const FKZComboCommandEdge& Edge : Node->CommandEdges)
+	{
+		if (Edge.CommandPhase == EKZComboCommandPhase::InputEnd &&
+			ASC->IsComboCommandHeld(Edge.CommandTag) &&
+			MatchesEdge(Edge, FKZComboCommand(Edge.CommandTag, Edge.CommandPhase)))
+		{
+			bHasContinuation = true;
+			break;
+		}
+	}
+	const UAnimMontage* Montage = Node->Montage.Get();
+	if (!bHasContinuation || !Montage || GetCurrentMontage() != Montage ||
+		Anim->Montage_GetCurrentSection(Montage) != Node->SectionName) return false;
+	const float Position = Anim->Montage_GetPosition(Montage);
+	const float PlayRate = Anim->Montage_GetEffectivePlayRate(Montage);
+	if (PlayRate <= 0.f) return false;
+	const int32 Section = Montage->GetSectionIndex(Node->SectionName);
+	if (Section == INDEX_NONE) return false;
+	const float SectionEnd = Montage->GetAnimCompositeSection(Section).GetTime() + Montage->GetSectionLength(Section);
+	for (const FAnimNotifyEvent& Notify : Montage->Notifies)
+	{
+		const float At = Notify.GetTriggerTime();
+		if (Notify.NotifyName == KZComboAttackAbilityPrivate::InputEndNotifyName &&
+			At >= Position && At < SectionEnd && (At - Position) / PlayRate <= LeadSeconds) return true;
+	}
+	return false;
+}
+
+bool UKZComboActionAbility::IsInSystemGuardWindow() const
+{
+	const FKZComboNode* Node = ComboDefinition ? ComboDefinition->FindNode(CurrentNodeId) : nullptr;
+	const UAnimInstance* Anim = BoundAnimInstance.Get();
+	if (!IsActive() || !Node || !Node->Montage || !Anim || GetCurrentMontage() != Node->Montage ||
+		Anim->Montage_GetCurrentSection(Node->Montage) != Node->SectionName) return false;
+	const int32 Section = Node->Montage->GetSectionIndex(Node->SectionName);
+	if (Section == INDEX_NONE) return false;
+	const float Time = Anim->Montage_GetPosition(Node->Montage) - Node->Montage->GetAnimCompositeSection(Section).GetTime();
+	return Node->SystemGuardWindows.ContainsByPredicate([Time](const FVector2D& Window)
+	{
+		return Time >= Window.X && Time <= Window.Y;
+	});
 }
 
 bool UKZComboActionAbility::CanActivateAbility(
@@ -70,6 +147,7 @@ void UKZComboActionAbility::ActivateAbility(
 	// 이전 실행에서 남은 연결과 값을 먼저 지운다.
 	UnbindComboCommandDelegate();
 	UnbindMontageNotifyDelegate();
+	UnbindConfirmedHitDelegate();
 	ResetRuntimeState();
 
 	UKZAbilitySystemComponent* ASC = Cast<UKZAbilitySystemComponent>(ActorInfo->AbilitySystemComponent.Get());
@@ -103,6 +181,7 @@ void UKZComboActionAbility::ActivateAbility(
 	}
 
 	// activation 이후 발생하는 Combo Command를 받도록 연결한다. 이전 사건을 재생하지는 않는다.
+	BindConfirmedHitDelegate(ASC);
 	BindComboCommandDelegate();
 
 	if (!ComboCommandDelegateHandle.IsValid())
@@ -194,6 +273,10 @@ bool UKZComboActionAbility::StartEntryMontage()
 	CurrentNodeId = EntryNode->NodeId;
 
 	Task->ReadyForActivation();
+	if (IsActive() && ActiveMontageTask == Task)
+	{
+		StartAttackCollision();
+	}
 
 	// 시작 실패 callback에서 Ability가 끝났는지도 함께 확인한다.
 	return IsActive() && ActiveMontageTask == Task;
@@ -295,6 +378,8 @@ bool UKZComboActionAbility::ApplyEdge(const FKZComboCommandEdge& Edge, const FKZ
 	}
 	
 	const bool bWasBlocking = IsBlockingOtherAbilities();
+	UpdateAttackCollision();
+	if (!IsActive()) return false;
 
 	// StrongCharge early Release는 InputEnd 전이므로
 	// source block을 잠시 풀어야 StrongAttack을 시작할 수 있다.
@@ -554,6 +639,8 @@ bool UKZComboActionAbility::TransitionToNode(const FName TargetNodeId)
     }
 
     const FName PreviousNodeId = CurrentNodeId;
+    UpdateAttackCollision();
+    if (!IsActive() || CurrentNodeId != PreviousNodeId) return false;
     const FGameplayAbilityActivationInfo ActivationInfo = GetCurrentActivationInfo();
 
     // 사용자가 적용한 local node마다 비용을 지불하는 정책을 유지한다.
@@ -571,16 +658,19 @@ bool UKZComboActionAbility::TransitionToNode(const FName TargetNodeId)
     bHoldCommitted = false;
     ResetInputEnd();
 
-    if (ComboTransitionInertializationDuration > 0.0f)
+    const float TransitionBlend=GetNodeTransitionBlendSeconds(*TargetNode);
+    if (TransitionBlend > 0.0f)
     {
         AnimInstance->RequestMontageInertialization(
             CurrentNode->Montage.Get(),
-            ComboTransitionInertializationDuration,
+            TransitionBlend,
             nullptr);
     }
 
     // Jump에서 첫 Notify가 발생할 수 있으므로 목적 node를 먼저 기록한다.
+    ClearCombatEffects();
     CurrentNodeId = TargetNodeId;
+    StartAttackCollision();
     MontageJumpToSection(TargetNode->SectionName);
 
     UE_LOG(LogAbility, Log, TEXT("%s transitioned Combo node %s -> %s."),
@@ -598,8 +688,243 @@ void UKZComboActionAbility::HandleMontageNotifyBegin(const FName NotifyName, con
 		return;
 	}
 
+	const UKZAnimNotify_CombatEffect* Effect = Payload.NotifyEvent
+		? Cast<UKZAnimNotify_CombatEffect>(Payload.NotifyEvent->Notify.Get()) : nullptr;
+	if (Effect != nullptr)
+	{
+		// This stricter resource guard does not change the existing input-notify
+		// contract. Reject another pawn or an old instance of the same montage.
+		USkeletalMeshComponent* Mesh = Payload.SkelMeshComponent;
+		const FGameplayAbilityActorInfo* ActorInfo = GetCurrentActorInfo();
+		UAnimInstance* AnimInstance = BoundAnimInstance.Get();
+		UAbilitySystemComponent* ASC = GetAbilitySystemComponentFromActorInfo();
+		FAnimMontageInstance* MontageInstance = IsValid(AnimInstance)
+			? AnimInstance->GetActiveInstanceForMontage(GetCurrentMontage()) : nullptr;
+		const bool bCanProcessEffects = IsValid(Mesh) && ActorInfo != nullptr &&
+			Mesh->GetOwner() == ActorInfo->AvatarActor.Get() &&
+			AnimInstance == Mesh->GetAnimInstance() && ActorInfo->GetAnimInstance() == AnimInstance &&
+			IsValid(ASC) && ASC->IsAnimatingAbility(this) && MontageInstance != nullptr &&
+			MontageInstance->GetInstanceID() == Payload.MontageInstanceID;
+		if (bCanProcessEffects)
+		{
+			// End before Start at the same boundary. Children are data only;
+			// authoring never nests batches or emits overlapping engine markers.
+			for (const bool bEnding : {true, false})
+			{
+				const auto ProcessEffect = [this, &Payload, bEnding](const UKZAnimNotify_CombatEffect* Entry)
+				{
+					if (!IsActive() || !IsValid(Entry) || Entry->EventId.IsNone() || Entry->bEndEvent != bEnding)
+					{
+						return;
+					}
+					const FGameplayAbilityActorInfo* CurrentInfo = GetCurrentActorInfo();
+					UAnimInstance* CurrentAnim = BoundAnimInstance.Get();
+					UAbilitySystemComponent* CurrentASC = GetAbilitySystemComponentFromActorInfo();
+					FAnimMontageInstance* CurrentInstance = IsValid(CurrentAnim)
+						? CurrentAnim->GetActiveInstanceForMontage(GetCurrentMontage()) : nullptr;
+					if (!IsValid(Payload.SkelMeshComponent) || CurrentInfo == nullptr ||
+						!IsValid(CurrentASC) || !CurrentASC->IsAnimatingAbility(this) ||
+						CurrentInstance == nullptr || CurrentInstance->GetInstanceID() != Payload.MontageInstanceID ||
+						Payload.SkelMeshComponent->GetOwner() != CurrentInfo->AvatarActor.Get() ||
+						Payload.SkelMeshComponent->GetAnimInstance() != CurrentAnim || CurrentInfo->GetAnimInstance() != CurrentAnim)
+					{
+						return;
+					}
+					if (bEnding)
+					{
+						StopCombatEffect(Entry->EventId, Payload.MontageInstanceID);
+					}
+					else
+					{
+						StartCombatEffect(*Entry, Payload);
+					}
+				};
+				ProcessEffect(Effect);
+				for (const UKZAnimNotify_CombatEffect* Child : Effect->BatchedEffects)
+				{
+					ProcessEffect(Child);
+				}
+			}
+		}
+		// If this batch replaces an equal-time old input marker, its preserved
+		// NotifyName still follows the existing input path after FX processing.
+		if (IsActive() && IsNotifyFromCurrentMontage(Payload))
+		{
+			ProcessMontageNotify(NotifyName);
+		}
+		return;
+	}
+
 	ProcessMontageNotify(NotifyName);
 }
+
+void UKZComboActionAbility::StartCombatEffect(
+	const UKZAnimNotify_CombatEffect& Effect, const FBranchingPointNotifyPayload& Payload,
+	const bool bConfirmedHit, const float RecoveredWindowDuration)
+{
+	if (Effect.bOnAttackSuccessed &&
+		(PlayedConfirmedEffects.Contains(Effect.EventId) ||
+		(!bConfirmedHit && (!bConfirmedEffectHitObserved ||
+			Payload.MontageInstanceID != AttackMontageInstanceId ||
+			FirstConfirmedEffectHitTime > Effect.WindowEndTime))))
+	{
+		return; // A real earlier hit may enable a later window in this execution.
+	}
+	Super::StartCombatEffect(Effect, Payload, Effect.bOnAttackSuccessed || bConfirmedHit,
+		RecoveredWindowDuration);
+	// Failed projection/template creation must remain retryable. Only actual
+	// spawned resources count as played in this attack execution.
+	if (Effect.bOnAttackSuccessed && ActiveCombatEffects.ContainsByPredicate(
+		[&Effect, &Payload](const FActiveCombatEffect& Record)
+		{
+			return Record.Component.IsValid() && Record.EventId == Effect.EventId &&
+				Record.MontageInstanceId == Payload.MontageInstanceID;
+		}))
+	{
+		PlayedConfirmedEffects.Add(Effect.EventId);
+	}
+}
+
+
+
+void UKZComboActionAbility::BindConfirmedHitDelegate(UAbilitySystemComponent* ASC)
+{
+	UnbindConfirmedHitDelegate();
+	if (IsValid(ASC))
+	{
+		ConfirmedHitASC = ASC;
+		ConfirmedHitDelegateHandle = ASC->OnGameplayEffectAppliedDelegateToTarget.AddUObject(
+			this, &ThisClass::HandleConfirmedHit);
+	}
+}
+
+void UKZComboActionAbility::UnbindConfirmedHitDelegate()
+{
+	const FDelegateHandle PreviousHandle = ConfirmedHitDelegateHandle;
+	UAbilitySystemComponent* ASC = ConfirmedHitASC.Get();
+	ConfirmedHitDelegateHandle.Reset();
+	ConfirmedHitASC.Reset();
+	if (IsValid(ASC) && PreviousHandle.IsValid())
+	{
+		ASC->OnGameplayEffectAppliedDelegateToTarget.Remove(PreviousHandle);
+	}
+}
+
+void UKZComboActionAbility::HandleConfirmedHit(UAbilitySystemComponent* TargetASC,
+	const FGameplayEffectSpec& Spec, FActiveGameplayEffectHandle EffectHandle)
+{
+	check(IsInGameThread());
+	(void)EffectHandle;
+	// This field is the current project's actual collision producer contract,
+	// not an original-game damage value. Costs, heals and other abilities fail it.
+	if (!IsActive() || !IsValid(TargetASC) || !IsValid(TargetASC->GetAvatarActor()) ||
+		Spec.GetContext().GetSourceObject() != this ||
+		!(Spec.GetSetByCallerMagnitude(FName(TEXT("KZAttackHPDamage")), false, 0.f) < 0.f))
+	{
+		return;
+	}
+	const FGameplayAbilityActorInfo* ActorInfo = GetCurrentActorInfo();
+	UAnimInstance* AnimInstance = BoundAnimInstance.Get();
+	UAbilitySystemComponent* ASC = ConfirmedHitASC.Get();
+	const FKZComboNode* Node = ComboDefinition ? ComboDefinition->FindNode(CurrentNodeId) : nullptr;
+	UAnimMontage* Montage = GetCurrentMontage();
+	if (!IsValid(Montage) && bNaturalAttackCollisionFlush && Node) Montage = Node->Montage;
+	FAnimMontageInstance* MontageInstance = IsValid(AnimInstance)
+		? AnimInstance->GetActiveInstanceForMontage(Montage) : nullptr;
+	const bool bFinalFlush = bNaturalAttackCollisionFlush && ActiveMontageTask != nullptr && Node &&
+		AttackMontage.Get() == Montage && Node->Montage == Montage && AttackMontageInstanceId != INDEX_NONE &&
+		IsValid(ASC) && (ASC->GetAnimatingAbility() == nullptr || ASC->GetAnimatingAbility() == this);
+	if (ActorInfo == nullptr || !IsValid(AnimInstance) || !IsValid(ASC) || ASC != GetAbilitySystemComponentFromActorInfo() ||
+		(!bFinalFlush && (!ASC->IsAnimatingAbility(this) || MontageInstance == nullptr)) ||
+		(MontageInstance != nullptr && MontageInstance->GetInstanceID() != AttackMontageInstanceId) ||
+		ActorInfo->GetAnimInstance() != AnimInstance)
+	{
+		return;
+	}
+	const int32 MontageInstanceId = MontageInstance ? MontageInstance->GetInstanceID() : AttackMontageInstanceId;
+	const float SampleTime = Spec.GetSetByCallerMagnitude(FName(TEXT("KZAttackMontageTime")), false, -1.f);
+	const float SampleInstance = Spec.GetSetByCallerMagnitude(FName(TEXT("KZAttackMontageInstance")), false, -1.f);
+	const float SampleExecution = Spec.GetSetByCallerMagnitude(FName(TEXT("KZAttackExecution")), false, -1.f);
+	if (!FMath::IsFinite(SampleTime) || SampleTime < 0.f ||
+		SampleInstance != float(MontageInstanceId) || SampleExecution != float(AttackExecution))
+	{
+		return;
+	}
+	if (!IsValid(Montage)) return;
+	const uint32 Execution = AttackExecution;
+	const FName NodeId = CurrentNodeId;
+	// Original BattleEffectIndex linkage is unavailable. This presentation-only
+	// adapter remembers a real HP hit for this execution/node's later windows.
+	if (!bConfirmedEffectHitObserved) FirstConfirmedEffectHitTime = SampleTime;
+	else FirstConfirmedEffectHitTime = FMath::Min(FirstConfirmedEffectHitTime, SampleTime);
+	bConfirmedEffectHitObserved = true;
+	const bool bCaptureWindow = Spec.GetSetByCallerMagnitude(FName(TEXT("KZAttackBeginsCapture")), false, 0.f) > 0.f;
+	RecordAcceptedAttackHit(TargetASC->GetAvatarActor(), SampleTime, bCaptureWindow);
+	const float PresentationTime = bFinalFlush ? Montage->GetPlayLength() : AnimInstance->Montage_GetPosition(Montage);
+	// Authored window data survives a Begin+End crossed by one slow frame. It is
+	// read at the actual producer's sampled time; no expired live-window cache.
+	TArray<TWeakObjectPtr<const UKZAnimNotify_CombatEffect>> Matches;
+	TSet<FName> MatchedIds;
+	const auto MatchEffect = [&Matches, &MatchedIds, SampleTime, PresentationTime, this](const UKZAnimNotify_CombatEffect* Entry)
+	{
+		if (IsValid(Entry) && !Entry->bEndEvent && Entry->bOnAttackSuccessed && !Entry->EventId.IsNone() &&
+			FMath::IsFinite(Entry->WindowStartTime) && FMath::IsFinite(Entry->WindowEndTime) &&
+			FirstConfirmedEffectHitTime <= Entry->WindowEndTime &&
+			((SampleTime >= Entry->WindowStartTime && SampleTime <= Entry->WindowEndTime) ||
+				(FirstConfirmedEffectHitTime <= Entry->WindowStartTime && PresentationTime >= Entry->WindowStartTime)) &&
+			!MatchedIds.Contains(Entry->EventId) && !PlayedConfirmedEffects.Contains(Entry->EventId))
+		{
+			MatchedIds.Add(Entry->EventId);
+			Matches.Add(Entry);
+		}
+	};
+	for (const FAnimNotifyEvent& NotifyEvent : Montage->Notifies)
+	{
+		if (const UKZAnimNotify_CombatEffect* Parent = Cast<UKZAnimNotify_CombatEffect>(NotifyEvent.Notify.Get()))
+		{
+			MatchEffect(Parent);
+			for (const UKZAnimNotify_CombatEffect* Child : Parent->BatchedEffects)
+			{
+				MatchEffect(Child);
+			}
+		}
+	}
+	for (const TWeakObjectPtr<const UKZAnimNotify_CombatEffect>& Matched : Matches)
+	{
+		const UKZAnimNotify_CombatEffect* Effect = Matched.Get();
+		const FGameplayAbilityActorInfo* EffectActorInfo = GetCurrentActorInfo();
+		UAnimInstance* CurrentAnimInstance = BoundAnimInstance.Get();
+		USkeletalMeshComponent* Mesh = IsValid(CurrentAnimInstance) ? CurrentAnimInstance->GetSkelMeshComponent() : nullptr;
+		FAnimMontageInstance* CurrentInstance = IsValid(CurrentAnimInstance)
+			? CurrentAnimInstance->GetActiveInstanceForMontage(Montage) : nullptr;
+		if (!IsActive() || !IsValid(Mesh) || !IsValid(Effect) ||
+			EffectActorInfo == nullptr || AttackExecution != Execution || CurrentNodeId != NodeId ||
+			CurrentAnimInstance != AnimInstance ||
+			(CurrentInstance != nullptr && CurrentInstance->GetInstanceID() != MontageInstanceId) ||
+			(CurrentInstance == nullptr && !bFinalFlush) ||
+			Mesh->GetOwner() != EffectActorInfo->AvatarActor.Get() ||
+			Mesh->GetAnimInstance() != CurrentAnimInstance || EffectActorInfo->GetAnimInstance() != CurrentAnimInstance ||
+			ASC != GetAbilitySystemComponentFromActorInfo() ||
+			(!bFinalFlush && !ASC->IsAnimatingAbility(this)) ||
+			(bFinalFlush && (!bNaturalAttackCollisionFlush || AttackMontage.Get() != Montage ||
+				(ASC->GetAnimatingAbility() != nullptr && ASC->GetAnimatingAbility() != this))))
+		{
+			continue;
+		}
+		const FBranchingPointNotifyPayload Payload(Mesh, Montage, nullptr, MontageInstanceId);
+		// One presentation per EventId/execution prevents the retained earlier hit
+		// and its later Begin marker from duplicating the same source occurrence.
+		const bool bRecoveredAfterEnd = bFinalFlush || CurrentAnimInstance->Montage_GetPosition(Montage) >= Effect->WindowEndTime;
+		const float Duration = bRecoveredAfterEnd ? Effect->WindowEndTime - Effect->WindowStartTime : 0.f;
+		if (bRecoveredAfterEnd && Effect->bDestroyOnNotifyEnd && !IsValid(Effect->DecalMaterial) && Duration <= 0.f)
+		{
+			continue; // A degenerate expired loop has no source duration to bound emission.
+		}
+		StartCombatEffect(*Effect, Payload, true, Duration);
+	}
+}
+
+
 
 void UKZComboActionAbility::ProcessMontageNotify(FName NotifyName)
 {
@@ -658,6 +983,36 @@ void UKZComboActionAbility::ProcessMontageNotify(FName NotifyName)
 	if (NotifyName == KZComboAttackAbilityPrivate::HoldEndNotifyName)
 	{
 		RunHeld(EKZComboCommandPhase::HoldEnd);
+	}
+	
+	if (NotifyName == KZComboAttackAbilityPrivate::JumpNotifyName)
+	{
+		if (AKZCharacter* Character = Cast<AKZCharacter>(GetOwningActorFromActorInfo()))
+		{
+			if (CurrentNodeId == "SpinningAttack01")
+			{
+				Character->LaunchCharacter(FVector(0.f, 0.f, 800.f), false, true);
+			}
+			else if (CurrentNodeId == "ChargeAttack03")
+			{
+				Character->LaunchCharacter(FVector(0.f, 0.f, 700.f), false, true);
+			}
+		}
+	}
+	
+	if (NotifyName == KZComboAttackAbilityPrivate::DownNotifyName)
+	{
+		if (AKZCharacter* Character = Cast<AKZCharacter>(GetOwningActorFromActorInfo()))
+		{
+			if (CurrentNodeId == "SpinningAttack01")
+			{
+				Character->LaunchCharacter(FVector(0.f, 0.f, -1000.f), false, true);	
+			}
+			else if (CurrentNodeId == "ChargeAttack03")
+			{
+				Character->LaunchCharacter(FVector(0.f, 0.f, -1500.f), false, true);
+			}
+		}
 	}
 }
 
@@ -782,8 +1137,276 @@ void UKZComboActionAbility::ClearPendingCommand()
 	PendingCommandTag = FGameplayTag();
 }
 
+void UKZComboActionAbility::ResetAttackCollision()
+{
+	if (UWorld* World = GetWorld()) World->GetTimerManager().ClearTimer(AttackCollisionTimer);
+	AttackHitTargets.Reset();
+	RumbledAttackGroups.Reset();
+	PreviousAttackTime = 0.f;
+	AttackMontageInstanceId = INDEX_NONE;
+	AttackMontage.Reset();
+	bConfirmedEffectHitObserved = false;
+	FirstConfirmedEffectHitTime = 0.f;
+	PlayedConfirmedEffects.Reset();
+	++AttackExecution;
+}
+
+void UKZComboActionAbility::StartAttackCollision()
+{
+	ResetAttackCollision();
+	AActor* Avatar = GetAvatarActorFromActorInfo();
+	const FKZComboNode* Node = ComboDefinition ? ComboDefinition->FindNode(CurrentNodeId) : nullptr;
+	if (!IsActive() || !IsValid(Avatar) || !Node) return;
+	// MonsterPatternAbility and the elite action Abilities share this node path.
+	if (Avatar->IsA<AKZMonster>()) AKZPlayerController::PlayCombatRumble(Avatar, false);
+	if (Node->AttackWindows.IsEmpty()) return;
+	UAnimInstance* Anim = BoundAnimInstance.Get();
+	const FAnimMontageInstance* Instance = IsValid(Anim)
+		? Anim->GetActiveInstanceForMontage(Node->Montage) : nullptr;
+	if (Instance && GetCurrentMontage() == Node->Montage)
+	{
+		AttackMontageInstanceId = Instance->GetInstanceID();
+		AttackMontage = Node->Montage;
+	}
+	PreviousAttackActorTransform = Avatar->GetActorTransform();
+	AttackCollisionTimer = GetWorld()->GetTimerManager().SetTimerForNextTick(FTimerDelegate::CreateUObject(this, &ThisClass::UpdateAttackCollision, false));
+}
+
+void UKZComboActionAbility::UpdateAttackCollision(const bool bMontageCompleted)
+{
+	TGuardValue<bool> NaturalFlushGuard(bNaturalAttackCollisionFlush, bMontageCompleted);
+	// A normal section handoff/completion can flush us before the scheduled callback.
+	if (UWorld* World = GetWorld()) World->GetTimerManager().ClearTimer(AttackCollisionTimer);
+	AActor* Avatar = GetAvatarActorFromActorInfo();
+	UAnimInstance* Anim = BoundAnimInstance.Get();
+	UAbilitySystemComponent* ASC = GetAbilitySystemComponentFromActorInfo();
+	const FKZComboNode* Node = ComboDefinition ? ComboDefinition->FindNode(CurrentNodeId) : nullptr;
+	if (!IsActive() || !IsValid(Avatar) || !IsValid(Anim) || !ASC || !Node ||
+		Node->AttackWindows.IsEmpty() || (!bMontageCompleted && (!ASC->IsAnimatingAbility(this) || GetCurrentMontage() != Node->Montage)) ||
+		(bMontageCompleted && (AttackMontage.Get() != Node->Montage || AttackMontageInstanceId == INDEX_NONE ||
+			(ASC->GetAnimatingAbility() != nullptr && ASC->GetAnimatingAbility() != this)))) return;
+	float SectionStart = 0.f, SectionEnd = 0.f;
+	Node->Montage->GetSectionStartAndEndTime(Node->Montage->GetSectionIndex(Node->SectionName), SectionStart, SectionEnd);
+	// Authored automatic NextSection chains (Spinning/Charge) retain this node's execution.
+	float Time = Anim->Montage_GetPosition(Node->Montage) - SectionStart;
+	// UE removes the active montage instance before dispatching OnCompleted (position then reads zero).
+	// Normal completion consumes the remaining authored hit clock; interruption never takes this path.
+	if (bMontageCompleted)
+	{
+		Time = PreviousAttackTime;
+		for (const FKZAttackCollisionWindow& Window : Node->AttackWindows) Time = FMath::Max(Time, Window.EndTime);
+	}
+	const float Now = FMath::Clamp(Time, 0.f, Node->Montage->GetPlayLength() - SectionStart);
+	const FTransform ActorTransform = Avatar->GetActorTransform();
+	const uint32 Execution = AttackExecution;
+	// External backward seeks do not sweep across unrelated recovery/sections.
+	if (Now < PreviousAttackTime) PreviousAttackTime = Now;
+	for (int32 Index = 0; Index < Node->AttackWindows.Num(); ++Index)
+	{
+		const FKZAttackCollisionWindow& Window = Node->AttackWindows[Index];
+		if (Window.Keys.IsEmpty() || Window.EndTime < Window.StartTime ||
+			Now < Window.StartTime || PreviousAttackTime >= Window.EndTime) continue;
+		int32 HitId = Index;
+		if (!Window.HitGroup.IsNone())
+		{
+			for (int32 Other = 0; Other < Index; ++Other)
+				if (Node->AttackWindows[Other].HitGroup == Window.HitGroup) { HitId = Other; break; }
+		}
+		if (!bMontageCompleted && !RumbledAttackGroups.Contains(HitId))
+		{
+			RumbledAttackGroups.Add(HitId);
+			const bool bWeakPlayerAttack = Avatar->IsA<AKZPlayer>() &&
+				Node->NodeId.ToString().StartsWith(TEXT("WeakAttack"));
+			AKZPlayerController::PlayCombatRumble(Avatar, !bWeakPlayerAttack);
+		}
+		const float Begin = FMath::Max(PreviousAttackTime, Window.StartTime);
+		const float End = FMath::Min(Now, Window.EndTime);
+		auto PoseAt = [&](float Time)
+		{
+			const FKZAttackCollisionKey* A = &Window.Keys[0];
+			const FKZAttackCollisionKey* B = A;
+			for (const FKZAttackCollisionKey& Key : Window.Keys)
+			{
+				B = &Key;
+				if (Key.Time >= Time) break;
+				A = &Key;
+			}
+			const float KeyAlpha = B->Time > A->Time ? FMath::Clamp((Time - A->Time) / (B->Time - A->Time), 0.f, 1.f) : 0.f;
+			const float ActorAlpha = Now > PreviousAttackTime ? FMath::Clamp((Time - PreviousAttackTime) / (Now - PreviousAttackTime), 0.f, 1.f) : 1.f;
+			FTransform Frame;
+			Frame.Blend(PreviousAttackActorTransform, ActorTransform, ActorAlpha);
+			FTransform Mapping = Node->CollisionToActor;
+			if (const AKZMonster* Monster = Cast<AKZMonster>(Avatar))
+				Mapping.SetScale3D(Mapping.GetScale3D() * Monster->GetMesh()->GetRelativeScale3D());
+			// Monster baked keys already use the actor's axes and locked root.
+			// Apply the current body scale once; applying mesh yaw or root travel again would duplicate them.
+			return FTransform(FQuat::Slerp(A->Rotation.Quaternion(), B->Rotation.Quaternion(), KeyAlpha),
+				FMath::Lerp(A->Center, B->Center, KeyAlpha)) * Mapping * Frame;
+		};
+		FVector LastCenter = PoseAt(Begin).GetLocation();
+		auto Sample = [&](float Time)
+		{
+			const FTransform Pose = PoseAt(Time);
+			const bool bContinue = QueryAttackCollision(Window, HitId, Pose, LastCenter, Execution, SectionStart + Time);
+			LastCenter = Pose.GetLocation();
+			return bContinue;
+		};
+		if (!Sample(Begin)) return;
+		// Consume EVERY crossed original baked key, including windows skipped by a slow frame.
+		for (const FKZAttackCollisionKey& Key : Window.Keys)
+			if (Key.Time > Begin && Key.Time < End && !Sample(Key.Time)) return;
+		if (End > Begin && !Sample(End)) return;
+	}
+	if (!IsActive() || AttackExecution != Execution) return;
+	PreviousAttackTime = Now;
+	PreviousAttackActorTransform = ActorTransform;
+	float LastWindowEnd = 0.f;
+	for (const FKZAttackCollisionWindow& Window : Node->AttackWindows) LastWindowEnd = FMath::Max(LastWindowEnd, Window.EndTime);
+	if (!bMontageCompleted && Now < LastWindowEnd)
+		AttackCollisionTimer = GetWorld()->GetTimerManager().SetTimerForNextTick(FTimerDelegate::CreateUObject(this, &ThisClass::UpdateAttackCollision, false));
+}
+
+bool UKZComboActionAbility::QueryAttackCollision(const FKZAttackCollisionWindow& Window, const int32 HitId,
+	const FTransform& Pose, const FVector& PreviousCenter, const uint32 Execution, const float SampleMontageTime)
+{
+	AActor* Avatar = GetAvatarActorFromActorInfo();
+	UWorld* World = GetWorld();
+	const FVector Extent = Window.Extent * Pose.GetScale3D().GetAbs();
+	const float Radius = FMath::Max(Extent.X, Extent.Y);
+	const bool bValidSize = Window.Shape == EKZAttackCollisionShape::Sphere ? Extent.X > 0.f :
+		(Window.Shape == EKZAttackCollisionShape::Cylinder ? Radius > 0.f && Extent.Z > 0.f : Extent.GetMin() > 0.f);
+	if (!World || !bValidSize || Extent.ContainsNaN() || Pose.ContainsNaN()) return true;
+	const FVector Center = Pose.GetLocation();
+	const FQuat Rotation = Pose.GetRotation();
+	const FVector QueryExtent = Window.Shape == EKZAttackCollisionShape::Cylinder ? FVector(Radius, Radius, Extent.Z) : Extent;
+	const FCollisionShape Shape = Window.Shape == EKZAttackCollisionShape::Sphere ?
+		FCollisionShape::MakeSphere(Extent.X) : FCollisionShape::MakeBox(QueryExtent);
+	if (!Avatar->HasAuthority()) return true;
+	FCollisionQueryParams Params(SCENE_QUERY_STAT(KZComboAttack), false, Avatar);
+	FCollisionObjectQueryParams Objects(ECC_Pawn);
+	TArray<FOverlapResult> Overlaps;
+	World->OverlapMultiByObjectType(Overlaps, Center, Rotation, Objects, Shape, Params);
+	TMap<TWeakObjectPtr<AActor>, bool> Candidates;
+	for (const FOverlapResult& Overlap : Overlaps)
+		if (AActor* Actor = Overlap.GetActor())
+			Candidates.FindOrAdd(Actor) |= Cast<AKZMonster>(Actor) &&
+				Cast<AKZMonster>(Actor)->IsPartGroup1WeakBox(Overlap.GetComponent());
+	// Box/sphere translations sweep between dense baked samples. Cylinder uses its exact finite shape below.
+	if (Window.Shape != EKZAttackCollisionShape::Cylinder && !PreviousCenter.Equals(Center))
+	{
+		TArray<FHitResult> Hits;
+		World->SweepMultiByObjectType(Hits, PreviousCenter, Center, Rotation, Objects, Shape, Params);
+		for (const FHitResult& Hit : Hits)
+			if (AActor* Actor = Hit.GetActor())
+				Candidates.FindOrAdd(Actor) |= Cast<AKZMonster>(Actor) &&
+					Cast<AKZMonster>(Actor)->IsPartGroup1WeakBox(Hit.GetComponent());
+	}
+	for (const TPair<TWeakObjectPtr<AActor>, bool>& Candidate : Candidates)
+	{
+		AKZCharacter* Recipient = Cast<AKZCharacter>(Candidate.Key.Get());
+		// Two current factions: Player hits Monster, Monster hits Player. No friendly fire.
+		if (!IsValid(Recipient) || Recipient == Avatar || AttackHitTargets.FindOrAdd(HitId).Contains(Recipient) ||
+			!(Avatar->IsA<AKZPlayer>() && Recipient->IsA<AKZMonster>() ||
+			  Avatar->IsA<AKZMonster>() && Recipient->IsA<AKZPlayer>())) continue;
+		if (Window.Shape == EKZAttackCollisionShape::Cylinder)
+		{
+			// UE query has no cylinder. Bounding box broadphase + finite-cylinder/capsule narrowphase.
+			const UCapsuleComponent* Capsule = Recipient->GetCapsuleComponent();
+			float HalfHeight, CapsuleRadius;
+			Capsule->GetScaledCapsuleSize(CapsuleRadius, HalfHeight);
+			const FVector Segment = Capsule->GetUpVector() * FMath::Max(HalfHeight - CapsuleRadius, 0.f);
+			const FVector A = Rotation.UnrotateVector(Capsule->GetComponentLocation() - Segment - Center);
+			const FVector D = Rotation.UnrotateVector(Segment * 2.f);
+			auto Derivative = [&](float T)
+			{
+				const FVector P = A + D * T;
+				const float R = FVector2D(P.X, P.Y).Size();
+				const float Radial = R > Radius ? (R - Radius) * (P.X * D.X + P.Y * D.Y) / R : 0.f;
+				return Radial + (FMath::Abs(P.Z) > Extent.Z ? (P.Z - FMath::Sign(P.Z) * Extent.Z) * D.Z : 0.f);
+			};
+			float Low = 0.f, High = 1.f;
+			// Engine epsilon is numerical query precision, not a gameplay range tuning value.
+			while (High - Low > UE_KINDA_SMALL_NUMBER)
+			{
+				const float Mid = (Low + High) * .5f;
+				if (Derivative(Mid) < 0.f) Low = Mid; else High = Mid;
+			}
+			const FVector P = A + D * ((Low + High) * .5f);
+			const float Radial = FMath::Max(FVector2D(P.X, P.Y).Size() - Radius, 0.f);
+			const float Vertical = FMath::Max(FMath::Abs(P.Z) - Extent.Z, 0.f);
+			if (Radial * Radial + Vertical * Vertical > CapsuleRadius * CapsuleRadius + UE_KINDA_SMALL_NUMBER) continue;
+		}
+		UKZAbilitySystemComponent* TargetASC = Cast<UKZAbilitySystemComponent>(Recipient->GetAbilitySystemComponent());
+		const UKZAttributeSet* Attributes = TargetASC ? TargetASC->GetSet<UKZAttributeSet>() : nullptr;
+		if (!Attributes || Attributes->GetMaxHP() <= 0.f || Attributes->GetHP() <= 0.f ||
+			!ComboDefinition->GetAttackDamageEffect() || !FMath::IsFinite(Window.HPDamage) ||
+			!FMath::IsFinite(Window.StaminaDamage) || Window.HPDamage < 0.f || Window.StaminaDamage < 0.f) continue;
+		// Consume before callbacks; attribute/Guard callbacks may reenter or end this execution.
+		AttackHitTargets.FindOrAdd(HitId).Add(Recipient);
+		if (TargetASC->TryDodgeHit(Avatar, Center, Window.bBeginsCapture)) continue;
+		AKZMonster* ShieldMonster = Cast<AKZMonster>(Recipient);
+		bool bParried = false;
+		const bool bGuarded = Window.bBlockable && (ShieldMonster ? ShieldMonster->TrySystemGuard(Window.StaminaDamage, Avatar) :
+			TargetASC->TryGuardHit(Window.StaminaDamage, Avatar, bParried, !Window.bDisallowPerfectGuard));
+		if (!IsActive() || Execution != AttackExecution || !IsValid(Recipient)) return false;
+		if (bGuarded && !bParried && Window.GuardSound)
+			UGameplayStatics::SpawnSoundAtLocation(Recipient, Window.GuardSound, Recipient->GetActorLocation());
+		if (!bGuarded)
+		{
+			UAbilitySystemComponent* SourceASC = GetAbilitySystemComponentFromActorInfo();
+			if (!IsValid(SourceASC)) return false;
+			FGameplayEffectContextHandle Context = SourceASC->MakeEffectContext();
+			Context.AddSourceObject(this);
+			const FGameplayEffectSpecHandle Spec = SourceASC->MakeOutgoingSpec(ComboDefinition->GetAttackDamageEffect(), GetAbilityLevel(), Context);
+			if (Spec.IsValid())
+			{
+				Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackHPDamage")), -Window.HPDamage);
+				Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackStaminaDamage")), -Window.StaminaDamage);
+				// Technical producer identity/time, not gameplay tuning or original metadata.
+				// The consumer can match effects even when this frame crossed their End.
+				UAnimInstance* Anim = BoundAnimInstance.Get();
+				const FAnimMontageInstance* Instance = IsValid(Anim)
+					? Anim->GetActiveInstanceForMontage(GetCurrentMontage()) : nullptr;
+				Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackMontageTime")), SampleMontageTime);
+				Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackMontageInstance")),
+					Instance ? float(Instance->GetInstanceID()) :
+						float(bNaturalAttackCollisionFlush ? AttackMontageInstanceId : INDEX_NONE));
+				Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackExecution")), float(Execution));
+				// Carry the accepted window identity through the synchronous GE callback.
+				// Recomputing local montage time can fall microscopically before StartTime.
+				Spec.Data->SetSetByCallerMagnitude(FName(TEXT("KZAttackBeginsCapture")), Window.bBeginsCapture ? 1.f : 0.f);
+				const FActiveGameplayEffectHandle Result = SourceASC->ApplyGameplayEffectSpecToTarget(*Spec.Data, TargetASC);
+				UE_LOG(LogAbility, Log, TEXT("ComboHit %s node=%s window=%d group=%s target=%s HPDamage=%g StaminaDamage=%g applied=%d"),
+					*GetNameSafe(Avatar), *CurrentNodeId.ToString(), HitId, *Window.HitGroup.ToString(), *GetNameSafe(Recipient),
+					Window.HPDamage, Window.StaminaDamage, Result.WasSuccessfullyApplied());
+				// ApplyGE may synchronously invalidate either actor. Exhaustion/death overrides ordinary presentation.
+				if (Result.WasSuccessfullyApplied() && IsValid(Recipient))
+				{
+					if (Window.HPDamage > 0.f && Window.ImpactSound)
+						UGameplayStatics::SpawnSoundAtLocation(Recipient, Window.ImpactSound, Recipient->GetActorLocation());
+					const UKZCharacterDefinitionData* BodyDefinition = Recipient->GetCharacterDefinition();
+					if (Window.HPDamage > 0.f && BodyDefinition && BodyDefinition->GetHitReactionSettings().ImpactSound)
+						UGameplayStatics::SpawnSoundAtLocation(Recipient, BodyDefinition->GetHitReactionSettings().ImpactSound, Recipient->GetActorLocation());
+					AKZMonster* Victim = Cast<AKZMonster>(Recipient);
+					if (Victim) Victim->PlayHitBlood(Avatar, Center);
+					const bool bPartBreak = Victim && Candidate.Value && !Window.bBeginsCapture &&
+						Victim->ReportPartGroup1Hit(Window.HPDamage, Avatar);
+					// A successful hold supplies its own victim animation and capture
+					// state on the next pattern tick. A normal hit reaction here would
+					// interrupt that pose and visibly pop at the hand attachment.
+					if (!Window.bBeginsCapture && !bPartBreak) Recipient->PlayHitReaction(Window.HitReaction, Avatar);
+				}
+			}
+		}
+		if (!IsActive() || Execution != AttackExecution) return false;
+	}
+	return true;
+}
+
 void UKZComboActionAbility::ResetRuntimeState()
 {
+	ResetAttackCollision();
+	ClearCombatEffects();
 	// 다음 activation이 이전 콤보 상태를 이어받지 않게 모두 비운다.
 	ClearPendingCommand();
 	CurrentNodeId = NAME_None;
@@ -793,6 +1416,11 @@ void UKZComboActionAbility::ResetRuntimeState()
 
 void UKZComboActionAbility::HandleMontageCompleted()
 {
+	// Consume final crossed keys before natural completion closes the execution.
+	const uint32 CompletedExecution = AttackExecution;
+	UpdateAttackCollision(true);
+	if (!IsActive() || AttackExecution != CompletedExecution) return;
+	ClearCombatEffects(true);
 	// 자연 종료이므로 취소되지 않은 완료로 끝낸다.
 	ActiveMontageTask = nullptr;
 	FinishAbility(false);
@@ -831,6 +1459,7 @@ void UKZComboActionAbility::EndAbility(
 	// 종료 중 입력이나 노티파이가 다시 들어오지 않게 연결부터 끊는다.
 	UnbindComboCommandDelegate();
 	UnbindMontageNotifyDelegate();
+	UnbindConfirmedHitDelegate();
 	ResetRuntimeState();
 
 	// 부모가 Task와 실행 중 태그를 정리한다.

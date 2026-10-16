@@ -9,6 +9,8 @@
 #include "Character/Component/KZLocomotionComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Animation/AnimationAsset.h"
+#include "AbilitySystemComponent.h"
+#include "KZGameplayTags.h"
 
 namespace
 {
@@ -126,6 +128,8 @@ void UKZAnimInstance::UpdateKinematics_AnyThread(const FKZAnimGameThreadData& Sn
 
 	ResolvedGait = Snapshot.ResolvedGait;
 	RotationMode = Snapshot.RotationMode;
+	bIsGuarding = Snapshot.bGuarding;
+	GuardMovementDirectionAngle = RotationMode == EKZRotationMode::LockOn ? MovementDirectionAngle : 0.f;
 
 	// 여러 프로퍼티를 통해 Idle Walk Run Sprint를 판단한다.
 	UpdateLocomotionSelection_AnyThread();
@@ -284,6 +288,10 @@ void UKZAnimInstance::GatherGameThreadData()
 	NewData.RotationMode = Policy.ResolvedRotationMode;
 
 	NewData.bMovementAllowed = LocomotionComponent->IsMovementInputAllowed();
+	if (const UAbilitySystemComponent* ASC = Character->GetAbilitySystemComponent())
+	{
+		NewData.bGuarding = ASC->HasMatchingGameplayTag(KZGameplayTags::State_Guarding);
+	}
 
 	NewData.bValid = true;
 
@@ -298,6 +306,8 @@ void UKZAnimInstance::ResetDerivedData_AnyThread()
 
 	GroundSpeed = 0.f;
 	MovementDirectionAngle = 0.f;
+	bIsGuarding = false;
+	GuardMovementDirectionAngle = 0.f;
 	InputAmount = 0.f;
 
 	bHasMovementInput = false;

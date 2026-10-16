@@ -171,9 +171,22 @@ internal static class Program
             return 0;
         }
 
+        // Other restored levels need the same verified landscape decoder.
+        // An explicit request file keeps this targeted; original StormPass
+        // defaults and its surface-material extraction are unchanged.
+        var landscapesOnly = args.Length >= 5 && args[3] == "--landscapes-only";
+        var targets = landscapesOnly
+            ? JsonSerializer.Deserialize<LandscapeTarget[]>(await File.ReadAllTextAsync(args[4]))
+                ?? throw new InvalidOperationException("Landscape request must be a target array")
+            : Targets;
         var summaries = new List<object>();
-        foreach (var target in Targets)
+        foreach (var target in targets)
         {
+            if (!target.PackagePath.StartsWith("BBQ/Content/", StringComparison.Ordinal) ||
+                target.PackagePath.Contains("..", StringComparison.Ordinal) ||
+                target.PackagePath.Contains('\\') ||
+                target.OutputName != SanitizeFileName(target.OutputName))
+                throw new InvalidOperationException("Invalid targeted Landscape path/name");
             Log.Information("Loading {PackagePath}", target.PackagePath);
             var package = provider.LoadPackage(target.PackagePath);
             var landscapes = package.GetExports()
@@ -224,6 +237,15 @@ internal static class Program
                 layers = files,
                 layer_info_mappings = GetLayerInfoMappings(landscapes[0])
             });
+        }
+
+        if (landscapesOnly)
+        {
+            await File.WriteAllTextAsync(Path.Combine(outputRoot, "TargetedLandscapeWeightmaps.json"),
+                JsonSerializer.Serialize(new { status = "passed", engine_version = "GAME_UE4_27",
+                    extraction_backend = "FModel-compatible CUE4Parse LandscapeMeshDto",
+                    landscapes = summaries }, new JsonSerializerOptions { WriteIndented = true }));
+            return 0;
         }
 
         var (materialSummaries, textureParameters) = ReadMaterialSources(materialJsonRoot);

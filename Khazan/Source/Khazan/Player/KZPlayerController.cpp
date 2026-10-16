@@ -12,6 +12,8 @@
 #include "KZGameplayTags.h"
 #include "Character/KZCharacter.h"
 #include "Character/KZPlayer.h"
+#include "Character/KZMonster.h"
+#include "Engine/World.h"
 #include "Data/KZInputData.h"
 #include "System/KZAssetManager.h"
 #include "Ability/KZAbilitySystemComponent.h"
@@ -19,15 +21,55 @@
 #include "EnhancedPlayerInput.h"
 #include "GameplayAbilitySpec.h"
 #include "Ability/PlayerAbility/KZDodgeAbility.h"
+#include "UI/KZCombatHUDWidget.h"
 
 AKZPlayerController::AKZPlayerController(const FObjectInitializer& ObjectInitializer)
 	:Super(ObjectInitializer)
 {
+	CombatHUDClass = UKZCombatHUDWidget::StaticClass();
+}
+
+void AKZPlayerController::PlayCombatRumble(const AActor* Source, const bool bStrong)
+{
+	UWorld* World = IsValid(Source) ? Source->GetWorld() : nullptr;
+	if (!World || !World->IsGameWorld() || World->GetNetMode() == NM_DedicatedServer) return;
+	const bool bMonster = Source->IsA<AKZMonster>();
+	for (FConstPlayerControllerIterator It = World->GetPlayerControllerIterator(); It; ++It)
+	{
+		AKZPlayerController* PC = Cast<AKZPlayerController>(It->Get());
+		if (!PC || !PC->IsLocalController() || !PC->GetLocalPlayer() || !IsValid(PC->GetPawn()) ||
+			!PC->bCombatRumbleEnabled || !PC->bForceFeedbackEnabled ||
+			(!bMonster && Source != PC->GetPawn())) continue;
+		const FVector2D& Pulse = bMonster
+			? (bStrong ? PC->MonsterStrongRumble : PC->MonsterWeakRumble)
+			: (bStrong ? PC->StrongAttackRumble : PC->WeakAttackRumble);
+		if (!FMath::IsFinite(Pulse.X) || !FMath::IsFinite(Pulse.Y) || Pulse.Y <= 0.) continue;
+		float Intensity = FMath::Clamp(static_cast<float>(Pulse.X), 0.f, 1.f);
+		if (bMonster)
+		{
+			if (!FMath::IsFinite(PC->MonsterRumbleFullStrengthDistanceCm) ||
+				!FMath::IsFinite(PC->MonsterRumbleMaxDistanceCm)) continue;
+			const double Near = FMath::Max(0.f, PC->MonsterRumbleFullStrengthDistanceCm);
+			const double Far = FMath::Max(Near, static_cast<double>(PC->MonsterRumbleMaxDistanceCm));
+			const double Distance = FVector::Dist(Source->GetActorLocation(), PC->GetPawn()->GetActorLocation());
+			Intensity *= Far > Near ? static_cast<float>(FMath::Clamp((Far - Distance) / (Far - Near), 0., 1.))
+				: (Distance <= Near ? 1.f : 0.f);
+		}
+		if (Intensity <= 0.f) continue;
+		// A positive finite duration expires in UE's controller-owned feedback list.
+		// Separate pulses merge through the engine, so a weak step cannot replace a strong parry.
+		PC->PlayDynamicForceFeedback(Intensity, static_cast<float>(Pulse.Y), true, true, true, true);
+	}
 }
 
 void AKZPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+	if (IsLocalController() && GetLocalPlayer() && CombatHUDClass)
+	{
+		CombatHUD = CreateWidget<UKZCombatHUDWidget>(this, CombatHUDClass);
+		if (CombatHUD) CombatHUD->AddToPlayerScreen();
+	}
 
 	if (const UKZInputData* InputData = UKZAssetManager::GetAssetByName<UKZInputData>(KZGameplayTags::AssetData_InputData))
 	{
@@ -74,10 +116,38 @@ void AKZPlayerController::SetupInputComponent()
 		EnhancedInputComponent->BindAction(StrongAttackAction, ETriggerEvent::Completed, this, &ThisClass::Input_StrongAttackCompleted);
 		EnhancedInputComponent->BindAction(StrongAttackAction, ETriggerEvent::Canceled, this, &ThisClass::Input_StrongAttackCanceled);
 
+		if (const UInputAction* BrutalAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_B))
+		{
+			EnhancedInputComponent->BindAction(BrutalAction, ETriggerEvent::Started, this, &ThisClass::Input_BrutalAttackStarted);
+			EnhancedInputComponent->BindAction(BrutalAction, ETriggerEvent::Completed, this, &ThisClass::Input_BrutalAttackCompleted);
+			EnhancedInputComponent->BindAction(BrutalAction, ETriggerEvent::Canceled, this, &ThisClass::Input_BrutalAttackCanceled);
+		}
+
 		const UInputAction* DodgeAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_A);
 		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Started, this, &ThisClass::Input_DodgeStarted);
 		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Completed, this, &ThisClass::Input_DodgeCompleted);
 		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Canceled, this, &ThisClass::Input_DodgeCanceled);
+
+		if (const UInputAction* GuardAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_Guard))
+		{
+			EnhancedInputComponent->BindAction(GuardAction, ETriggerEvent::Triggered, this, &ThisClass::Input_GuardPressed);
+			EnhancedInputComponent->BindAction(GuardAction, ETriggerEvent::Completed, this, &ThisClass::Input_GuardCompleted);
+			EnhancedInputComponent->BindAction(GuardAction, ETriggerEvent::Canceled, this, &ThisClass::Input_GuardCanceled);
+		}
+
+		if (const UInputAction* HealAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_Heal))
+		{
+			EnhancedInputComponent->BindAction(HealAction, ETriggerEvent::Started, this, &ThisClass::Input_HealStarted);
+			EnhancedInputComponent->BindAction(HealAction, ETriggerEvent::Completed, this, &ThisClass::Input_HealCompleted);
+			EnhancedInputComponent->BindAction(HealAction, ETriggerEvent::Canceled, this, &ThisClass::Input_HealCanceled);
+		}
+		
+		if (const UInputAction* RBAction = InputData->FindInputActionByTag(KZGameplayTags::Input_Action_RB))
+		{
+			EnhancedInputComponent->BindAction(RBAction, ETriggerEvent::Started, this, &ThisClass::Input_RBStarted);
+			EnhancedInputComponent->BindAction(RBAction, ETriggerEvent::Completed, this, &ThisClass::Input_RBCompleted);
+			EnhancedInputComponent->BindAction(RBAction, ETriggerEvent::Canceled, this, &ThisClass::Input_RBCanceled);
+		}
 		
 	}
 }
@@ -201,6 +271,84 @@ void AKZPlayerController::Input_DodgeCompleted(const FInputActionValue&)
 void AKZPlayerController::Input_DodgeCanceled(const FInputActionValue&)
 {
 	AbilityInputTagCanceled(KZGameplayTags::Input_Action_A);
+}
+
+void AKZPlayerController::Input_GuardPressed(const FInputActionValue&)
+{
+	// Triggered는 held 중 매 입력 update 호출된다. 활성화가 막혔으면 재시도하되 유지 중 Guard를 재시작하지 않는다.
+	UKZAbilitySystemComponent* ASC = GetKZAbilitySystemComponent();
+	if (IsValid(ASC) && !ASC->HasMatchingGameplayTag(KZGameplayTags::State_Guarding))
+	{
+		ASC->AbilityInputTagPressed(KZGameplayTags::Input_Action_Guard);
+	}
+}
+
+void AKZPlayerController::Input_GuardCompleted(const FInputActionValue&)
+{
+	AbilityInputTagReleased(KZGameplayTags::Input_Action_Guard);
+}
+
+void AKZPlayerController::Input_GuardCanceled(const FInputActionValue&)
+{
+	AbilityInputTagCanceled(KZGameplayTags::Input_Action_Guard);
+}
+
+void AKZPlayerController::Input_HealStarted(const FInputActionValue&)
+{
+	AbilityInputTagPressed(KZGameplayTags::Input_Action_Heal);
+}
+
+void AKZPlayerController::Input_HealCompleted(const FInputActionValue&)
+{
+	AbilityInputTagReleased(KZGameplayTags::Input_Action_Heal);
+}
+
+void AKZPlayerController::Input_HealCanceled(const FInputActionValue&)
+{
+	AbilityInputTagCanceled(KZGameplayTags::Input_Action_Heal);
+}
+
+void AKZPlayerController::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	if (CombatHUD) CombatHUD->RemoveFromParent();
+	CombatHUD = nullptr;
+	Super::EndPlay(EndPlayReason);
+}
+
+void AKZPlayerController::Input_BrutalAttackStarted(const FInputActionValue&)
+{
+	AbilityInputTagPressed(KZGameplayTags::Input_Action_B);
+}
+
+void AKZPlayerController::Input_BrutalAttackCompleted(const FInputActionValue&)
+{
+	AbilityInputTagReleased(KZGameplayTags::Input_Action_B);
+}
+
+void AKZPlayerController::Input_BrutalAttackCanceled(const FInputActionValue&)
+{
+	AbilityInputTagCanceled(KZGameplayTags::Input_Action_B);
+}
+
+void AKZPlayerController::Input_RBStarted(const FInputActionValue&)
+{
+	RouteAttackInput(KZGameplayTags::Input_Action_RB,
+		KZGameplayTags::Command_Player_RB,
+		EKZComboCommandPhase::Begin);
+}
+
+void AKZPlayerController::Input_RBCompleted(const FInputActionValue&)
+{
+	RouteAttackInput(KZGameplayTags::Input_Action_RB,
+		KZGameplayTags::Command_Player_RB,
+		EKZComboCommandPhase::Release);
+}
+
+void AKZPlayerController::Input_RBCanceled(const FInputActionValue&)
+{
+	RouteAttackInput(KZGameplayTags::Input_Action_RB,
+		KZGameplayTags::Command_Player_RB,
+		EKZComboCommandPhase::Cancel);
 }
 
 #pragma endregion

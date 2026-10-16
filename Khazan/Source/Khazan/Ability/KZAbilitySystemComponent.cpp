@@ -5,6 +5,52 @@
 #include "Ability/Combo/KZComboActionAbility.h"
 #include "Ability/KZActionAbility.h"
 #include "Combo/KZComboDefinitionData.h"
+#include "Ability/PlayerAbility/KZGuardAbility.h"
+#include "Ability/PlayerAbility/KZBrutalAttackAbility.h"
+#include "Ability/PlayerAbility/KZFallAbility.h"
+#include "Ability/PlayerAbility/KZDodgeAbility.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "KZGameplayTags.h"
+
+bool UKZAbilitySystemComponent::TryDodgeHit(AActor* Attacker, const FVector& Contact, bool bDodgeOnly)
+{
+	FScopedAbilityListLock AbilityListLock(*this);
+	int32 DodgeContributions = 0;
+	for (const FGameplayAbilitySpec& Spec : GetActivatableAbilities())
+		if (Spec.IsActive())
+			if (UKZDodgeAbility* Dodge = Cast<UKZDodgeAbility>(Spec.GetPrimaryInstance()))
+			{
+				if (Dodge->TryAvoidHit(Attacker, Contact)) return true;
+				DodgeContributions += Dodge->OwnsInvulnerabilityTag() ? 1 : 0;
+			}
+	// Independent contributors still protect; an expired Dodge awaiting its
+	// frame-boundary removal callback must not extend the requested .1 s.
+	return !bDodgeOnly && GetTagCount(KZGameplayTags::State_Invulnerable) > DodgeContributions;
+}
+
+bool UKZAbilitySystemComponent::TryGuardHit(float StaminaDamage, AActor* Attacker)
+{
+	bool bParried = false;
+	return TryGuardHit(StaminaDamage, Attacker, bParried);
+}
+
+bool UKZAbilitySystemComponent::TryGuardHit(float StaminaDamage, AActor* Attacker, bool& OutParried, bool bAllowParry)
+{
+	OutParried = false;
+	FScopedAbilityListLock AbilityListLock(*this);
+	for (const FGameplayAbilitySpec& Spec : GetActivatableAbilities())
+	{
+		if (Spec.IsActive())
+		{
+			if (UKZGuardAbility* Guard = Cast<UKZGuardAbility>(Spec.GetPrimaryInstance()))
+			{
+				return Guard->TryGuardHit(StaminaDamage, Attacker, &OutParried, bAllowParry);
+			}
+		}
+	}
+	return false;
+}
 
 
 bool UKZAbilitySystemComponent::HasComboEntry(const UKZComboDefinitionData* Definition, FName EntryNodeId,
@@ -103,6 +149,38 @@ void UKZAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag& Input
 	{
 		// 순회 중 Spec 목록이 바뀌지 않게 잠근다.
 		FScopedAbilityListLock AbilityListLock(*this);
+
+		// A paired attack gets first refusal on its configured input, only for an eligible exhausted target.
+		// Explicit Spec requests keep their existing meaning; ordinary attacks remain the fallback.
+		if (!RequestedHandle.IsValid())
+		{
+			// The airborne X Ability gets first refusal through the same spec/input lifetime.
+			for (FGameplayAbilitySpec& Spec : GetActivatableAbilities())
+			{
+				const UKZFallAbility* Fall = Cast<UKZFallAbility>(Spec.Ability);
+				if (!Fall || !Fall->IsPlungeAttack() || !Spec.GetDynamicSpecSourceTags().HasTagExact(InputTag)) continue;
+				const ACharacter* Character=AbilityActorInfo.IsValid()?Cast<ACharacter>(AbilityActorInfo->AvatarActor.Get()):nullptr;
+				if (!Character || !Character->GetCharacterMovement()->IsFalling()) continue;
+				if (Spec.IsActive()) { Spec.InputPressed=true; AbilitySpecInputPressed(Spec); return; }
+				if (!Spec.IsActive() && AbilityActorInfo.IsValid() && Fall->CanActivateAbility(Spec.Handle, AbilityActorInfo.Get()))
+				{
+					Spec.InputPressed = true;
+					if (TryActivateAbility(Spec.Handle)) return;
+					Spec.InputPressed = false;
+				}
+				return; // blocked airborne X must not activate a ground-only attack
+			}
+			for (FGameplayAbilitySpec& Spec : GetActivatableAbilities())
+			{
+				if (!Spec.IsActive() && Cast<UKZBrutalAttackAbility>(Spec.Ability) &&
+					Spec.GetDynamicSpecSourceTags().HasTagExact(InputTag))
+				{
+					Spec.InputPressed = true;
+					if (TryActivateAbility(Spec.Handle)) return;
+					Spec.InputPressed = false;
+				}
+			}
+		}
 
 		// 이미 실행 중인 동일 입력 Spec이 입력을 계속 소유한다.
 		for (FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
