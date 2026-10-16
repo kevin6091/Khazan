@@ -1,0 +1,136 @@
+{
+  "status": "passed",
+  "asset_saves": 0,
+  "monsters": [
+    {
+      "family": "Swordsman",
+      "particle": "/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference",
+      "ground_material": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "projector_cm": "<Struct 'Vector' (0x0000027D022580D0) {x: 8.000000, y: 95.000000, z: 150.000000}>",
+      "hold_seconds": 24.0,
+      "fade_seconds": 3.0,
+      "trace_cm": 600.0
+    },
+    {
+      "family": "SwordShield",
+      "particle": "/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference",
+      "ground_material": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "projector_cm": "<Struct 'Vector' (0x0000027D42F6B0D0) {x: 8.000000, y: 95.000000, z: 150.000000}>",
+      "hold_seconds": 24.0,
+      "fade_seconds": 3.0,
+      "trace_cm": 600.0
+    },
+    {
+      "family": "HeavySwordsman",
+      "particle": "/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference",
+      "ground_material": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "projector_cm": "<Struct 'Vector' (0x0000027D4994C8D0) {x: 8.000000, y: 95.000000, z: 150.000000}>",
+      "hold_seconds": 24.0,
+      "fade_seconds": 3.0,
+      "trace_cm": 600.0
+    },
+    {
+      "family": "HalberdElite",
+      "particle": "/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference",
+      "ground_material": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "projector_cm": "<Struct 'Vector' (0x0000027D52FA68D0) {x: 8.000000, y: 95.000000, z: 150.000000}>",
+      "hold_seconds": 24.0,
+      "fade_seconds": 3.0,
+      "trace_cm": 600.0
+    },
+    {
+      "family": "ApesStoneHandElite",
+      "particle": "/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference",
+      "ground_material": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "projector_cm": "<Struct 'Vector' (0x0000027D63FF44D0) {x: 8.000000, y: 95.000000, z: 150.000000}>",
+      "hold_seconds": 24.0,
+      "fade_seconds": 3.0,
+      "trace_cm": 600.0
+    },
+    {
+      "family": "Yetuga",
+      "particle": "/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference",
+      "ground_material": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "projector_cm": "<Struct 'Vector' (0x0000027E2181ECD0) {x: 8.000000, y: 95.000000, z: 150.000000}>",
+      "hold_seconds": 24.0,
+      "fade_seconds": 3.0,
+      "trace_cm": 600.0
+    }
+  ],
+  "materials": [
+    {
+      "asset": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "textures": [
+        {
+          "asset": "/Game/_Art/Effects/Combat/Blood/FT_Monster_HitBloodGroundMask.FT_Monster_HitBloodGroundMask",
+          "srgb": false,
+          "sampler": "LinearColor",
+          "never_stream": true,
+          "size": [
+            1024,
+            2048
+          ]
+        }
+      ],
+      "code": [
+        "float a=Channel<.5?Mask.r:(Channel<1.5?Mask.g:Mask.b);return saturate(pow(saturate(a),Power)*Density)*Fade;"
+      ],
+      "scalars": {
+        "BloodMaskChannel": 0.0,
+        "BloodMaskPower": 0.4000000059604645,
+        "BloodMaskDensity": 6.0,
+        "BloodRoughness": 0.11999999731779099,
+        "BloodMetallic": 0.25
+      },
+      "vectors": {
+        "BloodColor": "<Struct 'LinearColor' (0x0000027DD7654D78) {r: 0.012000, g: 0.000250, b: 0.000750, a: 1.000000}>"
+      },
+      "shading_model": "<MaterialShadingModel.MSM_DEFAULT_LIT: 1>",
+      "emissive_connected": false,
+      "lighting": "<TranslucencyLightingMode.TLM_VOLUMETRIC_NON_DIRECTIONAL: 0>",
+      "roughness_connected": false,
+      "metallic_connected": false,
+      "decal_lifetime_opacity": true
+    },
+    {
+      "asset": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodFluid.M_Monster_HitBloodFluid",
+      "textures": [
+        {
+          "asset": "/Game/_Art/Effects/Combat/Blood/FT_Monster_HitBloodFluid.FT_Monster_HitBloodFluid",
+          "srgb": false,
+          "sampler": "LinearColor",
+          "never_stream": true,
+          "size": [
+            1024,
+            1024
+          ]
+        }
+      ],
+      "code": [
+        "float f=floor(saturate(Age)*15);return (UV+float2(fmod(f,4),floor(f/4)))/4;",
+        "return saturate(pow(saturate(max(T.r,T.b)),Power)*Density)*Alpha;",
+        "return Color*lerp(.3,1.8,saturate(T.b*.75+T.r*.25));"
+      ],
+      "scalars": {
+        "BloodMaskPower": 0.44999998807907104,
+        "BloodMaskDensity": 2.5,
+        "BloodRoughness": 0.2800000011920929,
+        "BloodMetallic": 0.25,
+        "BloodSpecular": 0.10000000149011612
+      },
+      "vectors": {
+        "BloodColor": "<Struct 'LinearColor' (0x0000027DD7653E78) {r: 0.035000, g: 0.000800, b: 0.002000, a: 1.000000}>"
+      },
+      "shading_model": "<MaterialShadingModel.MSM_UNLIT: 0>",
+      "emissive_connected": true,
+      "lighting": "<TranslucencyLightingMode.TLM_SURFACE_PER_PIXEL_LIGHTING: 5>",
+      "roughness_connected": true,
+      "metallic_connected": true,
+      "decal_lifetime_opacity": false
+    }
+  ],
+  "retired_trial_referencers": {
+    "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodSheet": [],
+    "/Game/_Art/Effects/Combat/Blood/FT_Monster_HitBloodSheetMask": []
+  }
+}

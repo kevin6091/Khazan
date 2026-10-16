@@ -1,0 +1,150 @@
+{
+    "schema":  "Khazan.Heal.DebugFixture.v1",
+    "utc":  "2026-10-08T03:20:56.9128506Z",
+    "purpose":  "Read-only diagnosis of intermittent Heal.PIE fixed-time checkpoint failures. No product or test changes.",
+    "scope":  {
+                  "own_pid":  17772,
+                  "own_project":  "C:/Users/user/Desktop/GitProject/Khazan_MonsterWork_20261006/Khazan",
+                  "protected_main_pid":  13700,
+                  "protected_main_process_accessed":  false,
+                  "game_code_or_assets_changed":  false,
+                  "test_code_changed":  false,
+                  "fixture_deadline_or_state_changed":  false
+              },
+    "skill":  "C:/Users/user/AppData/Local/JetBrains/Rider2026.2/aia/agents/views/codex/.agents/skills/debugging-code/SKILL.md",
+    "source_hashes":  {
+                          "Source/Khazan/Tests/KZHealAbilityPIETest.cpp":  "cfc8686969f79a485b4cb70bebed3dfb53de3dacb58b623782a442e4f2b9b241",
+                          "Source/Khazan/Ability/PlayerAbility/KZHealAbility.cpp":  "3e68380218dbfe6c1b349c37d36cffeb11930e73f015b673de6b1120cbf9c5d5"
+                      },
+    "main_work_source_sha_equal_before_after":  true,
+    "invocation":  {
+                       "mailbox_request":  "C:/Users/user/Desktop/GitProject/Khazan_MonsterWork_20261006/Khazan/Saved/MonsterMailbox/debug_heal_fixture_20261008.request.json",
+                       "command":  "Automation RunTests Khazan.Heal.PIE",
+                       "response_success":  true,
+                       "response_pid":  17772,
+                       "response_utc":  "2026-10-08T03:17:26.504474+00:00"
+                   },
+    "debugger":  {
+                     "kind":  "LLDB",
+                     "session_id":  "UnrealEditor (17772)",
+                     "attached_only_to_owned_process":  true,
+                     "breakpoint":  {
+                                        "file":  "C:/Users/user/Desktop/GitProject/Khazan_MonsterWork_20261006/Khazan/Source/Khazan/Tests/KZHealAbilityPIETest.cpp",
+                                        "requested_and_paused_line":  181,
+                                        "assertion":  "Heal cannot revive zero HP",
+                                        "id":  "line|file://C:/Users/user/Desktop/GitProject/Khazan_MonsterWork_20261006/Khazan/Source/Khazan/Tests/KZHealAbilityPIETest.cpp|180",
+                                        "source_line_note":  "Prior compiled failure log reports line 182; current source and actual paused line are 181. SHA remained unchanged."
+                                    },
+                     "paused_stack":  [
+                                          {
+                                              "index":  0,
+                                              "function":  "FHealPIECommand::Update()",
+                                              "file":  "C:/Users/user/Desktop/GitProject/Khazan_MonsterWork_20261006/Khazan/Source/Khazan/Tests/KZHealAbilityPIETest.cpp",
+                                              "line":  181,
+                                              "thread":  "Thread-1-[GameThread] (29128)",
+                                              "total_frames_reported":  1
+                                          }
+                                      ],
+                     "observed_values":  {
+                                             "this_address":  "0x000001554f4ec090",
+                                             "heal_object_address":  "0x0000015618202d00",
+                                             "heal_name":  "GA_Player_Heal_C_0",
+                                             "Stage":  9,
+                                             "Stage_meaning":  "case 8 entered through switch(Stage++); Stage already incremented to 9.",
+                                             "NextTime":  13.823882385343314,
+                                             "bIsActive":  false,
+                                             "bInputEnded":  false,
+                                             "BoundAnimInstance":  null,
+                                             "ActiveMontageInstanceId":  -1,
+                                             "bHealApplied":  false,
+                                             "StoredWeapons_count":  0,
+                                             "fixture_Montage_weak_asset":  "AM_DAS_Player_Heal",
+                                             "fixture_Montage_note":  "This member retains the asset captured by StartHeal; it is not a current playback query.",
+                                             "draw_position":  null,
+                                             "draw_position_status":  "Not queried because this run had no active Heal execution and BoundAnimInstance was null.",
+                                             "Now_local":  "optimized out",
+                                             "actual_HP_runtime":  "not separately read; case8 HP lower-bound and zero-HP activation assertions passed in this run."
+                                         },
+                     "raw_expressions":  [
+                                             {
+                                                 "expression":  "((UKZHealAbility*)0x0000015618202d00)-\u003ebIsActive",
+                                                 "result":  "false {bool}"
+                                             },
+                                             {
+                                                 "expression":  "((UKZHealAbility*)0x0000015618202d00)-\u003ebInputEnded",
+                                                 "result":  "false {bool}"
+                                             }
+                                         ],
+                     "after_probe_resume":  true,
+                     "post_resume_wait":  "WAIT_FOR_PAUSE 1000ms returned running; no further agent breakpoint pause.",
+                     "cleanup":  {
+                                     "agent_breakpoints_removed":  1,
+                                     "remaining_agent_breakpoints":  0,
+                                     "user_exception_breakpoints_unchanged":  8,
+                                     "user_exception_enabled":  5,
+                                     "user_exception_disabled":  3,
+                                     "stop_attached_session_result":  "stopped",
+                                     "sessions_after_stop":  [
+
+                                                             ],
+                                     "own_process_still_alive_after_stop":  true,
+                                     "detach_verified_by_empty_sessions_and_live_process":  true
+                                 }
+                 },
+    "run":  {
+                "test":  "Khazan.Heal.PIE",
+                "started_utc":  "2026-10-08T03:17:36.861Z",
+                "completed_utc":  "2026-10-08T03:18:19.908Z",
+                "result":  "Success",
+                "elapsed_wall_seconds_computed":  43.047,
+                "debugger_paused_wall_duration":  "Not captured",
+                "fixture_timeout":  false,
+                "saved_log":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\MonsterMotion_20261008\\Heal_DebugFixture.log",
+                "source_log_start_line":  10269,
+                "source_log_end_line":  10739,
+                "preserved_log_sha256":  "5da4b62dfad0924e141ca8ae6234c275c412b9d03aec32abe3d34ad3a3350213",
+                "Stage4_armed_pose_position_seconds":  0.853309,
+                "pose_checks":  "Pass; walk effectiveWeight=1, local errors zero or floating-point epsilon in recorded bones."
+            },
+    "previous_failures":  [
+                              {
+                                  "log":  "C:/Users/user/Desktop/GitProject/Khazan/Khazan/Metadata/MonsterMotion_20261008/Heal_Merged_First.log",
+                                  "completed_utc":  "2026-10-08T03:03:06.956Z",
+                                  "assertions":  [
+                                                     "Armed is the current montage",
+                                                     "Upper-body Heal instance"
+                                                 ],
+                                  "prior_execution_state_observed":  false
+                              },
+                              {
+                                  "log":  "C:/Users/user/Desktop/GitProject/Khazan/Khazan/Metadata/MonsterMotion_20261008/Heal_Merged_Retry.log",
+                                  "completed_utc":  "2026-10-08T03:11:34.561Z",
+                                  "assertions":  [
+                                                     "Heal cannot revive zero HP"
+                                                 ],
+                                  "Stage4_armed_pose_position_seconds":  0.667783,
+                                  "prior_execution_state_observed":  false
+                              }
+                          ],
+    "analysis":  {
+                     "confirmed":  [
+                                       "Same Heal product and test source hashes in Main and Work; no source changes during diagnosis.",
+                                       "Original two failing checkpoints changed across unmodified executions.",
+                                       "Current debugger run was already inactive at the zero-HP assertion and the native test finished Success.",
+                                       "Draw starts from actual Heal montage completion callback; final Ability end follows Draw completion callback.",
+                                       "Test Stage4 uses fixed Now+1.4 checkpoint; Stages5 and8 use fixed Now+3.8, and case8 does not first establish inactivity of the preceding Heal execution."
+                                   ],
+                     "inference":  "The fixed-time fixture checkpoints are vulnerable to coarse frame/handoff/completion scheduling. This fits the differing failures and unmodified pass; it does not prove the exact state of the prior failing retry.",
+                     "unresolved":  [
+                                        "Prior failing case8 active montage and position were not captured.",
+                                        "No direct reproduction of an old active Draw at zero HP was obtained.",
+                                        "This debugger-assisted pass does not prove deterministic product correctness or establish a product regression root cause."
+                                    ],
+                     "korean_conclusion":  "무수정 디버그 재현은 PASS이며 case8 직전 Heal은 이미 비활성이었습니다. 이전 실패의 정확한 원인은 미확정입니다. 고정 시점 fixture 취약성은 확인 가능한 구조적 문제이며, Player 제품 코드 수정의 근거는 확보되지 않았습니다."
+                 },
+    "proposed_minimal_test_only_change_not_applied":  [
+                                                          "For Stage4, use existing Draw instance and actual pose position/checkpoint while it is active, before switch(Stage++) and before natural blend-out. Reuse existing authored WeaponDraw/pose observation evidence; add no arbitrary timing literal.",
+                                                          "For Stage5 and Stage8, wait for the previous Heal execution to naturally end before testing subsequent activation or zero HP. Retain the existing wall-clock Deadline so a hung Ability still fails.",
+                                                          "Keep the zero-HP CanActivate behavior and Player product code unchanged; separate fresh activation from an old execution in the fixture."
+                                                      ]
+}

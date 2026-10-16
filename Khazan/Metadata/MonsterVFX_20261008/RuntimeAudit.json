@@ -1,0 +1,268 @@
+{
+  "utc": "2026-10-08T11:19:49.335468+00:00",
+  "status": "ReadOnlyRuntimeAudit",
+  "project": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan",
+  "scope": [
+    "Swordsman",
+    "SwordShield",
+    "HeavySwordsman",
+    "HalberdElite",
+    "ApesStoneHandElite",
+    "Yetuga"
+  ],
+  "read_order": [
+    "0_DOCUMENT_ROUTER.md",
+    "CHARACTER_GAMEPLAY_ARCHITECTURE.md latest ARCH-83/82/81",
+    "CHARACTER_TAG_ABILITY_MIGRATION.md latest Main completed sections",
+    "PLAYER_ATTACK_VFX_RUNTIME_20261008.md latest19:11 and19:48",
+    "MONSTER_STAMINA_EXHAUSTION_20261008.md latest Main completed and19:48",
+    "Current native Source; targeted UE5.8 primary engine Source"
+  ],
+  "existing_notify_handles_all_monster_clips_without_product_change": false,
+  "current_execution_paths": [
+    {
+      "path": "NPC4 attack/alert/unaware idle/talk",
+      "producer": "Existing StateTree task selects existing granted Blueprint ComboAction ability by SpecHandle; held X/InputEnd continues actual combos; alert Release transitions idle Loop to matching End.",
+      "consumer": "UKZComboActionAbility::HandleMontageNotifyBegin -> validated current avatar/Anim/ASC animating ability/montage instance -> UKZActionAbility::Start/StopCombatEffect.",
+      "lifetime": "Ability activation and actual montage instance; local node jump calls ClearCombatEffects; OnCompleted and EndAbility clear owned records; cancel/StateTree Exit/UnPossess/EndPlay use existing ability cleanup.",
+      "unchanged_code_reusable": "Existing data-only branching KZCombatEffect can handle unconditional effects authored onto these montages. No monster AI rewrite is needed.",
+      "gap": "Hit-conditioned effects require a confirmed current execution producer. Current collision query selects AKZMonster targets; no Monster-to-Player physical hit producer is currently connected."
+    },
+    {
+      "path": "Exhaustion Start/Loop/End and paired BrutalVictim Damage1/2",
+      "producer": "AKZMonster next-tick coalesced HP/Stamina reaction activates existing UKZExhaustionAbility; PlaySection owns actual engine PlayMontageAndWait Task.",
+      "consumer": "Existing Exhaustion derives UKZGameplayAbility, not UKZActionAbility. It binds only montage completion/interruption/cancel callbacks; no KZCombatEffect montage consumer.",
+      "lifetime": "PlaySection may start a new montage instance per phase/loop; ClearMontageTask is owner of old Task. Paired lethal waits both normal completions before final death pose.",
+      "gap": "Current montage branching data notifications broadcast but have no corresponding effect consumer on this non-Action ability."
+    },
+    {
+      "path": "ABP locomotion/BlendSpace, ordinary sequence clips and library-only clips",
+      "producer": "Existing ABP asset players/blendspaces and animation evaluation; future QA may explicitly play actual clips on real six-family BP meshes without autonomous AI.",
+      "consumer": "Engine ordinary Notify/NotifyState callbacks, not Action montage delegate.",
+      "gap": "KZCombatEffect inherited CanBePlaced only accepts AnimMontage; no ordinary sequence Notify override. Pure sequence playback cannot use the present Ability presenter guard requiring active ActorInfo/avatar."
+    },
+    {
+      "path": "Death",
+      "producer": "AKZMonster RefreshCombatState HP<=0 -> State.Dead GE + own movement handle + action cancellation; paired presentation permitted until partner/completion cleanup.",
+      "consumer": "FinishDeathPresentation only sets GetMesh()->bPauseAnims=true when HP<=0.",
+      "gap": "No generic death montage or separate death Ability is currently played. Animation ticking ceases when bPauseAnims; an open ordinary sequence effect state cannot rely on a later End to stop emission. Authoring effects on unused death library clips does not implement death gameplay."
+    },
+    {
+      "path": "Apes/Yetuga",
+      "producer": "Existing real six-family BP/Definition/ASC body+ABP supports Exhaustion and paired victim reactions.",
+      "consumer": "Library clips may be exercised by a controlled existing mesh playback fixture.",
+      "gap": "Autonomous StateTree/attack patterns and map placement for these two remain absent. VFX work must not claim or silently invent those systems."
+    }
+  ],
+  "shared_presenter_current_contract": {
+    "entry_guards": "GT only, valid mesh world, no DedicatedServer, EventId nonempty, active owning Ability ActorInfo avatar and primary mesh exactly match; conditional bOnAttackSuccessed requires accepted hit.",
+    "spawn_math": "Current socket transform removes mesh scale, centimetre offsets, explicit Scale3D precedence, random offsets, correction anchoring, attached/only-start/world/floor modes, snow read-only surface adapter, per-instance parameters, source custom dilation and sort priority.",
+    "resources": "Weak scene components keyed EventId + actual montage instance, source destroy/deactivate/detach/animation-end flags; recovered post-source-end component-bound timer. Decal material age and engine lifespan own residual world decal lifetime.",
+    "end": "Stop closes exactly own window resources; Clear swaps receipts out before component callbacks; natural final recovered effect may transfer to existing component-bound timer; cancel kills explicit animation-lifetime resources or deactivates particle emission; decals without kill flag retain finite lifespan.",
+    "must_preserve": "Combo node/AttackExecution/provenance hit gate remains in Combo; Brutal paired target/actual GE result remains in Brutal; VFX never applies damage or owns State.Dead/Exhausted."
+  },
+  "actual_lifetime_gaps": [
+    "No non-Action effect callback in Exhaustion, and no ordinary sequence transport in current data-only montage Notify.",
+    "EndPlay/UnPossess presently cleanup GAS actions/exhaustion; there is no receipt for non-Ability animation-created looping/trail resources to clear.",
+    "Final death pause prevents future notify ticks/normal End; targeted own presentation cleanup is required immediately before final freeze, not when paired Dead first appears.",
+    "Stock timed particle End identifies first socket+template child, not source event/notify instance; overlapping same-template occurrences or other effects on same mesh can be stopped incorrectly.",
+    "Stock one-shot particle Notify suppresses looping templates; engine stock classes cannot represent all source floor/surface/random/correction/parameters/decal policies.",
+    "Current KZCombatEffect resources support PSC/decal only; Yetuga surface trail static mesh/intensity and Apes bone-vector/material-curve channels have no present consumer.",
+    "Current CombatEffect DEV fixture asserts authored BrutalHPDamage0, whereas latest saved user setting is50 across six families; fixture must snapshot/assert current baseline instead of altering product50."
+  ],
+  "recommended_smallest_architecture": {
+    "decision": "Add only a specific data-only Monster visual NotifyState for actual sequence/non-Action consumers. Reuse the current rendering implementation through a stateless extraction; keep Action lifetime and hit provenance unchanged. Existing AKZMonster owns narrow mesh-local resource receipts. No manager/component/FSM/duplicate gameplay states.",
+    "engine_first": "Use stock PlayParticleEffect only for verified nonlooping simple particles whose transform/scale policy matches; stock TimedParticleEffect only if overlap and source-policy audit proves sufficient. These do not cover the entire reported source set.",
+    "shared_spawn_reuse": "Move only existing Action StartCombatEffect pure spawn/transform/floor/parameter/decal work into a stateless function on existing KZAnimNotify_CombatEffect class/file. Data-only means no Pawn/component/runtime state on notify assets. Action wrapper preserves active/avatar/conditional guard and weak records/timer/dedup/cleanup. New state calls same factory; do not duplicate the300-line presenter or broaden IsActive guard into a bypass.",
+    "new_specific_state": "Possible UKZAnimNotifyState_MonsterVisualEffect h/cpp: immutable source data/Instanced existing effect records plus exact reported trail/bone/material channels. Normal queued NotifyBegin/Tick/End, NoMergeOnConcurrentPlay enabled; per-state runtime is not stored on shared UObject.",
+    "runtime_key": "Mesh + originating AnimInstance + EventReference.GetNotifyInstanceID. UE5.8 supplies and propagates this ID, distinguishing concurrent montage/asset-player contexts. Reject INDEX_NONE and foreign/stale mesh/anim context rather than inventing one shared bool. Source EventId remains provenance, not the sole runtime receipt key.",
+    "existing_owner": "AKZMonster receives Begin/Update/End for its actual mesh; only finite weak resource receipts and material baseline/last-written values are stored. These are presentation ownership receipts, not gameplay state copies. Attached world PSCs, trail UStaticMeshComponent and MID writes are created with existing engine APIs; no new runtime component class is needed.",
+    "loop": "A full-cycle active NotifyState naturally retains one engine instance/resource through a continuous loop; a closed partial window naturally produces new Begin/End receipt on a later loop. Do not permanently dedup by source EventId across loops. Cross-fade/concurrent same asset uses NoMergeOnConcurrentPlay source IDs.",
+    "natural_vs_cancel": "Use FAnimNotifyEndDataContext.bReachedEnd where present to distinguish source interval closure and early removal. Source explicit destroy/deactivate/detach flags govern normal End. Early cancel, source replacement, UnPossess, EndPlay and final freeze clear only owned resources and stop persistent emission; preserve source finite world residual/decal lifespan according to existing policy. Missing end reason is conservative cleanup, not assumed natural completion.",
+    "cleanup_hooks": "Targeted Monster visual clear in existing UnPossessed/EndPlay and immediately before FinishDeathPresentation bPauseAnims. Never clear the paired victim solely on first Dead tag; wait existing final-freeze boundary. NotifyEnd must remain idempotent after explicit clear and never kill Player/another actor resources.",
+    "minimum_file_surface": "Potential existing6runtime files: KZActionAbility h/cpp, KZAnimNotify_CombatEffect h/cpp, KZMonster h/cpp; new specific NotifyState2runtime files only if source mapping confirms demanded channels. Existing Exhaustion/Brutal/AI/ASC/AnimInstance require no gameplay rewrite. This is a proposal; parent owns final frozen Source baseline and implementation.",
+    "why_not_move_to_GameplayAbility": "Moving Action presenter into GameplayAbility serves Exhaustion but still cannot serve ABP/no-Ability clips, so it is not the smallest complete solution. Deriving Exhaustion from Action would change forced-reaction blocking/cancel/activation semantics and is rejected.",
+    "authoring_once": "Prefer sequence-level windows for Monster clips when retimed source-to-current mapping is verified, so the same actual clip works under ComboAction, Exhaustion and controlled library playback. Do not also duplicate equivalent montage FX markers. Preserve existing gameplay notify GUIDs and montage/sequence timing. Parent metadata audit decides source ranges/occurrences.",
+    "preview_boundary": "A Monster-owned adapter covers actual Monster BP mesh playback without needing AI. Default asset-editor preview owners are not AKZMonster; generic animation-editor preview support would need a mesh-local receipt owner and must be declared separately if requested, not silently claimed by a Monster-only runtime."
+  },
+  "special_source_channels": {
+    "YetugaSurfaceTrail": {
+      "confirmed_by_parent_metadata_fields": [
+        "TrailMesh",
+        "Intensity",
+        "BlendTime",
+        "AttachSocketName",
+        "Scale"
+      ],
+      "proposal": "Spawn an engine StaticMeshComponent for the exact source mesh; attach to actual valid socket with verified current mesh scale conversion; apply exact material parameter/intensity. Existing NotifyState ticks own temporal visual modulation, then ends/cleans its own component. BlendTime interpretation/fade shape is native-unconfirmed until source evidence; no arbitrary trail or fade duration. Any residual blend-out needs component-bound owned timer or inside-window curve, with explicit cancellation cleanup.",
+      "current_gap": "PSC/decal presenter has no static-mesh resource path."
+    },
+    "ApesSetBoneLocationToMaterialParam": {
+      "proposal": "Use GT NotifyTick and current actual bone/socket world or component transform in verified source coordinate space; write exact original vector parameter/material target. Store only per-owned parameter baseline/last-written receipt and restore safely on End/cancel/freeze. No AnimInstance combat state or worker Actor/MID access.",
+      "current_gap": "No live bone-vector parameter writer; exact coordinate/target material semantics require source field review."
+    },
+    "ApesSetMaterialParamByCurve": {
+      "engine_option": "If exact scalar parameter name, curve channel/time origin, target material set and blend semantics match, author original scalar keys as a material-flagged animation curve. Engine applies named scalar params on materials and optionally leader-pose followers; absent curves restore material defaults. This can avoid a custom scalar runtime tick.",
+      "when_not_equivalent": "An inline notify-local curve, target-specific/nondefault reset, vector parameter or source custom interpolation not equivalent to blended animation curve requires the narrow NotifyState scalar path. Preserve original time/key/tangent/weight data and state any project adapter.",
+      "awaiting_parent_source_details": true
+    }
+  },
+  "test_reuse_and_required_extensions": {
+    "existing_player_effect": "Source/Khazan/Tests/KZCombatEffectPIETest.cpp; Khazan.CombatEffect.PIE actual18entries+5Brutal cases, natural HP hit, wrong avatar/old instance/duplicate start/paired stop/cancel/restart/late marker. Fix only DEV hardcoded0 assertion for current authored50 before reuse.",
+    "existing_player_regression": [
+      "Khazan.Combat.PlayerAttackCollision.PIE",
+      "Khazan.Guard.PIE",
+      "Khazan.Heal.PIE"
+    ],
+    "existing_monster_regression": [
+      "Khazan.Monster.AttackPatternsPIE",
+      "Khazan.Monster.WaitingPIE",
+      "Khazan.Monster.CombatPolicyPIE",
+      "Khazan.Monster.FacingPIE",
+      "Khazan.Monster.PIE"
+    ],
+    "stamina_reuse": "Metadata/MonsterStamina_20261008/NativePIE.json and run_integrated_regressions.py provide453 prior checks of six-family Exhaustion/Brutal/lifecycle, plus5 named regressions. These are historical evidence; locate/preserve the existing native fixture/helper version before rerunning.",
+    "specific_new_checks": [
+      "Actual six BP meshes/Source windows under sequence and current montage paths, without fake AI for Apes/Yetuga.",
+      "Same state asset on two actors; overlapping same-template/socket occurrences; stale context; multiple loops without growing active resource count.",
+      "Natural partial-window End vs montage/ABP cross-fade cancellation; state replacement; UnPossess; Destroy/EndPlay; final death freeze; paired death retains effects until allowed final cleanup.",
+      "Actual Yetuga trail socket/scale/intensity/BlendTime, Apes bone-vector updates and scalar-curve values/baseline restoration, no extra gameplay HP/Stamina writes.",
+      "Saved source window/flags/parameters/path/timing audit separately from real RHI emission/readback; no shader fallback; screenshot six-family representative current animations."
+    ],
+    "reusable_artifacts": [
+      "Saved/ImportReports/PlayerAttackVFX_20261008/CombinedPreparedPlaybackPlan.json",
+      "Saved/ImportReports/PlayerAttackVFX_20261008/CombinedPlaybackWindows.csv",
+      "Saved/ImportReports/PlayerAttackVFX_20261008/MainCombinedSavedAssetAudit.json",
+      "Saved/ImportReports/PlayerAttackVFX_20261008/MainRuntimePIE/Driver.json"
+    ],
+    "do_not_replay": "Historical authoring/delivery helpers and0-damage CharacterDefinition payloads must not be reapplied. Main current user50, Player schema401windows and independent Source changes remain protected."
+  },
+  "source_evidence": [
+    {
+      "file": "Source/Khazan/Animation/Notifies/KZAnimNotify_CombatEffect.h",
+      "sha256": "8a959043d7d901d667c6783932fa92cc6dde1fe108768baef62755f7f95b0140",
+      "line": 50
+    },
+    {
+      "file": "Source/Khazan/Animation/Notifies/KZAnimNotify_CombatEffect.cpp",
+      "sha256": "572168b925277a378b165ca712e3393eecff65a636367f53b994b31a3cb8a117",
+      "line": 3
+    },
+    {
+      "file": "Source/Khazan/Ability/KZActionAbility.h",
+      "sha256": "1693b6c35232047b17083a6cb4393a2905f127d63e7b2e6d159f67d6b298a9e7",
+      "line": 49
+    },
+    {
+      "file": "Source/Khazan/Ability/KZActionAbility.cpp",
+      "sha256": "ea1215c848da0d9c5f93de02deb6ee45d3bd4172cd14f4297e1fc4dff74d3533",
+      "line": 81
+    },
+    {
+      "file": "Source/Khazan/Ability/Combo/KZComboActionAbility.cpp",
+      "sha256": "59238b53503a182954291cca82d8a47c43840a0bd380fc6ab2f6b7f519645f0b",
+      "line": 664
+    },
+    {
+      "file": "Source/Khazan/Ability/MonsterAbility/KZExhaustionAbility.h",
+      "sha256": "092406ee99afa2464dd975ad106671446ca24b306cf5103b81a14de21ccdc258",
+      "line": 18
+    },
+    {
+      "file": "Source/Khazan/Ability/MonsterAbility/KZExhaustionAbility.cpp",
+      "sha256": "d13a2bd0e2ae13fadd87ea9fd0948b73eecf863b8b8409e526bd35f3d8736d47",
+      "line": 147
+    },
+    {
+      "file": "Source/Khazan/Ability/PlayerAbility/KZBrutalAttackAbility.cpp",
+      "sha256": "7ecdcd4b484cd8706dcfc9d41fb769396cc9754a29e03e43333072c6dbe79934",
+      "line": 2
+    },
+    {
+      "file": "Source/Khazan/Character/KZMonster.cpp",
+      "sha256": "a61eb331d9191218ac80f6a06d865175ddae9000569e13542d3a8fc1fb9bf446",
+      "line": 175
+    },
+    {
+      "file": "Source/Khazan/Character/KZCharacter.cpp",
+      "sha256": "f4816c08fc8b71f160da9a8f9497f4fa0161b6c8ae49e9074d5ec0ebc29e196c",
+      "line": 162
+    },
+    {
+      "file": "Source/Khazan/AI/KZMonsterStateTreeNodes.cpp",
+      "sha256": "b37b9fbaa88c27274499c81aedf08564ba9ee79bc618e545ab7d6b650738bd12",
+      "line": 30
+    },
+    {
+      "file": "Source/Khazan/Animation/KZAnimInstance.cpp",
+      "sha256": "075b2dd4ea6bd3439a29e1a1211130d9c82988196d7cd69aa5bf22ba0b8df46c",
+      "line": 40
+    },
+    {
+      "file": "Source/Khazan/Tests/KZCombatEffectPIETest.cpp",
+      "sha256": "23bc48a966264527ab23c9e67257f15241eb16c300f9151e40d4e455c8a469bc",
+      "line": 284
+    }
+  ],
+  "engine_primary_evidence": [
+    {
+      "file": "AnimGraphRuntime/Private/AnimNotify_PlayMontageNotify.cpp",
+      "sha256": "b5f05c3a6db7accd220cbb50d9a60d1139c5d883a1188ebded1647c2edf1b538",
+      "line": 22
+    },
+    {
+      "file": "Engine/Private/Animation/AnimNotify_PlayParticleEffect.cpp",
+      "sha256": "214e662dd4db1f13d8b2dc7fdb554b46d8fcf6799bf887f893296a49a7522e6f",
+      "line": 100
+    },
+    {
+      "file": "Engine/Private/Animation/AnimNotifyState_TimedParticleEffect.cpp",
+      "sha256": "1eccd8f30a680155e886e40525990c915abd0d83518be1ec39df56f1cb5c8047",
+      "line": 35
+    },
+    {
+      "file": "Engine/Public/Animation/AnimNotifyQueue.h",
+      "sha256": "f9a5b3359c950c7f58b52bc59df11371ab2d5a528688af2e1a4ed9059166986b",
+      "line": 120
+    },
+    {
+      "file": "Engine/Classes/Animation/AnimNotifies/AnimNotifyState.h",
+      "sha256": "e91cbbe7af2cc39c3c902a0b1013532f80770e949eecb0c3f239186e9ad275b2",
+      "line": 29
+    },
+    {
+      "file": "Engine/Public/Animation/AnimNotifyEndDataContext.h",
+      "sha256": "60047833fef17867387130d65f85942058a13b23753335c85aa152458807f2ab",
+      "line": 18
+    },
+    {
+      "file": "Engine/Private/Animation/AnimInstance.cpp",
+      "sha256": "d593fff1143b0a6f49eac8456bbcb119702d6bd211cfc5f17c2f2b683c6915d2",
+      "line": 2130
+    },
+    {
+      "file": "Engine/Private/Animation/AnimInstanceProxy.cpp",
+      "sha256": "4bd27d49a6e26a32be81a31906634785d8c6c2516acc76f0ce22d9eafef2b5ea",
+      "line": 3611
+    },
+    {
+      "file": "Engine/Private/Components/SkeletalMeshComponent.cpp",
+      "sha256": "06179d38ebff3138b6412fe14b14331c0a9e8c1623b760801ba6276602223378",
+      "line": 3383
+    }
+  ],
+  "latest_saved_damage_evidence": {
+    "file": "Metadata/MonsterBrutalDamage50_20261008/FreshSavedReadback.json",
+    "sha256": "68a0aa0acbf30eaf01e40ce40bb5d2f7c636abc7620b8bd070203f20ce0dc388"
+  },
+  "numbers_policy": "Original direct fields, original-based time/coordinate conversions and adapter/tuning interpretations must remain distinct. This audit introduces no gameplay literal or new product tuning.",
+  "validation_boundary": {
+    "read_only_source_and_reports": true,
+    "source_mutations": false,
+    "content_mutations": false,
+    "editor_controls": false,
+    "editor_launches": false,
+    "build_or_runtime_test_executed_by_this_audit": false,
+    "recommendations_applied": false
+  }
+}

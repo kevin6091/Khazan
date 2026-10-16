@@ -1,0 +1,32 @@
+{
+  "time_kst": "2026-10-15T03:26:56+09:00",
+  "status": "current_main_integration_verified",
+  "project": "C:/Users/user/Desktop/GitProject/Khazan/Khazan",
+  "build": {"result": "Succeeded / Target is up to date", "log": "Build.log"},
+  "fresh_saved_verification": "SavedVerification.json",
+  "checked_file_hashes": 57,
+  "file_hash_mismatches": 0,
+  "module": "Binaries/Win64/UnrealEditor-Khazan.dll",
+  "module_sha256": "6f1c6bfe41382cb6f6308130e403ce568b6b76f560e2b154707f4f9810b2d25e",
+  "readback_results": {
+    "camera": {"report": "Camera/SavedReadback.json", "assets": 48, "events": 86, "status": "passed"},
+    "grab_warning": {"report": "GrabWarning/SavedReadback.json", "assets": 7, "status": "passed"},
+    "player_impact": {"report": "PlayerImpact/MainReadback.json", "nodes": 26, "attack_windows": 60, "common_cue_bindings": 0, "non_audio_equal_to_baseline": true, "status": "passed"},
+    "player_slash": {"report": "PlayerSlash/SavedReadback.json", "montages": 5, "slash_pairs": 33, "original_effect_objects_preserved": 882, "event_clock_guid_preserved": true, "status": "passed"}
+  },
+  "previously_excluded_work_now_in_main": [
+    "Metadata/GiantCamera_20261014/FinalVerification.json",
+    "Metadata/GiantGrabWarning_20261014/SavedReadback.json",
+    "Metadata/GiantGrabWarning_20261014/PIE/RuntimeReport.json"
+  ],
+  "later_completed_work_in_main": "Metadata/PlayerSlashOuter_20261014/FinalVerification.json",
+  "game_source_edits_this_check": 0,
+  "game_asset_saves_this_check": 0,
+  "ready_unapplied_changes_found": 0,
+  "verification_scope": "New stock build check and fresh NullRHI saved readback using the current standard Main DLL. Existing completed RHI/PIE receipts were reviewed; no new rendered gameplay test was run.",
+  "limits": [
+    "Original cooked-shader and frame-identical camera/UI appearance remain limited by the original sources, as recorded in the domain continuity documents.",
+    "Two original camera package aliases have no established current animation mapping.",
+    "The saved grab data and code exclude guard/parry; a separate held-Guard actual grab-contact fixture is not part of this integration check."
+  ]
+}

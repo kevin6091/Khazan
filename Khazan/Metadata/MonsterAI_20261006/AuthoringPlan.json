@@ -1,0 +1,960 @@
+[
+  {
+    "family": "Swordsman",
+    "art_bp": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Blueprints/BP_EN_Swordsman_U01_L01",
+    "clips": {
+      "idle": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSword_Basic_Loop_01",
+      "combat_idle": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSword_Stand_F",
+      "walk": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSword_Walk_Peace_F",
+      "run": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSword_Run_F",
+      "F": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSword_LockOnWalk_F",
+      "R": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSword_LockOnWalk_R",
+      "B": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSword_LockOnWalk_B",
+      "L": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSword_LockOnWalk_L"
+    },
+    "attacks": [
+      {
+        "id": "EmpireSword_Early_Slash",
+        "steps": [
+          {
+            "step": "ESubStateStepByActiveInput::Step2",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Slash/AC_EmpireSword_Slash_Step1",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSword_Slash_Step1",
+            "seconds": 2.616649866104126,
+            "fps": "3589463/59824",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.2,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [
+              {
+                "event_index": "ESimpleSkillEventIndex::Index2",
+                "event_tag_properties": {
+                  "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+                  "SkillTagCondition": [
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_FindTarget'Default__SB_EmpireSword_Early_Slash_C:xxSimpleSkillEventTag_0.xxSimpleSkillTagCondition_FindTarget_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Slash/Early/SB_EmpireSword_Early_Slash.12"
+                    }
+                  ]
+                },
+                "next_step": "ESubStateStepByActiveInput::Step3",
+                "playback_seconds": 1.4092856000000002,
+                "playback_end_seconds": 2.6166499,
+                "original_seconds": 1.1687396,
+                "function": "xxChangeNextStepFunc_1",
+                "notify_properties": {
+                  "Index": "ESimpleSkillEventIndex::Index2"
+                }
+              }
+            ],
+            "transition_seconds": 1.4092856000000002,
+            "target_step": "ESubStateStepByActiveInput::Step3"
+          },
+          {
+            "step": "ESubStateStepByActiveInput::Step3",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Slash/AC_EmpireSword_Slash_Step2",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSword_Slash_Step2",
+            "seconds": 1.9363856315612793,
+            "fps": "5766556/96261",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.3,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [],
+            "transition_seconds": null,
+            "target_step": null
+          }
+        ],
+        "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Slash/Early/SB_EmpireSword_Early_Slash.json"
+      },
+      {
+        "id": "EmpireSword_Early_Smash",
+        "steps": [
+          {
+            "step": "ESubStateStepByActiveInput::Step2",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/AC_EmpireSword_Smash",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSword_Smash",
+            "seconds": 2.7133946418762207,
+            "fps": "2996409/49880",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.2,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [],
+            "transition_seconds": null,
+            "target_step": null
+          }
+        ],
+        "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Smash/Early/SB_EmpireSword_Early_Smash.json"
+      },
+      {
+        "id": "EmpireSword_Pierce",
+        "steps": [
+          {
+            "step": "ESubStateStepByActiveInput::Step2",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/AC_EmpireSword_Pierce_Step1",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSword_Pierce_Step1",
+            "seconds": 1.076175332069397,
+            "fps": "5196737/86040",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.2,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [
+              {
+                "event_index": "ESimpleSkillEventIndex::Index2",
+                "event_tag_properties": {
+                  "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+                  "SkillTagCondition": [
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireSword_Pierce_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_TargetCondition_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.15"
+                    }
+                  ]
+                },
+                "next_step": "ESubStateStepByActiveInput::Step3",
+                "playback_seconds": 0.9544526057852232,
+                "playback_end_seconds": 1.0316939174327098,
+                "original_seconds": 1.2236423,
+                "function": "xxChangeNextStepFunc_0",
+                "notify_properties": {
+                  "Index": "ESimpleSkillEventIndex::Index2"
+                }
+              }
+            ],
+            "transition_seconds": 0.9544526057852232,
+            "target_step": "ESubStateStepByActiveInput::Step3"
+          },
+          {
+            "step": "ESubStateStepByActiveInput::Step3",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/AC_EmpireSword_Pierce_Step2",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSword_Pierce_Step2",
+            "seconds": 1.9327130317687988,
+            "fps": "1573885/26223",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.2,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [],
+            "transition_seconds": null,
+            "target_step": null
+          }
+        ],
+        "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Pierce/SB_EmpireSword_Pierce.json"
+      }
+    ],
+    "alert": {
+      "id": "Alert",
+      "steps": [
+        {
+          "step": "ESubStateStepByActiveInput::Step1",
+          "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_Armed/AC_EmpireSword_Vigilant_FreakOut_Armed",
+          "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSword_Vigilant_FreakOut_Armed",
+          "seconds": 1.8666666746139526,
+          "fps": "30/1",
+          "rate_scale": 1.0,
+          "anim_play_rate": 1.0,
+          "anim_loop_count": 1,
+          "blend_alpha": 0.3,
+          "next_step": "ESubStateStepByActiveInput::None",
+          "event_transitions": []
+        }
+      ],
+      "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Skill/Vigilant/FreakOut_Armed/SB_EmpireSword_Vigilant_FreakOut_Armed.json"
+    },
+    "original_cb": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Base_Setting/CB_EmpireSword_Early.json",
+    "original_scale": 1.2,
+    "capsule_half_height": 102.0,
+    "capsule_radius": 38.4,
+    "temporary": {
+      "walk_speed": 180.0,
+      "run_speed": 420.0,
+      "engage_distance": 350,
+      "preferred_distance": 240,
+      "attack_distance": 310,
+      "blend_out_seconds": 0.2,
+      "locomotion_blend_seconds": 0.2,
+      "combo_blend_seconds": 0.1
+    }
+  },
+  {
+    "family": "SwordShield",
+    "art_bp": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Blueprints/BP_EN_SwordShield_U01_L01",
+    "clips": {
+      "idle": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Playback/A_EN_PLAY_AC_EmpireSwordShield_Basic_Loop_01",
+      "combat_idle": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Playback/A_EN_PLAY_AC_Empire_SwordShield_Stand_F",
+      "walk": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Playback/A_EN_PLAY_AC_Empire_SwordShield_Walk_F",
+      "run": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Playback/A_EN_PLAY_AC_Empire_SwordShield_Run_F",
+      "F": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Playback/A_EN_PLAY_AC_Empire_SwordShield_LockOnWalk_F",
+      "R": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Playback/A_EN_PLAY_AC_Empire_SwordShield_LockOnWalk_R",
+      "B": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Playback/A_EN_PLAY_AC_Empire_SwordShield_LockOnWalk_B",
+      "L": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Playback/A_EN_PLAY_AC_Empire_SwordShield_LockOnWalk_L"
+    },
+    "attacks": [
+      {
+        "id": "Empire_SwordShield_SwordCombo",
+        "steps": [
+          {
+            "step": "ESubStateStepByActiveInput::Step1",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/AC_Empire_SwordShield_SwordCombo_01",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Playback/A_EN_PLAY_AC_Empire_SwordShield_SwordCombo_01",
+            "seconds": 2.190962553024292,
+            "fps": "890588/14895",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [
+              {
+                "event_index": "ESimpleSkillEventIndex::Index1",
+                "event_tag_properties": {
+                  "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+                  "SkillTagCondition": [
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_Empire_SwordShield_SwordCombo_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_TargetCondition_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.12"
+                    }
+                  ]
+                },
+                "next_step": "ESubStateStepByActiveInput::Step2",
+                "playback_seconds": 0.7774296450818909,
+                "playback_end_seconds": 0.9556438148170062,
+                "original_seconds": 0.8818395,
+                "function": "xxChangeNextStepFunc_1",
+                "notify_properties": {
+                  "Index": "ESimpleSkillEventIndex::Index1"
+                }
+              }
+            ],
+            "transition_seconds": 0.7774296450818909,
+            "target_step": "ESubStateStepByActiveInput::Step2"
+          },
+          {
+            "step": "ESubStateStepByActiveInput::Step2",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/AC_Empire_SwordShield_SwordCombo_02",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Playback/A_EN_PLAY_AC_Empire_SwordShield_SwordCombo_02",
+            "seconds": 1.3854868412017822,
+            "fps": "3795152/63351",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [],
+            "transition_seconds": null,
+            "target_step": null
+          }
+        ],
+        "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/SwordCombo/SB_Empire_SwordShield_SwordCombo.json"
+      },
+      {
+        "id": "Empire_SwordShield_Pierce",
+        "steps": [
+          {
+            "step": "ESubStateStepByActiveInput::Step1",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Pierce/AC_Empire_SwordShield_Pierce",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Playback/A_EN_PLAY_AC_Empire_SwordShield_Pierce",
+            "seconds": 2.229519844055176,
+            "fps": "1630404/27127",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.2,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [],
+            "transition_seconds": null,
+            "target_step": null
+          }
+        ],
+        "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Pierce/SB_Empire_SwordShield_Pierce.json"
+      },
+      {
+        "id": "Empire_SwordShield_ShieldCrash",
+        "steps": [
+          {
+            "step": "ESubStateStepByActiveInput::Step1",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/ShieldCrash/AC_Empire_SwordShield_ShieldCrash",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Playback/A_EN_PLAY_AC_Empire_SwordShield_ShieldCrash",
+            "seconds": 1.790028691291809,
+            "fps": "576655/9647",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.2,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [],
+            "transition_seconds": null,
+            "target_step": null
+          }
+        ],
+        "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/ShieldCrash/SB_Empire_SwordShield_ShieldCrash.json"
+      }
+    ],
+    "alert": {
+      "id": "Alert",
+      "steps": [
+        {
+          "step": "ESubStateStepByActiveInput::Step1",
+          "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Vigilant/FreakOut_Armed/AC_Empire_SwordShield_Vigilant_FreakOut_Armed",
+          "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Playback/A_EN_PLAY_AC_Empire_SwordShield_Vigilant_FreakOut_Armed",
+          "seconds": 1.8666666746139526,
+          "fps": "30/1",
+          "rate_scale": 1.0,
+          "anim_play_rate": 1.0,
+          "anim_loop_count": 1,
+          "blend_alpha": 0.2,
+          "next_step": "ESubStateStepByActiveInput::None",
+          "event_transitions": []
+        }
+      ],
+      "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Skill/Vigilant/FreakOut_Armed/SB_Empire_SwordShield_Vigilant_FreakOut_Armed.json"
+    },
+    "original_cb": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordShield/Base_Setting/CB_Empire_SwordShield.json",
+    "original_scale": 1.2,
+    "capsule_half_height": 102.0,
+    "capsule_radius": 33.6,
+    "temporary": {
+      "walk_speed": 180.0,
+      "run_speed": 420.0,
+      "engage_distance": 340,
+      "preferred_distance": 230,
+      "attack_distance": 300,
+      "blend_out_seconds": 0.2,
+      "locomotion_blend_seconds": 0.2,
+      "combo_blend_seconds": 0.1
+    }
+  },
+  {
+    "family": "HeavySwordsman",
+    "art_bp": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Blueprints/BP_EN_HeavySwordsman_U01_L01",
+    "clips": {
+      "idle": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSwordHArmor_Basic_Loop_01",
+      "combat_idle": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_CA_M_ESwordHArmor_Stand",
+      "walk": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_CA_M_ESwordHArmor_Walk_F",
+      "run": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_CA_M_ESwordHArmor_Run_F",
+      "F": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_CA_M_ESwordHArmor_LockOnWalk_F",
+      "R": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_CA_M_ESwordHArmor_LockOnWalk_R",
+      "B": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_CA_M_ESwordHArmor_LockOnWalk_B",
+      "L": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_CA_M_ESwordHArmor_LockOnWalk_L"
+    },
+    "attacks": [
+      {
+        "id": "EmpireSwordHArmor_SwordSwing_01",
+        "steps": [
+          {
+            "step": "ESubStateStepByActiveInput::Step1",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/01_SwordSwing_01/AC_EmpireSwordHArmor_SwordSwing_01_Step1",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSwordHArmor_SwordSwing_01_Step1",
+            "seconds": 2.1666297912597656,
+            "fps": "5406872/90113",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [
+              {
+                "event_index": "ESimpleSkillEventIndex::Index1",
+                "event_tag_properties": {
+                  "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+                  "SkillTagCondition": [
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireSwordHArmor_SwordSwing_01_C:xxSimpleSkillEventTag_3.xxSimpleSkillTagCondition_TargetCondition_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/01_SwordSwing_01/SB_EmpireSwordHArmor_SwordSwing_01.18"
+                    }
+                  ]
+                },
+                "next_step": "ESubStateStepByActiveInput::Step2",
+                "playback_seconds": 1.0351772943611945,
+                "playback_end_seconds": 1.3693328799999998,
+                "original_seconds": 0.935213,
+                "function": "xxChangeNextStepFunc_0",
+                "notify_properties": {
+                  "Index": "ESimpleSkillEventIndex::Index1"
+                }
+              }
+            ],
+            "transition_seconds": 1.0351772943611945,
+            "target_step": "ESubStateStepByActiveInput::Step2"
+          },
+          {
+            "step": "ESubStateStepByActiveInput::Step2",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/01_SwordSwing_01/AC_EmpireSwordHArmor_SwordSwing_01_Step2",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSwordHArmor_SwordSwing_01_Step2",
+            "seconds": 1.933296799659729,
+            "fps": "4921533/82024",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [
+              {
+                "event_index": "ESimpleSkillEventIndex::Index2",
+                "event_tag_properties": {
+                  "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+                  "SkillTagCondition": [
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireSwordHArmor_SwordSwing_01_C:xxSimpleSkillEventTag_2.xxSimpleSkillTagCondition_TargetCondition_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/01_SwordSwing_01/SB_EmpireSwordHArmor_SwordSwing_01.17"
+                    }
+                  ]
+                },
+                "next_step": "ESubStateStepByActiveInput::Step3",
+                "playback_seconds": 0.8112355,
+                "playback_end_seconds": 1.2669920578324443,
+                "original_seconds": 0.711271,
+                "function": "xxChangeNextStepFunc_2",
+                "notify_properties": {
+                  "Index": "ESimpleSkillEventIndex::Index2"
+                }
+              }
+            ],
+            "transition_seconds": 0.8112355,
+            "target_step": "ESubStateStepByActiveInput::Step3"
+          },
+          {
+            "step": "ESubStateStepByActiveInput::Step3",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/01_SwordSwing_01/AC_EmpireSwordHArmor_SwordSwing_01_Step3",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSwordHArmor_SwordSwing_01_Step3",
+            "seconds": 2.083261489868164,
+            "fps": "5713457/95221",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [
+              {
+                "event_index": "ESimpleSkillEventIndex::Index3",
+                "event_tag_properties": {
+                  "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+                  "SkillTagCondition": [
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireSwordHArmor_SwordSwing_01_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_TargetCondition_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/01_SwordSwing_01/SB_EmpireSwordHArmor_SwordSwing_01.16"
+                    }
+                  ]
+                },
+                "next_step": "ESubStateStepByActiveInput::Step4",
+                "playback_seconds": 0.9831193006022788,
+                "playback_end_seconds": 1.2453601725858903,
+                "original_seconds": 0.93319,
+                "function": "xxChangeNextStepFunc_1",
+                "notify_properties": {
+                  "Index": "ESimpleSkillEventIndex::Index3"
+                }
+              }
+            ],
+            "transition_seconds": 0.9831193006022788,
+            "target_step": "ESubStateStepByActiveInput::Step4"
+          },
+          {
+            "step": "ESubStateStepByActiveInput::Step4",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/01_SwordSwing_01/AC_EmpireSwordHArmor_SwordSwing_01_Step4",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSwordHArmor_SwordSwing_01_Step4",
+            "seconds": 2.9666666984558105,
+            "fps": "30/1",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [],
+            "transition_seconds": null,
+            "target_step": null
+          }
+        ],
+        "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/01_SwordSwing_01/SB_EmpireSwordHArmor_SwordSwing_01.json"
+      },
+      {
+        "id": "EmpireSwordHArmor_SwordSwing_02",
+        "steps": [
+          {
+            "step": "ESubStateStepByActiveInput::Step1",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/02_SwordSwing_02/AC_EmpireSwordHArmor_SwordSwing_02_Step1",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSwordHArmor_SwordSwing_02_Step1",
+            "seconds": 2.0703277587890625,
+            "fps": "4387767/73259",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [
+              {
+                "event_index": "ESimpleSkillEventIndex::Index1",
+                "event_tag_properties": {
+                  "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+                  "SkillTagCondition": [
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireSwordHArmor_SwordSwing_02_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_TargetCondition_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/02_SwordSwing_02/SB_EmpireSwordHArmor_SwordSwing_02.8"
+                    }
+                  ]
+                },
+                "next_step": "ESubStateStepByActiveInput::Step2",
+                "playback_seconds": 0.8524398970662282,
+                "playback_end_seconds": 1.565380170310681,
+                "original_seconds": 0.8154443,
+                "function": "xxChangeNextStepFunc_1",
+                "notify_properties": {
+                  "Index": "ESimpleSkillEventIndex::Index1"
+                }
+              }
+            ],
+            "transition_seconds": 0.8524398970662282,
+            "target_step": "ESubStateStepByActiveInput::Step2"
+          },
+          {
+            "step": "ESubStateStepByActiveInput::Step2",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/02_SwordSwing_02/AC_EmpireSwordHArmor_SwordSwing_02_Step2",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSwordHArmor_SwordSwing_02_Step2",
+            "seconds": 1.899999976158142,
+            "fps": "30/1",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [],
+            "transition_seconds": null,
+            "target_step": null
+          }
+        ],
+        "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/02_SwordSwing_02/SB_EmpireSwordHArmor_SwordSwing_02.json"
+      },
+      {
+        "id": "EmpireSwordHArmor_SwordSwing_03",
+        "steps": [
+          {
+            "step": "ESubStateStepByActiveInput::Step1",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/03_SwordSwing_03/AC_EmpireSwordHArmor_SwordSwing_03_Step1",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSwordHArmor_SwordSwing_03_Step1",
+            "seconds": 2.4402332305908203,
+            "fps": "5243053/87632",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [
+              {
+                "event_index": "ESimpleSkillEventIndex::Index1",
+                "event_tag_properties": {
+                  "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+                  "SkillTagCondition": [
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireSwordHArmor_SwordSwing_03_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_TargetCondition_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/03_SwordSwing_03/SB_EmpireSwordHArmor_SwordSwing_03.12"
+                    }
+                  ]
+                },
+                "next_step": "ESubStateStepByActiveInput::Step2",
+                "playback_seconds": 0.9437264648865702,
+                "playback_end_seconds": 1.4994409852412007,
+                "original_seconds": 0.983053,
+                "function": "xxChangeNextStepFunc_1",
+                "notify_properties": {
+                  "Index": "ESimpleSkillEventIndex::Index1"
+                }
+              }
+            ],
+            "transition_seconds": 0.9437264648865702,
+            "target_step": "ESubStateStepByActiveInput::Step2"
+          },
+          {
+            "step": "ESubStateStepByActiveInput::Step2",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/03_SwordSwing_03/AC_EmpireSwordHArmor_SwordSwing_03_Step2",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSwordHArmor_SwordSwing_03_Step2",
+            "seconds": 2.961447238922119,
+            "fps": "1297623/21589",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [
+              {
+                "event_index": "ESimpleSkillEventIndex::Index2",
+                "event_tag_properties": {
+                  "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+                  "SkillTagCondition": [
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireSwordHArmor_SwordSwing_03_C:xxSimpleSkillEventTag_2.xxSimpleSkillTagCondition_TargetCondition_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/03_SwordSwing_03/SB_EmpireSwordHArmor_SwordSwing_03.13"
+                    }
+                  ]
+                },
+                "next_step": "ESubStateStepByActiveInput::Step3",
+                "playback_seconds": 1.6221326358943282,
+                "playback_end_seconds": 2.2867331148661116,
+                "original_seconds": 1.827351,
+                "function": "xxChangeNextStepFunc_0",
+                "notify_properties": {
+                  "Index": "ESimpleSkillEventIndex::Index2"
+                }
+              }
+            ],
+            "transition_seconds": 1.6221326358943282,
+            "target_step": "ESubStateStepByActiveInput::Step3"
+          },
+          {
+            "step": "ESubStateStepByActiveInput::Step3",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/03_SwordSwing_03/AC_EmpireSwordHArmor_SwordSwing_03_Step3",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSwordHArmor_SwordSwing_03_Step3",
+            "seconds": 2.5999999046325684,
+            "fps": "30/1",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [],
+            "transition_seconds": null,
+            "target_step": null
+          }
+        ],
+        "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/03_SwordSwing_03/SB_EmpireSwordHArmor_SwordSwing_03.json"
+      },
+      {
+        "id": "SwordSwing_02_Single",
+        "steps": [
+          {
+            "step": "ESubStateStepByActiveInput::Step1",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/02_SwordSwing_02/AC_EmpireSwordHArmor_SwordSwing_02_Step1",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_AC_EmpireSwordHArmor_SwordSwing_02_Step1",
+            "seconds": 2.0703277587890625,
+            "fps": "4387767/73259",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [
+              {
+                "event_index": "ESimpleSkillEventIndex::Index1",
+                "event_tag_properties": {
+                  "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+                  "SkillTagCondition": [
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireSwordHArmor_SwordSwing_02_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_TargetCondition_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/02_SwordSwing_02/SB_EmpireSwordHArmor_SwordSwing_02.8"
+                    }
+                  ]
+                },
+                "next_step": "ESubStateStepByActiveInput::Step2",
+                "playback_seconds": 0.8524398970662282,
+                "playback_end_seconds": 1.565380170310681,
+                "original_seconds": 0.8154443,
+                "function": "xxChangeNextStepFunc_1",
+                "notify_properties": {
+                  "Index": "ESimpleSkillEventIndex::Index1"
+                }
+              }
+            ],
+            "transition_seconds": null,
+            "target_step": null
+          }
+        ],
+        "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/02_SwordSwing_02/SB_EmpireSwordHArmor_SwordSwing_02.json",
+        "note": "Original first-step recovery path when conditional continuation is not selected."
+      }
+    ],
+    "alert": {
+      "id": "Alert",
+      "steps": [
+        {
+          "step": "ESubStateStepByActiveInput::Step1",
+          "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/Vigilant/FreakOut_Armed/AC_Empire_SwordHArmor_Vigilant_FreakOut_Armed",
+          "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Playback/A_EN_PLAY_AC_Empire_SwordHArmor_Vigilant_FreakOut_Armed",
+          "seconds": 1.8333333730697632,
+          "fps": "30/1",
+          "rate_scale": 1.0,
+          "anim_play_rate": 1.0,
+          "anim_loop_count": 1,
+          "blend_alpha": 0.1,
+          "next_step": "ESubStateStepByActiveInput::None",
+          "event_transitions": []
+        }
+      ],
+      "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Skill/Vigilant/FreakOut_Armed/SB_Empire_SwordHArmor_Vigilant_FreakOut_Armed.json"
+    },
+    "original_cb": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/Empire_SwordHArmor/Base_Setting/CB_Empire_SwordHArmor_Early.json",
+    "original_scale": 1.3,
+    "capsule_half_height": 123.5,
+    "capsule_radius": 36.92,
+    "temporary": {
+      "walk_speed": 180.0,
+      "run_speed": 420.0,
+      "engage_distance": 410,
+      "preferred_distance": 285,
+      "attack_distance": 365,
+      "blend_out_seconds": 0.2,
+      "locomotion_blend_seconds": 0.2,
+      "combo_blend_seconds": 0.1
+    }
+  },
+  {
+    "family": "HalberdElite",
+    "art_bp": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Blueprints/BP_EN_HalberdElite",
+    "clips": {
+      "idle": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_AC_EmpireHalberd_Basic_Loop_01",
+      "combat_idle": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_CA_M_Halberd_Stand_F",
+      "walk": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_CA_M_Halberd_Walk_Peace_F",
+      "run": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_CA_M_Halberd_Run_F",
+      "F": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_CA_M_Halberd_LockOnWalk_F",
+      "R": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_CA_M_Halberd_LockOnWalk_R",
+      "B": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_CA_M_Halberd_LockOnWalk_B",
+      "L": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_CA_M_Halberd_LockOnWalk_L"
+    },
+    "attacks": [
+      {
+        "id": "EmpireHalberd_E_Early_Swing",
+        "steps": [
+          {
+            "step": "ESubStateStepByActiveInput::Step1",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Swing/Early/AC_EmpireHalberd_E_Early_Swing_01",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_AC_EmpireHalberd_E_Early_Swing_01",
+            "seconds": 2.589035749435425,
+            "fps": "5927875/99016",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [
+              {
+                "event_index": "ESimpleSkillEventIndex::Index1",
+                "event_tag_properties": {
+                  "EventTag": "ESimpleSkillEventTag::AnimationNotifyStartEnd"
+                },
+                "next_step": "ESubStateStepByActiveInput::Step2",
+                "playback_seconds": 1.2451011465761066,
+                "playback_end_seconds": 1.293619317997864,
+                "original_seconds": 1.1045637,
+                "function": "xxChangeNextStepFunc_0",
+                "notify_properties": {
+                  "Index": "ESimpleSkillEventIndex::Index1"
+                }
+              }
+            ],
+            "transition_seconds": 1.2451011465761066,
+            "target_step": "ESubStateStepByActiveInput::Step2"
+          },
+          {
+            "step": "ESubStateStepByActiveInput::Step2",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Swing/Early/AC_EmpireHalberd_E_Early_Swing_02",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_AC_EmpireHalberd_E_Early_Swing_02",
+            "seconds": 3.81656813621521,
+            "fps": "5730808/95511",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [
+              {
+                "event_index": "ESimpleSkillEventIndex::Index1",
+                "event_tag_properties": {
+                  "EventTag": "ESimpleSkillEventTag::AnimationNotifyTick",
+                  "SkillTagCondition": [
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_FindTarget'Default__SB_EmpireHalberd_E_Early_Swing_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_FindTarget_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Swing/Early/SB_EmpireHalberd_E_Early_Swing.9"
+                    },
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireHalberd_E_Early_Swing_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_SelfStatus_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Swing/Early/SB_EmpireHalberd_E_Early_Swing.11"
+                    },
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_NotifyEnable'Default__SB_EmpireHalberd_E_Early_Swing_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_NotifyEnable_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Swing/Early/SB_EmpireHalberd_E_Early_Swing.10"
+                    },
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_TargetCondition'Default__SB_EmpireHalberd_E_Early_Swing_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_TargetCondition_1'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Swing/Early/SB_EmpireHalberd_E_Early_Swing.12"
+                    }
+                  ]
+                },
+                "next_step": "ESubStateStepByActiveInput::Step3",
+                "playback_seconds": 1.4278436150593699,
+                "playback_end_seconds": 2.0230859071351857,
+                "original_seconds": 1.2864271,
+                "function": "xxChangeNextStepFunc_1",
+                "notify_properties": {
+                  "Index": "ESimpleSkillEventIndex::Index1"
+                }
+              }
+            ],
+            "transition_seconds": 1.4278436150593699,
+            "target_step": "ESubStateStepByActiveInput::Step3"
+          },
+          {
+            "step": "ESubStateStepByActiveInput::Step3",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Swing/Early/AC_EmpireHalberd_E_Early_Swing_03",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_AC_EmpireHalberd_E_Early_Swing_03",
+            "seconds": 4.0964508056640625,
+            "fps": "3116878/51903",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [],
+            "transition_seconds": null,
+            "target_step": null
+          }
+        ],
+        "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Swing/Early/SB_EmpireHalberd_E_Early_Swing.json"
+      },
+      {
+        "id": "EmpireHalberd_E_Early_Pierce",
+        "steps": [
+          {
+            "step": "ESubStateStepByActiveInput::Step1",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Pierce/Early/AC_EmpireHalberd_E_Early_Pierce_01",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_AC_EmpireHalberd_E_Early_Pierce_01",
+            "seconds": 4.22903299331665,
+            "fps": "834788/13899",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.25,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [
+              {
+                "event_index": "ESimpleSkillEventIndex::Index1",
+                "event_tag_properties": {
+                  "EventTag": "ESimpleSkillEventTag::AnimationNotifyStartEnd",
+                  "SkillTagCondition": [
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_FindTarget'Default__SB_EmpireHalberd_E_Early_Pierce_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_FindTarget_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Pierce/Early/SB_EmpireHalberd_E_Early_Pierce.6"
+                    },
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireHalberd_E_Early_Pierce_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_SelfStatus_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Pierce/Early/SB_EmpireHalberd_E_Early_Pierce.7"
+                    }
+                  ]
+                },
+                "next_step": "ESubStateStepByActiveInput::Step2",
+                "playback_seconds": 2.3025003064482257,
+                "playback_end_seconds": 2.6863150854314943,
+                "original_seconds": 2.2191126,
+                "function": "xxChangeNextStepFunc_0",
+                "notify_properties": {
+                  "Index": "ESimpleSkillEventIndex::Index1"
+                }
+              }
+            ],
+            "transition_seconds": 2.3025003064482257,
+            "target_step": "ESubStateStepByActiveInput::Step2"
+          },
+          {
+            "step": "ESubStateStepByActiveInput::Step2",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Pierce/Early/AC_EmpireHalberd_E_Early_Pierce_02",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_AC_EmpireHalberd_E_Early_Pierce_02",
+            "seconds": 3.156360387802124,
+            "fps": "5293252/88399",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.25,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [],
+            "transition_seconds": null,
+            "target_step": null
+          }
+        ],
+        "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Pierce/Early/SB_EmpireHalberd_E_Early_Pierce.json"
+      },
+      {
+        "id": "EmpireHalberd_E_Early_Push",
+        "steps": [
+          {
+            "step": "ESubStateStepByActiveInput::Step1",
+            "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/AC_EmpireHalberd_E_Early_Push_01",
+            "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_AC_EmpireHalberd_E_Early_Push_01",
+            "seconds": 1.8461734056472778,
+            "fps": "5110150/84993",
+            "rate_scale": 1.0,
+            "anim_play_rate": 1.0,
+            "anim_loop_count": 1,
+            "blend_alpha": 0.1,
+            "next_step": "ESubStateStepByActiveInput::None",
+            "event_transitions": [
+              {
+                "event_index": "ESimpleSkillEventIndex::Index1",
+                "event_tag_properties": {
+                  "EventTag": "ESimpleSkillEventTag::AnimationNotifyStart",
+                  "SkillTagCondition": [
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_AttackSuccess'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_AttackSuccess_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.10"
+                    },
+                    {
+                      "ObjectName": "xxSimpleSkillTagCondition_SelfStatus'Default__SB_EmpireHalberd_E_Early_Push_C:xxSimpleSkillEventTag_1.xxSimpleSkillTagCondition_SelfStatus_0'",
+                      "ObjectPath": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.12"
+                    }
+                  ]
+                },
+                "next_step": "ESubStateStepByActiveInput::Step2",
+                "playback_seconds": 1.1534449118836476,
+                "playback_end_seconds": 1.3204137643535652,
+                "original_seconds": 1.4451333,
+                "function": "xxChangeNextStepFunc_1",
+                "notify_properties": {
+                  "Index": "ESimpleSkillEventIndex::Index1"
+                }
+              }
+            ],
+            "transition_seconds": null,
+            "target_step": null
+          }
+        ],
+        "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Push/Early/SB_EmpireHalberd_E_Early_Push.json"
+      }
+    ],
+    "alert": {
+      "id": "Alert",
+      "steps": [
+        {
+          "step": "ESubStateStepByActiveInput::Step1",
+          "package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Vigilant/FreakOut_Armed/AC_EmpireHalberd_E_Vigilant_FreakOut_Armed",
+          "playback": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Playback/A_EN_PLAY_AC_EmpireHalberd_E_Vigilant_FreakOut_Armed",
+          "seconds": 1.2666666507720947,
+          "fps": "30/1",
+          "rate_scale": 1.0,
+          "anim_play_rate": 1.0,
+          "anim_loop_count": 1,
+          "blend_alpha": 0.1,
+          "next_step": "ESubStateStepByActiveInput::None",
+          "event_transitions": []
+        }
+      ],
+      "source": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Skill/Vigilant/FreakOut_Armed/SB_EmpireHalberd_E_Vigilant_FreakOut_Armed.json"
+    },
+    "original_cb": "Content/_Art/Enemies/HeinMach/Metadata/Expansion_20260909/Source/BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireHalberd_E/Base_Setting/CB_EmpireHalberd_E_Early.json",
+    "original_scale": 1.0,
+    "capsule_half_height": 140.0,
+    "capsule_radius": 70.0,
+    "temporary": {
+      "walk_speed": 200.0,
+      "run_speed": 420.0,
+      "engage_distance": 540,
+      "preferred_distance": 385,
+      "attack_distance": 490,
+      "blend_out_seconds": 0.2,
+      "locomotion_blend_seconds": 0.2,
+      "combo_blend_seconds": 0.1
+    }
+  }
+]

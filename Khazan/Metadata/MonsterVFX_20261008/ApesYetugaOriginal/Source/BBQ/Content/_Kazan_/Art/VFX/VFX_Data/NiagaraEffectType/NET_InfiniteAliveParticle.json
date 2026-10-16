@@ -1,0 +1,61 @@
+[
+  {
+    "Type": "NiagaraEffectType",
+    "Name": "NET_InfiniteAliveParticle",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'NiagaraEffectType'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/NiagaraEffectType/NET_InfiniteAliveParticle",
+    "Properties": {
+      "UpdateFrequency": "ENiagaraScalabilityUpdateFrequency::Continuous",
+      "CullReaction": "ENiagaraCullReaction::DeactivateImmediateResume",
+      "SignificanceHandler": {
+        "ObjectName": "NiagaraSignificanceHandlerDistance'NET_InfiniteAliveParticle:NiagaraSignificanceHandlerDistance_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/NiagaraEffectType/NET_InfiniteAliveParticle.1"
+      },
+      "SystemScalabilitySettings": {
+        "Settings": [
+          {
+            "Platforms": {
+              "QualityLevelMask": -1,
+              "DeviceProfileStates": [],
+              "CVarConditions": []
+            },
+            "bCullByDistance": true,
+            "bCullMaxInstanceCount": false,
+            "bCullPerSystemMaxInstanceCount": false,
+            "bCullByMaxTimeWithoutRender": false,
+            "bCullByGlobalBudget": false,
+            "MaxDistance": 3500.0,
+            "MaxInstances": 0,
+            "MaxSystemInstances": 0,
+            "MaxTimeWithoutRender": 0.0,
+            "MaxGlobalBudgetUsage": 1.0
+          }
+        ]
+      },
+      "EmitterScalabilitySettings": {
+        "Settings": [
+          {
+            "Platforms": {
+              "QualityLevelMask": -1,
+              "DeviceProfileStates": [],
+              "CVarConditions": []
+            },
+            "bScaleSpawnCount": false,
+            "SpawnCountScale": 1.0
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Type": "NiagaraSignificanceHandlerDistance",
+    "Name": "NiagaraSignificanceHandlerDistance_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'NiagaraSignificanceHandlerDistance'",
+    "Outer": {
+      "ObjectName": "NiagaraEffectType'NET_InfiniteAliveParticle'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/NiagaraEffectType/NET_InfiniteAliveParticle.0"
+    }
+  }
+]

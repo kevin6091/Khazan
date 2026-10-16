@@ -1,0 +1,18 @@
+{
+  "status": "failed",
+  "changed": [],
+  "raw_channels_written": 0,
+  "allowlist": [
+    "AnimSequence.RootMotionRootLock"
+  ],
+  "backup": "RootAssetsBefore",
+  "probe": {
+    "path": "/Game/__CodexMonsterContactProbe_20261012/ChargeTackleEnd",
+    "saved": true,
+    "root_keys_unchanged": true,
+    "save_readback": "REF_POSE",
+    "later_validation": "fresh native full-body pose test",
+    "deleted": true
+  },
+  "error": "Traceback (most recent call last):\n  File \"C:/Users/user/Desktop/GitProject/Khazan/Khazan/Scripts/Engineering/apply_monster_root_lock_repair_20261012.py\", line 34, in <module>\n    roots=raw_roots(a);settings=metadata(a)\n                                ^^^^^^^^^^^\n  File \"C:/Users/user/Desktop/GitProject/Khazan/Khazan/Scripts/Engineering/apply_monster_root_lock_repair_20261012.py\", line 17, in metadata\n    return {k:str(a.get_editor_property(k)) for k in ['enable_root_motion','force_root_lock','use_normalized_root_motion_scale','rate_scale','skeleton','additive_anim_type','ref_pose_type','ref_frame_index','bone_compression_settings','curve_compression_settings','notifies']}\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:/Users/user/Desktop/GitProject/Khazan/Khazan/Scripts/Engineering/apply_monster_root_lock_repair_20261012.py\", line 17, in <dictcomp>\n    return {k:str(a.get_editor_property(k)) for k in ['enable_root_motion','force_root_lock','use_normalized_root_motion_scale','rate_scale','skeleton','additive_anim_type','ref_pose_type','ref_frame_index','bone_compression_settings','curve_compression_settings','notifies']}\n                  ^^^^^^^^^^^^^^^^^^^^^^^^\nException: AnimSequence: Property 'Notifies' for attribute 'notifies' on 'AnimSequence' is protected and cannot be read\n"
+}

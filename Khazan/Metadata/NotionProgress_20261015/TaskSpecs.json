@@ -1,0 +1,471 @@
+[
+  {
+    "id": "fab",
+    "title": "Fab VFX 7팩 반입·얕은 라이브러리 정리",
+    "date": "2026-10-12",
+    "cat": [
+      "콘텐츠",
+      "폴리싱"
+    ],
+    "goal": "사용자가 제공한 Fab 7개 상품과 C:/Users/user/Desktop/VFX 공급 폴더를 대조하고, 누락됐던 4팩까지 Main에서 바로 조회할 수 있게 정리한다.",
+    "method": "네 번째 상품은 사용자 정정대로 Roar Spell VFX로 식별했다. Action-RPG Essentials, Dynamic Impact and Collision, Slash and Hit를 VFX/Assets까지 찾아 native 패키지로 반입했다. /Game/VFX 아래 01_ARPGEssentials, 02_DynamicImpact, 03_SlashHit, 04_RoarSpell, 05_CursedMagic, 06_NiagaraBundle, 07_ARPG03 및 _Shared로 정리했다. 새 깊은 분류 계층을 추가하지 않고, 실제 소비 효과만 기존 Ability/Notify에 연결한다.",
+    "result": "Main registry에서 팩별 NiagaraSystem 52/16/35/1/58/609/15개와 public asset 3,859개를 확인했다. 합계 786은 라이브러리 에셋 수이며 실제 게임에서 모두 재생한다는 뜻이 아니다. 반입·정리 필수 잔여 0. 현재 열린 Main 에디터에서도 read-only 조회로 확인했다.",
+    "insight": "공급 라이브러리의 반입 완료와 게임의 원작 표현 일치는 별도다. 전체 재임포트/이름 변경을 반복하지 않고 ListingMap과 SourcePackageIndex로 필요한 효과만 조사한다.",
+    "refs": [
+      "Docs/Art/FAB_VFX_IMPORT_20261012.md",
+      "Metadata/FabVFX_20261012/Completion/ListingMap.json",
+      "Metadata/FabVFX_20261012/Completion/LiveEditorAvailability.json"
+    ]
+  },
+  {
+    "id": "dodge",
+    "title": "플레이어 피격 제어 단축·Dodge 0.1초 무적·성공 피드백",
+    "date": "2026-10-12",
+    "cat": [
+      "캐릭터",
+      "폴리싱"
+    ],
+    "goal": "연속 공격에 한 번 맞은 뒤 긴 경직 때문에 다음 행동을 못 하는 문제를 줄이고, Dodge 시작 직후 공격을 회피할 수 있게 한다.",
+    "method": "기존 HitReaction Ability의 PlayerControlLockSeconds에 0.1초 TEMP 제어 잠금을 두고, 오래된 피격 타이머가 새로운 피격을 해제하지 않도록 실행 수명을 구분했다. Dodge Ability가 사용자 요청값 0.1초 무적 기여와 world-time deadline을 소유한다. 취소·비용 실패·다른 무적 기여를 함께 검증했다. Dodge에는 CursedMagic Dash1, 회피 성공에는 Blink1을 연결한다. 초기 성공음 저작 후 10/13 원본 justdodge cue로 보완된 이력을 구분한다.",
+    "result": "Defense 11사례, Recovery 6사례, 취소 8방향을 검증했다. 실제 근접/필드/투사체 GE, 무적 deadline 전후, 연속 피격, 다음 Dodge 및 CMC 이동을 확인했다. 6개 Main native suite가 성공했다. VFX preset 배율 ×0.12/×0.15는 어시스턴트 시각 TEMP이며 원작값이 아니다.",
+    "insight": "원작과의 완전한 executable 동일성은 확인하지 않았다. 최신 성공음은 HumanoidSFX의 SC_efx_pc_common_justdodge를 실행당 한 번 재생한다. 이동 중 회피와 거인 잡기의 실제 조작 경계는 별도 후속 일감으로 관리한다.",
+    "refs": [
+      "Metadata/BeastDodge_20261012/Completion/FinalVerification.json",
+      "Metadata/HumanoidSFX_20261013/FinalVerification.json",
+      "Docs/Engineering/CHARACTER_GAMEPLAY_ARCHITECTURE.md"
+    ]
+  },
+  {
+    "id": "received",
+    "title": "플레이어 일반 피격의 보라·파랑 HitBurst 제거",
+    "date": "2026-10-13",
+    "cat": [
+      "캐릭터",
+      "폴리싱"
+    ],
+    "goal": "플레이어가 맞을 때 공격 적중용 보라·파랑 파티클이 튀던 잘못된 피드백을 제거한다.",
+    "method": "DA_CharacterDefinition_Player의 HitReactions.ImpactEffect에서 PP_Combat_HitBurst 참조만 None으로 변경했다. 공유 파티클 에셋은 삭제하지 않았다. 실제 피해/피격 반응/다른 필드는 보존했다.",
+    "result": "실제 HP 피해 5사례에서 기존 received-hit burst 생성 0, 다른 exported field 동일, build exit 0을 확인했다. 10/15에는 승인 피격 혈흔 계약에 따라 정확한 Brutal Blood Trail_Sub가 새로 연결됐다. 따라서 현재 상태는 '플레이어 피격 VFX 전부 없음'이 아니라 '요청한 보라·파랑 burst 없음 + 빨간 승인 혈흔 사용'이다.",
+    "insight": "10/13 삭제 이력과 10/15 빨간 혈흔 추가를 함께 읽어야 현재 화면을 정확히 이해할 수 있다. 공격 적중용 공유 에셋을 통째로 삭제하면 다른 효과가 깨지므로 발생점의 참조만 분리했다.",
+    "refs": [
+      "Metadata/PlayerReceivedHitVFXRemoval_20261013/FinalVerification.json",
+      "Metadata/HeinMachColourVFX_20261015/FinalVerification.json"
+    ]
+  },
+  {
+    "id": "humanSfx",
+    "title": "플레이어·인간형 4종 현재 행동 SFX 바인딩·수명 보완",
+    "date": "2026-10-13",
+    "cat": [
+      "캐릭터",
+      "폴리싱"
+    ],
+    "goal": "현재 구현된 공격·이동·방어·회피·피격·행동에서 빠진 원본 음원과 중복 재생, 취소 정리 문제를 줄인다.",
+    "method": "저장된 936 animation/58 ComboDefinition/5 CharacterDefinition/84 grant 조사 결과를 바탕으로 누락 상위 Composite 음원과 공격 audio array 저장을 보완했다. 발·초기 cry·Guard 성공 중복을 정리하고, 단발음은 자연 끝음, loop와 source stop은 fade하는 기존 소유 수명을 적용했다. 원본 random choice/gain/media tail/source curve를 보존했다.",
+    "result": "최종 1,682 audio/control occurrence, 527 sequence(소리 제거 callback-only 3 포함), 35 combo/174 공격창, Dodge 8방향 성공음 저장을 확인했다. 추가 51 cue/248 new wave, fallback 0. 78 actual montage, cancel/loop cleanup/owner destroy 및 실제 mixer를 검증했다. master peak 0.5539245605, RMS 0.0203483704, clipping 0. 패링 cue의 TEMP gain 0.5 보정 후 peak 0.768127/clipping 0.",
+    "insight": "TEMP voice 0.85/foot 0.9/weapon 1, 최소 stop 0.08초, reverb send 0.05/0.15 등은 원작 직접값과 구분한다. Wwise DSP·전체 장치 주관 청취·Shipping 및 현재 world interaction producer가 없는 오브젝트까지의 무누락은 보장하지 않는다.",
+    "refs": [
+      "Metadata/HumanoidSFX_20261013/FinalVerification.json",
+      "Docs/Art/ART_PROJECT_STATE.md"
+    ]
+  },
+  {
+    "id": "giantSfx",
+    "title": "Apes·Yetuga 원본 행동 SFX·공격창·투사체 연결 보완",
+    "date": "2026-10-13",
+    "cat": [
+      "AI",
+      "폴리싱"
+    ],
+    "goal": "거인 두 종의 현재 저장 행동과 공격 판정에 원본 cue를 정확히 연결하고 잘못된 중복/누락을 식별한다.",
+    "method": "Apes 87 clip/253 event, Yetuga 125 clip/448 event를 원본 metadata와 비교했다. Apes 공격창 42, Yetuga 현재 공격창 252 및 object 4, 각 FastBall 투사체 비행음과 수신 body impact를 연결했다. 비오디오 구조 필드와 기존 retime은 유지했다.",
+    "result": "701 planned event의 missing/extra/null/wrong cue/time shift 0. 실제 mixer 26샘플(거인22/플레이어4), 취소2/투사체2를 별도로 확인했다. mixed peak 0.528594970703125, clipping 0. 발리스타 애니메이션 cue는 별도 강제 재생 peak 0.10968017578125였다.",
+    "insight": "701 저장 대조와 모든 701개를 실시간 청취했다는 주장을 구분한다. 발리스타 실제 월드 사용 owner/call path가 없어 상호작용 구현 완료로 계산하지 않았다. DSP/global RTPC/voice budget과 모든 행동 간 주관 청감은 후속이다.",
+    "refs": [
+      "Metadata/GiantSFX_20261013/FinalVerification.json",
+      "Metadata/GiantSFX_20261013/MainGiantSavedAuditFinal/GiantSFXAudit.json"
+    ]
+  },
+  {
+    "id": "hitDeath",
+    "title": "일반 적중음 중복 제거·브루탈 치명 사망 전이 수정",
+    "date": "2026-10-14",
+    "cat": [
+      "캐릭터",
+      "AI",
+      "폴리싱"
+    ],
+    "goal": "일반 공격에 브루탈처럼 묵직한 공통 소리가 겹치고, 브루탈 처치 후 몬스터가 서서 죽는 현상을 수정한다.",
+    "method": "Main Combo 26 node의 중복 공통 적중 audio 60창을 정리하고 수신 대상별 body-hit cue를 유지했다. 잠금 해제 후 저장 데이터에 반영하고 임시 exact-cue 차단 분기를 제거했다. paired victim 종료 뒤 기존 death montage로 연결하며, 10/15 DeathTransitionBlendSeconds TEMP 최소 0.24초로 죽음 전이를 보완했다.",
+    "result": "fresh readback에서 26 node/60창의 비오디오 동일성을 확인했다. 실제 PlayerAttackCollision PIE에서 body hit 관측/common 중복음 0/clipping 0. 브루탈 치명 사망 12건, 일반·중단 사망 12건이 D3D12에서 성공했다. 후속 CombatFeel RHI에서도 lethal Brutal 12건을 확인했다.",
+    "insight": "일반 적중 소리와 처형용 레이어의 발생 책임을 분리했다. 블렌드 0.24초는 어시스턴트 TEMP이며 원작 사망 전이 수치로 표현하지 않는다. 모든 원작 죽음 연출의 pixel/frame 동일성은 별도다.",
+    "refs": [
+      "Metadata/MainIntegration_20261014/FinalVerification.json",
+      "Metadata/CombatFeel_20261015/FinalVerification.json"
+    ]
+  },
+  {
+    "id": "giantAI",
+    "title": "Apes·Yetuga StateTree 원거리 추적·장거리 잡기·패턴 보완",
+    "date": "2026-10-15",
+    "cat": [
+      "AI",
+      "캐릭터"
+    ],
+    "goal": "현재 원본 패턴 자료와 저장 StateTree를 사용하는 거인 두 종이 원거리에서도 추적·공격·잡기 전이를 이어가도록 한다.",
+    "method": "현재 ST_Apes_Original/ST_Yetuga_Original 및 기존 MonsterPatternAbility/AI/StateTree 소유자를 보완했다. 장거리 추적과 dash capture가 기존 grant를 통해 실행되게 하고, Yetuga 원거리 Armageddon 정책은 BP AISettings에서 분리했다. 범위 800~5000cm는 원본 BT058 split 800/BT037 maxDistance 5000에서 가져왔다. 확률 0.3/쿨다운20초는 어시스턴트 TEMP이고, source end cooldown240의 원거리 정책 override임을 명시한다.",
+    "result": "FinalMain01: GiantCombatFeel/BeastDodge.SourceAudit/GiantFall 3 suite 성공. 실제 추적 이동 Apes 3815.44cm, Yetuga 4200.1cm; 장거리 capture 이동 Apes 1846.74cm/Yetuga1815.15cm 및 held=1. 실제 full-HP StateTree에서 Yetuga 4500cm Armageddon 진입을 확인했다. 새 runtime 파일/class/manager 0.",
+    "insight": "고정 플레이어 2000cm를 사용한 capture QA이며 움직이는 회피자의 통합 조작 검증은 남았다. 강제 확률0/1 경계는 선택 분기 검증이고 저장 확률0.3의 실측 빈도 검증이 아니다. 원작 native abort/RNG/selected-step semantics까지 한치의 오차 없는 재현이라고 기록하지 않는다.",
+    "refs": [
+      "Metadata/CombatFeel_20261015/FinalVerification.json",
+      "Metadata/BeastDodge_20261012/Completion/FinalVerification.json",
+      "Docs/Engineering/APES_YETUGA_FALL_IMPLEMENTATION_20261011.md"
+    ]
+  },
+  {
+    "id": "giantReaction",
+    "title": "거인 비중단 피격·Group1 약점·그로기·루트 이동 보완",
+    "date": "2026-10-15",
+    "cat": [
+      "AI",
+      "캐릭터",
+      "폴리싱"
+    ],
+    "goal": "거인의 일반 피격이 공격을 끊지 않으면서, 유효한 약점 파괴/소진/특수 반응은 별도 수명으로 실행되게 한다.",
+    "method": "일반 피격을 독립 additive Slot 표현으로 재생하고 피해 GE/공격 Ability/AI는 유지했다. ST0/HP0은 소진·사망 우선이다. Apes DempseyRoll Just Guard 및 Yetuga ChargeTackle 비보행성 벽 Stun 경로를 보완했다. Group1 위치/내구도는 원본 자료를 쓰고, HP피해→부위내구 환산 ×20과 half extent32cm는 Definition의 명시적 TEMP adapter다. 기존 HitReaction Ability로 PartGroggy 1회와 지속 loop를 실행한다.",
+    "result": "일반 GiantHit 25/25, 원본 full-pose16 보존. 실제 weak box Apes2/Yetuga3, montage6.0333333/8.0333328초, root 추출523.5443115cm와 capsule 이동526.8018/526.7897cm를 관측했다. groggy 지속 샘플277/437. 16 root asset read-only audit는 변경 전과 동일했다. 루트 데이터 자체의 일괄 재수정은 하지 않았다.",
+    "insight": "원본 Group1 durability Apes1/Yetuga350과 TEMP damage adapter를 혼동하지 않는다. SecondDurability native 조건, 실제 플레이어 입력부터 부위 파괴까지 및 벽 충돌 직접 물리 통합은 추가 근거가 필요하다. 원본 VAT shader 미확인으로 판처럼 보이던 혈액 메시3은 전용 복사본에서만 숨기고 sprite 혈흔/연기는 유지했다.",
+    "refs": [
+      "Metadata/GiantHitOverlay_20261013/FinalVerification.json",
+      "Metadata/GiantReaction_20261014/FinalVerificationTuning.json",
+      "Metadata/CombatFeel_20261015/FinalVerification.json",
+      "Docs/Engineering/GIANT_NONINTERRUPTING_HIT_20261013.md"
+    ]
+  },
+  {
+    "id": "parry",
+    "title": "패링 전용 광막·왜곡 최신 Main 효과 연결",
+    "date": "2026-10-15",
+    "cat": [
+      "캐릭터",
+      "폴리싱"
+    ],
+    "goal": "공격의 길고 가는 백색 중심/붉은 외곽선과 패링의 붉은·보라 광막을 구분하고, 패링 성공의 왜곡과 접촉 burst를 현재 메인 경로에서 재생한다.",
+    "method": "최신 Guard 성공 경로는 /Game/VFX/03_SlashHit/KZ_Parring_Distort와 기존 Brutal 접촉 PS3개를 사용한다. 원본 Grapple Notifies[12]/[10]/[27]의 PP_AtkEx_Grapple_01, PP_Dmg_Blood_Trail_Sub, PP_AtkEx_Grapple_02와 window delta를 사용했다. Actor XY 중점/실시간 Bip001-Spine2 Z 평균에 배치하고 native camera-facing renderer를 유지한다. 이전 ParryImpactEffect/ParryScreenDistortion volume/바닥용 plunge 연결은 최신 경로에서 제거됐다.",
+    "result": "Main 저장/fresh readback과 실제 D3D12 패링17 상황 성공. 공유 원본 Niagara/PS/material/Brutal montage 자체를 재작성하지 않았다. native scale1, emission stop0.5초/max lifetime2.5초는 명시된 TEMP 수명이며 alpha drain은 유지한다. 초기 full9 잔상 후보는 접촉3 최종 연결로 대체됐다.",
+    "insight": "과거 'plunge distortion 연결' 기록은 당시 이력이고 현재 연결은 KZ_Parring_Distort다. 17상황 실행/만료 통과를 원작 사진과 동일한 광학 외관 보장으로 확대하지 않는다. 동일 카메라·노출·타이밍 원작 비교와 custom shader 복원이 후속이다.",
+    "refs": [
+      "Metadata/CombatFeel_20261015/FinalVerification.json",
+      "Docs/Art/PLAYER_PARRY_SOURCE_20261012.md",
+      "Docs/Engineering/PARRY_IMPLEMENTATION_20261012.md"
+    ]
+  },
+  {
+    "id": "camera",
+    "title": "6축 선형 force/return 카메라·거인 이벤트·변동 적용",
+    "date": "2026-10-15",
+    "cat": [
+      "AI",
+      "폴리싱"
+    ],
+    "goal": "단순 반복 진동 대신 공격 방향·속도·충격에 맞는 앞뒤/좌우/상하 이동과 회전을 적용하고 같은 재생의 기계적 반복을 줄인다.",
+    "method": "기존 KZCombatCameraModifier를 재사용해 선형 force와 return envelope, 교대 pulse와 변동을 적용했다. source amplitude/scale/distance window는 보존했다. EditDefaultsOnly 설정의 최소 rise0.08초/return0.16초/최대반복4Hz는 어시스턴트 TEMP다. 기존 variation0.12/cross-axis0.06, 90cm/2도 clamp를 유지한다. 거인 행동/공격은 저장 animation48개/event86개와 기존 MonsterVisual notify로 연결한다.",
+    "result": "현재 카메라/패링 Main 저장 계약 readback 유지. GiantCamera 대표4사례, LinearCamera PIE, Parry17을 각각 실제 기록된 DLL에서 통과했다. 종료·겹침·거리 감쇠와 실행 변동 검증을 보존했다. source8 입력과 module별 receipt가 남아 있으며 이전 흔들림 경로를 그대로 중복 실행하지 않는다.",
+    "insight": "선형 envelope의 현재 구현과 원작 native camera modifier 실행 코드 복원은 다르다. 대응되지 않은 source package2 및 실제 영상 6축 궤적의 오차 측정은 남았다. 스크린샷은 흔들림 시간 곡선의 증거가 아니므로 native 로그/설정과 함께 판정한다.",
+    "refs": [
+      "Metadata/GiantCamera_20261015/FinalVerification.json",
+      "Metadata/CombatFeel_20261015/FinalVerification.json"
+    ]
+  },
+  {
+    "id": "slash",
+    "title": "플레이어 Slash 무기 추적·외측 위치·원본 효과 보존",
+    "date": "2026-10-14",
+    "cat": [
+      "캐릭터",
+      "폴리싱"
+    ],
+    "goal": "공격 이펙트가 무기와 반대 손/몸 안쪽에 붙거나 타격 방향을 흐리는 문제를 줄인다.",
+    "method": "첫 약공격 추가 Slash를 실제 Weapon_R로 정정한 뒤, 현행 KZ_Slash 사용 montage5개를 표적 조사했다. 외측 위치는 imported mesh geometry와 실제 시작 프레임을 보고 TEMP로 조정했다. 직접 제작한 sequencer pair1개는 유지했다. 기존 effect object/clock/GUID/audio/피해/Physics는 보존했다.",
+    "result": "Slash pair33 중32를 조정하고 33 start window 각각3프레임/시점을 검토했다. original effect object882개, event clock/GUID를 보존했다. Main composed288 node 캡처가 있으며 최초 약공격도 실제18+Brutal4/GPU70/yaw90을 검증했다.",
+    "insight": "TEMP 전방35cm·XY1.15 및 각 pair 조정은 원작 메타데이터 직접값이 아니다. 공격의 백색 중심/붉은 외곽선과 패링 광막을 다시 반대로 판단하지 않도록 역할을 명시한다. 원작 pixel/shader 동일성은 미검증이다.",
+    "refs": [
+      "Metadata/WeakAttack01Slash_20261013/FinalVerification.json",
+      "Metadata/PlayerSlashOuter_20261014/FinalVerification.json"
+    ]
+  },
+  {
+    "id": "heal",
+    "title": "회복 모션 VFX·부착·취소 정리 Main 반영",
+    "date": "2026-10-13",
+    "cat": [
+      "캐릭터",
+      "폴리싱"
+    ],
+    "goal": "회복 모션의 원본 역할별 효과를 손/몸에 올바르게 붙이고 취소·무기·입력 수명에 맞춰 정리한다.",
+    "method": "원본 효과5역할/child11과 source LUT/attachment를 복원해 기존 Heal montage와 기존 notify 실행 경로에 연결했다. 새 runtime class/component/manager/tag를 만들지 않았다. HP 회복·무기·입력·중단 cleanup은 기존 소유자가 유지한다.",
+    "result": "Main asset13개(신규12/기존montage1), runtime 기존1 수정. protected133개 SHA 변경0, 별도 Main build/saved audit/실제 runtime 검증 성공. 실제 화면과 effect ID를 영수증에 남겼다.",
+    "insight": "가시성 보완은 보고서에 기록된 TEMP이며 원본 shader 전체 복원으로 보지 않는다. 완료는 현재 Heal 실행/중단 계약의 검증이고 전 플레이 상황의 무제한 동일성은 아니다.",
+    "refs": [
+      "Metadata/HealVFX_20261013/FinalVerification.json",
+      "Metadata/HealVFX_20261013/MainSaved01/SavedAudit.json"
+    ]
+  },
+  {
+    "id": "physics",
+    "title": "몬스터 6계열 보조 물리·의상·헤어 구성",
+    "date": "2026-10-13",
+    "cat": [
+      "캐릭터",
+      "AI",
+      "폴리싱"
+    ],
+    "goal": "플레이어의 현재 보조 물리 구성을 재사용해 몬스터 의상·헤어 등 2차 움직임을 연결한다.",
+    "method": "기존 mesh/PhysicsAsset/PostProcess 경로를 확장하고 modular copy-pose를 유지했다. 전체 35 mesh/35 physics asset, postprocess20, BP6의 필요한 설정만 반영했다. 새 runtime class/file은 만들지 않았다.",
+    "result": "317 secondary bone, Main 전달99파일. 현행 gameplay6계열에 실제 saved/native RHI/runtime 검사를 수행했다. 나머지 imported variant는 정적 설정 검증 범위다.",
+    "insight": "원작 물리 solver 동일성·모든 삼각형 무관통·Shipping/network는 검증하지 않았다. 기능별 실제 runtime 범위와 imported variant 전체의 설정 범위를 나눠 기록한다.",
+    "refs": [
+      "Metadata/MonsterSecondaryPhysics_20261013/FinalVerification.json"
+    ]
+  },
+  {
+    "id": "alphaSnow",
+    "title": "파티클 사각 경계·검은 가림 보정·HeinMach 눈 예산 축소",
+    "date": "2026-10-13",
+    "cat": [
+      "콘텐츠",
+      "폴리싱"
+    ],
+    "goal": "현재 재생 VFX의 사각 카드/검은 배경 문제를 줄이고 HeinMach 강설이 시야를 가리지 않도록 한다.",
+    "method": "원인별 parent13/MI16과 눈 budget1 등30파일을 표적 수정했다. alpha와 refraction edge를 확인하고, 원본 source RGB/PS/NS 필드를 무작정 지우지 않았다. 강설 source rate1250/2500 particles/s는 보존하면서 budget scale을 TEMP0.25→0.20으로 낮췄다.",
+    "result": "Main saved/RHI/game 검증 성공. 예산 계수는20% 감소이며 실제 관측 flake평균2119→1862.33, dust532.67→454.67은 무작위·프레임 표본이므로 매 프레임 정확20% 감소를 뜻하지 않는다. 후속 거인 death white disk와 Yetuga atlas는 별도 원인으로10/15 수정됐다.",
+    "insight": "모든 사각형이 같은 alpha 문제는 아니다. deferred decal emissive, atlas frame sampling, opacity/refraction은 다른 수정이다. 10/15 catalogue321 중46종은 대상/파라미터/시간별 추가 검증 대상으로 남긴다.",
+    "refs": [
+      "Metadata/ParticleAlpha_20261013/FinalVerification.json",
+      "Metadata/MonsterDeathWhiteDisc_20261015/FinalVerification.json",
+      "Metadata/YetugaSnowLayout_20261015/FinalVerification.json"
+    ]
+  },
+  {
+    "id": "deathWhite",
+    "title": "몬스터 사망 시 큰 흰 원형 바닥 투영 제거",
+    "date": "2026-10-15",
+    "cat": [
+      "AI",
+      "폴리싱"
+    ],
+    "goal": "일부 몬스터 죽음에 나타나는 큰 흰 원반의 실제 생성원을 분리하고 비정상 투영만 제거한다.",
+    "method": "D3D12 death clip18개와 decal component9개를 비교했다. MonsterHuman D00/D02 reconstructed decal이 흰 RGB mask를 unlit emissive로 표시한 것이 원인이었다. Yetuga/Apes/Heavy2/Wraith Swordsman4, 총8개의 death notify에서 DecalMaterial 참조만 None으로 변경했다. animation/notify clock와 정상 dirt/blood/ash를 유지했다.",
+    "result": "Main saved8, 다른 death package10 SHA 동일, bad component8 제거/정상 dirt1 유지. 수정 뒤 death clip18과 기존 HP0 blood/ash/dissolve6 및 ground policy 회귀 성공, material compile failure0. 데이터만 변경해 별도 C++ 빌드를 반복하지 않았다.",
+    "insight": "Before/After 격리 사진은 같은 프레임에서 해당 decal만 숨겨 원인을 입증한 비교다. 실제 저장 수정 뒤 death replay도 별도로 확인했다. 공유 재질/사망 혈흔 전체 삭제와 구분한다.",
+    "refs": [
+      "Metadata/MonsterDeathWhiteDisc_20261015/FinalVerification.json",
+      "Metadata/MonsterDeathWhiteDisc_20261015/AfterRHI01",
+      "Metadata/MonsterDeathWhiteDisc_20261015/Backup/Content"
+    ]
+  },
+  {
+    "id": "yetugaSnow",
+    "title": "Yetuga 눈먼지의 격자 배열 아틀라스 표시 수정",
+    "date": "2026-10-15",
+    "cat": [
+      "AI",
+      "폴리싱"
+    ],
+    "goal": "작은 눈먼지가 오와 열을 맞춰 보이는 원인을 없애고 하나의 자연스러운 구름으로 읽히게 한다.",
+    "method": "실제 T_Smoke03_SubUV_9x9의9×9/81셀 전체가 1×1 카드에 표시되는 재질 문제가 원인이었다. 기존 soft snow parent의 전용 복사본 M_KZGiant_SnowFlipbook9x9를 만들고 A05/A06 MI2만 reparent했다. particle별 하나의 프레임과 인접 프레임을 blend한다. normalized particle age×(81−1)은 원본 custom shader가 없는 상황의 TEMP 재구성이다.",
+    "result": "Main 저장3(신규material1/MI2), Source/PS/animation/texture 변경0. 실제 movement/action6, particle7, 저장 GAS pattern2, 총15사례 성공. shader compile failure0. protected39/particle system23 및 기존 death decal fix8 SHA 동일. 전후 SideMove_L_Long_01 화면에서 반복 격자가 사라지고 연결된 먼지를 확인했다.",
+    "insight": "보이는 격자는 spawn위치 정렬이 아니라 atlas전체를 노출한 결과였다. 따라서 무작위 위치/입자 수/속도/수명/알파를 불필요하게 바꾸지 않았다. burst가 이미 끝나 빈 standalone 캡처는 시각 성공 근거로 쓰지 않는다.",
+    "refs": [
+      "Metadata/YetugaSnowLayout_20261015/FinalVerification.json",
+      "Metadata/YetugaSnowLayout_20261015/BeforeRHI02/008_Locomotion_SideMove_L_Long_01.png",
+      "Metadata/YetugaSnowLayout_20261015/AfterRHI01/008_Locomotion_SideMove_L_Long_01.png"
+    ]
+  },
+  {
+    "id": "colour",
+    "title": "HeinMach 색감·승인 혈흔·Surface VFX 색 보존",
+    "date": "2026-10-15",
+    "cat": [
+      "콘텐츠",
+      "폴리싱"
+    ],
+    "goal": "원작 참고 화면을 기준으로 HeinMach 색감과 빨간 혈흔을 조정하고 맵 후처리가 VFX 색을 과도하게 바꾸는 현상을 줄인다.",
+    "method": "map2/Definition7/Surface VFX root95/ground blood1, 총105package를 수정했다. Arcane Kuwahara blendable 연결2를 제거하고 colour grading/LUT off, LocalExposure identity를 적용했다. Surface VFX vertex fog off와 누락 emissive exposure compensation을 보완했다. 승인 피격은 Player+몬스터6종에 정확한 기존 Brutal PP_Dmg_Blood_Trail_Sub를 수신 capsule표면에서 재생한다. 원본 particle module/count/timing 및 decal scatter/lifetime은 유지했다.",
+    "result": "105 현재 package/saved readback 검증. scene actor10009 전후 동일, actor pose 변화0. native Parry/MonsterRepair/PlayerAttackCollision 3 suite 성공. 현재 catalogue321 system×두 맵의 age0.2s 촬영에서275쌍은 가시,46은 추가 조건이 필요하다. 왜곡2종은 같은 opaque배경3회씩 재검사했다.",
+    "insight": "빛/안개/노출과 혈흔 RGB/readability는 어시스턴트 TEMP art tuning이다. native film tonemapping/AA/물리 조명/depth/refraction은 유지된다. 321종 전부의 외관 합격이나 원작 shader/pixel 동일성, Shipping 성능 완료로 확대하지 않는다.",
+    "refs": [
+      "Metadata/HeinMachColourVFX_20261015/FinalVerification.json",
+      "Metadata/HeinMachColourVFX_20261015/CurrentCatalogDelta.json",
+      "Docs/Art/HEINMACH_COLOUR_VFX_20261015.md"
+    ]
+  },
+  {
+    "id": "hud",
+    "title": "전투 HUD·가슴 LockOn·브루탈 B·DPI 가독성 보완",
+    "date": "2026-10-14",
+    "cat": [
+      "캐릭터",
+      "폴리싱"
+    ],
+    "goal": "HP/ST/보스 게이지, 실제 브루탈 적격 B 표시와 가슴 록온을 선명하게 읽을 수 있도록 한다.",
+    "method": "원본 texture16/font/레이아웃을 재사용한다. UI_Chest(Bip001-Spine2) 실시간 projection, ASC 비율의 즉시 foreground, 감소 때만 HP/ST damage trail을 쓴다. gameplay targeting TargetPoint는 유지한다. 10/14 변경은 DefaultEngine.ini의 ShortestSide DPI곡선뿐이며 900px1.15/1080px1.3은 TEMP 표시 배율이다.",
+    "result": "실제 Khazan.CombatUI.PIE 변경 전후 Success, material fallback0. 1600×900 동일 fixture에서 Boss HP491×8→687×11px, B28×28→40×40px. 실제 B Ability/치명0/Max0/UnPossess-RePossess도 검증했다. 원본 텍스처/폰트/material/WBP/game C++ 변경0인 DPI후속은 새 빌드를 하지 않았다.",
+    "insight": "기존 완료 UI 일감은 유지하며 추가 가독성 범위를 이 일감으로 남긴다. 실제720p/1080p/4K 개별 검수 및 원작 배율 pixel일치는 미검증이다. .35초는 감소 잔상 TEMP이며 회복 foreground에 지연을 주는 값이 아니다.",
+    "refs": [
+      "Metadata/CombatUI_20261011/FinalVerification.json",
+      "Metadata/UIQuality_20261014/ImprovedPIE01",
+      "Docs/Engineering/COMBAT_UI_RUNTIME_20261011.md"
+    ]
+  },
+  {
+    "id": "grab",
+    "title": "Apes·Yetuga 잡기 경고 VFX·SFX·camera-facing 연결",
+    "date": "2026-10-15",
+    "cat": [
+      "AI",
+      "폴리싱"
+    ],
+    "goal": "일반 가드/패링으로 막을 수 없는 잡기 공격의 경고를 몬스터 가슴에서 읽을 수 있게 한다.",
+    "method": "기존 KZAnimNotify_CombatEffect와 audio state를 이용해 경고 표시/소리를 연결했다. 실제 UI_Chest와 camera-facing, mesh AABB 앞면 위치를 사용한다. capture node의 bBeginsCapture=true/bBlockable=false를 보존하고 Combo 적중에서 일반 guard/parry호출을 건너뛴다.",
+    "result": "fresh Main readback에서7animation/7capture node/12창, source/audio state와 카메라 이벤트4 누락0. 10/14 D3D12 PIE와 경고 음원9emitter/4.360875초 검증 근거가 있다. 10/15 재확인은 asset save0/전후SHA동일이며 새 PIE를 했다고 기록하지 않는다.",
+    "insight": "실제 플레이어 Guard를 계속 누른 상태에서 잡기를 당하는 end-to-end 사례는 추가 QA로 분리한다. 경고 원본 custom shader/DSP 완전 일치도 미확인이다.",
+    "refs": [
+      "Metadata/GiantGrabWarning_20261014/PIE/RuntimeReport.json",
+      "Metadata/GiantGrabWarning_20261015/SavedReadback.json",
+      "Docs/Engineering/ENGINEERING_PROJECT_STATE.md"
+    ]
+  },
+  {
+    "id": "e2e",
+    "title": "[후속] HeinMach·StormPass 실제 조작 연속 플레이 QA",
+    "cat": [
+      "콘텐츠",
+      "AI",
+      "폴리싱"
+    ],
+    "goal": "개별 자동화 성공을 두 레벨의 실제 플레이 경험으로 연결한다.",
+    "method": "메인 프로젝트의 두 맵에서 진입→이동→LockOn→일반/강공격→가드/패링/Dodge→피격/회복→그로기/브루탈→사망/재시작까지 실제 입력으로 기록한다. 인간형4종/Apes/Yetuga를 포함하고 벽/경사/카메라 occlusion과 전투 재개를 관찰한다. 재현맵·대상·입력 순서·빌드SHA·영상 timecode를 사례별 저장한다.",
+    "result": "미착수/계획. 완료 기준: 예정 시나리오별 성공/실패/제외 사유를 전부 기록하고 blocker를 수정한 뒤 같은 시나리오 재검증. 현재 완료된 개별 suite를 이 일감 완료로 대신하지 않는다.",
+    "insight": "우선순위 높음. 기존 완료 일감들의 통합 검증 후속이며 신규 기능의 포괄 개발 승인으로 해석하지 않는다. 담당자/착수일/마감일은 아직 미확정이다.",
+    "refs": [
+      "Metadata/CombatFeel_20261015/FinalVerification.json",
+      "Metadata/HeinMachColourVFX_20261015/FinalVerification.json"
+    ]
+  },
+  {
+    "id": "defenseQA",
+    "title": "[후속] 이동 회피·Guard-held 잡기·무적 경계 입력 QA",
+    "cat": [
+      "캐릭터",
+      "AI",
+      "폴리싱"
+    ],
+    "goal": "고정 대상 자동화로 확인하지 못한 실제 입력과 방어/잡기 경계 사례를 닫는다.",
+    "method": "이동 중 dash capture 추적, Guard를 누른 채 unblockable 잡기 수신, Dodge시작/0.1초 deadline전후의 근접·필드·투사체 피해를 실제 플레이 입력 경로로 기록한다. 중첩 무적/반복 피격/Ability취소/비용실패/소유권 변경을 기존 suite와 대조한다.",
+    "result": "계획. 완료 기준: HP/ST/태그 기여/실행ID와 capture held 상태, 실제 다음 행동 가능 시점이 로그·영상에서 일치하며 중복피해/늦은 해제/취소누수가 없어야 한다. 기존 Defense11/Recovery6과 정지대상 장거리잡기 성공은 선행 근거다.",
+    "insight": "우선순위 높음, 연속 플레이 QA와 같은 빌드에서 진행한다. 무적0.1초는 사용자 요청값이며 새로운 수치를 임의 추가하지 않는다. 아직 결과/완료일/담당을 확정하지 않는다.",
+    "refs": [
+      "Metadata/BeastDodge_20261012/Completion/FinalVerification.json",
+      "Metadata/CombatFeel_20261015/FinalVerification.json",
+      "Metadata/GiantGrabWarning_20261015/SavedReadback.json"
+    ]
+  },
+  {
+    "id": "weakQA",
+    "title": "[후속] 거인 부위내구·SecondDurability·특수 트리거 원본 확인",
+    "cat": [
+      "AI",
+      "캐릭터"
+    ],
+    "goal": "Group1 TEMP adapter와 원작 미확인 조건의 경계를 줄이고 실제 약점 공격부터 그로기까지 검증한다.",
+    "method": "저장된 원본 Group1/SecondDurability metadata와 해당 버전 native조건 자료를 표적 확인한다. 실제 Player공격→부위BoxHit→내구감소→PartGroggy 및 Apes DempseyRoll Just Guard/Yetuga비보행성 벽충돌을 연속 입력으로 재현한다. TEMP ×20/32cm를 원본값으로 오기하지 않는다.",
+    "result": "계획. 완료 기준: 원본 package/field/raw value/단위/적용조건을 확보하거나 미확인 상태를 유지하고, 현행 실제 입력 경로의 결과를 기록한다. 원본 근거 없이 SecondDurability를 임의 구현해 완료 처리하지 않는다.",
+    "insight": "우선순위 높음. 실제 capsule root이동은 이미 검증됐으므로 동일16rootasset 일괄 재수정을 반복하지 않는다. 필요한 데이터가 없으면 조건별 미확인을 문서에 남긴다.",
+    "refs": [
+      "Metadata/GiantReaction_20261014/FinalVerificationTuning.json",
+      "Metadata/CombatFeel_20261015/FinalVerification.json"
+    ]
+  },
+  {
+    "id": "vfx46",
+    "title": "[후속] 조건 의존 VFX 46종 대상·파라미터·시점별 검수",
+    "cat": [
+      "콘텐츠",
+      "폴리싱"
+    ],
+    "goal": "age0.2초 단순 캡처로 외관을 판단할 수 없었던 효과를 실제 사용조건에서 확인한다.",
+    "method": "HeinMachColourVFX CurrentCatalogDelta/기존321종 촬영 결과에서46개만 추려 skeletal/mesh 대상, Userparameter, 후발burst/lifetime/attachment를 채운 fixture를 구성한다. opaque배경과 실제 맵에서 alpha/refraction/depth/색보존을 시간창별 확인한다.",
+    "result": "계획. 완료 기준:46개 각각 required조건·최소한의재생증거·가시/미가시사유·shader오류 여부를 기록.275개의가시쌍을46개의검증결과로대체하지 않는다.",
+    "insight": "우선순위 중간. 과거 전체 공급라이브러리786종 반입과 현행 catalogue321종은 서로 다른 모집단이다. 전수재임포트 대신 필요한46종만 표적 검사한다.",
+    "refs": [
+      "Metadata/HeinMachColourVFX_20261015/CurrentCatalogDelta.json",
+      "Metadata/HeinMachColourVFX_20261015/FinalVerification.json"
+    ]
+  },
+  {
+    "id": "fidelity",
+    "title": "[후속] 동일 시점 원작 비교·전용 shader·Wwise DSP 근거 보강",
+    "cat": [
+      "폴리싱",
+      "콘텐츠"
+    ],
+    "goal": "현재 구현 검증과 원작 외관/청감 동일성 사이의 남은 차이를 측정 가능한 항목으로 만든다.",
+    "method": "패링/일반 적중/브루탈/거인 공격·카메라의 원작 비교 영상을 동일카메라·거리·노출·재생시점으로 정렬한다. source package/version/field를 기록하고 custom shader/VAT/왜곡과 Wwise DSP/RTPC는 확보 근거가 있는 부분만 복원한다. 카메라는 프레임별6축 궤적과 envelope를 비교한다.",
+    "result": "계획. 완료 기준: 사례별 원작직접값/원작기반계산/TEMP/미확인 표, 비교스크린샷/영상timecode, 차이 목록과 다음 수정 범위를 남긴다. 현재 자료만으로 '원작과 완전히 동일' 판정은 하지 않는다.",
+    "insight": "우선순위 중간. 자료부족은 현재 구현 실패와 동일하지 않다. 원본자료가 없는 필드는 미확인으로 관리하며 어시스턴트TEMP를 원본수치로 격상하지 않는다.",
+    "refs": [
+      "Docs/Art/PLAYER_PARRY_SOURCE_20261012.md",
+      "Metadata/CombatFeel_20261015/FinalVerification.json",
+      "Metadata/HumanoidSFX_20261013/FinalVerification.json"
+    ]
+  },
+  {
+    "id": "interaction",
+    "title": "[후속] 발리스타·문·상자 실제 상호작용 owner·SFX 확인",
+    "cat": [
+      "콘텐츠",
+      "캐릭터"
+    ],
+    "goal": "애니메이션 cue가 있다는 사실과 실제 월드 오브젝트 사용 완료를 구분하고 상호작용의 실행/종료 경로를 확인한다.",
+    "method": "기존 Interaction계층과 각 대상의 결과/보상 소유자를 먼저 확인한다. 발리스타는 원본 애니메이션 소리가 강제 재생됐지만 현재 world owner/call path가 확인되지 않았다. 문/상자도 실제producer가 존재하는지 표적 조사하고, 있는 경로의 시작/성공/취소/파괴/재사용 sound cleanup을 검증한다. 새로운 producer개발이 필요하면 범위를 먼저 별도 설계한다.",
+    "result": "계획. 완료 기준:대상별 구현/미구현/자료없음과 호출자·cue·수명·중복방지를 기록하고 실제사용 가능한대상만 end-to-end 검증한다. 소리파일존재/수동 montage재생만으로완료판정하지 않는다.",
+    "insight": "우선순위 중간. 현재 기능 범위를 넘는 신규 월드 기믹 개발은 이 문서 작성으로 실행하지 않는다. 담당·일정미정이며 아키텍처 v2 Interaction책임을 유지한다.",
+    "refs": [
+      "Metadata/GiantSFX_20261013/FinalVerification.json",
+      "Docs/Engineering/CHARACTER_GAMEPLAY_ARCHITECTURE.md"
+    ]
+  },
+  {
+    "id": "perf",
+    "title": "[후속] Shipping·장시간 전투·VFX/Audio 예산 프로파일",
+    "cat": [
+      "폴리싱",
+      "AI"
+    ],
+    "goal": "개발용D3D12 fixture의 기능통과와 실제 배포빌드 성능/안정성을 분리 검증한다.",
+    "method": "빌드구성/하드웨어/해상도/그래픽설정/씬/빌드SHA를 고정하고 두 레벨의 연속 전투에서 game/render/GPU frame, 메모리/VRAM, particle/voice수·clipping·효과cleanup을 측정한다. 현재 프로젝트싱글플레이 범위를 우선하며 network성능을완료라고쓰지 않는다.",
+    "result": "계획. 완료 기준:실측표·프로파일링capture·재현조건·병목리스트와 수정전후가 있어야 한다. 목표 FPS나 장시간분량은 기기/제품목표가확정되기전 임의마감/KPI숫자로기입하지 않는다.",
+    "insight": "우선순위 중간. 복수 QA에디터동시실행중 VRAM경고는 제품벤치마크근거가아니다. screenshots만으로성능을판정하지않는다.",
+    "refs": [
+      "Metadata/YetugaSnowLayout_20261015/FinalVerification.json",
+      "Metadata/HeinMachColourVFX_20261015/FinalVerification.json"
+    ]
+  },
+  {
+    "id": "turn",
+    "title": "[후속] Turn·SprintPivot 현행 상태와 공동 구현 범위 확인",
+    "cat": [
+      "캐릭터"
+    ],
+    "goal": "기존 로코모션의 미검증 Turn/SprintPivot을 완료로 오기하지 않고 최신 코드/에셋에 맞춰 다음 범위를 정한다.",
+    "method": "Router→Architecture v2→Migration현재단계→LOCOMOTION_CURRENT_IMPLEMENTATION→해당Source/BP 순으로 필요한부분만 확인한다. InGame한정/Start전부제외/Walk·Run발별Stop/Sprint단일Stop을 유지한다. 사용자가 직접따라하는공동구현과 직접수정요청을 구분해 작은diff/책임/단위/Reset/실행순서를 설명한다.",
+    "result": "계획. 완료 기준:실제현재심볼·source동작과문서차이, 구현/제안/미확인 구분 및 필요한애니메이션/입력/회전데이터계약을 확정한다. 이번노션작성에서는Turn/Pivot코드나에셋을수정하지 않는다.",
+    "insight": "우선순위 후속. 과거 AnimInstance변수/거대HFSM제안을 현행구현으로복원하지않는다. 새로운임시튜닝이필요하면출처상태를명시한다.",
+    "refs": [
+      "Docs/Animation/LOCOMOTION_CURRENT_IMPLEMENTATION.md",
+      "Docs/Engineering/CHARACTER_GAMEPLAY_ARCHITECTURE.md",
+      "Docs/Engineering/CHARACTER_TAG_ABILITY_MIGRATION.md"
+    ]
+  }
+]

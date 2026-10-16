@@ -1,0 +1,213 @@
+[
+  {
+    "Type": "MaterialInstanceConstant",
+    "Name": "MI_WriteSnowField_03_Main",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MaterialInstanceConstant'",
+    "Package": "BBQ/Content/BaseMaterials/VT_SnowField/M_WriteSnow/MI/MI_WriteSnowField_03_Main",
+    "Properties": {
+      "Parent": {
+        "ObjectName": "Material'M_WriteSnowField_02'",
+        "ObjectPath": "BBQ/Content/BaseMaterials/VT_SnowField/M_WriteSnow/M_WriteSnowField_02.0"
+      },
+      "bHasStaticPermutationResource": true,
+      "ScalarParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "NoisePow",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "5C15805A-401DB9BE-38333592-5371E744"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "NoiseStr",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.999726,
+          "ExpressionGUID": "0873B57D-4F7C04E5-E3A97788-26987B6D"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "FlowStr",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.05,
+          "ExpressionGUID": "D2E413BC-41FDDBD5-414C2392-D4F3B8CB"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Flow1Str",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.0,
+          "ExpressionGUID": "265DC55A-43FF6F5B-5C556486-7CDA9013"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "DetailIntensity",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 20.0,
+          "ExpressionGUID": "CB8F1959-4788C374-209F6AB3-ED217847"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "MaximumTarget",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.561111,
+          "ExpressionGUID": "15C3199B-49849CBA-C67F81A7-4DCA3D02"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "RefractionDepthBias",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.0,
+          "ExpressionGUID": "00000000-00000000-00000000-00000000"
+        }
+      ],
+      "VectorParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "NoiseUV",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "R": 2.0,
+            "G": 0.121429,
+            "B": 0.5,
+            "A": 0.0,
+            "Hex": "FF62BC"
+          },
+          "ExpressionGUID": "2F832184-46E2F2CE-ACF9A5B5-7C78E54C"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "FlowUV",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "R": 0.688889,
+            "G": 0.1,
+            "B": 0.0,
+            "A": 0.0,
+            "Hex": "D95900"
+          },
+          "ExpressionGUID": "B2BE467D-48207592-A7A4C797-C3B4FE96"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Flow1UV",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "R": 1.2,
+            "G": 1.2,
+            "B": 0.0,
+            "A": 0.0,
+            "Hex": "FFFF00"
+          },
+          "ExpressionGUID": "A382AA25-41FA132E-60312DAB-40312349"
+        }
+      ],
+      "TextureParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "NoiseTex",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'T_TX_Cloud_01'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/T_TX_Cloud_01.0"
+          },
+          "ExpressionGUID": "92354B56-4D8B75EC-91540AA3-F59F03FA"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "FlowTex",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT_Noise_Normal_004'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_Normal_004.0"
+          },
+          "ExpressionGUID": "C7F9ADA0-48927864-CFE252BC-93A427C1"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Flow1Tex",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT_FlowRGB_001'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_FlowRGB_001.0"
+          },
+          "ExpressionGUID": "D4ED6D00-459AEA0D-765B308B-83D05BCF"
+        }
+      ],
+      "BasePropertyOverrides": {
+        "BlendMode": "BLEND_Additive",
+        "ShadingModel": "MSM_Unlit",
+        "OpacityMaskClipValue": 0.3333
+      },
+      "StaticParameters": {
+        "StaticSwitchParameters": [
+          {
+            "Value": true,
+            "ParameterInfo": {
+              "Name": "PolarCoordinate",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            "bOverride": true,
+            "ExpressionGUID": "BCF2EADF-434B59F3-0FA1CDAB-7C3FD21E"
+          },
+          {
+            "Value": false,
+            "ParameterInfo": {
+              "Name": "FinalDecalPrev",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            "bOverride": true,
+            "ExpressionGUID": "BD89A62B-407FB83D-A3D7319F-1DBFB8D2"
+          }
+        ]
+      },
+      "CachedReferencedTextures": [
+        {
+          "ObjectName": "Texture2D'FT_Noise_Normal_004'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_Normal_004.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_Crack_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Decal/FT_Crack_01.0"
+        }
+      ],
+      "TextureStreamingData": [
+        {
+          "SamplingScale": 0.20751953,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Noise_Normal_004"
+        }
+      ]
+    },
+    "LoadedMaterialResources": []
+  }
+]

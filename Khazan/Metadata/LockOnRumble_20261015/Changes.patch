@@ -1,0 +1,421 @@
+--- before/Config/DefaultGame.ini
++++ after/Config/DefaultGame.ini
+@@ -45,4 +45,8 @@
+ ; Runtime AssetManager entries and the native portal's soft music reference.
+ +DirectoriesToAlwaysCook=(Path="/Game/Data")
+ +DirectoriesToAlwaysCook=(Path="/Game/Audio/Original/Music/Yetuga")
++
++[/Script/Engine.PlayerController]
++; User-requested 2x controller rumble; engine clamps final motor output to 0..1.
++ForceFeedbackScale=2.0
+ 
+--- before/Source/Khazan/Ability/MonsterAbility/KZMonsterPatternAbility.cpp
++++ after/Source/Khazan/Ability/MonsterAbility/KZMonsterPatternAbility.cpp
+@@ -9,6 +9,9 @@
+ #include "Animation/AnimSequenceBase.h"
+ #include "Ability/MonsterAbility/KZMonsterSkillObject.h"
+ #include "Character/KZCharacter.h"
++#include "Character/KZPlayer.h"
++#include "Character/Component/KZLockOnComponent.h"
++#include "GameFramework/PlayerController.h"
+ #include "Components/CapsuleComponent.h"
+ #include "Components/SkeletalMeshComponent.h"
+ #include "Engine/SkeletalMesh.h"
+@@ -354,12 +357,22 @@
+ 			if(CapturedVictimMontage)CapturedVictimAnim=VictimAnim;
+ 		}
+ 	}
++	if (Monster->GetCharacterDefinitionAssetName() == KZGameplayTags::AssetData_CharacterDefinition_Yetuga)
++	{
++		if (AKZPlayer* Player = Cast<AKZPlayer>(Victim); Player && Player->IsLocallyControlled())
++		{
++			CaptureLockOnController = Player->GetController<APlayerController>();
++			Player->StopLockOn();
++		}
++	}
+ 	ResolveEvent(EKZPatternEvent::HoldingSuccess);return true;
+ }
+ 
+ void UKZMonsterPatternAbility::ReleaseCapture()
+ {
+ 	AKZCharacter* Victim=CapturedTarget.Get();AKZMonster* Monster=BoundMonster.Get();CapturedTarget.Reset();
++	APlayerController* LockOnController = CaptureLockOnController.Get();
++	CaptureLockOnController.Reset();
+ 	if(UAnimInstance* VictimAnim=CapturedVictimAnim.Get())
+ 	{
+ 		if(CapturedVictimMontage && VictimAnim->Montage_IsActive(CapturedVictimMontage))
+@@ -380,6 +393,12 @@
+ 	CaptureEffectHandle.Invalidate();
+ 	if(Monster){if(bAddedVictimIgnore)Victim->GetCapsuleComponent()->IgnoreActorWhenMoving(Monster,false);if(bAddedCasterIgnore)Monster->GetCapsuleComponent()->IgnoreActorWhenMoving(Victim,false);}
+ 	bAddedVictimIgnore=bAddedCasterIgnore=false;
++	// Cleanup precedes re-lock; failed/dead/destroyed targets are rejected by the owner.
++	if (IsValid(LockOnController) && LockOnController->GetPawn() == Victim && Victim->GetController() == LockOnController)
++	{
++		if (UKZLockOnComponent* LockOn = Victim->FindComponentByClass<UKZLockOnComponent>())
++			LockOn->StartLockOn(Monster);
++	}
+ }
+ 
+ void UKZMonsterPatternAbility::HandleWorldCollision(AActor* Self, AActor* Other, FVector Impulse, const FHitResult& Hit)
+--- before/Source/Khazan/Ability/MonsterAbility/KZMonsterPatternAbility.h
++++ after/Source/Khazan/Ability/MonsterAbility/KZMonsterPatternAbility.h
+@@ -54,6 +54,8 @@
+ 	bool bPendingStepStart = true;
+ 	TWeakObjectPtr<class AKZCharacter> PendingCapture;
+ 	TWeakObjectPtr<class AKZCharacter> CapturedTarget;
++	// Only the controller whose player was captured may receive the automatic re-lock.
++	TWeakObjectPtr<class APlayerController> CaptureLockOnController;
+ 	TWeakObjectPtr<class UAnimInstance> CapturedVictimAnim;
+ 	UPROPERTY(Transient) TObjectPtr<class UAnimMontage> CapturedVictimMontage;
+ 	bool bCapturedVictimPaused=false;
+--- before/Source/Khazan/Character/Component/KZLockOnComponent.cpp
++++ after/Source/Khazan/Character/Component/KZLockOnComponent.cpp
+@@ -1,5 +1,8 @@
+-#include "Character/Component/KZLockOnComponent.h"
+-
++#include "Character/Component/KZLockOnComponent.h"
++
++#include "AbilitySystemComponent.h"
++#include "Attribute/KZAttributeSet.h"
++#include "KZGameplayTags.h"
+ #include "Character/KZMonster.h"
+ #include "Character/KZPlayer.h"
+ #include "CollisionQueryParams.h"
+@@ -8,6 +11,17 @@
+ #include "EngineUtils.h"
+ #include "GameFramework/PlayerController.h"
+ 
++namespace
++{
++bool IsLivingLockOnCharacter(const AKZCharacter* Character)
++{
++	const UAbilitySystemComponent* ASC = IsValid(Character) && !Character->IsActorBeingDestroyed()
++		? Character->GetAbilitySystemComponent() : nullptr;
++	return ASC && ASC->GetNumericAttribute(UKZAttributeSet::GetHPAttribute()) > 0.f &&
++		!ASC->HasMatchingGameplayTag(KZGameplayTags::State_Dead);
++}
++}
++
+ AKZMonster* UKZLockOnComponent::GetCurrentTarget() const
+ {
+ 	return IsLockedOn() ? CurrentTarget.Get() : nullptr;
+@@ -79,7 +93,7 @@
+ 	{
+ 		AKZMonster* CandidateMonster = *It;
+ 
+-		if (!IsValid(CandidateMonster) || CandidateMonster->IsHidden())
++		if (!IsLivingLockOnCharacter(CandidateMonster) || CandidateMonster->IsHidden())
+ 		{
+ 			continue;
+ 		}
+@@ -180,9 +194,10 @@
+ {
+ 	AKZPlayer* Player = Cast<AKZPlayer>(GetOwner());
+ 
+-	if (!IsValid(Player) ||
+-		!Player->IsLocallyControlled() ||
+-		!IsValid(Target) ||
++	if (!IsLivingLockOnCharacter(Player) ||
++		!Player->IsLocallyControlled() ||
++		Cast<AKZMonster>(Player->GetAttachParentActor()) ||
++		!IsLivingLockOnCharacter(Target) ||
+ 		Target->GetWorld() != GetWorld() ||
+ 		!IsValid(Target->GetLockOnTargetPoint()) ||
+ 		!IsValid(Cast<APlayerController>(Player->GetController())))
+@@ -219,16 +234,26 @@
+ 	}
+ 
+ 	// 제약 획득이 성공한 뒤에만 잠금 상태를 확정한다.
+-	CurrentTarget = Target;
+-	LockOnConstraintHandle = MoveTemp(NewHandle);
++	CurrentTarget = Target;
++	LockOnConstraintHandle = MoveTemp(NewHandle);
++	TargetAbilitySystem = Target->GetAbilitySystemComponent();
++	TargetHealthChangedHandle = TargetAbilitySystem->GetGameplayAttributeValueChangeDelegate(UKZAttributeSet::GetHPAttribute())
++		.AddUObject(this, &ThisClass::HandleTargetHealthChanged);
+ 
+ 	SetComponentTickEnabled(true);
+ 
+ 	return true;
+ }
+ 
+-void UKZLockOnComponent::StopLockOn()
+-{
++void UKZLockOnComponent::StopLockOn()
++{
++	if (UAbilitySystemComponent* ASC = TargetAbilitySystem.Get())
++	{
++		ASC->GetGameplayAttributeValueChangeDelegate(UKZAttributeSet::GetHPAttribute()).Remove(TargetHealthChangedHandle);
++	}
++	TargetHealthChangedHandle.Reset();
++	TargetAbilitySystem.Reset();
++
+ 	if (LockOnConstraintHandle.IsValid())
+ 	{
+ 		if (AKZPlayer* Player = Cast<AKZPlayer>(GetOwner()))
+@@ -248,11 +273,15 @@
+ 	SetComponentTickEnabled(false);
+ }
+ 
+-bool UKZLockOnComponent::IsLockedOn() const
+-{
+-	return CurrentTarget.IsValid() && LockOnConstraintHandle.IsValid();
+-}
+-
++bool UKZLockOnComponent::IsLockedOn() const
++{
++	return LockOnConstraintHandle.IsValid() && IsLivingLockOnCharacter(CurrentTarget.Get());
++}
++
++void UKZLockOnComponent::HandleTargetHealthChanged(const FOnAttributeChangeData& Data)
++{
++	if (Data.NewValue <= 0.f) StopLockOn();
++}
+ 
+ void UKZLockOnComponent::UpdateLockOnFacing(float DeltaTime)
+ {
+@@ -265,7 +294,7 @@
+ 	AKZPlayer* Player = Cast<AKZPlayer>(GetOwner());
+ 	AKZMonster* Target = CurrentTarget.Get();
+ 
+-	if (!IsValid(Player) || !IsValid(Target) || !Player->IsLocallyControlled())
++	if (!IsLivingLockOnCharacter(Player) || !IsValid(Target) || !Player->IsLocallyControlled())
+ 	{
+ 		StopLockOn();
+ 		return;
+--- before/Source/Khazan/Character/Component/KZLockOnComponent.h
++++ after/Source/Khazan/Character/Component/KZLockOnComponent.h
+@@ -7,7 +7,9 @@
+ #include "Components/ActorComponent.h"
+ #include "KZLockOnComponent.generated.h"
+ 
+-class AKZMonster;
++class AKZMonster;
++class UAbilitySystemComponent;
++struct FOnAttributeChangeData;
+ 
+ UCLASS( ClassGroup=(KZ), meta=(BlueprintSpawnableComponent) )
+ class KHAZAN_API UKZLockOnComponent : public UActorComponent
+@@ -27,6 +29,8 @@
+ 	bool IsLockedOn() const;
+ 	// Read-only presentation/Ability consumer; targeting and its constraint remain here.
+ 	AKZMonster* GetCurrentTarget() const;
++	// Explicit target after a paired action; shares normal life/ownership checks.
++	bool StartLockOn(AKZMonster* Target);
+ 	
+ protected:
+ 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+@@ -40,8 +44,7 @@
+ 	// 카메라와 타깃 지점 사이에 다른 blocking actor가 있는지 검사한다.
+ 	bool HasClearViewToTarget(const FVector& ViewLocation, const AKZMonster* Candidate, const FVector& TargetLocation) const;
+ 
+-	// 선택이 끝난 유효한 몬스터를 잠그고 이동 제약을 취득한다.
+-	bool StartLockOn(AKZMonster* Target);
++	void HandleTargetHealthChanged(const FOnAttributeChangeData& Data);
+ 
+ 	// 현재 타깃의 3차원 지점을 향해 카메라 ControlRotation을 보간한다.
+ 	void UpdateLockOnFacing(float DeltaTime);
+@@ -59,7 +62,9 @@
+ 
+ 	// 타깃이 파괴됐을 때 수명을 연장하지 않도록 약한 참조를 사용한다.
+ 	UPROPERTY(Transient)
+-	TWeakObjectPtr<AKZMonster> CurrentTarget;
++	TWeakObjectPtr<AKZMonster> CurrentTarget;
++	TWeakObjectPtr<UAbilitySystemComponent> TargetAbilitySystem;
++	FDelegateHandle TargetHealthChangedHandle;
+ 
+ 	// 이 TargetingComponent가 취득한 이동 제약 한 건의 해제 영수증이다.
+ 	FKZMovementConstraintHandle LockOnConstraintHandle;
+--- before/Source/Khazan/Character/KZCharacter.h
++++ after/Source/Khazan/Character/KZCharacter.h
+@@ -32,10 +32,11 @@
+ 		return LocomotionComponent;
+ 	}
+ 
+-	const UKZCharacterDefinitionData* GetCharacterDefinition() const
+-	{
+-		return CharacterDefinition;
+-	}
++	const UKZCharacterDefinitionData* GetCharacterDefinition() const
++	{
++		return CharacterDefinition;
++	}
++	FGameplayTag GetCharacterDefinitionAssetName() const { return CharacterDefinitionAssetName; }
+ 
+ protected:
+ 	virtual void BeginPlay() override;
+--- before/Source/Khazan/Tests/KZCombatUIPIEEditor.cpp
++++ after/Source/Khazan/Tests/KZCombatUIPIEEditor.cpp
+@@ -62,6 +62,7 @@
+ 		if (Phase == 0)
+ 		{
+ 			Test->TestTrue(TEXT("Actual local viewport owns exactly the configured HUD"), HUD->IsInViewport() && PC->IsLocalController() && HUD->GetClass() == PC->CombatHUDClass);
++			Test->TestEqual(TEXT("Actual saved player controller uses user-requested 2x rumble"), PC->ForceFeedbackScale, 2.f);
+ 			Test->AddInfo(FString::Printf(TEXT("COMBAT_UI_ACTUAL_HUD_CLASS %s"), *HUD->GetClass()->GetPathName()));
+ 			SavedView = PC->GetViewTarget(); SavedControl = PC->GetControlRotation();
+ 			Save(P); P->HandleInputMoveReleased(); P->GetAbilitySystemComponent()->CancelAllAbilities();
+@@ -210,7 +211,16 @@
+ 		{
+ 			if (Now - Start < .5f) return false;
+ 			if (!Test->TestTrue(TEXT("Disposable actor gauge initializes from actual HP"), Transient.IsValid() && HUD->GetDisplayedHPRatio(Transient.Get()) > .9f)) return Finish();
++			Test->TestTrue(TEXT("Living disposable target can be explicitly locked"), LockOn->StartLockOn(Transient.Get()));
+ 			Transient->GetAbilitySystemComponent()->SetNumericAttributeBase(UKZAttributeSet::GetHPAttribute(), 0.f);
++			Test->TestFalse(TEXT("HP zero synchronously releases LockOn before any world tick"), LockOn->IsLockedOn());
++			Test->TestFalse(TEXT("HP zero synchronously stops the targeting tick"), LockOn->IsComponentTickEnabled());
++			Test->TestFalse(TEXT("Dead target cannot be locked again"), LockOn->StartLockOn(Transient.Get()));
++			Test->TestTrue(TEXT("Live target can replace the dead target"), LockOn->StartLockOn(Boss.Get()));
++			Transient->GetAbilitySystemComponent()->SetNumericAttributeBase(UKZAttributeSet::GetHPAttribute(), 1.f);
++			Transient->GetAbilitySystemComponent()->SetNumericAttributeBase(UKZAttributeSet::GetHPAttribute(), 0.f);
++			Test->TestEqual(TEXT("Old target HP delegate cannot clear a different target"), LockOn->GetCurrentTarget(), Boss.Get());
++			LockOn->StopLockOn();
+ 			Start = Now; Phase = 12; return false;
+ 		}
+ 		if (Phase == 12)
+--- before/Source/Khazan/Tests/KZGiantFallPIETest.cpp
++++ after/Source/Khazan/Tests/KZGiantFallPIETest.cpp
+@@ -13,6 +13,7 @@
+ #include "AI/KZMonsterAIController.h"
+ #include "Character/KZPlayer.h"
+ #include "Character/KZMonster.h"
++#include "Character/Component/KZLockOnComponent.h"
+ #include "Attribute/KZAttributeSet.h"
+ #include "Animation/AnimInstance.h"
+ #include "Animation/AnimMontage.h"
+@@ -21,6 +22,7 @@
+ #include "Components/StateTreeAIComponent.h"
+ #include "Navigation/PathFollowingComponent.h"
+ #include "GameFramework/CharacterMovementComponent.h"
++#include "GameFramework/RootMotionSource.h"
+ #include "GameFramework/PlayerController.h"
+ #include "EnhancedPlayerInput.h"
+ #include "KZGameplayTags.h"
+@@ -39,7 +41,11 @@
+ class FGiantFallCommand : public IAutomationLatentCommand
+ {
+ public:
+-	FGiantFallCommand(FAutomationTestBase* T,AKZPlayer* P):Test(T),Player(P),Deadline(FPlatformTime::Seconds()+300.){}
++	FGiantFallCommand(FAutomationTestBase* T,AKZPlayer* P):Test(T),Player(P),Deadline(FPlatformTime::Seconds()+300.)
++	{
++		OutputDirectory=FPlatformMisc::GetEnvironmentVariable(TEXT("KZ_GIANT_FALL_OUTPUT"));
++		if(OutputDirectory.IsEmpty())OutputDirectory=FPaths::ProjectDir()/TEXT("Metadata/GiantCombatFall_20261011");
++	}
+ 	bool Update() override
+ 	{
+ 		if(!Player.IsValid()||FPlatformTime::Seconds()>Deadline){Test->AddError(TEXT("Owned DevMap GiantFall test timed out"));return Finish();}
+@@ -56,7 +62,7 @@
+ 		{
+ 			const FString Evidence=FString::Printf(TEXT("round=%d plunge=%d node=%s mode=%d z=%.2f"),Round,ActiveFall->IsPlungeAttack(),*ActiveFall->GetCurrentNodeId().ToString(),int32(P->GetCharacterMovement()->MovementMode),P->GetActorLocation().Z);
+ 			if(!Seen.Contains(Evidence.Left(Evidence.Find(TEXT(" mode=")))))
+-			{Seen.Add(Evidence.Left(Evidence.Find(TEXT(" mode="))));Test->AddInfo(Evidence);FScreenshotRequest::RequestScreenshot(FPaths::ProjectDir()+FString::Printf(TEXT("Metadata/GiantCombatFall_20261011/Fall_%d_%d_%s.png"),Round,ActiveFall->IsPlungeAttack(),*ActiveFall->GetCurrentNodeId().ToString()),false,false);}
++			{Seen.Add(Evidence.Left(Evidence.Find(TEXT(" mode="))));Test->AddInfo(Evidence);FScreenshotRequest::RequestScreenshot(OutputDirectory/FString::Printf(TEXT("Fall_%d_%d_%s.png"),Round,ActiveFall->IsPlungeAttack(),*ActiveFall->GetCurrentNodeId().ToString()),false,false);}
+ 			if(ActiveFall->IsPlungeAttack()) { SawPlunge=true;SawPlungeLand|=ActiveFall->GetCurrentNodeId()==TEXT("Land"); }
+ 			else { SawFall=true;SawNormalLand|=ActiveFall->GetCurrentNodeId()==TEXT("Land"); }
+ 		}
+@@ -148,7 +154,7 @@
+ private:
+ 	bool UpdatePatterns(AKZPlayer* P,float Now)
+ 	{
+-		struct FCase{const TCHAR* Family;const TCHAR* Skill;const TCHAR* Entry;float Distance;int32 Kind;};
++		struct FCase{const TCHAR* Family;const TCHAR* Skill;const TCHAR* Entry;float Distance;int32 Kind;bool bKillCaptor=false;};
+ 		// Distances/times below are isolated test stimuli, not gameplay defaults.
+ 		static const FCase Cases[]={
+ 			{TEXT("ApesStoneHandElite"),TEXT("NormalAtk02"),TEXT("NormalAtk02_Step1"),300,0},
+@@ -163,14 +169,25 @@
+ 			{TEXT("ApesStoneHandElite"),TEXT("Level_DashAtk_New"),TEXT("Level_DashAtk_New_Step8"),300,7},
+ 			{TEXT("Yetuga"),TEXT("CloseGrab"),TEXT("CloseGrab_Step1"),300,7},
+ 			{TEXT("Yetuga"),TEXT("RushGrab"),TEXT("RushGrab_Step5"),300,7},
++			{TEXT("Yetuga"),TEXT("CloseGrab"),TEXT("CloseGrab_Step1"),300,6,true},
+ 			{TEXT("Yetuga"),TEXT("Armageddon"),TEXT("Armageddon_Step3"),300,8}
+ 		};
+ 		if(PatternCase>=UE_ARRAY_COUNT(Cases))return Finish();
+ 		const auto& C=Cases[PatternCase];UWorld* W=P->GetWorld();
++		const bool bYetugaCapture = FCString::Strcmp(C.Family,TEXT("Yetuga"))==0 && (C.Kind==6 || C.Kind==7);
++		UKZLockOnComponent* LockOn=P->FindComponentByClass<UKZLockOnComponent>();
+ 		if(PatternCleanup)
+ 		{
+ 			// CMC removes a source marked for removal during its following movement tick.
+-			Test->TestFalse(TEXT("Owned RootMotionSource removed on the next CMC tick"),PatternMonster->GetCharacterMovement()->HasRootMotionSources());
++			if(C.bKillCaptor)
++			{
++				// HasRootMotionSources also includes the newly started death montage.
++				const auto& Group=PatternMonster->GetCharacterMovement()->CurrentRootMotion;
++				for(const auto* List:{&Group.RootMotionSources,&Group.PendingAddRootMotionSources})
++					for(const auto& Source:*List)if(Source.IsValid() && Source->InstanceName==TEXT("OriginalPatternMoveTo"))
++						Test->TestTrue(TEXT("Dead captor has released its own pattern movement"),Source->Status.HasFlag(ERootMotionSourceStatusFlags::MarkedForRemoval));
++			}
++			else Test->TestFalse(TEXT("Owned RootMotionSource removed on the next CMC tick"),PatternMonster->GetCharacterMovement()->HasRootMotionSources());
+ 			PatternMonster->Destroy();PatternMonster.Reset();Pattern.Reset();++PatternCase;PatternCleanup=false;return false;
+ 		}
+ 		if(!PatternMonster.IsValid())
+@@ -183,11 +200,13 @@
+ 			P->GetCharacterMovement()->SetMovementMode(MOVE_Walking);Start=Now;PatternStarted=false;
+ 			ObservedStep2=EarlyParry=LateParry=ObservedProjectile=ProjectileMoved=ObservedTrail=ObservedCapture=false;
+ 			ObservedHeldSuccess=ObservedVictimMontage=ObservedPausedHold=ObservedCaptureAlignment=ObservedLandingHit=ObservedArmageddonFollowup=false;MaxVictimMontagePosition=0.f;LaunchedObject.Reset();
++			bCaptureLockChecked=false;
++			if(bYetugaCapture)P->GetAbilitySystemComponent()->SetNumericAttributeBase(UKZAttributeSet::GetMaxHPAttribute(),2000.f); // QA-only survival stimulus.
+ 		}
+ 		AKZMonster* M=PatternMonster.Get();auto* AI=CastChecked<AKZMonsterAIController>(M->GetController());
+ 		auto* ASC=CastChecked<UKZAbilitySystemComponent>(M->GetAbilitySystemComponent());
+ 		if((C.Kind!=7 && C.Kind!=8) || !PatternStarted)
+-			P->GetAbilitySystemComponent()->SetNumericAttributeBase(UKZAttributeSet::GetHPAttribute(),200.f);
++			P->GetAbilitySystemComponent()->SetNumericAttributeBase(UKZAttributeSet::GetHPAttribute(),bYetugaCapture?2000.f:200.f);
+ 		if(!ObservedCapture && C.Kind!=3 && P->GetAttachParentActor()!=PatternMonster.Get())
+ 		{
+ 			const float Distance=PatternStarted?C.Distance:FMath::Min(C.Distance,M->GetAISettings().SightRadius*.5f);
+@@ -205,6 +224,7 @@
+ 			Pattern=Cast<UKZMonsterPatternAbility>(Spec->GetPrimaryInstance());
+ 			FindFProperty<FNameProperty>(UKZComboActionAbility::StaticClass(),TEXT("EntryNodeId"))->SetPropertyValue_InContainer(Pattern.Get(),FName(C.Entry));
+ 			AI->GetStateTreeComponent()->StopLogic(TEXT("Owned source branch fixture"));
++			if(bYetugaCapture)Test->TestTrue(TEXT("Yetuga is locked before the actual capture attempt"),LockOn && LockOn->StartLockOn(M));
+ 			if(!ASC->TryActivateAbility(Spec->Handle)){Test->AddError(TEXT("Granted source pattern failed to activate"));return Finish();}
+ 			InitialMonsterLocation=M->GetActorLocation();Start=Now;PatternStarted=true;
+ 			Test->AddInfo(FString::Printf(TEXT("Pattern fixture %d %s %s"),PatternCase,C.Family,C.Entry));
+@@ -239,6 +259,14 @@
+ 					P->SetActorLocation(FVector(Point.X,Point.Y,C.Kind==7?Point.Z:92.f),false,nullptr,ETeleportType::TeleportPhysics);
+ 			}
+ 			ObservedCapture=P->GetAttachParentActor()==M;
++		}
++		if(bYetugaCapture && ObservedCapture && !bCaptureLockChecked)
++		{
++			bCaptureLockChecked=true;
++			Test->TestFalse(TEXT("Successful Yetuga grab immediately releases LockOn"),LockOn->IsLockedOn());
++			Test->TestFalse(TEXT("Player cannot re-lock while attached by the grab"),LockOn->StartLockOn(M));
++			LockOn->ToggleLockOn();
++			Test->TestFalse(TEXT("Manual toggle cannot re-lock during the grab"),LockOn->IsLockedOn());
+ 		}
+ 		if(C.Kind==7 && ObservedCapture && A && A->IsActive())
+ 		{
+@@ -288,7 +316,15 @@
+ 			Test->TestTrue(TEXT("Armageddon landing applied the saved radial hit"),ObservedLandingHit);
+ 			Test->TestTrue(TEXT("Armageddon reached its original RushGrab follow-up"),ObservedArmageddonFollowup);
+ 		}
++		if(C.bKillCaptor)ASC->SetNumericAttributeBase(UKZAttributeSet::GetHPAttribute(),0.f);
+ 		if(A && A->IsActive())ASC->CancelAbilityHandle(A->GetCurrentAbilitySpecHandle());
++		if(bYetugaCapture)
++		{
++			Test->TestTrue(TEXT("Actual capture reached the lock suspension assertions"),bCaptureLockChecked);
++			if(C.bKillCaptor)Test->TestFalse(TEXT("Capture cleanup never re-locks a dead Yetuga"),LockOn->IsLockedOn());
++			else Test->TestEqual(TEXT("Completed/cancelled capture re-locks the same living Yetuga"),LockOn->GetCurrentTarget(),M);
++			LockOn->StopLockOn();
++		}
+ 		Test->TestTrue(TEXT("Cancel releases own capture attachment"),P->GetAttachParentActor()!=M);
+ 		Test->TestFalse(TEXT("Cancel removes capture gameplay restriction"),P->GetAbilitySystemComponent()->HasMatchingGameplayTag(KZGameplayTags::State_HitReacting));
+ 		PatternCleanup=true;return false;
+@@ -303,7 +339,7 @@
+ 		auto R=MakeShared<FJsonObject>();R->SetBoolField(TEXT("fall"),SawFall);R->SetBoolField(TEXT("normal_landing"),SawNormalLand);
+ 		R->SetBoolField(TEXT("plunge"),SawPlunge);R->SetBoolField(TEXT("plunge_landing"),SawPlungeLand);R->SetNumberField(TEXT("giant_count"),Giants.Num());R->SetBoolField(TEXT("passed"),!Test->HasAnyErrors());
+ 		R->SetNumberField(TEXT("pattern_cases"),PatternCase);
+-		FString Out;FJsonSerializer::Serialize(R,TJsonWriterFactory<>::Create(&Out));FFileHelper::SaveStringToFile(Out,*(FPaths::ProjectDir()+TEXT("Metadata/GiantCombatFall_20261011/PIEResult.json")));return true;
++		FString Out;FJsonSerializer::Serialize(R,TJsonWriterFactory<>::Create(&Out));FFileHelper::SaveStringToFile(Out,*(OutputDirectory/TEXT("PIEResult.json")));return true;
+ 	}
+ 	FAutomationTestBase* Test;TWeakObjectPtr<AKZPlayer> Player;TArray<TWeakObjectPtr<AKZMonster>> Giants;TSet<FString> Seen;
+ 	TArray<TWeakObjectPtr<AKZMonsterAIController>> Paused;
+@@ -315,6 +351,8 @@
+ 	TWeakObjectPtr<AKZMonsterSkillObject> LaunchedObject;FVector LaunchLocation;
+ 	bool PatternStarted=false,PatternCleanup=false,ObservedStep2=false,EarlyParry=false,LateParry=false,ObservedProjectile=false,ProjectileMoved=false,ObservedTrail=false,ObservedCapture=false,ObservedHeldSuccess=false,ObservedVictimMontage=false,ObservedPausedHold=false,ObservedCaptureAlignment=false,ObservedLandingHit=false,ObservedArmageddonFollowup=false;
+ 	float MaxVictimMontagePosition=0.f;
++	bool bCaptureLockChecked=false;
++	FString OutputDirectory;
+ };
+ class FWaitGiantFallPIE:public IAutomationLatentCommand
+ {

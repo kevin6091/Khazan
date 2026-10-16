@@ -1,0 +1,38 @@
+{
+  "utc": "2026-10-11T18:29:26.573597+00:00",
+  "status": "main_applied_final_cold_visual_in_progress",
+  "supersedes": "ResumeState.json (early checkpoint)",
+  "main_runtime_applied": true,
+  "new_runtime_files": 0,
+  "runtime_files": [
+    "Source/Khazan/Character/KZMonster.h",
+    "Source/Khazan/Character/KZMonster.cpp"
+  ],
+  "dev_files": [
+    "Source/Khazan/Tests/KZMonsterPresentationRepairPIETest.cpp",
+    "Source/Khazan/Tests/KZPlayerAttackCollisionPIETest.cpp"
+  ],
+  "effective_owned_packages": 5,
+  "last_verified": [
+    "MainBuild10 unique module2026101249 exit0, input unchanged",
+    "MainSnowVisual04 all6 + slope/miss/victim-death/fade passed; 24blood/12death frames; forced QA complete; previous tint",
+    "MainActualHits01 actual collision13 passed before final tint and BeginPlay shader prefetch",
+    "SavedParticleProbe02 final3 emitter ownership/count/enable readback passed",
+    "FinalTint01 and FinalTintDelivery01 one owned fluid material changed",
+    "RetiredTrials unused2 packages archived with SHA and no live referencers"
+  ],
+  "failure_root": "First editor draw used incomplete on-demand shader maps: both resources ready=1/map=1/complete=0 in MainSnowVisual04; EnsureIsComplete resolved the first frame. Main BeginPlay now submits background compilation before combat. Cold first hit proof pending.",
+  "debugger_blocker": "Owned PID7060 attached via LLDB; executable line328 unresolved; PAUSE stack unknown/no locals despite module PDB present. Owned sessions stopped and task breakpoints removed. User breakpoints unchanged.",
+  "next": [
+    "Poll own MainSnowVisual05/Driver.json, Exit.json and MainSaved05/SavedAudit.json. Inspect first00 and24 frames; QA COLD_FIRST=1 does not force material completeness.",
+    "If the first frame still falls back, repair only the existing Monster material preparation and rebuild a fresh unique Main suffix; do not repeat source stage, broad author/delivery or retired-trial script.",
+    "Run final Main actual collision13 in new MainActualHits02 from current module; then compare launch/build Source and selected package SHA.",
+    "Write FinalVerification.json and final small Runtime/QA patches; append Art/Engineering docs and accurate final continuity."
+  ],
+  "own_snow_pid": 28888,
+  "own_audit_pid": 20612,
+  "user_editor_pid_readonly": 19752,
+  "user_editor_reload": false,
+  "source_artifacts": "Baseline.json, Before, Delivery.json, FinalTintDelivery01, RetiredTrials",
+  "restart": "Normal user editor restart is needed to load the new C++ module; never close or reset the user editor."
+}

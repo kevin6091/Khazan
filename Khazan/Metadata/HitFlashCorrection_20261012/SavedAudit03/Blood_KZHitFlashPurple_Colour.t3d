@@ -1,0 +1,14 @@
+Begin Object Class=/Script/Engine.ParticleModuleColorOverLife Name="KZHitFlashPurple_HitFlashColour" ExportPath="/Script/Engine.ParticleModuleColorOverLife'/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference:KZHitFlashPurple_HitFlashColour'"
+   Begin Object Class=/Script/Engine.DistributionFloatConstantCurve Name="D_AlphaOverLife" ExportPath="/Script/Engine.DistributionFloatConstantCurve'/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference:KZHitFlashPurple_HitFlashColour.D_AlphaOverLife'"
+   End Object
+   Begin Object Class=/Script/Engine.DistributionVectorConstant Name="D_ColorOverLife" ExportPath="/Script/Engine.DistributionVectorConstant'/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference:KZHitFlashPurple_HitFlashColour.D_ColorOverLife'"
+   End Object
+   Begin Object Name="D_AlphaOverLife" ExportPath="/Script/Engine.DistributionFloatConstantCurve'/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference:KZHitFlashPurple_HitFlashColour.D_AlphaOverLife'"
+      ConstantCurve=(Points=((),(InVal=0.080000,OutVal=1.000000),(InVal=0.300000,OutVal=0.850000),(InVal=1.000000)))
+   End Object
+   Begin Object Name="D_ColorOverLife" ExportPath="/Script/Engine.DistributionVectorConstant'/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference:KZHitFlashPurple_HitFlashColour.D_ColorOverLife'"
+      Constant=(X=0.240000,Y=0.008000,Z=0.380000)
+   End Object
+   ColorOverLife=(Distribution="/Script/Engine.DistributionVectorConstant'D_ColorOverLife'")
+   AlphaOverLife=(Distribution="/Script/Engine.DistributionFloatConstantCurve'D_AlphaOverLife'")
+End Object

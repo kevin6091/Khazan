@@ -1,0 +1,141 @@
+--- a/Source/Khazan/Character/KZMonster.h
++++ b/Source/Khazan/Character/KZMonster.h
+@@ -160,6 +160,17 @@
+ 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Monster|UI")
+ 	FName CombatReticleSocket = TEXT("UI_Chest");
+ 	UPROPERTY(EditDefaultsOnly, Category = "Monster|Blood") TObjectPtr<UParticleSystem> HitBloodEffect;
++	UPROPERTY(EditDefaultsOnly, Category = "Monster|Blood") TObjectPtr<UMaterialInterface> HitBloodDecalMaterial;
++	// Screenshot matching, assistant temporary tuning: projector depth / half width / half length, cm.
++	UPROPERTY(EditDefaultsOnly, Category = "Monster|Blood", meta = (Units = "cm"))
++	FVector HitBloodDecalSize = FVector(8.f, 95.f, 150.f);
++	// Finite ground evidence survives the victim's death; the engine component owns fade and destruction.
++	UPROPERTY(EditDefaultsOnly, Category = "Monster|Blood", meta = (ClampMin = "0", Units = "s"))
++	float HitBloodDecalHoldSeconds = 24.f;
++	UPROPERTY(EditDefaultsOnly, Category = "Monster|Blood", meta = (ClampMin = "0.01", Units = "s"))
++	float HitBloodDecalFadeSeconds = 3.f;
++	UPROPERTY(EditDefaultsOnly, Category = "Monster|Blood", meta = (ClampMin = "0", Units = "cm"))
++	float HitBloodGroundTraceDistance = 600.f;
+ 	UPROPERTY(EditDefaultsOnly, Category = "Monster|Death") TObjectPtr<UParticleSystem> DeathAshEffect;
+ 	// Assistant temporary presentation duration; shared death timing was not recovered from the original.
+ 	UPROPERTY(EditDefaultsOnly, Category = "Monster|Death", meta = (ClampMin = "0.01", Units = "s"))
+--- a/Source/Khazan/Character/KZMonster.cpp
++++ b/Source/Khazan/Character/KZMonster.cpp
+@@ -32,12 +32,17 @@
+ #include "Components/StaticMeshComponent.h"
+ #include "Components/DecalComponent.h"
+ #include "Materials/MaterialInstanceDynamic.h"
++#include "Particles/ParticleEmitter.h"
++#include "Particles/ParticleLODLevel.h"
++#include "Particles/ParticleModuleRequired.h"
+ #include "Particles/ParticleSystem.h"
+ #include "Particles/ParticleSystemComponent.h"
+ #include "LogChannels.h"
+ #include "Kismet/GameplayStatics.h"
+ #include "UObject/ConstructorHelpers.h"
+ #include "Components/MeshComponent.h"
++#include "Environment/KZSnowDeformation.h"
++#include "EngineUtils.h"
+ 
+ AKZMonster::AKZMonster()
+ {
+@@ -51,8 +56,10 @@
+ 	LockOnTargetPoint = CreateDefaultSubobject<USceneComponent>(TEXT("LockOnTargetPoint"));
+ 	
+ 	LockOnTargetPoint->SetupAttachment(GetCapsuleComponent());
+-	static ConstructorHelpers::FObjectFinder<UParticleSystem> Blood(TEXT("/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBlood"));
++	static ConstructorHelpers::FObjectFinder<UParticleSystem> Blood(TEXT("/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference"));
+ 	HitBloodEffect = Blood.Object;
++	static ConstructorHelpers::FObjectFinder<UMaterialInterface> BloodDecal(TEXT("/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround"));
++	HitBloodDecalMaterial = BloodDecal.Object;
+ 	static ConstructorHelpers::FObjectFinder<UParticleSystem> Ash(TEXT("/Game/_Art/Effects/Combat/Blood/FP_Monster_DeathAsh"));
+ 	DeathAshEffect = Ash.Object;
+ }
+@@ -77,6 +84,21 @@
+ 		}
+ 	}
+ 	BindCombatAttributes();
++	if (GetNetMode() != NM_DedicatedServer)
++	{
++		// Finish incomplete editor on-demand shader maps before combat, rather than during a hit.
++		// Cooked builds already contain these shaders; the engine's shared material cache owns the work.
++		TArray<UMaterialInterface*> BloodMaterials;
++		BloodMaterials.Add(HitBloodDecalMaterial);
++		if (HitBloodEffect)
++			for (const auto& Emitter : HitBloodEffect->Emitters)
++				if (Emitter)
++					for (const auto& LOD : Emitter->LODLevels)
++						if (LOD && LOD->bEnabled && LOD->RequiredModule)
++							BloodMaterials.AddUnique(LOD->RequiredModule->Material.Get());
++		for (UMaterialInterface* Material : BloodMaterials)
++			if (Material) Material->EnsureIsComplete();
++	}
+ }
+ 
+ void AKZMonster::PossessedBy(AController* NewController)
+@@ -316,16 +338,60 @@
+ void AKZMonster::PlayHitBlood(AActor* Attacker, const FVector& Contact)
+ {
+ 	if (GetNetMode() == NM_DedicatedServer || !HitBloodEffect || !GetMesh()) return;
+-	FVector Point;
+-	// A broadphase query centre can lie outside the victim. Prefer its actual physics surface.
+-	if (GetMesh()->GetClosestPointOnCollision(Contact, Point) < 0.f)
+-		Point = GetMesh()->DoesSocketExist(CombatReticleSocket) ? GetMesh()->GetSocketLocation(CombatReticleSocket) : GetActorLocation();
+-	const FVector Direction = IsValid(Attacker) ? (Point - Attacker->GetActorLocation()).GetSafeNormal() : GetActorForwardVector();
++	// The six delivered meshes have no PhysicsAsset. A chest bone lies inside the body.
++	// Use the existing damage receiver capsule's surface and eject toward the attacker.
++	FVector Direction = IsValid(Attacker) ? (Attacker->GetActorLocation() - Contact).GetSafeNormal2D() : GetActorForwardVector();
++	if (Direction.IsNearlyZero()) Direction = GetActorForwardVector();
++	const UCapsuleComponent* Capsule = GetCapsuleComponent();
++	const float Radius = Capsule->GetScaledCapsuleRadius();
++	const FVector Axis = Capsule->GetUpVector() * (Capsule->GetScaledCapsuleHalfHeight() - Radius);
++	const FVector Centre = FMath::ClosestPointOnSegment(Contact, Capsule->GetComponentLocation() - Axis, Capsule->GetComponentLocation() + Axis);
++	const FVector Point = Centre + Direction * Radius;
+ 	if (UParticleSystemComponent* Blood = UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitBloodEffect,
+ 		FTransform(Direction.Rotation(), Point), true, EPSCPoolMethod::None, true))
+ 	{
+-		Blood->ComponentTags.Add(TEXT("KZMonsterHitBlood")); // Finite world particles own their drain, never a decal.
++		Blood->ComponentTags.Add(TEXT("KZMonsterHitBlood")); // Finite world particles own their drain.
+ 		Blood->ComponentTags.AddUnique(GetFName());
++	}
++	if (!HitBloodDecalMaterial || HitBloodDecalSize.GetMin() <= 0.f || HitBloodDecalFadeSeconds <= 0.f) return;
++	FCollisionQueryParams Query(SCENE_QUERY_STAT(MonsterHitBloodGround), true, this);
++	if (IsValid(Attacker)) Query.AddIgnoredActor(Attacker);
++	FCollisionObjectQueryParams Objects;
++	Objects.AddObjectTypesToQuery(ECC_WorldStatic);
++	Objects.AddObjectTypesToQuery(ECC_WorldDynamic);
++	FHitResult Ground;
++	if (!GetWorld()->LineTraceSingleByObjectType(Ground, Point, Point - FVector::UpVector * HitBloodGroundTraceDistance, Objects, Query) ||
++		Ground.ImpactNormal.Z < GetCharacterMovement()->GetWalkableFloorZ()) return;
++	FVector Tangent = FVector::VectorPlaneProject(Direction, Ground.ImpactNormal).GetSafeNormal();
++	if (Tangent.IsNearlyZero()) Tangent = FVector::VectorPlaneProject(GetActorForwardVector(), Ground.ImpactNormal).GetSafeNormal();
++	// A thin projector follows this ground normal; its long axis follows the accepted strike direction.
++	const FRotator Rotation = FRotationMatrix::MakeFromXZ(-Ground.ImpactNormal, Tangent).Rotator();
++	FVector ProjectionSize = HitBloodDecalSize, ProjectionPoint = Ground.ImpactPoint;
++	// Collision follows the substrate. Reuse the existing read-only snow sample for the rendered surface.
++	for (TActorIterator<AKZSnowDeformation> It(GetWorld()); It; ++It)
++	{
++		double SnowHeight = 0;
++		if (!It->GetSnowSurfaceHeight(Ground, SnowHeight)) continue;
++		ProjectionPoint += Ground.ImpactNormal * SnowHeight;
++		// Include the owner's authored layer and rim, so surrounding undisturbed snow stays inside the projector.
++		double LayerExtent = SnowHeight;
++		for (const FKZSnowSurfaceSamples& Profile : It->SurfaceContactSamples)
++			LayerExtent = FMath::Max(LayerExtent, double(Profile.DepthReferenceCm + Profile.RimHeightCm));
++		ProjectionSize.X += LayerExtent;
++		break;
++	}
++	if (UDecalComponent* Decal = UGameplayStatics::SpawnDecalAtLocation(GetWorld(), HitBloodDecalMaterial,
++		ProjectionSize, ProjectionPoint, Rotation))
++	{
++		Decal->ComponentTags.Add(TEXT("KZMonsterHitBloodGround"));
++		Decal->ComponentTags.AddUnique(GetFName());
++		if (UMaterialInstanceDynamic* Material = Decal->CreateDynamicMaterialInstance())
++		{
++			Material->SetScalarParameterValue(TEXT("BloodMaskChannel"), Decal->GetUniqueID() % 3); // Original RGB masks; presentation never draws from gameplay RNG.
++			// Reject steep rendered snow sides as well as steep collision surfaces.
++			Material->SetScalarParameterValue(TEXT("BloodWalkableFloorZ"), GetCharacterMovement()->GetWalkableFloorZ());
++		}
++		Decal->SetFadeOut(HitBloodDecalHoldSeconds, HitBloodDecalFadeSeconds, false);
+ 	}
+ }
+ 

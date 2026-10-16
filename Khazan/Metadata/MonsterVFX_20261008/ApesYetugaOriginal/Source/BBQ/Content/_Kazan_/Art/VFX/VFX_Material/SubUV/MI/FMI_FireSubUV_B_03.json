@@ -1,0 +1,200 @@
+[
+  {
+    "Type": "MaterialInstanceConstant",
+    "Name": "FMI_FireSubUV_B_03",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MaterialInstanceConstant'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/SubUV/MI/FMI_FireSubUV_B_03",
+    "Properties": {
+      "Parent": {
+        "ObjectName": "Material'FM_FireSubUV_B'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/SubUV/FM_FireSubUV_B.0"
+      },
+      "bHasStaticPermutationResource": true,
+      "ScalarParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "FlowStr1",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.1,
+          "ExpressionGUID": "AC7500C4-4D0F8BE0-2C59DF81-86A5CAE1"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "FlowStr2",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.1,
+          "ExpressionGUID": "F3FFD8FD-4C6924EE-74929692-4EF5FB32"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "FadeDistance",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 800.0,
+          "ExpressionGUID": "95B5B785-49A8E147-735322A7-555D34D4"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "RefractionDepthBias",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.0,
+          "ExpressionGUID": "00000000-00000000-00000000-00000000"
+        }
+      ],
+      "VectorParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "SubUVTexRC",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "R": 4.0,
+            "G": 4.0,
+            "B": 0.0,
+            "A": 0.0,
+            "Hex": "FFFF00"
+          },
+          "ExpressionGUID": "75719FC3-4CA5EB1D-825F17AF-C5D5BA7A"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Flow1_UV",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "R": 1.0,
+            "G": 1.0,
+            "B": 0.0,
+            "A": 0.7,
+            "Hex": "B3FFFF00"
+          },
+          "ExpressionGUID": "05015B28-45CB9500-F33EFB84-43F8B475"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Flow2_UV",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "R": 0.1,
+            "G": 0.2,
+            "B": 0.0,
+            "A": 0.4,
+            "Hex": "66597C00"
+          },
+          "ExpressionGUID": "87661B52-435EF5F0-95C014AD-2664E3C8"
+        }
+      ],
+      "TextureParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "FireSubUVTex_Linear",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT_Fire_4x4_01_gray'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/SubUV/FT_Fire_4x4_01_gray.0"
+          },
+          "ExpressionGUID": "C887F700-4D88C8A9-D063DA8A-AF3EB12D"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "FlowTex_1",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT_S_Tile_08Normal'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_S_Tile_08Normal.0"
+          },
+          "ExpressionGUID": "F7485856-4D971CD5-2856A182-1120AAC6"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "FlowTex_2",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT_Wave_V_Normal'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Wave_V_Normal.0"
+          },
+          "ExpressionGUID": "8BEC9F3A-4AD92EA6-F235C494-8E87D461"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "ColorCurve",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "CurveLinearColorAtlas'FA_DarkBlue_003'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/Curve/FA_DarkBlue_003.0"
+          },
+          "ExpressionGUID": "F1B0BD7A-4A40D5BB-9970F3AA-A5FF55AB"
+        }
+      ],
+      "BasePropertyOverrides": {
+        "BlendMode": "BLEND_Translucent",
+        "ShadingModel": "MSM_Unlit",
+        "OpacityMaskClipValue": 0.3333
+      },
+      "StaticParameters": {
+        "StaticSwitchParameters": [
+          {
+            "Value": true,
+            "ParameterInfo": {
+              "Name": "UseColorTex",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            "bOverride": true,
+            "ExpressionGUID": "51824D2F-406BF4BD-523DE1A9-67CA3C0E"
+          }
+        ]
+      },
+      "CachedReferencedTextures": [
+        {
+          "ObjectName": "Texture2D'DefaultDiffuse'",
+          "ObjectPath": "Engine/Content/EngineMaterials/DefaultDiffuse.0"
+        },
+        {
+          "ObjectName": "CurveLinearColorAtlas'FireCurveAtlas'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/Curve/FireCurveAtlas.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_FireTex_RGB'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/SubUV/FT_FireTex_RGB.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_S_Tile_08Normal'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_S_Tile_08Normal.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_Fire_4x4_01_gray'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/SubUV/FT_Fire_4x4_01_gray.0"
+        }
+      ],
+      "TextureStreamingData": [
+        {
+          "SamplingScale": 0.09375,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Wave_V_Normal"
+        }
+      ]
+    },
+    "LoadedMaterialResources": []
+  }
+]

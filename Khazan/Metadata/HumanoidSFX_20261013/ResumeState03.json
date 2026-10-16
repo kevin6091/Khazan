@@ -1,0 +1,78 @@
+{
+  "time": "2026-10-13T13:57:49.325382+09:00",
+  "scope": [
+    "Player",
+    "Swordsman",
+    "SwordShield",
+    "HeavySwordsman",
+    "HalberdElite"
+  ],
+  "excluded": [
+    "Yetuga",
+    "ApesStoneHandElite"
+  ],
+  "status": "Main final1682/527/174/8 saved and delivered; 78 actual mixer fixtures passed. Remaining fresh Parry/Dodge interactions and final domain documentation.",
+  "evidence": "Inventory02 / PlaybackPlan01 / AudioAuthoringPlan01 / NativeCuePlan01 / NativeDecodedImport01 / Stage01 / AuthorStage02 / RuntimeSamples01 / Coverage01",
+  "counts": {
+    "source_inventory_animations": 936,
+    "source_inventory_combos": 58,
+    "source_inventory_definitions": 5,
+    "audio_occurrences": 1682,
+    "audio_sequences": 524,
+    "cleared_callback_only_sequences": 3,
+    "combo_assets": 35,
+    "dodge_blueprints": 8,
+    "new_original_cues": 51,
+    "native_wave_recipes": 262,
+    "mixer_fixtures": 78,
+    "isolated_stage_assets": 570
+  },
+  "project": "C:\\Users\\user\\Desktop\\GitProject\\Khazan_HumanoidSFXWork_20261013\\Khazan",
+  "failures_preserved": [
+    "NativeImport03 relative path failure, fixed with absolute environment paths.",
+    "SpatialAuthor02/Author02 Main Win32 error32 caused by independent background render file locks.",
+    "SavedStage01/02 found duplicate same-foot audio notify surviving outside KZAudio.",
+    "AuthorStage03_Contacts protected Python Notifies array; existing DEV audio editor gets narrow class-only clear command."
+  ],
+  "main_saved": {
+    "success": true,
+    "package_saves": 0,
+    "events": 1682,
+    "sequences": 527,
+    "windows": 174,
+    "abilities": 8,
+    "errors": [],
+    "cues": 237
+  },
+  "runtime_source_files": [
+    "KZAnimNotify_PlayAudio.h",
+    "KZAnimNotify_PlayAudio.cpp",
+    "KZAnimNotifyState_PlayAudio.cpp"
+  ],
+  "numeric_policy": "Source bank gains/randomization/media endings/attenuation curves preserved. Explicit TEMP voice.85/foot.9/weapon1, stop minimum.08s, callback adapters at first actual pose; same-frame same-contact/voice dedup.",
+  "next": [
+    "Inspect MainParry01 fresh single-test regression. MainInteraction01 first3 tests passed with nonzero PCM/no clipping; fourth Parry expired after14s due lost PIE actor during sequential test restart, not a source behavior verdict.",
+    "Run MainDodge01 single Khazan.BeastDodge.DefensePIE (DEV test now reads authored SuccessSound).",
+    "Optionally room/snow mix check in existing HeinMach map using current baseline, without old pre-lighting actor equality assertions.",
+    "Consolidate Main/binary hashes, all compiled current source evidence and replay metrics; append Art/Engineering states, knowledge, continuity, architecture/migration and Router. No fullauthor/import/rebuild unless new failure requires it."
+  ],
+  "main_delivery": "MainDelivery01 complete535 applied/35 already; baseline conflicts0;locked0",
+  "mixer": {
+    "status": "passed",
+    "native_completion": "[2026.10.13-04.46.41:589][285]LogAutomationController: Display: Test Completed. Result={Success} Name={PIE} Path={Khazan.Audio.PIE}",
+    "output": {
+      "wave": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\HumanoidSFX_20261013\\MixerStage02_RHI\\ActualGameplayAudio.wav",
+      "seconds": 143.296,
+      "peak": 0.553924560546875,
+      "rms": 0.020348370423977684,
+      "clipped_samples": 0
+    },
+    "destroyed_owner_tail": {
+      "wave": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\HumanoidSFX_20261013\\MixerStage02_RHI\\DestroyedOwnerTail.wav",
+      "after_destroy_peak": 0.019866943359375,
+      "seconds": 0.6826666666666666,
+      "clipped_samples": 0
+    }
+  },
+  "debugger": "Test completed successfully before attach; temporary owned breakpoint removed, user8 breakpoints untouched, no debugger session created. AddInfo observations are flushed at automation completion; startup AppGain0 did not imply silent completed mixer."
+}

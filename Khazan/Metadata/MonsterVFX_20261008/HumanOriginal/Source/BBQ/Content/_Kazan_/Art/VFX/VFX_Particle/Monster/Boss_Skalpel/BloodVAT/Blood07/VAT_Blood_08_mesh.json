@@ -1,0 +1,180 @@
+[
+  {
+    "Type": "BodySetup",
+    "Name": "BodySetup_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BodySetup'",
+    "Outer": {
+      "ObjectName": "StaticMesh'VAT_Blood_08_mesh'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Skalpel/BloodVAT/Blood07/VAT_Blood_08_mesh.2"
+    },
+    "Properties": {
+      "DefaultInstance": {
+        "ObjectType": "ECC_WorldStatic",
+        "CollisionProfileName": "BlockAll",
+        "CollisionResponses": {
+          "ResponseArray": [
+            {
+              "Channel": "EngineTraceChannel1",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "Attack",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "JumpBlock",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "IKTrace",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "FloorCheck",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "LandScape",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "NamePlate",
+              "Response": "ECR_Block"
+            }
+          ]
+        }
+      }
+    },
+    "BodySetupGuid": "25FD19DF47C1A34B8F0C8B99AFC7A054"
+  },
+  {
+    "Type": "NavCollision",
+    "Name": "NavCollision_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'NavCollision'",
+    "Outer": {
+      "ObjectName": "StaticMesh'VAT_Blood_08_mesh'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Skalpel/BloodVAT/Blood07/VAT_Blood_08_mesh.2"
+    },
+    "CookedFormatData": {
+      "NavCollision_Chaos": {
+        "BulkDataFlags": "BULKDATA_SingleUse | BULKDATA_ForceInlinePayload",
+        "ElementCount": 21,
+        "SizeOnDisk": 21,
+        "OffsetInFile": "0x630D4"
+      }
+    }
+  },
+  {
+    "Type": "StaticMesh",
+    "Name": "VAT_Blood_08_mesh",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'StaticMesh'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Skalpel/BloodVAT/Blood07/VAT_Blood_08_mesh",
+    "Properties": {
+      "StaticMaterials": [
+        {
+          "MaterialInterface": {
+            "ObjectName": "MaterialInstanceConstant'VAT_FMI_Blood_08'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Skalpel/BloodVAT/Blood07/VAT_FMI_Blood_08.0"
+          },
+          "MaterialSlotName": "WorldGridMaterial",
+          "ImportedMaterialSlotName": "WorldGridMaterial",
+          "UVChannelData": {
+            "bInitialized": true,
+            "bOverrideDensities": false,
+            "LocalUVDensities": 2027.3177,
+            "LocalUVDensities[1]": 4.019993,
+            "LocalUVDensities[2]": 0.0,
+            "LocalUVDensities[3]": 0.0
+          }
+        }
+      ],
+      "LightmapUVDensity": 4.019993,
+      "LightMapResolution": 64,
+      "LightMapCoordinateIndex": 1,
+      "ExtendedBounds": {
+        "Origin": {
+          "X": 331.5,
+          "Y": 77.5,
+          "Z": 9.800001
+        },
+        "BoxExtent": {
+          "X": 341.5,
+          "Y": 187.5,
+          "Z": 40.2
+        },
+        "SphereRadius": 391.65616
+      }
+    },
+    "BodySetup": {
+      "ObjectName": "BodySetup'VAT_Blood_08_mesh:BodySetup_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Skalpel/BloodVAT/Blood07/VAT_Blood_08_mesh.0"
+    },
+    "NavCollision": {
+      "ObjectName": "NavCollision'VAT_Blood_08_mesh:NavCollision_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Monster/Boss_Skalpel/BloodVAT/Blood07/VAT_Blood_08_mesh.1"
+    },
+    "LightingGuid": "E7E7F23E-48FADF74-E44037B1-7FC6563D",
+    "RenderData": {
+      "LODs": [
+        {
+          "Sections": [
+            {
+              "MaterialIndex": 0,
+              "FirstIndex": 0,
+              "NumTriangles": 2056,
+              "MinVertexIndex": 0,
+              "MaxVertexIndex": 6165,
+              "bEnableCollision": false,
+              "bCastShadow": true,
+              "bForceOpaque": false,
+              "bVisibleInRayTracing": true
+            }
+          ],
+          "MaxDeviation": 0.0,
+          "PositionVertexBuffer": {
+            "Stride": 12,
+            "NumVertices": 6166
+          },
+          "VertexBuffer": {
+            "NumTexCoords": 2,
+            "NumVertices": 6166,
+            "Strides": -1,
+            "UseHighPrecisionTangentBasis": false,
+            "UseFullPrecisionUVs": true
+          },
+          "ColorVertexBuffer": {
+            "Stride": 0,
+            "NumVertices": 0
+          }
+        }
+      ],
+      "Bounds": {
+        "Origin": {
+          "X": 331.5,
+          "Y": 77.5,
+          "Z": 9.800001
+        },
+        "BoxExtent": {
+          "X": 341.5,
+          "Y": 187.5,
+          "Z": 40.2
+        },
+        "SphereRadius": 391.65616
+      },
+      "bLODsShareStaticLighting": true,
+      "ScreenSize": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  }
+]

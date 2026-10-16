@@ -1,0 +1,21 @@
+{
+  "schema": "Khazan.MonsterVisual.NoMergeCompatibilityRevision.v1",
+  "evidence": "Metadata/MonsterVFX_20261008/EngineNoMergeLifecycleAudit.json",
+  "source_files": [
+    {
+      "path": "Source/Khazan/Animation/Notifies/KZAnimNotifyState_MonsterVisual.cpp",
+      "sha256": "b4af49d8236e9e9cf1517ec39828dd69020f2905e56d05fc8a4b6e8c3e24cd12",
+      "lines": 36
+    },
+    {
+      "path": "Source/Khazan/Tests/KZMonsterVisualPIETest.cpp",
+      "sha256": "b19f2ca744d43443d5fedba5770dd8e4fe431c10d1d2368df8602fc356e82640",
+      "lines": 473
+    }
+  ],
+  "current_runtime_field_schema_sha256_unchanged": "58d4696c6b98900bcf6b380ea8d4049d48e7c1d8b3d39bd41c04b574f76e36cf",
+  "contract": "Engine queued state with default matching -> actual Monster receipt; exact source context IDs used when supplied. Fullclip context boundary -> source flags cleanup. Engine contextless BlendSpace/SingleNode continuation now supported.",
+  "same_actor_concurrency_limit": "Engine default can merge identical same-asset notify concurrent twice in one AnimInstance; no current concrete consumer intentionally requires this. Forced-ID DEV lifetime test is not evidence of engine same-actor identical-clip concurrency support. Different actual avatars and distinct original notify occurrences stay isolated.",
+  "dev": "Actual saved native census expects NoMerge bit unset, normal distinct forced-ID/actual avatar lifecycle fixture retained. RunTest uses Player fixture60s actual ownedPIE wait; no test begins/stops editorPIE.",
+  "validation": "Parent Build10, fresh saved2855 State+487 sentinel defaultflags readback and RHI/nativePIE pending; no child editor/build/content/MainSource action."
+}

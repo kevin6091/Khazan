@@ -1,0 +1,62 @@
+{
+  "status": "Complete",
+  "recorded_utc": "2026-10-07T07:00:35.666271+00:00",
+  "main_project": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan",
+  "main_ready_audit_utc": "2026-10-07T06:51:21.279651+00:00",
+  "main_editor_pid_at_audit": 29556,
+  "main_map": "/Game/Maps/DevMap.DevMap",
+  "runtime_new_files": 0,
+  "delivered_existing_source_files": 4,
+  "delivered_packages": 5,
+  "scoped_files_current_sha_verified": 9,
+  "protected_files_unchanged_at_delivery": 89,
+  "behavior": {
+    "HalberdElite": "Basic_Loop_02 -> Basic_End_02 only",
+    "HeavySwordsman": "Basic_Loop_03 -> Basic_End_03 only",
+    "acquired_target": "Retained while weak Player Actor is valid; lifetime cleanup preserved",
+    "re_chase": "After chosen Standoff interval or current Ability lifetime completes"
+  },
+  "tests": {
+    "Khazan.Monster.CombatPolicyPIE": {
+      "result": "Success",
+      "utc": "2026-10-07T06:32:02.734Z",
+      "families": 4
+    },
+    "Khazan.Monster.WaitingPIE": {
+      "result": "Success",
+      "utc": "2026-10-07T06:43:56.397Z"
+    },
+    "MainColdBuild": {
+      "result": "Succeeded",
+      "actions": 10,
+      "seconds": 68.3
+    },
+    "MainSavedReload": {
+      "result": "Success",
+      "dirty_packages": 0,
+      "PIE": false
+    }
+  },
+  "evidence": [
+    "CombatPolicyPIE_Success.log",
+    "WaitingPIE_Success.log",
+    "ColdBuild_Main.log",
+    "ColdBuild_StockRefreshed.log",
+    "DeliveryManifest.json",
+    "FinalMainHashVerification.json",
+    "MainReadyAudit.json",
+    "FinalSavedAudit.json"
+  ],
+  "documents_appended": [
+    "Docs/Engineering/CHARACTER_GAMEPLAY_ARCHITECTURE.md",
+    "Docs/Engineering/CHARACTER_TAG_ABILITY_MIGRATION.md",
+    "Docs/Engineering/MONSTER_UNAWARE_LOCOMOTION_20261007.md",
+    "Docs/Engineering/ENGINEERING_PROJECT_STATE.md",
+    "Docs/Engineering/ENGINEERING_WORK_CONTINUITY.md",
+    "Docs/Animation/LOCOMOTION_CURRENT_IMPLEMENTATION.md",
+    "0_DOCUMENT_ROUTER.md"
+  ],
+  "pending_implementation_or_delivery": [],
+  "next_user_check": "Play in Main DevMap; observe fixed wait, retained combat, completion before re-chase",
+  "scope": "Animation AI only; no damage or hit response; existing temporary AI values retained"
+}

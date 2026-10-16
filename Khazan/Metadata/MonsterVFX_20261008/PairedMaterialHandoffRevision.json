@@ -1,0 +1,30 @@
+{
+  "schema": "Khazan.MonsterVisual.PairedMaterialHandoff.v1",
+  "work_root": "C:\\Users\\user\\Desktop\\GitProject\\Khazan_MonsterVFXWork_20261008\\Khazan",
+  "source_files": [
+    {
+      "path": "Source/Khazan/Character/KZMonster.h",
+      "sha256": "df1012fac868ea556ab19e32756fe350ba2398cf16af68d88a9293200343dc75",
+      "lines": 211
+    },
+    {
+      "path": "Source/Khazan/Character/KZMonster.cpp",
+      "sha256": "d6be31311a7b148dbb105ab3f1b256a1654d178284084150c649878f058cb552",
+      "lines": 762
+    },
+    {
+      "path": "Source/Khazan/Ability/MonsterAbility/KZExhaustionAbility.cpp",
+      "sha256": "079ad39873c19c7774d2d58fdcea5d61683aac35871e93e310e2b725da1b7077",
+      "lines": 307
+    },
+    {
+      "path": "Source/Khazan/Tests/KZMonsterVisualPIETest.cpp",
+      "sha256": "dcd13bd0f97e04a9dd56fc42165b54998645ff54689f2e5bfeeec1b41b802c5c",
+      "lines": 459
+    }
+  ],
+  "current_runtime_field_schema_sha256_unchanged": "58d4696c6b98900bcf6b380ea8d4049d48e7c1d8b3d39bd41c04b574f76e36cf",
+  "contract": "Exact execution recipe with replacement map + actual active Exhaustion.HasBrutalPartner +HP>0 skips death material only; standalone source preview unaffected. At HP0 natural end retains only captured Mesh/Anim/NotifyID/MontageInstance receipts under actual Exhaustion owner. Successful victim+attacker completed Brutal2 calls FinishDeathPresentation(false) before cleanup; same receipt becomes frozen corpse presentation owner. Old completed montage/task End cannot revoke handed-off receipt. Cancel, explicit Clear/context replacement/Anim change/unpause/HP recovery, UnPossess and EndPlay restore original material/parameters.",
+  "test": "Two actual saved Apes BP executions through granted real player X/Brutal + actual stamina damage GE. Nonlethal uses initialized HP400 and current Brutal50; lethal fixture uses current authored one-hit50 threshold in temporary actor attribute only. Test validates real claim/reaction, living baseline materials, successful lethal frozen pose with original victim source MIDs, actual last source parameter retained exactly across QA1s dwell, and actual Controller.UnPossess baseline restoration. Terminal sampled last value is logged as actual source observation, not falsely equated to raw curve final key.",
+  "validation": "Parent Build8 stopped103.296s with only inherited AActor.Owner C4458; one local renamed after UBT exit. Parent Build9/native PIE/RHI pending."
+}

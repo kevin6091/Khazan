@@ -1,0 +1,2367 @@
+{
+  "schema": "Khazan.MonsterStamina.SavedReload.v1",
+  "project": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan",
+  "pid": 15924,
+  "read_only": true,
+  "success": true,
+  "tolerance": 1e-05,
+  "verification_scope": "Readable saved settings/references/segments/notifies/autoBlendOut/options only; unverified_required is separate native QA.",
+  "receipts": {
+    "Authoring.json": {
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\MonsterStamina_20261008\\Authoring.json",
+      "sha256": "ea3ad756aed6c61a515df0e5cc35c3f133e8b3d3d4ba1990b5aa55c05b8fde24"
+    },
+    "BodiesAuthoring.json": {
+      "file": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Metadata\\MonsterStamina_20261008\\BodiesAuthoring.json",
+      "sha256": "2e6a3b989a91884c2639e07c4f27c0514774141904758acc95247fc09e6131f7"
+    }
+  },
+  "definitions": [
+    {
+      "family": "Swordsman",
+      "asset": "/Game/Monsters/Swordsman/Data/DA_Character_Swordsman.DA_Character_Swordsman",
+      "enabled": true,
+      "settings": {
+        "parry_damage": 5.0,
+        "exhaustion_seconds": 5.0,
+        "brutal_hp_damage": 0.0,
+        "brutal_range_cm": 180.0,
+        "alignment_distance_cm": 0.0
+      },
+      "montage_refs": {
+        "exhaustion_montage": "/Game/Monsters/Swordsman/Animations/AM_Exhaustion.AM_Exhaustion",
+        "brutal_front_player_montage": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AM_DAS_BrutalFront.AM_DAS_BrutalFront",
+        "brutal_back_player_montage": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AM_DAS_BrutalBack.AM_DAS_BrutalBack",
+        "brutal_front_victim_montage": "/Game/Monsters/Swordsman/Animations/AM_BrutalVictimFront.AM_BrutalVictimFront",
+        "brutal_back_victim_montage": "/Game/Monsters/Swordsman/Animations/AM_BrutalVictimBack.AM_BrutalVictimBack"
+      },
+      "damage_effect": "/Game/Bluprints/AbilitySystem/Effects/Attack/GE_ComboAttack_Damage.GE_ComboAttack_Damage_C",
+      "dead_effect": "/Game/Monsters/Effects/GE_DeadState.GE_DeadState_C",
+      "grants": [
+        {
+          "ability": "/Game/Monsters/Swordsman/Abilities/GA_EmpireSword_Early_Slash.GA_EmpireSword_Early_Slash_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/Swordsman/Abilities/GA_EmpireSword_Early_Smash.GA_EmpireSword_Early_Smash_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/Swordsman/Abilities/GA_EmpireSword_Pierce.GA_EmpireSword_Pierce_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/Swordsman/Abilities/GA_Alert.GA_Alert_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/Swordsman/Abilities/GA_Idle_Guard.GA_Idle_Guard_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/Swordsman/Abilities/GA_Idle_Basic.GA_Idle_Basic_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/Swordsman/Abilities/GA_Idle_Search.GA_Idle_Search_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/Swordsman/Abilities/GA_Idle_Sit.GA_Idle_Sit_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/Swordsman/Abilities/GA_Idle_Talk01.GA_Idle_Talk01_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/Swordsman/Abilities/GA_Idle_Talk02.GA_Idle_Talk02_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/Swordsman/Abilities/GA_Rush.GA_Rush_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/Swordsman/Abilities/GA_Kick.GA_Kick_C",
+          "input": ""
+        },
+        {
+          "ability": "/Script/Khazan.KZExhaustionAbility",
+          "input": ""
+        }
+      ],
+      "initial_effects": [
+        "/Game/Monsters/Swordsman/Effects/GE_Init_Swordsman.GE_Init_Swordsman_C",
+        "/Game/Monsters/Effects/GE_MonsterStaminaPolicy.GE_MonsterStaminaPolicy_C"
+      ]
+    },
+    {
+      "family": "SwordShield",
+      "asset": "/Game/Monsters/SwordShield/Data/DA_Character_SwordShield.DA_Character_SwordShield",
+      "enabled": true,
+      "settings": {
+        "parry_damage": 5.0,
+        "exhaustion_seconds": 5.0,
+        "brutal_hp_damage": 0.0,
+        "brutal_range_cm": 180.0,
+        "alignment_distance_cm": 0.0
+      },
+      "montage_refs": {
+        "exhaustion_montage": "/Game/Monsters/SwordShield/Animations/AM_Exhaustion.AM_Exhaustion",
+        "brutal_front_player_montage": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AM_DAS_BrutalFront.AM_DAS_BrutalFront",
+        "brutal_back_player_montage": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AM_DAS_BrutalBack.AM_DAS_BrutalBack",
+        "brutal_front_victim_montage": "/Game/Monsters/SwordShield/Animations/AM_BrutalVictimFront.AM_BrutalVictimFront",
+        "brutal_back_victim_montage": "/Game/Monsters/SwordShield/Animations/AM_BrutalVictimBack.AM_BrutalVictimBack"
+      },
+      "damage_effect": "/Game/Bluprints/AbilitySystem/Effects/Attack/GE_ComboAttack_Damage.GE_ComboAttack_Damage_C",
+      "dead_effect": "/Game/Monsters/Effects/GE_DeadState.GE_DeadState_C",
+      "grants": [
+        {
+          "ability": "/Game/Monsters/SwordShield/Abilities/GA_Empire_SwordShield_SwordCombo.GA_Empire_SwordShield_SwordCombo_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/SwordShield/Abilities/GA_Empire_SwordShield_Pierce.GA_Empire_SwordShield_Pierce_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/SwordShield/Abilities/GA_Empire_SwordShield_ShieldCrash.GA_Empire_SwordShield_ShieldCrash_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/SwordShield/Abilities/GA_Alert.GA_Alert_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/SwordShield/Abilities/GA_Idle_Basic.GA_Idle_Basic_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/SwordShield/Abilities/GA_Idle_Sit.GA_Idle_Sit_C",
+          "input": ""
+        },
+        {
+          "ability": "/Script/Khazan.KZExhaustionAbility",
+          "input": ""
+        }
+      ],
+      "initial_effects": [
+        "/Game/Monsters/SwordShield/Effects/GE_Init_SwordShield.GE_Init_SwordShield_C",
+        "/Game/Monsters/Effects/GE_MonsterStaminaPolicy.GE_MonsterStaminaPolicy_C"
+      ]
+    },
+    {
+      "family": "HeavySwordsman",
+      "asset": "/Game/Monsters/HeavySwordsman/Data/DA_Character_HeavySwordsman.DA_Character_HeavySwordsman",
+      "enabled": true,
+      "settings": {
+        "parry_damage": 5.0,
+        "exhaustion_seconds": 5.0,
+        "brutal_hp_damage": 0.0,
+        "brutal_range_cm": 180.0,
+        "alignment_distance_cm": 0.0
+      },
+      "montage_refs": {
+        "exhaustion_montage": "/Game/Monsters/HeavySwordsman/Animations/AM_Exhaustion.AM_Exhaustion",
+        "brutal_front_player_montage": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AM_DAS_BrutalFront.AM_DAS_BrutalFront",
+        "brutal_back_player_montage": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AM_DAS_BrutalBack.AM_DAS_BrutalBack",
+        "brutal_front_victim_montage": "/Game/Monsters/HeavySwordsman/Animations/AM_BrutalVictimFront.AM_BrutalVictimFront",
+        "brutal_back_victim_montage": "/Game/Monsters/HeavySwordsman/Animations/AM_BrutalVictimBack.AM_BrutalVictimBack"
+      },
+      "damage_effect": "/Game/Bluprints/AbilitySystem/Effects/Attack/GE_ComboAttack_Damage.GE_ComboAttack_Damage_C",
+      "dead_effect": "/Game/Monsters/Effects/GE_DeadState.GE_DeadState_C",
+      "grants": [
+        {
+          "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_EmpireSwordHArmor_SwordSwing_01.GA_EmpireSwordHArmor_SwordSwing_01_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_EmpireSwordHArmor_SwordSwing_02.GA_EmpireSwordHArmor_SwordSwing_02_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_EmpireSwordHArmor_SwordSwing_03.GA_EmpireSwordHArmor_SwordSwing_03_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_SwordSwing_02_Single.GA_SwordSwing_02_Single_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_Alert.GA_Alert_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_Idle_Basic.GA_Idle_Basic_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_Idle_Search.GA_Idle_Search_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_Idle_Sit.GA_Idle_Sit_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_SwordSting.GA_SwordSting_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_SwordSwingTurnL.GA_SwordSwingTurnL_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_SwordSwingTurnR.GA_SwordSwingTurnR_C",
+          "input": ""
+        },
+        {
+          "ability": "/Script/Khazan.KZExhaustionAbility",
+          "input": ""
+        }
+      ],
+      "initial_effects": [
+        "/Game/Monsters/HeavySwordsman/Effects/GE_Init_HeavySwordsman.GE_Init_HeavySwordsman_C",
+        "/Game/Monsters/Effects/GE_MonsterStaminaPolicy.GE_MonsterStaminaPolicy_C"
+      ]
+    },
+    {
+      "family": "HalberdElite",
+      "asset": "/Game/Monsters/HalberdElite/Data/DA_Character_HalberdElite.DA_Character_HalberdElite",
+      "enabled": true,
+      "settings": {
+        "parry_damage": 5.0,
+        "exhaustion_seconds": 5.0,
+        "brutal_hp_damage": 0.0,
+        "brutal_range_cm": 180.0,
+        "alignment_distance_cm": 0.0
+      },
+      "montage_refs": {
+        "exhaustion_montage": "/Game/Monsters/HalberdElite/Animations/AM_Exhaustion.AM_Exhaustion",
+        "brutal_front_player_montage": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AM_DAS_BrutalFront.AM_DAS_BrutalFront",
+        "brutal_back_player_montage": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AM_DAS_BrutalBack.AM_DAS_BrutalBack",
+        "brutal_front_victim_montage": "/Game/Monsters/HalberdElite/Animations/AM_BrutalVictimFront.AM_BrutalVictimFront",
+        "brutal_back_victim_montage": "/Game/Monsters/HalberdElite/Animations/AM_BrutalVictimBack.AM_BrutalVictimBack"
+      },
+      "damage_effect": "/Game/Bluprints/AbilitySystem/Effects/Attack/GE_ComboAttack_Damage.GE_ComboAttack_Damage_C",
+      "dead_effect": "/Game/Monsters/Effects/GE_DeadState.GE_DeadState_C",
+      "grants": [
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_EmpireHalberd_E_Early_Swing.GA_EmpireHalberd_E_Early_Swing_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_EmpireHalberd_E_Early_Pierce.GA_EmpireHalberd_E_Early_Pierce_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_EmpireHalberd_E_Early_Push.GA_EmpireHalberd_E_Early_Push_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_Alert.GA_Alert_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_Idle_Basic.GA_Idle_Basic_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_Idle_Guard.GA_Idle_Guard_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_Idle_Search.GA_Idle_Search_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_Idle_Talk01.GA_Idle_Talk01_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_Idle_Talk02.GA_Idle_Talk02_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_Swing.GA_Swing_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_Pierce.GA_Pierce_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_Push.GA_Push_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_EarlyPushFollowup.GA_EarlyPushFollowup_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_RoundAttack.GA_RoundAttack_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_DownUpperSlash.GA_DownUpperSlash_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_SprintSwing.GA_SprintSwing_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_EarlySprintSwing.GA_EarlySprintSwing_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_BackDashCounter.GA_BackDashCounter_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_GuardCounterDown.GA_GuardCounterDown_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_GuardCounterUpper.GA_GuardCounterUpper_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_GuardCounterRecovery.GA_GuardCounterRecovery_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_ChargeAttack.GA_ChargeAttack_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_ChargeAttackFast.GA_ChargeAttackFast_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_Smash.GA_Smash_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_TurnAttack.GA_TurnAttack_C",
+          "input": ""
+        },
+        {
+          "ability": "/Game/Monsters/HalberdElite/Abilities/GA_TurnAttackFast.GA_TurnAttackFast_C",
+          "input": ""
+        },
+        {
+          "ability": "/Script/Khazan.KZExhaustionAbility",
+          "input": ""
+        }
+      ],
+      "initial_effects": [
+        "/Game/Monsters/HalberdElite/Effects/GE_Init_HalberdElite.GE_Init_HalberdElite_C",
+        "/Game/Monsters/Effects/GE_MonsterStaminaPolicy.GE_MonsterStaminaPolicy_C"
+      ]
+    },
+    {
+      "family": "ApesStoneHandElite",
+      "asset": "/Game/Monsters/ApesStoneHandElite/Data/DA_Character_ApesStoneHandElite.DA_Character_ApesStoneHandElite",
+      "enabled": true,
+      "settings": {
+        "parry_damage": 5.0,
+        "exhaustion_seconds": 5.0,
+        "brutal_hp_damage": 0.0,
+        "brutal_range_cm": 260.0,
+        "alignment_distance_cm": 0.0
+      },
+      "montage_refs": {
+        "exhaustion_montage": "/Game/Monsters/ApesStoneHandElite/Animations/AM_Exhaustion.AM_Exhaustion",
+        "brutal_front_player_montage": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AM_DAS_BrutalFront.AM_DAS_BrutalFront",
+        "brutal_back_player_montage": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AM_DAS_BrutalBack.AM_DAS_BrutalBack",
+        "brutal_front_victim_montage": "/Game/Monsters/ApesStoneHandElite/Animations/AM_BrutalVictimFront.AM_BrutalVictimFront",
+        "brutal_back_victim_montage": "/Game/Monsters/ApesStoneHandElite/Animations/AM_BrutalVictimBack.AM_BrutalVictimBack"
+      },
+      "damage_effect": "/Game/Bluprints/AbilitySystem/Effects/Attack/GE_ComboAttack_Damage.GE_ComboAttack_Damage_C",
+      "dead_effect": "/Game/Monsters/Effects/GE_DeadState.GE_DeadState_C",
+      "grants": [
+        {
+          "ability": "/Script/Khazan.KZExhaustionAbility",
+          "input": ""
+        }
+      ],
+      "initial_effects": [
+        "/Game/Monsters/ApesStoneHandElite/Effects/GE_Init_ApesStoneHandElite.GE_Init_ApesStoneHandElite_C",
+        "/Game/Monsters/Effects/GE_MonsterStaminaPolicy.GE_MonsterStaminaPolicy_C"
+      ]
+    },
+    {
+      "family": "Yetuga",
+      "asset": "/Game/Monsters/Yetuga/Data/DA_Character_Yetuga.DA_Character_Yetuga",
+      "enabled": true,
+      "settings": {
+        "parry_damage": 5.0,
+        "exhaustion_seconds": 8.0,
+        "brutal_hp_damage": 0.0,
+        "brutal_range_cm": 400.0,
+        "alignment_distance_cm": 0.0
+      },
+      "montage_refs": {
+        "exhaustion_montage": "/Game/Monsters/Yetuga/Animations/AM_Exhaustion.AM_Exhaustion",
+        "brutal_front_player_montage": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AM_DAS_BrutalFront.AM_DAS_BrutalFront",
+        "brutal_back_player_montage": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AM_DAS_BrutalBack.AM_DAS_BrutalBack",
+        "brutal_front_victim_montage": "/Game/Monsters/Yetuga/Animations/AM_BrutalVictimFront.AM_BrutalVictimFront",
+        "brutal_back_victim_montage": "/Game/Monsters/Yetuga/Animations/AM_BrutalVictimBack.AM_BrutalVictimBack"
+      },
+      "damage_effect": "/Game/Bluprints/AbilitySystem/Effects/Attack/GE_ComboAttack_Damage.GE_ComboAttack_Damage_C",
+      "dead_effect": "/Game/Monsters/Effects/GE_DeadState.GE_DeadState_C",
+      "grants": [
+        {
+          "ability": "/Script/Khazan.KZExhaustionAbility",
+          "input": ""
+        }
+      ],
+      "initial_effects": [
+        "/Game/Monsters/Yetuga/Effects/GE_Init_Yetuga.GE_Init_Yetuga_C",
+        "/Game/Monsters/Effects/GE_MonsterStaminaPolicy.GE_MonsterStaminaPolicy_C"
+      ]
+    }
+  ],
+  "effects": [
+    {
+      "asset": "/Game/Monsters/Effects/GE_MonsterStaminaPolicy.GE_MonsterStaminaPolicy_C",
+      "duration": "<GameplayEffectDurationType.INFINITE: 1>",
+      "configured_combined_tags": [
+        "Block.StaminaRegen"
+      ],
+      "configured_field": "InheritableGrantedTagsContainer",
+      "unavailable_field_errors": {},
+      "modifiers": 0
+    },
+    {
+      "asset": "/Game/Monsters/Effects/GE_DeadState.GE_DeadState_C",
+      "duration": "<GameplayEffectDurationType.INFINITE: 1>",
+      "configured_combined_tags": [
+        "Block.Movement.Input",
+        "State.Dead"
+      ],
+      "configured_field": "InheritableGrantedTagsContainer",
+      "unavailable_field_errors": {},
+      "modifiers": 0
+    }
+  ],
+  "montages": [
+    {
+      "asset": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AM_DAS_BrutalFront.AM_DAS_BrutalFront",
+      "skeleton": "/Game/_Art/Player/Character/Meshs/SK_Player.SK_Player",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Start",
+          "clip": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AC_Kazan_DualSwordAxe_Com_Grapple_Start.AC_Kazan_DualSwordAxe_Com_Grapple_Start",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 0.8999999761581421,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Attack1",
+          "clip": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AC_Kazan_DualAxeSword_Com_Grapple_Atk_01.AC_Kazan_DualAxeSword_Com_Grapple_Atk_01",
+          "segment_start": 0.8999999761581421,
+          "source_start": 0.0,
+          "source_end": 0.6666666865348816,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Attack2",
+          "clip": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AC_Kazan_DualAxeSword_Com_Grapple_Atk_02.AC_Kazan_DualAxeSword_Com_Grapple_Atk_02",
+          "segment_start": 1.566666603088379,
+          "source_start": 0.0,
+          "source_end": 2.049999952316284,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [
+        {
+          "name": "BrutalHit1",
+          "time_seconds": 1.467209,
+          "class_path": "/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify",
+          "native_name": "BrutalHit1",
+          "state_class": "None",
+          "duration": 0.0,
+          "tick": "<MontageNotifyTickType.BRANCHING_POINT: 1>"
+        },
+        {
+          "name": "BrutalHit2",
+          "time_seconds": 2.210542,
+          "class_path": "/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify",
+          "native_name": "BrutalHit2",
+          "state_class": "None",
+          "duration": 0.0,
+          "tick": "<MontageNotifyTickType.BRANCHING_POINT: 1>"
+        }
+      ],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": -1.0,
+      "blend_in": 0.10000000149011612,
+      "blend_out": 0.20000000298023224,
+      "seconds": 3.616666555404663
+    },
+    {
+      "asset": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AM_DAS_BrutalBack.AM_DAS_BrutalBack",
+      "skeleton": "/Game/_Art/Player/Character/Meshs/SK_Player.SK_Player",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Start",
+          "clip": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AC_Kazan_DualSwordAxe_Com_Grapple_Start.AC_Kazan_DualSwordAxe_Com_Grapple_Start",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 0.8999999761581421,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Attack1",
+          "clip": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_01.AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_01",
+          "segment_start": 0.8999999761581421,
+          "source_start": 0.0,
+          "source_end": 0.6833333373069763,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Attack2",
+          "clip": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_02.AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_02",
+          "segment_start": 1.5833332538604736,
+          "source_start": 0.0,
+          "source_end": 2.049999952316284,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [
+        {
+          "name": "BrutalHit1",
+          "time_seconds": 1.470816,
+          "class_path": "/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify",
+          "native_name": "BrutalHit1",
+          "state_class": "None",
+          "duration": 0.0,
+          "tick": "<MontageNotifyTickType.BRANCHING_POINT: 1>"
+        },
+        {
+          "name": "BrutalHit2",
+          "time_seconds": 2.227209,
+          "class_path": "/Script/AnimGraphRuntime.AnimNotify_PlayMontageNotify",
+          "native_name": "BrutalHit2",
+          "state_class": "None",
+          "duration": 0.0,
+          "tick": "<MontageNotifyTickType.BRANCHING_POINT: 1>"
+        }
+      ],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": -1.0,
+      "blend_in": 0.10000000149011612,
+      "blend_out": 0.20000000298023224,
+      "seconds": 3.633333444595337
+    },
+    {
+      "asset": "/Game/Monsters/Swordsman/Animations/AM_Exhaustion.AM_Exhaustion",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Start",
+          "clip": "/Game/Monsters/Swordsman/Animations/InGame/Damage/Damage_Groggy_Start.Damage_Groggy_Start",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 0.6666666865348816,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Loop",
+          "clip": "/Game/Monsters/Swordsman/Animations/InGame/Damage/Damage_Groggy_Loop.Damage_Groggy_Loop",
+          "segment_start": 0.6666666865348816,
+          "source_start": 0.0,
+          "source_end": 1.5,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "End",
+          "clip": "/Game/Monsters/Swordsman/Animations/InGame/Damage/Damage_Groggy_End.Damage_Groggy_End",
+          "segment_start": 2.1666667461395264,
+          "source_start": 0.0,
+          "source_end": 0.7666666507720947,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 2.933333396911621
+    },
+    {
+      "asset": "/Game/Monsters/Swordsman/Animations/AM_BrutalVictimFront.AM_BrutalVictimFront",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Damage1",
+          "clip": "/Game/Monsters/Swordsman/Animations/InGame/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.3666666746139526,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Damage2",
+          "clip": "/Game/Monsters/Swordsman/Animations/InGame/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+          "segment_start": 1.3666666746139526,
+          "source_start": 0.0,
+          "source_end": 1.100000023841858,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 2.4666666984558105
+    },
+    {
+      "asset": "/Game/Monsters/Swordsman/Animations/AM_BrutalVictimBack.AM_BrutalVictimBack",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Damage1",
+          "clip": "/Game/Monsters/Swordsman/Animations/InGame/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.3333333730697632,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Damage2",
+          "clip": "/Game/Monsters/Swordsman/Animations/InGame/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+          "segment_start": 1.3333333730697632,
+          "source_start": 0.0,
+          "source_end": 2.5,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 3.8333332538604736
+    },
+    {
+      "asset": "/Game/Monsters/SwordShield/Animations/AM_Exhaustion.AM_Exhaustion",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Start",
+          "clip": "/Game/Monsters/SwordShield/Animations/InGame/Damage/Damage_Groggy_Start.Damage_Groggy_Start",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 0.6666666865348816,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Loop",
+          "clip": "/Game/Monsters/SwordShield/Animations/InGame/Damage/Damage_Groggy_Loop.Damage_Groggy_Loop",
+          "segment_start": 0.6666666865348816,
+          "source_start": 0.0,
+          "source_end": 1.5,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "End",
+          "clip": "/Game/Monsters/SwordShield/Animations/InGame/Damage/Damage_Groggy_End.Damage_Groggy_End",
+          "segment_start": 2.1666667461395264,
+          "source_start": 0.0,
+          "source_end": 0.7666666507720947,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.05000000074505806,
+      "blend_out": 0.20000000298023224,
+      "seconds": 2.933333396911621
+    },
+    {
+      "asset": "/Game/Monsters/SwordShield/Animations/AM_BrutalVictimFront.AM_BrutalVictimFront",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Damage1",
+          "clip": "/Game/Monsters/SwordShield/Animations/InGame/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.3666666746139526,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Damage2",
+          "clip": "/Game/Monsters/SwordShield/Animations/InGame/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+          "segment_start": 1.3666666746139526,
+          "source_start": 0.0,
+          "source_end": 1.100000023841858,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.05000000074505806,
+      "blend_out": 0.20000000298023224,
+      "seconds": 2.4666666984558105
+    },
+    {
+      "asset": "/Game/Monsters/SwordShield/Animations/AM_BrutalVictimBack.AM_BrutalVictimBack",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Damage1",
+          "clip": "/Game/Monsters/SwordShield/Animations/InGame/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.3333333730697632,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Damage2",
+          "clip": "/Game/Monsters/SwordShield/Animations/InGame/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+          "segment_start": 1.3333333730697632,
+          "source_start": 0.0,
+          "source_end": 2.5,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.05000000074505806,
+      "blend_out": 0.20000000298023224,
+      "seconds": 3.8333332538604736
+    },
+    {
+      "asset": "/Game/Monsters/HeavySwordsman/Animations/AM_Exhaustion.AM_Exhaustion",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Start",
+          "clip": "/Game/Monsters/HeavySwordsman/Animations/InGame/Damage/Damage_Groggy_F_Start.Damage_Groggy_F_Start",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.1666666269302368,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Loop",
+          "clip": "/Game/Monsters/HeavySwordsman/Animations/InGame/Damage/Damage_Groggy_F_Loop.Damage_Groggy_F_Loop",
+          "segment_start": 1.1666666269302368,
+          "source_start": 0.0,
+          "source_end": 2.6666667461395264,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "End",
+          "clip": "/Game/Monsters/HeavySwordsman/Animations/InGame/Damage/Damage_Groggy_F_End.Damage_Groggy_F_End",
+          "segment_start": 3.8333334922790527,
+          "source_start": 0.0,
+          "source_end": 1.3333333730697632,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 5.166666507720947
+    },
+    {
+      "asset": "/Game/Monsters/HeavySwordsman/Animations/AM_BrutalVictimFront.AM_BrutalVictimFront",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Damage1",
+          "clip": "/Game/Monsters/HeavySwordsman/Animations/InGame/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.600000023841858,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Damage2",
+          "clip": "/Game/Monsters/HeavySwordsman/Animations/InGame/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+          "segment_start": 1.600000023841858,
+          "source_start": 0.0,
+          "source_end": 1.100000023841858,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 2.700000047683716
+    },
+    {
+      "asset": "/Game/Monsters/HeavySwordsman/Animations/AM_BrutalVictimBack.AM_BrutalVictimBack",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Damage1",
+          "clip": "/Game/Monsters/HeavySwordsman/Animations/InGame/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.3333333730697632,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Damage2",
+          "clip": "/Game/Monsters/HeavySwordsman/Animations/InGame/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+          "segment_start": 1.3333333730697632,
+          "source_start": 0.0,
+          "source_end": 2.5,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 3.8333332538604736
+    },
+    {
+      "asset": "/Game/Monsters/HalberdElite/Animations/AM_Exhaustion.AM_Exhaustion",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Skeletons/SKEL_EN_C_M_HalberdV2.SKEL_EN_C_M_HalberdV2",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Start",
+          "clip": "/Game/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Groggy_F_Start.Damage_Groggy_F_Start",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.2666666507720947,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Loop",
+          "clip": "/Game/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Groggy_F_Loop.Damage_Groggy_F_Loop",
+          "segment_start": 1.2666666507720947,
+          "source_start": 0.0,
+          "source_end": 2.1666667461395264,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "End",
+          "clip": "/Game/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Groggy_F_End.Damage_Groggy_F_End",
+          "segment_start": 3.433333396911621,
+          "source_start": 0.0,
+          "source_end": 2.2333333492279053,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 5.666666507720947
+    },
+    {
+      "asset": "/Game/Monsters/HalberdElite/Animations/AM_BrutalVictimFront.AM_BrutalVictimFront",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Skeletons/SKEL_EN_C_M_HalberdV2.SKEL_EN_C_M_HalberdV2",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Damage1",
+          "clip": "/Game/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.5,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Damage2",
+          "clip": "/Game/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+          "segment_start": 1.5,
+          "source_start": 0.0,
+          "source_end": 1.2000000476837158,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 2.700000047683716
+    },
+    {
+      "asset": "/Game/Monsters/HalberdElite/Animations/AM_BrutalVictimBack.AM_BrutalVictimBack",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Skeletons/SKEL_EN_C_M_HalberdV2.SKEL_EN_C_M_HalberdV2",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Damage1",
+          "clip": "/Game/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.3333333730697632,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Damage2",
+          "clip": "/Game/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+          "segment_start": 1.3333333730697632,
+          "source_start": 0.0,
+          "source_end": 2.5,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 3.8333332538604736
+    },
+    {
+      "asset": "/Game/Monsters/ApesStoneHandElite/Animations/AM_Exhaustion.AM_Exhaustion",
+      "skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Start",
+          "clip": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_GroggyStr_F_Start.Damage_GroggyStr_F_Start",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.2000000476837158,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Loop",
+          "clip": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_GroggyStr_F_Loop_Composite_Variant01.Damage_GroggyStr_F_Loop_Composite_Variant01",
+          "segment_start": 1.2000000476837158,
+          "source_start": 0.0,
+          "source_end": 2.1666667461395264,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "End",
+          "clip": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_GroggyStr_F_End_Composite_Variant01.Damage_GroggyStr_F_End_Composite_Variant01",
+          "segment_start": 3.366666793823242,
+          "source_start": 0.0,
+          "source_end": 2.299999952316284,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 5.666666507720947
+    },
+    {
+      "asset": "/Game/Monsters/ApesStoneHandElite/Animations/AM_BrutalVictimFront.AM_BrutalVictimFront",
+      "skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Damage1",
+          "clip": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.2999999523162842,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Damage2",
+          "clip": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+          "segment_start": 1.2999999523162842,
+          "source_start": 0.0,
+          "source_end": 1.100000023841858,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 2.4000000953674316
+    },
+    {
+      "asset": "/Game/Monsters/ApesStoneHandElite/Animations/AM_BrutalVictimBack.AM_BrutalVictimBack",
+      "skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Damage1",
+          "clip": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.3333333730697632,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Damage2",
+          "clip": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+          "segment_start": 1.3333333730697632,
+          "source_start": 0.0,
+          "source_end": 2.433333396911621,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 3.7666666507720947
+    },
+    {
+      "asset": "/Game/Monsters/Yetuga/Animations/AM_Exhaustion.AM_Exhaustion",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Start",
+          "clip": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_GroggyStr_F_Start_New.Damage_GroggyStr_F_Start_New",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 0.9666666388511658,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Loop",
+          "clip": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_GroggyStr_F_Loop_New.Damage_GroggyStr_F_Loop_New",
+          "segment_start": 0.9666666388511658,
+          "source_start": 0.0,
+          "source_end": 4.0,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "End",
+          "clip": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_GroggyStr_F_End_New.Damage_GroggyStr_F_End_New",
+          "segment_start": 4.9666666984558105,
+          "source_start": 0.0,
+          "source_end": 1.7000000476837158,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 6.666666507720947
+    },
+    {
+      "asset": "/Game/Monsters/Yetuga/Animations/AM_BrutalVictimFront.AM_BrutalVictimFront",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Damage1",
+          "clip": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.2999999523162842,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Damage2",
+          "clip": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+          "segment_start": 1.2999999523162842,
+          "source_start": 0.0,
+          "source_end": 1.100000023841858,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 2.4000000953674316
+    },
+    {
+      "asset": "/Game/Monsters/Yetuga/Animations/AM_BrutalVictimBack.AM_BrutalVictimBack",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "slot": "DefaultSlot",
+      "sections": [
+        {
+          "name": "Damage1",
+          "clip": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_Grapple_Atk_01_B.Damage_Grapple_Atk_01_B",
+          "segment_start": 0.0,
+          "source_start": 0.0,
+          "source_end": 1.3333333730697632,
+          "play_rate": 1.0,
+          "loops": 1
+        },
+        {
+          "name": "Damage2",
+          "clip": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_Grapple_Atk_02_B.Damage_Grapple_Atk_02_B",
+          "segment_start": 1.3333333730697632,
+          "source_start": 0.0,
+          "source_end": 2.433333396911621,
+          "play_rate": 1.0,
+          "loops": 1
+        }
+      ],
+      "notifies": [],
+      "auto_blend_out": true,
+      "blend_out_trigger_time": 0.0,
+      "blend_in": 0.20000000298023224,
+      "blend_out": 0.20000000298023224,
+      "seconds": 3.7666666507720947
+    }
+  ],
+  "clips": [
+    {
+      "source": "/Game/_Art/Player/Animation/Playback/DualAxeSword/Composite/Common/AC_Kazan_DualSwordAxe_Com_Grapple_Start.AC_Kazan_DualSwordAxe_Com_Grapple_Start",
+      "copy": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AC_Kazan_DualSwordAxe_Com_Grapple_Start.AC_Kazan_DualSwordAxe_Com_Grapple_Start",
+      "skeleton": "/Game/_Art/Player/Character/Meshs/SK_Player.SK_Player",
+      "seconds": 0.8999999761581421,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.REF_POSE: 0>"
+      },
+      "frames": 54,
+      "keys": 55
+    },
+    {
+      "source": "/Game/_Art/Player/Animation/Playback/DualAxeSword/Composite/Common/AC_Kazan_DualAxeSword_Com_Grapple_Atk_01.AC_Kazan_DualAxeSword_Com_Grapple_Atk_01",
+      "copy": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AC_Kazan_DualAxeSword_Com_Grapple_Atk_01.AC_Kazan_DualAxeSword_Com_Grapple_Atk_01",
+      "skeleton": "/Game/_Art/Player/Character/Meshs/SK_Player.SK_Player",
+      "seconds": 0.6666666865348816,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.REF_POSE: 0>"
+      },
+      "frames": 40,
+      "keys": 41
+    },
+    {
+      "source": "/Game/_Art/Player/Animation/Playback/DualAxeSword/Composite/Common/AC_Kazan_DualAxeSword_Com_Grapple_Atk_02.AC_Kazan_DualAxeSword_Com_Grapple_Atk_02",
+      "copy": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AC_Kazan_DualAxeSword_Com_Grapple_Atk_02.AC_Kazan_DualAxeSword_Com_Grapple_Atk_02",
+      "skeleton": "/Game/_Art/Player/Character/Meshs/SK_Player.SK_Player",
+      "seconds": 2.049999952316284,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.REF_POSE: 0>"
+      },
+      "frames": 123,
+      "keys": 124
+    },
+    {
+      "source": "/Game/_Art/Player/Animation/Playback/DualAxeSword/Composite/Common/AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_01.AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_01",
+      "copy": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_01.AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_01",
+      "skeleton": "/Game/_Art/Player/Character/Meshs/SK_Player.SK_Player",
+      "seconds": 0.6833333373069763,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.REF_POSE: 0>"
+      },
+      "frames": 41,
+      "keys": 42
+    },
+    {
+      "source": "/Game/_Art/Player/Animation/Playback/DualAxeSword/Composite/Common/AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_02.AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_02",
+      "copy": "/Game/_Art/Player/Animation/InGame/DAS/BrutalAttack/AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_02.AC_Kazan_DualAxeSword_Com_Grapple_BackAtk_02",
+      "skeleton": "/Game/_Art/Player/Character/Meshs/SK_Player.SK_Player",
+      "seconds": 2.049999952316284,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.REF_POSE: 0>"
+      },
+      "frames": 123,
+      "keys": 124
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Damage/Damage_Groggy_Start.Damage_Groggy_Start",
+      "copy": "/Game/Monsters/Swordsman/Animations/InGame/Damage/Damage_Groggy_Start.Damage_Groggy_Start",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "seconds": 0.6666666865348816,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 20,
+      "keys": 21
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Damage/Damage_Groggy_Loop.Damage_Groggy_Loop",
+      "copy": "/Game/Monsters/Swordsman/Animations/InGame/Damage/Damage_Groggy_Loop.Damage_Groggy_Loop",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "seconds": 1.5,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 45,
+      "keys": 46
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Damage/Damage_Groggy_End.Damage_Groggy_End",
+      "copy": "/Game/Monsters/Swordsman/Animations/InGame/Damage/Damage_Groggy_End.Damage_Groggy_End",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "seconds": 0.7666666507720947,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 23,
+      "keys": 24
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+      "copy": "/Game/Monsters/Swordsman/Animations/InGame/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "seconds": 1.3666666746139526,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 41,
+      "keys": 42
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+      "copy": "/Game/Monsters/Swordsman/Animations/InGame/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "seconds": 1.100000023841858,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 33,
+      "keys": 34
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+      "copy": "/Game/Monsters/Swordsman/Animations/InGame/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "seconds": 1.3333333730697632,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 40,
+      "keys": 41
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+      "copy": "/Game/Monsters/Swordsman/Animations/InGame/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "seconds": 2.5,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 75,
+      "keys": 76
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Groggy_Start.Damage_Groggy_Start",
+      "copy": "/Game/Monsters/SwordShield/Animations/InGame/Damage/Damage_Groggy_Start.Damage_Groggy_Start",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "seconds": 0.6666666865348816,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 20,
+      "keys": 21
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Groggy_Loop.Damage_Groggy_Loop",
+      "copy": "/Game/Monsters/SwordShield/Animations/InGame/Damage/Damage_Groggy_Loop.Damage_Groggy_Loop",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "seconds": 1.5,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 45,
+      "keys": 46
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Groggy_End.Damage_Groggy_End",
+      "copy": "/Game/Monsters/SwordShield/Animations/InGame/Damage/Damage_Groggy_End.Damage_Groggy_End",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "seconds": 0.7666666507720947,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 23,
+      "keys": 24
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+      "copy": "/Game/Monsters/SwordShield/Animations/InGame/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "seconds": 1.3666666746139526,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 41,
+      "keys": 42
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+      "copy": "/Game/Monsters/SwordShield/Animations/InGame/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "seconds": 1.100000023841858,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 33,
+      "keys": 34
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+      "copy": "/Game/Monsters/SwordShield/Animations/InGame/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "seconds": 1.3333333730697632,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 40,
+      "keys": 41
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+      "copy": "/Game/Monsters/SwordShield/Animations/InGame/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "seconds": 2.5,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 75,
+      "keys": 76
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_Groggy_F_Start.Damage_Groggy_F_Start",
+      "copy": "/Game/Monsters/HeavySwordsman/Animations/InGame/Damage/Damage_Groggy_F_Start.Damage_Groggy_F_Start",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton",
+      "seconds": 1.1666666269302368,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 35,
+      "keys": 36
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_Groggy_F_Loop.Damage_Groggy_F_Loop",
+      "copy": "/Game/Monsters/HeavySwordsman/Animations/InGame/Damage/Damage_Groggy_F_Loop.Damage_Groggy_F_Loop",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton",
+      "seconds": 2.6666667461395264,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 80,
+      "keys": 81
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_Groggy_F_End.Damage_Groggy_F_End",
+      "copy": "/Game/Monsters/HeavySwordsman/Animations/InGame/Damage/Damage_Groggy_F_End.Damage_Groggy_F_End",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton",
+      "seconds": 1.3333333730697632,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 40,
+      "keys": 41
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+      "copy": "/Game/Monsters/HeavySwordsman/Animations/InGame/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton",
+      "seconds": 1.600000023841858,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 48,
+      "keys": 49
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+      "copy": "/Game/Monsters/HeavySwordsman/Animations/InGame/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton",
+      "seconds": 1.100000023841858,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 33,
+      "keys": 34
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+      "copy": "/Game/Monsters/HeavySwordsman/Animations/InGame/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton",
+      "seconds": 1.3333333730697632,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 40,
+      "keys": 41
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+      "copy": "/Game/Monsters/HeavySwordsman/Animations/InGame/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton",
+      "seconds": 2.5,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 75,
+      "keys": 76
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Groggy_F_Start.Damage_Groggy_F_Start",
+      "copy": "/Game/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Groggy_F_Start.Damage_Groggy_F_Start",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Skeletons/SKEL_EN_C_M_HalberdV2.SKEL_EN_C_M_HalberdV2",
+      "seconds": 1.2666666507720947,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 38,
+      "keys": 39
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Groggy_F_Loop.Damage_Groggy_F_Loop",
+      "copy": "/Game/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Groggy_F_Loop.Damage_Groggy_F_Loop",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Skeletons/SKEL_EN_C_M_HalberdV2.SKEL_EN_C_M_HalberdV2",
+      "seconds": 2.1666667461395264,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 65,
+      "keys": 66
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Groggy_F_End.Damage_Groggy_F_End",
+      "copy": "/Game/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Groggy_F_End.Damage_Groggy_F_End",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Skeletons/SKEL_EN_C_M_HalberdV2.SKEL_EN_C_M_HalberdV2",
+      "seconds": 2.2333333492279053,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 67,
+      "keys": 68
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+      "copy": "/Game/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Skeletons/SKEL_EN_C_M_HalberdV2.SKEL_EN_C_M_HalberdV2",
+      "seconds": 1.5,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 45,
+      "keys": 46
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+      "copy": "/Game/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Skeletons/SKEL_EN_C_M_HalberdV2.SKEL_EN_C_M_HalberdV2",
+      "seconds": 1.2000000476837158,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 36,
+      "keys": 37
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+      "copy": "/Game/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Skeletons/SKEL_EN_C_M_HalberdV2.SKEL_EN_C_M_HalberdV2",
+      "seconds": 1.3333333730697632,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 40,
+      "keys": 41
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+      "copy": "/Game/Monsters/HalberdElite/Animations/InGame/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Skeletons/SKEL_EN_C_M_HalberdV2.SKEL_EN_C_M_HalberdV2",
+      "seconds": 2.5,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 75,
+      "keys": 76
+    },
+    {
+      "source": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_GroggyStr_F_Start.Damage_GroggyStr_F_Start",
+      "copy": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_GroggyStr_F_Start.Damage_GroggyStr_F_Start",
+      "skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "seconds": 1.2000000476837158,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 36,
+      "keys": 37
+    },
+    {
+      "source": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_GroggyStr_F_Loop_Composite_Variant01.Damage_GroggyStr_F_Loop_Composite_Variant01",
+      "copy": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_GroggyStr_F_Loop_Composite_Variant01.Damage_GroggyStr_F_Loop_Composite_Variant01",
+      "skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "seconds": 2.1666667461395264,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 65,
+      "keys": 66
+    },
+    {
+      "source": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_GroggyStr_F_End_Composite_Variant01.Damage_GroggyStr_F_End_Composite_Variant01",
+      "copy": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_GroggyStr_F_End_Composite_Variant01.Damage_GroggyStr_F_End_Composite_Variant01",
+      "skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "seconds": 2.299999952316284,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 69,
+      "keys": 70
+    },
+    {
+      "source": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+      "copy": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+      "skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "seconds": 1.2999999523162842,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 39,
+      "keys": 40
+    },
+    {
+      "source": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+      "copy": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+      "skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "seconds": 1.100000023841858,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 33,
+      "keys": 34
+    },
+    {
+      "source": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+      "copy": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_Grapple_Atk_B_01.Damage_Grapple_Atk_B_01",
+      "skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "seconds": 1.3333333730697632,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 40,
+      "keys": 41
+    },
+    {
+      "source": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+      "copy": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Damage/Damage_Grapple_Atk_B_02.Damage_Grapple_Atk_B_02",
+      "skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "seconds": 2.433333396911621,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 73,
+      "keys": 74
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_GroggyStr_F_Start_New.Damage_GroggyStr_F_Start_New",
+      "copy": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_GroggyStr_F_Start_New.Damage_GroggyStr_F_Start_New",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "seconds": 0.9666666388511658,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 29,
+      "keys": 30
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_GroggyStr_F_Loop_New.Damage_GroggyStr_F_Loop_New",
+      "copy": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_GroggyStr_F_Loop_New.Damage_GroggyStr_F_Loop_New",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "seconds": 4.0,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 120,
+      "keys": 121
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_GroggyStr_F_End_New.Damage_GroggyStr_F_End_New",
+      "copy": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_GroggyStr_F_End_New.Damage_GroggyStr_F_End_New",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "seconds": 1.7000000476837158,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 51,
+      "keys": 52
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+      "copy": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_Grapple_Atk_01.Damage_Grapple_Atk_01",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "seconds": 1.2999999523162842,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 39,
+      "keys": 40
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+      "copy": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_Grapple_Atk_02.Damage_Grapple_Atk_02",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "seconds": 1.100000023841858,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 33,
+      "keys": 34
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_Grapple_Atk_01_B.Damage_Grapple_Atk_01_B",
+      "copy": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_Grapple_Atk_01_B.Damage_Grapple_Atk_01_B",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "seconds": 1.3333333730697632,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 40,
+      "keys": 41
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_Grapple_Atk_02_B.Damage_Grapple_Atk_02_B",
+      "copy": "/Game/Monsters/Yetuga/Animations/InGame/Damage/Damage_Grapple_Atk_02_B.Damage_Grapple_Atk_02_B",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "seconds": 2.433333396911621,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 73,
+      "keys": 74
+    },
+    {
+      "source": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Locomotion/Locomotion_Stand_F_Original_Variant02.Locomotion_Stand_F_Original_Variant02",
+      "copy": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Idle/Locomotion_Stand_F_Original_Variant02.Locomotion_Stand_F_Original_Variant02",
+      "skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "seconds": 4.0,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 120,
+      "keys": 121
+    },
+    {
+      "source": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Locomotion/Locomotion_Stand_F.Locomotion_Stand_F",
+      "copy": "/Game/Monsters/Yetuga/Animations/InGame/Idle/Locomotion_Stand_F.Locomotion_Stand_F",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "seconds": 4.0,
+      "read_options": {
+        "rate_scale": 1.0,
+        "enable_root_motion": true,
+        "force_root_lock": true,
+        "use_normalized_root_motion_scale": true,
+        "root_motion_root_lock": "<RootMotionRootLock.ANIM_FIRST_FRAME: 1>"
+      },
+      "frames": 120,
+      "keys": 121
+    }
+  ],
+  "attacks": [
+    {
+      "family": "Swordsman",
+      "ability": "/Game/Monsters/Swordsman/Abilities/GA_EmpireSword_Early_Slash.GA_EmpireSword_Early_Slash_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "Swordsman",
+      "ability": "/Game/Monsters/Swordsman/Abilities/GA_EmpireSword_Early_Smash.GA_EmpireSword_Early_Smash_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "Swordsman",
+      "ability": "/Game/Monsters/Swordsman/Abilities/GA_EmpireSword_Pierce.GA_EmpireSword_Pierce_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "Swordsman",
+      "ability": "/Game/Monsters/Swordsman/Abilities/GA_Rush.GA_Rush_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "Swordsman",
+      "ability": "/Game/Monsters/Swordsman/Abilities/GA_Kick.GA_Kick_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "SwordShield",
+      "ability": "/Game/Monsters/SwordShield/Abilities/GA_Empire_SwordShield_SwordCombo.GA_Empire_SwordShield_SwordCombo_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "SwordShield",
+      "ability": "/Game/Monsters/SwordShield/Abilities/GA_Empire_SwordShield_Pierce.GA_Empire_SwordShield_Pierce_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "SwordShield",
+      "ability": "/Game/Monsters/SwordShield/Abilities/GA_Empire_SwordShield_ShieldCrash.GA_Empire_SwordShield_ShieldCrash_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HeavySwordsman",
+      "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_EmpireSwordHArmor_SwordSwing_01.GA_EmpireSwordHArmor_SwordSwing_01_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HeavySwordsman",
+      "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_EmpireSwordHArmor_SwordSwing_02.GA_EmpireSwordHArmor_SwordSwing_02_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HeavySwordsman",
+      "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_EmpireSwordHArmor_SwordSwing_03.GA_EmpireSwordHArmor_SwordSwing_03_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HeavySwordsman",
+      "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_SwordSwing_02_Single.GA_SwordSwing_02_Single_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HeavySwordsman",
+      "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_SwordSting.GA_SwordSting_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HeavySwordsman",
+      "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_SwordSwingTurnL.GA_SwordSwingTurnL_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HeavySwordsman",
+      "ability": "/Game/Monsters/HeavySwordsman/Abilities/GA_SwordSwingTurnR.GA_SwordSwingTurnR_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_EmpireHalberd_E_Early_Swing.GA_EmpireHalberd_E_Early_Swing_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_EmpireHalberd_E_Early_Pierce.GA_EmpireHalberd_E_Early_Pierce_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_EmpireHalberd_E_Early_Push.GA_EmpireHalberd_E_Early_Push_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_Swing.GA_Swing_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_Pierce.GA_Pierce_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_Push.GA_Push_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_EarlyPushFollowup.GA_EarlyPushFollowup_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_RoundAttack.GA_RoundAttack_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_DownUpperSlash.GA_DownUpperSlash_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_SprintSwing.GA_SprintSwing_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_EarlySprintSwing.GA_EarlySprintSwing_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_BackDashCounter.GA_BackDashCounter_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_GuardCounterDown.GA_GuardCounterDown_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_GuardCounterUpper.GA_GuardCounterUpper_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_GuardCounterRecovery.GA_GuardCounterRecovery_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_ChargeAttack.GA_ChargeAttack_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_ChargeAttackFast.GA_ChargeAttackFast_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_Smash.GA_Smash_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_TurnAttack.GA_TurnAttack_C",
+      "cost": null,
+      "on_end": null
+    },
+    {
+      "family": "HalberdElite",
+      "ability": "/Game/Monsters/HalberdElite/Abilities/GA_TurnAttackFast.GA_TurnAttackFast_C",
+      "cost": null,
+      "on_end": null
+    }
+  ],
+  "bodies": [
+    {
+      "family": "ApesStoneHandElite",
+      "bp": "/Game/Bluprints/Monsters/BP_Monster_ApesStoneHandElite.BP_Monster_ApesStoneHandElite",
+      "abp": "/Game/Monsters/ApesStoneHandElite/Animations/ABP_ApesStoneHandElite.ABP_ApesStoneHandElite",
+      "mesh": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Meshes/SK_EN_ApesStoneHandElite.SK_EN_ApesStoneHandElite",
+      "skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "capsule_radius": 99.0,
+      "capsule_half_height": 240.0,
+      "definition_tag": "AssetData.CharacterDefinition.ApesStoneHandElite",
+      "root_motion_mode": "<RootMotionMode.ROOT_MOTION_FROM_MONTAGES_ONLY: 3>",
+      "node_inventory": [
+        "AnimGraphNode_Inertialization",
+        "AnimGraphNode_Root",
+        "AnimGraphNode_SequencePlayer",
+        "AnimGraphNode_Slot"
+      ],
+      "idle": "/Game/Monsters/ApesStoneHandElite/Animations/InGame/Idle/Locomotion_Stand_F_Original_Variant02.Locomotion_Stand_F_Original_Variant02",
+      "idle_loop": true,
+      "idle_rate": 1.0
+    },
+    {
+      "family": "Yetuga",
+      "bp": "/Game/Bluprints/Monsters/BP_Monster_Yetuga.BP_Monster_Yetuga",
+      "abp": "/Game/Monsters/Yetuga/Animations/ABP_Yetuga.ABP_Yetuga",
+      "mesh": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Meshes/SK_EN_Yetuga.SK_EN_Yetuga",
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "capsule_radius": 150.0,
+      "capsule_half_height": 265.0,
+      "definition_tag": "AssetData.CharacterDefinition.Yetuga",
+      "root_motion_mode": "<RootMotionMode.ROOT_MOTION_FROM_MONTAGES_ONLY: 3>",
+      "node_inventory": [
+        "AnimGraphNode_Inertialization",
+        "AnimGraphNode_Root",
+        "AnimGraphNode_SequencePlayer",
+        "AnimGraphNode_Slot"
+      ],
+      "idle": "/Game/Monsters/Yetuga/Animations/InGame/Idle/Locomotion_Stand_F.Locomotion_Stand_F",
+      "idle_loop": true,
+      "idle_rate": 1.0
+    }
+  ],
+  "unverified_required": [
+    "Saved default NextSectionName links and direct section clocks are not exposed to Python; native autoplay QA must cover them.",
+    "ABP pin connection topology is not read by this script; native idle/montage pose QA must cover it."
+  ],
+  "limitations": [
+    "Caller must launch a fresh owned process; this script does not reload an existing editor.",
+    "No PIE/ability execution, compressed/raw pose comparison or original-game runtime equivalence.",
+    "Skeleton slot registration/reference bones are author C++ evidence; reload checks montage/clip skeleton identity.",
+    "Existing Definition contents are enumerated; author receipt contains counts, not a full pre-author field snapshot."
+  ],
+  "player": {
+    "definition": "/Game/Data/Character/DA_CharacterDefinition_Player.DA_CharacterDefinition_Player",
+    "grants": [
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/BasicAttack/GA_Player_WeakAttack.GA_Player_WeakAttack_C",
+        "input": "Input.Action.X"
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/BasicAttack/GA_Player_StrongCharge.GA_Player_StrongCharge_C",
+        "input": "Input.Action.Y"
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/BasicAttack/GA_Player_StrongAttack.GA_Player_StrongAttack_C",
+        "input": ""
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_F.GA_Player_DodgeAbility_F_C",
+        "input": "Input.Action.A"
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_RF.GA_Player_DodgeAbility_RF_C",
+        "input": "Input.Action.A"
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_R.GA_Player_DodgeAbility_R_C",
+        "input": "Input.Action.A"
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_RB.GA_Player_DodgeAbility_RB_C",
+        "input": "Input.Action.A"
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_B.GA_Player_DodgeAbility_B_C",
+        "input": "Input.Action.A"
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_LB.GA_Player_DodgeAbility_LB_C",
+        "input": "Input.Action.A"
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_L.GA_Player_DodgeAbility_L_C",
+        "input": "Input.Action.A"
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Dodge/GA_Player_DodgeAbility_LF.GA_Player_DodgeAbility_LF_C",
+        "input": "Input.Action.A"
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/DodgeAttack/GA_Player_DodgeAttack_B.GA_Player_DodgeAttack_B_C",
+        "input": ""
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/DodgeAttack/GA_Player_DodgeAttack_F.GA_Player_DodgeAttack_F_C",
+        "input": ""
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/DodgeAttack/GA_Player_DodgeAttack_L.GA_Player_DodgeAttack_L_C",
+        "input": ""
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/DodgeAttack/GA_Player_DodgeAttack_R.GA_Player_DodgeAttack_R_C",
+        "input": ""
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Guard/GA_Player_Guard.GA_Player_Guard_C",
+        "input": "Input.Action.Guard"
+      },
+      {
+        "ability": "/Game/Bluprints/AbilitySystem/Abilities/Player/Heal/GA_Player_Heal.GA_Player_Heal_C",
+        "input": "Input.Action.Heal"
+      },
+      {
+        "ability": "/Script/Khazan.KZBrutalAttackAbility",
+        "input": "Input.Action.X"
+      }
+    ],
+    "initial_effects": [
+      "/Game/Bluprints/AbilitySystem/Effects/GE_Init_PlayerStamina.GE_Init_PlayerStamina_C",
+      "/Game/Bluprints/AbilitySystem/Effects/GE_Player_StaminaRegen.GE_Player_StaminaRegen_C",
+      "/Game/Bluprints/AbilitySystem/Effects/GE_Init_PlayerHealth.GE_Init_PlayerHealth_C"
+    ]
+  },
+  "registry": {
+    "actual": [
+      {
+        "group": "Data",
+        "tag": "AssetData.InputData",
+        "asset": "/Game/Data/DA_InputData.DA_InputData",
+        "labels": [
+          "AssetLabel.PreLoad"
+        ]
+      },
+      {
+        "group": "Data",
+        "tag": "AssetData.CharacterDefinition.Player",
+        "asset": "/Game/Data/Character/DA_CharacterDefinition_Player.DA_CharacterDefinition_Player",
+        "labels": [
+          "AssetLabel.Preload"
+        ]
+      },
+      {
+        "group": "MonsterDefinitions",
+        "tag": "AssetData.CharacterDefinition.Swordsman",
+        "asset": "/Game/Monsters/Swordsman/Data/DA_Character_Swordsman.DA_Character_Swordsman",
+        "labels": [
+          "AssetLabel.Preload"
+        ]
+      },
+      {
+        "group": "MonsterDefinitions",
+        "tag": "AssetData.CharacterDefinition.SwordShield",
+        "asset": "/Game/Monsters/SwordShield/Data/DA_Character_SwordShield.DA_Character_SwordShield",
+        "labels": [
+          "AssetLabel.Preload"
+        ]
+      },
+      {
+        "group": "MonsterDefinitions",
+        "tag": "AssetData.CharacterDefinition.HeavySwordsman",
+        "asset": "/Game/Monsters/HeavySwordsman/Data/DA_Character_HeavySwordsman.DA_Character_HeavySwordsman",
+        "labels": [
+          "AssetLabel.Preload"
+        ]
+      },
+      {
+        "group": "MonsterDefinitions",
+        "tag": "AssetData.CharacterDefinition.HalberdElite",
+        "asset": "/Game/Monsters/HalberdElite/Data/DA_Character_HalberdElite.DA_Character_HalberdElite",
+        "labels": [
+          "AssetLabel.Preload"
+        ]
+      },
+      {
+        "group": "MonsterDefinitions",
+        "tag": "AssetData.CharacterDefinition.ApesStoneHandElite",
+        "asset": "/Game/Monsters/ApesStoneHandElite/Data/DA_Character_ApesStoneHandElite.DA_Character_ApesStoneHandElite",
+        "labels": [
+          "AssetLabel.Preload"
+        ]
+      },
+      {
+        "group": "MonsterDefinitions",
+        "tag": "AssetData.CharacterDefinition.Yetuga",
+        "asset": "/Game/Monsters/Yetuga/Data/DA_Character_Yetuga.DA_Character_Yetuga",
+        "labels": [
+          "AssetLabel.Preload"
+        ]
+      }
+    ],
+    "preexisting_preserved": true,
+    "added": [
+      [
+        "MonsterDefinitions",
+        "AssetData.CharacterDefinition.ApesStoneHandElite",
+        "/Game/Monsters/ApesStoneHandElite/Data/DA_Character_ApesStoneHandElite.DA_Character_ApesStoneHandElite",
+        [
+          "AssetLabel.Preload"
+        ]
+      ],
+      [
+        "MonsterDefinitions",
+        "AssetData.CharacterDefinition.Yetuga",
+        "/Game/Monsters/Yetuga/Data/DA_Character_Yetuga.DA_Character_Yetuga",
+        [
+          "AssetLabel.Preload"
+        ]
+      ]
+    ]
+  },
+  "dirty_content": [],
+  "dirty_map": [],
+  "counts": {
+    "definitions": 6,
+    "player_definitions": 1,
+    "montages": 20,
+    "sequence_copies": 49,
+    "attack_bps": 35,
+    "bodies": 2
+  },
+  "loaded_module": {
+    "path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan\\Binaries\\Win64\\UnrealEditor-KhazanStamina20261008-70158bc21dbb.dll",
+    "sha256": "70158bc21dbbb65c9090e4f749ef2560aebcb347c448ad9a9b9be0af2ff3fe18",
+    "pid": 15924
+  }
+}

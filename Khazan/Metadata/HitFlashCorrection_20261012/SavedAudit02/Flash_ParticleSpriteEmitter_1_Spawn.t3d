@@ -1,0 +1,20 @@
+Begin Object Class=/Script/Engine.ParticleModuleSpawn Name="HitFlashSpawn_1" ExportPath="/Script/Engine.ParticleModuleSpawn'/Game/_Art/Effects/Combat/AttackContact/PP_Monster_HitFlameFlash.PP_Monster_HitFlameFlash:HitFlashSpawn_1'"
+   Begin Object Class=/Script/Engine.DistributionFloatConstant Name="BurstScaleDistribution" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Combat/AttackContact/PP_Monster_HitFlameFlash.PP_Monster_HitFlameFlash:HitFlashSpawn_1.BurstScaleDistribution'"
+   End Object
+   Begin Object Class=/Script/Engine.DistributionFloatConstant Name="D_Rate" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Combat/AttackContact/PP_Monster_HitFlameFlash.PP_Monster_HitFlameFlash:HitFlashSpawn_1.D_Rate'"
+   End Object
+   Begin Object Class=/Script/Engine.DistributionFloatConstant Name="RequiredDistributionSpawnRateScale" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Combat/AttackContact/PP_Monster_HitFlameFlash.PP_Monster_HitFlameFlash:HitFlashSpawn_1.RequiredDistributionSpawnRateScale'"
+   End Object
+   Begin Object Name="BurstScaleDistribution" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Combat/AttackContact/PP_Monster_HitFlameFlash.PP_Monster_HitFlameFlash:HitFlashSpawn_1.BurstScaleDistribution'"
+      Constant=1.000000
+   End Object
+   Begin Object Name="D_Rate" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Combat/AttackContact/PP_Monster_HitFlameFlash.PP_Monster_HitFlameFlash:HitFlashSpawn_1.D_Rate'"
+   End Object
+   Begin Object Name="RequiredDistributionSpawnRateScale" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Combat/AttackContact/PP_Monster_HitFlameFlash.PP_Monster_HitFlameFlash:HitFlashSpawn_1.RequiredDistributionSpawnRateScale'"
+      Constant=1.000000
+   End Object
+   Rate=(Distribution="/Script/Engine.DistributionFloatConstant'D_Rate'")
+   RateScale=(Distribution="/Script/Engine.DistributionFloatConstant'RequiredDistributionSpawnRateScale'")
+   BurstList(0)=(Count=1)
+   BurstScale=(Distribution="/Script/Engine.DistributionFloatConstant'BurstScaleDistribution'")
+End Object

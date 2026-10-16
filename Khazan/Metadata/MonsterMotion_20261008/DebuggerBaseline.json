@@ -1,0 +1,134 @@
+[
+  {
+    "command": "xdebug_get_stack --sessionId \"UnrealEditor (3672)\"",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"frames\":[{\"presentation\":\"AKZMonsterAIController::MirrorNavigationIntent() KZMonsterAIController.cpp:167\",\"index\":0,\"file\":\"file://C:/Users/user/Desktop/GitProject/Khazan_MonsterWork_20261006/Khazan/Source/Khazan/AI/KZMonsterAIController.cpp\",\"line\":167,\"isCurrent\":true}],\"threadId\":\"Thread-1-[GameThread] (22200)\",\"totalFrames\":1}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "command": "xdebug_get_frame_values --sessionId \"UnrealEditor (3672)\" --frameIndex 0 --depth 1",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "├─ + this =  // 0x0000029a4d0bd200 (Label=L\"KZMonsterAIController1\",Name=\"KZMonsterAIController\"_1) {AKZMonsterAIController *}\n│  ├─ + AAIController = (Label=L\"KZMonsterAIController1\",Name=\"KZMonsterAIController\"_1) {AAIController}\n│  ├─ + StateTreeComponent =  // 0x0000029985e9b600 (Name = \"MonsterStateTree\", Owner =  // 0x0000029a4d0bd200 (Label=L\"KZMonsterAIController1\",Name=\"KZMonsterAIController\"_1)) {TObjectPtr<UStateTreeAIComponent>}\n│  ├─ + MonsterPerception =  // 0x0000029985e9b400 (Name = \"MonsterPerception\", Owner =  // 0x0000029a4d0bd200 (Label=L\"KZMonsterAIController1\",Name=\"KZMonsterAIController\"_1)) {TObjectPtr<UAIPerceptionComponent>}\n│  ├─ + SightConfig =  // 0x000002993fc51800 (Name=\"MonsterSight\", InternalFlags=ReachabilityFlag1) {TObjectPtr<UAISenseConfig_Sight>}\n│  ├─ + BattleTarget =  // 0x000002993c8d0000 (Label=L\"BP_Player0\",Name=\"BP_Player_C\"_0) {TWeakObjectPtr<AActor, FWeakObjectPtr>}\n│  ├─ + AlertedTarget =  // 0x000002993c8d0000 (Label=L\"BP_Player0\",Name=\"BP_Player_C\"_0) {TWeakObjectPtr<AActor, FWeakObjectPtr>}\n│  ├─ + LastAttackClass =  // 0x0000029976990000 (Name=\"GA_Kick_C\", InternalFlags=ReachabilityFlag1) {TWeakObjectPtr<UClass, FWeakObjectPtr>}\n│  ├─ + BoundLocomotion =  // 0x0000029a852c0400 (Name = \"LocomotionComponent\", Owner =  // 0x000002996f6e7800 (Label=L\"DevAI_Swordsman\",Name=\"BP_Monster_Swordsman_C\"_0)) {TWeakObjectPtr<UKZLocomotionComponent, FWeakObjectPtr>}\n│  ├─ + IntentHandle = {Owner= // 0x0000029a852c0400 (Name = \"LocomotionComponent\", Owner =  // 0x000002996f6e7800 (Label=L\"DevAI_Swordsman\",Name=\"BP_Monster_Swordsman_C\"_0)), Id={CD36B308-45A8-AB19-A9D0-C19CEF18894E}} {FKZLocomotionIntentHandle}\n│  ├─ + MovementPermissionHandle = {ID=124873} {FDelegateHandle}\n│  ├─ + HomeLocation = {X=1900 Y=-1300 Z=103.65000104904175} {UE::Math::TVector<double>}\n│  └─ NextAttackAt = 0 {float}\n├─ + Locomotion =  // 0x0000029a852c0400 (Name = \"LocomotionComponent\", Owner =  // 0x000002996f6e7800 (Label=L\"DevAI_Swordsman\",Name=\"BP_Monster_Swordsman_C\"_0)) {UKZLocomotionComponent *}\n│  ├─ + UActorComponent = (Name = \"LocomotionComponent\", Owner =  // 0x000002996f6e7800 (Label=L\"DevAI_Swordsman\",Name=\"BP_Monster_Swordsman_C\"_0)) {UActorComponent}\n│  ├─ + ObservedAbilitySystemComponent =  // 0x0000029a278e0000 (Name = \"AbilitySystemComponent\", Owner =  // 0x000002996f6e7800 (Label=L\"DevAI_Swordsman\",Name=\"BP_Monster_Swordsman_C\"_0)) {TWeakObjectPtr<UAbilitySystemComponent, FWeakObjectPtr>}\n│  ├─ + MovementBlockChangedHandle = {ID=124203} {FDelegateHandle}\n│  ├─ + MovementInputPermissionChanged = Num=1 {TMulticastDelegate<void __cdecl(bool), FDefaultDelegateUserPolicy>}\n│  ├─ + MovementConfig = {WalkSpeed=135.326294, RunSpeed=445.01651, SprintSpeed=445.01651, ...} {FKZLocomotionConfig}\n│  ├─ bHasValidMovementConfig = true {bool}\n│  ├─ + Intent = {MoveInputWorld={X=0 Y=0 Z=0}, InputAmount=0, RequestedGait=Walk, ...} {FKZLocomotionIntent}\n│  ├─ + ResolvedPolicy = {bMovementAllowedByTags=false, MaxAllowedGait=Run, ResolvedGait=Walk, ...} {FKZResolvedMovementPolicy}\n│  ├─ + ActiveIntentSource =  // 0x0000029a4d0bd200 (Label=L\"KZMonsterAIController1\",Name=\"KZMonsterAIController\"_1) {TWeakObjectPtr<UObject, FWeakObjectPtr>}\n│  ├─ + ActiveIntentId = {CD36B308-45A8-AB19-A9D0-C19CEF18894E} {FGuid}\n│  ├─ ActiveIntentSourceType = AIController {EKZLocomotionIntentSource}\n│  ├─ + ActiveConstraints = Empty {TMap<FGuid, UKZLocomotionComponent::FActiveMovementConstraint, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FGuid, UKZLocomotionComponent::FActiveMovementConstraint, 0>>}\n│  └─ NextConstraintAcquireOrder = 0 {unsigned long long}\n└─ Path = <error: Variable is not available>\n"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (3672)\" --frameIndex 0 --expression \"((AKZMonster*)Pawn)->CharacterMovement->bAllowPhysicsRotationDuringAnimRootMotion\"",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "((AKZMonster*)Pawn)->CharacterMovement->bAllowPhysicsRotationDuringAnimRootMotion = <error: error: cannot cast from type 'TObjectPtr<APawn>' to pointer type 'AKZMonster *'\n>"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (3672)\" --frameIndex 0 --expression \"((AKZMonster*)Pawn)->CharacterMovement->RootMotionParams\" --depth 1",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "((AKZMonster*)Pawn)->CharacterMovement->RootMotionParams = <error: error: cannot cast from type 'TObjectPtr<APawn>' to pointer type 'AKZMonster *'\n>"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (3672)\" --frameIndex 0 --expression \"ControlRotation\"",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "ControlRotation = {Pitch=-1.6772890830716718, Yaw=94.586816630697981, Roll=0} {UE::Math::TRotator<double>}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (3672)\" --frameIndex 0 --expression \"Pawn->RootComponent->RelativeRotation\"",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Pawn->RootComponent->RelativeRotation = {Pitch=0, Yaw=94.566337585449218, Roll=-0} {UE::Math::TRotator<double>}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (3672)\" --frameIndex 0 --expression \"((AKZMonster*)Pawn)->CharacterMovement->bUseControllerDesiredRotation\"",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "((AKZMonster*)Pawn)->CharacterMovement->bUseControllerDesiredRotation = <error: error: cannot cast from type 'TObjectPtr<APawn>' to pointer type 'AKZMonster *'\n>"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (3672)\" --frameIndex 0 --expression \"((AKZMonster*)0x000002996f6e7800)->CharacterMovement->bAllowPhysicsRotationDuringAnimRootMotion\" --depth 1",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "((AKZMonster*)0x000002996f6e7800)->CharacterMovement->bAllowPhysicsRotationDuringAnimRootMotion = 0 \"'\\0'\" {unsigned char}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (3672)\" --frameIndex 0 --expression \"((AKZMonster*)0x000002996f6e7800)->CharacterMovement->bUseControllerDesiredRotation\" --depth 1",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "((AKZMonster*)0x000002996f6e7800)->CharacterMovement->bUseControllerDesiredRotation = 1 \"'\\x1'\" {unsigned char}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (3672)\" --frameIndex 0 --expression \"((AKZMonster*)0x000002996f6e7800)->Mesh->AnimScriptInstance->RootMotionMontageInstance\" --depth 1",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "((AKZMonster*)0x000002996f6e7800)->Mesh->AnimScriptInstance->RootMotionMontageInstance =  // 0x0000029994828480 {Montage= // 0x0000029975cb3480 (Name=\"Attack_Kick\", InternalFlags=ReachabilityFlag1), OnMontageEnded={...}, OnMontageBlendingOutStarted={...}, ...} {FAnimMontageInstance *}\n  ├─ + Montage =  // 0x0000029975cb3480 (Name=\"Attack_Kick\", InternalFlags=ReachabilityFlag1) {TObjectPtr<UAnimMontage>}\n  ├─ + OnMontageEnded =  {TDelegate<void __cdecl(UAnimMontage *, bool), FDefaultDelegateUserPolicy>}\n  ├─ + OnMontageBlendingOutStarted =  {TDelegate<void __cdecl(UAnimMontage *, bool), FDefaultDelegateUserPolicy>}\n  ├─ + OnMontageBlendedInEnded =  {TDelegate<void __cdecl(UAnimMontage *), FDefaultDelegateUserPolicy>}\n  ├─ + OnMontageSectionChanged = Unbound {TDelegate<void __cdecl(UAnimMontage *, FName, bool), FDefaultDelegateUserPolicy>}\n  ├─ + OnComputeDeltaFrameTime = Unbound {TDelegate<float __cdecl(int, float, float), FDefaultDelegateUserPolicy>}\n  ├─ bPlaying = true {bool}\n  ├─ DefaultBlendTimeMultiplier = 1 {float}\n  ├─ + DeltaTimeRecord = {Delta=0, Previous=0, bPreviousIsValid=false} {FDeltaTimeRecord}\n  ├─ + MarkerTickRecord = {PreviousMarker={MarkerIndex=-2, TimeToMarker=3.80004748E+14}, NextMarker={MarkerIndex=-2, TimeToMarker=0}} {FMarkerTickRecord}\n  ├─ + MarkersPassedThisTick = Empty {TArray<FPassedMarker, TSizedDefaultAllocator<32>>}\n  ├─ bDidUseMarkerSyncThisTick = false {bool}\n  ├─ bEnableAutoBlendOut = true {bool}\n  ├─ + MontageSubStepper = {MontageInstance= // 0x0000029994828480 {Montage= // 0x0000029975cb3480 (Name=\"Attack_Kick\", InternalFlags=ReachabilityFlag1), OnMontageEnded={...}, OnMontageBlendingOutStarted={...}, ...}, Montage= // 0x0000029975cb3480 (Name=\"Attack_Kick\", InternalFlags=ReachabilityFlag1, ...} {FMontageSubStepper}\n  ├─ + NextSections = Num=1, Max=1 {TArray<int, TSizedDefaultAllocator<32>>}\n  ├─ + PrevSections = Num=1, Max=1 {TArray<int, TSizedDefaultAllocator<32>>}\n  ├─ + AnimInstance =  // 0x0000029a50852800 (Name=\"ABP_Swordsman_C\"_0, InternalFlags=ReachabilityFlag1) {TWeakObjectPtr<UAnimInstance, FWeakObjectPtr>}\n  ├─ InstanceID = 10 {int}\n  ├─ + ActiveStateBranchingPoints = Empty {TArray<FAnimNotifyEvent, TSizedDefaultAllocator<32>>}\n  ├─ Position = 0 {float}\n  ├─ PlayRate = 1 {float}\n  ├─ + Blend = {CustomCurve=nullptr, BlendTime=0.200000003, AlphaLerp=0, ...} {FAlphaBlend}\n  ├─ bInterrupted = false {bool}\n  ├─ PreviousWeight = 0 {float}\n  ├─ NotifyWeight = 0 {float}\n  ├─ BlendStartAlpha = 0 {float}\n  ├─ + SyncGroupName = \"None\" {FName}\n  ├─ ActiveBlendProfile = NULL {UBlendProfile *}\n  ├─ ActiveBlendProfileMode = TimeFactor {EBlendProfileMode}\n  ├─ + ForcedNextFromPosition = Unset {TOptional<float>}\n  ├─ + ForcedNextToPosition = Unset {TOptional<float>}\n  ├─ + ForcedLoopBoundaryPosition = Unset {TOptional<float>}\n  ├─ + ForcedLoopResumePosition = Unset {TOptional<float>}\n  ├─ DisableRootMotionCount = 0 {int}\n  ├─ + MontageSyncFollowers = Empty {TArray<FAnimMontageInstance *, TSizedDefaultAllocator<32>>}\n  ├─ MontageSyncLeader = NULL {FAnimMontageInstance *}\n  └─ MontageSyncUpdateFrameCounter = 4294967295 {unsigned int}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "command": "xdebug_evaluate_expression --sessionId \"UnrealEditor (3672)\" --frameIndex 0 --expression \"((AKZMonster*)0x000002996f6e7800)->Mesh->AnimScriptInstance->RootMotionMode\" --depth 1",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "((AKZMonster*)0x000002996f6e7800)->Mesh->AnimScriptInstance->RootMotionMode = RootMotionFromMontagesOnly {TEnumAsByte<enum ERootMotionMode::Type>}\n  └─ Value = 3 \"'\\x3'\" {unsigned char}"
+        }
+      ],
+      "isError": false
+    }
+  }
+]

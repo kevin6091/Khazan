@@ -1,0 +1,591 @@
+{
+  "status": "passed",
+  "materials": [
+    {
+      "asset": "/Game/_Art/Effects/Shared/Materials/Fluid/MI/FMI_fluid_A_Blood_01.FMI_fluid_A_Blood_01",
+      "scalars": "[{parameter_info: {name: \"Dist1_TilingU\", association: GlobalParameter, index: -1}, parameter_value: 2.000000}, {parameter_info: {name: \"Dist1_TilingV\", association: GlobalParameter, index: -1}, parameter_value: 3.000000}, {parameter_info: {name: \"Dist1_SpeedV\", association: GlobalParameter, index: -1}, parameter_value: -0.100000}, {parameter_info: {name: \"Dist1_OffsetAlign\", association: GlobalParameter, index: -1}, parameter_value: 0.361905}, {parameter_info: {name: \"Dist1_Str\", association: GlobalParameter, index: -1}, parameter_value: 0.314560}, {parameter_info: {name: \"Emi_pow\", association: GlobalParameter, index: -1}, parameter_value: 0.800000}, {parameter_info: {name: \"OPA_Depthfade\", association: GlobalParameter, index: -1}, parameter_value: 50.000000}, {parameter_info: {name: \"Normal_str\", association: GlobalParameter, index: -1}, parameter_value: 0.100000}, {parameter_info: {name: \"Opa_Pow\", association: GlobalParameter, index: -1}, parameter_value: 0.250000}, {parameter_info: {name: \"Refrac_Pow\", association: GlobalParameter, index: -1}, parameter_value: 0.100000}, {parameter_info: {name: \"Tex_Emi_clamp\", association: GlobalParameter, index: -1}, parameter_value: 4.000000}, {parameter_info: {name: \"Tex_opa_clamp\", association: GlobalParameter, index: -1}, parameter_value: 4.000000}, {parameter_info: {name: \"RefractionDepthBias\", association: GlobalParameter, index: -1}, parameter_value: 0.000000}]",
+      "vectors": "[{parameter_info: {name: \"Opa_color\", association: GlobalParameter, index: -1}, parameter_value: {r: 0.200000, g: 0.000000, b: 0.000000, a: 1.000000}}]",
+      "textures": "[{parameter_info: {name: \"Tex_Dist1\", association: GlobalParameter, index: -1}, parameter_value: \"/Script/Engine.Texture2D'/Game/_Art/Effects/Shared/Textures/UV/FT_S_UVNoise_01.FT_S_UVNoise_01'\"}, {parameter_info: {name: \"Tex_Emi\", association: GlobalParameter, index: -1}, parameter_value: \"/Script/Engine.Texture2D'/Game/_Art/Effects/Shared/Textures/water/FT_water_02_blur.FT_water_02_blur'\"}, {parameter_info: {name: \"Tex_Normal\", association: GlobalParameter, index: -1}, parameter_value: \"/Script/Engine.Texture2D'/Game/_Art/Effects/Shared/Textures/water/FT_water_01_n.FT_water_01_n'\"}, {parameter_info: {name: \"Tex_OPA\", association: GlobalParameter, index: -1}, parameter_value: \"/Script/Engine.Texture2D'/Game/_Art/Effects/Shared/Textures/water/FT_water_02_blur.FT_water_02_blur'\"}, {parameter_info: {name: \"Tex_Refrac\", association: GlobalParameter, index: -1}, parameter_value: \"/Script/Engine.Texture2D'/Game/_Art/Effects/Shared/Textures/water/FT_water_01_rf.FT_water_01_rf'\"}]",
+      "parent": "/Game/_Art/Effects/Shared/Materials/Fluid/FM_fluid_A.FM_fluid_A",
+      "graph": [
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionTextureSampleParameter2D",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/BASE_White.BASE_White"
+        },
+        {
+          "type": "MaterialExpressionMultiply"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionTextureSampleParameter2D",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/BASE_White.BASE_White"
+        },
+        {
+          "type": "MaterialExpressionTextureSampleParameter2D",
+          "texture": "/Game/_Art/Effects/Shared/Textures/water/FT_water_01_n.FT_water_01_n"
+        },
+        {
+          "type": "MaterialExpressionTime"
+        },
+        {
+          "type": "MaterialExpressionMultiply"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionVectorParameter"
+        },
+        {
+          "type": "MaterialExpressionTextureSampleParameter2D",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/SphereRenderMask.SphereRenderMask"
+        },
+        {
+          "type": "MaterialExpressionTextureSampleParameter2D",
+          "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/Mask/FT_S_Spheremask_01.FT_S_Spheremask_01"
+        },
+        {
+          "type": "MaterialExpressionTextureSampleParameter2D",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/BASE_White.BASE_White"
+        },
+        {
+          "type": "MaterialExpressionParticleRelativeTime"
+        },
+        {
+          "type": "MaterialExpressionCustom",
+          "code": "return UV*float2(TilingU,TilingV)+Time*float2(SpeedU,SpeedV)+float2(OffsetU,OffsetV);"
+        },
+        {
+          "type": "MaterialExpressionParticleColor"
+        },
+        {
+          "type": "MaterialExpressionMultiply"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionVectorParameter"
+        },
+        {
+          "type": "MaterialExpressionVectorParameter"
+        },
+        {
+          "type": "MaterialExpressionTextureObjectParameter",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/BASE_White.BASE_White"
+        },
+        {
+          "type": "MaterialExpressionTextureObjectParameter",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/SphereRenderMask.SphereRenderMask"
+        },
+        {
+          "type": "MaterialExpressionTextureObjectParameter",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/T_Black_Linear.T_Black_Linear"
+        },
+        {
+          "type": "MaterialExpressionTextureObjectParameter",
+          "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/Mask/FT_S_Spheremask_01.FT_S_Spheremask_01"
+        },
+        {
+          "type": "MaterialExpressionTextureObjectParameter",
+          "texture": "/Game/_Art/Effects/Shared/Textures/water/FT_water_01_n.FT_water_01_n"
+        },
+        {
+          "type": "MaterialExpressionTextureObjectParameter",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/BASE_White.BASE_White"
+        },
+        {
+          "type": "MaterialExpressionDynamicParameter"
+        },
+        {
+          "type": "MaterialExpressionTextureCoordinate"
+        },
+        {
+          "type": "MaterialExpressionTime"
+        },
+        {
+          "type": "MaterialExpressionParticleColor"
+        },
+        {
+          "type": "MaterialExpressionCustom",
+          "code": "float2 distUV=P0*float2(P1,P2)+P3*float2(P4,P5)+float2(P6,0);\nfloat2 distortion=(Texture2DSample(P7,P7Sampler,distUV).rg-P8)*P9;\ndistortion*=P10; float2 emiUV=(P0*float2(P11,P12)+P3*float2(P13,P14)+float2(P15,P16))+distortion;\nfloat2 opaUV=(P0*float2(P17,P18)+P3*float2(P19,P20)+float2(P21,P22))+distortion; float mask=1;\nfloat3 densityRGB=Texture2DSample(P23,P23Sampler,opaUV).rgb; float density=pow(saturate(max(densityRGB.r,max(densityRGB.g,densityRGB.b))),P24);\nfloat opacity=saturate(density-P25)*saturate(mask)*P26.a;\n// KZFXRecovery: child243 only; source clamp enum/topology unverified.\nif (P32>0.5) { float2 xy=P0*2.0-1.0; float edge=smoothstep(0.0,max(P33,0.0001),saturate(1.0-dot(xy,xy))); float cameraFade=pow(saturate(P34/max(P35,0.0001)),max(P33,0.0001)); opacity*=edge*cameraFade; }\nfloat3 image=Texture2DSample(P27,P27Sampler,emiUV).rgb; float3 color=(image+P28.rgb*Texture2DSample(P29,P29Sampler,P0).rgb+P30.rgb*density)*P31*P26.rgb; return float4(color,opacity);"
+        },
+        {
+          "type": "MaterialExpressionComponentMask"
+        },
+        {
+          "type": "MaterialExpressionComponentMask"
+        },
+        {
+          "type": "MaterialExpressionDepthFade"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionPixelDepth"
+        },
+        {
+          "type": "MaterialExpressionEyeAdaptationInverse"
+        }
+      ]
+    },
+    {
+      "asset": "/Game/_Art/Effects/Shared/Materials/Fluid/MI/FMI_fluid_A_Blood_02.FMI_fluid_A_Blood_02",
+      "scalars": "[{parameter_info: {name: \"Dist1_TilingU\", association: GlobalParameter, index: -1}, parameter_value: 2.000000}, {parameter_info: {name: \"Dist1_TilingV\", association: GlobalParameter, index: -1}, parameter_value: 1.000000}, {parameter_info: {name: \"Dist1_SpeedV\", association: GlobalParameter, index: -1}, parameter_value: -0.100000}, {parameter_info: {name: \"Dist1_OffsetAlign\", association: GlobalParameter, index: -1}, parameter_value: 0.361905}, {parameter_info: {name: \"Dist1_Str\", association: GlobalParameter, index: -1}, parameter_value: 0.314560}, {parameter_info: {name: \"Emi_pow\", association: GlobalParameter, index: -1}, parameter_value: 0.800000}, {parameter_info: {name: \"OPA_Depthfade\", association: GlobalParameter, index: -1}, parameter_value: 50.000000}, {parameter_info: {name: \"Normal_str\", association: GlobalParameter, index: -1}, parameter_value: 0.100000}, {parameter_info: {name: \"Opa_Pow\", association: GlobalParameter, index: -1}, parameter_value: 0.250000}, {parameter_info: {name: \"Refrac_Pow\", association: GlobalParameter, index: -1}, parameter_value: 0.100000}, {parameter_info: {name: \"Tex_Emi_clamp\", association: GlobalParameter, index: -1}, parameter_value: 4.000000}, {parameter_info: {name: \"Tex_opa_clamp\", association: GlobalParameter, index: -1}, parameter_value: 4.000000}, {parameter_info: {name: \"RefractionDepthBias\", association: GlobalParameter, index: -1}, parameter_value: 0.000000}]",
+      "vectors": "[{parameter_info: {name: \"Opa_color\", association: GlobalParameter, index: -1}, parameter_value: {r: 0.100000, g: 0.000000, b: 0.000000, a: 1.000000}}]",
+      "textures": "[{parameter_info: {name: \"Tex_Dist1\", association: GlobalParameter, index: -1}, parameter_value: \"/Script/Engine.Texture2D'/Game/_Art/Effects/Shared/Textures/UV/FT_S_UVNoise_01.FT_S_UVNoise_01'\"}, {parameter_info: {name: \"Tex_Emi\", association: GlobalParameter, index: -1}, parameter_value: \"/Script/Engine.Texture2D'/Game/_Art/Effects/Shared/Textures/water/FT_water_08.FT_water_08'\"}, {parameter_info: {name: \"Tex_Normal\", association: GlobalParameter, index: -1}, parameter_value: \"/Script/Engine.Texture2D'/Game/_Art/Effects/Shared/Textures/water/FT_water_01_n.FT_water_01_n'\"}, {parameter_info: {name: \"Tex_OPA\", association: GlobalParameter, index: -1}, parameter_value: \"/Script/Engine.Texture2D'/Game/_Art/Effects/Shared/Textures/water/FT_water_08.FT_water_08'\"}, {parameter_info: {name: \"Tex_Refrac\", association: GlobalParameter, index: -1}, parameter_value: \"/Script/Engine.Texture2D'/Game/_Art/Effects/Shared/Textures/water/FT_water_01_rf.FT_water_01_rf'\"}]",
+      "parent": "/Game/_Art/Effects/Shared/Materials/Fluid/FM_fluid_A.FM_fluid_A",
+      "graph": [
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionTextureSampleParameter2D",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/BASE_White.BASE_White"
+        },
+        {
+          "type": "MaterialExpressionMultiply"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionTextureSampleParameter2D",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/BASE_White.BASE_White"
+        },
+        {
+          "type": "MaterialExpressionTextureSampleParameter2D",
+          "texture": "/Game/_Art/Effects/Shared/Textures/water/FT_water_01_n.FT_water_01_n"
+        },
+        {
+          "type": "MaterialExpressionTime"
+        },
+        {
+          "type": "MaterialExpressionMultiply"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionVectorParameter"
+        },
+        {
+          "type": "MaterialExpressionTextureSampleParameter2D",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/SphereRenderMask.SphereRenderMask"
+        },
+        {
+          "type": "MaterialExpressionTextureSampleParameter2D",
+          "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/Mask/FT_S_Spheremask_01.FT_S_Spheremask_01"
+        },
+        {
+          "type": "MaterialExpressionTextureSampleParameter2D",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/BASE_White.BASE_White"
+        },
+        {
+          "type": "MaterialExpressionParticleRelativeTime"
+        },
+        {
+          "type": "MaterialExpressionCustom",
+          "code": "return UV*float2(TilingU,TilingV)+Time*float2(SpeedU,SpeedV)+float2(OffsetU,OffsetV);"
+        },
+        {
+          "type": "MaterialExpressionParticleColor"
+        },
+        {
+          "type": "MaterialExpressionMultiply"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionVectorParameter"
+        },
+        {
+          "type": "MaterialExpressionVectorParameter"
+        },
+        {
+          "type": "MaterialExpressionTextureObjectParameter",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/BASE_White.BASE_White"
+        },
+        {
+          "type": "MaterialExpressionTextureObjectParameter",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/SphereRenderMask.SphereRenderMask"
+        },
+        {
+          "type": "MaterialExpressionTextureObjectParameter",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/T_Black_Linear.T_Black_Linear"
+        },
+        {
+          "type": "MaterialExpressionTextureObjectParameter",
+          "texture": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/Mask/FT_S_Spheremask_01.FT_S_Spheremask_01"
+        },
+        {
+          "type": "MaterialExpressionTextureObjectParameter",
+          "texture": "/Game/_Art/Effects/Shared/Textures/water/FT_water_01_n.FT_water_01_n"
+        },
+        {
+          "type": "MaterialExpressionTextureObjectParameter",
+          "texture": "/Game/_Art/Effects/Shared/Textures/External/BASE_White.BASE_White"
+        },
+        {
+          "type": "MaterialExpressionDynamicParameter"
+        },
+        {
+          "type": "MaterialExpressionTextureCoordinate"
+        },
+        {
+          "type": "MaterialExpressionTime"
+        },
+        {
+          "type": "MaterialExpressionParticleColor"
+        },
+        {
+          "type": "MaterialExpressionCustom",
+          "code": "float2 distUV=P0*float2(P1,P2)+P3*float2(P4,P5)+float2(P6,0);\nfloat2 distortion=(Texture2DSample(P7,P7Sampler,distUV).rg-P8)*P9;\ndistortion*=P10; float2 emiUV=(P0*float2(P11,P12)+P3*float2(P13,P14)+float2(P15,P16))+distortion;\nfloat2 opaUV=(P0*float2(P17,P18)+P3*float2(P19,P20)+float2(P21,P22))+distortion; float mask=1;\nfloat3 densityRGB=Texture2DSample(P23,P23Sampler,opaUV).rgb; float density=pow(saturate(max(densityRGB.r,max(densityRGB.g,densityRGB.b))),P24);\nfloat opacity=saturate(density-P25)*saturate(mask)*P26.a;\n// KZFXRecovery: child243 only; source clamp enum/topology unverified.\nif (P32>0.5) { float2 xy=P0*2.0-1.0; float edge=smoothstep(0.0,max(P33,0.0001),saturate(1.0-dot(xy,xy))); float cameraFade=pow(saturate(P34/max(P35,0.0001)),max(P33,0.0001)); opacity*=edge*cameraFade; }\nfloat3 image=Texture2DSample(P27,P27Sampler,emiUV).rgb; float3 color=(image+P28.rgb*Texture2DSample(P29,P29Sampler,P0).rgb+P30.rgb*density)*P31*P26.rgb; return float4(color,opacity);"
+        },
+        {
+          "type": "MaterialExpressionComponentMask"
+        },
+        {
+          "type": "MaterialExpressionComponentMask"
+        },
+        {
+          "type": "MaterialExpressionDepthFade"
+        },
+        {
+          "type": "MaterialExpressionScalarParameter"
+        },
+        {
+          "type": "MaterialExpressionPixelDepth"
+        },
+        {
+          "type": "MaterialExpressionEyeAdaptationInverse"
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "asset": "/Game/_Art/Effects/Shared/Textures/SubUV/FT_Subuv_Fluid_001.FT_Subuv_Fluid_001",
+      "size": [
+        1024,
+        1024
+      ],
+      "srgb": false
+    },
+    {
+      "asset": "/Game/_Art/Effects/Shared/Textures/BBQ_Texture/SubUV/FT_Fluid_random_001.FT_Fluid_random_001",
+      "size": [
+        1024,
+        1024
+      ],
+      "srgb": true
+    }
+  ]
+}

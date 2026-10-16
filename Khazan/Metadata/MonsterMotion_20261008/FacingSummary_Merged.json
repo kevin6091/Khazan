@@ -1,0 +1,823 @@
+{
+  "schema_version": 2,
+  "generated_utc": "2026-10-08T03:17:50.688092+00:00",
+  "test": "Khazan.Monster.FacingPIE",
+  "native_result": "Success",
+  "completed_utc": "2026-10-08T02:57:16.698Z",
+  "evidence": {
+    "csv": {
+      "path": "Metadata/MonsterMotion_20261008/Facing_Merged.csv",
+      "sha256": "5c0649b1695838917f6a000877394a0ab3b17b5435ca5362f93709787103f449",
+      "rows": 1167,
+      "columns": [
+        "family",
+        "attack",
+        "time",
+        "dt",
+        "node_before",
+        "node_after",
+        "node_changed",
+        "section",
+        "montage_position",
+        "target_x",
+        "target_y",
+        "target_z",
+        "target_yaw",
+        "control_yaw_before",
+        "control_yaw_after",
+        "desired_yaw_before",
+        "desired_yaw_after",
+        "body_before",
+        "body_after",
+        "root_yaw",
+        "steering_yaw",
+        "error_before",
+        "error_after",
+        "approaching",
+        "next_node_preparation",
+        "root_samples",
+        "cmc_yaw_rate",
+        "physics_phase_valid",
+        "physics_approaching",
+        "physics_preparation",
+        "physics_node",
+        "physics_section",
+        "physics_position",
+        "physics_effective_rate"
+      ],
+      "source_unmodified": true
+    },
+    "log": {
+      "path": "Metadata/MonsterMotion_20261008/Facing_Merged.log",
+      "sha256": "7b01888fdc03d15bfc3a6ef06a773bcd6a21579b4f2cea33cc142593f14e9f2a",
+      "started": {
+        "line": 2192,
+        "text": "[2026.10.08-02.53.55:180][335]LogAutomationController: Display: Test Started. Name={FacingPIE} Path={Khazan.Monster.FacingPIE}"
+      },
+      "completed": {
+        "line": 4204,
+        "text": "[2026.10.08-02.57.16:698][705]LogAutomationController: Display: Test Completed. Result={Success} Name={FacingPIE} Path={Khazan.Monster.FacingPIE}",
+        "result": "Success"
+      }
+    },
+    "module": {
+      "work_path": "C:\\Users\\user\\Desktop\\GitProject\\Khazan_MonsterWork_20261006\\Khazan\\Binaries\\Win64\\UnrealEditor-Khazan.dll",
+      "sha256": "c2a575f25fb9d107825b67ce00a14ec3c35a5e53cc7d417915e6c3839d2ac3f5",
+      "matches_verified_delivery_proof": true,
+      "loaded_path_log": [
+        {
+          "line": 1434,
+          "text": "[2026.10.08-02.52.39:847][  0]LogModuleManager: InternalLoadLibrary: 'Khazan' ('C:/Users/user/Desktop/GitProject/Khazan_MonsterWork_20261006/Khazan/Binaries/Win64/UnrealEditor-Khazan.dll')"
+        }
+      ],
+      "hash_note": "Current on-disk DLL hash matches the recorded merged build proof. Log records the loaded path, not an in-memory binary hash."
+    },
+    "source": {
+      "proof_path": "Metadata/MonsterMotion_20261008/VerifiedDeliveryProof.json",
+      "proof_sha256": "95a0c7e08e79f734e92df96d5ffdfe59cc62b5efb61d01a46f75279f0fd83de0",
+      "records": [
+        {
+          "path": "Source/Khazan/AI/KZMonsterAIController.cpp",
+          "compiled_proof_sha256": "83e6008940188234a718b0bedf227db9e29aa7d3554f2d1448f1a95d9bb84fb3",
+          "current_work_sha256": "83e6008940188234a718b0bedf227db9e29aa7d3554f2d1448f1a95d9bb84fb3",
+          "matches": true
+        },
+        {
+          "path": "Source/Khazan/Ability/Combo/KZComboActionAbility.h",
+          "compiled_proof_sha256": "27b22598940cd0f5a36214f88f684abfc119e4977413ddc37f740d03138e90f0",
+          "current_work_sha256": "27b22598940cd0f5a36214f88f684abfc119e4977413ddc37f740d03138e90f0",
+          "matches": true
+        },
+        {
+          "path": "Source/Khazan/Character/KZMonster.cpp",
+          "compiled_proof_sha256": "dd628aba1f267f1f1ab0dc829ee6b5aed62fc7a1f1251ec2f410322255517ce3",
+          "current_work_sha256": "dd628aba1f267f1f1ab0dc829ee6b5aed62fc7a1f1251ec2f410322255517ce3",
+          "matches": true
+        },
+        {
+          "path": "Source/Khazan/AI/KZMonsterAIController.h",
+          "compiled_proof_sha256": "ea91575713a0d110c7f43d69eab9a8bbf520b743044694ad983937bd3d4910c4",
+          "current_work_sha256": "ea91575713a0d110c7f43d69eab9a8bbf520b743044694ad983937bd3d4910c4",
+          "matches": true
+        },
+        {
+          "path": "Source/Khazan/Character/KZMonster.h",
+          "compiled_proof_sha256": "7983af0df98c42c6632d0505c109113813c2f218cb03000fab7af0efe3e55fd6",
+          "current_work_sha256": "7983af0df98c42c6632d0505c109113813c2f218cb03000fab7af0efe3e55fd6",
+          "matches": true
+        },
+        {
+          "path": "Source/Khazan/Ability/Combo/KZComboActionAbility.cpp",
+          "compiled_proof_sha256": "92fe7841895dc844c400d36d4c0563384cff30480b3f6568d7ef83aa52d071ef",
+          "current_work_sha256": "92fe7841895dc844c400d36d4c0563384cff30480b3f6568d7ef83aa52d071ef",
+          "matches": true
+        },
+        {
+          "path": "Source/Khazan/Tests/KZMonsterAIPIETest.cpp",
+          "compiled_proof_sha256": "7454a7134a22a22ebb74619f1d63ec83f3700c7b1d25c95b0bfd0d823c5ec21a",
+          "current_work_sha256": "7454a7134a22a22ebb74619f1d63ec83f3700c7b1d25c95b0bfd0d823c5ec21a",
+          "matches": true
+        }
+      ]
+    },
+    "prior_facing": {
+      "summary_path": "Metadata/MonsterMotion_20261008/FacingSummary.json",
+      "rows": 5542,
+      "note": "Separate earlier run. Its counts are not included in the merged run."
+    },
+    "prior_walk_evidence": {
+      "summary_path": "Metadata/MonsterMotion_20261008/MonsterSummary.json",
+      "tested_module_sha256": "c060727cb123d86d99975cdca63be22c05425be5ec3871a61593612835801997",
+      "note": "32 walking cases, contact minimum 5 and median slip 0 belong to the earlier DLL; they are not measurements from this merged Facing run."
+    }
+  },
+  "reference_configuration": {
+    "source": "Source/Khazan/Character/KZMonster.h: FKZMonsterAISettings fields AttackTrackingYawRate, ComboReaimYawRate, AttackPreparationSeconds",
+    "note": "Offline bounds use these compiled source defaults. The native test separately reads the actual reflected monster settings, but does not print their numeric values into CSV.",
+    "runtime_values_in_csv": false,
+    "preparation_seconds": 0.15,
+    "source_sha256": "7983af0df98c42c6632d0505c109113813c2f218cb03000fab7af0efe3e55fd6",
+    "tracking_deg_s": 60,
+    "status": "Assistant temporary tuning; original-game AI values are unverified",
+    "reaim_deg_s": 180,
+    "matches_merged_compiled_source_proof": true
+  },
+  "measurement": {
+    "active_row_rule": "node_after != None, the CSV expression records the ComboAction instance only while IsActive()",
+    "desired_yaw_columns": "Read-only GetDesiredRotation queries before/after world ticks; desired_yaw_after is not the exact desired input sampled by PhysicsRotation",
+    "steering_formula": "NormalizeAxis(Yaw(inverse(accumulated world root quaternion) * post capsule quaternion) - pre capsule yaw)",
+    "csv_numeric_precision": "Six decimals for dt/yaw; original live native comparisons use the unrounded values",
+    "tolerance_deg": 0.25,
+    "phase_point": "Existing ProcessRootMotionPostConvertToWorld observer, after TickCharacterPose/montage notifies and before PhysicsRotation",
+    "tolerance_origin": "Exact C++ FMonsterFacingPIE::AngleTolerance, measurement tolerance rather than gameplay tuning",
+    "normal_row_rule": "attack index equals the family completed attack count",
+    "body_delta_formula": "NormalizeAxis(body_after - body_before), which includes both steering and authored root rotation"
+  },
+  "coverage": {
+    "families": 4,
+    "attack_patterns": 35,
+    "authored_nodes_observed": 55,
+    "all_35_contiguous_indices": true,
+    "attack_rows": 1163,
+    "active_attack_rows": 1128,
+    "attack_lifetime_boundary_rows": 35,
+    "normal_end_rows": 4,
+    "native_all_authored_node_assertions_passed": true,
+    "families_detail": [
+      {
+        "family": "BP_Monster_Swordsman_C",
+        "rows": 223,
+        "attack_rows": 222,
+        "active_attack_rows": 217,
+        "normal_end_rows": 1,
+        "attack_count": 5,
+        "attack_indices": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "authored_nodes_observed": 7,
+        "nodes_per_pattern": [
+          2,
+          1,
+          2,
+          1,
+          1
+        ],
+        "native_flags": {
+          "family": "BP_Monster_Swordsman_C",
+          "attacks": 5,
+          "wrap": true,
+          "slow": true,
+          "fast": true,
+          "normal": true,
+          "log_line": 4212
+        },
+        "csv_adjacent_target_yaw_wrap_crossings": 28,
+        "post_pose_slow_rows": 198,
+        "post_pose_fast_rows": 9,
+        "normal_end": {
+          "all_rows_obey_cmc_rate": true,
+          "min_error_after_deg": 0.0,
+          "root_callbacks": 0
+        },
+        "cmc_yaw_rates_deg_s": [
+          540.0
+        ]
+      },
+      {
+        "family": "BP_Monster_SwordShield_C",
+        "rows": 53,
+        "attack_rows": 52,
+        "active_attack_rows": 49,
+        "normal_end_rows": 1,
+        "attack_count": 3,
+        "attack_indices": [
+          0,
+          1,
+          2
+        ],
+        "authored_nodes_observed": 4,
+        "nodes_per_pattern": [
+          2,
+          1,
+          1
+        ],
+        "native_flags": {
+          "family": "BP_Monster_SwordShield_C",
+          "attacks": 3,
+          "wrap": true,
+          "slow": true,
+          "fast": true,
+          "normal": true,
+          "log_line": 4216
+        },
+        "csv_adjacent_target_yaw_wrap_crossings": 28,
+        "post_pose_slow_rows": 38,
+        "post_pose_fast_rows": 5,
+        "normal_end": {
+          "all_rows_obey_cmc_rate": true,
+          "min_error_after_deg": 0.0,
+          "root_callbacks": 0
+        },
+        "cmc_yaw_rates_deg_s": [
+          540.0
+        ]
+      },
+      {
+        "family": "BP_Monster_HeavySwordsman_C",
+        "rows": 192,
+        "attack_rows": 191,
+        "active_attack_rows": 184,
+        "normal_end_rows": 1,
+        "attack_count": 7,
+        "attack_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "authored_nodes_observed": 15,
+        "nodes_per_pattern": [
+          4,
+          2,
+          3,
+          1,
+          3,
+          1,
+          1
+        ],
+        "native_flags": {
+          "family": "BP_Monster_HeavySwordsman_C",
+          "attacks": 7,
+          "wrap": true,
+          "slow": true,
+          "fast": true,
+          "normal": true,
+          "log_line": 4224
+        },
+        "csv_adjacent_target_yaw_wrap_crossings": 22,
+        "post_pose_slow_rows": 149,
+        "post_pose_fast_rows": 21,
+        "normal_end": {
+          "all_rows_obey_cmc_rate": true,
+          "min_error_after_deg": 0.0,
+          "root_callbacks": 0
+        },
+        "cmc_yaw_rates_deg_s": [
+          540.0
+        ]
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "rows": 699,
+        "attack_rows": 698,
+        "active_attack_rows": 678,
+        "normal_end_rows": 1,
+        "attack_count": 20,
+        "attack_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "authored_nodes_observed": 29,
+        "nodes_per_pattern": [
+          3,
+          2,
+          1,
+          3,
+          2,
+          2,
+          2,
+          1,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "native_flags": {
+          "family": "BP_Monster_HalberdElite_C",
+          "attacks": 20,
+          "wrap": true,
+          "slow": true,
+          "fast": true,
+          "normal": true,
+          "log_line": 4245
+        },
+        "csv_adjacent_target_yaw_wrap_crossings": 74,
+        "post_pose_slow_rows": 607,
+        "post_pose_fast_rows": 31,
+        "normal_end": {
+          "all_rows_obey_cmc_rate": true,
+          "min_error_after_deg": 0.0,
+          "root_callbacks": 0
+        },
+        "cmc_yaw_rates_deg_s": [
+          540.0
+        ]
+      }
+    ],
+    "patterns": [
+      {
+        "family": "BP_Monster_Swordsman_C",
+        "attack": 0,
+        "nodes": 2,
+        "frames": 25,
+        "root_samples": 23,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4207
+      },
+      {
+        "family": "BP_Monster_Swordsman_C",
+        "attack": 1,
+        "nodes": 1,
+        "frames": 22,
+        "root_samples": 20,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4208
+      },
+      {
+        "family": "BP_Monster_Swordsman_C",
+        "attack": 2,
+        "nodes": 2,
+        "frames": 24,
+        "root_samples": 22,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4209
+      },
+      {
+        "family": "BP_Monster_Swordsman_C",
+        "attack": 3,
+        "nodes": 1,
+        "frames": 36,
+        "root_samples": 34,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4210
+      },
+      {
+        "family": "BP_Monster_Swordsman_C",
+        "attack": 4,
+        "nodes": 1,
+        "frames": 115,
+        "root_samples": 113,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4211
+      },
+      {
+        "family": "BP_Monster_SwordShield_C",
+        "attack": 0,
+        "nodes": 2,
+        "frames": 18,
+        "root_samples": 16,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4213
+      },
+      {
+        "family": "BP_Monster_SwordShield_C",
+        "attack": 1,
+        "nodes": 1,
+        "frames": 19,
+        "root_samples": 17,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4214
+      },
+      {
+        "family": "BP_Monster_SwordShield_C",
+        "attack": 2,
+        "nodes": 1,
+        "frames": 15,
+        "root_samples": 13,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4215
+      },
+      {
+        "family": "BP_Monster_HeavySwordsman_C",
+        "attack": 0,
+        "nodes": 4,
+        "frames": 44,
+        "root_samples": 42,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4217
+      },
+      {
+        "family": "BP_Monster_HeavySwordsman_C",
+        "attack": 1,
+        "nodes": 2,
+        "frames": 23,
+        "root_samples": 21,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4218
+      },
+      {
+        "family": "BP_Monster_HeavySwordsman_C",
+        "attack": 2,
+        "nodes": 3,
+        "frames": 39,
+        "root_samples": 37,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4219
+      },
+      {
+        "family": "BP_Monster_HeavySwordsman_C",
+        "attack": 3,
+        "nodes": 1,
+        "frames": 17,
+        "root_samples": 15,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4220
+      },
+      {
+        "family": "BP_Monster_HeavySwordsman_C",
+        "attack": 4,
+        "nodes": 3,
+        "frames": 28,
+        "root_samples": 26,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4221
+      },
+      {
+        "family": "BP_Monster_HeavySwordsman_C",
+        "attack": 5,
+        "nodes": 1,
+        "frames": 22,
+        "root_samples": 20,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4222
+      },
+      {
+        "family": "BP_Monster_HeavySwordsman_C",
+        "attack": 6,
+        "nodes": 1,
+        "frames": 18,
+        "root_samples": 16,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4223
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 0,
+        "nodes": 3,
+        "frames": 40,
+        "root_samples": 38,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4225
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 1,
+        "nodes": 2,
+        "frames": 38,
+        "root_samples": 36,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4226
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 2,
+        "nodes": 1,
+        "frames": 13,
+        "root_samples": 11,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4227
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 3,
+        "nodes": 3,
+        "frames": 76,
+        "root_samples": 74,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4228
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 4,
+        "nodes": 2,
+        "frames": 57,
+        "root_samples": 55,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4229
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 5,
+        "nodes": 2,
+        "frames": 30,
+        "root_samples": 28,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4230
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 6,
+        "nodes": 2,
+        "frames": 25,
+        "root_samples": 23,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4231
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 7,
+        "nodes": 1,
+        "frames": 28,
+        "root_samples": 26,
+        "authored_world_root_yaw_detected": true,
+        "consumed_abs_world_root_yaw_deg": 540.002,
+        "log_line": 4232
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 8,
+        "nodes": 2,
+        "frames": 38,
+        "root_samples": 36,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4233
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 9,
+        "nodes": 1,
+        "frames": 22,
+        "root_samples": 20,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4234
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 10,
+        "nodes": 1,
+        "frames": 26,
+        "root_samples": 24,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4235
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 11,
+        "nodes": 1,
+        "frames": 45,
+        "root_samples": 43,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4236
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 12,
+        "nodes": 1,
+        "frames": 28,
+        "root_samples": 26,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4237
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 13,
+        "nodes": 1,
+        "frames": 33,
+        "root_samples": 31,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4238
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 14,
+        "nodes": 1,
+        "frames": 17,
+        "root_samples": 15,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4239
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 15,
+        "nodes": 1,
+        "frames": 48,
+        "root_samples": 46,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4240
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 16,
+        "nodes": 1,
+        "frames": 43,
+        "root_samples": 41,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4241
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 17,
+        "nodes": 1,
+        "frames": 32,
+        "root_samples": 30,
+        "authored_world_root_yaw_detected": false,
+        "consumed_abs_world_root_yaw_deg": 0.0,
+        "log_line": 4242
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 18,
+        "nodes": 1,
+        "frames": 30,
+        "root_samples": 28,
+        "authored_world_root_yaw_detected": true,
+        "consumed_abs_world_root_yaw_deg": 180.0,
+        "log_line": 4243
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 19,
+        "nodes": 1,
+        "frames": 29,
+        "root_samples": 27,
+        "authored_world_root_yaw_detected": true,
+        "consumed_abs_world_root_yaw_deg": 180.0,
+        "log_line": 4244
+      }
+    ]
+  },
+  "rate_checks": {
+    "active_maximum": {
+      "formula": "abs(steering_yaw) <= max(tracking,reaim)*dt + 0.25",
+      "rows": 1128,
+      "violations": 0,
+      "maximum_observed_steering_rate_deg_s": 180.00071895534117
+    },
+    "ordinary_attack": {
+      "formula": "abs(steering_yaw) <= tracking*dt + 0.25",
+      "valid_post_pose_slow_rows": 992,
+      "native_eligible_rows": 837,
+      "native_error_before_gate": "error_before > tracking*dt + 0.25",
+      "violations_even_without_native_error_before_gate": 0
+    },
+    "preparation": {
+      "rows": 66,
+      "rows_above_slow_bound": 60,
+      "approaching_notify_rows": 21,
+      "new_section_preparation_rows": 45
+    },
+    "phase_valid_active_rows": 1058,
+    "phase_unknown_active_rows": 70,
+    "phase_unknown_policy": "Maximum/no-snap bound remains checked; the slower-rate classification is intentionally skipped",
+    "pre_only_would_fail_rows": 15,
+    "those_rows_correctly_classified_as_physics_fast": 15
+  },
+  "root_motion": {
+    "observed_callbacks": 1093,
+    "multi_callback_frames": 0,
+    "frames_with_abs_world_root_yaw_above_tolerance": 19,
+    "consumed_abs_world_root_yaw_sum_deg_csv": 900.002468,
+    "authored_yaw_patterns": [
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 7,
+        "nodes": 1,
+        "frames": 28,
+        "root_samples": 26,
+        "authored_world_root_yaw_detected": true,
+        "consumed_abs_world_root_yaw_deg": 540.002,
+        "log_line": 4232
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 18,
+        "nodes": 1,
+        "frames": 30,
+        "root_samples": 28,
+        "authored_world_root_yaw_detected": true,
+        "consumed_abs_world_root_yaw_deg": 180.0,
+        "log_line": 4243
+      },
+      {
+        "family": "BP_Monster_HalberdElite_C",
+        "attack": 19,
+        "nodes": 1,
+        "frames": 29,
+        "root_samples": 27,
+        "authored_world_root_yaw_detected": true,
+        "consumed_abs_world_root_yaw_deg": 180.0,
+        "log_line": 4244
+      }
+    ],
+    "actual_authored_node_transition_rows": 20,
+    "observer_behavior": "Returns the previous root delegate result unchanged; no root transform is replaced by the test",
+    "authored_reference": "First-slot montage root extraction at actual source frame intervals divided by abs(segment AnimPlayRate * source RateScale), quaternion converted with actual mesh component world basis",
+    "largest_total_body_step": {
+      "family": "BP_Monster_HalberdElite_C",
+      "attack": 7,
+      "world_time_seconds": 137.216565,
+      "dt_seconds": 0.147304,
+      "total_body_delta_deg": -155.88449,
+      "root_yaw_deg": -147.046226,
+      "factored_steering_yaw_deg": -8.838264,
+      "interpretation": "Rate bounds apply to root-factored steering. Total body yaw includes authored root rotation."
+    },
+    "preservation_scope": "Authored world-root yaw remains observed, and the observer passes root transforms through unchanged. This is not byte-for-byte animation package equality or exact per-frame original-motion equivalence."
+  },
+  "assertions_from_native_success": {
+    "raw_target_identity_and_focus_columns_present": false,
+    "persistent_player_battle_target_and_gameplay_focus_every_sampled_tick": true,
+    "actual_sight_acquisition_before_fixture_stop": true,
+    "normal_end_convergence_and_zero_attack_root_callbacks_all_families": true,
+    "normal_end_movement_block_removed_and_held_command_cleared": true
+  },
+  "delivery": {
+    "main_applied": false,
+    "status_source": "Root task status supplied for this report",
+    "note": "User Main PID 13700 holds the Combat BlendSpace files. Main delivery and fresh Main verification remain pending; this is isolated Work evidence."
+  },
+  "limitations": [
+    "The fixture stops StateTree after real Sight acquisition and manually activates all granted attacks with held combo intent. Natural attack selection/chase/leash is covered by separate regression tests.",
+    "Root presence/consumption and source yaw expectation are verified; this is not a byte-for-byte animation-package preservation audit or a complete frame-by-frame original root-motion equivalence proof.",
+    "The CSV records target coordinates and yaw, not capsule translation. Physical root travel and player damage are outside this Facing summary.",
+    "Tracking/reaim rates and preparation duration are explicit temporary tuning, not original-game AI metadata.",
+    "Runtime reflected tracking/reaim settings are not printed in CSV. Offline calculations use the compiled source defaults recorded above.",
+    "Native wrap flags validate selected-bearing +/-180 crossing. Adjacent CSV target_yaw crossings are diagnostics after root movement, not exact selected stimuli.",
+    "Prior Monster walking was measured on the earlier c060 DLL; this Facing evidence was measured on the merged c2a575 DLL."
+  ],
+  "technical_note": "The first owned PowerShell aggregation helper was stopped for excessive memory use before report creation. Final aggregation uses Python standard-library csv/json. Source, CSV, editor and other processes were not modified."
+}

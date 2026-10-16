@@ -1,0 +1,1720 @@
+[
+  {
+    "Type": "xxSoundConstants",
+    "Name": "SoundConstants",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxSoundConstants'",
+    "Package": "BBQ/Content/_Common/Constants/SoundConstants",
+    "Properties": {
+      "PlayerMemorySoundFadeOutTimeAtClose": 0.1,
+      "AttackMaterialMatchMap": [
+        {
+          "Key": "EBattleDirecting_AttackMaterial::AttackMaterial_01",
+          "Value": "EAttackMaterialType::Sword"
+        },
+        {
+          "Key": "EBattleDirecting_AttackMaterial::AttackMaterial_02",
+          "Value": "EAttackMaterialType::Hammer"
+        },
+        {
+          "Key": "EBattleDirecting_AttackMaterial::NewRightHand",
+          "Value": "EAttackMaterialType::Axe"
+        },
+        {
+          "Key": "EBattleDirecting_AttackMaterial::NewLeftHand",
+          "Value": "EAttackMaterialType::Sword"
+        }
+      ],
+      "AttackEventMap": [
+        {
+          "Key": "EAttackMaterialType::Sword",
+          "Value": {
+            "ObjectName": "AkAudioEvent'Play_Player_DualAxeSword_HitMaterialSwitch'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/Player_Hit/Play_Player_DualAxeSword_HitMaterialSwitch.0"
+          }
+        },
+        {
+          "Key": "EAttackMaterialType::Spear",
+          "Value": {
+            "ObjectName": "AkAudioEvent'Play_PLYR_Spear_HitMaterialSwitch'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/Player_Hit/Play_PLYR_Spear_HitMaterialSwitch.0"
+          }
+        },
+        {
+          "Key": "EAttackMaterialType::Hammer",
+          "Value": null
+        },
+        {
+          "Key": "EAttackMaterialType::GSword",
+          "Value": {
+            "ObjectName": "AkAudioEvent'Play_Player_GSword_HitMaterialSwitch'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/Player_Hit/Play_Player_GSword_HitMaterialSwitch.0"
+          }
+        },
+        {
+          "Key": "EAttackMaterialType::Gauntlet",
+          "Value": null
+        },
+        {
+          "Key": "EAttackMaterialType::Shield",
+          "Value": null
+        },
+        {
+          "Key": "EAttackMaterialType::Blunt",
+          "Value": {
+            "ObjectName": "AkAudioEvent'Play_Player_GSword_HitMaterialSwitch'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/Player_Hit/Play_Player_GSword_HitMaterialSwitch.0"
+          }
+        },
+        {
+          "Key": "EAttackMaterialType::Axe",
+          "Value": {
+            "ObjectName": "AkAudioEvent'Play_Player_DualAxeSword_HitMaterialSwitch'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/Player_Hit/Play_Player_DualAxeSword_HitMaterialSwitch.0"
+          }
+        }
+      ],
+      "ArmorMaterialMatchMap": [
+        {
+          "Key": "EBattleDirecting_DamageMaterial::DamageMaterial_01",
+          "Value": "EArmorMaterialType::Gore"
+        },
+        {
+          "Key": "EBattleDirecting_DamageMaterial::DamageMaterial_05",
+          "Value": "EArmorMaterialType::Plate"
+        },
+        {
+          "Key": "EBattleDirecting_DamageMaterial::DamageMaterial_03",
+          "Value": "EArmorMaterialType::Dirt"
+        },
+        {
+          "Key": "EBattleDirecting_DamageMaterial::DamageMaterial_02",
+          "Value": "EArmorMaterialType::Wood"
+        },
+        {
+          "Key": "EBattleDirecting_DamageMaterial::DamageMaterial_04",
+          "Value": "EArmorMaterialType::Gore"
+        },
+        {
+          "Key": "EBattleDirecting_DamageMaterial::DamageMaterial_06",
+          "Value": "EArmorMaterialType::Water"
+        },
+        {
+          "Key": "EBattleDirecting_DamageMaterial::DamageMaterial_07",
+          "Value": "EArmorMaterialType::None"
+        },
+        {
+          "Key": "EBattleDirecting_DamageMaterial::DamageMaterial_08",
+          "Value": "EArmorMaterialType::Snow"
+        },
+        {
+          "Key": "EBattleDirecting_DamageMaterial::DamageMaterial_09",
+          "Value": "EArmorMaterialType::Mud"
+        },
+        {
+          "Key": "EBattleDirecting_DamageMaterial::DamageMaterial_10",
+          "Value": "EArmorMaterialType::Gore"
+        },
+        {
+          "Key": "EBattleDirecting_DamageMaterial::DamageMaterial_11",
+          "Value": "EArmorMaterialType::Rock"
+        },
+        {
+          "Key": "EBattleDirecting_DamageMaterial::DamageMaterial_12",
+          "Value": "EArmorMaterialType::Poison"
+        },
+        {
+          "Key": "EBattleDirecting_DamageMaterial::DamageMaterial_13",
+          "Value": "EArmorMaterialType::Gore"
+        }
+      ],
+      "ArmorMaterialGroupName": "ArmorMaterialSwitch",
+      "ArmorMaterialMap": [
+        {
+          "Key": "EArmorMaterialType::Wood",
+          "Value": "Wood"
+        },
+        {
+          "Key": "EArmorMaterialType::Rock",
+          "Value": "Rock"
+        },
+        {
+          "Key": "EArmorMaterialType::Plate",
+          "Value": "Plate"
+        },
+        {
+          "Key": "EArmorMaterialType::Leather",
+          "Value": "Leather"
+        },
+        {
+          "Key": "EArmorMaterialType::Gore",
+          "Value": "Gore"
+        },
+        {
+          "Key": "EArmorMaterialType::Skeleton",
+          "Value": "Skeleton"
+        },
+        {
+          "Key": "EArmorMaterialType::Mud",
+          "Value": "Mud"
+        },
+        {
+          "Key": "EArmorMaterialType::Poison",
+          "Value": "Poison"
+        },
+        {
+          "Key": "EArmorMaterialType::Snow",
+          "Value": "Dirt"
+        },
+        {
+          "Key": "EArmorMaterialType::Water",
+          "Value": "Water"
+        }
+      ],
+      "HitStrengthMatchMap": [
+        {
+          "Key": "EBattleDirecting_AttackStrength::AttackStrength_01",
+          "Value": "Weak"
+        },
+        {
+          "Key": "EBattleDirecting_AttackStrength::AttackStrength_02",
+          "Value": "Strong"
+        },
+        {
+          "Key": "EBattleDirecting_AttackStrength::AttackStrength_03",
+          "Value": "Strong"
+        },
+        {
+          "Key": "EBattleDirecting_AttackStrength::AttackStrength_04",
+          "Value": "S_Strong"
+        }
+      ],
+      "HitStrengthGroupName": "HitTypesSwitch",
+      "CustomDamageSoundMatchMap": [
+        {
+          "Key": "ECustomDamageSoundKey::Key1",
+          "Value": "A"
+        },
+        {
+          "Key": "ECustomDamageSoundKey::Key2",
+          "Value": "B"
+        },
+        {
+          "Key": "ECustomDamageSoundKey::Key3",
+          "Value": "C"
+        },
+        {
+          "Key": "ECustomDamageSoundKey::Key4",
+          "Value": "D"
+        },
+        {
+          "Key": "ECustomDamageSoundKey::Key5",
+          "Value": "E"
+        },
+        {
+          "Key": "ECustomDamageSoundKey::Key6",
+          "Value": "F"
+        },
+        {
+          "Key": "ECustomDamageSoundKey::Key7",
+          "Value": "G"
+        },
+        {
+          "Key": "ECustomDamageSoundKey::Key8",
+          "Value": "H"
+        },
+        {
+          "Key": "ECustomDamageSoundKey::Key9",
+          "Value": "I"
+        },
+        {
+          "Key": "ECustomDamageSoundKey::Key10",
+          "Value": "Grapple"
+        }
+      ],
+      "HitTypeMatchMap": [
+        {
+          "Key": "EBattleDirecting_AttackStrength::NewDefense",
+          "Value": "Guard"
+        },
+        {
+          "Key": "EBattleDirecting_AttackStrength::NewJustGuard",
+          "Value": "JustGuard"
+        },
+        {
+          "Key": "EBattleDirecting_AttackStrength::NewSuperArmour",
+          "Value": "SuperArmor"
+        },
+        {
+          "Key": "EBattleDirecting_AttackStrength::NewParrying",
+          "Value": "Parrying"
+        },
+        {
+          "Key": "EBattleDirecting_AttackStrength::EnhancedJustGuard",
+          "Value": "JustGuard"
+        },
+        {
+          "Key": "EBattleDirecting_AttackStrength::Default",
+          "Value": "Hit"
+        }
+      ],
+      "HitTypeGroupName": "DefendTypeSwitch",
+      "EnvHitName": "Block",
+      "IsAttackerKazanRTPCName": "rtpc_attacker_is_player",
+      "FootStepAudioEvent": {
+        "ObjectName": "AkAudioEvent'efx_kazan_footstep'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/PlayerLocomotion/efx_kazan_footstep.0"
+      },
+      "FootStepAboveMaterialGroupName": "physical_material_above",
+      "FootStepBelowMaterialGroupName": "physical_material",
+      "FootStepAudioMap": [
+        {
+          "Key": "SurfaceType1",
+          "Value": "pm_flesh"
+        },
+        {
+          "Key": "SurfaceType2",
+          "Value": "pm_wood"
+        },
+        {
+          "Key": "SurfaceType3",
+          "Value": "pm_stone"
+        },
+        {
+          "Key": "SurfaceType4",
+          "Value": "pm_ice"
+        },
+        {
+          "Key": "SurfaceType5",
+          "Value": "pm_metal"
+        },
+        {
+          "Key": "SurfaceType6",
+          "Value": "pm_water"
+        },
+        {
+          "Key": "SurfaceType7",
+          "Value": "pm_dirt"
+        },
+        {
+          "Key": "SurfaceType8",
+          "Value": "pm_grass"
+        },
+        {
+          "Key": "SurfaceType9",
+          "Value": "pm_sand"
+        },
+        {
+          "Key": "SurfaceType10",
+          "Value": "pm_snow"
+        },
+        {
+          "Key": "SurfaceType11",
+          "Value": "pm_mud"
+        },
+        {
+          "Key": "SurfaceType12",
+          "Value": "pm_poison"
+        },
+        {
+          "Key": "SurfaceType13",
+          "Value": "pm_deepsnow"
+        },
+        {
+          "Key": "SurfaceType14",
+          "Value": "pm_deepwater"
+        },
+        {
+          "Key": "SurfaceType15",
+          "Value": "pm_deepsand"
+        },
+        {
+          "Key": "SurfaceType16",
+          "Value": "pm_blackblood"
+        },
+        {
+          "Key": "SurfaceType17",
+          "Value": "pm_dark"
+        },
+        {
+          "Key": "SurfaceType_Default",
+          "Value": "pm_default"
+        }
+      ],
+      "DeepOrCoverPhysicalSufaces": [
+        {
+          "Key": "SurfaceType14",
+          "Value": "ESpecialPhysicalSurface::Deep"
+        },
+        {
+          "Key": "SurfaceType13",
+          "Value": "ESpecialPhysicalSurface::Deep"
+        },
+        {
+          "Key": "SurfaceType6",
+          "Value": "ESpecialPhysicalSurface::Cover"
+        },
+        {
+          "Key": "SurfaceType10",
+          "Value": "ESpecialPhysicalSurface::Cover"
+        },
+        {
+          "Key": "SurfaceType15",
+          "Value": "ESpecialPhysicalSurface::Deep"
+        },
+        {
+          "Key": "SurfaceType16",
+          "Value": "ESpecialPhysicalSurface::Deep"
+        },
+        {
+          "Key": "SurfaceType12",
+          "Value": "ESpecialPhysicalSurface::Deep"
+        }
+      ],
+      "CharacterSpeedRTPCName": "RTPC_PlayerSpeed",
+      "FoorLandingThreshold": 5.0,
+      "InTheWeakDamageEffectSoundByJavelin": {
+        "ObjectName": "AkAudioEvent'Play_UI_Spear_Hit_Critical'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Ui/Play_UI_Spear_Hit_Critical.0"
+      },
+      "InTheWeakDieEffectSoundByJavelin": {
+        "ObjectName": "AkAudioEvent'Play_UI_Spear_Kill_Critical'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Ui/Play_UI_Spear_Kill_Critical.0"
+      },
+      "CameraShakeStartWwiseMotionPlayer": {
+        "ObjectName": "AkAudioEvent'motion_pc_camera_shake'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/WwiseMotion/motion_pc/motion_pc_camera_shake.0"
+      },
+      "CameraShakeEndWwiseMotionPlayer": {
+        "ObjectName": "AkAudioEvent'motion_pc_camera_shake_stop'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/WwiseMotion/motion_pc/motion_pc_camera_shake_stop.0"
+      },
+      "CameraShakeStartWwiseMotionMonster": {
+        "ObjectName": "AkAudioEvent'motion_mon_camera_shake'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/WwiseMotion/motion_mon/motion_mon_camera_shake.0"
+      },
+      "CameraShakeEndWwiseMotionMonster": {
+        "ObjectName": "AkAudioEvent'motion_mon_camera_shake_stop'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/WwiseMotion/motion_mon/motion_mon_camera_shake_stop.0"
+      },
+      "CameraShakeStartWwiseMotionLevelObject": {
+        "ObjectName": "AkAudioEvent'motion_lob_camera_shake'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/WwiseMotion/motion_lob/motion_lob_camera_shake.0"
+      },
+      "CameraShakeEndWwiseMotionLevelObject": {
+        "ObjectName": "AkAudioEvent'motion_lob_camera_shake_stop'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/WwiseMotion/motion_lob/motion_lob_camera_shake_stop.0"
+      },
+      "CameraShakePitchRTPCName": "rtpc_camera_shake_scale",
+      "FloorLandingDamageRateRTPCName": "rtpc_height_vel",
+      "MotionOnOffStateName": "add_output_motion",
+      "MotionOnStateValue": "motion_on",
+      "MotionOffStateValue": "motion_off",
+      "AddOutputTypeStateName": "add_output_type",
+      "AddOutputTypeKeyboard": "keyboard",
+      "AddOutputTypeDualsense": "dualsense",
+      "AddOutputTypeXBoxController": "xbox_c",
+      "DualSenseSteamInputStateName": "steaminput_api",
+      "DualSenseSteamInputStateOn": "on",
+      "DualSenseSteamInputStateOff": "off",
+      "BGMAudioGroupName": "BossPhase",
+      "BGMAudioMap": [
+        {
+          "Key": "EBattlePhaseType::BossPhase3",
+          "Value": "boss_3phase"
+        },
+        {
+          "Key": "EBattlePhaseType::BossPhase2",
+          "Value": "boss_2phase"
+        },
+        {
+          "Key": "EBattlePhaseType::BossPhase1",
+          "Value": "boss_1phase"
+        },
+        {
+          "Key": "EBattlePhaseType::Normal",
+          "Value": "battle"
+        },
+        {
+          "Key": "EBattlePhaseType::None",
+          "Value": "stealth"
+        }
+      ],
+      "AreaBattleSituationStartEvent": {
+        "ObjectName": "AkAudioEvent'bgm_areabattlesituation_start'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Music/Music_Common/bgm_areabattlesituation_start.0"
+      },
+      "AreaBattleSituationEndEvent": {
+        "ObjectName": "AkAudioEvent'bgm_areabattlesituation_end'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Music/Music_Common/bgm_areabattlesituation_end.0"
+      },
+      "AreaBattleSituationEndEventWithEnemyDeath": {
+        "ObjectName": "AkAudioEvent'bgm_areabattlesituation_end_enemydeath'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Music/Music_Common/bgm_areabattlesituation_end_enemydeath.0"
+      },
+      "AreaBattleBGMEvents": [
+        {
+          "Key": "200",
+          "Value": {
+            "AreaEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Stormpass/bgm_area_stormpass_start.bgm_area_stormpass_start",
+              "SubPathString": ""
+            },
+            "AreaBattleBGMEndType": "EAreaBattleBGMEndType::DelayTime",
+            "AreaBattleMinimumTime": 0.0,
+            "AreaBattleEndEventDelay": 9.0
+          }
+        },
+        {
+          "Key": "400",
+          "Value": {
+            "AreaEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Embars/bgm_area_embars_start.bgm_area_embars_start",
+              "SubPathString": ""
+            },
+            "AreaBattleBGMEndType": "EAreaBattleBGMEndType::DelayTime",
+            "AreaBattleMinimumTime": 0.0,
+            "AreaBattleEndEventDelay": 3.0
+          }
+        },
+        {
+          "Key": "500",
+          "Value": {
+            "AreaEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/SkoffaCave/bgm_area_skoffacave_start.bgm_area_skoffacave_start",
+              "SubPathString": ""
+            },
+            "AreaBattleBGMEndType": "EAreaBattleBGMEndType::DelayTime",
+            "AreaBattleMinimumTime": 0.0,
+            "AreaBattleEndEventDelay": 6.0
+          }
+        },
+        {
+          "Key": "700",
+          "Value": {
+            "AreaEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Nadin/bgm_area_nadin_start.bgm_area_nadin_start",
+              "SubPathString": ""
+            },
+            "AreaBattleBGMEndType": "EAreaBattleBGMEndType::DelayTime",
+            "AreaBattleMinimumTime": 0.0,
+            "AreaBattleEndEventDelay": 11.0
+          }
+        },
+        {
+          "Key": "801",
+          "Value": {
+            "AreaEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ElRavaca/sub01/bgm_area_elravaca_sub01_start.bgm_area_elravaca_sub01_start",
+              "SubPathString": ""
+            },
+            "AreaBattleBGMEndType": "EAreaBattleBGMEndType::DelayTime",
+            "AreaBattleMinimumTime": 0.0,
+            "AreaBattleEndEventDelay": 1.0
+          }
+        },
+        {
+          "Key": "1000",
+          "Value": {
+            "AreaEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Aldevir/bgm_area_aldevir_start.bgm_area_aldevir_start",
+              "SubPathString": ""
+            },
+            "AreaBattleBGMEndType": "EAreaBattleBGMEndType::DelayTime",
+            "AreaBattleMinimumTime": 0.0,
+            "AreaBattleEndEventDelay": 4.0
+          }
+        }
+      ],
+      "TrainingFieldDefaultEnterBGMEvent": {
+        "ObjectName": "AkAudioEvent'bgm_trainingroom_a_01'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Music/TrainingRoom/bgm_trainingroom_a_01.0"
+      },
+      "TrainingFieldMonsterEnterBGMEvent": {
+        "ObjectName": "AkAudioEvent'bgm_trainingroom_b_01'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Music/TrainingRoom/bgm_trainingroom_b_01.0"
+      },
+      "TrainingFieldDefaultRestartBGMEvent": {
+        "ObjectName": "AkAudioEvent'bgm_trainingroom_a_02'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Music/TrainingRoom/bgm_trainingroom_a_02.0"
+      },
+      "TrainingFieldMonsterRestartBGMEvent": {
+        "ObjectName": "AkAudioEvent'bgm_trainingroom_b_02'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Music/TrainingRoom/bgm_trainingroom_b_02.0"
+      },
+      "KazanTypeSwitches": [
+        {
+          "Key": "EKazanType::MaleKazan",
+          "Value": {
+            "KazanTypeEffectSwitch": {
+              "ObjectName": "AkSwitchValue'kz_apc_switch-kz'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Sound/GameSync/Switches/kz_apc_switch/kz_apc_switch-kz.0"
+            },
+            "KazanTypeVoiceSwitch": {
+              "ObjectName": "AkSwitchValue'vo_kz_switch-kz'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Sound/GameSync/Switches/vo_kz_switch/vo_kz_switch-kz.0"
+            }
+          }
+        },
+        {
+          "Key": "EKazanType::FemaleKazan",
+          "Value": {
+            "KazanTypeEffectSwitch": {
+              "ObjectName": "AkSwitchValue'kz_apc_switch-kz'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Sound/GameSync/Switches/kz_apc_switch/kz_apc_switch-kz.0"
+            },
+            "KazanTypeVoiceSwitch": {
+              "ObjectName": "AkSwitchValue'vo_kz_switch-kz_f'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Sound/GameSync/Switches/vo_kz_switch/vo_kz_switch-kz_f.0"
+            }
+          }
+        },
+        {
+          "Key": "EKazanType::ApcKazan",
+          "Value": {
+            "KazanTypeEffectSwitch": {
+              "ObjectName": "AkSwitchValue'kz_apc_switch-apc'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Sound/GameSync/Switches/kz_apc_switch/kz_apc_switch-apc.0"
+            },
+            "KazanTypeVoiceSwitch": {
+              "ObjectName": "AkSwitchValue'vo_kz_switch-apc'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Sound/GameSync/Switches/vo_kz_switch/vo_kz_switch-apc.0"
+            }
+          }
+        },
+        {
+          "Key": "EKazanType::AbyssKazan",
+          "Value": {
+            "KazanTypeEffectSwitch": {
+              "ObjectName": "AkSwitchValue'kz_apc_switch-abyss_kz'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Sound/GameSync/Switches/kz_apc_switch/kz_apc_switch-abyss_kz.0"
+            },
+            "KazanTypeVoiceSwitch": {
+              "ObjectName": "AkSwitchValue'vo_kz_switch-abyss_kz'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Sound/GameSync/Switches/vo_kz_switch/vo_kz_switch-abyss_kz.0"
+            }
+          }
+        }
+      ],
+      "KazanAPCSwitchAbyssKazanCalss": {
+        "AssetPathName": "/Game/_Kazan_/Design/Monster/APC/EnemyAPC/AbyssKazan/AbyssKazan_DualAxeSword/AbyssKazan_DualAxeSword_A/CB_AbyssKazan_DualAxeSword_A.CB_AbyssKazan_DualAxeSword_A_C",
+        "SubPathString": ""
+      },
+      "SoundObjectCullingDistMap": [
+        {
+          "Key": "ESoundObjectType::Object",
+          "Value": 1000
+        },
+        {
+          "Key": "ESoundObjectType::Item",
+          "Value": 1000
+        },
+        {
+          "Key": "ESoundObjectType::Monster",
+          "Value": 2000
+        },
+        {
+          "Key": "ESoundObjectType::BossMonster",
+          "Value": 3000
+        },
+        {
+          "Key": "ESoundObjectType::Player",
+          "Value": 3000
+        }
+      ],
+      "FieldItemAudioEvent": {
+        "ObjectName": "AkAudioEvent'ui_field_drop_item_get'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Ui/ui_field_drop_item_get.0"
+      },
+      "ChangeToRealWorld": {
+        "ObjectName": "AkAudioEvent'common_state_the_crevice_realworld'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_state_the_crevice_realworld.0"
+      },
+      "ChangeToUnderWorld": {
+        "ObjectName": "AkAudioEvent'common_state_the_crevice_underworld'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_state_the_crevice_underworld.0"
+      },
+      "FinalBlowStartAudioEvent": {
+        "ObjectName": "AkAudioEvent'Sstate_PLYR_FinalBlow_Start'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/Player_FinalBlow/Sstate_PLYR_FinalBlow_Start.0"
+      },
+      "FinalBlowEndAudioEvent": {
+        "ObjectName": "AkAudioEvent'Sstate_PLYR_FinalBlow_End'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/Player_FinalBlow/Sstate_PLYR_FinalBlow_End.0"
+      },
+      "KilledAudioEvent": {
+        "ObjectName": "AkAudioEvent'efx_pc_impact_enemy_kill'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/impact/efx_pc_impact_enemy_kill.0"
+      },
+      "KilledBossAudioEvent": {
+        "ObjectName": "AkAudioEvent'efx_pc_impact_boss_enemy_kill'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/impact/efx_pc_impact_boss_enemy_kill.0"
+      },
+      "EndMoribundDeadAudioEvent": {
+        "ObjectName": "AkAudioEvent'efx_pc_undead_confirm_kill'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/impact/efx_pc_undead_confirm_kill.0"
+      },
+      "StaminaExhaustionAudioEvent": {
+        "ObjectName": "AkAudioEvent'ui_groggy_normal'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Ui/ui_groggy_normal.0"
+      },
+      "ExcutionAudioEvent": {
+        "ObjectName": "AkAudioEvent'ui_grapple_normal'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Ui/ui_grapple_normal.0"
+      },
+      "CheckPointInteractionStartEvent": {
+        "ObjectName": "AkAudioEvent'Sstate_Tombstone_on'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/GameSync/Sstate_Tombstone_on.0"
+      },
+      "CheckPointInteractionEndEvent": {
+        "ObjectName": "AkAudioEvent'Sstate_Tombstone_off'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/GameSync/Sstate_Tombstone_off.0"
+      },
+      "TravelCheckPointLoopEndEvent": {
+        "ObjectName": "AkAudioEvent'stop_efx_lob_tombstone_loop'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/LevelObject/stop_efx_lob_tombstone_loop.0"
+      },
+      "InteractionStartEvent": {
+        "ObjectName": "AkAudioEvent'ui_interaction_mark_start'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Ui/ui_interaction_mark_start.0"
+      },
+      "InteractionStopEvent": {
+        "ObjectName": "AkAudioEvent'ui_interaction_mark_stop'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Ui/ui_interaction_mark_stop.0"
+      },
+      "InteractionEndEvent": {
+        "ObjectName": "AkAudioEvent'ui_interaction_mark_end'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Ui/ui_interaction_mark_end.0"
+      },
+      "NpcDialogueStartEvent": {
+        "ObjectName": "AkAudioEvent'common_state_dialog_on'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_state_dialog_on.0"
+      },
+      "NpcDialogueEndEvent": {
+        "ObjectName": "AkAudioEvent'common_state_dialog_off'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_state_dialog_off.0"
+      },
+      "CommmonMissionBeginPlayEvent": {
+        "ObjectName": "AkAudioEvent'common_lv_beginplay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_lv_beginplay.0"
+      },
+      "CommonMissionEndPlayEvent": {
+        "ObjectName": "AkAudioEvent'common_lv_endplay'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_lv_endplay.0"
+      },
+      "CommonResetEvent": {
+        "ObjectName": "AkAudioEvent'common_lv_interact_tombstone'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_lv_interact_tombstone.0"
+      },
+      "BeginRealInGameEvent": {
+        "ObjectName": "AkAudioEvent'common_lv_beginplay_realingame'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_lv_beginplay_realingame.0"
+      },
+      "ProjectileSwitchGroupName": "ProjectileSwitch",
+      "ProjectileSwitchStateNameMap": [
+        {
+          "Key": "EProjectileSwitchState::Arrow",
+          "Value": "Arrow"
+        },
+        {
+          "Key": "EProjectileSwitchState::Fire",
+          "Value": "Fire"
+        },
+        {
+          "Key": "EProjectileSwitchState::Large",
+          "Value": "Large"
+        },
+        {
+          "Key": "EProjectileSwitchState::Medium",
+          "Value": "Medium"
+        },
+        {
+          "Key": "EProjectileSwitchState::Small",
+          "Value": "Small"
+        },
+        {
+          "Key": "EProjectileSwitchState::Rock",
+          "Value": "Rock"
+        },
+        {
+          "Key": "EProjectileSwitchState::Snow",
+          "Value": "Snow"
+        },
+        {
+          "Key": "EProjectileSwitchState::Water",
+          "Value": "Water"
+        },
+        {
+          "Key": "EProjectileSwitchState::Electric",
+          "Value": "Electric"
+        },
+        {
+          "Key": "EProjectileSwitchState::Ice",
+          "Value": "Ice"
+        }
+      ],
+      "ProjectileRTPCName": "RTPC_ProjectileSpeed",
+      "ProjectileAudioEvent": {
+        "ObjectName": "AkAudioEvent'Play_Mon_Com_ProejctileSwitch'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/Monster_Common/Monster_Projectile/Play_Mon_Com_ProejctileSwitch.0"
+      },
+      "PlayerStateGroupName": "PlayerState",
+      "PlayerStateNames": [
+        {
+          "Key": "EPlayerStatus::Death",
+          "Value": "Death"
+        },
+        {
+          "Key": "EPlayerStatus::Survival",
+          "Value": "Survival"
+        },
+        {
+          "Key": "EPlayerStatus::Ghost",
+          "Value": "Ghost"
+        },
+        {
+          "Key": "EPlayerStatus::None",
+          "Value": "None"
+        }
+      ],
+      "GhostStateStartAudioEvent": {
+        "ObjectName": "AkAudioEvent'common_pc_ghost_on'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_pc_ghost_on.0"
+      },
+      "GhostStateEndAudioEvent": {
+        "ObjectName": "AkAudioEvent'common_pc_ghost_off'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_pc_ghost_off.0"
+      },
+      "SoultakerStartAudioEvent": {
+        "ObjectName": "AkAudioEvent'bgm_soultaker_start'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Music/Music_Common/bgm_soultaker_start.0"
+      },
+      "SoultakerEndAudioEvent": {
+        "ObjectName": "AkAudioEvent'bgm_soultaker_end_01'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Music/Music_Common/bgm_soultaker_end_01.0"
+      },
+      "SoultakerEndAudioEvent2": {
+        "ObjectName": "AkAudioEvent'bgm_soultaker_end_02'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Music/Music_Common/bgm_soultaker_end_02.0"
+      },
+      "SoultakerEndAudioEvent3": {
+        "ObjectName": "AkAudioEvent'bgm_soultaker_end_03'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Music/Music_Common/bgm_soultaker_end_03.0"
+      },
+      "SoultakerPauseAudioEvent": {
+        "ObjectName": "AkAudioEvent'bgm_soultaker_end_cn'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Music/Music_Common/bgm_soultaker_end_cn.0"
+      },
+      "SoultakerPauseCancelAudioEvent": {
+        "ObjectName": "AkAudioEvent'bgm_soultaker_start_cn'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Music/Music_Common/bgm_soultaker_start_cn.0"
+      },
+      "OzmaMissionTIDX": 1700,
+      "TitleBGMPreEvent": {
+        "AssetPathName": "/Game/_Kazan_/Sound/Music/Music_Common/bgm_title_pre.bgm_title_pre",
+        "SubPathString": ""
+      },
+      "TitleBGMStartEvent": {
+        "AssetPathName": "/Game/_Kazan_/Sound/Music/Music_Common/bgm_title_start.bgm_title_start",
+        "SubPathString": ""
+      },
+      "TitleBGMEndEvent": {
+        "AssetPathName": "/Game/_Kazan_/Sound/Music/Music_Common/bgm_title_end.bgm_title_end",
+        "SubPathString": ""
+      },
+      "VoiceSwitchGroupName": "VoiceSwitch",
+      "CombatIntensityRTPCName": "rtpc_bgm_battleintensity",
+      "BattleBGMEvents": [
+        {
+          "Key": "100",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/HeinMach/bgm_battle_heinmach_pre.bgm_battle_heinmach_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/HeinMach/bgm_battle_heinmach_start.bgm_battle_heinmach_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/HeinMach/bgm_battle_heinmach_end.bgm_battle_heinmach_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/HeinMach/bgm_battle_heinmach_end_enemydeath.bgm_battle_heinmach_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "200",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Stormpass/bgm_battle_stormpass_pre.bgm_battle_stormpass_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Stormpass/bgm_battle_stormpass_start.bgm_battle_stormpass_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Stormpass/bgm_battle_stormpass_end.bgm_battle_stormpass_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Stormpass/bgm_battle_stormpass_end_enemydeath.bgm_battle_stormpass_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "300",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Frrau/bgm_battle_frrau_pre.bgm_battle_frrau_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Frrau/bgm_battle_frrau_start.bgm_battle_frrau_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Frrau/bgm_battle_frrau_end.bgm_battle_frrau_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Frrau/bgm_battle_frrau_end_enemydeath.bgm_battle_frrau_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "301",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Frrau/sub01/bgm_battle_frrau_sub01_pre.bgm_battle_frrau_sub01_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Frrau/sub01/bgm_battle_frrau_sub01_start.bgm_battle_frrau_sub01_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Frrau/sub01/bgm_battle_frrau_sub01_end.bgm_battle_frrau_sub01_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Frrau/sub01/bgm_battle_frrau_sub01_end_enemydeath.bgm_battle_frrau_sub01_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "303",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Frrau/sub03/bgm_battle_frrau_sub03_pre.bgm_battle_frrau_sub03_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Frrau/sub03/bgm_battle_frrau_sub03_start.bgm_battle_frrau_sub03_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Frrau/sub03/bgm_battle_frrau_sub03_end.bgm_battle_frrau_sub03_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Frrau/sub03/bgm_battle_frrau_sub03_end_enemydeath.bgm_battle_frrau_sub03_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "400",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Embars/bgm_battle_embars_pre.bgm_battle_embars_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Embars/bgm_battle_embars_start.bgm_battle_embars_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Embars/bgm_battle_embars_end.bgm_battle_embars_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Embars/bgm_battle_embars_end_enemydeath.bgm_battle_embars_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "401",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Embars/sub01/bgm_battle_embars_sub01_pre.bgm_battle_embars_sub01_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Embars/sub01/bgm_battle_embars_sub01_start.bgm_battle_embars_sub01_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Embars/sub01/bgm_battle_embars_sub01_end.bgm_battle_embars_sub01_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Embars/sub01/bgm_battle_embars_sub01_end_enemydeath.bgm_battle_embars_sub01_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "402",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Embars/sub02/bgm_battle_embars_sub02_pre.bgm_battle_embars_sub02_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Embars/sub02/bgm_battle_embars_sub02_start.bgm_battle_embars_sub02_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Embars/sub02/bgm_battle_embars_sub02_end.bgm_battle_embars_sub02_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Embars/sub02/bgm_battle_embars_sub02_end_enemydeath.bgm_battle_embars_sub02_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "500",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/SkoffaCave/bgm_battle_skoffacave_pre.bgm_battle_skoffacave_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/SkoffaCave/bgm_battle_skoffacave_start.bgm_battle_skoffacave_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/SkoffaCave/bgm_battle_skoffacave_end.bgm_battle_skoffacave_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/SkoffaCave/bgm_battle_skoffacave_end_enemydeath.bgm_battle_skoffacave_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "501",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/SkoffaCave/sub01/bgm_battle_skoffacave_sub01_pre.bgm_battle_skoffacave_sub01_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/SkoffaCave/sub01/bgm_battle_skoffacave_sub01_start.bgm_battle_skoffacave_sub01_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/SkoffaCave/sub01/bgm_battle_skoffacave_sub01_end.bgm_battle_skoffacave_sub01_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/SkoffaCave/sub01/bgm_battle_skoffacave_sub01_end_enemydeath.bgm_battle_skoffacave_sub01_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "600",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Palemion/bgm_battle_palemion_pre.bgm_battle_palemion_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Palemion/bgm_battle_palemion_start.bgm_battle_palemion_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Palemion/bgm_battle_palemion_end.bgm_battle_palemion_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Palemion/bgm_battle_palemion_end_enemydeath.bgm_battle_palemion_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "603",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Palemion/sub03/bgm_battle_palemion_sub03_pre.bgm_battle_palemion_sub03_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Palemion/sub03/bgm_battle_palemion_sub03_start.bgm_battle_palemion_sub03_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Palemion/sub03/bgm_battle_palemion_sub03_end.bgm_battle_palemion_sub03_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Palemion/sub03/bgm_battle_palemion_sub03_end_enemydeath.bgm_battle_palemion_sub03_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "700",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Nadin/bgm_battle_nadin_pre.bgm_battle_nadin_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Nadin/bgm_battle_nadin_start.bgm_battle_nadin_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Nadin/bgm_battle_nadin_end.bgm_battle_nadin_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Nadin/bgm_battle_nadin_end_enemydeath.bgm_battle_nadin_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "701",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Nadin/sub01/bgm_battle_nadin_sub01_pre.bgm_battle_nadin_sub01_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Nadin/sub01/bgm_battle_nadin_sub01_start.bgm_battle_nadin_sub01_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Nadin/sub01/bgm_battle_nadin_sub01_end.bgm_battle_nadin_sub01_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Nadin/sub01/bgm_battle_nadin_sub01_end_enemydeath.bgm_battle_nadin_sub01_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "800",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ElRavaca/bgm_battle_elravaca_pre.bgm_battle_elravaca_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ElRavaca/bgm_battle_elravaca_start.bgm_battle_elravaca_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ElRavaca/bgm_battle_elravaca_end.bgm_battle_elravaca_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ElRavaca/bgm_battle_elravaca_end_enemydeath.bgm_battle_elravaca_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "801",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ElRavaca/sub01/bgm_battle_elravaca_sub01_pre.bgm_battle_elravaca_sub01_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ElRavaca/sub01/bgm_battle_elravaca_sub01_start.bgm_battle_elravaca_sub01_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ElRavaca/sub01/bgm_battle_elravaca_sub01_end.bgm_battle_elravaca_sub01_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ElRavaca/sub01/bgm_battle_elravaca_sub01_end_enemydeath.bgm_battle_elravaca_sub01_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "802",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ElRavaca/sub02/bgm_battle_elravaca_sub02_pre.bgm_battle_elravaca_sub02_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ElRavaca/sub02/bgm_battle_elravaca_sub02_start.bgm_battle_elravaca_sub02_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ElRavaca/sub02/bgm_battle_elravaca_sub02_end.bgm_battle_elravaca_sub02_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ElRavaca/sub02/bgm_battle_elravaca_sub02_end_enemydeath.bgm_battle_elravaca_sub02_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "900",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/LinonMine/bgm_battle_linonmine_pre.bgm_battle_linonmine_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/LinonMine/bgm_battle_linonmine_start.bgm_battle_linonmine_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/LinonMine/bgm_battle_linonmine_end.bgm_battle_linonmine_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/LinonMine/bgm_battle_linonmine_end_enemydeath.bgm_battle_linonmine_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "901",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/LinonMine/sub01/bgm_battle_linonmine_sub01_pre.bgm_battle_linonmine_sub01_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/LinonMine/sub01/bgm_battle_linonmine_sub01_start.bgm_battle_linonmine_sub01_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/LinonMine/sub01/bgm_battle_linonmine_sub01_end.bgm_battle_linonmine_sub01_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/LinonMine/sub01/bgm_battle_linonmine_sub01_end_enemydeath.bgm_battle_linonmine_sub01_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "902",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/LinonMine/sub02/bgm_battle_linonmine_sub02_pre.bgm_battle_linonmine_sub02_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/LinonMine/sub02/bgm_battle_linonmine_sub02_start.bgm_battle_linonmine_sub02_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/LinonMine/sub02/bgm_battle_linonmine_sub02_end.bgm_battle_linonmine_sub02_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/LinonMine/sub02/bgm_battle_linonmine_sub02_end_enemydeath.bgm_battle_linonmine_sub02_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1000",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Aldevir/bgm_battle_aldevir_pre.bgm_battle_aldevir_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Aldevir/bgm_battle_aldevir_start.bgm_battle_aldevir_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Aldevir/bgm_battle_aldevir_end.bgm_battle_aldevir_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Aldevir/bgm_battle_aldevir_end_enemydeath.bgm_battle_aldevir_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1001",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Aldevir/sub01/bgm_battle_aldevir_sub01_pre.bgm_battle_aldevir_sub01_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Aldevir/sub01/bgm_battle_aldevir_sub01_start.bgm_battle_aldevir_sub01_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Aldevir/sub01/bgm_battle_aldevir_sub01_end.bgm_battle_aldevir_sub01_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Aldevir/sub01/bgm_battle_aldevir_sub01_end_enemydeath.bgm_battle_aldevir_sub01_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1002",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Aldevir/sub02/bgm_battle_aldevir_sub02_pre.bgm_battle_aldevir_sub02_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Aldevir/sub02/bgm_battle_aldevir_sub02_start.bgm_battle_aldevir_sub02_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Aldevir/sub02/bgm_battle_aldevir_sub02_end.bgm_battle_aldevir_sub02_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Aldevir/sub02/bgm_battle_aldevir_sub02_end_enemydeath.bgm_battle_aldevir_sub02_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1100",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Repalan/bgm_battle_repalan_pre.bgm_battle_repalan_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Repalan/bgm_battle_repalan_start.bgm_battle_repalan_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Repalan/bgm_battle_repalan_end.bgm_battle_repalan_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Repalan/bgm_battle_repalan_end_enemydeath.bgm_battle_repalan_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1101",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Repalan/sub01/bgm_battle_repalan_sub01_pre.bgm_battle_repalan_sub01_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Repalan/sub01/bgm_battle_repalan_sub01_start.bgm_battle_repalan_sub01_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Repalan/sub01/bgm_battle_repalan_sub01_end.bgm_battle_repalan_sub01_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Repalan/sub01/bgm_battle_repalan_sub01_end_enemydeath.bgm_battle_repalan_sub01_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1200",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Vaisar/bgm_battle_vaisar_pre.bgm_battle_vaisar_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Vaisar/bgm_battle_vaisar_start.bgm_battle_vaisar_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Vaisar/bgm_battle_vaisar_end.bgm_battle_vaisar_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Vaisar/bgm_battle_vaisar_end_enemydeath.bgm_battle_vaisar_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1201",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Vaisar/sub01/bgm_battle_vaisar_sub01_pre.bgm_battle_vaisar_sub01_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Vaisar/sub01/bgm_battle_vaisar_sub01_start.bgm_battle_vaisar_sub01_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Vaisar/sub01/bgm_battle_vaisar_sub01_end.bgm_battle_vaisar_sub01_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Vaisar/sub01/bgm_battle_vaisar_sub01_end_enemydeath.bgm_battle_vaisar_sub01_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1202",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Vaisar/sub02/bgm_battle_vaisar_sub02_pre.bgm_battle_vaisar_sub02_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Vaisar/sub02/bgm_battle_vaisar_sub02_start.bgm_battle_vaisar_sub02_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Vaisar/sub02/bgm_battle_vaisar_sub02_end.bgm_battle_vaisar_sub02_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Vaisar/sub02/bgm_battle_vaisar_sub02_end_enemydeath.bgm_battle_vaisar_sub02_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1300",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Rovelion/bgm_battle_rovelion_pre.bgm_battle_rovelion_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Rovelion/bgm_battle_rovelion_start.bgm_battle_rovelion_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Rovelion/bgm_battle_rovelion_end.bgm_battle_rovelion_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Rovelion/bgm_battle_rovelion_end_enemydeath.bgm_battle_rovelion_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1301",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Rovelion/sub01/bgm_battle_rovelion_sub01_pre.bgm_battle_rovelion_sub01_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Rovelion/sub01/bgm_battle_rovelion_sub01_start.bgm_battle_rovelion_sub01_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Rovelion/sub01/bgm_battle_rovelion_sub01_end.bgm_battle_rovelion_sub01_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Rovelion/sub01/bgm_battle_rovelion_sub01_end_enemydeath.bgm_battle_rovelion_sub01_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1400",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/VitalonCity/bgm_battle_vitaloncity_pre.bgm_battle_vitaloncity_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/VitalonCity/bgm_battle_vitaloncity_start.bgm_battle_vitaloncity_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/VitalonCity/bgm_battle_vitaloncity_end.bgm_battle_vitaloncity_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/VitalonCity/bgm_battle_vitaloncity_end_enemydeath.bgm_battle_vitaloncity_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1401",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/VitalonCity/sub01/bgm_battle_vitaloncity_sub01_pre.bgm_battle_vitaloncity_sub01_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/VitalonCity/sub01/bgm_battle_vitaloncity_sub01_start.bgm_battle_vitaloncity_sub01_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/VitalonCity/sub01/bgm_battle_vitaloncity_sub01_end.bgm_battle_vitaloncity_sub01_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/VitalonCity/sub01/bgm_battle_vitaloncity_sub01_end_enemydeath.bgm_battle_vitaloncity_sub01_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1402",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/VitalonCity/sub02/bgm_battle_vitaloncity_sub02_pre.bgm_battle_vitaloncity_sub02_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/VitalonCity/sub02/bgm_battle_vitaloncity_sub02_start.bgm_battle_vitaloncity_sub02_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/VitalonCity/sub02/bgm_battle_vitaloncity_sub02_end.bgm_battle_vitaloncity_sub02_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/VitalonCity/sub02/bgm_battle_vitaloncity_sub02_end_enemydeath.bgm_battle_vitaloncity_sub02_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1500",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/GreatTemple/bgm_battle_greattemple_pre.bgm_battle_greattemple_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/GreatTemple/bgm_battle_greattemple_start.bgm_battle_greattemple_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/GreatTemple/bgm_battle_greattemple_end.bgm_battle_greattemple_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/GreatTemple/bgm_battle_greattemple_end_enemydeath.bgm_battle_greattemple_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "1600",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ImperialPalace/bgm_battle_imperialpalace_pre.bgm_battle_imperialpalace_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ImperialPalace/bgm_battle_imperialpalace_start.bgm_battle_imperialpalace_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ImperialPalace/bgm_battle_imperialpalace_end.bgm_battle_imperialpalace_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/ImperialPalace/bgm_battle_imperialpalace_end_enemydeath.bgm_battle_imperialpalace_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "2100",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Diary/bgm_battle_diary_pre.bgm_battle_diary_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Diary/bgm_battle_diary_start.bgm_battle_diary_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Diary/bgm_battle_diary_end.bgm_battle_diary_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Diary/bgm_battle_diary_end_enemydeath.bgm_battle_diary_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "2200",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Lama/bgm_battle_lama_pre.bgm_battle_lama_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Lama/bgm_battle_lama_start.bgm_battle_lama_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Lama/bgm_battle_lama_end.bgm_battle_lama_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Lama/bgm_battle_lama_end_enemydeath.bgm_battle_lama_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        },
+        {
+          "Key": "2400",
+          "Value": {
+            "PreEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Gladius/bgm_battle_gladius_pre.bgm_battle_gladius_pre",
+              "SubPathString": ""
+            },
+            "StartEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Gladius/bgm_battle_gladius_start.bgm_battle_gladius_start",
+              "SubPathString": ""
+            },
+            "EndEvent": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Gladius/bgm_battle_gladius_end.bgm_battle_gladius_end",
+              "SubPathString": ""
+            },
+            "EndEventWithEnemyDeath": {
+              "AssetPathName": "/Game/_Kazan_/Sound/Music/Gladius/bgm_battle_gladius_end_enemydeath.bgm_battle_gladius_end_enemydeath",
+              "SubPathString": ""
+            }
+          }
+        }
+      ],
+      "BattleEndEventDelay": 1.0,
+      "OnKazanDie": {
+        "ObjectName": "AkAudioEvent'common_pc_death_start'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_pc_death_start.0"
+      },
+      "OnKazanGhost": {
+        "ObjectName": "AkAudioEvent'common_pc_death_ready'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_pc_death_ready.0"
+      },
+      "OnKazanDieAfterGhost": {
+        "ObjectName": "AkAudioEvent'common_pc_death_ready_timeover'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_pc_death_ready_timeover.0"
+      },
+      "OnKazanReviveTombstone": {
+        "ObjectName": "AkAudioEvent'common_pc_death_end'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_pc_death_end.0"
+      },
+      "OnKazanReviveInPlace": {
+        "ObjectName": "AkAudioEvent'common_pc_death_ready_revive'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Common/common_pc_death_ready_revive.0"
+      },
+      "OnKazanFallToDeath": {
+        "ObjectName": "AkAudioEvent'efx_kz_die_fall'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/PlayerLocomotion/efx_kz_die_fall.0"
+      },
+      "OnEnterFoliage": {
+        "ObjectName": "AkAudioEvent'Play_Foliage_SpeedSwitch'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/PlayerLocomotion/Play_Foliage_SpeedSwitch.0"
+      },
+      "OnLeaveFoliage": {
+        "ObjectName": "AkAudioEvent'Stop_Foliage_SpeedSwitch'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/PlayerLocomotion/Stop_Foliage_SpeedSwitch.0"
+      },
+      "OnEnterFoliageMonster": {
+        "ObjectName": "AkAudioEvent'Play_Mon_Foliage_SpeedSwitch'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/Monster_Common/Monster_Locomotion/Play_Mon_Foliage_SpeedSwitch.0"
+      },
+      "OnLeaveFoliageMonster": {
+        "ObjectName": "AkAudioEvent'Stop_Mon_Foliage_SpeedSwitch'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Monster/Monster_Common/Monster_Locomotion/Stop_Mon_Foliage_SpeedSwitch.0"
+      },
+      "SpeedInFoliageRTPCName": "RTPC_SpeedInFoliage",
+      "SpeedInFoliageRTPCInterpolationTime": 50,
+      "SpeedInFoliageRTPCUpdateDistance": 4500.0,
+      "TargetFoleySoundInfo": {
+        "ObjectName": "xxProceduralFoleySoundInfo'Kazan_hand'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/DataAsset/Kazan_hand.1"
+      },
+      "LandingHeightRTPCName": "rtpc_height_vel",
+      "EquipmentRTPCName": "rtpc_equipment_weight",
+      "EquipmentHairValue": 1.0,
+      "EquipmentTorsoValue": 2.5,
+      "EquipmentArmValue": 0.2,
+      "EquipmentLegValue": 1.0,
+      "EquipmentShoesValue": 0.5,
+      "EquipmentLeatherValue": 1.0,
+      "EquipmentLigthValue": 10.0,
+      "EquipmentHeavyValue": 100.0,
+      "EquipmentPlateValue": 1000.0,
+      "LaserSoundBoxInterval": 0.1,
+      "OptimizerInterval": 0.2,
+      "OptimizedComponentsIntervalByDist": [
+        {
+          "Key": "5000",
+          "Value": 1.0
+        },
+        {
+          "Key": "2000",
+          "Value": 0.3
+        }
+      ],
+      "BossChallengeStartLobbyBGM": {
+        "AssetPathName": "/Game/_Kazan_/Sound/Music/BossChallenge/bgm_bosschallenge_common_start_lobby.bgm_bosschallenge_common_start_lobby",
+        "SubPathString": ""
+      },
+      "BossChallengeEndLobby1BGM": {
+        "AssetPathName": "/Game/_Kazan_/Sound/Music/BossChallenge/bgm_bosschallenge_common_end_lobby_01.bgm_bosschallenge_common_end_lobby_01",
+        "SubPathString": ""
+      },
+      "BossChallengeEndLobby2BGM": {
+        "AssetPathName": "/Game/_Kazan_/Sound/Music/BossChallenge/bgm_bosschallenge_common_end_lobby_02.bgm_bosschallenge_common_end_lobby_02",
+        "SubPathString": ""
+      },
+      "BossChallengeStartTitleBGM": {
+        "AssetPathName": "/Game/_Kazan_/Sound/Music/BossChallenge/bgm_bosschallenge_common_start_title.bgm_bosschallenge_common_start_title",
+        "SubPathString": ""
+      },
+      "BossChallengeEndTitleBGM": {
+        "AssetPathName": "/Game/_Kazan_/Sound/Music/BossChallenge/bgm_bosschallenge_common_end_title.bgm_bosschallenge_common_end_title",
+        "SubPathString": ""
+      }
+    }
+  }
+]

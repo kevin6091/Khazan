@@ -1,0 +1,47 @@
+{
+  "time_kst": "2026-10-14T03:28:12+09:00",
+  "project": "C:/Users/user/Desktop/GitProject/Khazan/Khazan",
+  "status": "reviewed_ready_work_applied_to_main",
+  "scope": "Completed Main delivery receipts and the one explicit prepared-but-unapplied PlayerImpactSFX asset",
+  "applied": {
+    "asset": "Content/Data/ComboCommand/DA_Player_Combo_Definition.uasset",
+    "before_sha256": "0dbdfd3f8b97ca0aba6a6f530d0ea9e26fbcddd238fb99164b09280a3e6493df",
+    "after_sha256": "6835a1677640ece0f64fa5dd4f5704fb1bd4c25fb2e53489b580158268edcad7",
+    "backup": "Metadata/PlayerImpactSFX_20261013/MainApply_20261014/Before/Content/Data/ComboCommand/DA_Player_Combo_Definition.uasset",
+    "source": "Source/Khazan/Ability/Combo/KZComboActionAbility.cpp",
+    "source_sha256": "56ae33bf62ab5543f21f29780c40bffc30fe899550b289df634581112930f390",
+    "source_change": "Removed the exact-cue temporary suppression after the 60 saved Player attack-window ImpactSound references were cleared."
+  },
+  "verification": {
+    "stock_main_build": "Succeeded",
+    "current_main_module": "Binaries/Win64/UnrealEditor-Khazan.dll",
+    "current_main_module_sha256": "7a5de7372e68576d9af325bede9087868c25244f5b5fb842b97c029ec1bb3b50",
+    "module_note": "Another active Main camera task rebuilt the standard module after this task's successful stock build; the later stock build also succeeded. Fresh NormalDeath PIE loaded the current standard module path.",
+    "saved_readback": "Metadata/PlayerImpactSFX_20261013/MainApply_20261014/Readback/MainReadback.json",
+    "saved_readback_result": "26 nodes, 60 windows, Main common cue 0, baseline common cue 60, non-audio nodes equal, package saves 0",
+    "actual_audio_pie": "Metadata/PlayerImpactSFX_20261013/MainApply_20261014/AudioRegression/Regression.json",
+    "actual_audio_result": "Khazan.Combat.PlayerAttackCollision.PIE passed; body hit observed; common cue absent; PCM peak 0.26409912109375; clipped samples 0",
+    "lethal_brutal_pie": "Metadata/PlayerImpactSFX_20261013/MainApply_20261014/BrutalDeath/PIEDriver.json",
+    "lethal_brutal_result": "Khazan.CombatPresentation.PIE passed, 12 paired cases",
+    "ordinary_death_pie": "Metadata/PlayerImpactSFX_20261013/MainApply_20261014/NormalDeath/PIEDriver.json",
+    "ordinary_death_result": "Khazan.CombatFinish.DeathPose.PIE passed, 12 normal/interrupted cases"
+  },
+  "other_completed_main_receipts_reviewed": [
+    "Metadata/GiantVFX_20261013/FinalVerification.json",
+    "Metadata/WeakAttack01Slash_20261013/FinalVerification.json",
+    "Metadata/GiantHitOverlay_20261013/FinalVerification.json",
+    "Metadata/GiantReaction_20261014/FinalVerificationTuning.json",
+    "Metadata/GiantGrabs_20261013/FinalVerification.json",
+    "Metadata/GiantSFX_20261013/FinalVerification.json",
+    "Metadata/HumanoidSFX_20261013/FinalVerification.json",
+    "Metadata/MonsterSecondaryPhysics_20261013/FinalVerification.json",
+    "Metadata/SceneLook_20261012/FinalVerification.json",
+    "Metadata/ParryVFXRebuild_20261013/FinalVerification.json",
+    "Metadata/UIQuality_20261014/ImprovedPIE01"
+  ],
+  "ready_unapplied_changes_remaining_in_reviewed_receipts": 0,
+  "concurrent_main_work_excluded_from_completion_claim": [
+    "Metadata/GiantGrabWarning_20261014",
+    "Metadata/GiantCamera_20261014"
+  ]
+}

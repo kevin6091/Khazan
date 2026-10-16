@@ -1,0 +1,223 @@
+{
+  "schema": "Khazan.MonsterStamina.MotionMerge.v1",
+  "date": "2026-10-08",
+  "status": "AppliedInWorkOnly_BuildAndPIEPending",
+  "work": "C:/Users/user/Desktop/GitProject/Khazan_MonsterWork_20261006/Khazan",
+  "candidate": "Metadata/MonsterStamina_20261008/WorkBefore",
+  "candidate_proof": "Metadata/MonsterMotion_20261008/VerifiedDeliveryProof.json",
+  "scope": {
+    "runtime_source_files": 6,
+    "test_source_files": 1,
+    "runtime_added_lines": 95,
+    "test_added_lines": 312,
+    "removed_code_lines": 0,
+    "main_source_writes": 0,
+    "asset_writes": 0,
+    "builds": 0,
+    "editor_operations": 0
+  },
+  "additions": [
+    "AIController bounded GetDesiredRotation override and required includes",
+    "Editable FKZMonsterAISettings tracking/preparation fields",
+    "Monster CMC bAllowPhysicsRotationDuringAnimRootMotion=true",
+    "ComboAction const IsApproachingComboTransition query",
+    "Exact candidate FMonsterFacingPIE class and its automation registration; existing fixture retained"
+  ],
+  "numeric_provenance": {
+    "source_document": "Docs/Engineering/MONSTER_FACING_SMOOTHING_20261008.md",
+    "AttackTrackingYawRate": {
+      "value": 60,
+      "unit": "deg/s",
+      "kind": "assistant temporary tuning; original AI rotation value unconfirmed"
+    },
+    "ComboReaimYawRate": {
+      "value": 180,
+      "unit": "deg/s",
+      "kind": "assistant temporary tuning; original AI rotation value unconfirmed"
+    },
+    "AttackPreparationSeconds": {
+      "value": 0.15,
+      "unit": "s",
+      "kind": "assistant temporary tuning; original AI rotation value unconfirmed"
+    }
+  },
+  "preservation": {
+    "method": "Remove only the exact inserted hunks in memory, normalize CRLF to LF, SHA256-compare the entire resulting file with the pre-merge normalized source",
+    "all_seven_file_checks_passed": true,
+    "main_seven_file_hashes_unchanged": true,
+    "stamina_collision_user_jump_down_and_existing_test_bodies_preserved": true,
+    "no_old_whole_source_or_BlendSpace_restoration": true,
+    "newline_note": "apply_patch retained existing mixed newlines except some touched context lines; CRLF counts before/after are reported per file. Preservation claim is normalized full-text identity, not byte identity."
+  },
+  "files": [
+    {
+      "file": "Source/Khazan/AI/KZMonsterAIController.cpp",
+      "before_sha256": "381b427586f74903aeb391673bf08ed17cb8315760d4303373785de0520b6efe",
+      "after_sha256": "831629218833bf9d15422b62223c274d81bec5da19efda17896c71c77d104d73",
+      "candidate_sha256": "83e6008940188234a718b0bedf227db9e29aa7d3554f2d1448f1a95d9bb84fb3",
+      "added_lines": 48,
+      "removed_code_lines": 0,
+      "non_motion_code_preserved_normalized": true,
+      "restored_normalized_sha256": "381b427586f74903aeb391673bf08ed17cb8315760d4303373785de0520b6efe",
+      "inserted_hunk_sha256": [
+        "67e5683e1991aa6a091b2c67d511241e5414cb0de35a55e3a1d918d159c6467c",
+        "0985d802053298f2f93512428b90ab9b14b7a54bc8befdfa9ba4d5d090ca4ebf",
+        "646b6083bf0e34cf38446ddfe33e829a8853b0fa69a2a50d3fee67ef31ee294c",
+        "47e26425036b5a84533ee22ad74c464853dc09588756eed543920c0b2cbe3047",
+        "1ef0fdde8c60dbe3ba306ed7c48263b7dd91d4448f234e602dd5f76674f85d42",
+        "dfcb73d625b8d94ae83dc317b1ee878290db4a026ac29650f054bb679f37d549",
+        "c7c6a6eb3e9eb67c175c841e9d2836d72dea93c8c107f3e88dfdc861177b4dbf",
+        "7ff9c8ea827f32d754c7c9279fb50aeda96e538701daa8779dc740ede47b6f2a"
+      ],
+      "before_crlf_lines": 0,
+      "after_crlf_lines": 0,
+      "main_current_sha256": "50092b16f322b1c2c97faf461264df50bcf4cf2a5fd2de5c595f02965665888a",
+      "main_unchanged_since_merge": true
+    },
+    {
+      "file": "Source/Khazan/AI/KZMonsterAIController.h",
+      "before_sha256": "56fcf8a59f5affa06d4a93e386b13513e79f7644a4804edda9eac49569c2b61e",
+      "after_sha256": "ea91575713a0d110c7f43d69eab9a8bbf520b743044694ad983937bd3d4910c4",
+      "candidate_sha256": "ea91575713a0d110c7f43d69eab9a8bbf520b743044694ad983937bd3d4910c4",
+      "added_lines": 1,
+      "removed_code_lines": 0,
+      "non_motion_code_preserved_normalized": true,
+      "restored_normalized_sha256": "56fcf8a59f5affa06d4a93e386b13513e79f7644a4804edda9eac49569c2b61e",
+      "inserted_hunk_sha256": [
+        "15722ad9fb744fd7b6098ff1ea9efcebb8ec547629a02281522a4dd59b9e49e4"
+      ],
+      "before_crlf_lines": 0,
+      "after_crlf_lines": 0,
+      "main_current_sha256": "56fcf8a59f5affa06d4a93e386b13513e79f7644a4804edda9eac49569c2b61e",
+      "main_unchanged_since_merge": true
+    },
+    {
+      "file": "Source/Khazan/Character/KZMonster.h",
+      "before_sha256": "99bda08a3d7d2f5c2b21f6d95dc003cb4e4c8829b7aecdeef3b1db4547ddf14c",
+      "after_sha256": "6fd59a6fcc3025018550ad89892d65df2aec572ffa382009fa81f42384332051",
+      "candidate_sha256": "7983af0df98c42c6632d0505c109113813c2f218cb03000fab7af0efe3e55fd6",
+      "added_lines": 7,
+      "removed_code_lines": 0,
+      "non_motion_code_preserved_normalized": true,
+      "restored_normalized_sha256": "a18175ccd18b5de531fcb9d6a6ab382347b2d09fdb8fa431a58eaf6c39f9477b",
+      "inserted_hunk_sha256": [
+        "e2b06c986a153fc41fc620fd2f5b4a8e7d120e28d8633ec89cf65b6656851b03"
+      ],
+      "before_crlf_lines": 27,
+      "after_crlf_lines": 27,
+      "main_current_sha256": "ea9a50fa6f3bf9972ac3bc7f87983942ca4b9dd4b332ec773d26017e8be92393",
+      "main_unchanged_since_merge": true
+    },
+    {
+      "file": "Source/Khazan/Character/KZMonster.cpp",
+      "before_sha256": "b8ecad78b75acc6d98b24a4002faa8aea238d6f19ab6345391557039fb55aa1a",
+      "after_sha256": "a61eb331d9191218ac80f6a06d865175ddae9000569e13542d3a8fc1fb9bf446",
+      "candidate_sha256": "dd628aba1f267f1f1ab0dc829ee6b5aed62fc7a1f1251ec2f410322255517ce3",
+      "added_lines": 2,
+      "removed_code_lines": 0,
+      "non_motion_code_preserved_normalized": true,
+      "restored_normalized_sha256": "9e487101cc38fe0652effca148f2028d870387fe66f08f414579b7634dc06f2c",
+      "inserted_hunk_sha256": [
+        "da19779a203a1224e916850553e90b61e238b90bdc4543f712aec113ebafb31c"
+      ],
+      "before_crlf_lines": 13,
+      "after_crlf_lines": 10,
+      "main_current_sha256": "fe607d463085b5fe9e003f22434b84def72070a80baef43e9d2ea756709a3984",
+      "main_unchanged_since_merge": true
+    },
+    {
+      "file": "Source/Khazan/Ability/Combo/KZComboActionAbility.h",
+      "before_sha256": "c40c7c4dff1467f8880fc35eecde49b83e4adb4041c88a60b1b96668788bbec7",
+      "after_sha256": "2fbd9cb19735f4d55cbafe99526b975c380f419059b7521d9f19c50572dab46c",
+      "candidate_sha256": "27b22598940cd0f5a36214f88f684abfc119e4977413ddc37f740d03138e90f0",
+      "added_lines": 2,
+      "removed_code_lines": 0,
+      "non_motion_code_preserved_normalized": true,
+      "restored_normalized_sha256": "6100945aff524c0d5ba20fb033aa9c330f9d68e8dec2df99f6f1c41a49d1d6b4",
+      "inserted_hunk_sha256": [
+        "7449f0310f6ade2b0b89fb8292b4a42d9f7a004aad4e15c85aa6ad6bb8a2a58c"
+      ],
+      "before_crlf_lines": 184,
+      "after_crlf_lines": 181,
+      "main_current_sha256": "c40c7c4dff1467f8880fc35eecde49b83e4adb4041c88a60b1b96668788bbec7",
+      "main_unchanged_since_merge": true
+    },
+    {
+      "file": "Source/Khazan/Ability/Combo/KZComboActionAbility.cpp",
+      "before_sha256": "7d29d7a4b790422557805958e81331cccb554bb769c7e3c30c74dec68c119782",
+      "after_sha256": "20304b9965f1a9969c4f64df9892fe4a85417356e6ad4bd9889bbd385b88cf58",
+      "candidate_sha256": "92fe7841895dc844c400d36d4c0563384cff30480b3f6568d7ef83aa52d071ef",
+      "added_lines": 35,
+      "removed_code_lines": 0,
+      "non_motion_code_preserved_normalized": true,
+      "restored_normalized_sha256": "e68e93837a7ee9513e9c926f40fbe04bff1f2d4060f8792ac234ee07b977841b",
+      "inserted_hunk_sha256": [
+        "a66a18b466e3aadc2e80f2200828bddf97137be5f2cf1ff9c67c7d500298f5e5"
+      ],
+      "before_crlf_lines": 862,
+      "after_crlf_lines": 856,
+      "main_current_sha256": "7d29d7a4b790422557805958e81331cccb554bb769c7e3c30c74dec68c119782",
+      "main_unchanged_since_merge": true
+    },
+    {
+      "file": "Source/Khazan/Tests/KZMonsterAIPIETest.cpp",
+      "before_sha256": "1b9d043270555959907a2da2d6c0a8a2c87b9ddbf73eea0e0c7e8767dbf1d53a",
+      "after_sha256": "1fb353080ffecbd1a686734a952b278ec51f693e8b58a21dc9c0e13d43cea60d",
+      "candidate_sha256": "7454a7134a22a22ebb74619f1d63ec83f3700c7b1d25c95b0bfd0d823c5ec21a",
+      "added_lines": 312,
+      "removed_code_lines": 0,
+      "non_motion_code_preserved_normalized": true,
+      "restored_normalized_sha256": "1b9d043270555959907a2da2d6c0a8a2c87b9ddbf73eea0e0c7e8767dbf1d53a",
+      "inserted_hunk_sha256": [
+        "630c9ee12a7053747e2db140024dc4b3717626036a8f2fa8fd73caf94f48e475",
+        "89ce2a96f1eab48e6fdd6b4397eabc9846f34b100f52e89171cadd518f6a21fb"
+      ],
+      "before_crlf_lines": 0,
+      "after_crlf_lines": 0,
+      "main_current_sha256": "1b9d043270555959907a2da2d6c0a8a2c87b9ddbf73eea0e0c7e8767dbf1d53a",
+      "main_unchanged_since_merge": true
+    }
+  ],
+  "validation": {
+    "static_readback": "All seven reverse-insertion preservation checks passed",
+    "build": "Not run by this author",
+    "PIE": "Not run by this author",
+    "prior_pass_reuse": "Previous Motion candidate passes are separate evidence, not verification of the new Stamina+collision+Motion module"
+  },
+  "next": "Root owns BlendSpace field-only audit/tuning, cold build and meaningful Facing plus Stamina regression; no delivery has been performed by this author.",
+  "pause_ownership_fix": {
+    "requested_by_parent": true,
+    "policy": "Only resume a StateTree pause acquired by this combat reaction; an already paused foreign tree is not claimed. ReleaseMonsterLogic resets ownership. Incapacitation remains derived from live ASC/resources.",
+    "fields": [
+      {
+        "name": "bPausedForCombatReaction",
+        "initial": false,
+        "kind": "internal pause request ownership; not gameplay-state snapshot"
+      }
+    ],
+    "files": [
+      {
+        "file": "Source/Khazan/AI/KZMonsterAIController.h",
+        "before_sha256": "ea91575713a0d110c7f43d69eab9a8bbf520b743044694ad983937bd3d4910c4",
+        "after_sha256": "cb2d4818fbb084ad459aba37077db4f729f38184fdd6c5fe2b4f13089184edb4",
+        "only_authorized_pause_ownership_delta": true
+      },
+      {
+        "file": "Source/Khazan/AI/KZMonsterAIController.cpp",
+        "before_sha256": "831629218833bf9d15422b62223c274d81bec5da19efda17896c71c77d104d73",
+        "after_sha256": "5b20450d449cc254a8050d1d86cc591e221f61ac7536d9863f2451a25c8143a4",
+        "only_authorized_pause_ownership_delta": true
+      }
+    ],
+    "verification": "Reverse only these three CPP edits and the header field/comment; each entire restored file SHA256 equals its pure Motion-merge after SHA. Motion GetDesiredRotation and all prior Stamina/cleanup code remain unchanged."
+  },
+  "final_work_source_sha256": {
+    "Source/Khazan/AI/KZMonsterAIController.cpp": "5b20450d449cc254a8050d1d86cc591e221f61ac7536d9863f2451a25c8143a4",
+    "Source/Khazan/AI/KZMonsterAIController.h": "cb2d4818fbb084ad459aba37077db4f729f38184fdd6c5fe2b4f13089184edb4",
+    "Source/Khazan/Character/KZMonster.h": "6fd59a6fcc3025018550ad89892d65df2aec572ffa382009fa81f42384332051",
+    "Source/Khazan/Character/KZMonster.cpp": "a61eb331d9191218ac80f6a06d865175ddae9000569e13542d3a8fc1fb9bf446",
+    "Source/Khazan/Ability/Combo/KZComboActionAbility.h": "2fbd9cb19735f4d55cbafe99526b975c380f419059b7521d9f19c50572dab46c",
+    "Source/Khazan/Ability/Combo/KZComboActionAbility.cpp": "20304b9965f1a9969c4f64df9892fe4a85417356e6ad4bd9889bbd385b88cf58",
+    "Source/Khazan/Tests/KZMonsterAIPIETest.cpp": "1fb353080ffecbd1a686734a952b278ec51f693e8b58a21dc9c0e13d43cea60d"
+  }
+}

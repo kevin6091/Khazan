@@ -1,0 +1,360 @@
+{
+    "schema_version":  1,
+    "generated_utc":  "2026-10-08T02:06:23.2960237Z",
+    "test":  "Khazan.Monster.FacingPIE",
+    "native_result":  "Success",
+    "evidence":  {
+                     "csv":  {
+                                 "columns":  [
+                                                 "family",
+                                                 "attack",
+                                                 "time",
+                                                 "dt",
+                                                 "node_before",
+                                                 "node_after",
+                                                 "node_changed",
+                                                 "section",
+                                                 "montage_position",
+                                                 "target_x",
+                                                 "target_y",
+                                                 "target_z",
+                                                 "target_yaw",
+                                                 "control_yaw_before",
+                                                 "control_yaw_after",
+                                                 "desired_yaw_before",
+                                                 "desired_yaw_after",
+                                                 "body_before",
+                                                 "body_after",
+                                                 "root_yaw",
+                                                 "steering_yaw",
+                                                 "error_before",
+                                                 "error_after",
+                                                 "approaching",
+                                                 "next_node_preparation",
+                                                 "root_samples",
+                                                 "cmc_yaw_rate",
+                                                 "physics_phase_valid",
+                                                 "physics_approaching",
+                                                 "physics_preparation",
+                                                 "physics_node",
+                                                 "physics_section",
+                                                 "physics_position",
+                                                 "physics_effective_rate"
+                                             ],
+                                 "path":  "Metadata/MonsterMotion_20261008/Facing_Final.csv",
+                                 "sha256":  "ac24404caa25ed495e84bd29ae38322725b36fcaf465f8a8f546092ab9dd44e6",
+                                 "work_copy_sha_matches":  true,
+                                 "rows":  5542
+                             },
+                     "test_source":  {
+                                         "sha256":  "9d50bafeb2673500361b89d9ec71747772ac632100732b54322dc549466ef98a",
+                                         "matches_final_compiled_source_snapshot":  true,
+                                         "work_path":  "C:\\Users\\user\\Desktop\\GitProject\\Khazan_MonsterWork_20261006\\Khazan\\Source\\Khazan\\Tests\\KZMonsterAIPIETest.cpp"
+                                     },
+                     "log":  {
+                                 "sha256":  "4cef4809569e52a69e72fb77eb986b1b4a1f4a280d2e0d52f2c1e25f94e8e26a",
+                                 "completed_line":  3922,
+                                 "completed_text":  "[2026.10.08-01.54.58:822][245]LogAutomationController: Display: Test Completed. Result={Success} Name={FacingPIE} Path={Khazan.Monster.FacingPIE}",
+                                 "started_text":  "[2026.10.08-01.52.09:655][505]LogAutomationController: Display: Test Started. Name={FacingPIE} Path={Khazan.Monster.FacingPIE}",
+                                 "path":  "Metadata/MonsterMotion_20261008/Facing_Final.log",
+                                 "started_line":  2192
+                             }
+                 },
+    "reference_configuration":  {
+                                    "source":  "Source/Khazan/Character/KZMonster.h: FKZMonsterAISettings fields AttackTrackingYawRate, ComboReaimYawRate, AttackPreparationSeconds",
+                                    "note":  "Offline bounds use these compiled source defaults. The native test separately reads the actual reflected monster settings, but does not print their numeric values into CSV.",
+                                    "runtime_values_in_csv":  false,
+                                    "preparation_seconds":  0.15,
+                                    "matches_final_compiled_source_snapshot":  true,
+                                    "source_sha256":  "7983af0df98c42c6632d0505c109113813c2f218cb03000fab7af0efe3e55fd6",
+                                    "tracking_deg_s":  60,
+                                    "status":  "Assistant temporary tuning; original-game AI values are unverified",
+                                    "reaim_deg_s":  180
+                                },
+    "measurement":  {
+                        "active_row_rule":  "node_after != None, the CSV expression records the ComboAction instance only while IsActive()",
+                        "desired_yaw_columns":  "Read-only GetDesiredRotation queries before/after world ticks; desired_yaw_after is not the exact desired input sampled by PhysicsRotation",
+                        "steering_formula":  "NormalizeAxis(Yaw(inverse(accumulated world root quaternion) * post capsule quaternion) - pre capsule yaw)",
+                        "csv_numeric_precision":  "Six decimals for dt/yaw; original live native comparisons use the unrounded values",
+                        "tolerance_deg":  0.25,
+                        "phase_point":  "Existing ProcessRootMotionPostConvertToWorld observer, after TickCharacterPose/montage notifies and before PhysicsRotation",
+                        "tolerance_origin":  "Exact C++ FMonsterFacingPIE::AngleTolerance, measurement tolerance rather than gameplay tuning",
+                        "normal_row_rule":  "attack index equals the family completed attack count",
+                        "body_delta_formula":  "NormalizeAxis(body_after - body_before), which includes both steering and authored root rotation"
+                    },
+    "coverage":  {
+                     "families":  4,
+                     "native_all_authored_node_assertions_passed":  true,
+                     "authored_nodes_observed":  55,
+                     "all_35_contiguous_indices":  true,
+                     "normal_end_rows":  10,
+                     "active_attack_rows":  5497,
+                     "attack_rows":  5532,
+                     "families_detail":  [
+                                             {
+                                                 "family":  "BP_Monster_Swordsman_C",
+                                                 "rows":  1051,
+                                                 "attack_rows":  1050,
+                                                 "normal_end_rows":  1,
+                                                 "attack_count":  5,
+                                                 "attack_indices":  [
+                                                                        0,
+                                                                        1,
+                                                                        2,
+                                                                        3,
+                                                                        4
+                                                                    ],
+                                                 "authored_nodes_observed":  7,
+                                                 "nodes_per_pattern":  [
+                                                                           2,
+                                                                           1,
+                                                                           2,
+                                                                           1,
+                                                                           1
+                                                                       ],
+                                                 "native_flags":  {
+                                                                      "family":  "BP_Monster_Swordsman_C",
+                                                                      "attacks":  5,
+                                                                      "wrap":  true,
+                                                                      "slow":  true,
+                                                                      "fast":  true,
+                                                                      "normal":  true
+                                                                  },
+                                                 "normal_end":  {
+                                                                    "all_rows_obey_cmc_rate":  true,
+                                                                    "min_error_after_deg":  0,
+                                                                    "root_callbacks":  0
+                                                                },
+                                                 "cmc_yaw_rates_deg_s":  [
+                                                                             540
+                                                                         ]
+                                             },
+                                             {
+                                                 "family":  "BP_Monster_SwordShield_C",
+                                                 "rows":  244,
+                                                 "attack_rows":  241,
+                                                 "normal_end_rows":  3,
+                                                 "attack_count":  3,
+                                                 "attack_indices":  [
+                                                                        0,
+                                                                        1,
+                                                                        2
+                                                                    ],
+                                                 "authored_nodes_observed":  4,
+                                                 "nodes_per_pattern":  [
+                                                                           2,
+                                                                           1,
+                                                                           1
+                                                                       ],
+                                                 "native_flags":  {
+                                                                      "family":  "BP_Monster_SwordShield_C",
+                                                                      "attacks":  3,
+                                                                      "wrap":  true,
+                                                                      "slow":  true,
+                                                                      "fast":  true,
+                                                                      "normal":  true
+                                                                  },
+                                                 "normal_end":  {
+                                                                    "all_rows_obey_cmc_rate":  true,
+                                                                    "min_error_after_deg":  0,
+                                                                    "root_callbacks":  0
+                                                                },
+                                                 "cmc_yaw_rates_deg_s":  [
+                                                                             540
+                                                                         ]
+                                             },
+                                             {
+                                                 "family":  "BP_Monster_HeavySwordsman_C",
+                                                 "rows":  902,
+                                                 "attack_rows":  899,
+                                                 "normal_end_rows":  3,
+                                                 "attack_count":  7,
+                                                 "attack_indices":  [
+                                                                        0,
+                                                                        1,
+                                                                        2,
+                                                                        3,
+                                                                        4,
+                                                                        5,
+                                                                        6
+                                                                    ],
+                                                 "authored_nodes_observed":  15,
+                                                 "nodes_per_pattern":  [
+                                                                           4,
+                                                                           2,
+                                                                           3,
+                                                                           1,
+                                                                           3,
+                                                                           1,
+                                                                           1
+                                                                       ],
+                                                 "native_flags":  {
+                                                                      "family":  "BP_Monster_HeavySwordsman_C",
+                                                                      "attacks":  7,
+                                                                      "wrap":  true,
+                                                                      "slow":  true,
+                                                                      "fast":  true,
+                                                                      "normal":  true
+                                                                  },
+                                                 "normal_end":  {
+                                                                    "all_rows_obey_cmc_rate":  true,
+                                                                    "min_error_after_deg":  0,
+                                                                    "root_callbacks":  0
+                                                                },
+                                                 "cmc_yaw_rates_deg_s":  [
+                                                                             540
+                                                                         ]
+                                             },
+                                             {
+                                                 "family":  "BP_Monster_HalberdElite_C",
+                                                 "rows":  3345,
+                                                 "attack_rows":  3342,
+                                                 "normal_end_rows":  3,
+                                                 "attack_count":  20,
+                                                 "attack_indices":  [
+                                                                        0,
+                                                                        1,
+                                                                        2,
+                                                                        3,
+                                                                        4,
+                                                                        5,
+                                                                        6,
+                                                                        7,
+                                                                        8,
+                                                                        9,
+                                                                        10,
+                                                                        11,
+                                                                        12,
+                                                                        13,
+                                                                        14,
+                                                                        15,
+                                                                        16,
+                                                                        17,
+                                                                        18,
+                                                                        19
+                                                                    ],
+                                                 "authored_nodes_observed":  29,
+                                                 "nodes_per_pattern":  [
+                                                                           3,
+                                                                           2,
+                                                                           1,
+                                                                           3,
+                                                                           2,
+                                                                           2,
+                                                                           2,
+                                                                           1,
+                                                                           2,
+                                                                           1,
+                                                                           1,
+                                                                           1,
+                                                                           1,
+                                                                           1,
+                                                                           1,
+                                                                           1,
+                                                                           1,
+                                                                           1,
+                                                                           1,
+                                                                           1
+                                                                       ],
+                                                 "native_flags":  {
+                                                                      "family":  "BP_Monster_HalberdElite_C",
+                                                                      "attacks":  20,
+                                                                      "wrap":  true,
+                                                                      "slow":  true,
+                                                                      "fast":  true,
+                                                                      "normal":  true
+                                                                  },
+                                                 "normal_end":  {
+                                                                    "all_rows_obey_cmc_rate":  true,
+                                                                    "min_error_after_deg":  0,
+                                                                    "root_callbacks":  0
+                                                                },
+                                                 "cmc_yaw_rates_deg_s":  [
+                                                                             540
+                                                                         ]
+                                             }
+                                         ],
+                     "patterns":  35
+                 },
+    "rate_checks":  {
+                        "phase_unknown_policy":  "Maximum/no-snap bound remains checked; the slower-rate classification is intentionally skipped",
+                        "those_rows_correctly_classified_as_physics_fast":  19,
+                        "pre_only_would_fail_rows":  19,
+                        "phase_unknown_active_rows":  257,
+                        "ordinary_attack":  {
+                                                "valid_post_pose_slow_rows":  4878,
+                                                "formula":  "abs(steering_yaw) \u003c= tracking*dt + 0.25",
+                                                "violations_even_without_native_error_before_gate":  0,
+                                                "native_eligible_rows":  4657
+                                            },
+                        "active_maximum":  {
+                                               "formula":  "abs(steering_yaw) \u003c= max(tracking,reaim)*dt + 0.25",
+                                               "rows":  5497,
+                                               "violations":  0
+                                           },
+                        "preparation":  {
+                                            "rows_above_slow_bound":  331,
+                                            "rows":  362
+                                        }
+                    },
+    "root_motion":  {
+                        "largest_total_body_step":  {
+                                                        "factored_steering_yaw_deg":  -4.200146,
+                                                        "world_time_seconds":  113.406909,
+                                                        "family":  "BP_Monster_HalberdElite_C",
+                                                        "dt_seconds":  0.070002,
+                                                        "interpretation":  "A large total body step includes authored root rotation; apply steering rate bounds to the factored steering column, not the total body yaw.",
+                                                        "attack":  7,
+                                                        "total_body_delta_deg":  -94.023668,
+                                                        "root_yaw_deg":  -89.823521
+                                                    },
+                        "frames_with_abs_world_root_yaw_above_tolerance":  88,
+                        "observed_callbacks":  5275,
+                        "consumed_abs_world_root_yaw_sum_deg_csv":  900.00247,
+                        "observer_behavior":  "Returns the previous root delegate result unchanged; no root transform is replaced by the test",
+                        "authored_reference":  "First-slot montage root extraction at actual source frame intervals divided by abs(segment AnimPlayRate * source RateScale), quaternion converted with actual mesh component world basis",
+                        "authored_yaw_patterns":  [
+                                                      {
+                                                          "family":  "BP_Monster_HalberdElite_C",
+                                                          "attack":  7,
+                                                          "nodes":  1,
+                                                          "frames":  137,
+                                                          "root_samples":  129,
+                                                          "authored_world_root_yaw_detected":  true,
+                                                          "consumed_abs_world_root_yaw_deg":  540.002
+                                                      },
+                                                      {
+                                                          "family":  "BP_Monster_HalberdElite_C",
+                                                          "attack":  18,
+                                                          "nodes":  1,
+                                                          "frames":  163,
+                                                          "root_samples":  156,
+                                                          "authored_world_root_yaw_detected":  true,
+                                                          "consumed_abs_world_root_yaw_deg":  180
+                                                      },
+                                                      {
+                                                          "family":  "BP_Monster_HalberdElite_C",
+                                                          "attack":  19,
+                                                          "nodes":  1,
+                                                          "frames":  153,
+                                                          "root_samples":  145,
+                                                          "authored_world_root_yaw_detected":  true,
+                                                          "consumed_abs_world_root_yaw_deg":  180
+                                                      }
+                                                  ],
+                        "multi_callback_frames":  0
+                    },
+    "assertions_from_native_success":  {
+                                           "raw_target_identity_and_focus_columns_present":  false,
+                                           "persistent_player_battle_target_and_gameplay_focus_every_sampled_tick":  true,
+                                           "actual_sight_acquisition_before_fixture_stop":  true,
+                                           "normal_end_convergence_and_zero_attack_root_callbacks_all_families":  true,
+                                           "normal_end_movement_block_removed_and_held_command_cleared":  true
+                                       },
+    "limitations":  [
+                        "The fixture stops StateTree after real Sight acquisition and manually activates all granted attacks with held combo intent. Natural attack selection/chase/leash is covered by separate regression tests.",
+                        "Root presence/consumption and source yaw expectation are verified; this is not a byte-for-byte animation-package preservation audit or a complete frame-by-frame original root-motion equivalence proof.",
+                        "The CSV records target coordinates and yaw, not capsule translation. Physical root travel and player damage are outside this Facing summary.",
+                        "Tracking/reaim rates and preparation duration are explicit temporary tuning, not original-game AI metadata."
+                    ]
+}

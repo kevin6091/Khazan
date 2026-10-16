@@ -1,0 +1,423 @@
+{
+  "utc": "2026-10-11T15:18:58.213193+00:00",
+  "status": "prepared",
+  "source": [
+    {
+      "path": "Source/Khazan/Character/KZMonster.h",
+      "before": "e4d2a186fa24895c7d561198ace126ba5d94f6b188ca0df2c7c2957363e596ba",
+      "after": "950829595e5e601e785468a3a0ba7b7e0bcec66b1bc043bac2514a1cf8ef63ce",
+      "concurrent_before": false
+    },
+    {
+      "path": "Source/Khazan/Character/KZMonster.cpp",
+      "before": "76c270a25931bf96a76f89a24b6c7dd795affe75c905c14b737c367fbfe73cae",
+      "after": "25ccdfa1240993f31ff5f31c24c8099022c6f9b280cfae2446e32175100737ba",
+      "concurrent_before": false
+    },
+    {
+      "path": "Source/Khazan/UI/KZCombatHUDWidget.h",
+      "before": "e23c05e4363677516cc4761e53cbcedea1335e5f87c25e25e6574cabcf65a642",
+      "after": "9e7a93ca008e4de0de834ee97273920b8364704a3b0d539503be4d22b094c190",
+      "concurrent_before": false
+    },
+    {
+      "path": "Source/Khazan/UI/KZCombatHUDWidget.cpp",
+      "before": "8a551ec74c614f4220f56a7d2687ecc6d01449e86b3bc87c10573f2b538efc42",
+      "after": "77d27bd129fbb37f801eac06684e983151805d4af8e2e813dbcc7b9006ed9327",
+      "concurrent_before": false
+    },
+    {
+      "path": "Source/Khazan/Ability/Combo/KZComboActionAbility.cpp",
+      "before": "47d5cfaee18cac0e140ff1ba2e19d8e75fcea51521a03623c13bca9ab1a7afa9",
+      "after": "a573e8cb5a195cad84d2d2e1dcc3cfe84ba051bbdf889c1f821bcf65ea193ada",
+      "concurrent_before": true
+    },
+    {
+      "path": "Source/Khazan/Ability/PlayerAbility/KZBrutalAttackAbility.cpp",
+      "before": "58538051ea0a4fa170e559558830cf805af263ad76412f91509e7b3542a12960",
+      "after": "9130ef32ebb87afa8f9365167ae18fcbd422a64e19a05dadc04e2b3dd470de42",
+      "concurrent_before": true
+    },
+    {
+      "path": "Source/Khazan/Tests/KZCombatUIPIEEditor.cpp",
+      "before": "13a4e92dbeb57c11282968cfe1885de451e44c728d421e93bd3e84eb33b19b48",
+      "after": "af8f88e0fcfe103a58cbd420a98d9ad3b7e458bb78e69a3cb34d7691641aa95c",
+      "concurrent_before": false
+    },
+    {
+      "path": "Source/Khazan/Tests/KZPlayerAttackCollisionPIETest.cpp",
+      "before": "346f3e13a81fb1c31422be81d431cbbb78499a802aa26231c9a760dc28ae9ba6",
+      "after": "4b167aa454e7b8122e4e6bda124b01a159d246092f0931645c0d8a13621207aa",
+      "concurrent_before": false
+    },
+    {
+      "path": "Source/Khazan/Tests/KZMonsterPresentationRepairPIETest.cpp",
+      "before": null,
+      "after": "022ac60b158168a6e7fcbcd68bcafb3cc7196d317ed4d88db67d019f92e43ac0",
+      "concurrent_before": false
+    },
+    {
+      "path": "Source/Khazan/Khazan.Build.cs",
+      "before": "47fce07e1c3de9dee4aef482e9ec71662c944a40aa2977c80b72fc600d15082a",
+      "after": "433f02bcc931d4140874fa3858878cdef25f356c8db47633617e222241f74566",
+      "concurrent_before": false
+    }
+  ],
+  "assets": [
+    {
+      "path": "Content/UI/Combat/Materials/M_UI_GaugeBackground.uasset",
+      "before": null,
+      "after": "834253e26a4eab15259160e09b231fa27b505fb350beee77c066cc332de2fe5f",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/FP_Monster_DeathAsh.uasset",
+      "before": null,
+      "after": "fda94e2da0888e53fafd5bd4ff2a761700e7849aaab789ea0eec1b0e2a6e528b",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/FP_Monster_HitBlood.uasset",
+      "before": null,
+      "after": "dbe1326660609ef873c63d28b2207fdf205e5d940a64bd035cbfff9301464268",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_BlackBlood_Strong_Bleed.uasset",
+      "before": "249ea3725279d2d82d26c531d63ae026b9f2274d513a8a010173076b4bfa8012",
+      "after": "2998f6dbdaa94726f1af701deab4d40c3bc7e21211ca6116ce61e776e47922d3",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_BlackBlood_Super_Bleed.uasset",
+      "before": "56c99835004d1740d6d5a80e14694a828feaddabf0fdc18253a2f3ac4ed1aa44",
+      "after": "3b2caccd97c3e073627db81cb977c9a957d7136464c2de48a6b80cb5e61f6450",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_BlackBlood_Trail_Sub.uasset",
+      "before": "62f6ea5309f305b71a08c182ab9165d50b17a967efa4bce75c1f89e55ab2d201",
+      "after": "74c3718b19a0e6d18141aed954b63de7e254de2cd0546bcc52512ee79006fd23",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_Blood_Strong_Bleed.uasset",
+      "before": "70e1bcacd5959e60982612a87a03e7d5cd7c28ac3d5dd26f5fdbe12b6260edcd",
+      "after": "a946cbf9d4036f02af4f8460357599ab7e593386f2a725d138cd70a498513ad9",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_Blood_Super_Bleed.uasset",
+      "before": "728b5b3f5ba1bafe70e5d82a4fa5209f92541dc2e484436803d809c19aaead6e",
+      "after": "3502cf9369a300da715947838eeb24cf6690582b4e2dc6e1413a498769bdff4e",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_Blood_Trail_Sub.uasset",
+      "before": "01b1b9e9ec781aa13af2dd847fc62c8571cccfd50b42d3d262f6e359eece686f",
+      "after": "6717340def9a4d147a447f8ec61a575963062e097569d842037662dadb440067",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_Gsword_BlackBlood_Base_Bleed.uasset",
+      "before": "77361182dd92e5997f08b3548f13b133c2419ae651281ea46f9d5970b4c86ddc",
+      "after": "df029c74234881ea85e90e45b680e2c17d02fb553f355cfddc6f928c27acadfd",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_Gsword_BlackBlood_Normal_Bleed.uasset",
+      "before": "b5d29692017e7c95c271371b10a991e4917372c50e46fd560edb3e4cb428d387",
+      "after": "89a48d6b456ea6b779b46fb26365f9f49183990b6f5b5f33a1b54f53d8c155f3",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_Gsword_BlackBlood_Strong_Bleed.uasset",
+      "before": "6f85c062c5a6ce0e6eb8db795e930cb17b90dbe1c4770073b01f90f17b32ee18",
+      "after": "c9af308acdacc4c2827cf56e9f016e29f2534ad50cdb101c1d4dec773819cf94",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_Gsword_BlackBlood_Super_Bleed.uasset",
+      "before": "824fad41168e7394db065af45c458aacce4ef8032819d789c0cd47e9f30af8cd",
+      "after": "91ea8d28d7fc8820c4a0b942e701b32ea0f2f4801f234e935c3fac3e81d0df01",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_Gsword_Blood_Base_Bleed.uasset",
+      "before": "1cf54c84058b8c85bd2c4e74faf9ec6d076c0929389409b239893f4781c03a9e",
+      "after": "821acaf89bc5742f29176f9de69928976ed9d95422d76cf8401dc7fe2ba815cf",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_Gsword_Blood_Base_Bleed_BK.uasset",
+      "before": "85fbc632a4009199f3b0f1b05d39ac5a30faf347a3909c7c01e041a900501eac",
+      "after": "c23f4d7a014807cc32f0295da72d5048d82466f1848b6d5828f8af616270bb03",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_Gsword_Blood_Normal_Bleed.uasset",
+      "before": "1dde3ace9bcebc770796d21261e0aa0f5c5c13c933896fea7c50b8afd2f3b982",
+      "after": "883e4ab6a76225a4835f99d450eef51dd668c8c83f911a652a04d8d2d1225dca",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_Gsword_Blood_Strong_Bleed.uasset",
+      "before": "557faa960390eab34f587976a5044961d25329b01eaccc67ea263ad41f801d3e",
+      "after": "c6caf1292ed8169185fd44444929f3cbd128d674e5d14ffdadd2074ef665f91f",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Dmg_Gsword_Blood_Super_Bleed.uasset",
+      "before": "e8845af7ca1f70621105457a8b560074316028ff9bb27f9c079d9a719d707171",
+      "after": "58cb2db37aea167d767a086059dbc3f448504b84a329f8eb8449eb8bbe36ed53",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Effects/Combat/Blood/PP_Wraith_DirtBlood_Die_Loop_00.uasset",
+      "before": "66c4c72f68a4fdd0596acbadc92ac53bdb634f8807eba9cdacec66db94f5bad8",
+      "after": "2056b81f290b5c642ce3840abdb4db69f1752c5a5ac3ee4699bbe04d7ffc970f",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Damage/Damage_PartGroggy_Start.uasset",
+      "before": "85fae889e028fb844386058cfa15650c4da57404fe3151498f3d6909e4a39147",
+      "after": "0fa008088a9703133ef6de424b9152eb3b01d665553debdcb69bd92c956c4e39",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Bosses/Yetuga/Animations/Death/Death_Die_F.uasset",
+      "before": "60f7e7fc4f1ddec9388059b2a5eb31acc3b00e3eedd0039d838ca3b2c98256d6",
+      "after": "1944dc6a880763ac2811eceef66a5b9ade7f95fe6a2e916c4aa8080e4aac3c40",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Bosses/Yetuga/Materials/Masters/M_EN_Yetuga_EyePreview.uasset",
+      "before": "2b49c71dd800d5e82d2f8a85feac9864422bb2bce98777b96a90a3c591953239",
+      "after": "a5a96b2f05e24b1a8c1aa882b3315c2774362c6193e9493b3829c8b88df99db5",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Bosses/Yetuga/Materials/Masters/M_EN_Yetuga_SurfacePreview.uasset",
+      "before": "58dc47da7eaf7dae8bb4ddcf6438defb34f693dd805bef8c2eb7ee374ecf821a",
+      "after": "6074788aa6c2a468d36d4578d5df09cdefadb77934153117695a31756398397d",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.uasset",
+      "before": "b805974e532a3eb97d95dfa6129e5176c14db8dc8236d0c3e39b2c3799fef543",
+      "after": "bb1009a32a47dfb8f2c4de7118effdaf0aff2691f6dd60cd07a414adbdf1d30a",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Down_B_Loop.uasset",
+      "before": "0a21b5cd3470ebf2c5b337354c18a60c0aaca99940cb8b37b4760652549a7a3d",
+      "after": "813942f5d82d19a97fffa243e19b33590ecb7ef19ef43a2fd235dd76149d8ceb",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Damage/Damage_Down_F_Loop.uasset",
+      "before": "25bd91d07e9165a38a5886c946bca19eb58d84e8787d3782c00090e2c8b2b78c",
+      "after": "141b2ef9a19ac4dd46236b3be9a58510fc7d52cb0ac6e894d6afba2b76b102c0",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Animations/Death/Death_Die_F.uasset",
+      "before": "22795eef303e85eba3ddb1b753e4f2a29a01241b69f64a5cb2fd803ffe84bcbb",
+      "after": "19ef282d36fc0375a4c701b9b1fed1b1c265d9166e27826984787fe8ed4885b9",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Skeletons/SKEL_EN_C_M_HalberdV2.uasset",
+      "before": "b3fd7aa287fb778c80fbb6af661acd1cb059b9548ee0b66a4968ad0e4354c6cd",
+      "after": "9c7eb80a244391a2ac2548981bd681f428714b87a16ca1cc228217f04cba225d",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_FinalBlow.uasset",
+      "before": "75a5e1a8f651aaf6e9e3fec8bdc8482e9876a7d215398dd5dc6175821b2379cb",
+      "after": "931098ba4157c85896622abe609c1a27eeabdc77d34fcda68387fcef3a202384",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Damage/Damage_FinalBlow_Wraith.uasset",
+      "before": "fefcfdb29a88044f68c00591a70e8d8a2b953b799618a341904301653f06a535",
+      "after": "4b2a53ce2dc0185a3c66c55760a3eb0bc835217c2afb4ecf3b07f9a3825f30fb",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Death/Death_Die_F.uasset",
+      "before": "9bfed7ca051528799893a30cb6e68d507f72f8e4949e71e6976b03246b68489f",
+      "after": "593d4337f9729ae7f45a91581504ff597c7cb8cec8b0e1a76ea80f753c1df229",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Animations/Death/Death_Die_F_Wraith.uasset",
+      "before": "20cef43bb2e84ed952edbdcb08be4c786a757b2aea24467d091b5eb5e6878e2f",
+      "after": "6caaa764b9ac6c1ee82f833dea631d695dbfe5ab3214735e272b0c994f69e9c5",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Damage/Damage_FinalBlow.uasset",
+      "before": "9e1de539bc13a7496cffd11f53e8290b0b39b92c45949da0ee0a1ef53f656df2",
+      "after": "de4c83cd3d7280f8a5b5d599d7a87be69d3b36a0f00e82dc8aa945e1699d671b",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Death/Death_Down_Die_B.uasset",
+      "before": "2fc57b1dae4fb2523d610a520a7862d1b875e4bfa6b462926e99d83ed52d4239",
+      "after": "24dc76b97b4bda56063ee99f68784e07203ce8d33667c7350470ac9ebbfe79bd",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Death/Death_Down_Die_F.uasset",
+      "before": "4871d47e0df7abcc96eb65ddab7bb042de0e19750773d1ba3a28c5bc60bc3524",
+      "after": "8052acd3be073174c2f9b20a4918328e6936461b4e69fbe75ca5648ab0689045",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/SwordShield/Animations/Death/Death_Ground_Die_F.uasset",
+      "before": "806d9eed14d9a2063e9171481055c92a13bb48ec5918bd3ad5053c5cb2bce337",
+      "after": "fad7aa6b78422427cceff014380866db152b88942a4d5bf3f0066072683a5cc2",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Damage/Damage_FinalBlow_Wraith.uasset",
+      "before": "77901a0ee3d1a42d1d83eed8d4c8c1154746819d13c89a4e1999944a1155c4f7",
+      "after": "1756f115c9da8f4c117da2876f7ad0e8ff66e8ce870a7051ef75a75b5842894b",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Death/Death_Down_Die_B.uasset",
+      "before": "e193f0c783321ae222fd34c210dcd0cdf9db3a329c40ce89525dd4972a7d9388",
+      "after": "74892a797bf5276a7250456ed53069e24ae97dda5d84a4fdb0dd949c5a3f7008",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Death/Death_Down_Die_F.uasset",
+      "before": "80897d15d1bf38e077f500d7f4901cbb921e10c4f5d77de7b06a67d194d60f98",
+      "after": "cea8e7105c74ca0cab26c9cf27929b3799c73b7ab1ba381c63885227bd5d5c99",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Death/Death_Down_Die_F_Wraith.uasset",
+      "before": "57d453cdf5c2323e482bb78a38ca722537bdfb14edc398a3ad0c857149a90dec",
+      "after": "26b8c97e2e18f565a6db95af4cce363374c1f8098ffc9878b9e3febc983dee17",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Death/Death_Ground_Die_F.uasset",
+      "before": "eac876862d4569d704d381d5a7cde3b9403ec54a23d94a2966bf9079e4e31dca",
+      "after": "42e639b0765f891ee83fad68c3d514dc4830dc097332977101513fb8759e10ed",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Death/Death_Ground_Die_F_2.uasset",
+      "before": "193aba3c1fcf8d851e390b2f447d45c21cc38bf35139b2857c14a4e093950cc0",
+      "after": "dd245467390e342ec7ba7e0aab4f4220154ed14a143dc7616757360aaab5f323",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Death/Death_Ground_Die_F_Wraith.uasset",
+      "before": "bd58b8cc8824495a2c738b894d4ca8e311c17e18cc5dec45eb5dad6558b18fcf",
+      "after": "bb21a2b51555ec9e26b1e703701a2f9a2565f5ccfac6302906e3ed2b11ac082f",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Death/Death_Ground_Die_F_Wraith02.uasset",
+      "before": "7263dd4ccb352202720f0bed757bddfa7e74f8348444276b21d1d3eca104d547",
+      "after": "f220a2f57b343d2846cffdf3710f7b6a7a99a2f5f392d48e83c36dd4d1a5371e",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Death/Death_Sick_Down_DieB.uasset",
+      "before": "48393d1a7b27568a4ea896e62fb2addc0879c03c19cc909050d69507bc46a9ab",
+      "after": "a18660a45c83b03dc9903b932e181a43efbd6a42a35b3789e006021cbf9ad710",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Humanoids/Swordsman/Animations/Death/Death_Sick_Down_DieF.uasset",
+      "before": "d5a26953c4edbe97f492369cc739d71968708c04738f132d85d57e74b6a3570c",
+      "after": "f1df7d334ddb522e99d1503436f56e14e20c5ada467cba00d4b0b1db4d0209be",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Shared/Materials/Expansion/Masters/M_EN_M_AKCartoonCharacter.uasset",
+      "before": "063d8cf68b53bec624e1e410bdef02029ee573b0534bf8ad196bc1e9595324fd",
+      "after": "d9fd17fe1ee71adb268fdc3c2692b87dda6f4904134a0a8f3da7f40e88f34dce",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Shared/Materials/Expansion/Masters/M_EN_M_BBQCartoonEye_AK.uasset",
+      "before": "e9cb6c13674e471d45a8dd0860e507f90cb1daadc13cd2c7c91fef9e494914c4",
+      "after": "1339d88f5a855ba6ce91cea97b2d01b1e9f53e05fb854730e0de4564edd95dbb",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Shared/Materials/Expansion/Masters/M_EN_M_BBQ_CharTransparent_AK.uasset",
+      "before": "9f692ab2ce07c85c581a3343bef1ace7567c831f5c0631a687bb5077991e423f",
+      "after": "b3b37c927b08c4aa328d19cd55fcca33179b3abb0eeddcf2edd069b70149d49f",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Shared/Materials/Parents/M_EN_M_AKCartoonCharacter.uasset",
+      "before": "29f68db023b28a11b89fd600314eeefd62da9a4606eb013779f83611d5f9ca3e",
+      "after": "d5e09b6f4345dc45f469673c5e3da3f3ceabd85a935d598a15952276b036da40",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Shared/Materials/Parents/M_EN_M_BBQCartoonEye_AK.uasset",
+      "before": "f4525040bc291cd70f3479c71ea0e04c4f7d33208fc6efa906e4adcad1232b9b",
+      "after": "072e2d7e2437dee8d42db6566c0c0ad930d869e2b7ff5351ab31a8174a1fc22f",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.uasset",
+      "before": "2984880e19fe385934d5f17aa43713840087cb72cd92626eb7d7989cb3b69c07",
+      "after": "f9c8084a2294449be1b517d04365b077b568ed7b1302be1938f6c581a7de41e7",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.uasset",
+      "before": "64b0954a0abfd9b4a05e45d9ef86a7fb3214934b7fce51f4f708403cf1714ac2",
+      "after": "82de1365564590ea529054b9274a3ab9d5e9199bfbbf3aa51f0b1fccd526f87b",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_FinalBlow.uasset",
+      "before": "ac356c2d1892dc7880426e11cf72793d41142f40eb8453c11580342577c5c061",
+      "after": "4dd22f070b0f63dd0b9009f044cb0e5d6b8d12050e204b69332ff4e093be6ef0",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Damage/Damage_PartGroggy_Start.uasset",
+      "before": "a06bbbb7e6415300e0907c8c50c965e7e6d0f1db0f68ab7723567e64b7ea3bd7",
+      "after": "83cfd19fc563bbec9bb703eaeee00c7be08a45dcd7819461c9a020e2b96cafea",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Animations/Death/Death_Die_F.uasset",
+      "before": "4bed618bc213ee7d181599772256a4547aa5fe1669ff05b572c657187db7612a",
+      "after": "5306db5a889b62b73d40a914e722b90113f9a78d40664e53c28bd9e824b1903c",
+      "concurrent_animation_preserved": true
+    },
+    {
+      "path": "Content/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Materials/Masters/M_EN_ApesStoneHandElite_EyePreview.uasset",
+      "before": "cc49c7990d2115ba83803757e8ce44669d349b0eecc9b2b5e3f01a63c9378b18",
+      "after": "c136b2647ef50438ed497adeea52696e66e0421e3cc6ef0531618a84a544af9a",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Materials/Masters/M_EN_ApesStoneHandElite_SurfacePreview.uasset",
+      "before": "acdad168663c96e9055d01a35390a1b17ce7a72eebd1c88716933f6a7ff4812a",
+      "after": "51b25d2222a27a1726ab6d44fbf3a24c306cc5edf13545f2e97c414f1706b994",
+      "concurrent_animation_preserved": false
+    },
+    {
+      "path": "Content/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.uasset",
+      "before": "270b4f5d4547e971e7c08ff4a42d96b52378a16cc10b86d1a08621bbcbd98536",
+      "after": "e6f17fc327532400a42dac6af2926d4dfd8d485fc3a873c24704504f3c4f0d53",
+      "concurrent_animation_preserved": false
+    }
+  ],
+  "conflicts": []
+}

@@ -1,0 +1,97 @@
+{
+  "status": "passed",
+  "asset_saves": 0,
+  "monsters": [
+    {
+      "family": "Swordsman",
+      "particle": "/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference",
+      "ground_material": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "projector_cm": "<Struct 'Vector' (0x000001EC4EA6A4D0) {x: 8.000000, y: 95.000000, z: 150.000000}>",
+      "hold_seconds": 24.0,
+      "fade_seconds": 3.0,
+      "trace_cm": 600.0
+    },
+    {
+      "family": "SwordShield",
+      "particle": "/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference",
+      "ground_material": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "projector_cm": "<Struct 'Vector' (0x000001EB89E9BCD0) {x: 8.000000, y: 95.000000, z: 150.000000}>",
+      "hold_seconds": 24.0,
+      "fade_seconds": 3.0,
+      "trace_cm": 600.0
+    },
+    {
+      "family": "HeavySwordsman",
+      "particle": "/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference",
+      "ground_material": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "projector_cm": "<Struct 'Vector' (0x000001EB9074E0D0) {x: 8.000000, y: 95.000000, z: 150.000000}>",
+      "hold_seconds": 24.0,
+      "fade_seconds": 3.0,
+      "trace_cm": 600.0
+    },
+    {
+      "family": "HalberdElite",
+      "particle": "/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference",
+      "ground_material": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "projector_cm": "<Struct 'Vector' (0x000001EB9A6D74D0) {x: 8.000000, y: 95.000000, z: 150.000000}>",
+      "hold_seconds": 24.0,
+      "fade_seconds": 3.0,
+      "trace_cm": 600.0
+    },
+    {
+      "family": "ApesStoneHandElite",
+      "particle": "/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference",
+      "ground_material": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "projector_cm": "<Struct 'Vector' (0x000001EBAA8A50D0) {x: 8.000000, y: 95.000000, z: 150.000000}>",
+      "hold_seconds": 24.0,
+      "fade_seconds": 3.0,
+      "trace_cm": 600.0
+    },
+    {
+      "family": "Yetuga",
+      "particle": "/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference",
+      "ground_material": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "projector_cm": "<Struct 'Vector' (0x000001EC95F6F8D0) {x: 8.000000, y: 95.000000, z: 150.000000}>",
+      "hold_seconds": 24.0,
+      "fade_seconds": 3.0,
+      "trace_cm": 600.0
+    }
+  ],
+  "materials": [
+    {
+      "asset": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "textures": [
+        {
+          "asset": "/Game/_Art/Effects/Combat/Blood/FT_Monster_HitBloodGroundMask.FT_Monster_HitBloodGroundMask",
+          "srgb": false,
+          "sampler": "LinearColor"
+        }
+      ],
+      "code": [
+        "float a=Channel<.5?Mask.r:(Channel<1.5?Mask.g:Mask.b);return saturate(pow(saturate(a),Power)*Density)*Fade;"
+      ],
+      "decal_lifetime_opacity": true
+    },
+    {
+      "asset": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodFluid.M_Monster_HitBloodFluid",
+      "textures": [
+        {
+          "asset": "/Game/_Art/Effects/Combat/Blood/FT_Monster_HitBloodFluid.FT_Monster_HitBloodFluid",
+          "srgb": false,
+          "sampler": "LinearColor"
+        }
+      ],
+      "code": [
+        "float f=floor(saturate(Age)*15);return (UV+float2(fmod(f,4),floor(f/4)))/4;",
+        "return saturate(pow(saturate(max(T.r,T.b)),Power)*Density)*Alpha;"
+      ],
+      "decal_lifetime_opacity": false
+    }
+  ],
+  "retired_trial_referencers": {
+    "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodSheet": [],
+    "/Game/_Art/Effects/Combat/Blood/FT_Monster_HitBloodSheetMask": [
+      "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodSheet"
+    ]
+  }
+}

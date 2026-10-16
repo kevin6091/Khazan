@@ -1,0 +1,198 @@
+[
+  {
+    "Type": "BodySetup",
+    "Name": "RB_BodySetup_0",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BodySetup'",
+    "Outer": {
+      "ObjectName": "StaticMesh'SurfaceTrailMesh'",
+      "ObjectPath": "BBQ/Content/_Common/BaseMeshes/Geometry/SurfaceTrailMesh.2"
+    },
+    "Properties": {
+      "AggGeom": {
+        "SphereElems": [
+          {
+            "Center": {
+              "X": 3.949275E-06,
+              "Y": -5.57953E-06,
+              "Z": -1.254577E-05
+            },
+            "Radius": 160.0,
+            "RestOffset": 0.0,
+            "Name": "None",
+            "bContributeToMass": true,
+            "CollisionEnabled": "ECollisionEnabled::QueryAndPhysics"
+          }
+        ]
+      },
+      "DefaultInstance": {
+        "ObjectType": "ECC_WorldStatic",
+        "CollisionProfileName": "BlockAll",
+        "CollisionResponses": {
+          "ResponseArray": [
+            {
+              "Channel": "EngineTraceChannel1",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "Attack",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "JumpBlock",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "IKTrace",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "FloorCheck",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "LandScape",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "NamePlate",
+              "Response": "ECR_Block"
+            }
+          ]
+        },
+        "bSimulatePhysics": true
+      }
+    },
+    "BodySetupGuid": "B71B5A75499DBDFD27795BAC07DF43A0",
+    "CookedFormatData": {
+      "PhysXPC": {
+        "BulkDataFlags": "BULKDATA_SingleUse | BULKDATA_ForceInlinePayload",
+        "ElementCount": 33614,
+        "SizeOnDisk": 33614,
+        "OffsetInFile": "0x46D7D"
+      }
+    }
+  },
+  {
+    "Type": "NavCollision",
+    "Name": "NavCollision_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'NavCollision'",
+    "Outer": {
+      "ObjectName": "StaticMesh'SurfaceTrailMesh'",
+      "ObjectPath": "BBQ/Content/_Common/BaseMeshes/Geometry/SurfaceTrailMesh.2"
+    },
+    "CookedFormatData": {
+      "NavCollision_Chaos": {
+        "BulkDataFlags": "BULKDATA_SingleUse | BULKDATA_ForceInlinePayload",
+        "ElementCount": 5521,
+        "SizeOnDisk": 5521,
+        "OffsetInFile": "0x4F113"
+      }
+    }
+  },
+  {
+    "Type": "StaticMesh",
+    "Name": "SurfaceTrailMesh",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'StaticMesh'",
+    "Package": "BBQ/Content/_Common/BaseMeshes/Geometry/SurfaceTrailMesh",
+    "Properties": {
+      "StaticMaterials": [
+        {
+          "MaterialInterface": {
+            "ObjectName": "Material'M_WriteSnowField'",
+            "ObjectPath": "BBQ/Content/BaseMaterials/VT_SnowField/M_WriteSnowField.0"
+          },
+          "MaterialSlotName": "MaterialSlot",
+          "ImportedMaterialSlotName": "MaterialSlot",
+          "UVChannelData": {
+            "bInitialized": true,
+            "bOverrideDensities": false,
+            "LocalUVDensities": 604.0186,
+            "LocalUVDensities[1]": 0.0,
+            "LocalUVDensities[2]": 0.0,
+            "LocalUVDensities[3]": 0.0
+          }
+        }
+      ],
+      "LightmapUVDensity": 604.0186,
+      "ExtendedBounds": {
+        "BoxExtent": {
+          "X": 160.0,
+          "Y": 160.0,
+          "Z": 160.0
+        },
+        "SphereRadius": 160.00002
+      }
+    },
+    "BodySetup": {
+      "ObjectName": "BodySetup'SurfaceTrailMesh:RB_BodySetup_0'",
+      "ObjectPath": "BBQ/Content/_Common/BaseMeshes/Geometry/SurfaceTrailMesh.0"
+    },
+    "NavCollision": {
+      "ObjectName": "NavCollision'SurfaceTrailMesh:NavCollision_0'",
+      "ObjectPath": "BBQ/Content/_Common/BaseMeshes/Geometry/SurfaceTrailMesh.1"
+    },
+    "LightingGuid": "66DA5244-4D6B08FE-3E2D18B6-77455BCA",
+    "RenderData": {
+      "LODs": [
+        {
+          "Sections": [
+            {
+              "MaterialIndex": 0,
+              "FirstIndex": 0,
+              "NumTriangles": 528,
+              "MinVertexIndex": 0,
+              "MaxVertexIndex": 322,
+              "bEnableCollision": true,
+              "bCastShadow": true,
+              "bForceOpaque": false,
+              "bVisibleInRayTracing": true
+            }
+          ],
+          "MaxDeviation": 0.0,
+          "PositionVertexBuffer": {
+            "Stride": 12,
+            "NumVertices": 323
+          },
+          "VertexBuffer": {
+            "NumTexCoords": 1,
+            "NumVertices": 323,
+            "Strides": -1,
+            "UseHighPrecisionTangentBasis": false,
+            "UseFullPrecisionUVs": false
+          },
+          "ColorVertexBuffer": {
+            "Stride": 0,
+            "NumVertices": 0
+          }
+        }
+      ],
+      "Bounds": {
+        "Origin": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "BoxExtent": {
+          "X": 160.0,
+          "Y": 160.0,
+          "Z": 160.0
+        },
+        "SphereRadius": 160.00002
+      },
+      "bLODsShareStaticLighting": true,
+      "ScreenSize": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  }
+]

@@ -1,0 +1,74 @@
+{
+  "schema": "Khazan.MonsterVisual.EngineNoMergeLifecycleAudit.v1",
+  "scope": "Read-only exact installed UE5.8 source. No product Source/assets/editor/build change.",
+  "observation": "Parent RHI1 before-test actual DevMap Swordsman source event KZMVFX_9a0b747cae82332030a5132d began each frame with IDs14,16,18... and sourceTime0.277..0.487.",
+  "event": {
+    "asset": "/Game/Monsters/Swordsman/Animations/InGame/Locomotion/Locomotion_Walk_Peace_F_Composite",
+    "source_package": "BBQ/Content/_Kazan_/Design/Monster/Human/Empire/EmpireSword/Moving/PeaceIdle/AC_EmpireSword_Walk_Peace_F",
+    "source_field": "Properties.Notifies[0]",
+    "source_window_seconds": [
+      0.31729928,
+      0.57147723
+    ],
+    "behavior": "Physical surface footstep particle, attached Bip001-L-Foot initially; one original occurrence, no original every-frame respawn claim."
+  },
+  "engine_sources": [
+    {
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Engine\\Private\\Animation\\AnimInstance.cpp",
+      "sha256": "d593fff1143b0a6f49eac8456bbcb119702d6bd211cfc5f17c2f2b683c6915d2",
+      "lines": [
+        1898,
+        1919,
+        1922,
+        1934
+      ]
+    },
+    {
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Engine\\Private\\Animation\\AnimNode_AssetPlayerBase.cpp",
+      "sha256": "b436241d9513645aefdd3a9d68b1a72935bf6ae02309e22bb30e0ad05ee37041",
+      "lines": [
+        21,
+        55
+      ]
+    },
+    {
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Engine\\Private\\Animation\\AnimSingleNodeInstanceProxy.cpp",
+      "sha256": "4578d06fe73cba30559ef5535c78f928e2b940ab4d644aa24d827dffe8a4925a",
+      "lines": [
+        599,
+        604
+      ]
+    },
+    {
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\AnimGraphRuntime\\Private\\AnimNodes\\AnimNode_BlendSpacePlayer.cpp",
+      "sha256": "fe300521401888b3cafcfc055f218b946ba3c0d78818a7830887dad93ed01766",
+      "lines": [
+        96,
+        105,
+        107
+      ]
+    },
+    {
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Source\\Runtime\\Engine\\Private\\Animation\\BlendSpace.cpp",
+      "sha256": "69fb35e0daa26373d7741bd8e21c96562facca8b7c1f02ea86700ffd1fffd932",
+      "lines": [
+        811
+      ]
+    }
+  ],
+  "finding": "UAnimInstance::TriggerAnimNotifies NoMerge requires matching MontageInstanceContext or AssetPlayerInstanceContext. If neither exists bHasMatchingSourceInstanceID staysfalse and same event is treated new everyframe, previous ends and new NotifyID generated. SequencePlayer Base explicitly supplies stable instanceID; current SingleNode and BlendSpacePlayer tick-record creation do not supply this context.",
+  "certainty": {
+    "single_node": "Directly proven by source; native representative PlayAnimation will churn with NoMerge.",
+    "blend_space": "Directly proven creator omits AssetPlayerInstanceContext; observed Swordsman event consistent with BlendSpace locomotion, actual graph/context identity still pending root native observation."
+  },
+  "smallest_proposal": "Use engine default notify event matching rather than forcing NoMerge on this data-only class. Preserve current actor/mesh/engineNotifyID receipts, source context IDs when available, cancel/EndPlay lifetimes. No fake sourceID/manager/frame polling/dedup state.",
+  "limitation": "Identical same-asset notify in two concurrent plays inside one AnimInstance may merge by engine default. Distinct notify occurrences and different AnimInstances/avatars stay isolated. Current monster one-action slot has no demonstrated intentional same-source same-AnimInstance concurrent consumer. If needed, context-producing graph/engine path required.",
+  "verification_needed": [
+    "Fresh native saved flag readback after constructor change (asset might serialize explicit flag).",
+    "Continuous contextless source window beginsonce perloop with stableID, receivesTicks, oneEnd at sourceboundary.",
+    "BlendSpace actual NPC path and SingleNode representative path.",
+    "Two actualavatars/sourcewindows isolation, ownmontagecancel and terminalmaterialhold regression."
+  ],
+  "applied": true,
+  "revision": "NoMergeCompatibilityRevision.json"
+}

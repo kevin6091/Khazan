@@ -1,0 +1,22 @@
+Begin Object Class=/Script/Engine.ParticleModuleSpawn Name="KZHitFlashRed_Spawn" ExportPath="/Script/Engine.ParticleModuleSpawn'/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference:KZHitFlashRed_Spawn'"
+   Begin Object Class=/Script/Engine.DistributionFloatConstant Name="BurstScaleDistribution" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference:KZHitFlashRed_Spawn.BurstScaleDistribution'"
+   End Object
+   Begin Object Class=/Script/Engine.DistributionFloatConstant Name="D_Rate" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference:KZHitFlashRed_Spawn.D_Rate'"
+   End Object
+   Begin Object Class=/Script/Engine.DistributionFloatConstant Name="RequiredDistributionSpawnRateScale" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference:KZHitFlashRed_Spawn.RequiredDistributionSpawnRateScale'"
+   End Object
+   Begin Object Name="BurstScaleDistribution" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference:KZHitFlashRed_Spawn.BurstScaleDistribution'"
+      Constant=1.000000
+   End Object
+   Begin Object Name="D_Rate" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference:KZHitFlashRed_Spawn.D_Rate'"
+      bBakedDataSuccesfully=True
+   End Object
+   Begin Object Name="RequiredDistributionSpawnRateScale" ExportPath="/Script/Engine.DistributionFloatConstant'/Game/_Art/Effects/Combat/Blood/FP_Monster_HitBloodReference.FP_Monster_HitBloodReference:KZHitFlashRed_Spawn.RequiredDistributionSpawnRateScale'"
+      Constant=1.000000
+      bBakedDataSuccesfully=True
+   End Object
+   Rate=(Distribution="/Script/Engine.DistributionFloatConstant'D_Rate'",Table=(Values=(0.000000),Op=1,EntryCount=1,EntryStride=1))
+   RateScale=(MinValue=1.000000,MaxValue=1.000000,Distribution="/Script/Engine.DistributionFloatConstant'RequiredDistributionSpawnRateScale'",Table=(Values=(1.000000),Op=1,EntryCount=1,EntryStride=1))
+   BurstList(0)=(Count=1)
+   BurstScale=(Distribution="/Script/Engine.DistributionFloatConstant'BurstScaleDistribution'")
+End Object

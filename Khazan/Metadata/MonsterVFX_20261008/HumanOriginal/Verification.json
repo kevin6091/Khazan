@@ -1,0 +1,79 @@
+{
+  "schema": "Khazan.MonsterVFX.HumanOriginal.Verification.v1",
+  "utc": "2026-10-08T11:24:33.003037+00:00",
+  "status": "ORIGINAL_MAPPING_AND_DELTA_PAYLOAD_COMPLETE_NO_NATIVE_AUTHOR_OR_RUNTIME_QA",
+  "summary": {
+    "current_clips": 629,
+    "older_library_clips": 601,
+    "new_stamina_gameplay_clones": 28,
+    "unique_clip_original_packages": 464,
+    "event_occurrences": 1410,
+    "unique_original_notify_identities": 898,
+    "notify_types_occurrence": {
+      "xxAnimNotifyState_Particle": 1280,
+      "xxAnimNotifyState_CameraMod": 43,
+      "xxAnimNotifyState_SurfaceTrailDeepSnow": 47,
+      "xxAnimNotifyState_Decal": 39,
+      "xxAnimNotify_RimLight": 1
+    },
+    "per_family": {
+      "Swordsman": {
+        "clips": 221,
+        "effect_event_occurrences": 327
+      },
+      "SwordShield": {
+        "clips": 115,
+        "effect_event_occurrences": 177
+      },
+      "HeavySwordsman": {
+        "clips": 113,
+        "effect_event_occurrences": 291
+      },
+      "HalberdElite": {
+        "clips": 180,
+        "effect_event_occurrences": 615
+      }
+    },
+    "resource_packages": 638,
+    "resource_native_available": 343,
+    "source_missing": 0,
+    "animation_source_missing": 0,
+    "leaf_source_missing": 0
+  },
+  "metadata_extracted_packages": 243,
+  "metadata_extraction_failed": 0,
+  "raw_export_packages": 295,
+  "raw_export_failed": 0,
+  "visual_payload_packages": 53,
+  "visual_payload_failed": 0,
+  "payload_extensions": {
+    ".png": 27,
+    ".pskx": 22,
+    ".hdr": 4
+  },
+  "timing_checks": {
+    "import_duration_vs_current_clip_gt1ms": [],
+    "saved_event_timing_difference_gt10us": [],
+    "unsupported_segment_rates": []
+  },
+  "scope": "Human4 all current saved animation library + current exhaustion/grapple/death clones, not only selected attack montage nodes.",
+  "reuse": "343 existing native assets are hash-recorded; delta295rows ownImportDeltaAssetManifest only. No global AssetManifest/Content/Source changes.",
+  "limitations": [
+    "Original game build/patch and native notify code not identified. Cached and newly extracted source hashes distinguish snapshots.",
+    "Native author/class support must assess SourceOnly Niagara9, MaterialFunction33, camera43/DeepSnow47/RimLight1 occurrences, routingconditions and CorrectionInfos26unique notifies.",
+    "Source timelines match saved import event table; no live sequence metadata/CDO reflection done in this subtask.",
+    "New295resource delta includes possible unselected physical-surface/status branches. Runtime author should preserve/select actual conditions, not emit all route candidates simultaneously.",
+    "Actual visual pixel parity/material topology, native import and RHI/PIE remain root-owned next steps."
+  ],
+  "artifact_hashes": {
+    "OriginalHumanVFXManifest.json": "a66da561473de142a0cc9ac32ae9fb0001d817ad8c4535b389c81f006f506acd",
+    "AnimationEffectNotifies.json": "c9dcce9238e76f862b6a05519f3cf130e3a72da02329433369b61eac0b3b200f",
+    "OriginalSourceTimingContracts.json": "4d969455956286a41125ede48311b3d5e40cd0ce0eebc52586016b736abb78a0",
+    "CurrentHumanClipMap.json": "07f41a6325e2aa374bd7ea01a6c6a53504d959e9e1f4f2fd8f4795a0d8ab6ac7",
+    "ResourceClosure.json": "05a828ef5b36f5d6e11f4f9d030fe6284a686c21285cfaa533a1d7172e3e31ba",
+    "ImportReadyAssetManifest.json": "1d19a53f25f9569c14120ba6ef54b929d00ba1f3ab6b4fd0ee311d0def459fa4",
+    "ImportDeltaAssetManifest.json": "645fa2728df1df9088806e281eafb0e5fb298640026f7cd48627aff1c03b32f2",
+    "VectorFieldExtraction.json": "71da8c94468658381c5193e75f912bf9d839a760aba55efaee54161d550b0d40",
+    "ImportPreparationSummary.json": "f32ed160d12b17608fac469391b460a898ac63bba1c11a53e85443c895f82ba7"
+  }
+}

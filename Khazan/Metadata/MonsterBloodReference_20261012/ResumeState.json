@@ -1,0 +1,33 @@
+{
+  "utc": "2026-10-11T17:11:13.799122+00:00",
+  "status": "work_author_ready_main_delivery_pending",
+  "main_runtime_applied": false,
+  "main_qa_modified": [
+    "Tests/KZMonsterPresentationRepairPIETest.cpp",
+    "Tests/KZPlayerAttackCollisionPIETest.cpp"
+  ],
+  "work_runtime": [
+    "Character/KZMonster.h",
+    "Character/KZMonster.cpp"
+  ],
+  "work_build": "WorkBuild04.log (waits for foreign ParryWork UBT mutex; do not terminate foreign processes)",
+  "last_verified": [
+    "TextureProbe02/Probe.json passed (asset saves0)",
+    "MaterialAuthor01/MaterialAuthor.json passed",
+    "MaterialUsage01/AssetReadback.json passed",
+    "ParticleAuthor02/Driver.json passed from previous WorkBuild03 DLL; fade-curve final author not yet rerun"
+  ],
+  "next": [
+    "Wait for task-owned WorkBuild04 session30083 to exit0; inspect latest source/compile log.",
+    "Run Khazan.MonsterBloodReference.Author in fresh own Work asset_editor as ParticleAuthor03; check distinct modules and alpha curve.",
+    "Run deliver_blood_reference_20261012.py exactly once (two Main runtime files/three blood packages with baseline CAS).",
+    "Build Main unique suffix2026101240 via build_blood_reference_main_20261012.py MainBuild01 2026101240.",
+    "Fresh Main commandlet readback and RHI Khazan.MonsterRepair.PIE with KZ_MONSTER_REPAIR_QUICK_VISUAL=1,KZ_BLOOD_REFERENCE_POLICY=1. Inspect24 blood and12death images.",
+    "Fresh actual collision PIE13, incl ground burst miss/cancel/dedup counts.",
+    "If visual insufficient, refine only task-owned variants with explicit before SHA/backups. Append dated Art/Engineering docs and separate final receipt."
+  ],
+  "user_editor_pid_readonly": 19752,
+  "foreign_ubt_pid_readonly": 16880,
+  "reference": "Reference.png",
+  "new_runtime_files": 0
+}

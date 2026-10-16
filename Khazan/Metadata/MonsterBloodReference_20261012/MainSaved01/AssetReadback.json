@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "asset_saves": 0,
+  "materials": [
+    {
+      "asset": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodGround.M_Monster_HitBloodGround",
+      "domain": "<MaterialDomain.MD_DEFERRED_DECAL: 1>",
+      "scalars": {
+        "BloodMaskChannel": 0.0,
+        "BloodMaskPower": 0.6000000238418579,
+        "BloodMaskDensity": 2.4000000953674316,
+        "BloodRoughness": 0.11999999731779099,
+        "BloodMetallic": 0.25
+      },
+      "textures": [
+        "/Game/_Art/Effects/Combat/Blood/FT_Monster_HitBloodGroundMask.FT_Monster_HitBloodGroundMask"
+      ],
+      "code": [
+        "float a=Channel<.5?Mask.r:(Channel<1.5?Mask.g:Mask.b);return saturate(pow(saturate(a),Power)*Density)*Fade;"
+      ],
+      "decal_fade_node": true
+    },
+    {
+      "asset": "/Game/_Art/Effects/Combat/Blood/M_Monster_HitBloodSheet.M_Monster_HitBloodSheet",
+      "domain": "<MaterialDomain.MD_SURFACE: 0>",
+      "scalars": {
+        "BloodMaskPower": 0.6499999761581421,
+        "BloodMaskDensity": 1.7999999523162842,
+        "BloodRoughness": 0.1599999964237213,
+        "BloodMetallic": 0.25
+      },
+      "textures": [
+        "/Game/_Art/Effects/Combat/Blood/FT_Monster_HitBloodSheetMask.FT_Monster_HitBloodSheetMask"
+      ],
+      "code": [
+        "return saturate(pow(saturate(max(Mask.r,max(Mask.g,Mask.b))),Power)*Density)*Alpha;"
+      ],
+      "decal_fade_node": false
+    }
+  ]
+}

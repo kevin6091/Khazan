@@ -1,0 +1,301 @@
+--- a/Source/Khazan/Tests/KZMonsterPresentationRepairPIETest.cpp
++++ b/Source/Khazan/Tests/KZMonsterPresentationRepairPIETest.cpp
+@@ -18,6 +18,8 @@
+ #include "Animation/Notifies/KZAnimNotifyState_MonsterVisual.h"
+ #include "Animation/Notifies/KZAnimNotify_CombatEffect.h"
+ #include "Materials/MaterialInstanceDynamic.h"
++#include "Materials/Material.h"
++#include "MaterialShared.h"
+ #include "Particles/ParticleSystemComponent.h"
+ #include "ParticleEmitterInstances.h"
+ #include "Data/KZCharacterDefinitionData.h"
+@@ -26,6 +28,9 @@
+ #include "Engine/Engine.h"
+ #include "EngineUtils.h"
+ #include "Engine/World.h"
++#include "Engine/StaticMeshActor.h"
++#include "Components/StaticMeshComponent.h"
++#include "Environment/KZSnowDeformation.h"
+ #include "GameFramework/CharacterMovementComponent.h"
+ #include "Camera/CameraActor.h"
+ #include "Camera/CameraComponent.h"
+@@ -61,7 +66,24 @@
+    for(TActorIterator<AKZMonster> It(W);It;++It){OriginalVisibility.Add(*It,It->IsHidden());It->SetActorHiddenInGame(true);It->GetAbilitySystemComponent()->CancelAllAbilities();if(auto* AI=Cast<AAIController>(It->GetController()))if(AI->BrainComponent)AI->BrainComponent->PauseLogic(TEXT("Owned visual QA"));}
+    Player->GetAbilitySystemComponent()->CancelAllAbilities();Player->GetCharacterMovement()->StopMovementImmediately();Player->SetActorHiddenInGame(true);
+    APlayerController* PC=CastChecked<APlayerController>(Player->GetController());SavedView=PC->GetViewTarget();
+-   const FVector Forward=Player->GetActorForwardVector(),Origin=Player->GetActorLocation();
++   const FVector Forward=Player->GetActorForwardVector();FVector Origin=Player->GetActorLocation();
++   if(FPlatformMisc::GetEnvironmentVariable(TEXT("KZ_BLOOD_REFERENCE_MAP")).Contains(TEXT("HeinMach")))
++   {
++    // Reuse the delivered snow QA's documented region; fixture placement must not embed meshes in entry rocks.
++    double Best=TNumericLimits<double>::Max();FHitResult Selected;AKZSnowDeformation* Snow=nullptr;
++    for(TActorIterator<AKZSnowDeformation> It(W);It;++It){Snow=*It;break;}
++    for(int32 X=-8;X<=8;++X)for(int32 Y=-8;Y<=8;++Y)
++    {
++     const FVector P(12100+X*100,13500+Y*100,0);FHitResult Hit;double Height=0;
++     if(Snow&&W->LineTraceSingleByChannel(Hit,P+FVector(0,0,2000),P-FVector(0,0,2000),ECC_Visibility,FCollisionQueryParams(NAME_None,true,Player.Get()))&&
++      Hit.GetComponent()&&Hit.GetComponent()->ComponentHasTag(Snow->SurfaceTag)&&Hit.ImpactNormal.Z>.95f&&Snow->GetSnowSurfaceHeight(Hit,Height)&&Height>0&&X*X+Y*Y<Best)
++     {Best=X*X+Y*Y;Selected=Hit;}
++    }
++    if(!Test->TestTrue(TEXT("Review fixture uses exposed delivered snow in the known QA region"),Best<TNumericLimits<double>::Max()))return Finish();
++    Origin=Selected.ImpactPoint+FVector(0,0,Player->GetCapsuleComponent()->GetScaledCapsuleHalfHeight())-Forward*350;
++    Test->AddInfo(FString::Printf(TEXT("Blood review actual snow ground=%s normal=%s"),*Selected.ImpactPoint.ToString(),*Selected.ImpactNormal.ToString()));
++   }
++   FixtureOrigin=Origin+Forward*350-FVector(0,0,Player->GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
+    Camera=W->SpawnActor<ACameraActor>(Origin-Forward*300+FVector(0,0,160),(Origin+Forward*350+FVector(0,0,50)-(Origin-Forward*300+FVector(0,0,160))).Rotation());
+    Camera->GetCameraComponent()->SetFieldOfView(65);PC->SetViewTarget(Camera.Get());
+    for(const TCHAR* F:Families)
+@@ -73,6 +95,7 @@
+     M->GetAbilitySystemComponent()->CancelAllAbilities();M->GetCharacterMovement()->DisableMovement();M->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+     FVector L=M->GetActorLocation();L.Z=Origin.Z-Player->GetCapsuleComponent()->GetScaledCapsuleHalfHeight()+M->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();M->SetActorLocation(L);M->SetActorRotation(Player->GetActorRotation());
+     M->GetMesh()->VisibilityBasedAnimTickOption=EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;M->GetMesh()->bSuppressNotifyEventDispatch=true;M->GetMesh()->SetComponentTickEnabled(false);M->GetController()->SetActorTickEnabled(false);M->SetActorHiddenInGame(true);Monsters.Add(M);ByFamily.Add(F,M);
++    if(FPlatformMisc::GetEnvironmentVariable(TEXT("KZ_MONSTER_REPAIR_QUICK_VISUAL"))==TEXT("1"))M->SetActorLocation(L+FVector(0,0,10000)); // Park unseen fixtures outside snow contact; never stack six bodies on the review ground.
+     Test->TestTrue(TEXT("Animated chest socket is saved for every family"),M->GetMesh()->DoesSocketExist(M->CombatReticleSocket));Test->TestNotNull(TEXT("Blood assigned to actual Monster"),M->HitBloodEffect.Get());Test->TestNotNull(TEXT("Ash assigned to actual Monster"),M->DeathAshEffect.Get());
+    }
+    Phase=FPlatformMisc::GetEnvironmentVariable(TEXT("KZ_MONSTER_REPAIR_QUICK_VISUAL"))==TEXT("1")?4:1;return false;
+@@ -133,17 +156,56 @@
+   }
+   if(Phase==4)
+   {
+-   if(DeathIndex>=Monsters.Num())return Finish();Current=Monsters[DeathIndex];auto* M=Current.Get();
++   if(DeathIndex>=Monsters.Num()){if(FPlatformMisc::GetEnvironmentVariable(TEXT("KZ_BLOOD_REFERENCE_POLICY"))==TEXT("1")){Phase=7;return false;}return Finish();}Current=Monsters[DeathIndex];auto* M=Current.Get();
+    for(auto& Other:Monsters)if(Other.IsValid())Other->SetActorHiddenInGame(Other!=Current);
+-   const FVector Centre=M->GetActorLocation();const float Half=M->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();const FVector View=Centre+Player->GetActorForwardVector()*(Half*2/FMath::Tan(FMath::DegreesToRadians(32.5f)));Camera->SetActorLocationAndRotation(View,(Centre-View).Rotation());
++   if(FPlatformMisc::GetEnvironmentVariable(TEXT("KZ_MONSTER_REPAIR_QUICK_VISUAL"))==TEXT("1"))
++    M->SetActorLocation(FixtureOrigin+FVector(0,0,M->GetCapsuleComponent()->GetScaledCapsuleHalfHeight()));
++   const FVector Centre=M->GetActorLocation();const float Half=M->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();const FVector View=Centre+Player->GetActorForwardVector()*(Half*4)+FVector(0,0,Half*.75f);Camera->SetActorLocationAndRotation(View,(Centre-FVector(0,0,Half*.3f)-View).Rotation());
+    M->GetMesh()->bSuppressNotifyEventDispatch=false;M->GetMesh()->SetComponentTickEnabled(true);CastChecked<APlayerController>(Player->GetController())->SetViewTarget(Camera.Get());
+    M->ClearMonsterVisuals();M->GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);M->GetMesh()->SetAnimInstanceClass(M->GetClass()->GetDefaultObject<AKZMonster>()->GetMesh()->GetAnimClass());
+-   M->PlayHitBlood(Player.Get(),M->GetMesh()->GetSocketLocation(M->CombatReticleSocket));Start=Now;Phase=6;return false;
++   Start=Now;Phase=10;return false;
++  }
++  if(Phase==10)
++  {
++   if(Now-Start<.15f)return false;auto* M=Current.Get();const FVector Contact=M->GetMesh()->GetSocketLocation(M->CombatReticleSocket);
++   const FVector Foot=M->GetActorLocation()-FVector(0,0,M->GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
++   const FVector Head=M->GetMesh()->GetSocketLocation(TEXT("Bip001-Head"));const FVector Focus=(Foot+Head)*.5f;
++   const float BodyHeight=FMath::Max(float(Head.Z-Foot.Z),M->GetCapsuleComponent()->GetScaledCapsuleHalfHeight()*2);
++   FVector View=Focus+Player->GetActorForwardVector()*BodyHeight*2.5f+FVector(0,0,BodyHeight*.6f);
++   if(FPlatformMisc::GetEnvironmentVariable(TEXT("KZ_BLOOD_REFERENCE_MAP")).Contains(TEXT("HeinMach")))
++   {
++    double BestDistance=0;FCollisionQueryParams Query(NAME_None,true,M);Query.AddIgnoredActor(Player.Get());
++    const FVector Preferred=(Player->GetActorLocation()-Focus).GetSafeNormal2D();
++    for(int32 I=0;I<8;++I)
++    {
++     const FVector Direction=Preferred.RotateAngleAxis(I*45.f,FVector::UpVector);
++     const FVector Candidate=Focus+Direction*BodyHeight*2.5f+FVector(0,0,BodyHeight*.6f);FHitResult Hit;
++     const bool Blocked=W->LineTraceSingleByChannel(Hit,Focus,Candidate,ECC_Visibility,Query);
++     const FVector Clear=Blocked?Hit.ImpactPoint+Hit.ImpactNormal*20.f:Candidate;
++     const double Distance=FVector::DistSquared(Focus,Clear);
++     if(Distance>BestDistance){BestDistance=Distance;View=Clear;}
++     if(!Blocked){View=Candidate;break;} // Prefer the attacker's view of the spray; a giant's back obscures its chest.
++    }
++   }
++   Camera->SetActorLocationAndRotation(View,(Focus-View).Rotation());
++   M->PlayHitBlood(Player.Get(),Contact);Test->AddInfo(FString::Printf(TEXT("Blood actual pose Actor=%s chest=%s"),*M->GetName(),*Contact.ToString()));
++   for(TObjectIterator<UParticleSystemComponent> It;It;++It)if(It->GetWorld()==W&&It->ComponentHasTag(M->GetFName())&&It->ComponentHasTag(TEXT("KZMonsterHitBlood")))
++   {
++    Test->AddInfo(FString::Printf(TEXT("Blood resolved world=%s outward=%s posedPhysics=%d"),*It->GetComponentLocation().ToString(),*It->GetForwardVector().ToString(),M->GetMesh()->GetPhysicsAsset()!=nullptr));
++    Test->TestTrue(TEXT("Blood exits toward the attacker side instead of travelling through the victim"),FVector::DotProduct(It->GetForwardVector(),(Player->GetActorLocation()-It->GetComponentLocation()).GetSafeNormal())>0);
++   }
++   Start=Now;BloodFrame=0;Phase=6;return false;
+   }
+   if(Phase==6)
+   {
+-   if(Now-Start<.12f)return false;Capture(TEXT("Blood_")+FString(Families[DeathIndex]));auto* M=Current.Get();
++   const float BloodTimes[]={.08f,.18f,.4f,.8f}; // Screenshot review times, not gameplay tuning.
++   if(BloodFrame<4){if(Now-Start<BloodTimes[BloodFrame])return false;Capture(FString::Printf(TEXT("Blood_%s_%02d"),Families[DeathIndex],BloodFrame++));return false;}
++   auto* M=Current.Get();
+    Test->TestTrue(TEXT("Blood emits actual live physical particles"),ParticleCount(M,TEXT("KZMonsterHitBlood"))>0);
++   int32 Decals=0;
++   for(TObjectIterator<UDecalComponent> It;It;++It)if(It->GetWorld()==W&&It->ComponentHasTag(M->GetFName())&&It->ComponentHasTag(TEXT("KZMonsterHitBloodGround")))
++   {++Decals;Test->TestFalse(TEXT("Ground blood transform finite"),It->GetComponentTransform().ContainsNaN());Test->TestTrue(TEXT("Ground blood projector points downward"),It->GetForwardVector().Z<0);}
++   Test->TestEqual(TEXT("One ground blood projector per hit on each monster family"),Decals,1);
+    M->GetAbilitySystemComponent()->SetNumericAttributeBase(UKZAttributeSet::GetHPAttribute(),0.f);M->FinishDeathPresentation(DeathIndex%2==0);Start=Now;DeathSampled=false;LateDeathSampled=false;Phase=5;return false;
+   }
+   if(Phase==5)
+@@ -155,6 +217,36 @@
+    if(Progress>.75f&&!LateDeathSampled){LateDeathSampled=true;Capture(TEXT("LateDeathAsh_")+FString(Families[DeathIndex]));}
+    if(Now-Start>30.f){Test->AddError(TEXT("Dead monster did not dissolve and despawn"));return Finish();}return false;
+   }
++  if(Phase==7)
++  {
++   // Isolated, unsaved geometry checks: incline placement, no ground, and independent finite decal life.
++   const FVector Base=Player->GetActorLocation()+FVector(20000,20000,10000);
++   PolicyFloor=W->SpawnActor<AStaticMeshActor>(Base,FRotator(20,0,0));
++   PolicyFloor->GetStaticMeshComponent()->SetMobility(EComponentMobility::Movable);
++   auto* Cube=LoadObject<UStaticMesh>(nullptr,TEXT("/Engine/BasicShapes/Cube.Cube"));
++   PolicyFloor->GetStaticMeshComponent()->SetStaticMesh(Cube);PolicyFloor->SetActorScale3D(FVector(10,10,.2));PolicyFloor->GetStaticMeshComponent()->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
++   PolicyFloor->GetStaticMeshComponent()->SetCollisionObjectType(ECC_WorldStatic);
++   UClass* Class=LoadClass<AKZMonster>(nullptr,TEXT("/Game/Bluprints/Monsters/BP_Monster_Swordsman.BP_Monster_Swordsman_C"));
++   FActorSpawnParameters Params;Params.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
++   auto* M=W->SpawnActor<AKZMonster>(Class,Base+FVector(0,0,130),FRotator::ZeroRotator,Params);PolicyMonster=M;Monsters.Add(M);
++   if(auto* AI=Cast<AAIController>(M->GetController()))if(AI->BrainComponent)AI->BrainComponent->StopLogic(TEXT("Owned ground policy fixture"));
++   M->GetCharacterMovement()->DisableMovement();M->SetActorHiddenInGame(true);M->GetMesh()->VisibilityBasedAnimTickOption=EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
++   M->HitBloodDecalHoldSeconds=.1f;M->HitBloodDecalFadeSeconds=.15f;Start=Now;Phase=8;return false;
++  }
++  if(Phase==8)
++  {
++   if(Now-Start<.1f)return false;auto* M=PolicyMonster.Get();
++   M->PlayHitBlood(Player.Get(),M->GetMesh()->GetSocketLocation(M->CombatReticleSocket));
++   for(TObjectIterator<UDecalComponent> It;It;++It)if(It->GetWorld()==W&&It->ComponentHasTag(M->GetFName())&&It->ComponentHasTag(TEXT("KZMonsterHitBloodGround")))PolicyDecal=*It;
++   Test->TestTrue(TEXT("Ground blood is generated on the inclined world surface"),PolicyDecal.IsValid());
++   if(PolicyDecal.IsValid())Test->TestTrue(TEXT("Ground blood normal follows the actual inclined face"),FVector::DotProduct(PolicyDecal->GetForwardVector(),-PolicyFloor->GetActorUpVector())>.999f);
++   M->SetActorLocation(M->GetActorLocation()+FVector(0,0,M->HitBloodGroundTraceDistance*2));M->GetMesh()->RefreshBoneTransforms();
++   M->PlayHitBlood(Player.Get(),M->GetMesh()->GetSocketLocation(M->CombatReticleSocket));
++   int32 Count=0;for(TObjectIterator<UDecalComponent> It;It;++It)if(It->GetWorld()==W&&It->ComponentHasTag(M->GetFName())&&It->ComponentHasTag(TEXT("KZMonsterHitBloodGround")))++Count;
++   Test->TestEqual(TEXT("Airborne hit with no ground in range adds no floating decal"),Count,1);
++   M->Destroy();Test->TestTrue(TEXT("Existing ground blood survives the victim's destruction"),PolicyDecal.IsValid()&&PolicyDecal->IsRegistered());Start=Now;Phase=9;return false;
++  }
++  if(Phase==9){if(Now-Start<.4f)return false;Test->TestTrue(TEXT("World blood decal destroys itself after hold and fade"),!PolicyDecal.IsValid()||!PolicyDecal->IsRegistered());return Finish();}
+   return false;
+  }
+ private:
+@@ -168,8 +260,9 @@
+   FFileHelper::SaveArrayToFile(PNG,*FPaths::Combine(FPlatformMisc::GetEnvironmentVariable(TEXT("KZ_MONSTER_REPAIR_OUT")),N+TEXT(".png")));
+  }
+  bool Finish(){auto R=MakeShared<FJsonObject>();R->SetStringField(TEXT("status"),Test->HasAnyErrors()?TEXT("failed"):TEXT("passed"));R->SetNumberField(TEXT("attack_assets"),CaseIndex);R->SetNumberField(TEXT("source_occurrences"),Occurrences);R->SetNumberField(TEXT("death_families"),DeathIndex);R->SetArrayField(TEXT("attack_events"),Rows);FString Text;FJsonSerializer::Serialize(R,TJsonWriterFactory<>::Create(&Text));FFileHelper::SaveStringToFile(Text,*(FPlatformMisc::GetEnvironmentVariable(TEXT("KZ_MONSTER_REPAIR_OUT"))/TEXT("Runtime.json")));Cleanup();return true;}
+- void Cleanup(){if(Cleaned)return;Cleaned=true;for(auto& M:Monsters)if(M.IsValid())M->Destroy();if(Player.IsValid()){Player->SetActorHiddenInGame(false);if(auto* PC=Cast<APlayerController>(Player->GetController()))PC->SetViewTarget(SavedView.Get());}if(Camera.IsValid())Camera->Destroy();for(const auto& P:OriginalVisibility)if(P.Key.IsValid()){P.Key->SetActorHiddenInGame(P.Value);if(auto* AI=Cast<AAIController>(P.Key->GetController()))if(AI->BrainComponent)AI->BrainComponent->ResumeLogic(TEXT("Owned visual QA complete"));}}
+- FAutomationTestBase* Test;TWeakObjectPtr<AKZPlayer> Player;double Deadline;TArray<FCase> Cases;TArray<TWeakObjectPtr<AKZMonster>> Monsters;TMap<FString,TWeakObjectPtr<AKZMonster>> ByFamily;TMap<TWeakObjectPtr<AKZMonster>,bool> OriginalVisibility;TWeakObjectPtr<AKZMonster> Current;TWeakObjectPtr<UAnimSequence> Sequence;TWeakObjectPtr<UKZAnimNotifyState_MonsterVisual> State;TWeakObjectPtr<ACameraActor> Camera;TWeakObjectPtr<AActor> SavedView;TSet<FString> Captured;TArray<TSharedPtr<FJsonValue>> Rows;int32 Phase=0,CaseIndex=0,EventIndex=0,Occurrences=0,DeathIndex=0;float Start=0,SampleTime=0;bool DeathSampled=false,LateDeathSampled=false,Cleaned=false;
++ void Cleanup(){if(Cleaned)return;Cleaned=true;for(auto& M:Monsters)if(M.IsValid())M->Destroy();if(PolicyFloor.IsValid())PolicyFloor->Destroy();if(PolicyDecal.IsValid())PolicyDecal->DestroyComponent();if(Player.IsValid()){Player->SetActorHiddenInGame(false);if(auto* PC=Cast<APlayerController>(Player->GetController()))PC->SetViewTarget(SavedView.Get());}if(Camera.IsValid())Camera->Destroy();for(const auto& P:OriginalVisibility)if(P.Key.IsValid()){P.Key->SetActorHiddenInGame(P.Value);if(auto* AI=Cast<AAIController>(P.Key->GetController()))if(AI->BrainComponent)AI->BrainComponent->ResumeLogic(TEXT("Owned visual QA complete"));}}
++ FVector FixtureOrigin;TWeakObjectPtr<AStaticMeshActor> PolicyFloor;TWeakObjectPtr<AKZMonster> PolicyMonster;TWeakObjectPtr<UDecalComponent> PolicyDecal;
++ FAutomationTestBase* Test;TWeakObjectPtr<AKZPlayer> Player;double Deadline;TArray<FCase> Cases;TArray<TWeakObjectPtr<AKZMonster>> Monsters;TMap<FString,TWeakObjectPtr<AKZMonster>> ByFamily;TMap<TWeakObjectPtr<AKZMonster>,bool> OriginalVisibility;TWeakObjectPtr<AKZMonster> Current;TWeakObjectPtr<UAnimSequence> Sequence;TWeakObjectPtr<UKZAnimNotifyState_MonsterVisual> State;TWeakObjectPtr<ACameraActor> Camera;TWeakObjectPtr<AActor> SavedView;TSet<FString> Captured;TArray<TSharedPtr<FJsonValue>> Rows;int32 Phase=0,CaseIndex=0,EventIndex=0,Occurrences=0,DeathIndex=0,BloodFrame=0;float Start=0,SampleTime=0;bool DeathSampled=false,LateDeathSampled=false,Cleaned=false;
+ };
+ class FWait:public IAutomationLatentCommand
+ {
+@@ -179,5 +272,22 @@
+ };
+ }
+ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FKZMonsterRepairPIE,"Khazan.MonsterRepair.PIE",EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+-bool FKZMonsterRepairPIE::RunTest(const FString&){const auto* D=LoadObject<UKZCharacterDefinitionData>(nullptr,TEXT("/Game/Data/Character/DA_CharacterDefinition_Player.DA_CharacterDefinition_Player"));if(!D)return false;int32 Blank=0;for(const auto& G:D->GetInitialAbilityGrants())if(!G.AbilityClass&&G.InputTag==FGameplayTag::EmptyTag)++Blank;if(Blank)AddExpectedError(TEXT("BP_Player_C_0 has an InitialAbilityGrant with no AbilityClass in DA_CharacterDefinition_Player (InputTag: None)."),EAutomationExpectedErrorFlags::Contains,Blank,false);FAutomationTestFramework::Get().EnqueueLatentCommand(MakeShared<KZMonsterRepairQA::FWait>(this));return true;}
++bool FKZMonsterRepairPIE::RunTest(const FString&)
++{
++ if(FPlatformMisc::GetEnvironmentVariable(TEXT("KZ_MONSTER_REPAIR_QUICK_VISUAL"))==TEXT("1"))
++  for(const TCHAR* Name:{TEXT("M_Monster_HitBloodGround"),TEXT("M_Monster_HitBloodFluid")})
++  {
++   UMaterial* Material=LoadObject<UMaterial>(nullptr,*(FString(TEXT("/Game/_Art/Effects/Combat/Blood/"))+Name));
++   if(!TestNotNull(TEXT("Review material is the saved effective blood variant"),Material))return false;
++   FMaterialResource* Resource=Material->GetMaterialResource(GMaxRHIShaderPlatform);
++   if(!TestNotNull(TEXT("Review material has this RHI's shader resource"),Resource))return false;
++   AddInfo(FString::Printf(TEXT("Blood shader before review %s ready=%d shaderMap=%d complete=%d"),Name,Resource->IsCompilationFinished(),Resource->GetGameThreadShaderMap()!=nullptr,Resource->IsGameThreadShaderMapComplete()));
++   if(FPlatformMisc::GetEnvironmentVariable(TEXT("KZ_BLOOD_REFERENCE_COLD_FIRST"))!=TEXT("1"))
++   {
++    Material->EnsureIsComplete(); // FinishCompilation alone does not submit the editor's missing on-demand shaders.
++    if(!TestTrue(TEXT("Blood review shader compilation completed without errors"),Resource->IsGameThreadShaderMapComplete()&&Resource->GetCompileErrors().IsEmpty()))return false;
++   }
++  }
++ const auto* D=LoadObject<UKZCharacterDefinitionData>(nullptr,TEXT("/Game/Data/Character/DA_CharacterDefinition_Player.DA_CharacterDefinition_Player"));if(!D)return false;int32 Blank=0;for(const auto& G:D->GetInitialAbilityGrants())if(!G.AbilityClass&&G.InputTag==FGameplayTag::EmptyTag)++Blank;if(Blank)AddExpectedError(TEXT("BP_Player_C_0 has an InitialAbilityGrant with no AbilityClass in DA_CharacterDefinition_Player (InputTag: None)."),EAutomationExpectedErrorFlags::Contains,Blank,false);FAutomationTestFramework::Get().EnqueueLatentCommand(MakeShared<KZMonsterRepairQA::FWait>(this));return true;
++}
+ #endif
+--- a/Source/Khazan/Tests/KZPlayerAttackCollisionPIETest.cpp
++++ b/Source/Khazan/Tests/KZPlayerAttackCollisionPIETest.cpp
+@@ -11,14 +11,18 @@
+ #include "AI/KZMonsterAIController.h"
+ #include "Data/KZCharacterDefinitionData.h"
+ #include "Components/CapsuleComponent.h"
++#include "Components/DecalComponent.h"
+ #include "Components/SkeletalMeshComponent.h"
+ #include "Components/StateTreeAIComponent.h"
++#include "Components/StaticMeshComponent.h"
+ #include "Perception/AIPerceptionComponent.h"
+ #include "GameFramework/CharacterMovementComponent.h"
+ #include "Animation/AnimInstance.h"
+ #include "Animation/AnimMontage.h"
+ #include "Engine/Engine.h"
+ #include "Engine/World.h"
++#include "Engine/StaticMeshActor.h"
++#include "Engine/StaticMesh.h"
+ #include "EngineUtils.h"
+ #include "KZGameplayTags.h"
+ #include "UObject/StrongObjectPtr.h"
+@@ -87,6 +91,9 @@
+   for (TObjectIterator<UParticleSystemComponent> It; It; ++It)
+    if (It->GetWorld() == Player->GetWorld() && It->ComponentHasTag(Target->GetFName()) && It->ComponentHasTag(TEXT("KZMonsterHitBlood")) && !SeenBlood.Contains(FObjectKey(*It)))
+    { SeenBlood.Add(FObjectKey(*It)); ++BloodChanges; }
++  for (TObjectIterator<UDecalComponent> It; It; ++It)
++   if (It->GetWorld() == Player->GetWorld() && It->ComponentHasTag(Target->GetFName()) && It->ComponentHasTag(TEXT("KZMonsterHitBloodGround")) && !SeenGroundBlood.Contains(FObjectKey(*It)))
++   { SeenGroundBlood.Add(FObjectKey(*It)); ++GroundBloodChanges; }
+   if (Attack->IsActive() && !FMath::IsNearlyEqual(LastObservedTime, Now))
+   {
+    float Begin = 0, End = 0; C.Node.Montage->GetSectionStartAndEndTime(C.Node.Montage->GetSectionIndex(C.Node.SectionName), Begin, End);
+@@ -107,6 +114,7 @@
+   Test->TestTrue(*FString::Printf(TEXT("%s stamina delta"), *C.Name), FMath::IsNearlyEqual(StaminaDelta, C.ExpectedStamina, .001f));
+   Test->TestEqual(*FString::Printf(TEXT("%s accepted HP effects"), *C.Name), HPChanges, C.ExpectedHits);
+   Test->TestEqual(*FString::Printf(TEXT("%s blood bursts match accepted hits, including miss/cancel/dedup"), *C.Name), BloodChanges, C.ExpectedHits);
++  Test->TestEqual(*FString::Printf(TEXT("%s ground blood matches accepted hits, including miss/cancel/dedup"), *C.Name), GroundBloodChanges, C.ExpectedHits);
+   if (CaseIndex == 0) Test->TestTrue(TEXT("Dedup observed across multiple actual active Montage frames"), ActiveWindowFrames > 1);
+   Test->AddInfo(FString::Printf(TEXT("PlayerAttackCollision case=%s HP=%g expected=%g Stamina=%g expected=%g HPChanges=%d expectedHits=%d bloodBursts=%d oversized=%d canceled=%d"),
+    *C.Name, HPDelta, C.ExpectedHP, StaminaDelta, C.ExpectedStamina, HPChanges, C.ExpectedHits, BloodChanges, C.Oversized, Canceled));
+@@ -236,6 +244,23 @@
+   if (Duration <= .3f) { Fail(TEXT("Real base Montage section is too short for fixture timing")); return; }
+   AddControlled(*Base, Duration);
+   Cases.Append(AuthoredCases);
++  // Surface projection now follows the receiver capsule. Oversized multi-hit fixtures
++  // must also have a floor underneath that whole surface, rather than incidental map slopes.
++  // These height/thickness literals are isolated QA geometry, never gameplay tuning.
++  FixtureTransform = SavedPlayer.Transform;
++  FixtureTransform.AddToTranslation(FVector(0, 0, 10000));
++  float FloorExtent = GeometryBound + 200;
++  for (const FAttackCollisionCase& C : Cases) FloorExtent = FMath::Max(FloorExtent, GeometryBound + 200 + static_cast<float>(C.TargetOffset.Size()));
++  GroundFixture = Player->GetWorld()->SpawnActor<AStaticMeshActor>();
++  UStaticMesh* Cube = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cube.Cube"));
++  if (!GroundFixture.IsValid() || !Cube) { Fail(TEXT("Controlled collision floor could not spawn")); return; }
++  GroundFixture->GetStaticMeshComponent()->SetMobility(EComponentMobility::Movable);
++  GroundFixture->SetActorLocation(FixtureTransform.GetLocation() - FVector(0, 0, SavedPlayer.HalfHeight + 10));
++  GroundFixture->SetActorScale3D(FVector(FloorExtent / 50, FloorExtent / 50, .2f));
++  GroundFixture->GetStaticMeshComponent()->SetStaticMesh(Cube);
++  GroundFixture->GetStaticMeshComponent()->SetCollisionObjectType(ECC_WorldStatic);
++  GroundFixture->GetStaticMeshComponent()->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
++  GroundFixture->GetStaticMeshComponent()->SetCollisionResponseToAllChannels(ECR_Block);
+   CostProperty->SetObjectPropertyValue_InContainer(Attack.Get(), nullptr);
+   AbilityDataChanged = true;
+  }
+@@ -275,21 +300,21 @@
+   // Each death fixture owns a fresh pawn. Restoring HP must not resurrect a dissolving corpse.
+   if (DisposableTarget.IsValid()) { DisposableTarget->GetAbilitySystemComponent()->GetGameplayAttributeValueChangeDelegate(UKZAttributeSet::GetHPAttribute()).Remove(HPDelegate); DisposableTarget->Destroy(); }
+   FActorSpawnParameters Params; Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+-  Target = Player->GetWorld()->SpawnActor<AKZMonster>(TargetClass, SavedPlayer.Transform.GetLocation(), SavedPlayer.Transform.Rotator(), Params);
++  Target = Player->GetWorld()->SpawnActor<AKZMonster>(TargetClass, FixtureTransform.GetLocation(), FixtureTransform.Rotator(), Params);
+   if (!Target.IsValid()) { Fail(TEXT("Disposable real monster target could not spawn")); return false; }
+   DisposableTarget = Target; Snapshot(Target.Get());
+   HPDelegate = Target->GetAbilitySystemComponent()->GetGameplayAttributeValueChangeDelegate(UKZAttributeSet::GetHPAttribute()).AddRaw(this, &FPlayerAttackCollisionCommand::OnHP);
+   TArray<FKZComboNode>& Nodes = *NodesProperty->ContainerPtrToValuePtr<TArray<FKZComboNode>>(Fixture.Get()); Nodes = {C.Node};
+   DefinitionProperty->SetObjectPropertyValue_InContainer(Attack.Get(), Fixture.Get()); EntryProperty->SetPropertyValue_InContainer(Attack.Get(), C.Node.NodeId);
+-  Player->SetActorTransform(SavedPlayer.Transform, false, nullptr, ETeleportType::TeleportPhysics);
++  Player->SetActorTransform(FixtureTransform, false, nullptr, ETeleportType::TeleportPhysics);
+   Target->GetCapsuleComponent()->SetCapsuleSize(C.Oversized ? GeometryBound + 200 : NormalRadius(), C.Oversized ? GeometryBound + 200 : NormalHalfHeight(), true);
+   Target->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+-  Target->SetActorLocation(SavedPlayer.Transform.TransformPosition(C.TargetOffset), false, nullptr, ETeleportType::TeleportPhysics);
++  Target->SetActorLocation(FixtureTransform.TransformPosition(C.TargetOffset), false, nullptr, ETeleportType::TeleportPhysics);
+   UAbilitySystemComponent* Victim = Target->GetAbilitySystemComponent();
+   Victim->SetNumericAttributeBase(UKZAttributeSet::GetMaxHPAttribute(), FMath::Max(C.InitialHP, 100.f));
+   Victim->SetNumericAttributeBase(UKZAttributeSet::GetMaxStaminaAttribute(), FMath::Max(C.InitialStamina, 50.f));
+   Victim->SetNumericAttributeBase(UKZAttributeSet::GetHPAttribute(), C.InitialHP); Victim->SetNumericAttributeBase(UKZAttributeSet::GetStaminaAttribute(), C.InitialStamina);
+-  HPChanges = 0; BloodChanges = 0; SeenBlood.Reset(); ActiveWindowFrames = 0; LastObservedTime = -1; Canceled = false; Capturing = true; CaseStart = Now;
++  HPChanges = 0; BloodChanges = 0; GroundBloodChanges = 0; SeenBlood.Reset(); SeenGroundBlood.Reset(); ActiveWindowFrames = 0; LastObservedTime = -1; Canceled = false; Capturing = true; CaseStart = Now;
+   if (!ASC->TryActivateAbility(AttackHandle) || !Attack->IsActive()) { Fail(TEXT("Real engine attack activation failed: ") + C.Name); return false; }
+   Test->TestTrue(TEXT("Attack uses real authored Montage"), Attack->GetCurrentMontage() == C.Node.Montage.Get());
+   RunningCase = true; return true;
+@@ -318,6 +343,7 @@
+   if (ASC.IsValid()) ASC->CancelAbilityHandle(AttackHandle);
+   if (Target.IsValid() && HPDelegate.IsValid()) Target->GetAbilitySystemComponent()->GetGameplayAttributeValueChangeDelegate(UKZAttributeSet::GetHPAttribute()).Remove(HPDelegate);
+   if (DisposableTarget.IsValid()) DisposableTarget->Destroy();
++  if (GroundFixture.IsValid()) GroundFixture->Destroy();
+   if (Attack.IsValid() && AbilityDataChanged && DefinitionProperty && EntryProperty)
+   {
+    DefinitionProperty->SetObjectPropertyValue_InContainer(Attack.Get(), const_cast<UKZComboDefinitionData*>(SavedDefinition)); EntryProperty->SetPropertyValue_InContainer(Attack.Get(), SavedEntry);
+@@ -340,10 +366,14 @@
+  TWeakObjectPtr<UKZComboAttackAbility> Attack;
+  TWeakObjectPtr<AKZMonster> Target;
+  TWeakObjectPtr<AKZMonster> DisposableTarget;
++ TWeakObjectPtr<AStaticMeshActor> GroundFixture;
++ FTransform FixtureTransform;
+  UClass* TargetClass = nullptr;
+  float TargetRadius = 0, TargetHalfHeight = 0;
+  TSet<FObjectKey> SeenBlood;
++ TSet<FObjectKey> SeenGroundBlood;
+  int32 BloodChanges = 0;
++ int32 GroundBloodChanges = 0;
+  const UKZComboDefinitionData* SavedDefinition = nullptr;
+  UObject* SavedCost = nullptr;
+  FName SavedEntry;

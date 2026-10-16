@@ -1,0 +1,36 @@
+{
+  "schema": "/Script/Khazan.KZAnimNotifyState_MonsterVisual",
+  "version": "20261008",
+  "lifetime": "Actor mesh+AnimInstance+NotifyID; actual source UObject+MontageInstanceID/AssetPlayerInstanceID; fullclipboundary ends all matching resource receipts; source flags retained after partial interval; original material/MID strongly retained until last owner",
+  "state": {
+    "Effect": "Instanced KZAnimNotify_CombatEffect",
+    "BoneName": "FName",
+    "VectorParameterName": "FName",
+    "ScalarCurveName": "FName",
+    "ScalarParameterName": "FName",
+    "bUseScalarCurve": "bool",
+    "ScalarCurve": "FRuntimeFloatCurve",
+    "bAnimationContextBoundary": "bool full-clip technical lifetime adapter, no source visual event",
+    "MaterialOverlay": "UMaterialInterface optional source Rim render adapter",
+    "MaterialOverrides": "TArray<FKZMonsterVisualMaterialOverride> {SourceMaterial:UMaterialInterface, ReplacementMaterial:UMaterialInterface}"
+  },
+  "effect_additions": {
+    "TrailMesh": "UStaticMesh",
+    "TrailMaterial": "UMaterialInterface",
+    "TrailIntensity": "float",
+    "TrailBlendTime": "float seconds",
+    "TrailCreateCount": "int32",
+    "bDeepSnowTrail": "bool",
+    "TrailIntensityParameter": "FName explicit material adapter",
+    "bUseCorrectionCurves": "bool",
+    "SourceCorrectionTranslation": "FRuntimeVectorCurve cm",
+    "SourceCorrectionRotation": "FRuntimeVectorCurve xyz Roll/Pitch/Yaw degrees",
+    "SourceCorrectionScale": "FRuntimeVectorCurve ratio"
+  },
+  "time": "All curves sequence-local mapped seconds; full rich keys/tangents preserved",
+  "source": "Existing Effect SourcePackage and SourceField",
+  "conditional": "bOnAttackSuccessed true gated off without actual hit producer",
+  "decal": "GPU material registry DecalOpacityCurveIndex, preserve player indices0..3; lifespan remains engine source lifespan",
+  "death": "MonsterStamina.DeathPresentationMontage optional UAnimMontage; default directional selection labeled adapter",
+  "surface_route_addition": "FKZCombatEffectSurfaceRoute: bSuppressParticle bool=false, DecalMaterial UMaterialInterface=nullptr, bSuppressDecal bool=false. Explicit source NULL selected route suppresses, no invented default on missing/unlisted Heavy surfaces. Existing player default behavior retained."
+}

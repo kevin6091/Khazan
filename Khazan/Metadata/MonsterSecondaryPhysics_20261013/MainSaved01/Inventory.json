@@ -1,0 +1,826 @@
+{
+  "project": "C:\\Users\\user\\Desktop\\GitProject\\Khazan\\Khazan",
+  "pid": 10648,
+  "read_only": true,
+  "blueprints": [
+    {
+      "blueprint": "/Game/Bluprints/Monsters/BP_Monster_ApesStoneHandElite",
+      "status": "<BlueprintStatus.BS_UP_TO_DATE: 3>",
+      "components": [
+        {
+          "name": "CharacterMesh0",
+          "mesh": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Meshes/SK_EN_ApesStoneHandElite.SK_EN_ApesStoneHandElite",
+          "physics": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Meshes/Physics/PA_SK_EN_ApesStoneHandElite.PA_SK_EN_ApesStoneHandElite",
+          "override": null,
+          "animation": "/Game/Monsters/ApesStoneHandElite/Animations/ABP_ApesStoneHandElite.ABP_ApesStoneHandElite_C",
+          "scale": "<Struct 'Vector' (0x00000198330E15B0) {x: 1.000000, y: 1.000000, z: 1.000000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "blueprint": "/Game/Bluprints/Monsters/BP_Monster_HalberdElite",
+      "status": "<BlueprintStatus.BS_UP_TO_DATE: 3>",
+      "components": [
+        {
+          "name": "EnemyWeapon_R_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Equipment/SK_EN_C_I_Halberd_WeaponV2.SK_EN_C_I_Halberd_WeaponV2",
+          "physics": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Equipment/Physics/PA_SK_EN_C_I_Halberd_WeaponV2.PA_SK_EN_C_I_Halberd_WeaponV2",
+          "override": null,
+          "animation": null,
+          "scale": "<Struct 'Vector' (0x0000019843203DB0) {x: 1.000000, y: 1.000000, z: 1.000000}>",
+          "collision": "<CollisionEnabled.NO_COLLISION: 0>",
+          "tags": []
+        },
+        {
+          "name": "CharacterMesh0",
+          "mesh": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/SK_EN_C_M_HalberdV2.SK_EN_C_M_HalberdV2",
+          "physics": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Physics/PA_SK_EN_C_M_HalberdV2.PA_SK_EN_C_M_HalberdV2",
+          "override": null,
+          "animation": "/Game/Monsters/HalberdElite/Animations/ABP_HalberdElite.ABP_HalberdElite_C",
+          "scale": "<Struct 'Vector' (0x000001984320A1B0) {x: 1.000000, y: 1.000000, z: 1.000000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "blueprint": "/Game/Bluprints/Monsters/BP_Monster_HeavySwordsman",
+      "status": "<BlueprintStatus.BS_UP_TO_DATE: 3>",
+      "components": [
+        {
+          "name": "EnemyArmor_Lower_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/SK_EN_C_M_Human_Elite_M_Empire_Lower001V2.SK_EN_C_M_Human_Elite_M_Empire_Lower001V2",
+          "physics": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/PA_SK_EN_C_M_Human_Elite_M_Empire_Lower001V2.PA_SK_EN_C_M_Human_Elite_M_Empire_Lower001V2",
+          "override": null,
+          "animation": "/Game/Monsters/Shared/Physics/ABP_EliteParts_CopyPose.ABP_EliteParts_CopyPose_C",
+          "scale": "<Struct 'Vector' (0x0000019849E7B5B0) {x: 1.000000, y: 1.000000, z: 1.000000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": [
+            "MonsterBodyPart"
+          ]
+        },
+        {
+          "name": "EnemyArmor_Upper_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/SK_EN_C_M_Human_Elite_M_Empire_Upper001V2.SK_EN_C_M_Human_Elite_M_Empire_Upper001V2",
+          "physics": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/PA_SK_EN_C_M_Human_Elite_M_Empire_Upper001V2.PA_SK_EN_C_M_Human_Elite_M_Empire_Upper001V2",
+          "override": null,
+          "animation": "/Game/Monsters/Shared/Physics/ABP_EliteParts_CopyPose.ABP_EliteParts_CopyPose_C",
+          "scale": "<Struct 'Vector' (0x0000019849E7A1B0) {x: 1.000000, y: 1.000000, z: 1.000000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": [
+            "MonsterBodyPart"
+          ]
+        },
+        {
+          "name": "EnemyWeapon_R_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_EmpireElite_Sword001V2.SK_EN_C_I_EmpireElite_Sword001V2",
+          "physics": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_EmpireElite_Sword001V2.PA_SK_EN_C_I_EmpireElite_Sword001V2",
+          "override": null,
+          "animation": null,
+          "scale": "<Struct 'Vector' (0x0000019849E7DDB0) {x: 0.900000, y: 0.900000, z: 0.900000}>",
+          "collision": "<CollisionEnabled.NO_COLLISION: 0>",
+          "tags": []
+        },
+        {
+          "name": "EnemyArmor_Head_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/SK_EN_C_M_Human_Elite_M_Empire_Hair001V2.SK_EN_C_M_Human_Elite_M_Empire_Hair001V2",
+          "physics": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/PA_SK_EN_C_M_Human_Elite_M_Empire_Hair001V2.PA_SK_EN_C_M_Human_Elite_M_Empire_Hair001V2",
+          "override": null,
+          "animation": "/Game/Monsters/Shared/Physics/ABP_EliteParts_CopyPose.ABP_EliteParts_CopyPose_C",
+          "scale": "<Struct 'Vector' (0x0000019849E7C9B0) {x: 1.000000, y: 1.000000, z: 1.000000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": [
+            "MonsterBodyPart"
+          ]
+        },
+        {
+          "name": "CharacterMesh0",
+          "mesh": "/Game/_Art/Enemies/HeinMach/Shared/PoseCarriers/SK_EN_C_M_Human_Elite_M_EmptyMesh.SK_EN_C_M_Human_Elite_M_EmptyMesh",
+          "physics": "/Game/_Art/Enemies/HeinMach/Shared/PoseCarriers/Physics/PA_SK_EN_C_M_Human_Elite_M_EmptyMesh.PA_SK_EN_C_M_Human_Elite_M_EmptyMesh",
+          "override": null,
+          "animation": "/Game/Monsters/HeavySwordsman/Animations/ABP_HeavySwordsman.ABP_HeavySwordsman_C",
+          "scale": "<Struct 'Vector' (0x000001984AAA51B0) {x: 1.300000, y: 1.300000, z: 1.300000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "blueprint": "/Game/Bluprints/Monsters/BP_Monster_SwordShield",
+      "status": "<BlueprintStatus.BS_UP_TO_DATE: 3>",
+      "components": [
+        {
+          "name": "EnemyWeapon_R_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_Empire_Q1Sword002.SK_EN_C_I_Empire_Q1Sword002",
+          "physics": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_Empire_Q1Sword002.PA_SK_EN_C_I_Empire_Q1Sword002",
+          "override": null,
+          "animation": null,
+          "scale": "<Struct 'Vector' (0x00000198369E29B0) {x: 1.000000, y: 1.000000, z: 0.800000}>",
+          "collision": "<CollisionEnabled.NO_COLLISION: 0>",
+          "tags": []
+        },
+        {
+          "name": "CharacterMesh0",
+          "mesh": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/SK_EN_SwordShield_U01_L01.SK_EN_SwordShield_U01_L01",
+          "physics": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/Physics/PA_SK_EN_SwordShield_U01_L01.PA_SK_EN_SwordShield_U01_L01",
+          "override": null,
+          "animation": "/Game/Monsters/SwordShield/Animations/ABP_SwordShield.ABP_SwordShield_C",
+          "scale": "<Struct 'Vector' (0x00000198369EA1B0) {x: 1.200000, y: 1.200000, z: 1.200000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": []
+        },
+        {
+          "name": "EnemyShield_L_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_SwordShield_Default001V2_L1.SK_EN_C_I_SwordShield_Default001V2_L1",
+          "physics": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_SwordShield_Default001V2_L1.PA_SK_EN_C_I_SwordShield_Default001V2_L1",
+          "override": null,
+          "animation": null,
+          "scale": "<Struct 'Vector' (0x00000198369E3DB0) {x: 1.000000, y: 1.000000, z: 1.000000}>",
+          "collision": "<CollisionEnabled.NO_COLLISION: 0>",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "blueprint": "/Game/Bluprints/Monsters/BP_Monster_Swordsman",
+      "status": "<BlueprintStatus.BS_UP_TO_DATE: 3>",
+      "components": [
+        {
+          "name": "EnemyWeapon_R_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_Empire_Q1Sword002.SK_EN_C_I_Empire_Q1Sword002",
+          "physics": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_Empire_Q1Sword002.PA_SK_EN_C_I_Empire_Q1Sword002",
+          "override": null,
+          "animation": null,
+          "scale": "<Struct 'Vector' (0x000001984F87A1B0) {x: 1.000000, y: 1.000000, z: 1.000000}>",
+          "collision": "<CollisionEnabled.NO_COLLISION: 0>",
+          "tags": []
+        },
+        {
+          "name": "CharacterMesh0",
+          "mesh": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/SK_EN_Swordsman_U01_L01.SK_EN_Swordsman_U01_L01",
+          "physics": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/Physics/PA_SK_EN_Swordsman_U01_L01.PA_SK_EN_Swordsman_U01_L01",
+          "override": null,
+          "animation": "/Game/Monsters/Swordsman/Animations/ABP_Swordsman.ABP_Swordsman_C",
+          "scale": "<Struct 'Vector' (0x000001984FF615B0) {x: 1.200000, y: 1.200000, z: 1.200000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "blueprint": "/Game/Bluprints/Monsters/BP_Monster_Yetuga",
+      "status": "<BlueprintStatus.BS_UP_TO_DATE: 3>",
+      "components": [
+        {
+          "name": "CharacterMesh0",
+          "mesh": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Meshes/SK_EN_Yetuga.SK_EN_Yetuga",
+          "physics": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Meshes/Physics/PA_SK_EN_Yetuga.PA_SK_EN_Yetuga",
+          "override": null,
+          "animation": "/Game/Monsters/Yetuga/Animations/ABP_Yetuga.ABP_Yetuga_C",
+          "scale": "<Struct 'Vector' (0x0000019866723DB0) {x: 1.000000, y: 1.000000, z: 1.000000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "blueprint": "/Game/_Art/Player/Character/Bluprints/BP_Player",
+      "status": "<BlueprintStatus.BS_UP_TO_DATE: 3>",
+      "components": [
+        {
+          "name": "DualAxeSword_Imperial_L_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_L.DualAxeSword_Imperial_L",
+          "physics": "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_L_PhysicsAsset.DualAxeSword_Imperial_L_PhysicsAsset",
+          "override": null,
+          "animation": null,
+          "scale": "<Struct 'Vector' (0x000001987B9815B0) {x: 0.010000, y: 0.010000, z: 0.010000}>",
+          "collision": "<CollisionEnabled.NO_COLLISION: 0>",
+          "tags": []
+        },
+        {
+          "name": "DualAxeSword_Imperial_R_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_R.DualAxeSword_Imperial_R",
+          "physics": "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_R_PhysicsAsset.DualAxeSword_Imperial_R_PhysicsAsset",
+          "override": null,
+          "animation": null,
+          "scale": "<Struct 'Vector' (0x000001987B988DB0) {x: 0.010000, y: 0.010000, z: 0.010000}>",
+          "collision": "<CollisionEnabled.NO_COLLISION: 0>",
+          "tags": []
+        },
+        {
+          "name": "Arm_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Player/Character/Meshs/Arm/Player_Original_Arm.Player_Original_Arm",
+          "physics": "/Game/_Art/Player/Character/Meshs/Arm/Player_Original_Arm_PhysicsAsset.Player_Original_Arm_PhysicsAsset",
+          "override": null,
+          "animation": "/Game/_Art/Player/Character/Bluprints/Parts/ABP_Player_Original_Arm.ABP_Player_Original_Arm_C",
+          "scale": "<Struct 'Vector' (0x000001987B9879B0) {x: 1.000000, y: 1.000000, z: 1.000000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": []
+        },
+        {
+          "name": "Hair_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Player/Character/Meshs/Hair/Player_Original_Hair.Player_Original_Hair",
+          "physics": "/Game/_Art/Player/Character/Meshs/Hair/Player_Original_Hair_PhysicsAsset.Player_Original_Hair_PhysicsAsset",
+          "override": null,
+          "animation": "/Game/_Art/Player/Character/Bluprints/Parts/ABP_Player_Original_Hair.ABP_Player_Original_Hair_C",
+          "scale": "<Struct 'Vector' (0x000001987B9865B0) {x: 1.000000, y: 1.000000, z: 1.000000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": []
+        },
+        {
+          "name": "Leg_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg.Player_Original_Leg",
+          "physics": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_PhysicsAsset.Player_Original_Leg_PhysicsAsset",
+          "override": null,
+          "animation": "/Game/_Art/Player/Character/Bluprints/Parts/ABP_Player_Original_Leg.ABP_Player_Original_Leg_C",
+          "scale": "<Struct 'Vector' (0x000001987B9851B0) {x: 1.000000, y: 1.000000, z: 1.000000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": []
+        },
+        {
+          "name": "Shoes_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Player/Character/Meshs/Shoes/Player_Original_Shoes.Player_Original_Shoes",
+          "physics": "/Game/_Art/Player/Character/Meshs/Shoes/Player_Original_Shoes_PhysicsAsset.Player_Original_Shoes_PhysicsAsset",
+          "override": null,
+          "animation": "/Game/_Art/Player/Character/Bluprints/Parts/ABP_Player_Original_Shoes.ABP_Player_Original_Shoes_C",
+          "scale": "<Struct 'Vector' (0x000001987B983DB0) {x: 1.000000, y: 1.000000, z: 1.000000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": []
+        },
+        {
+          "name": "Torso_GEN_VARIABLE",
+          "mesh": "/Game/_Art/Player/Character/Meshs/Torso/Player_Original_Torso.Player_Original_Torso",
+          "physics": "/Game/_Art/Player/Character/Meshs/Torso/Player_Original_Torso_PhysicsAsset.Player_Original_Torso_PhysicsAsset",
+          "override": null,
+          "animation": "/Game/_Art/Player/Character/Bluprints/Parts/ABP_Player_Original_Torso.ABP_Player_Original_Torso_C",
+          "scale": "<Struct 'Vector' (0x000001987B9829B0) {x: 1.000000, y: 1.000000, z: 1.000000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": []
+        },
+        {
+          "name": "CharacterMesh0",
+          "mesh": "/Game/_Art/Player/Character/Meshs/SKM_Player.SKM_Player",
+          "physics": "/Game/_Art/Player/Character/Meshs/Player_PhysicsAsset.Player_PhysicsAsset",
+          "override": null,
+          "animation": "/Game/_Art/Player/Character/Bluprints/ABP_Player.ABP_Player_C",
+          "scale": "<Struct 'Vector' (0x000001987B9915B0) {x: 0.010000, y: 0.010000, z: 0.010000}>",
+          "collision": "<CollisionEnabled.QUERY_ONLY: 1>",
+          "tags": []
+        }
+      ]
+    }
+  ],
+  "meshes": {
+    "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Meshes/SK_EN_ApesStoneHandElite.SK_EN_ApesStoneHandElite": {
+      "skeleton": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Skeletons/SKEL_EN_ApesStoneHandElite.SKEL_EN_ApesStoneHandElite",
+      "physics": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Meshes/Physics/PA_SK_EN_ApesStoneHandElite.PA_SK_EN_ApesStoneHandElite",
+      "post_process": "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Meshes/Physics/ABP_SK_EN_ApesStoneHandElite_Secondary.ABP_SK_EN_ApesStoneHandElite_Secondary_C",
+      "bones": []
+    },
+    "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Equipment/SK_EN_C_I_Halberd_WeaponV2.SK_EN_C_I_Halberd_WeaponV2": {
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Equipment/Skeletons/SKEL_EN_C_I_Halberd_WeaponV2.SKEL_EN_C_I_Halberd_WeaponV2",
+      "physics": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Equipment/Physics/PA_SK_EN_C_I_Halberd_WeaponV2.PA_SK_EN_C_I_Halberd_WeaponV2",
+      "post_process": null,
+      "bones": []
+    },
+    "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/SK_EN_C_M_HalberdV2.SK_EN_C_M_HalberdV2": {
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Skeletons/SKEL_EN_C_M_HalberdV2.SKEL_EN_C_M_HalberdV2",
+      "physics": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Physics/PA_SK_EN_C_M_HalberdV2.PA_SK_EN_C_M_HalberdV2",
+      "post_process": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Physics/ABP_SK_EN_C_M_HalberdV2_Secondary.ABP_SK_EN_C_M_HalberdV2_Secondary_C",
+      "bones": []
+    },
+    "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/SK_EN_C_M_Human_Elite_M_Empire_Lower001V2.SK_EN_C_M_Human_Elite_M_Empire_Lower001V2": {
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton",
+      "physics": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/PA_SK_EN_C_M_Human_Elite_M_Empire_Lower001V2.PA_SK_EN_C_M_Human_Elite_M_Empire_Lower001V2",
+      "post_process": null,
+      "bones": []
+    },
+    "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/SK_EN_C_M_Human_Elite_M_Empire_Upper001V2.SK_EN_C_M_Human_Elite_M_Empire_Upper001V2": {
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton",
+      "physics": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/PA_SK_EN_C_M_Human_Elite_M_Empire_Upper001V2.PA_SK_EN_C_M_Human_Elite_M_Empire_Upper001V2",
+      "post_process": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/ABP_SK_EN_C_M_Human_Elite_M_Empire_Upper001V2_Secondary.ABP_SK_EN_C_M_Human_Elite_M_Empire_Upper001V2_Secondary_C",
+      "bones": []
+    },
+    "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_EmpireElite_Sword001V2.SK_EN_C_I_EmpireElite_Sword001V2": {
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_I_EmpireElite_Sword001_Skeleton.SKEL_EN_C_I_EmpireElite_Sword001_Skeleton",
+      "physics": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_EmpireElite_Sword001V2.PA_SK_EN_C_I_EmpireElite_Sword001V2",
+      "post_process": null,
+      "bones": []
+    },
+    "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/SK_EN_C_M_Human_Elite_M_Empire_Hair001V2.SK_EN_C_M_Human_Elite_M_Empire_Hair001V2": {
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton",
+      "physics": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/PA_SK_EN_C_M_Human_Elite_M_Empire_Hair001V2.PA_SK_EN_C_M_Human_Elite_M_Empire_Hair001V2",
+      "post_process": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/ABP_SK_EN_C_M_Human_Elite_M_Empire_Hair001V2_Secondary.ABP_SK_EN_C_M_Human_Elite_M_Empire_Hair001V2_Secondary_C",
+      "bones": []
+    },
+    "/Game/_Art/Enemies/HeinMach/Shared/PoseCarriers/SK_EN_C_M_Human_Elite_M_EmptyMesh.SK_EN_C_M_Human_Elite_M_EmptyMesh": {
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_C_M_Human_Elite_M_Skeleton.SKEL_EN_C_M_Human_Elite_M_Skeleton",
+      "physics": "/Game/_Art/Enemies/HeinMach/Shared/PoseCarriers/Physics/PA_SK_EN_C_M_Human_Elite_M_EmptyMesh.PA_SK_EN_C_M_Human_Elite_M_EmptyMesh",
+      "post_process": null,
+      "bones": []
+    },
+    "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_Empire_Q1Sword002.SK_EN_C_I_Empire_Q1Sword002": {
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Skeletons/SKEL_EN_C_I_Empire_Q1Sword002.SKEL_EN_C_I_Empire_Q1Sword002",
+      "physics": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_Empire_Q1Sword002.PA_SK_EN_C_I_Empire_Q1Sword002",
+      "post_process": null,
+      "bones": []
+    },
+    "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/SK_EN_SwordShield_U01_L01.SK_EN_SwordShield_U01_L01": {
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "physics": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/Physics/PA_SK_EN_SwordShield_U01_L01.PA_SK_EN_SwordShield_U01_L01",
+      "post_process": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/Physics/ABP_SK_EN_SwordShield_U01_L01_Secondary.ABP_SK_EN_SwordShield_U01_L01_Secondary_C",
+      "bones": []
+    },
+    "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_SwordShield_Default001V2_L1.SK_EN_C_I_SwordShield_Default001V2_L1": {
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Skeletons/SKEL_EN_C_I_SwordShield_Default001V2_L1.SKEL_EN_C_I_SwordShield_Default001V2_L1",
+      "physics": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_SwordShield_Default001V2_L1.PA_SK_EN_C_I_SwordShield_Default001V2_L1",
+      "post_process": null,
+      "bones": []
+    },
+    "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/SK_EN_Swordsman_U01_L01.SK_EN_Swordsman_U01_L01": {
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Shared/Skeletons/SKEL_EN_EmpireHuman.SKEL_EN_EmpireHuman",
+      "physics": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/Physics/PA_SK_EN_Swordsman_U01_L01.PA_SK_EN_Swordsman_U01_L01",
+      "post_process": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/Physics/ABP_SK_EN_Swordsman_U01_L01_Secondary.ABP_SK_EN_Swordsman_U01_L01_Secondary_C",
+      "bones": []
+    },
+    "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Meshes/SK_EN_Yetuga.SK_EN_Yetuga": {
+      "skeleton": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Skeletons/SKEL_EN_Yetuga.SKEL_EN_Yetuga",
+      "physics": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Meshes/Physics/PA_SK_EN_Yetuga.PA_SK_EN_Yetuga",
+      "post_process": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Meshes/Physics/ABP_SK_EN_Yetuga_Secondary.ABP_SK_EN_Yetuga_Secondary_C",
+      "bones": []
+    },
+    "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_L.DualAxeSword_Imperial_L": {
+      "skeleton": "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_L_Skeleton.DualAxeSword_Imperial_L_Skeleton",
+      "physics": "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_L_PhysicsAsset.DualAxeSword_Imperial_L_PhysicsAsset",
+      "post_process": null,
+      "bones": []
+    },
+    "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_R.DualAxeSword_Imperial_R": {
+      "skeleton": "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_R_Skeleton.DualAxeSword_Imperial_R_Skeleton",
+      "physics": "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_R_PhysicsAsset.DualAxeSword_Imperial_R_PhysicsAsset",
+      "post_process": null,
+      "bones": []
+    },
+    "/Game/_Art/Player/Character/Meshs/Arm/Player_Original_Arm.Player_Original_Arm": {
+      "skeleton": "/Game/_Art/Player/Character/Meshs/Arm/Player_Original_Arm_Skeleton.Player_Original_Arm_Skeleton",
+      "physics": "/Game/_Art/Player/Character/Meshs/Arm/Player_Original_Arm_PhysicsAsset.Player_Original_Arm_PhysicsAsset",
+      "post_process": null,
+      "bones": []
+    },
+    "/Game/_Art/Player/Character/Meshs/Hair/Player_Original_Hair.Player_Original_Hair": {
+      "skeleton": "/Game/_Art/Player/Character/Meshs/Hair/Player_Original_Hair_Skeleton.Player_Original_Hair_Skeleton",
+      "physics": "/Game/_Art/Player/Character/Meshs/Hair/Player_Original_Hair_PhysicsAsset.Player_Original_Hair_PhysicsAsset",
+      "post_process": null,
+      "bones": []
+    },
+    "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg.Player_Original_Leg": {
+      "skeleton": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_Skeleton.Player_Original_Leg_Skeleton",
+      "physics": "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_PhysicsAsset.Player_Original_Leg_PhysicsAsset",
+      "post_process": null,
+      "bones": []
+    },
+    "/Game/_Art/Player/Character/Meshs/Shoes/Player_Original_Shoes.Player_Original_Shoes": {
+      "skeleton": "/Game/_Art/Player/Character/Meshs/Shoes/Player_Original_Shoes_Skeleton.Player_Original_Shoes_Skeleton",
+      "physics": "/Game/_Art/Player/Character/Meshs/Shoes/Player_Original_Shoes_PhysicsAsset.Player_Original_Shoes_PhysicsAsset",
+      "post_process": null,
+      "bones": []
+    },
+    "/Game/_Art/Player/Character/Meshs/Torso/Player_Original_Torso.Player_Original_Torso": {
+      "skeleton": "/Game/_Art/Player/Character/Meshs/Torso/Player_Original_Torso_Skeleton.Player_Original_Torso_Skeleton",
+      "physics": "/Game/_Art/Player/Character/Meshs/Torso/Player_Original_Torso_PhysicsAsset.Player_Original_Torso_PhysicsAsset",
+      "post_process": null,
+      "bones": []
+    },
+    "/Game/_Art/Player/Character/Meshs/SKM_Player.SKM_Player": {
+      "skeleton": "/Game/_Art/Player/Character/Meshs/SK_Player.SK_Player",
+      "physics": "/Game/_Art/Player/Character/Meshs/Player_PhysicsAsset.Player_PhysicsAsset",
+      "post_process": null,
+      "bones": []
+    }
+  },
+  "physics": {
+    "/Game/_Art/Enemies/Shared/Elites/ApesStoneHandElite/Meshes/Physics/PA_SK_EN_ApesStoneHandElite.PA_SK_EN_ApesStoneHandElite": {
+      "text": ""
+    },
+    "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Equipment/Physics/PA_SK_EN_C_I_Halberd_WeaponV2.PA_SK_EN_C_I_Halberd_WeaponV2": {
+      "text": ""
+    },
+    "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Physics/PA_SK_EN_C_M_HalberdV2.PA_SK_EN_C_M_HalberdV2": {
+      "text": ""
+    },
+    "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/PA_SK_EN_C_M_Human_Elite_M_Empire_Lower001V2.PA_SK_EN_C_M_Human_Elite_M_Empire_Lower001V2": {
+      "text": ""
+    },
+    "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/PA_SK_EN_C_M_Human_Elite_M_Empire_Upper001V2.PA_SK_EN_C_M_Human_Elite_M_Empire_Upper001V2": {
+      "text": ""
+    },
+    "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_EmpireElite_Sword001V2.PA_SK_EN_C_I_EmpireElite_Sword001V2": {
+      "text": ""
+    },
+    "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/PA_SK_EN_C_M_Human_Elite_M_Empire_Hair001V2.PA_SK_EN_C_M_Human_Elite_M_Empire_Hair001V2": {
+      "text": ""
+    },
+    "/Game/_Art/Enemies/HeinMach/Shared/PoseCarriers/Physics/PA_SK_EN_C_M_Human_Elite_M_EmptyMesh.PA_SK_EN_C_M_Human_Elite_M_EmptyMesh": {
+      "text": ""
+    },
+    "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_Empire_Q1Sword002.PA_SK_EN_C_I_Empire_Q1Sword002": {
+      "text": ""
+    },
+    "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/Physics/PA_SK_EN_SwordShield_U01_L01.PA_SK_EN_SwordShield_U01_L01": {
+      "text": ""
+    },
+    "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_SwordShield_Default001V2_L1.PA_SK_EN_C_I_SwordShield_Default001V2_L1": {
+      "text": ""
+    },
+    "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/Physics/PA_SK_EN_Swordsman_U01_L01.PA_SK_EN_Swordsman_U01_L01": {
+      "text": ""
+    },
+    "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Meshes/Physics/PA_SK_EN_Yetuga.PA_SK_EN_Yetuga": {
+      "text": ""
+    },
+    "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_L_PhysicsAsset.DualAxeSword_Imperial_L_PhysicsAsset": {
+      "text": ""
+    },
+    "/Game/_Art/Player/Item/Imperial/DualAxeSword_Imperial_R_PhysicsAsset.DualAxeSword_Imperial_R_PhysicsAsset": {
+      "text": ""
+    },
+    "/Game/_Art/Player/Character/Meshs/Arm/Player_Original_Arm_PhysicsAsset.Player_Original_Arm_PhysicsAsset": {
+      "text": ""
+    },
+    "/Game/_Art/Player/Character/Meshs/Hair/Player_Original_Hair_PhysicsAsset.Player_Original_Hair_PhysicsAsset": {
+      "text": ""
+    },
+    "/Game/_Art/Player/Character/Meshs/Leg/Player_Original_Leg_PhysicsAsset.Player_Original_Leg_PhysicsAsset": {
+      "text": ""
+    },
+    "/Game/_Art/Player/Character/Meshs/Shoes/Player_Original_Shoes_PhysicsAsset.Player_Original_Shoes_PhysicsAsset": {
+      "text": ""
+    },
+    "/Game/_Art/Player/Character/Meshs/Torso/Player_Original_Torso_PhysicsAsset.Player_Original_Torso_PhysicsAsset": {
+      "text": ""
+    },
+    "/Game/_Art/Player/Character/Meshs/Player_PhysicsAsset.Player_PhysicsAsset": {
+      "text": ""
+    }
+  },
+  "enemy_assets": [
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Meshes/Physics/PA_SK_EN_Yetuga",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Meshes/Physics/ABP_SK_EN_Yetuga_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Meshes/SK_EN_Yetuga",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Meshes/Physics/PA_SK_EN_Yetuga_IceRock",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Meshes/SK_EN_Yetuga_IceRock",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Meshes/Physics/PA_SK_EN_Archer_U01_L01",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Meshes/Physics/ABP_SK_EN_Archer_U01_L01_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Meshes/SK_EN_Archer_U01_L01",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Meshes/Physics/PA_SK_EN_Archer_U01_L02",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Meshes/Physics/ABP_SK_EN_Archer_U01_L02_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Meshes/SK_EN_Archer_U01_L02",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Meshes/Physics/PA_SK_EN_Archer_U02_L01",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Meshes/Physics/ABP_SK_EN_Archer_U02_L01_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Meshes/SK_EN_Archer_U02_L01",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Meshes/Physics/PA_SK_EN_Archer_U02_L02",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Meshes/Physics/ABP_SK_EN_Archer_U02_L02_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Meshes/SK_EN_Archer_U02_L02",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Equipment/Physics/PA_SK_EN_C_I_Halberd_WeaponV2",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Equipment/SK_EN_C_I_Halberd_WeaponV2",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Physics/PA_SK_EN_C_M_HalberdV2",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/Physics/ABP_SK_EN_C_M_HalberdV2_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Meshes/SK_EN_C_M_HalberdV2",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/PA_SK_EN_C_M_Human_Elite_M_Empire_Hair001V2",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/ABP_SK_EN_C_M_Human_Elite_M_Empire_Hair001V2_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/SK_EN_C_M_Human_Elite_M_Empire_Hair001V2",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/PA_SK_EN_C_M_Human_Elite_M_Empire_Lower001V2",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/SK_EN_C_M_Human_Elite_M_Empire_Lower001V2",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/PA_SK_EN_C_M_Human_Elite_M_Empire_Upper001V2",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/Physics/ABP_SK_EN_C_M_Human_Elite_M_Empire_Upper001V2_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Parts/SK_EN_C_M_Human_Elite_M_Empire_Upper001V2",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/Physics/PA_SK_EN_SwordShield_U01_L01",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/Physics/ABP_SK_EN_SwordShield_U01_L01_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/SK_EN_SwordShield_U01_L01",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/Physics/PA_SK_EN_SwordShield_U01_L02",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/Physics/ABP_SK_EN_SwordShield_U01_L02_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/SK_EN_SwordShield_U01_L02",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/Physics/PA_SK_EN_SwordShield_U02_L01",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/Physics/ABP_SK_EN_SwordShield_U02_L01_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/SK_EN_SwordShield_U02_L01",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/Physics/PA_SK_EN_SwordShield_U02_L02",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/Physics/ABP_SK_EN_SwordShield_U02_L02_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Meshes/SK_EN_SwordShield_U02_L02",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/Physics/PA_SK_EN_Swordsman_U01_L01",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/Physics/ABP_SK_EN_Swordsman_U01_L01_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/SK_EN_Swordsman_U01_L01",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/Physics/PA_SK_EN_Swordsman_U01_L02",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/Physics/ABP_SK_EN_Swordsman_U01_L02_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/SK_EN_Swordsman_U01_L02",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/Physics/PA_SK_EN_Swordsman_U02_L01",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/Physics/ABP_SK_EN_Swordsman_U02_L01_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/SK_EN_Swordsman_U02_L01",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/Physics/PA_SK_EN_Swordsman_U02_L02",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/Physics/ABP_SK_EN_Swordsman_U02_L02_Secondary",
+      "kind": "AnimBlueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Meshes/SK_EN_Swordsman_U02_L02",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_EmpireElite_Sword001V2",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_EmpireElite_Sword001V2",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_Empire_Q1BowArrow002",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_Empire_Q1BowArrow002",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_Empire_Q1BowArrow002V2",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_Empire_Q1BowArrow002V2",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_Empire_Q1Quiver002",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_Empire_Q1Quiver002",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_Empire_Q1Staff001",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_Empire_Q1Staff001",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_Empire_Q1Sword002",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_Empire_Q1Sword002",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_Empire_Staff002",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_Empire_Staff002",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/Physics/PA_SK_EN_C_I_SwordShield_Default001V2_L1",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/Equipment/SK_EN_C_I_SwordShield_Default001V2_L1",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/PoseCarriers/Physics/PA_SK_EN_C_M_Human_Adult_M_EmptyMesh",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/PoseCarriers/SK_EN_C_M_Human_Adult_M_EmptyMesh",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/PoseCarriers/Physics/PA_SK_EN_C_M_Human_Elite_M_EmptyMesh",
+      "kind": "PhysicsAsset"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Shared/PoseCarriers/SK_EN_C_M_Human_Elite_M_EmptyMesh",
+      "kind": "SkeletalMesh"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Bosses/Yetuga/Blueprints/BP_EN_Boss_Yetuga",
+      "kind": "Blueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Blueprints/BP_EN_Archer_U01_L01",
+      "kind": "Blueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Blueprints/BP_EN_Archer_U01_L02",
+      "kind": "Blueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Blueprints/BP_EN_Archer_U02_L01",
+      "kind": "Blueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Archer/Blueprints/BP_EN_Archer_U02_L02",
+      "kind": "Blueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HalberdElite/Blueprints/BP_EN_HalberdElite",
+      "kind": "Blueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/HeavySwordsman/Blueprints/BP_EN_HeavySwordsman_U01_L01",
+      "kind": "Blueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Blueprints/BP_EN_SwordShield_U01_L01",
+      "kind": "Blueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Blueprints/BP_EN_SwordShield_U01_L02",
+      "kind": "Blueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Blueprints/BP_EN_SwordShield_U02_L01",
+      "kind": "Blueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/SwordShield/Blueprints/BP_EN_SwordShield_U02_L02",
+      "kind": "Blueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Blueprints/BP_EN_Swordsman_U01_L01",
+      "kind": "Blueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Blueprints/BP_EN_Swordsman_U01_L02",
+      "kind": "Blueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Blueprints/BP_EN_Swordsman_U02_L01",
+      "kind": "Blueprint"
+    },
+    {
+      "path": "/Game/_Art/Enemies/HeinMach/Humanoids/Swordsman/Blueprints/BP_EN_Swordsman_U02_L02",
+      "kind": "Blueprint"
+    }
+  ]
+}
