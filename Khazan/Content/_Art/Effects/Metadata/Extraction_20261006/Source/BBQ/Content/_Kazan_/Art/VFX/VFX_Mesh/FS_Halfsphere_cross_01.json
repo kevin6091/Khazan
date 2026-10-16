@@ -1,0 +1,185 @@
+[
+  {
+    "Type": "BodySetup",
+    "Name": "BodySetup_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BodySetup'",
+    "Outer": {
+      "ObjectName": "StaticMesh'FS_Halfsphere_cross_01'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/FS_Halfsphere_cross_01.2"
+    },
+    "Properties": {
+      "DefaultInstance": {
+        "ObjectType": "ECC_WorldStatic",
+        "CollisionProfileName": "BlockAll",
+        "CollisionResponses": {
+          "ResponseArray": [
+            {
+              "Channel": "EngineTraceChannel1",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "Attack",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "JumpBlock",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "IKTrace",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "FloorCheck",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "LandScape",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "NamePlate",
+              "Response": "ECR_Block"
+            }
+          ]
+        }
+      }
+    },
+    "BodySetupGuid": "68AE9E9A4B915C55D3E728BD4762326B",
+    "CookedFormatData": {
+      "PhysXPC": {
+        "BulkDataFlags": "BULKDATA_SingleUse | BULKDATA_ForceInlinePayload",
+        "ElementCount": 96418,
+        "SizeOnDisk": 96418,
+        "OffsetInFile": "0x288FE"
+      }
+    }
+  },
+  {
+    "Type": "NavCollision",
+    "Name": "NavCollision_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'NavCollision'",
+    "Outer": {
+      "ObjectName": "StaticMesh'FS_Halfsphere_cross_01'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/FS_Halfsphere_cross_01.2"
+    },
+    "CookedFormatData": {
+      "NavCollision_Chaos": {
+        "BulkDataFlags": "BULKDATA_SingleUse | BULKDATA_ForceInlinePayload",
+        "ElementCount": 21,
+        "SizeOnDisk": 21,
+        "OffsetInFile": "0x401E8"
+      }
+    }
+  },
+  {
+    "Type": "StaticMesh",
+    "Name": "FS_Halfsphere_cross_01",
+    "Flags": "RF_Public | RF_Standalone | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'StaticMesh'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/FS_Halfsphere_cross_01",
+    "Properties": {
+      "StaticMaterials": [
+        {
+          "MaterialInterface": null,
+          "MaterialSlotName": "Base_Axis",
+          "ImportedMaterialSlotName": "Base_Axis",
+          "UVChannelData": {
+            "bInitialized": true,
+            "bOverrideDensities": false,
+            "LocalUVDensities": 76.15991,
+            "LocalUVDensities[1]": 139.23402,
+            "LocalUVDensities[2]": 0.0,
+            "LocalUVDensities[3]": 0.0
+          }
+        }
+      ],
+      "LightmapUVDensity": 139.23402,
+      "LightMapResolution": 64,
+      "LightMapCoordinateIndex": 1,
+      "ExtendedBounds": {
+        "Origin": {
+          "X": 0.013572693,
+          "Y": -0.004671097,
+          "Z": -0.011070251
+        },
+        "BoxExtent": {
+          "X": 45.5267,
+          "Y": 29.903912,
+          "Z": 52.392296
+        },
+        "SphereRadius": 54.523598
+      }
+    },
+    "BodySetup": {
+      "ObjectName": "BodySetup'FS_Halfsphere_cross_01:BodySetup_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/FS_Halfsphere_cross_01.0"
+    },
+    "NavCollision": {
+      "ObjectName": "NavCollision'FS_Halfsphere_cross_01:NavCollision_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/FS_Halfsphere_cross_01.1"
+    },
+    "LightingGuid": "810EDA5E-4ABA0763-3032A6BF-8FDF4F2F",
+    "RenderData": {
+      "LODs": [
+        {
+          "Sections": [
+            {
+              "MaterialIndex": 0,
+              "FirstIndex": 0,
+              "NumTriangles": 1520,
+              "MinVertexIndex": 0,
+              "MaxVertexIndex": 899,
+              "bEnableCollision": true,
+              "bCastShadow": true,
+              "bForceOpaque": false,
+              "bVisibleInRayTracing": true
+            }
+          ],
+          "MaxDeviation": 0.0,
+          "PositionVertexBuffer": {
+            "Stride": 12,
+            "NumVertices": 900
+          },
+          "VertexBuffer": {
+            "NumTexCoords": 2,
+            "NumVertices": 900,
+            "Strides": -1,
+            "UseHighPrecisionTangentBasis": false,
+            "UseFullPrecisionUVs": false
+          },
+          "ColorVertexBuffer": {
+            "Stride": 0,
+            "NumVertices": 0
+          }
+        }
+      ],
+      "Bounds": {
+        "Origin": {
+          "X": 0.013572693,
+          "Y": -0.004671097,
+          "Z": -0.011070251
+        },
+        "BoxExtent": {
+          "X": 45.5267,
+          "Y": 29.903912,
+          "Z": 52.392296
+        },
+        "SphereRadius": 54.523598
+      },
+      "bLODsShareStaticLighting": true,
+      "ScreenSize": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  }
+]

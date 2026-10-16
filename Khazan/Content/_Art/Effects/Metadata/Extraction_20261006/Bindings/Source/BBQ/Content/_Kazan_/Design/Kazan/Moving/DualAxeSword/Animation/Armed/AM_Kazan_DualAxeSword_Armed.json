@@ -1,0 +1,357 @@
+[
+  {
+    "Type": "AnimMontage",
+    "Name": "AM_Kazan_DualAxeSword_Armed",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimMontage'",
+    "Package": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/Armed/AM_Kazan_DualAxeSword_Armed",
+    "Properties": {
+      "BlendIn": {
+        "BlendTime": 0.1
+      },
+      "BlendOut": {
+        "BlendTime": 0.2
+      },
+      "BlendOutTriggerTime": 0.0,
+      "CompositeSections": [
+        {
+          "SectionName": "Default",
+          "NextSectionName": "None",
+          "MetaData": [],
+          "LinkedMontage": {
+            "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_Armed'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/Armed/AM_Kazan_DualAxeSword_Armed.0"
+          },
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.0,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimSequence'CA_P_Kazan_DualAxeSword_Armed'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/DualAxeSword/CA_P_Kazan_DualAxeSword_Armed.0"
+          }
+        }
+      ],
+      "SlotAnimTracks": [
+        {
+          "SlotName": "Upper",
+          "AnimTrack": {
+            "AnimSegments": [
+              {
+                "AnimReference": {
+                  "ObjectName": "AnimSequence'CA_P_Kazan_DualAxeSword_Armed'",
+                  "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/DualAxeSword/CA_P_Kazan_DualAxeSword_Armed.0"
+                },
+                "StartPos": 0.0,
+                "AnimStartTime": 0.0,
+                "AnimEndTime": 1.0,
+                "AnimPlayRate": 1.0,
+                "LoopingCount": 1
+              }
+            ]
+          }
+        },
+        {
+          "SlotName": "Lower",
+          "AnimTrack": {
+            "AnimSegments": []
+          }
+        }
+      ],
+      "Notifies": [
+        {
+          "TriggerTimeOffset": 0.0001,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxCannotChangeWeapon",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_CannotChangeWeapon'AM_Kazan_DualAxeSword_Armed:xxAnimNotifyState_CannotChangeWeapon_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/Armed/AM_Kazan_DualAxeSword_Armed.2"
+          },
+          "Duration": 0.3,
+          "EndLink": {
+            "LinkedMontage": {
+              "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_Armed'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/Armed/AM_Kazan_DualAxeSword_Armed.0"
+            },
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 1.0,
+            "LinkValue": 0.3,
+            "LinkedSequence": {
+              "ObjectName": "AnimSequence'CA_P_Kazan_DualAxeSword_Armed'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/DualAxeSword/CA_P_Kazan_DualAxeSword_Armed.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": {
+            "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_Armed'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/Armed/AM_Kazan_DualAxeSword_Armed.0"
+          },
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.0,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimSequence'CA_P_Kazan_DualAxeSword_Armed'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/DualAxeSword/CA_P_Kazan_DualAxeSword_Armed.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxAkEvent",
+          "Notify": {
+            "ObjectName": "xxAnimNotify_AkEvent'AM_Kazan_DualAxeSword_Armed:xxAnimNotify_AkEvent_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/Armed/AM_Kazan_DualAxeSword_Armed.1"
+          },
+          "NotifyStateClass": null,
+          "Duration": 0.0,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": -1,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.0,
+            "LinkValue": 0.0,
+            "LinkedSequence": null
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 1,
+          "LinkedMontage": {
+            "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_Armed'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/Armed/AM_Kazan_DualAxeSword_Armed.0"
+          },
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.0,
+          "LinkValue": 0.46666664,
+          "LinkedSequence": {
+            "ObjectName": "AnimSequence'CA_P_Kazan_DualAxeSword_Armed'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/DualAxeSword/CA_P_Kazan_DualAxeSword_Armed.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": -0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxChangeArmedState",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_ChangeArmedState'AM_Kazan_DualAxeSword_Armed:xxAnimNotifyState_ChangeArmedState_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/Armed/AM_Kazan_DualAxeSword_Armed.3"
+          },
+          "Duration": 0.500511,
+          "EndLink": {
+            "LinkedMontage": {
+              "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_Armed'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/Armed/AM_Kazan_DualAxeSword_Armed.0"
+            },
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 1.0,
+            "LinkValue": 1.0,
+            "LinkedSequence": {
+              "ObjectName": "AnimSequence'CA_P_Kazan_DualAxeSword_Armed'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/DualAxeSword/CA_P_Kazan_DualAxeSword_Armed.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": {
+            "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_Armed'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/Armed/AM_Kazan_DualAxeSword_Armed.0"
+          },
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.0,
+          "LinkValue": 0.499489,
+          "LinkedSequence": {
+            "ObjectName": "AnimSequence'CA_P_Kazan_DualAxeSword_Armed'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/DualAxeSword/CA_P_Kazan_DualAxeSword_Armed.0"
+          }
+        }
+      ],
+      "SequenceLength": 1.0,
+      "RawCurveData": {
+        "FloatCurves": [
+          {
+            "FloatCurve": {
+              "Keys": [
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.0,
+                  "Value": 0.0,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                }
+              ],
+              "DefaultValue": 3.4028235E+38,
+              "PreInfinityExtrap": "RCCE_Constant",
+              "PostInfinityExtrap": "RCCE_Constant"
+            },
+            "Name": {
+              "DisplayName": "Spine_Alpha"
+            },
+            "CurveTypeFlags": 4
+          },
+          {
+            "FloatCurve": {
+              "Keys": [
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.0,
+                  "Value": 1.0,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                }
+              ],
+              "DefaultValue": 3.4028235E+38,
+              "PreInfinityExtrap": "RCCE_Constant",
+              "PostInfinityExtrap": "RCCE_Constant"
+            },
+            "Name": {
+              "DisplayName": "Arms_Alpha"
+            },
+            "CurveTypeFlags": 4
+          },
+          {
+            "FloatCurve": {
+              "Keys": [],
+              "DefaultValue": 3.4028235E+38,
+              "PreInfinityExtrap": "RCCE_Constant",
+              "PostInfinityExtrap": "RCCE_Constant"
+            },
+            "Name": {
+              "DisplayName": "Spine_Affect"
+            },
+            "CurveTypeFlags": 4
+          },
+          {
+            "FloatCurve": {
+              "Keys": [
+                {
+                  "InterpMode": "RCIM_Linear",
+                  "TangentMode": "RCTM_Auto",
+                  "TangentWeightMode": "RCTWM_WeightedNone",
+                  "Time": 0.0,
+                  "Value": 1.0,
+                  "ArriveTangent": 0.0,
+                  "ArriveTangentWeight": 0.0,
+                  "LeaveTangent": 0.0,
+                  "LeaveTangentWeight": 0.0
+                }
+              ],
+              "DefaultValue": 3.4028235E+38,
+              "PreInfinityExtrap": "RCCE_Constant",
+              "PostInfinityExtrap": "RCCE_Constant"
+            },
+            "Name": {
+              "DisplayName": "Arms_Affect"
+            },
+            "CurveTypeFlags": 4
+          }
+        ]
+      },
+      "Skeleton": {
+        "ObjectName": "Skeleton'C_P_Kazan_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Model/C_P_Kazan_Skeleton.88"
+      }
+    },
+    "SkeletonGuid": "EDC47A49-495755E9-FB983989-EBE3839B"
+  },
+  {
+    "Type": "xxAnimNotify_AkEvent",
+    "Name": "xxAnimNotify_AkEvent_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotify_AkEvent'",
+    "Outer": {
+      "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_Armed'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/Armed/AM_Kazan_DualAxeSword_Armed.0"
+    },
+    "Properties": {
+      "Event": {
+        "ObjectName": "AkAudioEvent'dualaxesword_armed'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/PlayerLocomotion/dualaxesword_armed.0"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_CannotChangeWeapon",
+    "Name": "xxAnimNotifyState_CannotChangeWeapon_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_CannotChangeWeapon'",
+    "Outer": {
+      "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_Armed'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/Armed/AM_Kazan_DualAxeSword_Armed.0"
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_ChangeArmedState",
+    "Name": "xxAnimNotifyState_ChangeArmedState_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_ChangeArmedState'",
+    "Outer": {
+      "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_Armed'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/Armed/AM_Kazan_DualAxeSword_Armed.0"
+    },
+    "Properties": {
+      "IsBegin": true,
+      "BeginInfo": {
+        "ArmedState": "EWeaponArmedState::Armed"
+      },
+      "EndInfo": {
+        "ArmedState": "EWeaponArmedState::None"
+      }
+    }
+  }
+]

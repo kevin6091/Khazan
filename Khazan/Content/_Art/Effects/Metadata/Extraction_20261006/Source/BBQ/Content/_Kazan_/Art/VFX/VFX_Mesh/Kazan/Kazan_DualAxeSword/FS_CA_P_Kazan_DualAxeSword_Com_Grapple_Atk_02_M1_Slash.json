@@ -1,0 +1,179 @@
+[
+  {
+    "Type": "BodySetup",
+    "Name": "BodySetup_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BodySetup'",
+    "Outer": {
+      "ObjectName": "StaticMesh'FS_CA_P_Kazan_DualAxeSword_Com_Grapple_Atk_02_M1_Slash'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/Kazan/Kazan_DualAxeSword/FS_CA_P_Kazan_DualAxeSword_Com_Grapple_Atk_02_M1_Slash.2"
+    },
+    "Properties": {
+      "DefaultInstance": {
+        "ObjectType": "ECC_WorldStatic",
+        "CollisionProfileName": "BlockAll",
+        "CollisionResponses": {
+          "ResponseArray": [
+            {
+              "Channel": "EngineTraceChannel1",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "Attack",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "JumpBlock",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "IKTrace",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "FloorCheck",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "LandScape",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "NamePlate",
+              "Response": "ECR_Block"
+            }
+          ]
+        }
+      }
+    },
+    "BodySetupGuid": "5B8FC8164BD201584231348C7C9B0497"
+  },
+  {
+    "Type": "NavCollision",
+    "Name": "NavCollision_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'NavCollision'",
+    "Outer": {
+      "ObjectName": "StaticMesh'FS_CA_P_Kazan_DualAxeSword_Com_Grapple_Atk_02_M1_Slash'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/Kazan/Kazan_DualAxeSword/FS_CA_P_Kazan_DualAxeSword_Com_Grapple_Atk_02_M1_Slash.2"
+    },
+    "CookedFormatData": {
+      "NavCollision_Chaos": {
+        "BulkDataFlags": "BULKDATA_SingleUse | BULKDATA_ForceInlinePayload",
+        "ElementCount": 21,
+        "SizeOnDisk": 21,
+        "OffsetInFile": "0x34787"
+      }
+    }
+  },
+  {
+    "Type": "StaticMesh",
+    "Name": "FS_CA_P_Kazan_DualAxeSword_Com_Grapple_Atk_02_M1_Slash",
+    "Flags": "RF_Public | RF_Standalone | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'StaticMesh'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/Kazan/Kazan_DualAxeSword/FS_CA_P_Kazan_DualAxeSword_Com_Grapple_Atk_02_M1_Slash",
+    "Properties": {
+      "StaticMaterials": [
+        {
+          "MaterialInterface": {
+            "ObjectName": "Material'WorldGridMaterial'",
+            "ObjectPath": "Engine/Content/EngineMaterials/WorldGridMaterial.0"
+          },
+          "MaterialSlotName": "WorldGridMaterial",
+          "ImportedMaterialSlotName": "WorldGridMaterial",
+          "UVChannelData": {
+            "bInitialized": true,
+            "bOverrideDensities": false,
+            "LocalUVDensities": 282.61258,
+            "LocalUVDensities[1]": 0.0,
+            "LocalUVDensities[2]": 0.0,
+            "LocalUVDensities[3]": 0.0
+          }
+        }
+      ],
+      "LightmapUVDensity": 282.61258,
+      "LightMapResolution": 64,
+      "ExtendedBounds": {
+        "Origin": {
+          "X": 24.195503,
+          "Y": 39.396744,
+          "Z": 129.2501
+        },
+        "BoxExtent": {
+          "X": 132.31746,
+          "Y": 181.69476,
+          "Z": 135.67543
+        },
+        "SphereRadius": 195.14937
+      }
+    },
+    "BodySetup": {
+      "ObjectName": "BodySetup'FS_CA_P_Kazan_DualAxeSword_Com_Grapple_Atk_02_M1_Slash:BodySetup_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/Kazan/Kazan_DualAxeSword/FS_CA_P_Kazan_DualAxeSword_Com_Grapple_Atk_02_M1_Slash.0"
+    },
+    "NavCollision": {
+      "ObjectName": "NavCollision'FS_CA_P_Kazan_DualAxeSword_Com_Grapple_Atk_02_M1_Slash:NavCollision_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/Kazan/Kazan_DualAxeSword/FS_CA_P_Kazan_DualAxeSword_Com_Grapple_Atk_02_M1_Slash.1"
+    },
+    "LightingGuid": "1E45F87B-436FEC92-D8F83C82-B5BDD3EF",
+    "RenderData": {
+      "LODs": [
+        {
+          "Sections": [
+            {
+              "MaterialIndex": 0,
+              "FirstIndex": 0,
+              "NumTriangles": 464,
+              "MinVertexIndex": 0,
+              "MaxVertexIndex": 1159,
+              "bEnableCollision": false,
+              "bCastShadow": true,
+              "bForceOpaque": false,
+              "bVisibleInRayTracing": true
+            }
+          ],
+          "MaxDeviation": 0.0,
+          "PositionVertexBuffer": {
+            "Stride": 12,
+            "NumVertices": 1160
+          },
+          "VertexBuffer": {
+            "NumTexCoords": 1,
+            "NumVertices": 1160,
+            "Strides": -1,
+            "UseHighPrecisionTangentBasis": false,
+            "UseFullPrecisionUVs": false
+          },
+          "ColorVertexBuffer": {
+            "Stride": 4,
+            "NumVertices": 1160
+          }
+        }
+      ],
+      "Bounds": {
+        "Origin": {
+          "X": 24.195503,
+          "Y": 39.396744,
+          "Z": 129.2501
+        },
+        "BoxExtent": {
+          "X": 132.31746,
+          "Y": 181.69476,
+          "Z": 135.67543
+        },
+        "SphereRadius": 195.14937
+      },
+      "bLODsShareStaticLighting": true,
+      "ScreenSize": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  }
+]

@@ -1,0 +1,187 @@
+[
+  {
+    "Type": "BodySetup",
+    "Name": "BodySetup_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BodySetup'",
+    "Outer": {
+      "ObjectName": "StaticMesh'FS_Common_GroundBlock'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BBQ_Mesh/Common/FS_Common_GroundBlock.2"
+    },
+    "Properties": {
+      "DefaultInstance": {
+        "ObjectType": "ECC_WorldStatic",
+        "CollisionProfileName": "BlockAll",
+        "CollisionResponses": {
+          "ResponseArray": [
+            {
+              "Channel": "EngineTraceChannel1",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "Attack",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "JumpBlock",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "IKTrace",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "FloorCheck",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "LandScape",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "NamePlate",
+              "Response": "ECR_Block"
+            }
+          ]
+        }
+      }
+    },
+    "BodySetupGuid": "086CE2DE4BE38C19C4251CAE93F71265",
+    "CookedFormatData": {
+      "PhysXPC": {
+        "BulkDataFlags": "BULKDATA_SingleUse | BULKDATA_ForceInlinePayload",
+        "ElementCount": 112250,
+        "SizeOnDisk": 112250,
+        "OffsetInFile": "0x28579"
+      }
+    }
+  },
+  {
+    "Type": "NavCollision",
+    "Name": "NavCollision_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'NavCollision'",
+    "Outer": {
+      "ObjectName": "StaticMesh'FS_Common_GroundBlock'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BBQ_Mesh/Common/FS_Common_GroundBlock.2"
+    },
+    "CookedFormatData": {
+      "NavCollision_Chaos": {
+        "BulkDataFlags": "BULKDATA_SingleUse | BULKDATA_ForceInlinePayload",
+        "ElementCount": 21,
+        "SizeOnDisk": 21,
+        "OffsetInFile": "0x43C3B"
+      }
+    }
+  },
+  {
+    "Type": "StaticMesh",
+    "Name": "FS_Common_GroundBlock",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'StaticMesh'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BBQ_Mesh/Common/FS_Common_GroundBlock",
+    "Properties": {
+      "StaticMaterials": [
+        {
+          "MaterialInterface": {
+            "ObjectName": "Material'Base_Axis'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/Base/Base_Axis.0"
+          },
+          "MaterialSlotName": "WorldGridMaterial",
+          "ImportedMaterialSlotName": "WorldGridMaterial",
+          "UVChannelData": {
+            "bInitialized": true,
+            "bOverrideDensities": false,
+            "LocalUVDensities": 100.03857,
+            "LocalUVDensities[1]": 0.0,
+            "LocalUVDensities[2]": 0.0,
+            "LocalUVDensities[3]": 0.0
+          }
+        }
+      ],
+      "LightmapUVDensity": 100.03857,
+      "LightMapResolution": 64,
+      "ExtendedBounds": {
+        "Origin": {
+          "X": -3.8146973E-06,
+          "Y": 3.8146973E-06,
+          "Z": -4.5776367E-05
+        },
+        "BoxExtent": {
+          "X": 49.999996,
+          "Y": 49.999996,
+          "Z": 0.0
+        },
+        "SphereRadius": 70.71067
+      }
+    },
+    "BodySetup": {
+      "ObjectName": "BodySetup'FS_Common_GroundBlock:BodySetup_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BBQ_Mesh/Common/FS_Common_GroundBlock.0"
+    },
+    "NavCollision": {
+      "ObjectName": "NavCollision'FS_Common_GroundBlock:NavCollision_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BBQ_Mesh/Common/FS_Common_GroundBlock.1"
+    },
+    "LightingGuid": "EC3D589D-43A9AC62-05B5C492-871AF6A0",
+    "RenderData": {
+      "LODs": [
+        {
+          "Sections": [
+            {
+              "MaterialIndex": 0,
+              "FirstIndex": 0,
+              "NumTriangles": 1800,
+              "MinVertexIndex": 0,
+              "MaxVertexIndex": 960,
+              "bEnableCollision": true,
+              "bCastShadow": true,
+              "bForceOpaque": false,
+              "bVisibleInRayTracing": true
+            }
+          ],
+          "MaxDeviation": 0.0,
+          "PositionVertexBuffer": {
+            "Stride": 12,
+            "NumVertices": 961
+          },
+          "VertexBuffer": {
+            "NumTexCoords": 1,
+            "NumVertices": 961,
+            "Strides": -1,
+            "UseHighPrecisionTangentBasis": false,
+            "UseFullPrecisionUVs": false
+          },
+          "ColorVertexBuffer": {
+            "Stride": 0,
+            "NumVertices": 0
+          }
+        }
+      ],
+      "Bounds": {
+        "Origin": {
+          "X": -3.8146973E-06,
+          "Y": 3.8146973E-06,
+          "Z": -4.5776367E-05
+        },
+        "BoxExtent": {
+          "X": 49.999996,
+          "Y": 49.999996,
+          "Z": 0.0
+        },
+        "SphereRadius": 70.71067
+      },
+      "bLODsShareStaticLighting": true,
+      "ScreenSize": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  }
+]

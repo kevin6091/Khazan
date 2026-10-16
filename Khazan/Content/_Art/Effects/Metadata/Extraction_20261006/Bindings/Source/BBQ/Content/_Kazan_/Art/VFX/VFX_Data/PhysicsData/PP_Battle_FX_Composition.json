@@ -1,0 +1,158 @@
+[
+  {
+    "Type": "xxBattleEffectData",
+    "Name": "PP_Battle_FX_Composition",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxBattleEffectData'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PP_Battle_FX_Composition",
+    "Properties": {
+      "AttackerParticle": {
+        "ObjectName": "xxAttackerParticleData'PA_Attack_Slash'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Attack/PA_Attack_Slash.0"
+      },
+      "AttackerParticleData": {
+        "DetachAfterTime": 0.05
+      },
+      "DamagerParticleStruct": [
+        {
+          "DamagerParticle": {
+            "ObjectName": "xxDamagerParticleData'PP_Damage_Spray'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Dmg/PP_Damage_Spray.0"
+          },
+          "DamagerParticleData": {
+            "bHitAttach": true,
+            "DetachAfterTime": 0.25,
+            "bAbsoluteRotation": true,
+            "MoveImpactPointOffset": 0.0,
+            "AttackMaterial": "EBattleDirecting_AttackMaterial::Default",
+            "DamageMaterial": "EBattleDirecting_DamageMaterial::Default",
+            "AttackStrength": "EBattleDirecting_AttackStrength::Default",
+            "AttackerAttribute": "EStatusEffectAttribute::None"
+          }
+        },
+        {
+          "DamagerParticle": {
+            "ObjectName": "xxDamagerParticleData'PP_Damage_Bleed'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Dmg/PP_Damage_Bleed.0"
+          },
+          "DamagerParticleData": {
+            "bHitAttach": true,
+            "DetachAfterTime": 0.0,
+            "bAbsoluteRotation": true,
+            "MoveImpactPointOffset": 0.0,
+            "AttackMaterial": "EBattleDirecting_AttackMaterial::Default",
+            "DamageMaterial": "EBattleDirecting_DamageMaterial::Default",
+            "AttackStrength": "EBattleDirecting_AttackStrength::Default",
+            "AttackerAttribute": "EStatusEffectAttribute::None"
+          }
+        }
+      ],
+      "EnvDecal": {
+        "ObjectName": "xxEnvDecalData'Env_Decal_Environment'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Decal/Env_Decal_Environment.0"
+      },
+      "EnvDecalData": {
+        "EnvDecalSpawnDelayTime": 0.25,
+        "EnvDecalRandomScale": {
+          "BasedVector": {
+            "X": 175.0,
+            "Y": 225.0,
+            "Z": 150.0
+          },
+          "MinVector": {
+            "X": 0.0,
+            "Y": -10.0,
+            "Z": -10.0
+          },
+          "MaxVector": {
+            "X": 0.0,
+            "Y": 10.0,
+            "Z": 10.0
+          },
+          "bFixedRatio": false
+        },
+        "EnvDecalLife": 5.0,
+        "EnvDecalHitXYLocationOffset": 125.0,
+        "EnvDecalOpacityCurve": {
+          "ObjectName": "CurveFloat'FC_Decal_FadeOut'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/Curve/BBQ_Curve/FC_Decal_FadeOut.0"
+        },
+        "EnvDecalRandomScalarParams": [
+          {
+            "Key": "Random_Ch_Value",
+            "Value": {
+              "ScalarType": "EScalarParamType::Random",
+              "DefaultValue": 0.0,
+              "RandomMin": 0.0,
+              "RandomMax": 3.0,
+              "bRandomFloat": true
+            }
+          }
+        ]
+      },
+      "DamagerDecal": {
+        "ObjectName": "xxDamagerDecalData'DamagerDecal_SkindDecal'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Decal_Skinned/DamagerDecal_SkindDecal.0"
+      },
+      "DamagerDecalData": {
+        "DamagerDecalLife": 8.0
+      },
+      "DamagerHitEffect": {
+        "ObjectName": "xxDamagerHitEffectData'PH_Damage_Base'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Dmg/PH_Damage_Base.0"
+      },
+      "NotifyParticleStruct": [
+        {
+          "NotifyParticle": {
+            "ObjectName": "xxNotifyParticleData'PA_Trail_Base'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Trail/PA_Trail_Base.0"
+          }
+        },
+        {
+          "NotifyParticle": {
+            "ObjectName": "xxNotifyParticleData'PA_Trail_Dot_Base'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Trail/PA_Trail_Dot_Base.0"
+          }
+        }
+      ],
+      "NotifyDecalStruct": [
+        {
+          "NotifyDecal": {
+            "ObjectName": "xxNotifyDecalData'PA_Trail_Decal_Base'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Trail/PA_Trail_Decal_Base.0"
+          }
+        },
+        {
+          "NotifyDecal": {
+            "ObjectName": "xxNotifyDecalData'PA_Decal_Base'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Trail/PA_Decal_Base.0"
+          }
+        },
+        {
+          "NotifyDecal": {
+            "ObjectName": "xxNotifyDecalData'PA_Decal_Normal'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Trail/PA_Decal_Normal.0"
+          }
+        },
+        {
+          "NotifyDecal": {
+            "ObjectName": "xxNotifyDecalData'PA_Decal_Strong'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Trail/PA_Decal_Strong.0"
+          }
+        },
+        {
+          "NotifyDecal": {
+            "ObjectName": "xxNotifyDecalData'PA_Decal_Super'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Trail/PA_Decal_Super.0"
+          }
+        },
+        {
+          "NotifyDecal": {
+            "ObjectName": "xxNotifyDecalData'PA_Decal_Superround'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/PhysicsData/PA_Trail/PA_Decal_Superround.0"
+          }
+        }
+      ]
+    }
+  }
+]

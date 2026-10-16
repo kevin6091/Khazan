@@ -1,0 +1,289 @@
+[
+  {
+    "Type": "DistributionFloatConstant",
+    "Name": "RequiredDistributionSpawnRate",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'DistributionFloatConstant'",
+    "Outer": {
+      "ObjectName": "ParticleModuleRequired'FP_Enchant_Empty:ParticleModuleRequired_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.4"
+    }
+  },
+  {
+    "Type": "ParticleLODLevel",
+    "Name": "ParticleLODLevel_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleLODLevel'",
+    "Outer": {
+      "ObjectName": "ParticleSpriteEmitter'FP_Enchant_Empty:ParticleSpriteEmitter_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.7"
+    },
+    "Properties": {
+      "RequiredModule": {
+        "ObjectName": "ParticleModuleRequired'FP_Enchant_Empty:ParticleModuleRequired_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.4"
+      },
+      "Modules": [
+        {
+          "ObjectName": "ParticleModuleLifetime'FP_Enchant_Empty:ParticleModuleLifetime_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.3"
+        },
+        {
+          "ObjectName": "ParticleModuleSize'FP_Enchant_Empty:ParticleModuleSize_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.5"
+        },
+        {
+          "ObjectName": "ParticleModuleColorOverLife'FP_Enchant_Empty:ParticleModuleColorOverLife_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.2"
+        }
+      ],
+      "SpawnModule": {
+        "ObjectName": "ParticleModuleSpawn'FP_Enchant_Empty:ParticleModuleSpawn_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.6"
+      },
+      "PeakActiveParticles": 3
+    }
+  },
+  {
+    "Type": "ParticleModuleColorOverLife",
+    "Name": "ParticleModuleColorOverLife_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleColorOverLife'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'FP_Enchant_Empty'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.8"
+    },
+    "Properties": {
+      "ColorOverLife": {
+        "MinValue": 1.0,
+        "MaxValue": 1.0,
+        "MinValueVec": {
+          "X": 1.0,
+          "Y": 1.0,
+          "Z": 1.0
+        },
+        "MaxValueVec": {
+          "X": 1.0,
+          "Y": 1.0,
+          "Z": 1.0
+        },
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 3
+        }
+      },
+      "AlphaOverLife": {
+        "MaxValue": 1.0,
+        "Distribution": null,
+        "Table": {
+          "TimeScale": 1.0,
+          "Values": [
+            1.0,
+            0.0
+          ],
+          "Op": 1,
+          "EntryCount": 2,
+          "EntryStride": 1
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleLifetime",
+    "Name": "ParticleModuleLifetime_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleLifetime'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'FP_Enchant_Empty'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.8"
+    },
+    "Properties": {
+      "Lifetime": {
+        "MinValue": 0.1,
+        "MaxValue": 0.1,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.1
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleRequired",
+    "Name": "ParticleModuleRequired_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleRequired'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'FP_Enchant_Empty'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.8"
+    },
+    "Properties": {
+      "Material": {
+        "ObjectName": "Material'DefaultParticle'",
+        "ObjectPath": "Engine/Content/EngineMaterials/DefaultParticle.0"
+      },
+      "bUseLegacyEmitterTime": false,
+      "SpawnRate": {
+        "Distribution": {
+          "ObjectName": "DistributionFloatConstant'FP_Enchant_Empty:ParticleModuleRequired_0.RequiredDistributionSpawnRate'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.0"
+        }
+      },
+      "RandomImageTime": 1.0,
+      "EmitterLoops": 1,
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleSize",
+    "Name": "ParticleModuleSize_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleSize'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'FP_Enchant_Empty'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.8"
+    },
+    "Properties": {
+      "StartSize": {
+        "MinValue": 25.0,
+        "MaxValue": 25.0,
+        "MinValueVec": {
+          "X": 25.0,
+          "Y": 25.0,
+          "Z": 25.0
+        },
+        "MaxValueVec": {
+          "X": 25.0,
+          "Y": 25.0,
+          "Z": 25.0
+        },
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            25.0,
+            25.0,
+            25.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 3
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleSpawn",
+    "Name": "ParticleModuleSpawn_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleSpawn'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'FP_Enchant_Empty'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.8"
+    },
+    "Properties": {
+      "Rate": {
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "RateScale": {
+        "MinValue": 1.0,
+        "MaxValue": 1.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "BurstList": [
+        {
+          "Count": 1,
+          "CountLow": -1,
+          "Time": 0.0
+        }
+      ],
+      "BurstScale": {
+        "MinValue": 1.0,
+        "MaxValue": 1.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleSpriteEmitter",
+    "Name": "ParticleSpriteEmitter_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleSpriteEmitter'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'FP_Enchant_Empty'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.8"
+    },
+    "Properties": {
+      "EmitterRenderMode": "ERM_Point",
+      "LODLevels": [
+        {
+          "ObjectName": "ParticleLODLevel'FP_Enchant_Empty:ParticleSpriteEmitter_0.ParticleLODLevel_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.1"
+        }
+      ],
+      "DetailModeBitmask": 7
+    }
+  },
+  {
+    "Type": "ParticleSystem",
+    "Name": "FP_Enchant_Empty",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleSystem'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty",
+    "Properties": {
+      "Emitters": [
+        {
+          "ObjectName": "ParticleSpriteEmitter'FP_Enchant_Empty:ParticleSpriteEmitter_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Status/Enchant/FP_Enchant_Empty.7"
+        }
+      ],
+      "CurveEdSetup": null,
+      "LODDistances": [
+        0.0
+      ],
+      "LODSettings": [
+        {}
+      ],
+      "bShouldResetPeakCounts": true
+    }
+  }
+]

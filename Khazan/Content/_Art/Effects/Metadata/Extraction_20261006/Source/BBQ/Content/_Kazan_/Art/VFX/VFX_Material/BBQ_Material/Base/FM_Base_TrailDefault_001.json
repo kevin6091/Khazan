@@ -1,0 +1,376 @@
+[
+  {
+    "Type": "Material",
+    "Name": "FM_Base_TrailDefault_001",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Material'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/Base/FM_Base_TrailDefault_001",
+    "Properties": {
+      "EmissiveColor": {
+        "Expression": null,
+        "OutputIndex": 0,
+        "InputName": "None",
+        "Mask": 0,
+        "MaskR": 0,
+        "MaskG": 0,
+        "MaskB": 0,
+        "MaskA": 0,
+        "ExpressionName": "MaterialExpressionMultiply_1",
+        "UseConstant": false,
+        "Constant": {
+          "B": 0,
+          "G": 0,
+          "R": 0,
+          "A": 0,
+          "Hex": "000000"
+        }
+      },
+      "BlendMode": "BLEND_Translucent",
+      "ShadingModel": "MSM_Unlit",
+      "ShadingModels": {
+        "ShadingModelField": 1
+      },
+      "TwoSided": true,
+      "NumCustomizedUVs": 1,
+      "bUsedWithBeamTrails": true,
+      "bUsedWithMeshParticles": true,
+      "bCanMaskedBeAssumedOpaque": true,
+      "StateId": "E96A0D20-4DC48B0E-23B45AB3-BC4BAAB0",
+      "CachedExpressionData": {
+        "Parameters": {
+          "RuntimeEntries": {
+            "NameHashes": [
+              1423356870780766383,
+              4898608048710831115,
+              9502383306305746456,
+              15972978297942007204
+            ],
+            "ParameterInfos": [
+              {
+                "Name": "UV_Degree",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "PanSpeed_U",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "PanSpeed_V",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "UV_RotSpeed",
+                "Association": "GlobalParameter",
+                "Index": -1
+              }
+            ],
+            "ExpressionGuids": [
+              "3D43ECB5-411C2006-D259FCB6-09B8F6AF",
+              "2A6C0F39-4C63EF39-C9A438B0-81AA0EDB",
+              "01BF8D8A-4D3FF19A-4F83EA8D-1D0B5171",
+              "22B7F11B-4FCE75A4-CA5F45A5-2FEA9DC3"
+            ]
+          },
+          "RuntimeEntries[1]": {
+            "NameHashes": [
+              12279385124011487613
+            ],
+            "ParameterInfos": [
+              {
+                "Name": "Color",
+                "Association": "GlobalParameter",
+                "Index": -1
+              }
+            ],
+            "ExpressionGuids": [
+              "C004C970-4AFB0FF8-D5DC3CA5-E9737A0D"
+            ]
+          },
+          "RuntimeEntries[2]": {
+            "NameHashes": [
+              808274885655307101,
+              5386486669321159041
+            ],
+            "ParameterInfos": [
+              {
+                "Name": "Noise",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "Particle texture",
+                "Association": "GlobalParameter",
+                "Index": -1
+              }
+            ],
+            "ExpressionGuids": [
+              "9783878F-4B3109E4-1F8BFDBA-AB34EDF0",
+              "784A06EE-46557D56-FE2CD186-E6FBE2F4"
+            ]
+          },
+          "ScalarValues": [
+            0.0,
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "VectorValues": [
+            {
+              "R": 1.0,
+              "G": 1.0,
+              "B": 1.0,
+              "A": 1.0,
+              "Hex": "FFFFFF"
+            }
+          ],
+          "TextureValues": [
+            {
+              "ObjectName": "Texture2D'FT_Noise_FluidSmoke_001'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_Noise_FluidSmoke_001.0"
+            },
+            {
+              "ObjectName": "Texture2D'FT_Mask_Trail_001'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT_Mask_Trail_001.0"
+            }
+          ]
+        },
+        "ReferencedTextures": [
+          {
+            "ObjectName": "Texture2D'FT_Mask_Trail_001'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT_Mask_Trail_001.0"
+          },
+          {
+            "ObjectName": "Texture2D'FT_Noise_FluidSmoke_001'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_Noise_FluidSmoke_001.0"
+          }
+        ],
+        "FunctionInfos": [
+          {
+            "StateId": "BF4C35A2-41694269-CB7E7AB8-38AC31E3",
+            "Function": {
+              "ObjectName": "MaterialFunction'RemapValueRange'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions03/Math/RemapValueRange.0"
+            }
+          },
+          {
+            "StateId": "BF4C35A2-41694269-CB7E7AB8-38AC31E3",
+            "Function": {
+              "ObjectName": "MaterialFunction'RemapValueRange'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions03/Math/RemapValueRange.0"
+            }
+          },
+          {
+            "StateId": "BF4C35A2-41694269-CB7E7AB8-38AC31E3",
+            "Function": {
+              "ObjectName": "MaterialFunction'RemapValueRange'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions03/Math/RemapValueRange.0"
+            }
+          },
+          {
+            "StateId": "E16EC196-4388782F-5864EABD-AE7D0CCB",
+            "Function": {
+              "ObjectName": "MaterialFunction'FF_UVRotator'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/MaterialFunction/FF_UVRotator.0"
+            }
+          },
+          {
+            "StateId": "E16EC196-4388782F-5864EABD-AE7D0CCB",
+            "Function": {
+              "ObjectName": "MaterialFunction'FF_UVRotator'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/MaterialFunction/FF_UVRotator.0"
+            }
+          }
+        ],
+        "DynamicParameterNames": [
+          "Path",
+          "Lenght",
+          "Param3",
+          "Param4"
+        ],
+        "QualityLevelsUsed": [
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "TextureStreamingData": [
+        {
+          "SamplingScale": 1.0,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Mask_Trail_001"
+        },
+        {
+          "SamplingScale": 1.0,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Noise_FluidSmoke_001"
+        }
+      ]
+    },
+    "LoadedMaterialResources": [],
+    "CachedExpressionData": {
+      "Parameters": {
+        "RuntimeEntries": {
+          "NameHashes": [
+            1423356870780766383,
+            4898608048710831115,
+            9502383306305746456,
+            15972978297942007204
+          ],
+          "ParameterInfos": [
+            {
+              "Name": "UV_Degree",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "PanSpeed_U",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "PanSpeed_V",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "UV_RotSpeed",
+              "Association": "GlobalParameter",
+              "Index": -1
+            }
+          ],
+          "ExpressionGuids": [
+            "3D43ECB5-411C2006-D259FCB6-09B8F6AF",
+            "2A6C0F39-4C63EF39-C9A438B0-81AA0EDB",
+            "01BF8D8A-4D3FF19A-4F83EA8D-1D0B5171",
+            "22B7F11B-4FCE75A4-CA5F45A5-2FEA9DC3"
+          ]
+        },
+        "RuntimeEntries[1]": {
+          "NameHashes": [
+            12279385124011487613
+          ],
+          "ParameterInfos": [
+            {
+              "Name": "Color",
+              "Association": "GlobalParameter",
+              "Index": -1
+            }
+          ],
+          "ExpressionGuids": [
+            "C004C970-4AFB0FF8-D5DC3CA5-E9737A0D"
+          ]
+        },
+        "RuntimeEntries[2]": {
+          "NameHashes": [
+            808274885655307101,
+            5386486669321159041
+          ],
+          "ParameterInfos": [
+            {
+              "Name": "Noise",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "Particle texture",
+              "Association": "GlobalParameter",
+              "Index": -1
+            }
+          ],
+          "ExpressionGuids": [
+            "9783878F-4B3109E4-1F8BFDBA-AB34EDF0",
+            "784A06EE-46557D56-FE2CD186-E6FBE2F4"
+          ]
+        },
+        "ScalarValues": [
+          0.0,
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "VectorValues": [
+          {
+            "R": 1.0,
+            "G": 1.0,
+            "B": 1.0,
+            "A": 1.0,
+            "Hex": "FFFFFF"
+          }
+        ],
+        "TextureValues": [
+          {
+            "ObjectName": "Texture2D'FT_Noise_FluidSmoke_001'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_Noise_FluidSmoke_001.0"
+          },
+          {
+            "ObjectName": "Texture2D'FT_Mask_Trail_001'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT_Mask_Trail_001.0"
+          }
+        ]
+      },
+      "ReferencedTextures": [
+        {
+          "ObjectName": "Texture2D'FT_Mask_Trail_001'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT_Mask_Trail_001.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_Noise_FluidSmoke_001'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_Noise_FluidSmoke_001.0"
+        }
+      ],
+      "FunctionInfos": [
+        {
+          "StateId": "BF4C35A2-41694269-CB7E7AB8-38AC31E3",
+          "Function": {
+            "ObjectName": "MaterialFunction'RemapValueRange'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions03/Math/RemapValueRange.0"
+          }
+        },
+        {
+          "StateId": "BF4C35A2-41694269-CB7E7AB8-38AC31E3",
+          "Function": {
+            "ObjectName": "MaterialFunction'RemapValueRange'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions03/Math/RemapValueRange.0"
+          }
+        },
+        {
+          "StateId": "BF4C35A2-41694269-CB7E7AB8-38AC31E3",
+          "Function": {
+            "ObjectName": "MaterialFunction'RemapValueRange'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions03/Math/RemapValueRange.0"
+          }
+        },
+        {
+          "StateId": "E16EC196-4388782F-5864EABD-AE7D0CCB",
+          "Function": {
+            "ObjectName": "MaterialFunction'FF_UVRotator'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/MaterialFunction/FF_UVRotator.0"
+          }
+        },
+        {
+          "StateId": "E16EC196-4388782F-5864EABD-AE7D0CCB",
+          "Function": {
+            "ObjectName": "MaterialFunction'FF_UVRotator'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/MaterialFunction/FF_UVRotator.0"
+          }
+        }
+      ],
+      "DynamicParameterNames": [
+        "Path",
+        "Lenght",
+        "Param3",
+        "Param4"
+      ],
+      "QualityLevelsUsed": [
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  }
+]

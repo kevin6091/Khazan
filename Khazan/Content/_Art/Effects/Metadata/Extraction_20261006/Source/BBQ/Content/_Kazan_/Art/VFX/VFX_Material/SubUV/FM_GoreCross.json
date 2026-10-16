@@ -1,0 +1,358 @@
+[
+  {
+    "Type": "Material",
+    "Name": "FM_GoreCross",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Material'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/SubUV/FM_GoreCross",
+    "Properties": {
+      "EmissiveColor": {
+        "Expression": null,
+        "OutputIndex": 0,
+        "InputName": "None",
+        "Mask": 0,
+        "MaskR": 0,
+        "MaskG": 0,
+        "MaskB": 0,
+        "MaskA": 0,
+        "ExpressionName": "MaterialExpressionLinearInterpolate_0",
+        "UseConstant": false,
+        "Constant": {
+          "B": 0,
+          "G": 0,
+          "R": 0,
+          "A": 0,
+          "Hex": "000000"
+        }
+      },
+      "BlendMode": "BLEND_Masked",
+      "ShadingModel": "MSM_Unlit",
+      "ShadingModels": {
+        "ShadingModelField": 1
+      },
+      "TwoSided": true,
+      "bUsedWithMeshParticles": true,
+      "StateId": "9B79547A-4E8CF12F-186A9E9F-DFB9EECE",
+      "CachedExpressionData": {
+        "Parameters": {
+          "RuntimeEntries": {
+            "NameHashes": [
+              3877658916084265664,
+              16033722369781315324
+            ],
+            "ParameterInfos": [
+              {
+                "Name": "Distortion",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "Tex_Scale",
+                "Association": "GlobalParameter",
+                "Index": -1
+              }
+            ],
+            "ExpressionGuids": [
+              "AC0E6FB8-487245F1-FD67C990-2C04B392",
+              "4B4B7AED-40402CC9-BE85378D-DDDDF67B"
+            ]
+          },
+          "RuntimeEntries[1]": {
+            "NameHashes": [
+              10975057850833063825,
+              16001865301981087660
+            ],
+            "ParameterInfos": [
+              {
+                "Name": "Color2",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "Color1",
+                "Association": "GlobalParameter",
+                "Index": -1
+              }
+            ],
+            "ExpressionGuids": [
+              "DF38A8A6-4E5F2369-489476A9-89999014",
+              "6B7EE284-4383C278-59F75981-31DCBEA0"
+            ]
+          },
+          "RuntimeEntries[2]": {
+            "NameHashes": [
+              10396852466356375936,
+              15326729616219361024
+            ],
+            "ParameterInfos": [
+              {
+                "Name": "NoiseTex",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "BaseTex",
+                "Association": "GlobalParameter",
+                "Index": -1
+              }
+            ],
+            "ExpressionGuids": [
+              "B9DB636E-4BBE793A-5093848F-29DA3B87",
+              "3DFAC16B-4C24DFBD-09615A9C-E8E38C5C"
+            ]
+          },
+          "ScalarValues": [
+            1.0,
+            0.7
+          ],
+          "VectorValues": [
+            {
+              "R": 0.244792,
+              "G": 0.0,
+              "B": 0.0,
+              "A": 1.0,
+              "Hex": "880000"
+            },
+            {
+              "R": 1.0,
+              "G": 0.0,
+              "B": 0.0,
+              "A": 1.0,
+              "Hex": "FF0000"
+            }
+          ],
+          "TextureValues": [
+            {
+              "ObjectName": "Texture2D'FT_Noise_017'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_017.0"
+            },
+            {
+              "ObjectName": "Texture2D'FT_Fluid_02'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/water/FT_Fluid_02.0"
+            }
+          ]
+        },
+        "ReferencedTextures": [
+          {
+            "ObjectName": "Texture2D'DefaultTexture'",
+            "ObjectPath": "Engine/Content/EngineResources/DefaultTexture.0"
+          },
+          {
+            "ObjectName": "Texture2D'FT_Fluid_02'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/water/FT_Fluid_02.0"
+          },
+          {
+            "ObjectName": "Texture2D'FT_Noise_017'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_017.0"
+          }
+        ],
+        "FunctionInfos": [
+          {
+            "StateId": "B0A6151A-46CE0ED5-919EF681-D25406EC",
+            "Function": {
+              "ObjectName": "MaterialFunction'MF_UV_Distortion'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/MaterialFunction/MF_UV_Distortion.0"
+            }
+          },
+          {
+            "StateId": "2C1DDB6E-406BC9FC-1D4141A1-7C82122A",
+            "Function": {
+              "ObjectName": "MaterialFunction'BreakOutFloat2Components'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components.0"
+            }
+          },
+          {
+            "StateId": "B2F4A5A7-4EDE33D8-E70A4A83-A28D1503",
+            "Function": {
+              "ObjectName": "MaterialFunction'ScaleUVsByCenter'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/ScaleUVsByCenter.0"
+            }
+          },
+          {
+            "StateId": "7560E2DA-4356343C-18E6818A-A015BAC5",
+            "Function": {
+              "ObjectName": "MaterialFunction'MakeFloat2'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/MakeFloat2.0"
+            }
+          }
+        ],
+        "DynamicParameterNames": [
+          "Random",
+          "Dissolve",
+          "Xspd",
+          "Yspd"
+        ],
+        "QualityLevelsUsed": [
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "TextureStreamingData": [
+        {
+          "SamplingScale": 1.0,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Noise_017"
+        }
+      ]
+    },
+    "LoadedMaterialResources": [],
+    "CachedExpressionData": {
+      "Parameters": {
+        "RuntimeEntries": {
+          "NameHashes": [
+            3877658916084265664,
+            16033722369781315324
+          ],
+          "ParameterInfos": [
+            {
+              "Name": "Distortion",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "Tex_Scale",
+              "Association": "GlobalParameter",
+              "Index": -1
+            }
+          ],
+          "ExpressionGuids": [
+            "AC0E6FB8-487245F1-FD67C990-2C04B392",
+            "4B4B7AED-40402CC9-BE85378D-DDDDF67B"
+          ]
+        },
+        "RuntimeEntries[1]": {
+          "NameHashes": [
+            10975057850833063825,
+            16001865301981087660
+          ],
+          "ParameterInfos": [
+            {
+              "Name": "Color2",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "Color1",
+              "Association": "GlobalParameter",
+              "Index": -1
+            }
+          ],
+          "ExpressionGuids": [
+            "DF38A8A6-4E5F2369-489476A9-89999014",
+            "6B7EE284-4383C278-59F75981-31DCBEA0"
+          ]
+        },
+        "RuntimeEntries[2]": {
+          "NameHashes": [
+            10396852466356375936,
+            15326729616219361024
+          ],
+          "ParameterInfos": [
+            {
+              "Name": "NoiseTex",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "BaseTex",
+              "Association": "GlobalParameter",
+              "Index": -1
+            }
+          ],
+          "ExpressionGuids": [
+            "B9DB636E-4BBE793A-5093848F-29DA3B87",
+            "3DFAC16B-4C24DFBD-09615A9C-E8E38C5C"
+          ]
+        },
+        "ScalarValues": [
+          1.0,
+          0.7
+        ],
+        "VectorValues": [
+          {
+            "R": 0.244792,
+            "G": 0.0,
+            "B": 0.0,
+            "A": 1.0,
+            "Hex": "880000"
+          },
+          {
+            "R": 1.0,
+            "G": 0.0,
+            "B": 0.0,
+            "A": 1.0,
+            "Hex": "FF0000"
+          }
+        ],
+        "TextureValues": [
+          {
+            "ObjectName": "Texture2D'FT_Noise_017'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_017.0"
+          },
+          {
+            "ObjectName": "Texture2D'FT_Fluid_02'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/water/FT_Fluid_02.0"
+          }
+        ]
+      },
+      "ReferencedTextures": [
+        {
+          "ObjectName": "Texture2D'DefaultTexture'",
+          "ObjectPath": "Engine/Content/EngineResources/DefaultTexture.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_Fluid_02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/water/FT_Fluid_02.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_Noise_017'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_017.0"
+        }
+      ],
+      "FunctionInfos": [
+        {
+          "StateId": "B0A6151A-46CE0ED5-919EF681-D25406EC",
+          "Function": {
+            "ObjectName": "MaterialFunction'MF_UV_Distortion'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/MaterialFunction/MF_UV_Distortion.0"
+          }
+        },
+        {
+          "StateId": "2C1DDB6E-406BC9FC-1D4141A1-7C82122A",
+          "Function": {
+            "ObjectName": "MaterialFunction'BreakOutFloat2Components'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components.0"
+          }
+        },
+        {
+          "StateId": "B2F4A5A7-4EDE33D8-E70A4A83-A28D1503",
+          "Function": {
+            "ObjectName": "MaterialFunction'ScaleUVsByCenter'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/ScaleUVsByCenter.0"
+          }
+        },
+        {
+          "StateId": "7560E2DA-4356343C-18E6818A-A015BAC5",
+          "Function": {
+            "ObjectName": "MaterialFunction'MakeFloat2'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/MakeFloat2.0"
+          }
+        }
+      ],
+      "DynamicParameterNames": [
+        "Random",
+        "Dissolve",
+        "Xspd",
+        "Yspd"
+      ],
+      "QualityLevelsUsed": [
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  }
+]

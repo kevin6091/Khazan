@@ -1,0 +1,197 @@
+[
+  {
+    "Type": "MaterialInstanceConstant",
+    "Name": "FM_Lightning_trail2",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MaterialInstanceConstant'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/FM_Lightning_trail2",
+    "Properties": {
+      "Parent": {
+        "ObjectName": "Material'Base_Lightning_trail'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/Base/Base_Lightning_trail.0"
+      },
+      "bHasStaticPermutationResource": true,
+      "ScalarParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "bothTopAlpha",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 4.0,
+          "ExpressionGUID": "AFB63C1C-854E4E76-CB3A63AE-F50AD3BD"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Lightning_Strangth",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 150.0,
+          "ExpressionGUID": "46F894BB-428B031D-5EC3FF86-64F6AFB5"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "noisePower",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.2,
+          "ExpressionGUID": "EFD5C860-334541EA-E8FA9B9E-6211B31E"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "noiseSpdX(A)",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "00FF1397-45E45DF7-5BB089A6-8943EAD3"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "noiseSpdX(B)",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "E6F339D1-4E6982BD-F282D89B-9E6F5A59"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "noiseSpdY(A)",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "B923181C-4816DC91-E7B33492-E5D4C50E"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "noiseSpdY(B)",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.5,
+          "ExpressionGUID": "76B7818D-2F46776E-F9028887-A3D4CEE9"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "noiseTileU",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 2.0,
+          "ExpressionGUID": "8E8CAB02-4343DF6E-E3A237BD-F1EB0B40"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "noiseTileV",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "B29C320C-3547FEEE-63325DA1-91D3B880"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "RefractionDepthBias",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.0,
+          "ExpressionGUID": "00000000-00000000-00000000-00000000"
+        }
+      ],
+      "VectorParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "Set_Mask",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "R": 1.0,
+            "G": 0.4,
+            "B": 1.0,
+            "A": 0.0,
+            "Hex": "FFAAFF"
+          },
+          "ExpressionGUID": "9A49411E-4C2A80EF-8CA2D19F-B281225C"
+        }
+      ],
+      "TextureParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "base",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT_Noise_Flow_002'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_Noise_Flow_002.0"
+          },
+          "ExpressionGUID": "6D9ACD1F-8B471399-0115BAA8-16F273DD"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "baseNoise",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT__Mask_Simple_Chip'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT__Mask_Simple_Chip.0"
+          },
+          "ExpressionGUID": "819E7F83-BF481CDB-530FB9A6-396EAFA1"
+        }
+      ],
+      "BasePropertyOverrides": {
+        "TwoSided": true,
+        "BlendMode": "BLEND_Additive",
+        "ShadingModel": "MSM_Unlit",
+        "OpacityMaskClipValue": 0.3333
+      },
+      "StaticParameters": {
+        "StaticSwitchParameters": [
+          {
+            "Value": true,
+            "ParameterInfo": {
+              "Name": "Use_MaskCH",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            "bOverride": true,
+            "ExpressionGUID": "81F36412-459DB42B-B72500A8-9CEABBDF"
+          }
+        ],
+        "StaticComponentMaskParameters": [
+          {
+            "R": true,
+            "G": false,
+            "B": false,
+            "A": false,
+            "ParameterInfo": {
+              "Name": "noiseMask",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            "bOverride": true,
+            "ExpressionGUID": "EC0CD45F-FE4BCDA2-2AA088AF-2AD268A7"
+          }
+        ]
+      },
+      "CachedReferencedTextures": [
+        {
+          "ObjectName": "Texture2D'FT_Fire_Noise'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_Fire_Noise.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_Gradation_Hor'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT_Gradation_Hor.0"
+        }
+      ]
+    },
+    "LoadedMaterialResources": []
+  }
+]

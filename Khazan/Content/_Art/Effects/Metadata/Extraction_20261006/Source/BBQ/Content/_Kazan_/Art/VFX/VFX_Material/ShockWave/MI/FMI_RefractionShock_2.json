@@ -1,0 +1,152 @@
+[
+  {
+    "Type": "MaterialInstanceConstant",
+    "Name": "FMI_RefractionShock_2",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MaterialInstanceConstant'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/ShockWave/MI/FMI_RefractionShock_2",
+    "Properties": {
+      "Parent": {
+        "ObjectName": "Material'FM_RefractionShock_01'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/ShockWave/FM_RefractionShock_01.0"
+      },
+      "bHasStaticPermutationResource": true,
+      "ScalarParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "MaxDist",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 2000.0,
+          "ExpressionGUID": "3087460D-4CE4AA76-37033EB7-10C07E55"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "MaxDistStr",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.2,
+          "ExpressionGUID": "681BD28F-44821FCB-8C563E86-5E359CD1"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "MinDistStr",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "974956E9-42E4E394-4897D58A-D467A0C4"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Ref_T_Utile",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 2.0,
+          "ExpressionGUID": "75ADFB07-4DD65819-7D262B94-0AB72045"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Ref_T_Vtile",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "10BE876D-4DF6E5FE-B0CEEFB3-B3B83F2A"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Ref_tex_pow",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "5010B5A3-4A2172B5-8D6B2287-F589E72A"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Ref_tex_str",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "B1C4BF18-47855725-E0992883-F8ED2914"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Tex_Clamp_if",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 2.0,
+          "ExpressionGUID": "EECE7B36-4CB2727C-A78C73A0-96AB672B"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "RefractionDepthBias",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.0,
+          "ExpressionGUID": "00000000-00000000-00000000-00000000"
+        }
+      ],
+      "TextureParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "Refraction_texture",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT_Noise_ShockwaveTile_001_Clamp'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/ShockWave/FT_Noise_ShockwaveTile_001_Clamp.0"
+          },
+          "ExpressionGUID": "7FDF8C57-4F81AF26-D5462DA1-CF4E0585"
+        }
+      ],
+      "BasePropertyOverrides": {
+        "TwoSided": true,
+        "BlendMode": "BLEND_Translucent",
+        "OpacityMaskClipValue": 0.3333
+      },
+      "StaticParameters": {
+        "StaticSwitchParameters": [
+          {
+            "Value": true,
+            "ParameterInfo": {
+              "Name": "Use_DepthFade",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            "bOverride": true,
+            "ExpressionGUID": "B2EAE79C-48BC3ED7-09EA4DA5-DC8A1E2D"
+          }
+        ]
+      },
+      "CachedReferencedTextures": [
+        null,
+        {
+          "ObjectName": "Texture2D'DefaultDiffuse'",
+          "ObjectPath": "Engine/Content/EngineMaterials/DefaultDiffuse.0"
+        },
+        {
+          "ObjectName": "Texture2D'DebugNumberStrip'",
+          "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/ExampleContent/DebugNumberStrip.0"
+        },
+        {
+          "ObjectName": "Texture2D'DebugNumberPeriod'",
+          "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/ExampleContent/Textures/DebugNumberPeriod.0"
+        },
+        {
+          "ObjectName": "Texture2D'gradation_05'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Gradient/gradation_05.0"
+        }
+      ]
+    },
+    "LoadedMaterialResources": []
+  }
+]

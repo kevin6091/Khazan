@@ -1,0 +1,182 @@
+[
+  {
+    "Type": "MaterialInstanceConstant",
+    "Name": "FMI_Subuv_Atlas_B_04",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MaterialInstanceConstant'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/SubUV/MI/FMI_Subuv_Atlas_B_04",
+    "Properties": {
+      "Parent": {
+        "ObjectName": "Material'FM_Subuv_Atlas_B'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/SubUV/FM_Subuv_Atlas_B.0"
+      },
+      "bHasStaticPermutationResource": true,
+      "ScalarParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "Dist_TilingU",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "44E8093A-4BABD473-73171585-B9AD1112"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Dist_tilingV",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "097334F3-417245CE-63202F92-D9EFA828"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Emi_Pow",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.1,
+          "ExpressionGUID": "E14B6A2A-4F839BEE-3EFEE6A7-7ADB6E25"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Emi_str",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "DC1139CC-49C42278-F20DBCBF-D3034C3A"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "OPA_Pow",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "F9D6DB0B-4D09199F-8720F48E-B2007543"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "OPA_str",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 10.0,
+          "ExpressionGUID": "B28095A6-4FA22533-B64E0795-B45E936E"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "SubUV_channel_count",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "253A22E1-4741BF03-4633368A-44D59BD2"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "SubUV_Rows",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 2.0,
+          "ExpressionGUID": "058B6A1F-49EA11DE-7207F494-A86F66FD"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "SubUV_Columns",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 2.0,
+          "ExpressionGUID": "0F97B617-4137F266-E049CAA8-42FCD844"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "RefractionDepthBias",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.0,
+          "ExpressionGUID": "00000000-00000000-00000000-00000000"
+        }
+      ],
+      "TextureParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "Tex_distortion",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT_FlowRGB_001'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_FlowRGB_001.0"
+          },
+          "ExpressionGUID": "CB1B0D04-4F2A4DE9-D4C2D088-0AFA8B57"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Tex_SubUV",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT_Snow_01'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Mask/FT_Snow_01.0"
+          },
+          "ExpressionGUID": "4B3BC8A3-40F667BD-796E0781-349B0368"
+        }
+      ],
+      "BasePropertyOverrides": {
+        "bOverride_BlendMode": true,
+        "BlendMode": "BLEND_Translucent",
+        "ShadingModel": "MSM_Unlit",
+        "OpacityMaskClipValue": 0.3333
+      },
+      "StaticParameters": {
+        "StaticSwitchParameters": [
+          {
+            "Value": true,
+            "ParameterInfo": {
+              "Name": "SubUV_Random",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            "bOverride": true,
+            "ExpressionGUID": "FEE44B88-4FEF3885-28E3A290-D71C402A"
+          }
+        ]
+      },
+      "CachedReferencedTextures": [
+        null,
+        {
+          "ObjectName": "Texture2D'FT_RGB_Subuv'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/System/FT_RGB_Subuv.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_RGBA_Smoke_005_54f'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/SubUV/FT_RGBA_Smoke_005_54f.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_Wave_Normal_001'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_Wave_Normal_001.0"
+        }
+      ],
+      "TextureStreamingData": [
+        {
+          "SamplingScale": 1.0,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_FlowRGB_001"
+        },
+        {
+          "SamplingScale": 0.5,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Snow_01"
+        }
+      ]
+    },
+    "LoadedMaterialResources": []
+  }
+]

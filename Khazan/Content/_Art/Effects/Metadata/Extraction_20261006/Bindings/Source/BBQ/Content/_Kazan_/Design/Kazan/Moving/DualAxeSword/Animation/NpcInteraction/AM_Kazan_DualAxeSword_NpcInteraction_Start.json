@@ -1,0 +1,200 @@
+[
+  {
+    "Type": "AnimMontage",
+    "Name": "AM_Kazan_DualAxeSword_NpcInteraction_Start",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimMontage'",
+    "Package": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/NpcInteraction/AM_Kazan_DualAxeSword_NpcInteraction_Start",
+    "Properties": {
+      "BlendOut": {
+        "BlendTime": 0.0
+      },
+      "CompositeSections": [
+        {
+          "SectionName": "Default",
+          "NextSectionName": "None",
+          "MetaData": [],
+          "LinkedMontage": {
+            "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_NpcInteraction_Start'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/NpcInteraction/AM_Kazan_DualAxeSword_NpcInteraction_Start.0"
+          },
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.3333334,
+          "LinkValue": 0.0,
+          "LinkedSequence": {
+            "ObjectName": "AnimSequence'CA_P_Kazan_DASwordToStand_Start'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/DualAxeSword/CA_P_Kazan_DASwordToStand_Start.0"
+          }
+        }
+      ],
+      "SlotAnimTracks": [
+        {
+          "SlotName": "Base",
+          "AnimTrack": {
+            "AnimSegments": [
+              {
+                "AnimReference": {
+                  "ObjectName": "AnimSequence'CA_P_Kazan_DASwordToStand_Start'",
+                  "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/DualAxeSword/CA_P_Kazan_DASwordToStand_Start.0"
+                },
+                "StartPos": 0.0,
+                "AnimStartTime": 0.0,
+                "AnimEndTime": 1.3333334,
+                "AnimPlayRate": 1.0,
+                "LoopingCount": 1
+              }
+            ]
+          }
+        }
+      ],
+      "Notifies": [
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0001,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxAkEvent",
+          "Notify": {
+            "ObjectName": "xxAnimNotify_AkEvent'AM_Kazan_DualAxeSword_NpcInteraction_Start:xxAnimNotify_AkEvent_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/NpcInteraction/AM_Kazan_DualAxeSword_NpcInteraction_Start.1"
+          },
+          "NotifyStateClass": null,
+          "Duration": 0.0,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": -1,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.0,
+            "LinkValue": 0.0,
+            "LinkedSequence": null
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": {
+            "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_NpcInteraction_Start'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/NpcInteraction/AM_Kazan_DualAxeSword_NpcInteraction_Start.0"
+          },
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.3333334,
+          "LinkValue": 0.024592,
+          "LinkedSequence": {
+            "ObjectName": "AnimSequence'CA_P_Kazan_DASwordToStand_Start'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/DualAxeSword/CA_P_Kazan_DASwordToStand_Start.0"
+          }
+        },
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxChangeArmedState",
+          "Notify": null,
+          "NotifyStateClass": {
+            "ObjectName": "xxAnimNotifyState_ChangeArmedState'AM_Kazan_DualAxeSword_NpcInteraction_Start:xxAnimNotifyState_ChangeArmedState_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/NpcInteraction/AM_Kazan_DualAxeSword_NpcInteraction_Start.2"
+          },
+          "Duration": 0.044225067,
+          "EndLink": {
+            "LinkedMontage": {
+              "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_NpcInteraction_Start'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/NpcInteraction/AM_Kazan_DualAxeSword_NpcInteraction_Start.0"
+            },
+            "SlotIndex": 0,
+            "SegmentIndex": 0,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 1.3333334,
+            "LinkValue": 0.44422507,
+            "LinkedSequence": {
+              "ObjectName": "AnimSequence'CA_P_Kazan_DASwordToStand_Start'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/DualAxeSword/CA_P_Kazan_DASwordToStand_Start.0"
+            }
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 1,
+          "LinkedMontage": {
+            "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_NpcInteraction_Start'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/NpcInteraction/AM_Kazan_DualAxeSword_NpcInteraction_Start.0"
+          },
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 1.3333334,
+          "LinkValue": 0.4,
+          "LinkedSequence": {
+            "ObjectName": "AnimSequence'CA_P_Kazan_DASwordToStand_Start'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/DualAxeSword/CA_P_Kazan_DASwordToStand_Start.0"
+          }
+        }
+      ],
+      "SequenceLength": 1.3333334,
+      "DilationCurve": {
+        "TimePerFrame": 0.016666668
+      },
+      "Skeleton": {
+        "ObjectName": "Skeleton'C_P_Kazan_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Model/C_P_Kazan_Skeleton.88"
+      }
+    },
+    "SkeletonGuid": "EDC47A49-495755E9-FB983989-EBE3839B"
+  },
+  {
+    "Type": "xxAnimNotify_AkEvent",
+    "Name": "xxAnimNotify_AkEvent_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotify_AkEvent'",
+    "Outer": {
+      "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_NpcInteraction_Start'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/NpcInteraction/AM_Kazan_DualAxeSword_NpcInteraction_Start.0"
+    },
+    "Properties": {
+      "Event": {
+        "ObjectName": "AkAudioEvent'dualaxesword_unarmed'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/PlayerLocomotion/dualaxesword_unarmed.0"
+      }
+    }
+  },
+  {
+    "Type": "xxAnimNotifyState_ChangeArmedState",
+    "Name": "xxAnimNotifyState_ChangeArmedState_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotifyState_ChangeArmedState'",
+    "Outer": {
+      "ObjectName": "AnimMontage'AM_Kazan_DualAxeSword_NpcInteraction_Start'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Moving/DualAxeSword/Animation/NpcInteraction/AM_Kazan_DualAxeSword_NpcInteraction_Start.0"
+    },
+    "Properties": {
+      "IsBegin": true,
+      "BeginInfo": {
+        "ArmedState": "EWeaponArmedState::Unarmed"
+      },
+      "EndInfo": {
+        "ArmedState": "EWeaponArmedState::None"
+      }
+    }
+  }
+]

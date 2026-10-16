@@ -1,0 +1,168 @@
+[
+  {
+    "Type": "MaterialInstanceConstant",
+    "Name": "FMI_blood_trail_Poison1",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MaterialInstanceConstant'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/Trail/MI/FMI_blood_trail_Poison1",
+    "Properties": {
+      "Parent": {
+        "ObjectName": "Material'FM_blood_trail'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/Trail/FM_blood_trail.0"
+      },
+      "bHasStaticPermutationResource": true,
+      "ScalarParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "MainT_Uspeed",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.3,
+          "ExpressionGUID": "7DBCA3B8-447618D5-AD046BB1-771DEAD2"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "MainT_Utile",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "7BAD8402-40C6DD70-AA0F46B8-F88BB269"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "NoiseT_Utile",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "7837CA51-4447D2AB-CF20549D-6C3032D2"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "NoiseT_Vtile",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "00C0951E-442C5CF0-DFE67C8A-C98DDAC1"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Main_Emi_pow",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.25,
+          "ExpressionGUID": "A187FEFC-4092B1F8-9A3C2485-D2CEA776"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Main_tex_pow",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "1ED45730-49172C01-018ED5BE-1D875374"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Main_tex_str",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 4.0,
+          "ExpressionGUID": "6779657D-4144AF69-BFB9D08D-EBAFDB72"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "RefractionDepthBias",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.0,
+          "ExpressionGUID": "00000000-00000000-00000000-00000000"
+        }
+      ],
+      "VectorParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "InnerColor",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "R": 0.114583,
+            "G": 0.080432,
+            "B": 0.0,
+            "A": 1.0,
+            "Hex": "5F5000"
+          },
+          "ExpressionGUID": "47984739-45D9324A-7A0D9C97-5A2FCBDD"
+        }
+      ],
+      "TextureParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "Main_tex",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT_BloodTrail_01'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Trail/FT_BloodTrail_01.0"
+          },
+          "ExpressionGUID": "6820D33D-403DD3D9-E63A5E8F-C627FBFD"
+        }
+      ],
+      "BasePropertyOverrides": {
+        "bOverride_BlendMode": true,
+        "BlendMode": "BLEND_Translucent",
+        "ShadingModel": "MSM_Unlit",
+        "OpacityMaskClipValue": 0.3333
+      },
+      "CachedReferencedTextures": [
+        {
+          "ObjectName": "Texture2D'FT_Gradient_Cen'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Gradient/FT_Gradient_Cen.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_2Ch_Noise_001'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_2Ch_Noise_001.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_BloodTrail_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Trail/FT_BloodTrail_01.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_Noise_Powder_003'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_Powder_003.0"
+        }
+      ],
+      "TextureStreamingData": [
+        {
+          "SamplingScale": 1.0,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_2Ch_Noise_001"
+        },
+        {
+          "SamplingScale": 0.8125,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_BloodTrail_01"
+        },
+        {
+          "SamplingScale": 1.0,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Gradient_Cen"
+        },
+        {
+          "SamplingScale": 0.8125,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Noise_Powder_003"
+        }
+      ]
+    },
+    "LoadedMaterialResources": []
+  }
+]

@@ -1,0 +1,1686 @@
+[
+  {
+    "Type": "DistributionFloatConstant",
+    "Name": "RequiredDistributionSpawnRate",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'DistributionFloatConstant'",
+    "Outer": {
+      "ObjectName": "ParticleModuleRequired'PP_DmgEx_ArmorBreakHit:ParticleModuleRequired_10'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.21"
+    }
+  },
+  {
+    "Type": "DistributionFloatConstant",
+    "Name": "RequiredDistributionSpawnRate",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'DistributionFloatConstant'",
+    "Outer": {
+      "ObjectName": "ParticleModuleRequired'PP_DmgEx_ArmorBreakHit:ParticleModuleRequired_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.22"
+    }
+  },
+  {
+    "Type": "DistributionFloatUniform",
+    "Name": "DistributionFloatUniform_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'DistributionFloatUniform'",
+    "Outer": {
+      "ObjectName": "ParticleModuleColorScaleOverLife'PP_DmgEx_ArmorBreakHit:ParticleModuleColorScaleOverLife_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.12"
+    },
+    "Properties": {
+      "Min": 1.0,
+      "Max": 2.0
+    }
+  },
+  {
+    "Type": "DistributionVectorConstantCurve",
+    "Name": "DistributionVectorConstantCurve_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'DistributionVectorConstantCurve'",
+    "Outer": {
+      "ObjectName": "ParticleModuleSizeMultiplyLife'PP_DmgEx_ArmorBreakHit:ParticleModuleSizeMultiplyLife_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.25"
+    },
+    "Properties": {
+      "ConstantCurve": {
+        "Points": [
+          {
+            "InVal": 0.0,
+            "OutVal": {
+              "X": 1.0,
+              "Y": 2.0,
+              "Z": 1.0
+            },
+            "ArriveTangent": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "LeaveTangent": {
+              "X": 0.0,
+              "Y": -1.275016,
+              "Z": 0.0
+            },
+            "InterpMode": "CIM_CurveBreak"
+          },
+          {
+            "InVal": 1.0,
+            "OutVal": {
+              "X": 0.5,
+              "Y": 0.0,
+              "Z": 1.0
+            },
+            "ArriveTangent": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "LeaveTangent": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "InterpMode": "CIM_Linear"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Type": "DistributionVectorUniform",
+    "Name": "DistributionVectorUniform_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'DistributionVectorUniform'",
+    "Outer": {
+      "ObjectName": "ParticleModuleColorScaleOverLife'PP_DmgEx_ArmorBreakHit:ParticleModuleColorScaleOverLife_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.12"
+    },
+    "Properties": {
+      "Max": {
+        "X": 1.0,
+        "Y": 0.5,
+        "Z": 0.0
+      },
+      "Min": {
+        "X": 3.0,
+        "Y": 1.5,
+        "Z": 0.0
+      },
+      "bUseExtremes": true
+    }
+  },
+  {
+    "Type": "ParticleLODLevel",
+    "Name": "ParticleLODLevel_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleLODLevel'",
+    "Outer": {
+      "ObjectName": "ParticleSpriteEmitter'PP_DmgEx_ArmorBreakHit:ParticleSpriteEmitter_6'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.32"
+    },
+    "Properties": {
+      "RequiredModule": {
+        "ObjectName": "ParticleModuleRequired'PP_DmgEx_ArmorBreakHit:ParticleModuleRequired_2'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.22"
+      },
+      "Modules": [
+        {
+          "ObjectName": "ParticleModuleLifetime'PP_DmgEx_ArmorBreakHit:ParticleModuleLifetime_2'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.13"
+        },
+        {
+          "ObjectName": "ParticleModuleSize'PP_DmgEx_ArmorBreakHit:ParticleModuleSize_2'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.23"
+        },
+        {
+          "ObjectName": "ParticleModuleLocationPrimitiveSphere'PP_DmgEx_ArmorBreakHit:ParticleModuleLocationPrimitiveSphere_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.15"
+        },
+        {
+          "ObjectName": "ParticleModuleVelocity'PP_DmgEx_ArmorBreakHit:ParticleModuleVelocity_4'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.31"
+        },
+        {
+          "ObjectName": "ParticleModuleAccelerationConstant'PP_DmgEx_ArmorBreakHit:ParticleModuleAccelerationConstant_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.7"
+        },
+        {
+          "ObjectName": "ParticleModuleSizeMultiplyLife'PP_DmgEx_ArmorBreakHit:ParticleModuleSizeMultiplyLife_2'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.25"
+        },
+        {
+          "ObjectName": "ParticleModuleColor'PP_DmgEx_ArmorBreakHit:ParticleModuleColor_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.10"
+        },
+        {
+          "ObjectName": "ParticleModuleColorScaleOverLife'PP_DmgEx_ArmorBreakHit:ParticleModuleColorScaleOverLife_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.12"
+        }
+      ],
+      "TypeDataModule": {
+        "ObjectName": "ParticleModuleTypeDataGpu'PP_DmgEx_ArmorBreakHit:ParticleModuleTypeDataGpu_2'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.28"
+      },
+      "SpawnModule": {
+        "ObjectName": "ParticleModuleSpawn'PP_DmgEx_ArmorBreakHit:ParticleModuleSpawn_0'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.26"
+      },
+      "PeakActiveParticles": 100
+    }
+  },
+  {
+    "Type": "ParticleLODLevel",
+    "Name": "ParticleLODLevel_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleLODLevel'",
+    "Outer": {
+      "ObjectName": "ParticleSpriteEmitter'PP_DmgEx_ArmorBreakHit:ParticleSpriteEmitter_9'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.33"
+    },
+    "Properties": {
+      "RequiredModule": {
+        "ObjectName": "ParticleModuleRequired'PP_DmgEx_ArmorBreakHit:ParticleModuleRequired_10'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.21"
+      },
+      "Modules": [
+        {
+          "ObjectName": "ParticleModuleLifetime'PP_DmgEx_ArmorBreakHit:ParticleModuleLifetime_8'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.14"
+        },
+        {
+          "ObjectName": "ParticleModuleSize'PP_DmgEx_ArmorBreakHit:ParticleModuleSize_3'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.24"
+        },
+        {
+          "ObjectName": "ParticleModuleVelocity'PP_DmgEx_ArmorBreakHit:ParticleModuleVelocity_13'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.30"
+        },
+        {
+          "ObjectName": "ParticleModuleColorOverLife'PP_DmgEx_ArmorBreakHit:ParticleModuleColorOverLife_14'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.11"
+        },
+        {
+          "ObjectName": "ParticleModuleAccelerationConstant'PP_DmgEx_ArmorBreakHit:ParticleModuleAccelerationConstant_3'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.8"
+        },
+        {
+          "ObjectName": "ParticleModuleMeshRotation'PP_DmgEx_ArmorBreakHit:ParticleModuleMeshRotation_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.17"
+        },
+        {
+          "ObjectName": "ParticleModuleMeshRotationRate'PP_DmgEx_ArmorBreakHit:ParticleModuleMeshRotationRate_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.18"
+        },
+        {
+          "ObjectName": "ParticleModuleParameterDynamic'PP_DmgEx_ArmorBreakHit:ParticleModuleParameterDynamic_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.20"
+        },
+        {
+          "ObjectName": "ParticleModuleMeshRotationRateMultiplyLife'PP_DmgEx_ArmorBreakHit:ParticleModuleMeshRotationRateMultiplyLife_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.19"
+        },
+        {
+          "ObjectName": "ParticleModuleLocationPrimitiveSphere'PP_DmgEx_ArmorBreakHit:ParticleModuleLocationPrimitiveSphere_2'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.16"
+        },
+        {
+          "ObjectName": "ParticleModuleAccelerationDrag'PP_DmgEx_ArmorBreakHit:ParticleModuleAccelerationDrag_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.9"
+        }
+      ],
+      "TypeDataModule": {
+        "ObjectName": "ParticleModuleTypeDataMesh'PP_DmgEx_ArmorBreakHit:ParticleModuleTypeDataMesh_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.29"
+      },
+      "SpawnModule": {
+        "ObjectName": "ParticleModuleSpawn'PP_DmgEx_ArmorBreakHit:ParticleModuleSpawn_10'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.27"
+      },
+      "PeakActiveParticles": 23
+    }
+  },
+  {
+    "Type": "ParticleModuleAccelerationConstant",
+    "Name": "ParticleModuleAccelerationConstant_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleAccelerationConstant'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "Acceleration": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": -1500.0
+      },
+      "bAlwaysInWorldSpace": true,
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleAccelerationConstant",
+    "Name": "ParticleModuleAccelerationConstant_3",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleAccelerationConstant'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "Acceleration": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": -1000.0
+      },
+      "bAlwaysInWorldSpace": true,
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleAccelerationDrag",
+    "Name": "ParticleModuleAccelerationDrag_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleAccelerationDrag'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "DragCoefficientRaw": {
+        "MinValue": 1.0,
+        "MaxValue": 1.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "bAlwaysInWorldSpace": true,
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleColor",
+    "Name": "ParticleModuleColor_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleColor'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "StartColor": {
+        "MinValue": 1.0,
+        "MaxValue": 1.0,
+        "MinValueVec": {
+          "X": 1.0,
+          "Y": 1.0,
+          "Z": 1.0
+        },
+        "MaxValueVec": {
+          "X": 1.0,
+          "Y": 1.0,
+          "Z": 1.0
+        },
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 3
+        }
+      },
+      "StartAlpha": {
+        "MinValue": 2.0,
+        "MaxValue": 2.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            2.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleColorOverLife",
+    "Name": "ParticleModuleColorOverLife_14",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleColorOverLife'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "ColorOverLife": {
+        "MaxValue": 1.0,
+        "MinValueVec": {
+          "X": 0.121527,
+          "Y": 0.095932,
+          "Z": 0.0
+        },
+        "MaxValueVec": {
+          "X": 1.0,
+          "Y": 0.5,
+          "Z": 0.012306
+        },
+        "Distribution": null,
+        "Table": {
+          "TimeScale": 2.0,
+          "Values": [
+            1.0,
+            0.5,
+            0.0,
+            0.121527,
+            0.095932,
+            0.012306
+          ],
+          "Op": 1,
+          "EntryCount": 2,
+          "EntryStride": 3
+        }
+      },
+      "AlphaOverLife": {
+        "MinValue": 10.0,
+        "MaxValue": 10.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            10.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleColorScaleOverLife",
+    "Name": "ParticleModuleColorScaleOverLife_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleColorScaleOverLife'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "ColorScaleOverLife": {
+        "Distribution": {
+          "ObjectName": "DistributionVectorUniform'PP_DmgEx_ArmorBreakHit:ParticleModuleColorScaleOverLife_0.DistributionVectorUniform_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.4"
+        }
+      },
+      "AlphaScaleOverLife": {
+        "Distribution": {
+          "ObjectName": "DistributionFloatUniform'PP_DmgEx_ArmorBreakHit:ParticleModuleColorScaleOverLife_0.DistributionFloatUniform_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.2"
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleLifetime",
+    "Name": "ParticleModuleLifetime_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleLifetime'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "Lifetime": {
+        "MinValue": 0.3,
+        "MaxValue": 1.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.3,
+            1.0
+          ],
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 2,
+          "SubEntryStride": 1
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleLifetime",
+    "Name": "ParticleModuleLifetime_8",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleLifetime'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "Lifetime": {
+        "MinValue": 1.5,
+        "MaxValue": 2.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.5,
+            2.0
+          ],
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 2,
+          "SubEntryStride": 1
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleLocationPrimitiveSphere",
+    "Name": "ParticleModuleLocationPrimitiveSphere_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleLocationPrimitiveSphere'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "StartRadius": {
+        "MinValue": 25.0,
+        "MaxValue": 25.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            25.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "SurfaceOnly": true,
+      "Velocity": true,
+      "VelocityScale": {
+        "MinValue": 10.0,
+        "MaxValue": 10.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            10.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "StartLocation": {
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 3
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleLocationPrimitiveSphere",
+    "Name": "ParticleModuleLocationPrimitiveSphere_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleLocationPrimitiveSphere'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "StartRadius": {
+        "MinValue": 25.0,
+        "MaxValue": 25.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            25.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "SurfaceOnly": true,
+      "Velocity": true,
+      "VelocityScale": {
+        "MinValue": 10.0,
+        "MaxValue": 10.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            10.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "StartLocation": {
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 3
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleMeshRotation",
+    "Name": "ParticleModuleMeshRotation_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleMeshRotation'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "StartRotation": {
+        "MaxValue": 1.0,
+        "MaxValueVec": {
+          "X": 1.0,
+          "Y": 1.0,
+          "Z": 1.0
+        },
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 6,
+          "SubEntryStride": 3
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleMeshRotationRate",
+    "Name": "ParticleModuleMeshRotationRate_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleMeshRotationRate'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "StartRotationRate": {
+        "MinValue": -1.0,
+        "MaxValue": 1.0,
+        "MinValueVec": {
+          "X": -1.0,
+          "Y": -0.5,
+          "Z": -0.5
+        },
+        "MaxValueVec": {
+          "X": 1.0,
+          "Y": 0.5,
+          "Z": 0.5
+        },
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            -1.0,
+            -1.0,
+            -1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 6,
+          "SubEntryStride": 3,
+          "LockFlag": 4
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleMeshRotationRateMultiplyLife",
+    "Name": "ParticleModuleMeshRotationRateMultiplyLife_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleMeshRotationRateMultiplyLife'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "LifeMultiplier": {
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 3
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleParameterDynamic",
+    "Name": "ParticleModuleParameterDynamic_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleParameterDynamic'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "DynamicParams": [
+        {
+          "ParamName": "Dissolve",
+          "bUseEmitterTime": false,
+          "bSpawnTimeOnly": false,
+          "ValueMethod": "EDPV_UserSet",
+          "bScaleVelocityByParamValue": false,
+          "ParamValue": {
+            "MinValue": 0.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 2.0,
+              "TimeBias": 0.5,
+              "Values": [
+                1.0,
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 2,
+              "EntryStride": 1,
+              "SubEntryStride": 0,
+              "LockFlag": 0
+            }
+          }
+        },
+        {
+          "ParamName": "Param2",
+          "bUseEmitterTime": false,
+          "bSpawnTimeOnly": false,
+          "ValueMethod": "EDPV_UserSet",
+          "bScaleVelocityByParamValue": false,
+          "ParamValue": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 0.0,
+              "TimeBias": 0.0,
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1,
+              "SubEntryStride": 0,
+              "LockFlag": 0
+            }
+          }
+        },
+        {
+          "ParamName": "Param3",
+          "bUseEmitterTime": false,
+          "bSpawnTimeOnly": false,
+          "ValueMethod": "EDPV_UserSet",
+          "bScaleVelocityByParamValue": false,
+          "ParamValue": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 0.0,
+              "TimeBias": 0.0,
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1,
+              "SubEntryStride": 0,
+              "LockFlag": 0
+            }
+          }
+        },
+        {
+          "ParamName": "Param4",
+          "bUseEmitterTime": false,
+          "bSpawnTimeOnly": false,
+          "ValueMethod": "EDPV_UserSet",
+          "bScaleVelocityByParamValue": false,
+          "ParamValue": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 0.0,
+              "TimeBias": 0.0,
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1,
+              "SubEntryStride": 0,
+              "LockFlag": 0
+            }
+          }
+        }
+      ],
+      "UpdateFlags": 15,
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleRequired",
+    "Name": "ParticleModuleRequired_10",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleRequired'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "Material": {
+        "ObjectName": "MaterialInstanceConstant'FMI_Rock_01'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/Object/MI/FMI_Rock_01.0"
+      },
+      "ScreenAlignment": "PSA_Velocity",
+      "bUseLocalSpace": true,
+      "bKillOnDeactivate": true,
+      "bKillOnCompleted": true,
+      "bUseLegacyEmitterTime": false,
+      "SpawnRate": {
+        "Distribution": {
+          "ObjectName": "DistributionFloatConstant'PP_DmgEx_ArmorBreakHit:ParticleModuleRequired_10.RequiredDistributionSpawnRate'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.0"
+        }
+      },
+      "RandomImageTime": 1.0,
+      "EmitterLoops": 1,
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleRequired",
+    "Name": "ParticleModuleRequired_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleRequired'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "Material": {
+        "ObjectName": "MaterialInstanceConstant'FMI_CheapMaskedParticle_01'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/Dot/MI/FMI_CheapMaskedParticle_01.0"
+      },
+      "ScreenAlignment": "PSA_Velocity",
+      "bUseLegacyEmitterTime": false,
+      "EmitterDuration": 0.2,
+      "SpawnRate": {
+        "Distribution": {
+          "ObjectName": "DistributionFloatConstant'PP_DmgEx_ArmorBreakHit:ParticleModuleRequired_2.RequiredDistributionSpawnRate'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.1"
+        }
+      },
+      "RandomImageTime": 1.0,
+      "EmitterLoops": 1,
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleSize",
+    "Name": "ParticleModuleSize_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleSize'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "StartSize": {
+        "MinValue": 1.0,
+        "MaxValue": 25.0,
+        "MinValueVec": {
+          "X": 1.0,
+          "Y": 15.0,
+          "Z": 25.0
+        },
+        "MaxValueVec": {
+          "X": 2.0,
+          "Y": 10.0,
+          "Z": 25.0
+        },
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.0,
+            15.0,
+            25.0,
+            2.0,
+            10.0,
+            25.0
+          ],
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 6,
+          "SubEntryStride": 3
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleSize",
+    "Name": "ParticleModuleSize_3",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleSize'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "StartSize": {
+        "MinValue": 0.75,
+        "MaxValue": 1.0,
+        "MinValueVec": {
+          "X": 0.75,
+          "Y": 0.75,
+          "Z": 0.75
+        },
+        "MaxValueVec": {
+          "X": 1.0,
+          "Y": 1.0,
+          "Z": 1.0
+        },
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.75,
+            0.75,
+            0.75,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 6,
+          "SubEntryStride": 3
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleSizeMultiplyLife",
+    "Name": "ParticleModuleSizeMultiplyLife_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleSizeMultiplyLife'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "LifeMultiplier": {
+        "Distribution": {
+          "ObjectName": "DistributionVectorConstantCurve'PP_DmgEx_ArmorBreakHit:ParticleModuleSizeMultiplyLife_2.DistributionVectorConstantCurve_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.3"
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleSpawn",
+    "Name": "ParticleModuleSpawn_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleSpawn'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "Rate": {
+        "MinValue": 70.0,
+        "MaxValue": 70.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            70.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "RateScale": {
+        "MinValue": 1.0,
+        "MaxValue": 1.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "BurstList": [
+        {
+          "Count": 50,
+          "CountLow": -1,
+          "Time": 0.0
+        },
+        {
+          "Count": 25,
+          "CountLow": -1,
+          "Time": 0.1
+        },
+        {
+          "Count": 10,
+          "CountLow": -1,
+          "Time": 0.2
+        }
+      ],
+      "BurstScale": {
+        "MinValue": 1.0,
+        "MaxValue": 1.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleSpawn",
+    "Name": "ParticleModuleSpawn_10",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleSpawn'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "Rate": {
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "RateScale": {
+        "MinValue": 1.0,
+        "MaxValue": 1.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "BurstList": [
+        {
+          "Count": 10,
+          "CountLow": -1,
+          "Time": 0.0
+        },
+        {
+          "Count": 7,
+          "CountLow": -1,
+          "Time": 0.1
+        },
+        {
+          "Count": 3,
+          "CountLow": -1,
+          "Time": 0.2
+        }
+      ],
+      "BurstScale": {
+        "MinValue": 1.0,
+        "MaxValue": 1.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleTypeDataGpu",
+    "Name": "ParticleModuleTypeDataGpu_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleTypeDataGpu'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "EmitterInfo": {
+        "RequiredModule": {
+          "ObjectName": "ParticleModuleRequired'PP_DmgEx_ArmorBreakHit:ParticleModuleRequired_2'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.22"
+        },
+        "SpawnModule": {
+          "ObjectName": "ParticleModuleSpawn'PP_DmgEx_ArmorBreakHit:ParticleModuleSpawn_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.26"
+        },
+        "SpawnModules": [
+          {
+            "ObjectName": "ParticleModuleRequired'PP_DmgEx_ArmorBreakHit:ParticleModuleRequired_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.22"
+          },
+          {
+            "ObjectName": "ParticleModuleLifetime'PP_DmgEx_ArmorBreakHit:ParticleModuleLifetime_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.13"
+          },
+          {
+            "ObjectName": "ParticleModuleSize'PP_DmgEx_ArmorBreakHit:ParticleModuleSize_2'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.23"
+          },
+          {
+            "ObjectName": "ParticleModuleLocationPrimitiveSphere'PP_DmgEx_ArmorBreakHit:ParticleModuleLocationPrimitiveSphere_1'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.15"
+          },
+          {
+            "ObjectName": "ParticleModuleVelocity'PP_DmgEx_ArmorBreakHit:ParticleModuleVelocity_4'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.31"
+          }
+        ],
+        "ConstantAcceleration": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": -1500.0
+        },
+        "InvMaxSize": {
+          "X": 0.04,
+          "Y": 0.04
+        },
+        "InvRotationRateScale": 1.0,
+        "MaxLifetime": 1.0,
+        "MaxParticleCount": 100,
+        "ScreenAlignment": "PSA_Velocity"
+      },
+      "ResourceData": {
+        "QuantizedColorSamples": [
+          {
+            "B": 0,
+            "G": 0,
+            "R": 0,
+            "A": 255,
+            "Hex": "000000"
+          },
+          {
+            "B": 0,
+            "G": 0,
+            "R": 0,
+            "A": 0,
+            "Hex": "000000"
+          }
+        ],
+        "QuantizedMiscSamples": [
+          {
+            "B": 0,
+            "G": 255,
+            "R": 255,
+            "A": 0,
+            "Hex": "FFFF00"
+          },
+          {
+            "B": 0,
+            "G": 249,
+            "R": 254,
+            "A": 0,
+            "Hex": "FEF900"
+          },
+          {
+            "B": 0,
+            "G": 242,
+            "R": 251,
+            "A": 0,
+            "Hex": "FBF200"
+          },
+          {
+            "B": 0,
+            "G": 235,
+            "R": 248,
+            "A": 0,
+            "Hex": "F8EB00"
+          },
+          {
+            "B": 0,
+            "G": 227,
+            "R": 243,
+            "A": 0,
+            "Hex": "F3E300"
+          },
+          {
+            "B": 0,
+            "G": 218,
+            "R": 237,
+            "A": 0,
+            "Hex": "EDDA00"
+          },
+          {
+            "B": 0,
+            "G": 209,
+            "R": 230,
+            "A": 0,
+            "Hex": "E6D100"
+          },
+          {
+            "B": 0,
+            "G": 199,
+            "R": 221,
+            "A": 0,
+            "Hex": "DDC700"
+          },
+          {
+            "B": 0,
+            "G": 189,
+            "R": 212,
+            "A": 0,
+            "Hex": "D4BD00"
+          },
+          {
+            "B": 0,
+            "G": 179,
+            "R": 202,
+            "A": 0,
+            "Hex": "CAB300"
+          },
+          {
+            "B": 0,
+            "G": 168,
+            "R": 192,
+            "A": 0,
+            "Hex": "C0A800"
+          },
+          {
+            "B": 0,
+            "G": 157,
+            "R": 181,
+            "A": 0,
+            "Hex": "B59D00"
+          },
+          {
+            "B": 0,
+            "G": 146,
+            "R": 169,
+            "A": 0,
+            "Hex": "A99200"
+          },
+          {
+            "B": 0,
+            "G": 135,
+            "R": 158,
+            "A": 0,
+            "Hex": "9E8700"
+          },
+          {
+            "B": 0,
+            "G": 123,
+            "R": 145,
+            "A": 0,
+            "Hex": "917B00"
+          },
+          {
+            "B": 0,
+            "G": 112,
+            "R": 133,
+            "A": 0,
+            "Hex": "857000"
+          },
+          {
+            "B": 0,
+            "G": 101,
+            "R": 121,
+            "A": 0,
+            "Hex": "796500"
+          },
+          {
+            "B": 0,
+            "G": 90,
+            "R": 109,
+            "A": 0,
+            "Hex": "6D5A00"
+          },
+          {
+            "B": 0,
+            "G": 80,
+            "R": 96,
+            "A": 0,
+            "Hex": "605000"
+          },
+          {
+            "B": 0,
+            "G": 70,
+            "R": 85,
+            "A": 0,
+            "Hex": "554600"
+          },
+          {
+            "B": 0,
+            "G": 60,
+            "R": 73,
+            "A": 0,
+            "Hex": "493C00"
+          },
+          {
+            "B": 0,
+            "G": 51,
+            "R": 62,
+            "A": 0,
+            "Hex": "3E3300"
+          },
+          {
+            "B": 0,
+            "G": 42,
+            "R": 52,
+            "A": 0,
+            "Hex": "342A00"
+          },
+          {
+            "B": 0,
+            "G": 34,
+            "R": 42,
+            "A": 0,
+            "Hex": "2A2200"
+          },
+          {
+            "B": 0,
+            "G": 26,
+            "R": 33,
+            "A": 0,
+            "Hex": "211A00"
+          },
+          {
+            "B": 0,
+            "G": 20,
+            "R": 24,
+            "A": 0,
+            "Hex": "181400"
+          },
+          {
+            "B": 0,
+            "G": 14,
+            "R": 17,
+            "A": 0,
+            "Hex": "110E00"
+          },
+          {
+            "B": 0,
+            "G": 9,
+            "R": 11,
+            "A": 0,
+            "Hex": "0B0900"
+          },
+          {
+            "B": 0,
+            "G": 5,
+            "R": 6,
+            "A": 0,
+            "Hex": "060500"
+          },
+          {
+            "B": 0,
+            "G": 2,
+            "R": 3,
+            "A": 0,
+            "Hex": "030200"
+          },
+          {
+            "B": 0,
+            "G": 0,
+            "R": 0,
+            "A": 0,
+            "Hex": "000000"
+          },
+          {
+            "B": 0,
+            "G": 0,
+            "R": 0,
+            "A": 0,
+            "Hex": "000000"
+          }
+        ],
+        "ColorBias": {
+          "X": 3.0,
+          "Y": 1.5,
+          "Z": 0.0,
+          "W": 2.0
+        },
+        "MiscScale": {
+          "X": 12.5,
+          "Y": 50.0,
+          "Z": 0.0,
+          "W": 0.0
+        },
+        "MiscBias": {
+          "X": 12.5,
+          "Y": 0.0,
+          "Z": 0.0,
+          "W": 0.0
+        },
+        "SimulationAttrCurveBias": {
+          "X": 1.0,
+          "Y": 1.0,
+          "Z": 0.0,
+          "W": 1.0
+        },
+        "SubImageSize": {
+          "X": 1.0,
+          "Y": 1.0,
+          "Z": 1.0,
+          "W": 1.0
+        },
+        "SizeBySpeed": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 1.0,
+          "W": 1.0
+        },
+        "ConstantAcceleration": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": -1500.0
+        },
+        "PerParticleVectorFieldBias": 1.0,
+        "CollisionRadiusScale": 0.5,
+        "CollisionRandomDistribution": 1.0,
+        "OneMinusFriction": 1.0,
+        "RotationRateScale": 1.0,
+        "ScreenAlignment": "PSA_Velocity"
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleTypeDataMesh",
+    "Name": "ParticleModuleTypeDataMesh_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleTypeDataMesh'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "Mesh": {
+        "ObjectName": "StaticMesh'FS_Rock_01'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/FS_Rock_01.2"
+      },
+      "bOverrideMaterial": true,
+      "RollPitchYawRange": {
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 3
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleVelocity",
+    "Name": "ParticleModuleVelocity_13",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleVelocity'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "StartVelocity": {
+        "MinValue": -1000.0,
+        "MaxValue": 1000.0,
+        "MinValueVec": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": -1000.0
+        },
+        "MaxValueVec": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 1000.0
+        },
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.0,
+            0.0,
+            -1000.0,
+            0.0,
+            0.0,
+            1000.0
+          ],
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 6,
+          "SubEntryStride": 3
+        }
+      },
+      "StartVelocityRadial": {
+        "MinValue": 1.0,
+        "MaxValue": 10.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.0,
+            10.0
+          ],
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 2,
+          "SubEntryStride": 1
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleVelocity",
+    "Name": "ParticleModuleVelocity_4",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleVelocity'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "StartVelocity": {
+        "MinValue": -1000.0,
+        "MaxValue": 1000.0,
+        "MinValueVec": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": -1000.0
+        },
+        "MaxValueVec": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 1000.0
+        },
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.0,
+            0.0,
+            -1000.0,
+            0.0,
+            0.0,
+            1000.0
+          ],
+          "Op": 2,
+          "EntryCount": 1,
+          "EntryStride": 6,
+          "SubEntryStride": 3
+        }
+      },
+      "StartVelocityRadial": {
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleSpriteEmitter",
+    "Name": "ParticleSpriteEmitter_6",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleSpriteEmitter'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "LODLevels": [
+        {
+          "ObjectName": "ParticleLODLevel'PP_DmgEx_ArmorBreakHit:ParticleSpriteEmitter_6.ParticleLODLevel_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.5"
+        }
+      ],
+      "DetailModeBitmask": 7
+    }
+  },
+  {
+    "Type": "ParticleSpriteEmitter",
+    "Name": "ParticleSpriteEmitter_9",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleSpriteEmitter'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_DmgEx_ArmorBreakHit'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.34"
+    },
+    "Properties": {
+      "LODLevels": [
+        {
+          "ObjectName": "ParticleLODLevel'PP_DmgEx_ArmorBreakHit:ParticleSpriteEmitter_9.ParticleLODLevel_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.6"
+        }
+      ],
+      "DetailModeBitmask": 7
+    }
+  },
+  {
+    "Type": "ParticleSystem",
+    "Name": "PP_DmgEx_ArmorBreakHit",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleSystem'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit",
+    "Properties": {
+      "Emitters": [
+        {
+          "ObjectName": "ParticleSpriteEmitter'PP_DmgEx_ArmorBreakHit:ParticleSpriteEmitter_9'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.33"
+        },
+        {
+          "ObjectName": "ParticleSpriteEmitter'PP_DmgEx_ArmorBreakHit:ParticleSpriteEmitter_6'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_DmgEx_ArmorBreakHit.32"
+        }
+      ],
+      "CurveEdSetup": null,
+      "LODDistances": [
+        5000.0
+      ],
+      "LODSettings": [
+        {}
+      ],
+      "FixedRelativeBoundingBox": {
+        "Min": {
+          "X": -400.0,
+          "Y": -400.0,
+          "Z": -400.0
+        },
+        "Max": {
+          "X": 400.0,
+          "Y": 400.0,
+          "Z": 400.0
+        },
+        "IsValid": 1
+      },
+      "bUseFixedRelativeBoundingBox": true,
+      "bShouldResetPeakCounts": true
+    }
+  }
+]

@@ -1,0 +1,104 @@
+[
+  {
+    "Type": "MaterialInstanceConstant",
+    "Name": "FMI_Kazan_Spear_A_06",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MaterialInstanceConstant'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/Slash/MI/FMI_Kazan_Spear_A_06",
+    "Properties": {
+      "Parent": {
+        "ObjectName": "Material'FM_Kazan_Spear_A'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/Slash/FM_Kazan_Spear_A.0"
+      },
+      "bHasStaticPermutationResource": true,
+      "ScalarParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "Refraction_Str",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.3,
+          "ExpressionGUID": "E269C9DD-4A77C772-0A0A9A9B-68632E29"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "RefractionDepthBias",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.0,
+          "ExpressionGUID": "00000000-00000000-00000000-00000000"
+        }
+      ],
+      "VectorParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "ImpactColor",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "R": 20.0,
+            "G": 0.503951,
+            "B": 0.0,
+            "A": 0.0,
+            "Hex": "FFBC00"
+          },
+          "ExpressionGUID": "0B6D5BB0-41EBFE1D-F648BB9C-8224E0D9"
+        }
+      ],
+      "BasePropertyOverrides": {
+        "TwoSided": true,
+        "BlendMode": "BLEND_Translucent",
+        "ShadingModel": "MSM_Unlit",
+        "OpacityMaskClipValue": 0.0
+      },
+      "StaticParameters": {
+        "StaticSwitchParameters": [
+          {
+            "Value": true,
+            "ParameterInfo": {
+              "Name": "UseImpact",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            "bOverride": true,
+            "ExpressionGUID": "674840D6-45084161-9D1D4291-4FB5AC78"
+          }
+        ]
+      },
+      "CachedReferencedTextures": [
+        {
+          "ObjectName": "Texture2D'FT_Cloud_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Cloud_01.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_Base_NoiseMask'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/System/FT_Base_NoiseMask.0"
+        },
+        {
+          "ObjectName": "CurveLinearColorAtlas'FA_KazanSpear_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/Curve/FA_KazanSpear_01.0"
+        },
+        {
+          "ObjectName": "CurveLinearColorAtlas'FA_KazanSpear_02'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Data/Curve/FA_KazanSpear_02.0"
+        }
+      ],
+      "TextureStreamingData": [
+        {
+          "SamplingScale": 3.0,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Base_NoiseMask"
+        },
+        {
+          "SamplingScale": 0.5,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Cloud_01"
+        }
+      ]
+    },
+    "LoadedMaterialResources": []
+  }
+]

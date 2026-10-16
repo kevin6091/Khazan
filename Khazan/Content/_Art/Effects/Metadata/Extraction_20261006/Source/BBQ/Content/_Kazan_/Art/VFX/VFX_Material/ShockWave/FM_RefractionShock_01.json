@@ -1,0 +1,640 @@
+[
+  {
+    "Type": "Material",
+    "Name": "FM_RefractionShock_01",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Material'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/ShockWave/FM_RefractionShock_01",
+    "Properties": {
+      "Normal": {
+        "Expression": null,
+        "OutputIndex": 0,
+        "InputName": "None",
+        "Mask": 0,
+        "MaskR": 0,
+        "MaskG": 0,
+        "MaskB": 0,
+        "MaskA": 0,
+        "ExpressionName": "MaterialExpressionQualitySwitch_0",
+        "UseConstant": false,
+        "Constant": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 0.0
+        }
+      },
+      "BlendMode": "BLEND_Translucent",
+      "Refraction": {
+        "Expression": null,
+        "OutputIndex": 0,
+        "InputName": "None",
+        "Mask": 0,
+        "MaskR": 0,
+        "MaskG": 0,
+        "MaskB": 0,
+        "MaskA": 0,
+        "ExpressionName": "MaterialExpressionQualitySwitch_1",
+        "UseConstant": false,
+        "Constant": 0.0
+      },
+      "TwoSided": true,
+      "bUsedWithParticleSprites": true,
+      "bUsedWithMeshParticles": true,
+      "bUsedWithNiagaraSprites": true,
+      "bUsesDistortion": true,
+      "bCanMaskedBeAssumedOpaque": true,
+      "StateId": "858A4060-4DCBFE75-55E147AB-29620A64",
+      "CachedExpressionData": {
+        "Parameters": {
+          "RuntimeEntries": {
+            "NameHashes": [
+              261454691455474153,
+              6289461506488744067,
+              6527026966410724828,
+              7173782654399895025,
+              7505136516288947862,
+              7657009800605823080,
+              10645133004922551107,
+              12063249905684267135,
+              15701416028474025916,
+              16966583175618506177
+            ],
+            "ParameterInfos": [
+              {
+                "Name": "Ref_tex_pow",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "Ref_tex_str",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "Ref_T_Utile",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "Refraction_str",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "MaxDistStr",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "Tex_Clamp_if",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "MinDistStr",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "Ref_T_Vtile",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "MaxDist",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "DepthFade_Distance",
+                "Association": "GlobalParameter",
+                "Index": -1
+              }
+            ],
+            "ExpressionGuids": [
+              "5010B5A3-4A2172B5-8D6B2287-F589E72A",
+              "B1C4BF18-47855725-E0992883-F8ED2914",
+              "75ADFB07-4DD65819-7D262B94-0AB72045",
+              "FED3E6C6-4B5F48B3-FF474B95-FB59A5BB",
+              "681BD28F-44821FCB-8C563E86-5E359CD1",
+              "EECE7B36-4CB2727C-A78C73A0-96AB672B",
+              "974956E9-42E4E394-4897D58A-D467A0C4",
+              "10BE876D-4DF6E5FE-B0CEEFB3-B3B83F2A",
+              "3087460D-4CE4AA76-37033EB7-10C07E55",
+              "377FA282-454D3125-5F5FF99C-B021E297"
+            ]
+          },
+          "RuntimeEntries[2]": {
+            "NameHashes": [
+              18004566175441260908
+            ],
+            "ParameterInfos": [
+              {
+                "Name": "Refraction_texture",
+                "Association": "GlobalParameter",
+                "Index": -1
+              }
+            ],
+            "ExpressionGuids": [
+              "7FDF8C57-4F81AF26-D5462DA1-CF4E0585"
+            ]
+          },
+          "ScalarValues": [
+            2.0,
+            1.0,
+            1.0,
+            1.0,
+            0.2,
+            3.0,
+            1.0,
+            1.0,
+            600.0,
+            20.0
+          ],
+          "TextureValues": [
+            {
+              "ObjectName": "Texture2D'gradation_05'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Gradient/gradation_05.0"
+            }
+          ]
+        },
+        "ReferencedTextures": [
+          null,
+          {
+            "ObjectName": "Texture2D'DefaultDiffuse'",
+            "ObjectPath": "Engine/Content/EngineMaterials/DefaultDiffuse.0"
+          },
+          {
+            "ObjectName": "Texture2D'DebugNumberStrip'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/ExampleContent/DebugNumberStrip.0"
+          },
+          {
+            "ObjectName": "Texture2D'DebugNumberPeriod'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/ExampleContent/Textures/DebugNumberPeriod.0"
+          },
+          {
+            "ObjectName": "Texture2D'gradation_05'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Gradient/gradation_05.0"
+          }
+        ],
+        "FunctionInfos": [
+          {
+            "StateId": "2C1DDB6E-406BC9FC-1D4141A1-7C82122A",
+            "Function": {
+              "ObjectName": "MaterialFunction'BreakOutFloat2Components'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components.0"
+            }
+          },
+          {
+            "StateId": "972EFAAA-4C1C2B16-4BC287A2-B11C51DA",
+            "Function": {
+              "ObjectName": "MaterialFunction'SafeNormalize'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/SafeNormalize.0"
+            }
+          },
+          {
+            "StateId": "A9CC16D5-4B375243-36F3CF86-3EF27E55",
+            "Function": {
+              "ObjectName": "MaterialFunction'TextureCropping'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/TextureCropping.0"
+            }
+          },
+          {
+            "StateId": "E47E7D6B-466F913C-C1497584-EDB1DBD6",
+            "Function": {
+              "ObjectName": "MaterialFunction'ComputeMipLevel'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/ComputeMipLevel.0"
+            }
+          },
+          {
+            "StateId": "2DA7361E-4ADEEDBC-9E251392-08DB9B40",
+            "Function": {
+              "ObjectName": "MaterialFunction'DebugScalarValues'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/DebugScalarValues.0"
+            }
+          },
+          {
+            "StateId": "A9CC16D5-4B375243-36F3CF86-3EF27E55",
+            "Function": {
+              "ObjectName": "MaterialFunction'TextureCropping'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/TextureCropping.0"
+            }
+          },
+          {
+            "StateId": "E47E7D6B-466F913C-C1497584-EDB1DBD6",
+            "Function": {
+              "ObjectName": "MaterialFunction'ComputeMipLevel'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/ComputeMipLevel.0"
+            }
+          },
+          {
+            "StateId": "2DA7361E-4ADEEDBC-9E251392-08DB9B40",
+            "Function": {
+              "ObjectName": "MaterialFunction'DebugScalarValues'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/DebugScalarValues.0"
+            }
+          },
+          {
+            "StateId": "A9CC16D5-4B375243-36F3CF86-3EF27E55",
+            "Function": {
+              "ObjectName": "MaterialFunction'TextureCropping'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/TextureCropping.0"
+            }
+          },
+          {
+            "StateId": "E47E7D6B-466F913C-C1497584-EDB1DBD6",
+            "Function": {
+              "ObjectName": "MaterialFunction'ComputeMipLevel'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/ComputeMipLevel.0"
+            }
+          },
+          {
+            "StateId": "2DA7361E-4ADEEDBC-9E251392-08DB9B40",
+            "Function": {
+              "ObjectName": "MaterialFunction'DebugScalarValues'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/DebugScalarValues.0"
+            }
+          },
+          {
+            "StateId": "A9CC16D5-4B375243-36F3CF86-3EF27E55",
+            "Function": {
+              "ObjectName": "MaterialFunction'TextureCropping'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/TextureCropping.0"
+            }
+          },
+          {
+            "StateId": "E47E7D6B-466F913C-C1497584-EDB1DBD6",
+            "Function": {
+              "ObjectName": "MaterialFunction'ComputeMipLevel'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/ComputeMipLevel.0"
+            }
+          },
+          {
+            "StateId": "2DA7361E-4ADEEDBC-9E251392-08DB9B40",
+            "Function": {
+              "ObjectName": "MaterialFunction'DebugScalarValues'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/DebugScalarValues.0"
+            }
+          },
+          {
+            "StateId": "A9CC16D5-4B375243-36F3CF86-3EF27E55",
+            "Function": {
+              "ObjectName": "MaterialFunction'TextureCropping'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/TextureCropping.0"
+            }
+          },
+          {
+            "StateId": "5B938C50-440B6892-955AD79F-CD1A8337",
+            "Function": {
+              "ObjectName": "MaterialFunction'BreakOutFloat3Components'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat3Components.0"
+            }
+          },
+          {
+            "StateId": "6E393562-4EBBED69-A2B3C38F-39CB7F3C",
+            "Function": {
+              "ObjectName": "MaterialFunction'DebugFloat3Values'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/DebugFloat3Values.0"
+            }
+          },
+          {
+            "StateId": "CF8124B2-4C17FCD6-157F5EBD-B3EB4772",
+            "Function": {
+              "ObjectName": "MaterialFunction'DeriveNormalZ_Function'",
+              "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Math/DeriveNormalZ_Function.0"
+            }
+          },
+          {
+            "StateId": "F57A41D6-4737AE97-73DDFDBA-24C722D6",
+            "Function": {
+              "ObjectName": "MaterialFunction'MF_Tex_PolarCoord_Rad'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/MaterialFunction/MF_Tex_PolarCoord_Rad.0"
+            }
+          },
+          {
+            "StateId": "8712A16C-40371CDE-D191FF91-F894C7E7",
+            "Function": {
+              "ObjectName": "MaterialFunction'MF_Tex_UV'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/MaterialFunction/MF_Tex_UV.0"
+            }
+          },
+          {
+            "StateId": "6192CA69-48C53D77-270B80B5-D85CC8AF",
+            "Function": {
+              "ObjectName": "MaterialFunction'MF_Tex_Clamp_IF'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/MaterialFunction/MF_Tex_Clamp_IF.0"
+            }
+          }
+        ],
+        "DynamicParameterNames": [
+          "Ref_Tex_Voff",
+          "Ref_str",
+          "Param3",
+          "Param4"
+        ],
+        "QualityLevelsUsed": [
+          true,
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "LoadedMaterialResources": [],
+    "CachedExpressionData": {
+      "Parameters": {
+        "RuntimeEntries": {
+          "NameHashes": [
+            261454691455474153,
+            6289461506488744067,
+            6527026966410724828,
+            7173782654399895025,
+            7505136516288947862,
+            7657009800605823080,
+            10645133004922551107,
+            12063249905684267135,
+            15701416028474025916,
+            16966583175618506177
+          ],
+          "ParameterInfos": [
+            {
+              "Name": "Ref_tex_pow",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "Ref_tex_str",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "Ref_T_Utile",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "Refraction_str",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "MaxDistStr",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "Tex_Clamp_if",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "MinDistStr",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "Ref_T_Vtile",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "MaxDist",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "DepthFade_Distance",
+              "Association": "GlobalParameter",
+              "Index": -1
+            }
+          ],
+          "ExpressionGuids": [
+            "5010B5A3-4A2172B5-8D6B2287-F589E72A",
+            "B1C4BF18-47855725-E0992883-F8ED2914",
+            "75ADFB07-4DD65819-7D262B94-0AB72045",
+            "FED3E6C6-4B5F48B3-FF474B95-FB59A5BB",
+            "681BD28F-44821FCB-8C563E86-5E359CD1",
+            "EECE7B36-4CB2727C-A78C73A0-96AB672B",
+            "974956E9-42E4E394-4897D58A-D467A0C4",
+            "10BE876D-4DF6E5FE-B0CEEFB3-B3B83F2A",
+            "3087460D-4CE4AA76-37033EB7-10C07E55",
+            "377FA282-454D3125-5F5FF99C-B021E297"
+          ]
+        },
+        "RuntimeEntries[2]": {
+          "NameHashes": [
+            18004566175441260908
+          ],
+          "ParameterInfos": [
+            {
+              "Name": "Refraction_texture",
+              "Association": "GlobalParameter",
+              "Index": -1
+            }
+          ],
+          "ExpressionGuids": [
+            "7FDF8C57-4F81AF26-D5462DA1-CF4E0585"
+          ]
+        },
+        "ScalarValues": [
+          2.0,
+          1.0,
+          1.0,
+          1.0,
+          0.2,
+          3.0,
+          1.0,
+          1.0,
+          600.0,
+          20.0
+        ],
+        "TextureValues": [
+          {
+            "ObjectName": "Texture2D'gradation_05'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Gradient/gradation_05.0"
+          }
+        ]
+      },
+      "ReferencedTextures": [
+        null,
+        {
+          "ObjectName": "Texture2D'DefaultDiffuse'",
+          "ObjectPath": "Engine/Content/EngineMaterials/DefaultDiffuse.0"
+        },
+        {
+          "ObjectName": "Texture2D'DebugNumberStrip'",
+          "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/ExampleContent/DebugNumberStrip.0"
+        },
+        {
+          "ObjectName": "Texture2D'DebugNumberPeriod'",
+          "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/ExampleContent/Textures/DebugNumberPeriod.0"
+        },
+        {
+          "ObjectName": "Texture2D'gradation_05'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Gradient/gradation_05.0"
+        }
+      ],
+      "FunctionInfos": [
+        {
+          "StateId": "2C1DDB6E-406BC9FC-1D4141A1-7C82122A",
+          "Function": {
+            "ObjectName": "MaterialFunction'BreakOutFloat2Components'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components.0"
+          }
+        },
+        {
+          "StateId": "972EFAAA-4C1C2B16-4BC287A2-B11C51DA",
+          "Function": {
+            "ObjectName": "MaterialFunction'SafeNormalize'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/SafeNormalize.0"
+          }
+        },
+        {
+          "StateId": "A9CC16D5-4B375243-36F3CF86-3EF27E55",
+          "Function": {
+            "ObjectName": "MaterialFunction'TextureCropping'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/TextureCropping.0"
+          }
+        },
+        {
+          "StateId": "E47E7D6B-466F913C-C1497584-EDB1DBD6",
+          "Function": {
+            "ObjectName": "MaterialFunction'ComputeMipLevel'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/ComputeMipLevel.0"
+          }
+        },
+        {
+          "StateId": "2DA7361E-4ADEEDBC-9E251392-08DB9B40",
+          "Function": {
+            "ObjectName": "MaterialFunction'DebugScalarValues'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/DebugScalarValues.0"
+          }
+        },
+        {
+          "StateId": "A9CC16D5-4B375243-36F3CF86-3EF27E55",
+          "Function": {
+            "ObjectName": "MaterialFunction'TextureCropping'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/TextureCropping.0"
+          }
+        },
+        {
+          "StateId": "E47E7D6B-466F913C-C1497584-EDB1DBD6",
+          "Function": {
+            "ObjectName": "MaterialFunction'ComputeMipLevel'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/ComputeMipLevel.0"
+          }
+        },
+        {
+          "StateId": "2DA7361E-4ADEEDBC-9E251392-08DB9B40",
+          "Function": {
+            "ObjectName": "MaterialFunction'DebugScalarValues'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/DebugScalarValues.0"
+          }
+        },
+        {
+          "StateId": "A9CC16D5-4B375243-36F3CF86-3EF27E55",
+          "Function": {
+            "ObjectName": "MaterialFunction'TextureCropping'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/TextureCropping.0"
+          }
+        },
+        {
+          "StateId": "E47E7D6B-466F913C-C1497584-EDB1DBD6",
+          "Function": {
+            "ObjectName": "MaterialFunction'ComputeMipLevel'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/ComputeMipLevel.0"
+          }
+        },
+        {
+          "StateId": "2DA7361E-4ADEEDBC-9E251392-08DB9B40",
+          "Function": {
+            "ObjectName": "MaterialFunction'DebugScalarValues'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/DebugScalarValues.0"
+          }
+        },
+        {
+          "StateId": "A9CC16D5-4B375243-36F3CF86-3EF27E55",
+          "Function": {
+            "ObjectName": "MaterialFunction'TextureCropping'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/TextureCropping.0"
+          }
+        },
+        {
+          "StateId": "E47E7D6B-466F913C-C1497584-EDB1DBD6",
+          "Function": {
+            "ObjectName": "MaterialFunction'ComputeMipLevel'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/ComputeMipLevel.0"
+          }
+        },
+        {
+          "StateId": "2DA7361E-4ADEEDBC-9E251392-08DB9B40",
+          "Function": {
+            "ObjectName": "MaterialFunction'DebugScalarValues'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/DebugScalarValues.0"
+          }
+        },
+        {
+          "StateId": "A9CC16D5-4B375243-36F3CF86-3EF27E55",
+          "Function": {
+            "ObjectName": "MaterialFunction'TextureCropping'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/TextureCropping.0"
+          }
+        },
+        {
+          "StateId": "5B938C50-440B6892-955AD79F-CD1A8337",
+          "Function": {
+            "ObjectName": "MaterialFunction'BreakOutFloat3Components'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat3Components.0"
+          }
+        },
+        {
+          "StateId": "6E393562-4EBBED69-A2B3C38F-39CB7F3C",
+          "Function": {
+            "ObjectName": "MaterialFunction'DebugFloat3Values'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/DebugFloat3Values.0"
+          }
+        },
+        {
+          "StateId": "CF8124B2-4C17FCD6-157F5EBD-B3EB4772",
+          "Function": {
+            "ObjectName": "MaterialFunction'DeriveNormalZ_Function'",
+            "ObjectPath": "Engine/Content/Functions/Engine_MaterialFunctions02/Math/DeriveNormalZ_Function.0"
+          }
+        },
+        {
+          "StateId": "F57A41D6-4737AE97-73DDFDBA-24C722D6",
+          "Function": {
+            "ObjectName": "MaterialFunction'MF_Tex_PolarCoord_Rad'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/MaterialFunction/MF_Tex_PolarCoord_Rad.0"
+          }
+        },
+        {
+          "StateId": "8712A16C-40371CDE-D191FF91-F894C7E7",
+          "Function": {
+            "ObjectName": "MaterialFunction'MF_Tex_UV'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/MaterialFunction/MF_Tex_UV.0"
+          }
+        },
+        {
+          "StateId": "6192CA69-48C53D77-270B80B5-D85CC8AF",
+          "Function": {
+            "ObjectName": "MaterialFunction'MF_Tex_Clamp_IF'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/MaterialFunction/MF_Tex_Clamp_IF.0"
+          }
+        }
+      ],
+      "DynamicParameterNames": [
+        "Ref_Tex_Voff",
+        "Ref_str",
+        "Param3",
+        "Param4"
+      ],
+      "QualityLevelsUsed": [
+        true,
+        false,
+        false,
+        false
+      ]
+    }
+  }
+]

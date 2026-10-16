@@ -1,0 +1,574 @@
+[
+  {
+    "Type": "DistributionFloatConstant",
+    "Name": "RequiredDistributionSpawnRate",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'DistributionFloatConstant'",
+    "Outer": {
+      "ObjectName": "ParticleModuleRequired'PP_Dmg_BlackBlood_Trail:ParticleModuleRequired_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.7"
+    }
+  },
+  {
+    "Type": "DistributionFloatConstant",
+    "Name": "BurstScaleDistribution",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'DistributionFloatConstant'",
+    "Outer": {
+      "ObjectName": "ParticleModuleSpawn'PP_Dmg_BlackBlood_Trail:ParticleModuleSpawn_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.9"
+    },
+    "Properties": {
+      "Constant": 1.0
+    }
+  },
+  {
+    "Type": "ParticleLODLevel",
+    "Name": "ParticleLODLevel_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleLODLevel'",
+    "Outer": {
+      "ObjectName": "ParticleSpriteEmitter'PP_Dmg_BlackBlood_Trail:ParticleSpriteEmitter_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.12"
+    },
+    "Properties": {
+      "RequiredModule": {
+        "ObjectName": "ParticleModuleRequired'PP_Dmg_BlackBlood_Trail:ParticleModuleRequired_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.7"
+      },
+      "Modules": [
+        {
+          "ObjectName": "ParticleModuleLifetime'PP_Dmg_BlackBlood_Trail:ParticleModuleLifetime_2'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.5"
+        },
+        {
+          "ObjectName": "ParticleModuleSize'PP_Dmg_BlackBlood_Trail:ParticleModuleSize_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.8"
+        },
+        {
+          "ObjectName": "ParticleModuleColorOverLife'PP_Dmg_BlackBlood_Trail:ParticleModuleColorOverLife_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.4"
+        },
+        {
+          "ObjectName": "ParticleModuleSpawnPerUnit'PP_Dmg_BlackBlood_Trail:ParticleModuleSpawnPerUnit_2'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.10"
+        },
+        {
+          "ObjectName": "ParticleModuleParameterDynamic'PP_Dmg_BlackBlood_Trail:ParticleModuleParameterDynamic_1'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.6"
+        },
+        {
+          "ObjectName": "ParticleModuleAcceleration'PP_Dmg_BlackBlood_Trail:ParticleModuleAcceleration_3'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.3"
+        }
+      ],
+      "TypeDataModule": {
+        "ObjectName": "ParticleModuleTypeDataRibbon'PP_Dmg_BlackBlood_Trail:ParticleModuleTypeDataRibbon_2'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.11"
+      },
+      "SpawnModule": {
+        "ObjectName": "ParticleModuleSpawn'PP_Dmg_BlackBlood_Trail:ParticleModuleSpawn_1'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.9"
+      },
+      "PeakActiveParticles": 84
+    }
+  },
+  {
+    "Type": "ParticleModuleAcceleration",
+    "Name": "ParticleModuleAcceleration_3",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleAcceleration'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_Dmg_BlackBlood_Trail'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.13"
+    },
+    "Properties": {
+      "Acceleration": {
+        "MinValue": -400.0,
+        "MinValueVec": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": -400.0
+        },
+        "MaxValueVec": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": -400.0
+        },
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.0,
+            0.0,
+            -400.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 3
+        }
+      },
+      "bAlwaysInWorldSpace": true,
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleColorOverLife",
+    "Name": "ParticleModuleColorOverLife_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleColorOverLife'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_Dmg_BlackBlood_Trail'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.13"
+    },
+    "Properties": {
+      "ColorOverLife": {
+        "MinValue": 0.06,
+        "MaxValue": 0.15,
+        "MinValueVec": {
+          "X": 0.105,
+          "Y": 0.06,
+          "Z": 0.15
+        },
+        "MaxValueVec": {
+          "X": 0.105,
+          "Y": 0.06,
+          "Z": 0.15
+        },
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.105,
+            0.06,
+            0.15
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 3
+        }
+      },
+      "AlphaOverLife": {
+        "MaxValue": 1.0,
+        "Distribution": null,
+        "Table": {
+          "TimeScale": 31.0,
+          "Values": [
+            0.0,
+            0.32258064,
+            0.6451613,
+            0.96088386,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.9608842,
+            0.64516217,
+            0.32258078,
+            0.0
+          ],
+          "Op": 1,
+          "EntryCount": 32,
+          "EntryStride": 1
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleLifetime",
+    "Name": "ParticleModuleLifetime_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleLifetime'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_Dmg_BlackBlood_Trail'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.13"
+    },
+    "Properties": {
+      "Lifetime": {
+        "MinValue": 1.0,
+        "MaxValue": 1.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleParameterDynamic",
+    "Name": "ParticleModuleParameterDynamic_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleParameterDynamic'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_Dmg_BlackBlood_Trail'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.13"
+    },
+    "Properties": {
+      "DynamicParams": [
+        {
+          "ParamName": "Dissolve",
+          "bUseEmitterTime": false,
+          "bSpawnTimeOnly": false,
+          "ValueMethod": "EDPV_UserSet",
+          "bScaleVelocityByParamValue": false,
+          "ParamValue": {
+            "MinValue": 0.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 3.3333335,
+              "TimeBias": 0.1,
+              "Values": [
+                0.0,
+                0.14644638,
+                0.5009235,
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 4,
+              "EntryStride": 1,
+              "SubEntryStride": 0,
+              "LockFlag": 0
+            }
+          }
+        },
+        {
+          "ParamName": "pointcolor_str",
+          "bUseEmitterTime": false,
+          "bSpawnTimeOnly": false,
+          "ValueMethod": "EDPV_UserSet",
+          "bScaleVelocityByParamValue": false,
+          "ParamValue": {
+            "MinValue": 0.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 51.666668,
+              "TimeBias": 0.2,
+              "Values": [
+                1.0,
+                0.86451614,
+                0.7290322,
+                0.5935485,
+                0.45806462,
+                0.3225806,
+                0.2903226,
+                0.27870968,
+                0.2670968,
+                0.2554839,
+                0.243871,
+                0.23225805,
+                0.22064516,
+                0.20903228,
+                0.19741935,
+                0.18580645,
+                0.17419356,
+                0.16258062,
+                0.15096772,
+                0.13935484,
+                0.12774193,
+                0.11612902,
+                0.10451611,
+                0.09290324,
+                0.0812903,
+                0.06967743,
+                0.05806454,
+                0.04645163,
+                0.034838703,
+                0.023225803,
+                0.011612907,
+                0.0
+              ],
+              "Op": 1,
+              "EntryCount": 32,
+              "EntryStride": 1,
+              "SubEntryStride": 0,
+              "LockFlag": 0
+            }
+          }
+        },
+        {
+          "ParamName": "Param3",
+          "bUseEmitterTime": false,
+          "bSpawnTimeOnly": false,
+          "ValueMethod": "EDPV_UserSet",
+          "bScaleVelocityByParamValue": false,
+          "ParamValue": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 0.0,
+              "TimeBias": 0.0,
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1,
+              "SubEntryStride": 0,
+              "LockFlag": 0
+            }
+          }
+        },
+        {
+          "ParamName": "Param4",
+          "bUseEmitterTime": false,
+          "bSpawnTimeOnly": false,
+          "ValueMethod": "EDPV_UserSet",
+          "bScaleVelocityByParamValue": false,
+          "ParamValue": {
+            "MinValue": 1.0,
+            "MaxValue": 1.0,
+            "Distribution": null,
+            "Table": {
+              "TimeScale": 0.0,
+              "TimeBias": 0.0,
+              "Values": [
+                1.0
+              ],
+              "Op": 1,
+              "EntryCount": 1,
+              "EntryStride": 1,
+              "SubEntryStride": 0,
+              "LockFlag": 0
+            }
+          }
+        }
+      ],
+      "UpdateFlags": 15,
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleRequired",
+    "Name": "ParticleModuleRequired_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleRequired'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_Dmg_BlackBlood_Trail'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.13"
+    },
+    "Properties": {
+      "Material": {
+        "ObjectName": "MaterialInstanceConstant'FMI_blood_trail_black'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/Trail/MI/FMI_blood_trail_black.0"
+      },
+      "bUseLegacyEmitterTime": false,
+      "SpawnRate": {
+        "Distribution": {
+          "ObjectName": "DistributionFloatConstant'PP_Dmg_BlackBlood_Trail:ParticleModuleRequired_1.RequiredDistributionSpawnRate'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.0"
+        }
+      },
+      "RandomImageTime": 1.0,
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleSize",
+    "Name": "ParticleModuleSize_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleSize'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_Dmg_BlackBlood_Trail'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.13"
+    },
+    "Properties": {
+      "StartSize": {
+        "MaxValue": 20.0,
+        "MinValueVec": {
+          "X": 20.0,
+          "Y": 20.0,
+          "Z": 0.0
+        },
+        "MaxValueVec": {
+          "X": 20.0,
+          "Y": 20.0,
+          "Z": 0.0
+        },
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            20.0,
+            20.0,
+            0.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 3
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleSpawn",
+    "Name": "ParticleModuleSpawn_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleSpawn'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_Dmg_BlackBlood_Trail'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.13"
+    },
+    "Properties": {
+      "Rate": {
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            0.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "RateScale": {
+        "MinValue": 1.0,
+        "MaxValue": 1.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "BurstScale": {
+        "Distribution": {
+          "ObjectName": "DistributionFloatConstant'PP_Dmg_BlackBlood_Trail:ParticleModuleSpawn_1.BurstScaleDistribution'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.1"
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleSpawnPerUnit",
+    "Name": "ParticleModuleSpawnPerUnit_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleSpawnPerUnit'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_Dmg_BlackBlood_Trail'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.13"
+    },
+    "Properties": {
+      "UnitScalar": 80.0,
+      "SpawnPerUnit": {
+        "MinValue": 1.0,
+        "MaxValue": 1.0,
+        "Distribution": null,
+        "Table": {
+          "Values": [
+            1.0
+          ],
+          "Op": 1,
+          "EntryCount": 1,
+          "EntryStride": 1
+        }
+      },
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleModuleTypeDataRibbon",
+    "Name": "ParticleModuleTypeDataRibbon_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleModuleTypeDataRibbon'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_Dmg_BlackBlood_Trail'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.13"
+    },
+    "Properties": {
+      "SheetsPerTrail": 1000,
+      "MaxParticleInTrailCount": 75,
+      "bClipSourceSegement": false,
+      "bTangentRecalculationEveryFrame": true,
+      "bSpawnInitialParticle": true,
+      "TilingDistance": 350.0,
+      "LODValidity": 1
+    }
+  },
+  {
+    "Type": "ParticleSpriteEmitter",
+    "Name": "ParticleSpriteEmitter_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleSpriteEmitter'",
+    "Outer": {
+      "ObjectName": "ParticleSystem'PP_Dmg_BlackBlood_Trail'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.13"
+    },
+    "Properties": {
+      "LODLevels": [
+        {
+          "ObjectName": "ParticleLODLevel'PP_Dmg_BlackBlood_Trail:ParticleSpriteEmitter_2.ParticleLODLevel_0'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.2"
+        }
+      ],
+      "DetailModeBitmask": 7
+    }
+  },
+  {
+    "Type": "ParticleSystem",
+    "Name": "PP_Dmg_BlackBlood_Trail",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'ParticleSystem'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail",
+    "Properties": {
+      "Emitters": [
+        {
+          "ObjectName": "ParticleSpriteEmitter'PP_Dmg_BlackBlood_Trail:ParticleSpriteEmitter_2'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Particle/Physics/PP_Damage/PP_Dmg_BlackBlood_Trail.12"
+        }
+      ],
+      "CurveEdSetup": null,
+      "LODDistances": [
+        0.0
+      ],
+      "LODSettings": [
+        {}
+      ],
+      "FixedRelativeBoundingBox": {
+        "Min": {
+          "X": -300.0,
+          "Y": -300.0,
+          "Z": -300.0
+        },
+        "Max": {
+          "X": 300.0,
+          "Y": 300.0,
+          "Z": 300.0
+        },
+        "IsValid": 1
+      },
+      "bShouldResetPeakCounts": true
+    }
+  }
+]

@@ -1,0 +1,400 @@
+[
+  {
+    "Type": "BodySetup",
+    "Name": "BodySetup_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BodySetup'",
+    "Outer": {
+      "ObjectName": "StaticMesh'FS_Halfsphere_Plane_01'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/FS_Halfsphere_Plane_01.2"
+    },
+    "Properties": {
+      "AggGeom": {
+        "ConvexElems": [
+          {
+            "VertexData": [
+              {
+                "X": -98.463326,
+                "Y": 237.78667,
+                "Z": -0.099999964
+              },
+              {
+                "X": 98.46333,
+                "Y": 237.78668,
+                "Z": -0.125
+              },
+              {
+                "X": 98.79689,
+                "Y": 237.48419,
+                "Z": 0.3908041
+              },
+              {
+                "X": -98.796936,
+                "Y": 237.4842,
+                "Z": 0.39079842
+              },
+              {
+                "X": 98.46333,
+                "Y": -237.78667,
+                "Z": -0.099999964
+              },
+              {
+                "X": -98.47615,
+                "Y": -237.80493,
+                "Z": -0.09999998
+              },
+              {
+                "X": -98.796936,
+                "Y": -237.48418,
+                "Z": 0.3908041
+              },
+              {
+                "X": 98.796906,
+                "Y": -237.48419,
+                "Z": 0.39079842
+              },
+              {
+                "X": 237.78125,
+                "Y": 98.46875,
+                "Z": -0.099999964
+              },
+              {
+                "X": 237.78125,
+                "Y": -98.46875,
+                "Z": -0.125
+              },
+              {
+                "X": 237.48419,
+                "Y": -98.796906,
+                "Z": 0.3908041
+              },
+              {
+                "X": 237.4842,
+                "Y": 98.79686,
+                "Z": 0.39079842
+              },
+              {
+                "X": -237.79959,
+                "Y": -98.45041,
+                "Z": -0.099999964
+              },
+              {
+                "X": -237.79959,
+                "Y": 98.45041,
+                "Z": -0.125
+              },
+              {
+                "X": -237.48419,
+                "Y": 98.796936,
+                "Z": 0.3908041
+              },
+              {
+                "X": -237.48419,
+                "Y": -98.796906,
+                "Z": 0.39079842
+              }
+            ],
+            "IndexData": [
+              2,
+              3,
+              6,
+              12,
+              5,
+              15,
+              5,
+              6,
+              15,
+              6,
+              3,
+              15,
+              2,
+              0,
+              3,
+              5,
+              12,
+              13,
+              15,
+              3,
+              14,
+              3,
+              13,
+              14,
+              13,
+              12,
+              14,
+              12,
+              15,
+              14,
+              3,
+              0,
+              13,
+              13,
+              0,
+              1,
+              0,
+              2,
+              1,
+              4,
+              5,
+              9,
+              5,
+              13,
+              9,
+              13,
+              1,
+              9,
+              1,
+              8,
+              9,
+              8,
+              10,
+              9,
+              8,
+              1,
+              11,
+              1,
+              2,
+              11,
+              2,
+              10,
+              11,
+              10,
+              8,
+              11,
+              2,
+              6,
+              10,
+              6,
+              5,
+              7,
+              5,
+              4,
+              7,
+              4,
+              9,
+              7,
+              9,
+              10,
+              7,
+              10,
+              6,
+              7
+            ],
+            "ElemBox": {
+              "Min": {
+                "X": -237.79959,
+                "Y": -237.80493,
+                "Z": -0.125
+              },
+              "Max": {
+                "X": 237.78125,
+                "Y": 237.78668,
+                "Z": 0.3908041
+              },
+              "IsValid": 1
+            },
+            "Transform": {
+              "Rotation": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0,
+                "W": 1.0,
+                "IsNormalized": true,
+                "Size": 1.0,
+                "SizeSquared": 1.0
+              },
+              "Translation": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "Scale3D": {
+                "X": 1.0,
+                "Y": 1.0,
+                "Z": 1.0
+              }
+            },
+            "RestOffset": 0.0,
+            "Name": "None",
+            "bContributeToMass": true,
+            "CollisionEnabled": "ECollisionEnabled::QueryAndPhysics"
+          }
+        ]
+      },
+      "DefaultInstance": {
+        "ObjectType": "ECC_WorldStatic",
+        "CollisionProfileName": "BlockAll",
+        "CollisionResponses": {
+          "ResponseArray": [
+            {
+              "Channel": "EngineTraceChannel1",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "Attack",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "JumpBlock",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "IKTrace",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "FloorCheck",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "LandScape",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "NamePlate",
+              "Response": "ECR_Block"
+            }
+          ]
+        }
+      }
+    },
+    "BodySetupGuid": "2A599CA549E527A02C5610B8902204C0",
+    "CookedFormatData": {
+      "PhysXPC": {
+        "BulkDataFlags": "BULKDATA_SingleUse | BULKDATA_ForceInlinePayload",
+        "ElementCount": 26592,
+        "SizeOnDisk": 26592,
+        "OffsetInFile": "0x1F4BA"
+      }
+    }
+  },
+  {
+    "Type": "NavCollision",
+    "Name": "NavCollision_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'NavCollision'",
+    "Outer": {
+      "ObjectName": "StaticMesh'FS_Halfsphere_Plane_01'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/FS_Halfsphere_Plane_01.2"
+    },
+    "CookedFormatData": {
+      "NavCollision_Chaos": {
+        "BulkDataFlags": "BULKDATA_SingleUse | BULKDATA_ForceInlinePayload",
+        "ElementCount": 553,
+        "SizeOnDisk": 553,
+        "OffsetInFile": "0x25CE2"
+      }
+    }
+  },
+  {
+    "Type": "StaticMesh",
+    "Name": "FS_Halfsphere_Plane_01",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'StaticMesh'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/FS_Halfsphere_Plane_01",
+    "Properties": {
+      "StaticMaterials": [
+        {
+          "MaterialInterface": {
+            "ObjectName": "Material'Base_Axis'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/Base/Base_Axis.0"
+          },
+          "MaterialSlotName": "WorldGridMaterial",
+          "ImportedMaterialSlotName": "WorldGridMaterial",
+          "UVChannelData": {
+            "bInitialized": true,
+            "bOverrideDensities": false,
+            "LocalUVDensities": 439.9968,
+            "LocalUVDensities[1]": 447.0631,
+            "LocalUVDensities[2]": 0.0,
+            "LocalUVDensities[3]": 0.0
+          }
+        }
+      ],
+      "LightmapUVDensity": 447.0631,
+      "LightMapResolution": 64,
+      "LightMapCoordinateIndex": 1,
+      "ExtendedBounds": {
+        "Origin": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": -1.4941406E-07
+        },
+        "BoxExtent": {
+          "X": 237.68666,
+          "Y": 237.68666,
+          "Z": 1.4210855E-14
+        },
+        "SphereRadius": 237.68668
+      }
+    },
+    "BodySetup": {
+      "ObjectName": "BodySetup'FS_Halfsphere_Plane_01:BodySetup_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/FS_Halfsphere_Plane_01.0"
+    },
+    "NavCollision": {
+      "ObjectName": "NavCollision'FS_Halfsphere_Plane_01:NavCollision_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/FS_Halfsphere_Plane_01.1"
+    },
+    "LightingGuid": "2442AA8F-49B418F9-3EC1E88D-E180E84F",
+    "RenderData": {
+      "LODs": [
+        {
+          "Sections": [
+            {
+              "MaterialIndex": 0,
+              "FirstIndex": 0,
+              "NumTriangles": 384,
+              "MinVertexIndex": 0,
+              "MaxVertexIndex": 230,
+              "bEnableCollision": true,
+              "bCastShadow": true,
+              "bForceOpaque": false,
+              "bVisibleInRayTracing": true
+            }
+          ],
+          "MaxDeviation": 0.0,
+          "PositionVertexBuffer": {
+            "Stride": 12,
+            "NumVertices": 231
+          },
+          "VertexBuffer": {
+            "NumTexCoords": 2,
+            "NumVertices": 231,
+            "Strides": -1,
+            "UseHighPrecisionTangentBasis": false,
+            "UseFullPrecisionUVs": false
+          },
+          "ColorVertexBuffer": {
+            "Stride": 0,
+            "NumVertices": 0
+          }
+        }
+      ],
+      "Bounds": {
+        "Origin": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": -1.4941406E-07
+        },
+        "BoxExtent": {
+          "X": 237.68666,
+          "Y": 237.68666,
+          "Z": 1.4210855E-14
+        },
+        "SphereRadius": 237.68668
+      },
+      "bLODsShareStaticLighting": true,
+      "ScreenSize": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  }
+]

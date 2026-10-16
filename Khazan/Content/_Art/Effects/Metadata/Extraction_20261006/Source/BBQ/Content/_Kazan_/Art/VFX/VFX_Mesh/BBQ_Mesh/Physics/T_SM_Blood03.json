@@ -1,0 +1,330 @@
+[
+  {
+    "Type": "BodySetup",
+    "Name": "BodySetup_1",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BodySetup'",
+    "Outer": {
+      "ObjectName": "StaticMesh'T_SM_Blood03'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BBQ_Mesh/Physics/T_SM_Blood03.2"
+    },
+    "Properties": {
+      "AggGeom": {
+        "ConvexElems": [
+          {
+            "VertexData": [
+              {
+                "X": -5.249002,
+                "Y": 8.90625,
+                "Z": -0.125
+              },
+              {
+                "X": -5.249002,
+                "Y": 8.90625,
+                "Z": 0.375
+              },
+              {
+                "X": -5.249002,
+                "Y": -8.830898,
+                "Z": 0.375
+              },
+              {
+                "X": -5.249002,
+                "Y": -8.830898,
+                "Z": -0.124254405
+              },
+              {
+                "X": 1.4375,
+                "Y": 8.8786745,
+                "Z": 0.375
+              },
+              {
+                "X": 1.496326,
+                "Y": 8.8786745,
+                "Z": -0.12425441
+              },
+              {
+                "X": 1.5257034,
+                "Y": -8.849296,
+                "Z": -0.12499999
+              },
+              {
+                "X": 1.5257025,
+                "Y": -8.849298,
+                "Z": 0.375
+              },
+              {
+                "X": 10.359293,
+                "Y": -0.015708923,
+                "Z": 0.3995547
+              },
+              {
+                "X": 10.359425,
+                "Y": -0.015574455,
+                "Z": -0.12425441
+              }
+            ],
+            "IndexData": [
+              2,
+              3,
+              6,
+              3,
+              0,
+              6,
+              0,
+              9,
+              6,
+              2,
+              0,
+              3,
+              9,
+              0,
+              5,
+              0,
+              2,
+              1,
+              4,
+              5,
+              1,
+              5,
+              0,
+              1,
+              2,
+              6,
+              7,
+              6,
+              8,
+              7,
+              8,
+              2,
+              7,
+              6,
+              9,
+              8,
+              9,
+              5,
+              8,
+              5,
+              4,
+              8,
+              4,
+              1,
+              8,
+              1,
+              2,
+              8
+            ],
+            "ElemBox": {
+              "Min": {
+                "X": -5.249002,
+                "Y": -8.849298,
+                "Z": -0.125
+              },
+              "Max": {
+                "X": 10.359425,
+                "Y": 8.90625,
+                "Z": 0.3995547
+              },
+              "IsValid": 1
+            },
+            "Transform": {
+              "Rotation": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0,
+                "W": 1.0,
+                "IsNormalized": true,
+                "Size": 1.0,
+                "SizeSquared": 1.0
+              },
+              "Translation": {
+                "X": 0.0,
+                "Y": 0.0,
+                "Z": 0.0
+              },
+              "Scale3D": {
+                "X": 1.0,
+                "Y": 1.0,
+                "Z": 1.0
+              }
+            },
+            "RestOffset": 0.0,
+            "Name": "None",
+            "bContributeToMass": true,
+            "CollisionEnabled": "ECollisionEnabled::QueryAndPhysics"
+          }
+        ]
+      },
+      "DefaultInstance": {
+        "ObjectType": "ECC_WorldStatic",
+        "CollisionProfileName": "BlockAll",
+        "CollisionResponses": {
+          "ResponseArray": [
+            {
+              "Channel": "EngineTraceChannel1",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "Attack",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "JumpBlock",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "IKTrace",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "FloorCheck",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "LandScape",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "NamePlate",
+              "Response": "ECR_Block"
+            }
+          ]
+        }
+      }
+    },
+    "BodySetupGuid": "2D82EE35435C50411C234384110F0222",
+    "CookedFormatData": {
+      "PhysXPC": {
+        "BulkDataFlags": "BULKDATA_SingleUse | BULKDATA_ForceInlinePayload",
+        "ElementCount": 2052020,
+        "SizeOnDisk": 2052020,
+        "OffsetInFile": "0x47C38D"
+      }
+    }
+  },
+  {
+    "Type": "NavCollision",
+    "Name": "NavCollision_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'NavCollision'",
+    "Outer": {
+      "ObjectName": "StaticMesh'T_SM_Blood03'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BBQ_Mesh/Physics/T_SM_Blood03.2"
+    },
+    "CookedFormatData": {
+      "NavCollision_Chaos": {
+        "BulkDataFlags": "BULKDATA_SingleUse | BULKDATA_ForceInlinePayload",
+        "ElementCount": 337,
+        "SizeOnDisk": 337,
+        "OffsetInFile": "0x671389"
+      }
+    }
+  },
+  {
+    "Type": "StaticMesh",
+    "Name": "T_SM_Blood03",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'StaticMesh'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BBQ_Mesh/Physics/T_SM_Blood03",
+    "Properties": {
+      "StaticMaterials": [
+        {
+          "MaterialInterface": null,
+          "MaterialSlotName": "constant",
+          "ImportedMaterialSlotName": "constant",
+          "UVChannelData": {
+            "bInitialized": true,
+            "bOverrideDensities": false,
+            "LocalUVDensities": 0.0,
+            "LocalUVDensities[1]": 0.0,
+            "LocalUVDensities[2]": 0.0,
+            "LocalUVDensities[3]": 0.0
+          }
+        }
+      ],
+      "LightMapResolution": 64,
+      "LightMapCoordinateIndex": 1,
+      "ExtendedBounds": {
+        "Origin": {
+          "X": 2.5144978,
+          "Y": 0.014688492,
+          "Z": 0.13765015
+        },
+        "BoxExtent": {
+          "X": 7.663501,
+          "Y": 8.763986,
+          "Z": 0.16190456
+        },
+        "SphereRadius": 11.6384945
+      }
+    },
+    "BodySetup": {
+      "ObjectName": "BodySetup'T_SM_Blood03:BodySetup_1'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BBQ_Mesh/Physics/T_SM_Blood03.0"
+    },
+    "NavCollision": {
+      "ObjectName": "NavCollision'T_SM_Blood03:NavCollision_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BBQ_Mesh/Physics/T_SM_Blood03.1"
+    },
+    "LightingGuid": "0C607267-4E4353ED-F9C174BA-4E2ACDCC",
+    "RenderData": {
+      "LODs": [
+        {
+          "Sections": [
+            {
+              "MaterialIndex": 0,
+              "FirstIndex": 0,
+              "NumTriangles": 20000,
+              "MinVertexIndex": 0,
+              "MaxVertexIndex": 59999,
+              "bEnableCollision": true,
+              "bCastShadow": true,
+              "bForceOpaque": false,
+              "bVisibleInRayTracing": true
+            }
+          ],
+          "MaxDeviation": 0.0,
+          "PositionVertexBuffer": {
+            "Stride": 12,
+            "NumVertices": 60000
+          },
+          "VertexBuffer": {
+            "NumTexCoords": 2,
+            "NumVertices": 60000,
+            "Strides": -1,
+            "UseHighPrecisionTangentBasis": false,
+            "UseFullPrecisionUVs": true
+          },
+          "ColorVertexBuffer": {
+            "Stride": 0,
+            "NumVertices": 0
+          }
+        }
+      ],
+      "Bounds": {
+        "Origin": {
+          "X": 2.5144978,
+          "Y": 0.014688492,
+          "Z": 0.13765015
+        },
+        "BoxExtent": {
+          "X": 7.663501,
+          "Y": 8.763986,
+          "Z": 0.16190456
+        },
+        "SphereRadius": 11.6384945
+      },
+      "bLODsShareStaticLighting": true,
+      "ScreenSize": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  }
+]

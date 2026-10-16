@@ -1,0 +1,203 @@
+[
+  {
+    "Type": "MaterialInstanceConstant",
+    "Name": "FMI_blood_trail_Stone",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MaterialInstanceConstant'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/Trail/MI/FMI_blood_trail_Stone",
+    "Properties": {
+      "Parent": {
+        "ObjectName": "Material'FM_blood_trail'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/Trail/FM_blood_trail.0"
+      },
+      "bHasStaticPermutationResource": true,
+      "ScalarParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "MainT_Uspeed",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.2,
+          "ExpressionGUID": "7DBCA3B8-447618D5-AD046BB1-771DEAD2"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "MainT_Utile",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.2,
+          "ExpressionGUID": "7BAD8402-40C6DD70-AA0F46B8-F88BB269"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "SubT_Uspeed",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.8,
+          "ExpressionGUID": "078D74C0-41B338C0-0CE3E9B8-5B62B4E7"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "SubT_Utile",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 6.0,
+          "ExpressionGUID": "EE11A1C5-43A69789-679B749A-A6CC0A7C"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "SubT_Vtile",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 2.5,
+          "ExpressionGUID": "4FB08330-4037D9E8-D4A9C4A7-2E54B84C"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Main_Emi_pow",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "A187FEFC-4092B1F8-9A3C2485-D2CEA776"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Main_tex_pow",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "1ED45730-49172C01-018ED5BE-1D875374"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Main_tex_str",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 1.0,
+          "ExpressionGUID": "6779657D-4144AF69-BFB9D08D-EBAFDB72"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Sub_tex_pow",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 8.0,
+          "ExpressionGUID": "D1AFCED5-4E86EEFC-AADA33AC-DF3B4089"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "RefractionDepthBias",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.0,
+          "ExpressionGUID": "00000000-00000000-00000000-00000000"
+        }
+      ],
+      "VectorParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "InnerColor",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "R": 0.0,
+            "G": 0.0,
+            "B": 0.0,
+            "A": 1.0,
+            "Hex": "000000"
+          },
+          "ExpressionGUID": "47984739-45D9324A-7A0D9C97-5A2FCBDD"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "SubTexColor",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "R": 1.0,
+            "G": 1.0,
+            "B": 1.0,
+            "A": 1.0,
+            "Hex": "FFFFFF"
+          },
+          "ExpressionGUID": "4FD7D107-438F3A71-6BF2158B-E79310B2"
+        }
+      ],
+      "TextureParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "Main_tex",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT_trail_01'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Ribbon/FT_trail_01.0"
+          },
+          "ExpressionGUID": "6820D33D-403DD3D9-E63A5E8F-C627FBFD"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Sub_tex",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT_Noise_Powder_003'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_Powder_003.0"
+          },
+          "ExpressionGUID": "E7D0232E-4B2A1AFF-3BA7009F-50D430FC"
+        }
+      ],
+      "BasePropertyOverrides": {
+        "bOverride_BlendMode": true,
+        "BlendMode": "BLEND_Translucent",
+        "ShadingModel": "MSM_Unlit",
+        "OpacityMaskClipValue": 0.3333
+      },
+      "CachedReferencedTextures": [
+        {
+          "ObjectName": "Texture2D'FT_Gradient_Cen'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Gradient/FT_Gradient_Cen.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_2Ch_Noise_001'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_2Ch_Noise_001.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_BloodTrail_01'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Trail/FT_BloodTrail_01.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_Noise_Powder_003'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/Noise/FT_Noise_Powder_003.0"
+        }
+      ],
+      "TextureStreamingData": [
+        {
+          "SamplingScale": 1.0,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_2Ch_Noise_001"
+        },
+        {
+          "SamplingScale": 2.4991455,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Noise_Powder_003"
+        }
+      ]
+    },
+    "LoadedMaterialResources": []
+  }
+]

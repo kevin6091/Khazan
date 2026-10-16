@@ -1,0 +1,351 @@
+[
+  {
+    "Type": "Material",
+    "Name": "FM_SimpleDot_DepthFade",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'Material'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/Dot/FM_SimpleDot_DepthFade",
+    "Properties": {
+      "EmissiveColor": {
+        "Expression": null,
+        "OutputIndex": 0,
+        "InputName": "None",
+        "Mask": 0,
+        "MaskR": 0,
+        "MaskG": 0,
+        "MaskB": 0,
+        "MaskA": 0,
+        "ExpressionName": "MaterialExpressionMaterialFunctionCall_0",
+        "UseConstant": false,
+        "Constant": {
+          "B": 0,
+          "G": 0,
+          "R": 0,
+          "A": 0,
+          "Hex": "000000"
+        }
+      },
+      "BlendMode": "BLEND_Translucent",
+      "ShadingModel": "MSM_Unlit",
+      "ShadingModels": {
+        "ShadingModelField": 1
+      },
+      "TwoSided": true,
+      "bUsedWithParticleSprites": true,
+      "bUsedWithNiagaraSprites": true,
+      "bUsedWithNiagaraMeshParticles": true,
+      "bCanMaskedBeAssumedOpaque": true,
+      "StateId": "CF0CD07E-4B8676B0-02E7D4A4-C4871502",
+      "CachedExpressionData": {
+        "Parameters": {
+          "RuntimeEntries": {
+            "NameHashes": [
+              2652717646222895593,
+              6295569379598088961,
+              8964382441194723817,
+              10365776952601423206,
+              12584473539224423631
+            ],
+            "ParameterInfos": [
+              {
+                "Name": "ExponentIn",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "VO (S)",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "BaseReflectFractionIn",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "FadeDistance",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "UO (S)",
+                "Association": "GlobalParameter",
+                "Index": -1
+              }
+            ],
+            "ExpressionGuids": [
+              "EC22B556-4B1C14EE-16771C9C-F50D5AE9",
+              "D0F7A6FC-46E2EC4F-94DF868C-A84DF5A8",
+              "06BCBE66-4C9FBC47-9DD6BCB6-4E024D78",
+              "9BBDDE50-425DB46D-388A1FBD-985C6253",
+              "5EBE6494-4D2434BC-6D9C1B8F-470E031C"
+            ]
+          },
+          "RuntimeEntries[1]": {
+            "NameHashes": [
+              15175274089184382575
+            ],
+            "ParameterInfos": [
+              {
+                "Name": "UV",
+                "Association": "GlobalParameter",
+                "Index": -1
+              }
+            ],
+            "ExpressionGuids": [
+              "4CFFACC0-42E1B2E5-9503BDA9-5B73EE9B"
+            ]
+          },
+          "RuntimeEntries[2]": {
+            "NameHashes": [
+              728042707514448141,
+              8198569358239374743
+            ],
+            "ParameterInfos": [
+              {
+                "Name": "Base_Texture",
+                "Association": "GlobalParameter",
+                "Index": -1
+              },
+              {
+                "Name": "Mask",
+                "Association": "GlobalParameter",
+                "Index": -1
+              }
+            ],
+            "ExpressionGuids": [
+              "BED5CD87-4EDB0B63-45888782-4EBC8A7B",
+              "F6BA87E4-4099428B-6401B3A1-F817FF7E"
+            ]
+          },
+          "ScalarValues": [
+            1.0,
+            0.0,
+            0.3,
+            50.0,
+            0.0
+          ],
+          "VectorValues": [
+            {
+              "R": 1.0,
+              "G": 1.0,
+              "B": 0.0,
+              "A": 0.0,
+              "Hex": "FFFF00"
+            }
+          ],
+          "TextureValues": [
+            {
+              "ObjectName": "Texture2D'FT_Base_D'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT_Base_D.0"
+            },
+            {
+              "ObjectName": "Texture2D'FT_Base_D'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT_Base_D.0"
+            }
+          ]
+        },
+        "ReferencedTextures": [
+          {
+            "ObjectName": "Texture2D'FT_Base_D'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT_Base_D.0"
+          }
+        ],
+        "FunctionInfos": [
+          {
+            "StateId": "F3A82837-46B8135A-B4465FB1-E9D7D70D",
+            "Function": {
+              "ObjectName": "MaterialFunction'MF_Particle_Color'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/MaterialFunction/MF_Particle_Color.0"
+            }
+          },
+          {
+            "StateId": "F57A41D6-4737AE97-73DDFDBA-24C722D6",
+            "Function": {
+              "ObjectName": "MaterialFunction'MF_Tex_PolarCoord_Rad'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/MaterialFunction/MF_Tex_PolarCoord_Rad.0"
+            }
+          },
+          {
+            "StateId": "8712A16C-40371CDE-D191FF91-F894C7E7",
+            "Function": {
+              "ObjectName": "MaterialFunction'MF_Tex_UV'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/MaterialFunction/MF_Tex_UV.0"
+            }
+          }
+        ],
+        "DynamicParameterNames": [
+          "UO",
+          "VO",
+          "None",
+          "None"
+        ],
+        "QualityLevelsUsed": [
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "TextureStreamingData": [
+        {
+          "SamplingScale": 1.0,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_Base_D"
+        }
+      ]
+    },
+    "LoadedMaterialResources": [],
+    "CachedExpressionData": {
+      "Parameters": {
+        "RuntimeEntries": {
+          "NameHashes": [
+            2652717646222895593,
+            6295569379598088961,
+            8964382441194723817,
+            10365776952601423206,
+            12584473539224423631
+          ],
+          "ParameterInfos": [
+            {
+              "Name": "ExponentIn",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "VO (S)",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "BaseReflectFractionIn",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "FadeDistance",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "UO (S)",
+              "Association": "GlobalParameter",
+              "Index": -1
+            }
+          ],
+          "ExpressionGuids": [
+            "EC22B556-4B1C14EE-16771C9C-F50D5AE9",
+            "D0F7A6FC-46E2EC4F-94DF868C-A84DF5A8",
+            "06BCBE66-4C9FBC47-9DD6BCB6-4E024D78",
+            "9BBDDE50-425DB46D-388A1FBD-985C6253",
+            "5EBE6494-4D2434BC-6D9C1B8F-470E031C"
+          ]
+        },
+        "RuntimeEntries[1]": {
+          "NameHashes": [
+            15175274089184382575
+          ],
+          "ParameterInfos": [
+            {
+              "Name": "UV",
+              "Association": "GlobalParameter",
+              "Index": -1
+            }
+          ],
+          "ExpressionGuids": [
+            "4CFFACC0-42E1B2E5-9503BDA9-5B73EE9B"
+          ]
+        },
+        "RuntimeEntries[2]": {
+          "NameHashes": [
+            728042707514448141,
+            8198569358239374743
+          ],
+          "ParameterInfos": [
+            {
+              "Name": "Base_Texture",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            {
+              "Name": "Mask",
+              "Association": "GlobalParameter",
+              "Index": -1
+            }
+          ],
+          "ExpressionGuids": [
+            "BED5CD87-4EDB0B63-45888782-4EBC8A7B",
+            "F6BA87E4-4099428B-6401B3A1-F817FF7E"
+          ]
+        },
+        "ScalarValues": [
+          1.0,
+          0.0,
+          0.3,
+          50.0,
+          0.0
+        ],
+        "VectorValues": [
+          {
+            "R": 1.0,
+            "G": 1.0,
+            "B": 0.0,
+            "A": 0.0,
+            "Hex": "FFFF00"
+          }
+        ],
+        "TextureValues": [
+          {
+            "ObjectName": "Texture2D'FT_Base_D'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT_Base_D.0"
+          },
+          {
+            "ObjectName": "Texture2D'FT_Base_D'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT_Base_D.0"
+          }
+        ]
+      },
+      "ReferencedTextures": [
+        {
+          "ObjectName": "Texture2D'FT_Base_D'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Mask/FT_Base_D.0"
+        }
+      ],
+      "FunctionInfos": [
+        {
+          "StateId": "F3A82837-46B8135A-B4465FB1-E9D7D70D",
+          "Function": {
+            "ObjectName": "MaterialFunction'MF_Particle_Color'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/MaterialFunction/MF_Particle_Color.0"
+          }
+        },
+        {
+          "StateId": "F57A41D6-4737AE97-73DDFDBA-24C722D6",
+          "Function": {
+            "ObjectName": "MaterialFunction'MF_Tex_PolarCoord_Rad'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/MaterialFunction/MF_Tex_PolarCoord_Rad.0"
+          }
+        },
+        {
+          "StateId": "8712A16C-40371CDE-D191FF91-F894C7E7",
+          "Function": {
+            "ObjectName": "MaterialFunction'MF_Tex_UV'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/MaterialFunction/MF_Tex_UV.0"
+          }
+        }
+      ],
+      "DynamicParameterNames": [
+        "UO",
+        "VO",
+        "None",
+        "None"
+      ],
+      "QualityLevelsUsed": [
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  }
+]

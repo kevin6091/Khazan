@@ -1,0 +1,93 @@
+[
+  {
+    "Type": "AnimComposite",
+    "Name": "AC_Kazan_DualAxeSword_Off_DamageAir_Up_Start_B",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'AnimComposite'",
+    "Package": "BBQ/Content/_Kazan_/Design/Kazan/Reaction/DualAxeSword/AC_Kazan_DualAxeSword_Off_DamageAir_Up_Start_B",
+    "Properties": {
+      "AnimationTrack": {
+        "AnimSegments": [
+          {
+            "AnimReference": {
+              "ObjectName": "AnimSequence'CA_P_Kazan_DualAxeSword_Off_DamageAir_B'",
+              "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Animation/DualAxeSword/CA_P_Kazan_DualAxeSword_Off_DamageAir_B.0"
+            },
+            "StartPos": 0.0,
+            "AnimStartTime": 0.0,
+            "AnimEndTime": 0.167,
+            "AnimPlayRate": 1.0,
+            "LoopingCount": 1
+          }
+        ]
+      },
+      "Notifies": [
+        {
+          "TriggerTimeOffset": 0.0,
+          "EndTriggerTimeOffset": 0.0,
+          "TriggerWeightThreshold": 1E-05,
+          "NotifyName": "xxAkEvent",
+          "Notify": {
+            "ObjectName": "xxAnimNotify_AkEvent'AC_Kazan_DualAxeSword_Off_DamageAir_Up_Start_B:xxAnimNotify_AkEvent_0'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Reaction/DualAxeSword/AC_Kazan_DualAxeSword_Off_DamageAir_Up_Start_B.1"
+          },
+          "NotifyStateClass": null,
+          "Duration": 0.0,
+          "EndLink": {
+            "LinkedMontage": null,
+            "SlotIndex": 0,
+            "SegmentIndex": -1,
+            "LinkMethod": "EAnimLinkMethod::Absolute",
+            "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+            "SegmentBeginTime": 0.0,
+            "SegmentLength": 0.0,
+            "LinkValue": 0.10062513,
+            "LinkedSequence": null
+          },
+          "bConvertedFromBranchingPoint": false,
+          "MontageTickType": "EMontageNotifyTickType::Queued",
+          "NotifyTriggerChance": 1.0,
+          "NotifyFilterType": "ENotifyFilterType::NoFiltering",
+          "NotifyFilterLOD": 0,
+          "bTriggerOnDedicatedServer": true,
+          "bTriggerOnFollower": false,
+          "TrackIndex": 0,
+          "LinkedMontage": null,
+          "SlotIndex": 0,
+          "SegmentIndex": 0,
+          "LinkMethod": "EAnimLinkMethod::Absolute",
+          "CachedLinkMethod": "EAnimLinkMethod::Absolute",
+          "SegmentBeginTime": 0.0,
+          "SegmentLength": 0.167,
+          "LinkValue": 0.10062513,
+          "LinkedSequence": {
+            "ObjectName": "AnimComposite'AC_Kazan_DualAxeSword_Off_DamageAir_Up_Start_B'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Reaction/DualAxeSword/AC_Kazan_DualAxeSword_Off_DamageAir_Up_Start_B.0"
+          }
+        }
+      ],
+      "SequenceLength": 0.167,
+      "Skeleton": {
+        "ObjectName": "Skeleton'C_P_Kazan_Skeleton'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/Character/CHA_Model/PC/Kazan/Model/C_P_Kazan_Skeleton.88"
+      }
+    },
+    "SkeletonGuid": "EDC47A49-495755E9-FB983989-EBE3839B"
+  },
+  {
+    "Type": "xxAnimNotify_AkEvent",
+    "Name": "xxAnimNotify_AkEvent_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'xxAnimNotify_AkEvent'",
+    "Outer": {
+      "ObjectName": "AnimComposite'AC_Kazan_DualAxeSword_Off_DamageAir_Up_Start_B'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Design/Kazan/Reaction/DualAxeSword/AC_Kazan_DualAxeSword_Off_DamageAir_Up_Start_B.0"
+    },
+    "Properties": {
+      "Event": {
+        "ObjectName": "AkAudioEvent'efx_bodyfall_damage_air_start'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Sound/Player/Player_Common/PlayerLocomotion/efx_bodyfall_damage_air_start.0"
+      }
+    }
+  }
+]

@@ -1,0 +1,197 @@
+[
+  {
+    "Type": "MaterialInstanceConstant",
+    "Name": "FM_3Color_SubUV_Fire_002",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'MaterialInstanceConstant'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/FM_3Color_SubUV_Fire_002",
+    "Properties": {
+      "Parent": {
+        "ObjectName": "Material'Base_GPU_3Color_SubUV'",
+        "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Material/BBQ_Material/Base/Base_GPU_3Color_SubUV.0"
+      },
+      "bHasStaticPermutationResource": true,
+      "ScalarParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "DepthFade",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 50.0,
+          "ExpressionGUID": "A68D8ABA-47DEF0D3-E71BA0B0-1B767CC1"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "U_Tile",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 4.0,
+          "ExpressionGUID": "05F74F36-48C9867D-1BCD928F-108E9D60"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "V_Tile",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 4.0,
+          "ExpressionGUID": "0BCFFAF1-400DB489-E08650BE-B1B63968"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "Y_speed",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.2,
+          "ExpressionGUID": "0E309845-40773D92-C9D39FB9-6CBF6C83"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "NoisePow",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.7,
+          "ExpressionGUID": "A71DB683-4C9E4B53-96A0519E-FEF40E83"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "RefractionDepthBias",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": 0.0,
+          "ExpressionGUID": "00000000-00000000-00000000-00000000"
+        }
+      ],
+      "VectorParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "3Color",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "R": 3.0,
+            "G": 2.918642,
+            "B": 2.080909,
+            "A": 1.0,
+            "Hex": "FFFFFF"
+          },
+          "ExpressionGUID": "CD5740C7-46FC975E-9F7C7494-87AAEF06"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "2Color",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "R": 1.0,
+            "G": 0.503086,
+            "B": 0.228182,
+            "A": 1.0,
+            "Hex": "FFBC83"
+          },
+          "ExpressionGUID": "6313B47D-48228AEE-268A67B9-F06F3DD6"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "1Color",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "R": 1.0,
+            "G": 0.129369,
+            "B": 0.059669,
+            "A": 1.0,
+            "Hex": "FF6545"
+          },
+          "ExpressionGUID": "FDD0D69B-40A98DCB-3572E080-DE692702"
+        }
+      ],
+      "TextureParameterValues": [
+        {
+          "ParameterInfo": {
+            "Name": "BaseTex",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT_Fire_001'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/SubUV/FT_Fire_001.0"
+          },
+          "ExpressionGUID": "79DBA9BE-459F9F1A-1F272E97-B008C850"
+        },
+        {
+          "ParameterInfo": {
+            "Name": "NoiseTex",
+            "Association": "GlobalParameter",
+            "Index": -1
+          },
+          "ParameterValue": {
+            "ObjectName": "Texture2D'FT_S_Tile_03B'",
+            "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_S_Tile_03B.0"
+          },
+          "ExpressionGUID": "EB35F726-41272E7A-3C9CAD9C-0D0BB521"
+        }
+      ],
+      "BasePropertyOverrides": {
+        "BlendMode": "BLEND_Translucent",
+        "ShadingModel": "MSM_Unlit",
+        "OpacityMaskClipValue": 0.3333
+      },
+      "StaticParameters": {
+        "StaticSwitchParameters": [
+          {
+            "Value": true,
+            "ParameterInfo": {
+              "Name": "Use_Depthfade",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            "bOverride": true,
+            "ExpressionGUID": "5AE9F8BF-40DBFA26-2F544EAF-802C7947"
+          }
+        ],
+        "StaticComponentMaskParameters": [
+          {
+            "R": false,
+            "G": true,
+            "B": false,
+            "A": false,
+            "ParameterInfo": {
+              "Name": "BaseTex_Ch",
+              "Association": "GlobalParameter",
+              "Index": -1
+            },
+            "bOverride": true,
+            "ExpressionGUID": "6084D5E7-4B7854C9-136984A1-3477F5AD"
+          }
+        ]
+      },
+      "CachedReferencedTextures": [
+        {
+          "ObjectName": "Texture2D'FT_Fire_001'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/SubUV/FT_Fire_001.0"
+        },
+        {
+          "ObjectName": "Texture2D'FT_Mask_NoiseMask_Water_001'",
+          "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Texture/BBQ_Texture/Noise/FT_Mask_NoiseMask_Water_001.0"
+        }
+      ],
+      "TextureStreamingData": [
+        {
+          "SamplingScale": 4.0,
+          "UVChannelIndex": 0,
+          "TextureName": "FT_S_Tile_03B"
+        }
+      ]
+    },
+    "LoadedMaterialResources": []
+  }
+]

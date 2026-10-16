@@ -1,0 +1,189 @@
+[
+  {
+    "Type": "BodySetup",
+    "Name": "BodySetup_0",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'BodySetup'",
+    "Outer": {
+      "ObjectName": "StaticMesh'FS_VAT_BloodBubble_01_mesh'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BladePhantom/FS_VAT_BloodBubble_01_mesh.2"
+    },
+    "Properties": {
+      "DefaultInstance": {
+        "ObjectType": "ECC_WorldStatic",
+        "CollisionProfileName": "BlockAll",
+        "CollisionResponses": {
+          "ResponseArray": [
+            {
+              "Channel": "EngineTraceChannel1",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "Attack",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "JumpBlock",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "IKTrace",
+              "Response": "ECR_Block"
+            },
+            {
+              "Channel": "FloorCheck",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "LandScape",
+              "Response": "ECR_Overlap"
+            },
+            {
+              "Channel": "NamePlate",
+              "Response": "ECR_Block"
+            }
+          ]
+        }
+      },
+      "BattleEffectExceptionHit": true
+    },
+    "BodySetupGuid": "AC45ABF84F499C47DABC828D14D660CA",
+    "CookedFormatData": {
+      "PhysXPC": {
+        "BulkDataFlags": "BULKDATA_SingleUse | BULKDATA_ForceInlinePayload",
+        "ElementCount": 56066,
+        "SizeOnDisk": 56066,
+        "OffsetInFile": "0x1B7DE"
+      }
+    }
+  },
+  {
+    "Type": "NavCollision",
+    "Name": "NavCollision_2",
+    "Flags": "RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'NavCollision'",
+    "Outer": {
+      "ObjectName": "StaticMesh'FS_VAT_BloodBubble_01_mesh'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BladePhantom/FS_VAT_BloodBubble_01_mesh.2"
+    },
+    "CookedFormatData": {
+      "NavCollision_Chaos": {
+        "BulkDataFlags": "BULKDATA_SingleUse | BULKDATA_ForceInlinePayload",
+        "ElementCount": 21,
+        "SizeOnDisk": 21,
+        "OffsetInFile": "0x29328"
+      }
+    }
+  },
+  {
+    "Type": "StaticMesh",
+    "Name": "FS_VAT_BloodBubble_01_mesh",
+    "Flags": "RF_Public | RF_Standalone | RF_WasLoaded | RF_LoadCompleted",
+    "Class": "UScriptClass'StaticMesh'",
+    "Package": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BladePhantom/FS_VAT_BloodBubble_01_mesh",
+    "Properties": {
+      "StaticMaterials": [
+        {
+          "MaterialInterface": {
+            "ObjectName": "MaterialInstanceConstant'FMI_VAT_SoftBody_AKCartoonCharacter_BloodBubble_01'",
+            "ObjectPath": "BBQ/Content/_Kazan_/BaseMaterials/VAT/MI/FMI_VAT_SoftBody_AKCartoonCharacter_BloodBubble_01.0"
+          },
+          "MaterialSlotName": "WorldGridMaterial",
+          "ImportedMaterialSlotName": "WorldGridMaterial",
+          "UVChannelData": {
+            "bInitialized": true,
+            "bOverrideDensities": false,
+            "LocalUVDensities": 134.24957,
+            "LocalUVDensities[1]": 0.0,
+            "LocalUVDensities[2]": 125.82757,
+            "LocalUVDensities[3]": 0.0
+          }
+        }
+      ],
+      "LightmapUVDensity": 125.82757,
+      "LightMapResolution": 64,
+      "LightMapCoordinateIndex": 2,
+      "ExtendedBounds": {
+        "Origin": {
+          "X": -15.0,
+          "Y": 7.5,
+          "Z": 9.949999
+        },
+        "BoxExtent": {
+          "X": 35.0,
+          "Y": 37.5,
+          "Z": 30.05
+        },
+        "SphereRadius": 59.449577
+      }
+    },
+    "BodySetup": {
+      "ObjectName": "BodySetup'FS_VAT_BloodBubble_01_mesh:BodySetup_0'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BladePhantom/FS_VAT_BloodBubble_01_mesh.0"
+    },
+    "NavCollision": {
+      "ObjectName": "NavCollision'FS_VAT_BloodBubble_01_mesh:NavCollision_2'",
+      "ObjectPath": "BBQ/Content/_Kazan_/Art/VFX/VFX_Mesh/BladePhantom/FS_VAT_BloodBubble_01_mesh.1"
+    },
+    "LightingGuid": "8C186EC3-403070E4-2170AD82-CAF57C5E",
+    "RenderData": {
+      "LODs": [
+        {
+          "Sections": [
+            {
+              "MaterialIndex": 0,
+              "FirstIndex": 0,
+              "NumTriangles": 880,
+              "MinVertexIndex": 0,
+              "MaxVertexIndex": 561,
+              "bEnableCollision": true,
+              "bCastShadow": true,
+              "bForceOpaque": false,
+              "bVisibleInRayTracing": true
+            }
+          ],
+          "MaxDeviation": 0.0,
+          "PositionVertexBuffer": {
+            "Stride": 12,
+            "NumVertices": 562
+          },
+          "VertexBuffer": {
+            "NumTexCoords": 3,
+            "NumVertices": 562,
+            "Strides": -1,
+            "UseHighPrecisionTangentBasis": false,
+            "UseFullPrecisionUVs": true
+          },
+          "ColorVertexBuffer": {
+            "Stride": 0,
+            "NumVertices": 0
+          }
+        }
+      ],
+      "Bounds": {
+        "Origin": {
+          "X": -15.0,
+          "Y": 7.5,
+          "Z": 9.949999
+        },
+        "BoxExtent": {
+          "X": 35.0,
+          "Y": 37.5,
+          "Z": 30.05
+        },
+        "SphereRadius": 59.449577
+      },
+      "bLODsShareStaticLighting": true,
+      "ScreenSize": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  }
+]
